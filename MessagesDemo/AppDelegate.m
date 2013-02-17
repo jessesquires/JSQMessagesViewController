@@ -1,31 +1,28 @@
 //
 //  AppDelegate.m
-//  MessagesDemo
+//  Messages
 //
-//  Created by Jesse Squires on 2/17/13.
+//  Created by Jesse Squires on 2/12/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 
 #import "AppDelegate.h"
-
-#import "ViewController.h"
+#import "DemoViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    DemoViewController *vc = [DemoViewController new];
+	UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
-    } else {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
-    }
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
+	self.window.rootViewController = nc;
+	[self.window makeKeyAndVisible];
+    
     return YES;
 }
-
+							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

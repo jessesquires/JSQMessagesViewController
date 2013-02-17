@@ -16,9 +16,32 @@
 		881AE56F16D13CDC008F7636 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE56E16D13CDC008F7636 /* Default.png */; };
 		881AE57116D13CDC008F7636 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE57016D13CDC008F7636 /* Default@2x.png */; };
 		881AE57316D13CDC008F7636 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE57216D13CDC008F7636 /* Default-568h@2x.png */; };
-		881AE57616D13CDC008F7636 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE57516D13CDC008F7636 /* ViewController.m */; };
-		881AE57916D13CDC008F7636 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 881AE57716D13CDC008F7636 /* ViewController_iPhone.xib */; };
-		881AE57C16D13CDC008F7636 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 881AE57A16D13CDC008F7636 /* ViewController_iPad.xib */; };
+		881AE58416D13DE0008F7636 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58316D13DE0008F7636 /* DemoViewController.m */; };
+		881AE5A716D13E08008F7636 /* BubbleMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58716D13E08008F7636 /* BubbleMessageCell.m */; };
+		881AE5A816D13E08008F7636 /* BubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58916D13E08008F7636 /* BubbleView.m */; };
+		881AE5A916D13E08008F7636 /* MessageInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58B16D13E08008F7636 /* MessageInputView.m */; };
+		881AE5AA16D13E08008F7636 /* MessageSoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58D16D13E08008F7636 /* MessageSoundEffect.m */; };
+		881AE5AB16D13E08008F7636 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58F16D13E08008F7636 /* MessagesViewController.m */; };
+		881AE5AC16D13E08008F7636 /* NSString+MessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE59116D13E08008F7636 /* NSString+MessagesView.m */; };
+		881AE5AD16D13E08008F7636 /* input-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE59416D13E08008F7636 /* input-bar.png */; };
+		881AE5AE16D13E08008F7636 /* input-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE59516D13E08008F7636 /* input-bar@2x.png */; };
+		881AE5AF16D13E08008F7636 /* input-field.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE59616D13E08008F7636 /* input-field.png */; };
+		881AE5B016D13E08008F7636 /* input-field@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE59716D13E08008F7636 /* input-field@2x.png */; };
+		881AE5B116D13E08008F7636 /* messageBubbleBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE59816D13E08008F7636 /* messageBubbleBlue.png */; };
+		881AE5B216D13E08008F7636 /* messageBubbleBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE59916D13E08008F7636 /* messageBubbleBlue@2x.png */; };
+		881AE5B316D13E08008F7636 /* messageBubbleGray.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE59A16D13E08008F7636 /* messageBubbleGray.png */; };
+		881AE5B416D13E08008F7636 /* messageBubbleGray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE59B16D13E08008F7636 /* messageBubbleGray@2x.png */; };
+		881AE5B516D13E08008F7636 /* messageBubbleHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE59C16D13E08008F7636 /* messageBubbleHighlighted.png */; };
+		881AE5B616D13E08008F7636 /* messageBubbleHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE59D16D13E08008F7636 /* messageBubbleHighlighted@2x.png */; };
+		881AE5B716D13E08008F7636 /* messageBubbleTyping.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE59E16D13E08008F7636 /* messageBubbleTyping.png */; };
+		881AE5B816D13E08008F7636 /* messageBubbleTyping@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE59F16D13E08008F7636 /* messageBubbleTyping@2x.png */; };
+		881AE5B916D13E08008F7636 /* send-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE5A016D13E08008F7636 /* send-highlighted.png */; };
+		881AE5BA16D13E08008F7636 /* send-highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE5A116D13E08008F7636 /* send-highlighted@2x.png */; };
+		881AE5BB16D13E08008F7636 /* send.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE5A216D13E08008F7636 /* send.png */; };
+		881AE5BC16D13E08008F7636 /* send@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE5A316D13E08008F7636 /* send@2x.png */; };
+		881AE5BD16D13E08008F7636 /* messageReceived.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 881AE5A516D13E08008F7636 /* messageReceived.aiff */; };
+		881AE5BE16D13E08008F7636 /* messageSent.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 881AE5A616D13E08008F7636 /* messageSent.aiff */; };
+		881AE5C016D13E35008F7636 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881AE5BF16D13E35008F7636 /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,10 +58,39 @@
 		881AE56E16D13CDC008F7636 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		881AE57016D13CDC008F7636 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		881AE57216D13CDC008F7636 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		881AE57416D13CDC008F7636 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		881AE57516D13CDC008F7636 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		881AE57816D13CDC008F7636 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
-		881AE57B16D13CDC008F7636 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		881AE58216D13DE0008F7636 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
+		881AE58316D13DE0008F7636 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		881AE58616D13E08008F7636 /* BubbleMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubbleMessageCell.h; sourceTree = "<group>"; };
+		881AE58716D13E08008F7636 /* BubbleMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubbleMessageCell.m; sourceTree = "<group>"; };
+		881AE58816D13E08008F7636 /* BubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubbleView.h; sourceTree = "<group>"; };
+		881AE58916D13E08008F7636 /* BubbleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubbleView.m; sourceTree = "<group>"; };
+		881AE58A16D13E08008F7636 /* MessageInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageInputView.h; sourceTree = "<group>"; };
+		881AE58B16D13E08008F7636 /* MessageInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageInputView.m; sourceTree = "<group>"; };
+		881AE58C16D13E08008F7636 /* MessageSoundEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSoundEffect.h; sourceTree = "<group>"; };
+		881AE58D16D13E08008F7636 /* MessageSoundEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSoundEffect.m; sourceTree = "<group>"; };
+		881AE58E16D13E08008F7636 /* MessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
+		881AE58F16D13E08008F7636 /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
+		881AE59016D13E08008F7636 /* NSString+MessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MessagesView.h"; sourceTree = "<group>"; };
+		881AE59116D13E08008F7636 /* NSString+MessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MessagesView.m"; sourceTree = "<group>"; };
+		881AE59416D13E08008F7636 /* input-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input-bar.png"; sourceTree = "<group>"; };
+		881AE59516D13E08008F7636 /* input-bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input-bar@2x.png"; sourceTree = "<group>"; };
+		881AE59616D13E08008F7636 /* input-field.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input-field.png"; sourceTree = "<group>"; };
+		881AE59716D13E08008F7636 /* input-field@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input-field@2x.png"; sourceTree = "<group>"; };
+		881AE59816D13E08008F7636 /* messageBubbleBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messageBubbleBlue.png; sourceTree = "<group>"; };
+		881AE59916D13E08008F7636 /* messageBubbleBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageBubbleBlue@2x.png"; sourceTree = "<group>"; };
+		881AE59A16D13E08008F7636 /* messageBubbleGray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messageBubbleGray.png; sourceTree = "<group>"; };
+		881AE59B16D13E08008F7636 /* messageBubbleGray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageBubbleGray@2x.png"; sourceTree = "<group>"; };
+		881AE59C16D13E08008F7636 /* messageBubbleHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messageBubbleHighlighted.png; sourceTree = "<group>"; };
+		881AE59D16D13E08008F7636 /* messageBubbleHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageBubbleHighlighted@2x.png"; sourceTree = "<group>"; };
+		881AE59E16D13E08008F7636 /* messageBubbleTyping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messageBubbleTyping.png; sourceTree = "<group>"; };
+		881AE59F16D13E08008F7636 /* messageBubbleTyping@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageBubbleTyping@2x.png"; sourceTree = "<group>"; };
+		881AE5A016D13E08008F7636 /* send-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send-highlighted.png"; sourceTree = "<group>"; };
+		881AE5A116D13E08008F7636 /* send-highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send-highlighted@2x.png"; sourceTree = "<group>"; };
+		881AE5A216D13E08008F7636 /* send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send.png; sourceTree = "<group>"; };
+		881AE5A316D13E08008F7636 /* send@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send@2x.png"; sourceTree = "<group>"; };
+		881AE5A516D13E08008F7636 /* messageReceived.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = messageReceived.aiff; sourceTree = "<group>"; };
+		881AE5A616D13E08008F7636 /* messageSent.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = messageSent.aiff; sourceTree = "<group>"; };
+		881AE5BF16D13E35008F7636 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				881AE5C016D13E35008F7636 /* AudioToolbox.framework in Frameworks */,
 				881AE55D16D13CDC008F7636 /* UIKit.framework in Frameworks */,
 				881AE55F16D13CDC008F7636 /* Foundation.framework in Frameworks */,
 				881AE56116D13CDC008F7636 /* CoreGraphics.framework in Frameworks */,
@@ -75,6 +128,7 @@
 		881AE55B16D13CDC008F7636 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				881AE5BF16D13E35008F7636 /* AudioToolbox.framework */,
 				881AE55C16D13CDC008F7636 /* UIKit.framework */,
 				881AE55E16D13CDC008F7636 /* Foundation.framework */,
 				881AE56016D13CDC008F7636 /* CoreGraphics.framework */,
@@ -87,10 +141,9 @@
 			children = (
 				881AE56B16D13CDC008F7636 /* AppDelegate.h */,
 				881AE56C16D13CDC008F7636 /* AppDelegate.m */,
-				881AE57416D13CDC008F7636 /* ViewController.h */,
-				881AE57516D13CDC008F7636 /* ViewController.m */,
-				881AE57716D13CDC008F7636 /* ViewController_iPhone.xib */,
-				881AE57A16D13CDC008F7636 /* ViewController_iPad.xib */,
+				881AE58216D13DE0008F7636 /* DemoViewController.h */,
+				881AE58316D13DE0008F7636 /* DemoViewController.m */,
+				881AE58516D13E08008F7636 /* MessagesTableViewController */,
 				881AE56316D13CDC008F7636 /* Supporting Files */,
 			);
 			path = MessagesDemo;
@@ -108,6 +161,67 @@
 				881AE57216D13CDC008F7636 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		881AE58516D13E08008F7636 /* MessagesTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				881AE58E16D13E08008F7636 /* MessagesViewController.h */,
+				881AE58F16D13E08008F7636 /* MessagesViewController.m */,
+				881AE58A16D13E08008F7636 /* MessageInputView.h */,
+				881AE58B16D13E08008F7636 /* MessageInputView.m */,
+				881AE58616D13E08008F7636 /* BubbleMessageCell.h */,
+				881AE58716D13E08008F7636 /* BubbleMessageCell.m */,
+				881AE58816D13E08008F7636 /* BubbleView.h */,
+				881AE58916D13E08008F7636 /* BubbleView.m */,
+				881AE59216D13E08008F7636 /* Resources */,
+				881AE58C16D13E08008F7636 /* MessageSoundEffect.h */,
+				881AE58D16D13E08008F7636 /* MessageSoundEffect.m */,
+				881AE59016D13E08008F7636 /* NSString+MessagesView.h */,
+				881AE59116D13E08008F7636 /* NSString+MessagesView.m */,
+			);
+			path = MessagesTableViewController;
+			sourceTree = SOURCE_ROOT;
+		};
+		881AE59216D13E08008F7636 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				881AE59316D13E08008F7636 /* Images */,
+				881AE5A416D13E08008F7636 /* Sounds */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		881AE59316D13E08008F7636 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				881AE59416D13E08008F7636 /* input-bar.png */,
+				881AE59516D13E08008F7636 /* input-bar@2x.png */,
+				881AE59616D13E08008F7636 /* input-field.png */,
+				881AE59716D13E08008F7636 /* input-field@2x.png */,
+				881AE59816D13E08008F7636 /* messageBubbleBlue.png */,
+				881AE59916D13E08008F7636 /* messageBubbleBlue@2x.png */,
+				881AE59A16D13E08008F7636 /* messageBubbleGray.png */,
+				881AE59B16D13E08008F7636 /* messageBubbleGray@2x.png */,
+				881AE59C16D13E08008F7636 /* messageBubbleHighlighted.png */,
+				881AE59D16D13E08008F7636 /* messageBubbleHighlighted@2x.png */,
+				881AE59E16D13E08008F7636 /* messageBubbleTyping.png */,
+				881AE59F16D13E08008F7636 /* messageBubbleTyping@2x.png */,
+				881AE5A016D13E08008F7636 /* send-highlighted.png */,
+				881AE5A116D13E08008F7636 /* send-highlighted@2x.png */,
+				881AE5A216D13E08008F7636 /* send.png */,
+				881AE5A316D13E08008F7636 /* send@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		881AE5A416D13E08008F7636 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				881AE5A516D13E08008F7636 /* messageReceived.aiff */,
+				881AE5A616D13E08008F7636 /* messageSent.aiff */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,8 +279,24 @@
 				881AE56F16D13CDC008F7636 /* Default.png in Resources */,
 				881AE57116D13CDC008F7636 /* Default@2x.png in Resources */,
 				881AE57316D13CDC008F7636 /* Default-568h@2x.png in Resources */,
-				881AE57916D13CDC008F7636 /* ViewController_iPhone.xib in Resources */,
-				881AE57C16D13CDC008F7636 /* ViewController_iPad.xib in Resources */,
+				881AE5AD16D13E08008F7636 /* input-bar.png in Resources */,
+				881AE5AE16D13E08008F7636 /* input-bar@2x.png in Resources */,
+				881AE5AF16D13E08008F7636 /* input-field.png in Resources */,
+				881AE5B016D13E08008F7636 /* input-field@2x.png in Resources */,
+				881AE5B116D13E08008F7636 /* messageBubbleBlue.png in Resources */,
+				881AE5B216D13E08008F7636 /* messageBubbleBlue@2x.png in Resources */,
+				881AE5B316D13E08008F7636 /* messageBubbleGray.png in Resources */,
+				881AE5B416D13E08008F7636 /* messageBubbleGray@2x.png in Resources */,
+				881AE5B516D13E08008F7636 /* messageBubbleHighlighted.png in Resources */,
+				881AE5B616D13E08008F7636 /* messageBubbleHighlighted@2x.png in Resources */,
+				881AE5B716D13E08008F7636 /* messageBubbleTyping.png in Resources */,
+				881AE5B816D13E08008F7636 /* messageBubbleTyping@2x.png in Resources */,
+				881AE5B916D13E08008F7636 /* send-highlighted.png in Resources */,
+				881AE5BA16D13E08008F7636 /* send-highlighted@2x.png in Resources */,
+				881AE5BB16D13E08008F7636 /* send.png in Resources */,
+				881AE5BC16D13E08008F7636 /* send@2x.png in Resources */,
+				881AE5BD16D13E08008F7636 /* messageReceived.aiff in Resources */,
+				881AE5BE16D13E08008F7636 /* messageSent.aiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,7 +309,13 @@
 			files = (
 				881AE56916D13CDC008F7636 /* main.m in Sources */,
 				881AE56D16D13CDC008F7636 /* AppDelegate.m in Sources */,
-				881AE57616D13CDC008F7636 /* ViewController.m in Sources */,
+				881AE58416D13DE0008F7636 /* DemoViewController.m in Sources */,
+				881AE5A716D13E08008F7636 /* BubbleMessageCell.m in Sources */,
+				881AE5A816D13E08008F7636 /* BubbleView.m in Sources */,
+				881AE5A916D13E08008F7636 /* MessageInputView.m in Sources */,
+				881AE5AA16D13E08008F7636 /* MessageSoundEffect.m in Sources */,
+				881AE5AB16D13E08008F7636 /* MessagesViewController.m in Sources */,
+				881AE5AC16D13E08008F7636 /* NSString+MessagesView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,22 +328,6 @@
 				881AE56616D13CDC008F7636 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		881AE57716D13CDC008F7636 /* ViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				881AE57816D13CDC008F7636 /* en */,
-			);
-			name = ViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		881AE57A16D13CDC008F7636 /* ViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				881AE57B16D13CDC008F7636 /* en */,
-			);
-			name = ViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -312,6 +432,7 @@
 				881AE58116D13CDC008F7636 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
