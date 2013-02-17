@@ -1,12 +1,12 @@
 # MessagesTableViewController
 
-A messages tableview controller very similar to the iOS Messages app. **Note, this is only a messaging UI, not a messaging app.** This is intended to be used in an existing app where you have (or are developing) a messaging system and need a user interface for it.
+A messages UI for iPhone and iPad.
+
+This messages tableview controller is very similar to the iOS Messages app. **Note, this is only a messaging UI, not a messaging app.** This is intended to be used in an existing app where you have (or are developing) a messaging system and need a user interface for it.
 
 ## About
 
-This is *heavily* based on work by [Sam Soffes](https://github.com/soffes)' [SSMessagingViewController][1].
-
-I took Soffes' code base and developed this to use in [Hemoglobe](www.hemoglobe.com) for private messages between users.
+This is *heavily* based on work by [Sam Soffes](https://github.com/soffes)' [SSMessagingViewController][1]. I took Soffes' code base and developed this to use in [Hemoglobe](www.hemoglobe.com) for private messages between users. I didn't fork the original repo simply because my refactoring was too extensive.
 
 Notable changes from [SSMessagingViewController][1]:
 
@@ -14,7 +14,7 @@ Notable changes from [SSMessagingViewController][1]:
 * Allows arbitrary message sizes (and message bubble sizes)
 * Universal for iPhone and iPad
 * Dynamically resizes input text view as you type
-* Improved hiding/showing keyboard
+* Improved hiding/showing keyboard with `NSNotification`
 * Automatically enables/disables send button if text view is empty or not
 * Refactoring, refinements, and fixes
 
@@ -34,7 +34,18 @@ Notable changes from [SSMessagingViewController][1]:
 		* Call `[self finishSend]` at the end of this method to animate and reset the text input view
 		* Optionally play sound effects with `[MessageSoundEffect playMessageSentSound]` or `[MessageSoundEffect playMessageReceivedSound]`
 	* `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
-* Present view programmatically, does not work with Storyboards
+		* The API table view data source method that you should be familiar with
+* Present view programmatically, **does not work with Storyboards**
+* See the included Demo project `MessagesDemo.xcodeproj` for example
+
+## ToDo
+
+* Landscape mode
+* Swipe down to hide keyboard (like iOS Messages)
+* Allow text input view to resize dynamically (i.e., stretch up to top navigation bar like iOS Messages)
+* Display "To:" search field for new messages
+* "Send" images or video
+* Storyboards support
 
 ## Related Projects
 
@@ -45,7 +56,9 @@ Notable changes from [SSMessagingViewController][1]:
 
 ## License
 
-You are free to use this as you please. No attribution necessary.
+You are free to use this as you please. No attribution necessary. 
+
+**If you do use this, I would love to here about it!**
 
 MIT License
 Copyright &copy; 2013 Jesse Squires
