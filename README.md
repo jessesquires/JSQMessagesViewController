@@ -12,6 +12,7 @@ Notable changes from [SSMessagingViewController][1]:
 
 * Brought up-to-date for iOS 6.0 and ARC
 * Allows arbitrary message sizes (and message bubble sizes)
+* Universal for iPhone and iPad
 * Dynamically resizes input text view as you type
 * Improved hiding/showing keyboard
 * Automatically enables/disables send button if text view is empty or not
@@ -20,7 +21,22 @@ Notable changes from [SSMessagingViewController][1]:
 ## Installation
 		
 * Drag the `MessagesTableViewController/` folder to your project.
-* Subclass
+* Add the `AudioToolbox.framework` to your project, if you want to use the sound effects
+* Subclass `MessagesViewController`
+* Override the follow methods from `MessagesViewController`:
+	* `- (BubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath`
+		* The style for the bubble for this row
+		* Style options are: `BubbleMessageStyleOutgoing` or `BubbleMessageStyleIncoming`
+	* `- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath`
+		* The text to be displayed for this row
+	* `- (void)sendPressed:(UIButton *)sender withText:(NSString *)text`
+		* Hook into your own backend here
+		* Call `[self finishSend]` at the end of this method to animate and reset the text input view
+		* Optionally play sound effects with `[MessageSoundEffect playMessageSentSound]` or `[MessageSoundEffect playMessageReceivedSound]`
+
+* And as usual, override *at least* the following Table View Data Source Methods:
+	* `- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView`
+	* `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
 
 ## Related Projects
 
