@@ -23,9 +23,9 @@ Notable changes from [SSMessagingViewController][1]:
 * Drag the `MessagesTableViewController/` folder to your project.
 * Add the `AudioToolbox.framework` to your project, if you want to use the sound effects
 * Subclass `MessagesViewController`
-* Override the follow methods from `MessagesViewController`:
+* Override the following methods:
 	* `- (BubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath`
-		* The style for the bubble for this row
+		* The style of the bubble for this row
 		* Style options are: `BubbleMessageStyleOutgoing` or `BubbleMessageStyleIncoming`
 	* `- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath`
 		* The text to be displayed for this row
@@ -33,13 +33,13 @@ Notable changes from [SSMessagingViewController][1]:
 		* Hook into your own backend here
 		* Call `[self finishSend]` at the end of this method to animate and reset the text input view
 		* Optionally play sound effects with `[MessageSoundEffect playMessageSentSound]` or `[MessageSoundEffect playMessageReceivedSound]`
-
-* And as usual, override *at least* the following Table View Data Source Methods:
-	* `- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView`
 	* `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
 
 ## Related Projects
 
+[SSMessagingViewController][1]
+
+[AcaniChat](https://github.com/acani/AcaniChat)
 
 
 ## License
