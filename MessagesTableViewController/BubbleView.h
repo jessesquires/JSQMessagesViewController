@@ -50,5 +50,6 @@ typedef enum {
 + (CGSize)textSizeForText:(NSString *)txt;
 + (CGSize)bubbleSizeForText:(NSString *)txt;
 + (CGFloat)cellHeightForText:(NSString *)txt;
++ (int)maxCharactersPerLine;
 
 @end

@@ -70,7 +70,10 @@
 
 - (void)setupTextView
 {
-    self.textView = [[UITextView alloc] initWithFrame:CGRectMake(6.0f, 3.0f, 246.0f, [MessageInputView textViewLineHeight] * 4.0f)];
+    CGFloat width = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) ? 246.0f : 690.0f;
+    CGFloat height = [MessageInputView textViewLineHeight] * [MessageInputView maxLines];
+    
+    self.textView = [[UITextView alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, height)];
     self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.textView.backgroundColor = [UIColor whiteColor];
     self.textView.scrollIndicatorInsets = UIEdgeInsetsMake(13.0f, 0.0f, 14.0f, 7.0f);
@@ -131,6 +134,16 @@
 + (CGFloat)textViewLineHeight
 {
     return 35.0f; // for fontSize 15.0f
+}
+
++ (CGFloat)maxLines
+{
+    return ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) ? 4.0f : 8.0f;
+}
+
++ (CGFloat)maxHeight
+{
+    return ([MessageInputView maxLines] + 1.0f) * [MessageInputView textViewLineHeight];
 }
 
 @end

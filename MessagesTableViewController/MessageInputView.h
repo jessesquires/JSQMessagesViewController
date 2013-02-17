@@ -40,5 +40,7 @@
 
 #pragma mark - Message input view
 + (CGFloat)textViewLineHeight;
++ (CGFloat)maxLines;
++ (CGFloat)maxHeight;
 
 @end

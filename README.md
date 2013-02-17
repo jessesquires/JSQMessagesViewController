@@ -34,6 +34,7 @@ Notable changes from [SSMessagingViewController][1]:
 		* Call `[self finishSend]` at the end of this method to animate and reset the text input view
 		* Optionally play sound effects with `[MessageSoundEffect playMessageSentSound]` or `[MessageSoundEffect playMessageReceivedSound]`
 	* `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
+* Present view programmatically, does not work with Storyboards
 
 ## Related Projects
 

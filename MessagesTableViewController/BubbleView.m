@@ -41,8 +41,6 @@
 #define kPaddingBottom 8.0f
 #define kBubblePaddingRight 35.0f
 
-#define MAX_CHARS_PER_LINE 33
-
 @interface BubbleView()
 
 @property (strong, nonatomic) UIImage *incomingBackground;
@@ -123,7 +121,7 @@
 + (CGSize)textSizeForText:(NSString *)txt
 {
     CGFloat width = [UIScreen mainScreen].applicationFrame.size.width * 0.65f;
-    int numRows = (txt.length / MAX_CHARS_PER_LINE) + 1;
+    int numRows = (txt.length / [BubbleView maxCharactersPerLine]) + 1;
 
     CGFloat height = MAX(numRows, [txt numberOfLines]) * [MessageInputView textViewLineHeight];
     
@@ -142,6 +140,11 @@
 + (CGFloat)cellHeightForText:(NSString *)txt
 {
     return [BubbleView bubbleSizeForText:txt].height + kMarginTop + kMarginBottom;
+}
+
++ (int)maxCharactersPerLine
+{
+    return ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) ? 33 : 109;
 }
 
 @end

@@ -121,6 +121,13 @@
     return UIInterfaceOrientationMaskPortrait;
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [self.tableView reloadData];
+    [self.tableView setNeedsLayout];
+}
+
 #pragma mark - Actions
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text { } // override in subclass
 
@@ -220,7 +227,7 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-    CGFloat maxHeight = 5.0f * [MessageInputView textViewLineHeight];
+    CGFloat maxHeight = [MessageInputView maxHeight];
     CGFloat textViewContentHeight = textView.contentSize.height;
     CGFloat changeInHeight = textViewContentHeight - self.previousTextViewContentHeight;
 
