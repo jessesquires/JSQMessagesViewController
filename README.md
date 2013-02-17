@@ -8,7 +8,7 @@ This messages tableview controller is very similar to the iOS Messages app. **No
 
 ## About
 
-This is *heavily* based on work by [Sam Soffes](https://github.com/soffes)' [SSMessagingViewController][1]. I took Soffes' code base and developed this to use in [Hemoglobe](www.hemoglobe.com) for private messages between users. I didn't fork the original repo simply because my refactoring was too extensive.
+This is *heavily* based on work by [Sam Soffes](https://github.com/soffes)' [SSMessagingViewController][1]. I took Soffes' code base and developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users. I didn't fork the original repo simply because my refactoring was too extensive.
 
 Notable changes from [SSMessagingViewController][1]:
 
