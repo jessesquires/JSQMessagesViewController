@@ -155,11 +155,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellID = @"MessageCell";
+    BubbleMessageStyle style = [self messageStyleForRowAtIndexPath:indexPath];
+    
+    NSString *CellID = [NSString stringWithFormat:@"MessageCell%d", style];
     BubbleMessageCell *cell = (BubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellID];
     
     if(!cell) {
-        cell = [[BubbleMessageCell alloc] initWithBubbleStyle:[self messageStyleForRowAtIndexPath:indexPath]
+        cell = [[BubbleMessageCell alloc] initWithBubbleStyle:style
                                               reuseIdentifier:CellID];
     }
     
