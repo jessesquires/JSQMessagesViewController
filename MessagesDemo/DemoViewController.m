@@ -38,7 +38,7 @@
 #pragma mark - Messages view controller
 - (BubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return !(indexPath.row % 2) ? BubbleMessageStyleOutgoing : BubbleMessageStyleIncoming;
+    return (indexPath.row % 2) ? BubbleMessageStyleIncoming : BubbleMessageStyleOutgoing;
 }
 
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
