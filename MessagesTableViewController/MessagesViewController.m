@@ -70,10 +70,10 @@
     
     // Swipe guesture for pull to hide keyboard
     // Too buggy, needs work
-    //UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    //swipe.direction = UISwipeGestureRecognizerDirectionDown;
-    //swipe.numberOfTouchesRequired = 1;
-    //[self.inputView addGestureRecognizer:swipe];
+    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    swipe.direction = UISwipeGestureRecognizerDirectionDown;
+    swipe.numberOfTouchesRequired = 1;
+    [self.inputView addGestureRecognizer:swipe];
 }
 
 #pragma mark - View lifecycle
@@ -218,7 +218,8 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     [textView becomeFirstResponder];
-    self.previousTextViewContentHeight = textView.contentSize.height;
+	if (!self.previousTextViewContentHeight)
+		self.previousTextViewContentHeight = textView.contentSize.height;
     [self scrollToBottomAnimated:YES];
 }
 
@@ -287,14 +288,15 @@
                                       keyboardY - inputViewFrame.size.height,
                                       inputViewFrame.size.width,
                                       inputViewFrame.size.height);
-    
+
     UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
                                            0.0f,
-                                           self.view.frame.size.height - keyboardY,
+                                           self.view.frame.size.height - self.inputView.frame.origin.y - INPUT_HEIGHT,
                                            0.0f);
+
 	self.tableView.contentInset = insets;
 	self.tableView.scrollIndicatorInsets = insets;
-    
+    	
     [UIView commitAnimations];
 }
 
