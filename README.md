@@ -8,13 +8,14 @@ This messages tableview controller is very similar to the iOS Messages app. **No
 
 ## About
 
-This is *heavily* based on work by [Sam Soffes](https://github.com/soffes)' [SSMessagingViewController][1]. I took Soffes' code base and developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users. I didn't fork the original repo simply because my refactoring was too extensive.
+This is based on work by @soffes [SSMessagingViewController][1]. I took Soffes' code base and developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users.
 
 Notable changes from [SSMessagingViewController][1]:
 
 * Brought up-to-date for iOS 6.0 and ARC
 * Allows arbitrary message sizes (and message bubble sizes)
 * Universal for iPhone and iPad
+* Swipe/pull down to hide keyboard
 * Dynamically resizes input text view as you type
 * Improved hiding/showing keyboard with `NSNotification`
 * Automatically enables/disables send button if text view is empty or not
@@ -43,9 +44,10 @@ Notable changes from [SSMessagingViewController][1]:
 ## ToDo
 
 * Landscape mode
-* Swipe down to hide keyboard (like iOS Messages)
+* Timestamps for messages
 * Allow text input view to resize dynamically (i.e., stretch up to top navigation bar like iOS Messages)
 * Display "To:" search field for new messages
+* Option for user avatar to display next to bubbles
 * "Send" images or video
 * Storyboards support
 
