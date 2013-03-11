@@ -68,8 +68,6 @@
     [self.inputView.sendButton addTarget:self action:@selector(sendPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.inputView];
     
-    // Swipe guesture for pull to hide keyboard
-    // Too buggy, needs work
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     swipe.direction = UISwipeGestureRecognizerDirectionDown;
     swipe.numberOfTouchesRequired = 1;
@@ -218,8 +216,10 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     [textView becomeFirstResponder];
-	if (!self.previousTextViewContentHeight)
+	
+    if(!self.previousTextViewContentHeight)
 		self.previousTextViewContentHeight = textView.contentSize.height;
+    
     [self scrollToBottomAnimated:YES];
 }
 
@@ -237,22 +237,22 @@
     changeInHeight = (textViewContentHeight + changeInHeight >= maxHeight) ? 0.0f : changeInHeight;
 
     if(changeInHeight != 0.0f) {
-        [UIView animateWithDuration:0.25f animations:^{
-            
-            UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, self.tableView.contentInset.bottom + changeInHeight, 0.0f);
-            self.tableView.contentInset = insets;
-            self.tableView.scrollIndicatorInsets = insets;
-            
-            [self scrollToBottomAnimated:NO];
-            
-            CGRect inputViewFrame = self.inputView.frame;
-            self.inputView.frame = CGRectMake(0.0f,
-                                              inputViewFrame.origin.y - changeInHeight,
-                                              inputViewFrame.size.width,
-                                              inputViewFrame.size.height + changeInHeight);
-        } completion:^(BOOL finished) {
-            
-        }];
+        [UIView animateWithDuration:0.25f
+                         animations:^{
+                             UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, self.tableView.contentInset.bottom + changeInHeight, 0.0f);
+                             self.tableView.contentInset = insets;
+                             self.tableView.scrollIndicatorInsets = insets;
+                            
+                             [self scrollToBottomAnimated:NO];
+                            
+                             CGRect inputViewFrame = self.inputView.frame;
+                             self.inputView.frame = CGRectMake(0.0f,
+                                                               inputViewFrame.origin.y - changeInHeight,
+                                                               inputViewFrame.size.width,
+                                                               inputViewFrame.size.height + changeInHeight);
+                         }
+                         completion:^(BOOL finished) {
+                         }];
         
         self.previousTextViewContentHeight = MIN(textViewContentHeight, maxHeight);
     }
