@@ -42,6 +42,7 @@
 		881AE5BD16D13E08008F7636 /* messageReceived.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 881AE5A516D13E08008F7636 /* messageReceived.aiff */; };
 		881AE5BE16D13E08008F7636 /* messageSent.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 881AE5A616D13E08008F7636 /* messageSent.aiff */; };
 		881AE5C016D13E35008F7636 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881AE5BF16D13E35008F7636 /* AudioToolbox.framework */; };
+		889953A116EE3EE6004A9660 /* UIView+AnimationOptionsForCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 889953A016EE3EE6004A9660 /* UIView+AnimationOptionsForCurve.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,8 @@
 		881AE5A516D13E08008F7636 /* messageReceived.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = messageReceived.aiff; sourceTree = "<group>"; };
 		881AE5A616D13E08008F7636 /* messageSent.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = messageSent.aiff; sourceTree = "<group>"; };
 		881AE5BF16D13E35008F7636 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		8899539F16EE3EE6004A9660 /* UIView+AnimationOptionsForCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimationOptionsForCurve.h"; sourceTree = "<group>"; };
+		889953A016EE3EE6004A9660 /* UIView+AnimationOptionsForCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimationOptionsForCurve.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +182,8 @@
 				881AE58D16D13E08008F7636 /* MessageSoundEffect.m */,
 				881AE59016D13E08008F7636 /* NSString+MessagesView.h */,
 				881AE59116D13E08008F7636 /* NSString+MessagesView.m */,
+				8899539F16EE3EE6004A9660 /* UIView+AnimationOptionsForCurve.h */,
+				889953A016EE3EE6004A9660 /* UIView+AnimationOptionsForCurve.m */,
 			);
 			path = MessagesTableViewController;
 			sourceTree = SOURCE_ROOT;
@@ -316,6 +321,7 @@
 				881AE5AA16D13E08008F7636 /* MessageSoundEffect.m in Sources */,
 				881AE5AB16D13E08008F7636 /* MessagesViewController.m in Sources */,
 				881AE5AC16D13E08008F7636 /* NSString+MessagesView.m in Sources */,
+				889953A116EE3EE6004A9660 /* UIView+AnimationOptionsForCurve.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

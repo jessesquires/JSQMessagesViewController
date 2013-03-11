@@ -34,6 +34,7 @@
 #import "MessagesViewController.h"
 #import "MessageInputView.h"
 #import "NSString+MessagesView.h"
+#import "UIView+AnimationOptionsForCurve.h"
 
 #define INPUT_HEIGHT 40.0f
 
@@ -277,27 +278,28 @@
 	UIViewAnimationCurve curve = [[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
 	double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
-	[UIView beginAnimations:@"keyboardWillShowHide" context:nil];
-	[UIView setAnimationCurve:curve];
-	[UIView setAnimationDuration:duration];
-    
-    CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
-    
-    CGRect inputViewFrame = self.inputView.frame;
-    self.inputView.frame = CGRectMake(inputViewFrame.origin.x,
-                                      keyboardY - inputViewFrame.size.height,
-                                      inputViewFrame.size.width,
-                                      inputViewFrame.size.height);
-
-    UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
-                                           0.0f,
-                                           self.view.frame.size.height - self.inputView.frame.origin.y - INPUT_HEIGHT,
-                                           0.0f);
-
-	self.tableView.contentInset = insets;
-	self.tableView.scrollIndicatorInsets = insets;
-    	
-    [UIView commitAnimations];
+    [UIView animateWithDuration:duration
+                          delay:0.0f
+                        options:[UIView animationOptionsForCurve:curve]
+                     animations:^{
+                         CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
+                         
+                         CGRect inputViewFrame = self.inputView.frame;
+                         self.inputView.frame = CGRectMake(inputViewFrame.origin.x,
+                                                           keyboardY - inputViewFrame.size.height,
+                                                           inputViewFrame.size.width,
+                                                           inputViewFrame.size.height);
+                         
+                         UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
+                                                                0.0f,
+                                                                self.view.frame.size.height - self.inputView.frame.origin.y - INPUT_HEIGHT,
+                                                                0.0f);
+                         
+                         self.tableView.contentInset = insets;
+                         self.tableView.scrollIndicatorInsets = insets;
+                     }
+                     completion:^(BOOL finished) {
+                     }];
 }
 
 @end
