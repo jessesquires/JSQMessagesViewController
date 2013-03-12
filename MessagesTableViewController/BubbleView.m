@@ -109,7 +109,7 @@
 	[self.text drawInRect:textFrame
                  withFont:[BubbleView font]
             lineBreakMode:NSLineBreakByWordWrapping
-                alignment:(self.style == BubbleMessageStyleOutgoing) ? NSTextAlignmentRight : NSTextAlignmentLeft];
+                alignment:NSTextAlignmentLeft];
 }
 
 #pragma mark - Bubble view
