@@ -22,7 +22,13 @@ Notable changes from [SSMessagingViewController][1]:
 * Refactoring, refinements, and fixes
 
 ## Installation
-		
+
+### Using [CocoaPods](http://www.cocoapods.org)
+
+    pod 'MessagesTableViewController'
+
+### From source
+
 * Drag the `MessagesTableViewController/` folder to your project.
 * Add the `AudioToolbox.framework` to your project, if you want to use the sound effects
 * Subclass `MessagesViewController`
