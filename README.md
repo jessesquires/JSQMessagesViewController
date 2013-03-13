@@ -13,6 +13,7 @@ This is based on work by @soffes [SSMessagingViewController][1]. I took Soffes' 
 Notable changes from [SSMessagingViewController][1]:
 
 * Brought up-to-date for iOS 6.0 and ARC
+* Storyboards Support (if that's how you roll)
 * Allows arbitrary message sizes (and message bubble sizes)
 * Universal for iPhone and iPad
 * Swipe/pull down to hide keyboard
@@ -43,9 +44,14 @@ Notable changes from [SSMessagingViewController][1]:
 		* Call `[self finishSend]` at the end of this method to animate and reset the text input view
 		* Optionally play sound effects with `[MessageSoundEffect playMessageSentSound]` or `[MessageSoundEffect playMessageReceivedSound]`
 	* `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
-		* The API table view data source method that you should be familiar with
-* Present view programmatically, **does not work with Storyboards**
-* See the included Demo project `MessagesDemo.xcodeproj` for example
+		* The API [table view data source][2] method that you should be familiar with
+* Present view programmatically, or use Storyboards
+* Note: your `MessagesViewController` subclass **must** be presented in a `UINavigationViewController`
+
+### Demo projects included
+
+* `MessagesDemo.xcodeproj` for example of programmatic presentation
+* `MessagesDemoStoryboards/MessagesDemoSB.xcodeproj` for example of use with Storyboards
 
 ## ToDo
 
@@ -55,7 +61,6 @@ Notable changes from [SSMessagingViewController][1]:
 * Display "To:" search field for new messages
 * Option for user avatar to display next to bubbles
 * "Send" images or video
-* Storyboards support
 
 ## Related Projects
 
@@ -68,7 +73,7 @@ Notable changes from [SSMessagingViewController][1]:
 
 You are free to use this as you please. No attribution necessary. 
 
-**If you do use this, I would love to here about it!**
+**If you use this, please tell me about it!**
 
 MIT License
 Copyright &copy; 2013 Jesse Squires
@@ -81,3 +86,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 [1]:https://github.com/soffes/ssmessagesviewcontroller
+[2]:http://developer.apple.com/library/ios/#documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html#//apple_ref/occ/intf/UITableViewDataSource
