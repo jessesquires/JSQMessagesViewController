@@ -32,7 +32,6 @@
 //
 
 #import "MessagesViewController.h"
-#import "MessageInputView.h"
 #import "NSString+MessagesView.h"
 #import "UIView+AnimationOptionsForCurve.h"
 
