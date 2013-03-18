@@ -30,7 +30,7 @@ Notable changes from [SSMessagingViewController][1]:
 
 ### From source
 
-* Drag the `MessagesTableViewController/` folder to your project.
+* Drag the `JSMessagesTableViewController/` folder to your project.
 * Add the `AudioToolbox.framework` to your project, if you want to use the sound effects
 * Subclass `JSMessagesViewController`
 * Override the following methods:
