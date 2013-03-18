@@ -35,6 +35,7 @@
 
 #import "JSMessageInputView.h"
 #import "JSBubbleView.h"
+#import "NSString+JSMessagesView.h"
 
 @interface JSMessageInputView ()
 
@@ -61,7 +62,7 @@
 - (void)setup
 {
     self.image = [[UIImage imageNamed:@"input-bar"] resizableImageWithCapInsets:UIEdgeInsetsMake(19.0f, 3.0f, 19.0f, 3.0f)];
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor whiteColor];
     self.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin);
     self.opaque = YES;
     self.userInteractionEnabled = YES;
@@ -73,13 +74,13 @@
 - (void)setupTextView
 {
     CGFloat width = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) ? 246.0f : 690.0f;
-    CGFloat height = [JSMessageInputView textViewLineHeight] * [JSMessageInputView maxLines];
+    CGFloat height = [JSMessageInputView textViewLineHeight];
     
     self.textView = [[UITextView alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, height)];
     self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.textView.backgroundColor = [UIColor whiteColor];
-    self.textView.scrollIndicatorInsets = UIEdgeInsetsMake(13.0f, 0.0f, 14.0f, 7.0f);
-    self.textView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 13.0f, 0.0f);
+    self.textView.scrollIndicatorInsets = UIEdgeInsetsMake(10.0f, 0.0f, 10.0f, 8.0f);
+    self.textView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
     self.textView.scrollEnabled = YES;
     self.textView.scrollsToTop = NO;
     self.textView.userInteractionEnabled = YES;
@@ -97,6 +98,7 @@
                                                                                 self.frame.size.height)];
     inputFieldBack.image = [[UIImage imageNamed:@"input-field"] resizableImageWithCapInsets:UIEdgeInsetsMake(20.0f, 12.0f, 18.0f, 18.0f)];
     inputFieldBack.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    inputFieldBack.backgroundColor = [UIColor clearColor];
     [self addSubview:inputFieldBack];
 }
 
@@ -133,9 +135,25 @@
 }
 
 #pragma mark - Message input view
+- (void)adjustTextViewHeightBy:(CGFloat)changeInHeight
+{
+    CGRect prevFrame = self.textView.frame;
+    int numLines = [JSBubbleView numberOfLinesForMessage:self.textView.text];
+    
+    self.textView.frame = CGRectMake(prevFrame.origin.x,
+                                     prevFrame.origin.y,
+                                     prevFrame.size.width,
+                                     prevFrame.size.height + changeInHeight);
+    
+    self.textView.contentInset = UIEdgeInsetsMake((numLines >= 6 ? 4.0f : 0.0f),
+                                                  0.0f,
+                                                  (numLines >= 6 ? 4.0f : 0.0f),
+                                                  0.0f);
+}
+
 + (CGFloat)textViewLineHeight
 {
-    return 35.0f; // for fontSize 15.0f
+    return 29.0f; // for fontSize 15.0f
 }
 
 + (CGFloat)maxLines

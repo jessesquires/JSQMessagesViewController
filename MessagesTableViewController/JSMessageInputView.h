@@ -41,6 +41,7 @@
 @property (strong, nonatomic) UIButton *sendButton;
 
 #pragma mark - Message input view
+- (void)adjustTextViewHeightBy:(CGFloat)changeInHeight;
 + (CGFloat)textViewLineHeight;
 + (CGFloat)maxLines;
 + (CGFloat)maxHeight;

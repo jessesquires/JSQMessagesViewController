@@ -234,10 +234,14 @@
 {
     CGFloat maxHeight = [JSMessageInputView maxHeight];
     CGFloat textViewContentHeight = textView.contentSize.height;
+    BOOL isShrinking = textViewContentHeight < self.previousTextViewContentHeight;
     CGFloat changeInHeight = textViewContentHeight - self.previousTextViewContentHeight;
-
+    
     changeInHeight = (textViewContentHeight + changeInHeight >= maxHeight) ? 0.0f : changeInHeight;
-
+    
+    if(!isShrinking) // hackish -- to prevent ugly UI glitch with dynamic sizing of textview 
+        [self.inputView adjustTextViewHeightBy:changeInHeight];
+    
     if(changeInHeight != 0.0f) {
         [UIView animateWithDuration:0.25f
                          animations:^{
@@ -254,6 +258,8 @@
                                                                inputViewFrame.size.height + changeInHeight);
                          }
                          completion:^(BOOL finished) {
+                             if(isShrinking) // hackish -- to prevent ugly UI glitch with dynamic sizing of textview 
+                                 [self.inputView adjustTextViewHeightBy:changeInHeight];
                          }];
         
         self.previousTextViewContentHeight = MIN(textViewContentHeight, maxHeight);

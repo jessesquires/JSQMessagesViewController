@@ -123,9 +123,8 @@
 + (CGSize)textSizeForText:(NSString *)txt
 {
     CGFloat width = [UIScreen mainScreen].applicationFrame.size.width * 0.65f;
-    int numRows = (txt.length / [JSBubbleView maxCharactersPerLine]) + 1;
-
-    CGFloat height = MAX(numRows, [txt numberOfLines]) * [JSMessageInputView textViewLineHeight];
+    CGFloat height = MAX([JSBubbleView numberOfLinesForMessage:txt],
+                         [txt numberOfLines]) * [JSMessageInputView textViewLineHeight];
     
     return [txt sizeWithFont:[JSBubbleView font]
            constrainedToSize:CGSizeMake(width, height)
@@ -147,6 +146,11 @@
 + (int)maxCharactersPerLine
 {
     return ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) ? 33 : 109;
+}
+
++ (int)numberOfLinesForMessage:(NSString *)txt
+{
+    return (txt.length / [JSBubbleView maxCharactersPerLine]) + 1;
 }
 
 @end
