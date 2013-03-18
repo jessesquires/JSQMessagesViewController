@@ -1,8 +1,10 @@
 //
-//  MessagesViewController.h
+//  JSBubbleView.h
 //
 //  Created by Jesse Squires on 2/12/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
+//
+//  http://www.hexedbits.com
 //
 //
 //  Largely based on work by Sam Soffes
@@ -32,31 +34,24 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BubbleMessageCell.h"
-#import "MessageSoundEffect.h"
-#import "MessageInputView.h"
 
-@interface MessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
+typedef enum {
+	JSBubbleMessageStyleOutgoing = 0,
+	JSBubbleMessageStyleIncoming = 1
+} JSBubbleMessageStyle;
 
-@property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) MessageInputView *inputView;
-@property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 
-#pragma mark - Actions
-- (void)sendPressed:(UIButton *)sender withText:(NSString *)text;
-- (void)sendPressed:(UIButton *)sender;
-- (void)handleSwipe:(UIGestureRecognizer *)guestureRecognizer;
 
-#pragma mark - Messages view controller
-- (BubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (void)finishSend;
-- (void)setBackgroundColor:(UIColor *)color;
-- (void)scrollToBottomAnimated:(BOOL)animated;
+@interface JSBubbleView : UIView
 
-#pragma mark - Keyboard notifications
-- (void)handleWillShowKeyboard:(NSNotification *)notification;
-- (void)handleWillHideKeyboard:(NSNotification *)notification;
-- (void)keyboardWillShowHide:(NSNotification *)notification;
+@property (assign, nonatomic) JSBubbleMessageStyle style;
+@property (copy, nonatomic) NSString *text;
+
+#pragma mark - Bubble view
++ (UIFont *)font;
++ (CGSize)textSizeForText:(NSString *)txt;
++ (CGSize)bubbleSizeForText:(NSString *)txt;
++ (CGFloat)cellHeightForText:(NSString *)txt;
++ (int)maxCharactersPerLine;
 
 @end

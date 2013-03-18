@@ -1,15 +1,10 @@
 //
-//  MessageInputView.h
+//  JSMessageSoundEffect.h
 //
-//  Created by Jesse Squires on 2/12/13.
+//  Created by Jesse Squires on 2/15/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
-//
-//  Largely based on work by Sam Soffes
-//  https://github.com/soffes
-//
-//  SSMessagesViewController
-//  https://github.com/soffes/ssmessagesviewcontroller
+//  http://www.hexedbits.com
 //
 //
 //  The MIT License
@@ -31,16 +26,12 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
-@interface MessageInputView : UIImageView
+@interface JSMessageSoundEffect : NSObject
 
-@property (strong, nonatomic) UITextView *textView;
-@property (strong, nonatomic) UIButton *sendButton;
-
-#pragma mark - Message input view
-+ (CGFloat)textViewLineHeight;
-+ (CGFloat)maxLines;
-+ (CGFloat)maxHeight;
++ (void)playMessageReceivedSound;
++ (void)playMessageSentSound;
 
 @end

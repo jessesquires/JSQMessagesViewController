@@ -36,9 +36,9 @@
 }
 
 #pragma mark - Messages view controller
-- (BubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (indexPath.row % 2) ? BubbleMessageStyleIncoming : BubbleMessageStyleOutgoing;
+    return (indexPath.row % 2) ? JSBubbleMessageStyleIncoming : JSBubbleMessageStyleOutgoing;
 }
 
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -51,9 +51,9 @@
     [self.messages addObject:text];
     
     if((self.messages.count - 1) % 2)
-        [MessageSoundEffect playMessageSentSound];
+        [JSMessageSoundEffect playMessageSentSound];
     else
-        [MessageSoundEffect playMessageReceivedSound];
+        [JSMessageSoundEffect playMessageReceivedSound];
     
     [self finishSend];
 }

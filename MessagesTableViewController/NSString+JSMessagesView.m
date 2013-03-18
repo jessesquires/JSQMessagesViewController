@@ -1,15 +1,10 @@
 //
-//  BubbleView.h
+//  NSString+JSMessagesView.m
 //
-//  Created by Jesse Squires on 2/12/13.
+//  Created by Jesse Squires on 2/14/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
-//
-//  Largely based on work by Sam Soffes
-//  https://github.com/soffes
-//
-//  SSMessagesViewController
-//  https://github.com/soffes/ssmessagesviewcontroller
+//  http://www.hexedbits.com
 //
 //
 //  The MIT License
@@ -31,25 +26,20 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+#import "NSString+JSMessagesView.h"
 
-typedef enum {
-	BubbleMessageStyleOutgoing = 0,
-	BubbleMessageStyleIncoming = 1
-} BubbleMessageStyle;
+@implementation NSString (JSMessagesView)
 
+- (NSString *)trimWhitespace
+{
+    NSMutableString *str = [self mutableCopy];
+    CFStringTrimWhitespace((__bridge CFMutableStringRef)str);
+    return str;
+}
 
-
-@interface BubbleView : UIView
-
-@property (assign, nonatomic) BubbleMessageStyle style;
-@property (copy, nonatomic) NSString *text;
-
-#pragma mark - Bubble view
-+ (UIFont *)font;
-+ (CGSize)textSizeForText:(NSString *)txt;
-+ (CGSize)bubbleSizeForText:(NSString *)txt;
-+ (CGFloat)cellHeightForText:(NSString *)txt;
-+ (int)maxCharactersPerLine;
+- (NSUInteger)numberOfLines
+{
+    return [self componentsSeparatedByString:@"\n"].count + 1;
+}
 
 @end

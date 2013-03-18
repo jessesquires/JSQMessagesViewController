@@ -1,8 +1,10 @@
 //
-//  NSString+MessagesView.m
+//  JSMessageSoundEffect.m
 //
-//  Created by Jesse Squires on 2/14/13.
+//  Created by Jesse Squires on 2/15/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
+//
+//  http://www.hexedbits.com
 //
 //
 //  The MIT License
@@ -24,20 +26,41 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "NSString+MessagesView.h"
+#import "JSMessageSoundEffect.h"
 
-@implementation NSString (MessagesView)
+@interface JSMessageSoundEffect ()
 
-- (NSString *)trimWhitespace
++ (void)playSoundWithName:(NSString *)name type:(NSString *)type;
+
+@end
+
+
+
+@implementation JSMessageSoundEffect
+
++ (void)playSoundWithName:(NSString *)name type:(NSString *)type
 {
-    NSMutableString *str = [self mutableCopy];
-    CFStringTrimWhitespace((__bridge CFMutableStringRef)str);
-    return str;
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:type];
+    
+    if([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        NSURL *url = [NSURL fileURLWithPath:path];
+        SystemSoundID sound;
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &sound);
+        AudioServicesPlaySystemSound(sound);
+    }
+    else {
+        NSLog(@"**** Sound Error: file not found: %@", path);
+    }
 }
 
-- (NSUInteger)numberOfLines
++ (void)playMessageReceivedSound
 {
-    return [self componentsSeparatedByString:@"\n"].count + 1;
+    [JSMessageSoundEffect playSoundWithName:@"messageReceived" type:@"aiff"];
+}
+
++ (void)playMessageSentSound
+{
+    [JSMessageSoundEffect playSoundWithName:@"messageSent" type:@"aiff"];
 }
 
 @end

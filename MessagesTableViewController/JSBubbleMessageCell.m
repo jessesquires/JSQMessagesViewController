@@ -1,8 +1,10 @@
 //
-//  BubbleMessageCell.m
+//  JSBubbleMessageCell.m
 //
 //  Created by Jesse Squires on 2/12/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
+//
+//  http://www.hexedbits.com
 //
 //
 //  Largely based on work by Sam Soffes
@@ -31,9 +33,9 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "BubbleMessageCell.h"
+#import "JSBubbleMessageCell.h"
 
-@interface BubbleMessageCell()
+@interface JSBubbleMessageCell()
 
 - (void)setup;
 
@@ -41,7 +43,7 @@
 
 
 
-@implementation BubbleMessageCell
+@implementation JSBubbleMessageCell
 
 #pragma mark - Initialization
 - (void)setup
@@ -58,7 +60,7 @@
     self.detailTextLabel.text = nil;
     self.detailTextLabel.hidden = YES;
     
-    self.bubbleView = [[BubbleView alloc] initWithFrame:CGRectMake(0.0f,
+    self.bubbleView = [[JSBubbleView alloc] initWithFrame:CGRectMake(0.0f,
                                                                    0.0f,
                                                                    self.contentView.frame.size.width,
                                                                    self.contentView.frame.size.height)];
@@ -69,7 +71,7 @@
     [self.contentView sendSubviewToBack:self.bubbleView];
 }
 
-- (id)initWithBubbleStyle:(BubbleMessageStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithBubbleStyle:(JSBubbleMessageStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if(self) {

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 
-#import "MessagesViewController.h"
+#import "JSMessagesViewController.h"
 
-@interface DemoViewController : MessagesViewController
+@interface DemoViewController : JSMessagesViewController
 
 @property (strong, nonatomic) NSMutableArray *messages;
 

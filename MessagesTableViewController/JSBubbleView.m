@@ -1,8 +1,10 @@
 //
-//  BubbleView.m
+//  JSBubbleView.m
 //
 //  Created by Jesse Squires on 2/12/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
+//
+//  http://www.hexedbits.com
 //
 //
 //  Largely based on work by Sam Soffes
@@ -31,9 +33,9 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "BubbleView.h"
-#import "MessageInputView.h"
-#import "NSString+MessagesView.h"
+#import "JSBubbleView.h"
+#import "JSMessageInputView.h"
+#import "NSString+JSMessagesView.h"
 
 #define kMarginTop 8.0f
 #define kMarginBottom 4.0f
@@ -41,7 +43,7 @@
 #define kPaddingBottom 8.0f
 #define kBubblePaddingRight 35.0f
 
-@interface BubbleView()
+@interface JSBubbleView()
 
 @property (strong, nonatomic) UIImage *incomingBackground;
 @property (strong, nonatomic) UIImage *outgoingBackground;
@@ -52,7 +54,7 @@
 
 
 
-@implementation BubbleView
+@implementation JSBubbleView
 
 @synthesize style;
 @synthesize text;
@@ -75,7 +77,7 @@
 }
 
 #pragma mark - Setters
-- (void)setStyle:(BubbleMessageStyle)newStyle
+- (void)setStyle:(JSBubbleMessageStyle)newStyle
 {
     style = newStyle;
     [self setNeedsDisplay];
@@ -90,24 +92,24 @@
 #pragma mark - Drawing
 - (void)drawRect:(CGRect)frame
 {
-	UIImage *image = (self.style == BubbleMessageStyleIncoming) ? self.incomingBackground : self.outgoingBackground;
-    CGSize bubbleSize = [BubbleView bubbleSizeForText:self.text];
-	CGRect bubbleFrame = CGRectMake(((self.style == BubbleMessageStyleOutgoing) ? self.frame.size.width - bubbleSize.width : 0.0f),
+	UIImage *image = (self.style == JSBubbleMessageStyleIncoming) ? self.incomingBackground : self.outgoingBackground;
+    CGSize bubbleSize = [JSBubbleView bubbleSizeForText:self.text];
+	CGRect bubbleFrame = CGRectMake(((self.style == JSBubbleMessageStyleOutgoing) ? self.frame.size.width - bubbleSize.width : 0.0f),
                                     kMarginTop,
                                     bubbleSize.width,
                                     bubbleSize.height);
     
 	[image drawInRect:bubbleFrame];
 	
-	CGSize textSize = [BubbleView textSizeForText:self.text];
-	CGFloat textX = (CGFloat)image.leftCapWidth - 3.0f + ((self.style == BubbleMessageStyleOutgoing) ? bubbleFrame.origin.x : 0.0f);
+	CGSize textSize = [JSBubbleView textSizeForText:self.text];
+	CGFloat textX = (CGFloat)image.leftCapWidth - 3.0f + ((self.style == JSBubbleMessageStyleOutgoing) ? bubbleFrame.origin.x : 0.0f);
     CGRect textFrame = CGRectMake(textX,
                                   kPaddingTop + kMarginTop,
                                   textSize.width,
                                   textSize.height);
     
 	[self.text drawInRect:textFrame
-                 withFont:[BubbleView font]
+                 withFont:[JSBubbleView font]
             lineBreakMode:NSLineBreakByWordWrapping
                 alignment:NSTextAlignmentLeft];
 }
@@ -121,25 +123,25 @@
 + (CGSize)textSizeForText:(NSString *)txt
 {
     CGFloat width = [UIScreen mainScreen].applicationFrame.size.width * 0.65f;
-    int numRows = (txt.length / [BubbleView maxCharactersPerLine]) + 1;
+    int numRows = (txt.length / [JSBubbleView maxCharactersPerLine]) + 1;
 
-    CGFloat height = MAX(numRows, [txt numberOfLines]) * [MessageInputView textViewLineHeight];
+    CGFloat height = MAX(numRows, [txt numberOfLines]) * [JSMessageInputView textViewLineHeight];
     
-    return [txt sizeWithFont:[BubbleView font]
+    return [txt sizeWithFont:[JSBubbleView font]
            constrainedToSize:CGSizeMake(width, height)
                lineBreakMode:NSLineBreakByWordWrapping];
 }
 
 + (CGSize)bubbleSizeForText:(NSString *)txt
 {
-	CGSize textSize = [BubbleView textSizeForText:txt];
+	CGSize textSize = [JSBubbleView textSizeForText:txt];
 	return CGSizeMake(textSize.width + kBubblePaddingRight,
                       textSize.height + kPaddingTop + kPaddingBottom);
 }
 
 + (CGFloat)cellHeightForText:(NSString *)txt
 {
-    return [BubbleView bubbleSizeForText:txt].height + kMarginTop + kMarginBottom;
+    return [JSBubbleView bubbleSizeForText:txt].height + kMarginTop + kMarginBottom;
 }
 
 + (int)maxCharactersPerLine

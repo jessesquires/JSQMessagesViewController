@@ -17,12 +17,12 @@
 		881AE57116D13CDC008F7636 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE57016D13CDC008F7636 /* Default@2x.png */; };
 		881AE57316D13CDC008F7636 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE57216D13CDC008F7636 /* Default-568h@2x.png */; };
 		881AE58416D13DE0008F7636 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58316D13DE0008F7636 /* DemoViewController.m */; };
-		881AE5A716D13E08008F7636 /* BubbleMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58716D13E08008F7636 /* BubbleMessageCell.m */; };
-		881AE5A816D13E08008F7636 /* BubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58916D13E08008F7636 /* BubbleView.m */; };
-		881AE5A916D13E08008F7636 /* MessageInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58B16D13E08008F7636 /* MessageInputView.m */; };
-		881AE5AA16D13E08008F7636 /* MessageSoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58D16D13E08008F7636 /* MessageSoundEffect.m */; };
-		881AE5AB16D13E08008F7636 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58F16D13E08008F7636 /* MessagesViewController.m */; };
-		881AE5AC16D13E08008F7636 /* NSString+MessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE59116D13E08008F7636 /* NSString+MessagesView.m */; };
+		881AE5A716D13E08008F7636 /* JSBubbleMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58716D13E08008F7636 /* JSBubbleMessageCell.m */; };
+		881AE5A816D13E08008F7636 /* JSBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58916D13E08008F7636 /* JSBubbleView.m */; };
+		881AE5A916D13E08008F7636 /* JSMessageInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58B16D13E08008F7636 /* JSMessageInputView.m */; };
+		881AE5AA16D13E08008F7636 /* JSMessageSoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58D16D13E08008F7636 /* JSMessageSoundEffect.m */; };
+		881AE5AB16D13E08008F7636 /* JSMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE58F16D13E08008F7636 /* JSMessagesViewController.m */; };
+		881AE5AC16D13E08008F7636 /* NSString+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 881AE59116D13E08008F7636 /* NSString+JSMessagesView.m */; };
 		881AE5AD16D13E08008F7636 /* input-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE59416D13E08008F7636 /* input-bar.png */; };
 		881AE5AE16D13E08008F7636 /* input-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE59516D13E08008F7636 /* input-bar@2x.png */; };
 		881AE5AF16D13E08008F7636 /* input-field.png in Resources */ = {isa = PBXBuildFile; fileRef = 881AE59616D13E08008F7636 /* input-field.png */; };
@@ -61,18 +61,18 @@
 		881AE57216D13CDC008F7636 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		881AE58216D13DE0008F7636 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		881AE58316D13DE0008F7636 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
-		881AE58616D13E08008F7636 /* BubbleMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubbleMessageCell.h; sourceTree = "<group>"; };
-		881AE58716D13E08008F7636 /* BubbleMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubbleMessageCell.m; sourceTree = "<group>"; };
-		881AE58816D13E08008F7636 /* BubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubbleView.h; sourceTree = "<group>"; };
-		881AE58916D13E08008F7636 /* BubbleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubbleView.m; sourceTree = "<group>"; };
-		881AE58A16D13E08008F7636 /* MessageInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageInputView.h; sourceTree = "<group>"; };
-		881AE58B16D13E08008F7636 /* MessageInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageInputView.m; sourceTree = "<group>"; };
-		881AE58C16D13E08008F7636 /* MessageSoundEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSoundEffect.h; sourceTree = "<group>"; };
-		881AE58D16D13E08008F7636 /* MessageSoundEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSoundEffect.m; sourceTree = "<group>"; };
-		881AE58E16D13E08008F7636 /* MessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
-		881AE58F16D13E08008F7636 /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
-		881AE59016D13E08008F7636 /* NSString+MessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MessagesView.h"; sourceTree = "<group>"; };
-		881AE59116D13E08008F7636 /* NSString+MessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MessagesView.m"; sourceTree = "<group>"; };
+		881AE58616D13E08008F7636 /* JSBubbleMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBubbleMessageCell.h; sourceTree = "<group>"; };
+		881AE58716D13E08008F7636 /* JSBubbleMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBubbleMessageCell.m; sourceTree = "<group>"; };
+		881AE58816D13E08008F7636 /* JSBubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBubbleView.h; sourceTree = "<group>"; };
+		881AE58916D13E08008F7636 /* JSBubbleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBubbleView.m; sourceTree = "<group>"; };
+		881AE58A16D13E08008F7636 /* JSMessageInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSMessageInputView.h; sourceTree = "<group>"; };
+		881AE58B16D13E08008F7636 /* JSMessageInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSMessageInputView.m; sourceTree = "<group>"; };
+		881AE58C16D13E08008F7636 /* JSMessageSoundEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSMessageSoundEffect.h; sourceTree = "<group>"; };
+		881AE58D16D13E08008F7636 /* JSMessageSoundEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSMessageSoundEffect.m; sourceTree = "<group>"; };
+		881AE58E16D13E08008F7636 /* JSMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSMessagesViewController.h; sourceTree = "<group>"; };
+		881AE58F16D13E08008F7636 /* JSMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSMessagesViewController.m; sourceTree = "<group>"; };
+		881AE59016D13E08008F7636 /* NSString+JSMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JSMessagesView.h"; sourceTree = "<group>"; };
+		881AE59116D13E08008F7636 /* NSString+JSMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JSMessagesView.m"; sourceTree = "<group>"; };
 		881AE59416D13E08008F7636 /* input-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input-bar.png"; sourceTree = "<group>"; };
 		881AE59516D13E08008F7636 /* input-bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input-bar@2x.png"; sourceTree = "<group>"; };
 		881AE59616D13E08008F7636 /* input-field.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input-field.png"; sourceTree = "<group>"; };
@@ -169,19 +169,19 @@
 		881AE58516D13E08008F7636 /* MessagesTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				881AE58E16D13E08008F7636 /* MessagesViewController.h */,
-				881AE58F16D13E08008F7636 /* MessagesViewController.m */,
-				881AE58A16D13E08008F7636 /* MessageInputView.h */,
-				881AE58B16D13E08008F7636 /* MessageInputView.m */,
-				881AE58616D13E08008F7636 /* BubbleMessageCell.h */,
-				881AE58716D13E08008F7636 /* BubbleMessageCell.m */,
-				881AE58816D13E08008F7636 /* BubbleView.h */,
-				881AE58916D13E08008F7636 /* BubbleView.m */,
+				881AE58E16D13E08008F7636 /* JSMessagesViewController.h */,
+				881AE58F16D13E08008F7636 /* JSMessagesViewController.m */,
+				881AE58A16D13E08008F7636 /* JSMessageInputView.h */,
+				881AE58B16D13E08008F7636 /* JSMessageInputView.m */,
+				881AE58616D13E08008F7636 /* JSBubbleMessageCell.h */,
+				881AE58716D13E08008F7636 /* JSBubbleMessageCell.m */,
+				881AE58816D13E08008F7636 /* JSBubbleView.h */,
+				881AE58916D13E08008F7636 /* JSBubbleView.m */,
 				881AE59216D13E08008F7636 /* Resources */,
-				881AE58C16D13E08008F7636 /* MessageSoundEffect.h */,
-				881AE58D16D13E08008F7636 /* MessageSoundEffect.m */,
-				881AE59016D13E08008F7636 /* NSString+MessagesView.h */,
-				881AE59116D13E08008F7636 /* NSString+MessagesView.m */,
+				881AE58C16D13E08008F7636 /* JSMessageSoundEffect.h */,
+				881AE58D16D13E08008F7636 /* JSMessageSoundEffect.m */,
+				881AE59016D13E08008F7636 /* NSString+JSMessagesView.h */,
+				881AE59116D13E08008F7636 /* NSString+JSMessagesView.m */,
 				8899539F16EE3EE6004A9660 /* UIView+AnimationOptionsForCurve.h */,
 				889953A016EE3EE6004A9660 /* UIView+AnimationOptionsForCurve.m */,
 			);
@@ -255,6 +255,7 @@
 		881AE55116D13CDC008F7636 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = JS;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Hexed Bits";
 			};
@@ -315,12 +316,12 @@
 				881AE56916D13CDC008F7636 /* main.m in Sources */,
 				881AE56D16D13CDC008F7636 /* AppDelegate.m in Sources */,
 				881AE58416D13DE0008F7636 /* DemoViewController.m in Sources */,
-				881AE5A716D13E08008F7636 /* BubbleMessageCell.m in Sources */,
-				881AE5A816D13E08008F7636 /* BubbleView.m in Sources */,
-				881AE5A916D13E08008F7636 /* MessageInputView.m in Sources */,
-				881AE5AA16D13E08008F7636 /* MessageSoundEffect.m in Sources */,
-				881AE5AB16D13E08008F7636 /* MessagesViewController.m in Sources */,
-				881AE5AC16D13E08008F7636 /* NSString+MessagesView.m in Sources */,
+				881AE5A716D13E08008F7636 /* JSBubbleMessageCell.m in Sources */,
+				881AE5A816D13E08008F7636 /* JSBubbleView.m in Sources */,
+				881AE5A916D13E08008F7636 /* JSMessageInputView.m in Sources */,
+				881AE5AA16D13E08008F7636 /* JSMessageSoundEffect.m in Sources */,
+				881AE5AB16D13E08008F7636 /* JSMessagesViewController.m in Sources */,
+				881AE5AC16D13E08008F7636 /* NSString+JSMessagesView.m in Sources */,
 				889953A116EE3EE6004A9660 /* UIView+AnimationOptionsForCurve.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,8 +1,10 @@
 //
-//  MessagesViewController.m
+//  JSMessagesViewController.m
 //
 //  Created by Jesse Squires on 2/12/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
+//
+//  http://www.hexedbits.com
 //
 //
 //  Largely based on work by Sam Soffes
@@ -31,13 +33,13 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "MessagesViewController.h"
-#import "NSString+MessagesView.h"
+#import "JSMessagesViewController.h"
+#import "NSString+JSMessagesView.h"
 #import "UIView+AnimationOptionsForCurve.h"
 
 #define INPUT_HEIGHT 40.0f
 
-@interface MessagesViewController ()
+@interface JSMessagesViewController ()
 
 - (void)setup;
 
@@ -45,7 +47,7 @@
 
 
 
-@implementation MessagesViewController
+@implementation JSMessagesViewController
 
 #pragma mark - Initialization
 - (void)setup
@@ -63,7 +65,7 @@
     [self setBackgroundColor:color];
     
     CGRect inputFrame = CGRectMake(0.0f, size.height - INPUT_HEIGHT, size.width, INPUT_HEIGHT);
-    self.inputView = [[MessageInputView alloc] initWithFrame:inputFrame];
+    self.inputView = [[JSMessageInputView alloc] initWithFrame:inputFrame];
     self.inputView.textView.delegate = self;
     [self.inputView.sendButton addTarget:self action:@selector(sendPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.inputView];
@@ -153,13 +155,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BubbleMessageStyle style = [self messageStyleForRowAtIndexPath:indexPath];
+    JSBubbleMessageStyle style = [self messageStyleForRowAtIndexPath:indexPath];
     
     NSString *CellID = [NSString stringWithFormat:@"MessageCell%d", style];
-    BubbleMessageCell *cell = (BubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellID];
+    JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellID];
     
     if(!cell) {
-        cell = [[BubbleMessageCell alloc] initWithBubbleStyle:style
+        cell = [[JSBubbleMessageCell alloc] initWithBubbleStyle:style
                                               reuseIdentifier:CellID];
     }
     
@@ -172,11 +174,11 @@
 #pragma mark - Table view delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [BubbleView cellHeightForText:[self textForRowAtIndexPath:indexPath]];
+    return [JSBubbleView cellHeightForText:[self textForRowAtIndexPath:indexPath]];
 }
 
 #pragma mark - Messages view controller
-- (BubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 0; // Override in subclass
 }
@@ -230,7 +232,7 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-    CGFloat maxHeight = [MessageInputView maxHeight];
+    CGFloat maxHeight = [JSMessageInputView maxHeight];
     CGFloat textViewContentHeight = textView.contentSize.height;
     CGFloat changeInHeight = textViewContentHeight - self.previousTextViewContentHeight;
 

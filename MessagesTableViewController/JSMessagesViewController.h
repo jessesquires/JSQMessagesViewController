@@ -1,8 +1,10 @@
 //
-//  BubbleMessageCell.h
+//  JSMessagesViewController.h
 //
 //  Created by Jesse Squires on 2/12/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
+//
+//  http://www.hexedbits.com
 //
 //
 //  Largely based on work by Sam Soffes
@@ -32,13 +34,31 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BubbleView.h"
+#import "JSBubbleMessageCell.h"
+#import "JSMessageSoundEffect.h"
+#import "JSMessageInputView.h"
 
-@interface BubbleMessageCell : UITableViewCell
+@interface JSMessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 
-@property (strong, nonatomic) BubbleView *bubbleView;
+@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) JSMessageInputView *inputView;
+@property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 
-- (id)initWithBubbleStyle:(BubbleMessageStyle)style
-          reuseIdentifier:(NSString *)reuseIdentifier;
+#pragma mark - Actions
+- (void)sendPressed:(UIButton *)sender withText:(NSString *)text;
+- (void)sendPressed:(UIButton *)sender;
+- (void)handleSwipe:(UIGestureRecognizer *)guestureRecognizer;
+
+#pragma mark - Messages view controller
+- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)finishSend;
+- (void)setBackgroundColor:(UIColor *)color;
+- (void)scrollToBottomAnimated:(BOOL)animated;
+
+#pragma mark - Keyboard notifications
+- (void)handleWillShowKeyboard:(NSNotification *)notification;
+- (void)handleWillHideKeyboard:(NSNotification *)notification;
+- (void)keyboardWillShowHide:(NSNotification *)notification;
 
 @end

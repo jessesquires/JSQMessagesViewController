@@ -32,21 +32,22 @@ Notable changes from [SSMessagingViewController][1]:
 
 * Drag the `MessagesTableViewController/` folder to your project.
 * Add the `AudioToolbox.framework` to your project, if you want to use the sound effects
-* Subclass `MessagesViewController`
+* Subclass `JSMessagesViewController`
 * Override the following methods:
-	* `- (BubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath`
+	* `- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath`
 		* The style of the bubble for this row
-		* Style options are: `BubbleMessageStyleOutgoing` or `BubbleMessageStyleIncoming`
+		* Style options are: `JSBubbleMessageStyleOutgoing` or `JSBubbleMessageStyleIncoming`
 	* `- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath`
 		* The text to be displayed for this row
 	* `- (void)sendPressed:(UIButton *)sender withText:(NSString *)text`
 		* Hook into your own backend here
 		* Call `[self finishSend]` at the end of this method to animate and reset the text input view
-		* Optionally play sound effects with `[MessageSoundEffect playMessageSentSound]` or `[MessageSoundEffect playMessageReceivedSound]`
+		* Optionally play sound effects with `[JSMessageSoundEffect playMessageSentSound]` or `[JSMessageSoundEffect playMessageReceivedSound]`
 	* `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
 		* The API [table view data source][2] method that you should be familiar with
+* Use `setBackgroundColor:` to set table view background color
 * Present view programmatically, or use Storyboards
-* Note: your `MessagesViewController` subclass **must** be presented in a `UINavigationViewController`
+* Note: your `JSMessagesViewController` subclass **must** be presented in a `UINavigationViewController`
 
 ### Demo projects included
 

@@ -1,8 +1,10 @@
 //
-//  MessageInputView.m
+//  JSMessageInputView.m
 //
 //  Created by Jesse Squires on 2/12/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
+//
+//  http://www.hexedbits.com
 //
 //
 //  Largely based on work by Sam Soffes
@@ -31,10 +33,10 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "MessageInputView.h"
-#import "BubbleView.h"
+#import "JSMessageInputView.h"
+#import "JSBubbleView.h"
 
-@interface MessageInputView ()
+@interface JSMessageInputView ()
 
 - (void)setup;
 - (void)setupTextView;
@@ -44,7 +46,7 @@
 
 
 
-@implementation MessageInputView
+@implementation JSMessageInputView
 
 #pragma mark - Initialization
 - (id)initWithFrame:(CGRect)frame
@@ -71,7 +73,7 @@
 - (void)setupTextView
 {
     CGFloat width = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) ? 246.0f : 690.0f;
-    CGFloat height = [MessageInputView textViewLineHeight] * [MessageInputView maxLines];
+    CGFloat height = [JSMessageInputView textViewLineHeight] * [JSMessageInputView maxLines];
     
     self.textView = [[UITextView alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, height)];
     self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -81,7 +83,7 @@
     self.textView.scrollEnabled = YES;
     self.textView.scrollsToTop = NO;
     self.textView.userInteractionEnabled = YES;
-    self.textView.font = [BubbleView font];
+    self.textView.font = [JSBubbleView font];
     self.textView.textColor = [UIColor blackColor];
     self.textView.backgroundColor = [UIColor whiteColor];
     self.textView.keyboardAppearance = UIKeyboardAppearanceDefault;
@@ -143,7 +145,7 @@
 
 + (CGFloat)maxHeight
 {
-    return ([MessageInputView maxLines] + 1.0f) * [MessageInputView textViewLineHeight];
+    return ([JSMessageInputView maxLines] + 1.0f) * [JSMessageInputView textViewLineHeight];
 }
 
 @end

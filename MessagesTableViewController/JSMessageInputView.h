@@ -1,8 +1,17 @@
 //
-//  NSString+MessagesView.h
+//  JSMessageInputView.h
 //
-//  Created by Jesse Squires on 2/14/13.
+//  Created by Jesse Squires on 2/12/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
+//
+//  http://www.hexedbits.com
+//
+//
+//  Largely based on work by Sam Soffes
+//  https://github.com/soffes
+//
+//  SSMessagesViewController
+//  https://github.com/soffes/ssmessagesviewcontroller
 //
 //
 //  The MIT License
@@ -24,11 +33,16 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface NSString (MessagesView)
+@interface JSMessageInputView : UIImageView
 
-- (NSString *)trimWhitespace;
-- (NSUInteger)numberOfLines;
+@property (strong, nonatomic) UITextView *textView;
+@property (strong, nonatomic) UIButton *sendButton;
+
+#pragma mark - Message input view
++ (CGFloat)textViewLineHeight;
++ (CGFloat)maxLines;
++ (CGFloat)maxHeight;
 
 @end
