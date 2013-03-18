@@ -239,7 +239,7 @@
     
     changeInHeight = (textViewContentHeight + changeInHeight >= maxHeight) ? 0.0f : changeInHeight;
     
-    if(!isShrinking) // hackish -- to prevent ugly UI glitch with dynamic sizing of textview 
+    if(!isShrinking)
         [self.inputView adjustTextViewHeightBy:changeInHeight];
     
     if(changeInHeight != 0.0f) {
@@ -258,7 +258,7 @@
                                                                inputViewFrame.size.height + changeInHeight);
                          }
                          completion:^(BOOL finished) {
-                             if(isShrinking) // hackish -- to prevent ugly UI glitch with dynamic sizing of textview 
+                             if(isShrinking)
                                  [self.inputView adjustTextViewHeightBy:changeInHeight];
                          }];
         

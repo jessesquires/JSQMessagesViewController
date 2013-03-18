@@ -138,7 +138,9 @@
 - (void)adjustTextViewHeightBy:(CGFloat)changeInHeight
 {
     CGRect prevFrame = self.textView.frame;
-    int numLines = [JSBubbleView numberOfLinesForMessage:self.textView.text];
+    
+    int numLines = MAX([JSBubbleView numberOfLinesForMessage:self.textView.text],
+                       [self.textView.text numberOfLines]);
     
     self.textView.frame = CGRectMake(prevFrame.origin.x,
                                      prevFrame.origin.y,
@@ -149,11 +151,13 @@
                                                   0.0f,
                                                   (numLines >= 6 ? 4.0f : 0.0f),
                                                   0.0f);
+    
+    self.textView.scrollEnabled = (numLines >= 6);
 }
 
 + (CGFloat)textViewLineHeight
 {
-    return 29.0f; // for fontSize 15.0f
+    return 30.0f; // for fontSize 15.0f
 }
 
 + (CGFloat)maxLines
