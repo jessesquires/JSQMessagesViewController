@@ -61,9 +61,9 @@
     self.detailTextLabel.hidden = YES;
     
     self.bubbleView = [[JSBubbleView alloc] initWithFrame:CGRectMake(0.0f,
-                                                                   0.0f,
-                                                                   self.contentView.frame.size.width,
-                                                                   self.contentView.frame.size.height)];
+                                                                     0.0f,
+                                                                     self.contentView.frame.size.width,
+                                                                     self.contentView.frame.size.height)];
     
     self.bubbleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
@@ -100,10 +100,11 @@
 }
 
 #pragma mark - Setters
-- (void)setBackgroundColor:(UIColor *)backgroundColor
+- (void)setBackgroundColor:(UIColor *)color
 {
-    [super setBackgroundColor:backgroundColor];
-    [self.bubbleView setBackgroundColor:backgroundColor];
+    [super setBackgroundColor:color];
+    [self.contentView setBackgroundColor:color];
+    [self.bubbleView setBackgroundColor:color];
 }
 
 @end

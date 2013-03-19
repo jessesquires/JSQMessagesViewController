@@ -162,7 +162,7 @@
     
     if(!cell) {
         cell = [[JSBubbleMessageCell alloc] initWithBubbleStyle:style
-                                              reuseIdentifier:CellID];
+                                                reuseIdentifier:CellID];
     }
     
     cell.bubbleView.text = [self textForRowAtIndexPath:indexPath];

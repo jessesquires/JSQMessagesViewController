@@ -36,8 +36,9 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-	JSBubbleMessageStyleOutgoing = 0,
-	JSBubbleMessageStyleIncoming = 1
+	JSBubbleMessageStyleIncoming = 0,
+    JSBubbleMessageStyleOutgoing = 1,
+	JSBubbleMessageStyleOutgoingGreen = 2
 } JSBubbleMessageStyle;
 
 
@@ -48,6 +49,7 @@ typedef enum {
 @property (copy, nonatomic) NSString *text;
 
 #pragma mark - Bubble view
++ (UIImage *)bubbleImageForStyle:(JSBubbleMessageStyle)style;
 + (UIFont *)font;
 + (CGSize)textSizeForText:(NSString *)txt;
 + (CGSize)bubbleSizeForText:(NSString *)txt;

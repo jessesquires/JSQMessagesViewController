@@ -45,10 +45,8 @@
 
 @interface JSBubbleView()
 
-@property (strong, nonatomic) UIImage *incomingBackground;
-@property (strong, nonatomic) UIImage *outgoingBackground;
-
 - (void)setup;
+- (BOOL)styleIsOutgoing;
 
 @end
 
@@ -63,8 +61,16 @@
 - (void)setup
 {
     self.backgroundColor = [UIColor clearColor];
-    self.incomingBackground = [[UIImage imageNamed:@"messageBubbleGray"] stretchableImageWithLeftCapWidth:23 topCapHeight:15];
-    self.outgoingBackground = [[UIImage imageNamed:@"messageBubbleBlue"] stretchableImageWithLeftCapWidth:15 topCapHeight:15];
+}
+
+- (id)initWithFrame:(CGRect)frame style:(JSBubbleMessageStyle)bubbleStyle
+{
+    self = [super initWithFrame:frame];
+    if(self) {
+        [self setup];
+        self.style = bubbleStyle;
+    }
+    return self;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -92,9 +98,9 @@
 #pragma mark - Drawing
 - (void)drawRect:(CGRect)frame
 {
-	UIImage *image = (self.style == JSBubbleMessageStyleIncoming) ? self.incomingBackground : self.outgoingBackground;
+	UIImage *image = [JSBubbleView bubbleImageForStyle:self.style];
     CGSize bubbleSize = [JSBubbleView bubbleSizeForText:self.text];
-	CGRect bubbleFrame = CGRectMake(((self.style == JSBubbleMessageStyleOutgoing) ? self.frame.size.width - bubbleSize.width : 0.0f),
+	CGRect bubbleFrame = CGRectMake(([self styleIsOutgoing] ? self.frame.size.width - bubbleSize.width : 0.0f),
                                     kMarginTop,
                                     bubbleSize.width,
                                     bubbleSize.height);
@@ -102,7 +108,7 @@
 	[image drawInRect:bubbleFrame];
 	
 	CGSize textSize = [JSBubbleView textSizeForText:self.text];
-	CGFloat textX = (CGFloat)image.leftCapWidth - 3.0f + ((self.style == JSBubbleMessageStyleOutgoing) ? bubbleFrame.origin.x : 0.0f);
+	CGFloat textX = (CGFloat)image.leftCapWidth - 3.0f + ([self styleIsOutgoing] ? bubbleFrame.origin.x : 0.0f);
     CGRect textFrame = CGRectMake(textX,
                                   kPaddingTop + kMarginTop,
                                   textSize.width,
@@ -115,6 +121,28 @@
 }
 
 #pragma mark - Bubble view
+- (BOOL)styleIsOutgoing
+{
+    return (self.style == JSBubbleMessageStyleOutgoing || self.style == JSBubbleMessageStyleOutgoingGreen);
+}
+
++ (UIImage *)bubbleImageForStyle:(JSBubbleMessageStyle)style
+{
+    switch (style) {
+        case JSBubbleMessageStyleIncoming:
+            return [[UIImage imageNamed:@"messageBubbleGray"] stretchableImageWithLeftCapWidth:23 topCapHeight:15];
+            break;
+        case JSBubbleMessageStyleOutgoing:
+            return [[UIImage imageNamed:@"messageBubbleBlue"] stretchableImageWithLeftCapWidth:15 topCapHeight:15];
+            break;
+        case JSBubbleMessageStyleOutgoingGreen:
+            return [[UIImage imageNamed:@"messageBubbleGreen"] stretchableImageWithLeftCapWidth:15 topCapHeight:15];
+            break;
+    }
+    
+    return nil;
+}
+
 + (UIFont *)font
 {
     return [UIFont systemFontOfSize:16.0f];
