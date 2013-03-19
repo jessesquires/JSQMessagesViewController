@@ -36,7 +36,10 @@ Notable changes from [SSMessagingViewController][1]:
 * Override the following methods:
 	* `- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath`
 		* The style of the bubble for this row
-		* Style options are: `JSBubbleMessageStyleOutgoing` or `JSBubbleMessageStyleIncoming`
+		* Style options are: 
+			* `JSBubbleMessageStyleIncoming`
+			* `JSBubbleMessageStyleOutgoing`
+			* `JSBubbleMessageStyleOutgoingGreen`
 	* `- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath`
 		* The text to be displayed for this row
 	* `- (void)sendPressed:(UIButton *)sender withText:(NSString *)text`
