@@ -40,6 +40,7 @@
 
 @property (strong, nonatomic) JSBubbleView *bubbleView;
 
+#pragma mark - Initialization
 - (id)initWithBubbleStyle:(JSBubbleMessageStyle)style
           reuseIdentifier:(NSString *)reuseIdentifier;
 

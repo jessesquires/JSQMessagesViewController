@@ -48,6 +48,9 @@ typedef enum {
 @property (assign, nonatomic) JSBubbleMessageStyle style;
 @property (copy, nonatomic) NSString *text;
 
+#pragma mark - Initialization
+- (id)initWithFrame:(CGRect)frame bubbleStyle:(JSBubbleMessageStyle)bubbleStyle;
+
 #pragma mark - Bubble view
 + (UIImage *)bubbleImageForStyle:(JSBubbleMessageStyle)style;
 + (UIFont *)font;

@@ -38,6 +38,7 @@
 @interface JSBubbleMessageCell()
 
 - (void)setup;
+- (void)configureBubbleWithStyle:(JSBubbleMessageStyle)style;
 
 @end
 
@@ -59,11 +60,17 @@
     self.textLabel.hidden = YES;
     self.detailTextLabel.text = nil;
     self.detailTextLabel.hidden = YES;
+}
+
+- (void)configureBubbleWithStyle:(JSBubbleMessageStyle)style
+{
+    CGRect frame = CGRectMake(0.0f,
+                              0.0f,
+                              self.contentView.frame.size.width,
+                              self.contentView.frame.size.height);
     
-    self.bubbleView = [[JSBubbleView alloc] initWithFrame:CGRectMake(0.0f,
-                                                                     0.0f,
-                                                                     self.contentView.frame.size.width,
-                                                                     self.contentView.frame.size.height)];
+    self.bubbleView = [[JSBubbleView alloc] initWithFrame:frame
+                                              bubbleStyle:style];
     
     self.bubbleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
@@ -76,25 +83,7 @@
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if(self) {
         [self setup];
-        [self.bubbleView setStyle:style];
-    }
-    return self;
-}
-
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if(self) {
-        [self setup];
-    }
-    return self;
-}
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if(self) {
-        [self setup];
+        [self configureBubbleWithStyle:style];
     }
     return self;
 }

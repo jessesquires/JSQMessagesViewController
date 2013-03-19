@@ -63,21 +63,12 @@
     self.backgroundColor = [UIColor clearColor];
 }
 
-- (id)initWithFrame:(CGRect)frame style:(JSBubbleMessageStyle)bubbleStyle
+- (id)initWithFrame:(CGRect)frame bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
 {
     self = [super initWithFrame:frame];
     if(self) {
         [self setup];
         self.style = bubbleStyle;
-    }
-    return self;
-}
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if(self) {
-        [self setup];
     }
     return self;
 }
