@@ -42,11 +42,11 @@
 
 #pragma mark - Initialization
 - (id)initWithBubbleStyle:(JSBubbleMessageStyle)style
-                  hasDate:(BOOL)hasDate
+             hasTimestamp:(BOOL)hasTimestamp
           reuseIdentifier:(NSString *)reuseIdentifier;
 
 #pragma mark - Message Cell
 - (void)setMessage:(NSString *)msg;
-- (void)setDate:(NSDate *)date;
+- (void)setTimestamp:(NSDate *)date;
 
 @end

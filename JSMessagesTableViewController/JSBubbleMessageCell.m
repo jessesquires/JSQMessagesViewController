@@ -39,11 +39,11 @@
 @interface JSBubbleMessageCell()
 
 @property (strong, nonatomic) JSBubbleView *bubbleView;
-@property (strong, nonatomic) UILabel *dateLabel;
+@property (strong, nonatomic) UILabel *timestampLabel;
 
 - (void)setup;
-- (void)configureDateLabel;
-- (void)configureWithStyle:(JSBubbleMessageStyle)style date:(BOOL)hasDate;
+- (void)configureTimestampLabel;
+- (void)configureWithStyle:(JSBubbleMessageStyle)style timestamp:(BOOL)hasTimestamp;
 
 @end
 
@@ -67,37 +67,37 @@
     self.detailTextLabel.hidden = YES;
 }
 
-- (void)configureDateLabel
+- (void)configureTimestampLabel
 {
-    self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
-                                                               4.0f,
-                                                               [UIScreen mainScreen].bounds.size.width,
-                                                               14.5f)];
-    self.dateLabel.autoresizingMask =  UIViewAutoresizingNone;
-    self.dateLabel.backgroundColor = [UIColor clearColor];
-    self.dateLabel.textAlignment = NSTextAlignmentCenter;
-    self.dateLabel.textColor = [UIColor messagesDateLabelColor];
-    self.dateLabel.shadowColor = [UIColor whiteColor];
-    self.dateLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    self.dateLabel.font = [UIFont boldSystemFontOfSize:11.5f];
+    self.timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
+                                                                    4.0f,
+                                                                    [UIScreen mainScreen].bounds.size.width,
+                                                                    14.5f)];
+    self.timestampLabel.autoresizingMask =  UIViewAutoresizingNone;
+    self.timestampLabel.backgroundColor = [UIColor clearColor];
+    self.timestampLabel.textAlignment = NSTextAlignmentCenter;
+    self.timestampLabel.textColor = [UIColor messagesTimestampColor];
+    self.timestampLabel.shadowColor = [UIColor whiteColor];
+    self.timestampLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.timestampLabel.font = [UIFont boldSystemFontOfSize:11.5f];
     
-    [self.contentView addSubview:self.dateLabel];
-    [self.contentView bringSubviewToFront:self.dateLabel];
+    [self.contentView addSubview:self.timestampLabel];
+    [self.contentView bringSubviewToFront:self.timestampLabel];
 }
 
-- (void)configureWithStyle:(JSBubbleMessageStyle)style date:(BOOL)hasDate
+- (void)configureWithStyle:(JSBubbleMessageStyle)style timestamp:(BOOL)hasTimestamp
 {
     CGFloat bubbleY = 0.0f;
     
-    if(hasDate) {
-        [self configureDateLabel];
+    if(hasTimestamp) {
+        [self configureTimestampLabel];
         bubbleY = 14.0f;
     }
     
     CGRect frame = CGRectMake(0.0f,
                               bubbleY,
                               self.contentView.frame.size.width,
-                              self.contentView.frame.size.height - self.dateLabel.frame.size.height);
+                              self.contentView.frame.size.height - self.timestampLabel.frame.size.height);
     
     self.bubbleView = [[JSBubbleView alloc] initWithFrame:frame
                                               bubbleStyle:style];
@@ -108,12 +108,12 @@
     [self.contentView sendSubviewToBack:self.bubbleView];
 }
 
-- (id)initWithBubbleStyle:(JSBubbleMessageStyle)style hasDate:(BOOL)hasDate reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithBubbleStyle:(JSBubbleMessageStyle)style hasTimestamp:(BOOL)hasTimestamp reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if(self) {
         [self setup];
-        [self configureWithStyle:style date:hasDate];
+        [self configureWithStyle:style timestamp:hasTimestamp];
     }
     return self;
 }
@@ -132,11 +132,11 @@
     self.bubbleView.text = msg;
 }
 
-- (void)setDate:(NSDate *)date
+- (void)setTimestamp:(NSDate *)date
 {
-    self.dateLabel.text = [NSDateFormatter localizedStringFromDate:date
-                                                         dateStyle:NSDateFormatterMediumStyle
-                                                         timeStyle:NSDateFormatterShortStyle];
+    self.timestampLabel.text = [NSDateFormatter localizedStringFromDate:date
+                                                              dateStyle:NSDateFormatterMediumStyle
+                                                              timeStyle:NSDateFormatterShortStyle];
 }
 
 @end

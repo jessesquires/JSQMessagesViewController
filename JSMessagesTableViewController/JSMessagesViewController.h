@@ -40,18 +40,18 @@
 #import "JSMessageSoundEffect.h"
 
 typedef enum {
-    JSMessagesViewDateLabelPolicyAll = 0,
-    JSMessagesViewDateLabelPolicyAlternating,
-    JSMessagesViewDateLabelPolicyEveryThree,
-    JSMessagesViewDateLabelPolicyEveryFive,
-    JSMessagesViewDateLabelPolicyCustom
-} JSMessagesViewDateLabelPolicy;
+    JSMessagesViewTimestampPolicyAll = 0,
+    JSMessagesViewTimestampPolicyAlternating,
+    JSMessagesViewTimestampPolicyEveryThree,
+    JSMessagesViewTimestampPolicyEveryFive,
+    JSMessagesViewTimestampPolicyCustom
+} JSMessagesViewTimestampPolicy;
 
 
 
 @interface JSMessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 
-@property (assign, nonatomic) JSMessagesViewDateLabelPolicy dateLabelPolicy;
+@property (assign, nonatomic) JSMessagesViewTimestampPolicy timestampPolicy;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) JSMessageInputView *inputView;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
@@ -64,8 +64,8 @@ typedef enum {
 #pragma mark - Messages view controller
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (NSDate *)dateForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (BOOL)shouldHaveDateForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)finishSend;
 - (void)setBackgroundColor:(UIColor *)color;
 - (void)scrollToBottomAnimated:(BOOL)animated;

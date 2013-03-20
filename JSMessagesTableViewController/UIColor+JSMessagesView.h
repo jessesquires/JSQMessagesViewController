@@ -31,6 +31,6 @@
 @interface UIColor (JSMessagesView)
 
 + (UIColor *)messagesBackgroundColor;
-+ (UIColor *)messagesDateLabelColor;
++ (UIColor *)messagesTimestampColor;
 
 @end

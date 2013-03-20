@@ -81,7 +81,7 @@
 {
     [super viewDidLoad];
     [self setup];
-    self.dateLabelPolicy = JSMessagesViewDateLabelPolicyEveryThree;
+    self.timestampPolicy = JSMessagesViewTimestampPolicyEveryThree;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -157,19 +157,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     JSBubbleMessageStyle style = [self messageStyleForRowAtIndexPath:indexPath];
-    BOOL hasDate = [self shouldHaveDateForRowAtIndexPath:indexPath];
+    BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
     
-    NSString *CellID = [NSString stringWithFormat:@"MessageCell_%d_%d", style, hasDate];
+    NSString *CellID = [NSString stringWithFormat:@"MessageCell_%d_%d", style, hasTimestamp];
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellID];
     
     if(!cell) {
         cell = [[JSBubbleMessageCell alloc] initWithBubbleStyle:style
-                                                        hasDate:hasDate
+                                                   hasTimestamp:hasTimestamp
                                                 reuseIdentifier:CellID];
     }
     
-    if(hasDate)
-        [cell setDate:[self dateForRowAtIndexPath:indexPath]];
+    if(hasTimestamp)
+        [cell setTimestamp:[self timestampForRowAtIndexPath:indexPath]];
     
     [cell setMessage:[self textForRowAtIndexPath:indexPath]];
     [cell setBackgroundColor:tableView.backgroundColor];
@@ -180,7 +180,7 @@
 #pragma mark - Table view delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat dateHeight = [self shouldHaveDateForRowAtIndexPath:indexPath] ? DATE_LABEL_HEIGHT : 0.0f;
+    CGFloat dateHeight = [self shouldHaveTimestampForRowAtIndexPath:indexPath] ? DATE_LABEL_HEIGHT : 0.0f;
     
     return [JSBubbleView cellHeightForText:[self textForRowAtIndexPath:indexPath]] + dateHeight;
 }
@@ -196,27 +196,27 @@
     return nil; // Override in subclass
 }
 
-- (NSDate *)dateForRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return nil; // Override in subclass
 }
 
-- (BOOL)shouldHaveDateForRowAtIndexPath:(NSIndexPath *)indexPath // Override in subclass if using JSMessagesViewDateLabelPolicyCustom
+- (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath // Override in subclass if using JSMessagesViewTimestampPolicyCustom
 {
-    switch (self.dateLabelPolicy) {
-        case JSMessagesViewDateLabelPolicyAll:
+    switch (self.timestampPolicy) {
+        case JSMessagesViewTimestampPolicyAll:
             return YES;
             break;
-        case JSMessagesViewDateLabelPolicyAlternating:
+        case JSMessagesViewTimestampPolicyAlternating:
             return indexPath.row % 2 == 0;
             break;
-        case JSMessagesViewDateLabelPolicyEveryThree:
+        case JSMessagesViewTimestampPolicyEveryThree:
             return indexPath.row % 3 == 0;
             break;
-        case JSMessagesViewDateLabelPolicyEveryFive:
+        case JSMessagesViewTimestampPolicyEveryFive:
             return indexPath.row % 5 == 0;
             break;
-        case JSMessagesViewDateLabelPolicyCustom:
+        case JSMessagesViewTimestampPolicyCustom:
             return NO;
             break;
     }

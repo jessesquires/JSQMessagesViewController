@@ -42,7 +42,7 @@
     
     self.title = @"Messages";
     
-    self.dateLabelPolicy = JSMessagesViewDateLabelPolicyEveryThree;
+    self.timestampPolicy = JSMessagesViewTimestampPolicyEveryThree;
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      @"Testing some messages here.",
@@ -51,12 +51,12 @@
                      @"It's easy to implement. Sound effects and images included. Animations are smooth and messages can be of arbitrary size!",
                      nil];
     
-    self.dates = [[NSMutableArray alloc] initWithObjects:
-                  [NSDate distantPast],
-                  [NSDate distantPast],
-                  [NSDate distantPast],
-                  [NSDate distantPast],
-                  nil];
+    self.timestamps = [[NSMutableArray alloc] initWithObjects:
+                       [NSDate distantPast],
+                       [NSDate distantPast],
+                       [NSDate distantPast],
+                       [NSDate date],
+                       nil];
 }
 
 #pragma mark - Table view data source
@@ -76,16 +76,23 @@
     return [self.messages objectAtIndex:indexPath.row];
 }
 
-- (NSDate *)dateForRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.dates objectAtIndex:indexPath.row];
+    return [self.timestamps objectAtIndex:indexPath.row];
+}
+
+- (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Override here if using JSMessagesViewTimestampPolicyCustom
+    
+    return [super shouldHaveTimestampForRowAtIndexPath:indexPath]; 
 }
 
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text
 {
     [self.messages addObject:text];
     
-    [self.dates addObject:[NSDate date]];
+    [self.timestamps addObject:[NSDate date]];
     
     if((self.messages.count - 1) % 2)
         [JSMessageSoundEffect playMessageSentSound];
