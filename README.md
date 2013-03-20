@@ -26,7 +26,7 @@ Notable changes from [SSMessagingViewController][1]:
 
 ### Using [CocoaPods](http://www.cocoapods.org)
 
-    pod 'MessagesTableViewController'
+    pod 'JSMessagesViewController'
 
 ### From source
 
