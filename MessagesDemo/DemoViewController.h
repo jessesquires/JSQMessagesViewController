@@ -11,5 +11,6 @@
 @interface DemoViewController : JSMessagesViewController
 
 @property (strong, nonatomic) NSMutableArray *messages;
+@property (strong, nonatomic) NSMutableArray *dates;
 
 @end

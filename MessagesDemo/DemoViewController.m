@@ -19,7 +19,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.title = @"Messages";
+    
+    self.dateLabelPolicy = JSMessagesViewDateLabelPolicyEveryThree;
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      @"Testing some messages here.",
@@ -27,6 +30,13 @@
                      @"This is a complete re-write and refactoring.",
                      @"It's easy to implement. Sound effects and images included. Animations are smooth and messages can be of arbitrary size!",
                      nil];
+    
+    self.dates = [[NSMutableArray alloc] initWithObjects:
+                  [NSDate distantPast],
+                  [NSDate distantPast],
+                  [NSDate distantPast],
+                  [NSDate distantPast],
+                  nil];
 }
 
 #pragma mark - Table view data source
@@ -46,9 +56,16 @@
     return [self.messages objectAtIndex:indexPath.row];
 }
 
+- (NSDate *)dateForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self.dates objectAtIndex:indexPath.row];
+}
+
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text
 {
     [self.messages addObject:text];
+    
+    [self.dates addObject:[NSDate date]];
     
     if((self.messages.count - 1) % 2)
         [JSMessageSoundEffect playMessageSentSound];
