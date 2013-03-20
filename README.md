@@ -63,15 +63,15 @@ This is based on work by @soffes [SSMessagingViewController][ss]. I took Soffes'
 	* `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
 		* The API [table view data source][ref1] method that you should be familiar with
 
-* Set the `timestampPolicy` property in `- (void)viewDidLoad`, options are:
-	* `JSMessagesViewTimestampPolicyAll`
-	* `JSMessagesViewTimestampPolicyAlternating`
-	* `JSMessagesViewTimestampPolicyEveryThree`
-	* `JSMessagesViewTimestampPolicyEveryFive`
-	* `JSMessagesViewTimestampPolicyCustom`
+	* Set the `timestampPolicy` property in `- (void)viewDidLoad`, options are:
+		* `JSMessagesViewTimestampPolicyAll`
+		* `JSMessagesViewTimestampPolicyAlternating`
+		* `JSMessagesViewTimestampPolicyEveryThree`
+		* `JSMessagesViewTimestampPolicyEveryFive`
+		* `JSMessagesViewTimestampPolicyCustom`
 
-* **NOTE:** if using `JSMessagesViewTimestampPolicyCustom` **YOU MUST OVERRIDE** `- (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath`
-	* See the default implementation of this method for details
+	* **NOTE** if using `JSMessagesViewTimestampPolicyCustom` **YOU MUST OVERRIDE** `- (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath`
+		* See the default implementation of this method for details
 
 * Call `setBackgroundColor:` to set table view background color
 
