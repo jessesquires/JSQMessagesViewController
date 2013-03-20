@@ -31,7 +31,7 @@ This is based on work by @soffes [SSMessagingViewController][ss]. I took Soffes'
 
 ### From [CocoaPods](http://www.cocoapods.org)
 
-    pod 'MessagesTableViewController'
+    pod 'JSMessagesViewController'
 
 ### From source
 
