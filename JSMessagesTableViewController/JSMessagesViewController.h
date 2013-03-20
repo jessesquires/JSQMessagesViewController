@@ -35,11 +35,23 @@
 
 #import <UIKit/UIKit.h>
 #import "JSBubbleMessageCell.h"
-#import "JSMessageSoundEffect.h"
+#import "JSBubbleView.h"
 #import "JSMessageInputView.h"
+#import "JSMessageSoundEffect.h"
+
+typedef enum {
+    JSMessagesViewDateLabelPolicyAll = 0,
+    JSMessagesViewDateLabelPolicyAlternating,
+    JSMessagesViewDateLabelPolicyEveryThree,
+    JSMessagesViewDateLabelPolicyEveryFive,
+    JSMessagesViewDateLabelPolicyCustom
+} JSMessagesViewDateLabelPolicy;
+
+
 
 @interface JSMessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 
+@property (assign, nonatomic) JSMessagesViewDateLabelPolicy dateLabelPolicy;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) JSMessageInputView *inputView;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
@@ -52,6 +64,8 @@
 #pragma mark - Messages view controller
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (NSDate *)dateForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (BOOL)shouldHaveDateForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)finishSend;
 - (void)setBackgroundColor:(UIColor *)color;
 - (void)scrollToBottomAnimated:(BOOL)animated;

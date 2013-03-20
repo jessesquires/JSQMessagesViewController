@@ -36,12 +36,17 @@
 #import <UIKit/UIKit.h>
 #import "JSBubbleView.h"
 
-@interface JSBubbleMessageCell : UITableViewCell
+#define DATE_LABEL_HEIGHT 12.0f
 
-@property (strong, nonatomic) JSBubbleView *bubbleView;
+@interface JSBubbleMessageCell : UITableViewCell
 
 #pragma mark - Initialization
 - (id)initWithBubbleStyle:(JSBubbleMessageStyle)style
+                  hasDate:(BOOL)hasDate
           reuseIdentifier:(NSString *)reuseIdentifier;
+
+#pragma mark - Message Cell
+- (void)setMessage:(NSString *)msg;
+- (void)setDate:(NSDate *)date;
 
 @end

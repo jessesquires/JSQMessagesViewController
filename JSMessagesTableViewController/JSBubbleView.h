@@ -37,8 +37,8 @@
 
 typedef enum {
 	JSBubbleMessageStyleIncoming = 0,
-    JSBubbleMessageStyleOutgoing = 1,
-	JSBubbleMessageStyleOutgoingGreen = 2
+    JSBubbleMessageStyleOutgoing,
+	JSBubbleMessageStyleOutgoingGreen
 } JSBubbleMessageStyle;
 
 

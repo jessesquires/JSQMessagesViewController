@@ -36,6 +36,7 @@
 #import "JSMessagesViewController.h"
 #import "NSString+JSMessagesView.h"
 #import "UIView+AnimationOptionsForCurve.h"
+#import "UIColor+JSMessagesView.h"
 
 #define INPUT_HEIGHT 40.0f
 
@@ -61,8 +62,7 @@
 	self.tableView.delegate = self;
 	[self.view addSubview:self.tableView];
 	
-    UIColor *color = [UIColor colorWithRed:0.859f green:0.886f blue:0.929f alpha:1.0f];
-    [self setBackgroundColor:color];
+    [self setBackgroundColor:[UIColor messagesBackgroundColor]];
     
     CGRect inputFrame = CGRectMake(0.0f, size.height - INPUT_HEIGHT, size.width, INPUT_HEIGHT);
     self.inputView = [[JSMessageInputView alloc] initWithFrame:inputFrame];
@@ -81,6 +81,7 @@
 {
     [super viewDidLoad];
     [self setup];
+    self.dateLabelPolicy = JSMessagesViewDateLabelPolicyEveryThree;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -156,17 +157,22 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     JSBubbleMessageStyle style = [self messageStyleForRowAtIndexPath:indexPath];
+    BOOL hasDate = [self shouldHaveDateForRowAtIndexPath:indexPath];
     
-    NSString *CellID = [NSString stringWithFormat:@"MessageCell%d", style];
+    NSString *CellID = [NSString stringWithFormat:@"MessageCell_%d_%d", style, hasDate];
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellID];
     
     if(!cell) {
         cell = [[JSBubbleMessageCell alloc] initWithBubbleStyle:style
+                                                        hasDate:hasDate
                                                 reuseIdentifier:CellID];
     }
     
-    cell.bubbleView.text = [self textForRowAtIndexPath:indexPath];
-    cell.backgroundColor = tableView.backgroundColor;
+    if(hasDate)
+        [cell setDate:[self dateForRowAtIndexPath:indexPath]];
+    
+    [cell setMessage:[self textForRowAtIndexPath:indexPath]];
+    [cell setBackgroundColor:tableView.backgroundColor];
     
     return cell;
 }
@@ -174,7 +180,9 @@
 #pragma mark - Table view delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [JSBubbleView cellHeightForText:[self textForRowAtIndexPath:indexPath]];
+    CGFloat dateHeight = [self shouldHaveDateForRowAtIndexPath:indexPath] ? DATE_LABEL_HEIGHT : 0.0f;
+    
+    return [JSBubbleView cellHeightForText:[self textForRowAtIndexPath:indexPath]] + dateHeight;
 }
 
 #pragma mark - Messages view controller
@@ -186,6 +194,34 @@
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return nil; // Override in subclass
+}
+
+- (NSDate *)dateForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil; // Override in subclass
+}
+
+- (BOOL)shouldHaveDateForRowAtIndexPath:(NSIndexPath *)indexPath // Override in subclass if using JSMessagesViewDateLabelPolicyCustom
+{
+    switch (self.dateLabelPolicy) {
+        case JSMessagesViewDateLabelPolicyAll:
+            return YES;
+            break;
+        case JSMessagesViewDateLabelPolicyAlternating:
+            return indexPath.row % 2 == 0;
+            break;
+        case JSMessagesViewDateLabelPolicyEveryThree:
+            return indexPath.row % 3 == 0;
+            break;
+        case JSMessagesViewDateLabelPolicyEveryFive:
+            return indexPath.row % 5 == 0;
+            break;
+        case JSMessagesViewDateLabelPolicyCustom:
+            return NO;
+            break;
+    }
+    
+    return NO;
 }
 
 - (void)finishSend
