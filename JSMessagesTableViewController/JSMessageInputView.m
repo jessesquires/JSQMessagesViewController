@@ -152,7 +152,7 @@
                                                   (numLines >= 6 ? 4.0f : 0.0f),
                                                   0.0f);
     
-    self.textView.scrollEnabled = (numLines >= 6);
+    self.textView.scrollEnabled = (numLines >= 4);
 }
 
 + (CGFloat)textViewLineHeight
