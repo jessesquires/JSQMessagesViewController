@@ -19,6 +19,10 @@
 		880A1C2E16F1203000F01289 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 880A1C2C16F1203000F01289 /* MainStoryboard.storyboard */; };
 		880A1C7916F1212800F01289 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 880A1C7816F1212800F01289 /* DemoViewController.m */; };
 		880A1C7B16F1218E00F01289 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 880A1C7A16F1218E00F01289 /* AudioToolbox.framework */; };
+		88244C0D16FE6E5800034667 /* bubbleSquareIncoming.png in Resources */ = {isa = PBXBuildFile; fileRef = 88244C0916FE6E5800034667 /* bubbleSquareIncoming.png */; };
+		88244C0E16FE6E5800034667 /* bubbleSquareIncoming@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88244C0A16FE6E5800034667 /* bubbleSquareIncoming@2x.png */; };
+		88244C0F16FE6E5800034667 /* bubbleSquareOutgoing.png in Resources */ = {isa = PBXBuildFile; fileRef = 88244C0B16FE6E5800034667 /* bubbleSquareOutgoing.png */; };
+		88244C1016FE6E5800034667 /* bubbleSquareOutgoing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88244C0C16FE6E5800034667 /* bubbleSquareOutgoing@2x.png */; };
 		88301F4516F77B7A0037524D /* JSBubbleMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88301F2316F77B7A0037524D /* JSBubbleMessageCell.m */; };
 		88301F4616F77B7A0037524D /* JSBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88301F2516F77B7A0037524D /* JSBubbleView.m */; };
 		88301F4716F77B7A0037524D /* JSMessageInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88301F2716F77B7A0037524D /* JSMessageInputView.m */; };
@@ -65,6 +69,10 @@
 		880A1C7716F1212800F01289 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DemoViewController.h; path = ../../MessagesDemo/DemoViewController.h; sourceTree = "<group>"; };
 		880A1C7816F1212800F01289 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DemoViewController.m; path = ../../MessagesDemo/DemoViewController.m; sourceTree = "<group>"; };
 		880A1C7A16F1218E00F01289 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		88244C0916FE6E5800034667 /* bubbleSquareIncoming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleSquareIncoming.png; sourceTree = "<group>"; };
+		88244C0A16FE6E5800034667 /* bubbleSquareIncoming@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubbleSquareIncoming@2x.png"; sourceTree = "<group>"; };
+		88244C0B16FE6E5800034667 /* bubbleSquareOutgoing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleSquareOutgoing.png; sourceTree = "<group>"; };
+		88244C0C16FE6E5800034667 /* bubbleSquareOutgoing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubbleSquareOutgoing@2x.png"; sourceTree = "<group>"; };
 		88301F2216F77B7A0037524D /* JSBubbleMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBubbleMessageCell.h; sourceTree = "<group>"; };
 		88301F2316F77B7A0037524D /* JSBubbleMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBubbleMessageCell.m; sourceTree = "<group>"; };
 		88301F2416F77B7A0037524D /* JSBubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBubbleView.h; sourceTree = "<group>"; };
@@ -209,6 +217,10 @@
 		88301F2F16F77B7A0037524D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				88244C0916FE6E5800034667 /* bubbleSquareIncoming.png */,
+				88244C0A16FE6E5800034667 /* bubbleSquareIncoming@2x.png */,
+				88244C0B16FE6E5800034667 /* bubbleSquareOutgoing.png */,
+				88244C0C16FE6E5800034667 /* bubbleSquareOutgoing@2x.png */,
 				88301F3016F77B7A0037524D /* input-bar.png */,
 				88301F3116F77B7A0037524D /* input-bar@2x.png */,
 				88301F3216F77B7A0037524D /* input-field.png */,
@@ -313,6 +325,10 @@
 				88301F5A16F77B7A0037524D /* send@2x.png in Resources */,
 				88301F5B16F77B7A0037524D /* messageReceived.aiff in Resources */,
 				88301F5C16F77B7A0037524D /* messageSent.aiff in Resources */,
+				88244C0D16FE6E5800034667 /* bubbleSquareIncoming.png in Resources */,
+				88244C0E16FE6E5800034667 /* bubbleSquareIncoming@2x.png in Resources */,
+				88244C0F16FE6E5800034667 /* bubbleSquareOutgoing.png in Resources */,
+				88244C1016FE6E5800034667 /* bubbleSquareOutgoing@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
