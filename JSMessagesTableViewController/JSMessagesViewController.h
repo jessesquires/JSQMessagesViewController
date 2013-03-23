@@ -49,22 +49,37 @@ typedef enum {
 
 
 
+@protocol JSMessagesViewDelegate <NSObject>
+@required
+- (void)sendPressed:(UIButton *)sender withText:(NSString *)text;
+- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView;
+- (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+@end
+
+
+
+@protocol JSMessagesViewDataSource <NSObject>
+@required
+- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+@end
+
+
+
 @interface JSMessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 
-@property (assign, nonatomic) JSMessagesViewTimestampPolicy timestampPolicy;
+@property (weak, nonatomic) id<JSMessagesViewDelegate> delegate;
+@property (weak, nonatomic) id<JSMessagesViewDataSource> dataSource;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) JSMessageInputView *inputView;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 
 #pragma mark - Actions
-- (void)sendPressed:(UIButton *)sender withText:(NSString *)text;
 - (void)sendPressed:(UIButton *)sender;
 - (void)handleSwipe:(UIGestureRecognizer *)guestureRecognizer;
 
 #pragma mark - Messages view controller
-- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)finishSend;
 - (void)setBackgroundColor:(UIColor *)color;
