@@ -28,7 +28,7 @@
 
 #import "JSMessagesViewController.h"
 
-@interface DemoViewController : JSMessagesViewController
+@interface DemoViewController : JSMessagesViewController <JSMessagesViewDelegate, JSMessagesViewDataSource>
 
 @property (strong, nonatomic) NSMutableArray *messages;
 @property (strong, nonatomic) NSMutableArray *timestamps;

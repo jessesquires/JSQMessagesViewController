@@ -39,10 +39,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.delegate = self;
+    self.dataSource = self;
     
     self.title = @"Messages";
-    
-    self.timestampPolicy = JSMessagesViewTimestampPolicyEveryThree;
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      @"Testing some messages here.",
@@ -65,29 +65,7 @@
     return self.messages.count;
 }
 
-#pragma mark - Messages view controller
-- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return (indexPath.row % 2) ? JSBubbleMessageStyleIncomingDefault : JSBubbleMessageStyleOutgoingDefault;
-}
-
-- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [self.messages objectAtIndex:indexPath.row];
-}
-
-- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [self.timestamps objectAtIndex:indexPath.row];
-}
-
-- (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Override here if using JSMessagesViewTimestampPolicyCustom
-    
-    return [super shouldHaveTimestampForRowAtIndexPath:indexPath]; 
-}
-
+#pragma mark - Messages view delegate
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text
 {
     [self.messages addObject:text];
@@ -100,6 +78,33 @@
         [JSMessageSoundEffect playMessageReceivedSound];
     
     [self finishSend];
+}
+
+- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return (indexPath.row % 2) ? JSBubbleMessageStyleIncomingSquare : JSBubbleMessageStyleOutgoingSquare;
+}
+
+- (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView
+{
+    return JSMessagesViewTimestampPolicyEveryThree;
+}
+
+- (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // custom implementation here, if using `JSMessagesViewTimestampPolicyCustom`
+    return [self shouldHaveTimestampForRowAtIndexPath:indexPath];
+}
+
+#pragma mark - Messages view datasource
+- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self.messages objectAtIndex:indexPath.row];
+}
+
+- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self.timestamps objectAtIndex:indexPath.row];
 }
 
 @end
