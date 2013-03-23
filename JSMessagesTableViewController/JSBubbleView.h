@@ -36,9 +36,11 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-	JSBubbleMessageStyleIncoming = 0,
-    JSBubbleMessageStyleOutgoing,
-	JSBubbleMessageStyleOutgoingGreen
+	JSBubbleMessageStyleIncomingDefault = 0,
+    JSBubbleMessageStyleIncomingSquare,
+    JSBubbleMessageStyleOutgoingDefault,
+	JSBubbleMessageStyleOutgoingDefaultGreen,
+    JSBubbleMessageStyleOutgoingSquare
 } JSBubbleMessageStyle;
 
 

@@ -114,20 +114,28 @@
 #pragma mark - Bubble view
 - (BOOL)styleIsOutgoing
 {
-    return (self.style == JSBubbleMessageStyleOutgoing || self.style == JSBubbleMessageStyleOutgoingGreen);
+    return (self.style == JSBubbleMessageStyleOutgoingDefault
+            || self.style == JSBubbleMessageStyleOutgoingDefaultGreen
+            || self.style == JSBubbleMessageStyleOutgoingSquare);
 }
 
 + (UIImage *)bubbleImageForStyle:(JSBubbleMessageStyle)style
 {
     switch (style) {
-        case JSBubbleMessageStyleIncoming:
+        case JSBubbleMessageStyleIncomingDefault:
             return [[UIImage imageNamed:@"messageBubbleGray"] stretchableImageWithLeftCapWidth:23 topCapHeight:15];
+        case JSBubbleMessageStyleIncomingSquare:
+            return [[UIImage imageNamed:@"bubbleSquareIncoming"] stretchableImageWithLeftCapWidth:25 topCapHeight:15];
             break;
-        case JSBubbleMessageStyleOutgoing:
+            break;
+        case JSBubbleMessageStyleOutgoingDefault:
             return [[UIImage imageNamed:@"messageBubbleBlue"] stretchableImageWithLeftCapWidth:15 topCapHeight:15];
             break;
-        case JSBubbleMessageStyleOutgoingGreen:
+        case JSBubbleMessageStyleOutgoingDefaultGreen:
             return [[UIImage imageNamed:@"messageBubbleGreen"] stretchableImageWithLeftCapWidth:15 topCapHeight:15];
+            break;
+        case JSBubbleMessageStyleOutgoingSquare:
+            return [[UIImage imageNamed:@"bubbleSquareOutgoing"] stretchableImageWithLeftCapWidth:15 topCapHeight:15];
             break;
     }
     

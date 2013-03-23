@@ -68,7 +68,7 @@
 #pragma mark - Messages view controller
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (indexPath.row % 2) ? JSBubbleMessageStyleIncoming : JSBubbleMessageStyleOutgoing;
+    return (indexPath.row % 2) ? JSBubbleMessageStyleIncomingDefault : JSBubbleMessageStyleOutgoingDefault;
 }
 
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath

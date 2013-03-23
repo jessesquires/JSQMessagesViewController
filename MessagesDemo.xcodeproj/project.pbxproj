@@ -20,6 +20,10 @@
 		881AE5C016D13E35008F7636 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881AE5BF16D13E35008F7636 /* AudioToolbox.framework */; };
 		882235FD16F90F51003DF4B5 /* messageBubbleGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 882235FB16F90F4F003DF4B5 /* messageBubbleGreen.png */; };
 		882235FE16F90F51003DF4B5 /* messageBubbleGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 882235FC16F90F50003DF4B5 /* messageBubbleGreen@2x.png */; };
+		88244C0516FE5BA400034667 /* bubbleSquareIncoming.png in Resources */ = {isa = PBXBuildFile; fileRef = 88244C0116FE5BA300034667 /* bubbleSquareIncoming.png */; };
+		88244C0616FE5BA400034667 /* bubbleSquareIncoming@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88244C0216FE5BA300034667 /* bubbleSquareIncoming@2x.png */; };
+		88244C0716FE5BA400034667 /* bubbleSquareOutgoing.png in Resources */ = {isa = PBXBuildFile; fileRef = 88244C0316FE5BA300034667 /* bubbleSquareOutgoing.png */; };
+		88244C0816FE5BA400034667 /* bubbleSquareOutgoing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88244C0416FE5BA400034667 /* bubbleSquareOutgoing@2x.png */; };
 		88301F0816F77B3D0037524D /* JSBubbleMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88301EE616F77B3D0037524D /* JSBubbleMessageCell.m */; };
 		88301F0916F77B3D0037524D /* JSBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88301EE816F77B3D0037524D /* JSBubbleView.m */; };
 		88301F0A16F77B3D0037524D /* JSMessageInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88301EEA16F77B3D0037524D /* JSMessageInputView.m */; };
@@ -67,6 +71,10 @@
 		881AE5BF16D13E35008F7636 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		882235FB16F90F4F003DF4B5 /* messageBubbleGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messageBubbleGreen.png; sourceTree = "<group>"; };
 		882235FC16F90F50003DF4B5 /* messageBubbleGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageBubbleGreen@2x.png"; sourceTree = "<group>"; };
+		88244C0116FE5BA300034667 /* bubbleSquareIncoming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleSquareIncoming.png; sourceTree = "<group>"; };
+		88244C0216FE5BA300034667 /* bubbleSquareIncoming@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubbleSquareIncoming@2x.png"; sourceTree = "<group>"; };
+		88244C0316FE5BA300034667 /* bubbleSquareOutgoing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleSquareOutgoing.png; sourceTree = "<group>"; };
+		88244C0416FE5BA400034667 /* bubbleSquareOutgoing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubbleSquareOutgoing@2x.png"; sourceTree = "<group>"; };
 		88301EE516F77B3D0037524D /* JSBubbleMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBubbleMessageCell.h; sourceTree = "<group>"; };
 		88301EE616F77B3D0037524D /* JSBubbleMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBubbleMessageCell.m; sourceTree = "<group>"; };
 		88301EE716F77B3D0037524D /* JSBubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBubbleView.h; sourceTree = "<group>"; };
@@ -209,6 +217,10 @@
 		88301EF216F77B3D0037524D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				88244C0116FE5BA300034667 /* bubbleSquareIncoming.png */,
+				88244C0216FE5BA300034667 /* bubbleSquareIncoming@2x.png */,
+				88244C0316FE5BA300034667 /* bubbleSquareOutgoing.png */,
+				88244C0416FE5BA400034667 /* bubbleSquareOutgoing@2x.png */,
 				88301EF316F77B3D0037524D /* input-bar.png */,
 				88301EF416F77B3D0037524D /* input-bar@2x.png */,
 				88301EF516F77B3D0037524D /* input-field.png */,
@@ -316,6 +328,10 @@
 				88301F1F16F77B3D0037524D /* messageSent.aiff in Resources */,
 				882235FD16F90F51003DF4B5 /* messageBubbleGreen.png in Resources */,
 				882235FE16F90F51003DF4B5 /* messageBubbleGreen@2x.png in Resources */,
+				88244C0516FE5BA400034667 /* bubbleSquareIncoming.png in Resources */,
+				88244C0616FE5BA400034667 /* bubbleSquareIncoming@2x.png in Resources */,
+				88244C0716FE5BA400034667 /* bubbleSquareOutgoing.png in Resources */,
+				88244C0816FE5BA400034667 /* bubbleSquareOutgoing@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
