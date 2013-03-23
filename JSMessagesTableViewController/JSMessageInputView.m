@@ -41,7 +41,6 @@
 
 - (void)setup;
 - (void)setupTextView;
-- (void)setupSendButton;
 
 @end
 

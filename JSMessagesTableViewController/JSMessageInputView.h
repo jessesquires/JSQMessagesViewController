@@ -40,6 +40,9 @@
 @property (strong, nonatomic) UITextView *textView;
 @property (strong, nonatomic) UIButton *sendButton;
 
+#pragma mark - Initialization
+- (void)setupSendButton;
+
 #pragma mark - Message input view
 - (void)adjustTextViewHeightBy:(CGFloat)changeInHeight;
 + (CGFloat)textViewLineHeight;
