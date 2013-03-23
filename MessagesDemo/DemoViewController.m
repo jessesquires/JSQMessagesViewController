@@ -96,7 +96,7 @@
     return [self shouldHaveTimestampForRowAtIndexPath:indexPath];
 }
 
-#pragma mark - Messages view datasource
+#pragma mark - Messages view data source
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self.messages objectAtIndex:indexPath.row];
