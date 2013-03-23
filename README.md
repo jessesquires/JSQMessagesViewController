@@ -12,6 +12,8 @@ See more [screenshots](https://github.com/jessesquires/MessagesTableViewControll
 
 This is based on work by @soffes [SSMessagingViewController][ss]. I took Soffes' code base and developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users. The features section lists the most notable improvements from [SSMessagingViewController][ss].
 
+Square message bubbles designed by [@michaelwschultz](https://github.com/michaelwschultz)
+
 ## Features 
 
 * Up-to-date for iOS 6.0 and ARC
