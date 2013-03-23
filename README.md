@@ -12,7 +12,7 @@ See more [screenshots](https://github.com/jessesquires/MessagesTableViewControll
 
 This is based on work by @soffes [SSMessagingViewController][ss]. I took Soffes' code base and developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users. The features section lists the most notable improvements from [SSMessagingViewController][ss].
 
-Square message bubbles designed by [@michaelwschultz](https://github.com/michaelwschultz)
+Square message bubbles designed by [@michaelwschultz](http://www.michaelwschultz.com).
 
 ## Features 
 
@@ -27,7 +27,7 @@ Square message bubbles designed by [@michaelwschultz](https://github.com/michael
 * Automatically enables/disables send button if text view is empty or not
 * Smooth send animations
 * Send/Receive sound effects
-* Blue or green outgoing message bubble color
+* Various bubble styles
 
 ## Installation
 
