@@ -45,7 +45,7 @@ Square message bubbles designed by [@michaelwschultz](http://www.michaelwschultz
 #### Subclass `JSMessagesViewController`
 	
 * In `- (void)viewDidLoad`
-	* Set yourself as the `delegate` and `datasource`
+	* Set your view controller as the `delegate` and `datasource`
 		* `self.delegate = self`
 		* `self.dataSource = self`
     * Set your view controller title, `self.title = @"My Title"`
@@ -58,12 +58,12 @@ Square message bubbles designed by [@michaelwschultz](http://www.michaelwschultz
 	* Optionally play sound effects: `[JSMessageSoundEffect playMessageSentSound]` or `[JSMessageSoundEffect playMessageReceivedSound]`
 
 * `- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath`
-	* The style of the bubble for this row, options are: 
-			* `JSBubbleMessageStyleIncomingDefault`
-			* `JSBubbleMessageStyleIncomingSquare`
-			* `JSBubbleMessageStyleOutgoingDefault`
-			* `JSBubbleMessageStyleOutgoingDefaultGreen`
-			* `JSBubbleMessageStyleOutgoingSquare`
+	* The style of the bubble for this row, options are:
+		*`JSBubbleMessageStyleIncomingDefault`
+		* `JSBubbleMessageStyleIncomingSquare`
+		* `JSBubbleMessageStyleOutgoingDefault`
+		* `JSBubbleMessageStyleOutgoingDefaultGreen`
+		* `JSBubbleMessageStyleOutgoingSquare`
 
 * `- (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView`
 	* How/when to display timestamps for messages, options are:
@@ -98,13 +98,13 @@ Square message bubbles designed by [@michaelwschultz](http://www.michaelwschultz
 	* Override `- (void)setupSendButton`
 	* `#import` this category in your `JSMessagesViewController` subclass 
 
-### Notes
+#### Notes
 
 * Remember, you **must** subclass `JSMessagesViewController` and set your delegate properties
 * You may present view programmatically, or use Storyboards
 * Your `JSMessagesViewController` subclass **must** be presented in a `UINavigationController`
 
-### Demo projects included
+#### Demo projects included
 
 * `MessagesDemo.xcodeproj` for example of programmatic presentation
 * `MessagesDemoStoryboards/MessagesDemoSB.xcodeproj` for example of use with Storyboards
