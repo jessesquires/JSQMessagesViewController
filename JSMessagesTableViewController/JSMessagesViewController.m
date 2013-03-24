@@ -65,15 +65,26 @@
     [self setBackgroundColor:[UIColor messagesBackgroundColor]];
     
     CGRect inputFrame = CGRectMake(0.0f, size.height - INPUT_HEIGHT, size.width, INPUT_HEIGHT);
-    self.inputView = [[JSMessageInputView alloc] initWithFrame:inputFrame];
-    self.inputView.textView.delegate = self;
-    [self.inputView.sendButton addTarget:self action:@selector(sendPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.inputView = [[JSMessageInputView alloc] initWithFrame:inputFrame delegate:self];
+    
+    UIButton *sendButton = [self sendButton];
+    sendButton.enabled = NO;
+    sendButton.frame = CGRectMake(self.inputView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
+    [sendButton addTarget:self
+                   action:@selector(sendPressed:)
+         forControlEvents:UIControlEventTouchUpInside];
+    [self.inputView setSendButton:sendButton];
     [self.view addSubview:self.inputView];
     
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     swipe.direction = UISwipeGestureRecognizerDirectionDown;
     swipe.numberOfTouchesRequired = 1;
     [self.inputView addGestureRecognizer:swipe];
+}
+
+- (UIButton *)sendButton
+{
+    return [UIButton defaultSendButton];
 }
 
 #pragma mark - View lifecycle

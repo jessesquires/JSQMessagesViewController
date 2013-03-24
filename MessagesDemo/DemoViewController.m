@@ -35,6 +35,14 @@
 
 @implementation DemoViewController
 
+#pragma mark - Initialization
+- (UIButton *)sendButton
+{
+    // Override to use a custom send button
+    // The button's frame is set automatically for you
+    return [UIButton defaultSendButton];
+}
+
 #pragma mark - View lifecycle
 - (void)viewDidLoad
 {

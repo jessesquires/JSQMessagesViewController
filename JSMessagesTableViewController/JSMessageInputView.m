@@ -48,12 +48,16 @@
 
 @implementation JSMessageInputView
 
+@synthesize sendButton;
+
 #pragma mark - Initialization
 - (id)initWithFrame:(CGRect)frame
+           delegate:(id<UITextViewDelegate>)delegate
 {
     self = [super initWithFrame:frame];
     if(self) {
         [self setup];
+        self.textView.delegate = delegate;
     }
     return self;
 }
@@ -65,9 +69,7 @@
     self.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin);
     self.opaque = YES;
     self.userInteractionEnabled = YES;
-    
     [self setupTextView];
-    [self setupSendButton];
 }
 
 - (void)setupTextView
@@ -101,35 +103,13 @@
     [self addSubview:inputFieldBack];
 }
 
-- (void)setupSendButton
+#pragma mark - Setters
+- (void)setSendButton:(UIButton *)btn
 {
-    self.sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.sendButton.frame = CGRectMake(self.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
-    self.sendButton.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
+    if(sendButton)
+        [sendButton removeFromSuperview];
     
-    UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 13.0f, 0.0f, 13.0f);
-    UIImage *sendBack = [[UIImage imageNamed:@"send"] resizableImageWithCapInsets:insets];
-    UIImage *sendBackHighLighted = [[UIImage imageNamed:@"send-highlighted"] resizableImageWithCapInsets:insets];
-    [self.sendButton setBackgroundImage:sendBack forState:UIControlStateNormal];
-    [self.sendButton setBackgroundImage:sendBack forState:UIControlStateDisabled];
-    [self.sendButton setBackgroundImage:sendBackHighLighted forState:UIControlStateHighlighted];
-    
-    NSString *title = NSLocalizedString(@"Send", nil);
-    [self.sendButton setTitle:title forState:UIControlStateNormal];
-    [self.sendButton setTitle:title forState:UIControlStateHighlighted];
-    [self.sendButton setTitle:title forState:UIControlStateDisabled];
-    self.sendButton.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-    
-    UIColor *titleShadow = [UIColor colorWithRed:0.325f green:0.463f blue:0.675f alpha:1.0f];
-    [self.sendButton setTitleShadowColor:titleShadow forState:UIControlStateNormal];
-    [self.sendButton setTitleShadowColor:titleShadow forState:UIControlStateHighlighted];
-    self.sendButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
-    
-    [self.sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [self.sendButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateDisabled];
-    
-    self.sendButton.enabled = NO;
+    sendButton = btn;
     [self addSubview:self.sendButton];
 }
 

@@ -38,6 +38,7 @@
 #import "JSBubbleView.h"
 #import "JSMessageInputView.h"
 #import "JSMessageSoundEffect.h"
+#import "UIButton+JSMessagesView.h"
 
 typedef enum {
     JSMessagesViewTimestampPolicyAll = 0,
@@ -74,6 +75,9 @@ typedef enum {
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) JSMessageInputView *inputView;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
+
+#pragma mark - Initialization
+- (UIButton *)sendButton;
 
 #pragma mark - Actions
 - (void)sendPressed:(UIButton *)sender;
