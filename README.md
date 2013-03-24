@@ -42,58 +42,62 @@ Square message bubbles designed by [@michaelschultz](http://www.twitter.com/mich
 
 ## How To Use
 
-1. Subclass `JSMessagesViewController`
-	* In `- (void)viewDidLoad`
-		* Set your view controller as the `delegate` and `datasource`
-		* Set your view controller title
+#####Subclass `JSMessagesViewController`
 
-2. Implement the `JSMessagesViewDelegate` protocol
-	* `- (void)sendPressed:(UIButton *)sender withText:(NSString *)text`
-		* Hook into your own backend here
-		* Call `[self finishSend]` at the end of this method to animate and reset the text input view
-		* Optionally play sound effects: `[JSMessageSoundEffect playMessageSentSound]` or `[JSMessageSoundEffect playMessageReceivedSound]`
+* In `- (void)viewDidLoad`
+	* Set your view controller as the `delegate` and `datasource`
+	* Set your view controller title
 
-	* `- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath`
-		* The style of the bubble for this row, options are:
-			* `JSBubbleMessageStyleIncomingDefault`
-			* `JSBubbleMessageStyleIncomingSquare`
-			* `JSBubbleMessageStyleOutgoingDefault`
-			* `JSBubbleMessageStyleOutgoingDefaultGreen`
-			* `JSBubbleMessageStyleOutgoingSquare`
+#####Implement the `JSMessagesViewDelegate` protocol
 
-	* `- (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView`
-		* How/when to display timestamps for messages, options are:
-			* `JSMessagesViewTimestampPolicyAll`
-			* `JSMessagesViewTimestampPolicyAlternating`
-			* `JSMessagesViewTimestampPolicyEveryThree`
-			* `JSMessagesViewTimestampPolicyEveryFive`
-			* `JSMessagesViewTimestampPolicyCustom`
+* `- (void)sendPressed:(UIButton *)sender withText:(NSString *)text`
+	* Hook into your own backend here
+	* Call `[self finishSend]` at the end of this method to animate and reset the text input view
+	* Optionally play sound effects: `[JSMessageSoundEffect playMessageSentSound]` or `[JSMessageSoundEffect playMessageReceivedSound]`
 
-	* `- (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath`
-		* Returns if this row should display a timestamp or not, based on the value returned from the above method
-		* If using a built-in timestamp policy, simply return `[self shouldHaveTimestampForRowAtIndexPath:indexPath]`
-		* If using `JSMessagesViewTimestampPolicyCustom`, you are on your own!
+* `- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath`
+	* The style of the bubble for this row, options are:
+		* `JSBubbleMessageStyleIncomingDefault`
+		* `JSBubbleMessageStyleIncomingSquare`
+		* `JSBubbleMessageStyleOutgoingDefault`
+		* `JSBubbleMessageStyleOutgoingDefaultGreen`
+		* `JSBubbleMessageStyleOutgoingSquare`
 
-3. Implement the `JSMessagesViewDataSource` protocol
-	* `- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath`
-		* The text to be displayed for this row
+* `- (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView`
+	* How/when to display timestamps for messages, options are:
+		* `JSMessagesViewTimestampPolicyAll`
+		* `JSMessagesViewTimestampPolicyAlternating`
+		* `JSMessagesViewTimestampPolicyEveryThree`
+		* `JSMessagesViewTimestampPolicyEveryFive`
+		* `JSMessagesViewTimestampPolicyCustom`
 
-	* `- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath`
-		* The timestamp to be displayed *above* this row
+* `- (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath`
+	* Returns if this row should display a timestamp or not, based on the value returned from the above method
+	* If using a built-in timestamp policy, simply return `[self shouldHaveTimestampForRowAtIndexPath:indexPath]`
+	* If using `JSMessagesViewTimestampPolicyCustom`, you are on your own!
 
-4. Implement the [table view data source][ref1] method that you should be familiar with
-	* `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
+#####Implement the `JSMessagesViewDataSource` protocol
 
-5. Customize
-	* For custom view background color: use `- (void)setBackgroundColor:(UIColor *)color`
-	* For custom send button:
-		* Create a [category][ref2] on `JSMessageInputView`
-		* Override `- (void)setupSendButton`
-		* `#import` this category in your `JSMessagesViewController` subclass 
+* `- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath`
+	* The text to be displayed for this row
+
+* `- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath`
+	* The timestamp to be displayed *above* this row
+
+#####Implement the [table view data source][ref1] method that you should be familiar with
+
+* `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
+
+#####Customize
+
+* For custom view background color: use `- (void)setBackgroundColor:(UIColor *)color`
+* For custom send button:
+	* Create a [category][ref2] on `JSMessageInputView`
+	* Override `- (void)setupSendButton`
+	* `#import` this category in your `JSMessagesViewController` subclass 
 
 #### Notes
 
-* Remember, you **must** subclass `JSMessagesViewController` and set your delegate properties
 * You may present view programmatically, or use Storyboards
 * Your `JSMessagesViewController` subclass **must** be presented in a `UINavigationController`
 
