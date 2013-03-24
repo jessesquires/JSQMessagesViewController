@@ -45,9 +45,7 @@ Square message bubbles designed by [@michaelschultz](http://www.twitter.com/mich
 1. Subclass `JSMessagesViewController`
 	* In `- (void)viewDidLoad`
 		* Set your view controller as the `delegate` and `datasource`
-			* `self.delegate = self`
-			* `self.dataSource = self`
-		* Set your view controller title, `self.title = @"My Title"`
+		* Set your view controller title
 
 2. Implement the `JSMessagesViewDelegate` protocol
 	* `- (void)sendPressed:(UIButton *)sender withText:(NSString *)text`
@@ -81,7 +79,7 @@ Square message bubbles designed by [@michaelschultz](http://www.twitter.com/mich
 		* The text to be displayed for this row
 
 	* `- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath`
-	* The timestamp to be displayed *above* this row
+		* The timestamp to be displayed *above* this row
 
 4. Implement the [table view data source][ref1] method that you should be familiar with
 	* `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
