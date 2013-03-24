@@ -92,11 +92,8 @@ Square message bubbles designed by [@michaelschultz](http://www.twitter.com/mich
 
 #####Customize
 
-* For custom view background color: use `- (void)setBackgroundColor:(UIColor *)color`
-* For custom send button:
-	* Create a [category][ref2] on `JSMessageInputView`
-	* Override `- (void)setupSendButton`
-	* `#import` this category in your `JSMessagesViewController` subclass 
+* Custom background color, call `- (void)setBackgroundColor:(UIColor *)color`
+* Custom send button, override `- (UIButton *)sendButton`
 
 ##### Notes
 
