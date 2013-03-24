@@ -53,8 +53,10 @@ Square message bubbles designed by [@michaelschultz](http://www.twitter.com/mich
 * `- (void)sendPressed:(UIButton *)sender withText:(NSString *)text`
 	* Hook into your own backend here
 	* Call `[self finishSend]` at the end of this method to animate and reset the text input view
-	* Optionally play sound effects: `[JSMessageSoundEffect playMessageSentSound]` or `[JSMessageSoundEffect playMessageReceivedSound]`
-	<br />
+	* Optionally play sound effects
+		* For outgoing messages `[JSMessageSoundEffect playMessageSentSound]`
+		* For incoming messages `[JSMessageSoundEffect playMessageReceivedSound]`
+
 * `- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath`
 	* The style of the bubble for this row, options are:
 		* `JSBubbleMessageStyleIncomingDefault`
@@ -62,7 +64,7 @@ Square message bubbles designed by [@michaelschultz](http://www.twitter.com/mich
 		* `JSBubbleMessageStyleOutgoingDefault`
 		* `JSBubbleMessageStyleOutgoingDefaultGreen`
 		* `JSBubbleMessageStyleOutgoingSquare`
-		<br />
+
 * `- (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView`
 	* How/when to display timestamps for messages, options are:
 		* `JSMessagesViewTimestampPolicyAll`
@@ -70,7 +72,7 @@ Square message bubbles designed by [@michaelschultz](http://www.twitter.com/mich
 		* `JSMessagesViewTimestampPolicyEveryThree`
 		* `JSMessagesViewTimestampPolicyEveryFive`
 		* `JSMessagesViewTimestampPolicyCustom`
-		<br />
+
 * `- (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath`
 	* Returns if this row should display a timestamp or not, based on the value returned from the above method
 	* If using a built-in timestamp policy, simply return `[self shouldHaveTimestampForRowAtIndexPath:indexPath]`
@@ -80,10 +82,10 @@ Square message bubbles designed by [@michaelschultz](http://www.twitter.com/mich
 
 * `- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath`
 	* The text to be displayed for this row
-	<br />
+
 * `- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath`
 	* The timestamp to be displayed *above* this row
-	
+
 #####Implement the [table view data source][ref1] method that you should be familiar with
 
 * `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
