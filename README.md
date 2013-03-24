@@ -42,7 +42,7 @@ Square message bubbles designed by [@michaelwschultz](http://www.michaelwschultz
 
 ## How To Use
 
-### Subclass `JSMessagesViewController`
+#### Subclass `JSMessagesViewController`
 	
 * In `- (void)viewDidLoad`
 	* Set yourself as the `delegate` and `datasource`
@@ -50,7 +50,7 @@ Square message bubbles designed by [@michaelwschultz](http://www.michaelwschultz
 		* `self.dataSource = self`
     * Set your view controller title, `self.title = @"My Title"`
 
-### Implement the `JSMessagesViewDelegate` protocol
+#### Implement the `JSMessagesViewDelegate` protocol
 
 * `- (void)sendPressed:(UIButton *)sender withText:(NSString *)text`
 	* Hook into your own backend here
@@ -78,7 +78,7 @@ Square message bubbles designed by [@michaelwschultz](http://www.michaelwschultz
 	* If using a built-in timestamp policy, simply return `[self shouldHaveTimestampForRowAtIndexPath:indexPath]`
 	* If using `JSMessagesViewTimestampPolicyCustom`, you are on your own!
 
-### Implement the `JSMessagesViewDataSource` protocol
+#### Implement the `JSMessagesViewDataSource` protocol
 
 * `- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath`
 	* The text to be displayed for this row
@@ -86,11 +86,11 @@ Square message bubbles designed by [@michaelwschultz](http://www.michaelwschultz
 * `- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath`
 	* The timestamp to be displayed *above* this row
 
-### Implement the [table view data source][ref1] method that you should be familiar with
+#### Implement the [table view data source][ref1] method that you should be familiar with
 
 * `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
 
-### Customizing
+#### Customizing
 
 * Call `setBackgroundColor:` to set table view background color
 * To customize the send button
