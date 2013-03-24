@@ -59,7 +59,7 @@ Square message bubbles designed by [@michaelwschultz](http://www.michaelwschultz
 
 * `- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath`
 	* The style of the bubble for this row, options are:
-		*`JSBubbleMessageStyleIncomingDefault`
+		* `JSBubbleMessageStyleIncomingDefault`
 		* `JSBubbleMessageStyleIncomingSquare`
 		* `JSBubbleMessageStyleOutgoingDefault`
 		* `JSBubbleMessageStyleOutgoingDefaultGreen`
