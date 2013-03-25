@@ -6,13 +6,13 @@ A messages UI for iPhone and iPad.
 
 This messages tableview controller is very similar to the one in the iOS Messages app. **Note, this is only a messaging UI, not a messaging app.** This is intended to be used in an existing app where you have (or are developing) a messaging system and need a user interface for it.
 
-See more [screenshots](https://github.com/jessesquires/MessagesTableViewController/tree/master/Screenshots) in the `Screenshots/` directory. (Surprise!)
+**See more [screenshots][link1] in the `Screenshots/` directory. (Surprise!)**
 
 ## About
 
-This is based on work by @soffes [SSMessagingViewController][ss]. I took Soffes' code base and developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users. The features section lists the most notable improvements from [SSMessagingViewController][ss].
+This is based on work by [@soffes](http://github.com/soffes) [SSMessagingViewController][ss]. I took Soffes' code base and developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users. The features section lists the most notable improvements from [SSMessagingViewController][ss].
 
-Square message bubbles designed by [@michaelschultz](http://www.twitter.com/michaelschultz).
+[Square message bubbles][img4] designed by [@michaelschultz](http://www.twitter.com/michaelschultz).
 
 ## Features 
 
@@ -58,7 +58,7 @@ Square message bubbles designed by [@michaelschultz](http://www.twitter.com/mich
 		* For incoming messages `[JSMessageSoundEffect playMessageReceivedSound]`
 
 * `- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath`
-	* The style of the bubble for this row, options are:
+	* The [style of the bubble][link1] for this row, options are:
 		* `JSBubbleMessageStyleIncomingDefault`
 		* `JSBubbleMessageStyleIncomingSquare`
 		* `JSBubbleMessageStyleOutgoingDefault`
@@ -144,3 +144,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 [img1]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot1.png
 [img2]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot2.png
 [img3]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot3.png
+[img4]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot4.png
+
+[link1]:https://github.com/jessesquires/MessagesTableViewController/tree/master/Screenshots
