@@ -124,7 +124,7 @@ This is based on work by [@soffes](http://github.com/soffes) [SSMessagingViewCon
 
 You are free to use this as you please. No attribution necessary. 
 
-However, a link back to [Hexed Bits](http://wwww.hexedbits.com) or here would be appreciated.
+**However, a link back to [Hexed Bits](http://www.hexedbits.com) or here would be appreciated.**
 
 **If you use this, please tell me about it!**
 
