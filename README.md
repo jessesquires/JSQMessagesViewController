@@ -16,7 +16,7 @@ This is based on work by [@soffes](http://github.com/soffes) [SSMessagingViewCon
 
 ## Features 
 
-* Up-to-date for iOS 6.0 and ARC
+* Up-to-date for iOS 6.0 and ARC (iOS 5.0+ required)
 * Storyboards support (if that's how you roll)
 * Universal for iPhone and iPad
 * Allows arbitrary message (and bubble) sizes
@@ -123,6 +123,8 @@ This is based on work by [@soffes](http://github.com/soffes) [SSMessagingViewCon
 ## License
 
 You are free to use this as you please. No attribution necessary. 
+
+However, a link back to [Hexed Bits](http://wwww.hexedbits.com) or here would be appreciated.
 
 **If you use this, please tell me about it!**
 
