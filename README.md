@@ -119,7 +119,6 @@ This is based on work by [@soffes](http://github.com/soffes) [SSMessagingViewCon
 
 [AcaniChat](https://github.com/acani/AcaniChat)
 
-
 ## License
 
 You are free to use this as you please. No attribution necessary. 
