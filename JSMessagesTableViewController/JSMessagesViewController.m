@@ -53,6 +53,11 @@
 #pragma mark - Initialization
 - (void)setup
 {
+  if ([self.view isKindOfClass:[UIScrollView class]])
+  {
+    ((UIScrollView*)self.view).scrollEnabled = NO;
+  }
+  
     CGSize size = self.view.frame.size;
 	
     CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - INPUT_HEIGHT);
