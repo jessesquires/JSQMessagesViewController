@@ -74,7 +74,7 @@
 
 - (void)setupTextView
 {
-    CGFloat width = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) ? 246.0f : 690.0f;
+    CGFloat width = self.frame.size.width - 78;//([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) ? 246.0f : 690.0f;
     CGFloat height = [JSMessageInputView textViewLineHeight];
     
     self.textView = [[UITextView alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, height)];
