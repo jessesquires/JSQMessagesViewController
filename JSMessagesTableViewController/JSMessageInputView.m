@@ -37,6 +37,8 @@
 #import "JSBubbleView.h"
 #import "NSString+JSMessagesView.h"
 
+#define SEND_BUTTON_WIDTH 78.f
+
 @interface JSMessageInputView ()
 
 - (void)setup;
@@ -74,7 +76,7 @@
 
 - (void)setupTextView
 {
-    CGFloat width = self.frame.size.width - 78;//([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) ? 246.0f : 690.0f;
+    CGFloat width = self.frame.size.width - SEND_BUTTON_WIDTH;
     CGFloat height = [JSMessageInputView textViewLineHeight];
     
     self.textView = [[UITextView alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, height)];

@@ -326,12 +326,12 @@
                          CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
                          
                          CGRect inputViewFrame = self.inputView.frame;
-                         CGFloat inputY = keyboardY - inputViewFrame.size.height;
-                         CGFloat bottom = self.view.frame.size.height - INPUT_HEIGHT;
-                         if (inputY > bottom) inputY = bottom;
+                         CGFloat inputViewFrameY = keyboardY - inputViewFrame.size.height;
+                         CGFloat messageViewFrameBottom = self.view.frame.size.height - INPUT_HEIGHT;
+                         if (inputViewFrameY > messageViewFrameBottom) inputViewFrameY = messageViewFrameBottom;
 
                          self.inputView.frame = CGRectMake(inputViewFrame.origin.x,
-                                                           inputY,
+                                                           inputViewFrameY,
                                                            inputViewFrame.size.width,
                                                            inputViewFrame.size.height);
                          
