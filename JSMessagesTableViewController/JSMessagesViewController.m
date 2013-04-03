@@ -53,10 +53,10 @@
 #pragma mark - Initialization
 - (void)setup
 {
-  if ([self.view isKindOfClass:[UIScrollView class]])
-  {
-    ((UIScrollView*)self.view).scrollEnabled = NO;
-  }
+    if([self.view isKindOfClass:[UIScrollView class]]) {
+        // fix for ipad modal form presentations
+        ((UIScrollView *)self.view).scrollEnabled = NO;
+    }
   
     CGSize size = self.view.frame.size;
 	
@@ -327,8 +327,11 @@
                          
                          CGRect inputViewFrame = self.inputView.frame;
                          CGFloat inputViewFrameY = keyboardY - inputViewFrame.size.height;
+                         
+                         // for ipad modal form presentations
                          CGFloat messageViewFrameBottom = self.view.frame.size.height - INPUT_HEIGHT;
-                         if (inputViewFrameY > messageViewFrameBottom) inputViewFrameY = messageViewFrameBottom;
+                         if(inputViewFrameY > messageViewFrameBottom)
+                             inputViewFrameY = messageViewFrameBottom;
 
                          self.inputView.frame = CGRectMake(inputViewFrame.origin.x,
                                                            inputViewFrameY,
