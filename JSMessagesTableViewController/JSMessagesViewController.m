@@ -53,6 +53,11 @@
 #pragma mark - Initialization
 - (void)setup
 {
+  if ([self.view isKindOfClass:[UIScrollView class]])
+  {
+    ((UIScrollView*)self.view).scrollEnabled = NO;
+  }
+  
     CGSize size = self.view.frame.size;
 	
     CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - INPUT_HEIGHT);
@@ -321,8 +326,12 @@
                          CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
                          
                          CGRect inputViewFrame = self.inputView.frame;
+                         CGFloat inputViewFrameY = keyboardY - inputViewFrame.size.height;
+                         CGFloat messageViewFrameBottom = self.view.frame.size.height - INPUT_HEIGHT;
+                         if (inputViewFrameY > messageViewFrameBottom) inputViewFrameY = messageViewFrameBottom;
+
                          self.inputView.frame = CGRectMake(inputViewFrame.origin.x,
-                                                           keyboardY - inputViewFrame.size.height,
+                                                           inputViewFrameY,
                                                            inputViewFrame.size.width,
                                                            inputViewFrame.size.height);
                          

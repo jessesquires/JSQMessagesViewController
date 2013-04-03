@@ -71,9 +71,9 @@
 {
     self.timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
                                                                     4.0f,
-                                                                    [UIScreen mainScreen].bounds.size.width,
+                                                                    self.bounds.size.width,
                                                                     14.5f)];
-    self.timestampLabel.autoresizingMask =  UIViewAutoresizingNone;
+    self.timestampLabel.autoresizingMask =  UIViewAutoresizingFlexibleWidth;
     self.timestampLabel.backgroundColor = [UIColor clearColor];
     self.timestampLabel.textAlignment = NSTextAlignmentCenter;
     self.timestampLabel.textColor = [UIColor messagesTimestampColor];
