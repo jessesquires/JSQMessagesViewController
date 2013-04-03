@@ -121,7 +121,7 @@ This is based on work by [@soffes](http://github.com/soffes) [SSMessagingViewCon
 
 ## [MIT License](http://opensource.org/licenses/MIT)
 
-You are free to use this as you please. No attribution necessary. *However, a link back to [Hexed Bits](http://www.hexedbits.com) or here would be appreciated. If you use this, please tell me about it!*
+You are free to use this as you please. No attribution necessary. **However, a link back to [Hexed Bits](http://www.hexedbits.com) or here would be appreciated. If you use this, please tell me about it!**
 
 Copyright &copy; 2013 Jesse Squires
 
