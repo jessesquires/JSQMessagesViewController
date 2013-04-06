@@ -113,6 +113,12 @@ This is based on work by [@soffes](http://github.com/soffes) [SSMessagingViewCon
 * Option for user avatar to display next to bubbles
 * "Send" images or video
 
+## Apps Using This Control
+
+* [Hemoglobe](http://bit.ly/hemoglobeapp)
+
+*[Contact me](mailto:jesse.d.squires@gmail.com) to have your app listed here.*
+
 ## Related Projects
 
 [SSMessagingViewController][ss]
