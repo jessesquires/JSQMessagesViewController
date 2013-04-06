@@ -115,7 +115,7 @@ This is based on work by [@soffes](http://github.com/soffes) [SSMessagingViewCon
 
 ## Apps Using This Control
 
-* [Hemoglobe](http://bit.ly/hemoglobeapp)
+[Hemoglobe](http://bit.ly/hemoglobeapp)
 
 *[Contact me](mailto:jesse.d.squires@gmail.com) to have your app listed here.*
 
