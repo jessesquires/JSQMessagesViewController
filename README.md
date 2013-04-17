@@ -62,26 +62,35 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 	* For outgoing messages `[JSMessageSoundEffect playMessageSentSound]`
 	* For incoming messages `[JSMessageSoundEffect playMessageReceivedSound]`
 
-* `- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath`
-	* The [style of the bubble][link1] for this row, options are:
-		* `JSBubbleMessageStyleIncomingDefault`
-		* `JSBubbleMessageStyleIncomingSquare`
-		* `JSBubbleMessageStyleOutgoingDefault`
-		* `JSBubbleMessageStyleOutgoingDefaultGreen`
-		* `JSBubbleMessageStyleOutgoingSquare`
+````objective-c 
+- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+````
 
-* `- (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView`
-	* How/when to display timestamps for messages, options are:
-		* `JSMessagesViewTimestampPolicyAll`
-		* `JSMessagesViewTimestampPolicyAlternating`
-		* `JSMessagesViewTimestampPolicyEveryThree`
-		* `JSMessagesViewTimestampPolicyEveryFive`
-		* `JSMessagesViewTimestampPolicyCustom`
+* The [style of the bubble][link1] for this row, options are:
+	* `JSBubbleMessageStyleIncomingDefault`
+	* `JSBubbleMessageStyleIncomingSquare`
+	* `JSBubbleMessageStyleOutgoingDefault`
+	* `JSBubbleMessageStyleOutgoingDefaultGreen`
+	* `JSBubbleMessageStyleOutgoingSquare`
 
-* `- (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath`
-	* Returns if this row should display a timestamp or not, based on the value returned from the above method
-	* If using a built-in timestamp policy, simply return `[self shouldHaveTimestampForRowAtIndexPath:indexPath]`
-	* If using `JSMessagesViewTimestampPolicyCustom`, you are on your own!
+````objective-c 
+- (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView
+````
+
+* How/when to display timestamps for messages, options are:
+	* `JSMessagesViewTimestampPolicyAll`
+	* `JSMessagesViewTimestampPolicyAlternating`
+	* `JSMessagesViewTimestampPolicyEveryThree`
+	* `JSMessagesViewTimestampPolicyEveryFive`
+	* `JSMessagesViewTimestampPolicyCustom`
+
+````objective-c 
+- (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
+````
+
+* Returns if this row should display a timestamp or not, based on the value returned from the above method
+* If using a built-in timestamp policy, simply return `[self shouldHaveTimestampForRowAtIndexPath:indexPath]`
+* If using `JSMessagesViewTimestampPolicyCustom`, you are on your own!
 
 #####Implement the `JSMessagesViewDataSource` protocol
 
