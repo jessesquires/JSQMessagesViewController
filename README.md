@@ -48,7 +48,7 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 
 * In `- (void)viewDidLoad`
 	* Set your view controller as the `delegate` and `datasource`
-	* Set your view controller title
+	* Set your view controller `title`
 
 #####Implement the `JSMessagesViewDelegate` protocol
 
@@ -94,20 +94,28 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 
 #####Implement the `JSMessagesViewDataSource` protocol
 
-* `- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath`
-	* The text to be displayed for this row
+````objective-c 
+- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
+````
 
-* `- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath`
-	* The timestamp to be displayed *above* this row
+* The text to be displayed for this row
+
+````objective-c 
+- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
+````
+
+* The timestamp to be displayed *above* this row
 
 #####Implement the [table view data source][ref1] method that you should be familiar with
 
-* `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
+````objective-c 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+````
 
 #####Customize
 
-* Custom background color, call `- (void)setBackgroundColor:(UIColor *)color`
-* Custom send button, override `- (UIButton *)sendButton`
+* For custom background color, use `- (void)setBackgroundColor:(UIColor *)color`
+* For custom send button, override `- (UIButton *)sendButton`
 
 ##### Notes
 
