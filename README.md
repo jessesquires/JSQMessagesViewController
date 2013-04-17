@@ -52,7 +52,9 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 
 #####Implement the `JSMessagesViewDelegate` protocol
 
-* ````objective-c - (void)sendPressed:(UIButton *)sender withText:(NSString *)text````
+````objective-c 
+- (void)sendPressed:(UIButton *)sender withText:(NSString *)text
+````
 	* Hook into your own backend here
 	* Call `[self finishSend]` at the end of this method to animate and reset the text input view
 	* Optionally play sound effects
