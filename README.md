@@ -55,11 +55,12 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 ````objective-c 
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text
 ````
-	* Hook into your own backend here
-	* Call `[self finishSend]` at the end of this method to animate and reset the text input view
-	* Optionally play sound effects
-		* For outgoing messages `[JSMessageSoundEffect playMessageSentSound]`
-		* For incoming messages `[JSMessageSoundEffect playMessageReceivedSound]`
+
+* Hook into your own backend here
+* Call `[self finishSend]` at the end of this method to animate and reset the text input view
+* Optionally play sound effects
+	* For outgoing messages `[JSMessageSoundEffect playMessageSentSound]`
+	* For incoming messages `[JSMessageSoundEffect playMessageReceivedSound]`
 
 * `- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath`
 	* The [style of the bubble][link1] for this row, options are:
