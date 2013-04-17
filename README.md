@@ -10,7 +10,9 @@ This messages tableview controller is very similar to the one in the iOS Message
 
 ## About
 
-This is based on work by [@soffes](http://github.com/soffes) [SSMessagingViewController][ss]. I took Soffes' code base and developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users. The features section lists the most notable improvements from [SSMessagingViewController][ss].
+This is based on work by [@soffes](http://github.com/soffes) [SSMessagingViewController][ss]. 
+
+I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users.
 
 [Square message bubbles][img4] designed by [@michaelschultz](http://www.twitter.com/michaelschultz).
 
@@ -50,7 +52,7 @@ This is based on work by [@soffes](http://github.com/soffes) [SSMessagingViewCon
 
 #####Implement the `JSMessagesViewDelegate` protocol
 
-* `- (void)sendPressed:(UIButton *)sender withText:(NSString *)text`
+* ````objective-c - (void)sendPressed:(UIButton *)sender withText:(NSString *)text````
 	* Hook into your own backend here
 	* Call `[self finishSend]` at the end of this method to animate and reset the text input view
 	* Optionally play sound effects
