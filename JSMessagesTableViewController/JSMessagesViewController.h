@@ -48,6 +48,7 @@ typedef enum {
     JSMessagesViewTimestampPolicyCustom
 } JSMessagesViewTimestampPolicy;
 
+typedef BOOL (^JSMessageInputViewInputHandler)(NSString *newText);
 
 
 @protocol JSMessagesViewDelegate <NSObject>
@@ -75,6 +76,7 @@ typedef enum {
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) JSMessageInputView *inputView;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
+@property (copy, nonatomic) JSMessageInputViewInputHandler inputHandler;
 
 #pragma mark - Initialization
 - (UIButton *)sendButton;

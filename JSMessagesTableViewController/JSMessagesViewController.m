@@ -302,6 +302,15 @@
     self.inputView.sendButton.enabled = ([textView.text trimWhitespace].length > 0);
 }
 
+- (BOOL)textView:(UITextView *)theTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+
+    if (_inputHandler) {
+        return _inputHandler([theTextView.text stringByReplacingCharactersInRange:range withString:text]);
+    }
+
+    return YES;
+}
+
 #pragma mark - Keyboard notifications
 - (void)handleWillShowKeyboard:(NSNotification *)notification
 {
