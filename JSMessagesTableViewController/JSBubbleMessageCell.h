@@ -43,10 +43,14 @@
 #pragma mark - Initialization
 - (id)initWithBubbleStyle:(JSBubbleMessageStyle)style
              hasTimestamp:(BOOL)hasTimestamp
+                 hasPhoto:(BOOL) hasPhoto
           reuseIdentifier:(NSString *)reuseIdentifier;
 
 #pragma mark - Message Cell
 - (void)setMessage:(NSString *)msg;
 - (void)setTimestamp:(NSDate *)date;
+- (void)setPhoto:(NSString *)photoUrl;
+
+ 
 
 @end

@@ -64,6 +64,8 @@ typedef enum {
 @required
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+@optional
+- (NSString *)photoForRowAtIndexPath:(NSIndexPath *)indexPath;
 @end
 
 
