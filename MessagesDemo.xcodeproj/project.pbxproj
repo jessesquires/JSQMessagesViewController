@@ -51,7 +51,8 @@
 		88301F2016F77B3D0037524D /* UIView+AnimationOptionsForCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 88301F0716F77B3D0037524D /* UIView+AnimationOptionsForCurve.m */; };
 		8856C7DD16F9273C00FC921C /* UIColor+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8856C7DC16F9273C00FC921C /* UIColor+JSMessagesView.m */; };
 		88E5341F16FF9B02004272FA /* UIButton+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E5341E16FF9B01004272FA /* UIButton+JSMessagesView.m */; };
-		C8B6CED0173BC71C00943B56 /* photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B6CECF173BC71C00943B56 /* photo@2x.png */; };
+		C8B6CED0173BC71C00943B56 /* photo1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B6CECF173BC71C00943B56 /* photo1@2x.png */; };
+		C8DA8CF4173C8342007F982F /* photo0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C8DA8CF3173C8342007F982F /* photo0@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,7 +114,8 @@
 		8856C7DC16F9273C00FC921C /* UIColor+JSMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+JSMessagesView.m"; sourceTree = "<group>"; };
 		88E5341D16FF9B01004272FA /* UIButton+JSMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+JSMessagesView.h"; sourceTree = "<group>"; };
 		88E5341E16FF9B01004272FA /* UIButton+JSMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+JSMessagesView.m"; sourceTree = "<group>"; };
-		C8B6CECF173BC71C00943B56 /* photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo@2x.png"; sourceTree = "<group>"; };
+		C8B6CECF173BC71C00943B56 /* photo1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo1@2x.png"; sourceTree = "<group>"; };
+		C8DA8CF3173C8342007F982F /* photo0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo0@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,7 +217,8 @@
 		88301EF116F77B3D0037524D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C8B6CECF173BC71C00943B56 /* photo@2x.png */,
+				C8DA8CF3173C8342007F982F /* photo0@2x.png */,
+				C8B6CECF173BC71C00943B56 /* photo1@2x.png */,
 				88301EF216F77B3D0037524D /* Images */,
 				88301F0316F77B3D0037524D /* Sounds */,
 			);
@@ -340,7 +343,8 @@
 				88244C0616FE5BA400034667 /* bubbleSquareIncoming@2x.png in Resources */,
 				88244C0716FE5BA400034667 /* bubbleSquareOutgoing.png in Resources */,
 				88244C0816FE5BA400034667 /* bubbleSquareOutgoing@2x.png in Resources */,
-				C8B6CED0173BC71C00943B56 /* photo@2x.png in Resources */,
+				C8B6CED0173BC71C00943B56 /* photo1@2x.png in Resources */,
+				C8DA8CF4173C8342007F982F /* photo0@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -111,7 +111,9 @@
 }
 - (NSString *)photoForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return @"photo";
+    NSString *photoUrl=[NSString stringWithFormat:@"photo%d",indexPath.row%2];
+
+    return photoUrl;
 }
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -51,6 +51,6 @@
 - (void)setTimestamp:(NSDate *)date;
 - (void)setPhoto:(NSString *)photoUrl;
 
- 
+- (void) addAccessoryView:(UIView*) view;
 
 @end

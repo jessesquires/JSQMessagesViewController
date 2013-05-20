@@ -39,7 +39,9 @@
 
 #define photoEdgeInsets (UIEdgeInsets){2,4,2,4}
 #define photoSize (CGSize){40,40}
-@interface JSBubbleMessageCell()
+@interface JSBubbleMessageCell(){
+    UIActivityIndicatorView *_indicatorView;
+}
 
 @property (strong, nonatomic) JSBubbleView *bubbleView;
 @property (strong, nonatomic) UIImageView *photoView;
@@ -166,5 +168,12 @@
                                                               dateStyle:NSDateFormatterMediumStyle
                                                               timeStyle:NSDateFormatterShortStyle];
 }
+
+- (void) addAccessoryView:(UIView*) view
+{
+    self.bubbleView.accessoryView=view;
+}
+
+ 
 
 @end

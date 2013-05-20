@@ -109,6 +109,12 @@
                  withFont:[JSBubbleView font]
             lineBreakMode:NSLineBreakByWordWrapping
                 alignment:NSTextAlignmentLeft];
+    
+    
+    if(self.accessoryView){
+        self.accessoryView.center=CGPointMake(bubbleFrame.origin.x-self.accessoryView.bounds.size.width/2-10, bubbleFrame.origin.y+bubbleFrame.size.height/2);
+        [self addSubview:self.accessoryView];
+    }
 }
 
 #pragma mark - Bubble view
