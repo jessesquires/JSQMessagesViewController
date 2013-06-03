@@ -63,6 +63,8 @@
     CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - INPUT_HEIGHT);
 	self.tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
 	self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    self.tableView.allowsSelection = NO;
 	self.tableView.dataSource = self;
 	self.tableView.delegate = self;
 	[self.view addSubview:self.tableView];

@@ -18,6 +18,7 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 
 ## Features 
 
+* Added edit mode
 * Up-to-date for iOS 6.0 and ARC (iOS 5.0+ required)
 * Storyboards support (if that's how you roll)
 * Universal for iPhone and iPad

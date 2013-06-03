@@ -43,12 +43,24 @@
     return [UIButton defaultSendButton];
 }
 
+- (IBAction)editMessages
+{
+    if ([self.tableView isEditing]) {
+        [self.tableView setEditing:NO animated:YES];
+    }
+    else {
+        [self.tableView setEditing:YES animated:YES];
+    }
+}
+
 #pragma mark - View lifecycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.delegate = self;
     self.dataSource = self;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editMessages)];
     
     self.title = @"Messages";
     

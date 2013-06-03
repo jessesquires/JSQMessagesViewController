@@ -55,7 +55,7 @@
 - (void)setup
 {
     self.backgroundColor = [UIColor clearColor];
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    //self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.accessoryType = UITableViewCellAccessoryNone;
     self.accessoryView = nil;
     
@@ -137,6 +137,23 @@
     self.timestampLabel.text = [NSDateFormatter localizedStringFromDate:date
                                                               dateStyle:NSDateFormatterMediumStyle
                                                               timeStyle:NSDateFormatterShortStyle];
+}
+
+#pragma mark - Override editing behaviour
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    self.timestampLabel.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin;
+    
+    if(self.bubbleView.style == JSBubbleMessageStyleIncomingDefault || self.bubbleView.style == JSBubbleMessageStyleIncomingSquare) {
+        self.bubbleView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
+    } else {
+        self.bubbleView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+    }
+    
+    [super setEditing:editing animated:animated];
+    
+    self.bubbleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.timestampLabel.autoresizingMask =  UIViewAutoresizingFlexibleWidth;
 }
 
 @end
