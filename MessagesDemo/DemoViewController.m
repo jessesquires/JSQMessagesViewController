@@ -29,6 +29,9 @@
 #import "DemoViewController.h"
 
 @interface DemoViewController ()
+{
+    NSMutableArray* selectedRows;
+}
 @end
 
 
@@ -43,25 +46,13 @@
     return [UIButton defaultSendButton];
 }
 
-- (IBAction)editMessages
-{
-    if ([self.tableView isEditing]) {
-        [self.tableView setEditing:NO animated:YES];
-    }
-    else {
-        [self.tableView setEditing:YES animated:YES];
-    }
-}
-
 #pragma mark - View lifecycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.delegate = self;
     self.dataSource = self;
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editMessages)];
-    
+    self.navigationItem.rightBarButtonItem = [self editButtonItem];
     self.title = @"Messages";
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
@@ -77,6 +68,19 @@
                        [NSDate distantPast],
                        [NSDate date],
                        nil];
+    
+    selectedRows = [[NSMutableArray alloc] init];
+}
+
+-(void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:animated];
+    if(editing) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteMessages)];
+    } else {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
 }
 
 #pragma mark - Table view data source
@@ -98,6 +102,33 @@
         [JSMessageSoundEffect playMessageReceivedSound];
     
     [self finishSend];
+}
+
+- (IBAction)deleteMessages
+{
+    if (self.tableView.editing)
+    {
+        for(NSIndexPath* indexPath in selectedRows) {
+            [self.messages removeObjectAtIndex:indexPath.row];
+            [self.timestamps removeObjectAtIndex:indexPath.row];
+        }
+        [self.tableView deleteRowsAtIndexPaths:selectedRows withRowAnimation:UITableViewRowAnimationRight];
+        [selectedRows removeAllObjects];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(self.tableView.editing) {
+        [selectedRows addObject:indexPath];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(self.tableView.editing) {
+        [selectedRows removeObject:indexPath];
+    }
 }
 
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
