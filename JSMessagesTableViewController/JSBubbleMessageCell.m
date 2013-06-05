@@ -73,7 +73,7 @@
                                                                     4.0f,
                                                                     self.bounds.size.width,
                                                                     14.5f)];
-    self.timestampLabel.autoresizingMask =  UIViewAutoresizingFlexibleWidth;
+    self.timestampLabel.autoresizingMask =  UIViewAutoresizingFlexibleWidth; //UIViewAutoresizingFlexibleLeftMargin;
     self.timestampLabel.backgroundColor = [UIColor clearColor];
     self.timestampLabel.textAlignment = NSTextAlignmentCenter;
     self.timestampLabel.textColor = [UIColor messagesTimestampColor];
@@ -102,7 +102,11 @@
     self.bubbleView = [[JSBubbleView alloc] initWithFrame:frame
                                               bubbleStyle:style];
     
-    self.bubbleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    if(style == JSBubbleMessageStyleIncomingDefault || style == JSBubbleMessageStyleIncomingSquare) {
+        self.bubbleView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
+    } else {
+        self.bubbleView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+    }
     
     [self.contentView addSubview:self.bubbleView];
     [self.contentView sendSubviewToBack:self.bubbleView];
@@ -137,23 +141,6 @@
     self.timestampLabel.text = [NSDateFormatter localizedStringFromDate:date
                                                               dateStyle:NSDateFormatterMediumStyle
                                                               timeStyle:NSDateFormatterShortStyle];
-}
-
-#pragma mark - Override editing behaviour
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated
-{
-    self.timestampLabel.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin;
-    
-    if(self.bubbleView.style == JSBubbleMessageStyleIncomingDefault || self.bubbleView.style == JSBubbleMessageStyleIncomingSquare) {
-        self.bubbleView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
-    } else {
-        self.bubbleView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
-    }
-    
-    [super setEditing:editing animated:animated];
-    
-    self.bubbleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.timestampLabel.autoresizingMask =  UIViewAutoresizingFlexibleWidth;
 }
 
 @end
