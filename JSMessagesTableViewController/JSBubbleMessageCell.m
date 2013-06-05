@@ -73,7 +73,8 @@
                                                                     4.0f,
                                                                     self.bounds.size.width,
                                                                     14.5f)];
-    self.timestampLabel.autoresizingMask =  UIViewAutoresizingFlexibleWidth; //UIViewAutoresizingFlexibleLeftMargin;
+
+    self.timestampLabel.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin;
     self.timestampLabel.backgroundColor = [UIColor clearColor];
     self.timestampLabel.textAlignment = NSTextAlignmentCenter;
     self.timestampLabel.textColor = [UIColor messagesTimestampColor];
