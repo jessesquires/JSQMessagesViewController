@@ -69,6 +69,13 @@
                        [NSDate date],
                        nil];
     
+    self.showtimestamps = [[NSMutableArray alloc] initWithObjects:
+                       [NSNumber numberWithBool:YES],
+                       [NSNumber numberWithBool:NO],
+                       [NSNumber numberWithBool:NO],
+                       [NSNumber numberWithBool:YES],
+                       nil];
+    
     selectedRows = [[NSMutableArray alloc] init];
 }
 
@@ -93,8 +100,8 @@
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text
 {
     [self.messages addObject:text];
-    
     [self.timestamps addObject:[NSDate date]];
+    [self.showtimestamps addObject:[NSNumber numberWithBool:YES]];
     
     if((self.messages.count - 1) % 2)
         [JSMessageSoundEffect playMessageSentSound];
@@ -108,9 +115,24 @@
 {
     if (self.tableView.editing)
     {
+        // you need to sort the selected rows to delete from highest to lowest index
+        // otherwise it may lead to delete attempt on an invalid index
+        [selectedRows sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            NSInteger r1 = [obj1 row];
+            NSInteger r2 = [obj2 row];
+            if (r1 > r2) {
+                return (NSComparisonResult)NSOrderedAscending;
+            }
+            if (r1 < r2) {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+            return (NSComparisonResult)NSOrderedSame;
+        }];
+        
         for(NSIndexPath* indexPath in selectedRows) {
             [self.messages removeObjectAtIndex:indexPath.row];
             [self.timestamps removeObjectAtIndex:indexPath.row];
+            [self.showtimestamps removeObjectAtIndex:indexPath.row];
         }
         [self.tableView deleteRowsAtIndexPaths:selectedRows withRowAnimation:UITableViewRowAnimationRight];
         [selectedRows removeAllObjects];
@@ -138,13 +160,22 @@
 
 - (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView
 {
-    return JSMessagesViewTimestampPolicyEveryThree;
+    NSLog(@"timestampPolicyForMessagesView");
+    return JSMessagesViewTimestampPolicyCustom;
 }
+
+- (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [[self.showtimestamps objectAtIndex:indexPath.row] boolValue];
+}
+
 
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // custom implementation here, if using `JSMessagesViewTimestampPolicyCustom`
-    return [self shouldHaveTimestampForRowAtIndexPath:indexPath];
+    //return [self shouldHaveTimestampForRowAtIndexPath:indexPath];
+    NSLog(@"hasTimestampForRowAtIndexPath: %u", [[self.showtimestamps objectAtIndex:indexPath.row] boolValue]);
+    return [[self.showtimestamps objectAtIndex:indexPath.row] boolValue];
 }
 
 #pragma mark - Messages view data source
