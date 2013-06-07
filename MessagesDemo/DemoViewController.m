@@ -35,7 +35,6 @@
 @end
 
 
-
 @implementation DemoViewController
 
 #pragma mark - Initialization
@@ -116,7 +115,7 @@
     if (self.tableView.editing)
     {
         // you need to sort the selected rows to delete from highest to lowest index
-        // otherwise it may lead to delete attempt on an invalid index
+        // otherwise it may lead to a delete attempt on an invalid index
         [selectedRows sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
             NSInteger r1 = [obj1 row];
             NSInteger r2 = [obj2 row];
@@ -160,7 +159,6 @@
 
 - (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView
 {
-    NSLog(@"timestampPolicyForMessagesView");
     return JSMessagesViewTimestampPolicyCustom;
 }
 
@@ -173,8 +171,6 @@
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // custom implementation here, if using `JSMessagesViewTimestampPolicyCustom`
-    //return [self shouldHaveTimestampForRowAtIndexPath:indexPath];
-    NSLog(@"hasTimestampForRowAtIndexPath: %u", [[self.showtimestamps objectAtIndex:indexPath.row] boolValue]);
     return [[self.showtimestamps objectAtIndex:indexPath.row] boolValue];
 }
 
