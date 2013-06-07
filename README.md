@@ -139,6 +139,8 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 
 [Hemoglobe](http://bit.ly/hemoglobeapp)
 
+[FourChat](https://itunes.apple.com/us/app/fourchat/id650833730?mt=8)
+
 *[Contact me](mailto:jesse.d.squires@gmail.com) to have your app listed here.*
 
 ## Related Projects
