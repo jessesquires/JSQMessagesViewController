@@ -152,6 +152,8 @@
 #pragma mark - Actions
 - (void)sendPressed:(UIButton *)sender
 {
+    [self.inputView.textView resignFirstResponder];
+    [self.inputView.textView becomeFirstResponder];
     [self.delegate sendPressed:sender
                       withText:[self.inputView.textView.text trimWhitespace]];
 }
