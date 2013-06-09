@@ -227,12 +227,20 @@
     return NO;
 }
 
-- (void)finishSend
+- (void)finishSend:(UITableViewRowAnimation)animation
 {
     [self.inputView.textView setText:nil];
     [self textViewDidChange:self.inputView.textView];
-    [self.tableView reloadData];
-    [self scrollToBottomAnimated:YES];
+    
+    NSInteger rows = [self.tableView numberOfRowsInSection:0];
+    NSArray *newRow = @[[NSIndexPath indexPathForRow:rows inSection:0]];
+    
+    [self.tableView insertRowsAtIndexPaths:newRow
+                          withRowAnimation:animation];
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:rows inSection:0]
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
 }
 
 - (void)setBackgroundColor:(UIColor *)color

@@ -85,7 +85,7 @@ typedef enum {
 
 #pragma mark - Messages view controller
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (void)finishSend;
+- (void)finishSend:(UITableViewRowAnimation)animation;
 - (void)setBackgroundColor:(UIColor *)color;
 - (void)scrollToBottomAnimated:(BOOL)animated;
 

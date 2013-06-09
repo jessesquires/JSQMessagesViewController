@@ -68,13 +68,6 @@
                        [NSDate date],
                        nil];
     
-    self.showtimestamps = [[NSMutableArray alloc] initWithObjects:
-                       [NSNumber numberWithBool:YES],
-                       [NSNumber numberWithBool:NO],
-                       [NSNumber numberWithBool:NO],
-                       [NSNumber numberWithBool:YES],
-                       nil];
-    
     selectedRows = [[NSMutableArray alloc] init];
 }
 
@@ -100,14 +93,15 @@
 {
     [self.messages addObject:text];
     [self.timestamps addObject:[NSDate date]];
-    [self.showtimestamps addObject:[NSNumber numberWithBool:YES]];
     
-    if((self.messages.count - 1) % 2)
+    if((self.messages.count - 1) % 2) {
         [JSMessageSoundEffect playMessageSentSound];
-    else
+        [self finishSend:UITableViewRowAnimationLeft];
+    } else {
         [JSMessageSoundEffect playMessageReceivedSound];
+        [self finishSend:UITableViewRowAnimationRight];
+    }
     
-    [self finishSend];
 }
 
 - (IBAction)deleteMessages
@@ -131,7 +125,6 @@
         for(NSIndexPath* indexPath in selectedRows) {
             [self.messages removeObjectAtIndex:indexPath.row];
             [self.timestamps removeObjectAtIndex:indexPath.row];
-            [self.showtimestamps removeObjectAtIndex:indexPath.row];
         }
         [self.tableView deleteRowsAtIndexPaths:selectedRows withRowAnimation:UITableViewRowAnimationRight];
         [selectedRows removeAllObjects];
@@ -159,19 +152,13 @@
 
 - (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView
 {
-    return JSMessagesViewTimestampPolicyCustom;
+    return JSMessagesViewTimestampPolicyEveryThree;
 }
-
-- (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [[self.showtimestamps objectAtIndex:indexPath.row] boolValue];
-}
-
 
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // custom implementation here, if using `JSMessagesViewTimestampPolicyCustom`
-    return [[self.showtimestamps objectAtIndex:indexPath.row] boolValue];
+    return NO;
 }
 
 #pragma mark - Messages view data source
