@@ -46,11 +46,10 @@
 
 @end
 
-
-
 @implementation JSMessagesViewController
 
 #pragma mark - Initialization
+
 - (void)setup
 {
     if([self.view isKindOfClass:[UIScrollView class]]) {
@@ -58,6 +57,8 @@
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
   
+    _selectedRows = [[NSMutableArray alloc] init];
+    
     CGSize size = self.view.frame.size;
 	
     CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - INPUT_HEIGHT);
@@ -95,6 +96,7 @@
 }
 
 #pragma mark - View lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -132,6 +134,7 @@
 }
 
 #pragma mark - View rotation
+
 - (BOOL)shouldAutorotate
 {
     return NO;
@@ -150,9 +153,10 @@
 }
 
 #pragma mark - Actions
+
 - (void)sendPressed:(UIButton *)sender
 {
-    [self.inputView.textView resignFirstResponder];
+    [self.inputView.dummyView becomeFirstResponder];
     [self.inputView.textView becomeFirstResponder];
     [self.delegate sendPressed:sender
                       withText:[self.inputView.textView.text trimWhitespace]];
@@ -163,7 +167,41 @@
     [self.inputView.textView resignFirstResponder];
 }
 
+- (void)deleteMessagesAnimated:(UITableViewRowAnimation)animation
+{
+    if (self.tableView.editing)
+    {
+        // you need to sort the selected rows to delete from highest to lowest index
+        // otherwise it may lead to a delete attempt on an invalid index
+        [_selectedRows sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            NSInteger r1 = [obj1 row];
+            NSInteger r2 = [obj2 row];
+            if (r1 > r2) {
+                return (NSComparisonResult)NSOrderedAscending;
+            }
+            if (r1 < r2) {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+            return (NSComparisonResult)NSOrderedSame;
+        }];
+        
+        //NSMutableArray* visible = [[self.tableView indexPathsForVisibleRows] mutableCopy];
+        
+        for(NSIndexPath* indexPath in _selectedRows) {
+            [self.dataSource deleteDataAtIndexPath:indexPath];
+         //   [visible removeObject:indexPath];
+        }
+        
+        //[self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:_selectedRows withRowAnimation:animation];
+        [_selectedRows removeAllObjects];
+        [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationTop];
+        //[self.tableView endUpdates];
+    }
+}
+
 #pragma mark - Table view data source
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -198,6 +236,7 @@
 }
 
 #pragma mark - Table view delegate
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat dateHeight = [self shouldHaveTimestampForRowAtIndexPath:indexPath] ? DATE_LABEL_HEIGHT : 0.0f;
@@ -205,7 +244,22 @@
     return [JSBubbleView cellHeightForText:[self.dataSource textForRowAtIndexPath:indexPath]] + dateHeight;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(tableView.editing) {
+        [_selectedRows addObject:indexPath];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(tableView.editing) {
+        [_selectedRows removeObject:indexPath];
+    }
+}
+
 #pragma mark - Messages view controller
+
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch ([self.delegate timestampPolicyForMessagesView]) {
@@ -235,14 +289,16 @@
     [self textViewDidChange:self.inputView.textView];
     
     NSInteger rows = [self.tableView numberOfRowsInSection:0];
-    NSArray *newRow = @[[NSIndexPath indexPathForRow:rows inSection:0]];
+    NSIndexPath* newRow = [NSIndexPath indexPathForRow:rows inSection:0];
     
-    [self.tableView insertRowsAtIndexPaths:newRow
+    //[self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:@[newRow]
                           withRowAnimation:animation];
     
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:rows inSection:0]
+    [self.tableView scrollToRowAtIndexPath:newRow
                           atScrollPosition:UITableViewScrollPositionBottom
                                   animated:YES];
+    //[self.tableView endUpdates];
 }
 
 - (void)setBackgroundColor:(UIColor *)color
@@ -264,6 +320,7 @@
 }
 
 #pragma mark - Text view delegate
+
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     [textView becomeFirstResponder];
@@ -318,6 +375,7 @@
 }
 
 #pragma mark - Keyboard notifications
+
 - (void)handleWillShowKeyboard:(NSNotification *)notification
 {
     [self keyboardWillShowHide:notification];

@@ -48,8 +48,6 @@ typedef enum {
     JSMessagesViewTimestampPolicyCustom
 } JSMessagesViewTimestampPolicy;
 
-
-
 @protocol JSMessagesViewDelegate <NSObject>
 @required
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text;
@@ -58,15 +56,12 @@ typedef enum {
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 @end
 
-
-
 @protocol JSMessagesViewDataSource <NSObject>
 @required
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)deleteDataAtIndexPath:(NSIndexPath *)indexPath;
 @end
-
-
 
 @interface JSMessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 
@@ -75,6 +70,7 @@ typedef enum {
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) JSMessageInputView *inputView;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
+@property (readonly, nonatomic) NSMutableArray* selectedRows;
 
 #pragma mark - Initialization
 - (UIButton *)sendButton;
@@ -82,6 +78,7 @@ typedef enum {
 #pragma mark - Actions
 - (void)sendPressed:(UIButton *)sender;
 - (void)handleSwipe:(UIGestureRecognizer *)guestureRecognizer;
+- (void)deleteMessagesAnimated:(UITableViewRowAnimation)animation;
 
 #pragma mark - Messages view controller
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;

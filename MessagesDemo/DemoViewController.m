@@ -28,16 +28,10 @@
 
 #import "DemoViewController.h"
 
-@interface DemoViewController ()
-{
-    NSMutableArray* selectedRows;
-}
-@end
-
-
 @implementation DemoViewController
 
 #pragma mark - Initialization
+
 - (UIButton *)sendButton
 {
     // Override to use a custom send button
@@ -46,6 +40,7 @@
 }
 
 #pragma mark - View lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -67,11 +62,9 @@
                        [NSDate distantPast],
                        [NSDate date],
                        nil];
-    
-    selectedRows = [[NSMutableArray alloc] init];
 }
 
--(void)setEditing:(BOOL)editing animated:(BOOL)animated
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
     [self.tableView setEditing:editing animated:animated];
@@ -82,13 +75,20 @@
     }
 }
 
+- (IBAction)deleteMessages
+{
+    [self deleteMessagesAnimated:UITableViewRowAnimationRight];
+}
+
 #pragma mark - Table view data source
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.messages.count;
 }
 
 #pragma mark - Messages view delegate
+
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text
 {
     [self.messages addObject:text];
@@ -100,48 +100,6 @@
     } else {
         [JSMessageSoundEffect playMessageReceivedSound];
         [self finishSend:UITableViewRowAnimationRight];
-    }
-    
-}
-
-- (IBAction)deleteMessages
-{
-    if (self.tableView.editing)
-    {
-        // you need to sort the selected rows to delete from highest to lowest index
-        // otherwise it may lead to a delete attempt on an invalid index
-        [selectedRows sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            NSInteger r1 = [obj1 row];
-            NSInteger r2 = [obj2 row];
-            if (r1 > r2) {
-                return (NSComparisonResult)NSOrderedAscending;
-            }
-            if (r1 < r2) {
-                return (NSComparisonResult)NSOrderedDescending;
-            }
-            return (NSComparisonResult)NSOrderedSame;
-        }];
-        
-        for(NSIndexPath* indexPath in selectedRows) {
-            [self.messages removeObjectAtIndex:indexPath.row];
-            [self.timestamps removeObjectAtIndex:indexPath.row];
-        }
-        [self.tableView deleteRowsAtIndexPaths:selectedRows withRowAnimation:UITableViewRowAnimationRight];
-        [selectedRows removeAllObjects];
-    }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(self.tableView.editing) {
-        [selectedRows addObject:indexPath];
-    }
-}
-
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(self.tableView.editing) {
-        [selectedRows removeObject:indexPath];
     }
 }
 
@@ -162,6 +120,7 @@
 }
 
 #pragma mark - Messages view data source
+
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self.messages objectAtIndex:indexPath.row];
@@ -170,6 +129,12 @@
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self.timestamps objectAtIndex:indexPath.row];
+}
+
+- (void)deleteDataAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.messages removeObjectAtIndex:indexPath.row];
+    [self.timestamps removeObjectAtIndex:indexPath.row];
 }
 
 @end
