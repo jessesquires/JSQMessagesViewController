@@ -185,18 +185,23 @@
             return (NSComparisonResult)NSOrderedSame;
         }];
         
-        //NSMutableArray* visible = [[self.tableView indexPathsForVisibleRows] mutableCopy];
+        NSMutableArray* visible = [[self.tableView indexPathsForVisibleRows] mutableCopy];
+        NSIndexPath* first = [_selectedRows objectAtIndex:0];
+        
+        for(NSIndexPath* indexPath in [self.tableView indexPathsForVisibleRows])
+            if(indexPath.row < first.row)
+                 [visible removeObject:indexPath];
         
         for(NSIndexPath* indexPath in _selectedRows) {
             [self.dataSource deleteDataAtIndexPath:indexPath];
-         //   [visible removeObject:indexPath];
+            [visible removeObject:indexPath];
         }
         
-        //[self.tableView beginUpdates];
+        [self.tableView beginUpdates];
         [self.tableView deleteRowsAtIndexPaths:_selectedRows withRowAnimation:animation];
         [_selectedRows removeAllObjects];
-        [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationTop];
-        //[self.tableView endUpdates];
+        [self.tableView reloadRowsAtIndexPaths:visible withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView endUpdates];
     }
 }
 
