@@ -47,18 +47,14 @@
 
 @end
 
-
-
 @implementation JSBubbleMessageCell
 
 #pragma mark - Initialization
 - (void)setup
 {
     self.backgroundColor = [UIColor clearColor];
-    //self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.accessoryType = UITableViewCellAccessoryNone;
     self.accessoryView = nil;
-    
     self.imageView.image = nil;
     self.imageView.hidden = YES;
     self.textLabel.text = nil;

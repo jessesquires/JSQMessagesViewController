@@ -56,8 +56,6 @@
         // fix for ipad modal form presentations
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
-  
-    _selectedRows = [[NSMutableArray alloc] init];
     
     CGSize size = self.view.frame.size;
 	
@@ -158,51 +156,14 @@
 {
     [self.inputView.dummyView becomeFirstResponder];
     [self.inputView.textView becomeFirstResponder];
-    [self.delegate sendPressed:sender
-                      withText:[self.inputView.textView.text trimWhitespace]];
+    [self.delegate sendPressed:sender withText:[self.inputView.textView.text trimWhitespace]];
+    [self.inputView.textView setText:nil];
+    [self textViewDidChange:self.inputView.textView];
 }
 
 - (void)handleSwipe:(UIGestureRecognizer *)guestureRecognizer
 {
     [self.inputView.textView resignFirstResponder];
-}
-
-- (void)deleteMessagesAnimated:(UITableViewRowAnimation)animation
-{
-    if (self.tableView.editing)
-    {
-        // you need to sort the selected rows to delete from highest to lowest index
-        // otherwise it may lead to a delete attempt on an invalid index
-        [_selectedRows sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            NSInteger r1 = [obj1 row];
-            NSInteger r2 = [obj2 row];
-            if (r1 > r2) {
-                return (NSComparisonResult)NSOrderedAscending;
-            }
-            if (r1 < r2) {
-                return (NSComparisonResult)NSOrderedDescending;
-            }
-            return (NSComparisonResult)NSOrderedSame;
-        }];
-        
-        NSMutableArray* visible = [[self.tableView indexPathsForVisibleRows] mutableCopy];
-        NSIndexPath* first = [_selectedRows objectAtIndex:0];
-        
-        for(NSIndexPath* indexPath in [self.tableView indexPathsForVisibleRows])
-            if(indexPath.row < first.row)
-                 [visible removeObject:indexPath];
-        
-        for(NSIndexPath* indexPath in _selectedRows) {
-            [self.dataSource deleteDataAtIndexPath:indexPath];
-            [visible removeObject:indexPath];
-        }
-        
-        [self.tableView beginUpdates];
-        [self.tableView deleteRowsAtIndexPaths:_selectedRows withRowAnimation:animation];
-        [_selectedRows removeAllObjects];
-        [self.tableView reloadRowsAtIndexPaths:visible withRowAnimation:UITableViewRowAnimationTop];
-        [self.tableView endUpdates];
-    }
 }
 
 #pragma mark - Table view data source
@@ -249,20 +210,6 @@
     return [JSBubbleView cellHeightForText:[self.dataSource textForRowAtIndexPath:indexPath]] + dateHeight;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(tableView.editing) {
-        [_selectedRows addObject:indexPath];
-    }
-}
-
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(tableView.editing) {
-        [_selectedRows removeObject:indexPath];
-    }
-}
-
 #pragma mark - Messages view controller
 
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -286,24 +233,6 @@
     }
     
     return NO;
-}
-
-- (void)finishSend:(UITableViewRowAnimation)animation
-{
-    [self.inputView.textView setText:nil];
-    [self textViewDidChange:self.inputView.textView];
-    
-    NSInteger rows = [self.tableView numberOfRowsInSection:0];
-    NSIndexPath* newRow = [NSIndexPath indexPathForRow:rows inSection:0];
-    
-    //[self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:@[newRow]
-                          withRowAnimation:animation];
-    
-    [self.tableView scrollToRowAtIndexPath:newRow
-                          atScrollPosition:UITableViewScrollPositionBottom
-                                  animated:YES];
-    //[self.tableView endUpdates];
 }
 
 - (void)setBackgroundColor:(UIColor *)color
@@ -359,9 +288,9 @@
                              UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, self.tableView.contentInset.bottom + changeInHeight, 0.0f);
                              self.tableView.contentInset = insets;
                              self.tableView.scrollIndicatorInsets = insets;
-                            
+                             
                              [self scrollToBottomAnimated:NO];
-                            
+                             
                              CGRect inputViewFrame = self.inputView.frame;
                              self.inputView.frame = CGRectMake(0.0f,
                                                                inputViewFrame.origin.y - changeInHeight,
@@ -410,7 +339,7 @@
                          CGFloat messageViewFrameBottom = self.view.frame.size.height - INPUT_HEIGHT;
                          if(inputViewFrameY > messageViewFrameBottom)
                              inputViewFrameY = messageViewFrameBottom;
-
+                         
                          self.inputView.frame = CGRectMake(inputViewFrame.origin.x,
                                                            inputViewFrameY,
                                                            inputViewFrame.size.width,

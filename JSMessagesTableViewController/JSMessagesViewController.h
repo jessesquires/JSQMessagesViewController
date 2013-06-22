@@ -60,7 +60,6 @@ typedef enum {
 @required
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (void)deleteDataAtIndexPath:(NSIndexPath *)indexPath;
 @end
 
 @interface JSMessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
@@ -70,7 +69,6 @@ typedef enum {
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) JSMessageInputView *inputView;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
-@property (readonly, nonatomic) NSMutableArray* selectedRows;
 
 #pragma mark - Initialization
 - (UIButton *)sendButton;
@@ -78,11 +76,9 @@ typedef enum {
 #pragma mark - Actions
 - (void)sendPressed:(UIButton *)sender;
 - (void)handleSwipe:(UIGestureRecognizer *)guestureRecognizer;
-- (void)deleteMessagesAnimated:(UITableViewRowAnimation)animation;
 
 #pragma mark - Messages view controller
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (void)finishSend:(UITableViewRowAnimation)animation;
 - (void)setBackgroundColor:(UIColor *)color;
 - (void)scrollToBottomAnimated:(BOOL)animated;
 
