@@ -47,18 +47,14 @@
 
 @end
 
-
-
 @implementation JSBubbleMessageCell
 
 #pragma mark - Initialization
 - (void)setup
 {
     self.backgroundColor = [UIColor clearColor];
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.accessoryType = UITableViewCellAccessoryNone;
     self.accessoryView = nil;
-    
     self.imageView.image = nil;
     self.imageView.hidden = YES;
     self.textLabel.text = nil;
@@ -73,7 +69,8 @@
                                                                     4.0f,
                                                                     self.bounds.size.width,
                                                                     14.5f)];
-    self.timestampLabel.autoresizingMask =  UIViewAutoresizingFlexibleWidth;
+
+    self.timestampLabel.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin;
     self.timestampLabel.backgroundColor = [UIColor clearColor];
     self.timestampLabel.textAlignment = NSTextAlignmentCenter;
     self.timestampLabel.textColor = [UIColor messagesTimestampColor];
@@ -102,7 +99,11 @@
     self.bubbleView = [[JSBubbleView alloc] initWithFrame:frame
                                               bubbleStyle:style];
     
-    self.bubbleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    if(style == JSBubbleMessageStyleIncomingDefault || style == JSBubbleMessageStyleIncomingSquare) {
+        self.bubbleView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
+    } else {
+        self.bubbleView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+    }
     
     [self.contentView addSubview:self.bubbleView];
     [self.contentView sendSubviewToBack:self.bubbleView];

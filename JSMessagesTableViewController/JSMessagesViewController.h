@@ -48,8 +48,6 @@ typedef enum {
     JSMessagesViewTimestampPolicyCustom
 } JSMessagesViewTimestampPolicy;
 
-
-
 @protocol JSMessagesViewDelegate <NSObject>
 @required
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text;
@@ -58,15 +56,11 @@ typedef enum {
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 @end
 
-
-
 @protocol JSMessagesViewDataSource <NSObject>
 @required
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 @end
-
-
 
 @interface JSMessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 
@@ -85,7 +79,6 @@ typedef enum {
 
 #pragma mark - Messages view controller
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (void)finishSend;
 - (void)setBackgroundColor:(UIColor *)color;
 - (void)scrollToBottomAnimated:(BOOL)animated;
 

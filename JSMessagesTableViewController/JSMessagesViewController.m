@@ -46,23 +46,24 @@
 
 @end
 
-
-
 @implementation JSMessagesViewController
 
 #pragma mark - Initialization
+
 - (void)setup
 {
     if([self.view isKindOfClass:[UIScrollView class]]) {
         // fix for ipad modal form presentations
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
-  
+    
     CGSize size = self.view.frame.size;
 	
     CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - INPUT_HEIGHT);
 	self.tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
 	self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    self.tableView.allowsSelection = NO;
 	self.tableView.dataSource = self;
 	self.tableView.delegate = self;
 	[self.view addSubview:self.tableView];
@@ -93,6 +94,7 @@
 }
 
 #pragma mark - View lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -102,8 +104,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self scrollToBottomAnimated:NO];
-    
-	[[NSNotificationCenter defaultCenter] addObserver:self
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(handleWillShowKeyboard:)
 												 name:UIKeyboardWillShowNotification
                                                object:nil];
@@ -127,6 +132,7 @@
 }
 
 #pragma mark - View rotation
+
 - (BOOL)shouldAutorotate
 {
     return NO;
@@ -145,10 +151,14 @@
 }
 
 #pragma mark - Actions
+
 - (void)sendPressed:(UIButton *)sender
 {
-    [self.delegate sendPressed:sender
-                      withText:[self.inputView.textView.text trimWhitespace]];
+    [self.inputView.dummyView becomeFirstResponder];
+    [self.inputView.textView becomeFirstResponder];
+    [self.delegate sendPressed:sender withText:[self.inputView.textView.text trimWhitespace]];
+    [self.inputView.textView setText:nil];
+    [self textViewDidChange:self.inputView.textView];
 }
 
 - (void)handleSwipe:(UIGestureRecognizer *)guestureRecognizer
@@ -157,6 +167,7 @@
 }
 
 #pragma mark - Table view data source
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -191,6 +202,7 @@
 }
 
 #pragma mark - Table view delegate
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat dateHeight = [self shouldHaveTimestampForRowAtIndexPath:indexPath] ? DATE_LABEL_HEIGHT : 0.0f;
@@ -199,6 +211,7 @@
 }
 
 #pragma mark - Messages view controller
+
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch ([self.delegate timestampPolicyForMessagesView]) {
@@ -222,14 +235,6 @@
     return NO;
 }
 
-- (void)finishSend
-{
-    [self.inputView.textView setText:nil];
-    [self textViewDidChange:self.inputView.textView];
-    [self.tableView reloadData];
-    [self scrollToBottomAnimated:YES];
-}
-
 - (void)setBackgroundColor:(UIColor *)color
 {
     self.view.backgroundColor = color;
@@ -249,6 +254,7 @@
 }
 
 #pragma mark - Text view delegate
+
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     [textView becomeFirstResponder];
@@ -282,9 +288,9 @@
                              UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, self.tableView.contentInset.bottom + changeInHeight, 0.0f);
                              self.tableView.contentInset = insets;
                              self.tableView.scrollIndicatorInsets = insets;
-                            
+                             
                              [self scrollToBottomAnimated:NO];
-                            
+                             
                              CGRect inputViewFrame = self.inputView.frame;
                              self.inputView.frame = CGRectMake(0.0f,
                                                                inputViewFrame.origin.y - changeInHeight,
@@ -303,6 +309,7 @@
 }
 
 #pragma mark - Keyboard notifications
+
 - (void)handleWillShowKeyboard:(NSNotification *)notification
 {
     [self keyboardWillShowHide:notification];
@@ -332,7 +339,7 @@
                          CGFloat messageViewFrameBottom = self.view.frame.size.height - INPUT_HEIGHT;
                          if(inputViewFrameY > messageViewFrameBottom)
                              inputViewFrameY = messageViewFrameBottom;
-
+                         
                          self.inputView.frame = CGRectMake(inputViewFrame.origin.x,
                                                            inputViewFrameY,
                                                            inputViewFrame.size.width,

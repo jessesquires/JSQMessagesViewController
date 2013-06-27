@@ -94,6 +94,10 @@
     self.textView.keyboardType = UIKeyboardTypeDefault;
     self.textView.returnKeyType = UIReturnKeyDefault;
     [self addSubview:self.textView];
+    
+    self.dummyView = [[UITextView alloc] init];
+    self.dummyView.hidden = YES;
+    [self addSubview:self.dummyView];
 	
     UIImageView *inputFieldBack = [[UIImageView alloc] initWithFrame:CGRectMake(self.textView.frame.origin.x - 1.0f,
                                                                                 0.0f,

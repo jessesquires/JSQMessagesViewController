@@ -28,14 +28,13 @@
 
 #import "DemoViewController.h"
 
-@interface DemoViewController ()
-@end
-
-
-
 @implementation DemoViewController
+{
+    NSMutableArray* _selectedRows;
+}
 
 #pragma mark - Initialization
+
 - (UIButton *)sendButton
 {
     // Override to use a custom send button
@@ -44,13 +43,16 @@
 }
 
 #pragma mark - View lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.delegate = self;
     self.dataSource = self;
-    
+    self.navigationItem.rightBarButtonItem = [self editButtonItem];
     self.title = @"Messages";
+    
+    _selectedRows = [[NSMutableArray alloc] init];
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      @"Testing some messages here.",
@@ -67,17 +69,74 @@
                        nil];
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:animated];
+    if(editing) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteMessages)];
+    } else {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
+}
+
+- (void)deleteMessages
+{
+    if (self.tableView.editing)
+    {
+        /*
+         * we need to sort the selected rows to delete from highest to lowest index
+         * otherwise it may lead to a delete attempt on an invalid index
+         *
+         * this is not needed if datasource is a NSFetchedResultsController
+         */
+        [_selectedRows sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            NSInteger r1 = [obj1 row];
+            NSInteger r2 = [obj2 row];
+            if (r1 > r2) {
+                return (NSComparisonResult)NSOrderedAscending;
+            }
+            if (r1 < r2) {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+            return (NSComparisonResult)NSOrderedSame;
+        }];
+        
+        for(NSIndexPath* indexPath in _selectedRows) {
+            [self.messages removeObjectAtIndex:indexPath.row];
+            [self.timestamps removeObjectAtIndex:indexPath.row];
+        }
+        [_selectedRows removeAllObjects];
+        [self.tableView reloadData];
+    }
+}
+
 #pragma mark - Table view data source
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.messages.count;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(tableView.editing) {
+        [_selectedRows addObject:indexPath];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(tableView.editing) {
+        [_selectedRows removeObject:indexPath];
+    }
+}
+
 #pragma mark - Messages view delegate
+
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text
 {
     [self.messages addObject:text];
-    
     [self.timestamps addObject:[NSDate date]];
     
     if((self.messages.count - 1) % 2)
@@ -85,7 +144,10 @@
     else
         [JSMessageSoundEffect playMessageReceivedSound];
     
-    [self finishSend];
+    // this is moved out from JSMessagesViewController to be more flexible
+    // (e.g. if you want to use smooth cell insert animations instead of reloadData)
+    [self.tableView reloadData];
+    [self scrollToBottomAnimated:YES];
 }
 
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -101,10 +163,11 @@
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // custom implementation here, if using `JSMessagesViewTimestampPolicyCustom`
-    return [self shouldHaveTimestampForRowAtIndexPath:indexPath];
+    return NO;
 }
 
 #pragma mark - Messages view data source
+
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self.messages objectAtIndex:indexPath.row];
