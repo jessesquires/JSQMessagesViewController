@@ -106,6 +106,7 @@
             [self.messages removeObjectAtIndex:indexPath.row];
             [self.timestamps removeObjectAtIndex:indexPath.row];
         }
+        [_selectedRows removeAllObjects];
         [self.tableView reloadData];
     }
 }
