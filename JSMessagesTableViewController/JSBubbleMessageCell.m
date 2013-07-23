@@ -35,15 +35,21 @@
 
 #import "JSBubbleMessageCell.h"
 #import "UIColor+JSMessagesView.h"
+ 
 
-@interface JSBubbleMessageCell()
+#define photoEdgeInsets (UIEdgeInsets){2,4,2,4}
+#define photoSize (CGSize){40,40}
+@interface JSBubbleMessageCell(){
+    UIActivityIndicatorView *_indicatorView;
+}
 
 @property (strong, nonatomic) JSBubbleView *bubbleView;
+@property (strong, nonatomic) UIImageView *photoView;
 @property (strong, nonatomic) UILabel *timestampLabel;
 
 - (void)setup;
 - (void)configureTimestampLabel;
-- (void)configureWithStyle:(JSBubbleMessageStyle)style timestamp:(BOOL)hasTimestamp;
+- (void)configureWithStyle:(JSBubbleMessageStyle)style timestamp:(BOOL)hasTimestamp photo:(BOOL) hasPhoto;
 
 @end
 
@@ -65,6 +71,7 @@
     self.textLabel.hidden = YES;
     self.detailTextLabel.text = nil;
     self.detailTextLabel.hidden = YES;
+    
 }
 
 - (void)configureTimestampLabel
@@ -85,7 +92,7 @@
     [self.contentView bringSubviewToFront:self.timestampLabel];
 }
 
-- (void)configureWithStyle:(JSBubbleMessageStyle)style timestamp:(BOOL)hasTimestamp
+- (void)configureWithStyle:(JSBubbleMessageStyle)style timestamp:(BOOL)hasTimestamp photo:(BOOL) hasPhoto
 {
     CGFloat bubbleY = 0.0f;
     
@@ -93,10 +100,28 @@
         [self configureTimestampLabel];
         bubbleY = 14.0f;
     }
+    CGFloat rightOffsetX=0.0f;
+    CGFloat leftOffsetX=0.0f;
+     
     
-    CGRect frame = CGRectMake(0.0f,
+    
+    if(hasPhoto){
+        
+        if(style==JSBubbleMessageStyleIncomingDefault||style==JSBubbleMessageStyleIncomingSquare){
+            rightOffsetX=photoEdgeInsets.left+photoSize.width+photoEdgeInsets.right;
+            self.photoView=[[UIImageView alloc] initWithFrame:(CGRect){photoEdgeInsets.left,self.contentView.frame.size.height-photoEdgeInsets.bottom-photoSize.height,photoSize}];
+        }else{
+            leftOffsetX=photoEdgeInsets.left+photoSize.width+photoEdgeInsets.right;
+            self.photoView=[[UIImageView alloc] initWithFrame:(CGRect){self.contentView.frame.size.width-photoEdgeInsets.right-photoSize.width,self.contentView.frame.size.height-photoEdgeInsets.bottom-photoSize.height,photoSize}];
+        }
+        [self.contentView addSubview:self.photoView];
+        self.photoView.autoresizingMask=UIViewAutoresizingFlexibleTopMargin;
+//        UIImage *testImage=[UIImage imageNamed:@"send"];
+//        self.photoView.image=testImage;
+    }
+    CGRect frame = CGRectMake(rightOffsetX,
                               bubbleY,
-                              self.contentView.frame.size.width,
+                              self.contentView.frame.size.width-rightOffsetX-leftOffsetX,
                               self.contentView.frame.size.height - self.timestampLabel.frame.size.height);
     
     self.bubbleView = [[JSBubbleView alloc] initWithFrame:frame
@@ -108,12 +133,12 @@
     [self.contentView sendSubviewToBack:self.bubbleView];
 }
 
-- (id)initWithBubbleStyle:(JSBubbleMessageStyle)style hasTimestamp:(BOOL)hasTimestamp reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithBubbleStyle:(JSBubbleMessageStyle)style hasTimestamp:(BOOL)hasTimestamp hasPhoto:(BOOL) hasPhoto reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if(self) {
         [self setup];
-        [self configureWithStyle:style timestamp:hasTimestamp];
+        [self configureWithStyle:style timestamp:hasTimestamp photo:hasPhoto];
     }
     return self;
 }
@@ -131,6 +156,11 @@
 {
     self.bubbleView.text = msg;
 }
+- (void) setPhoto:(NSString *)photoUrl
+{
+    UIImage *image=[UIImage imageNamed:photoUrl];
+    self.photoView.image=image;
+}
 
 - (void)setTimestamp:(NSDate *)date
 {
@@ -138,5 +168,12 @@
                                                               dateStyle:NSDateFormatterMediumStyle
                                                               timeStyle:NSDateFormatterShortStyle];
 }
+
+- (void) addAccessoryView:(UIView*) view
+{
+    self.bubbleView.accessoryView=view;
+}
+
+ 
 
 @end

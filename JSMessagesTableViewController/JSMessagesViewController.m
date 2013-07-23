@@ -172,12 +172,22 @@
     JSBubbleMessageStyle style = [self.delegate messageStyleForRowAtIndexPath:indexPath];
     BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
     
+    NSString *photoUrl;
+    if([self.dataSource respondsToSelector:@selector(photoForRowAtIndexPath:)]){
+        photoUrl=[self.dataSource photoForRowAtIndexPath:indexPath];
+    }
+    BOOL hasPhoto=photoUrl!=nil;
+    UIView *accessoryView;
+    if([self.dataSource respondsToSelector:@selector(accessoryViewForRowAtIndexPath:)]){
+        accessoryView=[self.dataSource accessoryViewForRowAtIndexPath:indexPath];
+    }
+    
     NSString *CellID = [NSString stringWithFormat:@"MessageCell_%d_%d", style, hasTimestamp];
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellID];
     
     if(!cell) {
         cell = [[JSBubbleMessageCell alloc] initWithBubbleStyle:style
-                                                   hasTimestamp:hasTimestamp
+                                                   hasTimestamp:hasTimestamp hasPhoto:hasPhoto
                                                 reuseIdentifier:CellID];
     }
     
@@ -185,6 +195,12 @@
         [cell setTimestamp:[self.dataSource timestampForRowAtIndexPath:indexPath]];
     
     [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
+    if(photoUrl){
+        [cell setPhoto:photoUrl];
+    }
+    if(accessoryView){
+        [cell addAccessoryView:accessoryView];
+    }
     [cell setBackgroundColor:tableView.backgroundColor];
     
     return cell;

@@ -109,7 +109,12 @@
 {
     return [self.messages objectAtIndex:indexPath.row];
 }
+- (NSString *)photoForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *photoUrl=[NSString stringWithFormat:@"photo%d",indexPath.row%2];
 
+    return photoUrl;
+}
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self.timestamps objectAtIndex:indexPath.row];
