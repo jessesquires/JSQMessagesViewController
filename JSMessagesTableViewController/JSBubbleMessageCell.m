@@ -196,7 +196,8 @@
         return;
     
     UIMenuController *menu = [UIMenuController sharedMenuController];
-    [menu setTargetRect:CGRectInset([self.bubbleView bubbleFrame], 0, 4.f) inView:self];
+    CGRect targetRect = [self convertRect:[self.bubbleView bubbleFrame] fromView:self.bubbleView];
+    [menu setTargetRect:CGRectInset(targetRect, 0, 4.f) inView:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(menuWillShow:)
