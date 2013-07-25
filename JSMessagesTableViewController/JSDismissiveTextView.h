@@ -31,10 +31,11 @@
 
 @protocol JSDismissiveTextViewDelegate <NSObject>
 
+@optional
 - (void)keyboardDidShow;
 - (void)keyboardDidScroll:(CGPoint)keyboardOrigin;
 - (void)keyboardWillBeDismissed;
-- (void)keyboardWillSnapBackTo:(CGPoint)keyboardOrigin;
+- (void)keyboardWillSnapBackToPoint:(CGPoint)keyboardOrigin;
 
 @end
 

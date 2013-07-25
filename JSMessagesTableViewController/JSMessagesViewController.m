@@ -393,7 +393,7 @@
     self.inputToolBarView.frame = inputViewFrame;
 }
 
-- (void)keyboardWillSnapBackTo:(CGPoint)keyboardOrigin{
+- (void)keyboardWillSnapBackToPoint:(CGPoint)keyboardOrigin{
     CGRect inputViewFrame = self.inputToolBarView.frame;
     keyboardOrigin = [self.view convertPoint:keyboardOrigin fromView:nil];
     inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
