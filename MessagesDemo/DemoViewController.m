@@ -53,10 +53,10 @@
     self.title = @"Messages";
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
-                     @"Testing some here.",
-                     @"This workMessagesViewController.",
-                     @"Thcomplite and refactoring.",
-                     @"It'sffects and images included. Animations are smooth and messages can be of arbitrary size!",
+                     @"Testing some messages here.",
+                     @"This work is based on Sam Soffes' SSMessagesViewController.",
+                     @"This is a complete re-write and refactoring.",
+                     @"It's easy to implement. Sound effects and images included. Animations are smooth and messages can be of arbitrary size!",
                      nil];
     
     self.timestamps = [[NSMutableArray alloc] initWithObjects:
@@ -105,7 +105,7 @@
 }
 
 - (BOOL)hasPhotoForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return (indexPath.row % 2);
+    return indexPath.row % 2;
 }
 
 #pragma mark - Messages view data source
