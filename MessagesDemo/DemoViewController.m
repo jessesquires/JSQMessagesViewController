@@ -119,7 +119,7 @@
     return [self.timestamps objectAtIndex:indexPath.row];
 }
 
-- (void)goCrazyWithYourAvatarImageView:(UIImageView *)avatarView{
+- (void)goCrazyWithYourAvatarImageView:(UIImageView *)avatarView forRowAtIndexPath:(NSIndexPath *)indexPath{
     avatarView.image = [UIImage imageNamed:@"DemoAvatarExample"];
 }
 

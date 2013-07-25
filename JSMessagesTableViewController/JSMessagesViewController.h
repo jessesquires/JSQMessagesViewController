@@ -64,7 +64,7 @@ typedef enum {
 @protocol JSMessagesViewDataSource <NSObject>
 @optional
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (void)goCrazyWithYourAvatarImageView:(UIImageView *)avatarView;
+- (void)goCrazyWithYourAvatarImageView:(UIImageView *)avatarView forRowAtIndexPath:(NSIndexPath *)indexPath;
 @required
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
 @end

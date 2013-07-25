@@ -187,7 +187,7 @@
         [cell setTimestamp:[self.dataSource timestampForRowAtIndexPath:indexPath]];
     
     if (hasAvatar) {
-        [self.dataSource goCrazyWithYourAvatarImageView:cell.photoView];
+        [self.dataSource goCrazyWithYourAvatarImageView:cell.photoView forRowAtIndexPath:indexPath];
     }
     
     [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
