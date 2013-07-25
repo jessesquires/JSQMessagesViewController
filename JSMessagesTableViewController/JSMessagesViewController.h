@@ -73,7 +73,7 @@ typedef enum {
 @property (weak, nonatomic) id<JSMessagesViewDelegate> delegate;
 @property (weak, nonatomic) id<JSMessagesViewDataSource> dataSource;
 @property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) JSMessageInputView *inputView;
+@property (strong, nonatomic) JSMessageInputView *inputToolBarView;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 
 #pragma mark - Initialization
