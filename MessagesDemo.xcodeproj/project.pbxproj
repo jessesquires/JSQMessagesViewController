@@ -10,7 +10,7 @@
 		041A9E7117A0FE8500923B72 /* DemoAvatarExample.png in Resources */ = {isa = PBXBuildFile; fileRef = 041A9E7017A0FE8500923B72 /* DemoAvatarExample.png */; };
 		049A2A4317A17939000D4811 /* messageBubbleSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A2A4117A17939000D4811 /* messageBubbleSelected.png */; };
 		049A2A4417A17939000D4811 /* messageBubbleSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A2A4217A17939000D4811 /* messageBubbleSelected@2x.png */; };
-		04E5799617A0E15C0022CD77 /* JSMADismissiveTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E5799517A0E15C0022CD77 /* JSMADismissiveTextView.m */; };
+		04E5799617A0E15C0022CD77 /* JSDismissiveTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E5799517A0E15C0022CD77 /* JSDismissiveTextView.m */; };
 		881AE55D16D13CDC008F7636 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881AE55C16D13CDC008F7636 /* UIKit.framework */; };
 		881AE55F16D13CDC008F7636 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881AE55E16D13CDC008F7636 /* Foundation.framework */; };
 		881AE56116D13CDC008F7636 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881AE56016D13CDC008F7636 /* CoreGraphics.framework */; };
@@ -61,8 +61,8 @@
 		041A9E7017A0FE8500923B72 /* DemoAvatarExample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DemoAvatarExample.png; sourceTree = "<group>"; };
 		049A2A4117A17939000D4811 /* messageBubbleSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messageBubbleSelected.png; sourceTree = "<group>"; };
 		049A2A4217A17939000D4811 /* messageBubbleSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageBubbleSelected@2x.png"; sourceTree = "<group>"; };
-		04E5799417A0E15C0022CD77 /* JSMADismissiveTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSMADismissiveTextView.h; sourceTree = "<group>"; };
-		04E5799517A0E15C0022CD77 /* JSMADismissiveTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSMADismissiveTextView.m; sourceTree = "<group>"; };
+		04E5799417A0E15C0022CD77 /* JSDismissiveTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDismissiveTextView.h; sourceTree = "<group>"; };
+		04E5799517A0E15C0022CD77 /* JSDismissiveTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDismissiveTextView.m; sourceTree = "<group>"; };
 		881AE55916D13CDC008F7636 /* MessagesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MessagesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		881AE55C16D13CDC008F7636 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		881AE55E16D13CDC008F7636 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -197,8 +197,8 @@
 		88301EE416F77B3D0037524D /* JSMessagesTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				04E5799417A0E15C0022CD77 /* JSMADismissiveTextView.h */,
-				04E5799517A0E15C0022CD77 /* JSMADismissiveTextView.m */,
+				04E5799417A0E15C0022CD77 /* JSDismissiveTextView.h */,
+				04E5799517A0E15C0022CD77 /* JSDismissiveTextView.m */,
 				88301EE516F77B3D0037524D /* JSBubbleMessageCell.h */,
 				88301EE616F77B3D0037524D /* JSBubbleMessageCell.m */,
 				88301EE716F77B3D0037524D /* JSBubbleView.h */,
@@ -376,7 +376,7 @@
 				88301F2016F77B3D0037524D /* UIView+AnimationOptionsForCurve.m in Sources */,
 				8856C7DD16F9273C00FC921C /* UIColor+JSMessagesView.m in Sources */,
 				88E5341F16FF9B02004272FA /* UIButton+JSMessagesView.m in Sources */,
-				04E5799617A0E15C0022CD77 /* JSMADismissiveTextView.m in Sources */,
+				04E5799617A0E15C0022CD77 /* JSDismissiveTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -37,11 +37,11 @@
 #import "NSString+JSMessagesView.h"
 #import "UIView+AnimationOptionsForCurve.h"
 #import "UIColor+JSMessagesView.h"
-#import "JSMADismissiveTextView.h"
+#import "JSDismissiveTextView.h"
 
 #define INPUT_HEIGHT 40.0f
 
-@interface JSMessagesViewController () <MADismissiveKeyboardDelegate>
+@interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
 - (void)setup;
 
@@ -374,7 +374,12 @@
 }
 
 
-#pragma mark - MADissmissiveTextViewDelegate
+#pragma mark - Dismissive Text view delegate
+- (void)keyboardDidShow
+{
+    NSLog(@"Keyboard did show");
+}
+
 - (void)keyboardDidScroll:(CGPoint)keyboardOrigin{
     CGRect inputViewFrame = self.inputToolBarView.frame;
     keyboardOrigin = [self.view convertPoint:keyboardOrigin fromView:nil];

@@ -1,17 +1,11 @@
 //
-//  JSMessageInputView.h
+//  JSDismissiveTextView.h
 //
-//  Created by Jesse Squires on 2/12/13.
-//  Copyright (c) 2013 Hexed Bits. All rights reserved.
+//  Taken from MADismissiveTextView
+//  https://github.com/mikeahmarani/MADismissiveTextView
 //
-//  http://www.hexedbits.com
-//
-//
-//  Largely based on work by Sam Soffes
-//  https://github.com/soffes
-//
-//  SSMessagesViewController
-//  https://github.com/soffes/ssmessagesviewcontroller
+//  Created by Mike Ahmarani on 12-02-18.
+//  Copyright (c) 2012 Mike Ahmarani. All rights reserved.
 //
 //
 //  The MIT License
@@ -34,21 +28,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JSDismissiveTextView.h"
 
-@interface JSMessageInputView : UIImageView
+@protocol JSDismissiveTextViewDelegate <NSObject>
 
-@property (strong, nonatomic) JSDismissiveTextView *textView;
-@property (strong, nonatomic) UIButton *sendButton;
+- (void)keyboardDidShow;
+- (void)keyboardDidScroll:(CGPoint)keyboardOrigin;
+- (void)keyboardWillBeDismissed;
+- (void)keyboardWillSnapBackTo:(CGPoint)keyboardOrigin;
 
-#pragma mark - Initialization
-- (id)initWithFrame:(CGRect)frame
-           delegate:(id<UITextViewDelegate>)delegate;
+@end
 
-#pragma mark - Message input view
-- (void)adjustTextViewHeightBy:(CGFloat)changeInHeight;
-+ (CGFloat)textViewLineHeight;
-+ (CGFloat)maxLines;
-+ (CGFloat)maxHeight;
+
+
+@interface JSDismissiveTextView : UITextView
+
+@property (weak, nonatomic) id<JSDismissiveTextViewDelegate> keyboardDelegate;
+@property (strong, nonatomic) UIPanGestureRecognizer *dismissivePanGestureRecognizer;
 
 @end
