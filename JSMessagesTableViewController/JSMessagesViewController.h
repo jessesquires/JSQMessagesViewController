@@ -56,14 +56,17 @@ typedef enum {
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView;
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (BOOL )hasPhotoForRowAtIndexPath:(NSIndexPath *)indexPath;
 @end
 
 
 
 @protocol JSMessagesViewDataSource <NSObject>
+@optional
+- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)goCrazyWithYourAvatarImageView:(UIImageView *)avatarView;
 @required
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 @end
 
 

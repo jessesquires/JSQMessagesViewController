@@ -53,10 +53,10 @@
     self.title = @"Messages";
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
-                     @"Testing some messages here.",
-                     @"This work is based on Sam Soffes' SSMessagesViewController.",
-                     @"This is a complete re-write and refactoring.",
-                     @"It's easy to implement. Sound effects and images included. Animations are smooth and messages can be of arbitrary size!",
+                     @"Testing some here.",
+                     @"This workMessagesViewController.",
+                     @"Thcomplite and refactoring.",
+                     @"It'sffects and images included. Animations are smooth and messages can be of arbitrary size!",
                      nil];
     
     self.timestamps = [[NSMutableArray alloc] initWithObjects:
@@ -104,6 +104,10 @@
     return [self shouldHaveTimestampForRowAtIndexPath:indexPath];
 }
 
+- (BOOL)hasPhotoForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return (indexPath.row % 2);
+}
+
 #pragma mark - Messages view data source
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -113,6 +117,10 @@
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self.timestamps objectAtIndex:indexPath.row];
+}
+
+- (void)goCrazyWithYourAvatarImageView:(UIImageView *)avatarView{
+    avatarView.image = [UIImage imageNamed:@"DemoAvatarExample"];
 }
 
 @end
