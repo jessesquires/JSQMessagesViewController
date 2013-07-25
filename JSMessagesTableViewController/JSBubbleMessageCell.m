@@ -40,7 +40,6 @@
 
 @property (strong, nonatomic) JSBubbleView *bubbleView;
 @property (strong, nonatomic) UILabel *timestampLabel;
-@property (strong, nonatomic) UIImageView *photoView;
 
 - (void)setup;
 - (void)configureTimestampLabel;

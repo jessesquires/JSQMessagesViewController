@@ -52,6 +52,6 @@
 - (void)setMessage:(NSString *)msg;
 - (void)setTimestamp:(NSDate *)date;
 
-@property (strong, readonly) UIImageView *photoView;
+@property (strong, nonatomic) UIImageView *photoView;
 
 @end
