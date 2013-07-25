@@ -14,7 +14,7 @@
 - (void)keyboardDidShow;
 - (void)keyboardDidScroll:(CGPoint)keyboardOrigin;
 - (void)keyboardWillBeDismissed;
-- (void)keyboardWillSnapBack;
+- (void)keyboardWillSnapBackTo:(CGPoint)keyboardOrigin;
 @end
 
 @interface MADismissiveTextView : UITextView

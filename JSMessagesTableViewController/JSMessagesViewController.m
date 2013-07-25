@@ -91,10 +91,22 @@
 
 - (void)keyboardDidScroll:(CGPoint)keyboardOrigin{
     CGRect inputViewFrame = self.inputView.frame;
-    inputViewFrame.origin.y = keyboardOrigin.y - 266 + 160;
+    keyboardOrigin = [self.view convertPoint:keyboardOrigin fromView:nil];
+    inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
     self.inputView.frame = inputViewFrame;
-    NSLog(@"%g --- %g", keyboardOrigin.y, inputViewFrame.origin.y);
+}
 
+- (void)keyboardWillBeDismissed{
+    CGRect inputViewFrame = self.inputView.frame;
+    inputViewFrame.origin.y = self.view.bounds.size.height - inputViewFrame.size.height;
+    self.inputView.frame = inputViewFrame;
+}
+
+- (void)keyboardWillSnapBackTo:(CGPoint)keyboardOrigin{
+    CGRect inputViewFrame = self.inputView.frame;
+    keyboardOrigin = [self.view convertPoint:keyboardOrigin fromView:nil];
+    inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
+    self.inputView.frame = inputViewFrame;
 }
 
 - (UIButton *)sendButton

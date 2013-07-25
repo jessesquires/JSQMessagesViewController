@@ -64,6 +64,10 @@
     
     if(self.keyboard && !self.keyboard.hidden){
         
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGFloat screenHeight = screenRect.size.height;
+        
+        
         UIWindow *panWindow = [[UIApplication sharedApplication] keyWindow];
         CGPoint location = [pan locationInView:panWindow];
         CGPoint velocity = [pan velocityInView:panWindow];
@@ -76,12 +80,11 @@
             
             if(velocity.y > 0 && self.keyboard.frame.origin.y > self.originalKeyboardY){ //Gesture ended with a flick downwards, dismiss keyboard.
                 
-                if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardWillBeDismissed)]){                
-                    [self.keyboardDelegate keyboardWillBeDismissed];
-                }
-                
                 [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                    self.keyboard.frame = CGRectMake(0, 480, self.keyboard.frame.size.width, self.keyboard.frame.size.height);
+                    self.keyboard.frame = CGRectMake(0, screenHeight, self.keyboard.frame.size.width, self.keyboard.frame.size.height);
+                    if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardWillBeDismissed)]){
+                        [self.keyboardDelegate keyboardWillBeDismissed];
+                    }
                 }completion:^(BOOL finished){
                     self.keyboard.hidden = YES;
                     self.keyboard.frame = CGRectMake(0, self.originalKeyboardY, self.keyboard.frame.size.width, self.keyboard.frame.size.height);
@@ -89,12 +92,11 @@
                 }];
                 
             }else{ //Gesture ended with no flick or a flick upwards, snap keyboard back to original position.
-                                
-                if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardWillSnapBack)]){
-                    [self.keyboardDelegate keyboardWillSnapBack];
-                }
                 
                 [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                    if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardWillSnapBackTo:)]){
+                        [self.keyboardDelegate keyboardWillSnapBackTo:CGPointMake(0, self.originalKeyboardY)];
+                    }
                     self.keyboard.frame = CGRectMake(0, self.originalKeyboardY, self.keyboard.frame.size.width, self.keyboard.frame.size.height);
                 } completion:^(BOOL finished){
                 }];
@@ -107,7 +109,7 @@
                 
                 float newKeyboardY = self.originalKeyboardY + (location.y-self.originalKeyboardY);
                 newKeyboardY = newKeyboardY < self.originalKeyboardY ? self.originalKeyboardY:newKeyboardY;
-                newKeyboardY = newKeyboardY > 480 ? 480:newKeyboardY;
+                newKeyboardY = newKeyboardY > screenHeight ? screenHeight :newKeyboardY;
             
                 self.keyboard.frame = CGRectMake(0, newKeyboardY, self.keyboard.frame.size.width, self.keyboard.frame.size.height);
                 
