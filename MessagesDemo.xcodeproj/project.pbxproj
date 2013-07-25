@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041A9E7117A0FE8500923B72 /* DemoAvatarExample.png in Resources */ = {isa = PBXBuildFile; fileRef = 041A9E7017A0FE8500923B72 /* DemoAvatarExample.png */; };
 		04E5799617A0E15C0022CD77 /* JSMADismissiveTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E5799517A0E15C0022CD77 /* JSMADismissiveTextView.m */; };
 		881AE55D16D13CDC008F7636 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881AE55C16D13CDC008F7636 /* UIKit.framework */; };
 		881AE55F16D13CDC008F7636 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881AE55E16D13CDC008F7636 /* Foundation.framework */; };
@@ -55,6 +56,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		041A9E7017A0FE8500923B72 /* DemoAvatarExample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DemoAvatarExample.png; sourceTree = "<group>"; };
 		04E5799417A0E15C0022CD77 /* JSMADismissiveTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSMADismissiveTextView.h; sourceTree = "<group>"; };
 		04E5799517A0E15C0022CD77 /* JSMADismissiveTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSMADismissiveTextView.m; sourceTree = "<group>"; };
 		881AE55916D13CDC008F7636 /* MessagesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MessagesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,6 +169,7 @@
 				881AE56C16D13CDC008F7636 /* AppDelegate.m */,
 				881AE58216D13DE0008F7636 /* DemoViewController.h */,
 				881AE58316D13DE0008F7636 /* DemoViewController.m */,
+				041A9E7017A0FE8500923B72 /* DemoAvatarExample.png */,
 				88301EE416F77B3D0037524D /* JSMessagesTableViewController */,
 				881AE56316D13CDC008F7636 /* Supporting Files */,
 			);
@@ -342,6 +345,7 @@
 				88244C0616FE5BA400034667 /* bubbleSquareIncoming@2x.png in Resources */,
 				88244C0716FE5BA400034667 /* bubbleSquareOutgoing.png in Resources */,
 				88244C0816FE5BA400034667 /* bubbleSquareOutgoing@2x.png in Resources */,
+				041A9E7117A0FE8500923B72 /* DemoAvatarExample.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
