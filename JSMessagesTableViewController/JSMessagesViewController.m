@@ -58,7 +58,7 @@
         // fix for ipad modal form presentations
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
-  
+    
     CGSize size = self.view.frame.size;
 	
     CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - INPUT_HEIGHT);
@@ -223,7 +223,11 @@
             return indexPath.row % 5 == 0;
             break;
         case JSMessagesViewTimestampPolicyCustom:
-            return NO;
+            if ([self.delegate hasTimestampForRowAtIndexPath:indexPath]) {
+                return [self.delegate hasTimestampForRowAtIndexPath:indexPath];
+            } else {
+                return NO;
+            }
             break;
     }
     
@@ -298,9 +302,9 @@
                              UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, self.tableView.contentInset.bottom + changeInHeight, 0.0f);
                              self.tableView.contentInset = insets;
                              self.tableView.scrollIndicatorInsets = insets;
-                            
+                             
                              [self scrollToBottomAnimated:NO];
-                            
+                             
                              CGRect inputViewFrame = self.inputView.frame;
                              self.inputView.frame = CGRectMake(0.0f,
                                                                inputViewFrame.origin.y - changeInHeight,
@@ -348,7 +352,7 @@
                          CGFloat messageViewFrameBottom = self.view.frame.size.height - INPUT_HEIGHT;
                          if(inputViewFrameY > messageViewFrameBottom)
                              inputViewFrameY = messageViewFrameBottom;
-
+                         
                          self.inputView.frame = CGRectMake(inputViewFrame.origin.x,
                                                            inputViewFrameY,
                                                            inputViewFrame.size.width,
