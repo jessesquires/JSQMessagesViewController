@@ -70,21 +70,21 @@
     [self setBackgroundColor:[UIColor messagesBackgroundColor]];
     
     CGRect inputFrame = CGRectMake(0.0f, size.height - INPUT_HEIGHT, size.width, INPUT_HEIGHT);
-    self.inputView = [[JSMessageInputView alloc] initWithFrame:inputFrame delegate:self];
+    self.inputToolBarView = [[JSMessageInputView alloc] initWithFrame:inputFrame delegate:self];
     
     UIButton *sendButton = [self sendButton];
     sendButton.enabled = NO;
-    sendButton.frame = CGRectMake(self.inputView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
+    sendButton.frame = CGRectMake(self.inputToolBarView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
     [sendButton addTarget:self
                    action:@selector(sendPressed:)
          forControlEvents:UIControlEventTouchUpInside];
-    [self.inputView setSendButton:sendButton];
-    [self.view addSubview:self.inputView];
+    [self.inputToolBarView setSendButton:sendButton];
+    [self.view addSubview:self.inputToolBarView];
     
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     swipe.direction = UISwipeGestureRecognizerDirectionDown;
     swipe.numberOfTouchesRequired = 1;
-    [self.inputView addGestureRecognizer:swipe];
+    [self.inputToolBarView addGestureRecognizer:swipe];
 }
 
 - (UIButton *)sendButton
@@ -148,12 +148,12 @@
 - (void)sendPressed:(UIButton *)sender
 {
     [self.delegate sendPressed:sender
-                      withText:[self.inputView.textView.text trimWhitespace]];
+                      withText:[self.inputToolBarView.textView.text trimWhitespace]];
 }
 
 - (void)handleSwipe:(UIGestureRecognizer *)guestureRecognizer
 {
-    [self.inputView.textView resignFirstResponder];
+    [self.inputToolBarView.textView resignFirstResponder];
 }
 
 #pragma mark - Table view data source
@@ -224,8 +224,8 @@
 
 - (void)finishSend
 {
-    [self.inputView.textView setText:nil];
-    [self textViewDidChange:self.inputView.textView];
+    [self.inputToolBarView.textView setText:nil];
+    [self textViewDidChange:self.inputToolBarView.textView];
     [self.tableView reloadData];
     [self scrollToBottomAnimated:YES];
 }
@@ -271,10 +271,12 @@
     BOOL isShrinking = textViewContentHeight < self.previousTextViewContentHeight;
     CGFloat changeInHeight = textViewContentHeight - self.previousTextViewContentHeight;
     
-    changeInHeight = (textViewContentHeight + changeInHeight >= maxHeight) ? 0.0f : changeInHeight;
+    if (changeInHeight > 0 && self.previousTextViewContentHeight == maxHeight) {
+        changeInHeight = 0;
+    }
     
     if(!isShrinking)
-        [self.inputView adjustTextViewHeightBy:changeInHeight];
+        [self.inputToolBarView adjustTextViewHeightBy:changeInHeight];
     
     if(changeInHeight != 0.0f) {
         [UIView animateWithDuration:0.25f
@@ -285,21 +287,21 @@
                             
                              [self scrollToBottomAnimated:NO];
                             
-                             CGRect inputViewFrame = self.inputView.frame;
-                             self.inputView.frame = CGRectMake(0.0f,
+                             CGRect inputViewFrame = self.inputToolBarView.frame;
+                             self.inputToolBarView.frame = CGRectMake(0.0f,
                                                                inputViewFrame.origin.y - changeInHeight,
                                                                inputViewFrame.size.width,
                                                                inputViewFrame.size.height + changeInHeight);
                          }
                          completion:^(BOOL finished) {
                              if(isShrinking)
-                                 [self.inputView adjustTextViewHeightBy:changeInHeight];
+                                 [self.inputToolBarView adjustTextViewHeightBy:changeInHeight];
                          }];
         
         self.previousTextViewContentHeight = MIN(textViewContentHeight, maxHeight);
     }
     
-    self.inputView.sendButton.enabled = ([textView.text trimWhitespace].length > 0);
+    self.inputToolBarView.sendButton.enabled = ([textView.text trimWhitespace].length > 0);
 }
 
 #pragma mark - Keyboard notifications
@@ -325,7 +327,7 @@
                      animations:^{
                          CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
                          
-                         CGRect inputViewFrame = self.inputView.frame;
+                         CGRect inputViewFrame = self.inputToolBarView.frame;
                          CGFloat inputViewFrameY = keyboardY - inputViewFrame.size.height;
                          
                          // for ipad modal form presentations
@@ -333,14 +335,14 @@
                          if(inputViewFrameY > messageViewFrameBottom)
                              inputViewFrameY = messageViewFrameBottom;
 
-                         self.inputView.frame = CGRectMake(inputViewFrame.origin.x,
+                         self.inputToolBarView.frame = CGRectMake(inputViewFrame.origin.x,
                                                            inputViewFrameY,
                                                            inputViewFrame.size.width,
                                                            inputViewFrame.size.height);
                          
                          UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
                                                                 0.0f,
-                                                                self.view.frame.size.height - self.inputView.frame.origin.y - INPUT_HEIGHT,
+                                                                self.view.frame.size.height - self.inputToolBarView.frame.origin.y - INPUT_HEIGHT,
                                                                 0.0f);
                          
                          self.tableView.contentInset = insets;

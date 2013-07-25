@@ -65,6 +65,11 @@
     self.textLabel.hidden = YES;
     self.detailTextLabel.text = nil;
     self.detailTextLabel.hidden = YES;
+    
+    UILongPressGestureRecognizer *recognizer =
+    [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    [recognizer setMinimumPressDuration:0.5];
+    [self addGestureRecognizer:recognizer];
 }
 
 - (void)configureTimestampLabel
@@ -137,6 +142,80 @@
     self.timestampLabel.text = [NSDateFormatter localizedStringFromDate:date
                                                               dateStyle:NSDateFormatterMediumStyle
                                                               timeStyle:NSDateFormatterShortStyle];
+}
+
+#pragma mark - Implement Copy
+- (BOOL) canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (BOOL) becomeFirstResponder
+{
+    return [super becomeFirstResponder];
+}
+
+- (BOOL) canPerformAction:(SEL)action withSender:(id)sender
+{
+    if (action == @selector(copy:))
+        return YES;
+    
+    return [super canPerformAction:action withSender:sender];
+}
+
+- (void)copy:(id)sender {
+    [[UIPasteboard generalPasteboard] setString:self.bubbleView.text];
+    [self resignFirstResponder];
+}
+
+- (void) handleLongPress:(UILongPressGestureRecognizer *)longPressRecognizer
+{
+    if (longPressRecognizer.state != UIGestureRecognizerStateBegan)
+        return;
+    
+    if ([self becomeFirstResponder] == NO)
+        return;
+    
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    [menu setTargetRect:CGRectInset([self.bubbleView bubbleFrame], 0, 4.f) inView:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(menuWillShow:)
+                                                 name:UIMenuControllerWillShowMenuNotification
+                                               object:nil];
+    [menu setMenuVisible:YES animated:YES];
+}
+
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+    if ([self isFirstResponder] == NO)
+        return;
+    
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    [menu setMenuVisible:NO animated:YES];
+    [menu update];
+    [self resignFirstResponder];
+}
+
+- (void) menuWillHide:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIMenuControllerWillHideMenuNotification object:nil];
+    self.bubbleView.selectedToShowCopyMenu = NO;
+}
+
+- (void) menuWillShow:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIMenuControllerWillShowMenuNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(menuWillHide:)
+                                                 name:UIMenuControllerWillHideMenuNotification
+                                               object:nil];
+    self.bubbleView.selectedToShowCopyMenu = YES;
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
