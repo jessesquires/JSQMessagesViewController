@@ -121,6 +121,7 @@
 
 - (void)goCrazyWithYourAvatarImageView:(UIImageView *)avatarView forRowAtIndexPath:(NSIndexPath *)indexPath{
     avatarView.image = [UIImage imageNamed:@"DemoAvatarExample"];
+    // You can use SDWebImage or AFNetworking for Remote Image loading here.
 }
 
 @end
