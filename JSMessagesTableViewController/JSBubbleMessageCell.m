@@ -43,7 +43,7 @@
 
 - (void)setup;
 - (void)configureTimestampLabel;
-- (void)configureWithStyle:(JSBubbleMessageStyle)style timestamp:(BOOL)hasTimestamp;
+- (void)configureWithStyle:(JSBubbleMessageStyle)style timestamp:(BOOL)hasTimestamp avatar:(BOOL)hasAvatar;
 
 @end
 
@@ -65,6 +65,11 @@
     self.textLabel.hidden = YES;
     self.detailTextLabel.text = nil;
     self.detailTextLabel.hidden = YES;
+    
+    UILongPressGestureRecognizer *recognizer =
+    [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    [recognizer setMinimumPressDuration:0.5];
+    [self addGestureRecognizer:recognizer];
 }
 
 - (void)configureTimestampLabel
@@ -85,7 +90,7 @@
     [self.contentView bringSubviewToFront:self.timestampLabel];
 }
 
-- (void)configureWithStyle:(JSBubbleMessageStyle)style timestamp:(BOOL)hasTimestamp
+- (void)configureWithStyle:(JSBubbleMessageStyle)style timestamp:(BOOL)hasTimestamp avatar:(BOOL)hasAvatar
 {
     CGFloat bubbleY = 0.0f;
     
@@ -94,9 +99,28 @@
         bubbleY = 14.0f;
     }
     
-    CGRect frame = CGRectMake(0.0f,
+    CGFloat rightOffsetX=0.0f;
+    CGFloat leftOffsetX=0.0f;
+    
+    
+    
+    if(hasAvatar){
+        
+        if(style==JSBubbleMessageStyleIncomingDefault||style==JSBubbleMessageStyleIncomingSquare){
+            rightOffsetX=PHOTO_EDGE_INSET.left+PHOTO_SIZE.width+PHOTO_EDGE_INSET.right;
+            self.photoView=[[UIImageView alloc] initWithFrame:(CGRect){PHOTO_EDGE_INSET.left,self.contentView.frame.size.height-PHOTO_EDGE_INSET.bottom-PHOTO_SIZE.height,PHOTO_SIZE}];
+        }else{
+            leftOffsetX=PHOTO_EDGE_INSET.left+PHOTO_SIZE.width+PHOTO_EDGE_INSET.right;
+            self.photoView=[[UIImageView alloc] initWithFrame:(CGRect){self.contentView.frame.size.width-PHOTO_EDGE_INSET.right-PHOTO_SIZE.width,self.contentView.frame.size.height-PHOTO_EDGE_INSET.bottom-PHOTO_SIZE.height,PHOTO_SIZE}];
+        }
+        [self.contentView addSubview:self.photoView];
+        self.photoView.autoresizingMask= (UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin);
+    }
+    
+    
+    CGRect frame = CGRectMake(rightOffsetX,
                               bubbleY,
-                              self.contentView.frame.size.width,
+                              self.contentView.frame.size.width-rightOffsetX-leftOffsetX,
                               self.contentView.frame.size.height - self.timestampLabel.frame.size.height);
     
     self.bubbleView = [[JSBubbleView alloc] initWithFrame:frame
@@ -108,12 +132,12 @@
     [self.contentView sendSubviewToBack:self.bubbleView];
 }
 
-- (id)initWithBubbleStyle:(JSBubbleMessageStyle)style hasTimestamp:(BOOL)hasTimestamp reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithBubbleStyle:(JSBubbleMessageStyle)style hasTimestamp:(BOOL)hasTimestamp hasAvatar:(BOOL)hasAvatar reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if(self) {
         [self setup];
-        [self configureWithStyle:style timestamp:hasTimestamp];
+        [self configureWithStyle:style timestamp:hasTimestamp avatar:hasAvatar];
     }
     return self;
 }
@@ -137,6 +161,80 @@
     self.timestampLabel.text = [NSDateFormatter localizedStringFromDate:date
                                                               dateStyle:NSDateFormatterMediumStyle
                                                               timeStyle:NSDateFormatterShortStyle];
+}
+
+#pragma mark - Implement Copy
+- (BOOL) canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (BOOL) becomeFirstResponder
+{
+    return [super becomeFirstResponder];
+}
+
+- (BOOL) canPerformAction:(SEL)action withSender:(id)sender
+{
+    if (action == @selector(copy:))
+        return YES;
+    
+    return [super canPerformAction:action withSender:sender];
+}
+
+- (void)copy:(id)sender {
+    [[UIPasteboard generalPasteboard] setString:self.bubbleView.text];
+    [self resignFirstResponder];
+}
+
+- (void) handleLongPress:(UILongPressGestureRecognizer *)longPressRecognizer
+{
+    if (longPressRecognizer.state != UIGestureRecognizerStateBegan)
+        return;
+    
+    if ([self becomeFirstResponder] == NO)
+        return;
+    
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    [menu setTargetRect:CGRectInset([self.bubbleView bubbleFrame], 0, 4.f) inView:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(menuWillShow:)
+                                                 name:UIMenuControllerWillShowMenuNotification
+                                               object:nil];
+    [menu setMenuVisible:YES animated:YES];
+}
+
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+    if ([self isFirstResponder] == NO)
+        return;
+    
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    [menu setMenuVisible:NO animated:YES];
+    [menu update];
+    [self resignFirstResponder];
+}
+
+- (void) menuWillHide:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIMenuControllerWillHideMenuNotification object:nil];
+    self.bubbleView.selectedToShowCopyMenu = NO;
+}
+
+- (void) menuWillShow:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIMenuControllerWillShowMenuNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(menuWillHide:)
+                                                 name:UIMenuControllerWillHideMenuNotification
+                                               object:nil];
+    self.bubbleView.selectedToShowCopyMenu = YES;
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

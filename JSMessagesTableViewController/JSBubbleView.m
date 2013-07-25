@@ -86,16 +86,36 @@
     [self setNeedsDisplay];
 }
 
+- (void)setSelectedToShowCopyMenu:(BOOL)selectedToShowCopyMenu{
+    _selectedToShowCopyMenu = selectedToShowCopyMenu;
+    [self setNeedsDisplay];
+}
+
 #pragma mark - Drawing
-- (void)drawRect:(CGRect)frame
-{
-	UIImage *image = [JSBubbleView bubbleImageForStyle:self.style];
+
+- (CGRect)bubbleFrame{
     CGSize bubbleSize = [JSBubbleView bubbleSizeForText:self.text];
 	CGRect bubbleFrame = CGRectMake(([self styleIsOutgoing] ? self.frame.size.width - bubbleSize.width : 0.0f),
                                     kMarginTop,
                                     bubbleSize.width,
                                     bubbleSize.height);
-    
+    return bubbleFrame;
+}
+
+- (void)drawRect:(CGRect)frame
+{
+	UIImage *image = nil;
+    if (self.selectedToShowCopyMenu) {
+        if ([self styleIsOutgoing]) {
+            image = [[UIImage imageNamed:@"messageBubbleHighlighted"] stretchableImageWithLeftCapWidth:15 topCapHeight:15];
+        } else {
+            image = [[UIImage imageNamed:@"messageBubbleSelected"] stretchableImageWithLeftCapWidth:23 topCapHeight:15];
+        }
+    } else {
+        image = [JSBubbleView bubbleImageForStyle:self.style];
+    }
+    [JSBubbleView bubbleImageForStyle:self.style];
+    CGRect bubbleFrame = [self bubbleFrame];
 	[image drawInRect:bubbleFrame];
 	
 	CGSize textSize = [JSBubbleView textSizeForText:self.text];

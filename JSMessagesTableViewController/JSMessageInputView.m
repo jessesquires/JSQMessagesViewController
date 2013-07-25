@@ -79,7 +79,7 @@
     CGFloat width = self.frame.size.width - SEND_BUTTON_WIDTH;
     CGFloat height = [JSMessageInputView textViewLineHeight];
     
-    self.textView = [[UITextView alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, height)];
+    self.textView = [[JSMADismissiveTextView  alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, height)];
     self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.textView.backgroundColor = [UIColor whiteColor];
     self.textView.scrollIndicatorInsets = UIEdgeInsetsMake(10.0f, 0.0f, 10.0f, 8.0f);

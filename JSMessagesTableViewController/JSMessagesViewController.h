@@ -56,14 +56,17 @@ typedef enum {
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView;
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (BOOL )hasPhotoForRowAtIndexPath:(NSIndexPath *)indexPath;
 @end
 
 
 
 @protocol JSMessagesViewDataSource <NSObject>
+@optional
+- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)goCrazyWithYourAvatarImageView:(UIImageView *)avatarView forRowAtIndexPath:(NSIndexPath *)indexPath;
 @required
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 @end
 
 
@@ -73,7 +76,7 @@ typedef enum {
 @property (weak, nonatomic) id<JSMessagesViewDelegate> delegate;
 @property (weak, nonatomic) id<JSMessagesViewDataSource> dataSource;
 @property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) JSMessageInputView *inputView;
+@property (strong, nonatomic) JSMessageInputView *inputToolBarView;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 
 #pragma mark - Initialization
