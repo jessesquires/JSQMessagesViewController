@@ -171,6 +171,7 @@
 {
     JSBubbleMessageStyle style = [self.delegate messageStyleForRowAtIndexPath:indexPath];
     BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
+    BOOL hasAvatar = [self shouldHavePhotoForRowAtIndexPath:indexPath];
     
     NSString *CellID = [NSString stringWithFormat:@"MessageCell_%d_%d", style, hasTimestamp];
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellID];
@@ -178,11 +179,16 @@
     if(!cell) {
         cell = [[JSBubbleMessageCell alloc] initWithBubbleStyle:style
                                                    hasTimestamp:hasTimestamp
+                                                      hasAvatar:hasAvatar
                                                 reuseIdentifier:CellID];
     }
     
     if(hasTimestamp)
         [cell setTimestamp:[self.dataSource timestampForRowAtIndexPath:indexPath]];
+    
+    if (hasAvatar) {
+        [self.dataSource goCrazyWithYourAvatarImageView:cell.photoView forRowAtIndexPath:indexPath];
+    }
     
     [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
     [cell setBackgroundColor:tableView.backgroundColor];
@@ -194,8 +200,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat dateHeight = [self shouldHaveTimestampForRowAtIndexPath:indexPath] ? DATE_LABEL_HEIGHT : 0.0f;
-    
-    return [JSBubbleView cellHeightForText:[self.dataSource textForRowAtIndexPath:indexPath]] + dateHeight;
+    CGFloat avatarCellHeight = [self shouldHavePhotoForRowAtIndexPath:indexPath] ? (PHOTO_SIZE.height + PHOTO_EDGE_INSET.top + PHOTO_EDGE_INSET.bottom) : 0.0f;
+    return MAX(avatarCellHeight, [JSBubbleView cellHeightForText:[self.dataSource textForRowAtIndexPath:indexPath]] + dateHeight);
 }
 
 #pragma mark - Messages view controller
@@ -220,6 +226,14 @@
     }
     
     return NO;
+}
+
+- (BOOL)shouldHavePhotoForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self.delegate respondsToSelector:@selector(hasPhotoForRowAtIndexPath:)]) {
+        return [self.delegate hasPhotoForRowAtIndexPath:indexPath];
+    } else {
+        return NO;
+    }
 }
 
 - (void)finishSend

@@ -40,6 +40,7 @@
 
 @property (strong, nonatomic) JSBubbleView *bubbleView;
 @property (strong, nonatomic) UILabel *timestampLabel;
+@property (strong, nonatomic) UIImageView *photoView;
 
 - (void)setup;
 - (void)configureTimestampLabel;
@@ -85,7 +86,7 @@
     [self.contentView bringSubviewToFront:self.timestampLabel];
 }
 
-- (void)configureWithStyle:(JSBubbleMessageStyle)style timestamp:(BOOL)hasTimestamp
+- (void)configureWithStyle:(JSBubbleMessageStyle)style timestamp:(BOOL)hasTimestamp avatar:(BOOL)hasAvatar
 {
     CGFloat bubbleY = 0.0f;
     
@@ -94,9 +95,28 @@
         bubbleY = 14.0f;
     }
     
-    CGRect frame = CGRectMake(0.0f,
+    CGFloat rightOffsetX=0.0f;
+    CGFloat leftOffsetX=0.0f;
+    
+    
+    
+    if(hasAvatar){
+        
+        if(style==JSBubbleMessageStyleIncomingDefault||style==JSBubbleMessageStyleIncomingSquare){
+            rightOffsetX=PHOTO_EDGE_INSET.left+PHOTO_SIZE.width+PHOTO_EDGE_INSET.right;
+            self.photoView=[[UIImageView alloc] initWithFrame:(CGRect){PHOTO_EDGE_INSET.left,self.contentView.frame.size.height-PHOTO_EDGE_INSET.bottom-PHOTO_SIZE.height,PHOTO_SIZE}];
+        }else{
+            leftOffsetX=PHOTO_EDGE_INSET.left+PHOTO_SIZE.width+PHOTO_EDGE_INSET.right;
+            self.photoView=[[UIImageView alloc] initWithFrame:(CGRect){self.contentView.frame.size.width-PHOTO_EDGE_INSET.right-PHOTO_SIZE.width,self.contentView.frame.size.height-PHOTO_EDGE_INSET.bottom-PHOTO_SIZE.height,PHOTO_SIZE}];
+        }
+        [self.contentView addSubview:self.photoView];
+        self.photoView.autoresizingMask= (UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin);
+    }
+    
+    
+    CGRect frame = CGRectMake(rightOffsetX,
                               bubbleY,
-                              self.contentView.frame.size.width,
+                              self.contentView.frame.size.width-rightOffsetX-leftOffsetX,
                               self.contentView.frame.size.height - self.timestampLabel.frame.size.height);
     
     self.bubbleView = [[JSBubbleView alloc] initWithFrame:frame
@@ -108,12 +128,12 @@
     [self.contentView sendSubviewToBack:self.bubbleView];
 }
 
-- (id)initWithBubbleStyle:(JSBubbleMessageStyle)style hasTimestamp:(BOOL)hasTimestamp reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithBubbleStyle:(JSBubbleMessageStyle)style hasTimestamp:(BOOL)hasTimestamp hasAvatar:(BOOL)hasAvatar reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if(self) {
         [self setup];
-        [self configureWithStyle:style timestamp:hasTimestamp];
+        [self configureWithStyle:style timestamp:hasTimestamp avatar:hasAvatar];
     }
     return self;
 }
