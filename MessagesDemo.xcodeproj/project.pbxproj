@@ -54,6 +54,7 @@
 		88301F1F16F77B3D0037524D /* messageSent.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 88301F0516F77B3D0037524D /* messageSent.aiff */; };
 		88301F2016F77B3D0037524D /* UIView+AnimationOptionsForCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 88301F0716F77B3D0037524D /* UIView+AnimationOptionsForCurve.m */; };
 		8856C7DD16F9273C00FC921C /* UIColor+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8856C7DC16F9273C00FC921C /* UIColor+JSMessagesView.m */; };
+		88A564D017A196A5006BC6E6 /* UIImage+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A564CF17A196A5006BC6E6 /* UIImage+JSMessagesView.m */; };
 		88E5341F16FF9B02004272FA /* UIButton+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E5341E16FF9B01004272FA /* UIButton+JSMessagesView.m */; };
 /* End PBXBuildFile section */
 
@@ -119,6 +120,8 @@
 		88301F0716F77B3D0037524D /* UIView+AnimationOptionsForCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimationOptionsForCurve.m"; sourceTree = "<group>"; };
 		8856C7DB16F9273C00FC921C /* UIColor+JSMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+JSMessagesView.h"; sourceTree = "<group>"; };
 		8856C7DC16F9273C00FC921C /* UIColor+JSMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+JSMessagesView.m"; sourceTree = "<group>"; };
+		88A564CE17A196A5006BC6E6 /* UIImage+JSMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+JSMessagesView.h"; sourceTree = "<group>"; };
+		88A564CF17A196A5006BC6E6 /* UIImage+JSMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JSMessagesView.m"; sourceTree = "<group>"; };
 		88E5341D16FF9B01004272FA /* UIButton+JSMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+JSMessagesView.h"; sourceTree = "<group>"; };
 		88E5341E16FF9B01004272FA /* UIButton+JSMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+JSMessagesView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -197,12 +200,12 @@
 		88301EE416F77B3D0037524D /* JSMessagesTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				04E5799417A0E15C0022CD77 /* JSDismissiveTextView.h */,
-				04E5799517A0E15C0022CD77 /* JSDismissiveTextView.m */,
 				88301EE516F77B3D0037524D /* JSBubbleMessageCell.h */,
 				88301EE616F77B3D0037524D /* JSBubbleMessageCell.m */,
 				88301EE716F77B3D0037524D /* JSBubbleView.h */,
 				88301EE816F77B3D0037524D /* JSBubbleView.m */,
+				04E5799417A0E15C0022CD77 /* JSDismissiveTextView.h */,
+				04E5799517A0E15C0022CD77 /* JSDismissiveTextView.m */,
 				88301EE916F77B3D0037524D /* JSMessageInputView.h */,
 				88301EEA16F77B3D0037524D /* JSMessageInputView.m */,
 				88301EEB16F77B3D0037524D /* JSMessageSoundEffect.h */,
@@ -212,12 +215,14 @@
 				88301EEF16F77B3D0037524D /* NSString+JSMessagesView.h */,
 				88301EF016F77B3D0037524D /* NSString+JSMessagesView.m */,
 				88301EF116F77B3D0037524D /* Resources */,
-				8856C7DB16F9273C00FC921C /* UIColor+JSMessagesView.h */,
-				8856C7DC16F9273C00FC921C /* UIColor+JSMessagesView.m */,
-				88301F0616F77B3D0037524D /* UIView+AnimationOptionsForCurve.h */,
-				88301F0716F77B3D0037524D /* UIView+AnimationOptionsForCurve.m */,
 				88E5341D16FF9B01004272FA /* UIButton+JSMessagesView.h */,
 				88E5341E16FF9B01004272FA /* UIButton+JSMessagesView.m */,
+				8856C7DB16F9273C00FC921C /* UIColor+JSMessagesView.h */,
+				8856C7DC16F9273C00FC921C /* UIColor+JSMessagesView.m */,
+				88A564CE17A196A5006BC6E6 /* UIImage+JSMessagesView.h */,
+				88A564CF17A196A5006BC6E6 /* UIImage+JSMessagesView.m */,
+				88301F0616F77B3D0037524D /* UIView+AnimationOptionsForCurve.h */,
+				88301F0716F77B3D0037524D /* UIView+AnimationOptionsForCurve.m */,
 			);
 			path = JSMessagesTableViewController;
 			sourceTree = SOURCE_ROOT;
@@ -377,6 +382,7 @@
 				8856C7DD16F9273C00FC921C /* UIColor+JSMessagesView.m in Sources */,
 				88E5341F16FF9B02004272FA /* UIButton+JSMessagesView.m in Sources */,
 				04E5799617A0E15C0022CD77 /* JSDismissiveTextView.m in Sources */,
+				88A564D017A196A5006BC6E6 /* UIImage+JSMessagesView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

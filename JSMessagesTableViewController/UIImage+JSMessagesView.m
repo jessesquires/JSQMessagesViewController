@@ -1,17 +1,10 @@
 //
-//  JSMessageInputView.h
+//  UIImage+JSMessagesView.m
 //
-//  Created by Jesse Squires on 2/12/13.
+//  Created by Jesse Squires on 7/25/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 //  http://www.hexedbits.com
-//
-//
-//  Largely based on work by Sam Soffes
-//  https://github.com/soffes
-//
-//  SSMessagesViewController
-//  https://github.com/soffes/ssmessagesviewcontroller
 //
 //
 //  The MIT License
@@ -33,23 +26,18 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-#import "JSDismissiveTextView.h"
+#import "UIImage+JSMessagesView.h"
 
-@interface JSMessageInputView : UIImageView
+@implementation UIImage (JSMessagesView)
 
-@property (strong, nonatomic) JSDismissiveTextView *textView;
-@property (strong, nonatomic) UIButton *sendButton;
++ (UIImage *)inputBarImage
+{
+    return [[UIImage imageNamed:@"input-bar"] resizableImageWithCapInsets:UIEdgeInsetsMake(19.0f, 3.0f, 19.0f, 3.0f)];
+}
 
-#pragma mark - Initialization
-- (id)initWithFrame:(CGRect)frame
-           delegate:(id<UITextViewDelegate>)delegate;
-
-#pragma mark - Message input view
-- (void)adjustTextViewHeightBy:(CGFloat)changeInHeight;
-
-+ (CGFloat)textViewLineHeight;
-+ (CGFloat)maxLines;
-+ (CGFloat)maxHeight;
++ (UIImage *)inputFieldImage
+{
+    return [[UIImage imageNamed:@"input-field"] resizableImageWithCapInsets:UIEdgeInsetsMake(20.0f, 12.0f, 18.0f, 18.0f)];
+}
 
 @end

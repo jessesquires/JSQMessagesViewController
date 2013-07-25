@@ -36,6 +36,7 @@
 #import "JSMessageInputView.h"
 #import "JSBubbleView.h"
 #import "NSString+JSMessagesView.h"
+#import "UIImage+JSMessagesView.h"
 
 #define SEND_BUTTON_WIDTH 78.0f
 
@@ -64,9 +65,16 @@
     return self;
 }
 
+- (void)dealloc
+{
+    self.textView = nil;
+    self.sendButton = nil;
+}
+
+#pragma mark - Setup
 - (void)setup
 {
-    self.image = [[UIImage imageNamed:@"input-bar"] resizableImageWithCapInsets:UIEdgeInsetsMake(19.0f, 3.0f, 19.0f, 3.0f)];
+    self.image = [UIImage inputBarImage];
     self.backgroundColor = [UIColor whiteColor];
     self.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin);
     self.opaque = YES;
@@ -99,7 +107,7 @@
                                                                                 0.0f,
                                                                                 self.textView.frame.size.width + 2.0f,
                                                                                 self.frame.size.height)];
-    inputFieldBack.image = [[UIImage imageNamed:@"input-field"] resizableImageWithCapInsets:UIEdgeInsetsMake(20.0f, 12.0f, 18.0f, 18.0f)];
+    inputFieldBack.image = [UIImage inputFieldImage];
     inputFieldBack.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     inputFieldBack.backgroundColor = [UIColor clearColor];
     [self addSubview:inputFieldBack];
