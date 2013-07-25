@@ -32,9 +32,7 @@
 
 - (NSString *)trimWhitespace
 {
-    NSMutableString *str = [self mutableCopy];
-    CFStringTrimWhitespace((__bridge CFMutableStringRef)str);
-    return str;
+    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
 - (NSUInteger)numberOfLines
