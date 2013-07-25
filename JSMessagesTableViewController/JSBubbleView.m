@@ -36,6 +36,7 @@
 #import "JSBubbleView.h"
 #import "JSMessageInputView.h"
 #import "NSString+JSMessagesView.h"
+#import "UIImage+JSMessagesView.h"
 
 #define kMarginTop 8.0f
 #define kMarginBottom 4.0f
@@ -56,6 +57,7 @@
 
 @synthesize style;
 @synthesize text;
+@synthesize selectedToShowCopyMenu;
 
 #pragma mark - Initialization
 - (void)setup
@@ -73,6 +75,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    self.text = nil;
+}
+
 #pragma mark - Setters
 - (void)setStyle:(JSBubbleMessageStyle)newStyle
 {
@@ -86,16 +93,17 @@
     [self setNeedsDisplay];
 }
 
-- (void)setSelectedToShowCopyMenu:(BOOL)selectedToShowCopyMenu{
-    _selectedToShowCopyMenu = selectedToShowCopyMenu;
+- (void)setSelectedToShowCopyMenu:(BOOL)isSelected
+{
+    selectedToShowCopyMenu = isSelected;
     [self setNeedsDisplay];
 }
 
 #pragma mark - Drawing
-
-- (CGRect)bubbleFrame{
+- (CGRect)bubbleFrame
+{
     CGSize bubbleSize = [JSBubbleView bubbleSizeForText:self.text];
-	CGRect bubbleFrame = CGRectMake(([self styleIsOutgoing] ? self.frame.size.width - bubbleSize.width : 0.0f),
+    CGRect bubbleFrame = CGRectMake(([self styleIsOutgoing] ? self.frame.size.width - bubbleSize.width : 0.0f),
                                     kMarginTop,
                                     bubbleSize.width,
                                     bubbleSize.height);
@@ -104,22 +112,29 @@
 
 - (void)drawRect:(CGRect)frame
 {
+    [super drawRect:frame];
+    
 	UIImage *image = nil;
-    if (self.selectedToShowCopyMenu) {
-        if ([self styleIsOutgoing]) {
-            image = [[UIImage imageNamed:@"messageBubbleHighlighted"] stretchableImageWithLeftCapWidth:15 topCapHeight:15];
-        } else {
-            image = [[UIImage imageNamed:@"messageBubbleSelected"] stretchableImageWithLeftCapWidth:23 topCapHeight:15];
+    
+    if(self.selectedToShowCopyMenu) {
+        
+        if([self styleIsOutgoing]) {
+            image = [UIImage messageBubbleHighlightedOutgoing];
         }
-    } else {
+        else {
+            image = [UIImage messageBubbleHighlightedIncoming];
+        }
+    }
+    else {
         image = [JSBubbleView bubbleImageForStyle:self.style];
     }
+    
     [JSBubbleView bubbleImageForStyle:self.style];
     CGRect bubbleFrame = [self bubbleFrame];
 	[image drawInRect:bubbleFrame];
 	
 	CGSize textSize = [JSBubbleView textSizeForText:self.text];
-	CGFloat textX = (CGFloat)image.leftCapWidth - 3.0f + ([self styleIsOutgoing] ? bubbleFrame.origin.x : 0.0f);
+	CGFloat textX = image.leftCapWidth - 3.0f + ([self styleIsOutgoing] ? bubbleFrame.origin.x : 0.0f);
     CGRect textFrame = CGRectMake(textX,
                                   kPaddingTop + kMarginTop,
                                   textSize.width,
@@ -136,30 +151,30 @@
 {
     return (self.style == JSBubbleMessageStyleOutgoingDefault
             || self.style == JSBubbleMessageStyleOutgoingDefaultGreen
-            || self.style == JSBubbleMessageStyleOutgoingSquare);
+            || self.style == JSBubbleMessageStyleOutgoingSquareDefault);
 }
 
 + (UIImage *)bubbleImageForStyle:(JSBubbleMessageStyle)style
 {
     switch (style) {
         case JSBubbleMessageStyleIncomingDefault:
-            return [[UIImage imageNamed:@"messageBubbleGray"] stretchableImageWithLeftCapWidth:23 topCapHeight:15];
-        case JSBubbleMessageStyleIncomingSquare:
-            return [[UIImage imageNamed:@"bubbleSquareIncoming"] stretchableImageWithLeftCapWidth:25 topCapHeight:15];
-            break;
-            break;
+            return [UIImage messageBubbleIncomingDefault];
+            
+        case JSBubbleMessageStyleIncomingSquareDefault:
+            return [UIImage messageBubbleIncomingSquareDefault];
+            
         case JSBubbleMessageStyleOutgoingDefault:
-            return [[UIImage imageNamed:@"messageBubbleBlue"] stretchableImageWithLeftCapWidth:15 topCapHeight:15];
-            break;
+            return [UIImage messageBubbleOutgoingDefault];
+            
+        case JSBubbleMessageStyleOutgoingSquareDefault:
+            return [UIImage messageBubbleOutgoingSquareDefault];
+            
         case JSBubbleMessageStyleOutgoingDefaultGreen:
-            return [[UIImage imageNamed:@"messageBubbleGreen"] stretchableImageWithLeftCapWidth:15 topCapHeight:15];
-            break;
-        case JSBubbleMessageStyleOutgoingSquare:
-            return [[UIImage imageNamed:@"bubbleSquareOutgoing"] stretchableImageWithLeftCapWidth:15 topCapHeight:15];
-            break;
+            return [UIImage messageBubbleOutgoingDefaultGreen];
+            
+        default:
+            return nil;
     }
-    
-    return nil;
 }
 
 + (UIFont *)font

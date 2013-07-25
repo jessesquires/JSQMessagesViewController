@@ -30,7 +30,21 @@
 
 @interface UIImage (JSMessagesView)
 
+#pragma mark - Input bar
 + (UIImage *)inputBarImage;
 + (UIImage *)inputFieldImage;
+
+#pragma mark - Message bubbles
++ (UIImage *)messageBubbleOutgoingDefault;
++ (UIImage *)messageBubbleIncomingDefault;
+
++ (UIImage *)messageBubbleOutgoingSquareDefault;
++ (UIImage *)messageBubbleIncomingSquareDefault;
+
++ (UIImage *)messageBubbleOutgoingDefaultGreen;
+
+#pragma mark - Highlighted message bubbles
++ (UIImage *)messageBubbleHighlightedIncoming;
++ (UIImage *)messageBubbleHighlightedOutgoing;
 
 @end

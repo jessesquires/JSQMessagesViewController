@@ -30,6 +30,7 @@
 
 @implementation UIImage (JSMessagesView)
 
+#pragma mark - Input bar
 + (UIImage *)inputBarImage
 {
     return [[UIImage imageNamed:@"input-bar"] resizableImageWithCapInsets:UIEdgeInsetsMake(19.0f, 3.0f, 19.0f, 3.0f)];
@@ -38,6 +39,43 @@
 + (UIImage *)inputFieldImage
 {
     return [[UIImage imageNamed:@"input-field"] resizableImageWithCapInsets:UIEdgeInsetsMake(20.0f, 12.0f, 18.0f, 18.0f)];
+}
+
+#pragma mark - Message bubbles
++ (UIImage *)messageBubbleOutgoingDefault
+{
+    return [[UIImage imageNamed:@"messageBubbleBlue"] stretchableImageWithLeftCapWidth:15.0f topCapHeight:15.0f];
+}
+
++ (UIImage *)messageBubbleIncomingDefault
+{
+    return [[UIImage imageNamed:@"messageBubbleGray"] stretchableImageWithLeftCapWidth:23.0f topCapHeight:15.0f];
+}
+
++ (UIImage *)messageBubbleOutgoingSquareDefault
+{
+    return [[UIImage imageNamed:@"bubbleSquareOutgoing"] stretchableImageWithLeftCapWidth:15.0f topCapHeight:15.0f];
+}
+
++ (UIImage *)messageBubbleIncomingSquareDefault
+{
+    return [[UIImage imageNamed:@"bubbleSquareIncoming"] stretchableImageWithLeftCapWidth:25.0f topCapHeight:15.0f];
+}
+
++ (UIImage *)messageBubbleOutgoingDefaultGreen
+{
+    return [[UIImage imageNamed:@"messageBubbleGreen"] stretchableImageWithLeftCapWidth:15.0f topCapHeight:15.0f];
+}
+
+#pragma mark - Highlighted message bubbles
++ (UIImage *)messageBubbleHighlightedIncoming
+{
+    return [[UIImage imageNamed:@"messageBubbleHighlighted-incoming"] stretchableImageWithLeftCapWidth:23.0f topCapHeight:15.0f];
+}
+
++ (UIImage *)messageBubbleHighlightedOutgoing
+{
+    return [[UIImage imageNamed:@"messageBubbleHighlighted-outgoing"] stretchableImageWithLeftCapWidth:15.0f topCapHeight:15.0f];
 }
 
 @end
