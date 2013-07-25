@@ -36,17 +36,22 @@
 #import <UIKit/UIKit.h>
 #import "JSBubbleView.h"
 
-#define DATE_LABEL_HEIGHT 12.0f
+#define DATE_LABEL_HEIGHT   12.0f
+#define PHOTO_EDGE_INSET    (UIEdgeInsets){2,4,2,4}
+#define PHOTO_SIZE          (CGSize){40,40}
 
 @interface JSBubbleMessageCell : UITableViewCell
 
 #pragma mark - Initialization
 - (id)initWithBubbleStyle:(JSBubbleMessageStyle)style
              hasTimestamp:(BOOL)hasTimestamp
+                hasAvatar:(BOOL)hasAvatar
           reuseIdentifier:(NSString *)reuseIdentifier;
 
 #pragma mark - Message Cell
 - (void)setMessage:(NSString *)msg;
 - (void)setTimestamp:(NSDate *)date;
+
+@property (strong, nonatomic) UIImageView *photoView;
 
 @end

@@ -104,6 +104,10 @@
     return [self shouldHaveTimestampForRowAtIndexPath:indexPath];
 }
 
+- (BOOL)hasPhotoForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return indexPath.row % 2;
+}
+
 #pragma mark - Messages view data source
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -113,6 +117,11 @@
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self.timestamps objectAtIndex:indexPath.row];
+}
+
+- (void)goCrazyWithYourAvatarImageView:(UIImageView *)avatarView forRowAtIndexPath:(NSIndexPath *)indexPath{
+    avatarView.image = [UIImage imageNamed:@"DemoAvatarExample"];
+    // You can use SDWebImage or AFNetworking for Remote Image loading here.
 }
 
 @end
