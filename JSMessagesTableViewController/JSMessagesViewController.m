@@ -271,7 +271,9 @@
     BOOL isShrinking = textViewContentHeight < self.previousTextViewContentHeight;
     CGFloat changeInHeight = textViewContentHeight - self.previousTextViewContentHeight;
     
-    changeInHeight = (textViewContentHeight + changeInHeight >= maxHeight) ? 0.0f : changeInHeight;
+    if (changeInHeight > 0 && self.previousTextViewContentHeight == maxHeight) {
+        changeInHeight = 0;
+    }
     
     if(!isShrinking)
         [self.inputToolBarView adjustTextViewHeightBy:changeInHeight];

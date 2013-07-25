@@ -177,7 +177,7 @@
         return;
     
     UIMenuController *menu = [UIMenuController sharedMenuController];
-    [menu setTargetRect:self.bubbleView.frame inView:self];
+    [menu setTargetRect:CGRectInset([self.bubbleView bubbleFrame], 0, 4.f) inView:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(menuWillShow:)
@@ -201,6 +201,7 @@
 - (void) menuWillHide:(NSNotification *)notification
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIMenuControllerWillHideMenuNotification object:nil];
+    self.bubbleView.selectedToShowCopyMenu = NO;
 }
 
 - (void) menuWillShow:(NSNotification *)notification
@@ -210,6 +211,7 @@
                                              selector:@selector(menuWillHide:)
                                                  name:UIMenuControllerWillHideMenuNotification
                                                object:nil];
+    self.bubbleView.selectedToShowCopyMenu = YES;
 }
 
 - (void)dealloc{

@@ -40,7 +40,7 @@ typedef enum {
     JSBubbleMessageStyleIncomingSquare,
     JSBubbleMessageStyleOutgoingDefault,
 	JSBubbleMessageStyleOutgoingDefaultGreen,
-    JSBubbleMessageStyleOutgoingSquare
+    JSBubbleMessageStyleOutgoingSquare,
 } JSBubbleMessageStyle;
 
 
@@ -52,6 +52,9 @@ typedef enum {
 
 #pragma mark - Initialization
 - (id)initWithFrame:(CGRect)frame bubbleStyle:(JSBubbleMessageStyle)bubbleStyle;
+
+- (CGRect)bubbleFrame;
+@property (nonatomic) BOOL selectedToShowCopyMenu;
 
 #pragma mark - Bubble view
 + (UIImage *)bubbleImageForStyle:(JSBubbleMessageStyle)style;
