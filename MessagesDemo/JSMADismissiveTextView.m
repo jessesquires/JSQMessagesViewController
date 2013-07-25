@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Mike Ahmarani. All rights reserved.
 //
 
-#import "MADismissiveTextView.h"
+#import "JSMADismissiveTextView.h"
 
-@interface MADismissiveTextView ()
+@interface JSMADismissiveTextView ()
 
 @property (nonatomic, strong) UIView *keyboard;
 @property (nonatomic, readwrite) float originalKeyboardY; 
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation MADismissiveTextView
+@implementation JSMADismissiveTextView
 
 @synthesize keyboard, dismissivePanGestureRecognizer, originalKeyboardY, keyboardDelegate;
 

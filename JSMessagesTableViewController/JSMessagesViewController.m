@@ -37,7 +37,7 @@
 #import "NSString+JSMessagesView.h"
 #import "UIView+AnimationOptionsForCurve.h"
 #import "UIColor+JSMessagesView.h"
-#import "MADismissiveTextView.h"
+#import "JSMADismissiveTextView.h"
 
 #define INPUT_HEIGHT 40.0f
 

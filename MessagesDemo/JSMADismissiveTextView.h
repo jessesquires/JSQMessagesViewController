@@ -17,7 +17,7 @@
 - (void)keyboardWillSnapBackTo:(CGPoint)keyboardOrigin;
 @end
 
-@interface MADismissiveTextView : UITextView
+@interface JSMADismissiveTextView : UITextView
 
 @property (nonatomic, weak) id <MADismissiveKeyboardDelegate> keyboardDelegate;
 @property (nonatomic, strong) UIPanGestureRecognizer *dismissivePanGestureRecognizer;

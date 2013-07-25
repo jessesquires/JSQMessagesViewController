@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04E5799317A0B25E0022CD77 /* MADismissiveTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E5799217A0B25E0022CD77 /* MADismissiveTextView.m */; };
+		04E5799317A0B25E0022CD77 /* JSMADismissiveTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E5799217A0B25E0022CD77 /* JSMADismissiveTextView.m */; };
 		881AE55D16D13CDC008F7636 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881AE55C16D13CDC008F7636 /* UIKit.framework */; };
 		881AE55F16D13CDC008F7636 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881AE55E16D13CDC008F7636 /* Foundation.framework */; };
 		881AE56116D13CDC008F7636 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881AE56016D13CDC008F7636 /* CoreGraphics.framework */; };
@@ -55,8 +55,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		04E5799117A0B25E0022CD77 /* MADismissiveTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MADismissiveTextView.h; sourceTree = "<group>"; };
-		04E5799217A0B25E0022CD77 /* MADismissiveTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MADismissiveTextView.m; sourceTree = "<group>"; };
+		04E5799117A0B25E0022CD77 /* JSMADismissiveTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSMADismissiveTextView.h; sourceTree = "<group>"; };
+		04E5799217A0B25E0022CD77 /* JSMADismissiveTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSMADismissiveTextView.m; sourceTree = "<group>"; };
 		881AE55916D13CDC008F7636 /* MessagesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MessagesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		881AE55C16D13CDC008F7636 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		881AE55E16D13CDC008F7636 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -163,8 +163,8 @@
 		881AE56216D13CDC008F7636 /* MessagesDemo */ = {
 			isa = PBXGroup;
 			children = (
-				04E5799117A0B25E0022CD77 /* MADismissiveTextView.h */,
-				04E5799217A0B25E0022CD77 /* MADismissiveTextView.m */,
+				04E5799117A0B25E0022CD77 /* JSMADismissiveTextView.h */,
+				04E5799217A0B25E0022CD77 /* JSMADismissiveTextView.m */,
 				881AE56B16D13CDC008F7636 /* AppDelegate.h */,
 				881AE56C16D13CDC008F7636 /* AppDelegate.m */,
 				881AE58216D13DE0008F7636 /* DemoViewController.h */,
@@ -364,7 +364,7 @@
 				88301F2016F77B3D0037524D /* UIView+AnimationOptionsForCurve.m in Sources */,
 				8856C7DD16F9273C00FC921C /* UIColor+JSMessagesView.m in Sources */,
 				88E5341F16FF9B02004272FA /* UIButton+JSMessagesView.m in Sources */,
-				04E5799317A0B25E0022CD77 /* MADismissiveTextView.m in Sources */,
+				04E5799317A0B25E0022CD77 /* JSMADismissiveTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
