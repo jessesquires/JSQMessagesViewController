@@ -37,10 +37,11 @@
 #import "NSString+JSMessagesView.h"
 #import "UIView+AnimationOptionsForCurve.h"
 #import "UIColor+JSMessagesView.h"
+#import "JSMADismissiveTextView.h"
 
 #define INPUT_HEIGHT 40.0f
 
-@interface JSMessagesViewController ()
+@interface JSMessagesViewController () <MADismissiveKeyboardDelegate>
 
 - (void)setup;
 
@@ -71,7 +72,8 @@
     
     CGRect inputFrame = CGRectMake(0.0f, size.height - INPUT_HEIGHT, size.width, INPUT_HEIGHT);
     self.inputView = [[JSMessageInputView alloc] initWithFrame:inputFrame delegate:self];
-    
+    self.inputView.textView.dismissivePanGestureRecognizer = self.tableView.panGestureRecognizer;
+    self.inputView.textView.keyboardDelegate = self;
     UIButton *sendButton = [self sendButton];
     sendButton.enabled = NO;
     sendButton.frame = CGRectMake(self.inputView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
@@ -348,6 +350,28 @@
                      }
                      completion:^(BOOL finished) {
                      }];
+}
+
+
+#pragma mark - MADissmissiveTextViewDelegate
+- (void)keyboardDidScroll:(CGPoint)keyboardOrigin{
+    CGRect inputViewFrame = self.inputView.frame;
+    keyboardOrigin = [self.view convertPoint:keyboardOrigin fromView:nil];
+    inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
+    self.inputView.frame = inputViewFrame;
+}
+
+- (void)keyboardWillBeDismissed{
+    CGRect inputViewFrame = self.inputView.frame;
+    inputViewFrame.origin.y = self.view.bounds.size.height - inputViewFrame.size.height;
+    self.inputView.frame = inputViewFrame;
+}
+
+- (void)keyboardWillSnapBackTo:(CGPoint)keyboardOrigin{
+    CGRect inputViewFrame = self.inputView.frame;
+    keyboardOrigin = [self.view convertPoint:keyboardOrigin fromView:nil];
+    inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
+    self.inputView.frame = inputViewFrame;
 }
 
 @end
