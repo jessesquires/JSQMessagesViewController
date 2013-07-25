@@ -43,13 +43,12 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:type];
     
     if([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-        NSURL *url = [NSURL fileURLWithPath:path];
         SystemSoundID sound;
-        AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &sound);
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:path], &sound);
         AudioServicesPlaySystemSound(sound);
     }
     else {
-        NSLog(@"**** Sound Error: file not found: %@", path);
+        NSLog(@"Error: audio file not found at path: %@", path);
     }
 }
 
