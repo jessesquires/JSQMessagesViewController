@@ -83,11 +83,6 @@
          forControlEvents:UIControlEventTouchUpInside];
     [self.inputToolBarView setSendButton:sendButton];
     [self.view addSubview:self.inputToolBarView];
-    
-    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    swipe.direction = UISwipeGestureRecognizerDirectionDown;
-    swipe.numberOfTouchesRequired = 1;
-    [self.inputToolBarView addGestureRecognizer:swipe];
 }
 
 - (UIButton *)sendButton
@@ -154,11 +149,6 @@
                       withText:[self.inputToolBarView.textView.text trimWhitespace]];
 }
 
-- (void)handleSwipe:(UIGestureRecognizer *)guestureRecognizer
-{
-    [self.inputToolBarView.textView resignFirstResponder];
-}
-
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -172,30 +162,41 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
     JSBubbleMessageStyle style = [self.delegate messageStyleForRowAtIndexPath:indexPath];
+    
     BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
-    BOOL hasAvatar = [self shouldHavePhotoForRowAtIndexPath:indexPath];
+    BOOL hasAvatar = [self.delegate hasAvatarForRowAtIndexPath:indexPath];
     
     NSString *CellID = [NSString stringWithFormat:@"MessageCell_%d_%d", style, hasTimestamp];
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellID];
     
-    if(!cell) {
-        cell = [[JSBubbleMessageCell alloc] initWithBubbleStyle:style
-                                                   hasTimestamp:hasTimestamp
-                                                      hasAvatar:hasAvatar
-                                                reuseIdentifier:CellID];
-    }
+    if(!cell)
+        cell = [[JSBubbleMessageCell alloc] initWithBubbleType:type
+                                                         style:style
+                                                  hasTimestamp:hasTimestamp
+                                                     hasAvatar:hasAvatar
+                                               reuseIdentifier:CellID];
     
     if(hasTimestamp)
         [cell setTimestamp:[self.dataSource timestampForRowAtIndexPath:indexPath]];
     
-    if (hasAvatar) {
-        [self.dataSource goCrazyWithYourAvatarImageView:cell.photoView forRowAtIndexPath:indexPath];
+    if(hasAvatar) {
+        switch (type) {
+            case JSBubbleMessageTypeIncoming:
+                if([self.dataSource respondsToSelector:@selector(avatarImageForIncomingMessage)])
+                    [cell setAvatarImage:[self.dataSource avatarImageForIncomingMessage]];
+                break;
+                
+            case JSBubbleMessageTypeOutgoing:
+                if([self.dataSource respondsToSelector:@selector(avatarImageForOutgoingMessage)])
+                    [cell setAvatarImage:[self.dataSource avatarImageForOutgoingMessage]];
+                break;
+        }
     }
     
     [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
     [cell setBackgroundColor:tableView.backgroundColor];
-    
     return cell;
 }
 
@@ -203,43 +204,32 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat dateHeight = [self shouldHaveTimestampForRowAtIndexPath:indexPath] ? DATE_LABEL_HEIGHT : 0.0f;
-    CGFloat avatarCellHeight = [self shouldHavePhotoForRowAtIndexPath:indexPath] ? (PHOTO_SIZE.height + PHOTO_EDGE_INSET.top + PHOTO_EDGE_INSET.bottom) : 0.0f;
+    CGFloat avatarCellHeight = [self.delegate hasAvatarForRowAtIndexPath:indexPath] ? (PHOTO_SIZE.height + PHOTO_EDGE_INSET.top + PHOTO_EDGE_INSET.bottom) : 0.0f;
     return MAX(avatarCellHeight, [JSBubbleView cellHeightForText:[self.dataSource textForRowAtIndexPath:indexPath]] + dateHeight);
 }
 
 #pragma mark - Messages view controller
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch ([self.delegate timestampPolicyForMessagesView]) {
+    switch ([self.delegate timestampPolicy]) {
         case JSMessagesViewTimestampPolicyAll:
             return YES;
-            break;
+            
         case JSMessagesViewTimestampPolicyAlternating:
             return indexPath.row % 2 == 0;
-            break;
+            
         case JSMessagesViewTimestampPolicyEveryThree:
             return indexPath.row % 3 == 0;
-            break;
+            
         case JSMessagesViewTimestampPolicyEveryFive:
             return indexPath.row % 5 == 0;
-            break;
+            
         case JSMessagesViewTimestampPolicyCustom:
-            if ([self.delegate hasTimestampForRowAtIndexPath:indexPath]) {
+            if([self.delegate respondsToSelector:@selector(hasTimestampForRowAtIndexPath:)])
                 return [self.delegate hasTimestampForRowAtIndexPath:indexPath];
-            } else {
-                return NO;
-            }
-            break;
-    }
-    
-    return NO;
-}
-
-- (BOOL)shouldHavePhotoForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self.delegate respondsToSelector:@selector(hasPhotoForRowAtIndexPath:)]) {
-        return [self.delegate hasPhotoForRowAtIndexPath:indexPath];
-    } else {
-        return NO;
+            
+        default:
+            return NO;
     }
 }
 
@@ -302,17 +292,20 @@
     if(changeInHeight != 0.0f) {
         [UIView animateWithDuration:0.25f
                          animations:^{
-                             UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, self.tableView.contentInset.bottom + changeInHeight, 0.0f);
+                             UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
+                                                                    0.0f,
+                                                                    self.tableView.contentInset.bottom + changeInHeight,
+                                                                    0.0f);
+                             
                              self.tableView.contentInset = insets;
                              self.tableView.scrollIndicatorInsets = insets;
-                             
                              [self scrollToBottomAnimated:NO];
-
+                             
                              CGRect inputViewFrame = self.inputToolBarView.frame;
                              self.inputToolBarView.frame = CGRectMake(0.0f,
-                                                               inputViewFrame.origin.y - changeInHeight,
-                                                               inputViewFrame.size.width,
-                                                               inputViewFrame.size.height + changeInHeight);
+                                                                      inputViewFrame.origin.y - changeInHeight,
+                                                                      inputViewFrame.size.width,
+                                                                      inputViewFrame.size.height + changeInHeight);
                          }
                          completion:^(BOOL finished) {
                              if(isShrinking)
@@ -373,29 +366,26 @@
                      }];
 }
 
-
-#pragma mark - Dismissive Text view delegate
-- (void)keyboardDidShow
+#pragma mark - Dismissive text view delegate
+- (void)keyboardDidScrollToPoint:(CGPoint)pt
 {
-    NSLog(@"Keyboard did show");
-}
-
-- (void)keyboardDidScroll:(CGPoint)keyboardOrigin{
     CGRect inputViewFrame = self.inputToolBarView.frame;
-    keyboardOrigin = [self.view convertPoint:keyboardOrigin fromView:nil];
+    CGPoint keyboardOrigin = [self.view convertPoint:pt fromView:nil];
     inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
     self.inputToolBarView.frame = inputViewFrame;
 }
 
-- (void)keyboardWillBeDismissed{
+- (void)keyboardWillBeDismissed
+{
     CGRect inputViewFrame = self.inputToolBarView.frame;
     inputViewFrame.origin.y = self.view.bounds.size.height - inputViewFrame.size.height;
     self.inputToolBarView.frame = inputViewFrame;
 }
 
-- (void)keyboardWillSnapBackToPoint:(CGPoint)keyboardOrigin{
+- (void)keyboardWillSnapBackToPoint:(CGPoint)pt
+{
     CGRect inputViewFrame = self.inputToolBarView.frame;
-    keyboardOrigin = [self.view convertPoint:keyboardOrigin fromView:nil];
+    CGPoint keyboardOrigin = [self.view convertPoint:pt fromView:nil];
     inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
     self.inputToolBarView.frame = inputViewFrame;
 }

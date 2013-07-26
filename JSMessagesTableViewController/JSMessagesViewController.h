@@ -53,20 +53,24 @@ typedef enum {
 @protocol JSMessagesViewDelegate <NSObject>
 @required
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text;
+- (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView;
+- (JSMessagesViewTimestampPolicy)timestampPolicy;
+- (BOOL)hasAvatarForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+@optional
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (BOOL )hasPhotoForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
 
 
 
 @protocol JSMessagesViewDataSource <NSObject>
-@optional
-- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (void)goCrazyWithYourAvatarImageView:(UIImageView *)avatarView forRowAtIndexPath:(NSIndexPath *)indexPath;
 @required
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (UIImage *)avatarImageForIncomingMessage;
+- (UIImage *)avatarImageForOutgoingMessage;
 @end
 
 
@@ -84,7 +88,6 @@ typedef enum {
 
 #pragma mark - Actions
 - (void)sendPressed:(UIButton *)sender;
-- (void)handleSwipe:(UIGestureRecognizer *)guestureRecognizer;
 
 #pragma mark - Messages view controller
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;

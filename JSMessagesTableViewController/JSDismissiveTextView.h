@@ -33,9 +33,9 @@
 
 @optional
 - (void)keyboardDidShow;
-- (void)keyboardDidScroll:(CGPoint)keyboardOrigin;
+- (void)keyboardDidScrollToPoint:(CGPoint)pt;
 - (void)keyboardWillBeDismissed;
-- (void)keyboardWillSnapBackToPoint:(CGPoint)keyboardOrigin;
+- (void)keyboardWillSnapBackToPoint:(CGPoint)pt;
 
 @end
 

@@ -43,15 +43,15 @@
 @interface JSBubbleMessageCell : UITableViewCell
 
 #pragma mark - Initialization
-- (id)initWithBubbleStyle:(JSBubbleMessageStyle)style
-             hasTimestamp:(BOOL)hasTimestamp
-                hasAvatar:(BOOL)hasAvatar
-          reuseIdentifier:(NSString *)reuseIdentifier;
+- (id)initWithBubbleType:(JSBubbleMessageType)type
+                   style:(JSBubbleMessageStyle)style
+            hasTimestamp:(BOOL)hasTimestamp
+               hasAvatar:(BOOL)hasAvatar
+         reuseIdentifier:(NSString *)reuseIdentifier;
 
-#pragma mark - Message Cell
+#pragma mark - Message cell
 - (void)setMessage:(NSString *)msg;
 - (void)setTimestamp:(NSDate *)date;
-
-@property (strong, nonatomic) UIImageView *photoView;
+- (void)setAvatarImage:(UIImage *)image;
 
 @end

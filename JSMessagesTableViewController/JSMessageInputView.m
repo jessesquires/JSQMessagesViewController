@@ -74,7 +74,7 @@
 #pragma mark - Setup
 - (void)setup
 {
-    self.image = [UIImage inputBarImage];
+    self.image = [UIImage inputBar];
     self.backgroundColor = [UIColor whiteColor];
     self.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin);
     self.opaque = YES;
@@ -107,7 +107,7 @@
                                                                                 0.0f,
                                                                                 self.textView.frame.size.width + 2.0f,
                                                                                 self.frame.size.height)];
-    inputFieldBack.image = [UIImage inputFieldImage];
+    inputFieldBack.image = [UIImage inputField];
     inputFieldBack.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     inputFieldBack.backgroundColor = [UIColor clearColor];
     [self addSubview:inputFieldBack];

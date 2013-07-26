@@ -47,7 +47,9 @@
 @interface JSBubbleView()
 
 - (void)setup;
-- (BOOL)styleIsOutgoing;
+
++ (UIImage *)bubbleImageTypeIncomingWithStyle:(JSBubbleMessageStyle)aStyle;
++ (UIImage *)bubbleImageTypeOutgoingWithStyle:(JSBubbleMessageStyle)aStyle;
 
 @end
 
@@ -55,21 +57,27 @@
 
 @implementation JSBubbleView
 
+@synthesize type;
 @synthesize style;
 @synthesize text;
 @synthesize selectedToShowCopyMenu;
 
-#pragma mark - Initialization
+#pragma mark - Setup
 - (void)setup
 {
     self.backgroundColor = [UIColor clearColor];
+    self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 }
 
-- (id)initWithFrame:(CGRect)frame bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
+#pragma mark - Initialization
+- (id)initWithFrame:(CGRect)rect
+         bubbleType:(JSBubbleMessageType)bubleType
+        bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:rect];
     if(self) {
         [self setup];
+        self.type = bubleType;
         self.style = bubbleStyle;
     }
     return self;
@@ -81,6 +89,12 @@
 }
 
 #pragma mark - Setters
+- (void)setType:(JSBubbleMessageType)newType
+{
+    type = newType;
+    [self setNeedsDisplay];
+}
+
 - (void)setStyle:(JSBubbleMessageStyle)newStyle
 {
     style = newStyle;
@@ -103,38 +117,45 @@
 - (CGRect)bubbleFrame
 {
     CGSize bubbleSize = [JSBubbleView bubbleSizeForText:self.text];
-    CGRect bubbleFrame = CGRectMake(([self styleIsOutgoing] ? self.frame.size.width - bubbleSize.width : 0.0f),
-                                    kMarginTop,
-                                    bubbleSize.width,
-                                    bubbleSize.height);
-    return bubbleFrame;
+    return CGRectMake((self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width : 0.0f),
+                      kMarginTop,
+                      bubbleSize.width,
+                      bubbleSize.height);
+}
+
+- (UIImage *)bubbleImage
+{
+    return [JSBubbleView bubbleImageForType:self.type style:self.style];
+}
+
+- (UIImage *)bubbleImageHighlighted
+{
+    switch (self.style) {
+        case JSBubbleMessageStyleDefault:
+        case JSBubbleMessageStyleDefaultGreen:
+            return (self.type == JSBubbleMessageTypeIncoming) ? [UIImage bubbleDefaultIncomingSelected] : [UIImage bubbleDefaultOutgoingSelected];
+            
+        case JSBubbleMessageStyleSquare:
+            return (self.type == JSBubbleMessageTypeIncoming) ? [UIImage bubbleSquareIncomingSelected] : [UIImage bubbleSquareOutgoingSelected];
+            
+        default:
+            return nil;
+    }
 }
 
 - (void)drawRect:(CGRect)frame
 {
     [super drawRect:frame];
     
-	UIImage *image = nil;
+	UIImage *image = (self.selectedToShowCopyMenu) ? [self bubbleImageHighlighted] : [self bubbleImage];
     
-    if(self.selectedToShowCopyMenu) {
-        
-        if([self styleIsOutgoing]) {
-            image = [UIImage messageBubbleHighlightedOutgoing];
-        }
-        else {
-            image = [UIImage messageBubbleHighlightedIncoming];
-        }
-    }
-    else {
-        image = [JSBubbleView bubbleImageForStyle:self.style];
-    }
-    
-    [JSBubbleView bubbleImageForStyle:self.style];
     CGRect bubbleFrame = [self bubbleFrame];
 	[image drawInRect:bubbleFrame];
 	
 	CGSize textSize = [JSBubbleView textSizeForText:self.text];
-	CGFloat textX = image.leftCapWidth - 3.0f + ([self styleIsOutgoing] ? bubbleFrame.origin.x : 0.0f);
+	
+    CGFloat textX = image.leftCapWidth - 3.0f + (self.type == JSBubbleMessageTypeOutgoing ? bubbleFrame.origin.x : 0.0f);
+    
     CGRect textFrame = CGRectMake(textX,
                                   kPaddingTop + kMarginTop,
                                   textSize.width,
@@ -147,30 +168,48 @@
 }
 
 #pragma mark - Bubble view
-- (BOOL)styleIsOutgoing
++ (UIImage *)bubbleImageForType:(JSBubbleMessageType)aType style:(JSBubbleMessageStyle)aStyle
 {
-    return (self.style == JSBubbleMessageStyleOutgoingDefault
-            || self.style == JSBubbleMessageStyleOutgoingDefaultGreen
-            || self.style == JSBubbleMessageStyleOutgoingSquareDefault);
+    switch (aType) {
+        case JSBubbleMessageTypeIncoming:
+            return [self bubbleImageTypeIncomingWithStyle:aStyle];
+            
+        case JSBubbleMessageTypeOutgoing:
+            return [self bubbleImageTypeOutgoingWithStyle:aStyle];
+            
+        default:
+            return nil;
+    }
 }
 
-+ (UIImage *)bubbleImageForStyle:(JSBubbleMessageStyle)style
++ (UIImage *)bubbleImageTypeIncomingWithStyle:(JSBubbleMessageStyle)aStyle
 {
-    switch (style) {
-        case JSBubbleMessageStyleIncomingDefault:
-            return [UIImage messageBubbleIncomingDefault];
+    switch (aStyle) {
+        case JSBubbleMessageStyleDefault:
+            return [UIImage bubbleDefaultIncoming];
             
-        case JSBubbleMessageStyleIncomingSquareDefault:
-            return [UIImage messageBubbleIncomingSquareDefault];
+        case JSBubbleMessageStyleSquare:
+            return [UIImage bubbleSquareIncoming];
             
-        case JSBubbleMessageStyleOutgoingDefault:
-            return [UIImage messageBubbleOutgoingDefault];
+        case JSBubbleMessageStyleDefaultGreen:
+            return [UIImage bubbleDefaultIncomingGreen];
             
-        case JSBubbleMessageStyleOutgoingSquareDefault:
-            return [UIImage messageBubbleOutgoingSquareDefault];
+        default:
+            return nil;
+    }
+}
+
++ (UIImage *)bubbleImageTypeOutgoingWithStyle:(JSBubbleMessageStyle)aStyle
+{
+    switch (aStyle) {
+        case JSBubbleMessageStyleDefault:
+            return [UIImage bubbleDefaultOutgoing];
             
-        case JSBubbleMessageStyleOutgoingDefaultGreen:
-            return [UIImage messageBubbleOutgoingDefaultGreen];
+        case JSBubbleMessageStyleSquare:
+            return [UIImage bubbleSquareOutgoing];
+            
+        case JSBubbleMessageStyleDefaultGreen:
+            return [UIImage bubbleDefaultOutgoingGreen];
             
         default:
             return nil;

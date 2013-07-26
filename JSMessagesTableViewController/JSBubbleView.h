@@ -36,30 +36,39 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-	JSBubbleMessageStyleIncomingDefault = 0,
-    JSBubbleMessageStyleIncomingSquareDefault,
-    
-    JSBubbleMessageStyleOutgoingDefault,
-	JSBubbleMessageStyleOutgoingSquareDefault,
-    
-    JSBubbleMessageStyleOutgoingDefaultGreen
-} JSBubbleMessageStyle;
+    JSBubbleMessageTypeIncoming = 0,
+    JSBubbleMessageTypeOutgoing
+} JSBubbleMessageType;
 
+
+typedef enum {
+    JSBubbleMessageStyleDefault = 0,
+    JSBubbleMessageStyleSquare,
+    JSBubbleMessageStyleDefaultGreen
+} JSBubbleMessageStyle;
 
 
 @interface JSBubbleView : UIView
 
+@property (assign, nonatomic) JSBubbleMessageType type;
 @property (assign, nonatomic) JSBubbleMessageStyle style;
 @property (copy, nonatomic) NSString *text;
 @property (assign, nonatomic) BOOL selectedToShowCopyMenu;
 
 #pragma mark - Initialization
-- (id)initWithFrame:(CGRect)frame bubbleStyle:(JSBubbleMessageStyle)bubbleStyle;
+- (id)initWithFrame:(CGRect)rect
+         bubbleType:(JSBubbleMessageType)bubleType
+        bubbleStyle:(JSBubbleMessageStyle)bubbleStyle;
+
+#pragma mark - Drawing
+- (CGRect)bubbleFrame;
+- (UIImage *)bubbleImage;
+- (UIImage *)bubbleImageHighlighted;
 
 #pragma mark - Bubble view
-- (CGRect)bubbleFrame;
++ (UIImage *)bubbleImageForType:(JSBubbleMessageType)aType
+                          style:(JSBubbleMessageStyle)aStyle;
 
-+ (UIImage *)bubbleImageForStyle:(JSBubbleMessageStyle)style;
 + (UIFont *)font;
 
 + (CGSize)textSizeForText:(NSString *)txt;

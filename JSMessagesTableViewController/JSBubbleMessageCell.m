@@ -40,10 +40,19 @@
 
 @property (strong, nonatomic) JSBubbleView *bubbleView;
 @property (strong, nonatomic) UILabel *timestampLabel;
+@property (strong, nonatomic) UIImageView *avatarImageView;
 
 - (void)setup;
 - (void)configureTimestampLabel;
-- (void)configureWithStyle:(JSBubbleMessageStyle)style timestamp:(BOOL)hasTimestamp avatar:(BOOL)hasAvatar;
+
+- (void)configureWithType:(JSBubbleMessageType)type
+                    style:(JSBubbleMessageStyle)style
+                timestamp:(BOOL)hasTimestamp
+                   avatar:(BOOL)hasAvatar;
+
+- (void)handleLongPress:(UILongPressGestureRecognizer *)longPress;
+- (void)handleMenuWillHideNotification:(NSNotification *)notification;
+- (void)handleMenuWillShowNotification:(NSNotification *)notification;
 
 @end
 
@@ -51,7 +60,7 @@
 
 @implementation JSBubbleMessageCell
 
-#pragma mark - Initialization
+#pragma mark - Setup
 - (void)setup
 {
     self.backgroundColor = [UIColor clearColor];
@@ -66,9 +75,9 @@
     self.detailTextLabel.text = nil;
     self.detailTextLabel.hidden = YES;
     
-    UILongPressGestureRecognizer *recognizer =
-    [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    [recognizer setMinimumPressDuration:0.5];
+    UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                             action:@selector(handleLongPress:)];
+    [recognizer setMinimumPressDuration:0.4];
     [self addGestureRecognizer:recognizer];
 }
 
@@ -90,7 +99,10 @@
     [self.contentView bringSubviewToFront:self.timestampLabel];
 }
 
-- (void)configureWithStyle:(JSBubbleMessageStyle)style timestamp:(BOOL)hasTimestamp avatar:(BOOL)hasAvatar
+- (void)configureWithType:(JSBubbleMessageType)type
+                    style:(JSBubbleMessageStyle)style
+                timestamp:(BOOL)hasTimestamp
+                   avatar:(BOOL)hasAvatar
 {
     CGFloat bubbleY = 0.0f;
     
@@ -99,47 +111,61 @@
         bubbleY = 14.0f;
     }
     
-    CGFloat rightOffsetX=0.0f;
-    CGFloat leftOffsetX=0.0f;
+    CGFloat rightOffsetX = 0.0f;
+    CGFloat leftOffsetX = 0.0f;
     
-    
-    
-    if(hasAvatar){
-        
-        if(style==JSBubbleMessageStyleIncomingDefault||style==JSBubbleMessageStyleIncomingDefault){
-            rightOffsetX=PHOTO_EDGE_INSET.left+PHOTO_SIZE.width+PHOTO_EDGE_INSET.right;
-            self.photoView=[[UIImageView alloc] initWithFrame:(CGRect){PHOTO_EDGE_INSET.left,self.contentView.frame.size.height-PHOTO_EDGE_INSET.bottom-PHOTO_SIZE.height,PHOTO_SIZE}];
-        }else{
-            leftOffsetX=PHOTO_EDGE_INSET.left+PHOTO_SIZE.width+PHOTO_EDGE_INSET.right;
-            self.photoView=[[UIImageView alloc] initWithFrame:(CGRect){self.contentView.frame.size.width-PHOTO_EDGE_INSET.right-PHOTO_SIZE.width,self.contentView.frame.size.height-PHOTO_EDGE_INSET.bottom-PHOTO_SIZE.height,PHOTO_SIZE}];
+    if(hasAvatar) {
+        if(type == JSBubbleMessageTypeIncoming) {
+            rightOffsetX = PHOTO_EDGE_INSET.left + PHOTO_SIZE.width + PHOTO_EDGE_INSET.right;
+            
+            self.avatarImageView = [[UIImageView alloc] initWithFrame:(CGRect){PHOTO_EDGE_INSET.left,self.contentView.frame.size.height-PHOTO_EDGE_INSET.bottom-PHOTO_SIZE.height,PHOTO_SIZE}];
         }
-        [self.contentView addSubview:self.photoView];
-        self.photoView.autoresizingMask= (UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin);
+        else {
+            leftOffsetX=PHOTO_EDGE_INSET.left+PHOTO_SIZE.width+PHOTO_EDGE_INSET.right;
+            self.avatar=[[UIImageView alloc] initWithFrame:(CGRect){self.contentView.frame.size.width-PHOTO_EDGE_INSET.right-PHOTO_SIZE.width,self.contentView.frame.size.height-PHOTO_EDGE_INSET.bottom-PHOTO_SIZE.height,PHOTO_SIZE}];
+        }
+        
+        [self.contentView addSubview:self.avatar];
+        self.avatar.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
+                                        | UIViewAutoresizingFlexibleLeftMargin
+                                        | UIViewAutoresizingFlexibleRightMargin);
     }
-    
     
     CGRect frame = CGRectMake(rightOffsetX,
                               bubbleY,
-                              self.contentView.frame.size.width-rightOffsetX-leftOffsetX,
+                              self.contentView.frame.size.width - rightOffsetX - leftOffsetX,
                               self.contentView.frame.size.height - self.timestampLabel.frame.size.height);
     
-    self.bubbleView = [[JSBubbleView alloc] initWithFrame:frame
-                                              bubbleStyle:style];
-    
-    self.bubbleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.bubbleView = [[JSBubbleView alloc] initWithFrame:frame bubbleType:type bubbleStyle:style];
     
     [self.contentView addSubview:self.bubbleView];
     [self.contentView sendSubviewToBack:self.bubbleView];
 }
 
-- (id)initWithBubbleStyle:(JSBubbleMessageStyle)style hasTimestamp:(BOOL)hasTimestamp hasAvatar:(BOOL)hasAvatar reuseIdentifier:(NSString *)reuseIdentifier
+#pragma mark - Initialization
+- (id)initWithBubbleType:(JSBubbleMessageType)type
+                   style:(JSBubbleMessageStyle)style
+            hasTimestamp:(BOOL)hasTimestamp
+               hasAvatar:(BOOL)hasAvatar
+         reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if(self) {
         [self setup];
-        [self configureWithStyle:style timestamp:hasTimestamp avatar:hasAvatar];
+        [self configureWithType:type
+                          style:style
+                      timestamp:hasTimestamp
+                         avatar:hasAvatar];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    self.bubbleView = nil;
+    self.timestampLabel = nil;
+    self.avatarImageView = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Setters
@@ -163,52 +189,41 @@
                                                               timeStyle:NSDateFormatterShortStyle];
 }
 
-#pragma mark - Implement Copy
-- (BOOL) canBecomeFirstResponder
+- (void)setAvatarImage:(UIImage *)image
+{
+    self.avatarImageView.image = image;
+}
+
+#pragma mark - Copying
+- (BOOL)canBecomeFirstResponder
 {
     return YES;
 }
 
-- (BOOL) becomeFirstResponder
+- (BOOL)becomeFirstResponder
 {
     return [super becomeFirstResponder];
 }
 
-- (BOOL) canPerformAction:(SEL)action withSender:(id)sender
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
-    if (action == @selector(copy:))
+    if(action == @selector(copy:))
         return YES;
     
     return [super canPerformAction:action withSender:sender];
 }
 
-- (void)copy:(id)sender {
+- (void)copy:(id)sender
+{
     [[UIPasteboard generalPasteboard] setString:self.bubbleView.text];
     [self resignFirstResponder];
 }
 
-- (void) handleLongPress:(UILongPressGestureRecognizer *)longPressRecognizer
-{
-    if (longPressRecognizer.state != UIGestureRecognizerStateBegan)
-        return;
-    
-    if ([self becomeFirstResponder] == NO)
-        return;
-    
-    UIMenuController *menu = [UIMenuController sharedMenuController];
-    [menu setTargetRect:CGRectInset([self.bubbleView bubbleFrame], 0, 4.f) inView:self];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(menuWillShow:)
-                                                 name:UIMenuControllerWillShowMenuNotification
-                                               object:nil];
-    [menu setMenuVisible:YES animated:YES];
-}
-
-- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+#pragma mark - Touch events
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
-    if ([self isFirstResponder] == NO)
+    if(![self isFirstResponder])
         return;
     
     UIMenuController *menu = [UIMenuController sharedMenuController];
@@ -217,24 +232,45 @@
     [self resignFirstResponder];
 }
 
-- (void) menuWillHide:(NSNotification *)notification
+#pragma mark - Gestures
+- (void)handleLongPress:(UILongPressGestureRecognizer *)longPress
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIMenuControllerWillHideMenuNotification object:nil];
+    if(longPress.state != UIGestureRecognizerStateBegan
+       || ![self becomeFirstResponder])
+        return;
+    
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    [menu setTargetRect:CGRectInset([self.bubbleView bubbleFrame], 0.0f, 4.0f)
+                 inView:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleMenuWillShowNotification:)
+                                                 name:UIMenuControllerWillShowMenuNotification
+                                               object:nil];
+    [menu setMenuVisible:YES animated:YES];
+}
+
+#pragma mark - Notification
+- (void)handleMenuWillHideNotification:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIMenuControllerWillHideMenuNotification
+                                                  object:nil];
     self.bubbleView.selectedToShowCopyMenu = NO;
 }
 
-- (void) menuWillShow:(NSNotification *)notification
+- (void)handleMenuWillShowNotification:(NSNotification *)notification
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIMenuControllerWillShowMenuNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIMenuControllerWillShowMenuNotification
+                                                  object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(menuWillHide:)
+                                             selector:@selector(handleMenuWillHideNotification:)
                                                  name:UIMenuControllerWillHideMenuNotification
                                                object:nil];
+    
     self.bubbleView.selectedToShowCopyMenu = YES;
-}
-
-- (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

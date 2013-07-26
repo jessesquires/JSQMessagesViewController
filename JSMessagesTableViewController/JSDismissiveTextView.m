@@ -168,8 +168,8 @@
                                                  self.keyboard.frame.size.width,
                                                  self.keyboard.frame.size.height);
                 
-                if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardDidScroll:)])
-                    [self.keyboardDelegate keyboardDidScroll:CGPointMake(0.0f, newKeyboardY)];
+                if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardDidScrollToPoint:)])
+                    [self.keyboardDelegate keyboardDidScrollToPoint:CGPointMake(0.0f, newKeyboardY)];
             }
             break;
     }
