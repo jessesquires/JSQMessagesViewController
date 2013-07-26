@@ -28,11 +28,6 @@
 
 #import "DemoViewController.h"
 
-@interface DemoViewController ()
-@end
-
-
-
 @implementation DemoViewController
 
 #pragma mark - Initialization
@@ -88,25 +83,31 @@
     [self finishSend];
 }
 
-- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+- (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (indexPath.row % 2) ? JSBubbleMessageStyleIncomingDefault : JSBubbleMessageStyleOutgoingDefault;
+    return (indexPath.row % 2) ? JSBubbleMessageTypeIncoming : JSBubbleMessageTypeOutgoing;
 }
 
-- (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView
+- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return JSBubbleMessageStyleSquare;
+}
+
+- (JSMessagesViewTimestampPolicy)timestampPolicy
 {
     return JSMessagesViewTimestampPolicyEveryThree;
 }
 
-- (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)hasAvatarForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // custom implementation here, if using `JSMessagesViewTimestampPolicyCustom`
-    return [self shouldHaveTimestampForRowAtIndexPath:indexPath];
+    return YES;
 }
 
-- (BOOL)hasPhotoForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return indexPath.row % 2;
-}
+//  Optional delegate method
+//  Required if using `JSMessagesViewTimestampPolicyCustom`
+//
+//  - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
+//
 
 #pragma mark - Messages view data source
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -119,9 +120,14 @@
     return [self.timestamps objectAtIndex:indexPath.row];
 }
 
-- (void)goCrazyWithYourAvatarImageView:(UIImageView *)avatarView forRowAtIndexPath:(NSIndexPath *)indexPath{
-    avatarView.image = [UIImage imageNamed:@"DemoAvatarExample"];
-    // You can use SDWebImage or AFNetworking for Remote Image loading here.
+- (UIImage *)avatarImageForIncomingMessage
+{
+    return [UIImage imageNamed:@"DemoAvatarExample"];
+}
+
+- (UIImage *)avatarImageForOutgoingMessage
+{
+    return [UIImage imageNamed:@"DemoAvatarExample"];
 }
 
 @end
