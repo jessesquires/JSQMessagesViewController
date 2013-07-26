@@ -122,13 +122,13 @@
         }
         else {
             leftOffsetX=PHOTO_EDGE_INSET.left+PHOTO_SIZE.width+PHOTO_EDGE_INSET.right;
-            self.avatar=[[UIImageView alloc] initWithFrame:(CGRect){self.contentView.frame.size.width-PHOTO_EDGE_INSET.right-PHOTO_SIZE.width,self.contentView.frame.size.height-PHOTO_EDGE_INSET.bottom-PHOTO_SIZE.height,PHOTO_SIZE}];
+            self.avatarImageView=[[UIImageView alloc] initWithFrame:(CGRect){self.contentView.frame.size.width-PHOTO_EDGE_INSET.right-PHOTO_SIZE.width,self.contentView.frame.size.height-PHOTO_EDGE_INSET.bottom-PHOTO_SIZE.height,PHOTO_SIZE}];
         }
         
-        [self.contentView addSubview:self.avatar];
-        self.avatar.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
-                                        | UIViewAutoresizingFlexibleLeftMargin
-                                        | UIViewAutoresizingFlexibleRightMargin);
+        [self.contentView addSubview:self.avatarImageView];
+        self.avatarImageView.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
+                                                 | UIViewAutoresizingFlexibleLeftMargin
+                                                 | UIViewAutoresizingFlexibleRightMargin);
     }
     
     CGRect frame = CGRectMake(rightOffsetX,
