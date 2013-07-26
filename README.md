@@ -63,19 +63,25 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 	* For outgoing messages `[JSMessageSoundEffect playMessageSentSound]`
 	* For incoming messages `[JSMessageSoundEffect playMessageReceivedSound]`
 
-````objective-c 
+````objective-c
+- (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
+````
+
+* The type of bubble for this row, options are:
+	* `JSBubbleMessageTypeIncoming`
+	* `JSBubbleMessageTypeOutgoing`
+
+````objective-c
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 ````
 
 * The [style of the bubble][link1] for this row, options are:
-	* `JSBubbleMessageStyleIncomingDefault`
-	* `JSBubbleMessageStyleIncomingSquare`
-	* `JSBubbleMessageStyleOutgoingDefault`
-	* `JSBubbleMessageStyleOutgoingDefaultGreen`
-	* `JSBubbleMessageStyleOutgoingSquare`
+	* `JSBubbleMessageStyleDefault`
+	* `JSBubbleMessageStyleSquare`
+	* `JSBubbleMessageStyleDefaultGreen`
 
 ````objective-c 
-- (JSMessagesViewTimestampPolicy)timestampPolicyForMessagesView
+- (JSMessagesViewTimestampPolicy)timestampPolicy
 ````
 
 * How/when to display timestamps for messages, options are:
@@ -86,12 +92,17 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 	* `JSMessagesViewTimestampPolicyCustom`
 
 ````objective-c 
+- (BOOL)hasAvatarForRowAtIndexPath:(NSIndexPath *)indexPath;
+````
+
+* Returns if this row should display an avatar
+
+````objective-c 
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 ````
 
-* Returns if this row should display a timestamp or not, based on the value returned from the above method
-* If using a built-in timestamp policy, simply return `[self shouldHaveTimestampForRowAtIndexPath:indexPath]`
-* If using `JSMessagesViewTimestampPolicyCustom`, you are on your own!
+* Returns if this row should display a timestamp or not
+* Required if using `JSMessagesViewTimestampPolicyCustom`
 
 #####Implement the `JSMessagesViewDataSource` protocol
 
@@ -106,6 +117,18 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 ````
 
 * The timestamp to be displayed *above* this row
+
+````objective-c 
+- (UIImage *)avatarImageForIncomingMessage
+````
+
+* The avatar image for incoming messages
+
+````objective-c 
+- (UIImage *)avatarImageForOutgoingMessage
+````
+
+* The avatar image for outgoing messages
 
 #####Implement the [table view data source][ref1] method that you should be familiar with
 
@@ -128,21 +151,13 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 * `MessagesDemo.xcodeproj` for example of programmatic presentation
 * `MessagesDemoStoryboards/MessagesDemoSB.xcodeproj` for example of use with Storyboards
 
-## ToDo
-
-* Landscape mode
-* Allow text input view to resize up to navigation bar (instead of only 5 lines)
-* Display "To: <recipient>" search field for new messages
-* Option for user avatar to display next to bubbles
-* "Send" images or video
-
 ## Apps Using This Control
 
 [Hemoglobe](http://bit.ly/hemoglobeapp)
 
 [FourChat](https://itunes.apple.com/us/app/fourchat/id650833730?mt=8)
 
-*[Contact me](mailto:jesse.d.squires@gmail.com) to have your app listed here.*
+*[Contact me](mailto:jesse.squires.developer@gmail.com) to have your app listed here.*
 
 ## Related Projects
 
