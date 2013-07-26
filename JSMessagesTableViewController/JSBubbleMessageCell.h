@@ -38,15 +38,23 @@
 
 #define DATE_LABEL_HEIGHT   12.0f
 #define PHOTO_EDGE_INSET    (UIEdgeInsets){2,4,2,4}
-#define PHOTO_SIZE          (CGSize){40,40}
+#define PHOTO_SIZE          (CGSize){55,55}
+
+
+typedef enum {
+    JSAvatarStyleCircle = 0,
+    JSAvatarStyleSquare,
+    JSAvatarStyleNone
+} JSAvatarStyle;
+
 
 @interface JSBubbleMessageCell : UITableViewCell
 
 #pragma mark - Initialization
 - (id)initWithBubbleType:(JSBubbleMessageType)type
-                   style:(JSBubbleMessageStyle)style
+             bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
+             avatarStyle:(JSAvatarStyle)avatarStyle
             hasTimestamp:(BOOL)hasTimestamp
-               hasAvatar:(BOOL)hasAvatar
          reuseIdentifier:(NSString *)reuseIdentifier;
 
 #pragma mark - Message cell

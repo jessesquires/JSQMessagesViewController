@@ -49,6 +49,12 @@ typedef enum {
 } JSMessagesViewTimestampPolicy;
 
 
+typedef enum {
+    JSMessagesViewAvatarPolicyIncomingOnly = 0,
+    JSMessagesViewAvatarPolicyBoth,
+    JSMessagesViewAvatarPolicyNone
+} JSMessagesViewAvatarPolicy;
+
 
 @protocol JSMessagesViewDelegate <NSObject>
 @required
@@ -56,7 +62,8 @@ typedef enum {
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (JSMessagesViewTimestampPolicy)timestampPolicy;
-- (BOOL)hasAvatarForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (JSMessagesViewAvatarPolicy)avatarPolicy;
+- (JSAvatarStyle)avatarStyle;
 
 @optional
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -91,6 +98,7 @@ typedef enum {
 
 #pragma mark - Messages view controller
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (BOOL)shouldHaveAvatarForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)finishSend;
 - (void)setBackgroundColor:(UIColor *)color;
 - (void)scrollToBottomAnimated:(BOOL)animated;

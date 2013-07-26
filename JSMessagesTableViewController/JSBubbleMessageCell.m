@@ -35,20 +35,22 @@
 
 #import "JSBubbleMessageCell.h"
 #import "UIColor+JSMessagesView.h"
+#import "UIImage+JSMessagesView.h"
 
 @interface JSBubbleMessageCell()
 
 @property (strong, nonatomic) JSBubbleView *bubbleView;
 @property (strong, nonatomic) UILabel *timestampLabel;
 @property (strong, nonatomic) UIImageView *avatarImageView;
+@property (assign, nonatomic) JSAvatarStyle avatarImageStyle;
 
 - (void)setup;
 - (void)configureTimestampLabel;
 
 - (void)configureWithType:(JSBubbleMessageType)type
-                    style:(JSBubbleMessageStyle)style
-                timestamp:(BOOL)hasTimestamp
-                   avatar:(BOOL)hasAvatar;
+              bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
+              avatarStyle:(JSAvatarStyle)avatarStyle
+                timestamp:(BOOL)hasTimestamp;
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPress;
 - (void)handleMenuWillHideNotification:(NSNotification *)notification;
@@ -100,9 +102,9 @@
 }
 
 - (void)configureWithType:(JSBubbleMessageType)type
-                    style:(JSBubbleMessageStyle)style
+              bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
+              avatarStyle:(JSAvatarStyle)avatarStyle
                 timestamp:(BOOL)hasTimestamp
-                   avatar:(BOOL)hasAvatar
 {
     CGFloat bubbleY = 0.0f;
     
@@ -114,7 +116,7 @@
     CGFloat rightOffsetX = 0.0f;
     CGFloat leftOffsetX = 0.0f;
     
-    if(hasAvatar) {
+    if(avatarStyle != JSAvatarStyleNone) {
         if(type == JSBubbleMessageTypeIncoming) {
             rightOffsetX = PHOTO_EDGE_INSET.left + PHOTO_SIZE.width + PHOTO_EDGE_INSET.right;
             
@@ -136,7 +138,9 @@
                               self.contentView.frame.size.width - rightOffsetX - leftOffsetX,
                               self.contentView.frame.size.height - self.timestampLabel.frame.size.height);
     
-    self.bubbleView = [[JSBubbleView alloc] initWithFrame:frame bubbleType:type bubbleStyle:style];
+    self.bubbleView = [[JSBubbleView alloc] initWithFrame:frame
+                                               bubbleType:type
+                                              bubbleStyle:bubbleStyle];
     
     [self.contentView addSubview:self.bubbleView];
     [self.contentView sendSubviewToBack:self.bubbleView];
@@ -144,18 +148,19 @@
 
 #pragma mark - Initialization
 - (id)initWithBubbleType:(JSBubbleMessageType)type
-                   style:(JSBubbleMessageStyle)style
+             bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
+             avatarStyle:(JSAvatarStyle)avatarStyle
             hasTimestamp:(BOOL)hasTimestamp
-               hasAvatar:(BOOL)hasAvatar
          reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if(self) {
         [self setup];
+        self.avatarImageStyle = avatarStyle;
         [self configureWithType:type
-                          style:style
-                      timestamp:hasTimestamp
-                         avatar:hasAvatar];
+                    bubbleStyle:bubbleStyle
+                    avatarStyle:avatarStyle
+                      timestamp:hasTimestamp];
     }
     return self;
 }
@@ -191,7 +196,24 @@
 
 - (void)setAvatarImage:(UIImage *)image
 {
-    self.avatarImageView.image = image;
+    UIImage *styledImg = nil;
+    CGFloat size = 55.0f;
+    
+    switch (self.avatarImageStyle) {
+        case JSAvatarStyleCircle:
+            styledImg = [image circleImageWithSize:size];
+            break;
+            
+        case JSAvatarStyleSquare:
+            styledImg = [image squareImageWithSize:size];
+            break;
+            
+        case JSAvatarStyleNone:
+        default:
+            break;
+    }
+    
+    self.avatarImageView.image = styledImg;
 }
 
 #pragma mark - Copying

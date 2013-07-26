@@ -163,19 +163,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
-    JSBubbleMessageStyle style = [self.delegate messageStyleForRowAtIndexPath:indexPath];
+    JSBubbleMessageStyle bubbleStyle = [self.delegate messageStyleForRowAtIndexPath:indexPath];
+    JSAvatarStyle avatarStyle = [self.delegate avatarStyle];
     
     BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
-    BOOL hasAvatar = [self.delegate hasAvatarForRowAtIndexPath:indexPath];
+    BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
     
-    NSString *CellID = [NSString stringWithFormat:@"MessageCell_%d_%d", style, hasTimestamp];
+    NSString *CellID = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d", type, bubbleStyle, hasTimestamp, hasAvatar];
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellID];
     
     if(!cell)
         cell = [[JSBubbleMessageCell alloc] initWithBubbleType:type
-                                                         style:style
+                                                   bubbleStyle:bubbleStyle
+                                                   avatarStyle:(hasAvatar) ? avatarStyle : JSAvatarStyleNone
                                                   hasTimestamp:hasTimestamp
-                                                     hasAvatar:hasAvatar
                                                reuseIdentifier:CellID];
     
     if(hasTimestamp)
@@ -184,13 +185,11 @@
     if(hasAvatar) {
         switch (type) {
             case JSBubbleMessageTypeIncoming:
-                if([self.dataSource respondsToSelector:@selector(avatarImageForIncomingMessage)])
-                    [cell setAvatarImage:[self.dataSource avatarImageForIncomingMessage]];
+                [cell setAvatarImage:[self.dataSource avatarImageForIncomingMessage]];
                 break;
                 
             case JSBubbleMessageTypeOutgoing:
-                if([self.dataSource respondsToSelector:@selector(avatarImageForOutgoingMessage)])
-                    [cell setAvatarImage:[self.dataSource avatarImageForOutgoingMessage]];
+                [cell setAvatarImage:[self.dataSource avatarImageForOutgoingMessage]];
                 break;
         }
     }
@@ -204,7 +203,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat dateHeight = [self shouldHaveTimestampForRowAtIndexPath:indexPath] ? DATE_LABEL_HEIGHT : 0.0f;
-    CGFloat avatarCellHeight = [self.delegate hasAvatarForRowAtIndexPath:indexPath] ? (PHOTO_SIZE.height + PHOTO_EDGE_INSET.top + PHOTO_EDGE_INSET.bottom) : 0.0f;
+    CGFloat avatarCellHeight = [self shouldHaveAvatarForRowAtIndexPath:indexPath] ? (PHOTO_SIZE.height + PHOTO_EDGE_INSET.top + PHOTO_EDGE_INSET.bottom) : 0.0f;
     return MAX(avatarCellHeight, [JSBubbleView cellHeightForText:[self.dataSource textForRowAtIndexPath:indexPath]] + dateHeight);
 }
 
@@ -228,6 +227,21 @@
             if([self.delegate respondsToSelector:@selector(hasTimestampForRowAtIndexPath:)])
                 return [self.delegate hasTimestampForRowAtIndexPath:indexPath];
             
+        default:
+            return NO;
+    }
+}
+
+- (BOOL)shouldHaveAvatarForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch ([self.delegate avatarPolicy]) {
+        case JSMessagesViewAvatarPolicyIncomingOnly:
+            return [self.delegate messageTypeForRowAtIndexPath:indexPath] == JSBubbleMessageTypeIncoming;
+            
+        case JSMessagesViewAvatarPolicyBoth:
+            return YES;
+            
+        case JSMessagesViewAvatarPolicyNone:
         default:
             return NO;
     }
