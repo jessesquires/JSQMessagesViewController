@@ -22,6 +22,7 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 * Storyboards support (if that's how you roll)
 * Universal for iPhone and iPad
 * Allows arbitrary message (and bubble) sizes
+* Copy & paste messages
 * Timestamp options
 * Swipe/pull down to hide keyboard
 * Dynamically resizes input text view as you type
