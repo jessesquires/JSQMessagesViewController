@@ -31,20 +31,32 @@
 @interface UIImage (JSMessagesView)
 
 #pragma mark - Input bar
-+ (UIImage *)inputBarImage;
-+ (UIImage *)inputFieldImage;
++ (UIImage *)inputBar;
++ (UIImage *)inputField;
 
-#pragma mark - Message bubbles
-+ (UIImage *)messageBubbleOutgoingDefault;
-+ (UIImage *)messageBubbleIncomingDefault;
+#pragma mark - Bubble cap insets
+- (UIImage *)makeStretchableDefaultIncoming;
+- (UIImage *)makeStretchableDefaultOutgoing;
 
-+ (UIImage *)messageBubbleOutgoingSquareDefault;
-+ (UIImage *)messageBubbleIncomingSquareDefault;
+- (UIImage *)makeStretchableSquareIncoming;
+- (UIImage *)makeStretchableSquareOutgoing;
 
-+ (UIImage *)messageBubbleOutgoingDefaultGreen;
+#pragma mark - Incoming message bubbles
++ (UIImage *)bubbleDefaultIncoming;
++ (UIImage *)bubbleDefaultIncomingSelected;
 
-#pragma mark - Highlighted message bubbles
-+ (UIImage *)messageBubbleHighlightedIncoming;
-+ (UIImage *)messageBubbleHighlightedOutgoing;
++ (UIImage *)bubbleDefaultIncomingGreen;
+
++ (UIImage *)bubbleSquareIncoming;
++ (UIImage *)bubbleSquareIncomingSelected;
+
+#pragma mark - Outgoing message bubbles
++ (UIImage *)bubbleDefaultOutgoing;
++ (UIImage *)bubbleDefaultOutgoingSelected;
+
++ (UIImage *)bubbleDefaultOutgoingGreen;
+
++ (UIImage *)bubbleSquareOutgoing;
++ (UIImage *)bubbleSquareOutgoingSelected;
 
 @end

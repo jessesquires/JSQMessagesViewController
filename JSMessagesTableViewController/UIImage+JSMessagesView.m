@@ -31,51 +31,91 @@
 @implementation UIImage (JSMessagesView)
 
 #pragma mark - Input bar
-+ (UIImage *)inputBarImage
++ (UIImage *)inputBar
 {
     return [[UIImage imageNamed:@"input-bar"] resizableImageWithCapInsets:UIEdgeInsetsMake(19.0f, 3.0f, 19.0f, 3.0f)];
 }
 
-+ (UIImage *)inputFieldImage
++ (UIImage *)inputField
 {
     return [[UIImage imageNamed:@"input-field"] resizableImageWithCapInsets:UIEdgeInsetsMake(20.0f, 12.0f, 18.0f, 18.0f)];
 }
 
-#pragma mark - Message bubbles
-+ (UIImage *)messageBubbleOutgoingDefault
+#pragma mark - Bubble cap insets
+- (UIImage *)makeStretchableDefaultIncoming
 {
-    return [[UIImage imageNamed:@"messageBubbleBlue"] stretchableImageWithLeftCapWidth:15.0f topCapHeight:15.0f];
+    return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 20.0f, 15.0f, 20.0f)
+                                resizingMode:UIImageResizingModeStretch];
 }
 
-+ (UIImage *)messageBubbleIncomingDefault
+- (UIImage *)makeStretchableDefaultOutgoing
 {
-    return [[UIImage imageNamed:@"messageBubbleGray"] stretchableImageWithLeftCapWidth:23.0f topCapHeight:15.0f];
+    return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 20.0f, 15.0f, 20.0f)
+                                resizingMode:UIImageResizingModeStretch];
 }
 
-+ (UIImage *)messageBubbleOutgoingSquareDefault
+- (UIImage *)makeStretchableSquareIncoming
 {
-    return [[UIImage imageNamed:@"bubbleSquareOutgoing"] stretchableImageWithLeftCapWidth:15.0f topCapHeight:15.0f];
+    return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 25.0f, 16.0f, 23.0f)
+                                resizingMode:UIImageResizingModeStretch];
 }
 
-+ (UIImage *)messageBubbleIncomingSquareDefault
+- (UIImage *)makeStretchableSquareOutgoing
 {
-    return [[UIImage imageNamed:@"bubbleSquareIncoming"] stretchableImageWithLeftCapWidth:25.0f topCapHeight:15.0f];
+    return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 20.0f, 16.0f, 25.0f)
+                                resizingMode:UIImageResizingModeStretch];
 }
 
-+ (UIImage *)messageBubbleOutgoingDefaultGreen
+#pragma mark - Incoming message bubbles
++ (UIImage *)bubbleDefaultIncoming
 {
-    return [[UIImage imageNamed:@"messageBubbleGreen"] stretchableImageWithLeftCapWidth:15.0f topCapHeight:15.0f];
+    return [[UIImage imageNamed:@"bubble-default-incoming"] makeStretchableDefaultIncoming];
 }
 
-#pragma mark - Highlighted message bubbles
-+ (UIImage *)messageBubbleHighlightedIncoming
++ (UIImage *)bubbleDefaultIncomingSelected
 {
-    return [[UIImage imageNamed:@"messageBubbleHighlighted-incoming"] stretchableImageWithLeftCapWidth:23.0f topCapHeight:15.0f];
+    return [[UIImage imageNamed:@"bubble-default-incoming-selected"] makeStretchableDefaultIncoming];
 }
 
-+ (UIImage *)messageBubbleHighlightedOutgoing
++ (UIImage *)bubbleDefaultIncomingGreen
 {
-    return [[UIImage imageNamed:@"messageBubbleHighlighted-outgoing"] stretchableImageWithLeftCapWidth:15.0f topCapHeight:15.0f];
+    return [[UIImage imageNamed:@"bubble-default-incoming-green"] makeStretchableDefaultIncoming];
+}
+
++ (UIImage *)bubbleSquareIncoming
+{
+    return [[UIImage imageNamed:@"bubble-square-incoming"] makeStretchableSquareIncoming];
+}
+
++ (UIImage *)bubbleSquareIncomingSelected
+{
+    return [[UIImage imageNamed:@"bubble-square-incoming-selected"] makeStretchableSquareIncoming];
+}
+
+#pragma mark - Outgoing message bubbles
++ (UIImage *)bubbleDefaultOutgoing
+{
+    return [[UIImage imageNamed:@"bubble-default-outgoing"] makeStretchableDefaultOutgoing];
+}
+
++ (UIImage *)bubbleDefaultOutgoingSelected
+{
+    return [[UIImage imageNamed:@"bubble-default-outgoing-selected"] makeStretchableDefaultOutgoing];
+}
+
++ (UIImage *)bubbleDefaultOutgoingGreen
+{
+    return [[UIImage imageNamed:@"bubble-default-outgoing-green"] makeStretchableDefaultOutgoing];
+}
+
++ (UIImage *)bubbleSquareOutgoing
+{
+    return [[UIImage imageNamed:@"bubble-square-outgoing"] makeStretchableSquareOutgoing];
+}
+
++ (UIImage *)bubbleSquareOutgoingSelected
+{
+    return [[UIImage imageNamed:@"bubble-square-outgoing-selected"] makeStretchableSquareOutgoing];
 }
 
 @end
