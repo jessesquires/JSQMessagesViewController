@@ -98,9 +98,14 @@
     return JSMessagesViewTimestampPolicyEveryThree;
 }
 
-- (BOOL)hasAvatarForRowAtIndexPath:(NSIndexPath *)indexPath
+- (JSMessagesViewAvatarPolicy)avatarPolicy
 {
-    return YES;
+    return JSMessagesViewAvatarPolicyBoth;
+}
+
+- (JSAvatarStyle)avatarStyle
+{
+    return JSAvatarStyleCircle;
 }
 
 //  Optional delegate method
@@ -122,12 +127,12 @@
 
 - (UIImage *)avatarImageForIncomingMessage
 {
-    return [UIImage imageNamed:@"DemoAvatarExample"];
+    return [UIImage imageNamed:@"demo-avatar-woz"];
 }
 
 - (UIImage *)avatarImageForOutgoingMessage
 {
-    return [UIImage imageNamed:@"DemoAvatarExample"];
+    return [UIImage imageNamed:@"demo-avatar-jobs"];
 }
 
 @end
