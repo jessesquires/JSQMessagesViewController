@@ -49,7 +49,7 @@
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      @"Testing some messages here.",
-                     @"This work is based on Sam Soffes' SSMessagesViewController.",
+                     @"Options for avatars: none, circles, or squares",
                      @"This is a complete re-write and refactoring.",
                      @"It's easy to implement. Sound effects and images included. Animations are smooth and messages can be of arbitrary size!",
                      nil];
@@ -105,7 +105,7 @@
 
 - (JSAvatarStyle)avatarStyle
 {
-    return JSAvatarStyleCircle;
+    return JSAvatarStyleSquare;
 }
 
 //  Optional delegate method
