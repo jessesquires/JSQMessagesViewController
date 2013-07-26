@@ -137,7 +137,7 @@
 
 - (UIImage *)makeStretchableSquareOutgoing
 {
-    return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 20.0f, 16.0f, 25.0f)
+    return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 18.0f, 16.0f, 23.0f)
                                 resizingMode:UIImageResizingModeStretch];
 }
 
