@@ -92,17 +92,29 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 	* `JSMessagesViewTimestampPolicyCustom`
 
 ````objective-c 
-- (BOOL)hasAvatarForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (JSMessagesViewAvatarPolicy)avatarPolicy
 ````
 
-* Returns if this row should display an avatar
+* How/when to display avatars, options are:
+	* `JSMessagesViewAvatarPolicyIncomingOnly`
+	* `JSMessagesViewAvatarPolicyBoth`
+	* `JSMessagesViewAvatarPolicyNone`
+
+````objective-c 
+- (JSAvatarStyle)avatarStyle
+````
+
+* The [style for the avatars][link1], options are:
+	* `JSAvatarStyleCircle`
+	* `JSAvatarStyleSquare`
+	* `JSAvatarStyleNone`
 
 ````objective-c 
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 ````
 
 * Returns if this row should display a timestamp or not
-* Required if using `JSMessagesViewTimestampPolicyCustom`
+* Required only if using `JSMessagesViewTimestampPolicyCustom`
 
 #####Implement the `JSMessagesViewDataSource` protocol
 
@@ -182,7 +194,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 [ref1]:http://developer.apple.com/library/ios/#documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html#//apple_ref/occ/intf/UITableViewDataSource
 [ref2]:http://developer.apple.com/library/ios/#documentation/cocoa/conceptual/ProgrammingWithObjectiveC/CustomizingExistingClasses/CustomizingExistingClasses.html
 
-[img1]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot1.png
+[img1]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot0.png
 [img2]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot2.png
 [img3]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot3.png
 [img4]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot4.png
