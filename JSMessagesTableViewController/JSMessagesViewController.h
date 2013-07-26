@@ -35,7 +35,6 @@
 
 #import <UIKit/UIKit.h>
 #import "JSBubbleMessageCell.h"
-#import "JSBubbleView.h"
 #import "JSMessageInputView.h"
 #import "JSMessageSoundEffect.h"
 #import "UIButton+JSMessagesView.h"

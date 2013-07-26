@@ -37,6 +37,8 @@
 #import "UIColor+JSMessagesView.h"
 #import "UIImage+JSMessagesView.h"
 
+#define TIMESTAMP_LABEL_HEIGHT 14.5f
+
 @interface JSBubbleMessageCell()
 
 @property (strong, nonatomic) JSBubbleView *bubbleView;
@@ -88,7 +90,7 @@
     self.timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
                                                                     4.0f,
                                                                     self.bounds.size.width,
-                                                                    14.5f)];
+                                                                    TIMESTAMP_LABEL_HEIGHT)];
     self.timestampLabel.autoresizingMask =  UIViewAutoresizingFlexibleWidth;
     self.timestampLabel.backgroundColor = [UIColor clearColor];
     self.timestampLabel.textAlignment = NSTextAlignmentCenter;
@@ -107,35 +109,38 @@
                 timestamp:(BOOL)hasTimestamp
 {
     CGFloat bubbleY = 0.0f;
+    CGFloat bubbleX = 0.0f;
     
     if(hasTimestamp) {
         [self configureTimestampLabel];
         bubbleY = 14.0f;
     }
     
-    CGFloat rightOffsetX = 0.0f;
-    CGFloat leftOffsetX = 0.0f;
+    CGFloat offsetX = 0.0f;
     
     if(avatarStyle != JSAvatarStyleNone) {
-        if(type == JSBubbleMessageTypeIncoming) {
-            rightOffsetX = PHOTO_EDGE_INSET.left + PHOTO_SIZE.width + PHOTO_EDGE_INSET.right;
-            
-            self.avatarImageView = [[UIImageView alloc] initWithFrame:(CGRect){PHOTO_EDGE_INSET.left,self.contentView.frame.size.height-PHOTO_EDGE_INSET.bottom-PHOTO_SIZE.height,PHOTO_SIZE}];
-        }
-        else {
-            leftOffsetX=PHOTO_EDGE_INSET.left+PHOTO_SIZE.width+PHOTO_EDGE_INSET.right;
-            self.avatarImageView=[[UIImageView alloc] initWithFrame:(CGRect){self.contentView.frame.size.width-PHOTO_EDGE_INSET.right-PHOTO_SIZE.width,self.contentView.frame.size.height-PHOTO_EDGE_INSET.bottom-PHOTO_SIZE.height,PHOTO_SIZE}];
-        }
+        offsetX = 4.0f;
+        bubbleX = kJSAvatarSize;
+        CGFloat avatarX = 0.5f;
         
-        [self.contentView addSubview:self.avatarImageView];
+        if(type == JSBubbleMessageTypeOutgoing) {
+            avatarX = (self.contentView.frame.size.width - kJSAvatarSize);
+            offsetX = kJSAvatarSize - 4.0f;
+        }
+        self.avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(avatarX,
+                                                                             self.contentView.frame.size.height - kJSAvatarSize,
+                                                                             kJSAvatarSize,
+                                                                             kJSAvatarSize)];
+        
         self.avatarImageView.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
                                                  | UIViewAutoresizingFlexibleLeftMargin
                                                  | UIViewAutoresizingFlexibleRightMargin);
+        [self.contentView addSubview:self.avatarImageView];
     }
     
-    CGRect frame = CGRectMake(rightOffsetX,
+    CGRect frame = CGRectMake(bubbleX - offsetX,
                               bubbleY,
-                              self.contentView.frame.size.width - rightOffsetX - leftOffsetX,
+                              self.contentView.frame.size.width - bubbleX,
                               self.contentView.frame.size.height - self.timestampLabel.frame.size.height);
     
     self.bubbleView = [[JSBubbleView alloc] initWithFrame:frame
@@ -197,15 +202,13 @@
 - (void)setAvatarImage:(UIImage *)image
 {
     UIImage *styledImg = nil;
-    CGFloat size = 55.0f;
-    
     switch (self.avatarImageStyle) {
         case JSAvatarStyleCircle:
-            styledImg = [image circleImageWithSize:size];
+            styledImg = [image circleImageWithSize:kJSAvatarSize];
             break;
             
         case JSAvatarStyleSquare:
-            styledImg = [image squareImageWithSize:size];
+            styledImg = [image squareImageWithSize:kJSAvatarSize];
             break;
             
         case JSAvatarStyleNone:
@@ -214,6 +217,13 @@
     }
     
     self.avatarImageView.image = styledImg;
+}
+
++ (CGFloat)neededHeightForText:(NSString *)bubbleViewText timestamp:(BOOL)hasTimestamp avatar:(BOOL)hasAvatar
+{
+    CGFloat timestampHeight = (hasTimestamp) ? TIMESTAMP_LABEL_HEIGHT : 0.0f;
+    CGFloat avatarHeight = (hasAvatar) ? kJSAvatarSize : 0.0f;
+    return MAX(avatarHeight, [JSBubbleView cellHeightForText:bubbleViewText]) + timestampHeight;
 }
 
 #pragma mark - Copying

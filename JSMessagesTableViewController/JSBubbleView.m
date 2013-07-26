@@ -38,6 +38,8 @@
 #import "NSString+JSMessagesView.h"
 #import "UIImage+JSMessagesView.h"
 
+CGFloat const kJSAvatarSize = 50.0f;
+
 #define kMarginTop 8.0f
 #define kMarginBottom 4.0f
 #define kPaddingTop 4.0f
@@ -223,12 +225,12 @@
 
 + (CGSize)textSizeForText:(NSString *)txt
 {
-    CGFloat width = [UIScreen mainScreen].applicationFrame.size.width * 0.65f;
+    CGFloat width = [UIScreen mainScreen].applicationFrame.size.width * 0.75f;
     CGFloat height = MAX([JSBubbleView numberOfLinesForMessage:txt],
                          [txt numberOfLines]) * [JSMessageInputView textViewLineHeight];
     
     return [txt sizeWithFont:[JSBubbleView font]
-           constrainedToSize:CGSizeMake(width, height)
+           constrainedToSize:CGSizeMake(width - kJSAvatarSize, height + kJSAvatarSize)
                lineBreakMode:NSLineBreakByWordWrapping];
 }
 

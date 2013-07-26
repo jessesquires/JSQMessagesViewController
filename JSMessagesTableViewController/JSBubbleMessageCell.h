@@ -36,11 +36,6 @@
 #import <UIKit/UIKit.h>
 #import "JSBubbleView.h"
 
-#define DATE_LABEL_HEIGHT   12.0f
-#define PHOTO_EDGE_INSET    (UIEdgeInsets){2,4,2,4}
-#define PHOTO_SIZE          (CGSize){55,55}
-
-
 typedef enum {
     JSAvatarStyleCircle = 0,
     JSAvatarStyleSquare,
@@ -61,5 +56,9 @@ typedef enum {
 - (void)setMessage:(NSString *)msg;
 - (void)setTimestamp:(NSDate *)date;
 - (void)setAvatarImage:(UIImage *)image;
+
++ (CGFloat)neededHeightForText:(NSString *)bubbleViewText
+                     timestamp:(BOOL)hasTimestamp
+                        avatar:(BOOL)hasAvatar;
 
 @end

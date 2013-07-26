@@ -35,6 +35,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern CGFloat const kJSAvatarSize;
+
 typedef enum {
     JSBubbleMessageTypeIncoming = 0,
     JSBubbleMessageTypeOutgoing

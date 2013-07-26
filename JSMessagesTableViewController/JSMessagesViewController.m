@@ -202,9 +202,9 @@
 #pragma mark - Table view delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat dateHeight = [self shouldHaveTimestampForRowAtIndexPath:indexPath] ? DATE_LABEL_HEIGHT : 0.0f;
-    CGFloat avatarCellHeight = [self shouldHaveAvatarForRowAtIndexPath:indexPath] ? (PHOTO_SIZE.height + PHOTO_EDGE_INSET.top + PHOTO_EDGE_INSET.bottom) : 0.0f;
-    return MAX(avatarCellHeight, [JSBubbleView cellHeightForText:[self.dataSource textForRowAtIndexPath:indexPath]] + dateHeight);
+    return [JSBubbleMessageCell neededHeightForText:[self.dataSource textForRowAtIndexPath:indexPath]
+                                          timestamp:[self shouldHaveTimestampForRowAtIndexPath:indexPath]
+                                             avatar:[self shouldHaveAvatarForRowAtIndexPath:indexPath]];
 }
 
 #pragma mark - Messages view controller
