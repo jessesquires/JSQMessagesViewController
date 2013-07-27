@@ -147,6 +147,11 @@
                                                   0.0f);
     
     self.textView.scrollEnabled = (numLines >= 4);
+    
+    if(numLines >= 6) {
+        CGPoint bottomOffset = CGPointMake(0.0f, self.textView.contentSize.height - self.textView.bounds.size.height);
+        [self.textView setContentOffset:bottomOffset animated:YES];
+    }
 }
 
 + (CGFloat)textViewLineHeight
