@@ -292,14 +292,16 @@
     BOOL isShrinking = textViewContentHeight < self.previousTextViewContentHeight;
     CGFloat changeInHeight = textViewContentHeight - self.previousTextViewContentHeight;
     
-    if (changeInHeight > 0 && self.previousTextViewContentHeight == maxHeight) {
+    if (!isShrinking && self.previousTextViewContentHeight == maxHeight) {
         changeInHeight = 0;
+    } else {
+        changeInHeight = MIN(changeInHeight, maxHeight-self.previousTextViewContentHeight);
     }
     
-    if(!isShrinking)
-        [self.inputToolBarView adjustTextViewHeightBy:changeInHeight];
-    
     if(changeInHeight != 0.0f) {
+        if(!isShrinking)
+            [self.inputToolBarView adjustTextViewHeightBy:changeInHeight];
+
         [UIView animateWithDuration:0.25f
                          animations:^{
                              UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, self.tableView.contentInset.bottom + changeInHeight, 0.0f);
