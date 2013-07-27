@@ -72,6 +72,8 @@
     
     CGRect inputFrame = CGRectMake(0.0f, size.height - INPUT_HEIGHT, size.width, INPUT_HEIGHT);
     self.inputToolBarView = [[JSMessageInputView alloc] initWithFrame:inputFrame delegate:self];
+    
+    // TODO: refactor
     self.inputToolBarView.textView.dismissivePanGestureRecognizer = self.tableView.panGestureRecognizer;
     self.inputToolBarView.textView.keyboardDelegate = self;
 
@@ -116,12 +118,21 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [self.inputToolBarView resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     NSLog(@"*** %@: didReceiveMemoryWarning ***", self.class);
+}
+
+- (void)dealloc
+{
+    self.delegate = nil;
+    self.dataSource = nil;
+    self.tableView = nil;
+    self.inputToolBarView = nil;
 }
 
 #pragma mark - View rotation

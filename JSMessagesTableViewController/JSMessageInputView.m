@@ -71,6 +71,11 @@
     self.sendButton = nil;
 }
 
+- (BOOL)resignFirstResponder
+{
+    [self.textView resignFirstResponder];
+    return [super resignFirstResponder];
+}
 #pragma mark - Setup
 - (void)setup
 {
