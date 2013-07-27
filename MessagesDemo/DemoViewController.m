@@ -60,6 +60,16 @@
                        [NSDate distantPast],
                        [NSDate date],
                        nil];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
+                                                                                           target:self
+                                                                                           action:@selector(buttonPressed:)];
+}
+
+- (void)buttonPressed:(UIButton*)sender
+{
+    DemoViewController *vc = [[DemoViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Table view data source
