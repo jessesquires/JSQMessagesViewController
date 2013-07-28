@@ -68,6 +68,7 @@
 
 - (void)buttonPressed:(UIButton*)sender
 {
+    // Testing pushing/popping messages view
     DemoViewController *vc = [[DemoViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:vc animated:YES];
 }
