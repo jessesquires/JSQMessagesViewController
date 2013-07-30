@@ -89,6 +89,7 @@
     }
     else if([notification.name isEqualToString:UIKeyboardDidShowNotification]) {
         self.keyboard = self.inputAccessoryView.superview;
+        self.keyboard.hidden = NO;
         
         if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardDidShow)])
             [self.keyboardDelegate keyboardDidShow];
