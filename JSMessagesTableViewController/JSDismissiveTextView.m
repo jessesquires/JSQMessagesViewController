@@ -62,6 +62,11 @@
                                                  selector:@selector(handleKeyboardWillShowHideNotification:)
                                                      name:UIKeyboardDidShowNotification
                                                    object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleKeyboardWillShowHideNotification:)
+                                                     name:UIKeyboardDidHideNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -93,6 +98,10 @@
         
         if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardDidShow)])
             [self.keyboardDelegate keyboardDidShow];
+    }
+    else if([notification.name isEqualToString:UIKeyboardDidHideNotification]) {
+        self.keyboard.hidden = NO;
+        [self resignFirstResponder];
     }
 }
 
