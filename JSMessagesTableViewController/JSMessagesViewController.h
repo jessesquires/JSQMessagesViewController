@@ -100,6 +100,8 @@ typedef enum {
 
 @property (weak, nonatomic) id<JSMessagesViewDelegate> delegate;
 @property (weak, nonatomic) id<JSMessagesViewDataSource> dataSource;
+@property BOOL preventScrollToBottomWhileUserScrolling;
+
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) JSMessageInputView *inputToolBarView;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
@@ -121,5 +123,10 @@ typedef enum {
 - (void)handleWillShowKeyboard:(NSNotification *)notification;
 - (void)handleWillHideKeyboard:(NSNotification *)notification;
 - (void)keyboardWillShowHide:(NSNotification *)notification;
+
+#pragma mark - Scroll while respecting user interaction
+- (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath
+			  atScrollPosition:(UITableViewScrollPosition)position
+					  animated:(BOOL)animated;
 
 @end

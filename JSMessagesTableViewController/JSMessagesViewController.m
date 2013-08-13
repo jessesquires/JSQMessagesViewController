@@ -44,6 +44,7 @@
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
 - (void)setup;
+@property BOOL isUserScrolling;
 
 @end
 
@@ -58,6 +59,9 @@
         // fix for ipad modal form presentations
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
+	
+	self.preventScrollToBottomWhileUserScrolling = NO;
+	self.isUserScrolling = NO;
     
     CGSize size = self.view.frame.size;
 	
@@ -297,6 +301,8 @@
 
 - (void)scrollToBottomAnimated:(BOOL)animated
 {
+	if(self.isUserScrolling && self.preventScrollToBottomWhileUserScrolling) return;
+	
     NSInteger rows = [self.tableView numberOfRowsInSection:0];
     
     if(rows > 0) {
@@ -304,6 +310,24 @@
                               atScrollPosition:UITableViewScrollPositionBottom
                                       animated:animated];
     }
+}
+
+- (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath
+			  atScrollPosition:(UITableViewScrollPosition)position
+					  animated:(BOOL)animated{
+	if(self.isUserScrolling && self.preventScrollToBottomWhileUserScrolling) return;
+	
+	[self.tableView scrollToRowAtIndexPath:indexPath
+						  atScrollPosition:position
+								  animated:animated];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+	self.isUserScrolling = NO;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+	self.isUserScrolling = YES;
 }
 
 #pragma mark - Text view delegate
