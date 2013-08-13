@@ -51,8 +51,17 @@ typedef enum {
 typedef enum {
     JSMessagesViewAvatarPolicyIncomingOnly = 0,
     JSMessagesViewAvatarPolicyBoth,
-    JSMessagesViewAvatarPolicyNone
+    JSMessagesViewAvatarPolicyNone,
+    JSMessagesViewAvatarPolicyOutgoingOnly
 } JSMessagesViewAvatarPolicy;
+
+
+typedef enum {
+    JSMessagesViewSubtitlePolicyIncomingOnly = 0,
+	JSMessagesViewSubtitlePolicyOutgoingOnly,
+    JSMessagesViewSubtitlePolicyBoth,
+    JSMessagesViewSubtitlePolicyNone
+} JSMessagesViewSubtitlePolicy;
 
 
 @protocol JSMessagesViewDelegate <NSObject>
@@ -61,10 +70,10 @@ typedef enum {
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (JSMessagesViewTimestampPolicy)timestampPolicy;
-- (JSMessagesViewAvatarPolicy)avatarPolicy;
-- (JSAvatarStyle)avatarStyle;
 
 @optional
+- (JSMessagesViewAvatarPolicy)avatarPolicy;
+- (JSAvatarStyle)avatarStyle;
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
@@ -75,8 +84,14 @@ typedef enum {
 @required
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (UIImage *)avatarImageForIncomingMessage;
-- (UIImage *)avatarImageForOutgoingMessage;
+
+@optional
+- (UIImage *)avatarImageForIncomingMessageAtIndexPath:(NSIndexPath*)indexPath;
+- (UIImage *)avatarImageForOutgoingMessageAtIndexPath:(NSIndexPath*)indexPath;
+
+- (UIImage *)avatarImageForIncomingMessage __attribute__ ((deprecated));
+- (UIImage *)avatarImageForOutgoingMessage __attribute__ ((deprecated));
+
 @end
 
 

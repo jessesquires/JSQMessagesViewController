@@ -76,7 +76,7 @@
     // TODO: refactor
     self.inputToolBarView.textView.dismissivePanGestureRecognizer = self.tableView.panGestureRecognizer;
     self.inputToolBarView.textView.keyboardDelegate = self;
-
+	
     UIButton *sendButton = [self sendButton];
     sendButton.enabled = NO;
     sendButton.frame = CGRectMake(self.inputToolBarView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
@@ -199,11 +199,23 @@
     if(hasAvatar) {
         switch (type) {
             case JSBubbleMessageTypeIncoming:
-                [cell setAvatarImage:[self.dataSource avatarImageForIncomingMessage]];
+				if([self.dataSource respondsToSelector:@selector(avatarImageForIncomingMessageAtIndexPath:)]) {
+					[cell setAvatarImage:[self.dataSource avatarImageForIncomingMessageAtIndexPath:indexPath]];
+				}
+				else if([self.dataSource respondsToSelector:@selector(avatarImageForIncomingMessage)]) {
+					[cell setAvatarImage:[self.dataSource performSelector:@selector(avatarImageForIncomingMessage)]];
+				}
+				
                 break;
                 
             case JSBubbleMessageTypeOutgoing:
-                [cell setAvatarImage:[self.dataSource avatarImageForOutgoingMessage]];
+				if([self.dataSource respondsToSelector:@selector(avatarImageForOutgoingMessageAtIndexPath:)]) {
+					[cell setAvatarImage:[self.dataSource avatarImageForOutgoingMessageAtIndexPath:indexPath]];
+				}
+				else if([self.dataSource respondsToSelector:@selector(avatarImageForOutgoingMessage)]) {
+					[cell setAvatarImage:[self.dataSource performSelector:@selector(avatarImageForOutgoingMessage)]];
+				}
+				
                 break;
         }
     }
@@ -248,9 +260,16 @@
 
 - (BOOL)shouldHaveAvatarForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	if(![self.delegate respondsToSelector:@selector(avatarPolicy)]) {
+		return NO;
+	}
+	
     switch ([self.delegate avatarPolicy]) {
         case JSMessagesViewAvatarPolicyIncomingOnly:
             return [self.delegate messageTypeForRowAtIndexPath:indexPath] == JSBubbleMessageTypeIncoming;
+			
+		case JSMessagesViewAvatarPolicyOutgoingOnly:
+			return [self.delegate messageTypeForRowAtIndexPath:indexPath] == JSBubbleMessageTypeOutgoing;
             
         case JSMessagesViewAvatarPolicyBoth:
             return YES;
@@ -379,11 +398,11 @@
                          CGFloat messageViewFrameBottom = self.view.frame.size.height - INPUT_HEIGHT;
                          if(inputViewFrameY > messageViewFrameBottom)
                              inputViewFrameY = messageViewFrameBottom;
-
+						 
                          self.inputToolBarView.frame = CGRectMake(inputViewFrame.origin.x,
-                                                           inputViewFrameY,
-                                                           inputViewFrame.size.width,
-                                                           inputViewFrame.size.height);
+																  inputViewFrameY,
+																  inputViewFrame.size.width,
+																  inputViewFrame.size.height);
                          
                          UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
                                                                 0.0f,
