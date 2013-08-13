@@ -182,10 +182,16 @@
 {
     JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
     JSBubbleMessageStyle bubbleStyle = [self.delegate messageStyleForRowAtIndexPath:indexPath];
-    JSAvatarStyle avatarStyle = [self.delegate avatarStyle];
+    JSAvatarStyle avatarStyle = JSAvatarStyleNone;
+	if([self.delegate respondsToSelector:@selector(avatarStyle)])
+		avatarStyle = [self.delegate avatarStyle];
     
     BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
+	
+	BOOL hasSubtitle = NO;
+	if([self.delegate respondsToSelector:@selector(hasSubtitleForRowAtIndexPath:)])
+		hasSubtitle = [self.delegate hasSubtitleForRowAtIndexPath:indexPath];
     
     NSString *CellID = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d", type, bubbleStyle, hasTimestamp, hasAvatar];
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellID];
@@ -195,10 +201,14 @@
                                                    bubbleStyle:bubbleStyle
                                                    avatarStyle:(hasAvatar) ? avatarStyle : JSAvatarStyleNone
                                                   hasTimestamp:hasTimestamp
+												   hasSubtitle:hasSubtitle
                                                reuseIdentifier:CellID];
     
     if(hasTimestamp)
         [cell setTimestamp:[self.dataSource timestampForRowAtIndexPath:indexPath]];
+	
+	if(hasSubtitle)
+		[cell setSubtitle:[self.dataSource subtitleForRowAtIndexPath:indexPath]];
     
     if(hasAvatar) {
         switch (type) {
@@ -232,8 +242,14 @@
 #pragma mark - Table view delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	BOOL hasSubtitle = NO;
+	if([self.delegate respondsToSelector:@selector(hasSubtitleForRowAtIndexPath:)]) {
+		hasSubtitle = [self.delegate hasSubtitleForRowAtIndexPath:indexPath];
+	}
+	
     return [JSBubbleMessageCell neededHeightForText:[self.dataSource textForRowAtIndexPath:indexPath]
                                           timestamp:[self shouldHaveTimestampForRowAtIndexPath:indexPath]
+										   subtitle:hasSubtitle
                                              avatar:[self shouldHaveAvatarForRowAtIndexPath:indexPath]];
 }
 
@@ -288,8 +304,14 @@
 {
     [self.inputToolBarView.textView setText:nil];
     [self textViewDidChange:self.inputToolBarView.textView];
-    [self.tableView reloadData];
-    [self scrollToBottomAnimated:YES];
+	
+	if([self.delegate respondsToSelector:@selector(messageDoneSending)]) {
+		[self.delegate messageDoneSending];
+	}
+	else {
+		[self.tableView reloadData];
+		[self scrollToBottomAnimated:YES];
+	}
 }
 
 - (void)setBackgroundColor:(UIColor *)color

@@ -56,14 +56,6 @@ typedef enum {
 } JSMessagesViewAvatarPolicy;
 
 
-typedef enum {
-    JSMessagesViewSubtitlePolicyIncomingOnly = 0,
-	JSMessagesViewSubtitlePolicyOutgoingOnly,
-    JSMessagesViewSubtitlePolicyBoth,
-    JSMessagesViewSubtitlePolicyNone
-} JSMessagesViewSubtitlePolicy;
-
-
 @protocol JSMessagesViewDelegate <NSObject>
 @required
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text;
@@ -72,9 +64,13 @@ typedef enum {
 - (JSMessagesViewTimestampPolicy)timestampPolicy;
 
 @optional
+- (BOOL)hasSubtitleForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 - (JSMessagesViewAvatarPolicy)avatarPolicy;
 - (JSAvatarStyle)avatarStyle;
+
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)messageDoneSending;
 
 @end
 
@@ -86,6 +82,8 @@ typedef enum {
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @optional
+- (NSString *)subtitleForRowAtIndexPath:(NSIndexPath*)indexPath;
+
 - (UIImage *)avatarImageForIncomingMessageAtIndexPath:(NSIndexPath*)indexPath;
 - (UIImage *)avatarImageForOutgoingMessageAtIndexPath:(NSIndexPath*)indexPath;
 
