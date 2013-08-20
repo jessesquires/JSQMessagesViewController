@@ -119,6 +119,11 @@
     return JSAvatarStyleSquare;
 }
 
+- (JSInputBarStyle)inputBarStyle
+{
+  return JSInputBarStyleDefault;
+}
+
 //  Optional delegate method
 //  Required if using `JSMessagesViewTimestampPolicyCustom`
 //

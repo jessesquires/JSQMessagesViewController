@@ -27,6 +27,7 @@
 //
 
 #import "UIImage+JSMessagesView.h"
+#import "JSMessageInputView.h"
 
 @implementation UIImage (JSMessagesView)
 
@@ -108,11 +109,17 @@
 #pragma mark - Input bar
 + (UIImage *)inputBar
 {
+  if ([JSMessageInputView inputBarStyle] == JSInputBarStyleFlat)
+    return [UIImage imageNamed:@"input-bar-flat"];
+  else      // jSInputBarStyleDefault
     return [[UIImage imageNamed:@"input-bar"] resizableImageWithCapInsets:UIEdgeInsetsMake(19.0f, 3.0f, 19.0f, 3.0f)];
 }
 
 + (UIImage *)inputField
 {
+  if ([JSMessageInputView inputBarStyle] == JSInputBarStyleFlat)
+    return nil; // no graphic around input field.
+  else          // jSInputBarStyleDefault
     return [[UIImage imageNamed:@"input-field"] resizableImageWithCapInsets:UIEdgeInsetsMake(20.0f, 12.0f, 18.0f, 18.0f)];
 }
 
@@ -141,6 +148,20 @@
                                 resizingMode:UIImageResizingModeStretch];
 }
 
+// JeremyStone
+- (UIImage *)makeStretchableFlatIncoming
+{
+  return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 20.0f, 15.0f, 20.0f)
+                              resizingMode:UIImageResizingModeStretch];
+}
+
+// JeremyStone
+- (UIImage *)makeStretchableFlatOutgoing
+{
+  return [self resizableImageWithCapInsets:UIEdgeInsetsMake(14.0f, 15.0f, 14.0f, 20.0f)
+                              resizingMode:UIImageResizingModeStretch];
+}
+
 #pragma mark - Incoming message bubbles
 + (UIImage *)bubbleDefaultIncoming
 {
@@ -167,6 +188,18 @@
     return [[UIImage imageNamed:@"bubble-square-incoming-selected"] makeStretchableSquareIncoming];
 }
 
+// JeremyStone
++ (UIImage *)bubbleFlatIncoming
+{
+  return [[UIImage imageNamed:@"bubble-flat-incoming"] makeStretchableFlatIncoming];
+}
+
+// JeremyStone
++ (UIImage *)bubbleFlatIncomingSelected
+{
+  return [self bubbleFlatIncoming];
+}
+
 #pragma mark - Outgoing message bubbles
 + (UIImage *)bubbleDefaultOutgoing
 {
@@ -191,6 +224,18 @@
 + (UIImage *)bubbleSquareOutgoingSelected
 {
     return [[UIImage imageNamed:@"bubble-square-outgoing-selected"] makeStretchableSquareOutgoing];
+}
+
+// JeremyStone
++ (UIImage *)bubbleFlatOutgoing
+{
+  return [self bubbleFlatOutgoingSelected];
+}
+
+// JeremyStone
++ (UIImage *)bubbleFlatOutgoingSelected
+{
+  return [[UIImage imageNamed:@"bubble-flat-outgoing"] makeStretchableFlatOutgoing];
 }
 
 @end

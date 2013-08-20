@@ -46,7 +46,8 @@ typedef enum {
 typedef enum {
     JSBubbleMessageStyleDefault = 0,
     JSBubbleMessageStyleSquare,
-    JSBubbleMessageStyleDefaultGreen
+    JSBubbleMessageStyleDefaultGreen,
+    JSBubbleMessageStyleFlat
 } JSBubbleMessageStyle;
 
 

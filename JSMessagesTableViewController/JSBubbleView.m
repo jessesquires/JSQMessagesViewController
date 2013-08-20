@@ -139,7 +139,10 @@ CGFloat const kJSAvatarSize = 50.0f;
             
         case JSBubbleMessageStyleSquare:
             return (self.type == JSBubbleMessageTypeIncoming) ? [UIImage bubbleSquareIncomingSelected] : [UIImage bubbleSquareOutgoingSelected];
-            
+        
+      case JSBubbleMessageStyleFlat:
+        return (self.type == JSBubbleMessageTypeIncoming) ? [UIImage bubbleFlatIncomingSelected] : [UIImage bubbleFlatOutgoingSelected];
+        
         default:
             return nil;
     }
@@ -195,7 +198,10 @@ CGFloat const kJSAvatarSize = 50.0f;
             
         case JSBubbleMessageStyleDefaultGreen:
             return [UIImage bubbleDefaultIncomingGreen];
-            
+        
+      case JSBubbleMessageStyleFlat:
+        return [UIImage bubbleFlatIncoming];
+        
         default:
             return nil;
     }
@@ -212,7 +218,10 @@ CGFloat const kJSAvatarSize = 50.0f;
             
         case JSBubbleMessageStyleDefaultGreen:
             return [UIImage bubbleDefaultOutgoingGreen];
-            
+        
+      case JSBubbleMessageStyleFlat:
+        return [UIImage bubbleFlatOutgoing];
+        
         default:
             return nil;
     }
