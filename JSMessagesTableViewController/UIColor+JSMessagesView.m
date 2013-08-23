@@ -27,11 +27,16 @@
 //
 
 #import "UIColor+JSMessagesView.h"
+#import "JSMessageInputView.h"
+
 
 @implementation UIColor (JSMessagesView)
 
 + (UIColor *)messagesBackgroundColor
 {
+    if ([JSMessageInputView inputBarStyle] == JSInputBarStyleFlat)
+        return [UIColor whiteColor];
+
     return [UIColor colorWithRed:0.859f green:0.886f blue:0.929f alpha:1.0f];
 }
 

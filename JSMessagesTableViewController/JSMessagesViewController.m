@@ -68,8 +68,6 @@
 	self.tableView.delegate = self;
 	[self.view addSubview:self.tableView];
 	
-    [self setBackgroundColor:[UIColor messagesBackgroundColor]];
-    
     CGRect inputFrame = CGRectMake(0.0f, size.height - INPUT_HEIGHT, size.width, INPUT_HEIGHT);
     self.inputToolBarView = [[JSMessageInputView alloc] initWithFrame:inputFrame delegate:self];
     
@@ -85,6 +83,8 @@
          forControlEvents:UIControlEventTouchUpInside];
     [self.inputToolBarView setSendButton:sendButton];
     [self.view addSubview:self.inputToolBarView];
+
+    [self setBackgroundColor:[UIColor messagesBackgroundColor]];    
 }
 
 - (UIButton *)sendButton
