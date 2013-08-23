@@ -101,7 +101,7 @@
 
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return JSBubbleMessageStyleSquare;
+    return JSBubbleMessageStyleFlat;
 }
 
 - (JSMessagesViewTimestampPolicy)timestampPolicy
@@ -121,7 +121,7 @@
 
 - (JSInputBarStyle)inputBarStyle
 {
-  return JSInputBarStyleDefault;
+  return JSInputBarStyleFlat;
 }
 
 //  Optional delegate method

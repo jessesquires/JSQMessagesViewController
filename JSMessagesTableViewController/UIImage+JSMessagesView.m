@@ -197,7 +197,7 @@
 // JeremyStone
 + (UIImage *)bubbleFlatIncomingSelected
 {
-  return [self bubbleFlatIncoming];
+  return [[UIImage imageNamed:@"bubble-flat-incoming-selected"] makeStretchableFlatIncoming];
 }
 
 #pragma mark - Outgoing message bubbles
@@ -229,7 +229,7 @@
 // JeremyStone
 + (UIImage *)bubbleFlatOutgoing
 {
-  return [self bubbleFlatOutgoingSelected];
+  return [[UIImage imageNamed:@"bubble-flat-outgoing-selected"] makeStretchableFlatOutgoing];
 }
 
 // JeremyStone
