@@ -119,26 +119,42 @@
 #pragma mark - Bubble cap insets
 - (UIImage *)makeStretchableDefaultIncoming
 {
-    return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 20.0f, 15.0f, 20.0f)
-                                resizingMode:UIImageResizingModeStretch];
+    if ([self respondsToSelector:@selector(resizableImageWithCapInsets:resizingMode:)]) {
+        return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 20.0f, 15.0f, 20.0f)
+                                    resizingMode:UIImageResizingModeStretch];
+    } else {
+        return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 20.0f, 15.0f, 20.0f)];
+    }
 }
 
 - (UIImage *)makeStretchableDefaultOutgoing
 {
-    return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 20.0f, 15.0f, 20.0f)
-                                resizingMode:UIImageResizingModeStretch];
+    if ([self respondsToSelector:@selector(resizableImageWithCapInsets:resizingMode:)]) {
+        return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 20.0f, 15.0f, 20.0f)
+                                    resizingMode:UIImageResizingModeStretch];
+    } else {
+        return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 20.0f, 15.0f, 20.0f)];
+    }
 }
 
 - (UIImage *)makeStretchableSquareIncoming
 {
-    return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 25.0f, 16.0f, 23.0f)
-                                resizingMode:UIImageResizingModeStretch];
+    if ([self respondsToSelector:@selector(resizableImageWithCapInsets:resizingMode:)]) {
+        return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 25.0f, 16.0f, 23.0f)
+                                    resizingMode:UIImageResizingModeStretch];
+    } else {
+        return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 20.0f, 15.0f, 20.0f)];
+    }
 }
 
 - (UIImage *)makeStretchableSquareOutgoing
 {
-    return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 18.0f, 16.0f, 23.0f)
-                                resizingMode:UIImageResizingModeStretch];
+    if ([self respondsToSelector:@selector(resizableImageWithCapInsets:resizingMode:)]) {
+        return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 18.0f, 16.0f, 23.0f)
+                                    resizingMode:UIImageResizingModeStretch];
+    } else {
+        return [self resizableImageWithCapInsets:UIEdgeInsetsMake(15.0f, 20.0f, 15.0f, 20.0f)];
+    }
 }
 
 #pragma mark - Incoming message bubbles
