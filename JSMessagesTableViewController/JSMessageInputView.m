@@ -179,7 +179,7 @@ static id<JSMessageInputViewDelegate> __delegate;
 
 + (CGFloat)textViewLineHeight
 {
-    return 30.0f; // for fontSize 15.0f
+    return 36.0f; // for fontSize 15.0f
 }
 
 + (CGFloat)maxLines

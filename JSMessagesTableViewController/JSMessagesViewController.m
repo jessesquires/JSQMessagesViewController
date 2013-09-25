@@ -39,7 +39,7 @@
 #import "UIColor+JSMessagesView.h"
 #import "JSDismissiveTextView.h"
 
-#define INPUT_HEIGHT 40.0f
+#define INPUT_HEIGHT 46.0f
 
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
@@ -305,9 +305,15 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-    CGFloat maxHeight = [JSMessageInputView maxHeight];
-    CGFloat textViewContentHeight = textView.contentSize.height;
-    BOOL isShrinking = textViewContentHeight < self.previousTextViewContentHeight;
+  CGFloat maxHeight = [JSMessageInputView maxHeight];
+  // CGFloat textViewContentHeight = textView.contentSize.height;
+  // There seems to be a bug in Apple's code for textView.contentSize.height. This code was implemented as a workaround for calculating the appropriate textViewContentHeight. https://devforums.apple.com/thread/192052 https://github.com/jessesquires/MessagesTableViewController/issues/50 https://github.com/jessesquires/MessagesTableViewController/issues/47
+  
+  CGSize size = [textView sizeThatFits:CGSizeMake(textView.frame.size.width, maxHeight)];
+  CGFloat textViewContentHeight = size.height - 5.5f;
+  // End of textView.contentSize replacement code
+
+  BOOL isShrinking = textViewContentHeight < self.previousTextViewContentHeight;
     CGFloat changeInHeight = textViewContentHeight - self.previousTextViewContentHeight;
     
     if(!isShrinking && self.previousTextViewContentHeight == maxHeight) {

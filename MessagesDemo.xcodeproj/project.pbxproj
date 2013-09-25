@@ -356,6 +356,11 @@
 				CLASSPREFIX = JS;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Hexed Bits";
+				TargetAttributes = {
+					881AE55816D13CDC008F7636 = {
+						DevelopmentTeam = PABMVQJRY5;
+					};
+				};
 			};
 			buildConfigurationList = 881AE55416D13CDC008F7636 /* Build configuration list for PBXProject "MessagesDemo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -529,11 +534,14 @@
 		881AE58016D13CDC008F7636 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MessagesDemo/MessagesDemo-Prefix.pch";
 				INFOPLIST_FILE = "MessagesDemo/MessagesDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -541,11 +549,14 @@
 		881AE58116D13CDC008F7636 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MessagesDemo/MessagesDemo-Prefix.pch";
 				INFOPLIST_FILE = "MessagesDemo/MessagesDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
