@@ -306,7 +306,7 @@
 - (void)textViewDidChange:(UITextView *)textView
 {
     CGFloat maxHeight = [JSMessageInputView maxHeight];
-    CGFloat textViewContentHeight = textView.contentSize.height;
+    CGFloat textViewContentHeight = ceilf([textView sizeThatFits:textView.frame.size].height + 9);
     BOOL isShrinking = textViewContentHeight < self.previousTextViewContentHeight;
     CGFloat changeInHeight = textViewContentHeight - self.previousTextViewContentHeight;
     
