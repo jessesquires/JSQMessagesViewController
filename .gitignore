@@ -1,9 +1,25 @@
+# Xcode
+
 .DS_Store
+/build/*
+*/build/*
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+profile
+*.moved-aside
+DerivedData
+.idea/
+*.hmap
+*.xccheckout
 
-/build/
-MessagesDemo.xcodeproj/project.xcworkspace/xcuserdata/jesse.xcuserdatad/
-MessagesDemo.xcodeproj/xcuserdata/jesse.xcuserdatad/
 
-/MessagesDemoStoryboards/build/
-/MessagesDemoStoryboards/MessagesDemoSB.xcodeproj/project.xcworkspace/xcuserdata/jesse.xcuserdatad/
-/MessagesDemoStoryboards/MessagesDemoSB.xcodeproj/xcuserdata/jesse.xcuserdatad/
+#CocoaPods
+
+Pods

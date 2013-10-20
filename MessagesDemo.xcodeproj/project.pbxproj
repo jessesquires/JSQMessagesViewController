@@ -53,6 +53,7 @@
 		88301F1F16F77B3D0037524D /* messageSent.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 88301F0516F77B3D0037524D /* messageSent.aiff */; };
 		88301F2016F77B3D0037524D /* UIView+AnimationOptionsForCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 88301F0716F77B3D0037524D /* UIView+AnimationOptionsForCurve.m */; };
 		8856C7DD16F9273C00FC921C /* UIColor+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8856C7DC16F9273C00FC921C /* UIColor+JSMessagesView.m */; };
+		886CA651181454610096E52E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 886CA650181454610096E52E /* Images.xcassets */; };
 		88A564D017A196A5006BC6E6 /* UIImage+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A564CF17A196A5006BC6E6 /* UIImage+JSMessagesView.m */; };
 		88A564D317A19DB0006BC6E6 /* bubble-default-incoming-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88A564D117A19DAD006BC6E6 /* bubble-default-incoming-selected@2x.png */; };
 		88A564D417A19DB0006BC6E6 /* bubble-default-incoming-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 88A564D217A19DAE006BC6E6 /* bubble-default-incoming-selected.png */; };
@@ -126,6 +127,7 @@
 		88301F0716F77B3D0037524D /* UIView+AnimationOptionsForCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimationOptionsForCurve.m"; sourceTree = "<group>"; };
 		8856C7DB16F9273C00FC921C /* UIColor+JSMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+JSMessagesView.h"; sourceTree = "<group>"; };
 		8856C7DC16F9273C00FC921C /* UIColor+JSMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+JSMessagesView.m"; sourceTree = "<group>"; };
+		886CA650181454610096E52E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		88A564CE17A196A5006BC6E6 /* UIImage+JSMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+JSMessagesView.h"; sourceTree = "<group>"; };
 		88A564CF17A196A5006BC6E6 /* UIImage+JSMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JSMessagesView.m"; sourceTree = "<group>"; };
 		88A564D117A19DAD006BC6E6 /* bubble-default-incoming-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble-default-incoming-selected@2x.png"; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				8808C57717A2DE6C008E2C1C /* demo-avatar-jobs.png */,
 				8808C57817A2DE6C008E2C1C /* demo-avatar-woz.png */,
 				88301EE416F77B3D0037524D /* JSMessagesTableViewController */,
+				886CA650181454610096E52E /* Images.xcassets */,
 				881AE56316D13CDC008F7636 /* Supporting Files */,
 			);
 			path = MessagesDemo;
@@ -352,6 +355,7 @@
 				881AE56716D13CDC008F7636 /* InfoPlist.strings in Resources */,
 				881AE56F16D13CDC008F7636 /* Default.png in Resources */,
 				881AE57116D13CDC008F7636 /* Default@2x.png in Resources */,
+				886CA651181454610096E52E /* Images.xcassets in Resources */,
 				881AE57316D13CDC008F7636 /* Default-568h@2x.png in Resources */,
 				88301F0E16F77B3D0037524D /* input-bar.png in Resources */,
 				88301F0F16F77B3D0037524D /* input-bar@2x.png in Resources */,
@@ -489,10 +493,12 @@
 		881AE58016D13CDC008F7636 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MessagesDemo/MessagesDemo-Prefix.pch";
 				INFOPLIST_FILE = "MessagesDemo/MessagesDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -501,10 +507,12 @@
 		881AE58116D13CDC008F7636 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MessagesDemo/MessagesDemo-Prefix.pch";
 				INFOPLIST_FILE = "MessagesDemo/MessagesDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
