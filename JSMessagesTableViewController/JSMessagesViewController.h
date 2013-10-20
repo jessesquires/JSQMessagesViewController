@@ -51,7 +51,8 @@ typedef enum {
 typedef enum {
     JSMessagesViewAvatarPolicyIncomingOnly = 0,
     JSMessagesViewAvatarPolicyBoth,
-    JSMessagesViewAvatarPolicyNone
+    JSMessagesViewAvatarPolicyNone,
+    JSMessagesViewAvatarPolicyOutgoingOnly
 } JSMessagesViewAvatarPolicy;
 
 
@@ -61,11 +62,15 @@ typedef enum {
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (JSMessagesViewTimestampPolicy)timestampPolicy;
+
+@optional
+- (BOOL)hasSubtitleForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 - (JSMessagesViewAvatarPolicy)avatarPolicy;
 - (JSAvatarStyle)avatarStyle;
 
-@optional
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)messageDoneSending;
 
 @end
 
@@ -75,8 +80,16 @@ typedef enum {
 @required
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (UIImage *)avatarImageForIncomingMessage;
-- (UIImage *)avatarImageForOutgoingMessage;
+
+@optional
+- (NSString *)subtitleForRowAtIndexPath:(NSIndexPath*)indexPath;
+
+- (UIImage *)avatarImageForIncomingMessageAtIndexPath:(NSIndexPath*)indexPath;
+- (UIImage *)avatarImageForOutgoingMessageAtIndexPath:(NSIndexPath*)indexPath;
+
+- (UIImage *)avatarImageForIncomingMessage __attribute__ ((deprecated));
+- (UIImage *)avatarImageForOutgoingMessage __attribute__ ((deprecated));
+
 @end
 
 
@@ -85,6 +98,8 @@ typedef enum {
 
 @property (weak, nonatomic) id<JSMessagesViewDelegate> delegate;
 @property (weak, nonatomic) id<JSMessagesViewDataSource> dataSource;
+@property BOOL preventScrollToBottomWhileUserScrolling;
+
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) JSMessageInputView *inputToolBarView;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
@@ -106,5 +121,10 @@ typedef enum {
 - (void)handleWillShowKeyboard:(NSNotification *)notification;
 - (void)handleWillHideKeyboard:(NSNotification *)notification;
 - (void)keyboardWillShowHide:(NSNotification *)notification;
+
+#pragma mark - Scroll while respecting user interaction
+- (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath
+			  atScrollPosition:(UITableViewScrollPosition)position
+					  animated:(BOOL)animated;
 
 @end
