@@ -44,6 +44,7 @@
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
 - (void)setup;
+@property BOOL isUserScrolling;
 
 @end
 
@@ -58,6 +59,9 @@
         // fix for ipad modal form presentations
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
+	
+	self.preventScrollToBottomWhileUserScrolling = NO;
+	self.isUserScrolling = NO;
     
     CGSize size = self.view.frame.size;
 	
@@ -76,7 +80,7 @@
     // TODO: refactor
     self.inputToolBarView.textView.dismissivePanGestureRecognizer = self.tableView.panGestureRecognizer;
     self.inputToolBarView.textView.keyboardDelegate = self;
-
+	
     UIButton *sendButton = [self sendButton];
     sendButton.enabled = NO;
     sendButton.frame = CGRectMake(self.inputToolBarView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
@@ -178,10 +182,16 @@
 {
     JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
     JSBubbleMessageStyle bubbleStyle = [self.delegate messageStyleForRowAtIndexPath:indexPath];
-    JSAvatarStyle avatarStyle = [self.delegate avatarStyle];
+    JSAvatarStyle avatarStyle = JSAvatarStyleNone;
+	if([self.delegate respondsToSelector:@selector(avatarStyle)])
+		avatarStyle = [self.delegate avatarStyle];
     
     BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
+	
+	BOOL hasSubtitle = NO;
+	if([self.delegate respondsToSelector:@selector(hasSubtitleForRowAtIndexPath:)])
+		hasSubtitle = [self.delegate hasSubtitleForRowAtIndexPath:indexPath];
     
     NSString *CellID = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d", type, bubbleStyle, hasTimestamp, hasAvatar];
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellID];
@@ -191,19 +201,35 @@
                                                    bubbleStyle:bubbleStyle
                                                    avatarStyle:(hasAvatar) ? avatarStyle : JSAvatarStyleNone
                                                   hasTimestamp:hasTimestamp
+												   hasSubtitle:hasSubtitle
                                                reuseIdentifier:CellID];
     
     if(hasTimestamp)
         [cell setTimestamp:[self.dataSource timestampForRowAtIndexPath:indexPath]];
+	
+	if(hasSubtitle)
+		[cell setSubtitle:[self.dataSource subtitleForRowAtIndexPath:indexPath]];
     
     if(hasAvatar) {
         switch (type) {
             case JSBubbleMessageTypeIncoming:
-                [cell setAvatarImage:[self.dataSource avatarImageForIncomingMessage]];
+				if([self.dataSource respondsToSelector:@selector(avatarImageForIncomingMessageAtIndexPath:)]) {
+					[cell setAvatarImage:[self.dataSource avatarImageForIncomingMessageAtIndexPath:indexPath]];
+				}
+				else if([self.dataSource respondsToSelector:@selector(avatarImageForIncomingMessage)]) {
+					[cell setAvatarImage:[self.dataSource performSelector:@selector(avatarImageForIncomingMessage)]];
+				}
+				
                 break;
                 
             case JSBubbleMessageTypeOutgoing:
-                [cell setAvatarImage:[self.dataSource avatarImageForOutgoingMessage]];
+				if([self.dataSource respondsToSelector:@selector(avatarImageForOutgoingMessageAtIndexPath:)]) {
+					[cell setAvatarImage:[self.dataSource avatarImageForOutgoingMessageAtIndexPath:indexPath]];
+				}
+				else if([self.dataSource respondsToSelector:@selector(avatarImageForOutgoingMessage)]) {
+					[cell setAvatarImage:[self.dataSource performSelector:@selector(avatarImageForOutgoingMessage)]];
+				}
+				
                 break;
         }
     }
@@ -216,8 +242,14 @@
 #pragma mark - Table view delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	BOOL hasSubtitle = NO;
+	if([self.delegate respondsToSelector:@selector(hasSubtitleForRowAtIndexPath:)]) {
+		hasSubtitle = [self.delegate hasSubtitleForRowAtIndexPath:indexPath];
+	}
+	
     return [JSBubbleMessageCell neededHeightForText:[self.dataSource textForRowAtIndexPath:indexPath]
                                           timestamp:[self shouldHaveTimestampForRowAtIndexPath:indexPath]
+										   subtitle:hasSubtitle
                                              avatar:[self shouldHaveAvatarForRowAtIndexPath:indexPath]];
 }
 
@@ -248,9 +280,16 @@
 
 - (BOOL)shouldHaveAvatarForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	if(![self.delegate respondsToSelector:@selector(avatarPolicy)]) {
+		return NO;
+	}
+	
     switch ([self.delegate avatarPolicy]) {
         case JSMessagesViewAvatarPolicyIncomingOnly:
             return [self.delegate messageTypeForRowAtIndexPath:indexPath] == JSBubbleMessageTypeIncoming;
+			
+		case JSMessagesViewAvatarPolicyOutgoingOnly:
+			return [self.delegate messageTypeForRowAtIndexPath:indexPath] == JSBubbleMessageTypeOutgoing;
             
         case JSMessagesViewAvatarPolicyBoth:
             return YES;
@@ -265,8 +304,14 @@
 {
     [self.inputToolBarView.textView setText:nil];
     [self textViewDidChange:self.inputToolBarView.textView];
-    [self.tableView reloadData];
-    [self scrollToBottomAnimated:YES];
+	
+	if([self.delegate respondsToSelector:@selector(messageDoneSending)]) {
+		[self.delegate messageDoneSending];
+	}
+	else {
+		[self.tableView reloadData];
+		[self scrollToBottomAnimated:YES];
+	}
 }
 
 - (void)setBackgroundColor:(UIColor *)color
@@ -278,6 +323,8 @@
 
 - (void)scrollToBottomAnimated:(BOOL)animated
 {
+	if(self.isUserScrolling && self.preventScrollToBottomWhileUserScrolling) return;
+	
     NSInteger rows = [self.tableView numberOfRowsInSection:0];
     
     if(rows > 0) {
@@ -285,6 +332,24 @@
                               atScrollPosition:UITableViewScrollPositionBottom
                                       animated:animated];
     }
+}
+
+- (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath
+			  atScrollPosition:(UITableViewScrollPosition)position
+					  animated:(BOOL)animated{
+	if(self.isUserScrolling && self.preventScrollToBottomWhileUserScrolling) return;
+	
+	[self.tableView scrollToRowAtIndexPath:indexPath
+						  atScrollPosition:position
+								  animated:animated];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+	self.isUserScrolling = NO;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+	self.isUserScrolling = YES;
 }
 
 #pragma mark - Text view delegate
@@ -379,11 +444,11 @@
                          CGFloat messageViewFrameBottom = self.view.frame.size.height - INPUT_HEIGHT;
                          if(inputViewFrameY > messageViewFrameBottom)
                              inputViewFrameY = messageViewFrameBottom;
-
+						 
                          self.inputToolBarView.frame = CGRectMake(inputViewFrame.origin.x,
-                                                           inputViewFrameY,
-                                                           inputViewFrame.size.width,
-                                                           inputViewFrame.size.height);
+																  inputViewFrameY,
+																  inputViewFrame.size.width,
+																  inputViewFrame.size.height);
                          
                          UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
                                                                 0.0f,

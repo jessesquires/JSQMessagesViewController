@@ -49,6 +49,7 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 
 * In `- (void)viewDidLoad`
 	* Set your view controller as the `delegate` and `datasource`
+	* *Optional* set `preventScrollToBottomWhileUserScrolling` to `YES` if you would like to prevent the tableview from being scrolled to the bottom while the user is scrolling the tableview manually. The method `scrollToRowAtIndexPath:indexPath:atScrollPosition:animated:` can also be used to implement scrolling functionality that respects this setting.
 	* Set your view controller `title`
 
 #####Implement the `JSMessagesViewDelegate` protocol
@@ -95,8 +96,9 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 - (JSMessagesViewAvatarPolicy)avatarPolicy
 ````
 
-* How/when to display avatars, options are:
+* *Optional* How/when to display avatars, options are:
 	* `JSMessagesViewAvatarPolicyIncomingOnly`
+	* `JSMessagesViewAvatarPolicyOutgoingOnly`
 	* `JSMessagesViewAvatarPolicyBoth`
 	* `JSMessagesViewAvatarPolicyNone`
 
@@ -116,6 +118,12 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 * Returns if this row should display a timestamp or not
 * Required only if using `JSMessagesViewTimestampPolicyCustom`
 
+````objective-c
+- (BOOL)hasSubtitleForRowAtIndexPath:(NSIndexPath *)indexPath
+````
+
+* *Optional* Return `YES` if you want to display a small bit of text under the bubble.
+
 #####Implement the `JSMessagesViewDataSource` protocol
 
 ````objective-c 
@@ -131,16 +139,28 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 * The timestamp to be displayed *above* this row
 
 ````objective-c 
-- (UIImage *)avatarImageForIncomingMessage
+- (UIImage *)avatarImageForIncomingMessageAtIndexPath:(NSIndexPath*)indexPath
 ````
 
-* The avatar image for incoming messages
+* *Optional* The avatar image for incoming messages
 
 ````objective-c 
-- (UIImage *)avatarImageForOutgoingMessage
+- (UIImage *)avatarImageForOutgoingMessageAtIndexPath:(NSIndexPath*)indexPath;
 ````
 
-* The avatar image for outgoing messages
+* *Optional* The avatar image for outgoing messages
+
+````objective-c 
+- (NSString *)subtitleForRowAtIndexPath:(NSIndexPath*)indexPath
+````
+
+* *Optional* The text to display underneath the bubble
+
+````objective-c 
+- (void)messageDoneSending
+````
+
+* *Optional* Implement this method if you do not wish for the table view to be reloaded and scrolled to the bottom when `finishSend` is called.
 
 #####Implement the [table view data source][ref1] method that you should be familiar with
 

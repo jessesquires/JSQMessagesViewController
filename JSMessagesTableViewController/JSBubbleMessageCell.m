@@ -39,12 +39,16 @@
 
 #define TIMESTAMP_LABEL_HEIGHT 14.5f
 
+#define SUBTITLE_LABEL_HEIGHT 16.0f
+#define SUBTITLE_LABEL_SIDE_OFFSET 15.0f
+
 @interface JSBubbleMessageCell()
 
 @property (strong, nonatomic) JSBubbleView *bubbleView;
 @property (strong, nonatomic) UILabel *timestampLabel;
 @property (strong, nonatomic) UIImageView *avatarImageView;
 @property (assign, nonatomic) JSAvatarStyle avatarImageStyle;
+@property (strong, nonatomic) UILabel *subtitleLabel;
 
 - (void)setup;
 - (void)configureTimestampLabel;
@@ -52,6 +56,7 @@
 - (void)configureWithType:(JSBubbleMessageType)type
               bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
               avatarStyle:(JSAvatarStyle)avatarStyle
+				 subtitle:(BOOL)hasSubtitle
                 timestamp:(BOOL)hasTimestamp;
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPress;
@@ -106,6 +111,7 @@
 - (void)configureWithType:(JSBubbleMessageType)type
               bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
               avatarStyle:(JSAvatarStyle)avatarStyle
+				 subtitle:(BOOL)hasSubtitle
                 timestamp:(BOOL)hasTimestamp
 {
     CGFloat bubbleY = 0.0f;
@@ -135,6 +141,7 @@
         self.avatarImageView.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
                                                  | UIViewAutoresizingFlexibleLeftMargin
                                                  | UIViewAutoresizingFlexibleRightMargin);
+		
         [self.contentView addSubview:self.avatarImageView];
     }
     
@@ -146,9 +153,36 @@
     self.bubbleView = [[JSBubbleView alloc] initWithFrame:frame
                                                bubbleType:type
                                               bubbleStyle:bubbleStyle];
+	
+	if(hasSubtitle) {
+		self.subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SUBTITLE_LABEL_SIDE_OFFSET,
+																	   bubbleY + frame.size.height - SUBTITLE_LABEL_HEIGHT,
+																	   frame.size.width - bubbleX - SUBTITLE_LABEL_SIDE_OFFSET * 2,
+																	   SUBTITLE_LABEL_HEIGHT)];
+		self.subtitleLabel.font = [UIFont systemFontOfSize:13.0f];
+		self.subtitleLabel.backgroundColor = [UIColor clearColor];
+		self.subtitleLabel.textColor = [UIColor grayColor];
+		
+		if(type == JSBubbleMessageTypeOutgoing) {
+			self.subtitleLabel.textAlignment = NSTextAlignmentRight;
+		}
+		
+		self.subtitleLabel.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
+											   | UIViewAutoresizingFlexibleWidth);
+
+		[self.contentView addSubview:self.subtitleLabel];
+	}
+	
+    self.bubbleView.autoresizingMask = (UIViewAutoresizingFlexibleWidth
+										| UIViewAutoresizingFlexibleHeight
+										| UIViewAutoresizingFlexibleBottomMargin);
     
     [self.contentView addSubview:self.bubbleView];
     [self.contentView sendSubviewToBack:self.bubbleView];
+}
+
+- (void)setSubtitle:(NSString *)sub {
+	self.subtitleLabel.text = sub;
 }
 
 #pragma mark - Initialization
@@ -156,6 +190,7 @@
              bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
              avatarStyle:(JSAvatarStyle)avatarStyle
             hasTimestamp:(BOOL)hasTimestamp
+			 hasSubtitle:(BOOL)hasSubtitle
          reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
@@ -165,6 +200,7 @@
         [self configureWithType:type
                     bubbleStyle:bubbleStyle
                     avatarStyle:avatarStyle
+					   subtitle:hasSubtitle
                       timestamp:hasTimestamp];
     }
     return self;
@@ -219,11 +255,12 @@
     self.avatarImageView.image = styledImg;
 }
 
-+ (CGFloat)neededHeightForText:(NSString *)bubbleViewText timestamp:(BOOL)hasTimestamp avatar:(BOOL)hasAvatar
++ (CGFloat)neededHeightForText:(NSString *)bubbleViewText timestamp:(BOOL)hasTimestamp subtitle:(BOOL)hasSubtitle avatar:(BOOL)hasAvatar
 {
     CGFloat timestampHeight = (hasTimestamp) ? TIMESTAMP_LABEL_HEIGHT : 0.0f;
     CGFloat avatarHeight = (hasAvatar) ? kJSAvatarSize : 0.0f;
-    return MAX(avatarHeight, [JSBubbleView cellHeightForText:bubbleViewText]) + timestampHeight;
+	CGFloat subtitleHeight = hasSubtitle ? SUBTITLE_LABEL_HEIGHT : 0.0f;
+    return MAX(avatarHeight, [JSBubbleView cellHeightForText:bubbleViewText]) + timestampHeight + subtitleHeight;
 }
 
 #pragma mark - Copying
