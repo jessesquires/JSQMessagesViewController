@@ -1,13 +1,11 @@
 //
-//  JSBubbleMessageCell.m
-//
 //  Created by Jesse Squires on 2/12/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 //  http://www.hexedbits.com
 //
 //
-//  Largely based on work by Sam Soffes
+//  Originally based on work by Sam Soffes
 //  https://github.com/soffes
 //
 //  SSMessagesViewController
@@ -34,8 +32,10 @@
 //
 
 #import "JSBubbleMessageCell.h"
+
 #import "UIColor+JSMessagesView.h"
-#import "UIImage+JSMessagesView.h"
+#import "UIImage+JSMessagesAvatar.h"
+#import "UIImage+JSMessagesBubble.h"
 
 #define TIMESTAMP_LABEL_HEIGHT 14.5f
 
@@ -99,7 +99,7 @@
     self.timestampLabel.autoresizingMask =  UIViewAutoresizingFlexibleWidth;
     self.timestampLabel.backgroundColor = [UIColor clearColor];
     self.timestampLabel.textAlignment = NSTextAlignmentCenter;
-    self.timestampLabel.textColor = [UIColor messagesTimestampColor];
+    self.timestampLabel.textColor = [UIColor js_messagesTimestampColor_iOS6];
     self.timestampLabel.shadowColor = [UIColor whiteColor];
     self.timestampLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
     self.timestampLabel.font = [UIFont boldSystemFontOfSize:11.5f];
@@ -240,11 +240,11 @@
     UIImage *styledImg = nil;
     switch (self.avatarImageStyle) {
         case JSAvatarStyleCircle:
-            styledImg = [image circleImageWithSize:kJSAvatarSize];
+            styledImg = [image js_circleImageWithSize:kJSAvatarSize];
             break;
             
         case JSAvatarStyleSquare:
-            styledImg = [image squareImageWithSize:kJSAvatarSize];
+            styledImg = [image js_squareImageWithSize:kJSAvatarSize];
             break;
             
         case JSAvatarStyleNone:

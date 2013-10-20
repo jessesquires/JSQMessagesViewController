@@ -1,5 +1,5 @@
 //
-//  Created by Jesse Squires on 2/15/13.
+//  Created by Jesse Squires on 3/11/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 //  http://www.hexedbits.com
@@ -24,12 +24,28 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
-#import <AudioToolbox/AudioToolbox.h>
+#import "UIView+AnimationOptionsForCurve.h"
 
-@interface JSMessageSoundEffect : NSObject
+@implementation UIView (AnimationOptionsForCurve)
 
-+ (void)playMessageReceivedSound;
-+ (void)playMessageSentSound;
++ (UIViewAnimationOptions)js_animationOptionsForCurve:(UIViewAnimationCurve)curve
+{
+    switch (curve) {
+        case UIViewAnimationCurveEaseInOut:
+            return UIViewAnimationOptionCurveEaseInOut;
+            
+        case UIViewAnimationCurveEaseIn:
+            return UIViewAnimationOptionCurveEaseIn;
+            
+        case UIViewAnimationCurveEaseOut:
+            return UIViewAnimationOptionCurveEaseOut;
+            
+        case UIViewAnimationCurveLinear:
+            return UIViewAnimationOptionCurveLinear;
+            
+        default:
+            return kNilOptions;
+    }
+}
 
 @end

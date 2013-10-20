@@ -1,7 +1,5 @@
 //
-//  UIImage+JSMessagesView.h
-//
-//  Created by Jesse Squires on 7/25/13.
+//  Created by Jesse Squires on 3/24/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 //  http://www.hexedbits.com
@@ -28,45 +26,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImage (JSMessagesView)
+@interface UIButton (JSMessagesView)
 
-#pragma mark - Avatar styles
-- (UIImage *)circleImageWithSize:(CGFloat)size;
-- (UIImage *)squareImageWithSize:(CGFloat)size;
-
-- (UIImage *)imageAsCircle:(BOOL)clipToCircle
-               withDiamter:(CGFloat)diameter
-               borderColor:(UIColor *)borderColor
-               borderWidth:(CGFloat)borderWidth
-              shadowOffSet:(CGSize)shadowOffset;
-
-#pragma mark - Input bar
-+ (UIImage *)inputBar;
-+ (UIImage *)inputField;
-
-#pragma mark - Bubble cap insets
-- (UIImage *)makeStretchableDefaultIncoming;
-- (UIImage *)makeStretchableDefaultOutgoing;
-
-- (UIImage *)makeStretchableSquareIncoming;
-- (UIImage *)makeStretchableSquareOutgoing;
-
-#pragma mark - Incoming message bubbles
-+ (UIImage *)bubbleDefaultIncoming;
-+ (UIImage *)bubbleDefaultIncomingSelected;
-
-+ (UIImage *)bubbleDefaultIncomingGreen;
-
-+ (UIImage *)bubbleSquareIncoming;
-+ (UIImage *)bubbleSquareIncomingSelected;
-
-#pragma mark - Outgoing message bubbles
-+ (UIImage *)bubbleDefaultOutgoing;
-+ (UIImage *)bubbleDefaultOutgoingSelected;
-
-+ (UIImage *)bubbleDefaultOutgoingGreen;
-
-+ (UIImage *)bubbleSquareOutgoing;
-+ (UIImage *)bubbleSquareOutgoingSelected;
++ (UIButton *)js_defaultSendButton_iOS6;
 
 @end

@@ -1,6 +1,4 @@
 //
-//  JSDismissiveTextView.h
-//
 //  Taken from MADismissiveTextView
 //  https://github.com/mikeahmarani/MADismissiveTextView
 //

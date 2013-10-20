@@ -1,6 +1,4 @@
 //
-//  JSMessageSoundEffect.m
-//
 //  Created by Jesse Squires on 2/15/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //

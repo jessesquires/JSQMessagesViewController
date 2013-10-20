@@ -1,6 +1,4 @@
 //
-//  UIColor+JSMessagesView.m
-//
 //  Created by Jesse Squires on 3/19/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
@@ -26,18 +24,11 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "UIColor+JSMessagesView.h"
+#import <UIKit/UIKit.h>
 
-@implementation UIColor (JSMessagesView)
+@interface UIColor (JSMessagesView)
 
-+ (UIColor *)messagesBackgroundColor
-{
-    return [UIColor colorWithRed:0.859f green:0.886f blue:0.929f alpha:1.0f];
-}
-
-+ (UIColor *)messagesTimestampColor
-{
-    return [UIColor colorWithRed:0.533f green:0.573f blue:0.647f alpha:1.0f];
-}
++ (UIColor *)js_messagesBackgroundColor_iOS6;
++ (UIColor *)js_messagesTimestampColor_iOS6;
 
 @end

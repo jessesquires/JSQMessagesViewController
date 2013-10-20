@@ -1,5 +1,5 @@
 //
-//  Created by Jesse Squires on 2/15/13.
+//  Created by Jesse Squires on 2/14/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 //  http://www.hexedbits.com
@@ -25,11 +25,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AudioToolbox/AudioToolbox.h>
 
-@interface JSMessageSoundEffect : NSObject
+@interface NSString (JSMessagesView)
 
-+ (void)playMessageReceivedSound;
-+ (void)playMessageSentSound;
+- (NSString *)js_stringByTrimingWhitespace;
+- (NSUInteger)js_numberOfLines;
 
 @end

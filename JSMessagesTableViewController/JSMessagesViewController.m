@@ -1,13 +1,11 @@
 //
-//  JSMessagesViewController.m
-//
 //  Created by Jesse Squires on 2/12/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 //  http://www.hexedbits.com
 //
 //
-//  Largely based on work by Sam Soffes
+//  Originally based on work by Sam Soffes
 //  https://github.com/soffes
 //
 //  SSMessagesViewController
@@ -34,10 +32,12 @@
 //
 
 #import "JSMessagesViewController.h"
+#import "JSDismissiveTextView.h"
+
 #import "NSString+JSMessagesView.h"
 #import "UIView+AnimationOptionsForCurve.h"
 #import "UIColor+JSMessagesView.h"
-#import "JSDismissiveTextView.h"
+#import "UIButton+JSMessagesView.h"
 
 #define INPUT_HEIGHT 40.0f
 
@@ -72,7 +72,7 @@
 	self.tableView.delegate = self;
 	[self.view addSubview:self.tableView];
 	
-    [self setBackgroundColor:[UIColor messagesBackgroundColor]];
+    [self setBackgroundColor:[UIColor js_messagesBackgroundColor_iOS6]];
     
     CGRect inputFrame = CGRectMake(0.0f, size.height - INPUT_HEIGHT, size.width, INPUT_HEIGHT);
     self.inputToolBarView = [[JSMessageInputView alloc] initWithFrame:inputFrame delegate:self];
@@ -93,7 +93,7 @@
 
 - (UIButton *)sendButton
 {
-    return [UIButton defaultSendButton];
+    return [UIButton js_defaultSendButton_iOS6];
 }
 
 #pragma mark - View lifecycle
@@ -164,7 +164,7 @@
 - (void)sendPressed:(UIButton *)sender
 {
     [self.delegate sendPressed:sender
-                      withText:[self.inputToolBarView.textView.text trimWhitespace]];
+                      withText:[self.inputToolBarView.textView.text js_stringByTrimingWhitespace]];
 }
 
 #pragma mark - Table view data source
@@ -411,7 +411,7 @@
         self.previousTextViewContentHeight = MIN(textViewContentHeight, maxHeight);
     }
     
-    self.inputToolBarView.sendButton.enabled = ([textView.text trimWhitespace].length > 0);
+    self.inputToolBarView.sendButton.enabled = ([textView.text js_stringByTrimingWhitespace].length > 0);
 }
 
 #pragma mark - Keyboard notifications
@@ -433,7 +433,7 @@
     
     [UIView animateWithDuration:duration
                           delay:0.0f
-                        options:[UIView animationOptionsForCurve:curve]
+                        options:[UIView js_animationOptionsForCurve:curve]
                      animations:^{
                          CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
                          

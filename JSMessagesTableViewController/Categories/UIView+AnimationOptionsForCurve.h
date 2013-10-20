@@ -1,7 +1,5 @@
 //
-//  NSString+JSMessagesView.m
-//
-//  Created by Jesse Squires on 2/14/13.
+//  Created by Jesse Squires on 3/11/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 //  http://www.hexedbits.com
@@ -26,18 +24,10 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "NSString+JSMessagesView.h"
+#import <UIKit/UIKit.h>
 
-@implementation NSString (JSMessagesView)
+@interface UIView (AnimationOptionsForCurve)
 
-- (NSString *)trimWhitespace
-{
-    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-}
-
-- (NSUInteger)numberOfLines
-{
-    return [self componentsSeparatedByString:@"\n"].count + 1;
-}
++ (UIViewAnimationOptions)js_animationOptionsForCurve:(UIViewAnimationCurve)curve;
 
 @end

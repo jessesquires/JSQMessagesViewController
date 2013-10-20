@@ -1,13 +1,11 @@
 //
-//  JSBubbleView.m
-//
 //  Created by Jesse Squires on 2/12/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 //  http://www.hexedbits.com
 //
 //
-//  Largely based on work by Sam Soffes
+//  Originally based on work by Sam Soffes
 //  https://github.com/soffes
 //
 //  SSMessagesViewController
@@ -36,7 +34,7 @@
 #import "JSBubbleView.h"
 #import "JSMessageInputView.h"
 #import "NSString+JSMessagesView.h"
-#import "UIImage+JSMessagesView.h"
+#import "UIImage+JSMessagesBubble.h"
 
 CGFloat const kJSAvatarSize = 50.0f;
 
@@ -135,10 +133,10 @@ CGFloat const kJSAvatarSize = 50.0f;
     switch (self.style) {
         case JSBubbleMessageStyleDefault:
         case JSBubbleMessageStyleDefaultGreen:
-            return (self.type == JSBubbleMessageTypeIncoming) ? [UIImage bubbleDefaultIncomingSelected] : [UIImage bubbleDefaultOutgoingSelected];
+            return (self.type == JSBubbleMessageTypeIncoming) ? [UIImage js_bubbleDefaultIncomingSelected] : [UIImage js_bubbleDefaultOutgoingSelected];
             
         case JSBubbleMessageStyleSquare:
-            return (self.type == JSBubbleMessageTypeIncoming) ? [UIImage bubbleSquareIncomingSelected] : [UIImage bubbleSquareOutgoingSelected];
+            return (self.type == JSBubbleMessageTypeIncoming) ? [UIImage js_bubbleSquareIncomingSelected] : [UIImage js_bubbleSquareOutgoingSelected];
             
         default:
             return nil;
@@ -188,13 +186,13 @@ CGFloat const kJSAvatarSize = 50.0f;
 {
     switch (aStyle) {
         case JSBubbleMessageStyleDefault:
-            return [UIImage bubbleDefaultIncoming];
+            return [UIImage js_bubbleDefaultIncoming];
             
         case JSBubbleMessageStyleSquare:
-            return [UIImage bubbleSquareIncoming];
+            return [UIImage js_bubbleSquareIncoming];
             
         case JSBubbleMessageStyleDefaultGreen:
-            return [UIImage bubbleDefaultIncomingGreen];
+            return [UIImage js_bubbleDefaultIncomingGreen];
             
         default:
             return nil;
@@ -205,13 +203,13 @@ CGFloat const kJSAvatarSize = 50.0f;
 {
     switch (aStyle) {
         case JSBubbleMessageStyleDefault:
-            return [UIImage bubbleDefaultOutgoing];
+            return [UIImage js_bubbleDefaultOutgoing];
             
         case JSBubbleMessageStyleSquare:
-            return [UIImage bubbleSquareOutgoing];
+            return [UIImage js_bubbleSquareOutgoing];
             
         case JSBubbleMessageStyleDefaultGreen:
-            return [UIImage bubbleDefaultOutgoingGreen];
+            return [UIImage js_bubbleDefaultOutgoingGreen];
             
         default:
             return nil;
@@ -227,7 +225,7 @@ CGFloat const kJSAvatarSize = 50.0f;
 {
     CGFloat width = [UIScreen mainScreen].applicationFrame.size.width * 0.75f;
     CGFloat height = MAX([JSBubbleView numberOfLinesForMessage:txt],
-                         [txt numberOfLines]) * [JSMessageInputView textViewLineHeight];
+                         [txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
     
     return [txt sizeWithFont:[JSBubbleView font]
            constrainedToSize:CGSizeMake(width - kJSAvatarSize, height + kJSAvatarSize)

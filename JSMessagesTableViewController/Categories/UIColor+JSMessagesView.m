@@ -1,7 +1,5 @@
 //
-//  UIView+AnimationOptionsForCurve.m
-//
-//  Created by Jesse Squires on 3/11/13.
+//  Created by Jesse Squires on 3/19/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 //  http://www.hexedbits.com
@@ -26,28 +24,18 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "UIView+AnimationOptionsForCurve.h"
+#import "UIColor+JSMessagesView.h"
 
-@implementation UIView (AnimationOptionsForCurve)
+@implementation UIColor (JSMessagesView)
 
-+ (UIViewAnimationOptions)animationOptionsForCurve:(UIViewAnimationCurve)curve
++ (UIColor *)js_messagesBackgroundColor_iOS6
 {
-    switch (curve) {
-        case UIViewAnimationCurveEaseInOut:
-            return UIViewAnimationOptionCurveEaseInOut;
-            break;
-        case UIViewAnimationCurveEaseIn:
-            return UIViewAnimationOptionCurveEaseIn;
-            break;
-        case UIViewAnimationCurveEaseOut:
-            return UIViewAnimationOptionCurveEaseOut;
-            break;
-        case UIViewAnimationCurveLinear:
-            return UIViewAnimationOptionCurveLinear;
-            break;
-    }
-    
-    return kNilOptions;
+    return [UIColor colorWithRed:0.859f green:0.886f blue:0.929f alpha:1.0f];
+}
+
++ (UIColor *)js_messagesTimestampColor_iOS6
+{
+    return [UIColor colorWithRed:0.533f green:0.573f blue:0.647f alpha:1.0f];
 }
 
 @end

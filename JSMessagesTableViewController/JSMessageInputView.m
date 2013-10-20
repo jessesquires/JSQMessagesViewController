@@ -1,13 +1,11 @@
 //
-//  JSMessageInputView.m
-//
 //  Created by Jesse Squires on 2/12/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 //  http://www.hexedbits.com
 //
 //
-//  Largely based on work by Sam Soffes
+//  Originally based on work by Sam Soffes
 //  https://github.com/soffes
 //
 //  SSMessagesViewController
@@ -35,8 +33,10 @@
 
 #import "JSMessageInputView.h"
 #import "JSBubbleView.h"
+
 #import "NSString+JSMessagesView.h"
-#import "UIImage+JSMessagesView.h"
+#import "UIImage+JSMessagesBubble.h"
+#import "UIImage+JSMessagesInputBar.h"
 
 #define SEND_BUTTON_WIDTH 78.0f
 
@@ -79,7 +79,7 @@
 #pragma mark - Setup
 - (void)setup
 {
-    self.image = [UIImage inputBar];
+    self.image = [UIImage js_inputBar_iOS6];
     self.backgroundColor = [UIColor whiteColor];
     self.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin);
     self.opaque = YES;
@@ -112,7 +112,7 @@
                                                                                 0.0f,
                                                                                 self.textView.frame.size.width + 2.0f,
                                                                                 self.frame.size.height)];
-    inputFieldBack.image = [UIImage inputField];
+    inputFieldBack.image = [UIImage js_inputField_iOS6];
     inputFieldBack.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     inputFieldBack.backgroundColor = [UIColor clearColor];
     [self addSubview:inputFieldBack];
@@ -134,7 +134,7 @@
     CGRect prevFrame = self.textView.frame;
     
     int numLines = MAX([JSBubbleView numberOfLinesForMessage:self.textView.text],
-                       [self.textView.text numberOfLines]);
+                       [self.textView.text js_numberOfLines]);
     
     self.textView.frame = CGRectMake(prevFrame.origin.x,
                                      prevFrame.origin.y,

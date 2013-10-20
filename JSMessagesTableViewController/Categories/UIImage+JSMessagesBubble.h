@@ -1,7 +1,5 @@
 //
-//  UIView+AnimationOptionsForCurve.h
-//
-//  Created by Jesse Squires on 3/11/13.
+//  Created by Jesse Squires on 7/25/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 //  http://www.hexedbits.com
@@ -28,8 +26,34 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (AnimationOptionsForCurve)
+@interface UIImage (JSMessagesBubble)
 
-+ (UIViewAnimationOptions)animationOptionsForCurve:(UIViewAnimationCurve)curve;
+#pragma mark - Bubble cap insets
+
+- (UIImage *)js_makeStretchableDefaultIncoming;
+- (UIImage *)js_makeStretchableDefaultOutgoing;
+
+- (UIImage *)js_makeStretchableSquareIncoming;
+- (UIImage *)js_makeStretchableSquareOutgoing;
+
+#pragma mark - Incoming message bubbles
+
++ (UIImage *)js_bubbleDefaultIncoming;
++ (UIImage *)js_bubbleDefaultIncomingSelected;
+
++ (UIImage *)js_bubbleDefaultIncomingGreen;
+
++ (UIImage *)js_bubbleSquareIncoming;
++ (UIImage *)js_bubbleSquareIncomingSelected;
+
+#pragma mark - Outgoing message bubbles
+
++ (UIImage *)js_bubbleDefaultOutgoing;
++ (UIImage *)js_bubbleDefaultOutgoingSelected;
+
++ (UIImage *)js_bubbleDefaultOutgoingGreen;
+
++ (UIImage *)js_bubbleSquareOutgoing;
++ (UIImage *)js_bubbleSquareOutgoingSelected;
 
 @end

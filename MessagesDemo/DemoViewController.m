@@ -1,6 +1,4 @@
 //
-//  DemoViewController.m
-//
 //  Created by Jesse Squires on 2/12/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
@@ -28,6 +26,8 @@
 
 #import "DemoViewController.h"
 
+#import "UIButton+JSMessagesView.h"
+
 @implementation DemoViewController
 
 #pragma mark - Initialization
@@ -35,7 +35,7 @@
 {
     // Override to use a custom send button
     // The button's frame is set automatically for you
-    return [UIButton defaultSendButton];
+    return [UIButton js_defaultSendButton_iOS6];
 }
 
 #pragma mark - View lifecycle
