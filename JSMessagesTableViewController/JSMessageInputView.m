@@ -93,20 +93,7 @@
     CGFloat width = self.frame.size.width - SEND_BUTTON_WIDTH;
     CGFloat height = [JSMessageInputView textViewLineHeight];
     
-    _textView = [[JSDismissiveTextView  alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, height)];
-    _textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    _textView.backgroundColor = [UIColor whiteColor];
-    _textView.scrollIndicatorInsets = UIEdgeInsetsMake(10.0f, 0.0f, 10.0f, 8.0f);
-    _textView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
-    _textView.scrollEnabled = YES;
-    _textView.scrollsToTop = NO;
-    _textView.userInteractionEnabled = YES;
-    _textView.font = [JSBubbleView font];
-    _textView.textColor = [UIColor blackColor];
-    _textView.backgroundColor = [UIColor whiteColor];
-    _textView.keyboardAppearance = UIKeyboardAppearanceDefault;
-    _textView.keyboardType = UIKeyboardTypeDefault;
-    _textView.returnKeyType = UIReturnKeyDefault;
+    _textView = [[JSMessageTextView  alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, height)];
     [self addSubview:_textView];
 	
     UIImageView *inputFieldBack = [[UIImageView alloc] initWithFrame:CGRectMake(_textView.frame.origin.x - 1.0f,

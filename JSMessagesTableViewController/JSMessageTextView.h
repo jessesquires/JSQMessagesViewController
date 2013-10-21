@@ -1,15 +1,8 @@
 //
-//  Created by Jesse Squires on 2/12/13.
+//  Created by Jesse Squires on 10/20/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 //  http://www.hexedbits.com
-//
-//
-//  Originally based on work by Sam Soffes
-//  https://github.com/soffes
-//
-//  SSMessagesViewController
-//  https://github.com/soffes/ssmessagesviewcontroller
 //
 //
 //  The MIT License
@@ -31,27 +24,8 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-#import "JSMessageTextView.h"
+#import "JSDismissiveTextView.h"
 
-@interface JSMessageInputView : UIImageView
-
-@property (strong, nonatomic) JSMessageTextView *textView;
-@property (strong, nonatomic) UIButton *sendButton;
-
-#pragma mark - Initialization
-
-- (instancetype)initWithFrame:(CGRect)frame
-                     delegate:(id<UITextViewDelegate>)delegate;
-
-#pragma mark - Message input view
-
-- (void)adjustTextViewHeightBy:(CGFloat)changeInHeight;
-
-+ (CGFloat)textViewLineHeight;
-
-+ (CGFloat)maxLines;
-
-+ (CGFloat)maxHeight;
+@interface JSMessageTextView : JSDismissiveTextView
 
 @end

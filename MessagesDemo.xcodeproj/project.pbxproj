@@ -55,6 +55,7 @@
 		886CA66C1814A3780096E52E /* UIImage+JSMessagesBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 886CA6631814A3780096E52E /* UIImage+JSMessagesBubble.m */; };
 		886CA66D1814A3780096E52E /* UIImage+JSMessagesInputBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 886CA6651814A3780096E52E /* UIImage+JSMessagesInputBar.m */; };
 		886CA66E1814A3780096E52E /* UIView+AnimationOptionsForCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 886CA6671814A3780096E52E /* UIView+AnimationOptionsForCurve.m */; };
+		886CA6711814ACF60096E52E /* JSMessageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 886CA6701814ACF60096E52E /* JSMessageTextView.m */; };
 		88A564D317A19DB0006BC6E6 /* bubble-default-incoming-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88A564D117A19DAD006BC6E6 /* bubble-default-incoming-selected@2x.png */; };
 		88A564D417A19DB0006BC6E6 /* bubble-default-incoming-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 88A564D217A19DAE006BC6E6 /* bubble-default-incoming-selected.png */; };
 		88A564D717A1C296006BC6E6 /* bubble-default-incoming-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 88A564D517A1C293006BC6E6 /* bubble-default-incoming-green.png */; };
@@ -132,6 +133,8 @@
 		886CA6651814A3780096E52E /* UIImage+JSMessagesInputBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JSMessagesInputBar.m"; sourceTree = "<group>"; };
 		886CA6661814A3780096E52E /* UIView+AnimationOptionsForCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimationOptionsForCurve.h"; sourceTree = "<group>"; };
 		886CA6671814A3780096E52E /* UIView+AnimationOptionsForCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimationOptionsForCurve.m"; sourceTree = "<group>"; };
+		886CA66F1814ACF60096E52E /* JSMessageTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSMessageTextView.h; sourceTree = "<group>"; };
+		886CA6701814ACF60096E52E /* JSMessageTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSMessageTextView.m; sourceTree = "<group>"; };
 		88A564D117A19DAD006BC6E6 /* bubble-default-incoming-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble-default-incoming-selected@2x.png"; sourceTree = "<group>"; };
 		88A564D217A19DAE006BC6E6 /* bubble-default-incoming-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble-default-incoming-selected.png"; sourceTree = "<group>"; };
 		88A564D517A1C293006BC6E6 /* bubble-default-incoming-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble-default-incoming-green.png"; sourceTree = "<group>"; };
@@ -190,12 +193,12 @@
 			children = (
 				881AE56B16D13CDC008F7636 /* AppDelegate.h */,
 				881AE56C16D13CDC008F7636 /* AppDelegate.m */,
-				881AE58216D13DE0008F7636 /* DemoViewController.h */,
-				881AE58316D13DE0008F7636 /* DemoViewController.m */,
 				8808C57717A2DE6C008E2C1C /* demo-avatar-jobs.png */,
 				8808C57817A2DE6C008E2C1C /* demo-avatar-woz.png */,
-				88301EE416F77B3D0037524D /* JSMessagesTableViewController */,
+				881AE58216D13DE0008F7636 /* DemoViewController.h */,
+				881AE58316D13DE0008F7636 /* DemoViewController.m */,
 				886CA650181454610096E52E /* Images.xcassets */,
+				88301EE416F77B3D0037524D /* JSMessagesTableViewController */,
 				881AE56316D13CDC008F7636 /* Supporting Files */,
 			);
 			path = MessagesDemo;
@@ -228,6 +231,8 @@
 				88301EEC16F77B3D0037524D /* JSMessageSoundEffect.m */,
 				88301EED16F77B3D0037524D /* JSMessagesViewController.h */,
 				88301EEE16F77B3D0037524D /* JSMessagesViewController.m */,
+				886CA66F1814ACF60096E52E /* JSMessageTextView.h */,
+				886CA6701814ACF60096E52E /* JSMessageTextView.m */,
 				88301EF116F77B3D0037524D /* Resources */,
 			);
 			path = JSMessagesTableViewController;
@@ -413,6 +418,7 @@
 				886CA6681814A3780096E52E /* NSString+JSMessagesView.m in Sources */,
 				88301F0816F77B3D0037524D /* JSBubbleMessageCell.m in Sources */,
 				88301F0916F77B3D0037524D /* JSBubbleView.m in Sources */,
+				886CA6711814ACF60096E52E /* JSMessageTextView.m in Sources */,
 				88301F0A16F77B3D0037524D /* JSMessageInputView.m in Sources */,
 				886CA66A1814A3780096E52E /* UIColor+JSMessagesView.m in Sources */,
 				886CA66E1814A3780096E52E /* UIView+AnimationOptionsForCurve.m in Sources */,
