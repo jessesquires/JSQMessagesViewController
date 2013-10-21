@@ -54,12 +54,16 @@
 #pragma mark - Initialization
 
 - (instancetype)initWithFrame:(CGRect)frame
-                     delegate:(id<UITextViewDelegate>)delegate
+             textViewDelegate:(id<UITextViewDelegate>)delegate
+             keyboardDelegate:(id<JSDismissiveTextViewDelegate>)keyboardDelegate
+         panGestureRecognizer:(UIPanGestureRecognizer *)pan
 {
     self = [super initWithFrame:frame];
     if(self) {
         [self setup];
         _textView.delegate = delegate;
+        _textView.keyboardDelegate = keyboardDelegate;
+        _textView.dismissivePanGestureRecognizer = pan;
     }
     return self;
 }

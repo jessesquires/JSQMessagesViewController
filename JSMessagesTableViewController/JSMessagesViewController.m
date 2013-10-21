@@ -44,7 +44,8 @@
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
 - (void)setup;
-@property BOOL isUserScrolling;
+
+@property (assign, nonatomic) BOOL isUserScrolling;
 
 @end
 
@@ -53,6 +54,7 @@
 @implementation JSMessagesViewController
 
 #pragma mark - Initialization
+
 - (void)setup
 {
     if([self.view isKindOfClass:[UIScrollView class]]) {
@@ -60,35 +62,33 @@
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
 	
-	self.preventScrollToBottomWhileUserScrolling = NO;
-	self.isUserScrolling = NO;
+	_preventScrollToBottomWhileUserScrolling = NO;
+	_isUserScrolling = NO;
     
     CGSize size = self.view.frame.size;
 	
     CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - INPUT_HEIGHT);
-	self.tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
-	self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	self.tableView.dataSource = self;
-	self.tableView.delegate = self;
-	[self.view addSubview:self.tableView];
+	_tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
+	_tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	_tableView.dataSource = self;
+	_tableView.delegate = self;
+	[self.view addSubview:_tableView];
 	
     [self setBackgroundColor:[UIColor js_messagesBackgroundColor_iOS6]];
     
     CGRect inputFrame = CGRectMake(0.0f, size.height - INPUT_HEIGHT, size.width, INPUT_HEIGHT);
-    self.inputToolBarView = [[JSMessageInputView alloc] initWithFrame:inputFrame delegate:self];
+    _inputToolBarView = [[JSMessageInputView alloc] initWithFrame:inputFrame textViewDelegate:self
+                                                 keyboardDelegate:self
+                                             panGestureRecognizer:self.tableView.panGestureRecognizer];
     
-    // TODO: refactor
-    self.inputToolBarView.textView.dismissivePanGestureRecognizer = self.tableView.panGestureRecognizer;
-    self.inputToolBarView.textView.keyboardDelegate = self;
-	
     UIButton *sendButton = [self sendButton];
     sendButton.enabled = NO;
-    sendButton.frame = CGRectMake(self.inputToolBarView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
+    sendButton.frame = CGRectMake(_inputToolBarView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
     [sendButton addTarget:self
                    action:@selector(sendPressed:)
          forControlEvents:UIControlEventTouchUpInside];
-    [self.inputToolBarView setSendButton:sendButton];
-    [self.view addSubview:self.inputToolBarView];
+    [_inputToolBarView setSendButton:sendButton];
+    [self.view addSubview:_inputToolBarView];
 }
 
 - (UIButton *)sendButton
@@ -97,6 +97,7 @@
 }
 
 #pragma mark - View lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -105,6 +106,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     [self scrollToBottomAnimated:NO];
     
 	[[NSNotificationCenter defaultCenter] addObserver:self
@@ -121,6 +124,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
     [self.inputToolBarView resignFirstResponder];
     [self setEditing:NO animated:YES];
     
@@ -136,13 +140,14 @@
 
 - (void)dealloc
 {
-    self.delegate = nil;
-    self.dataSource = nil;
-    self.tableView = nil;
-    self.inputToolBarView = nil;
+    _delegate = nil;
+    _dataSource = nil;
+    _tableView = nil;
+    _inputToolBarView = nil;
 }
 
 #pragma mark - View rotation
+
 - (BOOL)shouldAutorotate
 {
     return NO;
@@ -161,6 +166,7 @@
 }
 
 #pragma mark - Actions
+
 - (void)sendPressed:(UIButton *)sender
 {
     [self.delegate sendPressed:sender
@@ -168,6 +174,7 @@
 }
 
 #pragma mark - Table view data source
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -183,7 +190,8 @@
     JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
     JSBubbleMessageStyle bubbleStyle = [self.delegate messageStyleForRowAtIndexPath:indexPath];
     JSAvatarStyle avatarStyle = JSAvatarStyleNone;
-	if([self.delegate respondsToSelector:@selector(avatarStyle)])
+	
+    if([self.delegate respondsToSelector:@selector(avatarStyle)])
 		avatarStyle = [self.delegate avatarStyle];
     
     BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
@@ -193,7 +201,7 @@
 	if([self.delegate respondsToSelector:@selector(hasSubtitleForRowAtIndexPath:)])
 		hasSubtitle = [self.delegate hasSubtitleForRowAtIndexPath:indexPath];
     
-    NSString *CellID = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d", type, bubbleStyle, hasTimestamp, hasAvatar];
+    NSString *CellID = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d_%d", type, bubbleStyle, hasTimestamp, hasAvatar, hasSubtitle];
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellID];
     
     if(!cell)
@@ -240,6 +248,7 @@
 }
 
 #pragma mark - Table view delegate
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	BOOL hasSubtitle = NO;
@@ -254,6 +263,7 @@
 }
 
 #pragma mark - Messages view controller
+
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch ([self.delegate timestampPolicy]) {
@@ -317,13 +327,14 @@
 - (void)setBackgroundColor:(UIColor *)color
 {
     self.view.backgroundColor = color;
-    self.tableView.backgroundColor = color;
-    self.tableView.separatorColor = color;
+    _tableView.backgroundColor = color;
+    _tableView.separatorColor = color;
 }
 
 - (void)scrollToBottomAnimated:(BOOL)animated
 {
-	if(self.isUserScrolling && self.preventScrollToBottomWhileUserScrolling) return;
+	if(self.isUserScrolling && self.preventScrollToBottomWhileUserScrolling)
+        return;
 	
     NSInteger rows = [self.tableView numberOfRowsInSection:0];
     
@@ -336,23 +347,30 @@
 
 - (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath
 			  atScrollPosition:(UITableViewScrollPosition)position
-					  animated:(BOOL)animated{
-	if(self.isUserScrolling && self.preventScrollToBottomWhileUserScrolling) return;
+					  animated:(BOOL)animated
+{
+	if(self.isUserScrolling && self.preventScrollToBottomWhileUserScrolling)
+        return;
 	
 	[self.tableView scrollToRowAtIndexPath:indexPath
 						  atScrollPosition:position
 								  animated:animated];
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-	self.isUserScrolling = NO;
-}
+#pragma mark - Scroll view delegate
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
 	self.isUserScrolling = YES;
 }
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    self.isUserScrolling = NO;
+}
+
 #pragma mark - Text view delegate
+
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     [textView becomeFirstResponder];
@@ -415,6 +433,7 @@
 }
 
 #pragma mark - Keyboard notifications
+
 - (void)handleWillShowKeyboard:(NSNotification *)notification
 {
     [self keyboardWillShowHide:notification];
@@ -463,6 +482,7 @@
 }
 
 #pragma mark - Dismissive text view delegate
+
 - (void)keyboardDidScrollToPoint:(CGPoint)pt
 {
     CGRect inputViewFrame = self.inputToolBarView.frame;

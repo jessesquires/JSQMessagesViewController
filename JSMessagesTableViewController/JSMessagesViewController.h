@@ -37,24 +37,25 @@
 #import "JSMessageSoundEffect.h"
 
 
-typedef enum {
-    JSMessagesViewTimestampPolicyAll = 0,
+typedef NS_ENUM(NSUInteger, JSMessagesViewTimestampPolicy) {
+    JSMessagesViewTimestampPolicyAll,
     JSMessagesViewTimestampPolicyAlternating,
     JSMessagesViewTimestampPolicyEveryThree,
     JSMessagesViewTimestampPolicyEveryFive,
     JSMessagesViewTimestampPolicyCustom
-} JSMessagesViewTimestampPolicy;
+};
 
 
-typedef enum {
-    JSMessagesViewAvatarPolicyIncomingOnly = 0,
+typedef NS_ENUM(NSUInteger, JSMessagesViewAvatarPolicy) {
+    JSMessagesViewAvatarPolicyIncomingOnly,
     JSMessagesViewAvatarPolicyBoth,
     JSMessagesViewAvatarPolicyNone,
     JSMessagesViewAvatarPolicyOutgoingOnly
-} JSMessagesViewAvatarPolicy;
+};
 
 
 @protocol JSMessagesViewDelegate <NSObject>
+
 @required
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text;
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -75,6 +76,7 @@ typedef enum {
 
 
 @protocol JSMessagesViewDataSource <NSObject>
+
 @required
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -96,19 +98,22 @@ typedef enum {
 
 @property (weak, nonatomic) id<JSMessagesViewDelegate> delegate;
 @property (weak, nonatomic) id<JSMessagesViewDataSource> dataSource;
-@property BOOL preventScrollToBottomWhileUserScrolling;
+@property (assign, nonatomic) BOOL preventScrollToBottomWhileUserScrolling;
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) JSMessageInputView *inputToolBarView;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 
 #pragma mark - Initialization
+
 - (UIButton *)sendButton;
 
 #pragma mark - Actions
+
 - (void)sendPressed:(UIButton *)sender;
 
 #pragma mark - Messages view controller
+
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (BOOL)shouldHaveAvatarForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)finishSend;
@@ -116,11 +121,13 @@ typedef enum {
 - (void)scrollToBottomAnimated:(BOOL)animated;
 
 #pragma mark - Keyboard notifications
+
 - (void)handleWillShowKeyboard:(NSNotification *)notification;
 - (void)handleWillHideKeyboard:(NSNotification *)notification;
 - (void)keyboardWillShowHide:(NSNotification *)notification;
 
 #pragma mark - Scroll while respecting user interaction
+
 - (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath
 			  atScrollPosition:(UITableViewScrollPosition)position
 					  animated:(BOOL)animated;
