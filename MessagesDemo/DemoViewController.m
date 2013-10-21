@@ -76,7 +76,7 @@
 
 #pragma mark - Messages view delegate
 
-- (void)sendPressed:(UIButton *)sender withText:(NSString *)text
+- (void)didSendText:(NSString *)text
 {
     [self.messages addObject:text];
     
@@ -88,6 +88,7 @@
         [JSMessageSoundEffect playMessageReceivedSound];
     
     [self finishSend];
+    [self scrollToBottomAnimated:YES];
 }
 
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath

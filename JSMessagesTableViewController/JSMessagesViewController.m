@@ -44,7 +44,7 @@
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) JSMessageInputView *inputToolBarView;
+@property (strong, nonatomic) JSMessageInputView *inputToolbarView;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 
 @property (assign, nonatomic) BOOL isUserScrolling;
@@ -87,7 +87,7 @@
     [self setBackgroundColor:[UIColor js_messagesBackgroundColor_iOS6]];
     
     CGRect inputFrame = CGRectMake(0.0f, size.height - INPUT_HEIGHT, size.width, INPUT_HEIGHT);
-    _inputToolBarView = [[JSMessageInputView alloc] initWithFrame:inputFrame
+    _inputToolbarView = [[JSMessageInputView alloc] initWithFrame:inputFrame
                                                  textViewDelegate:self
                                                  keyboardDelegate:self
                                              panGestureRecognizer:_tableView.panGestureRecognizer];
@@ -100,12 +100,12 @@
         sendButton = [UIButton js_defaultSendButton_iOS6];
     }
     sendButton.enabled = NO;
-    sendButton.frame = CGRectMake(_inputToolBarView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
+    sendButton.frame = CGRectMake(_inputToolbarView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
     [sendButton addTarget:self
                    action:@selector(sendPressed:)
          forControlEvents:UIControlEventTouchUpInside];
-    [_inputToolBarView setSendButton:sendButton];
-    [self.view addSubview:_inputToolBarView];
+    [_inputToolbarView setSendButton:sendButton];
+    [self.view addSubview:_inputToolbarView];
 }
 
 #pragma mark - View lifecycle
@@ -137,7 +137,7 @@
 {
     [super viewWillDisappear:animated];
     
-    [self.inputToolBarView resignFirstResponder];
+    [self.inputToolbarView resignFirstResponder];
     [self setEditing:NO animated:YES];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
@@ -155,7 +155,7 @@
     _delegate = nil;
     _dataSource = nil;
     _tableView = nil;
-    _inputToolBarView = nil;
+    _inputToolbarView = nil;
 }
 
 #pragma mark - View rotation
@@ -181,8 +181,7 @@
 
 - (void)sendPressed:(UIButton *)sender
 {
-    [self.delegate sendPressed:sender
-                      withText:[self.inputToolBarView.textView.text js_stringByTrimingWhitespace]];
+    [self.delegate didSendText:[self.inputToolbarView.textView.text js_stringByTrimingWhitespace]];
 }
 
 #pragma mark - Table view data source
@@ -309,16 +308,9 @@
 
 - (void)finishSend
 {
-    [self.inputToolBarView.textView setText:nil];
-    [self textViewDidChange:self.inputToolBarView.textView];
-	
-	if([self.delegate respondsToSelector:@selector(messageDoneSending)]) {
-		[self.delegate messageDoneSending];
-	}
-	else {
-		[self.tableView reloadData];
-		[self scrollToBottomAnimated:YES];
-	}
+    [self.inputToolbarView.textView setText:nil];
+    [self textViewDidChange:self.inputToolbarView.textView];
+    [self.tableView reloadData];
 }
 
 - (void)setBackgroundColor:(UIColor *)color
@@ -399,7 +391,7 @@
     
     if(changeInHeight != 0.0f) {
         if(!isShrinking)
-            [self.inputToolBarView adjustTextViewHeightBy:changeInHeight];
+            [self.inputToolbarView adjustTextViewHeightBy:changeInHeight];
         
         [UIView animateWithDuration:0.25f
                          animations:^{
@@ -412,21 +404,21 @@
                              self.tableView.scrollIndicatorInsets = insets;
                              [self scrollToBottomAnimated:NO];
                              
-                             CGRect inputViewFrame = self.inputToolBarView.frame;
-                             self.inputToolBarView.frame = CGRectMake(0.0f,
+                             CGRect inputViewFrame = self.inputToolbarView.frame;
+                             self.inputToolbarView.frame = CGRectMake(0.0f,
                                                                       inputViewFrame.origin.y - changeInHeight,
                                                                       inputViewFrame.size.width,
                                                                       inputViewFrame.size.height + changeInHeight);
                          }
                          completion:^(BOOL finished) {
                              if(isShrinking)
-                                 [self.inputToolBarView adjustTextViewHeightBy:changeInHeight];
+                                 [self.inputToolbarView adjustTextViewHeightBy:changeInHeight];
                          }];
         
         self.previousTextViewContentHeight = MIN(textViewContentHeight, maxHeight);
     }
     
-    self.inputToolBarView.sendButton.enabled = ([textView.text js_stringByTrimingWhitespace].length > 0);
+    self.inputToolbarView.sendButton.enabled = ([textView.text js_stringByTrimingWhitespace].length > 0);
 }
 
 #pragma mark - Keyboard notifications
@@ -453,7 +445,7 @@
                      animations:^{
                          CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
                          
-                         CGRect inputViewFrame = self.inputToolBarView.frame;
+                         CGRect inputViewFrame = self.inputToolbarView.frame;
                          CGFloat inputViewFrameY = keyboardY - inputViewFrame.size.height;
                          
                          // for ipad modal form presentations
@@ -461,14 +453,14 @@
                          if(inputViewFrameY > messageViewFrameBottom)
                              inputViewFrameY = messageViewFrameBottom;
 						 
-                         self.inputToolBarView.frame = CGRectMake(inputViewFrame.origin.x,
+                         self.inputToolbarView.frame = CGRectMake(inputViewFrame.origin.x,
 																  inputViewFrameY,
 																  inputViewFrame.size.width,
 																  inputViewFrame.size.height);
                          
                          UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
                                                                 0.0f,
-                                                                self.view.frame.size.height - self.inputToolBarView.frame.origin.y - INPUT_HEIGHT,
+                                                                self.view.frame.size.height - self.inputToolbarView.frame.origin.y - INPUT_HEIGHT,
                                                                 0.0f);
                          
                          self.tableView.contentInset = insets;
@@ -482,25 +474,25 @@
 
 - (void)keyboardDidScrollToPoint:(CGPoint)point
 {
-    CGRect inputViewFrame = self.inputToolBarView.frame;
+    CGRect inputViewFrame = self.inputToolbarView.frame;
     CGPoint keyboardOrigin = [self.view convertPoint:point fromView:nil];
     inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
-    self.inputToolBarView.frame = inputViewFrame;
+    self.inputToolbarView.frame = inputViewFrame;
 }
 
 - (void)keyboardWillBeDismissed
 {
-    CGRect inputViewFrame = self.inputToolBarView.frame;
+    CGRect inputViewFrame = self.inputToolbarView.frame;
     inputViewFrame.origin.y = self.view.bounds.size.height - inputViewFrame.size.height;
-    self.inputToolBarView.frame = inputViewFrame;
+    self.inputToolbarView.frame = inputViewFrame;
 }
 
 - (void)keyboardWillSnapBackToPoint:(CGPoint)point
 {
-    CGRect inputViewFrame = self.inputToolBarView.frame;
+    CGRect inputViewFrame = self.inputToolbarView.frame;
     CGPoint keyboardOrigin = [self.view convertPoint:point fromView:nil];
     inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
-    self.inputToolBarView.frame = inputViewFrame;
+    self.inputToolbarView.frame = inputViewFrame;
 }
 
 @end

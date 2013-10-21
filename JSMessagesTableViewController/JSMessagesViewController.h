@@ -65,7 +65,7 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 @protocol JSMessagesViewDelegate <NSObject>
 
 @required
-- (void)sendPressed:(UIButton *)sender withText:(NSString *)text;
+- (void)didSendText:(NSString *)text;
 
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -78,8 +78,6 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 - (UIButton *)sendButtonForInputView;
-
-- (void)messageDoneSending; // TODO:
 
 @end
 
