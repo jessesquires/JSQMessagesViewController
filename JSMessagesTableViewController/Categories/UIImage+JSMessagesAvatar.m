@@ -31,10 +31,10 @@
 - (UIImage *)js_circleImageWithSize:(CGFloat)size
 {
     return [self js_imageAsCircle:YES
-                   withDiamter:size
-                   borderColor:[UIColor colorWithHue:0.0f saturation:0.0f brightness:0.8f alpha:1.0f]
-                   borderWidth:1.0f
-                  shadowOffSet:CGSizeMake(0.0f, 1.0f)];
+                      withDiamter:size
+                      borderColor:[UIColor colorWithHue:0.0f saturation:0.0f brightness:0.8f alpha:1.0f]
+                      borderWidth:1.0f
+                     shadowOffSet:CGSizeMake(0.0f, 1.0f)];
 }
 
 - (UIImage *)js_squareImageWithSize:(CGFloat)size
@@ -47,13 +47,13 @@
 }
 
 - (UIImage *)js_imageAsCircle:(BOOL)clipToCircle
-               withDiamter:(CGFloat)diameter
-               borderColor:(UIColor *)borderColor
-               borderWidth:(CGFloat)borderWidth
-              shadowOffSet:(CGSize)shadowOffset
+                  withDiamter:(CGFloat)diameter
+                  borderColor:(UIColor *)borderColor
+                  borderWidth:(CGFloat)borderWidth
+                 shadowOffSet:(CGSize)shadowOffset
 {
     // increase given size for border and shadow
-    CGFloat increase = diameter * 0.15f;
+    CGFloat increase = diameter * 0.1f;
     CGFloat newSize = diameter + increase;
     
     CGRect newRect = CGRectMake(0.0f,
@@ -72,11 +72,12 @@
     CGContextSaveGState(context);
     
     // draw shadow
-    if(!CGSizeEqualToSize(shadowOffset, CGSizeZero))
+    if(!CGSizeEqualToSize(shadowOffset, CGSizeZero)) {
         CGContextSetShadowWithColor(context,
                                     CGSizeMake(shadowOffset.width, shadowOffset.height),
-                                    3.0f,
+                                    2.0f,
                                     [UIColor colorWithWhite:0.0f alpha:0.45f].CGColor);
+    }
     
     // draw border
     // as circle or square
