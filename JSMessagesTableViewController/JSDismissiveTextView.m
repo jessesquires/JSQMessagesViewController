@@ -41,9 +41,8 @@
 
 @implementation JSDismissiveTextView
 
-@synthesize dismissivePanGestureRecognizer;
-
 #pragma mark - Initialization
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -72,19 +71,22 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self.dismissivePanGestureRecognizer removeTarget:self action:@selector(panning:)];
-    self.dismissivePanGestureRecognizer = nil;
-    self.keyboardDelegate = nil;
+    [_dismissivePanGestureRecognizer removeTarget:self action:@selector(handlePanGesture:)];
+    _dismissivePanGestureRecognizer = nil;
+    _keyboardDelegate = nil;
+    _keyboard = nil;
 }
 
 #pragma mark - Setters
+
 - (void)setDismissivePanGestureRecognizer:(UIPanGestureRecognizer *)pan
 {
-    dismissivePanGestureRecognizer = pan;
-    [dismissivePanGestureRecognizer addTarget:self action:@selector(handlePanGesture:)];
+    _dismissivePanGestureRecognizer = pan;
+    [_dismissivePanGestureRecognizer addTarget:self action:@selector(handlePanGesture:)];
 }
 
 #pragma mark - Notifications
+
 - (void)handleKeyboardWillShowHideNotification:(NSNotification *)notification
 {
     if([notification.name isEqualToString:UIKeyboardWillShowNotification]) {
@@ -104,6 +106,7 @@
 }
 
 #pragma mark - Gestures
+
 - (void)handlePanGesture:(UIPanGestureRecognizer *)pan
 {
     if(!self.keyboard || self.keyboard.hidden)

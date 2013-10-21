@@ -40,14 +40,18 @@
 @property (strong, nonatomic) UIButton *sendButton;
 
 #pragma mark - Initialization
-- (id)initWithFrame:(CGRect)frame
-           delegate:(id<UITextViewDelegate>)delegate;
+
+- (instancetype)initWithFrame:(CGRect)frame
+                     delegate:(id<UITextViewDelegate>)delegate;
 
 #pragma mark - Message input view
+
 - (void)adjustTextViewHeightBy:(CGFloat)changeInHeight;
 
 + (CGFloat)textViewLineHeight;
+
 + (CGFloat)maxLines;
+
 + (CGFloat)maxHeight;
 
 @end

@@ -51,24 +51,23 @@
 
 @implementation JSMessageInputView
 
-@synthesize sendButton;
-
 #pragma mark - Initialization
-- (id)initWithFrame:(CGRect)frame
-           delegate:(id<UITextViewDelegate>)delegate
+
+- (instancetype)initWithFrame:(CGRect)frame
+                     delegate:(id<UITextViewDelegate>)delegate
 {
     self = [super initWithFrame:frame];
     if(self) {
         [self setup];
-        self.textView.delegate = delegate;
+        _textView.delegate = delegate;
     }
     return self;
 }
 
 - (void)dealloc
 {
-    self.textView = nil;
-    self.sendButton = nil;
+    _textView = nil;
+    _sendButton = nil;
 }
 
 - (BOOL)resignFirstResponder
@@ -76,7 +75,9 @@
     [self.textView resignFirstResponder];
     return [super resignFirstResponder];
 }
+
 #pragma mark - Setup
+
 - (void)setup
 {
     self.image = [UIImage js_inputBar_iOS6];
@@ -92,25 +93,25 @@
     CGFloat width = self.frame.size.width - SEND_BUTTON_WIDTH;
     CGFloat height = [JSMessageInputView textViewLineHeight];
     
-    self.textView = [[JSDismissiveTextView  alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, height)];
-    self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    self.textView.backgroundColor = [UIColor whiteColor];
-    self.textView.scrollIndicatorInsets = UIEdgeInsetsMake(10.0f, 0.0f, 10.0f, 8.0f);
-    self.textView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
-    self.textView.scrollEnabled = YES;
-    self.textView.scrollsToTop = NO;
-    self.textView.userInteractionEnabled = YES;
-    self.textView.font = [JSBubbleView font];
-    self.textView.textColor = [UIColor blackColor];
-    self.textView.backgroundColor = [UIColor whiteColor];
-    self.textView.keyboardAppearance = UIKeyboardAppearanceDefault;
-    self.textView.keyboardType = UIKeyboardTypeDefault;
-    self.textView.returnKeyType = UIReturnKeyDefault;
-    [self addSubview:self.textView];
+    _textView = [[JSDismissiveTextView  alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, height)];
+    _textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    _textView.backgroundColor = [UIColor whiteColor];
+    _textView.scrollIndicatorInsets = UIEdgeInsetsMake(10.0f, 0.0f, 10.0f, 8.0f);
+    _textView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
+    _textView.scrollEnabled = YES;
+    _textView.scrollsToTop = NO;
+    _textView.userInteractionEnabled = YES;
+    _textView.font = [JSBubbleView font];
+    _textView.textColor = [UIColor blackColor];
+    _textView.backgroundColor = [UIColor whiteColor];
+    _textView.keyboardAppearance = UIKeyboardAppearanceDefault;
+    _textView.keyboardType = UIKeyboardTypeDefault;
+    _textView.returnKeyType = UIReturnKeyDefault;
+    [self addSubview:_textView];
 	
-    UIImageView *inputFieldBack = [[UIImageView alloc] initWithFrame:CGRectMake(self.textView.frame.origin.x - 1.0f,
+    UIImageView *inputFieldBack = [[UIImageView alloc] initWithFrame:CGRectMake(_textView.frame.origin.x - 1.0f,
                                                                                 0.0f,
-                                                                                self.textView.frame.size.width + 2.0f,
+                                                                                _textView.frame.size.width + 2.0f,
                                                                                 self.frame.size.height)];
     inputFieldBack.image = [UIImage js_inputField_iOS6];
     inputFieldBack.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
@@ -119,16 +120,18 @@
 }
 
 #pragma mark - Setters
+
 - (void)setSendButton:(UIButton *)btn
 {
-    if(sendButton)
-        [sendButton removeFromSuperview];
+    if(_sendButton)
+        [_sendButton removeFromSuperview];
     
-    sendButton = btn;
-    [self addSubview:self.sendButton];
+    _sendButton = btn;
+    [self addSubview:_sendButton];
 }
 
 #pragma mark - Message input view
+
 - (void)adjustTextViewHeightBy:(CGFloat)changeInHeight
 {
     CGRect prevFrame = self.textView.frame;

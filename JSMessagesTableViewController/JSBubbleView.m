@@ -33,6 +33,7 @@
 
 #import "JSBubbleView.h"
 #import "JSMessageInputView.h"
+
 #import "NSString+JSMessagesView.h"
 #import "UIImage+JSMessagesBubble.h"
 
@@ -57,12 +58,8 @@ CGFloat const kJSAvatarSize = 50.0f;
 
 @implementation JSBubbleView
 
-@synthesize type;
-@synthesize style;
-@synthesize text;
-@synthesize selectedToShowCopyMenu;
-
 #pragma mark - Setup
+
 - (void)setup
 {
     self.backgroundColor = [UIColor clearColor];
@@ -70,50 +67,53 @@ CGFloat const kJSAvatarSize = 50.0f;
 }
 
 #pragma mark - Initialization
-- (id)initWithFrame:(CGRect)rect
-         bubbleType:(JSBubbleMessageType)bubleType
-        bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
+
+- (instancetype)initWithFrame:(CGRect)rect
+                   bubbleType:(JSBubbleMessageType)bubleType
+                  bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
 {
     self = [super initWithFrame:rect];
     if(self) {
         [self setup];
-        self.type = bubleType;
-        self.style = bubbleStyle;
+        _type = bubleType;
+        _style = bubbleStyle;
     }
     return self;
 }
 
 - (void)dealloc
 {
-    self.text = nil;
+    _text = nil;
 }
 
 #pragma mark - Setters
+
 - (void)setType:(JSBubbleMessageType)newType
 {
-    type = newType;
+    _type = newType;
     [self setNeedsDisplay];
 }
 
 - (void)setStyle:(JSBubbleMessageStyle)newStyle
 {
-    style = newStyle;
+    _style = newStyle;
     [self setNeedsDisplay];
 }
 
 - (void)setText:(NSString *)newText
 {
-    text = newText;
+    _text = newText;
     [self setNeedsDisplay];
 }
 
-- (void)setSelectedToShowCopyMenu:(BOOL)isSelected
+- (void)setIsSelectedToShowCopyMenu:(BOOL)isSelected
 {
-    selectedToShowCopyMenu = isSelected;
+    _isSelectedToShowCopyMenu = isSelected;
     [self setNeedsDisplay];
 }
 
 #pragma mark - Drawing
+
 - (CGRect)bubbleFrame
 {
     CGSize bubbleSize = [JSBubbleView bubbleSizeForText:self.text];
@@ -147,7 +147,7 @@ CGFloat const kJSAvatarSize = 50.0f;
 {
     [super drawRect:frame];
     
-	UIImage *image = (self.selectedToShowCopyMenu) ? [self bubbleImageHighlighted] : [self bubbleImage];
+	UIImage *image = (self.isSelectedToShowCopyMenu) ? [self bubbleImageHighlighted] : [self bubbleImage];
     
     CGRect bubbleFrame = [self bubbleFrame];
 	[image drawInRect:bubbleFrame];
@@ -168,6 +168,7 @@ CGFloat const kJSAvatarSize = 50.0f;
 }
 
 #pragma mark - Bubble view
+
 + (UIImage *)bubbleImageForType:(JSBubbleMessageType)aType style:(JSBubbleMessageStyle)aStyle
 {
     switch (aType) {

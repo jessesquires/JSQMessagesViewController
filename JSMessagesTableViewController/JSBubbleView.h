@@ -35,17 +35,17 @@
 
 extern CGFloat const kJSAvatarSize;
 
-typedef enum {
-    JSBubbleMessageTypeIncoming = 0,
+typedef NS_ENUM(NSUInteger, JSBubbleMessageType) {
+    JSBubbleMessageTypeIncoming,
     JSBubbleMessageTypeOutgoing
-} JSBubbleMessageType;
+};
 
 
-typedef enum {
-    JSBubbleMessageStyleDefault = 0,
+typedef NS_ENUM(NSUInteger, JSBubbleMessageStyle) {
+    JSBubbleMessageStyleDefault,
     JSBubbleMessageStyleSquare,
     JSBubbleMessageStyleDefaultGreen
-} JSBubbleMessageStyle;
+};
 
 
 @interface JSBubbleView : UIView
@@ -53,19 +53,22 @@ typedef enum {
 @property (assign, nonatomic) JSBubbleMessageType type;
 @property (assign, nonatomic) JSBubbleMessageStyle style;
 @property (copy, nonatomic) NSString *text;
-@property (assign, nonatomic) BOOL selectedToShowCopyMenu;
+@property (assign, nonatomic) BOOL isSelectedToShowCopyMenu;
 
 #pragma mark - Initialization
-- (id)initWithFrame:(CGRect)rect
-         bubbleType:(JSBubbleMessageType)bubleType
-        bubbleStyle:(JSBubbleMessageStyle)bubbleStyle;
+
+- (instancetype)initWithFrame:(CGRect)rect
+                   bubbleType:(JSBubbleMessageType)bubleType
+                  bubbleStyle:(JSBubbleMessageStyle)bubbleStyle;
 
 #pragma mark - Drawing
+
 - (CGRect)bubbleFrame;
 - (UIImage *)bubbleImage;
 - (UIImage *)bubbleImageHighlighted;
 
 #pragma mark - Bubble view
+
 + (UIImage *)bubbleImageForType:(JSBubbleMessageType)aType
                           style:(JSBubbleMessageStyle)aStyle;
 
