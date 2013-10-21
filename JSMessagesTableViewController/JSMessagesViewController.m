@@ -77,9 +77,10 @@
     [self setBackgroundColor:[UIColor js_messagesBackgroundColor_iOS6]];
     
     CGRect inputFrame = CGRectMake(0.0f, size.height - INPUT_HEIGHT, size.width, INPUT_HEIGHT);
-    _inputToolBarView = [[JSMessageInputView alloc] initWithFrame:inputFrame textViewDelegate:self
+    _inputToolBarView = [[JSMessageInputView alloc] initWithFrame:inputFrame
+                                                 textViewDelegate:self
                                                  keyboardDelegate:self
-                                             panGestureRecognizer:self.tableView.panGestureRecognizer];
+                                             panGestureRecognizer:_tableView.panGestureRecognizer];
     
     UIButton *sendButton = [self sendButton];
     sendButton.enabled = NO;
