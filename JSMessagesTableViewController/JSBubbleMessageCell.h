@@ -34,21 +34,14 @@
 #import <UIKit/UIKit.h>
 #import "JSBubbleView.h"
 
-typedef NS_ENUM(NSUInteger, JSAvatarStyle) {
-    JSAvatarStyleCircle,
-    JSAvatarStyleSquare,
-    JSAvatarStyleNone
-};
-
-
 @interface JSBubbleMessageCell : UITableViewCell
 
 #pragma mark - Initialization
 
 - (instancetype)initWithBubbleType:(JSBubbleMessageType)type
                        bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
-                       avatarStyle:(JSAvatarStyle)avatarStyle
                       hasTimestamp:(BOOL)hasTimestamp
+                         hasAvatar:(BOOL)hasAvatar
                        hasSubtitle:(BOOL)hasSubtitle
                    reuseIdentifier:(NSString *)reuseIdentifier;
 
@@ -58,13 +51,13 @@ typedef NS_ENUM(NSUInteger, JSAvatarStyle) {
 
 - (void)setTimestamp:(NSDate *)date;
 
-- (void)setAvatarImage:(UIImage *)image;
+- (void)setAvatar:(UIImage *)image;
 
 - (void)setSubtitle:(NSString *)subtitle;
 
 + (CGFloat)neededHeightForText:(NSString *)bubbleViewText
                      timestamp:(BOOL)hasTimestamp
-					  subtitle:(BOOL)hasSubtitle
-                        avatar:(BOOL)hasAvatar;
+                        avatar:(BOOL)hasAvatar
+                      subtitle:(BOOL)hasSubtitle;
 
 @end

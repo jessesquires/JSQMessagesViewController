@@ -43,9 +43,19 @@
 
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
-- (void)setup;
+@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) JSMessageInputView *inputToolBarView;
+@property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 
 @property (assign, nonatomic) BOOL isUserScrolling;
+
+- (void)setup;
+
+- (void)sendPressed:(UIButton *)sender;
+
+- (void)handleWillShowKeyboardNotification:(NSNotification *)notification;
+- (void)handleWillHideKeyboardNotification:(NSNotification *)notification;
+- (void)keyboardWillShowHide:(NSNotification *)notification;
 
 @end
 
@@ -82,7 +92,13 @@
                                                  keyboardDelegate:self
                                              panGestureRecognizer:_tableView.panGestureRecognizer];
     
-    UIButton *sendButton = [self sendButton];
+    UIButton *sendButton;
+    if([self.delegate respondsToSelector:@selector(sendButtonForInputView)]) {
+        sendButton = [self.delegate sendButtonForInputView];
+    }
+    else {
+        sendButton = [UIButton js_defaultSendButton_iOS6];
+    }
     sendButton.enabled = NO;
     sendButton.frame = CGRectMake(_inputToolBarView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
     [sendButton addTarget:self
@@ -90,11 +106,6 @@
          forControlEvents:UIControlEventTouchUpInside];
     [_inputToolBarView setSendButton:sendButton];
     [self.view addSubview:_inputToolBarView];
-}
-
-- (UIButton *)sendButton
-{
-    return [UIButton js_defaultSendButton_iOS6];
 }
 
 #pragma mark - View lifecycle
@@ -112,12 +123,12 @@
     [self scrollToBottomAnimated:NO];
     
 	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(handleWillShowKeyboard:)
+											 selector:@selector(handleWillShowKeyboardNotification:)
 												 name:UIKeyboardWillShowNotification
                                                object:nil];
     
 	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(handleWillHideKeyboard:)
+											 selector:@selector(handleWillHideKeyboardNotification:)
 												 name:UIKeyboardWillHideNotification
                                                object:nil];
 }
@@ -190,57 +201,33 @@
 {
     JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
     JSBubbleMessageStyle bubbleStyle = [self.delegate messageStyleForRowAtIndexPath:indexPath];
-    JSAvatarStyle avatarStyle = JSAvatarStyleNone;
-	
-    if([self.delegate respondsToSelector:@selector(avatarStyle)])
-		avatarStyle = [self.delegate avatarStyle];
     
     BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
-	
-	BOOL hasSubtitle = NO;
-	if([self.delegate respondsToSelector:@selector(hasSubtitleForRowAtIndexPath:)])
-		hasSubtitle = [self.delegate hasSubtitleForRowAtIndexPath:indexPath];
+	BOOL hasSubtitle = [self shouldHaveSubtitleForRowAtIndexPath:indexPath];
     
     NSString *CellID = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d_%d", type, bubbleStyle, hasTimestamp, hasAvatar, hasSubtitle];
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellID];
     
-    if(!cell)
+    if(!cell) {
         cell = [[JSBubbleMessageCell alloc] initWithBubbleType:type
                                                    bubbleStyle:bubbleStyle
-                                                   avatarStyle:(hasAvatar) ? avatarStyle : JSAvatarStyleNone
                                                   hasTimestamp:hasTimestamp
-												   hasSubtitle:hasSubtitle
+                                                     hasAvatar:hasAvatar
+                                                   hasSubtitle:hasSubtitle
                                                reuseIdentifier:CellID];
+    }
     
-    if(hasTimestamp)
+    if(hasTimestamp) {
         [cell setTimestamp:[self.dataSource timestampForRowAtIndexPath:indexPath]];
+    }
 	
-	if(hasSubtitle)
-		[cell setSubtitle:[self.dataSource subtitleForRowAtIndexPath:indexPath]];
-    
     if(hasAvatar) {
-        switch (type) {
-            case JSBubbleMessageTypeIncoming:
-				if([self.dataSource respondsToSelector:@selector(avatarImageForIncomingMessageAtIndexPath:)]) {
-					[cell setAvatarImage:[self.dataSource avatarImageForIncomingMessageAtIndexPath:indexPath]];
-				}
-				else if([self.dataSource respondsToSelector:@selector(avatarImageForIncomingMessage)]) {
-					[cell setAvatarImage:[self.dataSource performSelector:@selector(avatarImageForIncomingMessage)]];
-				}
-				
-                break;
-                
-            case JSBubbleMessageTypeOutgoing:
-				if([self.dataSource respondsToSelector:@selector(avatarImageForOutgoingMessageAtIndexPath:)]) {
-					[cell setAvatarImage:[self.dataSource avatarImageForOutgoingMessageAtIndexPath:indexPath]];
-				}
-				else if([self.dataSource respondsToSelector:@selector(avatarImageForOutgoingMessage)]) {
-					[cell setAvatarImage:[self.dataSource performSelector:@selector(avatarImageForOutgoingMessage)]];
-				}
-				
-                break;
-        }
+        [cell setAvatar:[self.dataSource avatarForRowAtIndexPath:indexPath]];
+    }
+    
+	if(hasSubtitle) {
+		[cell setSubtitle:[self.dataSource subtitleForRowAtIndexPath:indexPath]];
     }
     
     [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
@@ -252,15 +239,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	BOOL hasSubtitle = NO;
-	if([self.delegate respondsToSelector:@selector(hasSubtitleForRowAtIndexPath:)]) {
-		hasSubtitle = [self.delegate hasSubtitleForRowAtIndexPath:indexPath];
-	}
-	
     return [JSBubbleMessageCell neededHeightForText:[self.dataSource textForRowAtIndexPath:indexPath]
                                           timestamp:[self shouldHaveTimestampForRowAtIndexPath:indexPath]
-										   subtitle:hasSubtitle
-                                             avatar:[self shouldHaveAvatarForRowAtIndexPath:indexPath]];
+                                             avatar:[self shouldHaveAvatarForRowAtIndexPath:indexPath]
+                                           subtitle:[self shouldHaveSubtitleForRowAtIndexPath:indexPath]];
 }
 
 #pragma mark - Messages view controller
@@ -291,21 +273,35 @@
 
 - (BOOL)shouldHaveAvatarForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if(![self.delegate respondsToSelector:@selector(avatarPolicy)]) {
-		return NO;
-	}
-	
-    switch ([self.delegate avatarPolicy]) {
+	switch ([self.delegate avatarPolicy]) {
+        case JSMessagesViewAvatarPolicyAll:
+            return YES;
+            
         case JSMessagesViewAvatarPolicyIncomingOnly:
             return [self.delegate messageTypeForRowAtIndexPath:indexPath] == JSBubbleMessageTypeIncoming;
 			
 		case JSMessagesViewAvatarPolicyOutgoingOnly:
 			return [self.delegate messageTypeForRowAtIndexPath:indexPath] == JSBubbleMessageTypeOutgoing;
             
-        case JSMessagesViewAvatarPolicyBoth:
-            return YES;
-            
         case JSMessagesViewAvatarPolicyNone:
+        default:
+            return NO;
+    }
+}
+
+- (BOOL)shouldHaveSubtitleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch ([self.delegate subtitlePolicy]) {
+        case JSMessagesViewSubtitlePolicyAll:
+            return YES;
+        
+        case JSMessagesViewSubtitlePolicyIncomingOnly:
+            return [self.delegate messageTypeForRowAtIndexPath:indexPath] == JSBubbleMessageTypeIncoming;
+            
+        case JSMessagesViewSubtitlePolicyOutgoingOnly:
+            return [self.delegate messageTypeForRowAtIndexPath:indexPath] == JSBubbleMessageTypeOutgoing;
+            
+        case JSMessagesViewSubtitlePolicyNone:
         default:
             return NO;
     }
@@ -435,12 +431,12 @@
 
 #pragma mark - Keyboard notifications
 
-- (void)handleWillShowKeyboard:(NSNotification *)notification
+- (void)handleWillShowKeyboardNotification:(NSNotification *)notification
 {
     [self keyboardWillShowHide:notification];
 }
 
-- (void)handleWillHideKeyboard:(NSNotification *)notification
+- (void)handleWillHideKeyboardNotification:(NSNotification *)notification
 {
     [self keyboardWillShowHide:notification];
 }
@@ -484,10 +480,10 @@
 
 #pragma mark - Dismissive text view delegate
 
-- (void)keyboardDidScrollToPoint:(CGPoint)pt
+- (void)keyboardDidScrollToPoint:(CGPoint)point
 {
     CGRect inputViewFrame = self.inputToolBarView.frame;
-    CGPoint keyboardOrigin = [self.view convertPoint:pt fromView:nil];
+    CGPoint keyboardOrigin = [self.view convertPoint:point fromView:nil];
     inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
     self.inputToolBarView.frame = inputViewFrame;
 }
@@ -499,10 +495,10 @@
     self.inputToolBarView.frame = inputViewFrame;
 }
 
-- (void)keyboardWillSnapBackToPoint:(CGPoint)pt
+- (void)keyboardWillSnapBackToPoint:(CGPoint)point
 {
     CGRect inputViewFrame = self.inputToolBarView.frame;
-    CGPoint keyboardOrigin = [self.view convertPoint:pt fromView:nil];
+    CGPoint keyboardOrigin = [self.view convertPoint:point fromView:nil];
     inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
     self.inputToolBarView.frame = inputViewFrame;
 }

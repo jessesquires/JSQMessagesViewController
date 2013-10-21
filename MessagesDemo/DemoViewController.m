@@ -27,18 +27,12 @@
 #import "DemoViewController.h"
 
 #import "UIButton+JSMessagesView.h"
+#import "UIImage+JSMessagesAvatar.h"
 
 @implementation DemoViewController
 
-#pragma mark - Initialization
-- (UIButton *)sendButton
-{
-    // Override to use a custom send button
-    // The button's frame is set automatically for you
-    return [UIButton js_defaultSendButton_iOS6];
-}
-
 #pragma mark - View lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -48,10 +42,10 @@
     self.title = @"Messages";
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
-                     @"Testing some messages here.",
-                     @"Options for avatars: none, circles, or squares",
-                     @"This is a complete re-write and refactoring.",
-                     @"It's easy to implement. Sound effects and images included. Animations are smooth and messages can be of arbitrary size!",
+                     @"Testing some messages here. END",
+                     @"Options for avatars: none, circles, or squares. END",
+                     @"This is a complete re-write and refactoring. END",
+                     @"It's easy to implement. Sound effects and images included. Animations are smooth and messages can be of arbitrary size! END",
                      nil];
     
     self.timestamps = [[NSMutableArray alloc] initWithObjects:
@@ -74,12 +68,14 @@
 }
 
 #pragma mark - Table view data source
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.messages.count;
 }
 
 #pragma mark - Messages view delegate
+
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text
 {
     [self.messages addObject:text];
@@ -111,21 +107,32 @@
 
 - (JSMessagesViewAvatarPolicy)avatarPolicy
 {
-    return JSMessagesViewAvatarPolicyBoth;
+    return JSMessagesViewAvatarPolicyAll;
 }
 
-- (JSAvatarStyle)avatarStyle
+- (JSMessagesViewSubtitlePolicy)subtitlePolicy
 {
-    return JSAvatarStyleSquare;
+    return JSMessagesViewSubtitlePolicyAll;
 }
 
-//  Optional delegate method
-//  Required if using `JSMessagesViewTimestampPolicyCustom`
+#pragma mark - Optional delegate methods
+
+//  *** Required if using `JSMessagesViewTimestampPolicyCustom`
 //
 //  - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 //
 
+// *** Implement to use a custom send button
+//
+// The button's frame is set automatically for you
+//
+- (UIButton *)sendButtonForInputView
+{
+    return [UIButton js_defaultSendButton_iOS6];
+}
+
 #pragma mark - Messages view data source
+
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self.messages objectAtIndex:indexPath.row];
@@ -136,14 +143,20 @@
     return [self.timestamps objectAtIndex:indexPath.row];
 }
 
-- (UIImage *)avatarImageForIncomingMessage
+ - (UIImage *)avatarForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [UIImage imageNamed:@"demo-avatar-woz"];
+    if(indexPath.row % 2)
+        return [[UIImage imageNamed:@"demo-avatar-woz"] js_circleImageWithSize:kJSAvatarSize];
+    
+    return [[UIImage imageNamed:@"demo-avatar-jobs"] js_squareImageWithSize:kJSAvatarSize];
 }
 
-- (UIImage *)avatarImageForOutgoingMessage
+- (NSString *)subtitleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [UIImage imageNamed:@"demo-avatar-jobs"];
+    if(indexPath.row % 2)
+        return @"Steve Wozniak";
+    
+    return @"Jobs";
 }
 
 @end

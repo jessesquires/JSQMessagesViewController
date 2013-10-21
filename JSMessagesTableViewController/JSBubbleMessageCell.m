@@ -37,8 +37,10 @@
 #import "UIImage+JSMessagesAvatar.h"
 #import "UIImage+JSMessagesBubble.h"
 
-static const CGFloat kJSTimeStampLabelHeight = 14.5f;
-static const CGFloat kJSSubtitleLabelHeight = 16.0f;
+static const CGFloat kJSLabelPadding = 5.0f;
+
+static const CGFloat kJSTimeStampLabelHeight = 15.0f;
+static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 
 @interface JSBubbleMessageCell()
@@ -46,19 +48,20 @@ static const CGFloat kJSSubtitleLabelHeight = 16.0f;
 @property (strong, nonatomic) JSBubbleView *bubbleView;
 @property (strong, nonatomic) UILabel *timestampLabel;
 @property (strong, nonatomic) UIImageView *avatarImageView;
-@property (assign, nonatomic) JSAvatarStyle avatarImageStyle;
 @property (strong, nonatomic) UILabel *subtitleLabel;
 
 - (void)setup;
 - (void)configureTimestampLabel;
+- (void)configureAvatarImageViewForMessageType:(JSBubbleMessageType)type;
+- (void)configureSubtitleLabelForMessageType:(JSBubbleMessageType)type;
 
 - (void)configureWithType:(JSBubbleMessageType)type
               bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
-              avatarStyle:(JSAvatarStyle)avatarStyle
-				 subtitle:(BOOL)hasSubtitle
-                timestamp:(BOOL)hasTimestamp;
+                timestamp:(BOOL)hasTimestamp
+                   avatar:(BOOL)hasAvatar
+				 subtitle:(BOOL)hasSubtitle;
 
-- (void)handleLongPress:(UILongPressGestureRecognizer *)longPress;
+- (void)handleLongPressGesture:(UILongPressGestureRecognizer *)longPress;
 
 - (void)handleMenuWillHideNotification:(NSNotification *)notification;
 - (void)handleMenuWillShowNotification:(NSNotification *)notification;
@@ -86,16 +89,16 @@ static const CGFloat kJSSubtitleLabelHeight = 16.0f;
     self.detailTextLabel.hidden = YES;
     
     UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
-                                                                                             action:@selector(handleLongPress:)];
+                                                                                             action:@selector(handleLongPressGesture:)];
     [recognizer setMinimumPressDuration:0.4f];
     [self addGestureRecognizer:recognizer];
 }
 
 - (void)configureTimestampLabel
 {
-    _timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
-                                                                4.0f,
-                                                                self.bounds.size.width,
+    _timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake(kJSLabelPadding,
+                                                                kJSLabelPadding,
+                                                                self.contentView.frame.size.width - (kJSLabelPadding * 2.0f),
                                                                 kJSTimeStampLabelHeight)];
     _timestampLabel.autoresizingMask =  UIViewAutoresizingFlexibleWidth;
     _timestampLabel.backgroundColor = [UIColor clearColor];
@@ -103,80 +106,86 @@ static const CGFloat kJSSubtitleLabelHeight = 16.0f;
     _timestampLabel.textColor = [UIColor js_messagesTimestampColor_iOS6];
     _timestampLabel.shadowColor = [UIColor whiteColor];
     _timestampLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    _timestampLabel.font = [UIFont boldSystemFontOfSize:11.5f];
+    _timestampLabel.font = [UIFont boldSystemFontOfSize:12.0f];
     
     [self.contentView addSubview:_timestampLabel];
     [self.contentView bringSubviewToFront:_timestampLabel];
 }
 
+- (void)configureAvatarImageViewForMessageType:(JSBubbleMessageType)type
+{
+    CGFloat avatarX = 0.5f;
+    if(type == JSBubbleMessageTypeOutgoing) {
+        avatarX = (self.contentView.frame.size.width - kJSAvatarSize);
+    }
+    
+    CGFloat avatarY = self.contentView.frame.size.height - kJSAvatarSize;
+    if(_subtitleLabel) {
+        avatarY -= kJSSubtitleLabelHeight;
+    }
+    
+    _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(avatarX,
+                                                                     avatarY,
+                                                                     kJSAvatarSize,
+                                                                     kJSAvatarSize)];
+    _avatarImageView.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
+                                         | UIViewAutoresizingFlexibleLeftMargin
+                                         | UIViewAutoresizingFlexibleRightMargin);
+    
+    [self.contentView addSubview:_avatarImageView];
+}
+
+- (void)configureSubtitleLabelForMessageType:(JSBubbleMessageType)type
+{
+    _subtitleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    _subtitleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    _subtitleLabel.backgroundColor = [UIColor clearColor];
+    _subtitleLabel.textAlignment = (type == JSBubbleMessageTypeOutgoing) ? NSTextAlignmentRight : NSTextAlignmentLeft;
+    _subtitleLabel.textColor = [UIColor js_messagesTimestampColor_iOS6];
+    _subtitleLabel.font = [UIFont systemFontOfSize:12.5f];
+    
+    [self.contentView addSubview:_subtitleLabel];
+}
+
 - (void)configureWithType:(JSBubbleMessageType)type
               bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
-              avatarStyle:(JSAvatarStyle)avatarStyle
-				 subtitle:(BOOL)hasSubtitle
                 timestamp:(BOOL)hasTimestamp
+                   avatar:(BOOL)hasAvatar
+				 subtitle:(BOOL)hasSubtitle
 {
     CGFloat bubbleY = 0.0f;
     CGFloat bubbleX = 0.0f;
+    
+    CGFloat offsetX = 0.0f;
     
     if(hasTimestamp) {
         [self configureTimestampLabel];
         bubbleY = 14.0f;
     }
     
-    CGFloat offsetX = 0.0f;
+    if(hasSubtitle) {
+		[self configureSubtitleLabelForMessageType:type];
+	}
     
-    if(avatarStyle != JSAvatarStyleNone) {
+    if(hasAvatar) {
         offsetX = 4.0f;
         bubbleX = kJSAvatarSize;
-        CGFloat avatarX = 0.5f;
-        
         if(type == JSBubbleMessageTypeOutgoing) {
-            avatarX = (self.contentView.frame.size.width - kJSAvatarSize);
             offsetX = kJSAvatarSize - 4.0f;
         }
         
-        _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(avatarX,
-                                                                             self.contentView.frame.size.height - kJSAvatarSize,
-                                                                             kJSAvatarSize,
-                                                                             kJSAvatarSize)];
-        
-        _avatarImageView.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
-                                                 | UIViewAutoresizingFlexibleLeftMargin
-                                                 | UIViewAutoresizingFlexibleRightMargin);
-		
-        [self.contentView addSubview:_avatarImageView];
+        [self configureAvatarImageViewForMessageType:type];
     }
     
     CGRect frame = CGRectMake(bubbleX - offsetX,
                               bubbleY,
                               self.contentView.frame.size.width - bubbleX,
-                              self.contentView.frame.size.height - _timestampLabel.frame.size.height);
+                              self.contentView.frame.size.height - _timestampLabel.frame.size.height - _subtitleLabel.frame.size.height);
     
     _bubbleView = [[JSBubbleView alloc] initWithFrame:frame
                                            bubbleType:type
                                           bubbleStyle:bubbleStyle];
-	
-	if(hasSubtitle) {
-        CGFloat subtitleXOffset = 15.0f;
-        
-		_subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(subtitleXOffset,
-                                                                   bubbleY + frame.size.height - kJSSubtitleLabelHeight,
-                                                                   frame.size.width - bubbleX - subtitleXOffset * 2,
-                                                                   kJSSubtitleLabelHeight)];
-		_subtitleLabel.font = [UIFont systemFontOfSize:13.0f];
-		_subtitleLabel.backgroundColor = [UIColor clearColor];
-		_subtitleLabel.textColor = [UIColor grayColor];
-		
-		if(type == JSBubbleMessageTypeOutgoing) {
-			_subtitleLabel.textAlignment = NSTextAlignmentRight;
-		}
-		
-		_subtitleLabel.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
-                                           | UIViewAutoresizingFlexibleWidth);
-
-		[self.contentView addSubview:_subtitleLabel];
-	}
-	
+    
     _bubbleView.autoresizingMask = (UIViewAutoresizingFlexibleWidth
                                     | UIViewAutoresizingFlexibleHeight
                                     | UIViewAutoresizingFlexibleBottomMargin);
@@ -189,8 +198,8 @@ static const CGFloat kJSSubtitleLabelHeight = 16.0f;
 
 - (instancetype)initWithBubbleType:(JSBubbleMessageType)type
                        bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
-                       avatarStyle:(JSAvatarStyle)avatarStyle
                       hasTimestamp:(BOOL)hasTimestamp
+                         hasAvatar:(BOOL)hasAvatar
                        hasSubtitle:(BOOL)hasSubtitle
                    reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -198,13 +207,11 @@ static const CGFloat kJSSubtitleLabelHeight = 16.0f;
     if(self) {
         [self setup];
         
-        _avatarImageStyle = avatarStyle;
-        
         [self configureWithType:type
                     bubbleStyle:bubbleStyle
-                    avatarStyle:avatarStyle
-					   subtitle:hasSubtitle
-                      timestamp:hasTimestamp];
+                      timestamp:hasTimestamp
+                         avatar:hasAvatar
+                       subtitle:hasSubtitle];
     }
     return self;
 }
@@ -241,24 +248,9 @@ static const CGFloat kJSSubtitleLabelHeight = 16.0f;
                                                               timeStyle:NSDateFormatterShortStyle];
 }
 
-- (void)setAvatarImage:(UIImage *)image
+- (void)setAvatar:(UIImage *)image
 {
-    UIImage *styledImg = nil;
-    switch (self.avatarImageStyle) {
-        case JSAvatarStyleCircle:
-            styledImg = [image js_circleImageWithSize:kJSAvatarSize];
-            break;
-            
-        case JSAvatarStyleSquare:
-            styledImg = [image js_squareImageWithSize:kJSAvatarSize];
-            break;
-            
-        case JSAvatarStyleNone:
-        default:
-            break;
-    }
-    
-    self.avatarImageView.image = styledImg;
+    self.avatarImageView.image = image;
 }
 
 - (void)setSubtitle:(NSString *)subtitle
@@ -268,13 +260,30 @@ static const CGFloat kJSSubtitleLabelHeight = 16.0f;
 
 + (CGFloat)neededHeightForText:(NSString *)bubbleViewText
                      timestamp:(BOOL)hasTimestamp
-                      subtitle:(BOOL)hasSubtitle
                         avatar:(BOOL)hasAvatar
+                      subtitle:(BOOL)hasSubtitle
 {
     CGFloat timestampHeight = (hasTimestamp) ? kJSTimeStampLabelHeight : 0.0f;
     CGFloat avatarHeight = (hasAvatar) ? kJSAvatarSize : 0.0f;
 	CGFloat subtitleHeight = hasSubtitle ? kJSSubtitleLabelHeight : 0.0f;
-    return MAX(avatarHeight, [JSBubbleView cellHeightForText:bubbleViewText]) + timestampHeight + subtitleHeight;
+    return MAX(avatarHeight, [JSBubbleView cellHeightForText:bubbleViewText])
+            + timestampHeight
+            + subtitleHeight
+            + kJSLabelPadding;
+}
+
+#pragma mark - Layout
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    if(self.subtitleLabel) {
+        self.subtitleLabel.frame = CGRectMake(kJSLabelPadding,
+                                              self.contentView.frame.size.height - kJSSubtitleLabelHeight,
+                                              self.contentView.frame.size.width - (kJSLabelPadding * 2.0f),
+                                              kJSSubtitleLabelHeight);
+    }
 }
 
 #pragma mark - Copying
@@ -319,7 +328,7 @@ static const CGFloat kJSSubtitleLabelHeight = 16.0f;
 
 #pragma mark - Gestures
 
-- (void)handleLongPress:(UILongPressGestureRecognizer *)longPress
+- (void)handleLongPressGesture:(UILongPressGestureRecognizer *)longPress
 {
     if(longPress.state != UIGestureRecognizerStateBegan
        || ![self becomeFirstResponder])

@@ -47,10 +47,18 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewTimestampPolicy) {
 
 
 typedef NS_ENUM(NSUInteger, JSMessagesViewAvatarPolicy) {
+    JSMessagesViewAvatarPolicyAll,
     JSMessagesViewAvatarPolicyIncomingOnly,
-    JSMessagesViewAvatarPolicyBoth,
-    JSMessagesViewAvatarPolicyNone,
-    JSMessagesViewAvatarPolicyOutgoingOnly
+    JSMessagesViewAvatarPolicyOutgoingOnly,
+    JSMessagesViewAvatarPolicyNone
+};
+
+
+typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
+    JSMessagesViewSubtitlePolicyAll,
+    JSMessagesViewSubtitlePolicyIncomingOnly,
+    JSMessagesViewSubtitlePolicyOutgoingOnly,
+    JSMessagesViewSubtitlePolicyNone
 };
 
 
@@ -58,18 +66,20 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewAvatarPolicy) {
 
 @required
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text;
+
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 - (JSMessagesViewTimestampPolicy)timestampPolicy;
+- (JSMessagesViewAvatarPolicy)avatarPolicy;
+- (JSMessagesViewSubtitlePolicy)subtitlePolicy;
 
 @optional
-- (BOOL)hasSubtitleForRowAtIndexPath:(NSIndexPath *)indexPath;
-
-- (JSMessagesViewAvatarPolicy)avatarPolicy;
-- (JSAvatarStyle)avatarStyle;
-
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (void)messageDoneSending;
+
+- (UIButton *)sendButtonForInputView;
+
+- (void)messageDoneSending; // TODO:
 
 @end
 
@@ -80,15 +90,8 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewAvatarPolicy) {
 @required
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
-
-@optional
-- (NSString *)subtitleForRowAtIndexPath:(NSIndexPath*)indexPath;
-
-- (UIImage *)avatarImageForIncomingMessageAtIndexPath:(NSIndexPath*)indexPath;
-- (UIImage *)avatarImageForOutgoingMessageAtIndexPath:(NSIndexPath*)indexPath;
-
-- (UIImage *)avatarImageForIncomingMessage __attribute__ ((deprecated));
-- (UIImage *)avatarImageForOutgoingMessage __attribute__ ((deprecated));
+- (UIImage *)avatarForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (NSString *)subtitleForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -100,31 +103,15 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewAvatarPolicy) {
 @property (weak, nonatomic) id<JSMessagesViewDataSource> dataSource;
 @property (assign, nonatomic) BOOL preventScrollToBottomWhileUserScrolling;
 
-@property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) JSMessageInputView *inputToolBarView;
-@property (assign, nonatomic) CGFloat previousTextViewContentHeight;
-
-#pragma mark - Initialization
-
-- (UIButton *)sendButton;
-
-#pragma mark - Actions
-
-- (void)sendPressed:(UIButton *)sender;
-
 #pragma mark - Messages view controller
 
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (BOOL)shouldHaveAvatarForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (BOOL)shouldHaveSubtitleForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 - (void)finishSend;
 - (void)setBackgroundColor:(UIColor *)color;
 - (void)scrollToBottomAnimated:(BOOL)animated;
-
-#pragma mark - Keyboard notifications
-
-- (void)handleWillShowKeyboard:(NSNotification *)notification;
-- (void)handleWillHideKeyboard:(NSNotification *)notification;
-- (void)keyboardWillShowHide:(NSNotification *)notification;
 
 #pragma mark - Scroll while respecting user interaction
 
