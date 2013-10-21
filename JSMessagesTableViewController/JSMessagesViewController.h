@@ -76,7 +76,7 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 
 @optional
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
-
+- (BOOL)shouldPreventScrollToBottomWhileUserScrolling;
 - (UIButton *)sendButtonForInputView;
 
 @end
@@ -99,7 +99,6 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 
 @property (weak, nonatomic) id<JSMessagesViewDelegate> delegate;
 @property (weak, nonatomic) id<JSMessagesViewDataSource> dataSource;
-@property (assign, nonatomic) BOOL preventScrollToBottomWhileUserScrolling;
 
 #pragma mark - Messages view controller
 
@@ -109,10 +108,8 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 
 - (void)finishSend;
 - (void)setBackgroundColor:(UIColor *)color;
+
 - (void)scrollToBottomAnimated:(BOOL)animated;
-
-#pragma mark - Scroll while respecting user interaction
-
 - (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath
 			  atScrollPosition:(UITableViewScrollPosition)position
 					  animated:(BOOL)animated;

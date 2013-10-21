@@ -53,6 +53,8 @@
 
 - (void)sendPressed:(UIButton *)sender;
 
+- (BOOL)shouldAllowScroll;
+
 - (void)handleWillShowKeyboardNotification:(NSNotification *)notification;
 - (void)handleWillHideKeyboardNotification:(NSNotification *)notification;
 - (void)keyboardWillShowHide:(NSNotification *)notification;
@@ -71,8 +73,7 @@
         // fix for ipad modal form presentations
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
-	
-	_preventScrollToBottomWhileUserScrolling = NO;
+    
 	_isUserScrolling = NO;
     
     CGSize size = self.view.frame.size;
@@ -322,7 +323,7 @@
 
 - (void)scrollToBottomAnimated:(BOOL)animated
 {
-	if(self.isUserScrolling && self.preventScrollToBottomWhileUserScrolling)
+	if(![self shouldAllowScroll])
         return;
 	
     NSInteger rows = [self.tableView numberOfRowsInSection:0];
@@ -338,12 +339,24 @@
 			  atScrollPosition:(UITableViewScrollPosition)position
 					  animated:(BOOL)animated
 {
-	if(self.isUserScrolling && self.preventScrollToBottomWhileUserScrolling)
+	if(![self shouldAllowScroll])
         return;
 	
 	[self.tableView scrollToRowAtIndexPath:indexPath
 						  atScrollPosition:position
 								  animated:animated];
+}
+
+- (BOOL)shouldAllowScroll
+{
+    if(self.isUserScrolling) {
+        if([self.delegate respondsToSelector:@selector(shouldPreventScrollToBottomWhileUserScrolling)]
+           && [self.delegate shouldPreventScrollToBottomWhileUserScrolling]) {
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 #pragma mark - Scroll view delegate

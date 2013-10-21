@@ -132,6 +132,11 @@
     return [UIButton js_defaultSendButton_iOS6];
 }
 
+- (BOOL)shouldPreventScrollToBottomWhileUserScrolling
+{
+    return YES;
+}
+
 #pragma mark - Messages view data source
 
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
