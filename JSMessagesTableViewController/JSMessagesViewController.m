@@ -32,7 +32,7 @@
 //
 
 #import "JSMessagesViewController.h"
-#import "JSDismissiveTextView.h"
+#import "JSMessageTextView.h"
 
 #import "NSString+JSMessagesView.h"
 #import "UIView+AnimationOptionsForCurve.h"
