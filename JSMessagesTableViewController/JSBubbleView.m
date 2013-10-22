@@ -119,10 +119,10 @@ CGFloat const kJSAvatarSize = 50.0f;
 - (CGRect)bubbleFrame
 {
     CGSize bubbleSize = [JSBubbleView bubbleSizeForText:self.text];
-    return CGRectMake((self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width : 0.0f),
-                      kMarginTop,
-                      floor(bubbleSize.width),
-                      floor(bubbleSize.height));
+    return CGRectMake(floorf(self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width : 0.0f),
+                      floorf(kMarginTop),
+                      floorf(bubbleSize.width),
+                      floorf(bubbleSize.height));
 }
 
 - (UIImage *)bubbleImage
