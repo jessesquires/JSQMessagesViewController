@@ -218,6 +218,10 @@
                                                reuseIdentifier:CellID];
     }
     
+    if([self.dataSource respondsToSelector:@selector(avatarImageViewForRowAtIndexPath:)]) {
+        [cell setCustomAvatarImageView:[self.dataSource avatarImageViewForRowAtIndexPath:indexPath]];
+    }
+    
     if(hasTimestamp) {
         [cell setTimestamp:[self.dataSource timestampForRowAtIndexPath:indexPath]];
     }

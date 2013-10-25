@@ -91,6 +91,9 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 - (UIImage *)avatarForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (NSString *)subtitleForRowAtIndexPath:(NSIndexPath *)indexPath;
 
+@optional
+- (UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
 
 

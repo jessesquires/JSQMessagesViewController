@@ -123,19 +123,26 @@
 //  - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 //
 
-// *** Implement to use a custom send button
+//  *** Implement to use a custom send button
 //
-// The button's frame is set automatically for you
+//  The button's frame is set automatically for you
 //
 - (UIButton *)sendButtonForInputView
 {
     return [UIButton js_defaultSendButton_iOS6];
 }
 
+//  *** Implement to prevent auto-scrolling when message is added
+//
 - (BOOL)shouldPreventScrollToBottomWhileUserScrolling
 {
     return YES;
 }
+
+//  *** Implement to use a custom (subclass of) UIImageView
+//
+//  - (UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath
+//
 
 #pragma mark - Messages view data source
 

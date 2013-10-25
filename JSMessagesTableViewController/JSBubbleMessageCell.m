@@ -124,10 +124,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
         avatarY -= kJSSubtitleLabelHeight;
     }
     
-    _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(avatarX,
-                                                                     avatarY,
-                                                                     kJSAvatarSize,
-                                                                     kJSAvatarSize)];
+    _avatarImageView.frame = CGRectMake(avatarX, avatarY, kJSAvatarSize, kJSAvatarSize);
     _avatarImageView.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
                                          | UIViewAutoresizingFlexibleLeftMargin
                                          | UIViewAutoresizingFlexibleRightMargin);
@@ -174,6 +171,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
             offsetX = kJSAvatarSize - 4.0f;
         }
         
+        _avatarImageView = [[UIImageView alloc] init];
         [self configureAvatarImageViewForMessageType:type];
     }
     
@@ -225,7 +223,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - Setters
+#pragma mark - TableViewCell
 
 - (void)setBackgroundColor:(UIColor *)color
 {
@@ -234,7 +232,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     [self.bubbleView setBackgroundColor:color];
 }
 
-#pragma mark - Message Cell
+#pragma mark - Setters
 
 - (void)setMessage:(NSString *)msg
 {
@@ -256,6 +254,27 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 - (void)setSubtitle:(NSString *)subtitle
 {
 	self.subtitleLabel.text = subtitle;
+}
+
+- (void)setCustomAvatarImageView:(UIImageView *)customImageView
+{
+    [_avatarImageView removeFromSuperview];
+    _avatarImageView = nil;
+    
+    _avatarImageView = customImageView;
+    [self configureAvatarImageViewForMessageType:[self messageType]];
+}
+
+#pragma mark - Getters
+
+- (JSBubbleMessageType)messageType
+{
+    return self.bubbleView.type;
+}
+
+- (UIImageView *)avatarImageView
+{
+    return _avatarImageView;
 }
 
 + (CGFloat)neededHeightForText:(NSString *)bubbleViewText

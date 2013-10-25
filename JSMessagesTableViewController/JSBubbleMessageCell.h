@@ -45,7 +45,7 @@
                        hasSubtitle:(BOOL)hasSubtitle
                    reuseIdentifier:(NSString *)reuseIdentifier;
 
-#pragma mark - Message cell
+#pragma mark - Setters
 
 - (void)setMessage:(NSString *)msg;
 
@@ -54,6 +54,14 @@
 - (void)setAvatar:(UIImage *)image;
 
 - (void)setSubtitle:(NSString *)subtitle;
+
+- (void)setCustomAvatarImageView:(UIImageView *)customImageView;
+
+#pragma mark - Getters
+
+- (JSBubbleMessageType)messageType;
+
+- (UIImageView *)avatarImageView;
 
 + (CGFloat)neededHeightForText:(NSString *)bubbleViewText
                      timestamp:(BOOL)hasTimestamp
