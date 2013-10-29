@@ -68,6 +68,23 @@
 	self.tableView.delegate = self;
 	[self.view addSubview:self.tableView];
 	
+	UIButton* mediaButton = nil;
+	if (kAllowsMedia)
+	{
+		// set up the image and button frame
+		UIImage* image = [UIImage imageNamed:@"PhotoIcon"];
+		CGRect frame = CGRectMake(4, 0, image.size.width, image.size.height);
+		CGFloat yHeight = (INPUT_HEIGHT - frame.size.height) / 2.0f;
+		frame.origin.y = yHeight;
+		
+		// make the button
+		mediaButton = [[UIButton alloc] initWithFrame:frame];
+		[mediaButton setBackgroundImage:image forState:UIControlStateNormal];
+		
+		// button action
+		[mediaButton addTarget:self action:@selector(cameraAction:) forControlEvents:UIControlEventTouchUpInside];
+	}
+	
     CGRect inputFrame = CGRectMake(0.0f, size.height - INPUT_HEIGHT, size.width, INPUT_HEIGHT);
     self.inputToolBarView = [[JSMessageInputView alloc] initWithFrame:inputFrame delegate:self];
     
@@ -84,7 +101,26 @@
     [self.inputToolBarView setSendButton:sendButton];
     [self.view addSubview:self.inputToolBarView];
 
-    [self setBackgroundColor:[UIColor messagesBackgroundColor]];    
+	if (kAllowsMedia)
+	{
+		// adjust the size of the send button to balance out more with the camera button on the other side.
+		CGRect frame = self.inputToolBarView.sendButton.frame;
+		frame.size.width -= 16;
+		frame.origin.x += 16;
+		self.inputToolBarView.sendButton.frame = frame;
+		
+		// add the camera button
+		[self.inputToolBarView addSubview:mediaButton];
+
+		// move the tet view over
+		frame = self.inputToolBarView.textView.frame;
+		frame.origin.x += mediaButton.frame.size.width + mediaButton.frame.origin.x;
+		frame.size.width -= mediaButton.frame.size.width + mediaButton.frame.origin.x;
+		frame.size.width += 16;		// from the send button adjustment above
+		self.inputToolBarView.textView.frame = frame;
+	}
+	
+    [self setBackgroundColor:[UIColor messagesBackgroundColor]];
 }
 
 - (UIButton *)sendButton
@@ -162,6 +198,32 @@
     [self.delegate sendPressed:sender
                       withText:[self.inputToolBarView.textView.text trimWhitespace]];
 }
+
+
+- (void)cameraAction:(id)sender
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+
+#pragma mark - Image picker delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+	NSLog(@"Chose image!  Details:  %@", info);
+	
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+	[self dismissModalViewControllerAnimated:YES];
+}
+
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

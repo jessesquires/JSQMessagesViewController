@@ -39,6 +39,9 @@
 #import "JSMessageSoundEffect.h"
 #import "UIButton+JSMessagesView.h"
 
+
+#define kAllowsMedia		NO
+
 typedef enum {
     JSMessagesViewTimestampPolicyAll = 0,
     JSMessagesViewTimestampPolicyAlternating,
@@ -81,7 +84,7 @@ typedef enum {
 
 
 
-@interface JSMessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, JSMessageInputViewDelegate>
+@interface JSMessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, JSMessageInputViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) id<JSMessagesViewDelegate> delegate;
 @property (weak, nonatomic) id<JSMessagesViewDataSource> dataSource;
