@@ -2,6 +2,8 @@
 
 A messages UI for iPhone and iPad.
 
+iOS 7 changes by Jeremy Stone, forked from https://github.com/jessesquires/MessagesTableViewController
+
 ![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2][img2]
 
 This messages tableview controller is very similar to the one in the iOS Messages app. **Note, this is only a messaging UI, not a messaging app.** This is intended to be used in an existing app where you have (or are developing) a messaging system and need a user interface for it.
