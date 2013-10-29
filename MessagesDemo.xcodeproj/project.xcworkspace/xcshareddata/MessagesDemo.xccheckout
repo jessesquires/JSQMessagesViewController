@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D04C28C8-F773-476C-962B-2FE67C32165F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MessagesDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>994AE685-3C21-4FB5-BDE5-B4156F59D5B0</key>
+		<string>https://github.com/slycrel/MessagesTableViewController.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MessagesDemo.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>994AE685-3C21-4FB5-BDE5-B4156F59D5B0</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/slycrel/MessagesTableViewController.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>994AE685-3C21-4FB5-BDE5-B4156F59D5B0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>994AE685-3C21-4FB5-BDE5-B4156F59D5B0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MessagesTableViewController</string>
+		</dict>
+	</array>
+</dict>
+</plist>
