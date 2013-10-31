@@ -192,6 +192,22 @@
     self.bubbleView.text = msg;
 }
 
+
+- (void)setMedia:(id)data
+{
+	if ([data isKindOfClass:[UIImage class]])
+	{
+		// image
+		NSLog(@"show the image here");
+	}
+	else if ([data isKindOfClass:[NSData class]])
+	{
+		// show a button / icon to view details
+		NSLog(@"icon view");
+	}
+}
+
+
 - (void)setTimestamp:(NSDate *)date
 {
     self.timestampLabel.text = [NSDateFormatter localizedStringFromDate:date

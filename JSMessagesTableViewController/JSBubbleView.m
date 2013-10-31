@@ -119,6 +119,7 @@ CGFloat const kJSAvatarSize = 50.0f;
 - (CGRect)bubbleFrame
 {
     CGSize bubbleSize = [JSBubbleView bubbleSizeForText:self.text];
+//#error return an image frame here as needed.
     return CGRectMake(floorf(self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width : 0.0f),
                       floorf(kMarginTop),
                       floorf(bubbleSize.width),
@@ -166,65 +167,76 @@ CGFloat const kJSAvatarSize = 50.0f;
                                   textSize.width,
                                   textSize.height);
 
-    // for flat outgoing messages change the text color to grey or white.  Otherwise leave them black.
-    if (self.style == JSBubbleMessageStyleFlat && self.type == JSBubbleMessageTypeOutgoing)
-    {
-        UIColor* textColor = [UIColor whiteColor];
-        if (self.selectedToShowCopyMenu)
-            textColor = [UIColor lightTextColor];
-        
-        if ([[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending)
-        {
-            NSMutableParagraphStyle* paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-            [paragraphStyle setAlignment:NSTextAlignmentLeft];
-            [paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
-
-            NSDictionary* attributes = @{NSFontAttributeName: [JSBubbleView font],
-                                         NSParagraphStyleAttributeName: paragraphStyle};
-
-            // change the color attribute if we are flat
-            if ([JSMessageInputView inputBarStyle] == JSInputBarStyleFlat)
-            {
-                NSMutableDictionary* dict = [attributes mutableCopy];
-                [dict setObject:textColor forKey:NSForegroundColorAttributeName];
-                attributes = [NSDictionary dictionaryWithDictionary:dict];
-            }
-            
-            [self.text drawInRect:textFrame
-                   withAttributes:attributes];
-        }
-        else
-        {
-            CGContextSetFillColorWithColor(UIGraphicsGetCurrentContext(), textColor.CGColor);
-            [self.text drawInRect:textFrame
-                         withFont:[JSBubbleView font]
-                    lineBreakMode:NSLineBreakByWordWrapping
-                        alignment:NSTextAlignmentLeft];
-            CGContextSetFillColorWithColor(UIGraphicsGetCurrentContext(), [UIColor blackColor].CGColor);
-        }
-    }
-    else
-    {
-        if ([[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending)
-        {
-            NSMutableParagraphStyle* paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-            [paragraphStyle setAlignment:NSTextAlignmentLeft];
-            [paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
-            
-            NSDictionary* attributes = @{NSFontAttributeName: [JSBubbleView font],
-                                         NSParagraphStyleAttributeName: paragraphStyle};
-            
-            [self.text drawInRect:textFrame
-                   withAttributes:attributes];
-        }
-        else
-        {
-            [self.text drawInRect:textFrame
-                         withFont:[JSBubbleView font]
-                    lineBreakMode:NSLineBreakByWordWrapping
-                        alignment:NSTextAlignmentLeft];
-        }
-    }
+	if (self.text.length)
+	{
+		// for flat outgoing messages change the text color to grey or white.  Otherwise leave them black.
+		if (self.style == JSBubbleMessageStyleFlat && self.type == JSBubbleMessageTypeOutgoing)
+		{
+			UIColor* textColor = [UIColor whiteColor];
+			if (self.selectedToShowCopyMenu)
+				textColor = [UIColor lightTextColor];
+			
+			if ([[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending)
+			{
+				NSMutableParagraphStyle* paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+				[paragraphStyle setAlignment:NSTextAlignmentLeft];
+				[paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
+				
+				NSDictionary* attributes = @{NSFontAttributeName: [JSBubbleView font],
+											 NSParagraphStyleAttributeName: paragraphStyle};
+				
+				// change the color attribute if we are flat
+				if ([JSMessageInputView inputBarStyle] == JSInputBarStyleFlat)
+				{
+					NSMutableDictionary* dict = [attributes mutableCopy];
+					[dict setObject:textColor forKey:NSForegroundColorAttributeName];
+					attributes = [NSDictionary dictionaryWithDictionary:dict];
+				}
+				
+				[self.text drawInRect:textFrame
+					   withAttributes:attributes];
+			}
+			else
+			{
+				CGContextSetFillColorWithColor(UIGraphicsGetCurrentContext(), textColor.CGColor);
+				[self.text drawInRect:textFrame
+							 withFont:[JSBubbleView font]
+						lineBreakMode:NSLineBreakByWordWrapping
+							alignment:NSTextAlignmentLeft];
+				CGContextSetFillColorWithColor(UIGraphicsGetCurrentContext(), [UIColor blackColor].CGColor);
+			}
+		}
+		else
+		{
+			if ([[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending)
+			{
+				NSMutableParagraphStyle* paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+				[paragraphStyle setAlignment:NSTextAlignmentLeft];
+				[paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
+				
+				NSDictionary* attributes = @{NSFontAttributeName: [JSBubbleView font],
+											 NSParagraphStyleAttributeName: paragraphStyle};
+				
+				[self.text drawInRect:textFrame
+					   withAttributes:attributes];
+			}
+			else
+			{
+				[self.text drawInRect:textFrame
+							 withFont:[JSBubbleView font]
+						lineBreakMode:NSLineBreakByWordWrapping
+							alignment:NSTextAlignmentLeft];
+			}
+		}
+	}
+	else	// media
+	{
+		UIImage* img = [UIImage imageNamed:@"CameraIcon"];
+		if (img)
+		{
+//#error draw an image here.
+		}
+	}
 }
 
 #pragma mark - Bubble view

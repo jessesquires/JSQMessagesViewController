@@ -214,7 +214,8 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 	NSLog(@"Chose image!  Details:  %@", info);
-	
+
+	// dismiss the image picker.
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -270,6 +271,9 @@
         }
     }
     
+	if (kAllowsMedia)
+		[cell setMedia:[self.dataSource dataForRowAtIndexPath:indexPath]];
+
     [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
     [cell setBackgroundColor:tableView.backgroundColor];
     return cell;

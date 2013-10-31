@@ -56,6 +56,7 @@ typedef enum {
 @property (assign, nonatomic) JSBubbleMessageType type;
 @property (assign, nonatomic) JSBubbleMessageStyle style;
 @property (copy, nonatomic) NSString *text;
+@property (copy, nonatomic) id data;
 @property (assign, nonatomic) BOOL selectedToShowCopyMenu;
 
 #pragma mark - Initialization
