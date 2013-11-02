@@ -256,12 +256,12 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 	self.subtitleLabel.text = subtitle;
 }
 
-- (void)setCustomAvatarImageView:(UIImageView *)customImageView
+- (void)setAvatarImageView:(UIImageView *)imageView
 {
     [_avatarImageView removeFromSuperview];
     _avatarImageView = nil;
     
-    _avatarImageView = customImageView;
+    _avatarImageView = imageView;
     [self configureAvatarImageViewForMessageType:[self messageType]];
 }
 
@@ -270,11 +270,6 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 - (JSBubbleMessageType)messageType
 {
     return self.bubbleView.type;
-}
-
-- (UIImageView *)avatarImageView
-{
-    return _avatarImageView;
 }
 
 + (CGFloat)neededHeightForText:(NSString *)bubbleViewText

@@ -51,11 +51,9 @@
 
 - (void)setTimestamp:(NSDate *)date;
 
-- (void)setAvatar:(UIImage *)image;
+- (void)setAvatarImageView:(UIImageView *)imageView;
 
 - (void)setSubtitle:(NSString *)subtitle;
-
-- (void)setCustomAvatarImageView:(UIImageView *)customImageView;
 
 #pragma mark - Getters
 

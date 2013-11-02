@@ -88,11 +88,8 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 @required
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (UIImage *)avatarForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (NSString *)subtitleForRowAtIndexPath:(NSIndexPath *)indexPath;
-
-@optional
 - (UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (NSString *)subtitleForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

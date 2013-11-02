@@ -139,11 +139,6 @@
     return YES;
 }
 
-//  *** Implement to use a custom (subclass of) UIImageView
-//
-//  - (UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath
-//
-
 #pragma mark - Messages view data source
 
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -156,12 +151,15 @@
     return [self.timestamps objectAtIndex:indexPath.row];
 }
 
- - (UIImage *)avatarForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIImage *img = nil;
     if(indexPath.row % 2)
-        return [[UIImage imageNamed:@"demo-avatar-woz"] js_circleImageWithSize:kJSAvatarSize];
+        img = [[UIImage imageNamed:@"demo-avatar-woz"] js_circleImageWithSize:kJSAvatarSize];
+    else
+        img = [[UIImage imageNamed:@"demo-avatar-jobs"] js_squareImageWithSize:kJSAvatarSize];
     
-    return [[UIImage imageNamed:@"demo-avatar-jobs"] js_squareImageWithSize:kJSAvatarSize];
+    return [[UIImageView alloc] initWithImage:img];
 }
 
 - (NSString *)subtitleForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -218,16 +218,12 @@
                                                reuseIdentifier:CellID];
     }
     
-    if([self.dataSource respondsToSelector:@selector(avatarImageViewForRowAtIndexPath:)]) {
-        [cell setCustomAvatarImageView:[self.dataSource avatarImageViewForRowAtIndexPath:indexPath]];
-    }
-    
     if(hasTimestamp) {
         [cell setTimestamp:[self.dataSource timestampForRowAtIndexPath:indexPath]];
     }
 	
     if(hasAvatar) {
-        [cell setAvatar:[self.dataSource avatarForRowAtIndexPath:indexPath]];
+        [cell setAvatarImageView:[self.dataSource avatarImageViewForRowAtIndexPath:indexPath]];
     }
     
 	if(hasSubtitle) {
