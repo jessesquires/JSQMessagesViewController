@@ -246,16 +246,6 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                                                               timeStyle:NSDateFormatterShortStyle];
 }
 
-- (void)setAvatar:(UIImage *)image
-{
-    self.avatarImageView.image = image;
-}
-
-- (void)setSubtitle:(NSString *)subtitle
-{
-	self.subtitleLabel.text = subtitle;
-}
-
 - (void)setAvatarImageView:(UIImageView *)imageView
 {
     [_avatarImageView removeFromSuperview];
@@ -263,6 +253,11 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     
     _avatarImageView = imageView;
     [self configureAvatarImageViewForMessageType:[self messageType]];
+}
+
+- (void)setSubtitle:(NSString *)subtitle
+{
+	self.subtitleLabel.text = subtitle;
 }
 
 #pragma mark - Getters
@@ -344,13 +339,13 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (void)handleLongPressGesture:(UILongPressGestureRecognizer *)longPress
 {
-    if(longPress.state != UIGestureRecognizerStateBegan
-       || ![self becomeFirstResponder])
+    if(longPress.state != UIGestureRecognizerStateBegan || ![self becomeFirstResponder])
         return;
     
     UIMenuController *menu = [UIMenuController sharedMenuController];
     CGRect targetRect = [self convertRect:[self.bubbleView bubbleFrame]
                                  fromView:self.bubbleView];
+    
     [menu setTargetRect:CGRectInset(targetRect, 0.0f, 4.0f) inView:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self

@@ -59,8 +59,6 @@
 
 - (JSBubbleMessageType)messageType;
 
-- (UIImageView *)avatarImageView;
-
 + (CGFloat)neededHeightForText:(NSString *)bubbleViewText
                      timestamp:(BOOL)hasTimestamp
                         avatar:(BOOL)hasAvatar
