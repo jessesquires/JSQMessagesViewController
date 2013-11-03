@@ -28,6 +28,11 @@
 
 #import "UIButton+JSMessagesView.h"
 #import "UIImage+JSMessagesAvatar.h"
+#import "UIImage+JSMessagesBubble.h"
+
+#define kSubtitleJobs @"Jobs"
+#define kSubtitleWoz @"Steve Wozniak"
+#define kSubtitleCook @"Mr. Cook"
 
 @implementation DemoViewController
 
@@ -55,9 +60,42 @@
                        [NSDate date],
                        nil];
     
+    self.subtitles = [[NSMutableArray alloc] initWithObjects:
+                      kSubtitleJobs,
+                      kSubtitleWoz,
+                      kSubtitleJobs,
+                      kSubtitleCook, nil];
+    
+    self.avatars = [[NSDictionary alloc] initWithObjectsAndKeys:
+                    [[UIImage imageNamed:@"demo-avatar-jobs"] js_squareImageWithSize:kJSAvatarSize], kSubtitleJobs,
+                    [[UIImage imageNamed:@"demo-avatar-woz"] js_circleImageWithSize:kJSAvatarSize], kSubtitleWoz,
+                    [[UIImage imageNamed:@"demo-avatar-cook"] js_circleImageWithSize:kJSAvatarSize], kSubtitleCook,
+                    nil];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
                                                                                            target:self
                                                                                            action:@selector(buttonPressed:)];
+    
+    
+    
+    
+    // TODO:
+    /*
+     
+     1. add imageView to the bubble view instead of [img drawInRect: ] using the method below
+     2. reduce assets by only having incoming version of each
+     3. make bubbleImageFactory
+     4. adapt API for custom bubble images
+     
+     */
+    
+    
+//    UIImage *img = [UIImage js_bubbleSquareIncoming];
+//    UIImage *mirrorImg = [UIImage imageWithCGImage:img.CGImage scale:img.scale orientation:UIImageOrientationUpMirrored];
+//    UIImageView *imgView = [[UIImageView alloc] initWithImage:[mirrorImg js_makeStretchableDefaultOutgoing]];
+//    imgView.frame = CGRectMake(0, 0, 100, 100);
+//    imgView.center = self.view.center;
+//    [self.view addSubview:imgView];
 }
 
 - (void)buttonPressed:(UIButton*)sender
@@ -82,10 +120,16 @@
     
     [self.timestamps addObject:[NSDate date]];
     
-    if((self.messages.count - 1) % 2)
+    if((self.messages.count - 1) % 2) {
         [JSMessageSoundEffect playMessageSentSound];
-    else
+        
+        [self.subtitles addObject:arc4random_uniform(100) % 2 ? kSubtitleCook : kSubtitleWoz];
+    }
+    else {
         [JSMessageSoundEffect playMessageReceivedSound];
+        
+        [self.subtitles addObject:kSubtitleJobs];
+    }
     
     [self finishSend];
     [self scrollToBottomAnimated:YES];
@@ -153,21 +197,14 @@
 
 - (UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIImage *img = nil;
-    if(indexPath.row % 2)
-        img = [[UIImage imageNamed:@"demo-avatar-woz"] js_circleImageWithSize:kJSAvatarSize];
-    else
-        img = [[UIImage imageNamed:@"demo-avatar-jobs"] js_squareImageWithSize:kJSAvatarSize];
-    
-    return [[UIImageView alloc] initWithImage:img];
+    NSString *subtitle = [self.subtitles objectAtIndex:indexPath.row];
+    UIImage *image = [self.avatars objectForKey:subtitle];
+    return [[UIImageView alloc] initWithImage:image];
 }
 
 - (NSString *)subtitleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row % 2)
-        return @"Steve Wozniak";
-    
-    return @"Jobs";
+    return [self.subtitles objectAtIndex:indexPath.row];
 }
 
 @end
