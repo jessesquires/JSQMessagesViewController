@@ -14,4 +14,10 @@
 
 - (UIImage *)js_stretchableImageWithCapInsets:(UIEdgeInsets)capInsets;
 
+- (UIImage *)js_imageAsCircle:(BOOL)clipToCircle
+                  withDiamter:(CGFloat)diameter
+                  borderColor:(UIColor *)borderColor
+                  borderWidth:(CGFloat)borderWidth
+                 shadowOffSet:(CGSize)shadowOffset;
+
 @end

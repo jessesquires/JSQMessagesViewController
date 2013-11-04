@@ -35,7 +35,6 @@
 #import "JSBubbleView.h"
 
 #import "NSString+JSMessagesView.h"
-#import "UIImage+JSMessagesBubble.h"
 #import "UIImage+JSMessagesInputBar.h"
 
 #define SEND_BUTTON_WIDTH 78.0f

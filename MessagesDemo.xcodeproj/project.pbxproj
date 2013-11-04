@@ -21,8 +21,6 @@
 		886B97CD182755A200AE264B /* NSString+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 886B978F182755A100AE264B /* NSString+JSMessagesView.m */; };
 		886B97CE182755A200AE264B /* UIButton+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 886B9791182755A100AE264B /* UIButton+JSMessagesView.m */; };
 		886B97CF182755A200AE264B /* UIColor+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 886B9793182755A100AE264B /* UIColor+JSMessagesView.m */; };
-		886B97D0182755A200AE264B /* UIImage+JSMessagesAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = 886B9795182755A200AE264B /* UIImage+JSMessagesAvatar.m */; };
-		886B97D1182755A200AE264B /* UIImage+JSMessagesBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 886B9797182755A200AE264B /* UIImage+JSMessagesBubble.m */; };
 		886B97D2182755A200AE264B /* UIImage+JSMessagesInputBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 886B9799182755A200AE264B /* UIImage+JSMessagesInputBar.m */; };
 		886B97D3182755A200AE264B /* UIView+AnimationOptionsForCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 886B979B182755A200AE264B /* UIView+AnimationOptionsForCurve.m */; };
 		886B97D4182755A200AE264B /* JSBubbleMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 886B979D182755A200AE264B /* JSBubbleMessageCell.m */; };
@@ -61,6 +59,7 @@
 		88D03E19182777D00005BFFB /* send@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88D03DFE182777D00005BFFB /* send@2x.png */; };
 		88D03E1A182777D00005BFFB /* messageReceived.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 88D03E00182777D00005BFFB /* messageReceived.aiff */; };
 		88D03E1B182777D00005BFFB /* messageSent.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 88D03E01182777D00005BFFB /* messageSent.aiff */; };
+		88D03E1E182780250005BFFB /* JSAvatarImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D03E1D182780250005BFFB /* JSAvatarImageFactory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,10 +85,6 @@
 		886B9791182755A100AE264B /* UIButton+JSMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+JSMessagesView.m"; sourceTree = "<group>"; };
 		886B9792182755A100AE264B /* UIColor+JSMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+JSMessagesView.h"; sourceTree = "<group>"; };
 		886B9793182755A100AE264B /* UIColor+JSMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+JSMessagesView.m"; sourceTree = "<group>"; };
-		886B9794182755A200AE264B /* UIImage+JSMessagesAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+JSMessagesAvatar.h"; sourceTree = "<group>"; };
-		886B9795182755A200AE264B /* UIImage+JSMessagesAvatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JSMessagesAvatar.m"; sourceTree = "<group>"; };
-		886B9796182755A200AE264B /* UIImage+JSMessagesBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+JSMessagesBubble.h"; sourceTree = "<group>"; };
-		886B9797182755A200AE264B /* UIImage+JSMessagesBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JSMessagesBubble.m"; sourceTree = "<group>"; };
 		886B9798182755A200AE264B /* UIImage+JSMessagesInputBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+JSMessagesInputBar.h"; sourceTree = "<group>"; };
 		886B9799182755A200AE264B /* UIImage+JSMessagesInputBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JSMessagesInputBar.m"; sourceTree = "<group>"; };
 		886B979A182755A200AE264B /* UIView+AnimationOptionsForCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimationOptionsForCurve.h"; sourceTree = "<group>"; };
@@ -139,6 +134,8 @@
 		88D03DFE182777D00005BFFB /* send@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send@2x.png"; sourceTree = "<group>"; };
 		88D03E00182777D00005BFFB /* messageReceived.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = messageReceived.aiff; sourceTree = "<group>"; };
 		88D03E01182777D00005BFFB /* messageSent.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = messageSent.aiff; sourceTree = "<group>"; };
+		88D03E1C182780250005BFFB /* JSAvatarImageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSAvatarImageFactory.h; sourceTree = "<group>"; };
+		88D03E1D182780250005BFFB /* JSAvatarImageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAvatarImageFactory.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +213,8 @@
 			isa = PBXGroup;
 			children = (
 				886B978D182755A100AE264B /* Categories */,
+				88D03E1C182780250005BFFB /* JSAvatarImageFactory.h */,
+				88D03E1D182780250005BFFB /* JSAvatarImageFactory.m */,
 				88D03DDC18275BC50005BFFB /* JSBubbleImageViewFactory.h */,
 				88D03DDD18275BC50005BFFB /* JSBubbleImageViewFactory.m */,
 				886B979C182755A200AE264B /* JSBubbleMessageCell.h */,
@@ -246,10 +245,6 @@
 				886B9791182755A100AE264B /* UIButton+JSMessagesView.m */,
 				886B9792182755A100AE264B /* UIColor+JSMessagesView.h */,
 				886B9793182755A100AE264B /* UIColor+JSMessagesView.m */,
-				886B9794182755A200AE264B /* UIImage+JSMessagesAvatar.h */,
-				886B9795182755A200AE264B /* UIImage+JSMessagesAvatar.m */,
-				886B9796182755A200AE264B /* UIImage+JSMessagesBubble.h */,
-				886B9797182755A200AE264B /* UIImage+JSMessagesBubble.m */,
 				886B9798182755A200AE264B /* UIImage+JSMessagesInputBar.h */,
 				886B9799182755A200AE264B /* UIImage+JSMessagesInputBar.m */,
 				886B979A182755A200AE264B /* UIView+AnimationOptionsForCurve.h */,
@@ -434,9 +429,7 @@
 				886B97D2182755A200AE264B /* UIImage+JSMessagesInputBar.m in Sources */,
 				886B97CF182755A200AE264B /* UIColor+JSMessagesView.m in Sources */,
 				886B97D7182755A200AE264B /* JSMessageInputView.m in Sources */,
-				886B97D1182755A200AE264B /* UIImage+JSMessagesBubble.m in Sources */,
 				886B97D9182755A200AE264B /* JSMessagesViewController.m in Sources */,
-				886B97D0182755A200AE264B /* UIImage+JSMessagesAvatar.m in Sources */,
 				886B97DA182755A200AE264B /* JSMessageTextView.m in Sources */,
 				88D03DDE18275BC50005BFFB /* JSBubbleImageViewFactory.m in Sources */,
 				881AE56D16D13CDC008F7636 /* AppDelegate.m in Sources */,
@@ -445,6 +438,7 @@
 				881AE58416D13DE0008F7636 /* DemoViewController.m in Sources */,
 				886B97CD182755A200AE264B /* NSString+JSMessagesView.m in Sources */,
 				886B97CE182755A200AE264B /* UIButton+JSMessagesView.m in Sources */,
+				88D03E1E182780250005BFFB /* JSAvatarImageFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

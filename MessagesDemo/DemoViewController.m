@@ -27,8 +27,7 @@
 #import "DemoViewController.h"
 
 #import "UIButton+JSMessagesView.h"
-#import "UIImage+JSMessagesAvatar.h"
-#import "UIImage+JSMessagesBubble.h"
+#import "JSAvatarImageFactory.h"
 
 #define kSubtitleJobs @"Jobs"
 #define kSubtitleWoz @"Steve Wozniak"
@@ -67,35 +66,14 @@
                       kSubtitleCook, nil];
     
     self.avatars = [[NSDictionary alloc] initWithObjectsAndKeys:
-                    [[UIImage imageNamed:@"demo-avatar-jobs"] js_squareImageWithSize:kJSAvatarSize], kSubtitleJobs,
-                    [[UIImage imageNamed:@"demo-avatar-woz"] js_circleImageWithSize:kJSAvatarSize], kSubtitleWoz,
-                    [[UIImage imageNamed:@"demo-avatar-cook"] js_circleImageWithSize:kJSAvatarSize], kSubtitleCook,
+                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-jobs" style:JSAvatarImageStyleFlat shape:JSAvatarImageShapeSquare], kSubtitleJobs,
+                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-woz" style:JSAvatarImageStyleClassic shape:JSAvatarImageShapeCircle], kSubtitleWoz,
+                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-cook" style:JSAvatarImageStyleClassic shape:JSAvatarImageShapeCircle], kSubtitleCook,
                     nil];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
                                                                                            target:self
                                                                                            action:@selector(buttonPressed:)];
-    
-    
-    
-    
-    // TODO:
-    /*
-     
-     1. add imageView to the bubble view instead of [img drawInRect: ] using the method below
-     2. reduce assets by only having incoming version of each
-     3. make bubbleImageFactory
-     4. adapt API for custom bubble images
-     
-     */
-    
-    
-//    UIImage *img = [UIImage js_bubbleSquareIncoming];
-//    UIImage *mirrorImg = [UIImage imageWithCGImage:img.CGImage scale:img.scale orientation:UIImageOrientationUpMirrored];
-//    UIImageView *imgView = [[UIImageView alloc] initWithImage:[mirrorImg js_makeStretchableDefaultOutgoing]];
-//    imgView.frame = CGRectMake(0, 0, 100, 100);
-//    imgView.center = self.view.center;
-//    [self.view addSubview:imgView];
 }
 
 - (void)buttonPressed:(UIButton*)sender
@@ -142,7 +120,7 @@
 
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return JSBubbleMessageStyleSquare;
+    return JSBubbleMessageStyleDefault;
 }
 
 - (JSMessagesViewTimestampPolicy)timestampPolicy

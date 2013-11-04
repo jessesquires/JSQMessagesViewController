@@ -34,8 +34,7 @@
 #import "JSBubbleMessageCell.h"
 
 #import "UIColor+JSMessagesView.h"
-#import "UIImage+JSMessagesAvatar.h"
-#import "UIImage+JSMessagesBubble.h"
+#import "JSAvatarImageFactory.h"
 
 static const CGFloat kJSLabelPadding = 5.0f;
 
@@ -116,15 +115,15 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 {
     CGFloat avatarX = 0.5f;
     if(type == JSBubbleMessageTypeOutgoing) {
-        avatarX = (self.contentView.frame.size.width - kJSAvatarSize);
+        avatarX = (self.contentView.frame.size.width - kJSAvatarImageSize);
     }
     
-    CGFloat avatarY = self.contentView.frame.size.height - kJSAvatarSize;
+    CGFloat avatarY = self.contentView.frame.size.height - kJSAvatarImageSize;
     if(_subtitleLabel) {
         avatarY -= kJSSubtitleLabelHeight;
     }
     
-    _avatarImageView.frame = CGRectMake(avatarX, avatarY, kJSAvatarSize, kJSAvatarSize);
+    _avatarImageView.frame = CGRectMake(avatarX, avatarY, kJSAvatarImageSize, kJSAvatarImageSize);
     _avatarImageView.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
                                          | UIViewAutoresizingFlexibleLeftMargin
                                          | UIViewAutoresizingFlexibleRightMargin);
@@ -166,9 +165,9 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     
     if(hasAvatar) {
         offsetX = 4.0f;
-        bubbleX = kJSAvatarSize;
+        bubbleX = kJSAvatarImageSize;
         if(type == JSBubbleMessageTypeOutgoing) {
-            offsetX = kJSAvatarSize - 4.0f;
+            offsetX = kJSAvatarImageSize - 4.0f;
         }
         
         _avatarImageView = [[UIImageView alloc] init];
@@ -273,7 +272,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                       subtitle:(BOOL)hasSubtitle
 {
     CGFloat timestampHeight = (hasTimestamp) ? kJSTimeStampLabelHeight : 0.0f;
-    CGFloat avatarHeight = (hasAvatar) ? kJSAvatarSize : 0.0f;
+    CGFloat avatarHeight = (hasAvatar) ? kJSAvatarImageSize : 0.0f;
 	CGFloat subtitleHeight = hasSubtitle ? kJSSubtitleLabelHeight : 0.0f;
     return MAX(avatarHeight, [JSBubbleView cellHeightForText:bubbleViewText])
             + timestampHeight
