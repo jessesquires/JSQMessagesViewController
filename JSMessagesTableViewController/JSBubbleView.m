@@ -98,6 +98,7 @@ CGFloat const kJSAvatarSize = 50.0f;
         textView.contentInset = UIEdgeInsetsZero;
         textView.scrollIndicatorInsets = UIEdgeInsetsZero;
         textView.contentOffset = CGPointZero;
+        textView.dataDetectorTypes = UIDataDetectorTypeAll;
         _textView = textView;
         [self addSubview:textView];
         
