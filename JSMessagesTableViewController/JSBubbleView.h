@@ -52,14 +52,21 @@ typedef NS_ENUM(NSUInteger, JSBubbleMessageStyle) {
 
 @property (assign, nonatomic) JSBubbleMessageType type;
 @property (assign, nonatomic) JSBubbleMessageStyle style;
-@property (copy, nonatomic) NSString *text;
-@property (assign, nonatomic) BOOL isSelectedToShowCopyMenu;
+@property (weak, nonatomic) UIImageView *bubbleImageView;
 
 #pragma mark - Initialization
 
 - (instancetype)initWithFrame:(CGRect)rect
                    bubbleType:(JSBubbleMessageType)bubleType
                   bubbleStyle:(JSBubbleMessageStyle)bubbleStyle;
+
+#pragma mark - Setters
+
+- (void)setText:(NSString *)newText;
+
+#pragma mark - Getters
+
+- (NSString *)text;
 
 #pragma mark - Drawing
 

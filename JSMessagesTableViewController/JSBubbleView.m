@@ -47,6 +47,8 @@ CGFloat const kJSAvatarSize = 50.0f;
 
 @interface JSBubbleView()
 
+@property (weak, nonatomic) UITextView *textView;
+
 - (void)setup;
 
 + (UIImage *)bubbleImageTypeIncomingWithStyle:(JSBubbleMessageStyle)aStyle;
@@ -77,13 +79,44 @@ CGFloat const kJSAvatarSize = 50.0f;
         [self setup];
         _type = bubleType;
         _style = bubbleStyle;
+        
+        UIImageView *bubbleImageView = [[UIImageView alloc] init];
+        bubbleImageView.image = [self bubbleImage];
+        bubbleImageView.highlightedImage = [self bubbleImageHighlighted];
+        bubbleImageView.userInteractionEnabled = YES;
+        [self addSubview:bubbleImageView];
+        _bubbleImageView = bubbleImageView;
+        
+        UITextView *textView = [[UITextView alloc] init];
+        textView.editable = NO;
+        textView.userInteractionEnabled = YES;
+        textView.showsHorizontalScrollIndicator = NO;
+        textView.showsVerticalScrollIndicator = NO;
+        textView.scrollEnabled = NO;
+        textView.font = [JSBubbleView font];
+        textView.backgroundColor = [UIColor clearColor];
+        textView.contentInset = UIEdgeInsetsZero;
+        textView.scrollIndicatorInsets = UIEdgeInsetsZero;
+        textView.contentOffset = CGPointZero;
+        _textView = textView;
+        [self addSubview:textView];
+        
+//        NOTE: TODO: textView frame & text inset
+//        --------------------
+//        future implementation for textView frame
+//        in layoutSubviews : "self.textView.frame = textFrame;" is not needed
+//        when setting the property : "_textView.textContainerInset = UIEdgeInsetsZero;"
+//        unfortunately, this API is available in iOS 7.0+
+//        update after dropping support for iOS 6.0
+//        --------------------
     }
     return self;
 }
 
 - (void)dealloc
 {
-    _text = nil;
+    _bubbleImageView = nil;
+    _textView = nil;
 }
 
 #pragma mark - Setters
@@ -102,25 +135,27 @@ CGFloat const kJSAvatarSize = 50.0f;
 
 - (void)setText:(NSString *)newText
 {
-    _text = newText;
+    _textView.text = newText;
     [self setNeedsDisplay];
 }
 
-- (void)setIsSelectedToShowCopyMenu:(BOOL)isSelected
+#pragma mark - Getters
+
+- (NSString *)text
 {
-    _isSelectedToShowCopyMenu = isSelected;
-    [self setNeedsDisplay];
+    return self.textView.text;
 }
 
 #pragma mark - Drawing
 
 - (CGRect)bubbleFrame
 {
-    CGSize bubbleSize = [JSBubbleView bubbleSizeForText:self.text];
+    CGSize bubbleSize = [JSBubbleView bubbleSizeForText:self.textView.text];
+    
     return CGRectMake((self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width : 0.0f),
                       kMarginTop,
                       bubbleSize.width,
-                      bubbleSize.height);
+                      bubbleSize.height + kMarginTop);
 }
 
 - (UIImage *)bubbleImage
@@ -143,28 +178,26 @@ CGFloat const kJSAvatarSize = 50.0f;
     }
 }
 
-- (void)drawRect:(CGRect)frame
+#pragma mark - Layout
+
+- (void)layoutSubviews
 {
-    [super drawRect:frame];
+    [super layoutSubviews];
     
-	UIImage *image = (self.isSelectedToShowCopyMenu) ? [self bubbleImageHighlighted] : [self bubbleImage];
+    self.bubbleImageView.frame = [self bubbleFrame];
     
-    CGRect bubbleFrame = [self bubbleFrame];
-	[image drawInRect:bubbleFrame];
-	
-	CGSize textSize = [JSBubbleView textSizeForText:self.text];
-	
-    CGFloat textX = image.leftCapWidth - 3.0f + (self.type == JSBubbleMessageTypeOutgoing ? bubbleFrame.origin.x : 0.0f);
+    CGFloat textX = self.bubbleImageView.frame.origin.x;
+    
+    if(self.type == JSBubbleMessageTypeIncoming) {
+        textX += (self.bubbleImageView.image.capInsets.left / 2.0f);
+    }
     
     CGRect textFrame = CGRectMake(textX,
-                                  kPaddingTop + kMarginTop,
-                                  textSize.width,
-                                  textSize.height);
+                                  self.bubbleImageView.frame.origin.y,
+                                  self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f),
+                                  self.bubbleImageView.frame.size.height - kMarginTop);
     
-	[self.text drawInRect:textFrame
-                 withFont:[JSBubbleView font]
-            lineBreakMode:NSLineBreakByWordWrapping
-                alignment:NSTextAlignmentLeft];
+    self.textView.frame = textFrame;
 }
 
 #pragma mark - Bubble view
@@ -224,18 +257,20 @@ CGFloat const kJSAvatarSize = 50.0f;
 
 + (CGSize)textSizeForText:(NSString *)txt
 {
-    CGFloat width = [UIScreen mainScreen].applicationFrame.size.width * 0.75f;
-    CGFloat height = MAX([JSBubbleView numberOfLinesForMessage:txt],
+    CGFloat maxWidth = [UIScreen mainScreen].applicationFrame.size.width * 0.70f;
+    CGFloat maxHeight = MAX([JSBubbleView numberOfLinesForMessage:txt],
                          [txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
+    maxHeight += kJSAvatarSize;
     
     return [txt sizeWithFont:[JSBubbleView font]
-           constrainedToSize:CGSizeMake(width - kJSAvatarSize, height + kJSAvatarSize)
+           constrainedToSize:CGSizeMake(maxWidth, maxHeight)
                lineBreakMode:NSLineBreakByWordWrapping];
 }
 
 + (CGSize)bubbleSizeForText:(NSString *)txt
 {
 	CGSize textSize = [JSBubbleView textSizeForText:txt];
+    
 	return CGSizeMake(textSize.width + kBubblePaddingRight,
                       textSize.height + kPaddingTop + kPaddingBottom);
 }

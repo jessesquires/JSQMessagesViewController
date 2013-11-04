@@ -317,7 +317,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (void)copy:(id)sender
 {
-    [[UIPasteboard generalPasteboard] setString:self.bubbleView.text];
+    [[UIPasteboard generalPasteboard] setString:[self.bubbleView text]];
     [self resignFirstResponder];
 }
 
@@ -348,6 +348,8 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     
     [menu setTargetRect:CGRectInset(targetRect, 0.0f, 4.0f) inView:self];
     
+    self.bubbleView.bubbleImageView.highlighted = YES;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleMenuWillShowNotification:)
                                                  name:UIMenuControllerWillShowMenuNotification
@@ -359,10 +361,11 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (void)handleMenuWillHideNotification:(NSNotification *)notification
 {
+    self.bubbleView.bubbleImageView.highlighted = NO;
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIMenuControllerWillHideMenuNotification
                                                   object:nil];
-    self.bubbleView.isSelectedToShowCopyMenu = NO;
 }
 
 - (void)handleMenuWillShowNotification:(NSNotification *)notification
@@ -375,8 +378,6 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                                              selector:@selector(handleMenuWillHideNotification:)
                                                  name:UIMenuControllerWillHideMenuNotification
                                                object:nil];
-    
-    self.bubbleView.isSelectedToShowCopyMenu = YES;
 }
 
 @end
