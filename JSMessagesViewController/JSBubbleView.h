@@ -33,8 +33,6 @@
 
 #import <UIKit/UIKit.h>
 
-extern CGFloat const kJSAvatarSize;
-
 typedef NS_ENUM(NSUInteger, JSBubbleMessageType) {
     JSBubbleMessageTypeIncoming,
     JSBubbleMessageTypeOutgoing
@@ -71,13 +69,8 @@ typedef NS_ENUM(NSUInteger, JSBubbleMessageStyle) {
 #pragma mark - Drawing
 
 - (CGRect)bubbleFrame;
-- (UIImage *)bubbleImage;
-- (UIImage *)bubbleImageHighlighted;
 
 #pragma mark - Bubble view
-
-+ (UIImage *)bubbleImageForType:(JSBubbleMessageType)aType
-                          style:(JSBubbleMessageStyle)aStyle;
 
 + (UIFont *)font;
 

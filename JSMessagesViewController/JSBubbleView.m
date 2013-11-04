@@ -35,9 +35,8 @@
 #import "JSMessageInputView.h"
 
 #import "NSString+JSMessagesView.h"
-#import "UIImage+JSMessagesBubble.h"
-
-CGFloat const kJSAvatarSize = 50.0f;
+#import "JSBubbleImageViewFactory.h"
+#import "JSAvatarImageFactory.h"
 
 #define kMarginTop 8.0f
 #define kMarginBottom 4.0f
@@ -50,9 +49,6 @@ CGFloat const kJSAvatarSize = 50.0f;
 @property (weak, nonatomic) UITextView *textView;
 
 - (void)setup;
-
-+ (UIImage *)bubbleImageTypeIncomingWithStyle:(JSBubbleMessageStyle)aStyle;
-+ (UIImage *)bubbleImageTypeOutgoingWithStyle:(JSBubbleMessageStyle)aStyle;
 
 @end
 
@@ -159,26 +155,6 @@ CGFloat const kJSAvatarSize = 50.0f;
                       bubbleSize.height + kMarginTop);
 }
 
-- (UIImage *)bubbleImage
-{
-    return [JSBubbleView bubbleImageForType:self.type style:self.style];
-}
-
-- (UIImage *)bubbleImageHighlighted
-{
-    switch (self.style) {
-        case JSBubbleMessageStyleDefault:
-        case JSBubbleMessageStyleDefaultGreen:
-            return (self.type == JSBubbleMessageTypeIncoming) ? [UIImage js_bubbleDefaultIncomingSelected] : [UIImage js_bubbleDefaultOutgoingSelected];
-            
-        case JSBubbleMessageStyleSquare:
-            return (self.type == JSBubbleMessageTypeIncoming) ? [UIImage js_bubbleSquareIncomingSelected] : [UIImage js_bubbleSquareOutgoingSelected];
-            
-        default:
-            return nil;
-    }
-}
-
 #pragma mark - Layout
 
 - (void)layoutSubviews
@@ -203,54 +179,6 @@ CGFloat const kJSAvatarSize = 50.0f;
 
 #pragma mark - Bubble view
 
-+ (UIImage *)bubbleImageForType:(JSBubbleMessageType)aType style:(JSBubbleMessageStyle)aStyle
-{
-    switch (aType) {
-        case JSBubbleMessageTypeIncoming:
-            return [self bubbleImageTypeIncomingWithStyle:aStyle];
-            
-        case JSBubbleMessageTypeOutgoing:
-            return [self bubbleImageTypeOutgoingWithStyle:aStyle];
-            
-        default:
-            return nil;
-    }
-}
-
-+ (UIImage *)bubbleImageTypeIncomingWithStyle:(JSBubbleMessageStyle)aStyle
-{
-    switch (aStyle) {
-        case JSBubbleMessageStyleDefault:
-            return [UIImage js_bubbleDefaultIncoming];
-            
-        case JSBubbleMessageStyleSquare:
-            return [UIImage js_bubbleSquareIncoming];
-            
-        case JSBubbleMessageStyleDefaultGreen:
-            return [UIImage js_bubbleDefaultIncomingGreen];
-            
-        default:
-            return nil;
-    }
-}
-
-+ (UIImage *)bubbleImageTypeOutgoingWithStyle:(JSBubbleMessageStyle)aStyle
-{
-    switch (aStyle) {
-        case JSBubbleMessageStyleDefault:
-            return [UIImage js_bubbleDefaultOutgoing];
-            
-        case JSBubbleMessageStyleSquare:
-            return [UIImage js_bubbleSquareOutgoing];
-            
-        case JSBubbleMessageStyleDefaultGreen:
-            return [UIImage js_bubbleDefaultOutgoingGreen];
-            
-        default:
-            return nil;
-    }
-}
-
 + (UIFont *)font
 {
     return [UIFont systemFontOfSize:16.0f];
@@ -261,7 +189,7 @@ CGFloat const kJSAvatarSize = 50.0f;
     CGFloat maxWidth = [UIScreen mainScreen].applicationFrame.size.width * 0.70f;
     CGFloat maxHeight = MAX([JSBubbleView numberOfLinesForMessage:txt],
                          [txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
-    maxHeight += kJSAvatarSize;
+    maxHeight += kJSAvatarImageSize;
     
     return [txt sizeWithFont:[JSBubbleView font]
            constrainedToSize:CGSizeMake(maxWidth, maxHeight)
