@@ -36,7 +36,7 @@
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         self.backgroundColor = [UIColor whiteColor];
         self.scrollIndicatorInsets = UIEdgeInsetsMake(10.0f, 0.0f, 10.0f, 8.0f);
-        self.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
+        self.contentInset = UIEdgeInsetsZero;
         self.scrollEnabled = YES;
         self.scrollsToTop = NO;
         self.userInteractionEnabled = YES;
@@ -46,6 +46,7 @@
         self.keyboardAppearance = UIKeyboardAppearanceDefault;
         self.keyboardType = UIKeyboardTypeDefault;
         self.returnKeyType = UIReturnKeyDefault;
+        self.textAlignment = NSTextAlignmentLeft;
     }
     return self;
 }
