@@ -151,7 +151,7 @@ This messages tableview controller is very similar to the one in the iOS Message
 * The timestamp to be displayed *above* this row
 
 ````objective-c 
-- (UIImage *)avatarImageViewForRowAtIndexPath:(NSIndexPath*)indexPath
+- (UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath*)indexPath
 ````
 
 * The avatar image view to be displayed this row
