@@ -136,12 +136,12 @@
 
 - (JSMessagesViewAvatarPolicy)avatarPolicy
 {
-    return JSMessagesViewAvatarPolicyIncomingOnly;
+    return JSMessagesViewAvatarPolicyAll;
 }
 
 - (JSMessagesViewSubtitlePolicy)subtitlePolicy
 {
-    return JSMessagesViewSubtitlePolicyIncomingOnly;
+    return JSMessagesViewSubtitlePolicyAll;
 }
 
 #pragma mark - Optional delegate methods

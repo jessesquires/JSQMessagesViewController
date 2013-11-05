@@ -36,8 +36,8 @@
 
 @interface JSBubbleView : UIView
 
-@property (assign, nonatomic) JSBubbleMessageType type;
-@property (weak, nonatomic) UIImageView *bubbleImageView;
+@property (assign, nonatomic, readonly) JSBubbleMessageType type;
+@property (weak, nonatomic, readonly) UIImageView *bubbleImageView;
 
 #pragma mark - Initialization
 

@@ -36,7 +36,10 @@
 
 @interface JSBubbleMessageCell : UITableViewCell
 
-@property (strong, nonatomic, readonly) JSBubbleView *bubbleView;
+@property (weak, nonatomic, readonly) JSBubbleView *bubbleView;
+@property (weak, nonatomic, readonly) UILabel *timestampLabel;
+@property (weak, nonatomic, readonly) UIImageView *avatarImageView;
+@property (weak, nonatomic, readonly) UILabel *subtitleLabel;
 
 #pragma mark - Initialization
 

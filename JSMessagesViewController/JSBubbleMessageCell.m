@@ -37,20 +37,15 @@
 #import "UIColor+JSMessagesView.h"
 
 static const CGFloat kJSLabelPadding = 5.0f;
-
 static const CGFloat kJSTimeStampLabelHeight = 15.0f;
 static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 
 @interface JSBubbleMessageCell()
 
-@property (strong, nonatomic) UILabel *timestampLabel;
-@property (strong, nonatomic) UIImageView *avatarImageView;
-@property (strong, nonatomic) UILabel *subtitleLabel;
-
 - (void)setup;
 - (void)configureTimestampLabel;
-- (void)configureAvatarImageViewForMessageType:(JSBubbleMessageType)type;
+- (void)configureAvatarImageView:(UIImageView *)imageView forMessageType:(JSBubbleMessageType)type;
 - (void)configureSubtitleLabelForMessageType:(JSBubbleMessageType)type;
 
 - (void)configureWithType:(JSBubbleMessageType)type
@@ -94,23 +89,24 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (void)configureTimestampLabel
 {
-    _timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake(kJSLabelPadding,
-                                                                kJSLabelPadding,
-                                                                self.contentView.frame.size.width - (kJSLabelPadding * 2.0f),
-                                                                kJSTimeStampLabelHeight)];
-    _timestampLabel.autoresizingMask =  UIViewAutoresizingFlexibleWidth;
-    _timestampLabel.backgroundColor = [UIColor clearColor];
-    _timestampLabel.textAlignment = NSTextAlignmentCenter;
-    _timestampLabel.textColor = [UIColor js_messagesTimestampColor_iOS6];
-    _timestampLabel.shadowColor = [UIColor whiteColor];
-    _timestampLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    _timestampLabel.font = [UIFont boldSystemFontOfSize:12.0f];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kJSLabelPadding,
+                                                               kJSLabelPadding,
+                                                               self.contentView.frame.size.width - (kJSLabelPadding * 2.0f),
+                                                               kJSTimeStampLabelHeight)];
+    label.autoresizingMask =  UIViewAutoresizingFlexibleWidth;
+    label.backgroundColor = [UIColor clearColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor js_messagesTimestampColor_iOS6];
+    label.shadowColor = [UIColor whiteColor];
+    label.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    label.font = [UIFont boldSystemFontOfSize:12.0f];
     
-    [self.contentView addSubview:_timestampLabel];
-    [self.contentView bringSubviewToFront:_timestampLabel];
+    [self.contentView addSubview:label];
+    [self.contentView bringSubviewToFront:label];
+    _timestampLabel = label;
 }
 
-- (void)configureAvatarImageViewForMessageType:(JSBubbleMessageType)type
+- (void)configureAvatarImageView:(UIImageView *)imageView forMessageType:(JSBubbleMessageType)type
 {
     CGFloat avatarX = 0.5f;
     if(type == JSBubbleMessageTypeOutgoing) {
@@ -122,24 +118,26 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
         avatarY -= kJSSubtitleLabelHeight;
     }
     
-    _avatarImageView.frame = CGRectMake(avatarX, avatarY, kJSAvatarImageSize, kJSAvatarImageSize);
-    _avatarImageView.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
+    imageView.frame = CGRectMake(avatarX, avatarY, kJSAvatarImageSize, kJSAvatarImageSize);
+    imageView.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
                                          | UIViewAutoresizingFlexibleLeftMargin
                                          | UIViewAutoresizingFlexibleRightMargin);
     
-    [self.contentView addSubview:_avatarImageView];
+    [self.contentView addSubview:imageView];
+    _avatarImageView = imageView;
 }
 
 - (void)configureSubtitleLabelForMessageType:(JSBubbleMessageType)type
 {
-    _subtitleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    _subtitleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    _subtitleLabel.backgroundColor = [UIColor clearColor];
-    _subtitleLabel.textAlignment = (type == JSBubbleMessageTypeOutgoing) ? NSTextAlignmentRight : NSTextAlignmentLeft;
-    _subtitleLabel.textColor = [UIColor js_messagesTimestampColor_iOS6];
-    _subtitleLabel.font = [UIFont systemFontOfSize:12.5f];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    label.backgroundColor = [UIColor clearColor];
+    label.textAlignment = (type == JSBubbleMessageTypeOutgoing) ? NSTextAlignmentRight : NSTextAlignmentLeft;
+    label.textColor = [UIColor js_messagesTimestampColor_iOS6];
+    label.font = [UIFont systemFontOfSize:12.5f];
     
-    [self.contentView addSubview:_subtitleLabel];
+    [self.contentView addSubview:label];
+    _subtitleLabel = label;
 }
 
 - (void)configureWithType:(JSBubbleMessageType)type
@@ -169,8 +167,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
             offsetX = kJSAvatarImageSize - 4.0f;
         }
         
-        _avatarImageView = [[UIImageView alloc] init];
-        [self configureAvatarImageViewForMessageType:type];
+        [self configureAvatarImageView:[[UIImageView alloc] init] forMessageType:type];
     }
     
     CGRect frame = CGRectMake(bubbleX - offsetX,
@@ -178,16 +175,17 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                               self.contentView.frame.size.width - bubbleX,
                               self.contentView.frame.size.height - _timestampLabel.frame.size.height - _subtitleLabel.frame.size.height);
     
-    _bubbleView = [[JSBubbleView alloc] initWithFrame:frame
-                                           bubbleType:type
-                                      bubbleImageView:bubbleImageView];
+    JSBubbleView *bubbleView = [[JSBubbleView alloc] initWithFrame:frame
+                                                        bubbleType:type
+                                                   bubbleImageView:bubbleImageView];
     
-    _bubbleView.autoresizingMask = (UIViewAutoresizingFlexibleWidth
+    bubbleView.autoresizingMask = (UIViewAutoresizingFlexibleWidth
                                     | UIViewAutoresizingFlexibleHeight
                                     | UIViewAutoresizingFlexibleBottomMargin);
     
-    [self.contentView addSubview:_bubbleView];
-    [self.contentView sendSubviewToBack:_bubbleView];
+    [self.contentView addSubview:bubbleView];
+    [self.contentView sendSubviewToBack:bubbleView];
+    _bubbleView = bubbleView;
 }
 
 #pragma mark - Initialization
@@ -249,8 +247,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     [_avatarImageView removeFromSuperview];
     _avatarImageView = nil;
     
-    _avatarImageView = imageView;
-    [self configureAvatarImageViewForMessageType:[self messageType]];
+    [self configureAvatarImageView:imageView forMessageType:[self messageType]];
 }
 
 - (void)setSubtitle:(NSString *)subtitle
