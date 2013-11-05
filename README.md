@@ -8,29 +8,32 @@ This messages tableview controller is very similar to the one in the iOS Message
 
 **See more [screenshots][link1] in the `Screenshots/` directory. (Surprise!)**
 
-## About
+### Update!
 
-This is based on work by [@soffes](http://github.com/soffes) [SSMessagingViewController][ss]. 
-
-I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users.
-
-[Square message bubbles][img4] designed by [@michaelschultz](http://www.twitter.com/michaelschultz).
+v2.5.0 just released with a brand new API! iOS 7 support coming soon. Moar better documentation coming soon!
 
 ## Features 
 
-* Up-to-date for iOS 6.0 and ARC (iOS 5.0+ required)
-* Storyboards support (if that's how you roll)
-* Universal for iPhone and iPad
-* Allows arbitrary message (and bubble) sizes
+* Highly customizable
+* Arbitrary message sizes
 * Copy & paste messages
-* Timestamp options
-* Swipe/pull down to hide keyboard
+* Data detectors (recognizes phone numbers, links, dates, etc)
+* Timestamps
+* Avatars
+* Subtitles
+* Lots of bubble styles, or use your own!
+* Swipe down to hide keyboard
 * Dynamically resizes input text view as you type
-* Smooth hiding/showing keyboard animations with `NSNotification`
-* Automatically enables/disables send button if text view is empty or not
-* Smooth send animations
+* Smooth animations
+* Automatically enables/disables send button (if text view is empty or not)
 * Send/Receive sound effects
-* Various bubble styles
+* Storyboards support (if that's how you roll)
+* Universal
+
+## Requirements
+
+* iOS 6.0+ 
+* ARC
 
 ## Installation
 
@@ -40,32 +43,32 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 
 ### From source
 
-* Drag the `JSMessagesTableViewController/` folder to your project.
+* Drag the `JSMessagesViewController/` folder to your project.
 * Add the `AudioToolbox.framework` to your project, if you want to use the sound effects
 
 ## How To Use
 
-#####Subclass `JSMessagesViewController`
+###Subclass `JSMessagesViewController`
 
 * In `- (void)viewDidLoad`
 	* Set your view controller as the `delegate` and `datasource`
-	* *Optional* set `preventScrollToBottomWhileUserScrolling` to `YES` if you would like to prevent the tableview from being scrolled to the bottom while the user is scrolling the tableview manually. The method `scrollToRowAtIndexPath:indexPath:atScrollPosition:animated:` can also be used to implement scrolling functionality that respects this setting.
 	* Set your view controller `title`
 
-#####Implement the `JSMessagesViewDelegate` protocol
+###Implement the `JSMessagesViewDelegate` protocol
 
 ````objective-c 
-- (void)sendPressed:(UIButton *)sender withText:(NSString *)text
+- (void)didSendText:(NSString *)text;
 ````
 
 * Hook into your own backend here
-* Call `[self finishSend]` at the end of this method to animate and reset the text input view
+* Call `finishSend` at the end of this method to animate and reset the text input view
+* Call `scrollToBottomAnimated:` to scroll to newly sent message
 * Optionally play sound effects
 	* For outgoing messages `[JSMessageSoundEffect playMessageSentSound]`
 	* For incoming messages `[JSMessageSoundEffect playMessageReceivedSound]`
 
 ````objective-c
-- (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
+- (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath;
 ````
 
 * The type of bubble for this row, options are:
@@ -73,19 +76,17 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 	* `JSBubbleMessageTypeOutgoing`
 
 ````objective-c
-- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type
+                       forRowAtIndexPath:(NSIndexPath *)indexPath;
 ````
 
-* The [style of the bubble][link1] for this row, options are:
-	* `JSBubbleMessageStyleDefault`
-	* `JSBubbleMessageStyleSquare`
-	* `JSBubbleMessageStyleDefaultGreen`
+* The [bubble image view][link1] for this row, see `JSBubbleImageViewFactory`
 
 ````objective-c 
 - (JSMessagesViewTimestampPolicy)timestampPolicy
 ````
 
-* How/when to display timestamps for messages, options are:
+* How/when to display timestamps for messages:
 	* `JSMessagesViewTimestampPolicyAll`
 	* `JSMessagesViewTimestampPolicyAlternating`
 	* `JSMessagesViewTimestampPolicyEveryThree`
@@ -96,35 +97,45 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 - (JSMessagesViewAvatarPolicy)avatarPolicy
 ````
 
-* *Optional* How/when to display avatars, options are:
+* How/when to display avatars:
+	* `JSMessagesViewAvatarPolicyAll`
 	* `JSMessagesViewAvatarPolicyIncomingOnly`
 	* `JSMessagesViewAvatarPolicyOutgoingOnly`
-	* `JSMessagesViewAvatarPolicyBoth`
 	* `JSMessagesViewAvatarPolicyNone`
 
-````objective-c 
-- (JSAvatarStyle)avatarStyle
+
+````objective-c
+- (JSMessagesViewSubtitlePolicy)subtitlePolicy;
 ````
 
-* The [style for the avatars][link1], options are:
-	* `JSAvatarStyleCircle`
-	* `JSAvatarStyleSquare`
-	* `JSAvatarStyleNone`
+* How/when to display subtitles:
+	* `JSMessagesViewSubtitlePolicyAll`
+	* `JSMessagesViewSubtitlePolicyIncomingOnly`
+	* `JSMessagesViewSubtitlePolicyOutgoingOnly`
+	* `JSMessagesViewSubtitlePolicyNone`
+
 
 ````objective-c 
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 ````
 
-* Returns if this row should display a timestamp or not
-* Required only if using `JSMessagesViewTimestampPolicyCustom`
+* *Optional* Returns if this row should display a timestamp or not
+* Required if using `JSMessagesViewTimestampPolicyCustom`
 
-````objective-c
-- (BOOL)hasSubtitleForRowAtIndexPath:(NSIndexPath *)indexPath
+````objective-c 
+- (BOOL)shouldPreventScrollToBottomWhileUserScrolling;
 ````
 
-* *Optional* Return `YES` if you want to display a small bit of text under the bubble.
+* *Optional* Return `YES` if you would like to prevent the tableview from being scrolled to the bottom while the user is scrolling the tableview manually. The method `scrollToRowAtIndexPath:indexPath:atScrollPosition:animated:` can also be used to implement scrolling functionality that respects this setting.
 
-#####Implement the `JSMessagesViewDataSource` protocol
+````objective-c 
+- (UIButton *)sendButtonForInputView;
+````	
+
+* *Optional* Return a custom send button, the frame is set for you.
+
+
+###Implement the `JSMessagesViewDataSource` protocol
 
 ````objective-c 
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -139,49 +150,44 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 * The timestamp to be displayed *above* this row
 
 ````objective-c 
-- (UIImage *)avatarImageForIncomingMessageAtIndexPath:(NSIndexPath*)indexPath
+- (UIImage *)avatarImageViewForRowAtIndexPath:(NSIndexPath*)indexPath
 ````
 
-* *Optional* The avatar image for incoming messages
-
-````objective-c 
-- (UIImage *)avatarImageForOutgoingMessageAtIndexPath:(NSIndexPath*)indexPath;
-````
-
-* *Optional* The avatar image for outgoing messages
+* The avatar image view to be displayed this row
 
 ````objective-c 
 - (NSString *)subtitleForRowAtIndexPath:(NSIndexPath*)indexPath
 ````
 
-* *Optional* The text to display underneath the bubble
+* The subtitle text to be displayed *below* this row
 
-````objective-c 
-- (void)messageDoneSending
-````
-
-* *Optional* Implement this method if you do not wish for the table view to be reloaded and scrolled to the bottom when `finishSend` is called.
-
-#####Implement the [table view data source][ref1] method that you should be familiar with
+###Implement the [table view data source][ref1] method that you should be familiar with
 
 ````objective-c 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 ````
 
-#####Customize
+###Customize
 
 * For custom background color, use `- (void)setBackgroundColor:(UIColor *)color`
-* For custom send button, override `- (UIButton *)sendButton`
 
-##### Notes
+### Notes
 
 * You may present view programmatically, or use Storyboards
 * Your `JSMessagesViewController` subclass **must** be presented in a `UINavigationController`
 
-##### Demo projects included
+### Demo projects included
 
 * `MessagesDemo.xcodeproj` for example of programmatic presentation
 * `MessagesDemoStoryboards/MessagesDemoSB.xcodeproj` for example of use with Storyboards
+
+## About
+
+This project was originally based on work by [@soffes](http://github.com/soffes) [SSMessagingViewController][ss]. 
+
+I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users.
+
+[Square message bubbles][img4] designed by [@michaelschultz](http://www.twitter.com/michaelschultz).
 
 ## Apps Using This Control
 
@@ -198,6 +204,8 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 [SSMessagingViewController][ss]
 
 [AcaniChat](https://github.com/acani/AcaniChat)
+
+[UIBubbleTableView](https://github.com/AlexBarinov/UIBubbleTableView)
 
 ## [MIT License](http://opensource.org/licenses/MIT)
 
