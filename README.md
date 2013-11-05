@@ -175,11 +175,7 @@ v2.5.0 just released with a brand new API! iOS 7 support coming soon. Moar bette
 
 * You may present view programmatically, or use Storyboards
 * Your `JSMessagesViewController` subclass **must** be presented in a `UINavigationController`
-
-### Demo projects included
-
-* `MessagesDemo.xcodeproj` for example of programmatic presentation
-* `MessagesDemoStoryboards/MessagesDemoSB.xcodeproj` for example of use with Storyboards
+* Demo project included: `MessagesDemo.xcodeproj` 
 
 ## About
 
