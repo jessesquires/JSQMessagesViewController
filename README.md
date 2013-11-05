@@ -17,6 +17,7 @@ v2.5.0 just released with a brand new API! iOS 7 support coming soon. Moar bette
 * Highly customizable
 * Arbitrary message sizes
 * Copy & paste messages
+* Support for group messages
 * Data detectors (recognizes phone numbers, links, dates, etc)
 * Timestamps
 * Avatars
