@@ -29,6 +29,7 @@
 @interface NSString (JSMessagesView)
 
 - (NSString *)js_stringByTrimingWhitespace;
+
 - (NSUInteger)js_numberOfLines;
 
 @end

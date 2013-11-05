@@ -29,6 +29,7 @@
 @interface UIColor (JSMessagesView)
 
 + (UIColor *)js_messagesBackgroundColor_iOS6;
+
 + (UIColor *)js_messagesTimestampColor_iOS6;
 
 @end

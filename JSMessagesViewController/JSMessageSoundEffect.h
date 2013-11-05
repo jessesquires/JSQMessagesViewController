@@ -30,6 +30,7 @@
 @interface JSMessageSoundEffect : NSObject
 
 + (void)playMessageReceivedSound;
+
 + (void)playMessageSentSound;
 
 @end
