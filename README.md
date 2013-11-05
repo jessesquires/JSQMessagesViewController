@@ -1,4 +1,4 @@
-# MessagesTableViewController
+# JSMessagesViewController
 
 A messages UI for iPhone and iPad.
 
@@ -8,9 +8,9 @@ This messages tableview controller is very similar to the one in the iOS Message
 
 **See more [screenshots][link1] in the `Screenshots/` directory. (Surprise!)**
 
-### Update!
+## Update!
 
-v2.5.0 just released with a brand new API! iOS 7 support coming soon. Moar better documentation coming soon!
+###Version 2.5 just released with a brand new API! iOS 7 support coming soon, and moar better documentation!
 
 ## Features 
 
@@ -162,7 +162,7 @@ v2.5.0 just released with a brand new API! iOS 7 support coming soon. Moar bette
 
 * The subtitle text to be displayed *below* this row
 
-###Implement the [table view data source][ref1] method that you should be familiar with
+###Implement the [table view data source][ref1] method
 
 ````objective-c 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
