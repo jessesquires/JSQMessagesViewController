@@ -200,22 +200,24 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
-    JSBubbleMessageStyle bubbleStyle = [self.delegate messageStyleForRowAtIndexPath:indexPath];
+    
+    UIImageView *bubbleImageView = [self.delegate bubbleImageViewWithType:type
+                                                        forRowAtIndexPath:indexPath];
     
     BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
 	BOOL hasSubtitle = [self shouldHaveSubtitleForRowAtIndexPath:indexPath];
     
-    NSString *CellID = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d_%d", type, bubbleStyle, hasTimestamp, hasAvatar, hasSubtitle];
-    JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellID];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d", type, hasTimestamp, hasAvatar, hasSubtitle];
+    JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(!cell) {
         cell = [[JSBubbleMessageCell alloc] initWithBubbleType:type
-                                                   bubbleStyle:bubbleStyle
+                                               bubbleImageView:bubbleImageView
                                                   hasTimestamp:hasTimestamp
                                                      hasAvatar:hasAvatar
                                                    hasSubtitle:hasSubtitle
-                                               reuseIdentifier:CellID];
+                                               reuseIdentifier:CellIdentifier];
     }
     
     if(hasTimestamp) {
@@ -239,10 +241,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [JSBubbleMessageCell neededHeightForText:[self.dataSource textForRowAtIndexPath:indexPath]
-                                          timestamp:[self shouldHaveTimestampForRowAtIndexPath:indexPath]
-                                             avatar:[self shouldHaveAvatarForRowAtIndexPath:indexPath]
-                                           subtitle:[self shouldHaveSubtitleForRowAtIndexPath:indexPath]];
+    return [(JSBubbleMessageCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath] height];
 }
 
 #pragma mark - Messages view controller

@@ -68,7 +68,9 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 - (void)didSendText:(NSString *)text;
 
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+- (UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type
+                       forRowAtIndexPath:(NSIndexPath *)indexPath;
 
 - (JSMessagesViewTimestampPolicy)timestampPolicy;
 - (JSMessagesViewAvatarPolicy)avatarPolicy;

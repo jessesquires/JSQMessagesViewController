@@ -33,8 +33,8 @@
 
 #import "JSBubbleMessageCell.h"
 
-#import "UIColor+JSMessagesView.h"
 #import "JSAvatarImageFactory.h"
+#import "UIColor+JSMessagesView.h"
 
 static const CGFloat kJSLabelPadding = 5.0f;
 
@@ -44,7 +44,6 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 @interface JSBubbleMessageCell()
 
-@property (strong, nonatomic) JSBubbleView *bubbleView;
 @property (strong, nonatomic) UILabel *timestampLabel;
 @property (strong, nonatomic) UIImageView *avatarImageView;
 @property (strong, nonatomic) UILabel *subtitleLabel;
@@ -55,7 +54,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 - (void)configureSubtitleLabelForMessageType:(JSBubbleMessageType)type;
 
 - (void)configureWithType:(JSBubbleMessageType)type
-              bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
+          bubbleImageView:(UIImageView *)bubbleImageView
                 timestamp:(BOOL)hasTimestamp
                    avatar:(BOOL)hasAvatar
 				 subtitle:(BOOL)hasSubtitle;
@@ -144,7 +143,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 }
 
 - (void)configureWithType:(JSBubbleMessageType)type
-              bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
+          bubbleImageView:(UIImageView *)bubbleImageView
                 timestamp:(BOOL)hasTimestamp
                    avatar:(BOOL)hasAvatar
 				 subtitle:(BOOL)hasSubtitle
@@ -181,7 +180,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     
     _bubbleView = [[JSBubbleView alloc] initWithFrame:frame
                                            bubbleType:type
-                                          bubbleStyle:bubbleStyle];
+                                      bubbleImageView:bubbleImageView];
     
     _bubbleView.autoresizingMask = (UIViewAutoresizingFlexibleWidth
                                     | UIViewAutoresizingFlexibleHeight
@@ -194,7 +193,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 #pragma mark - Initialization
 
 - (instancetype)initWithBubbleType:(JSBubbleMessageType)type
-                       bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
+                   bubbleImageView:(UIImageView *)bubbleImageView
                       hasTimestamp:(BOOL)hasTimestamp
                          hasAvatar:(BOOL)hasAvatar
                        hasSubtitle:(BOOL)hasSubtitle
@@ -205,7 +204,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
         [self setup];
         
         [self configureWithType:type
-                    bubbleStyle:bubbleStyle
+                bubbleImageView:bubbleImageView
                       timestamp:hasTimestamp
                          avatar:hasAvatar
                        subtitle:hasSubtitle];
@@ -266,18 +265,15 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     return self.bubbleView.type;
 }
 
-+ (CGFloat)neededHeightForText:(NSString *)bubbleViewText
-                     timestamp:(BOOL)hasTimestamp
-                        avatar:(BOOL)hasAvatar
-                      subtitle:(BOOL)hasSubtitle
+- (CGFloat)height
 {
-    CGFloat timestampHeight = (hasTimestamp) ? kJSTimeStampLabelHeight : 0.0f;
-    CGFloat avatarHeight = (hasAvatar) ? kJSAvatarImageSize : 0.0f;
-	CGFloat subtitleHeight = hasSubtitle ? kJSSubtitleLabelHeight : 0.0f;
-    return MAX(avatarHeight, [JSBubbleView cellHeightForText:bubbleViewText])
-            + timestampHeight
-            + subtitleHeight
-            + kJSLabelPadding;
+    CGFloat timestampHeight = (self.timestampLabel) ? kJSTimeStampLabelHeight : 0.0f;
+    CGFloat avatarHeight = (self.avatarImageView) ? kJSAvatarImageSize : 0.0f;
+	CGFloat subtitleHeight = self.subtitleLabel ? kJSSubtitleLabelHeight : 0.0f;
+    
+    CGFloat subviewHeights = timestampHeight + subtitleHeight + kJSLabelPadding;
+    
+    return subviewHeights + MAX(avatarHeight, [self.bubbleView neededHeightForCell]);
 }
 
 #pragma mark - Layout

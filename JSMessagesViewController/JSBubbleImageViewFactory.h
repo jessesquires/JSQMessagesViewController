@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSUInteger, JSBubbleImageViewType) {
-    JSBubbleImageViewTypeIncoming,
-    JSBubbleImageViewTypeOutgoing
+typedef NS_ENUM(NSUInteger, JSBubbleMessageType) {
+    JSBubbleMessageTypeIncoming,
+    JSBubbleMessageTypeOutgoing
 };
 
 
@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, JSBubbleImageViewStyle) {
 
 @interface JSBubbleImageViewFactory : NSObject
 
-+ (UIImageView *)bubbleImageViewForType:(JSBubbleImageViewType)type
++ (UIImageView *)bubbleImageViewForType:(JSBubbleMessageType)type
                                   style:(JSBubbleImageViewStyle)style;
 
 @end

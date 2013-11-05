@@ -36,10 +36,12 @@
 
 @interface JSBubbleMessageCell : UITableViewCell
 
+@property (strong, nonatomic, readonly) JSBubbleView *bubbleView;
+
 #pragma mark - Initialization
 
 - (instancetype)initWithBubbleType:(JSBubbleMessageType)type
-                       bubbleStyle:(JSBubbleMessageStyle)bubbleStyle
+                   bubbleImageView:(UIImageView *)bubbleImageView
                       hasTimestamp:(BOOL)hasTimestamp
                          hasAvatar:(BOOL)hasAvatar
                        hasSubtitle:(BOOL)hasSubtitle
@@ -59,9 +61,6 @@
 
 - (JSBubbleMessageType)messageType;
 
-+ (CGFloat)neededHeightForText:(NSString *)bubbleViewText
-                     timestamp:(BOOL)hasTimestamp
-                        avatar:(BOOL)hasAvatar
-                      subtitle:(BOOL)hasSubtitle;
+- (CGFloat)height;
 
 @end

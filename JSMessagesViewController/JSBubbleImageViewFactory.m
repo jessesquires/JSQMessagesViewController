@@ -41,11 +41,11 @@ static NSDictionary *bubbleImageDictionary;
 
 #pragma mark - Public
 
-+ (UIImageView *)bubbleImageViewForType:(JSBubbleImageViewType)type
++ (UIImageView *)bubbleImageViewForType:(JSBubbleMessageType)type
                                   style:(JSBubbleImageViewStyle)style
 {
     return [JSBubbleImageViewFactory bubbleImageViewForStyle:style
-                                                  isOutgoing:type == JSBubbleImageViewTypeOutgoing];
+                                                  isOutgoing:type == JSBubbleMessageTypeOutgoing];
 }
 
 #pragma mark - Private

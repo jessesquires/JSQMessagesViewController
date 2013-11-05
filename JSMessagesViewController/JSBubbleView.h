@@ -32,51 +32,40 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef NS_ENUM(NSUInteger, JSBubbleMessageType) {
-    JSBubbleMessageTypeIncoming,
-    JSBubbleMessageTypeOutgoing
-};
-
-
-typedef NS_ENUM(NSUInteger, JSBubbleMessageStyle) {
-    JSBubbleMessageStyleDefault,
-    JSBubbleMessageStyleSquare,
-    JSBubbleMessageStyleDefaultGreen
-};
-
+#import "JSBubbleImageViewFactory.h"
 
 @interface JSBubbleView : UIView
 
 @property (assign, nonatomic) JSBubbleMessageType type;
-@property (assign, nonatomic) JSBubbleMessageStyle style;
 @property (weak, nonatomic) UIImageView *bubbleImageView;
 
 #pragma mark - Initialization
 
 - (instancetype)initWithFrame:(CGRect)rect
                    bubbleType:(JSBubbleMessageType)bubleType
-                  bubbleStyle:(JSBubbleMessageStyle)bubbleStyle;
+              bubbleImageView:(UIImageView *)bubbleImageView;
 
 #pragma mark - Setters
 
 - (void)setText:(NSString *)newText;
 
+- (void)setFont:(UIFont *)font;
+
+- (void)setTextColor:(UIColor *)textColor;
+
 #pragma mark - Getters
 
 - (NSString *)text;
 
-#pragma mark - Drawing
+- (UIFont *)font;
+
+- (UIColor *)textColor;
 
 - (CGRect)bubbleFrame;
 
+- (CGFloat)neededHeightForCell;
+
 #pragma mark - Bubble view
-
-+ (UIFont *)font;
-
-+ (CGSize)textSizeForText:(NSString *)txt;
-+ (CGSize)bubbleSizeForText:(NSString *)txt;
-+ (CGFloat)cellHeightForText:(NSString *)txt;
 
 + (int)maxCharactersPerLine;
 + (int)numberOfLinesForMessage:(NSString *)txt;

@@ -76,7 +76,7 @@
                                                                                            action:@selector(buttonPressed:)];
 }
 
-- (void)buttonPressed:(UIButton*)sender
+- (void)buttonPressed:(UIButton *)sender
 {
     // Testing pushing/popping messages view
     DemoViewController *vc = [[DemoViewController alloc] initWithNibName:nil bundle:nil];
@@ -118,9 +118,15 @@
     return (indexPath.row % 2) ? JSBubbleMessageTypeIncoming : JSBubbleMessageTypeOutgoing;
 }
 
-- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type
+                       forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return JSBubbleMessageStyleDefault;
+    if(indexPath.row % 2) {
+        return [JSBubbleImageViewFactory bubbleImageViewForType:type
+                                                          style:JSBubbleImageViewStyleClassicBlue];
+    }
+    
+    return [JSBubbleImageViewFactory bubbleImageViewForType:type style:JSBubbleImageViewStyleClassicSquareGray];
 }
 
 - (JSMessagesViewTimestampPolicy)timestampPolicy
@@ -130,12 +136,12 @@
 
 - (JSMessagesViewAvatarPolicy)avatarPolicy
 {
-    return JSMessagesViewAvatarPolicyAll;
+    return JSMessagesViewAvatarPolicyIncomingOnly;
 }
 
 - (JSMessagesViewSubtitlePolicy)subtitlePolicy
 {
-    return JSMessagesViewSubtitlePolicyAll;
+    return JSMessagesViewSubtitlePolicyIncomingOnly;
 }
 
 #pragma mark - Optional delegate methods
