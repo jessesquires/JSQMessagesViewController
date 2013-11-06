@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
 	s.author			= { 'Jesse Squires' => 'jesse.squires.developer@gmail.com' }
 	s.source			= { :git => 'https://github.com/jessesquires/MessagesTableViewController.git', :tag => s.version.to_s }
 	s.platform		= :ios, '6.0'
-	s.source_files	= 'JSMessagesViewController/Classes/*'
+	s.source_files	= 'JSMessagesViewController/Classes/**/*'
 	s.resources		= 'JSMessagesViewController/Resources/*'
 	s.frameworks	= 'AudioToolbox'
 	s.requires_arc	= true
