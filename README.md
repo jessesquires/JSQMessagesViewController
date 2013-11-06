@@ -10,7 +10,7 @@ This messages tableview controller is very similar to the one in the iOS Message
 
 ## Update!
 
-###Version 2.5 just released with a brand new API! iOS 7 support coming soon, and moar better documentation!
+####Version 3.0.0 just released with a brand new API! iOS 7 support + documentation coming soon!
 
 ## Features 
 
