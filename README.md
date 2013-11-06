@@ -1,4 +1,4 @@
-# JSMessagesViewController
+# JSMessagesViewController [![Build Status](https://secure.travis-ci.org/jessesquires/MessagesTableViewController.png)](http://travis-ci.org/jessesquires/MessagesTableViewController)
 
 A messages UI for iPhone and iPad.
 
