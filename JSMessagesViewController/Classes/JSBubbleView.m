@@ -206,8 +206,11 @@
                          [txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
     maxHeight += kJSAvatarImageSize;
     
-    return [txt sizeWithFont:self.textView.font
-           constrainedToSize:CGSizeMake(maxWidth, maxHeight)];
+    CGRect bubbleRect = [txt boundingRectWithSize:CGSizeMake(maxWidth, maxHeight)
+                                          options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                       attributes:@{NSFontAttributeName:self.textView.font}
+                                          context:nil];
+    return bubbleRect.size;
 }
 
 - (CGSize)bubbleSizeForText:(NSString *)txt
