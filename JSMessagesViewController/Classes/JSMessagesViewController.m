@@ -390,7 +390,28 @@
 - (void)textViewDidChange:(UITextView *)textView
 {
     CGFloat maxHeight = [JSMessageInputView maxHeight];
-    CGFloat textViewContentHeight = textView.contentSize.height;
+    
+    //  TODO:
+    //
+    //  CGFloat textViewContentHeight = textView.contentSize.height;
+    //
+    //  The line above is broken as of iOS 7.0
+    //
+    //  There seems to be a bug in Apple's code for textView.contentSize
+    //  The following code was implemented as a workaround for calculating the appropriate textViewContentHeight
+    //
+    //  https://devforums.apple.com/thread/192052
+    //  https://github.com/jessesquires/MessagesTableViewController/issues/50
+    //  https://github.com/jessesquires/MessagesTableViewController/issues/47
+    //
+    // BEGIN HACK
+    //
+        CGSize size = [textView sizeThatFits:CGSizeMake(textView.frame.size.width, maxHeight)];
+        CGFloat textViewContentHeight = size.height;
+    //
+    //  END HACK
+    //
+    
     BOOL isShrinking = textViewContentHeight < self.previousTextViewContentHeight;
     CGFloat changeInHeight = textViewContentHeight - self.previousTextViewContentHeight;
     
