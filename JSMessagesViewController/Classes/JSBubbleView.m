@@ -96,6 +96,7 @@
         textView.contentOffset = CGPointZero;
         textView.dataDetectorTypes = UIDataDetectorTypeAll;
         [self addSubview:textView];
+        [self bringSubviewToFront:textView];
         _textView = textView;
         
 //        NOTE: TODO: textView frame & text inset
@@ -201,13 +202,12 @@
 - (CGSize)textSizeForText:(NSString *)txt
 {
     CGFloat maxWidth = [UIScreen mainScreen].applicationFrame.size.width * 0.70f;
-    CGFloat maxHeight = MAX([JSBubbleView numberOfLinesForMessage:txt],
+    CGFloat maxHeight = MAX([JSMessageTextView numberOfLinesForMessage:txt],
                          [txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
     maxHeight += kJSAvatarImageSize;
     
     return [txt sizeWithFont:self.textView.font
-           constrainedToSize:CGSizeMake(maxWidth, maxHeight)
-               lineBreakMode:NSLineBreakByWordWrapping];
+           constrainedToSize:CGSizeMake(maxWidth, maxHeight)];
 }
 
 - (CGSize)bubbleSizeForText:(NSString *)txt
@@ -216,16 +216,6 @@
     
 	return CGSizeMake(textSize.width + kBubblePaddingRight,
                       textSize.height + kPaddingTop + kPaddingBottom);
-}
-
-+ (int)maxCharactersPerLine
-{
-    return ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) ? 33 : 109;
-}
-
-+ (int)numberOfLinesForMessage:(NSString *)txt
-{
-    return (txt.length / [JSBubbleView maxCharactersPerLine]) + 1;
 }
 
 @end

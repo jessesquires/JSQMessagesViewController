@@ -126,7 +126,7 @@
 {
     CGRect prevFrame = self.textView.frame;
     
-    int numLines = MAX([JSBubbleView numberOfLinesForMessage:self.textView.text],
+    int numLines = MAX([self.textView numberOfLinesOfText],
                        [self.textView.text js_numberOfLines]);
     
     self.textView.frame = CGRectMake(prevFrame.origin.x,
@@ -149,7 +149,7 @@
 
 + (CGFloat)textViewLineHeight
 {
-    return 30.0f; // for fontSize 16.0f
+    return 36.0f; // for fontSize 16.0f
 }
 
 + (CGFloat)maxLines

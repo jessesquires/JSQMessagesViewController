@@ -29,6 +29,8 @@
 
 @implementation JSMessageTextView
 
+#pragma mark - Init
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -49,6 +51,23 @@
         self.textAlignment = NSTextAlignmentLeft;
     }
     return self;
+}
+
+#pragma mark - Text view
+
+- (NSInteger)numberOfLinesOfText
+{
+    return [JSMessageTextView numberOfLinesForMessage:self.text];
+}
+
++ (NSInteger)maxCharactersPerLine
+{
+    return ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) ? 33 : 109;
+}
+
++ (NSInteger)numberOfLinesForMessage:(NSString *)txt
+{
+    return (txt.length / [JSMessageTextView maxCharactersPerLine]) + 1;
 }
 
 @end

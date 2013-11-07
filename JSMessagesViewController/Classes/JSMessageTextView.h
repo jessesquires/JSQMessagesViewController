@@ -28,4 +28,10 @@
 
 @interface JSMessageTextView : JSDismissiveTextView
 
+- (NSInteger)numberOfLinesOfText;
+
++ (NSInteger)maxCharactersPerLine;
+
++ (NSInteger)numberOfLinesForMessage:(NSString *)txt;
+
 @end

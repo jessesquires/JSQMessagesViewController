@@ -65,10 +65,4 @@
 
 - (CGFloat)neededHeightForCell;
 
-#pragma mark - Bubble view
-
-+ (int)maxCharactersPerLine;
-
-+ (int)numberOfLinesForMessage:(NSString *)txt;
-
 @end
