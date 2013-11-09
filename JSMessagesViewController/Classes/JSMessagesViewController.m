@@ -225,6 +225,7 @@
         [self.delegate configureCell:cell atIndexPath:indexPath];
     }
     
+    [cell prepareForReuse];
     return cell;
 }
 
