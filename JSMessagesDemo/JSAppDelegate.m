@@ -1,5 +1,5 @@
 //
-//  Created by Jesse Squires on 2/12/13.
+//  Created by Jesse Squires on 11/8/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 //  http://www.hexedbits.com
@@ -24,13 +24,21 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "JSMessagesViewController.h"
+#import "JSAppDelegate.h"
+#import "JSDemoViewController.h"
 
-@interface DemoViewController : JSMessagesViewController <JSMessagesViewDelegate, JSMessagesViewDataSource>
+@implementation JSAppDelegate
 
-@property (strong, nonatomic) NSMutableArray *messages;
-@property (strong, nonatomic) NSMutableArray *timestamps;
-@property (strong, nonatomic) NSMutableArray *subtitles;
-@property (strong, nonatomic) NSDictionary *avatars;
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    JSDemoViewController *vc = [JSDemoViewController new];
+	UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	self.window.rootViewController = nc;
+	[self.window makeKeyAndVisible];
+    
+    return YES;
+}
 
 @end

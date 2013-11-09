@@ -1,5 +1,5 @@
 //
-//  Created by Jesse Squires on 2/12/13.
+//  Created by Jesse Squires on 11/8/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 //  http://www.hexedbits.com
@@ -24,31 +24,13 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "AppDelegate.h"
-#import "DemoViewController.h"
+#import "JSMessagesViewController.h"
 
-@implementation AppDelegate
+@interface JSDemoViewController : JSMessagesViewController <JSMessagesViewDataSource, JSMessagesViewDelegate>
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    DemoViewController *vc = [DemoViewController new];
-	UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
-    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	self.window.rootViewController = nc;
-	[self.window makeKeyAndVisible];
-    
-    return YES;
-}
-							
-- (void)applicationWillResignActive:(UIApplication *)application { }
-
-- (void)applicationDidEnterBackground:(UIApplication *)application { }
-
-- (void)applicationWillEnterForeground:(UIApplication *)application { }
-
-- (void)applicationDidBecomeActive:(UIApplication *)application { }
-
-- (void)applicationWillTerminate:(UIApplication *)application { }
+@property (strong, nonatomic) NSMutableArray *messages;
+@property (strong, nonatomic) NSMutableArray *timestamps;
+@property (strong, nonatomic) NSMutableArray *subtitles;
+@property (strong, nonatomic) NSDictionary *avatars;
 
 @end

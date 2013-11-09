@@ -1,5 +1,5 @@
 //
-//  Created by Jesse Squires on 2/12/13.
+//  Created by Jesse Squires on 11/8/13.
 //  Copyright (c) 2013 Hexed Bits. All rights reserved.
 //
 //  http://www.hexedbits.com
@@ -24,7 +24,7 @@
 //  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "DemoViewController.h"
+#import "JSDemoViewController.h"
 
 #import "UIButton+JSMessagesView.h"
 #import "JSAvatarImageFactory.h"
@@ -33,7 +33,7 @@
 #define kSubtitleWoz @"Steve Wozniak"
 #define kSubtitleCook @"Mr. Cook"
 
-@implementation DemoViewController
+@implementation JSDemoViewController
 
 #pragma mark - View lifecycle
 
@@ -79,7 +79,7 @@
 - (void)buttonPressed:(UIButton *)sender
 {
     // Testing pushing/popping messages view
-    DemoViewController *vc = [[DemoViewController alloc] initWithNibName:nil bundle:nil];
+    JSDemoViewController *vc = [[JSDemoViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
