@@ -24,7 +24,6 @@
 		8889A4BF1829FFD8002CF4DA /* UIColor+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8889A4831829FFD8002CF4DA /* UIColor+JSMessagesView.m */; };
 		8889A4C01829FFD8002CF4DA /* UIImage+JSMessagesInputBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8889A4851829FFD8002CF4DA /* UIImage+JSMessagesInputBar.m */; };
 		8889A4C11829FFD8002CF4DA /* UIImage+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8889A4871829FFD8002CF4DA /* UIImage+JSMessagesView.m */; };
-		8889A4C21829FFD8002CF4DA /* UIView+AnimationOptionsForCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 8889A4891829FFD8002CF4DA /* UIView+AnimationOptionsForCurve.m */; };
 		8889A4C31829FFD8002CF4DA /* JSAvatarImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8889A48C1829FFD8002CF4DA /* JSAvatarImageFactory.m */; };
 		8889A4C41829FFD8002CF4DA /* JSBubbleImageViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8889A48E1829FFD8002CF4DA /* JSBubbleImageViewFactory.m */; };
 		8889A4C51829FFD8002CF4DA /* JSBubbleMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8889A4901829FFD8002CF4DA /* JSBubbleMessageCell.m */; };
@@ -90,8 +89,6 @@
 		8889A4851829FFD8002CF4DA /* UIImage+JSMessagesInputBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JSMessagesInputBar.m"; sourceTree = "<group>"; };
 		8889A4861829FFD8002CF4DA /* UIImage+JSMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+JSMessagesView.h"; sourceTree = "<group>"; };
 		8889A4871829FFD8002CF4DA /* UIImage+JSMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JSMessagesView.m"; sourceTree = "<group>"; };
-		8889A4881829FFD8002CF4DA /* UIView+AnimationOptionsForCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimationOptionsForCurve.h"; sourceTree = "<group>"; };
-		8889A4891829FFD8002CF4DA /* UIView+AnimationOptionsForCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimationOptionsForCurve.m"; sourceTree = "<group>"; };
 		8889A48B1829FFD8002CF4DA /* JSAvatarImageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSAvatarImageFactory.h; sourceTree = "<group>"; };
 		8889A48C1829FFD8002CF4DA /* JSAvatarImageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAvatarImageFactory.m; sourceTree = "<group>"; };
 		8889A48D1829FFD8002CF4DA /* JSBubbleImageViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBubbleImageViewFactory.h; sourceTree = "<group>"; };
@@ -254,8 +251,6 @@
 				8889A4851829FFD8002CF4DA /* UIImage+JSMessagesInputBar.m */,
 				8889A4861829FFD8002CF4DA /* UIImage+JSMessagesView.h */,
 				8889A4871829FFD8002CF4DA /* UIImage+JSMessagesView.m */,
-				8889A4881829FFD8002CF4DA /* UIView+AnimationOptionsForCurve.h */,
-				8889A4891829FFD8002CF4DA /* UIView+AnimationOptionsForCurve.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -449,7 +444,6 @@
 				8889A4C41829FFD8002CF4DA /* JSBubbleImageViewFactory.m in Sources */,
 				8889A4C81829FFD8002CF4DA /* JSMessageInputView.m in Sources */,
 				8889A4C91829FFD8002CF4DA /* JSMessageSoundEffect.m in Sources */,
-				8889A4C21829FFD8002CF4DA /* UIView+AnimationOptionsForCurve.m in Sources */,
 				8889A4BE1829FFD8002CF4DA /* UIButton+JSMessagesView.m in Sources */,
 				8889A4C31829FFD8002CF4DA /* JSAvatarImageFactory.m in Sources */,
 				8889A4C51829FFD8002CF4DA /* JSBubbleMessageCell.m in Sources */,

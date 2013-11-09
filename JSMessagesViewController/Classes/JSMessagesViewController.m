@@ -35,7 +35,6 @@
 #import "JSMessageTextView.h"
 
 #import "NSString+JSMessagesView.h"
-#import "UIView+AnimationOptionsForCurve.h"
 #import "UIColor+JSMessagesView.h"
 #import "UIButton+JSMessagesView.h"
 
@@ -62,6 +61,8 @@
 - (void)handleWillShowKeyboardNotification:(NSNotification *)notification;
 - (void)handleWillHideKeyboardNotification:(NSNotification *)notification;
 - (void)keyboardWillShowHide:(NSNotification *)notification;
+
+- (UIViewAnimationOptions)animationOptionsForCurve:(UIViewAnimationCurve)curve;
 
 @end
 
@@ -483,7 +484,7 @@
     
     [UIView animateWithDuration:duration
                           delay:0.0f
-                        options:[UIView js_animationOptionsForCurve:curve]
+                        options:[self animationOptionsForCurve:curve]
                      animations:^{
                          CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
                          
@@ -535,6 +536,28 @@
     CGPoint keyboardOrigin = [self.view convertPoint:point fromView:nil];
     inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
     self.inputToolbarView.frame = inputViewFrame;
+}
+
+#pragma mark - Utilities
+
+- (UIViewAnimationOptions)animationOptionsForCurve:(UIViewAnimationCurve)curve
+{
+    switch (curve) {
+        case UIViewAnimationCurveEaseInOut:
+            return UIViewAnimationOptionCurveEaseInOut;
+            
+        case UIViewAnimationCurveEaseIn:
+            return UIViewAnimationOptionCurveEaseIn;
+            
+        case UIViewAnimationCurveEaseOut:
+            return UIViewAnimationOptionCurveEaseOut;
+            
+        case UIViewAnimationCurveLinear:
+            return UIViewAnimationOptionCurveLinear;
+            
+        default:
+            return kNilOptions;
+    }
 }
 
 @end
