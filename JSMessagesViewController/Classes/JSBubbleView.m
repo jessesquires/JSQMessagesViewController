@@ -49,11 +49,11 @@
 
 #pragma mark - Initialization
 
-- (instancetype)initWithFrame:(CGRect)rect
+- (instancetype)initWithFrame:(CGRect)frame
                    bubbleType:(JSBubbleMessageType)bubleType
               bubbleImageView:(UIImageView *)bubbleImageView
 {
-    self = [super initWithFrame:rect];
+    self = [super initWithFrame:frame];
     if(self) {
         [self setup];
         
@@ -100,15 +100,15 @@
 
 #pragma mark - Setters
 
-- (void)setType:(JSBubbleMessageType)newType
+- (void)setType:(JSBubbleMessageType)type
 {
-    _type = newType;
+    _type = type;
     [self setNeedsDisplay];
 }
 
-- (void)setText:(NSString *)newText
+- (void)setText:(NSString *)text
 {
-    self.textView.text = newText;
+    self.textView.text = text;
     [self setNeedsDisplay];
 }
 
