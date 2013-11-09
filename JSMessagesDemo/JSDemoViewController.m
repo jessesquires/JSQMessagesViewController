@@ -111,10 +111,10 @@
 {
     if(indexPath.row % 2) {
         return [JSBubbleImageViewFactory bubbleImageViewForType:type
-                                                          style:JSBubbleImageViewStyleClassicBlue];
+                                                          style:JSBubbleImageViewStyleClassicGray];
     }
     
-    return [JSBubbleImageViewFactory bubbleImageViewForType:type style:JSBubbleImageViewStyleClassicSquareGray];
+    return [JSBubbleImageViewFactory bubbleImageViewForType:type style:JSBubbleImageViewStyleClassicGray];
 }
 
 - (JSMessagesViewTimestampPolicy)timestampPolicy
