@@ -90,7 +90,7 @@
     return self.messages.count;
 }
 
-#pragma mark - Messages view delegate
+#pragma mark - Messages view delegate: REQUIRED
 
 - (void)didSendText:(NSString *)text
 {
@@ -144,7 +144,15 @@
     return JSMessagesViewSubtitlePolicyAll;
 }
 
-#pragma mark - Optional delegate methods
+#pragma mark - Messages view delegate: OPTIONAL
+
+//  *** Implement to customize cell further
+//
+//  - (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
+//  {
+//      [cell.bubbleView setFont:[UIFont boldSystemFontOfSize:9.0]];
+//      [cell.bubbleView setTextColor:[UIColor whiteColor]];
+//  }
 
 //  *** Required if using `JSMessagesViewTimestampPolicyCustom`
 //
@@ -167,7 +175,7 @@
     return YES;
 }
 
-#pragma mark - Messages view data source
+#pragma mark - Messages view data source: REQUIRED
 
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
 {

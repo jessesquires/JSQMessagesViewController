@@ -77,6 +77,7 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 - (JSMessagesViewSubtitlePolicy)subtitlePolicy;
 
 @optional
+- (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (BOOL)shouldPreventScrollToBottomWhileUserScrolling;
 - (UIButton *)sendButtonForInputView;

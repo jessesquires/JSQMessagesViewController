@@ -238,6 +238,11 @@
     
     [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
     [cell setBackgroundColor:tableView.backgroundColor];
+    
+    if([self.delegate respondsToSelector:@selector(configureCell:atIndexPath:)]) {
+        [self.delegate configureCell:cell atIndexPath:indexPath];
+    }
+    
     return cell;
 }
 
