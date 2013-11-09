@@ -104,14 +104,12 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 
 #pragma mark - Messages view controller
 
-- (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (BOOL)shouldHaveAvatarForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (BOOL)shouldHaveSubtitleForRowAtIndexPath:(NSIndexPath *)indexPath;
-
 - (void)finishSend;
+
 - (void)setBackgroundColor:(UIColor *)color;
 
 - (void)scrollToBottomAnimated:(BOOL)animated;
+
 - (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath
 			  atScrollPosition:(UITableViewScrollPosition)position
 					  animated:(BOOL)animated;

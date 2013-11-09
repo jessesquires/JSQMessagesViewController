@@ -53,6 +53,10 @@
 
 - (void)sendPressed:(UIButton *)sender;
 
+- (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (BOOL)shouldHaveAvatarForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (BOOL)shouldHaveSubtitleForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 - (BOOL)shouldAllowScroll;
 
 - (void)handleWillShowKeyboardNotification:(NSNotification *)notification;
