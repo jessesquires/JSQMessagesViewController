@@ -61,7 +61,7 @@ static NSDictionary *bubbleImageDictionary;
     UIImage *image = [UIImage imageNamed:[bubbleImageDictionary objectForKey:@(style)]];
     UIImage *highlightedImage = [JSBubbleImageViewFactory highlightedBubbleImageForStyle:style];
     
-    if(isOutgoing) {
+    if(!isOutgoing) {
         image = [image js_imageFlippedHorizontal];
         highlightedImage = [highlightedImage js_imageFlippedHorizontal];
     }
@@ -79,11 +79,11 @@ static NSDictionary *bubbleImageDictionary;
         case JSBubbleImageViewStyleClassicGray:
         case JSBubbleImageViewStyleClassicBlue:
         case JSBubbleImageViewStyleClassicGreen:
-            return [UIImage imageNamed:@"bubble-classic-highlighted"];
+            return [UIImage imageNamed:@"bubble-classic-selected"];
             
         case JSBubbleImageViewStyleClassicSquareGray:
         case JSBubbleImageViewStyleClassicSquareBlue:
-            return [UIImage imageNamed:@"bubble-classic-square-highlighted"];
+            return [UIImage imageNamed:@"bubble-classic-square-selected"];
             
         default:
             return nil;

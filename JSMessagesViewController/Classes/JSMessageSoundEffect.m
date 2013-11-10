@@ -40,12 +40,12 @@
 
 + (void)playMessageReceivedSound
 {
-    [JSMessageSoundEffect playSoundWithName:@"messageReceived" type:@"aiff"];
+    [JSMessageSoundEffect playSoundWithName:@"message-received" type:@"aiff"];
 }
 
 + (void)playMessageSentSound
 {
-    [JSMessageSoundEffect playSoundWithName:@"messageSent" type:@"aiff"];
+    [JSMessageSoundEffect playSoundWithName:@"message-sent" type:@"aiff"];
 }
 
 @end
