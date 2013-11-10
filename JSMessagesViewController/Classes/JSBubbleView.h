@@ -39,7 +39,7 @@
  *  @param bubleType       A constant that specifies the type of the bubble view. @see JSBubbleMessageType.
  *  @param bubbleImageView An image view initialized with an image and highlighted image for this bubble view. @see JSBubbleImageViewFactory.
  *
- *  @return An initialized JSBubbleView object or nil if the object could not be successfully initialized.
+ *  @return An initialized `JSBubbleView` object or `nil` if the object could not be successfully initialized.
  */
 - (instancetype)initWithFrame:(CGRect)frame
                    bubbleType:(JSBubbleMessageType)bubleType
