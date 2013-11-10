@@ -84,7 +84,7 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 @property (weak, nonatomic) id<JSMessagesViewDelegate> delegate;
 @property (weak, nonatomic) id<JSMessagesViewDataSource> dataSource;
 
-@property (strong, nonatomic, readonly) JSMessageInputView *inputToolbarView;
+@property (strong, nonatomic, readonly) JSMessageInputView *inputView;
 
 #pragma mark - Messages view controller
 
