@@ -440,8 +440,9 @@
                                                                       inputViewFrame.size.height + changeInHeight);
                          }
                          completion:^(BOOL finished) {
-                             if(isShrinking)
+                             if(isShrinking) {
                                  [self.inputView adjustTextViewHeightBy:changeInHeight];
+                             }
                          }];
         
         self.previousTextViewContentHeight = MIN(textViewContentHeight, maxHeight);
