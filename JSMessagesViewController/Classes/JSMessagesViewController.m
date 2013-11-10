@@ -19,13 +19,11 @@
 #import "UIColor+JSMessagesView.h"
 #import "UIButton+JSMessagesView.h"
 
-#define INPUT_HEIGHT 40.0f
-
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
-@property (strong, nonatomic) UITableView *tableView;
-@property (assign, nonatomic) CGFloat previousTextViewContentHeight;
+@property (weak, nonatomic) UITableView *tableView;
 
+@property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 @property (assign, nonatomic) BOOL isUserScrolling;
 
 - (void)setup;
@@ -62,21 +60,26 @@
 	_isUserScrolling = NO;
     
     CGSize size = self.view.frame.size;
-	
-    CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - INPUT_HEIGHT);
-	_tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
-	_tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	_tableView.dataSource = self;
-	_tableView.delegate = self;
-	[self.view addSubview:_tableView];
-	
+    
+    CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - [JSMessageInputView defaultHeight]);
+	UITableView *tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
+	tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	tableView.dataSource = self;
+	tableView.delegate = self;
+	[self.view addSubview:tableView];
+	_tableView = tableView;
+    
     [self setBackgroundColor:[UIColor js_messagesBackgroundColor_iOS6]];
     
-    CGRect inputFrame = CGRectMake(0.0f, size.height - INPUT_HEIGHT, size.width, INPUT_HEIGHT);
-    _inputView = [[JSMessageInputView alloc] initWithFrame:inputFrame
-                                                 textViewDelegate:self
-                                                 keyboardDelegate:self
-                                             panGestureRecognizer:_tableView.panGestureRecognizer];
+    CGRect inputFrame = CGRectMake(0.0f,
+                                   size.height - [JSMessageInputView defaultHeight],
+                                   size.width,
+                                   [JSMessageInputView defaultHeight]);
+    
+    JSMessageInputView *inputView = [[JSMessageInputView alloc] initWithFrame:inputFrame
+                                                             textViewDelegate:self
+                                                             keyboardDelegate:self
+                                                         panGestureRecognizer:_tableView.panGestureRecognizer];
     
     UIButton *sendButton;
     if([self.delegate respondsToSelector:@selector(sendButtonForInputView)]) {
@@ -86,12 +89,14 @@
         sendButton = [UIButton js_defaultSendButton_iOS6];
     }
     sendButton.enabled = NO;
-    sendButton.frame = CGRectMake(_inputView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
+    sendButton.frame = CGRectMake(inputView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
     [sendButton addTarget:self
                    action:@selector(sendPressed:)
          forControlEvents:UIControlEventTouchUpInside];
-    [_inputView setSendButton:sendButton];
-    [self.view addSubview:_inputView];
+    [inputView setSendButton:sendButton];
+    
+    [self.view addSubview:inputView];
+    _inputView = inputView;
 }
 
 #pragma mark - View lifecycle
@@ -473,7 +478,7 @@
                          CGFloat inputViewFrameY = keyboardY - inputViewFrame.size.height;
                          
                          // for ipad modal form presentations
-                         CGFloat messageViewFrameBottom = self.view.frame.size.height - INPUT_HEIGHT;
+                         CGFloat messageViewFrameBottom = self.view.frame.size.height - [JSMessageInputView defaultHeight];
                          if(inputViewFrameY > messageViewFrameBottom)
                              inputViewFrameY = messageViewFrameBottom;
 						 
@@ -484,7 +489,7 @@
                          
                          UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
                                                                 0.0f,
-                                                                self.view.frame.size.height - self.inputView.frame.origin.y - INPUT_HEIGHT,
+                                                                self.view.frame.size.height - self.inputView.frame.origin.y - [JSMessageInputView defaultHeight],
                                                                 0.0f);
                          
                          self.tableView.contentInset = insets;

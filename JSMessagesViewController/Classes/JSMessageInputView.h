@@ -17,8 +17,8 @@
 
 @interface JSMessageInputView : UIImageView
 
-@property (strong, nonatomic, readonly) JSMessageTextView *textView;
-@property (strong, nonatomic) UIButton *sendButton;
+@property (weak, nonatomic, readonly) JSMessageTextView *textView;
+@property (weak, nonatomic) UIButton *sendButton;
 
 #pragma mark - Initialization
 
@@ -36,5 +36,7 @@
 + (CGFloat)maxLines;
 
 + (CGFloat)maxHeight;
+
++ (CGFloat)defaultHeight;
 
 @end

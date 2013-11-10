@@ -77,9 +77,10 @@
     CGFloat width = self.frame.size.width - SEND_BUTTON_WIDTH;
     CGFloat height = [JSMessageInputView textViewLineHeight];
     
-    _textView = [[JSMessageTextView  alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, height)];
-    [self addSubview:_textView];
-	
+    JSMessageTextView *textView = [[JSMessageTextView  alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, height)];
+    [self addSubview:textView];
+	_textView = textView;
+    
     UIImageView *inputFieldBack = [[UIImageView alloc] initWithFrame:CGRectMake(_textView.frame.origin.x - 1.0f,
                                                                                 0.0f,
                                                                                 _textView.frame.size.width + 2.0f,
@@ -97,8 +98,8 @@
     if(_sendButton)
         [_sendButton removeFromSuperview];
     
+    [self addSubview:btn];
     _sendButton = btn;
-    [self addSubview:_sendButton];
 }
 
 #pragma mark - Message input view
@@ -141,6 +142,11 @@
 + (CGFloat)maxHeight
 {
     return ([JSMessageInputView maxLines] + 1.0f) * [JSMessageInputView textViewLineHeight];
+}
+
++ (CGFloat)defaultHeight
+{
+    return 40.0f;
 }
 
 @end
