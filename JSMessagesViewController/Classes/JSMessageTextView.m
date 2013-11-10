@@ -28,7 +28,7 @@
 
 @implementation JSMessageTextView
 
-#pragma mark - Init
+#pragma mark - Initialization
 
 - (void)setup
 {

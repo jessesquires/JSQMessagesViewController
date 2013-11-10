@@ -19,7 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    JSDemoViewController *vc = [JSDemoViewController new];
+    JSDemoViewController *vc = [[JSDemoViewController alloc] init];
 	UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
