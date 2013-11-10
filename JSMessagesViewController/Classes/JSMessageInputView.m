@@ -14,16 +14,13 @@
 
 #import "JSMessageInputView.h"
 #import "JSBubbleView.h"
-
 #import "NSString+JSMessagesView.h"
-#import "UIImage+JSMessagesInputBar.h"
 
 #define SEND_BUTTON_WIDTH 78.0f
 
 @interface JSMessageInputView ()
 
 - (void)setup;
-- (void)setupTextView;
 
 @end
 
@@ -32,6 +29,31 @@
 @implementation JSMessageInputView
 
 #pragma mark - Initialization
+
+- (void)setup
+{
+    self.image = [[UIImage imageNamed:@"input-bar-background"] resizableImageWithCapInsets:UIEdgeInsetsMake(19.0f, 3.0f, 19.0f, 3.0f)];
+    self.backgroundColor = [UIColor whiteColor];
+    self.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin);
+    self.opaque = YES;
+    self.userInteractionEnabled = YES;
+    
+    CGFloat width = self.frame.size.width - SEND_BUTTON_WIDTH;
+    CGFloat height = [JSMessageInputView textViewLineHeight];
+    
+    JSMessageTextView *textView = [[JSMessageTextView  alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, height)];
+    [self addSubview:textView];
+	_textView = textView;
+    
+    UIImageView *inputFieldBack = [[UIImageView alloc] initWithFrame:CGRectMake(_textView.frame.origin.x - 1.0f,
+                                                                                0.0f,
+                                                                                _textView.frame.size.width + 2.0f,
+                                                                                self.frame.size.height)];
+    inputFieldBack.image = [[UIImage imageNamed:@"input-field-cover"] resizableImageWithCapInsets:UIEdgeInsetsMake(20.0f, 12.0f, 18.0f, 18.0f)];
+    inputFieldBack.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    inputFieldBack.backgroundColor = [UIColor clearColor];
+    [self addSubview:inputFieldBack];
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
              textViewDelegate:(id<UITextViewDelegate>)delegate
@@ -54,41 +76,12 @@
     _sendButton = nil;
 }
 
+#pragma mark - UIView
+
 - (BOOL)resignFirstResponder
 {
     [self.textView resignFirstResponder];
     return [super resignFirstResponder];
-}
-
-#pragma mark - Setup
-
-- (void)setup
-{
-    self.image = [UIImage js_inputBar_iOS6];
-    self.backgroundColor = [UIColor whiteColor];
-    self.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin);
-    self.opaque = YES;
-    self.userInteractionEnabled = YES;
-    [self setupTextView];
-}
-
-- (void)setupTextView
-{
-    CGFloat width = self.frame.size.width - SEND_BUTTON_WIDTH;
-    CGFloat height = [JSMessageInputView textViewLineHeight];
-    
-    JSMessageTextView *textView = [[JSMessageTextView  alloc] initWithFrame:CGRectMake(6.0f, 3.0f, width, height)];
-    [self addSubview:textView];
-	_textView = textView;
-    
-    UIImageView *inputFieldBack = [[UIImageView alloc] initWithFrame:CGRectMake(_textView.frame.origin.x - 1.0f,
-                                                                                0.0f,
-                                                                                _textView.frame.size.width + 2.0f,
-                                                                                self.frame.size.height)];
-    inputFieldBack.image = [UIImage js_inputField_iOS6];
-    inputFieldBack.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    inputFieldBack.backgroundColor = [UIColor clearColor];
-    [self addSubview:inputFieldBack];
 }
 
 #pragma mark - Setters
