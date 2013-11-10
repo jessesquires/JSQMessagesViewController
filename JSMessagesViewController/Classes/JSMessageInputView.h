@@ -17,7 +17,7 @@
 
 @interface JSMessageInputView : UIImageView
 
-@property (strong, nonatomic) JSMessageTextView *textView;
+@property (strong, nonatomic, readonly) JSMessageTextView *textView;
 @property (strong, nonatomic) UIButton *sendButton;
 
 #pragma mark - Initialization
