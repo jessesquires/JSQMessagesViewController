@@ -43,19 +43,19 @@
 
 #pragma mark - Text view
 
-- (NSInteger)numberOfLinesOfText
+- (NSUInteger)numberOfLinesOfText
 {
     return [JSMessageTextView numberOfLinesForMessage:self.text];
 }
 
-+ (NSInteger)maxCharactersPerLine
++ (NSUInteger)maxCharactersPerLine
 {
     return ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) ? 33 : 109;
 }
 
-+ (NSInteger)numberOfLinesForMessage:(NSString *)txt
++ (NSUInteger)numberOfLinesForMessage:(NSString *)text
 {
-    return (txt.length / [JSMessageTextView maxCharactersPerLine]) + 1;
+    return (text.length / [JSMessageTextView maxCharactersPerLine]) + 1;
 }
 
 @end
