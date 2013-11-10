@@ -33,6 +33,8 @@
     
     self.title = @"Messages";
     
+    self.inputToolbarView.textView.placeHolder = @"Message";
+    
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      @"Testing some messages here. END",
                      @"Options for avatars: none, circles, or squares. END",

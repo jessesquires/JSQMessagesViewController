@@ -15,9 +15,19 @@
 #import "JSDismissiveTextView.h"
 
 /**
- *  An instance of JSMessageTextView is a means for displaying an input text view above a keyboard as a subview of the keyboard's inputAccessoryView. It is used for composing messages.
+ *  An instance of JSMessageTextView is a means for displaying an input text view above a keyboard as a subview of the keyboard's inputAccessoryView. It is used for composing messages and adds support for a placeholder like UITextField.
  */
 @interface JSMessageTextView : JSDismissiveTextView
+
+/**
+ *  The text to be displayed when the text view is empty. The default value is `nil`.
+ */
+@property (copy, nonatomic) NSString *placeHolder;
+
+/**
+ *  The color of the place holder text. The default value is `[UIColor lightGrayColor]`.
+ */
+@property (strong, nonatomic) UIColor *placeHolderTextColor;
 
 /**
  *  Returns an unsigned integer describing the number of lines of text contained in the text view.

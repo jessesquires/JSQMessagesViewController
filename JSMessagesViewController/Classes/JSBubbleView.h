@@ -26,7 +26,7 @@
 @property (assign, nonatomic, readonly) JSBubbleMessageType type;
 
 /**
- *  The image view for this bubble view. The default value is nil.
+ *  The image view for this bubble view. The default value is `nil`.
  */
 @property (weak, nonatomic, readonly) UIImageView *bubbleImageView;
 

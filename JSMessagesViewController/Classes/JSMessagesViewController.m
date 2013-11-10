@@ -24,7 +24,6 @@
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) JSMessageInputView *inputToolbarView;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 
 @property (assign, nonatomic) BOOL isUserScrolling;
