@@ -36,10 +36,10 @@
     self.messageInputView.textView.placeHolder = @"Message";
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
-                     @"Testing some messages here. END",
-                     @"Options for avatars: none, circles, or squares. END",
-                     @"This is a complete re-write and refactoring. END",
-                     @"It's easy to implement. Sound effects and images included. Animations are smooth and messages can be of arbitrary size! END",
+                     @"JSMessagesViewController is simple and easy to use.",
+                     @"It's highly customizable.",
+                     @"It even has data detectors. You can call me tonight. My cell number is 452-123-4567. \nMy website is www.hexedbits.com.",
+                     @"Group chat is possible. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!",
                      nil];
     
     self.timestamps = [[NSMutableArray alloc] initWithObjects:
@@ -113,10 +113,10 @@
 {
     if(indexPath.row % 2) {
         return [JSBubbleImageViewFactory bubbleImageViewForType:type
-                                                          style:JSBubbleImageViewStyleClassicGray];
+                                                          style:JSBubbleImageViewStyleClassicBlue];
     }
     
-    return [JSBubbleImageViewFactory bubbleImageViewForType:type style:JSBubbleImageViewStyleClassicGray];
+    return [JSBubbleImageViewFactory bubbleImageViewForType:type style:JSBubbleImageViewStyleClassicSquareGray];
 }
 
 - (JSMessagesViewTimestampPolicy)timestampPolicy
