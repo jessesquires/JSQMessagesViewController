@@ -33,7 +33,7 @@
     
     self.title = @"Messages";
     
-    self.inputView.textView.placeHolder = @"Message";
+    self.messageInputView.textView.placeHolder = @"Message";
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      @"Testing some messages here. END",

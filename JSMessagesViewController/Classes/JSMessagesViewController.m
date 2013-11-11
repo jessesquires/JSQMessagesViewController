@@ -96,7 +96,7 @@
     [inputView setSendButton:sendButton];
     
     [self.view addSubview:inputView];
-    _inputView = inputView;
+    _messageInputView = inputView;
 }
 
 #pragma mark - View lifecycle
@@ -128,7 +128,7 @@
 {
     [super viewWillDisappear:animated];
     
-    [self.inputView resignFirstResponder];
+    [self.messageInputView resignFirstResponder];
     [self setEditing:NO animated:YES];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
@@ -146,7 +146,7 @@
     _delegate = nil;
     _dataSource = nil;
     _tableView = nil;
-    _inputView = nil;
+    _messageInputView = nil;
 }
 
 #pragma mark - View rotation
@@ -172,7 +172,7 @@
 
 - (void)sendPressed:(UIButton *)sender
 {
-    [self.delegate didSendText:[self.inputView.textView.text js_stringByTrimingWhitespace]];
+    [self.delegate didSendText:[self.messageInputView.textView.text js_stringByTrimingWhitespace]];
 }
 
 #pragma mark - Table view data source
@@ -304,8 +304,8 @@
 
 - (void)finishSend
 {
-    [self.inputView.textView setText:nil];
-    [self textViewDidChange:self.inputView.textView];
+    [self.messageInputView.textView setText:nil];
+    [self textViewDidChange:self.messageInputView.textView];
     [self.tableView reloadData];
 }
 
@@ -420,7 +420,7 @@
     
     if(changeInHeight != 0.0f) {
         if(!isShrinking)
-            [self.inputView adjustTextViewHeightBy:changeInHeight];
+            [self.messageInputView adjustTextViewHeightBy:changeInHeight];
         
         [UIView animateWithDuration:0.25f
                          animations:^{
@@ -433,22 +433,22 @@
                              self.tableView.scrollIndicatorInsets = insets;
                              [self scrollToBottomAnimated:NO];
                              
-                             CGRect inputViewFrame = self.inputView.frame;
-                             self.inputView.frame = CGRectMake(0.0f,
+                             CGRect inputViewFrame = self.messageInputView.frame;
+                             self.messageInputView.frame = CGRectMake(0.0f,
                                                                       inputViewFrame.origin.y - changeInHeight,
                                                                       inputViewFrame.size.width,
                                                                       inputViewFrame.size.height + changeInHeight);
                          }
                          completion:^(BOOL finished) {
                              if(isShrinking) {
-                                 [self.inputView adjustTextViewHeightBy:changeInHeight];
+                                 [self.messageInputView adjustTextViewHeightBy:changeInHeight];
                              }
                          }];
         
         self.previousTextViewContentHeight = MIN(textViewContentHeight, maxHeight);
     }
     
-    self.inputView.sendButton.enabled = ([textView.text js_stringByTrimingWhitespace].length > 0);
+    self.messageInputView.sendButton.enabled = ([textView.text js_stringByTrimingWhitespace].length > 0);
 }
 
 #pragma mark - Keyboard notifications
@@ -475,7 +475,7 @@
                      animations:^{
                          CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
                          
-                         CGRect inputViewFrame = self.inputView.frame;
+                         CGRect inputViewFrame = self.messageInputView.frame;
                          CGFloat inputViewFrameY = keyboardY - inputViewFrame.size.height;
                          
                          // for ipad modal form presentations
@@ -483,14 +483,14 @@
                          if(inputViewFrameY > messageViewFrameBottom)
                              inputViewFrameY = messageViewFrameBottom;
 						 
-                         self.inputView.frame = CGRectMake(inputViewFrame.origin.x,
+                         self.messageInputView.frame = CGRectMake(inputViewFrame.origin.x,
 																  inputViewFrameY,
 																  inputViewFrame.size.width,
 																  inputViewFrame.size.height);
                          
                          UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
                                                                 0.0f,
-                                                                self.view.frame.size.height - self.inputView.frame.origin.y - [JSMessageInputView defaultHeight],
+                                                                self.view.frame.size.height - self.messageInputView.frame.origin.y - [JSMessageInputView defaultHeight],
                                                                 0.0f);
                          
                          self.tableView.contentInset = insets;
@@ -504,25 +504,25 @@
 
 - (void)keyboardDidScrollToPoint:(CGPoint)point
 {
-    CGRect inputViewFrame = self.inputView.frame;
+    CGRect inputViewFrame = self.messageInputView.frame;
     CGPoint keyboardOrigin = [self.view convertPoint:point fromView:nil];
     inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
-    self.inputView.frame = inputViewFrame;
+    self.messageInputView.frame = inputViewFrame;
 }
 
 - (void)keyboardWillBeDismissed
 {
-    CGRect inputViewFrame = self.inputView.frame;
+    CGRect inputViewFrame = self.messageInputView.frame;
     inputViewFrame.origin.y = self.view.bounds.size.height - inputViewFrame.size.height;
-    self.inputView.frame = inputViewFrame;
+    self.messageInputView.frame = inputViewFrame;
 }
 
 - (void)keyboardWillSnapBackToPoint:(CGPoint)point
 {
-    CGRect inputViewFrame = self.inputView.frame;
+    CGRect inputViewFrame = self.messageInputView.frame;
     CGPoint keyboardOrigin = [self.view convertPoint:point fromView:nil];
     inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
-    self.inputView.frame = inputViewFrame;
+    self.messageInputView.frame = inputViewFrame;
 }
 
 #pragma mark - Utilities
