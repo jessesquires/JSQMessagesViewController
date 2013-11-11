@@ -2,15 +2,15 @@
 
 A messages UI for iPhone and iPad.
 
-![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2][img2]
-
 `JSMessagesViewController` is a `UITableViewController` subclass that is very similar to the iOS Messages app. **Note, this is only a messaging UI, not a messaging app.**
 
-**See more [screenshots](https://github.com/jessesquires/MessagesTableViewController/tree/master/Screenshots) in the `Screenshots/` directory.**
+![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2][img2]
+
+*See more [screenshots](https://github.com/jessesquires/MessagesTableViewController/tree/master/Screenshots) in the `Screenshots/` directory.*
 
 ## Update!
 
-####Version 3.0.0 just released with a brand new API! iOS 7 support + documentation coming soon!
+####Version 3.0.0 just released with a brand new API! iOS 7 support coming soon!
 
 ## Features 
 
@@ -38,11 +38,11 @@ A messages UI for iPhone and iPad.
 
 ## Installation
 
-### From [CocoaPods](http://www.cocoapods.org)
+#### From [CocoaPods](http://www.cocoapods.org)
 
     pod 'JSMessagesViewController'
 
-### From source
+#### From source
 
 * Drag the `JSMessagesViewController/` folder to your project.
 * Add the `AudioToolbox.framework` to your project, if you want to use the sound effects
@@ -61,9 +61,9 @@ A messages UI for iPhone and iPad.
 
 5. Implement `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section` from the [`UITableViewDataSource` protocol](https://developer.apple.com/library/ios/documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html).
 
-666. Present your subclassed ViewController programatically or via StoryBoards. Your subclass should be the `rootViewController` of a `UINavigationController`.
+6. Present your subclassed ViewController programatically or via StoryBoards. Your subclass should be the `rootViewController` of a `UINavigationController`.
 
-7. Read the documentation (Yes, there's documentation! Seriously!)
+7. Read the documentation (Yes, there's documentation! [Seriously](http://dailyyeah.com/wp-content/uploads/2008/07/crazy_fat_kid.gif)!)
 
 8. See the included demo project: `JSMessagesDemo.xcodeproj`
 
@@ -83,9 +83,9 @@ Documentation is [available here](http://cocoadocs.org/docsets/JSMessagesViewCon
 
 Created by [Jesse Squires](https://twitter.com/jesse_squires), a [programming-motherfucker](http://programming-motherfucker.com).
 
-Originally inspired by [@soffes](http://github.com/soffes)/[SSMessagingViewController][ss].
+Originally inspired by [@soffes](http://github.com/soffes) **/** [SSMessagingViewController][ss].
 
-Many thanks to [le contributors](https://github.com/jessesquires/MessagesTableViewController/graphs/contributors) of this project.
+Many thanks to [the contributors](https://github.com/jessesquires/MessagesTableViewController/graphs/contributors) of this project.
 
 Square message bubbles designed by [@michaelschultz](http://www.twitter.com/michaelschultz).
 
