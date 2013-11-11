@@ -4,9 +4,9 @@ A messages UI for iPhone and iPad.
 
 ![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2][img2]
 
-This messages tableview controller is very similar to the one in the iOS Messages app. **Note, this is only a messaging UI, not a messaging app.** This is intended to be used in an existing app where you have (or are developing) a messaging system and need a user interface for it.
+`JSMessagesViewController` is a `UITableViewController` subclass that is very similar to the iOS Messages app. **Note, this is only a messaging UI, not a messaging app.**
 
-**See more [screenshots][link1] in the `Screenshots/` directory. (Surprise!)**
+**See more [screenshots](https://github.com/jessesquires/MessagesTableViewController/tree/master/Screenshots) in the `Screenshots/` directory.**
 
 ## Update!
 
@@ -47,148 +47,61 @@ This messages tableview controller is very similar to the one in the iOS Message
 * Drag the `JSMessagesViewController/` folder to your project.
 * Add the `AudioToolbox.framework` to your project, if you want to use the sound effects
 
-## How To Use
+## Getting Started
 
-###Subclass `JSMessagesViewController`
+1. Subclass `JSMessagesViewController`
 
-* In `- (void)viewDidLoad`
+2. In `- (void)viewDidLoad`
 	* Set your view controller as the `delegate` and `datasource`
 	* Set your view controller `title`
 
-###Implement the `JSMessagesViewDelegate` protocol
+3. Implement the `JSMessagesViewDelegate` protocol
 
-````objective-c 
-- (void)didSendText:(NSString *)text;
-````
+4. Implement the `JSMessagesViewDataSource` protocol
 
-* Hook into your own backend here
-* Call `finishSend` at the end of this method to animate and reset the text input view
-* Call `scrollToBottomAnimated:` to scroll to newly sent message
-* Optionally play sound effects
-	* For outgoing messages `[JSMessageSoundEffect playMessageSentSound]`
-	* For incoming messages `[JSMessageSoundEffect playMessageReceivedSound]`
+5. Implement `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section` from the [`UITableViewDataSource` protocol](https://developer.apple.com/library/ios/documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html).
 
-````objective-c
-- (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath;
-````
+666. Present your subclassed ViewController programatically or via StoryBoards. Your subclass should be the `rootViewController` of a `UINavigationController`.
 
-* The type of bubble for this row, options are:
-	* `JSBubbleMessageTypeIncoming`
-	* `JSBubbleMessageTypeOutgoing`
+7. Read the documentation (Yes, there's documentation! Seriously!)
 
-````objective-c
-- (UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type
-                       forRowAtIndexPath:(NSIndexPath *)indexPath;
-````
+8. See the included demo project: `JSMessagesDemo.xcodeproj`
 
-* The [bubble image view][link1] for this row, see `JSBubbleImageViewFactory`
+## Documentation
 
-````objective-c 
-- (JSMessagesViewTimestampPolicy)timestampPolicy
-````
+Documentation is [available here](http://cocoadocs.org/docsets/JSMessagesViewController) via [CocoaDocs](http://cocoadocs.org). Thanks [@CocoaDocs](https://twitter.com/CocoaDocs)!
 
-* How/when to display timestamps for messages:
-	* `JSMessagesViewTimestampPolicyAll`
-	* `JSMessagesViewTimestampPolicyAlternating`
-	* `JSMessagesViewTimestampPolicyEveryThree`
-	* `JSMessagesViewTimestampPolicyEveryFive`
-	* `JSMessagesViewTimestampPolicyCustom`
+## Customization
 
-````objective-c 
-- (JSMessagesViewAvatarPolicy)avatarPolicy
-````
+*Stuff here coming soon!*
 
-* How/when to display avatars:
-	* `JSMessagesViewAvatarPolicyAll`
-	* `JSMessagesViewAvatarPolicyIncomingOnly`
-	* `JSMessagesViewAvatarPolicyOutgoingOnly`
-	* `JSMessagesViewAvatarPolicyNone`
+## How To Contribute
 
+*Stuff here coming soon!*
 
-````objective-c
-- (JSMessagesViewSubtitlePolicy)subtitlePolicy;
-````
+## Credits
 
-* How/when to display subtitles:
-	* `JSMessagesViewSubtitlePolicyAll`
-	* `JSMessagesViewSubtitlePolicyIncomingOnly`
-	* `JSMessagesViewSubtitlePolicyOutgoingOnly`
-	* `JSMessagesViewSubtitlePolicyNone`
+Created by [Jesse Squires](https://twitter.com/jesse_squires), a [programming-motherfucker](http://programming-motherfucker.com).
 
+Originally inspired by [@soffes](http://github.com/soffes)/[SSMessagingViewController][ss].
 
-````objective-c 
-- (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
-````
+Many thanks to [le contributors](https://github.com/jessesquires/MessagesTableViewController/graphs/contributors) of this project.
 
-* *Optional* Returns if this row should display a timestamp or not
-* Required if using `JSMessagesViewTimestampPolicyCustom`
-
-````objective-c 
-- (BOOL)shouldPreventScrollToBottomWhileUserScrolling;
-````
-
-* *Optional* Return `YES` if you would like to prevent the tableview from being scrolled to the bottom while the user is scrolling the tableview manually. The method `scrollToRowAtIndexPath:indexPath:atScrollPosition:animated:` can also be used to implement scrolling functionality that respects this setting.
-
-````objective-c 
-- (UIButton *)sendButtonForInputView;
-````	
-
-* *Optional* Return a custom send button, the frame is set for you.
-
-
-###Implement the `JSMessagesViewDataSource` protocol
-
-````objective-c 
-- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
-````
-
-* The text to be displayed for this row
-
-````objective-c 
-- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
-````
-
-* The timestamp to be displayed *above* this row
-
-````objective-c 
-- (UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath*)indexPath
-````
-
-* The avatar image view to be displayed this row
-
-````objective-c 
-- (NSString *)subtitleForRowAtIndexPath:(NSIndexPath*)indexPath
-````
-
-* The subtitle text to be displayed *below* this row
-
-###Implement the [table view data source][ref1] method
-
-````objective-c 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-````
-
-###Customize
-
-* For custom background color, use `- (void)setBackgroundColor:(UIColor *)color`
-
-### Notes
-
-* You may present view programmatically, or use Storyboards
-* Your `JSMessagesViewController` subclass **must** be presented in a `UINavigationController`
-* Demo project included: `MessagesDemo.xcodeproj` 
+Square message bubbles designed by [@michaelschultz](http://www.twitter.com/michaelschultz).
 
 ## About
 
-This project was originally based on work by [@soffes](http://github.com/soffes) [SSMessagingViewController][ss]. 
+I initialily developed this control to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users.
 
-I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users.
+As it turns out, messaging is a popular thing that iOS devs want to do — I know, this is *shocking*. Thus, I am supporting this project in my free time and have added features way beyond what [Hemoglobe](http://www.hemoglobe.com) ever needed.
 
-[Square message bubbles][img4] designed by [@michaelschultz](http://www.twitter.com/michaelschultz).
+Check me out my work at [Hexed Bits](http://www.hexedbits.com).
 
 ## Apps Using This Control
 
 [Hemoglobe](http://bit.ly/hemoglobeapp)
+
+[Oxwall Messenger](https://github.com/tochman/OxwallMessenger)
 
 [FourChat](https://itunes.apple.com/us/app/fourchat/id650833730?mt=8)
 
@@ -206,7 +119,7 @@ I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private mes
 
 ## [MIT License](http://opensource.org/licenses/MIT)
 
-You are free to use this as you please. No attribution necessary. **However, a link back to [Hexed Bits](http://www.hexedbits.com) or here would be appreciated. If you use this, please tell me about it!**
+You are free to use this as you please. **No attribution necessary, but much appreciated.**
 
 Copyright &copy; 2013 Jesse Squires
 
@@ -218,12 +131,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 [ss]:https://github.com/soffes/ssmessagesviewcontroller
 
-[ref1]:http://developer.apple.com/library/ios/#documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html#//apple_ref/occ/intf/UITableViewDataSource
-[ref2]:http://developer.apple.com/library/ios/#documentation/cocoa/conceptual/ProgrammingWithObjectiveC/CustomizingExistingClasses/CustomizingExistingClasses.html
-
 [img1]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot0.png
 [img2]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot2.png
-[img3]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot3.png
-[img4]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot4.png
-
-[link1]:https://github.com/jessesquires/MessagesTableViewController/tree/master/Screenshots
