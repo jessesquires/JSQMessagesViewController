@@ -40,7 +40,7 @@ A messages UI for iPhone and iPad.
 
 #### From [CocoaPods](http://www.cocoapods.org)
 
-    pod 'JSMessagesViewController'
+`pod 'JSMessagesViewController'`
 
 #### From source
 
