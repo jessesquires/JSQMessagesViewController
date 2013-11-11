@@ -410,8 +410,8 @@
     
     BOOL isShrinking = textViewContentHeight < self.previousTextViewContentHeight;
     CGFloat changeInHeight = textViewContentHeight - self.previousTextViewContentHeight;
-    
-    if(!isShrinking && self.previousTextViewContentHeight == maxHeight) {
+        
+    if(!isShrinking && (self.previousTextViewContentHeight == maxHeight || textView.text.length == 0)) {
         changeInHeight = 0;
     }
     else {
