@@ -282,29 +282,12 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
-    if(action == @selector(copy:))
-        return YES;
-    
-    return [super canPerformAction:action withSender:sender];
+    return (action == @selector(copy:));
 }
 
 - (void)copy:(id)sender
 {
     [[UIPasteboard generalPasteboard] setString:[self.bubbleView text]];
-    [self resignFirstResponder];
-}
-
-#pragma mark - Touch events
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [super touchesEnded:touches withEvent:event];
-    if(![self isFirstResponder])
-        return;
-    
-    UIMenuController *menu = [UIMenuController sharedMenuController];
-    [menu setMenuVisible:NO animated:YES];
-    [menu update];
     [self resignFirstResponder];
 }
 
