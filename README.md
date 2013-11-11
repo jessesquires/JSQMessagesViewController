@@ -81,9 +81,9 @@ Documentation is [available here](http://cocoadocs.org/docsets/JSMessagesViewCon
 
 ## Credits
 
-Created by [Jesse Squires](https://twitter.com/jesse_squires), a [programming-motherfucker](http://programming-motherfucker.com).
+Created by [@Jesse Squires](https://twitter.com/jesse_squires), a [programming-motherfucker](http://programming-motherfucker.com).
 
-Assets extracted using [0xced](https://github.com/0xced) **/** [iOS-Artwork-Extractor](https://github.com/0xced/iOS-Artwork-Extractor).
+Assets extracted using [@0xced](https://github.com/0xced) **/** [iOS-Artwork-Extractor](https://github.com/0xced/iOS-Artwork-Extractor).
 
 Originally inspired by [@soffes](http://github.com/soffes) **/** [SSMessagingViewController][ss].
 
