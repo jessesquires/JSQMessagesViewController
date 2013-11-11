@@ -103,25 +103,25 @@
 - (void)setType:(JSBubbleMessageType)type
 {
     _type = type;
-    [self setNeedsDisplay];
+    [self setNeedsLayout];
 }
 
 - (void)setText:(NSString *)text
 {
     self.textView.text = text;
-    [self setNeedsDisplay];
+    [self setNeedsLayout];
 }
 
 - (void)setFont:(UIFont *)font
 {
     self.textView.font = font;
-    [self setNeedsDisplay];
+    [self setNeedsLayout];
 }
 
 - (void)setTextColor:(UIColor *)textColor
 {
     self.textView.textColor = textColor;
-    [self setNeedsDisplay];
+    [self setNeedsLayout];
 }
 
 #pragma mark - Getters
