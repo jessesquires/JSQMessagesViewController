@@ -69,7 +69,7 @@ A messages UI for iPhone and iPad.
 
 ## Documentation
 
-Documentation is [available here](http://cocoadocs.org/docsets/JSMessagesViewController) via [CocoaDocs](http://cocoadocs.org). Thanks [@CocoaDocs](https://twitter.com/CocoaDocs)!
+Documentation is [available here](http://cocoadocs.org/docsets/JSMessagesViewController/3.1.0) via [CocoaDocs](http://cocoadocs.org). Thanks [@CocoaDocs](https://twitter.com/CocoaDocs)!
 
 ## Customization
 
