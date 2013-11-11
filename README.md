@@ -2,7 +2,9 @@
 
 A messages UI for iPhone and iPad.
 
-`JSMessagesViewController` is a `UITableViewController` subclass that is very similar to the iOS Messages app. **Note, this is only a messaging UI, not a messaging app.**
+`JSMessagesViewController` is a `UITableViewController` subclass that is very similar to the iOS Messages app. 
+
+**Note: this is only a messaging UI, not a messaging app.**
 
 ![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2][img2]
 
@@ -18,7 +20,7 @@ A messages UI for iPhone and iPad.
 * Arbitrary message sizes
 * Copy & paste messages
 * Support for group messages
-* Data detectors (recognizes phone numbers, links, dates, etc)
+* Data detectors (recognizes phone numbers, links, dates, etc.)
 * Timestamps
 * Avatars
 * Subtitles
@@ -29,7 +31,7 @@ A messages UI for iPhone and iPad.
 * Automatically enables/disables send button (if text view is empty or not)
 * Send/Receive sound effects
 * Storyboards support (if that's how you roll)
-* Universal
+* Universal for iPhone and iPad
 
 ## Requirements
 
@@ -47,24 +49,21 @@ A messages UI for iPhone and iPad.
 * Drag the `JSMessagesViewController/` folder to your project.
 * Add the `AudioToolbox.framework` to your project, if you want to use the sound effects
 
+#### Too cool for [ARC](https://developer.apple.com/library/mac/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html)?
+
+* Add the `-fobjc-arc` compiler flag to all source files in your project in Target Settings > Build Phases > Compile Sources.
+
 ## Getting Started
 
 1. Subclass `JSMessagesViewController`
-
 2. In `- (void)viewDidLoad`
 	* Set your view controller as the `delegate` and `datasource`
 	* Set your view controller `title`
-
 3. Implement the `JSMessagesViewDelegate` protocol
-
 4. Implement the `JSMessagesViewDataSource` protocol
-
 5. Implement `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section` from the [`UITableViewDataSource` protocol](https://developer.apple.com/library/ios/documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html).
-
 6. Present your subclassed ViewController programatically or via StoryBoards. Your subclass should be the `rootViewController` of a `UINavigationController`.
-
-7. Read the documentation (Yes, there's documentation! [Seriously](http://dailyyeah.com/wp-content/uploads/2008/07/crazy_fat_kid.gif)!)
-
+7. Be a badass [programming-motherfucker](http://programming-motherfucker.com) and read the fucking documentation. (Yes, there's documentation! [Seriously](http://dailyyeah.com/wp-content/uploads/2008/07/crazy_fat_kid.gif)!)
 8. See the included demo project: `JSMessagesDemo.xcodeproj`
 
 ## Documentation
@@ -77,7 +76,16 @@ Documentation is [available here](http://cocoadocs.org/docsets/JSMessagesViewCon
 
 ## How To Contribute
 
-*Stuff here coming soon!*
+1. [Find an issue](https://github.com/jessesquires/MessagesTableViewController/issues?sort=created&state=open) to work on, or create a new one.
+2. Fork me.
+3. Create a new branch with a sweet fucking name: `git checkout -b issue_<##>_<featureOrFix>`.
+4. Do some motherfucking programming.
+5. Keep your code nice and clean by adhering to Google's [Objective-C Style Guide](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml) and Apple's [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html).
+6. Don't break shit, especially `master`.
+7. Update the documentation header comments.
+8. Update the pod spec and project version numbers, adhering to the [semantic versioning](http://semver.org) specification.
+9. Submit a pull request.
+10. See step 1.
 
 ## Credits
 
@@ -97,7 +105,7 @@ I initialily developed this control to use in [Hemoglobe](http://www.hemoglobe.c
 
 As it turns out, messaging is a popular thing that iOS devs want to do — I know, this is *shocking*. Thus, I am supporting this project in my free time and have added features way beyond what [Hemoglobe](http://www.hemoglobe.com) ever needed.
 
-Check me out my work at [Hexed Bits](http://www.hexedbits.com).
+Check out my work at [Hexed Bits](http://www.hexedbits.com).
 
 ## Apps Using This Control
 
