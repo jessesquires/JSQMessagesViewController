@@ -16,7 +16,7 @@
 #import "JSMessageTextView.h"
 
 /**
- *  An instance of JSMessageInputView defines the input toolbar for composing a new message that is to be displayed above the keyboard.
+ *  An instance of `JSMessageInputView` defines the input toolbar for composing a new message that is to be displayed above the keyboard.
  */
 @interface JSMessageInputView : UIImageView
 
@@ -37,7 +37,7 @@
  *
  *  @param frame                A rectangle specifying the initial location and size of the bubble view in its superview's coordinates.
  *  @param delegate             An object that conforms to the `UITextViewDelegate` protocol.
- *  @param keyboardDelegate     An object that conforms to the `JSDismissiveTextViewDelegate` protocol. @See JSDismissiveTextViewDelegate.
+ *  @param keyboardDelegate     An object that conforms to the `JSDismissiveTextViewDelegate` protocol. @see JSDismissiveTextViewDelegate.
  *  @param panGestureRecognizer A `UIPanGestureRecognizer` used to dismiss the input view by dragging down.
  *
  *  @return An initialized `JSMessageInputView` object or `nil` if the object could not be successfully initialized.

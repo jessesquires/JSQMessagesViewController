@@ -38,7 +38,8 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewTimestampPolicy) {
      */
     JSMessagesViewTimestampPolicyEveryFive,
     /**
-     *  Displays a timestamp based on the result of the optional delegate method `hasTimestampForRowAtIndexPath:`. @See JSMessagesViewDelegate.
+     *  Displays a timestamp based on the result of the optional delegate method `hasTimestampForRowAtIndexPath:`. 
+     *  @see JSMessagesViewDelegate.
      */
     JSMessagesViewTimestampPolicyCustom
 };
@@ -88,7 +89,7 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 };
 
 /**
- *  The delegate of a JSMessagesViewController must adopt the JSMessagesViewDelegate protocol.
+ *  The delegate of a `JSMessagesViewController` must adopt the `JSMessagesViewDelegate` protocol.
  */
 @protocol JSMessagesViewDelegate <NSObject>
 
@@ -106,7 +107,8 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  *
  *  @param indexPath The index path of the row to be displayed.
  *
- *  @return A constant describing the message type. @See JSBubbleMessageType.
+ *  @return A constant describing the message type. 
+ *  @see JSBubbleMessageType.
  */
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath;
 
@@ -116,7 +118,8 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  *  @param type      The type of message for the row located at indexPath.
  *  @param indexPath The index path of the row to be displayed.
  *
- *  @return A `UIImageView` with both `image` and `highlightedImage` properties set. @See JSBubbleImageViewFactory.
+ *  @return A `UIImageView` with both `image` and `highlightedImage` properties set. 
+ *  @see JSBubbleImageViewFactory.
  */
 - (UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type
                        forRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -124,21 +127,24 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 /**
  *  Asks the delegate for the timestamp policy.
  *
- *  @return A constant describing the timestamp policy. @See JSMessagesViewTimestampPolicy.
+ *  @return A constant describing the timestamp policy. 
+ *  @see JSMessagesViewTimestampPolicy.
  */
 - (JSMessagesViewTimestampPolicy)timestampPolicy;
 
 /**
  *  Asks the delegate for the avatar policy.
  *
- *  @return A constant describing the avatar policy. @See JSMessagesViewAvatarPolicy.
+ *  @return A constant describing the avatar policy. 
+ *  @see JSMessagesViewAvatarPolicy.
  */
 - (JSMessagesViewAvatarPolicy)avatarPolicy;
 
 /**
  *  Asks the delegate for the subtitle policy.
  *
- *  @return A constant describing the subtitle policy. @See JSMessagesViewSubtitlePolicy.
+ *  @return A constant describing the subtitle policy. 
+ *  @see JSMessagesViewSubtitlePolicy.
  */
 - (JSMessagesViewSubtitlePolicy)subtitlePolicy;
 
@@ -153,7 +159,7 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 - (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 /**
- *  Asks the delegate if the row at the specified index path should display a timestamp. You should only implement this method if using `JSMessagesViewTimestampPolicyCustom`. @See JSMessagesViewTimestampPolicy.
+ *  Asks the delegate if the row at the specified index path should display a timestamp. You should only implement this method if using `JSMessagesViewTimestampPolicyCustom`. @see JSMessagesViewTimestampPolicy.
  *
  *  @param indexPath The index path of the row to be displayed.
  *
@@ -245,7 +251,8 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 #pragma mark - Messages view controller
 
 /**
- *  Animates and resets the text view in messageInputView. Call this method at the end of the delegate method `didSendText:`. @See JSMessagesViewDelegate.
+ *  Animates and resets the text view in messageInputView. Call this method at the end of the delegate method `didSendText:`. 
+ *  @see JSMessagesViewDelegate.
  */
 - (void)finishSend;
 
@@ -258,14 +265,22 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 - (void)setBackgroundColor:(UIColor *)color;
 
 /**
- *  Scrolls the table view such that the bottom most cell is completely visible, above the messageInputView. This method respects the delegate method `shouldPreventScrollToBottomWhileUserScrolling`. @See JSMessagesViewDelegate.
+ *  Scrolls the table view such that the bottom most cell is completely visible, above the messageInputView. 
+ *
+ *  This method respects the delegate method `shouldPreventScrollToBottomWhileUserScrolling`. 
+ *
+ *  @see JSMessagesViewDelegate.
  *
  *  @param animated `YES` if you want to animate scrolling, `NO` if it should be immediate.
  */
 - (void)scrollToBottomAnimated:(BOOL)animated;
 
 /**
- *  Scrolls the receiver until a row identified by index path is at a particular location on the screen. This method respects the delegate method `shouldPreventScrollToBottomWhileUserScrolling`. @See JSMessagesViewDelegate.
+ *  Scrolls the receiver until a row identified by index path is at a particular location on the screen. 
+ *
+ *  This method respects the delegate method `shouldPreventScrollToBottomWhileUserScrolling`. 
+ *
+ *  @see JSMessagesViewDelegate.
  *
  *  @param indexPath An index path that identifies a row in the table view by its row index and its section index.
  *  @param position  A constant defined in `UITableViewScrollPosition` that identifies a relative position in the receiving table view.

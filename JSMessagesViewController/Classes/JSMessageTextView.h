@@ -15,7 +15,7 @@
 #import "JSDismissiveTextView.h"
 
 /**
- *  An instance of JSMessageTextView is a means for displaying an input text view above a keyboard as a subview of the keyboard's inputAccessoryView. It is used for composing messages and adds support for a placeholder like UITextField.
+ *  An instance of `JSMessageTextView` is a means for displaying an input text view above a keyboard as a subview of a keyboard's `inputAccessoryView`. It is used for composing messages and adds support for a placeholder like UITextField.
  */
 @interface JSMessageTextView : JSDismissiveTextView
 

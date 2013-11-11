@@ -18,7 +18,7 @@
 #import <UIKit/UIKit.h>
 
 /**
- *  The delegate of a JSDismissiveTextView object must adopt the JSDismissiveTextViewDelegate protocol.
+ *  The delegate of a `JSDismissiveTextView` object must adopt the `JSDismissiveTextViewDelegate` protocol.
  */
 @protocol JSDismissiveTextViewDelegate <NSObject>
 
@@ -51,7 +51,7 @@
 
 
 /**
- *  An instance of JSDismissiveTextView is a means for displaying a text view that is contained as a subview of the keyboard's inputAccessoryView and responds to a pan gesture to dismiss the keyboard and end editing.
+ *  An instance of `JSDismissiveTextView` is a means for displaying a text view that is contained as a subview of the keyboard's `inputAccessoryView` and responds to a pan gesture to dismiss the keyboard and end editing.
  */
 @interface JSDismissiveTextView : UITextView
 
