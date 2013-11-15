@@ -488,11 +488,8 @@
 																  inputViewFrame.size.width,
 																  inputViewFrame.size.height);
                          
-                         UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
-                                                                0.0f,
-                                                                self.view.frame.size.height - self.messageInputView.frame.origin.y - [JSMessageInputView defaultHeight],
-                                                                0.0f);
-                         
+						 UIEdgeInsets insets = self.tableView.contentInset;
+						 insets.bottom = self.view.frame.size.height - self.messageInputView.frame.origin.y - [JSMessageInputView defaultHeight];
                          self.tableView.contentInset = insets;
                          self.tableView.scrollIndicatorInsets = insets;
                      }
