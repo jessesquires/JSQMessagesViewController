@@ -51,7 +51,7 @@
     self.backgroundColor = [UIColor whiteColor];
     self.keyboardAppearance = UIKeyboardAppearanceDefault;
     self.keyboardType = UIKeyboardTypeDefault;
-    self.returnKeyType = UIReturnKeyDefault;
+    self.returnKeyType = UIReturnKeySend;
     self.textAlignment = NSTextAlignmentLeft;
 }
 

@@ -80,7 +80,7 @@
                                                              textViewDelegate:self
                                                              keyboardDelegate:self
                                                          panGestureRecognizer:_tableView.panGestureRecognizer];
-    
+    /*
     UIButton *sendButton;
     if([self.delegate respondsToSelector:@selector(sendButtonForInputView)]) {
         sendButton = [self.delegate sendButtonForInputView];
@@ -94,6 +94,7 @@
                    action:@selector(sendPressed:)
          forControlEvents:UIControlEventTouchUpInside];
     [inputView setSendButton:sendButton];
+    */
     
     [self.view addSubview:inputView];
     _messageInputView = inputView;
@@ -449,6 +450,15 @@
     }
     
     self.messageInputView.sendButton.enabled = ([textView.text js_stringByTrimingWhitespace].length > 0);
+}
+
+- (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        [self sendPressed:nil];
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark - Keyboard notifications
