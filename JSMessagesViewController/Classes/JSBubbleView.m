@@ -18,6 +18,7 @@
 #import "JSAvatarImageFactory.h"
 #import "NSString+JSMessagesView.h"
 
+#define kTextMarginLeft 4.0f
 #define kMarginTop 8.0f
 #define kMarginBottom 4.0f
 #define kPaddingTop 4.0f
@@ -170,7 +171,7 @@
         textX += (self.bubbleImageView.image.capInsets.left / 2.0f);
     }
     
-    CGRect textFrame = CGRectMake(textX,
+    CGRect textFrame = CGRectMake(textX + kTextMarginLeft,
                                   self.bubbleImageView.frame.origin.y,
                                   self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f),
                                   self.bubbleImageView.frame.size.height - kMarginTop);

@@ -15,7 +15,7 @@
 #import "JSAvatarImageFactory.h"
 #import "UIImage+JSMessagesView.h"
 
-CGFloat const kJSAvatarImageSize = 50.0f;
+CGFloat const kJSAvatarImageSize = 40.0f;
 
 @implementation JSAvatarImageFactory
 

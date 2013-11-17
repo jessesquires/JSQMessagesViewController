@@ -20,7 +20,8 @@
 static const CGFloat kJSLabelPadding = 5.0f;
 static const CGFloat kJSTimeStampLabelHeight = 15.0f;
 static const CGFloat kJSSubtitleLabelHeight = 15.0f;
-
+static const CGFloat kJSAvatarImageViewPadding = 8.0f;
+static const CGFloat kBubbleViewMargin = 2.0f;
 
 @interface JSBubbleMessageCell()
 
@@ -89,9 +90,9 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (void)configureAvatarImageView:(UIImageView *)imageView forMessageType:(JSBubbleMessageType)type
 {
-    CGFloat avatarX = 0.5f;
+    CGFloat avatarX = kJSAvatarImageViewPadding;
     if(type == JSBubbleMessageTypeOutgoing) {
-        avatarX = (self.contentView.frame.size.width - kJSAvatarImageSize);
+        avatarX = (self.contentView.frame.size.width - kJSAvatarImageSize) - avatarX;
     }
     
     CGFloat avatarY = self.contentView.frame.size.height - kJSAvatarImageSize;
@@ -151,9 +152,9 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
         [self configureAvatarImageView:[[UIImageView alloc] init] forMessageType:type];
     }
     
-    CGRect frame = CGRectMake(bubbleX - offsetX,
+    CGRect frame = CGRectMake(bubbleX - offsetX + kJSAvatarImageViewPadding + kBubbleViewMargin,
                               bubbleY,
-                              self.contentView.frame.size.width - bubbleX,
+                              self.contentView.frame.size.width - bubbleX - kJSAvatarImageViewPadding * 2 - kBubbleViewMargin * 2,
                               self.contentView.frame.size.height - _timestampLabel.frame.size.height - _subtitleLabel.frame.size.height);
     
     JSBubbleView *bubbleView = [[JSBubbleView alloc] initWithFrame:frame
