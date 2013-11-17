@@ -23,6 +23,7 @@
 
 @property (weak, nonatomic) UITableView *tableView;
 
+@property (assign, nonatomic, readonly) UIEdgeInsets originalTableViewContentInset;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 @property (assign, nonatomic) BOOL isUserScrolling;
 
@@ -112,6 +113,15 @@
     [super viewWillAppear:animated];
     
     [self scrollToBottomAnimated:NO];
+    
+    //  FIXME: this is a hack
+    //  ---------------------
+    //  Possibly an iOS 7 bug?
+    //  tableView.contentInset.top = 0.0 on iOS 6
+    //  tableView.contentInset.top = 64.0 on iOS 7
+    //  save here in order to reset in [ keyboardWillShowHide: ]
+    //  ---------------------
+    _originalTableViewContentInset = self.tableView.contentInset;
     
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(handleWillShowKeyboardNotification:)
@@ -487,11 +497,11 @@
 																  inputViewFrameY,
 																  inputViewFrame.size.width,
 																  inputViewFrame.size.height);
-                         
-                         UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
-                                                                0.0f,
-                                                                self.view.frame.size.height - self.messageInputView.frame.origin.y - [JSMessageInputView defaultHeight],
-                                                                0.0f);
+
+                         UIEdgeInsets insets = self.originalTableViewContentInset;
+                         insets.bottom = self.view.frame.size.height
+                                            - self.messageInputView.frame.origin.y
+                                            - [JSMessageInputView defaultHeight];
                          
                          self.tableView.contentInset = insets;
                          self.tableView.scrollIndicatorInsets = insets;
