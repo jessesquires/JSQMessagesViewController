@@ -65,4 +65,6 @@
  */
 @property (strong, nonatomic) UIPanGestureRecognizer *dismissivePanGestureRecognizer;
 
+- (void) hideKeyboard;
+
 @end

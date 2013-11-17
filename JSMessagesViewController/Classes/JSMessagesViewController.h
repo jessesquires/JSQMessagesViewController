@@ -16,6 +16,7 @@
 #import "JSBubbleMessageCell.h"
 #import "JSMessageInputView.h"
 #import "JSMessageSoundEffect.h"
+#import "JSMessagesTableView.h"
 
 /**
  *  The frequency with which timestamps are displayed in the messages table view.
@@ -231,7 +232,7 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 /**
  *  An instance of `JSMessagesViewController` is a subclass of `UITableViewController` specialized to display a messaging interface.
  */
-@interface JSMessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
+@interface JSMessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, JSMessagesTableViewDelegate>
 
 /**
  *  The object that acts as the delegate of the receiving messages view.

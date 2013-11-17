@@ -107,6 +107,8 @@
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)pan
 {
+    return;
+    
     if(!self.keyboardView || self.keyboardView.hidden)
         return;
     
@@ -182,6 +184,36 @@
             }
             break;
     }
+}
+
+- (void) hideKeyboard
+{
+    if(!self.keyboardView || self.keyboardView.hidden)
+        return;
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenHeight = screenRect.size.height;
+    
+    [UIView animateWithDuration:0.25
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         self.keyboardView.frame = CGRectMake(0.0f,
+                                                              screenHeight,
+                                                              self.keyboardView.frame.size.width,
+                                                              self.keyboardView.frame.size.height);
+                         
+                         if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardWillBeDismissed)])
+                             [self.keyboardDelegate keyboardWillBeDismissed];
+                     }
+                     completion:^(BOOL finished) {
+                         self.keyboardView.hidden = YES;
+                         self.keyboardView.frame = CGRectMake(0.0f,
+                                                              self.previousKeyboardY,
+                                                              self.keyboardView.frame.size.width,
+                                                              self.keyboardView.frame.size.height);
+                         [self resignFirstResponder];
+                     }];
 }
 
 @end

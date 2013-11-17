@@ -14,6 +14,7 @@
 
 #import "JSMessagesViewController.h"
 #import "JSMessageTextView.h"
+#import "JSMessagesTableView.h"
 
 #import "NSString+JSMessagesView.h"
 #import "UIColor+JSMessagesView.h"
@@ -21,7 +22,7 @@
 
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
-@property (weak, nonatomic) UITableView *tableView;
+@property (weak, nonatomic) JSMessagesTableView *tableView;
 
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 @property (assign, nonatomic) BOOL isUserScrolling;
@@ -62,10 +63,11 @@
     CGSize size = self.view.frame.size;
     
     CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - [JSMessageInputView defaultHeight]);
-	UITableView *tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
+	JSMessagesTableView *tableView = [[JSMessagesTableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
 	tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	tableView.dataSource = self;
 	tableView.delegate = self;
+    tableView.canCancelContentTouches = NO;
 	[self.view addSubview:tableView];
 	_tableView = tableView;
     
@@ -80,6 +82,7 @@
                                                              textViewDelegate:self
                                                              keyboardDelegate:self
                                                          panGestureRecognizer:_tableView.panGestureRecognizer];
+    
     /*
     UIButton *sendButton;
     if([self.delegate respondsToSelector:@selector(sendButtonForInputView)]) {
@@ -355,11 +358,18 @@
     return YES;
 }
 
+- (void) hideKeyboard
+{
+    [self.messageInputView.textView hideKeyboard];
+}
+
 #pragma mark - Scroll view delegate
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
 	self.isUserScrolling = YES;
+    
+    [self hideKeyboard];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
@@ -555,6 +565,15 @@
         default:
             return kNilOptions;
     }
+}
+
+#pragma mark - JSMessagesTableViewDelegate
+
+- (void) messagesTableView:(JSMessagesTableView *)tableView
+              touchesBegan:(NSSet *)touches
+                 withEvent:(UIEvent *)event
+{
+    [self hideKeyboard];
 }
 
 @end
