@@ -258,7 +258,7 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 
 
 /**
- *  Sets the background color of the table view and its table view cells.
+ *  Sets the background color of the table view, the table view cells, and the table view separator.
  *
  *  @param color The color to be used as the new background color.
  */
