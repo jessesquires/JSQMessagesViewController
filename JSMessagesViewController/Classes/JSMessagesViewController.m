@@ -491,8 +491,6 @@
                          CGRect inputViewFrame = self.messageInputView.frame;
                          CGFloat inputViewFrameY = keyboardY - inputViewFrame.size.height;
                          
-                         NSLog(@"HEIGHT = %lf",inputViewFrame.size.height);
-                         
                          // for ipad modal form presentations
                          CGFloat messageViewFrameBottom = self.view.frame.size.height - inputViewFrame.size.height;
                          if(inputViewFrameY > messageViewFrameBottom)
@@ -505,7 +503,7 @@
 
                          UIEdgeInsets insets = self.originalTableViewContentInset;
                          insets.bottom = self.view.frame.size.height
-                                            - inputViewFrame.origin.y
+                                            - self.messageInputView.frame.origin.y
                                             - inputViewFrame.size.height;
                          
                          self.tableView.contentInset = insets;
