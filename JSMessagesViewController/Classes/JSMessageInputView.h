@@ -16,6 +16,21 @@
 #import "JSMessageTextView.h"
 
 /**
+ *  The appearance style of the input bar view for composing a new message.
+ */
+typedef NS_ENUM(NSUInteger, JSMessageInputViewStyle) {
+    /**
+     *  An input view style that has the appearance as seen in iOS 6 and before.
+     */
+    JSMessageInputViewStyleClassic,
+    /**
+     *  An input view style that has the appearance as seen in iOS 7 and later.
+     */
+    JSMessageInputViewStyleFlat
+};
+
+
+/**
  *  An instance of `JSMessageInputView` defines the input toolbar for composing a new message that is to be displayed above the keyboard.
  */
 @interface JSMessageInputView : UIImageView
@@ -33,18 +48,18 @@
 #pragma mark - Initialization
 
 /**
- *  Initializes and returns an input view having the given frame, delegate, keyboardDelegate, and panGestureRecognizer
+ *  Initializes and returns an input view having the given frame, style, delegate, and panGestureRecognizer.
  *
  *  @param frame                A rectangle specifying the initial location and size of the bubble view in its superview's coordinates.
- *  @param delegate             An object that conforms to the `UITextViewDelegate` protocol.
- *  @param keyboardDelegate     An object that conforms to the `JSDismissiveTextViewDelegate` protocol. @see JSDismissiveTextViewDelegate.
+ *  @param style                The style of the input view. @see JSMessageInputViewStyle.
+ *  @param delegate             An object that conforms to the `UITextViewDelegate` protocol and `JSDismissiveTextViewDelegate` protocol. @see JSDismissiveTextViewDelegate.
  *  @param panGestureRecognizer A `UIPanGestureRecognizer` used to dismiss the input view by dragging down.
  *
  *  @return An initialized `JSMessageInputView` object or `nil` if the object could not be successfully initialized.
  */
 - (instancetype)initWithFrame:(CGRect)frame
-             textViewDelegate:(id<UITextViewDelegate>)delegate
-             keyboardDelegate:(id<JSDismissiveTextViewDelegate>)keyboardDelegate
+                        style:(JSMessageInputViewStyle)style
+                     delegate:(id<UITextViewDelegate, JSDismissiveTextViewDelegate>)delegate
          panGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer;
 
 #pragma mark - Message input view

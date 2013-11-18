@@ -148,6 +148,14 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  */
 - (JSMessagesViewSubtitlePolicy)subtitlePolicy;
 
+/**
+ *  Asks the delegate for the input view style.
+ *
+ *  @return A constant describing the input view style.
+ *  @see JSMessageInputViewStyle.
+ */
+- (JSMessageInputViewStyle)inputViewStyle;
+
 @optional
 
 /**

@@ -54,7 +54,7 @@
 - (void)setup
 {
     if([self.view isKindOfClass:[UIScrollView class]]) {
-        // fix for ipad modal form presentations
+        // FIXME: hack-ish fix for ipad modal form presentations
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
     
@@ -78,8 +78,8 @@
                                    [JSMessageInputView defaultHeight]);
     
     JSMessageInputView *inputView = [[JSMessageInputView alloc] initWithFrame:inputFrame
-                                                             textViewDelegate:self
-                                                             keyboardDelegate:self
+                                                                        style:[self.delegate inputViewStyle]
+                                                                     delegate:self
                                                          panGestureRecognizer:_tableView.panGestureRecognizer];
     
     UIButton *sendButton;

@@ -134,6 +134,11 @@
     return JSMessagesViewSubtitlePolicyAll;
 }
 
+- (JSMessageInputViewStyle)inputViewStyle
+{
+    return JSMessageInputViewStyleFlat;
+}
+
 #pragma mark - Messages view delegate: OPTIONAL
 
 //  *** Implement to customize cell further

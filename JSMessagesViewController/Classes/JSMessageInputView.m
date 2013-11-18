@@ -20,7 +20,7 @@
 
 @interface JSMessageInputView ()
 
-- (void)setup;
+- (void)configureWithStyle:(JSMessageInputViewStyle)style;
 
 @end
 
@@ -30,7 +30,7 @@
 
 #pragma mark - Initialization
 
-- (void)setup
+- (void)configureWithStyle:(JSMessageInputViewStyle)style
 {
     self.image = [[UIImage imageNamed:@"input-bar-background"] resizableImageWithCapInsets:UIEdgeInsetsMake(19.0f, 3.0f, 19.0f, 3.0f)];
     self.backgroundColor = [UIColor whiteColor];
@@ -56,15 +56,15 @@
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
-             textViewDelegate:(id<UITextViewDelegate>)delegate
-             keyboardDelegate:(id<JSDismissiveTextViewDelegate>)keyboardDelegate
+                        style:(JSMessageInputViewStyle)style
+                     delegate:(id<UITextViewDelegate, JSDismissiveTextViewDelegate>)delegate
          panGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer
 {
     self = [super initWithFrame:frame];
     if(self) {
-        [self setup];
+        [self configureWithStyle:style];
         _textView.delegate = delegate;
-        _textView.keyboardDelegate = keyboardDelegate;
+        _textView.keyboardDelegate = delegate;
         _textView.dismissivePanGestureRecognizer = panGestureRecognizer;
     }
     return self;
