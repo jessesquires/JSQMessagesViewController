@@ -27,13 +27,13 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
     self.delegate = self;
     self.dataSource = self;
+    [super viewDidLoad];
     
     self.title = @"Messages";
     
-    self.messageInputView.textView.placeHolder = @"Message";
+    self.messageInputView.textView.placeHolder = @"New Message";
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      @"JSMessagesViewController is simple and easy to use.",

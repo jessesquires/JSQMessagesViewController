@@ -56,9 +56,24 @@ A messages UI for iPhone and iPad.
 ## Getting Started
 
 1. Subclass `JSMessagesViewController`
-2. In `- (void)viewDidLoad`
-	* Set your view controller as the `delegate` and `datasource`
-	* Set your view controller `title`
+2. Setup your `viewDidLoad` like the following:
+
+````objective-c
+
+- (void)viewDidLoad
+{
+    self.delegate = self;
+    self.dataSource = self;
+    [super viewDidLoad];
+    
+    self.title = @"Messages";
+    
+    self.messageInputView.textView.placeHolder = @"New Message";
+}
+
+````
+
+
 3. Implement the `JSMessagesViewDelegate` protocol
 4. Implement the `JSMessagesViewDataSource` protocol
 5. Implement `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section` from the [`UITableViewDataSource` protocol](https://developer.apple.com/library/ios/documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html).
