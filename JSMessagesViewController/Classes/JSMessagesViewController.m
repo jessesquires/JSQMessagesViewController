@@ -62,7 +62,10 @@
     
     CGSize size = self.view.frame.size;
     
-    CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - [JSMessageInputView defaultHeight]);
+    JSMessageInputViewStyle inputViewStyle = [self.delegate inputViewStyle];
+    CGFloat inputViewHeight = (inputViewStyle == JSMessageInputViewStyleFlat) ? 45.0f : 40.0f;
+    
+    CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - inputViewHeight);
 	UITableView *tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
 	tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	tableView.dataSource = self;
@@ -73,12 +76,12 @@
     [self setBackgroundColor:[UIColor js_messagesBackgroundColor_iOS6]];
     
     CGRect inputFrame = CGRectMake(0.0f,
-                                   size.height - [JSMessageInputView defaultHeight],
+                                   size.height - inputViewHeight,
                                    size.width,
-                                   [JSMessageInputView defaultHeight]);
+                                   inputViewHeight);
     
     JSMessageInputView *inputView = [[JSMessageInputView alloc] initWithFrame:inputFrame
-                                                                        style:[self.delegate inputViewStyle]
+                                                                        style:inputViewStyle
                                                                      delegate:self
                                                          panGestureRecognizer:_tableView.panGestureRecognizer];
     
@@ -488,8 +491,10 @@
                          CGRect inputViewFrame = self.messageInputView.frame;
                          CGFloat inputViewFrameY = keyboardY - inputViewFrame.size.height;
                          
+                         NSLog(@"HEIGHT = %lf",inputViewFrame.size.height);
+                         
                          // for ipad modal form presentations
-                         CGFloat messageViewFrameBottom = self.view.frame.size.height - [JSMessageInputView defaultHeight];
+                         CGFloat messageViewFrameBottom = self.view.frame.size.height - inputViewFrame.size.height;
                          if(inputViewFrameY > messageViewFrameBottom)
                              inputViewFrameY = messageViewFrameBottom;
 						 
@@ -500,8 +505,8 @@
 
                          UIEdgeInsets insets = self.originalTableViewContentInset;
                          insets.bottom = self.view.frame.size.height
-                                            - self.messageInputView.frame.origin.y
-                                            - [JSMessageInputView defaultHeight];
+                                            - inputViewFrame.origin.y
+                                            - inputViewFrame.size.height;
                          
                          self.tableView.contentInset = insets;
                          self.tableView.scrollIndicatorInsets = insets;

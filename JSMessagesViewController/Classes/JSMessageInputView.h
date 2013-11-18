@@ -86,9 +86,4 @@ typedef NS_ENUM(NSUInteger, JSMessageInputViewStyle) {
  */
 + (CGFloat)maxHeight;
 
-/**
- *  @return A constant indicating the default height of the input view when no text is displayed in the textView.
- */
-+ (CGFloat)defaultHeight;
-
 @end
