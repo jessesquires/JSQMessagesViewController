@@ -72,7 +72,7 @@
 	[self.view addSubview:tableView];
 	_tableView = tableView;
     
-    [self setBackgroundColor:[UIColor js_messagesBackgroundColor_iOS6]];
+    [self setBackgroundColor:[UIColor js_backgroundColorClassic]];
     
     CGRect inputFrame = CGRectMake(0.0f,
                                    size.height - inputViewHeight,
