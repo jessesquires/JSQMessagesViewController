@@ -48,7 +48,13 @@ static NSDictionary *bubbleImageDictionary;
 #pragma mark - Public
 
 + (UIImageView *)bubbleImageViewForType:(JSBubbleMessageType)type
-                                  style:(JSBubbleImageViewStyle)style
+                                  color:(UIColor *)color
+{
+    return nil;
+}
+
++ (UIImageView *)classicBubbleImageViewForType:(JSBubbleMessageType)type
+                                         style:(JSBubbleImageViewStyle)style
 {
     return [JSBubbleImageViewFactory bubbleImageViewForStyle:style
                                                   isOutgoing:type == JSBubbleMessageTypeOutgoing];

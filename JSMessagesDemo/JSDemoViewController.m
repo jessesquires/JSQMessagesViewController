@@ -111,11 +111,12 @@
                        forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row % 2) {
-        return [JSBubbleImageViewFactory bubbleImageViewForType:type
-                                                          style:JSBubbleImageViewStyleClassicBlue];
+        return [JSBubbleImageViewFactory classicBubbleImageViewForType:type
+                                                                 style:JSBubbleImageViewStyleClassicBlue];
     }
     
-    return [JSBubbleImageViewFactory bubbleImageViewForType:type style:JSBubbleImageViewStyleClassicSquareGray];
+    return [JSBubbleImageViewFactory classicBubbleImageViewForType:type
+                                                             style:JSBubbleImageViewStyleClassicSquareGray];
 }
 
 - (JSMessagesViewTimestampPolicy)timestampPolicy

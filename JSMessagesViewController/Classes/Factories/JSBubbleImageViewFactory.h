@@ -32,6 +32,9 @@ typedef NS_ENUM(NSUInteger, JSBubbleImageViewStyle) {
 @interface JSBubbleImageViewFactory : NSObject
 
 + (UIImageView *)bubbleImageViewForType:(JSBubbleMessageType)type
-                                  style:(JSBubbleImageViewStyle)style;
+                                  color:(UIColor *)color;
+
++ (UIImageView *)classicBubbleImageViewForType:(JSBubbleMessageType)type
+                                         style:(JSBubbleImageViewStyle)style;
 
 @end
