@@ -61,21 +61,22 @@
         [self addSubview:bubbleImageView];
         _bubbleImageView = bubbleImageView;
         
-        _textView = [[UITextView alloc] init];
-        _textView.font = [UIFont systemFontOfSize:16.0f];
-        _textView.textColor = [UIColor blackColor];
-        _textView.editable = NO;
-        _textView.userInteractionEnabled = YES;
-        _textView.showsHorizontalScrollIndicator = NO;
-        _textView.showsVerticalScrollIndicator = NO;
-        _textView.scrollEnabled = NO;
-        _textView.backgroundColor = [UIColor clearColor];
-        _textView.contentInset = UIEdgeInsetsZero;
-        _textView.scrollIndicatorInsets = UIEdgeInsetsZero;
-        _textView.contentOffset = CGPointZero;
-        _textView.dataDetectorTypes = UIDataDetectorTypeAll;
-        [self addSubview:_textView];
-        [self bringSubviewToFront:_textView];
+        UITextView *textView = [[UITextView alloc] init];
+        textView.font = [UIFont systemFontOfSize:16.0f];
+        textView.textColor = [UIColor blackColor];
+        textView.editable = NO;
+        textView.userInteractionEnabled = YES;
+        textView.showsHorizontalScrollIndicator = NO;
+        textView.showsVerticalScrollIndicator = NO;
+        textView.scrollEnabled = NO;
+        textView.backgroundColor = [UIColor clearColor];
+        textView.contentInset = UIEdgeInsetsZero;
+        textView.scrollIndicatorInsets = UIEdgeInsetsZero;
+        textView.contentOffset = CGPointZero;
+        textView.dataDetectorTypes = UIDataDetectorTypeAll;
+        [self addSubview:textView];
+        [self bringSubviewToFront:textView];
+        _textView = textView;
         
 //        NOTE: TODO: textView frame & text inset
 //        --------------------

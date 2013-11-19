@@ -35,7 +35,7 @@
 /**
  *  Returns the text view containing the message text for this bubble view.
  */
-@property (strong, nonatomic, readonly) UITextView *textView;
+@property (weak, nonatomic, readonly) UITextView *textView;
 
 #pragma mark - Initialization
 
