@@ -10,10 +10,6 @@ A messages UI for iPhone and iPad.
 
 *See more [screenshots](https://github.com/jessesquires/MessagesTableViewController/tree/master/Screenshots) in the `Screenshots/` directory.*
 
-## Update!
-
-####Version 3.0.0 just released with a brand new API! iOS 7 support coming soon!
-
 ## Features 
 
 * Highly customizable
@@ -72,7 +68,6 @@ A messages UI for iPhone and iPad.
 }
 
 ````
-
 
 3. Implement the `JSMessagesViewDelegate` protocol
 4. Implement the `JSMessagesViewDataSource` protocol
@@ -158,5 +153,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 [ss]:https://github.com/soffes/ssmessagesviewcontroller
 
-[img1]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot5.png
-[img2]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot2.png
+[img1]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot-ios7.png
+[img2]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot5.png
