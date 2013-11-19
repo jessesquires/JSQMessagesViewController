@@ -19,8 +19,15 @@
 #pragma mark - Colors
 
 + (UIColor *)js_backgroundColorClassic;
-
 + (UIColor *)js_messagesTimestampColorClassic;
+
+#pragma mark - iOS7 Colors
+//
+// Taken from : https://github.com/claaslange/iOS7Colors
+//
++ (UIColor *)js_iOS7greenColor;
++ (UIColor *)js_iOS7blueColor;
++ (UIColor *)js_iOS7lightGrayColor;
 
 #pragma mark - Utilities
 

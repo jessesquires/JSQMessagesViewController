@@ -28,6 +28,25 @@
     return [UIColor colorWithRed:0.533f green:0.573f blue:0.647f alpha:1.0f];
 }
 
+#pragma mark - iOS7 Colors
+//
+// Taken from : https://github.com/claaslange/iOS7Colors
+//
++ (UIColor *)js_iOS7greenColor
+{
+    return [UIColor colorWithRed:0.27f green:0.85f blue:0.46f alpha:1.0f];
+}
+
++ (UIColor *)js_iOS7blueColor
+{
+    return [UIColor colorWithRed:0.0f green:0.49f blue:0.96f alpha:1.0f];
+}
+
++ (UIColor *)js_iOS7lightGrayColor
+{
+    return [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0f];
+}
+
 #pragma mark - Utilities
 
 - (UIColor *)js_darkenColorWithValue:(CGFloat)value
