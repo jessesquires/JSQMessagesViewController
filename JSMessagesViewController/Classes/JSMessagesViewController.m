@@ -17,7 +17,6 @@
 
 #import "NSString+JSMessagesView.h"
 #import "UIColor+JSMessagesView.h"
-#import "UIButton+JSMessagesView.h"
 
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
@@ -85,19 +84,15 @@
                                                                      delegate:self
                                                          panGestureRecognizer:_tableView.panGestureRecognizer];
     
-    UIButton *sendButton;
     if([self.delegate respondsToSelector:@selector(sendButtonForInputView)]) {
-        sendButton = [self.delegate sendButtonForInputView];
+        UIButton *sendButton = [self.delegate sendButtonForInputView];
+        [inputView setSendButton:sendButton];
     }
-    else {
-        sendButton = [UIButton js_defaultSendButton_iOS6];
-    }
-    sendButton.enabled = NO;
-    sendButton.frame = CGRectMake(inputView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
-    [sendButton addTarget:self
-                   action:@selector(sendPressed:)
-         forControlEvents:UIControlEventTouchUpInside];
-    [inputView setSendButton:sendButton];
+    
+    inputView.sendButton.enabled = NO;
+    [inputView.sendButton addTarget:self
+                             action:@selector(sendPressed:)
+                   forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:inputView];
     _messageInputView = inputView;

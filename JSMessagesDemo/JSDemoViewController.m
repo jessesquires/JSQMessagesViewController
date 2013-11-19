@@ -14,7 +14,6 @@
 
 #import "JSDemoViewController.h"
 
-#import "UIButton+JSMessagesView.h"
 #import "JSAvatarImageFactory.h"
 
 #define kSubtitleJobs @"Jobs"
@@ -158,10 +157,8 @@
 //
 //  The button's frame is set automatically for you
 //
-- (UIButton *)sendButtonForInputView
-{
-    return [UIButton js_defaultSendButton_iOS6];
-}
+//  - (UIButton *)sendButtonForInputView
+//
 
 //  *** Implement to prevent auto-scrolling when message is added
 //

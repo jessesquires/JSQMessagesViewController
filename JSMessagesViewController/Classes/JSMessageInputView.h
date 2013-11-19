@@ -36,12 +36,19 @@ typedef NS_ENUM(NSUInteger, JSMessageInputViewStyle) {
 @interface JSMessageInputView : UIImageView
 
 /**
+ *  Returns the style appearance for the input view.
+ *  @see JSMessageInputViewStyle.
+ */
+@property (assign, nonatomic, readonly) JSMessageInputViewStyle style;
+
+/**
  *  Returns the textView into which a new message is composed. This property is never `nil`.
  */
 @property (weak, nonatomic, readonly) JSMessageTextView *textView;
 
 /**
- *  The send button for the input view. The default value is `nil`.
+ *  The send button for the input view. The default value is an initialized `UIButton` whose appearance is styled according to the value of style during initialization. 
+ @see JSMessageInputViewStyle.
  */
 @property (weak, nonatomic) UIButton *sendButton;
 
@@ -52,7 +59,8 @@ typedef NS_ENUM(NSUInteger, JSMessageInputViewStyle) {
  *
  *  @param frame                A rectangle specifying the initial location and size of the bubble view in its superview's coordinates.
  *  @param style                The style of the input view. @see JSMessageInputViewStyle.
- *  @param delegate             An object that conforms to the `UITextViewDelegate` protocol and `JSDismissiveTextViewDelegate` protocol. @see JSDismissiveTextViewDelegate.
+ *  @param delegate             An object that conforms to the `UITextViewDelegate` protocol and `JSDismissiveTextViewDelegate` protocol. 
+ *  @see JSDismissiveTextViewDelegate.
  *  @param panGestureRecognizer A `UIPanGestureRecognizer` used to dismiss the input view by dragging down.
  *
  *  @return An initialized `JSMessageInputView` object or `nil` if the object could not be successfully initialized.

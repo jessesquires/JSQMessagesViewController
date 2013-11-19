@@ -23,8 +23,6 @@
 		88A3FB82182E0B1700705327 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88A3FB81182E0B1700705327 /* AudioToolbox.framework */; };
 		88A3FC59182E0EA000705327 /* NSString+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A3FC1D182E0EA000705327 /* NSString+JSMessagesView.m */; };
 		88A3FC5A182E0EA000705327 /* NSString+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A3FC1D182E0EA000705327 /* NSString+JSMessagesView.m */; };
-		88A3FC5B182E0EA000705327 /* UIButton+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A3FC1F182E0EA000705327 /* UIButton+JSMessagesView.m */; };
-		88A3FC5C182E0EA000705327 /* UIButton+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A3FC1F182E0EA000705327 /* UIButton+JSMessagesView.m */; };
 		88A3FC5D182E0EA000705327 /* UIColor+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A3FC21182E0EA000705327 /* UIColor+JSMessagesView.m */; };
 		88A3FC5E182E0EA000705327 /* UIColor+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A3FC21182E0EA000705327 /* UIColor+JSMessagesView.m */; };
 		88A3FC61182E0EA000705327 /* UIImage+JSMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A3FC25182E0EA000705327 /* UIImage+JSMessagesView.m */; };
@@ -142,8 +140,6 @@
 		88A3FC15182E0B8C00705327 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		88A3FC1C182E0EA000705327 /* NSString+JSMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JSMessagesView.h"; sourceTree = "<group>"; };
 		88A3FC1D182E0EA000705327 /* NSString+JSMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JSMessagesView.m"; sourceTree = "<group>"; };
-		88A3FC1E182E0EA000705327 /* UIButton+JSMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+JSMessagesView.h"; sourceTree = "<group>"; };
-		88A3FC1F182E0EA000705327 /* UIButton+JSMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+JSMessagesView.m"; sourceTree = "<group>"; };
 		88A3FC20182E0EA000705327 /* UIColor+JSMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+JSMessagesView.h"; sourceTree = "<group>"; };
 		88A3FC21182E0EA000705327 /* UIColor+JSMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+JSMessagesView.m"; sourceTree = "<group>"; };
 		88A3FC24182E0EA000705327 /* UIImage+JSMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+JSMessagesView.h"; sourceTree = "<group>"; };
@@ -351,8 +347,6 @@
 			children = (
 				88A3FC1C182E0EA000705327 /* NSString+JSMessagesView.h */,
 				88A3FC1D182E0EA000705327 /* NSString+JSMessagesView.m */,
-				88A3FC1E182E0EA000705327 /* UIButton+JSMessagesView.h */,
-				88A3FC1F182E0EA000705327 /* UIButton+JSMessagesView.m */,
 				88A3FC20182E0EA000705327 /* UIColor+JSMessagesView.h */,
 				88A3FC21182E0EA000705327 /* UIColor+JSMessagesView.m */,
 				88A3FC24182E0EA000705327 /* UIImage+JSMessagesView.h */,
@@ -656,7 +650,6 @@
 				88A3FB5A182E079E00705327 /* JSAppDelegate.m in Sources */,
 				88A3FC65182E0EA000705327 /* JSBubbleImageViewFactory.m in Sources */,
 				88A3FC59182E0EA000705327 /* NSString+JSMessagesView.m in Sources */,
-				88A3FC5B182E0EA000705327 /* UIButton+JSMessagesView.m in Sources */,
 				88A3FC61182E0EA000705327 /* UIImage+JSMessagesView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,7 +658,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88A3FC5C182E0EA000705327 /* UIButton+JSMessagesView.m in Sources */,
 				88A3FC68182E0EA000705327 /* JSBubbleMessageCell.m in Sources */,
 				88A3FB78182E079E00705327 /* JSMessagesDemoTests.m in Sources */,
 				88A3FC5A182E0EA000705327 /* NSString+JSMessagesView.m in Sources */,

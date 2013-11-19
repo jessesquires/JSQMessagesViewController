@@ -21,7 +21,8 @@
 @interface JSMessageInputView ()
 
 - (void)setup;
-- (void)configureWithStyle:(JSMessageInputViewStyle)style;
+- (void)configureInputBarWithStyle:(JSMessageInputViewStyle)style;
+- (void)configureSendButtonWithStyle:(JSMessageInputViewStyle)style;
 
 @end
 
@@ -39,7 +40,7 @@
     self.userInteractionEnabled = YES;
 }
 
-- (void)configureWithStyle:(JSMessageInputViewStyle)style
+- (void)configureInputBarWithStyle:(JSMessageInputViewStyle)style
 {
     CGFloat width = self.frame.size.width - SEND_BUTTON_WIDTH;
     CGFloat height = [JSMessageInputView textViewLineHeight];
@@ -48,17 +49,7 @@
     [self addSubview:textView];
 	_textView = textView;
     
-    if(style == JSMessageInputViewStyleFlat) {
-        _textView.frame = CGRectMake(4.0f, 4.5f, width, height);
-        _textView.backgroundColor = [UIColor clearColor];
-        _textView.layer.borderColor = [UIColor colorWithWhite:0.8f alpha:1.0f].CGColor;
-        _textView.layer.borderWidth = 0.65f;
-        _textView.layer.cornerRadius = 6.0f;
-        
-        self.image = [[UIImage imageNamed:@"input-bar-flat"] resizableImageWithCapInsets:UIEdgeInsetsZero
-                                                                            resizingMode:UIImageResizingModeStretch];
-    }
-    else if(style == JSMessageInputViewStyleClassic) {
+    if(style == JSMessageInputViewStyleClassic) {
         _textView.frame = CGRectMake(6.0f, 3.0f, width, height);
         _textView.backgroundColor = [UIColor whiteColor];
         
@@ -74,6 +65,61 @@
         inputFieldBack.backgroundColor = [UIColor clearColor];
         [self addSubview:inputFieldBack];
     }
+    else {
+        _textView.frame = CGRectMake(4.0f, 4.5f, width, height);
+        _textView.backgroundColor = [UIColor clearColor];
+        _textView.layer.borderColor = [UIColor colorWithWhite:0.8f alpha:1.0f].CGColor;
+        _textView.layer.borderWidth = 0.65f;
+        _textView.layer.cornerRadius = 6.0f;
+        
+        self.image = [[UIImage imageNamed:@"input-bar-flat"] resizableImageWithCapInsets:UIEdgeInsetsMake(2.0f, 0.0f, 0.0f, 0.0f)
+                                                                            resizingMode:UIImageResizingModeStretch];
+    }
+}
+
+- (void)configureSendButtonWithStyle:(JSMessageInputViewStyle)style
+{
+    UIButton *sendButton;
+    
+    if(style == JSMessageInputViewStyleClassic) {
+        UIButton *sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        sendButton.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
+        
+        UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 13.0f, 0.0f, 13.0f);
+        UIImage *sendBack = [[UIImage imageNamed:@"send-button"] resizableImageWithCapInsets:insets];
+        UIImage *sendBackHighLighted = [[UIImage imageNamed:@"send-button-pressed"] resizableImageWithCapInsets:insets];
+        [sendButton setBackgroundImage:sendBack forState:UIControlStateNormal];
+        [sendButton setBackgroundImage:sendBack forState:UIControlStateDisabled];
+        [sendButton setBackgroundImage:sendBackHighLighted forState:UIControlStateHighlighted];
+        
+        UIColor *titleShadow = [UIColor colorWithRed:0.325f green:0.463f blue:0.675f alpha:1.0f];
+        [sendButton setTitleShadowColor:titleShadow forState:UIControlStateNormal];
+        [sendButton setTitleShadowColor:titleShadow forState:UIControlStateHighlighted];
+        sendButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
+        
+        [sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+        [sendButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateDisabled];
+        
+        sendButton.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+    }
+    else {
+        sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        sendButton.backgroundColor = [UIColor clearColor];
+        
+        [sendButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [sendButton setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
+        [sendButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+        
+        sendButton.titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
+    }
+    
+    NSString *title = NSLocalizedString(@"Send", nil);
+    [sendButton setTitle:title forState:UIControlStateNormal];
+    [sendButton setTitle:title forState:UIControlStateHighlighted];
+    [sendButton setTitle:title forState:UIControlStateDisabled];
+    
+    [self setSendButton:sendButton];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -83,8 +129,11 @@
 {
     self = [super initWithFrame:frame];
     if(self) {
+        _style = style;
         [self setup];
-        [self configureWithStyle:style];
+        [self configureInputBarWithStyle:style];
+        [self configureSendButtonWithStyle:style];
+        
         _textView.delegate = delegate;
         _textView.keyboardDelegate = delegate;
         _textView.dismissivePanGestureRecognizer = panGestureRecognizer;
@@ -112,6 +161,17 @@
 {
     if(_sendButton)
         [_sendButton removeFromSuperview];
+    
+    if(self.style == JSMessageInputViewStyleClassic) {
+        btn.frame = CGRectMake(self.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
+    }
+    else {
+        CGFloat padding = 8.0f;
+        btn.frame = CGRectMake(self.textView.frame.origin.x + self.textView.frame.size.width + padding,
+                               padding,
+                               60.0f,
+                               self.textView.frame.size.height - padding);
+    }
     
     [self addSubview:btn];
     _sendButton = btn;
