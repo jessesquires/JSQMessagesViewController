@@ -19,9 +19,13 @@ static NSDictionary *bubbleImageDictionary;
 
 @interface JSBubbleImageViewFactory()
 
-+ (UIImageView *)bubbleImageViewForStyle:(JSBubbleImageViewStyle)style isOutgoing:(BOOL)isOutgoing;
-+ (UIImage *)highlightedBubbleImageForStyle:(JSBubbleImageViewStyle)style;
-+ (UIEdgeInsets)bubbleImageCapInsetsForStyle:(JSBubbleImageViewStyle)style isOutgoing:(BOOL)isOutgoing;
++ (UIImageView *)classicBubbleImageViewForStyle:(JSBubbleImageViewStyle)style
+                                     isOutgoing:(BOOL)isOutgoing;
+
++ (UIImage *)classicHighlightedBubbleImageForStyle:(JSBubbleImageViewStyle)style;
+
++ (UIEdgeInsets)classicBubbleImageCapInsetsForStyle:(JSBubbleImageViewStyle)style
+                                         isOutgoing:(BOOL)isOutgoing;
 
 @end
 
@@ -56,30 +60,31 @@ static NSDictionary *bubbleImageDictionary;
 + (UIImageView *)classicBubbleImageViewForType:(JSBubbleMessageType)type
                                          style:(JSBubbleImageViewStyle)style
 {
-    return [JSBubbleImageViewFactory bubbleImageViewForStyle:style
+    return [JSBubbleImageViewFactory classicBubbleImageViewForStyle:style
                                                   isOutgoing:type == JSBubbleMessageTypeOutgoing];
 }
 
 #pragma mark - Private
 
-+ (UIImageView *)bubbleImageViewForStyle:(JSBubbleImageViewStyle)style isOutgoing:(BOOL)isOutgoing
++ (UIImageView *)classicBubbleImageViewForStyle:(JSBubbleImageViewStyle)style
+                                     isOutgoing:(BOOL)isOutgoing
 {
     UIImage *image = [UIImage imageNamed:[bubbleImageDictionary objectForKey:@(style)]];
-    UIImage *highlightedImage = [JSBubbleImageViewFactory highlightedBubbleImageForStyle:style];
+    UIImage *highlightedImage = [JSBubbleImageViewFactory classicHighlightedBubbleImageForStyle:style];
     
     if(!isOutgoing) {
         image = [image js_imageFlippedHorizontal];
         highlightedImage = [highlightedImage js_imageFlippedHorizontal];
     }
     
-    UIEdgeInsets capInsets = [JSBubbleImageViewFactory bubbleImageCapInsetsForStyle:style
+    UIEdgeInsets capInsets = [JSBubbleImageViewFactory classicBubbleImageCapInsetsForStyle:style
                                                                          isOutgoing:isOutgoing];
     
     return [[UIImageView alloc] initWithImage:[image js_stretchableImageWithCapInsets:capInsets]
                              highlightedImage:[highlightedImage js_stretchableImageWithCapInsets:capInsets]];
 }
 
-+ (UIImage *)highlightedBubbleImageForStyle:(JSBubbleImageViewStyle)style
++ (UIImage *)classicHighlightedBubbleImageForStyle:(JSBubbleImageViewStyle)style
 {
     switch (style) {
         case JSBubbleImageViewStyleClassicGray:
@@ -96,7 +101,8 @@ static NSDictionary *bubbleImageDictionary;
     }
 }
 
-+ (UIEdgeInsets)bubbleImageCapInsetsForStyle:(JSBubbleImageViewStyle)style isOutgoing:(BOOL)isOutgoing
++ (UIEdgeInsets)classicBubbleImageCapInsetsForStyle:(JSBubbleImageViewStyle)style
+                                         isOutgoing:(BOOL)isOutgoing
 {
     switch (style) {
         case JSBubbleImageViewStyleClassicGray:
