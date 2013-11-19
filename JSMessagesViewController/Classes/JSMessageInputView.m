@@ -15,6 +15,7 @@
 #import "JSMessageInputView.h"
 #import "JSBubbleView.h"
 #import "NSString+JSMessagesView.h"
+#import "UIColor+JSMessagesView.h"
 
 #define SEND_BUTTON_WIDTH 78.0f
 
@@ -106,9 +107,9 @@
         sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
         sendButton.backgroundColor = [UIColor clearColor];
         
-        [sendButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        [sendButton setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
-        [sendButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+        [sendButton setTitleColor:[UIColor js_iOS7blueColor] forState:UIControlStateNormal];
+        [sendButton setTitleColor:[UIColor js_iOS7blueColor] forState:UIControlStateHighlighted];
+        [sendButton setTitleColor:[UIColor js_iOS7lightGrayColor] forState:UIControlStateDisabled];
         
         sendButton.titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
     }
