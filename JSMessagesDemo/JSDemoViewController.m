@@ -14,8 +14,6 @@
 
 #import "JSDemoViewController.h"
 
-#import "JSAvatarImageFactory.h"
-
 #define kSubtitleJobs @"Jobs"
 #define kSubtitleWoz @"Steve Wozniak"
 #define kSubtitleCook @"Mr. Cook"
@@ -111,12 +109,12 @@
                        forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row % 2) {
-        return [JSBubbleImageViewFactory classicBubbleImageViewForType:type
-                                                                 style:JSBubbleImageViewStyleClassicBlue];
+        return [JSBubbleImageViewFactory bubbleImageViewForType:type
+                                                          color:[UIColor js_iOS7blueColor]];
     }
     
-    return [JSBubbleImageViewFactory classicBubbleImageViewForType:type
-                                                             style:JSBubbleImageViewStyleClassicSquareGray];
+    return [JSBubbleImageViewFactory bubbleImageViewForType:type
+                                                      color:[UIColor js_iOS7lightGrayColor]];
 }
 
 - (JSMessagesViewTimestampPolicy)timestampPolicy

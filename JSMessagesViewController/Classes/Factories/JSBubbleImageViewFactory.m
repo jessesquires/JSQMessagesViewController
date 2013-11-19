@@ -14,6 +14,7 @@
 
 #import "JSBubbleImageViewFactory.h"
 #import "UIImage+JSMessagesView.h"
+#import "UIColor+JSMessagesView.h"
 
 static NSDictionary *bubbleImageDictionary;
 
@@ -54,7 +55,20 @@ static NSDictionary *bubbleImageDictionary;
 + (UIImageView *)bubbleImageViewForType:(JSBubbleMessageType)type
                                   color:(UIColor *)color
 {
-    return nil;
+    UIImage *bubble = [UIImage imageNamed:@"bubble-min"];
+    
+    UIImage *normalBubble = [bubble js_imageMaskWithColor:color];
+    UIImage *highlightedBubble = [bubble js_imageMaskWithColor:[color js_darkenColorWithValue:0.12f]];
+    
+    if(type == JSBubbleMessageTypeIncoming) {
+        normalBubble = [normalBubble js_imageFlippedHorizontal];
+        highlightedBubble = [highlightedBubble js_imageFlippedHorizontal];
+    }
+    
+    UIEdgeInsets capInsets = UIEdgeInsetsMake(15.0f, 20.0f, 15.0f, 20.0f);
+    
+    return [[UIImageView alloc] initWithImage:[normalBubble js_stretchableImageWithCapInsets:capInsets]
+                             highlightedImage:[highlightedBubble js_stretchableImageWithCapInsets:capInsets]];
 }
 
 + (UIImageView *)classicBubbleImageViewForType:(JSBubbleMessageType)type
@@ -78,7 +92,7 @@ static NSDictionary *bubbleImageDictionary;
     }
     
     UIEdgeInsets capInsets = [JSBubbleImageViewFactory classicBubbleImageCapInsetsForStyle:style
-                                                                         isOutgoing:isOutgoing];
+                                                                                isOutgoing:isOutgoing];
     
     return [[UIImageView alloc] initWithImage:[image js_stretchableImageWithCapInsets:capInsets]
                              highlightedImage:[highlightedImage js_stretchableImageWithCapInsets:capInsets]];
