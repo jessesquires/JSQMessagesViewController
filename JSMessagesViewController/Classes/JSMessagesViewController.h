@@ -15,7 +15,10 @@
 #import <UIKit/UIKit.h>
 #import "JSBubbleMessageCell.h"
 #import "JSMessageInputView.h"
+#import "JSAvatarImageFactory.h"
+#import "JSBubbleImageViewFactory.h"
 #import "JSMessageSoundEffect.h"
+#import "UIColor+JSMessagesView.h"
 
 /**
  *  The frequency with which timestamps are displayed in the messages table view.

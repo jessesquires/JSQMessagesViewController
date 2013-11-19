@@ -14,9 +14,7 @@
 
 #import "JSMessagesViewController.h"
 #import "JSMessageTextView.h"
-
 #import "NSString+JSMessagesView.h"
-#import "UIColor+JSMessagesView.h"
 
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
