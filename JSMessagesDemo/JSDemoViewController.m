@@ -32,6 +32,8 @@
     
     self.messageInputView.textView.placeHolder = @"New Message";
     
+    [self setBackgroundColor:[UIColor whiteColor]];
+    
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      @"JSMessagesViewController is simple and easy to use.",
                      @"It's highly customizable.",
@@ -53,14 +55,14 @@
                       kSubtitleCook, nil];
     
     self.avatars = [[NSDictionary alloc] initWithObjectsAndKeys:
-                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-jobs" style:JSAvatarImageStyleFlat shape:JSAvatarImageShapeSquare], kSubtitleJobs,
-                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-woz" style:JSAvatarImageStyleClassic shape:JSAvatarImageShapeCircle], kSubtitleWoz,
-                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-cook" style:JSAvatarImageStyleClassic shape:JSAvatarImageShapeCircle], kSubtitleCook,
+                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-jobs" style:JSAvatarImageStyleFlat shape:JSAvatarImageShapeCircle], kSubtitleJobs,
+                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-woz" style:JSAvatarImageStyleFlat shape:JSAvatarImageShapeCircle], kSubtitleWoz,
+                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-cook" style:JSAvatarImageStyleFlat shape:JSAvatarImageShapeCircle], kSubtitleCook,
                     nil];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
-                                                                                           target:self
-                                                                                           action:@selector(buttonPressed:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
+//                                                                                           target:self
+//                                                                                           action:@selector(buttonPressed:)];
 }
 
 - (void)buttonPressed:(UIButton *)sender
@@ -110,11 +112,11 @@
 {
     if(indexPath.row % 2) {
         return [JSBubbleImageViewFactory bubbleImageViewForType:type
-                                                          color:[UIColor js_iOS7blueColor]];
+                                                          color:[UIColor js_iOS7lightGrayColor]];
     }
     
     return [JSBubbleImageViewFactory bubbleImageViewForType:type
-                                                      color:[UIColor js_iOS7lightGrayColor]];
+                                                      color:[UIColor js_iOS7blueColor]];
 }
 
 - (JSMessagesViewTimestampPolicy)timestampPolicy
@@ -139,13 +141,31 @@
 
 #pragma mark - Messages view delegate: OPTIONAL
 
+//
 //  *** Implement to customize cell further
 //
-//  - (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
-//  {
-//      [cell.bubbleView setFont:[UIFont boldSystemFontOfSize:9.0]];
-//      [cell.bubbleView setTextColor:[UIColor whiteColor]];
-//  }
+- (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    if([cell messageType] == JSBubbleMessageTypeOutgoing) {
+        [cell.bubbleView setTextColor:[UIColor whiteColor]];
+    
+        if([cell.bubbleView.textView respondsToSelector:@selector(linkTextAttributes)]) {
+            NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
+            [attrs setValue:[UIColor blueColor] forKey:UITextAttributeTextColor];
+            
+            cell.bubbleView.textView.linkTextAttributes = attrs;
+        }
+    }
+    
+    if(cell.timestampLabel) {
+        cell.timestampLabel.textColor = [UIColor lightGrayColor];
+        cell.timestampLabel.shadowOffset = CGSizeZero;
+    }
+    
+    if(cell.subtitleLabel) {
+        cell.subtitleLabel.textColor = [UIColor lightGrayColor];
+    }
+}
 
 //  *** Required if using `JSMessagesViewTimestampPolicyCustom`
 //
