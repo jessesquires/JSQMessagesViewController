@@ -22,15 +22,20 @@
 @interface JSBubbleView : UIView
 
 /**
- *  The message type for this bubble view.
+ *  Returns the message type for this bubble view.
  *  @see JSBubbleMessageType for descriptions of the constants used to specify bubble message type.
  */
 @property (assign, nonatomic, readonly) JSBubbleMessageType type;
 
 /**
- *  The image view for this bubble view. The default value is `nil`.
+ *  Returns the image view containing the bubble image for this bubble view.
  */
 @property (weak, nonatomic, readonly) UIImageView *bubbleImageView;
+
+/**
+ *  Returns the text view containing the message text for this bubble view.
+ */
+@property (strong, nonatomic, readonly) UITextView *textView;
 
 #pragma mark - Initialization
 

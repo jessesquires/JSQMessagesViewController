@@ -27,8 +27,6 @@
 
 @interface JSBubbleView()
 
-@property (weak, nonatomic) UITextView *textView;
-
 - (void)setup;
 
 - (CGSize)textSizeForText:(NSString *)txt;
