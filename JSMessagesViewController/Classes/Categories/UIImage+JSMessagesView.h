@@ -26,4 +26,6 @@
                   borderWidth:(CGFloat)borderWidth
                  shadowOffSet:(CGSize)shadowOffset;
 
+- (UIImage *)js_imageMaskWithColor:(UIColor *)maskColor;
+
 @end

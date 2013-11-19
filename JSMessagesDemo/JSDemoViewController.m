@@ -14,9 +14,6 @@
 
 #import "JSDemoViewController.h"
 
-#import "UIButton+JSMessagesView.h"
-#import "JSAvatarImageFactory.h"
-
 #define kSubtitleJobs @"Jobs"
 #define kSubtitleWoz @"Steve Wozniak"
 #define kSubtitleCook @"Mr. Cook"
@@ -27,13 +24,15 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
     self.delegate = self;
     self.dataSource = self;
+    [super viewDidLoad];
     
     self.title = @"Messages";
     
-    self.messageInputView.textView.placeHolder = @"Message";
+    self.messageInputView.textView.placeHolder = @"New Message";
+    
+    [self setBackgroundColor:[UIColor whiteColor]];
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      @"JSMessagesViewController is simple and easy to use.",
@@ -56,14 +55,14 @@
                       kSubtitleCook, nil];
     
     self.avatars = [[NSDictionary alloc] initWithObjectsAndKeys:
-                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-jobs" style:JSAvatarImageStyleFlat shape:JSAvatarImageShapeSquare], kSubtitleJobs,
-                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-woz" style:JSAvatarImageStyleClassic shape:JSAvatarImageShapeCircle], kSubtitleWoz,
-                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-cook" style:JSAvatarImageStyleClassic shape:JSAvatarImageShapeCircle], kSubtitleCook,
+                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-jobs" style:JSAvatarImageStyleFlat shape:JSAvatarImageShapeCircle], kSubtitleJobs,
+                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-woz" style:JSAvatarImageStyleFlat shape:JSAvatarImageShapeCircle], kSubtitleWoz,
+                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-cook" style:JSAvatarImageStyleFlat shape:JSAvatarImageShapeCircle], kSubtitleCook,
                     nil];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
-                                                                                           target:self
-                                                                                           action:@selector(buttonPressed:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
+//                                                                                           target:self
+//                                                                                           action:@selector(buttonPressed:)];
 }
 
 - (void)buttonPressed:(UIButton *)sender
@@ -113,10 +112,11 @@
 {
     if(indexPath.row % 2) {
         return [JSBubbleImageViewFactory bubbleImageViewForType:type
-                                                          style:JSBubbleImageViewStyleClassicBlue];
+                                                          color:[UIColor js_iOS7lightGrayColor]];
     }
     
-    return [JSBubbleImageViewFactory bubbleImageViewForType:type style:JSBubbleImageViewStyleClassicSquareGray];
+    return [JSBubbleImageViewFactory bubbleImageViewForType:type
+                                                      color:[UIColor js_iOS7blueColor]];
 }
 
 - (JSMessagesViewTimestampPolicy)timestampPolicy
@@ -134,15 +134,38 @@
     return JSMessagesViewSubtitlePolicyAll;
 }
 
+- (JSMessageInputViewStyle)inputViewStyle
+{
+    return JSMessageInputViewStyleFlat;
+}
+
 #pragma mark - Messages view delegate: OPTIONAL
 
+//
 //  *** Implement to customize cell further
 //
-//  - (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
-//  {
-//      [cell.bubbleView setFont:[UIFont boldSystemFontOfSize:9.0]];
-//      [cell.bubbleView setTextColor:[UIColor whiteColor]];
-//  }
+- (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    if([cell messageType] == JSBubbleMessageTypeOutgoing) {
+        [cell.bubbleView setTextColor:[UIColor whiteColor]];
+    
+        if([cell.bubbleView.textView respondsToSelector:@selector(linkTextAttributes)]) {
+            NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
+            [attrs setValue:[UIColor blueColor] forKey:UITextAttributeTextColor];
+            
+            cell.bubbleView.textView.linkTextAttributes = attrs;
+        }
+    }
+    
+    if(cell.timestampLabel) {
+        cell.timestampLabel.textColor = [UIColor lightGrayColor];
+        cell.timestampLabel.shadowOffset = CGSizeZero;
+    }
+    
+    if(cell.subtitleLabel) {
+        cell.subtitleLabel.textColor = [UIColor lightGrayColor];
+    }
+}
 
 //  *** Required if using `JSMessagesViewTimestampPolicyCustom`
 //
@@ -153,10 +176,8 @@
 //
 //  The button's frame is set automatically for you
 //
-- (UIButton *)sendButtonForInputView
-{
-    return [UIButton js_defaultSendButton_iOS6];
-}
+//  - (UIButton *)sendButtonForInputView
+//
 
 //  *** Implement to prevent auto-scrolling when message is added
 //

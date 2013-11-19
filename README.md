@@ -1,18 +1,14 @@
-# JSMessagesViewController [![Build Status](https://secure.travis-ci.org/jessesquires/MessagesTableViewController.png)](http://travis-ci.org/jessesquires/MessagesTableViewController)
+# JSMessagesViewController [![Build Status](https://secure.travis-ci.org/jessesquires/MessagesTableViewController.png)](http://travis-ci.org/jessesquires/MessagesTableViewController) [![Version Status](https://cocoapod-badges.herokuapp.com/v/JSMessagesViewController/badge.png)][docsLink]
 
 A messages UI for iPhone and iPad.
 
-`JSMessagesViewController` is a `UITableViewController` subclass that is very similar to the iOS Messages app. 
+`JSMessagesViewController` is a `UIViewController` subclass that is very similar to the iOS Messages app. 
 
 **Note: this is only a messaging UI, not a messaging app.**
 
 ![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2][img2]
 
 *See more [screenshots](https://github.com/jessesquires/MessagesTableViewController/tree/master/Screenshots) in the `Screenshots/` directory.*
-
-## Update!
-
-####Version 3.0.0 just released with a brand new API! iOS 7 support coming soon!
 
 ## Features 
 
@@ -56,9 +52,23 @@ A messages UI for iPhone and iPad.
 ## Getting Started
 
 1. Subclass `JSMessagesViewController`
-2. In `- (void)viewDidLoad`
-	* Set your view controller as the `delegate` and `datasource`
-	* Set your view controller `title`
+2. Setup your `viewDidLoad` like the following:
+
+````objective-c
+
+- (void)viewDidLoad
+{
+    self.delegate = self;
+    self.dataSource = self;
+    [super viewDidLoad];
+    
+    self.title = @"Messages";
+    
+    self.messageInputView.textView.placeHolder = @"New Message";
+}
+
+````
+
 3. Implement the `JSMessagesViewDelegate` protocol
 4. Implement the `JSMessagesViewDataSource` protocol
 5. Implement `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section` from the [`UITableViewDataSource` protocol](https://developer.apple.com/library/ios/documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html).
@@ -68,7 +78,7 @@ A messages UI for iPhone and iPad.
 
 ## Documentation
 
-Documentation is [available here](http://cocoadocs.org/docsets/JSMessagesViewController/3.1.0) via [CocoaDocs](http://cocoadocs.org). Thanks [@CocoaDocs](https://twitter.com/CocoaDocs)!
+Documentation is [available here][docsLink] via [CocoaDocs](http://cocoadocs.org). Thanks [@CocoaDocs](https://twitter.com/CocoaDocs)!
 
 ## Customization
 
@@ -139,7 +149,9 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+[docsLink]:http://cocoadocs.org/docsets/JSMessagesViewController/3.1.0
+
 [ss]:https://github.com/soffes/ssmessagesviewcontroller
 
-[img1]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot5.png
-[img2]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot2.png
+[img1]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot-ios7.png
+[img2]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot5.png

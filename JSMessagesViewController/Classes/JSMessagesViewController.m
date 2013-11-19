@@ -14,15 +14,13 @@
 
 #import "JSMessagesViewController.h"
 #import "JSMessageTextView.h"
-
 #import "NSString+JSMessagesView.h"
-#import "UIColor+JSMessagesView.h"
-#import "UIButton+JSMessagesView.h"
 
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
 @property (weak, nonatomic) UITableView *tableView;
 
+@property (assign, nonatomic, readonly) UIEdgeInsets originalTableViewContentInset;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 @property (assign, nonatomic) BOOL isUserScrolling;
 
@@ -53,7 +51,7 @@
 - (void)setup
 {
     if([self.view isKindOfClass:[UIScrollView class]]) {
-        // fix for ipad modal form presentations
+        // FIXME: hack-ish fix for ipad modal form presentations
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
     
@@ -61,7 +59,10 @@
     
     CGSize size = self.view.frame.size;
     
-    CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - [JSMessageInputView defaultHeight]);
+    JSMessageInputViewStyle inputViewStyle = [self.delegate inputViewStyle];
+    CGFloat inputViewHeight = (inputViewStyle == JSMessageInputViewStyleFlat) ? 45.0f : 40.0f;
+    
+    CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - inputViewHeight);
 	UITableView *tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
 	tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	tableView.dataSource = self;
@@ -69,31 +70,27 @@
 	[self.view addSubview:tableView];
 	_tableView = tableView;
     
-    [self setBackgroundColor:[UIColor js_messagesBackgroundColor_iOS6]];
+    [self setBackgroundColor:[UIColor js_backgroundColorClassic]];
     
     CGRect inputFrame = CGRectMake(0.0f,
-                                   size.height - [JSMessageInputView defaultHeight],
+                                   size.height - inputViewHeight,
                                    size.width,
-                                   [JSMessageInputView defaultHeight]);
+                                   inputViewHeight);
     
     JSMessageInputView *inputView = [[JSMessageInputView alloc] initWithFrame:inputFrame
-                                                             textViewDelegate:self
-                                                             keyboardDelegate:self
+                                                                        style:inputViewStyle
+                                                                     delegate:self
                                                          panGestureRecognizer:_tableView.panGestureRecognizer];
     
-    UIButton *sendButton;
     if([self.delegate respondsToSelector:@selector(sendButtonForInputView)]) {
-        sendButton = [self.delegate sendButtonForInputView];
+        UIButton *sendButton = [self.delegate sendButtonForInputView];
+        [inputView setSendButton:sendButton];
     }
-    else {
-        sendButton = [UIButton js_defaultSendButton_iOS6];
-    }
-    sendButton.enabled = NO;
-    sendButton.frame = CGRectMake(inputView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
-    [sendButton addTarget:self
-                   action:@selector(sendPressed:)
-         forControlEvents:UIControlEventTouchUpInside];
-    [inputView setSendButton:sendButton];
+    
+    inputView.sendButton.enabled = NO;
+    [inputView.sendButton addTarget:self
+                             action:@selector(sendPressed:)
+                   forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:inputView];
     _messageInputView = inputView;
@@ -112,6 +109,15 @@
     [super viewWillAppear:animated];
     
     [self scrollToBottomAnimated:NO];
+    
+    //  FIXME: this is a hack
+    //  ---------------------
+    //  Possibly an iOS 7 bug?
+    //  tableView.contentInset.top = 0.0 on iOS 6
+    //  tableView.contentInset.top = 64.0 on iOS 7
+    //  save here in order to reset in [ keyboardWillShowHide: ]
+    //  ---------------------
+    _originalTableViewContentInset = self.tableView.contentInset;
     
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(handleWillShowKeyboardNotification:)
@@ -419,8 +425,6 @@
     }
     
     if(changeInHeight != 0.0f) {
-        if(!isShrinking)
-            [self.messageInputView adjustTextViewHeightBy:changeInHeight];
         
         [UIView animateWithDuration:0.25f
                          animations:^{
@@ -433,16 +437,23 @@
                              self.tableView.scrollIndicatorInsets = insets;
                              [self scrollToBottomAnimated:NO];
                              
+                             if(isShrinking) {
+                                 // if shrinking the view, animate text view frame BEFORE input view frame
+                                 [self.messageInputView adjustTextViewHeightBy:changeInHeight];
+                             }
+                             
                              CGRect inputViewFrame = self.messageInputView.frame;
                              self.messageInputView.frame = CGRectMake(0.0f,
                                                                       inputViewFrame.origin.y - changeInHeight,
                                                                       inputViewFrame.size.width,
                                                                       inputViewFrame.size.height + changeInHeight);
-                         }
-                         completion:^(BOOL finished) {
-                             if(isShrinking) {
+                             
+                             if(!isShrinking) {
+                                 // growing the view, animate the text view frame AFTER input view frame
                                  [self.messageInputView adjustTextViewHeightBy:changeInHeight];
                              }
+                         }
+                         completion:^(BOOL finished) {
                          }];
         
         self.previousTextViewContentHeight = MIN(textViewContentHeight, maxHeight);
@@ -479,7 +490,7 @@
                          CGFloat inputViewFrameY = keyboardY - inputViewFrame.size.height;
                          
                          // for ipad modal form presentations
-                         CGFloat messageViewFrameBottom = self.view.frame.size.height - [JSMessageInputView defaultHeight];
+                         CGFloat messageViewFrameBottom = self.view.frame.size.height - inputViewFrame.size.height;
                          if(inputViewFrameY > messageViewFrameBottom)
                              inputViewFrameY = messageViewFrameBottom;
 						 
@@ -487,11 +498,11 @@
 																  inputViewFrameY,
 																  inputViewFrame.size.width,
 																  inputViewFrame.size.height);
-                         
-                         UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
-                                                                0.0f,
-                                                                self.view.frame.size.height - self.messageInputView.frame.origin.y - [JSMessageInputView defaultHeight],
-                                                                0.0f);
+
+                         UIEdgeInsets insets = self.originalTableViewContentInset;
+                         insets.bottom = self.view.frame.size.height
+                                            - self.messageInputView.frame.origin.y
+                                            - inputViewFrame.size.height;
                          
                          self.tableView.contentInset = insets;
                          self.tableView.scrollIndicatorInsets = insets;
