@@ -82,8 +82,7 @@
     UIButton *sendButton;
     
     if(style == JSMessageInputViewStyleClassic) {
-        UIButton *sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        sendButton.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
+        sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
         
         UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 13.0f, 0.0f, 13.0f);
         UIImage *sendBack = [[UIImage imageNamed:@"send-button"] resizableImageWithCapInsets:insets];
@@ -118,6 +117,8 @@
     [sendButton setTitle:title forState:UIControlStateNormal];
     [sendButton setTitle:title forState:UIControlStateHighlighted];
     [sendButton setTitle:title forState:UIControlStateDisabled];
+    
+    sendButton.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
     
     [self setSendButton:sendButton];
 }
