@@ -427,8 +427,6 @@
     }
     
     if(changeInHeight != 0.0f) {
-        if(!isShrinking)
-            [self.messageInputView adjustTextViewHeightBy:changeInHeight];
         
         [UIView animateWithDuration:0.25f
                          animations:^{
@@ -441,16 +439,23 @@
                              self.tableView.scrollIndicatorInsets = insets;
                              [self scrollToBottomAnimated:NO];
                              
+                             if(isShrinking) {
+                                 // if shrinking the view, animate text view frame BEFORE input view frame
+                                 [self.messageInputView adjustTextViewHeightBy:changeInHeight];
+                             }
+                             
                              CGRect inputViewFrame = self.messageInputView.frame;
                              self.messageInputView.frame = CGRectMake(0.0f,
                                                                       inputViewFrame.origin.y - changeInHeight,
                                                                       inputViewFrame.size.width,
                                                                       inputViewFrame.size.height + changeInHeight);
-                         }
-                         completion:^(BOOL finished) {
-                             if(isShrinking) {
+                             
+                             if(!isShrinking) {
+                                 // growing the view, animate the text view frame AFTER input view frame
                                  [self.messageInputView adjustTextViewHeightBy:changeInHeight];
                              }
+                         }
+                         completion:^(BOOL finished) {
                          }];
         
         self.previousTextViewContentHeight = MIN(textViewContentHeight, maxHeight);
