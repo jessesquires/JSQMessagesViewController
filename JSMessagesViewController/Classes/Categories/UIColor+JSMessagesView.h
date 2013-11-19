@@ -16,8 +16,14 @@
 
 @interface UIColor (JSMessagesView)
 
+#pragma mark - Colors
+
 + (UIColor *)js_backgroundColorClassic;
 
 + (UIColor *)js_messagesTimestampColorClassic;
+
+#pragma mark - Utilities
+
+- (UIColor *)js_darkenColorWithValue:(CGFloat)value;
 
 @end
