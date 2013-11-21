@@ -16,6 +16,7 @@
 #import "JSBubbleView.h"
 #import "NSString+JSMessagesView.h"
 #import "UIColor+JSMessagesView.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define SEND_BUTTON_WIDTH 78.0f
 
