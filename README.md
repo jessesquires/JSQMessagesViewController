@@ -99,7 +99,7 @@ Documentation is [available here][docsLink] via [CocoaDocs](http://cocoadocs.org
 
 ## Credits
 
-Created by [@Jesse Squires](https://twitter.com/jesse_squires), a [programming-motherfucker](http://programming-motherfucker.com).
+Created by [@jesse_squires](https://twitter.com/jesse_squires), a [programming-motherfucker](http://programming-motherfucker.com).
 
 Assets extracted using [@0xced](https://github.com/0xced) **/** [iOS-Artwork-Extractor](https://github.com/0xced/iOS-Artwork-Extractor).
 
@@ -111,7 +111,7 @@ Square message bubbles designed by [@michaelschultz](http://www.twitter.com/mich
 
 ## About
 
-I initialily developed this control to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users.
+I initially developed this control to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users.
 
 As it turns out, messaging is a popular thing that iOS devs want to do — I know, this is *shocking*. Thus, I am supporting this project in my free time and have added features way beyond what [Hemoglobe](http://www.hemoglobe.com) ever needed.
 
