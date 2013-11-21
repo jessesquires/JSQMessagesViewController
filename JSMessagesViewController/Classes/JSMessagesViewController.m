@@ -18,8 +18,6 @@
 
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
-@property (weak, nonatomic) UITableView *tableView;
-
 @property (assign, nonatomic, readonly) UIEdgeInsets originalTableViewContentInset;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 @property (assign, nonatomic) BOOL isUserScrolling;

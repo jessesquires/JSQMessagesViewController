@@ -255,6 +255,11 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 @property (weak, nonatomic) id<JSMessagesViewDataSource> dataSource;
 
 /**
+ *  Returns the table view that displays the messages in `JSMessagesViewController`.
+ */
+@property (weak, nonatomic, readonly) UITableView *tableView;
+
+/**
  *  Returns the message input view with which new messages are composed.
  */
 @property (weak, nonatomic, readonly) JSMessageInputView *messageInputView;
