@@ -19,8 +19,6 @@
 #import "NSString+JSMessagesView.h"
 #import "UIColor+JSMessagesView.h"
 
-#define SEND_BUTTON_WIDTH 78.0f
-
 @interface JSMessageInputView ()
 
 - (void)setup;
@@ -45,7 +43,9 @@
 
 - (void)configureInputBarWithStyle:(JSMessageInputViewStyle)style
 {
-    CGFloat width = self.frame.size.width - SEND_BUTTON_WIDTH;
+    CGFloat sendButtonWidth = (style == JSMessageInputViewStyleClassic) ? 78.0f : 64.0f;
+    
+    CGFloat width = self.frame.size.width - sendButtonWidth;
     CGFloat height = [JSMessageInputView textViewLineHeight];
     
     JSMessageTextView *textView = [[JSMessageTextView  alloc] initWithFrame:CGRectZero];
@@ -171,7 +171,7 @@
     }
     else {
         CGFloat padding = 8.0f;
-        btn.frame = CGRectMake(self.textView.frame.origin.x + self.textView.frame.size.width + padding,
+        btn.frame = CGRectMake(self.textView.frame.origin.x + self.textView.frame.size.width,
                                padding,
                                60.0f,
                                self.textView.frame.size.height - padding);
