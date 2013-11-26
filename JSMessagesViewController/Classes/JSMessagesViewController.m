@@ -193,6 +193,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
     
     UIImageView *bubbleImageView = [self.delegate bubbleImageViewWithType:type
@@ -206,12 +207,16 @@
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(!cell) {
+        NSLog(@"Allocating new cell...");
         cell = [[JSBubbleMessageCell alloc] initWithBubbleType:type
                                                bubbleImageView:bubbleImageView
                                                   hasTimestamp:hasTimestamp
                                                      hasAvatar:hasAvatar
                                                    hasSubtitle:hasSubtitle
                                                reuseIdentifier:CellIdentifier];
+    }
+    else {
+        NSLog(@"Dequeuing cell...");
     }
     
     if(hasTimestamp) {
@@ -241,7 +246,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [(JSBubbleMessageCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath] height];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+    CGFloat height = [cell height];
+    cell = nil;
+    return height;
 }
 
 #pragma mark - Messages view controller
