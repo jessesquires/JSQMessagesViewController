@@ -28,10 +28,8 @@
     return [UIColor colorWithRed:0.533f green:0.573f blue:0.647f alpha:1.0f];
 }
 
-#pragma mark - iOS7 Colors
-//
-// Taken from : https://github.com/claaslange/iOS7Colors
-//
+#pragma mark - iOS 7 Bubble colors
+
 + (UIColor *)js_iOS7greenColor
 {
     return [UIColor colorWithRed:0.27f green:0.85f blue:0.46f alpha:1.0f];
