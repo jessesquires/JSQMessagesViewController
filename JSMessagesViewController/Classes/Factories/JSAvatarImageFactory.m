@@ -20,16 +20,25 @@ CGFloat const kJSAvatarImageSize = 50.0f;
 @implementation JSAvatarImageFactory
 
 + (UIImage *)avatarImageNamed:(NSString *)filename
-                        style:(JSAvatarImageStyle)style
-                        shape:(JSAvatarImageShape)shape
+              croppedToCircle:(BOOL)croppedToCircle
 {
     UIImage *image = [UIImage imageNamed:filename];
-    
-    return [image js_imageAsCircle:(shape == JSAvatarImageShapeCircle)
+    return [image js_imageAsCircle:croppedToCircle
                        withDiamter:kJSAvatarImageSize
-                       borderColor:(style == JSAvatarImageStyleClassic) ? [UIColor colorWithHue:0.0f saturation:0.0f brightness:0.8f alpha:1.0f] : nil
-                       borderWidth:(style == JSAvatarImageStyleClassic) ? 1.0f : 0.0f
-                      shadowOffSet:(style == JSAvatarImageStyleClassic) ? CGSizeMake(0.0f, 1.0f) : CGSizeZero];
+                       borderColor:nil
+                       borderWidth:0.0f
+                      shadowOffSet:CGSizeZero];
+}
+
++ (UIImage *)classicAvatarImageNamed:(NSString *)filename
+                     croppedToCircle:(BOOL)croppedToCircle
+{
+    UIImage *image = [UIImage imageNamed:filename];
+    return [image js_imageAsCircle:croppedToCircle
+                       withDiamter:kJSAvatarImageSize
+                       borderColor:[UIColor colorWithHue:0.0f saturation:0.0f brightness:0.8f alpha:1.0f]
+                       borderWidth:1.0f
+                      shadowOffSet:CGSizeMake(0.0f, 1.0f)];
 }
 
 @end

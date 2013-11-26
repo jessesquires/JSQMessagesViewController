@@ -11,26 +11,17 @@
 //  Copyright (c) 2013 Jesse Squires
 //  http://opensource.org/licenses/MIT
 //
+
 #import <Foundation/Foundation.h>
 
 extern CGFloat const kJSAvatarImageSize;
 
-typedef NS_ENUM(NSUInteger, JSAvatarImageStyle) {
-    JSAvatarImageStyleClassic,
-    JSAvatarImageStyleFlat
-};
-
-
-typedef NS_ENUM(NSUInteger, JSAvatarImageShape) {
-    JSAvatarImageShapeCircle,
-    JSAvatarImageShapeSquare
-};
-
-
 @interface JSAvatarImageFactory : NSObject
 
 + (UIImage *)avatarImageNamed:(NSString *)filename
-                        style:(JSAvatarImageStyle)style
-                        shape:(JSAvatarImageShape)shape;
+              croppedToCircle:(BOOL)croppedToCircle;
+
++ (UIImage *)classicAvatarImageNamed:(NSString *)filename
+                     croppedToCircle:(BOOL)croppedToCircle;
 
 @end
