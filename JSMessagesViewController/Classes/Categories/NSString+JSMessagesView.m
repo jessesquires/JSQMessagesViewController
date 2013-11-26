@@ -23,7 +23,7 @@
 
 - (NSUInteger)js_numberOfLines
 {
-    return [self componentsSeparatedByString:@"\n"].count + 1;
+    return [[self componentsSeparatedByString:@"\n"] count] + 1;
 }
 
 @end
