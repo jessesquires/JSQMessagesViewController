@@ -78,6 +78,10 @@
         [self bringSubviewToFront:textView];
         _textView = textView;
         
+        if([_textView respondsToSelector:@selector(textContainerInset)]) {
+            _textView.textContainerInset = UIEdgeInsetsMake(4.0f, 4.0f, 4.0f, 4.0f);
+        }
+        
 //        NOTE: TODO: textView frame & text inset
 //        --------------------
 //        future implementation for textView frame
