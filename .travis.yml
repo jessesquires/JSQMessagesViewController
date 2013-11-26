@@ -1,5 +1,8 @@
 language: objective-c
 
+script: 
+- xctool -project JSMessagesDemo.xcodeproj -scheme JSMessagesDemo -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO clean build test
+
 branches:
-  only:
-    - master
+only:
+- master
