@@ -452,8 +452,6 @@
             [textView setContentOffset:bottomOffset animated:YES];
         });
     }
-    
-    self.messageInputView.sendButton.enabled = ([textView.text js_stringByTrimingWhitespace].length > 0);
 }
 
 #pragma mark - KVO observer method
@@ -463,6 +461,12 @@
     if ([textView isKindOfClass:[UITextView class]] && [keyPath isEqualToString:@"contentSize"]) {
         [self refreshViewFrames:textView];
     }
+}
+
+#pragma mark - UITextView Delegate Methods
+
+- (void)textViewDidChange:(UITextView *)textView {
+    self.messageInputView.sendButton.enabled = ([textView.text js_stringByTrimingWhitespace].length > 0);
 }
 
 
