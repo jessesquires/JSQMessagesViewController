@@ -14,6 +14,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JSMessageTextView.h"
+#import "JSGlobals.h"
 
 /**
  *  The appearance style of the input bar view for composing a new message.
@@ -51,6 +52,12 @@ typedef NS_ENUM(NSUInteger, JSMessageInputViewStyle) {
  @see JSMessageInputViewStyle.
  */
 @property (weak, nonatomic) UIButton *sendButton;
+
+/**
+ *  The attach image button for the input view. The default value is an initialized `UIButton` whose appearance is styled according to the value of style during initialization.
+ @see JSMessageInputViewStyle.
+ */
+@property (weak, nonatomic) UIButton *attachImageButton;
 
 #pragma mark - Initialization
 

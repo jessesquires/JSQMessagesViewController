@@ -19,7 +19,7 @@
  *  Enable the feature of attaching image messages.
  *  @see JSMessageInputView.
  */
-#define IMAGE_BUBBLE_FEATURE_ENABLED YES
+#define __FEATURE_FLAGE__IMAGE_BUBBLE_ENABLED NO
 
 
 
