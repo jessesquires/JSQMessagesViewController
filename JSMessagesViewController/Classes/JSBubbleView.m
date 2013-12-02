@@ -199,6 +199,8 @@
         textX += (self.bubbleImageView.image.capInsets.left / 2.0f);
     }
     
+    int imageSmallShift = (self.type == JSBubbleMessageTypeIncoming) ? 3 : -3;
+    
     CGRect textFrame = CGRectMake(textX,
                                   self.bubbleImageView.frame.origin.y,
                                   self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f),
@@ -210,8 +212,8 @@
     // If There is an image attached need to be displayed ..
     if (_attachedImageView) {
 
-        CGRect imageFrame = CGRectMake( self.bubbleImageView.frame.origin.x + round( (self.bubbleImageView.frame.size.width /2 ) - ( _attachedImageView.frame.size.width / 2.0 ) ),
-                                       16,
+        CGRect imageFrame = CGRectMake( self.bubbleImageView.frame.origin.x + imageSmallShift + round( (self.bubbleImageView.frame.size.width /2 ) - ( _attachedImageView.frame.size.width / 2.0 ) ),
+                                       17,
                                        _attachedImageView.frame.size.width,
                                        _attachedImageView.frame.size.height);
         
