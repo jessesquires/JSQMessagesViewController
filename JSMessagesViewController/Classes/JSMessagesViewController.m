@@ -147,6 +147,10 @@
 
 - (void)dealloc
 {
+    // Remove the kVO when textview dealloc
+    [_messageInputView.textView removeObserver:self
+                                    forKeyPath:@"contentSize"];
+    
     _delegate = nil;
     _dataSource = nil;
     _tableView = nil;
@@ -395,7 +399,8 @@
     [textView resignFirstResponder];
 }
 
-- (void)refreshViewFrames:(UITextView *)textView {
+- (void)refreshViewFrames:(UITextView *)textView
+{
     CGFloat maxHeight = [JSMessageInputView maxHeight];
     
     BOOL isShrinking = textView.contentSize.height < self.previousTextViewContentHeight;
@@ -456,16 +461,20 @@
 
 #pragma mark - KVO observer method
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    UITextView *textView = (UITextView *)object;
-    if ([textView isKindOfClass:[UITextView class]] && [keyPath isEqualToString:@"contentSize"]) {
-        [self refreshViewFrames:textView];
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if ([object isKindOfClass:[UITextView class]] && [keyPath isEqualToString:@"contentSize"]) {
+        [self refreshViewFrames:object];
     }
 }
 
 #pragma mark - UITextView Delegate Methods
 
-- (void)textViewDidChange:(UITextView *)textView {
+- (void)textViewDidChange:(UITextView *)textView
+{
     self.messageInputView.sendButton.enabled = ([textView.text js_stringByTrimingWhitespace].length > 0);
 }
 

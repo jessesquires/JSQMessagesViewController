@@ -143,16 +143,16 @@
         _textView.dismissivePanGestureRecognizer = panGestureRecognizer;
         
         // From iOS 7, the content size will be calculated after the delegate method calls complete. So we are adding KVO to the content size of the text view to accomadate the content size for the new line text.
-        [_textView addObserver:delegate forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+        [_textView addObserver:delegate
+                    forKeyPath:@"contentSize"
+                       options:NSKeyValueObservingOptionNew
+                       context:nil];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    
-    // Remove the KVO observer in dealloc
-    [_textView removeObserver:_textView.keyboardDelegate forKeyPath:@"contentSize"];
     _textView = nil;
     _sendButton = nil;
 }
@@ -197,12 +197,18 @@
                        [self.textView.text js_numberOfLines]);
     
     // Below iOS 7, if you set the text view frame programmatically, the KVO will keep on notify the observer method. So to avoid that, we are removing the observer before setting the frame and add the observer after setting frame here.
-    [self.textView removeObserver:_textView.keyboardDelegate forKeyPath:@"contentSize"];
+    [self.textView removeObserver:_textView.keyboardDelegate
+                       forKeyPath:@"contentSize"];
+    
     self.textView.frame = CGRectMake(prevFrame.origin.x,
                                      prevFrame.origin.y,
                                      prevFrame.size.width,
                                      prevFrame.size.height + changeInHeight);
-    [self.textView addObserver:_textView.keyboardDelegate forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+    
+    [self.textView addObserver:_textView.keyboardDelegate
+                    forKeyPath:@"contentSize"
+                       options:NSKeyValueObservingOptionNew
+                       context:nil];
 
     self.textView.contentInset = UIEdgeInsetsMake((numLines >= 6 ? 4.0f : 0.0f),
                                                   0.0f,
