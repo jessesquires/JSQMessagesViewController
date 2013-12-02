@@ -60,6 +60,8 @@
                     [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-cook" croppedToCircle:YES], kSubtitleCook,
                     nil];
     
+    self.attachedImageMessages = [[NSMutableDictionary alloc] initWithCapacity:5];
+    
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
 //                                                                                           target:self
 //                                                                                           action:@selector(buttonPressed:)];
@@ -100,6 +102,37 @@
     
     [self finishSend];
     [self scrollToBottomAnimated:YES];
+}
+
+- (void)didSendAttachedImage:(UIImage *)image ForKey:(NSString *)key
+{
+    [self.messages addObject:key];
+    [_attachedImageMessages setValue:image forKey:key];
+    
+    [self.timestamps addObject:[NSDate date]];
+    
+    if((self.messages.count - 1) % 2) {
+        [JSMessageSoundEffect playMessageSentSound];
+        
+        [self.subtitles addObject:arc4random_uniform(100) % 2 ? kSubtitleCook : kSubtitleWoz];
+    }
+    else {
+        [JSMessageSoundEffect playMessageReceivedSound];
+        
+        [self.subtitles addObject:kSubtitleJobs];
+    }
+    
+    [self finishSendTheAttachedMessage];
+    [self scrollToBottomAnimated:YES];
+}
+
+- (UIImage *) attachedImageSelected
+{
+    UIImage* image = nil;
+    int random = (arc4random_uniform(100) % 3) + 1 ;
+    image = [UIImage imageNamed:[NSString stringWithFormat:@"test%d.jpg" , random]];
+    
+    return image;
 }
 
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -210,4 +243,8 @@
     return [self.subtitles objectAtIndex:indexPath.row];
 }
 
+- (UIImage*)attachedImageForKey:(NSString *)key
+{
+    return [self.attachedImageMessages valueForKey:key];
+}
 @end

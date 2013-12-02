@@ -25,6 +25,7 @@
 - (void)setup;
 
 - (void)sendPressed:(UIButton *)sender;
+- (void)attachImagePressed:(UIButton *)sender;
 
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (BOOL)shouldHaveAvatarForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -89,6 +90,11 @@
     [inputView.sendButton addTarget:self
                              action:@selector(sendPressed:)
                    forControlEvents:UIControlEventTouchUpInside];
+    
+    inputView.attachImageButton.enabled = YES;
+    [inputView.attachImageButton addTarget:self
+                                    action:@selector(attachImagePressed:)
+                          forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:inputView];
     _messageInputView = inputView;
@@ -179,6 +185,11 @@
     [self.delegate didSendText:[self.messageInputView.textView.text js_stringByTrimingWhitespace]];
 }
 
+- (void)attachImagePressed:(UIButton *)sender
+{
+    [self.delegate didSendAttachedImage:[self.delegate attachedImageSelected] ForKey:[self keyForAttachedImageSent]];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -233,6 +244,11 @@
     
     [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
     [cell setBackgroundColor:tableView.backgroundColor];
+    
+    [cell setAttachedImage:nil];
+    if ([self isProperKeyForAttachedImageMessage:[self.dataSource textForRowAtIndexPath:indexPath]]) {
+        [cell setAttachedImage:[self.dataSource attachedImageForKey:[self.dataSource textForRowAtIndexPath:indexPath]]];
+    }
     
     if([self.delegate respondsToSelector:@selector(configureCell:atIndexPath:)]) {
         [self.delegate configureCell:cell atIndexPath:indexPath];
@@ -320,6 +336,26 @@
     [self.messageInputView.textView setText:nil];
     [self textViewDidChange:self.messageInputView.textView];
     [self.tableView reloadData];
+}
+
+- (void)finishSendTheAttachedMessage
+{
+    [self.tableView reloadData];
+}
+
+- (NSString *) keyForAttachedImageSent
+{
+    return  [NSString stringWithFormat:@"##%d__%d##" , (int)[NSDate timeIntervalSinceReferenceDate] , arc4random_uniform(100)];
+}
+
+- (BOOL) isProperKeyForAttachedImageMessage:(NSString*)key
+{
+    NSString *phoneRegex = @"##[0-9]+__[0-9]+##";
+    NSPredicate* predict = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+    
+    BOOL matches = [predict evaluateWithObject:key];
+    
+    return (key != nil && matches );
 }
 
 - (void)setBackgroundColor:(UIColor *)color

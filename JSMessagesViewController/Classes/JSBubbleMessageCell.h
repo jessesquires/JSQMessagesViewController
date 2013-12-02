@@ -96,6 +96,13 @@
  */
 - (void)setSubtitle:(NSString *)subtitle;
 
+/**
+ *  Sets the image to be displayed in the bubble image view of the cell.
+ *
+ *  @param image The attached displayed image for the cell.
+ */
+- (void)setAttachedImage:(UIImage*)image;
+
 #pragma mark - Getters
 
 /**

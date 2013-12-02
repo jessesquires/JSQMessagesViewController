@@ -37,6 +37,11 @@
  */
 @property (weak, nonatomic, readonly) UITextView *textView;
 
+/**
+ *  Returns the image view containing the attached image for this bubble view.
+ */
+@property (strong, nonatomic, readonly) UIImageView *attachedImageView;
+
 #pragma mark - Initialization
 
 /**
@@ -60,6 +65,14 @@
  *  @param text The message text to be displayed in the bubble view.
  */
 - (void)setText:(NSString *)text;
+
+/**
+ *  Sets a given Image for the bubble view, resizing its frame as needed.
+ *
+ *  @param image The message attached Image to be displayed in the bubble view.
+ */
+- (void)setMessageImage:(UIImage *)image;
+
 
 /**
  *  Sets the given font for the bubble view text, resizing its frame as needed.
@@ -105,5 +118,12 @@
  *  @return The minimum required value for the height of the bubble view.
  */
 - (CGFloat)neededHeightForCell;
+
+/**
+ *  Asks the BubbleView for showing weather it contains attached Image or not.
+ *
+ *  @return A Bool.
+ */
+- (BOOL)isImageMessage;
 
 @end

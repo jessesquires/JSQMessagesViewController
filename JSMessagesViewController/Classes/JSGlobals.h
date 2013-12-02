@@ -19,9 +19,20 @@
  *  Enable the feature of attaching image messages.
  *  @see JSMessageInputView.
  */
-#define __FEATURE_FLAGE__IMAGE_BUBBLE_ENABLED NO
+#define __FEATURE_FLAGE__IMAGE_BUBBLE_ENABLED YES
 
 
+/*
+ *
+ ***************** Predefined Constants *****************
+ *
+ */
+
+/**
+ *  Enable the feature of attaching image messages.
+ *  @see JSMessageInputView.
+ */
+#define IMAGE_BUBBLE_CORNER_SIZE_IN_PIXELS 8.0f
 
 
 /*

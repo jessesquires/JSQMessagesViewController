@@ -236,6 +236,11 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 	self.subtitleLabel.text = subtitle;
 }
 
+- (void)setAttachedImage:(UIImage*)image
+{
+    [self.bubbleView setMessageImage:image];
+}
+
 #pragma mark - Getters
 
 - (JSBubbleMessageType)messageType
@@ -282,7 +287,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
-    return (action == @selector(copy:));
+    return (action == @selector(copy:) && ![self.bubbleView isImageMessage]);
 }
 
 - (void)copy:(id)sender
@@ -298,12 +303,15 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     if(longPress.state != UIGestureRecognizerStateBegan || ![self becomeFirstResponder])
         return;
     
+    if ([self.bubbleView isImageMessage])
+        return;
+    
     UIMenuController *menu = [UIMenuController sharedMenuController];
     CGRect targetRect = [self convertRect:[self.bubbleView bubbleFrame]
                                  fromView:self.bubbleView];
-    
+
     [menu setTargetRect:CGRectInset(targetRect, 0.0f, 4.0f) inView:self];
-    
+
     self.bubbleView.bubbleImageView.highlighted = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -311,6 +319,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                                                  name:UIMenuControllerWillShowMenuNotification
                                                object:nil];
     [menu setMenuVisible:YES animated:YES];
+    [self.bubbleView layoutSubviews];
 }
 
 #pragma mark - Notifications

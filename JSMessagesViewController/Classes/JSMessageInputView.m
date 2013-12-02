@@ -162,6 +162,7 @@
         [self setup];
         [self configureInputBarWithStyle:style];
         [self configureSendButtonWithStyle:style];
+        _attachImageButton = nil;
         [self configureAttachImageButtonWithStyle:style];
         
         _textView.delegate = delegate;

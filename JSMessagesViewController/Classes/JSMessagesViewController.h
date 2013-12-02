@@ -192,6 +192,21 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  */
 - (UIButton *)sendButtonForInputView;
 
+
+/**
+ *  Tells the delegate that the specified Image has been sent. Hook into your own backend here.
+ *
+ *  @param text A string containing the key that was store to access the UIImage that was attached in the messageInputView's when the attach button was pressed.
+ */
+- (void)didSendAttachedImage:(UIImage *)image ForKey:(NSString *)key;
+
+
+/**
+ *  Tells the delegate to retrive an image from the user device.
+ *
+ */
+- (UIImage *) attachedImageSelected;
+
 @end
 
 
@@ -236,6 +251,16 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  */
 - (NSString *)subtitleForRowAtIndexPath:(NSIndexPath *)indexPath;
 
+@optional
+/**
+ *  Asks the data source for the UIImage to display for the row at the specified index path.
+ *
+ *  @param key An string value to locate the attached image in the bubble view.
+ *
+ *  @return A UIImage containing attached image to be displayed. This value must not be `nil`.
+ */
+- (UIImage *) attachedImageForKey:(NSString *) key;
+
 @end
 
 
@@ -272,6 +297,26 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  */
 - (void)finishSend;
 
+/**
+ *  Animates and resets the text view in messageInputView. Call this method at the end of the delegate method `didSendAttachedImage:forKey:`.
+ *  @see JSMessagesViewDelegate.
+ */
+- (void)finishSendTheAttachedMessage;
+
+/**
+ *  Asks the controller for generating proper unrepeatable key for the attached Image.
+ *
+ *  @return A UIImage containing attached image to be displayed. This value must not be `nil`.
+ */
+- (NSString *) keyForAttachedImageSent;
+
+
+/**
+ *  Asks the controller for generating proper unrepeatable key for the attached Image.
+ *
+ *  @return A Bool to indicate weather the message is a key for attached image or not.
+ */
+- (BOOL) isProperKeyForAttachedImageMessage:(NSString*)key;
 
 /**
  *  Sets the background color of the table view, the table view cells, and the table view separator.
