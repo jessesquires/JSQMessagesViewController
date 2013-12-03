@@ -115,7 +115,6 @@
     //  tableView.contentInset.top = 64.0 on iOS 7
     //  save here in order to reset in [ keyboardWillShowHide: ]
     //  ---------------------
-    _originalTableViewContentInset = self.tableView.contentInset;
     
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(handleWillShowKeyboardNotification:)
@@ -126,6 +125,11 @@
 											 selector:@selector(handleWillHideKeyboardNotification:)
 												 name:UIKeyboardWillHideNotification
                                                object:nil];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    _originalTableViewContentInset = self.tableView.contentInset;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
