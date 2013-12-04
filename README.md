@@ -121,6 +121,8 @@ Check out my work at [Hexed Bits](http://www.hexedbits.com).
 
 [Hemoglobe](http://bit.ly/hemoglobeapp)
 
+[Loopse](https://itunes.apple.com/us/app/loopse-spots-friends-sessions/id704783915?mt=8)
+
 [Oxwall Messenger](https://github.com/tochman/OxwallMessenger)
 
 [FourChat](https://itunes.apple.com/us/app/fourchat/id650833730?mt=8)
