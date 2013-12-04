@@ -109,9 +109,9 @@
         sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
         sendButton.backgroundColor = [UIColor clearColor];
         
-        [sendButton setTitleColor:[UIColor js_iOS7blueColor] forState:UIControlStateNormal];
-        [sendButton setTitleColor:[UIColor js_iOS7blueColor] forState:UIControlStateHighlighted];
-        [sendButton setTitleColor:[UIColor js_iOS7lightGrayColor] forState:UIControlStateDisabled];
+        [sendButton setTitleColor:[UIColor js_bubbleBlueColor] forState:UIControlStateNormal];
+        [sendButton setTitleColor:[UIColor js_bubbleBlueColor] forState:UIControlStateHighlighted];
+        [sendButton setTitleColor:[UIColor js_bubbleLightGrayColor] forState:UIControlStateDisabled];
         
         sendButton.titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
     }

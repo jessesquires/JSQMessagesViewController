@@ -60,9 +60,9 @@
                     [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-cook" croppedToCircle:YES], kSubtitleCook,
                     nil];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
-                                                                                           target:self
-                                                                                           action:@selector(buttonPressed:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
+//                                                                                           target:self
+//                                                                                           action:@selector(buttonPressed:)];
 }
 
 - (void)buttonPressed:(UIButton *)sender
@@ -112,11 +112,11 @@
 {
     if(indexPath.row % 2) {
         return [JSBubbleImageViewFactory bubbleImageViewForType:type
-                                                          color:[UIColor js_iOS7lightGrayColor]];
+                                                          color:[UIColor js_bubbleLightGrayColor]];
     }
     
     return [JSBubbleImageViewFactory bubbleImageViewForType:type
-                                                      color:[UIColor js_iOS7blueColor]];
+                                                      color:[UIColor js_bubbleBlueColor]];
 }
 
 - (JSMessagesViewTimestampPolicy)timestampPolicy

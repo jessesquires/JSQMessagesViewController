@@ -21,11 +21,11 @@
 + (UIColor *)js_backgroundColorClassic;
 + (UIColor *)js_messagesTimestampColorClassic;
 
-#pragma mark - iOS 7 Bubble colors
+#pragma mark - Bubble colors
 
-+ (UIColor *)js_iOS7greenColor;
-+ (UIColor *)js_iOS7blueColor;
-+ (UIColor *)js_iOS7lightGrayColor;
++ (UIColor *)js_bubbleGreenColor;
++ (UIColor *)js_bubbleBlueColor;
++ (UIColor *)js_bubbleLightGrayColor;
 
 #pragma mark - Utilities
 

@@ -28,21 +28,30 @@
     return [UIColor colorWithRed:0.533f green:0.573f blue:0.647f alpha:1.0f];
 }
 
-#pragma mark - iOS 7 Bubble colors
+#pragma mark - Bubble colors
 
-+ (UIColor *)js_iOS7greenColor
++ (UIColor *)js_bubbleGreenColor
 {
-    return [UIColor colorWithRed:0.27f green:0.85f blue:0.46f alpha:1.0f];
+    return [UIColor colorWithHue:130.0f / 360.0f
+                      saturation:0.68f
+                      brightness:0.80f
+                           alpha:1.0f];
 }
 
-+ (UIColor *)js_iOS7blueColor
++ (UIColor *)js_bubbleBlueColor
 {
-    return [UIColor colorWithRed:0.0f green:0.49f blue:0.96f alpha:1.0f];
+    return [UIColor colorWithHue:210.0f / 360.0f
+                      saturation:0.94f
+                      brightness:1.0f
+                           alpha:1.0f];
 }
 
-+ (UIColor *)js_iOS7lightGrayColor
++ (UIColor *)js_bubbleLightGrayColor
 {
-    return [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0f];
+    return [UIColor colorWithHue:240.0f / 360.0f
+                      saturation:0.02f
+                      brightness:0.92f
+                           alpha:1.0f];
 }
 
 #pragma mark - Utilities
