@@ -108,14 +108,6 @@
     
     [self scrollToBottomAnimated:NO];
     
-    //  FIXME: this is a hack
-    //  ---------------------
-    //  Possibly an iOS 7 bug?
-    //  tableView.contentInset.top = 0.0 on iOS 6
-    //  tableView.contentInset.top = 64.0 on iOS 7
-    //  save here in order to reset in [ keyboardWillShowHide: ]
-    //  ---------------------
-    
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(handleWillShowKeyboardNotification:)
 												 name:UIKeyboardWillShowNotification
@@ -127,8 +119,17 @@
                                                object:nil];
 }
 
--(void)viewDidAppear:(BOOL)animated{
+- (void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
+    
+    //  FIXME: this is a hack
+    //  ---------------------
+    //  tableView.contentInset.top = 0.0 on iOS 6
+    //  tableView.contentInset.top = 64.0 on iOS 7
+    //  this is because in iOS 7 all VCs default to fullscreen (with navbar overlayed on view)
+    //  save here in order to reset in [ keyboardWillShowHide: ]
+    //  ---------------------
     _originalTableViewContentInset = self.tableView.contentInset;
 }
 
