@@ -92,6 +92,11 @@
     
     [self.view addSubview:inputView];
     _messageInputView = inputView;
+    
+    [_messageInputView.textView addObserver:self
+                                 forKeyPath:@"contentSize"
+                                    options:NSKeyValueObservingOptionNew
+                                    context:nil];
 }
 
 #pragma mark - View lifecycle
@@ -152,10 +157,7 @@
 
 - (void)dealloc
 {
-    // Remove the kVO when textview dealloc
-    [_messageInputView.textView removeObserver:self
-                                    forKeyPath:@"contentSize"];
-    
+    [_messageInputView.textView removeObserver:self forKeyPath:@"contentSize"];
     _delegate = nil;
     _dataSource = nil;
     _tableView = nil;
@@ -327,6 +329,7 @@
 - (void)finishSend
 {
     [self.messageInputView.textView setText:nil];
+    [self textViewDidChange:self.messageInputView.textView];
     [self.tableView reloadData];
 }
 
@@ -399,12 +402,19 @@
     [self scrollToBottomAnimated:YES];
 }
 
+- (void)textViewDidChange:(UITextView *)textView
+{
+    self.messageInputView.sendButton.enabled = ([[textView.text js_stringByTrimingWhitespace] length] > 0);
+}
+
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     [textView resignFirstResponder];
 }
 
-- (void)refreshViewFrames:(UITextView *)textView
+#pragma mark - Layout message input view
+
+- (void)layoutAndAnimateMessageInputTextView:(UITextView *)textView
 {
     CGFloat maxHeight = [JSMessageInputView maxHeight];
     
@@ -417,8 +427,8 @@
     else {
         changeInHeight = MIN(changeInHeight, maxHeight - self.previousTextViewContentHeight);
     }
+    
     if(changeInHeight != 0.0f) {
-        
         [UIView animateWithDuration:0.25f
                          animations:^{
                              UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
@@ -454,17 +464,19 @@
     
     // Once we reached the max height, we have to consider the bottom offset for the text view.
     // To make visible the last line, again we have to set the content offset.
-    if (self.previousTextViewContentHeight == maxHeight && [textView.text hasSuffix:@"\n"]) {        
+    if (self.previousTextViewContentHeight == maxHeight) {
         double delayInSeconds = 0.01;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            CGPoint bottomOffset = CGPointMake(0.0f, textView.contentSize.height - textView.bounds.size.height);
-            [textView setContentOffset:bottomOffset animated:YES];
-        });
+        dispatch_after(popTime,
+                       dispatch_get_main_queue(),
+                       ^(void) {
+                           CGPoint bottomOffset = CGPointMake(0.0f, textView.contentSize.height - textView.bounds.size.height);
+                           [textView setContentOffset:bottomOffset animated:YES];
+                       });
     }
 }
 
-#pragma mark - KVO observer method
+#pragma mark - Key-value observing
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
@@ -472,17 +484,9 @@
                        context:(void *)context
 {
     if ([object isKindOfClass:[UITextView class]] && [keyPath isEqualToString:@"contentSize"]) {
-        [self refreshViewFrames:object];
+        [self layoutAndAnimateMessageInputTextView:object];
     }
 }
-
-#pragma mark - UITextView Delegate Methods
-
-- (void)textViewDidChange:(UITextView *)textView
-{
-    self.messageInputView.sendButton.enabled = ([textView.text js_stringByTrimingWhitespace].length > 0);
-}
-
 
 #pragma mark - Keyboard notifications
 

@@ -141,12 +141,6 @@
         _textView.delegate = delegate;
         _textView.keyboardDelegate = delegate;
         _textView.dismissivePanGestureRecognizer = panGestureRecognizer;
-        
-        // From iOS 7, the content size will be calculated after the delegate method calls complete. So we are adding KVO to the content size of the text view to accomadate the content size for the new line text.
-        [_textView addObserver:delegate
-                    forKeyPath:@"contentSize"
-                       options:NSKeyValueObservingOptionNew
-                       context:nil];
     }
     return self;
 }
@@ -196,7 +190,8 @@
     int numLines = MAX([self.textView numberOfLinesOfText],
                        [self.textView.text js_numberOfLines]);
     
-    // Below iOS 7, if you set the text view frame programmatically, the KVO will keep on notify the observer method. So to avoid that, we are removing the observer before setting the frame and add the observer after setting frame here.
+    //  below iOS 7, if you set the text view frame programmatically, the KVO will continue notifying
+    //  to avoid that, we are removing the observer before setting the frame and add the observer after setting frame here.
     [self.textView removeObserver:_textView.keyboardDelegate
                        forKeyPath:@"contentSize"];
     
@@ -215,13 +210,13 @@
                                                   (numLines >= 6 ? 4.0f : 0.0f),
                                                   0.0f);
     
-    // From iOS 7, the content size will be accurate only if the scrolling is enabled.
+    // from iOS 7, the content size will be accurate only if the scrolling is enabled.
     self.textView.scrollEnabled = YES;
     
-    // Set the content offset only when user enters the new line.
-    if(numLines >= 6 && [self.textView.text hasSuffix:@"\n"]) {
+    if(numLines >= 6) {
         CGPoint bottomOffset = CGPointMake(0.0f, self.textView.contentSize.height - self.textView.bounds.size.height);
         [self.textView setContentOffset:bottomOffset animated:YES];
+        [self.textView scrollRangeToVisible:NSMakeRange(self.textView.text.length - 2, 1)];
     }
 }
 
