@@ -137,6 +137,8 @@ Check out my work at [Hexed Bits](http://www.hexedbits.com).
 
 [UIBubbleTableView](https://github.com/AlexBarinov/UIBubbleTableView)
 
+[SPHChatBubble](https://github.com/sibahota059/SPHChatBubble)
+
 ## [MIT License](http://opensource.org/licenses/MIT)
 
 You are free to use this as you please. **No attribution necessary, but much appreciated.**
