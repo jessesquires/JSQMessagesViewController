@@ -60,9 +60,9 @@
                     [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-cook" croppedToCircle:YES], kSubtitleCook,
                     nil];
     
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
-//                                                                                           target:self
-//                                                                                           action:@selector(buttonPressed:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
+                                                                                           target:self
+                                                                                           action:@selector(buttonPressed:)];
 }
 
 - (void)buttonPressed:(UIButton *)sender
