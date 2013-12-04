@@ -20,7 +20,7 @@
 extern CGFloat const kJSAvatarImageSize;
 
 /**
- *  `JSAvatarImageFactory` is a factory that provides a means for styling avatar images to be displayed in a `JSMessagesViewController`.
+ *  `JSAvatarImageFactory` is a factory that provides a means for styling avatar images to be displayed in a `JSBubbleMessageCell` of a `JSMessagesViewController`.
  */
 @interface JSAvatarImageFactory : NSObject
 
