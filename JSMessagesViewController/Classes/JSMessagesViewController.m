@@ -249,6 +249,7 @@
         [self.delegate configureCell:cell atIndexPath:indexPath];
     }
     
+    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
     [cell prepareForReuse];
     return cell;
 }
