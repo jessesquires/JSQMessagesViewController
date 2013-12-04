@@ -152,6 +152,10 @@
 
 - (void)dealloc
 {
+    // Remove the kVO when textview dealloc
+    [_messageInputView.textView removeObserver:self
+                                    forKeyPath:@"contentSize"];
+    
     _delegate = nil;
     _dataSource = nil;
     _tableView = nil;
@@ -323,7 +327,6 @@
 - (void)finishSend
 {
     [self.messageInputView.textView setText:nil];
-    [self textViewDidChange:self.messageInputView.textView];
     [self.tableView reloadData];
 }
 
@@ -401,41 +404,19 @@
     [textView resignFirstResponder];
 }
 
-- (void)textViewDidChange:(UITextView *)textView
+- (void)refreshViewFrames:(UITextView *)textView
 {
     CGFloat maxHeight = [JSMessageInputView maxHeight];
     
-    //  TODO:
-    //
-    //  CGFloat textViewContentHeight = textView.contentSize.height;
-    //
-    //  The line above is broken as of iOS 7.0
-    //
-    //  There seems to be a bug in Apple's code for textView.contentSize
-    //  The following code was implemented as a workaround for calculating the appropriate textViewContentHeight
-    //
-    //  https://devforums.apple.com/thread/192052
-    //  https://github.com/jessesquires/MessagesTableViewController/issues/50
-    //  https://github.com/jessesquires/MessagesTableViewController/issues/47
-    //
-    // BEGIN HACK
-    //
-        CGSize size = [textView sizeThatFits:CGSizeMake(textView.frame.size.width, maxHeight)];
-        CGFloat textViewContentHeight = size.height;
-    //
-    //  END HACK
-    //
+    BOOL isShrinking = textView.contentSize.height < self.previousTextViewContentHeight;
+    CGFloat changeInHeight = textView.contentSize.height - self.previousTextViewContentHeight;
     
-    BOOL isShrinking = textViewContentHeight < self.previousTextViewContentHeight;
-    CGFloat changeInHeight = textViewContentHeight - self.previousTextViewContentHeight;
-        
     if(!isShrinking && (self.previousTextViewContentHeight == maxHeight || textView.text.length == 0)) {
         changeInHeight = 0;
     }
     else {
         changeInHeight = MIN(changeInHeight, maxHeight - self.previousTextViewContentHeight);
     }
-    
     if(changeInHeight != 0.0f) {
         
         [UIView animateWithDuration:0.25f
@@ -468,11 +449,40 @@
                          completion:^(BOOL finished) {
                          }];
         
-        self.previousTextViewContentHeight = MIN(textViewContentHeight, maxHeight);
+        self.previousTextViewContentHeight = MIN(textView.contentSize.height, maxHeight);
     }
     
+    // Once we reached the max height, we have to consider the bottom offset for the text view.
+    // To make visible the last line, again we have to set the content offset.
+    if (self.previousTextViewContentHeight == maxHeight && [textView.text hasSuffix:@"\n"]) {        
+        double delayInSeconds = 0.01;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            CGPoint bottomOffset = CGPointMake(0.0f, textView.contentSize.height - textView.bounds.size.height);
+            [textView setContentOffset:bottomOffset animated:YES];
+        });
+    }
+}
+
+#pragma mark - KVO observer method
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if ([object isKindOfClass:[UITextView class]] && [keyPath isEqualToString:@"contentSize"]) {
+        [self refreshViewFrames:object];
+    }
+}
+
+#pragma mark - UITextView Delegate Methods
+
+- (void)textViewDidChange:(UITextView *)textView
+{
     self.messageInputView.sendButton.enabled = ([textView.text js_stringByTrimingWhitespace].length > 0);
 }
+
 
 #pragma mark - Keyboard notifications
 
