@@ -16,6 +16,8 @@
 #import "JSMessageTextView.h"
 #import "NSString+JSMessagesView.h"
 
+static NSString * const kJSMessagesCellReuseIdentifier = @"kJSMessagesCellReuseIdentifier";
+
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
 @property (assign, nonatomic, readonly) UIEdgeInsets originalTableViewContentInset;
@@ -105,6 +107,10 @@
 {
     [super viewDidLoad];
     [self setup];
+    
+    // TODO: fix #75
+//    [self.tableView registerClass:[JSBubbleMessageCell class]
+//           forCellReuseIdentifier:kJSMessagesCellReuseIdentifier];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -214,8 +220,7 @@
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
 	BOOL hasSubtitle = [self shouldHaveSubtitleForRowAtIndexPath:indexPath];
     
-    NSString *CellIdentifier = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d", type, hasTimestamp, hasAvatar, hasSubtitle];
-    JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:kJSMessagesCellReuseIdentifier];
     
     if(!cell) {
         NSLog(@"Allocating new cell...");
@@ -224,7 +229,7 @@
                                                   hasTimestamp:hasTimestamp
                                                      hasAvatar:hasAvatar
                                                    hasSubtitle:hasSubtitle
-                                               reuseIdentifier:CellIdentifier];
+                                               reuseIdentifier:kJSMessagesCellReuseIdentifier];
     }
     else {
         NSLog(@"Dequeuing cell...");
@@ -251,7 +256,6 @@
         [self.delegate configureCell:cell atIndexPath:indexPath];
     }
     
-    [cell prepareForReuse];
     return cell;
 }
 
