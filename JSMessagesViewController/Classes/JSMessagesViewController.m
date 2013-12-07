@@ -16,8 +16,6 @@
 #import "JSMessageTextView.h"
 #import "NSString+JSMessagesView.h"
 
-static NSString * const kJSMessagesCellReuseIdentifier = @"kJSMessagesCellReuseIdentifier";
-
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
 @property (assign, nonatomic, readonly) UIEdgeInsets originalTableViewContentInset;
@@ -107,10 +105,6 @@ static NSString * const kJSMessagesCellReuseIdentifier = @"kJSMessagesCellReuseI
 {
     [super viewDidLoad];
     [self setup];
-    
-    // TODO: fix #75
-//    [self.tableView registerClass:[JSBubbleMessageCell class]
-//           forCellReuseIdentifier:kJSMessagesCellReuseIdentifier];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -210,7 +204,6 @@ static NSString * const kJSMessagesCellReuseIdentifier = @"kJSMessagesCellReuseI
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
     
     UIImageView *bubbleImageView = [self.delegate bubbleImageViewWithType:type
@@ -220,19 +213,16 @@ static NSString * const kJSMessagesCellReuseIdentifier = @"kJSMessagesCellReuseI
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
 	BOOL hasSubtitle = [self shouldHaveSubtitleForRowAtIndexPath:indexPath];
     
-    JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:kJSMessagesCellReuseIdentifier];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d", type, hasTimestamp, hasAvatar, hasSubtitle];
+    JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(!cell) {
-        NSLog(@"Allocating new cell...");
         cell = [[JSBubbleMessageCell alloc] initWithBubbleType:type
                                                bubbleImageView:bubbleImageView
                                                   hasTimestamp:hasTimestamp
                                                      hasAvatar:hasAvatar
                                                    hasSubtitle:hasSubtitle
-                                               reuseIdentifier:kJSMessagesCellReuseIdentifier];
-    }
-    else {
-        NSLog(@"Dequeuing cell...");
+                                               reuseIdentifier:CellIdentifier];
     }
     
     if(hasTimestamp) {
@@ -263,7 +253,6 @@ static NSString * const kJSMessagesCellReuseIdentifier = @"kJSMessagesCellReuseI
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
     CGFloat height = [cell height];
     cell = nil;
