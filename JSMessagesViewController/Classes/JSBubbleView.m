@@ -29,6 +29,9 @@
 
 - (void)setup;
 
+- (void)addTextViewObservers;
+- (void)removeTextViewObservers;
+
 - (CGSize)textSizeForText:(NSString *)txt;
 - (CGSize)bubbleSizeForText:(NSString *)txt;
 
@@ -82,6 +85,8 @@
             _textView.textContainerInset = UIEdgeInsetsMake(6.0f, 4.0f, 2.0f, 4.0f);
         }
         
+        [self addTextViewObservers];
+        
 //        NOTE: TODO: textView frame & text inset
 //        --------------------
 //        future implementation for textView frame
@@ -96,52 +101,53 @@
 
 - (void)dealloc
 {
+    [self removeTextViewObservers];
     _bubbleImageView = nil;
     _textView = nil;
 }
 
-#pragma mark - Setters
+#pragma mark - KVO
 
-- (void)setType:(JSBubbleMessageType)type
+- (void)addTextViewObservers
 {
-    _type = type;
-    [self setNeedsLayout];
+    [_textView addObserver:self
+                forKeyPath:@"text"
+                   options:NSKeyValueObservingOptionNew
+                   context:nil];
+    
+    [_textView addObserver:self
+                forKeyPath:@"font"
+                   options:NSKeyValueObservingOptionNew
+                   context:nil];
+    
+    [_textView addObserver:self
+                forKeyPath:@"textColor"
+                   options:NSKeyValueObservingOptionNew
+                   context:nil];
 }
 
-- (void)setText:(NSString *)text
+- (void)removeTextViewObservers
 {
-    self.textView.text = text;
-    [self setNeedsLayout];
+    [_textView removeObserver:self forKeyPath:@"text"];
+    [_textView removeObserver:self forKeyPath:@"font"];
+    [_textView removeObserver:self forKeyPath:@"textColor"];
 }
 
-- (void)setFont:(UIFont *)font
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
 {
-    self.textView.font = font;
-    [self setNeedsLayout];
-}
-
-- (void)setTextColor:(UIColor *)textColor
-{
-    self.textView.textColor = textColor;
-    [self setNeedsLayout];
+    if (object == self.textView) {
+        if([keyPath isEqualToString:@"text"]
+           || [keyPath isEqualToString:@"font"]
+           || [keyPath isEqualToString:@"textColor"]) {
+            [self setNeedsLayout];
+        }
+    }
 }
 
 #pragma mark - Getters
-
-- (NSString *)text
-{
-    return self.textView.text;
-}
-
-- (UIFont *)font
-{
-    return self.textView.font;
-}
-
-- (UIColor *)textColor
-{
-    return self.textView.textColor;
-}
 
 - (CGRect)bubbleFrame
 {

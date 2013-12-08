@@ -52,45 +52,7 @@
                    bubbleType:(JSBubbleMessageType)bubleType
               bubbleImageView:(UIImageView *)bubbleImageView;
 
-#pragma mark - Setters
-
-/**
- *  Sets the given text for the bubble view, resizing its frame as needed.
- *
- *  @param text The message text to be displayed in the bubble view.
- */
-- (void)setText:(NSString *)text;
-
-/**
- *  Sets the given font for the bubble view text, resizing its frame as needed.
- *
- *  @param font The message font to be used for the text displayed in the bubble view.
- */
-- (void)setFont:(UIFont *)font;
-
-/**
- *  Sets the given color for the text in the bubble view.
- *
- *  @param textColor The color to used for the text displayed in the bubble view.
- */
-- (void)setTextColor:(UIColor *)textColor;
-
 #pragma mark - Getters
-
-/**
- *  @return The text for the bubble view.
- */
-- (NSString *)text;
-
-/**
- *  @return The font for the bubble view.
- */
-- (UIFont *)font;
-
-/**
- *  @return The text color for the bubble view.
- */
-- (UIColor *)textColor;
 
 /**
  *  The bubble view's frame rectangle is computed and set based on the size of the text that it needs to display.

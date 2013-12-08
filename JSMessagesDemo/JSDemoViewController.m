@@ -147,7 +147,7 @@
 - (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     if([cell messageType] == JSBubbleMessageTypeOutgoing) {
-        [cell.bubbleView setTextColor:[UIColor whiteColor]];
+        cell.bubbleView.textView.textColor = [UIColor whiteColor];
     
         if([cell.bubbleView.textView respondsToSelector:@selector(linkTextAttributes)]) {
             NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];

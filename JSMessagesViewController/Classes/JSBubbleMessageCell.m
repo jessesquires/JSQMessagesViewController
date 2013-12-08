@@ -212,7 +212,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 - (void)prepareForReuse
 {
     [super prepareForReuse];
-    self.bubbleView.text = nil;
+    self.bubbleView.textView.text = nil;
     self.timestampLabel.text = nil;
     self.avatarImageView = nil;
     self.subtitleLabel.text = nil;
@@ -229,7 +229,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (void)setMessage:(NSString *)msg
 {
-    self.bubbleView.text = msg;
+    self.bubbleView.textView.text = msg;
 }
 
 - (void)setTimestamp:(NSDate *)date
@@ -303,7 +303,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (void)copy:(id)sender
 {
-    [[UIPasteboard generalPasteboard] setString:[self.bubbleView text]];
+    [[UIPasteboard generalPasteboard] setString:self.bubbleView.textView.text];
     [self resignFirstResponder];
 }
 
