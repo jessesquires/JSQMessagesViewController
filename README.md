@@ -93,7 +93,7 @@ Support the developement of this **free**, open-source control! via [Square Cash
 
 ## Customization
 
-You can customize almost any property of a cell by implementing the delegate method [`configureCell: atIndexPath:`](http://cocoadocs.org/docsets/JSMessagesViewController/3.3.0/Protocols/JSMessagesViewDelegate.html#//api/name/configureCell:atIndexPath:).
+* You can customize almost any property of a cell by implementing the optional delegate method `configureCell: atIndexPath:`
 
 ````objective-c
 - (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -119,6 +119,16 @@ You can customize almost any property of a cell by implementing the delegate met
     }
 }
 ````
+
+* Set the font for your messages bubbles via `UIAppearance`
+
+````objective-c
+[[JSBubbleView appearance] setFont:[UIFont systemFontOfSize:16.0f]];
+````
+
+* Customize your message bubbles with `JSBubbleImageViewFactory`
+
+* Customize your avatars with `JSAvatarImageFactory`
 
 *More tips coming soon!* Have your own? Submit a PR!
 
