@@ -34,11 +34,16 @@
 
 /**
  *  Returns the text view containing the message text for this bubble view.
+ *
+ *  @warning You may customize the propeties of textView, however you *must not* change its `font` property directly. Please use the `JSBubbleView` font property instead.
  */
 @property (weak, nonatomic, readonly) UITextView *textView;
 
 /**
  *  The font for the text contained in the bubble view. The default value is `[UIFont systemFontOfSize:16.0f]`.
+ *
+ *  @warning You must set this propety via `UIAppearance` only. *DO NOT set this property directly*.
+ *  @bug Setting this property directly, rather than via `UIAppearance` will cause the message bubbles and text to be laid out incorrectly.
  */
 @property (strong, nonatomic) UIFont *font UI_APPEARANCE_SELECTOR;
 
