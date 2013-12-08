@@ -32,8 +32,9 @@
 - (void)addTextViewObservers;
 - (void)removeTextViewObservers;
 
-- (CGSize)textSizeForText:(NSString *)txt;
-- (CGSize)bubbleSizeForText:(NSString *)txt;
++ (CGSize)textSizeForText:(NSString *)txt;
++ (CGSize)neededSizeForText:(NSString *)text;
++ (CGFloat)neededHeightForText:(NSString *)text;
 
 @end
 
@@ -176,17 +177,12 @@
 
 - (CGRect)bubbleFrame
 {
-    CGSize bubbleSize = [self bubbleSizeForText:self.textView.text];
+    CGSize bubbleSize = [JSBubbleView neededSizeForText:self.textView.text];
     
     return CGRectMake((self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width : 0.0f),
                       kMarginTop,
                       bubbleSize.width,
                       bubbleSize.height + kMarginTop);
-}
-
-- (CGFloat)neededHeightForCell;
-{
-    return [self bubbleSizeForText:self.textView.text].height + kMarginTop + kMarginBottom;
 }
 
 #pragma mark - Layout
@@ -213,23 +209,29 @@
 
 #pragma mark - Bubble view
 
-- (CGSize)textSizeForText:(NSString *)txt
++ (CGSize)textSizeForText:(NSString *)txt
 {
     CGFloat maxWidth = [UIScreen mainScreen].applicationFrame.size.width * 0.70f;
     CGFloat maxHeight = MAX([JSMessageTextView numberOfLinesForMessage:txt],
                          [txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
     maxHeight += kJSAvatarImageSize;
     
-    return [txt sizeWithFont:self.textView.font
+    return [txt sizeWithFont:[[JSBubbleView appearance] font]
            constrainedToSize:CGSizeMake(maxWidth, maxHeight)];
 }
 
-- (CGSize)bubbleSizeForText:(NSString *)txt
++ (CGSize)neededSizeForText:(NSString *)text
 {
-	CGSize textSize = [self textSizeForText:txt];
+    CGSize textSize = [JSBubbleView textSizeForText:text];
     
 	return CGSizeMake(textSize.width + kBubblePaddingRight,
                       textSize.height + kPaddingTop + kPaddingBottom);
+}
+
++ (CGFloat)neededHeightForText:(NSString *)text
+{
+    CGSize size = [JSBubbleView neededSizeForText:text];
+    return size.height + kMarginTop + kMarginBottom;
 }
 
 @end

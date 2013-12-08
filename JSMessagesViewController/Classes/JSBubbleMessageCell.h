@@ -106,11 +106,21 @@
  */
 - (JSBubbleMessageType)messageType;
 
+#pragma mark - Class methods
+
 /**
- *  Returns the height of the cell's frame based on the contents of its subviews.
+ *  Computes and returns the minimum necessary height of a `JSBubbleMessageCell` needed to display its contents.
  *
- *  @return The frame height of the cell.
+ *  @param text         The text to display in the cell.
+ *  @param hasTimestamp A boolean value indicating whether or not the cell has a timestamp.
+ *  @param hasAvatar    A boolean value indicating whether or not the cell has an avatar.
+ *  @param hasSubtitle  A boolean value indicating whether or not the cell has a subtitle.
+ *
+ *  @return The height required for the frame of the cell in order for the cell to display the entire contents of its subviews.
  */
-- (CGFloat)height;
++ (CGFloat)neededHeightForBubbleMessageCellWithText:(NSString *)text
+                                          timestamp:(BOOL)hasTimestamp
+                                             avatar:(BOOL)hasAvatar
+                                           subtitle:(BOOL)hasSubtitle;
 
 @end

@@ -66,11 +66,15 @@
  */
 - (CGRect)bubbleFrame;
 
+#pragma mark - Class methods
+
 /**
- *  The bubble view's height is the height of its frame plus padding for its displayed text.
+ *  Computes and returns the minimum necessary height of a `JSBubbleView` needed to display the given text.
  *
- *  @return The minimum required value for the height of the bubble view.
+ *  @param text The text to display in the bubble view.
+ *
+ *  @return The height required for the frame of the bubble view in order to display the given text.
  */
-- (CGFloat)neededHeightForCell;
++ (CGFloat)neededHeightForText:(NSString *)text;
 
 @end

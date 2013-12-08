@@ -253,10 +253,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-    CGFloat height = [cell height];
-    cell = nil;
-    return height;
+    NSString *text = [self.dataSource textForRowAtIndexPath:indexPath];
+    
+    BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
+    BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
+	BOOL hasSubtitle = [self shouldHaveSubtitleForRowAtIndexPath:indexPath];
+    
+    return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithText:text
+                                                               timestamp:hasTimestamp
+                                                                  avatar:hasAvatar
+                                                                subtitle:hasSubtitle];
 }
 
 #pragma mark - Messages view controller
