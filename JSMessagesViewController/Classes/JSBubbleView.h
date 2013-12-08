@@ -37,6 +37,11 @@
  */
 @property (weak, nonatomic, readonly) UITextView *textView;
 
+/**
+ *  The font for the text contained in the bubble view. The default value is `[UIFont systemFontOfSize:16.0f]`.
+ */
+@property (strong, nonatomic) UIFont *font UI_APPEARANCE_SELECTOR;
+
 #pragma mark - Initialization
 
 /**

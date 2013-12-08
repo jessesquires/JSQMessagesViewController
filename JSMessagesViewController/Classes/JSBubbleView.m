@@ -40,6 +40,8 @@
 
 @implementation JSBubbleView
 
+@synthesize font = _font;
+
 #pragma mark - Setup
 
 - (void)setup
@@ -145,6 +147,29 @@
             [self setNeedsLayout];
         }
     }
+}
+
+#pragma mark - Setters
+
+- (void)setFont:(UIFont *)font
+{
+    _font = font;
+    _textView.font = font;
+}
+
+#pragma mark - UIAppearance Getters
+
+- (UIFont *)font
+{
+    if (_font == nil) {
+        _font = [[[self class] appearance] font];
+    }
+    
+    if (_font != nil) {
+        return _font;
+    }
+    
+    return [UIFont systemFontOfSize:16.0f];
 }
 
 #pragma mark - Getters

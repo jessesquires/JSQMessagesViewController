@@ -28,6 +28,8 @@
     self.dataSource = self;
     [super viewDidLoad];
     
+    [[JSBubbleView appearance] setFont:[UIFont systemFontOfSize:16.0f]];
+    
     self.title = @"Messages";
     
     self.messageInputView.textView.placeHolder = @"New Message";
