@@ -57,7 +57,6 @@ A messages UI for iPhone and iPad.
 2. Setup your `viewDidLoad` like the following:
 
 ````objective-c
-
 - (void)viewDidLoad
 {
     self.delegate = self;
@@ -68,7 +67,6 @@ A messages UI for iPhone and iPad.
     
     self.messageInputView.textView.placeHolder = @"New Message";
 }
-
 ````
 
 3. Implement the `JSMessagesViewDelegate` protocol
@@ -93,7 +91,34 @@ Support the developement of this **free**, open-source control! via [Square Cash
 
 ## Customization
 
-*Stuff here coming soon!*
+You can customize almost any property of the message bubble cell by implementing the delegate method `configureCell: atIndexPath:`.
+
+````objective-c
+- (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    if([cell messageType] == JSBubbleMessageTypeOutgoing) {
+        cell.bubbleView.textView.textColor = [UIColor whiteColor];
+    
+        if([cell.bubbleView.textView respondsToSelector:@selector(linkTextAttributes)]) {
+            NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
+            [attrs setValue:[UIColor blueColor] forKey:UITextAttributeTextColor];
+            
+            cell.bubbleView.textView.linkTextAttributes = attrs;
+        }
+    }
+    
+    if(cell.timestampLabel) {
+        cell.timestampLabel.textColor = [UIColor lightGrayColor];
+        cell.timestampLabel.shadowOffset = CGSizeZero;
+    }
+    
+    if(cell.subtitleLabel) {
+        cell.subtitleLabel.textColor = [UIColor lightGrayColor];
+    }
+}
+````
+
+*More tips coming soon!* Have your own? Submit a PR!
 
 ## How To Contribute
 
