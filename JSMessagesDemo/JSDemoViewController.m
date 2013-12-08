@@ -148,6 +148,11 @@
 //
 - (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
+    // TODO:
+    // Disable data detectors because of iOS 7 bug? issue #72
+    // Allow Travis-CI to build and test
+    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeNone;
+    
     if([cell messageType] == JSBubbleMessageTypeOutgoing) {
         cell.bubbleView.textView.textColor = [UIColor whiteColor];
     
