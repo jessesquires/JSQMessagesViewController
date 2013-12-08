@@ -91,7 +91,7 @@ Support the developement of this **free**, open-source control! via [Square Cash
 
 ## Customization
 
-You can customize almost any property of the message bubble cell by implementing the delegate method `configureCell: atIndexPath:`.
+You can customize almost any property of a cell by implementing the delegate method [`configureCell: atIndexPath:`](http://cocoadocs.org/docsets/JSMessagesViewController/3.3.0/Protocols/JSMessagesViewDelegate.html#//api/name/configureCell:atIndexPath:).
 
 ````objective-c
 - (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
