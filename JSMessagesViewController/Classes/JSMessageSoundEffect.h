@@ -13,12 +13,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AudioToolbox/AudioToolbox.h>
 
 @interface JSMessageSoundEffect : NSObject
 
 + (void)playMessageReceivedSound;
 
++ (void)playMessageReceivedAlert;
+
 + (void)playMessageSentSound;
+
++ (void)playMessageSentAlert;
 
 @end

@@ -33,6 +33,7 @@ A messages UI for iPhone and iPad.
 
 * iOS 6.0+ 
 * ARC
+* [JSQSystemSoundPlayer][playerLink]
 
 ## Installation
 
@@ -42,8 +43,9 @@ A messages UI for iPhone and iPad.
 
 #### From source
 
-* Drag the `JSMessagesViewController/` folder to your project.
-* Add the `AudioToolbox.framework` to your project, if you want to use the sound effects
+* Drag the `JSMessagesViewController/` folder to your project
+* Download [JSQSystemSoundPlayer][playerLink] and follow its install instructions
+* Add the `QuartzCore.framework` to your project
 
 #### Too cool for [ARC](https://developer.apple.com/library/mac/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html)?
 
@@ -74,7 +76,7 @@ A messages UI for iPhone and iPad.
 5. Implement `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section` from the [`UITableViewDataSource` protocol](https://developer.apple.com/library/ios/documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html).
 6. Present your subclassed ViewController programatically or via StoryBoards. Your subclass should be the `rootViewController` of a `UINavigationController`.
 7. Be a badass [programming-motherfucker](http://programming-motherfucker.com) and read the fucking documentation. (Yes, there's documentation! [Seriously](http://dailyyeah.com/wp-content/uploads/2008/07/crazy_fat_kid.gif)!)
-8. See the included demo project: `JSMessagesDemo.xcodeproj`
+8. See the included demo: `JSMessagesDemo.xcworkspace`
 
 ## Documentation
 
@@ -163,6 +165,8 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 [docsLink]:http://cocoadocs.org/docsets/JSMessagesViewController/3.3.0
+
+[playerLink]:https://github.com/jessesquires/JSQSystemSoundPlayer
 
 [ss]:https://github.com/soffes/ssmessagesviewcontroller
 
