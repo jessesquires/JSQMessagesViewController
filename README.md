@@ -63,9 +63,11 @@ A messages UI for iPhone and iPad.
     self.dataSource = self;
     [super viewDidLoad];
     
-    self.title = @"Messages";
+    [[JSBubbleView appearance] setFont:/* your font for the message bubbles */];
+
+    self.title = @"Your view controller title";
     
-    self.messageInputView.textView.placeHolder = @"New Message";
+    self.messageInputView.textView.placeHolder = @"Your placeholder text";
 }
 ````
 
