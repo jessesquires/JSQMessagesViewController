@@ -1,129 +1,173 @@
-# JSMessagesViewController [![Build Status](https://secure.travis-ci.org/jessesquires/MessagesTableViewController.png)](http://travis-ci.org/jessesquires/MessagesTableViewController) [![Version Status](https://cocoapod-badges.herokuapp.com/v/JSMessagesViewController/badge.png)][docsLink]
+# MessagesTableViewController
 
 A messages UI for iPhone and iPad.
 
-`JSMessagesViewController` is a `UIViewController` subclass that is very similar to the iOS Messages app. 
-
-**Note: this is only a messaging UI, not a messaging app.**
+iOS 7 changes by Jeremy Stone, forked from https://github.com/jessesquires/MessagesTableViewController
 
 ![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2][img2]
 
-*See more [screenshots](https://github.com/jessesquires/MessagesTableViewController/tree/master/Screenshots) in the `Screenshots/` directory.*
+This messages tableview controller is very similar to the one in the iOS Messages app. **Note, this is only a messaging UI, not a messaging app.** This is intended to be used in an existing app where you have (or are developing) a messaging system and need a user interface for it.
 
-## Features 
-
-* Highly customizable
-* Arbitrary message sizes
-* Copy & paste messages
-* Support for group messages
-* Data detectors (recognizes phone numbers, links, dates, etc.)
-* Timestamps
-* Avatars
-* Subtitles
-* Lots of bubble styles, or use your own!
-* Swipe down to hide keyboard
-* Dynamically resizes input text view as you type
-* Smooth animations
-* Automatically enables/disables send button (if text view is empty or not)
-* Send/Receive sound effects
-* Storyboards support (if that's how you roll)
-* Universal for iPhone and iPad
-
-## Requirements
-
-* iOS 6.0+ 
-* ARC
-
-## Installation
-
-#### From [CocoaPods](http://www.cocoapods.org)
-
-`pod 'JSMessagesViewController'`
-
-#### From source
-
-* Drag the `JSMessagesViewController/` folder to your project.
-* Add the `AudioToolbox.framework` to your project, if you want to use the sound effects
-
-#### Too cool for [ARC](https://developer.apple.com/library/mac/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html)?
-
-* Add the `-fobjc-arc` compiler flag to all source files in your project in Target Settings > Build Phases > Compile Sources.
-
-## Getting Started
-
-1. Subclass `JSMessagesViewController`
-2. Setup your `viewDidLoad` like the following:
-
-````objective-c
-
-- (void)viewDidLoad
-{
-    self.delegate = self;
-    self.dataSource = self;
-    [super viewDidLoad];
-    
-    self.title = @"Messages";
-    
-    self.messageInputView.textView.placeHolder = @"New Message";
-}
-
-````
-
-3. Implement the `JSMessagesViewDelegate` protocol
-4. Implement the `JSMessagesViewDataSource` protocol
-5. Implement `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section` from the [`UITableViewDataSource` protocol](https://developer.apple.com/library/ios/documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html).
-6. Present your subclassed ViewController programatically or via StoryBoards. Your subclass should be the `rootViewController` of a `UINavigationController`.
-7. Be a badass [programming-motherfucker](http://programming-motherfucker.com) and read the fucking documentation. (Yes, there's documentation! [Seriously](http://dailyyeah.com/wp-content/uploads/2008/07/crazy_fat_kid.gif)!)
-8. See the included demo project: `JSMessagesDemo.xcodeproj`
-
-## Documentation
-
-Documentation is [available here][docsLink] via [CocoaDocs](http://cocoadocs.org). Thanks [@CocoaDocs](https://twitter.com/CocoaDocs)!
-
-## Customization
-
-*Stuff here coming soon!*
-
-## How To Contribute
-
-1. [Find an issue](https://github.com/jessesquires/MessagesTableViewController/issues?sort=created&state=open) to work on, or create a new one.
-2. Fork me.
-3. Create a new branch with a sweet fucking name: `git checkout -b issue_<##>_<featureOrFix>`.
-4. Do some motherfucking programming.
-5. Keep your code nice and clean by adhering to Google's [Objective-C Style Guide](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml) and Apple's [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html).
-6. Don't break shit, especially `master`.
-7. Update the documentation header comments.
-8. Update the pod spec and project version numbers, adhering to the [semantic versioning](http://semver.org) specification.
-9. Submit a pull request.
-10. See step 1.
-
-## Credits
-
-Created by [@jesse_squires](https://twitter.com/jesse_squires), a [programming-motherfucker](http://programming-motherfucker.com).
-
-Assets extracted using [@0xced](https://github.com/0xced) **/** [iOS-Artwork-Extractor](https://github.com/0xced/iOS-Artwork-Extractor).
-
-Originally inspired by [@soffes](http://github.com/soffes) **/** [SSMessagingViewController][ss].
-
-Many thanks to [the contributors](https://github.com/jessesquires/MessagesTableViewController/graphs/contributors) of this project.
-
-Square message bubbles designed by [@michaelschultz](http://www.twitter.com/michaelschultz).
+**See more [screenshots][link1] in the `Screenshots/` directory. (Surprise!)**
 
 ## About
 
-I initially developed this control to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users.
+This is based on work by [@soffes](http://github.com/soffes) [SSMessagingViewController][ss]. 
 
-As it turns out, messaging is a popular thing that iOS devs want to do — I know, this is *shocking*. Thus, I am supporting this project in my free time and have added features way beyond what [Hemoglobe](http://www.hemoglobe.com) ever needed.
+I developed this to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users.
 
-Check out my work at [Hexed Bits](http://www.hexedbits.com).
+[Square message bubbles][img4] designed by [@michaelschultz](http://www.twitter.com/michaelschultz).
+
+## Features 
+
+* Up-to-date for iOS 6.0 and ARC (iOS 5.0+ required)
+* Storyboards support (if that's how you roll)
+* Universal for iPhone and iPad
+* Allows arbitrary message (and bubble) sizes
+* Copy & paste messages
+* Timestamp options
+* Swipe/pull down to hide keyboard
+* Dynamically resizes input text view as you type
+* Smooth hiding/showing keyboard animations with `NSNotification`
+* Automatically enables/disables send button if text view is empty or not
+* Smooth send animations
+* Send/Receive sound effects
+* Various bubble styles
+
+## Installation
+
+### From [CocoaPods](http://www.cocoapods.org)
+
+    pod 'JSMessagesViewController'
+
+### From source
+
+* Drag the `JSMessagesTableViewController/` folder to your project.
+* Add the `AudioToolbox.framework` to your project, if you want to use the sound effects
+
+## How To Use
+
+#####Subclass `JSMessagesViewController`
+
+* In `- (void)viewDidLoad`
+	* Set your view controller as the `delegate` and `datasource`
+	* Set your view controller `title`
+
+#####Implement the `JSMessagesViewDelegate` protocol
+
+````objective-c 
+- (void)sendPressed:(UIButton *)sender withText:(NSString *)text
+````
+
+* Hook into your own backend here
+* Call `[self finishSend]` at the end of this method to animate and reset the text input view
+* Optionally play sound effects
+	* For outgoing messages `[JSMessageSoundEffect playMessageSentSound]`
+	* For incoming messages `[JSMessageSoundEffect playMessageReceivedSound]`
+
+````objective-c
+- (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
+````
+
+* The type of bubble for this row, options are:
+	* `JSBubbleMessageTypeIncoming`
+	* `JSBubbleMessageTypeOutgoing`
+
+````objective-c
+- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+````
+
+* The [style of the bubble][link1] for this row, options are:
+	* `JSBubbleMessageStyleDefault`
+	* `JSBubbleMessageStyleSquare`
+	* `JSBubbleMessageStyleDefaultGreen`
+
+````objective-c 
+- (JSMessagesViewTimestampPolicy)timestampPolicy
+````
+
+* How/when to display timestamps for messages, options are:
+	* `JSMessagesViewTimestampPolicyAll`
+	* `JSMessagesViewTimestampPolicyAlternating`
+	* `JSMessagesViewTimestampPolicyEveryThree`
+	* `JSMessagesViewTimestampPolicyEveryFive`
+	* `JSMessagesViewTimestampPolicyCustom`
+
+````objective-c 
+- (JSMessagesViewAvatarPolicy)avatarPolicy
+````
+
+* How/when to display avatars, options are:
+	* `JSMessagesViewAvatarPolicyIncomingOnly`
+	* `JSMessagesViewAvatarPolicyBoth`
+	* `JSMessagesViewAvatarPolicyNone`
+
+````objective-c 
+- (JSAvatarStyle)avatarStyle
+````
+
+* The [style for the avatars][link1], options are:
+	* `JSAvatarStyleCircle`
+	* `JSAvatarStyleSquare`
+	* `JSAvatarStyleNone`
+
+````objective-c 
+- (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
+````
+
+* Returns if this row should display a timestamp or not
+* Required only if using `JSMessagesViewTimestampPolicyCustom`
+
+#####Implement the `JSMessagesViewDataSource` protocol
+
+````objective-c 
+- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
+````
+
+* The text to be displayed for this row
+
+````objective-c 
+- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
+````
+
+* The timestamp to be displayed *above* this row
+
+````objective-c 
+- (UIImage *)avatarImageForIncomingMessage
+````
+
+* The avatar image for incoming messages
+
+````objective-c 
+- (UIImage *)avatarImageForOutgoingMessage
+````
+
+* The avatar image for outgoing messages
+
+#####Implement the [table view data source][ref1] method that you should be familiar with
+
+````objective-c 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+````
+
+#####Customize
+
+* For custom background color, use `- (void)setBackgroundColor:(UIColor *)color`
+* For custom send button, override `- (UIButton *)sendButton`
+
+##### Notes
+
+* You may present view programmatically, or use Storyboards
+* Your `JSMessagesViewController` subclass **must** be presented in a `UINavigationController`
+
+##### Demo projects included
+
+* `MessagesDemo.xcodeproj` for example of programmatic presentation
+* `MessagesDemoStoryboards/MessagesDemoSB.xcodeproj` for example of use with Storyboards
 
 ## Apps Using This Control
 
 [Hemoglobe](http://bit.ly/hemoglobeapp)
-
-[Loopse](https://itunes.apple.com/us/app/loopse-spots-friends-sessions/id704783915?mt=8)
-
-[Oxwall Messenger](https://github.com/tochman/OxwallMessenger)
 
 [FourChat](https://itunes.apple.com/us/app/fourchat/id650833730?mt=8)
 
@@ -137,13 +181,9 @@ Check out my work at [Hexed Bits](http://www.hexedbits.com).
 
 [AcaniChat](https://github.com/acani/AcaniChat)
 
-[UIBubbleTableView](https://github.com/AlexBarinov/UIBubbleTableView)
-
-[SPHChatBubble](https://github.com/sibahota059/SPHChatBubble)
-
 ## [MIT License](http://opensource.org/licenses/MIT)
 
-You are free to use this as you please. **No attribution necessary, but much appreciated.**
+You are free to use this as you please. No attribution necessary. **However, a link back to [Hexed Bits](http://www.hexedbits.com) or here would be appreciated. If you use this, please tell me about it!**
 
 Copyright &copy; 2013 Jesse Squires
 
@@ -153,9 +193,14 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-[docsLink]:http://cocoadocs.org/docsets/JSMessagesViewController/3.3.0
-
 [ss]:https://github.com/soffes/ssmessagesviewcontroller
 
-[img1]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot-ios7.png
-[img2]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot5.png
+[ref1]:http://developer.apple.com/library/ios/#documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html#//apple_ref/occ/intf/UITableViewDataSource
+[ref2]:http://developer.apple.com/library/ios/#documentation/cocoa/conceptual/ProgrammingWithObjectiveC/CustomizingExistingClasses/CustomizingExistingClasses.html
+
+[img1]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot0.png
+[img2]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot2.png
+[img3]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot3.png
+[img4]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot4.png
+
+[link1]:https://github.com/jessesquires/MessagesTableViewController/tree/master/Screenshots
