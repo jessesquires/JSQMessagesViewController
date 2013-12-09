@@ -34,8 +34,18 @@
 
 /**
  *  Returns the text view containing the message text for this bubble view.
+ *
+ *  @warning You may customize the propeties of textView, however you *must not* change its `font` property directly. Please use the `JSBubbleView` font property instead.
  */
 @property (weak, nonatomic, readonly) UITextView *textView;
+
+/**
+ *  The font for the text contained in the bubble view. The default value is `[UIFont systemFontOfSize:16.0f]`.
+ *
+ *  @warning You must set this propety via `UIAppearance` only. *DO NOT set this property directly*.
+ *  @bug Setting this property directly, rather than via `UIAppearance` will cause the message bubbles and text to be laid out incorrectly.
+ */
+@property (strong, nonatomic) UIFont *font UI_APPEARANCE_SELECTOR;
 
 #pragma mark - Initialization
 
@@ -52,45 +62,7 @@
                    bubbleType:(JSBubbleMessageType)bubleType
               bubbleImageView:(UIImageView *)bubbleImageView;
 
-#pragma mark - Setters
-
-/**
- *  Sets the given text for the bubble view, resizing its frame as needed.
- *
- *  @param text The message text to be displayed in the bubble view.
- */
-- (void)setText:(NSString *)text;
-
-/**
- *  Sets the given font for the bubble view text, resizing its frame as needed.
- *
- *  @param font The message font to be used for the text displayed in the bubble view.
- */
-- (void)setFont:(UIFont *)font;
-
-/**
- *  Sets the given color for the text in the bubble view.
- *
- *  @param textColor The color to used for the text displayed in the bubble view.
- */
-- (void)setTextColor:(UIColor *)textColor;
-
 #pragma mark - Getters
-
-/**
- *  @return The text for the bubble view.
- */
-- (NSString *)text;
-
-/**
- *  @return The font for the bubble view.
- */
-- (UIFont *)font;
-
-/**
- *  @return The text color for the bubble view.
- */
-- (UIColor *)textColor;
 
 /**
  *  The bubble view's frame rectangle is computed and set based on the size of the text that it needs to display.
@@ -99,11 +71,15 @@
  */
 - (CGRect)bubbleFrame;
 
+#pragma mark - Class methods
+
 /**
- *  The bubble view's height is the height of its frame plus padding for its displayed text.
+ *  Computes and returns the minimum necessary height of a `JSBubbleView` needed to display the given text.
  *
- *  @return The minimum required value for the height of the bubble view.
+ *  @param text The text to display in the bubble view.
+ *
+ *  @return The height required for the frame of the bubble view in order to display the given text.
  */
-- (CGFloat)neededHeightForCell;
++ (CGFloat)neededHeightForText:(NSString *)text;
 
 @end

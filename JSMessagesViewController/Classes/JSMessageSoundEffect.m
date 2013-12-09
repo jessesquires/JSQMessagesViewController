@@ -13,39 +13,35 @@
 //
 
 #import "JSMessageSoundEffect.h"
+#import <JSQSystemSoundPlayer/JSQSystemSoundPlayer.h>
 
-@interface JSMessageSoundEffect ()
-
-+ (void)playSoundWithName:(NSString *)name type:(NSString *)type;
-
-@end
-
-
+static NSString * const kJSMessageReceived = @"message-received";
+static NSString * const kJSMessageSent = @"message-sent";
 
 @implementation JSMessageSoundEffect
 
-+ (void)playSoundWithName:(NSString *)name type:(NSString *)type
-{
-    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:type];
-    
-    if([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-        SystemSoundID sound;
-        AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:path], &sound);
-        AudioServicesPlaySystemSound(sound);
-    }
-    else {
-        NSLog(@"Error: audio file not found at path: %@", path);
-    }
-}
-
 + (void)playMessageReceivedSound
 {
-    [JSMessageSoundEffect playSoundWithName:@"message-received" type:@"aiff"];
+    [[JSQSystemSoundPlayer sharedPlayer] playSoundWithName:kJSMessageReceived
+                                                 extension:kJSQSystemSoundTypeAIFF];
+}
+
++ (void)playMessageReceivedAlert
+{
+    [[JSQSystemSoundPlayer sharedPlayer] playAlertSoundWithName:kJSMessageReceived
+                                                      extension:kJSQSystemSoundTypeAIFF];
 }
 
 + (void)playMessageSentSound
 {
-    [JSMessageSoundEffect playSoundWithName:@"message-sent" type:@"aiff"];
+    [[JSQSystemSoundPlayer sharedPlayer] playSoundWithName:kJSMessageSent
+                                                 extension:kJSQSystemSoundTypeAIFF];
+}
+
++ (void)playMessageSentAlert
+{
+    [[JSQSystemSoundPlayer sharedPlayer] playAlertSoundWithName:kJSMessageSent
+                                                      extension:kJSQSystemSoundTypeAIFF];
 }
 
 @end

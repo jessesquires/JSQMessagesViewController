@@ -1,7 +1,10 @@
 language: objective-c
 
+before_install: gem install cocoapods
+
 script: 
-- xctool -project JSMessagesDemo.xcodeproj -scheme JSMessagesDemo -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO clean build test
+- xctool -workspace JSMessagesDemo.xcworkspace -scheme JSMessagesDemo -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO clean build test
+#- xctool -workspace JSMessagesDemo.xcworkspace -scheme JSMessagesDemoTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO clean build run-tests -freshSimulator -freshInstall
 
 branches:
 only:

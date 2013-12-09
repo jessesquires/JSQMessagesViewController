@@ -29,13 +29,19 @@
 
 - (void)setup;
 
-- (CGSize)textSizeForText:(NSString *)txt;
-- (CGSize)bubbleSizeForText:(NSString *)txt;
+- (void)addTextViewObservers;
+- (void)removeTextViewObservers;
+
++ (CGSize)textSizeForText:(NSString *)txt;
++ (CGSize)neededSizeForText:(NSString *)text;
++ (CGFloat)neededHeightForText:(NSString *)text;
 
 @end
 
 
 @implementation JSBubbleView
+
+@synthesize font = _font;
 
 #pragma mark - Setup
 
@@ -82,6 +88,8 @@
             _textView.textContainerInset = UIEdgeInsetsMake(6.0f, 4.0f, 2.0f, 4.0f);
         }
         
+        [self addTextViewObservers];
+        
 //        NOTE: TODO: textView frame & text inset
 //        --------------------
 //        future implementation for textView frame
@@ -96,66 +104,85 @@
 
 - (void)dealloc
 {
+    [self removeTextViewObservers];
     _bubbleImageView = nil;
     _textView = nil;
 }
 
+#pragma mark - KVO
+
+- (void)addTextViewObservers
+{
+    [_textView addObserver:self
+                forKeyPath:@"text"
+                   options:NSKeyValueObservingOptionNew
+                   context:nil];
+    
+    [_textView addObserver:self
+                forKeyPath:@"font"
+                   options:NSKeyValueObservingOptionNew
+                   context:nil];
+    
+    [_textView addObserver:self
+                forKeyPath:@"textColor"
+                   options:NSKeyValueObservingOptionNew
+                   context:nil];
+}
+
+- (void)removeTextViewObservers
+{
+    [_textView removeObserver:self forKeyPath:@"text"];
+    [_textView removeObserver:self forKeyPath:@"font"];
+    [_textView removeObserver:self forKeyPath:@"textColor"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if (object == self.textView) {
+        if([keyPath isEqualToString:@"text"]
+           || [keyPath isEqualToString:@"font"]
+           || [keyPath isEqualToString:@"textColor"]) {
+            [self setNeedsLayout];
+        }
+    }
+}
+
 #pragma mark - Setters
-
-- (void)setType:(JSBubbleMessageType)type
-{
-    _type = type;
-    [self setNeedsLayout];
-}
-
-- (void)setText:(NSString *)text
-{
-    self.textView.text = text;
-    [self setNeedsLayout];
-}
 
 - (void)setFont:(UIFont *)font
 {
-    self.textView.font = font;
-    [self setNeedsLayout];
+    _font = font;
+    _textView.font = font;
 }
 
-- (void)setTextColor:(UIColor *)textColor
+#pragma mark - UIAppearance Getters
+
+- (UIFont *)font
 {
-    self.textView.textColor = textColor;
-    [self setNeedsLayout];
+    if (_font == nil) {
+        _font = [[[self class] appearance] font];
+    }
+    
+    if (_font != nil) {
+        return _font;
+    }
+    
+    return [UIFont systemFontOfSize:16.0f];
 }
 
 #pragma mark - Getters
 
-- (NSString *)text
-{
-    return self.textView.text;
-}
-
-- (UIFont *)font
-{
-    return self.textView.font;
-}
-
-- (UIColor *)textColor
-{
-    return self.textView.textColor;
-}
-
 - (CGRect)bubbleFrame
 {
-    CGSize bubbleSize = [self bubbleSizeForText:self.textView.text];
+    CGSize bubbleSize = [JSBubbleView neededSizeForText:self.textView.text];
     
     return CGRectMake((self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width : 0.0f),
                       kMarginTop,
                       bubbleSize.width,
                       bubbleSize.height + kMarginTop);
-}
-
-- (CGFloat)neededHeightForCell;
-{
-    return [self bubbleSizeForText:self.textView.text].height + kMarginTop + kMarginBottom;
 }
 
 #pragma mark - Layout
@@ -182,23 +209,29 @@
 
 #pragma mark - Bubble view
 
-- (CGSize)textSizeForText:(NSString *)txt
++ (CGSize)textSizeForText:(NSString *)txt
 {
     CGFloat maxWidth = [UIScreen mainScreen].applicationFrame.size.width * 0.70f;
     CGFloat maxHeight = MAX([JSMessageTextView numberOfLinesForMessage:txt],
                          [txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
     maxHeight += kJSAvatarImageSize;
     
-    return [txt sizeWithFont:self.textView.font
+    return [txt sizeWithFont:[[JSBubbleView appearance] font]
            constrainedToSize:CGSizeMake(maxWidth, maxHeight)];
 }
 
-- (CGSize)bubbleSizeForText:(NSString *)txt
++ (CGSize)neededSizeForText:(NSString *)text
 {
-	CGSize textSize = [self textSizeForText:txt];
+    CGSize textSize = [JSBubbleView textSizeForText:text];
     
 	return CGSizeMake(textSize.width + kBubblePaddingRight,
                       textSize.height + kPaddingTop + kPaddingBottom);
+}
+
++ (CGFloat)neededHeightForText:(NSString *)text
+{
+    CGSize size = [JSBubbleView neededSizeForText:text];
+    return size.height + kMarginTop + kMarginBottom;
 }
 
 @end
