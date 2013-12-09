@@ -209,3 +209,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 [img1]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot-ios7.png
 [img2]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot5.png
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jessesquires/messagestableviewcontroller/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
