@@ -26,6 +26,10 @@ typedef NS_ENUM(NSUInteger, JSMessagesType) {
     JSVideoMessage
 };
 
+
+/**
+ *  An instance of JSMessage is a means for holding the message content Data either being Text or Media Message type.
+ */
 @interface JSMessage : NSObject
 
 /**

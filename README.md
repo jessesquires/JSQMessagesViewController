@@ -13,8 +13,11 @@ A messages UI for iPhone and iPad.
 ## Features 
 
 * Highly customizable
+* Text content Messages
+* Image ( Photos,Videos ) attached content messages with description title
 * Arbitrary message sizes
-* Copy & paste messages
+* Copy & paste Text messages
+* Action delegate to see more information for displayed media messages when tapping
 * Support for group messages
 * Data detectors (recognizes phone numbers, links, dates, etc.)
 * Timestamps
@@ -63,6 +66,7 @@ A messages UI for iPhone and iPad.
     [super viewDidLoad];
     
     self.title = @"Messages";
+    [self.messageInputView showMediaButton:YES];
     
     self.messageInputView.textView.placeHolder = @"New Message";
 }
