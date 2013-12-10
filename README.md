@@ -6,7 +6,7 @@ A messages UI for iPhone and iPad.
 
 **Note: this is only a messaging UI, not a messaging app.**
 
-![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2](https://github.com/0xcodezero/MessagesTableViewController/blob/issue_75_photoMessages/Screenshots/iphone5-screenshot-ios7-Media-support.png)
+![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2](https://raw.github.com/0xcodezero/MessagesTableViewController/issue_75_photoMessages/Screenshots/iphone5-screenshot-ios7-Media-support.png)
 
 *See more [screenshots](https://github.com/jessesquires/MessagesTableViewController/tree/master/Screenshots) in the `Screenshots/` directory.*
 
