@@ -194,6 +194,8 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 
 - (UIView *)customLeftViewForInputView;
 
+- (UIView *)customTopHeaderView;
+
 @end
 
 
