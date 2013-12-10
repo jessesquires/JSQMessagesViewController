@@ -192,6 +192,10 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  */
 - (UIButton *)sendButtonForInputView;
 
+- (UIView *)customLeftViewForInputView;
+
+- (UIView *)customTopHeaderView;
+
 @end
 
 

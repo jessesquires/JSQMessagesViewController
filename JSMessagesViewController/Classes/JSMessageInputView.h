@@ -54,6 +54,8 @@ typedef NS_ENUM(NSUInteger, JSMessageInputViewStyle) {
 
 #pragma mark - Initialization
 
+@property(strong, nonatomic) UIView *customLeftView;
+
 /**
  *  Initializes and returns an input view having the given frame, style, delegate, and panGestureRecognizer.
  *
@@ -83,6 +85,8 @@ typedef NS_ENUM(NSUInteger, JSMessageInputViewStyle) {
  *  @return A constant indicating the height of one line of text in the input view.
  */
 + (CGFloat)textViewLineHeight;
+
+- (void)setCustomLeftViewForInputView:(UIView *)customLeftViewForInputView;
 
 /**
  *  @return A contant indicating the maximum number of lines of text that can be displayed in the textView.

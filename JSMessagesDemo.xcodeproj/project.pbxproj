@@ -105,6 +105,8 @@
 		88E43C7F1830138A0045E52D /* bubble-classic-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E43C7D1830138A0045E52D /* bubble-classic-selected@2x.png */; };
 		88E43C821830147E0045E52D /* bubble-classic-typing.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E43C801830147E0045E52D /* bubble-classic-typing.png */; };
 		88E43C831830147E0045E52D /* bubble-classic-typing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E43C811830147E0045E52D /* bubble-classic-typing@2x.png */; };
+		C0A49401F7908422AA247FF8 /* up-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C0A49FF2DB39BACD1876C8D2 /* up-icon@2x.png */; };
+		C0A498E36E4BC5BBC66DE66F /* up-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C0A498F96D4696485B7F583D /* up-icon.png */; };
 		FF5F1C19A2B14956BCA42EBB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFF9601294443728D9481E0 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -211,6 +213,8 @@
 		88E43C801830147E0045E52D /* bubble-classic-typing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble-classic-typing.png"; sourceTree = "<group>"; };
 		88E43C811830147E0045E52D /* bubble-classic-typing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble-classic-typing@2x.png"; sourceTree = "<group>"; };
 		A8C230F1717F4008B2BFAEA6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C0A498F96D4696485B7F583D /* up-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up-icon.png"; sourceTree = "<group>"; };
+		C0A49FF2DB39BACD1876C8D2 /* up-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up-icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +291,8 @@
 				88A3FB62182E079E00705327 /* JSDemoViewController.m */,
 				88A3FB64182E079E00705327 /* Images.xcassets */,
 				88A3FB50182E079E00705327 /* Supporting Files */,
+				C0A498F96D4696485B7F583D /* up-icon.png */,
+				C0A49FF2DB39BACD1876C8D2 /* up-icon@2x.png */,
 			);
 			path = JSMessagesDemo;
 			sourceTree = "<group>";
@@ -618,6 +624,8 @@
 				88A3FC77182E0EA000705327 /* bubble-classic-blue@2x.png in Resources */,
 				88A6AD131839FE95000F56DA /* bubble-stroked-tailless@2x.png in Resources */,
 				88A3FCA7182E0EA000705327 /* message-sent.aiff in Resources */,
+				C0A498E36E4BC5BBC66DE66F /* up-icon.png in Resources */,
+				C0A49401F7908422AA247FF8 /* up-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

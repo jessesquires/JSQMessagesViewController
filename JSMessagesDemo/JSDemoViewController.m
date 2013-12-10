@@ -188,6 +188,40 @@
     return YES;
 }
 
+- (UIView *)customTopHeaderView {
+    if (self.topHeaderView == nil) {
+        self.topHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 60, 320, 40)];
+        self.topHeaderView.backgroundColor = [UIColor lightGrayColor];
+
+        UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+        headerLabel.backgroundColor = [UIColor clearColor];
+        headerLabel.textColor = [UIColor whiteColor];
+        headerLabel.text = @"Apple Board Communications";
+        headerLabel.textAlignment = NSTextAlignmentCenter;
+
+        [self.topHeaderView addSubview:headerLabel];
+    }
+    return self.topHeaderView;
+}
+
+
+- (UIView *)customLeftViewForInputView {
+    if (self.customLeftView == nil){
+        UIImage *upIcon = [UIImage imageNamed:@"up-icon.png"];
+        self.customLeftView = [[UIImageView alloc] initWithImage:upIcon];
+
+        self.customLeftView.userInteractionEnabled = YES;
+        UIGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(customViewTapped)];
+        [self.customLeftView addGestureRecognizer:tapGestureRecognizer];
+    }
+    return self.customLeftView;
+}
+
+- (void)customViewTapped {
+    NSLog(@"Yo! Show view to attach pictures etc.");
+}
+
+
 #pragma mark - Messages view data source: REQUIRED
 
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath

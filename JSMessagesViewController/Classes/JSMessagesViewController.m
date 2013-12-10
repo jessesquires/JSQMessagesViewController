@@ -59,8 +59,17 @@
     
     JSMessageInputViewStyle inputViewStyle = [self.delegate inputViewStyle];
     CGFloat inputViewHeight = (inputViewStyle == JSMessageInputViewStyleFlat) ? 45.0f : 40.0f;
-    
-    CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - inputViewHeight);
+
+    CGFloat y = 0.0f;
+    if ([self.delegate respondsToSelector:@selector(customTopHeaderView)]) {
+        UIView *topHeaderView = [self.delegate customTopHeaderView];
+
+        [self.view addSubview:topHeaderView];
+        y = topHeaderView.frame.size.height + 60;
+    }
+
+
+    CGRect tableFrame = CGRectMake(0.0f, y, size.width, size.height - inputViewHeight - y);
 	UITableView *tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
 	tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	tableView.dataSource = self;
@@ -79,6 +88,10 @@
                                                                         style:inputViewStyle
                                                                      delegate:self
                                                          panGestureRecognizer:_tableView.panGestureRecognizer];
+    
+    if ([self.delegate respondsToSelector:@selector(customLeftViewForInputView)]) {
+        inputView.customLeftViewForInputView = [self.delegate customLeftViewForInputView];
+    }
     
     if([self.delegate respondsToSelector:@selector(sendButtonForInputView)]) {
         UIButton *sendButton = [self.delegate sendButtonForInputView];
