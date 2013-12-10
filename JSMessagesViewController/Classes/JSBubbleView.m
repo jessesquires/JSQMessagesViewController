@@ -17,11 +17,12 @@
 #import "JSMessageInputView.h"
 #import "JSAvatarImageFactory.h"
 #import "NSString+JSMessagesView.h"
+#import "UIImage+JSMessagesView.h"
 
 #define kMarginTop 8.0f
 #define kMarginBottom 4.0f
 #define kPaddingTop 4.0f
-#define kPaddingBottom 8.0f
+#define kPaddingBottom 3.0f
 #define kBubblePaddingRight 35.0f
 
 
@@ -185,6 +186,10 @@
     return (_attachedImageView != nil);
 }
 
+-(void) setPlayButtonOverlay
+{
+    [_attachedImageView setImage:[[_attachedImageView.image js_imageResizeWithSize:_attachedImageView.frame.size] js_imageOverlayAPlayButtonAbove]];
+}
 #pragma mark - Layout
 
 - (void)layoutSubviews
@@ -192,22 +197,8 @@
     [super layoutSubviews];
     
     self.bubbleImageView.frame = [self bubbleFrame];
-    
-    CGFloat textX = self.bubbleImageView.frame.origin.x;
-    
-    if(self.type == JSBubbleMessageTypeIncoming) {
-        textX += (self.bubbleImageView.image.capInsets.left / 2.0f);
-    }
-    
     int imageSmallShift = (self.type == JSBubbleMessageTypeIncoming) ? 3 : -3;
-    
-    CGRect textFrame = CGRectMake(textX,
-                                  self.bubbleImageView.frame.origin.y,
-                                  self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f),
-                                  self.bubbleImageView.frame.size.height - kMarginTop);
-    
-    self.textView.frame = textFrame;
-    [self.textView setHidden:NO];
+    int imageHeightForDescribtion = 3.0f;
     
     // If There is an image attached need to be displayed ..
     if (_attachedImageView) {
@@ -221,10 +212,33 @@
         // Set rounded Corners for Image Message View
         [self setMaskTo:_attachedImageView byRoundingCorners:UIRectCornerAllCorners ];
         
+        imageHeightForDescribtion = _attachedImageView.frame.size.height + 5;
         
-        [self.textView setHidden:YES];
         [self addSubview:_attachedImageView];
+        
+        if (_message && _message.type == JSVideoMessage) {
+            [self setPlayButtonOverlay];
+        }
     }
+    
+    
+    CGFloat textX = self.bubbleImageView.frame.origin.x;
+    
+    if(self.type == JSBubbleMessageTypeIncoming) {
+        textX += (self.bubbleImageView.image.capInsets.left / 2.0f);
+    }else
+    {
+        textX += (self.bubbleImageView.image.capInsets.left / 4.0f);
+    }
+    
+    
+    
+    CGRect textFrame = CGRectMake(textX,
+                                  self.bubbleImageView.frame.origin.y + imageHeightForDescribtion,
+                                  self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f),
+                                  self.bubbleImageView.frame.size.height - kMarginTop);
+    
+    self.textView.frame = textFrame;
     
 }
 
@@ -247,7 +261,7 @@
     CGSize imageSize = [self bubbleSizeForAttachedImage];
     
     // Check If there is an image attached , or It is Just a regular text Message.
-    CGSize bubbleSize = (_attachedImageView) ? imageSize : textSize ;
+    CGSize bubbleSize = CGSizeMake( MAX(imageSize.width, textSize.width), round (imageSize.height + textSize.height));
     
 	return CGSizeMake(bubbleSize.width + kBubblePaddingRight,
                       bubbleSize.height + kPaddingTop + kPaddingBottom);

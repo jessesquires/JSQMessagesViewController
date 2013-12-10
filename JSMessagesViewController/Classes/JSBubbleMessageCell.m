@@ -36,6 +36,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 				 subtitle:(BOOL)hasSubtitle;
 
 - (void)handleLongPressGesture:(UILongPressGestureRecognizer *)longPress;
+- (void)handleTapPressGesture:(UITapGestureRecognizer *)tap;
 
 - (void)handleMenuWillHideNotification:(NSNotification *)notification;
 - (void)handleMenuWillShowNotification:(NSNotification *)notification;
@@ -66,6 +67,11 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                                                                                              action:@selector(handleLongPressGesture:)];
     [recognizer setMinimumPressDuration:0.4f];
     [self addGestureRecognizer:recognizer];
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(handleTapPressGesture:)];
+    [tapRecognizer setNumberOfTapsRequired:1];
+    [self addGestureRecognizer:tapRecognizer];
 }
 
 - (void)configureTimestampLabel
@@ -211,9 +217,12 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 #pragma mark - Setters
 
-- (void)setMessage:(NSString *)msg
+- (void)setMessage:(JSMessage *)msg
 {
-    self.bubbleView.text = msg;
+    self.bubbleView.message = msg;
+    
+    self.bubbleView.text = msg.textMessage;
+    [self.bubbleView setMessageImage:msg.thumbnailImage];
 }
 
 - (void)setTimestamp:(NSDate *)date
@@ -234,11 +243,6 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 - (void)setSubtitle:(NSString *)subtitle
 {
 	self.subtitleLabel.text = subtitle;
-}
-
-- (void)setAttachedImage:(UIImage*)image
-{
-    [self.bubbleView setMessageImage:image];
 }
 
 #pragma mark - Getters
@@ -320,6 +324,17 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                                                object:nil];
     [menu setMenuVisible:YES animated:YES];
     [self.bubbleView layoutSubviews];
+}
+
+- (void)handleTapPressGesture:(UITapGestureRecognizer *)tap
+{
+    if( ![self becomeFirstResponder])
+        return;
+    
+    if (![self.bubbleView isImageMessage])
+        return;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:MEDIA_TAPPED_TO_SEE_NOTFICATION object:[NSNumber numberWithInteger:self.tag]];
 }
 
 #pragma mark - Notifications

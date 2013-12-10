@@ -27,5 +27,7 @@
                  shadowOffSet:(CGSize)shadowOffset;
 
 - (UIImage *)js_imageMaskWithColor:(UIColor *)maskColor;
+- (UIImage *)js_imageOverlayAPlayButtonAbove;
+- (UIImage *) js_imageResizeWithSize:(CGSize) size;
 
 @end

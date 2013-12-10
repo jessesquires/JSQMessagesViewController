@@ -108,4 +108,28 @@
     return newImage;
 }
 
+- (UIImage *) js_imageOverlayAPlayButtonAbove
+{
+    UIImage *watermarkImage = [UIImage imageNamed:@"play-media-button.png"];
+    
+    UIGraphicsBeginImageContext(self.size);
+    [self drawInRect:CGRectMake(0, 0, self.size.width, self.size.height)];
+    [watermarkImage drawInRect:CGRectMake(self.size.width - 54, self.size.height - 54, 50, 50)];
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return result;
+}
+
+- (UIImage *) js_imageResizeWithSize:(CGSize) size
+{
+    UIGraphicsBeginImageContext(size);
+    [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return result;
+}
+
 @end

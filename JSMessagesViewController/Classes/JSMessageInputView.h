@@ -101,4 +101,10 @@ typedef NS_ENUM(NSUInteger, JSMessageInputViewStyle) {
  */
 + (CGFloat)maxHeight;
 
+/**
+ *  Setting Boolean to show the Media Button or Not.
+ *
+ *  @param isShown The YES/NO to be displayed in the button
+ */
+- (void) showMediaButton:(BOOL) isShown;
 @end

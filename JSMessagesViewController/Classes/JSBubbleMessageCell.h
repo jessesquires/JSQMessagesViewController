@@ -14,6 +14,8 @@
 
 #import <UIKit/UIKit.h>
 #import "JSBubbleView.h"
+#import "JSMessage.h"
+#import "JSGlobals.h"
 
 /**
  *  The `JSBubbleMessageCell` class defines the attributes and behavior of the cells that appear in `JSMessagesViewController`. This class includes properties and methods for setting and managing cell content.
@@ -71,9 +73,9 @@
 /**
  *  Sets the message to be displayed in the bubbleView of the cell.
  *
- *  @param msg The message text for the cell.
+ *  @param msg The message Data for the cell.
  */
-- (void)setMessage:(NSString *)msg;
+- (void)setMessage:(JSMessage *)msg;
 
 /**
  *  Sets the date to be displayed in the timestampLabel of the cell. The date is formatted for you via `NSDateFormatter` by `JSBubbleMessageCell`.
@@ -95,13 +97,6 @@
  *  @param subtitle The subtitle text for the cell.
  */
 - (void)setSubtitle:(NSString *)subtitle;
-
-/**
- *  Sets the image to be displayed in the bubble image view of the cell.
- *
- *  @param image The attached displayed image for the cell.
- */
-- (void)setAttachedImage:(UIImage*)image;
 
 #pragma mark - Getters
 

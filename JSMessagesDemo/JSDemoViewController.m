@@ -31,17 +31,21 @@
     self.title = @"Messages";
     
     self.messageInputView.textView.placeHolder = @"New Message";
+    [self.messageInputView showMediaButton:YES];
     
     [self setBackgroundColor:[UIColor whiteColor]];
     
+    
     self.messages = [[NSMutableArray alloc] initWithObjects:
-                     @"JSMessagesViewController is simple and easy to use.",
-                     @"It's highly customizable.",
-                     @"It even has data detectors. You can call me tonight. My cell number is 452-123-4567. \nMy website is www.hexedbits.com.",
-                     @"Group chat is possible. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!",
+                     [[JSMessage alloc] initWithTextMessage:@"JSMessagesViewController is simple and easy to use."],
+                     [[JSMessage alloc] initWithTextMessage:@"It's highly customizable."],
+                     [[JSMessage alloc] initWithTextMessage:@"It even has data detectors. You can call me tonight. My cell number is 452-123-4567. \nMy website is www.hexedbits.com."],
+                     [[JSMessage alloc] initWithTextMessage:@"Group chat is possible. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!"],
+                     [[JSMessage alloc] initWithVideoMessage:[UIImage imageNamed:@"test3.jpg"] descrption:@"Apple WWDC 2011: Steve Jobs' keynote" linkedToURL:[NSURL URLWithString:@"http://www.apple.com"]],
                      nil];
     
     self.timestamps = [[NSMutableArray alloc] initWithObjects:
+                       [NSDate distantPast],
                        [NSDate distantPast],
                        [NSDate distantPast],
                        [NSDate distantPast],
@@ -52,15 +56,14 @@
                       kSubtitleJobs,
                       kSubtitleWoz,
                       kSubtitleJobs,
-                      kSubtitleCook, nil];
+                      kSubtitleCook,
+                      kSubtitleJobs, nil];
     
     self.avatars = [[NSDictionary alloc] initWithObjectsAndKeys:
                     [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-jobs" croppedToCircle:YES], kSubtitleJobs,
                     [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-woz" croppedToCircle:YES], kSubtitleWoz,
                     [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-cook" croppedToCircle:YES], kSubtitleCook,
                     nil];
-    
-    self.attachedImageMessages = [[NSMutableDictionary alloc] initWithCapacity:5];
     
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
 //                                                                                           target:self
@@ -83,9 +86,9 @@
 
 #pragma mark - Messages view delegate: REQUIRED
 
-- (void)didSendText:(NSString *)text
+- (void)didSendMessageData:(JSMessage *)message
 {
-    [self.messages addObject:text];
+    [self.messages addObject:message];
     
     [self.timestamps addObject:[NSDate date]];
     
@@ -100,39 +103,26 @@
         [self.subtitles addObject:kSubtitleJobs];
     }
     
-    [self finishSend];
+    
+    [self finishSendingMessage:(message.type == JSTextMessage)];
+    
     [self scrollToBottomAnimated:YES];
 }
 
-- (void)didSendAttachedImage:(UIImage *)image ForKey:(NSString *)key
+- (JSMessage*) attachedMediaMessage
 {
-    [self.messages addObject:key];
-    [_attachedImageMessages setValue:image forKey:key];
-    
-    [self.timestamps addObject:[NSDate date]];
-    
-    if((self.messages.count - 1) % 2) {
-        [JSMessageSoundEffect playMessageSentSound];
-        
-        [self.subtitles addObject:arc4random_uniform(100) % 2 ? kSubtitleCook : kSubtitleWoz];
-    }
-    else {
-        [JSMessageSoundEffect playMessageReceivedSound];
-        
-        [self.subtitles addObject:kSubtitleJobs];
-    }
-    
-    [self finishSendTheAttachedMessage];
-    [self scrollToBottomAnimated:YES];
-}
-
-- (UIImage *) attachedImageSelected
-{
+    JSMessage* userSelectedMediaMessage = nil;
     UIImage* image = nil;
+    NSURL * moreInfoURL = [NSURL URLWithString:@"http://www.github.com"];
+    
     int random = (arc4random_uniform(100) % 3) + 1 ;
     image = [UIImage imageNamed:[NSString stringWithFormat:@"test%d.jpg" , random]];
     
-    return image;
+    
+    random = (arc4random_uniform(100) % 2) ;
+    userSelectedMediaMessage = (random == 0) ? [[JSMessage alloc] initWithImageMessage:image descrption:@"Description for Image" linkedToURL:moreInfoURL]:[[JSMessage alloc] initWithVideoMessage:image descrption:@"Description for Video" linkedToURL:moreInfoURL];
+    
+    return userSelectedMediaMessage;
 }
 
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -172,6 +162,19 @@
     return JSMessageInputViewStyleFlat;
 }
 
+-(void) shouldViewImageAtIndexPath:(NSIndexPath*) indexPath
+{
+    JSMessage* imageMessage = [_messages objectAtIndex:indexPath.row];
+    NSLog(@"shouldView **  Image  ** AtIndexPath with Index %d and Link: %@" , indexPath.row , imageMessage.mediaURL );
+}
+
+-(void) shouldViewVideoAtIndexPath:(NSIndexPath*) indexPath
+{
+    JSMessage* imageMessage = [_messages objectAtIndex:indexPath.row];
+    NSLog(@"shouldView **  Video  ** AtIndexPath with Index %d and Link: %@" , indexPath.row , imageMessage.mediaURL );
+}
+
+
 #pragma mark - Messages view delegate: OPTIONAL
 
 //
@@ -198,6 +201,16 @@
     if(cell.subtitleLabel) {
         cell.subtitleLabel.textColor = [UIColor lightGrayColor];
     }
+    
+    if (cell.bubbleView.attachedImageView) {
+        
+        if([cell messageType] == JSBubbleMessageTypeOutgoing) {
+            [cell.bubbleView setTextColor:[UIColor lightGrayColor]];
+        }else
+        {
+            [cell.bubbleView setTextColor:[UIColor darkGrayColor]];
+        }
+    }
 }
 
 //  *** Required if using `JSMessagesViewTimestampPolicyCustom`
@@ -221,7 +234,11 @@
 
 #pragma mark - Messages view data source: REQUIRED
 
-- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
+//- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return [self.messages objectAtIndex:indexPath.row];
+//}
+- (JSMessage*) messageForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self.messages objectAtIndex:indexPath.row];
 }
@@ -243,8 +260,8 @@
     return [self.subtitles objectAtIndex:indexPath.row];
 }
 
-- (UIImage*)attachedImageForKey:(NSString *)key
-{
-    return [self.attachedImageMessages valueForKey:key];
-}
+//- (UIImage*)attachedImageForKey:(NSString *)key
+//{
+//    return [self.attachedImageMessages valueForKey:key];
+//}
 @end

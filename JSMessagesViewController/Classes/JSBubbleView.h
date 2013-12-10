@@ -14,12 +14,15 @@
 
 #import <UIKit/UIKit.h>
 #import "JSBubbleImageViewFactory.h"
+#import "JSMessage.h"
 
 /**
  *  An instance of JSBubbleView is a means for displaying text in a speech bubble image to be placed in a JSBubbleMessageCell. 
  *  @see JSBubbleMessageCell.
  */
 @interface JSBubbleView : UIView
+
+@property (weak, nonatomic) JSMessage *message;
 
 /**
  *  Returns the message type for this bubble view.
@@ -125,5 +128,7 @@
  *  @return A Bool.
  */
 - (BOOL)isImageMessage;
+
+- (void)setPlayButtonOverlay;
 
 @end

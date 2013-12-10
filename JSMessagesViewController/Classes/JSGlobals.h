@@ -33,6 +33,7 @@
  *  @see JSMessageInputView.
  */
 #define IMAGE_BUBBLE_CORNER_SIZE_IN_PIXELS 8.0f
+#define MEDIA_TAPPED_TO_SEE_NOTFICATION @"MediaTappedToSeeNotification"
 
 
 /*

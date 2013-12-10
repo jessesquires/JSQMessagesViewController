@@ -45,7 +45,7 @@
 - (void)configureInputBarWithStyle:(JSMessageInputViewStyle)style
 {
     CGFloat sendButtonWidth = (style == JSMessageInputViewStyleClassic) ? 78.0f : 64.0f;
-    CGFloat attachImageButtonWidth =  (__FEATURE_FLAGE__IMAGE_BUBBLE_ENABLED) ?  45.0f : 0.0f;
+    CGFloat attachImageButtonWidth =   45.0f;
     
     CGFloat width = self.frame.size.width - sendButtonWidth - attachImageButtonWidth;
     CGFloat height = [JSMessageInputView textViewLineHeight];
@@ -132,6 +132,7 @@
 - (void)configureAttachImageButtonWithStyle:(JSMessageInputViewStyle)style
 {
     if (!__FEATURE_FLAGE__IMAGE_BUBBLE_ENABLED) {
+        [self setAttachImageButton:nil];
         return;
     }
     
@@ -161,6 +162,7 @@
         _style = style;
         [self setup];
         [self configureInputBarWithStyle:style];
+        
         [self configureSendButtonWithStyle:style];
         _attachImageButton = nil;
         [self configureAttachImageButtonWithStyle:style];
@@ -213,6 +215,7 @@
 {
     if(_attachImageButton)
         [_attachImageButton removeFromSuperview];
+    _attachImageButton = nil;
     
     btn.frame = CGRectMake(12.0f, 13.0f, 25.0f , 19.0f);
     
@@ -263,4 +266,28 @@
     return ([JSMessageInputView maxLines] + 1.0f) * [JSMessageInputView textViewLineHeight];
 }
 
+- (void) showMediaButton:(BOOL) isShown
+{
+    CGFloat sendButtonWidth = (_style == JSMessageInputViewStyleClassic) ? 78.0f : 64.0f;
+    CGFloat attachImageButtonWidth = ( isShown) ?  45.0f : 0.0f;
+    
+    CGFloat width = self.frame.size.width - sendButtonWidth - attachImageButtonWidth;
+    CGFloat height = [JSMessageInputView textViewLineHeight];
+    
+    if (!isShown) {
+        [_attachImageButton setHidden:YES];
+        attachImageButtonWidth = 0;
+    }else
+    {
+        [_attachImageButton setHidden:NO];
+    }
+    
+    
+    if(_style == JSMessageInputViewStyleClassic) {
+        _textView.frame = CGRectMake(6.0f + attachImageButtonWidth, 3.0f, width , height);
+    }
+    else {
+        _textView.frame = CGRectMake(4.0f + attachImageButtonWidth , 4.5f, width , height);
+    }
+}
 @end

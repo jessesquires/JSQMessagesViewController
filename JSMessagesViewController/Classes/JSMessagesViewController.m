@@ -36,6 +36,7 @@
 - (void)handleWillShowKeyboardNotification:(NSNotification *)notification;
 - (void)handleWillHideKeyboardNotification:(NSNotification *)notification;
 - (void)keyboardWillShowHide:(NSNotification *)notification;
+- (void)handleMediaSeeMoreNotification:(NSNotification *)notification;
 
 - (UIViewAnimationOptions)animationOptionsForCurve:(UIViewAnimationCurve)curve;
 
@@ -132,6 +133,11 @@
 											 selector:@selector(handleWillHideKeyboardNotification:)
 												 name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(handleMediaSeeMoreNotification:)
+												 name:MEDIA_TAPPED_TO_SEE_NOTFICATION
+                                               object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -143,6 +149,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MEDIA_TAPPED_TO_SEE_NOTFICATION object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -182,12 +189,12 @@
 
 - (void)sendPressed:(UIButton *)sender
 {
-    [self.delegate didSendText:[self.messageInputView.textView.text js_stringByTrimingWhitespace]];
+    [self.delegate didSendMessageData:[[JSMessage alloc] initWithTextMessage:[self.messageInputView.textView.text js_stringByTrimingWhitespace]]];
 }
 
 - (void)attachImagePressed:(UIButton *)sender
 {
-    [self.delegate didSendAttachedImage:[self.delegate attachedImageSelected] ForKey:[self keyForAttachedImageSent]];
+    [self.delegate didSendMessageData:[self.delegate attachedMediaMessage]];
 }
 
 #pragma mark - Table view data source
@@ -242,13 +249,11 @@
 		[cell setSubtitle:[self.dataSource subtitleForRowAtIndexPath:indexPath]];
     }
     
-    [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
-    [cell setBackgroundColor:tableView.backgroundColor];
+    JSMessage* messageData = [self.dataSource messageForRowAtIndexPath:indexPath];
     
-    [cell setAttachedImage:nil];
-    if ([self isProperKeyForAttachedImageMessage:[self.dataSource textForRowAtIndexPath:indexPath]]) {
-        [cell setAttachedImage:[self.dataSource attachedImageForKey:[self.dataSource textForRowAtIndexPath:indexPath]]];
-    }
+    [cell setMessage:messageData];
+    [cell setTag:indexPath.row];
+    [cell setBackgroundColor:tableView.backgroundColor];
     
     if([self.delegate respondsToSelector:@selector(configureCell:atIndexPath:)]) {
         [self.delegate configureCell:cell atIndexPath:indexPath];
@@ -331,31 +336,15 @@
     }
 }
 
-- (void)finishSend
+- (void)finishSendingMessage:(BOOL)isToFlushInputView
 {
-    [self.messageInputView.textView setText:nil];
-    [self textViewDidChange:self.messageInputView.textView];
-    [self.tableView reloadData];
-}
-
-- (void)finishSendTheAttachedMessage
-{
-    [self.tableView reloadData];
-}
-
-- (NSString *) keyForAttachedImageSent
-{
-    return  [NSString stringWithFormat:@"##%d__%d##" , (int)[NSDate timeIntervalSinceReferenceDate] , arc4random_uniform(100)];
-}
-
-- (BOOL) isProperKeyForAttachedImageMessage:(NSString*)key
-{
-    NSString *phoneRegex = @"##[0-9]+__[0-9]+##";
-    NSPredicate* predict = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
     
-    BOOL matches = [predict evaluateWithObject:key];
+    if (isToFlushInputView) {
+        [self.messageInputView.textView setText:nil];
+        [self textViewDidChange:self.messageInputView.textView];
+    }
     
-    return (key != nil && matches );
+    [self.tableView reloadData];
 }
 
 - (void)setBackgroundColor:(UIColor *)color
@@ -554,6 +543,18 @@
                      }];
 }
 
+- (void)handleMediaSeeMoreNotification:(NSNotification *)notification
+{
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:[(NSNumber*)notification.object intValue] inSection:0];
+    JSMessage *message = [self.dataSource messageForRowAtIndexPath:indexPath];
+    
+    if (message.type == JSVideoMessage) {
+        [self.delegate shouldViewVideoAtIndexPath:indexPath];
+    }else
+    {
+        [self.delegate shouldViewImageAtIndexPath:indexPath];
+    }
+}
 #pragma mark - Dismissive text view delegate
 
 - (void)keyboardDidScrollToPoint:(CGPoint)point
