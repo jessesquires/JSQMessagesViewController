@@ -188,6 +188,23 @@
     return YES;
 }
 
+- (UIView *)customLeftViewForInputView {
+    if (self.customLeftView == nil){
+        UIImage *upIcon = [UIImage imageNamed:@"up-icon.png"];
+        self.customLeftView = [[UIImageView alloc] initWithImage:upIcon];
+
+        self.customLeftView.userInteractionEnabled = YES;
+        UIGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(customViewTapped)];
+        [self.customLeftView addGestureRecognizer:tapGestureRecognizer];
+    }
+    return self.customLeftView;
+}
+
+- (void)customViewTapped {
+    NSLog(@"Yo! Show view to attach pictures etc.");
+}
+
+
 #pragma mark - Messages view data source: REQUIRED
 
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath

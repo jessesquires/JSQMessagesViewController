@@ -80,6 +80,10 @@
                                                                      delegate:self
                                                          panGestureRecognizer:_tableView.panGestureRecognizer];
     
+    if ([self.delegate respondsToSelector:@selector(customLeftViewForInputView)]) {
+        inputView.customLeftViewForInputView = [self.delegate customLeftViewForInputView];
+    }
+    
     if([self.delegate respondsToSelector:@selector(sendButtonForInputView)]) {
         UIButton *sendButton = [self.delegate sendButtonForInputView];
         [inputView setSendButton:sendButton];

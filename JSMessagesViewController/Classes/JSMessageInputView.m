@@ -225,6 +225,22 @@
     return 36.0f; // for fontSize 16.0f
 }
 
+- (void)setCustomLeftViewForInputView:(UIView *)customLeftViewForInputView {
+    self.customLeftView = customLeftViewForInputView;
+
+    [self configureCustomLeftView];
+}
+
+- (void)configureCustomLeftView {
+    CGFloat y = (self.frame.size.height - self.customLeftView.frame.size.height)/2;
+    self.customLeftView.frame = CGRectMake(self.textView.frame.origin.x, y, self.customLeftView.frame.size.width, self.customLeftView.frame.size.height);
+    CGFloat x = self.customLeftView.frame.origin.x + self.customLeftView.frame.size.width + self.textView.frame.origin.x;
+    CGFloat width = self.textView.frame.size.width - (2 * self.customLeftView.frame.origin.x + self.customLeftView.frame.size.width);
+    self.textView.frame = CGRectMake(x, self.textView.frame.origin.y, width, self.textView.frame.size.height);
+
+    [self addSubview:self.customLeftView];
+}
+
 + (CGFloat)maxLines
 {
     return ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) ? 4.0f : 8.0f;

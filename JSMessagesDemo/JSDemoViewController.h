@@ -20,5 +20,5 @@
 @property (strong, nonatomic) NSMutableArray *timestamps;
 @property (strong, nonatomic) NSMutableArray *subtitles;
 @property (strong, nonatomic) NSDictionary *avatars;
-
+@property (strong, nonatomic) UIView *customLeftView;
 @end
