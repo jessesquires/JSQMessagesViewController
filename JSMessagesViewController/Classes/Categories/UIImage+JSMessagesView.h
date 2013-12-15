@@ -60,4 +60,22 @@
  */
 - (UIImage *)js_imageMaskWithColor:(UIColor *)maskColor;
 
+/**
+ *  Creates and returns a new image object that is masked with with a play button to be video indicative.
+ *
+ *  @return A new image object masked with 'Video Play' button.
+ */
+- (UIImage *)js_imageOverlayAPlayButtonAbove;
+
+/**
+ *  Creates and returns a new image object upon the required New Size.
+ *
+ *  @param size The rect size ( Width & Height )
+ *
+ *  @return A new image object with the given size in Pixels.
+ */
+- (UIImage *) js_imageResizeWithSize:(CGSize) size;
+
+
+
 @end
