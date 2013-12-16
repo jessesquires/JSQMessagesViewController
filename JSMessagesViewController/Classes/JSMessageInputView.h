@@ -52,6 +52,11 @@ typedef NS_ENUM(NSUInteger, JSMessageInputViewStyle) {
  */
 @property (weak, nonatomic) UIButton *sendButton;
 
+/**
+ *  The attach image button for the input view. The default value is an initialized `UIButton` whose appearance is styled according to the value of style during initialization.
+ *  @see JSMessageInputViewStyle.
+ */
+@property (weak, nonatomic) UIButton *attachImageButton;
 #pragma mark - Initialization
 
 /**
@@ -94,4 +99,10 @@ typedef NS_ENUM(NSUInteger, JSMessageInputViewStyle) {
  */
 + (CGFloat)maxHeight;
 
+/**
+ *  Setting Boolean to show the Media Button or Not.
+ *
+ *  @param isShown The YES/NO to be displayed in the button
+ */
+- (void) showMediaButton:(BOOL) isShown;
 @end

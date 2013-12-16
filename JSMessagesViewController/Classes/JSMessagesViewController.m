@@ -25,6 +25,7 @@
 - (void)setup;
 
 - (void)sendPressed:(UIButton *)sender;
+- (void)attachImagePressed:(UIButton *)sender;
 
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (BOOL)shouldHaveAvatarForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -35,6 +36,7 @@
 - (void)handleWillShowKeyboardNotification:(NSNotification *)notification;
 - (void)handleWillHideKeyboardNotification:(NSNotification *)notification;
 - (void)keyboardWillShowHide:(NSNotification *)notification;
+- (void)handleMediaSeeMoreNotification:(NSNotification *)notification;
 
 - (UIViewAnimationOptions)animationOptionsForCurve:(UIViewAnimationCurve)curve;
 
@@ -90,6 +92,12 @@
                              action:@selector(sendPressed:)
                    forControlEvents:UIControlEventTouchUpInside];
     
+    inputView.attachImageButton.enabled = YES;
+    [inputView.attachImageButton addTarget:self
+                                    action:@selector(attachImagePressed:)
+                          forControlEvents:UIControlEventTouchUpInside];
+    
+    
     [self.view addSubview:inputView];
     _messageInputView = inputView;
     
@@ -122,6 +130,11 @@
 											 selector:@selector(handleWillHideKeyboardNotification:)
 												 name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(handleMediaSeeMoreNotification:)
+												 name:@"MediaTappedToSeeNotification"
+                                               object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -147,6 +160,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"MediaTappedToSeeNotification" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -187,7 +201,12 @@
 
 - (void)sendPressed:(UIButton *)sender
 {
-    [self.delegate didSendText:[self.messageInputView.textView.text js_stringByTrimingWhitespace]];
+    [self.delegate didSendMessageData:[[JSMessage alloc] initWithTextMessage:[self.messageInputView.textView.text js_stringByTrimingWhitespace]]];
+}
+
+- (void)attachImagePressed:(UIButton *)sender
+{
+    [self.delegate didSendMessageData:[self.delegate attachedMediaMessage]];
 }
 
 #pragma mark - Table view data source
@@ -237,9 +256,12 @@
 		[cell setSubtitle:[self.dataSource subtitleForRowAtIndexPath:indexPath]];
     }
     
-    [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
-    [cell setBackgroundColor:tableView.backgroundColor];
+    JSMessage* messageData = [self.dataSource messageForRowAtIndexPath:indexPath];
     
+    [cell setMessage:messageData];
+    [cell setTag:indexPath.row];
+    
+    [cell setBackgroundColor:tableView.backgroundColor];
     cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
     
     if([self.delegate respondsToSelector:@selector(configureCell:atIndexPath:)]) {
@@ -253,13 +275,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *text = [self.dataSource textForRowAtIndexPath:indexPath];
+    JSMessage *message = [self.dataSource messageForRowAtIndexPath:indexPath];
     
     BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
 	BOOL hasSubtitle = [self shouldHaveSubtitleForRowAtIndexPath:indexPath];
     
-    return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithText:text
+    return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithMessage:message
                                                                timestamp:hasTimestamp
                                                                   avatar:hasAvatar
                                                                 subtitle:hasSubtitle];
@@ -327,10 +349,13 @@
     }
 }
 
-- (void)finishSend
+- (void)finishSendingMessage:(BOOL)isToFlushInputView
 {
-    [self.messageInputView.textView setText:nil];
-    [self textViewDidChange:self.messageInputView.textView];
+    if (isToFlushInputView) {
+        [self.messageInputView.textView setText:nil];
+        [self textViewDidChange:self.messageInputView.textView];
+    }
+    
     [self.tableView reloadData];
 }
 
@@ -536,6 +561,19 @@
                      }
                      completion:^(BOOL finished) {
                      }];
+}
+
+- (void)handleMediaSeeMoreNotification:(NSNotification *)notification
+{
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:[(NSNumber*)notification.object intValue] inSection:0];
+    JSMessage *message = [self.dataSource messageForRowAtIndexPath:indexPath];
+    
+    if (message.type == JSVideoMessage) {
+        [self.delegate shouldViewVideoAtIndexPath:indexPath];
+    }else
+    {
+        [self.delegate shouldViewImageAtIndexPath:indexPath];
+    }
 }
 
 #pragma mark - Dismissive text view delegate
