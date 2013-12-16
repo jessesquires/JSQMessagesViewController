@@ -111,8 +111,8 @@
 - (UIImage *) js_imageOverlayAPlayButtonAbove
 {
     UIImage *watermarkImage = [UIImage imageNamed:@"play-media-button.png"];
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, [UIScreen mainScreen].scale);
     
-    UIGraphicsBeginImageContext(self.size);
     [self drawInRect:CGRectMake(0, 0, self.size.width, self.size.height)];
     [watermarkImage drawInRect:CGRectMake(self.size.width - 54, self.size.height - 54, 50, 50)];
     UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
@@ -123,7 +123,7 @@
 
 - (UIImage *) js_imageResizeWithSize:(CGSize) size
 {
-    UIGraphicsBeginImageContext(size);
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
     [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
     
     UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
