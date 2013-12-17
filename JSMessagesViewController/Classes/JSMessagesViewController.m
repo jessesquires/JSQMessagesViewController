@@ -36,7 +36,6 @@
 - (void)handleWillShowKeyboardNotification:(NSNotification *)notification;
 - (void)handleWillHideKeyboardNotification:(NSNotification *)notification;
 - (void)keyboardWillShowHide:(NSNotification *)notification;
-- (void)handleMediaSeeMoreNotification:(NSNotification *)notification;
 
 - (UIViewAnimationOptions)animationOptionsForCurve:(UIViewAnimationCurve)curve;
 
@@ -130,11 +129,6 @@
 											 selector:@selector(handleWillHideKeyboardNotification:)
 												 name:UIKeyboardWillHideNotification
                                                object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(handleMediaSeeMoreNotification:)
-												 name:@"MediaTappedToSeeNotification"
-                                               object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -160,7 +154,6 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"MediaTappedToSeeNotification" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -259,7 +252,6 @@
     JSMessage* messageData = [self.dataSource messageForRowAtIndexPath:indexPath];
     
     [cell setMessage:messageData];
-    [cell setTag:indexPath.row];
     
     [cell setBackgroundColor:tableView.backgroundColor];
     cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
@@ -285,6 +277,19 @@
                                                                timestamp:hasTimestamp
                                                                   avatar:hasAvatar
                                                                 subtitle:hasSubtitle];
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    JSMessage* messageSelected = [self.dataSource messageForRowAtIndexPath:indexPath];
+    if (messageSelected && messageSelected.type == JSImageMessage )
+    {
+        [self.delegate shouldViewImageAtIndexPath:indexPath];
+    }
+    else if (messageSelected && messageSelected.type == JSVideoMessage)
+    {
+        [self.delegate shouldViewVideoAtIndexPath:indexPath];
+    }
 }
 
 #pragma mark - Messages view controller
@@ -561,19 +566,6 @@
                      }
                      completion:^(BOOL finished) {
                      }];
-}
-
-- (void)handleMediaSeeMoreNotification:(NSNotification *)notification
-{
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:[(NSNumber*)notification.object intValue] inSection:0];
-    JSMessage *message = [self.dataSource messageForRowAtIndexPath:indexPath];
-    
-    if (message.type == JSVideoMessage) {
-        [self.delegate shouldViewVideoAtIndexPath:indexPath];
-    }else
-    {
-        [self.delegate shouldViewImageAtIndexPath:indexPath];
-    }
 }
 
 #pragma mark - Dismissive text view delegate

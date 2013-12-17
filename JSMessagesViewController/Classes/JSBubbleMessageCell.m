@@ -36,7 +36,6 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 				 subtitle:(BOOL)hasSubtitle;
 
 - (void)handleLongPressGesture:(UILongPressGestureRecognizer *)longPress;
-- (void)handleTapPressGesture:(UITapGestureRecognizer *)tap;
 
 - (void)handleMenuWillHideNotification:(NSNotification *)notification;
 - (void)handleMenuWillShowNotification:(NSNotification *)notification;
@@ -67,11 +66,6 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                                                                                              action:@selector(handleLongPressGesture:)];
     [recognizer setMinimumPressDuration:0.4f];
     [self addGestureRecognizer:recognizer];
-    
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                    action:@selector(handleTapPressGesture:)];
-    [tapRecognizer setNumberOfTapsRequired:1];
-    [self addGestureRecognizer:tapRecognizer];
 }
 
 - (void)configureTimestampLabel
@@ -341,17 +335,6 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                                                object:nil];
     [menu setMenuVisible:YES animated:YES];
 //    [self.bubbleView layoutSubviews];
-}
-
-- (void)handleTapPressGesture:(UITapGestureRecognizer *)tap
-{
-    if( ![self becomeFirstResponder])
-        return;
-    
-    if (![self.bubbleView isImageMessage])
-        return;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"MediaTappedToSeeNotification" object:[NSNumber numberWithInteger:self.tag]];
 }
 
 #pragma mark - Notifications
