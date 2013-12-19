@@ -37,8 +37,6 @@
 + (CGSize)textSizeForText:(NSString *)txt;
 + (CGSize)neededSizeForText:(NSString *)text;
 
-- (void)setMaskTo:(UIView*)view byRoundingCorners:(UIRectCorner)corners;
-
 @end
 
 
@@ -93,6 +91,7 @@
         
         [self addTextViewObservers];
         _attachedImageView = nil;
+        _message = nil;
 
         
 //        NOTE: TODO: textView frame & text inset
@@ -223,64 +222,62 @@
     [super layoutSubviews];
     
     self.bubbleImageView.frame = [self bubbleFrame];
-    int imageSmallShift = (self.type == JSBubbleMessageTypeIncoming) ? 3 : -3;
-    int imageHeightForDescribtion = 3.0f;
+    [self.bubbleImageView setHidden:NO];
+    [self.textView setHidden:YES];
     
     // If There is an image attached need to be displayed ..
     if (_attachedImageView) {
+        
+        [self.bubbleImageView setHidden:YES];
+        self.bubbleImageView.frame = CGRectMake(self.bubbleImageView.frame.origin.x , self.bubbleImageView.frame.origin.y , self.bubbleImageView.frame.size.width , self.bubbleImageView.frame.size.height - kMarginTop + kMarginBottom);
+        
         CGSize imageSize = [JSBubbleView neededSizeForImage:_attachedImageView.image];
-        
-        CGRect imageFrame = CGRectMake( self.bubbleImageView.frame.origin.x + imageSmallShift + round( (self.bubbleImageView.frame.size.width /2 ) - ( _attachedImageView.frame.size.width / 2.0 ) ),
-                                       17,
-                                       imageSize.width,
-                                       imageSize.height);
-        
-        self.attachedImageView.frame = imageFrame;
-        // Set rounded Corners for Image Message View
-        [self setMaskTo:_attachedImageView byRoundingCorners:UIRectCornerAllCorners ];
-        
-        imageHeightForDescribtion = _attachedImageView.frame.size.height + 5;
-        
-        [self addSubview:_attachedImageView];
         
         if (_message && _message.type == JSVideoMessage) {
             [self setPlayButtonOverlay];
         }
+    
+        int imageShift = (self.type == JSBubbleMessageTypeIncoming) ? 0 : (self.bubbleImageView.frame.size.width - imageSize.width);
+        CGRect imageFrame = CGRectMake( self.bubbleImageView.frame.origin.x + imageShift,
+                                       10,
+                                       imageSize.width ,
+                                       imageSize.height);
+        self.attachedImageView.frame = imageFrame;
+        
+        
+        
+        if (imageSize.width > 0.01 && imageSize.height > 0.01) {
+            UIImage* image = [JSBubbleImageViewFactory bubbleMediaMaskImageForType:self.type size:imageFrame.size];
+            if (_attachedImageView.image) {
+                _attachedImageView.image = [_attachedImageView.image js_imageMaskWithImage:image];
+            }
+            
+        }
+        
     }
-    
-    
-    CGFloat textX = self.bubbleImageView.frame.origin.x;
-    
-    if(self.type == JSBubbleMessageTypeIncoming) {
-        textX += (self.bubbleImageView.image.capInsets.left / 2.0f);
-    }else
+    else
     {
-        textX += (self.bubbleImageView.image.capInsets.left / 4.0f);
+        [self.textView setHidden:NO];
+        
+        CGFloat textX = self.bubbleImageView.frame.origin.x;
+        
+        if(self.type == JSBubbleMessageTypeIncoming) {
+            textX += (self.bubbleImageView.image.capInsets.left / 2.0f);
+        }else
+        {
+            textX += (self.bubbleImageView.image.capInsets.left / 4.0f);
+        }
+        
+        CGRect textFrame = CGRectMake(textX,
+                                      self.bubbleImageView.frame.origin.y + 2,
+                                      self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f),
+                                      self.bubbleImageView.frame.size.height - kMarginTop);
+        
+        self.textView.frame = textFrame;
     }
-    
-    CGRect textFrame = CGRectMake(textX,
-                                  self.bubbleImageView.frame.origin.y + imageHeightForDescribtion,
-                                  self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f),
-                                  self.bubbleImageView.frame.size.height - kMarginTop);
-    
-    self.textView.frame = textFrame;
 }
 
 #pragma mark - Bubble view
-
-
-//- (CGSize)bubbleSizeForText:(NSString *)txt
-//{
-//	CGSize textSize = [self textSizeForText:txt];
-//    CGSize imageSize = [self bubbleSizeForAttachedImage];
-//    
-//    // Check If there is an image attached , or It is Just a regular text Message.
-//    CGSize bubbleSize = CGSizeMake( MAX(imageSize.width, textSize.width), round (imageSize.height + textSize.height));
-//    
-//	return CGSizeMake(bubbleSize.width + kBubblePaddingRight,
-//                      bubbleSize.height + kPaddingTop + kPaddingBottom);
-//}
-
 
 + (CGSize)textSizeForText:(NSString *)txt
 {
@@ -306,8 +303,16 @@
     CGSize textSize = [JSBubbleView neededSizeForText:msg.textMessage];
     CGSize imageSize = [JSBubbleView neededSizeForImage:msg.thumbnailImage];
     
+    int increaseInMessageHeight =  kPaddingTop + kPaddingBottom + kMarginBottom ;
+    if (msg.type == JSTextMessage) {
+        imageSize = CGSizeZero;
+    }else{
+        textSize = CGSizeZero;
+        increaseInMessageHeight = kPaddingBottom + kPaddingTop;
+    }
+    
     // Check If there is an image attached , or It is Just a regular text Message.
-    CGSize bubbleSize = CGSizeMake( MAX(imageSize.width, textSize.width)  + kBubblePaddingRight , round (imageSize.height + textSize.height) + kPaddingTop + kPaddingBottom + kMarginBottom );
+    CGSize bubbleSize = CGSizeMake( MAX(imageSize.width, textSize.width)  + kBubblePaddingRight , round (imageSize.height + textSize.height) + increaseInMessageHeight );
     
     return bubbleSize;
 }
@@ -320,23 +325,13 @@
         CGFloat maxWidth = [UIScreen mainScreen].applicationFrame.size.width * 0.70f;
         CGSize actualImageSize = imageView.image.size;
         if (actualImageSize.width > maxWidth ) {
-            imageSize = CGSizeMake(maxWidth, actualImageSize.height * maxWidth / actualImageSize.width);
+            imageSize = CGSizeMake(maxWidth, round (actualImageSize.height * maxWidth / actualImageSize.width));
         }else{
             imageSize = actualImageSize;
         }
     }
     
     return imageSize;
-}
-
-- (void)setMaskTo:(UIView*)view byRoundingCorners:(UIRectCorner)corners
-{
-    UIBezierPath *rounded = [UIBezierPath bezierPathWithRoundedRect:view.bounds
-                                                  byRoundingCorners:corners
-                                                        cornerRadii:CGSizeMake(IMAGE_BUBBLE_CORNER_SIZE_IN_PIXELS, IMAGE_BUBBLE_CORNER_SIZE_IN_PIXELS)];
-    CAShapeLayer *shape = [[CAShapeLayer alloc] init];
-    [shape setPath:rounded.CGPath];
-    view.layer.mask = shape;
 }
 
 @end

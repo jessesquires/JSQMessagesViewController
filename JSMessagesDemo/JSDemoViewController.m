@@ -43,7 +43,7 @@
                      [[JSMessage alloc] initWithTextMessage:@"It's highly customizable."],
                      [[JSMessage alloc] initWithTextMessage:@"It even has data detectors. You can call me tonight. My cell number is 452-123-4567. \nMy website is www.hexedbits.com."],
                      [[JSMessage alloc] initWithTextMessage:@"Group chat is possible. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!"],
-                     [[JSMessage alloc] initWithVideoMessage:[UIImage imageNamed:@"test3.jpg"] descrption:@"Apple WWDC 2011: Steve Jobs' keynote" linkedToURL:[NSURL URLWithString:@"http://www.apple.com"]],
+                     [[JSMessage alloc] initWithVideoMessage:[UIImage imageNamed:@"test2.jpg"] descrption:@"Apple WWDC 2011: Steve Jobs' keynote" linkedToURL:[NSURL URLWithString:@"http://www.apple.com"]],
                      nil];
     
     self.timestamps = [[NSMutableArray alloc] initWithObjects:
@@ -117,7 +117,7 @@
     UIImage* image = nil;
     NSURL * moreInfoURL = [NSURL URLWithString:@"http://www.github.com"];
     
-    int random = (arc4random_uniform(100) % 3) + 1 ;
+    int random = (arc4random_uniform(100) % 2) + 1 ;
     image = [UIImage imageNamed:[NSString stringWithFormat:@"test%d.jpg" , random]];
     
     

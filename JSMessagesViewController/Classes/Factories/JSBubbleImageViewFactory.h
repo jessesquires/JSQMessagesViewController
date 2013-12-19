@@ -83,4 +83,16 @@ typedef NS_ENUM(NSUInteger, JSBubbleImageViewStyle) {
 + (UIImageView *)classicBubbleImageViewForType:(JSBubbleMessageType)type
                                          style:(JSBubbleImageViewStyle)style;
 
+
+/**
+ *  Creates and returns an bubble mask image object with the specified type and size. The `image` property of the image is constructed to be a white and black image file to be used to mask an image/video message attached.
+ *
+ *  @param type  The type of the bubble image view.
+ *  @param rectSize The size of the image in the bubble image.
+ *
+ *  @return An initialized mask image object.
+ **/
++ (UIImage *)bubbleMediaMaskImageForType:(JSBubbleMessageType)type
+                                    size:(CGSize)rectSize;
+
 @end

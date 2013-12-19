@@ -108,13 +108,44 @@
     return newImage;
 }
 
+- (UIImage*) js_imageMaskWithImage:(UIImage *) mask
+{
+    // This image is made as a hack for Retina output images for the masked images.
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, [UIScreen mainScreen].scale);
+    [self drawInRect:CGRectMake(0, 0, self.size.width, self.size.height)];
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    CGImageRef imageReference = image.CGImage;
+    CGImageRef maskReference = mask.CGImage;
+    
+    CGImageRef imageMask = CGImageMaskCreate(CGImageGetWidth(maskReference),
+                                             CGImageGetHeight(maskReference),
+                                             CGImageGetBitsPerComponent(maskReference),
+                                             CGImageGetBitsPerPixel(maskReference),
+                                             CGImageGetBytesPerRow(maskReference),
+                                             CGImageGetDataProvider(maskReference),
+                                             NULL, // Decode is null
+                                             YES // Should interpolate
+                                             );
+    
+    CGImageRef maskedReference = CGImageCreateWithMask(imageReference, imageMask);
+    CGImageRelease(imageMask);
+    
+    UIImage *maskedImage = [UIImage imageWithCGImage:maskedReference];
+    CGImageRelease(maskedReference);
+    
+    return maskedImage;
+}
+
 - (UIImage *) js_imageOverlayAPlayButtonAbove
 {
+    
     UIImage *watermarkImage = [UIImage imageNamed:@"play-media-button.png"];
     UIGraphicsBeginImageContextWithOptions(self.size, NO, [UIScreen mainScreen].scale);
     
     [self drawInRect:CGRectMake(0, 0, self.size.width, self.size.height)];
-    [watermarkImage drawInRect:CGRectMake(self.size.width - 54, self.size.height - 54, 50, 50)];
+    [watermarkImage drawInRect:CGRectMake(  roundf( (self.size.width / 2.0) - 12.5) , roundf((self.size.height / 2.0) - 12.5), 25, 25)];
     UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     

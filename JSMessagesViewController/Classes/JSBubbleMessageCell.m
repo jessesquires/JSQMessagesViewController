@@ -229,9 +229,12 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (void)setMessage:(JSMessage *)msg
 {
+    self.bubbleView.textView.text = @"";
     self.bubbleView.message = msg;
     
-    self.bubbleView.textView.text = msg.textMessage;
+    if (msg.type == JSTextMessage) {
+        self.bubbleView.textView.text = msg.textMessage;
+    }
     [self.bubbleView setMessageImage:msg.thumbnailImage];
 }
 
