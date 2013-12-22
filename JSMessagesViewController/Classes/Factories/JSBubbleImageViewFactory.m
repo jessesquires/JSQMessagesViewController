@@ -65,7 +65,7 @@ static NSDictionary *bubbleImageDictionary;
         highlightedBubble = [highlightedBubble js_imageFlippedHorizontal];
     }
     
-    UIEdgeInsets capInsets = UIEdgeInsetsMake(15.0f, 20.0f, 15.0f, 20.0f);
+	UIEdgeInsets capInsets = UIEdgeInsetsMake(17.0f, 18.0f, 17.0f, 26.0f);
     
     return [[UIImageView alloc] initWithImage:[normalBubble js_stretchableImageWithCapInsets:capInsets]
                              highlightedImage:[highlightedBubble js_stretchableImageWithCapInsets:capInsets]];
@@ -75,7 +75,7 @@ static NSDictionary *bubbleImageDictionary;
                                          style:(JSBubbleImageViewStyle)style
 {
     return [JSBubbleImageViewFactory classicBubbleImageViewForStyle:style
-                                                  isOutgoing:type == JSBubbleMessageTypeOutgoing];
+														 isOutgoing:type == JSBubbleMessageTypeOutgoing];
 }
 
 #pragma mark - Private

@@ -198,9 +198,13 @@
     if(self.type == JSBubbleMessageTypeIncoming) {
         textX += (self.bubbleImageView.image.capInsets.left / 2.0f);
     }
-    
+	else
+	{
+        textX += 4; // Adds more padding to the left side of right-pointing bubbles
+    }
+	
     CGRect textFrame = CGRectMake(textX,
-                                  self.bubbleImageView.frame.origin.y,
+                                  self.bubbleImageView.frame.origin.y + 3, // vertically aligns the text better in all bubbles
                                   self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f),
                                   self.bubbleImageView.frame.size.height - kMarginTop);
     
@@ -213,7 +217,7 @@
 {
     CGFloat maxWidth = [UIScreen mainScreen].applicationFrame.size.width * 0.70f;
     CGFloat maxHeight = MAX([JSMessageTextView numberOfLinesForMessage:txt],
-                         [txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
+							[txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
     maxHeight += kJSAvatarImageSize;
     
     return [txt sizeWithFont:[[JSBubbleView appearance] font]
