@@ -240,7 +240,15 @@
     [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
     [cell setBackgroundColor:tableView.backgroundColor];
     
-    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
+	#if TARGET_IPHONE_SIMULATOR
+    
+		cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeNone;
+
+	#else
+	
+		cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
+
+	#endif
     
     if([self.delegate respondsToSelector:@selector(configureCell:atIndexPath:)]) {
         [self.delegate configureCell:cell atIndexPath:indexPath];
