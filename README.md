@@ -134,15 +134,16 @@ Support the developement of this **free**, open-source control! via [Square Cash
 
 ## How To Contribute
 
-1. [Find an issue](https://github.com/jessesquires/MessagesTableViewController/issues?sort=created&state=open) to work on, or create a new one.
-2. Fork me.
-3. Create a new branch with a sweet fucking name: `git checkout -b issue_<##>_<featureOrFix>`.
-4. Do some motherfucking programming.
-5. Keep your code nice and clean by adhering to Google's [Objective-C Style Guide](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml) and Apple's [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html).
-6. Don't break shit, especially `master`.
-7. Update the documentation header comments, if needed.
-8. Submit a pull request to the `develop` **[branch](https://github.com/jessesquires/MessagesTableViewController/tree/develop)**.
-9. See step 1.
+1. [Find an issue](https://github.com/jessesquires/MessagesTableViewController/issues?sort=created&state=open) to work on, or create a new one
+2. Fork me
+3. Create a new branch with a sweet fucking name: `git checkout -b issue_<##>_<featureOrFix>`
+4. Do some motherfucking programming
+5. Keep your code nice and clean by adhering to Google's [Objective-C Style Guide](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml) and Apple's [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html)
+6. Don't break shit, especially `master`
+7. Update the documentation header comments, if needed
+8. Merge the latest from `develop` and **resolve any conflicts** (*before submitting a pull request!*)
+9. Submit a pull request to the `develop` **[branch](https://github.com/jessesquires/MessagesTableViewController/tree/develop)**
+10. See step 1
 
 ## Credits
 
