@@ -70,7 +70,7 @@ typedef NS_ENUM(NSUInteger, JSMessagesType) {
  *  @param mediaURL URL for image to be shown if message tapped
  */
 - (instancetype)initWithImageMessage:(UIImage *) thumbnailImage
-                  descrption:(NSString*) description
+                  description:(NSString*) description
                  linkedToURL:(NSURL*) mediaURL;
 
 
@@ -82,7 +82,7 @@ typedef NS_ENUM(NSUInteger, JSMessagesType) {
  *  @param mediaURL URL for Video to be shown if message tapped
  */
 - (instancetype)initWithVideoMessage:(UIImage *) thumbnailImage
-                  descrption:(NSString*) description
+                  description:(NSString*) description
                  linkedToURL:(NSURL*) mediaURL;
 
 @end

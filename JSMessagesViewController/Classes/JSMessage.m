@@ -35,7 +35,7 @@
 }
 
 - (instancetype)initWithImageMessage:(UIImage *) thumbnailImage
-                  descrption:(NSString*) description
+                  description:(NSString*) description
                  linkedToURL:(NSURL*) mediaURL
 {
     self = [super init];
@@ -52,7 +52,7 @@
 
 
 - (instancetype)initWithVideoMessage:(UIImage *) thumbnailImage
-                  descrption:(NSString*) description
+                  description:(NSString*) description
                  linkedToURL:(NSURL*) mediaURL
 {
     self = [super init];
