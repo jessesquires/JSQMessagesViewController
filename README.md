@@ -140,10 +140,9 @@ Support the developement of this **free**, open-source control! via [Square Cash
 4. Do some motherfucking programming.
 5. Keep your code nice and clean by adhering to Google's [Objective-C Style Guide](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml) and Apple's [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html).
 6. Don't break shit, especially `master`.
-7. Update the documentation header comments.
-8. Update the pod spec and project version numbers, adhering to the [semantic versioning](http://semver.org) specification.
-9. Submit a pull request.
-10. See step 1.
+7. Update the documentation header comments, if needed.
+8. Submit a pull request to the `develop` **[branch](https://github.com/jessesquires/MessagesTableViewController/tree/develop)**.
+9. See step 1.
 
 ## Credits
 
