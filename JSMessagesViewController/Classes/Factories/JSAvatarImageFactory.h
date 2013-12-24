@@ -36,14 +36,14 @@ extern CGFloat const kJSAvatarImageSize;
               croppedToCircle:(BOOL)croppedToCircle;
 
 /**
- * Returns the image object associated with the specified image. The image is cropped to a circle if the value of croppedToCircle is `YES`, otherwise the image is cropped to a square. The image has a flat, iOS 7 appearance.
+ * Returns a copy of the image object associated with the specified originalImage. The image is cropped to a circle if the value of croppedToCircle is `YES`, otherwise the image is cropped to a square. The image has a flat, iOS 7 appearance.
  *
- *  @param originImage The origin image object to be convert
+ *  @param originalImage The origin image object to be styled for an avatar.
  *  @param croppedToCircle A boolean value indicating whether or not the image should be cropped as a circle or square. Pass `YES` to crop to a circle, and `NO` to crop to a square.
  *
- *  @return The image object for the specified file (cropped as specified), or `nil` if the method could not find the specified image.
+ *  @return A new image object for the specified originalImage (cropped as specified), or `nil` if originalImage is not a valid, initialized image object.
 */
-+ (UIImage *)avatarImage:(UIImage *)originImage
++ (UIImage *)avatarImage:(UIImage *)originalImage
          croppedToCircle:(BOOL)croppedToCircle;
 
 /**

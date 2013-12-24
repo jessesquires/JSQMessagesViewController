@@ -26,11 +26,14 @@ CGFloat const kJSAvatarImageSize = 50.0f;
     return [self avatarImage:image croppedToCircle:croppedToCircle];
 }
 
-+ (UIImage *)avatarImage:(UIImage *)originImage
++ (UIImage *)avatarImage:(UIImage *)originalImage
          croppedToCircle:(BOOL)croppedToCircle
 {
-    return [originImage js_imageAsCircle:croppedToCircle
-                             withDiamter:kJSAvatarImageSize borderColor:nil borderWidth:0.0f shadowOffSet:CGSizeZero];
+    return [originalImage js_imageAsCircle:croppedToCircle
+                               withDiamter:kJSAvatarImageSize
+                               borderColor:nil
+                               borderWidth:0.0f
+                              shadowOffSet:CGSizeZero];
 }
 
 + (UIImage *)classicAvatarImageNamed:(NSString *)filename
