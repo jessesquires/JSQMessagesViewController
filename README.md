@@ -1,4 +1,5 @@
-# JSMessagesViewController [![Build Status](https://secure.travis-ci.org/jessesquires/MessagesTableViewController.png)](http://travis-ci.org/jessesquires/MessagesTableViewController) [![Version Status](https://cocoapod-badges.herokuapp.com/v/JSMessagesViewController/badge.png)][docsLink] ![license MIT](http://b.repl.ca/v1/license-MIT-blue.png)
+# JSMessagesViewController 
+[![Build Status](https://secure.travis-ci.org/jessesquires/MessagesTableViewController.png)](http://travis-ci.org/jessesquires/MessagesTableViewController) [![Version Status](https://cocoapod-badges.herokuapp.com/v/JSMessagesViewController/badge.png)][docsLink] ![license MIT](http://b.repl.ca/v1/license-MIT-blue.png)
 
 A messages UI for iPhone and iPad.
 
@@ -138,8 +139,11 @@ Support the developement of this **free**, open-source control! via [Square Cash
 2. Fork me
 3. Create a new branch with a sweet fucking name: `git checkout -b issue_<##>_<featureOrFix>`
 4. Do some motherfucking programming
-5. Keep your code nice and clean by adhering to Google's [Objective-C Style Guide](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml) and Apple's [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html)
-6. Don't break shit, especially `master`
+5. Write [unit tests](http://nshipster.com/unit-testing), if possible
+5. Keep your code nice and clean by adhering to the following standards: 
+    * Google's [Objective-C Style Guide](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml)
+    * Apple's [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html)
+6. Don't break shit, like unit tests
 7. Update the documentation header comments, if needed
 8. Merge the latest from `develop` and **resolve any conflicts** (*before submitting a pull request!*)
 9. Submit a pull request to the `develop` **[branch](https://github.com/jessesquires/MessagesTableViewController/tree/develop)**
