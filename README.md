@@ -1,5 +1,5 @@
 # JSMessagesViewController 
-[![Build Status](https://secure.travis-ci.org/jessesquires/MessagesTableViewController.png)](http://travis-ci.org/jessesquires/MessagesTableViewController) [![Version Status](https://cocoapod-badges.herokuapp.com/v/JSMessagesViewController/badge.png)][docsLink] ![license MIT](http://b.repl.ca/v1/license-MIT-blue.png)
+[![Build Status](https://secure.travis-ci.org/jessesquires/MessagesTableViewController.png)](http://travis-ci.org/jessesquires/MessagesTableViewController) [![Version Status](https://cocoapod-badges.herokuapp.com/v/JSMessagesViewController/badge.png)][docsLink] ![[license MIT](http://b.repl.ca/v1/license-MIT-blue.png)][mitLink]
 
 A messages UI for iPhone and iPad.
 
@@ -140,14 +140,13 @@ Support the developement of this **free**, open-source control! via [Square Cash
 3. Create a new branch with a sweet fucking name: `git checkout -b issue_<##>_<featureOrFix>`
 4. Do some motherfucking programming
 5. Write [unit tests](http://nshipster.com/unit-testing), if possible
-5. Keep your code nice and clean by adhering to the following standards: 
+6. Keep your code nice and clean by adhering to the following standards: 
     * Google's [Objective-C Style Guide](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml)
     * Apple's [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html)
-6. Don't break shit, like unit tests
-7. Update the documentation header comments, if needed
-8. Merge the latest from `develop` and **resolve any conflicts** (*before submitting a pull request!*)
-9. Submit a pull request to the `develop` **[branch](https://github.com/jessesquires/MessagesTableViewController/tree/develop)**
-10. See step 1
+7. Don't break shit, like unit tests
+8. Update the documentation header comments, if needed
+9. Merge the latest from `develop` and **resolve any conflicts** (*before submitting a pull request!*)
+10. Submit a pull request to the `develop` **[branch](https://github.com/jessesquires/MessagesTableViewController/tree/develop)**
 
 ## Credits
 
@@ -193,7 +192,7 @@ Check out my work at [Hexed Bits](http://www.hexedbits.com).
 
 [SPHChatBubble](https://github.com/sibahota059/SPHChatBubble)
 
-## [MIT License](http://opensource.org/licenses/MIT)
+## [MIT License][mitLink]
 
 You are free to use this as you please. **No attribution necessary, but much appreciated.**
 
@@ -206,6 +205,8 @@ Copyright &copy; 2013 Jesse Squires
 >THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 [docsLink]:http://cocoadocs.org/docsets/JSMessagesViewController/3.4.0
+
+[mitLink]:http://opensource.org/licenses/MIT
 
 [playerLink]:https://github.com/jessesquires/JSQSystemSoundPlayer
 
