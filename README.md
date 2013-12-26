@@ -135,18 +135,7 @@ Support the developement of this **free**, open-source control! via [Square Cash
 
 ## How To Contribute
 
-1. [Find an issue](https://github.com/jessesquires/MessagesTableViewController/issues?sort=created&state=open) to work on, or create a new one
-2. Fork me
-3. Create a new branch with a sweet fucking name: `git checkout -b issue_<##>_<featureOrFix>`
-4. Do some motherfucking programming
-5. Write [unit tests](http://nshipster.com/unit-testing), if possible
-6. Keep your code nice and clean by adhering to the following standards: 
-    * Google's [Objective-C Style Guide](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml)
-    * Apple's [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html)
-7. Don't break shit, like unit tests
-8. Update the documentation header comments, if needed
-9. Merge the latest from `develop` and **resolve any conflicts** (*before submitting a pull request!*)
-10. Submit a pull request to the `develop` **[branch](https://github.com/jessesquires/MessagesTableViewController/tree/develop)**
+Please follow these sweet [contribution guidelines](https://github.com/jessesquires/HowToContribute).
 
 ## Credits
 
