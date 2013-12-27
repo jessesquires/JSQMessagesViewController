@@ -17,13 +17,15 @@
 #import "JSMessageInputView.h"
 #import "JSAvatarImageFactory.h"
 #import "NSString+JSMessagesView.h"
+#import "UIImage+JSMessagesView.h"
 
 #define kMarginTop 8.0f
-#define kMarginBottom 4.0f
-#define kPaddingTop 4.0f
+#define kMarginBottom 20.0f
+#define kPaddingTop 2.0f
 #define kPaddingBottom 8.0f
 #define kBubblePaddingRight 35.0f
 
+#define IMAGE_BUBBLE_CORNER_SIZE_IN_PIXELS 8.0f
 
 @interface JSBubbleView()
 
@@ -34,7 +36,6 @@
 
 + (CGSize)textSizeForText:(NSString *)txt;
 + (CGSize)neededSizeForText:(NSString *)text;
-+ (CGFloat)neededHeightForText:(NSString *)text;
 
 @end
 
@@ -89,6 +90,9 @@
         }
         
         [self addTextViewObservers];
+        _attachedImageView = nil;
+        _message = nil;
+
         
 //        NOTE: TODO: textView frame & text inset
 //        --------------------
@@ -107,6 +111,9 @@
     [self removeTextViewObservers];
     _bubbleImageView = nil;
     _textView = nil;
+    
+    [_attachedImageView removeFromSuperview];
+    _attachedImageView = nil;
 }
 
 #pragma mark - KVO
@@ -158,6 +165,19 @@
     _textView.font = font;
 }
 
+- (void)setMessageImage:(UIImage *)image
+{
+    [_attachedImageView removeFromSuperview];
+    _attachedImageView = nil;
+    
+    if (image) {
+        _attachedImageView = [[UIImageView alloc] initWithImage:image];
+        [self addSubview:_attachedImageView];
+        [self layoutSubviews];
+    }
+    
+}
+
 #pragma mark - UIAppearance Getters
 
 - (UIFont *)font
@@ -177,12 +197,22 @@
 
 - (CGRect)bubbleFrame
 {
-    CGSize bubbleSize = [JSBubbleView neededSizeForText:self.textView.text];
+    CGSize bubbleSize = [JSBubbleView neededSizeForMessage:_message];
     
     return CGRectMake((self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width : 0.0f),
                       kMarginTop,
                       bubbleSize.width,
-                      bubbleSize.height + kMarginTop);
+                      bubbleSize.height + kMarginTop - kMarginBottom );
+}
+
+- (BOOL)isImageMessage
+{
+    return (_attachedImageView != nil);
+}
+
+-(void) setPlayButtonOverlay
+{
+    [_attachedImageView setImage:[[_attachedImageView.image js_imageResizeWithSize:_attachedImageView.frame.size] js_imageOverlayAPlayButtonAbove]];
 }
 
 #pragma mark - Layout
@@ -192,19 +222,59 @@
     [super layoutSubviews];
     
     self.bubbleImageView.frame = [self bubbleFrame];
+    [self.bubbleImageView setHidden:NO];
+    [self.textView setHidden:YES];
     
-    CGFloat textX = self.bubbleImageView.frame.origin.x;
+    // If There is an image attached need to be displayed ..
+    if (_attachedImageView) {
+        
+        [self.bubbleImageView setHidden:YES];
+        self.bubbleImageView.frame = CGRectMake(self.bubbleImageView.frame.origin.x , self.bubbleImageView.frame.origin.y , self.bubbleImageView.frame.size.width , self.bubbleImageView.frame.size.height - kMarginTop + kMarginBottom);
+        
+        CGSize imageSize = [JSBubbleView neededSizeForImage:_attachedImageView.image];
+        
+        if (_message && _message.type == JSVideoMessage) {
+            [self setPlayButtonOverlay];
+        }
     
-    if(self.type == JSBubbleMessageTypeIncoming) {
-        textX += (self.bubbleImageView.image.capInsets.left / 2.0f);
+        int imageShift = (self.type == JSBubbleMessageTypeIncoming) ? 0 : (self.bubbleImageView.frame.size.width - imageSize.width);
+        CGRect imageFrame = CGRectMake( self.bubbleImageView.frame.origin.x + imageShift,
+                                       10,
+                                       imageSize.width ,
+                                       imageSize.height);
+        self.attachedImageView.frame = imageFrame;
+        
+        
+        
+        if (imageSize.width > 0.01 && imageSize.height > 0.01) {
+            UIImage* image = [JSBubbleImageViewFactory bubbleMediaMaskImageForType:self.type size:imageFrame.size];
+            if (_attachedImageView.image) {
+                _attachedImageView.image = [_attachedImageView.image js_imageMaskWithImage:image];
+            }
+            
+        }
+        
     }
-    
-    CGRect textFrame = CGRectMake(textX,
-                                  self.bubbleImageView.frame.origin.y,
-                                  self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f),
-                                  self.bubbleImageView.frame.size.height - kMarginTop);
-    
-    self.textView.frame = textFrame;
+    else
+    {
+        [self.textView setHidden:NO];
+        
+        CGFloat textX = self.bubbleImageView.frame.origin.x;
+        
+        if(self.type == JSBubbleMessageTypeIncoming) {
+            textX += (self.bubbleImageView.image.capInsets.left / 2.0f);
+        }else
+        {
+            textX += (self.bubbleImageView.image.capInsets.left / 4.0f);
+        }
+        
+        CGRect textFrame = CGRectMake(textX,
+                                      self.bubbleImageView.frame.origin.y + 2,
+                                      self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f),
+                                      self.bubbleImageView.frame.size.height - kMarginTop);
+        
+        self.textView.frame = textFrame;
+    }
 }
 
 #pragma mark - Bubble view
@@ -224,14 +294,44 @@
 {
     CGSize textSize = [JSBubbleView textSizeForText:text];
     
-	return CGSizeMake(textSize.width + kBubblePaddingRight,
-                      textSize.height + kPaddingTop + kPaddingBottom);
+	return CGSizeMake(textSize.width,
+                      textSize.height);
 }
 
-+ (CGFloat)neededHeightForText:(NSString *)text
++ (CGSize)neededSizeForMessage:(JSMessage*) msg
 {
-    CGSize size = [JSBubbleView neededSizeForText:text];
-    return size.height + kMarginTop + kMarginBottom;
+    CGSize textSize = [JSBubbleView neededSizeForText:msg.textMessage];
+    CGSize imageSize = [JSBubbleView neededSizeForImage:msg.thumbnailImage];
+    
+    int increaseInMessageHeight =  kPaddingTop + kPaddingBottom + kMarginBottom ;
+    if (msg.type == JSTextMessage) {
+        imageSize = CGSizeZero;
+    }else{
+        textSize = CGSizeZero;
+        increaseInMessageHeight = kPaddingBottom + kPaddingTop;
+    }
+    
+    // Check If there is an image attached , or It is Just a regular text Message.
+    CGSize bubbleSize = CGSizeMake( MAX(imageSize.width, textSize.width)  + kBubblePaddingRight , round (imageSize.height + textSize.height) + increaseInMessageHeight );
+    
+    return bubbleSize;
+}
+
++ (CGSize) neededSizeForImage:(UIImage*) img
+{
+    CGSize imageSize = CGSizeZero;
+    if (img) {
+        UIImageView* imageView = [[UIImageView alloc] initWithImage:img];
+        CGFloat maxWidth = [UIScreen mainScreen].applicationFrame.size.width * 0.70f;
+        CGSize actualImageSize = imageView.image.size;
+        if (actualImageSize.width > maxWidth ) {
+            imageSize = CGSizeMake(maxWidth, round (actualImageSize.height * maxWidth / actualImageSize.width));
+        }else{
+            imageSize = actualImageSize;
+        }
+    }
+    
+    return imageSize;
 }
 
 @end

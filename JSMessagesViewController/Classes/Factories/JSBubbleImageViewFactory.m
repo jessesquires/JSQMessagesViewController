@@ -133,4 +133,66 @@ static NSDictionary *bubbleImageDictionary;
     }
 }
 
++ (UIImage *)bubbleMediaMaskImageForType:(JSBubbleMessageType)type
+                                    size:(CGSize)rectSize
+{
+    
+    UIImage *backgroundImage = [UIImage imageNamed:@"mask-bubble-background@2x.png"];
+    
+    if(type == JSBubbleMessageTypeIncoming)
+    {
+        
+        UIImage *arrowImage = [UIImage imageNamed:@"r-mask-bubble-arrow-right@2x.png"];
+        UIImage *rightBarImage = [UIImage imageNamed:@"r-mask-bubble-right-bar@2x.png"];
+        UIImage *upperRightCorner = [UIImage imageNamed:@"r-mask-bubble-upper-right@2x.png"];
+        UIImage *upperLeftCorner = [UIImage imageNamed:@"r-mask-bubble-upper-left@2x.png"];
+        UIImage *bottomLeftCorner = [UIImage imageNamed:@"r-mask-bubble-bottom-left@2x.png"];
+        
+        UIGraphicsBeginImageContextWithOptions(rectSize, NO, [UIScreen mainScreen].scale);
+        
+        
+        [backgroundImage drawInRect:CGRectMake(0, 0, rectSize.width, rectSize.height)];
+        
+        [arrowImage drawInRect:CGRectMake( 0 , rectSize.height - 18 , 24 , 18)];
+        [rightBarImage drawInRect:CGRectMake(0 , 18 , 24,  rectSize.height - ( 36 ))];
+        [upperRightCorner drawInRect:CGRectMake(0 , 0 , 24, 18)];
+        
+        [upperLeftCorner drawInRect:CGRectMake(rectSize.width - 24 , 0 , 24, 18)];
+        [bottomLeftCorner drawInRect:CGRectMake(rectSize.width - 24  , rectSize.height - 18 , 24, 18)];
+        
+        UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return result;
+        
+    }else
+    {
+        
+        
+        UIImage *arrowImage = [UIImage imageNamed:@"mask-bubble-arrow-right@2x.png"];
+        UIImage *rightBarImage = [UIImage imageNamed:@"mask-bubble-right-bar@2x.png"];
+        UIImage *upperRightCorner = [UIImage imageNamed:@"mask-bubble-upper-right@2x.png"];
+        UIImage *upperLeftCorner = [UIImage imageNamed:@"mask-bubble-upper-left@2x.png"];
+        UIImage *bottomLeftCorner = [UIImage imageNamed:@"mask-bubble-bottom-left@2x.png"];
+        
+        UIGraphicsBeginImageContextWithOptions(rectSize, NO, [UIScreen mainScreen].scale);
+        
+        
+        [backgroundImage drawInRect:CGRectMake(0, 0, rectSize.width, rectSize.height)];
+        
+        [arrowImage drawInRect:CGRectMake( rectSize.width - 24 , rectSize.height - 18 , 24 , 18)];
+        [rightBarImage drawInRect:CGRectMake(rectSize.width - 24 , 18 , 24,  rectSize.height - ( 36 ))];
+        [upperRightCorner drawInRect:CGRectMake(rectSize.width - 24 , 0 , 24, 18)];
+        
+        [upperLeftCorner drawInRect:CGRectMake(0 , 0 , 24, 18)];
+        [bottomLeftCorner drawInRect:CGRectMake(0 , rectSize.height - 18 , 24, 18)];
+        
+        UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return result;
+    }
+    
+    
+    
+}
+
 @end

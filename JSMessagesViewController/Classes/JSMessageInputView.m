@@ -24,6 +24,7 @@
 - (void)setup;
 - (void)configureInputBarWithStyle:(JSMessageInputViewStyle)style;
 - (void)configureSendButtonWithStyle:(JSMessageInputViewStyle)style;
+- (void)configureAttachImageButtonWithStyle:(JSMessageInputViewStyle)style;
 
 @end
 
@@ -44,8 +45,9 @@
 - (void)configureInputBarWithStyle:(JSMessageInputViewStyle)style
 {
     CGFloat sendButtonWidth = (style == JSMessageInputViewStyleClassic) ? 78.0f : 64.0f;
+    CGFloat attachImageButtonWidth =   45.0f;
     
-    CGFloat width = self.frame.size.width - sendButtonWidth;
+    CGFloat width = self.frame.size.width - sendButtonWidth - attachImageButtonWidth;
     CGFloat height = [JSMessageInputView textViewLineHeight];
     
     JSMessageTextView *textView = [[JSMessageTextView  alloc] initWithFrame:CGRectZero];
@@ -53,7 +55,7 @@
 	_textView = textView;
     
     if(style == JSMessageInputViewStyleClassic) {
-        _textView.frame = CGRectMake(6.0f, 3.0f, width, height);
+        _textView.frame = CGRectMake(6.0f + attachImageButtonWidth, 3.0f, width, height);
         _textView.backgroundColor = [UIColor whiteColor];
         
         self.image = [[UIImage imageNamed:@"input-bar-background"] resizableImageWithCapInsets:UIEdgeInsetsMake(19.0f, 3.0f, 19.0f, 3.0f)
@@ -69,7 +71,7 @@
         [self addSubview:inputFieldBack];
     }
     else {
-        _textView.frame = CGRectMake(4.0f, 4.5f, width, height);
+        _textView.frame = CGRectMake(4.0f + attachImageButtonWidth , 4.5f, width, height);
         _textView.backgroundColor = [UIColor clearColor];
         _textView.layer.borderColor = [UIColor colorWithWhite:0.8f alpha:1.0f].CGColor;
         _textView.layer.borderWidth = 0.65f;
@@ -126,6 +128,23 @@
     [self setSendButton:sendButton];
 }
 
+- (void)configureAttachImageButtonWithStyle:(JSMessageInputViewStyle)style
+{
+    UIButton *attachButton;
+    attachButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
+    UIImage *sendBack = [[UIImage imageNamed:@"button-photo"] resizableImageWithCapInsets:insets];
+    UIImage *sendBackHighLighted = [[UIImage imageNamed:@"button-photo-highlighted"] resizableImageWithCapInsets:insets];
+    [attachButton setBackgroundImage:sendBack forState:UIControlStateNormal];
+    [attachButton setBackgroundImage:sendBack forState:UIControlStateDisabled];
+    [attachButton setBackgroundImage:sendBackHighLighted forState:UIControlStateHighlighted];
+    
+    attachButton.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin);
+    
+    [self setAttachImageButton:attachButton];
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
                         style:(JSMessageInputViewStyle)style
                      delegate:(id<UITextViewDelegate, JSDismissiveTextViewDelegate>)delegate
@@ -138,6 +157,9 @@
         [self configureInputBarWithStyle:style];
         [self configureSendButtonWithStyle:style];
         
+        _attachImageButton = nil;
+        [self configureAttachImageButtonWithStyle:style];
+        
         _textView.delegate = delegate;
         _textView.keyboardDelegate = delegate;
         _textView.dismissivePanGestureRecognizer = panGestureRecognizer;
@@ -149,6 +171,7 @@
 {
     _textView = nil;
     _sendButton = nil;
+    _attachImageButton = nil;
 }
 
 #pragma mark - UIView
@@ -179,6 +202,18 @@
     
     [self addSubview:btn];
     _sendButton = btn;
+}
+
+-(void) setAttachImageButton:(UIButton *)btn
+{
+    if(_attachImageButton)
+        [_attachImageButton removeFromSuperview];
+    _attachImageButton = nil;
+    
+    btn.frame = CGRectMake(12.0f, 13.0f, 25.0f , 19.0f);
+    
+    [self addSubview:btn];
+    _attachImageButton = btn;
 }
 
 #pragma mark - Message input view
@@ -233,6 +268,31 @@
 + (CGFloat)maxHeight
 {
     return ([JSMessageInputView maxLines] + 1.0f) * [JSMessageInputView textViewLineHeight];
+}
+
+- (void) showMediaButton:(BOOL) isShown
+{
+    CGFloat sendButtonWidth = (_style == JSMessageInputViewStyleClassic) ? 78.0f : 64.0f;
+    CGFloat attachImageButtonWidth = ( isShown) ?  45.0f : 0.0f;
+    
+    CGFloat width = self.frame.size.width - sendButtonWidth - attachImageButtonWidth;
+    CGFloat height = [JSMessageInputView textViewLineHeight];
+    
+    if (!isShown) {
+        [_attachImageButton setHidden:YES];
+        attachImageButtonWidth = 0;
+    }else
+    {
+        [_attachImageButton setHidden:NO];
+    }
+    
+    
+    if(_style == JSMessageInputViewStyleClassic) {
+        _textView.frame = CGRectMake(6.0f + attachImageButtonWidth, 3.0f, width , height);
+    }
+    else {
+        _textView.frame = CGRectMake(4.0f + attachImageButtonWidth , 4.5f, width , height);
+    }
 }
 
 @end

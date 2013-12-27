@@ -108,4 +108,59 @@
     return newImage;
 }
 
+- (UIImage*) js_imageMaskWithImage:(UIImage *) mask
+{
+    // This image is made as a hack for Retina output images for the masked images.
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, [UIScreen mainScreen].scale);
+    [self drawInRect:CGRectMake(0, 0, self.size.width, self.size.height)];
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    CGImageRef imageReference = image.CGImage;
+    CGImageRef maskReference = mask.CGImage;
+    
+    CGImageRef imageMask = CGImageMaskCreate(CGImageGetWidth(maskReference),
+                                             CGImageGetHeight(maskReference),
+                                             CGImageGetBitsPerComponent(maskReference),
+                                             CGImageGetBitsPerPixel(maskReference),
+                                             CGImageGetBytesPerRow(maskReference),
+                                             CGImageGetDataProvider(maskReference),
+                                             NULL, // Decode is null
+                                             YES // Should interpolate
+                                             );
+    
+    CGImageRef maskedReference = CGImageCreateWithMask(imageReference, imageMask);
+    CGImageRelease(imageMask);
+    
+    UIImage *maskedImage = [UIImage imageWithCGImage:maskedReference];
+    CGImageRelease(maskedReference);
+    
+    return maskedImage;
+}
+
+- (UIImage *) js_imageOverlayAPlayButtonAbove
+{
+    
+    UIImage *watermarkImage = [UIImage imageNamed:@"play-media-button.png"];
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, [UIScreen mainScreen].scale);
+    
+    [self drawInRect:CGRectMake(0, 0, self.size.width, self.size.height)];
+    [watermarkImage drawInRect:CGRectMake(  roundf( (self.size.width / 2.0) - 12.5) , roundf((self.size.height / 2.0) - 12.5), 25, 25)];
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return result;
+}
+
+- (UIImage *) js_imageResizeWithSize:(CGSize) size
+{
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
+    [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return result;
+}
+
 @end

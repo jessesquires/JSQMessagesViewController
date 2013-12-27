@@ -13,6 +13,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSMessage.h"
 #import "JSBubbleMessageCell.h"
 #import "JSMessageInputView.h"
 #import "JSAvatarImageFactory.h"
@@ -99,11 +100,11 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 @required
 
 /**
- *  Tells the delegate that the specified text has been sent. Hook into your own backend here.
+ *  Tells the delegate that the specified Message has been sent. Hook into your own backend here.
  *
- *  @param text A string containing the text that was present in the messageInputView's textView when the send button was pressed.
+ *  @param message A JSMessage object contains the full message information required either after pressing send button ( Text Message the messageInputView's textView )
  */
-- (void)didSendText:(NSString *)text;
+-(void) didSendMessageData:(JSMessage*) message;
 
 /**
  *  Asks the delegate for the message type for the row at the specified index path.
@@ -159,6 +160,21 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  */
 - (JSMessageInputViewStyle)inputViewStyle;
 
+/**
+ *  Tells the delegate to show More Information about Image File.
+ *
+ *  @param indexPath A NSIndexPath object that give the inforamation about row index inside the messages List.
+ */
+-(void) shouldViewImageAtIndexPath:(NSIndexPath*) indexPath;
+
+
+/**
+ *  Tells the delegate to show More Information about Video File.
+ *
+ *  @param indexPath A NSIndexPath object that give the inforamation about row index inside the messages List.
+ */
+-(void) shouldViewVideoAtIndexPath:(NSIndexPath*) indexPath;
+
 @optional
 
 /**
@@ -192,6 +208,12 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  */
 - (UIButton *)sendButtonForInputView;
 
+/**
+ *  Tells the delegate to retrive an Media Data Message from the user device.
+ *
+ */
+- (JSMessage *) attachedMediaMessage;
+
 @end
 
 
@@ -201,13 +223,13 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 @required
 
 /**
- *  Asks the data source for the text to display for the row at the specified index path.
+ *  Asks the data source for the Message to display for the row at the specified index path.
  *
  *  @param indexPath An index path locating a row in the table view.
  *
- *  @return A string containing text for a message. This value must not be `nil`.
+ *  @return A Message Object contains (Text or Media Content). This value must not be `nil`.
  */
-- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (JSMessage*)messageForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  *  Asks the data source for the date to display in the timestamp label *above* the row at the specified index path.
@@ -267,10 +289,13 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 #pragma mark - Messages view controller
 
 /**
- *  Animates and resets the text view in messageInputView. Call this method at the end of the delegate method `didSendText:`. 
+ *  Animates Without reseting the text view in messageInputView. Call this method at the end of the delegate method `didSendMessageData:`.
+ *
+ *  @param isToFlushInputView `YES` if you want to empty the text input fields after pressing 'send' button , `NO` if it was Media content Message.
+ *
  *  @see JSMessagesViewDelegate.
  */
-- (void)finishSend;
+- (void)finishSendingMessage:(BOOL) isToFlushInputView;
 
 
 /**

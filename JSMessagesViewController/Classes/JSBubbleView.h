@@ -14,6 +14,8 @@
 
 #import <UIKit/UIKit.h>
 #import "JSBubbleImageViewFactory.h"
+#import "JSMessage.h"
+
 
 /**
  *  An instance of JSBubbleView is a means for displaying text in a speech bubble image to be placed in a JSBubbleMessageCell. 
@@ -21,6 +23,7 @@
  */
 @interface JSBubbleView : UIView
 
+@property (weak, nonatomic) JSMessage *message;
 /**
  *  Returns the message type for this bubble view.
  *  @see JSBubbleMessageType for descriptions of the constants used to specify bubble message type.
@@ -47,6 +50,11 @@
  */
 @property (strong, nonatomic) UIFont *font UI_APPEARANCE_SELECTOR;
 
+/**
+ *  Returns the image view containing the attached image for this bubble view.
+ */
+@property (strong, nonatomic, readonly) UIImageView *attachedImageView;
+
 #pragma mark - Initialization
 
 /**
@@ -62,6 +70,15 @@
                    bubbleType:(JSBubbleMessageType)bubleType
               bubbleImageView:(UIImageView *)bubbleImageView;
 
+#pragma mark - Setters
+/**
+ *  Sets a given Image for the bubble view, resizing its frame as needed.
+ *
+ *  @param image The message attached Image to be displayed in the bubble view.
+ */
+- (void)setMessageImage:(UIImage *)image;
+
+
 #pragma mark - Getters
 
 /**
@@ -74,12 +91,22 @@
 #pragma mark - Class methods
 
 /**
- *  Computes and returns the minimum necessary height of a `JSBubbleView` needed to display the given text.
+ *  Computes and returns the minimum necessary size of a `JSBubbleView` needed to display the given text AND/OR Image.
  *
- *  @param text The text to display in the bubble view.
+ *  @param msg The JSMessage Data to be displayed inside the bubble view.
  *
- *  @return The height required for the frame of the bubble view in order to display the given text.
+ *  @return The size required for the frame of the bubble view in order to display the given text and/or Image.
  */
-+ (CGFloat)neededHeightForText:(NSString *)text;
++ (CGSize)neededSizeForMessage:(JSMessage*) msg;
+
+
+/**
+ *  Asks the BubbleView for showing weather it contains attached Image or not.
+ *
+ *  @return A Bool.
+ */
+- (BOOL)isImageMessage;
+
+- (void)setPlayButtonOverlay;
 
 @end

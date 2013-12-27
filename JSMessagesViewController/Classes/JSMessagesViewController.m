@@ -25,6 +25,7 @@
 - (void)setup;
 
 - (void)sendPressed:(UIButton *)sender;
+- (void)attachImagePressed:(UIButton *)sender;
 
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (BOOL)shouldHaveAvatarForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -89,6 +90,12 @@
     [inputView.sendButton addTarget:self
                              action:@selector(sendPressed:)
                    forControlEvents:UIControlEventTouchUpInside];
+    
+    inputView.attachImageButton.enabled = YES;
+    [inputView.attachImageButton addTarget:self
+                                    action:@selector(attachImagePressed:)
+                          forControlEvents:UIControlEventTouchUpInside];
+    
     
     [self.view addSubview:inputView];
     _messageInputView = inputView;
@@ -187,7 +194,12 @@
 
 - (void)sendPressed:(UIButton *)sender
 {
-    [self.delegate didSendText:[self.messageInputView.textView.text js_stringByTrimingWhitespace]];
+    [self.delegate didSendMessageData:[[JSMessage alloc] initWithTextMessage:[self.messageInputView.textView.text js_stringByTrimingWhitespace]]];
+}
+
+- (void)attachImagePressed:(UIButton *)sender
+{
+    [self.delegate didSendMessageData:[self.delegate attachedMediaMessage]];
 }
 
 #pragma mark - Table view data source
@@ -237,9 +249,11 @@
 		[cell setSubtitle:[self.dataSource subtitleForRowAtIndexPath:indexPath]];
     }
     
-    [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
-    [cell setBackgroundColor:tableView.backgroundColor];
+    JSMessage* messageData = [self.dataSource messageForRowAtIndexPath:indexPath];
     
+    [cell setMessage:messageData];
+    
+    [cell setBackgroundColor:tableView.backgroundColor];
     cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
     
     if([self.delegate respondsToSelector:@selector(configureCell:atIndexPath:)]) {
@@ -253,16 +267,29 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *text = [self.dataSource textForRowAtIndexPath:indexPath];
+    JSMessage *message = [self.dataSource messageForRowAtIndexPath:indexPath];
     
     BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
 	BOOL hasSubtitle = [self shouldHaveSubtitleForRowAtIndexPath:indexPath];
     
-    return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithText:text
+    return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithMessage:message
                                                                timestamp:hasTimestamp
                                                                   avatar:hasAvatar
                                                                 subtitle:hasSubtitle];
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    JSMessage* messageSelected = [self.dataSource messageForRowAtIndexPath:indexPath];
+    if (messageSelected && messageSelected.type == JSImageMessage )
+    {
+        [self.delegate shouldViewImageAtIndexPath:indexPath];
+    }
+    else if (messageSelected && messageSelected.type == JSVideoMessage)
+    {
+        [self.delegate shouldViewVideoAtIndexPath:indexPath];
+    }
 }
 
 #pragma mark - Messages view controller
@@ -327,10 +354,13 @@
     }
 }
 
-- (void)finishSend
+- (void)finishSendingMessage:(BOOL)isToFlushInputView
 {
-    [self.messageInputView.textView setText:nil];
-    [self textViewDidChange:self.messageInputView.textView];
+    if (isToFlushInputView) {
+        [self.messageInputView.textView setText:nil];
+        [self textViewDidChange:self.messageInputView.textView];
+    }
+    
     [self.tableView reloadData];
 }
 
