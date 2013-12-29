@@ -105,6 +105,7 @@
 {
     [super viewDidLoad];
     [self setup];
+    [[JSBubbleView appearance] setFont:[UIFont systemFontOfSize:16.0f]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
