@@ -187,8 +187,8 @@
 {
     CGRect prevFrame = self.textView.frame;
     
-    int numLines = MAX([self.textView numberOfLinesOfText],
-                       [self.textView.text js_numberOfLines]);
+    NSUInteger numLines = MAX([self.textView numberOfLinesOfText],
+                              [self.textView.text js_numberOfLines]);
     
     //  below iOS 7, if you set the text view frame programmatically, the KVO will continue notifying
     //  to avoid that, we are removing the observer before setting the frame and add the observer after setting frame here.
