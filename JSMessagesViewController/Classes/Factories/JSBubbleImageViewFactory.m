@@ -65,7 +65,7 @@ static NSDictionary *bubbleImageDictionary;
         highlightedBubble = [highlightedBubble js_imageFlippedHorizontal];
     }
     
-    UIEdgeInsets capInsets = UIEdgeInsetsMake(15.0f, 20.0f, 15.0f, 20.0f);
+    UIEdgeInsets capInsets = UIEdgeInsetsMake(18.0f, 21.0f, 18.0f, 27.0f);
     
     return [[UIImageView alloc] initWithImage:[normalBubble js_stretchableImageWithCapInsets:capInsets]
                              highlightedImage:[highlightedBubble js_stretchableImageWithCapInsets:capInsets]];
