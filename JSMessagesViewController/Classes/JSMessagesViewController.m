@@ -213,7 +213,7 @@
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
 	BOOL hasSubtitle = [self shouldHaveSubtitleForRowAtIndexPath:indexPath];
     
-    NSString *CellIdentifier = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d", type, hasTimestamp, hasAvatar, hasSubtitle];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d", (int)type, hasTimestamp, hasAvatar, hasSubtitle];
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(!cell) {
@@ -240,8 +240,12 @@
     [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
     [cell setBackgroundColor:tableView.backgroundColor];
     
-    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
-    
+	#if TARGET_IPHONE_SIMULATOR
+        cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeNone;
+	#else
+		cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
+	#endif
+	
     if([self.delegate respondsToSelector:@selector(configureCell:atIndexPath:)]) {
         [self.delegate configureCell:cell atIndexPath:indexPath];
     }
