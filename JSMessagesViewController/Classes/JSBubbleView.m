@@ -87,7 +87,7 @@
         if([_textView respondsToSelector:@selector(textContainerInset)]) {
             _textView.textContainerInset = UIEdgeInsetsMake(6.0f, 4.0f, 2.0f, 4.0f);
         }
-        
+		
         [self addTextViewObservers];
         
 //        NOTE: TODO: textView frame & text inset
@@ -224,8 +224,8 @@
 {
     CGSize textSize = [JSBubbleView textSizeForText:text];
     
-	return CGSizeMake(textSize.width + kBubblePaddingRight,
-                      textSize.height + kPaddingTop + kPaddingBottom);
+	return CGSizeMake((int)(textSize.width + kBubblePaddingRight),
+                      (int)(textSize.height + kPaddingTop + kPaddingBottom));
 }
 
 + (CGFloat)neededHeightForText:(NSString *)text
