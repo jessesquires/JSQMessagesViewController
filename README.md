@@ -77,7 +77,8 @@ A messages UI for iPhone and iPad.
 5. Implement `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section` from the [`UITableViewDataSource` protocol](https://developer.apple.com/library/ios/documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html).
 6. Present your subclassed ViewController programatically or via StoryBoards. Your subclass should be the `rootViewController` of a `UINavigationController`.
 7. Be a badass [programming-motherfucker](http://programming-motherfucker.com) and read the fucking documentation. (Yes, there's documentation! [Seriously](http://dailyyeah.com/wp-content/uploads/2008/07/crazy_fat_kid.gif)!)
-8. See the included demo: `JSMessagesDemo.xcworkspace`
+8. See the included demo: **`JSMessagesDemo.xcworkspace`**
+    * Don't forget to run `pod install` before opening the demo!
 
 ## Documentation
 
