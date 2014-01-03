@@ -562,10 +562,14 @@
 
 - (void)keyboardWillSnapBackToPoint:(CGPoint)point
 {
-    CGRect inputViewFrame = self.messageInputView.frame;
-    CGPoint keyboardOrigin = [self.view convertPoint:point fromView:nil];
-    inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
-    self.messageInputView.frame = inputViewFrame;
+    if([[[self.parentViewController tabBarController] tabBar] isHidden]){
+        CGRect inputViewFrame = self.messageInputView.frame;
+        CGPoint keyboardOrigin = [self.view convertPoint:point fromView:nil];
+        inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
+        self.messageInputView.frame = inputViewFrame;
+    }
+    else{
+    }
 }
 
 #pragma mark - Utilities
