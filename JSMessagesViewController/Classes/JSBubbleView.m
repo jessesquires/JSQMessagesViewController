@@ -253,4 +253,10 @@
     return size.height + kMarginTop + kMarginBottom;
 }
 
++ (CGFloat)attributedNeededHeightForText:(NSAttributedString *)text
+{
+    CGSize size = [JSBubbleView attributedNeededSizeForText:text];
+    return size.height + kMarginTop + kMarginBottom;
+}
+
 @end
