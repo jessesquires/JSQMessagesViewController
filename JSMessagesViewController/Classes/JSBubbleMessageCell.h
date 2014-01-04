@@ -74,6 +74,7 @@
  *  @param msg The message text for the cell.
  */
 - (void)setMessage:(NSString *)msg;
+- (void)setAttributedMessage:(NSAttributedString *)msg;
 
 /**
  *  Sets the date to be displayed in the timestampLabel of the cell. The date is formatted for you via `NSDateFormatter` by `JSBubbleMessageCell`.
@@ -122,5 +123,10 @@
                                           timestamp:(BOOL)hasTimestamp
                                              avatar:(BOOL)hasAvatar
                                            subtitle:(BOOL)hasSubtitle;
+
++ (CGFloat)attributedNeededHeightForBubbleMessageCellWithText:(NSAttributedString *)text
+                                                    timestamp:(BOOL)hasTimestamp
+                                                       avatar:(BOOL)hasAvatar
+                                                     subtitle:(BOOL)hasSubtitle;
 
 @end

@@ -33,8 +33,11 @@
 - (void)removeTextViewObservers;
 
 + (CGSize)textSizeForText:(NSString *)txt;
++ (CGSize)attributedTextSizeForText:(NSAttributedString *)txt;
 + (CGSize)neededSizeForText:(NSString *)text;
++ (CGSize)attributedNeededSizeForText:(NSAttributedString *)text;
 + (CGFloat)neededHeightForText:(NSString *)text;
++ (CGFloat)attributedNeededHeightForText:(NSAttributedString *)text;
 
 @end
 
@@ -177,7 +180,7 @@
 
 - (CGRect)bubbleFrame
 {
-    CGSize bubbleSize = [JSBubbleView neededSizeForText:self.textView.text];
+    CGSize bubbleSize = [JSBubbleView attributedNeededSizeForText:self.textView.attributedText];
     
     return CGRectMake((self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width : 0.0f),
                       kMarginTop,
@@ -220,11 +223,27 @@
            constrainedToSize:CGSizeMake(maxWidth, maxHeight)];
 }
 
++ (CGSize)attributedTextSizeForText:(NSAttributedString *)txt
+{
+    CGFloat maxWidth = [UIScreen mainScreen].applicationFrame.size.width * 0.70f;
+    CGRect rect = [txt boundingRectWithSize:CGSizeMake(maxWidth, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+    
+    return rect.size;
+}
+
 + (CGSize)neededSizeForText:(NSString *)text
 {
     CGSize textSize = [JSBubbleView textSizeForText:text];
     
 	return CGSizeMake(textSize.width + kBubblePaddingRight,
+                      textSize.height + kPaddingTop + kPaddingBottom);
+}
+
++ (CGSize)attributedNeededSizeForText:(NSAttributedString *)text
+{
+    CGSize textSize = [JSBubbleView attributedTextSizeForText:text];
+    
+    return CGSizeMake(textSize.width + kBubblePaddingRight,
                       textSize.height + kPaddingTop + kPaddingBottom);
 }
 
