@@ -18,7 +18,6 @@
 
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
-@property (assign, nonatomic, readonly) UIEdgeInsets originalTableViewContentInset;
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 @property (assign, nonatomic) BOOL isUserScrolling;
 
@@ -31,6 +30,9 @@
 - (BOOL)shouldHaveSubtitleForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 - (BOOL)shouldAllowScroll;
+
+- (void)layoutAndAnimateMessageInputTextView:(UITextView *)textView;
+- (UIEdgeInsets)tableViewInsetsWithBottomValue:(CGFloat)bottom;
 
 - (void)handleWillShowKeyboardNotification:(NSNotification *)notification;
 - (void)handleWillHideKeyboardNotification:(NSNotification *)notification;
@@ -123,20 +125,6 @@
 											 selector:@selector(handleWillHideKeyboardNotification:)
 												 name:UIKeyboardWillHideNotification
                                                object:nil];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    //  FIXME: this is a hack
-    //  ---------------------
-    //  tableView.contentInset.top = 0.0 on iOS 6
-    //  tableView.contentInset.top = 64.0 on iOS 7
-    //  this is because in iOS 7 all VCs default to fullscreen (with navbar overlayed on view)
-    //  save here in order to reset in [ keyboardWillShowHide: ]
-    //  ---------------------
-    _originalTableViewContentInset = self.tableView.contentInset;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -437,11 +425,7 @@
     if(changeInHeight != 0.0f) {
         [UIView animateWithDuration:0.25f
                          animations:^{
-                             UIEdgeInsets insets = UIEdgeInsetsMake(0.0f,
-                                                                    0.0f,
-                                                                    self.tableView.contentInset.bottom + changeInHeight,
-                                                                    0.0f);
-                             
+                             UIEdgeInsets insets = [self tableViewInsetsWithBottomValue:self.tableView.contentInset.bottom + changeInHeight];
                              self.tableView.contentInset = insets;
                              self.tableView.scrollIndicatorInsets = insets;
                              [self scrollToBottomAnimated:NO];
@@ -480,6 +464,19 @@
                            [textView setContentOffset:bottomOffset animated:YES];
                        });
     }
+}
+
+- (UIEdgeInsets)tableViewInsetsWithBottomValue:(CGFloat)bottom
+{
+    UIEdgeInsets insets = UIEdgeInsetsZero;
+    
+    if ([self respondsToSelector:@selector(topLayoutGuide)]) {
+        insets.top = self.topLayoutGuide.length;
+    }
+    
+    insets.bottom = bottom;
+    
+    return insets;
 }
 
 #pragma mark - Key-value observing
@@ -531,16 +528,15 @@
 																  inputViewFrame.size.width,
 																  inputViewFrame.size.height);
 
-                         UIEdgeInsets insets = self.originalTableViewContentInset;
-                         insets.bottom = self.view.frame.size.height
-                                            - self.messageInputView.frame.origin.y
-                                            - inputViewFrame.size.height;
+                         UIEdgeInsets insets = [self tableViewInsetsWithBottomValue:
+                                                self.view.frame.size.height
+                                                - self.messageInputView.frame.origin.y
+                                                - inputViewFrame.size.height];
                          
                          self.tableView.contentInset = insets;
                          self.tableView.scrollIndicatorInsets = insets;
                      }
-                     completion:^(BOOL finished) {
-                     }];
+                     completion:nil];
 }
 
 #pragma mark - Dismissive text view delegate
