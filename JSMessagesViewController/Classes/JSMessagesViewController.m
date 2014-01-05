@@ -486,7 +486,7 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    if ([object isKindOfClass:[UITextView class]] && [keyPath isEqualToString:@"contentSize"]) {
+    if (object == self.messageInputView.textView && [keyPath isEqualToString:@"contentSize"]) {
         [self layoutAndAnimateMessageInputTextView:object];
     }
 }
