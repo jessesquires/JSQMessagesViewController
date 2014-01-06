@@ -32,6 +32,7 @@
 - (BOOL)shouldAllowScroll;
 
 - (void)layoutAndAnimateMessageInputTextView:(UITextView *)textView;
+- (void)setTableViewInsetsWithBottomValue:(CGFloat)bottom;
 - (UIEdgeInsets)tableViewInsetsWithBottomValue:(CGFloat)bottom;
 
 - (void)handleWillShowKeyboardNotification:(NSNotification *)notification;
@@ -151,6 +152,14 @@
     _dataSource = nil;
     _tableView = nil;
     _messageInputView = nil;
+}
+
+#pragma mark - View layout
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    [self setTableViewInsetsWithBottomValue:0.0f];
 }
 
 #pragma mark - View rotation
@@ -425,9 +434,8 @@
     if(changeInHeight != 0.0f) {
         [UIView animateWithDuration:0.25f
                          animations:^{
-                             UIEdgeInsets insets = [self tableViewInsetsWithBottomValue:self.tableView.contentInset.bottom + changeInHeight];
-                             self.tableView.contentInset = insets;
-                             self.tableView.scrollIndicatorInsets = insets;
+                             [self setTableViewInsetsWithBottomValue:self.tableView.contentInset.bottom + changeInHeight];
+                             
                              [self scrollToBottomAnimated:NO];
                              
                              if(isShrinking) {
@@ -464,6 +472,13 @@
                            [textView setContentOffset:bottomOffset animated:YES];
                        });
     }
+}
+
+- (void)setTableViewInsetsWithBottomValue:(CGFloat)bottom
+{
+    UIEdgeInsets insets = [self tableViewInsetsWithBottomValue:bottom];
+    self.tableView.contentInset = insets;
+    self.tableView.scrollIndicatorInsets = insets;
 }
 
 - (UIEdgeInsets)tableViewInsetsWithBottomValue:(CGFloat)bottom
@@ -510,7 +525,7 @@
 	double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
     [UIView animateWithDuration:duration
-                          delay:0.0f
+                          delay:0.0
                         options:[self animationOptionsForCurve:curve]
                      animations:^{
                          CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
@@ -528,13 +543,9 @@
 																  inputViewFrame.size.width,
 																  inputViewFrame.size.height);
 
-                         UIEdgeInsets insets = [self tableViewInsetsWithBottomValue:
-                                                self.view.frame.size.height
-                                                - self.messageInputView.frame.origin.y
-                                                - inputViewFrame.size.height];
-                         
-                         self.tableView.contentInset = insets;
-                         self.tableView.scrollIndicatorInsets = insets;
+                         [self setTableViewInsetsWithBottomValue:self.view.frame.size.height
+                                                                - self.messageInputView.frame.origin.y
+                                                                - inputViewFrame.size.height];
                      }
                      completion:nil];
 }
