@@ -159,7 +159,7 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    [self setTableViewInsetsWithBottomValue:0.0f];
+    [self setTableViewInsetsWithBottomValue:self.tableView.contentInset.bottom];
 }
 
 #pragma mark - View rotation
