@@ -154,14 +154,6 @@
     _messageInputView = nil;
 }
 
-#pragma mark - View layout
-
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-    [self setTableViewInsetsWithBottomValue:self.tableView.contentInset.bottom];
-}
-
 #pragma mark - View rotation
 
 - (BOOL)shouldAutorotate
