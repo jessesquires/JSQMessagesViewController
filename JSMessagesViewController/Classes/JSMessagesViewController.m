@@ -20,6 +20,7 @@
 
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 @property (assign, nonatomic) BOOL isUserScrolling;
+@property (assign, nonatomic) BOOL isViewAppeared;
 
 - (void)setup;
 
@@ -115,8 +116,6 @@
 {
     [super viewWillAppear:animated];
     
-    [self scrollToBottomAnimated:NO];
-    
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(handleWillShowKeyboardNotification:)
 												 name:UIKeyboardWillShowNotification
@@ -128,6 +127,12 @@
                                                object:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.isViewAppeared = YES;
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -137,6 +142,12 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    self.isViewAppeared = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -160,6 +171,9 @@
 {
     [super viewWillLayoutSubviews];
     [self setTableViewInsetsWithBottomValue:0.0f];
+    if (!self.isViewAppeared) {
+        [self scrollToBottomAnimated:NO];
+    }
 }
 
 #pragma mark - View rotation
