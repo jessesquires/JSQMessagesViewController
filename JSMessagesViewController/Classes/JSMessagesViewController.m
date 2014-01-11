@@ -561,7 +561,7 @@
 
 - (void)keyboardWillSnapBackToPoint:(CGPoint)point
 {
-    if(self.parentViewController != nil && !self.parentViewController.tabBarController.tabBar.isHidden){
+    if(!self.tabBarController.tabBar.hidden){
         return;
     }
 	
