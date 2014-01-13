@@ -18,6 +18,12 @@
 #define kSubtitleWoz @"Steve Wozniak"
 #define kSubtitleCook @"Mr. Cook"
 
+@interface JSDemoViewController()
+
+@property (nonatomic, strong) UIImage *image;
+
+@end
+
 @implementation JSDemoViewController
 
 #pragma mark - View lifecycle
@@ -31,6 +37,7 @@
     [[JSBubbleView appearance] setFont:[UIFont systemFontOfSize:16.0f]];
     
     self.title = @"Messages";
+    self.image = [UIImage imageNamed:@"SteveJobs.jpg"];
     
     self.messageInputView.textView.placeHolder = @"New Message";
     
@@ -193,6 +200,13 @@
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self.messages objectAtIndex:indexPath.row];
+}
+
+- (UIImage *)imageForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row % 2 == 1)
+        return self.image;
+    else return nil;
 }
 
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath

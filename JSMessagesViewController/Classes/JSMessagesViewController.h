@@ -205,9 +205,19 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  *
  *  @param indexPath An index path locating a row in the table view.
  *
- *  @return A string containing text for a message. This value must not be `nil`.
+ *  @return A string containing text for a message. If a cell contains an image, text is ignored.
  */
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+
+/**
+ * Asks the data source for the image to display for the row at the specified index path.
+ *
+ * @param indexPath An index path locating a row in the table view.
+ *
+ * @return An image. If a cell contains an image, text is ignored.
+ */
+- (UIImage *)imageForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  *  Asks the data source for the date to display in the timestamp label *above* the row at the specified index path.

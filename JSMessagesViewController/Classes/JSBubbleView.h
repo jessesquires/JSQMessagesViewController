@@ -40,6 +40,11 @@
 @property (weak, nonatomic, readonly) UITextView *textView;
 
 /**
+ * Returns the image view containing the message image for this bubble view.
+ */
+@property (weak, nonatomic, readonly) UIImageView *imageView;
+
+/**
  *  The font for the text contained in the bubble view. The default value is `[UIFont systemFontOfSize:16.0f]`.
  *
  *  @warning You must set this propety via `UIAppearance` only. *DO NOT set this property directly*.
@@ -81,5 +86,7 @@
  *  @return The height required for the frame of the bubble view in order to display the given text.
  */
 + (CGFloat)neededHeightForText:(NSString *)text;
+
++ (CGFloat)neededHeightForImage:(UIImage *)image;
 
 @end

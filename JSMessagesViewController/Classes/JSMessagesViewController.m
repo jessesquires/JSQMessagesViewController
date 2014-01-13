@@ -237,7 +237,8 @@
 		[cell setSubtitle:[self.dataSource subtitleForRowAtIndexPath:indexPath]];
     }
     
-    [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
+    [cell setMessageWithText:[self.dataSource textForRowAtIndexPath:indexPath]];
+    [cell setMessageWithImage:[self.dataSource imageForRowAtIndexPath:indexPath]];
     [cell setBackgroundColor:tableView.backgroundColor];
     
     cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
@@ -253,16 +254,28 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIImage *image = [self.dataSource imageForRowAtIndexPath:indexPath];
     NSString *text = [self.dataSource textForRowAtIndexPath:indexPath];
     
     BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
 	BOOL hasSubtitle = [self shouldHaveSubtitleForRowAtIndexPath:indexPath];
     
-    return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithText:text
+    if(image)
+    {
+        return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithImage:image
+                                                                   timestamp:hasTimestamp
+                                                                      avatar:hasAvatar
+                                                                    subtitle:hasSubtitle];
+    }
+    else
+    {
+    
+        return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithText:text
                                                                timestamp:hasTimestamp
                                                                   avatar:hasAvatar
                                                                 subtitle:hasSubtitle];
+    }
 }
 
 #pragma mark - Messages view controller
