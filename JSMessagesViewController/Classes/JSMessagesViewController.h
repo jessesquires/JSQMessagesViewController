@@ -199,6 +199,7 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 @protocol JSMessagesViewDataSource <NSObject>
 
 @required
+@optional
 
 /**
  *  Asks the data source for the text to display for the row at the specified index path.
