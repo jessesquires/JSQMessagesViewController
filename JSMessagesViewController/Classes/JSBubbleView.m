@@ -217,10 +217,10 @@
     maxHeight += kJSAvatarImageSize;
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0
-    return [txt boundingRectWithSize:CGSizeMake(maxWidth, maxHeight)
-                              options:NSStringDrawingUsesLineFragmentOrigin
-                           attributes:@{NSFontAttributeName: [[JSBubbleView appearance] font]}
-                              context:nil].size;
+    return CGRectIntegral([txt boundingRectWithSize:CGSizeMake(maxWidth, maxHeight)
+                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                         attributes:@{NSFontAttributeName: [[JSBubbleView appearance] font]}
+                                            context:nil]).size;
 #else
     CGSize stringSize = [txt sizeWithFont:[[JSBubbleView appearance] font]
                         constrainedToSize:CGSizeMake(maxWidth, maxHeight)];
