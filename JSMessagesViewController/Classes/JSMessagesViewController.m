@@ -213,7 +213,7 @@
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
 	BOOL hasSubtitle = [self shouldHaveSubtitleForRowAtIndexPath:indexPath];
     
-    NSString *CellIdentifier;
+    NSString *CellIdentifier = nil;
     if([self.delegate respondsToSelector:@selector(customCellIdentifierForRowAtIndexPath:)])
     {
         CellIdentifier = [self.delegate customCellIdentifierForRowAtIndexPath:indexPath];
