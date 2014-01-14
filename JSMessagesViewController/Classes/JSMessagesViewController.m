@@ -213,8 +213,12 @@
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
 	BOOL hasSubtitle = [self shouldHaveSubtitleForRowAtIndexPath:indexPath];
     
-    
-    NSString *CellIdentifier = [self.delegate customCellIdentifierForRowAtIndexPath:indexPath];
+    NSString *CellIdentifier;
+    if([self.delegate respondsToSelector:@selector(customCellIdentifierForRowAtIndexPath:)])
+    {
+        CellIdentifier = [self.delegate customCellIdentifierForRowAtIndexPath:indexPath];
+    }
+
     if(!CellIdentifier)
         CellIdentifier = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d", type, hasTimestamp, hasAvatar, hasSubtitle];
     
