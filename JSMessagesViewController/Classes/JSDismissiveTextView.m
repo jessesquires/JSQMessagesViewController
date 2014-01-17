@@ -69,7 +69,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_dismissivePanGestureRecognizer removeTarget:self action:@selector(handlePanGesture:)];
+//    [_dismissivePanGestureRecognizer removeTarget:self action:@selector(handlePanGesture:)];
     _dismissivePanGestureRecognizer = nil;
     _keyboardDelegate = nil;
     _keyboardView = nil;
@@ -80,7 +80,7 @@
 - (void)setDismissivePanGestureRecognizer:(UIPanGestureRecognizer *)pan
 {
     _dismissivePanGestureRecognizer = pan;
-    [_dismissivePanGestureRecognizer addTarget:self action:@selector(handlePanGesture:)];
+//    [_dismissivePanGestureRecognizer addTarget:self action:@selector(handlePanGesture:)];
 }
 
 #pragma mark - Notifications
