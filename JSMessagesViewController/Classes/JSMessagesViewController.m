@@ -208,6 +208,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [UIView setAnimationsEnabled:NO];
     JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
     
     UIImageView *bubbleImageView = [self.delegate bubbleImageViewWithType:type
@@ -250,6 +251,7 @@
         [self.delegate configureCell:cell atIndexPath:indexPath];
     }
     
+    [UIView setAnimationsEnabled:YES];
     return cell;
 }
 
