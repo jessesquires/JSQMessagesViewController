@@ -99,7 +99,14 @@
     }
     else if([notification.name isEqualToString:UIKeyboardDidHideNotification]) {
         self.keyboardView.hidden = NO;
-        [self resignFirstResponder];
+        // Only resign the first responder if it's an iPhone, or if on an iPad then ALSO
+        // if the frame changed due to user interaction. This prevents truly odd
+        // behaviour one sees when starting editing, then using the "split keyboard"
+        // option while still in the text field.
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone ||
+            1 == ((NSNumber *)notification.userInfo[@"UIKeyboardFrameChangedByUserInteraction"]).intValue) {
+            [self resignFirstResponder];
+        }
     }
 }
 
