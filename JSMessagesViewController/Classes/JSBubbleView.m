@@ -218,17 +218,18 @@
     
     CGSize stringSize;
     
-    #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0
-    CGRect stringRect = [txt boundingRectWithSize:CGSizeMake(maxWidth, maxHeight)
-                                          options:NSStringDrawingUsesLineFragmentOrigin
-                                       attributes:@{ NSFontAttributeName : [[JSBubbleView appearance] font] }
-                                          context:nil];
-    
-    stringSize = CGRectIntegral(stringRect).size;
-    #else
-    stringSize = [txt sizeWithFont:[[JSBubbleView appearance] font]
-                 constrainedToSize:CGSizeMake(maxWidth, maxHeight)];
-    #endif
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_0) {
+        CGRect stringRect = [txt boundingRectWithSize:CGSizeMake(maxWidth, maxHeight)
+                                              options:NSStringDrawingUsesLineFragmentOrigin
+                                           attributes:@{ NSFontAttributeName : [[JSBubbleView appearance] font] }
+                                              context:nil];
+        
+        stringSize = CGRectIntegral(stringRect).size;
+    }
+    else {
+        stringSize = [txt sizeWithFont:[[JSBubbleView appearance] font]
+                     constrainedToSize:CGSizeMake(maxWidth, maxHeight)];
+    }
     
     return CGSizeMake(roundf(stringSize.width), roundf(stringSize.height));
 }
