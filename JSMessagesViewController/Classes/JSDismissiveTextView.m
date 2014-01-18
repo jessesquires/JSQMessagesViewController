@@ -99,7 +99,13 @@
     }
     else if([notification.name isEqualToString:UIKeyboardDidHideNotification]) {
         self.keyboardView.hidden = NO;
-        [self resignFirstResponder];
+        
+        BOOL isPhone = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone;
+        BOOL keyBoardWasSplitOnPad = [[notification userInfo][@"UIKeyboardFrameChangedByUserInteraction"] boolValue];
+        
+        if(isPhone || keyBoardWasSplitOnPad) {
+            [self resignFirstResponder];
+        }
     }
 }
 
