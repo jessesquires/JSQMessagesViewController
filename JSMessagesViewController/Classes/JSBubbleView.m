@@ -155,7 +155,7 @@
 - (void)setFont:(UIFont *)font
 {
     _font = font;
-    _textView.font = font;
+//    _textView.font = font;
 }
 
 #pragma mark - UIAppearance Getters
