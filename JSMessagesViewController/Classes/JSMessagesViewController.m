@@ -429,7 +429,7 @@
 
 - (void)didTapTableView:(UITapGestureRecognizer *)gestureRecognizer
 {
-    [[_messageInputView textView] resignFirstResponder];
+    [self.view endEditing:YES];
 }
 
 #pragma mark - Layout message input view
