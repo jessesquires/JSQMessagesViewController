@@ -88,7 +88,12 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
     /**
      *  Does not display any subtitles.
      */
-    JSMessagesViewSubtitlePolicyNone
+    JSMessagesViewSubtitlePolicyNone,
+    /**
+     *  Displays a timestamp based on the result of the optional delegate method `hasSubtitleForRowAtIndexPath:`.
+     *  @see JSMessagesViewDelegate.
+     */
+    JSMessagesViewSubtitlePolicyCustom
 };
 
 /**
@@ -177,6 +182,15 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  *  @return `YES` if the row should display a timestamp, `NO` otherwise.
  */
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  Asks the delegate if the row at the specified index path should display a subtitle. You should only implement this method if using `JSMessagesViewSubtitlePolicyCustom`. @see JSMessagesViewSubtitlePolicy.
+ *
+ *  @param indexPath The index path of the row to be displayed.
+ *
+ *  @return `YES` if the row should display a subtitle, `NO` otherwise.
+ */
+- (BOOL)hasSubtitleForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  *  Asks the delegate if should always scroll to bottom automatically when new messages are sent or received.

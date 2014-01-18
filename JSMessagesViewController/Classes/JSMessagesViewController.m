@@ -17,6 +17,11 @@
 #import "NSString+JSMessagesView.h"
 
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
+{
+	@private
+	JSMessagesViewTimestampPolicy actualTimestampPolicy;
+	JSMessagesViewSubtitlePolicy actualSubtitlePolicy;
+}
 
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 @property (assign, nonatomic) BOOL isUserScrolling;
@@ -56,6 +61,24 @@
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
     
+    // The actual policies we use could differ from the requested policy in some cases
+    actualTimestampPolicy = [self.delegate timestampPolicy];
+    actualSubtitlePolicy = [self.delegate subtitlePolicy];
+	
+    // Now we check and see if they've done what they need to do to support their
+    // chosen policies. In the case of custom policies, they must have implemented
+    // the necessary methods, or we'll fall back to an 'All' policy.
+    if (actualTimestampPolicy == JSMessagesViewTimestampPolicyCustom
+        && ![self.delegate respondsToSelector:@selector(hasTimestampForRowAtIndexPath:)]) {
+        NSLog(@"*** %@: You must implement hasTimestampForRowAtIndexPath to support JSMessagesViewTimestampPolicyCustom. ***", self.class);
+        actualTimestampPolicy = JSMessagesViewTimestampPolicyAll;
+    }
+    if (actualSubtitlePolicy == JSMessagesViewSubtitlePolicyCustom
+        && ![self.delegate respondsToSelector:@selector(hasSubtitleForRowAtIndexPath:)]) {
+        NSLog(@"*** %@: You must implement hasSubtitleForRowAtIndexPath to support JSMessagesViewSubtitlePolicyCustom. ***", self.class);
+        actualSubtitlePolicy = JSMessagesViewSubtitlePolicyAll;
+    }
+
 	_isUserScrolling = NO;
     
     CGSize size = self.view.frame.size;
@@ -265,7 +288,7 @@
 
 - (BOOL)shouldHaveTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch ([self.delegate timestampPolicy]) {
+    switch (actualTimestampPolicy) {
         case JSMessagesViewTimestampPolicyAll:
             return YES;
             
@@ -279,8 +302,7 @@
             return indexPath.row % 5 == 0;
             
         case JSMessagesViewTimestampPolicyCustom:
-            if([self.delegate respondsToSelector:@selector(hasTimestampForRowAtIndexPath:)])
-                return [self.delegate hasTimestampForRowAtIndexPath:indexPath];
+            return [self.delegate hasTimestampForRowAtIndexPath:indexPath];
             
         default:
             return NO;
@@ -307,7 +329,7 @@
 
 - (BOOL)shouldHaveSubtitleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch ([self.delegate subtitlePolicy]) {
+    switch (actualSubtitlePolicy) {
         case JSMessagesViewSubtitlePolicyAll:
             return YES;
         
@@ -316,7 +338,10 @@
             
         case JSMessagesViewSubtitlePolicyOutgoingOnly:
             return [self.delegate messageTypeForRowAtIndexPath:indexPath] == JSBubbleMessageTypeOutgoing;
-            
+
+		case JSMessagesViewTimestampPolicyCustom:
+            return [self.delegate hasSubtitleForRowAtIndexPath:indexPath];
+
         case JSMessagesViewSubtitlePolicyNone:
         default:
             return NO;

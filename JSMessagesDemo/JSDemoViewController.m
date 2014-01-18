@@ -39,19 +39,22 @@
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      @"JSMessagesViewController is simple and easy to use.",
                      @"It's highly customizable.",
+                     @"Including custom subtitle and timestamp display policies.",
                      @"It even has data detectors. You can call me tonight. My cell number is 452-123-4567. \nMy website is www.hexedbits.com.",
                      @"Group chat is possible. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!",
                      nil];
     
     self.timestamps = [[NSMutableArray alloc] initWithObjects:
-                       [NSDate distantPast],
-                       [NSDate distantPast],
-                       [NSDate distantPast],
+                       [NSDate dateWithTimeInterval:-300 sinceDate:[NSDate date]],
+                       [NSDate dateWithTimeInterval:-240 sinceDate:[NSDate date]],
+                       [NSDate dateWithTimeInterval:-180 sinceDate:[NSDate date]],
+                       [NSDate dateWithTimeInterval:-59 sinceDate:[NSDate date]],
                        [NSDate date],
                        nil];
     
     self.subtitles = [[NSMutableArray alloc] initWithObjects:
                       kSubtitleJobs,
+                      kSubtitleWoz,
                       kSubtitleWoz,
                       kSubtitleJobs,
                       kSubtitleCook, nil];
@@ -106,13 +109,13 @@
 
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (indexPath.row % 2) ? JSBubbleMessageTypeIncoming : JSBubbleMessageTypeOutgoing;
+    return ([[self.subtitles objectAtIndex:indexPath.row] isEqualToString:kSubtitleWoz]) ? JSBubbleMessageTypeIncoming : JSBubbleMessageTypeOutgoing;
 }
 
 - (UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type
                        forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row % 2) {
+    if([[self.subtitles objectAtIndex:indexPath.row] isEqualToString:kSubtitleWoz]) {
         return [JSBubbleImageViewFactory bubbleImageViewForType:type
                                                           color:[UIColor js_bubbleLightGrayColor]];
     }
@@ -123,7 +126,7 @@
 
 - (JSMessagesViewTimestampPolicy)timestampPolicy
 {
-    return JSMessagesViewTimestampPolicyEveryThree;
+    return JSMessagesViewTimestampPolicyCustom;
 }
 
 - (JSMessagesViewAvatarPolicy)avatarPolicy
@@ -133,7 +136,7 @@
 
 - (JSMessagesViewSubtitlePolicy)subtitlePolicy
 {
-    return JSMessagesViewSubtitlePolicyAll;
+    return JSMessagesViewSubtitlePolicyCustom;
 }
 
 - (JSMessageInputViewStyle)inputViewStyle
@@ -171,8 +174,43 @@
 
 //  *** Required if using `JSMessagesViewTimestampPolicyCustom`
 //
-//  - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
+//  In this example, we only print the timestamp if it's more than 2 minutes
+//  since the previous message, or if it's the first message in our display
 //
+- (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (indexPath.row > 0) {
+        if ([self.timestamps[indexPath.row] timeIntervalSinceDate:self.timestamps[indexPath.row-1]] > 120) {
+			return YES;
+		}
+		else {
+			return NO;
+		}
+	}
+	else {
+        return YES;
+	}
+}
+
+//  *** Required if using `JSMessagesViewSubtitlePolicyCustom`
+//
+//  In this example, we only print the subtitle if it differs from the one above
+//  it, or if it's the first message in our display.
+//
+- (BOOL)hasSubtitleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row > 0) {
+        if (![self.subtitles[indexPath.row] isEqualToString:self.subtitles[indexPath.row-1]]) {
+            return YES;
+        }
+        else {
+            return NO;
+        }
+    }
+    else {
+        return YES;
+    }
+}
 
 //  *** Implement to use a custom send button
 //
