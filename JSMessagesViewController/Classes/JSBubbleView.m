@@ -216,10 +216,17 @@
                          [txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
     maxHeight += kJSAvatarImageSize;
     
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0
+    return CGRectIntegral([txt boundingRectWithSize:CGSizeMake(maxWidth, maxHeight)
+                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                         attributes:@{NSFontAttributeName: [[JSBubbleView appearance] font]}
+                                            context:nil]).size;
+#else
     CGSize stringSize = [txt sizeWithFont:[[JSBubbleView appearance] font]
                         constrainedToSize:CGSizeMake(maxWidth, maxHeight)];
     
     return CGSizeMake(roundf(stringSize.width), roundf(stringSize.height));
+#endif
 }
 
 + (CGSize)neededSizeForText:(NSString *)text
