@@ -116,8 +116,6 @@
     [super viewWillAppear:animated];
     
     [self scrollToBottomAnimated:NO];
-
-    [self.tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
     
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(handleWillShowKeyboardNotification:)
@@ -128,6 +126,13 @@
 											 selector:@selector(handleWillHideKeyboardNotification:)
 												 name:UIKeyboardWillHideNotification
                                                object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self scrollToBottomAnimated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -144,7 +149,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    NSLog(@"*** %@: didReceiveMemoryWarning ***", self.class);
+    NSLog(@"*** %@: didReceiveMemoryWarning ***", [self class]);
 }
 
 - (void)dealloc
