@@ -116,6 +116,8 @@
     [super viewWillAppear:animated];
     
     [self scrollToBottomAnimated:NO];
+
+    [self.tableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
     
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(handleWillShowKeyboardNotification:)
