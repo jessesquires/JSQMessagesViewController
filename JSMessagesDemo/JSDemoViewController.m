@@ -141,6 +141,11 @@
     return JSMessageInputViewStyleFlat;
 }
 
+-(JSMessageKeyboardDismissalMode)keyboardDismissalMode
+{
+    return JSMessageKeyboardDismissalModeTap;
+}
+
 #pragma mark - Messages view delegate: OPTIONAL
 
 //

@@ -29,7 +29,6 @@ typedef NS_ENUM(NSUInteger, JSMessageInputViewStyle) {
     JSMessageInputViewStyleFlat
 };
 
-
 /**
  *  An instance of `JSMessageInputView` defines the input toolbar for composing a new message that is to be displayed above the keyboard.
  */
