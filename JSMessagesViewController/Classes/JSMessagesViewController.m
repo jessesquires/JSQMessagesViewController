@@ -71,6 +71,7 @@
 	[self.view addSubview:tableView];
 	_tableView = tableView;
     
+    
     [self setBackgroundColor:[UIColor js_backgroundColorClassic]];
     
     CGRect inputFrame = CGRectMake(0.0f,
@@ -78,10 +79,21 @@
                                    size.width,
                                    inputViewHeight);
     
+    
+    UIPanGestureRecognizer *panGestureRecognizer = _tableView.panGestureRecognizer;
+    
+    if([self.delegate respondsToSelector:@selector(keyboardDismissalMode)] &&
+       [self.delegate keyboardDismissalMode] == JSMessageKeyboardDismissalModeTap)
+    {
+        panGestureRecognizer = nil;
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapTableView:)];
+        [tableView addGestureRecognizer:tapGestureRecognizer];
+    }
+    
     JSMessageInputView *inputView = [[JSMessageInputView alloc] initWithFrame:inputFrame
                                                                         style:inputViewStyle
                                                                      delegate:self
-                                                         panGestureRecognizer:_tableView.panGestureRecognizer];
+                                                         panGestureRecognizer:panGestureRecognizer];
     
     if([self.delegate respondsToSelector:@selector(sendButtonForInputView)]) {
         UIButton *sendButton = [self.delegate sendButtonForInputView];
@@ -201,6 +213,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [UIView setAnimationsEnabled:NO];
     JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
     
     UIImageView *bubbleImageView = [self.delegate bubbleImageViewWithType:type
@@ -247,6 +260,7 @@
         [self.delegate configureCell:cell atIndexPath:indexPath];
     }
     
+    [UIView setAnimationsEnabled:YES];
     return cell;
 }
 
@@ -414,6 +428,11 @@
     [textView resignFirstResponder];
 }
 
+- (void)didTapTableView:(UITapGestureRecognizer *)gestureRecognizer
+{
+    [self.view endEditing:YES];
+}
+
 #pragma mark - Layout message input view
 
 - (void)layoutAndAnimateMessageInputTextView:(UITextView *)textView
@@ -520,33 +539,33 @@
 - (void)keyboardWillShowHide:(NSNotification *)notification
 {
     CGRect keyboardRect = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-	UIViewAnimationCurve curve = [[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-	double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
-    [UIView animateWithDuration:duration
-                          delay:0.0
-                        options:[self animationOptionsForCurve:curve]
-                     animations:^{
-                         CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
-                         
-                         CGRect inputViewFrame = self.messageInputView.frame;
-                         CGFloat inputViewFrameY = keyboardY - inputViewFrame.size.height;
-                         
-                         // for ipad modal form presentations
-                         CGFloat messageViewFrameBottom = self.view.frame.size.height - inputViewFrame.size.height;
-                         if(inputViewFrameY > messageViewFrameBottom)
-                             inputViewFrameY = messageViewFrameBottom;
-						 
-                         self.messageInputView.frame = CGRectMake(inputViewFrame.origin.x,
-																  inputViewFrameY,
-																  inputViewFrame.size.width,
-																  inputViewFrame.size.height);
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:[notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
+    [UIView setAnimationCurve:[notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    
+    
+     CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
+     
+     CGRect inputViewFrame = self.messageInputView.frame;
+     CGFloat inputViewFrameY = keyboardY - inputViewFrame.size.height;
+     
+     // for ipad modal form presentations
+     CGFloat messageViewFrameBottom = self.view.frame.size.height - inputViewFrame.size.height;
+     if(inputViewFrameY > messageViewFrameBottom)
+         inputViewFrameY = messageViewFrameBottom;
+     
+     self.messageInputView.frame = CGRectMake(inputViewFrame.origin.x,
+                                              inputViewFrameY,
+                                              inputViewFrame.size.width,
+                                              inputViewFrame.size.height);
 
-                         [self setTableViewInsetsWithBottomValue:self.view.frame.size.height
-                                                                - self.messageInputView.frame.origin.y
-                                                                - inputViewFrame.size.height];
-                     }
-                     completion:nil];
+     [self setTableViewInsetsWithBottomValue:
+      self.view.frame.size.height - self.messageInputView.frame.origin.y - inputViewFrame.size.height];
+    
+    [UIView commitAnimations];
+    
 }
 
 #pragma mark - Dismissive text view delegate

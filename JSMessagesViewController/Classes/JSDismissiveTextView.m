@@ -79,6 +79,7 @@
 
 - (void)setDismissivePanGestureRecognizer:(UIPanGestureRecognizer *)pan
 {
+    [_dismissivePanGestureRecognizer removeTarget:self action:@selector(handlePanGesture:)];
     _dismissivePanGestureRecognizer = pan;
     [_dismissivePanGestureRecognizer addTarget:self action:@selector(handlePanGesture:)];
 }

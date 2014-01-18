@@ -192,6 +192,14 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  */
 - (UIButton *)sendButtonForInputView;
 
+/**
+ *  Asks the delegate for the keyboard dismissal mode.
+ *  
+ *  @return A constant describing the keyboard dismissal mode.
+ *  @see JSMessageKeyboardDismissalMode
+ */
+- (JSMessageKeyboardDismissalMode)keyboardDismissalMode;
+
 @end
 
 

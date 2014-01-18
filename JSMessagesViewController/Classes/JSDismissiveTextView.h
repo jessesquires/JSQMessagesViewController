@@ -17,6 +17,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, JSMessageKeyboardDismissalMode) {
+    /**
+     *  Specifies that keyboard will be dismissed with a tap on the screen.
+     */
+    JSMessageKeyboardDismissalModeTap,
+    /**
+     *  Specifies that keyboard will be dismissed with a pan gesture.
+     */
+    JSMessageKeyboardDismissalModePan
+};
+
 /**
  *  The delegate of a `JSDismissiveTextView` object must adopt the `JSDismissiveTextViewDelegate` protocol.
  */
