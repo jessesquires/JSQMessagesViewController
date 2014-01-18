@@ -1,10 +1,10 @@
 PODS:
-  - JSQSystemSoundPlayer (1.3.0)
+  - JSQSystemSoundPlayer (1.4.0)
 
 DEPENDENCIES:
   - JSQSystemSoundPlayer
 
 SPEC CHECKSUMS:
-  JSQSystemSoundPlayer: 429f3769bd6ef045937543746828ab9f8d9b8474
+  JSQSystemSoundPlayer: 28ccd01a92a0cebc6de6361e8499011b4cb6dab7
 
-COCOAPODS: 0.28.0
+COCOAPODS: 0.29.0

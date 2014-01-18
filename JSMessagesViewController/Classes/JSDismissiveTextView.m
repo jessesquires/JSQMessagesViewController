@@ -99,7 +99,13 @@
     }
     else if([notification.name isEqualToString:UIKeyboardDidHideNotification]) {
         self.keyboardView.hidden = NO;
-        [self resignFirstResponder];
+        
+        BOOL isPhone = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone;
+        BOOL keyBoardWasSplitOnPad = [[notification userInfo][@"UIKeyboardFrameChangedByUserInteraction"] boolValue];
+        
+        if(isPhone || keyBoardWasSplitOnPad) {
+            [self resignFirstResponder];
+        }
     }
 }
 
@@ -145,7 +151,8 @@
                                      [self resignFirstResponder];
                                  }];
             }
-            else { // gesture ended with no flick or a flick upwards, snap keyboard back to original position
+            else {
+                // gesture ended with no flick or a flick upwards, snap keyboard back to original position
                 [UIView animateWithDuration:0.2
                                       delay:0
                                     options:UIViewAnimationOptionCurveEaseOut
@@ -159,13 +166,12 @@
                                                                           self.keyboardView.frame.size.width,
                                                                           self.keyboardView.frame.size.height);
                                  }
-                                 completion:^(BOOL finished){
-                                 }];
+                                 completion:nil];
             }
             break;
         
-        // gesture is currently panning, match keyboard y to touch y
         default:
+            // gesture is currently panning, match keyboard y to touch y
             if(location.y > self.keyboardView.frame.origin.y || self.keyboardView.frame.origin.y != self.previousKeyboardY) {
                 
                 CGFloat newKeyboardY = self.previousKeyboardY + (location.y - self.previousKeyboardY);

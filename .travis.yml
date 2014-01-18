@@ -5,7 +5,3 @@ before_install: gem install cocoapods
 script: 
 - xctool -workspace JSMessagesDemo.xcworkspace -scheme JSMessagesDemo -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO clean build test
 #- xctool -workspace JSMessagesDemo.xcworkspace -scheme JSMessagesDemoTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO clean build run-tests -freshSimulator -freshInstall
-
-branches:
-only:
-- master
