@@ -81,5 +81,6 @@
  *  @return The height required for the frame of the bubble view in order to display the given text.
  */
 + (CGFloat)neededHeightForText:(NSString *)text;
++ (CGFloat)attributedNeededHeightForText:(NSAttributedString *)text;
 
 @end

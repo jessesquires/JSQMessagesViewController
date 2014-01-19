@@ -232,6 +232,11 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     self.bubbleView.textView.text = msg;
 }
 
+- (void)setAttributedMessage:(NSAttributedString *)msg
+{
+    self.bubbleView.textView.attributedText = msg;
+}
+
 - (void)setTimestamp:(NSDate *)date
 {
     self.timestampLabel.text = [NSDateFormatter localizedStringFromDate:date
@@ -273,6 +278,22 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     CGFloat subviewHeights = timestampHeight + subtitleHeight + kJSLabelPadding;
     
     CGFloat bubbleHeight = [JSBubbleView neededHeightForText:text];
+    
+    return subviewHeights + MAX(avatarHeight, bubbleHeight);
+}
+
++ (CGFloat)attributedNeededHeightForBubbleMessageCellWithText:(NSAttributedString *)text
+                                                    timestamp:(BOOL)hasTimestamp
+                                                       avatar:(BOOL)hasAvatar
+                                                     subtitle:(BOOL)hasSubtitle
+{
+    CGFloat timestampHeight = hasTimestamp ? kJSTimeStampLabelHeight : 0.0f;
+    CGFloat avatarHeight = hasAvatar ? kJSAvatarImageSize : 0.0f;
+    CGFloat subtitleHeight = hasSubtitle ? kJSSubtitleLabelHeight : 0.0f;
+    
+    CGFloat subviewHeights = timestampHeight + subtitleHeight + kJSLabelPadding;
+    
+    CGFloat bubbleHeight = [JSBubbleView attributedNeededHeightForText:text];
     
     return subviewHeights + MAX(avatarHeight, bubbleHeight);
 }

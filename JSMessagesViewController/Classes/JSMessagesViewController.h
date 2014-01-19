@@ -208,6 +208,7 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  *  @return A string containing text for a message. This value must not be `nil`.
  */
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (NSAttributedString *)attributedTextForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  *  Asks the data source for the date to display in the timestamp label *above* the row at the specified index path.
@@ -263,6 +264,12 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  *  Returns the message input view with which new messages are composed.
  */
 @property (weak, nonatomic, readonly) JSMessageInputView *messageInputView;
+
+/**
+ *  Flags whether we will be using an attributedString with attributedTextForRowAtIndexPath or an NSString with 
+ *  textForRowAtIndexPath
+ */
+@property (nonatomic, assign) BOOL attributedTextFlag;
 
 #pragma mark - Messages view controller
 
