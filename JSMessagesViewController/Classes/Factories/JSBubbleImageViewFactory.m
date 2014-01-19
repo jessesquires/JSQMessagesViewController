@@ -55,11 +55,19 @@ static NSDictionary *bubbleImageDictionary;
 + (UIImageView *)bubbleImageViewForType:(JSBubbleMessageType)type
                                   color:(UIColor *)color
 {
-    UIImage *bubble = [UIImage imageNamed:@"bubble-min"];
+    UIImage *bubble;
+    UIImage *normalBubble;
+    UIImage *highlightedBubble;
     
-    UIImage *normalBubble = [bubble js_imageMaskWithColor:color];
-    UIImage *highlightedBubble = [bubble js_imageMaskWithColor:[color js_darkenColorWithValue:0.12f]];
+    if(type == JSBubbleMessageTypeNotification) {
+        bubble = [UIImage imageNamed:@"bubble-stroked-tailless"];
+    } else {
+        bubble = [UIImage imageNamed:@"bubble-min"];;
+    }
     
+    normalBubble = [bubble js_imageMaskWithColor:color];
+    highlightedBubble = [bubble js_imageMaskWithColor:[color js_darkenColorWithValue:0.12f]];
+
     if(type == JSBubbleMessageTypeIncoming) {
         normalBubble = [normalBubble js_imageFlippedHorizontal];
         highlightedBubble = [highlightedBubble js_imageFlippedHorizontal];

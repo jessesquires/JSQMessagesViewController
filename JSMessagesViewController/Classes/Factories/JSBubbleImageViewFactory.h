@@ -25,7 +25,11 @@ typedef NS_ENUM(NSUInteger, JSBubbleMessageType) {
     /**
      *  Specifies an outgoing, or sent message.
      */
-    JSBubbleMessageTypeOutgoing
+    JSBubbleMessageTypeOutgoing,
+    /**
+     * Specifies received notification.
+     */
+    JSBubbleMessageTypeNotification
 };
 
 /**
