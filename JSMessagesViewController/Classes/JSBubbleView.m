@@ -92,14 +92,14 @@
         
         [self addTextViewObservers];
         
-//        NOTE: TODO: textView frame & text inset
-//        --------------------
-//        future implementation for textView frame
-//        in layoutSubviews : "self.textView.frame = textFrame;" is not needed
-//        when setting the property : "_textView.textContainerInset = UIEdgeInsetsZero;"
-//        unfortunately, this API is available in iOS 7.0+
-//        update after dropping support for iOS 6.0
-//        --------------------
+        //        NOTE: TODO: textView frame & text inset
+        //        --------------------
+        //        future implementation for textView frame
+        //        in layoutSubviews : "self.textView.frame = textFrame;" is not needed
+        //        when setting the property : "_textView.textContainerInset = UIEdgeInsetsZero;"
+        //        unfortunately, this API is available in iOS 7.0+
+        //        update after dropping support for iOS 6.0
+        //        --------------------
     }
     return self;
 }
@@ -157,7 +157,7 @@
 - (void)setFont:(UIFont *)font
 {
     _font = font;
-//    _textView.font = font;
+    //    _textView.font = font;
 }
 
 #pragma mark - UIAppearance Getters
@@ -186,9 +186,9 @@
         return CGRectIntegral((CGRect){kMarginLeftRight, kMarginTop, bubbleSize.width - (kMarginLeftRight*2), bubbleSize.height + (kMarginTop/2)});
     }
     
-    return CGRectIntegral(CGRectMake((self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width : kMarginLeftRight),
+    return CGRectIntegral(CGRectMake((self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width - kMarginLeftRight : kMarginLeftRight),
                                      kMarginTop,
-                                     bubbleSize.width - kMarginLeftRight,
+                                     bubbleSize.width,
                                      bubbleSize.height + (kMarginTop/2) ));
 }
 
@@ -224,7 +224,7 @@
     }
     
     CGFloat maxHeight = MAX([JSMessageTextView numberOfLinesForMessage:txt],
-                         [txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
+                            [txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
     maxHeight += kJSAvatarImageSize;
     
     CGSize stringSize = [txt sizeWithFont:[[JSBubbleView appearance] font]
