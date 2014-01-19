@@ -159,13 +159,13 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     JSBubbleView *bubbleView = [[JSBubbleView alloc] initWithFrame:frame
                                                         bubbleType:type
                                                    bubbleImageView:bubbleImageView];
-    
     bubbleView.autoresizingMask = (UIViewAutoresizingFlexibleWidth
                                     | UIViewAutoresizingFlexibleHeight
                                     | UIViewAutoresizingFlexibleBottomMargin);
     
     [self.contentView addSubview:bubbleView];
     [self.contentView sendSubviewToBack:bubbleView];
+    
     _bubbleView = bubbleView;
 }
 
@@ -265,6 +265,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                                           timestamp:(BOOL)hasTimestamp
                                              avatar:(BOOL)hasAvatar
                                            subtitle:(BOOL)hasSubtitle
+                                               type:(JSBubbleMessageType)type
 {
     CGFloat timestampHeight = hasTimestamp ? kJSTimeStampLabelHeight : 0.0f;
     CGFloat avatarHeight = hasAvatar ? kJSAvatarImageSize : 0.0f;
@@ -272,7 +273,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     
     CGFloat subviewHeights = timestampHeight + subtitleHeight + kJSLabelPadding;
     
-    CGFloat bubbleHeight = [JSBubbleView neededHeightForText:text];
+    CGFloat bubbleHeight = [JSBubbleView neededHeightForText:text type:type];
     
     return subviewHeights + MAX(avatarHeight, bubbleHeight);
 }

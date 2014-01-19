@@ -121,6 +121,7 @@
 + (CGFloat)neededHeightForBubbleMessageCellWithText:(NSString *)text
                                           timestamp:(BOOL)hasTimestamp
                                              avatar:(BOOL)hasAvatar
-                                           subtitle:(BOOL)hasSubtitle;
+                                           subtitle:(BOOL)hasSubtitle
+                                               type:(JSBubbleMessageType)type;
 
 @end

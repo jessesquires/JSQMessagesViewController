@@ -252,11 +252,13 @@
     BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
 	BOOL hasSubtitle = [self shouldHaveSubtitleForRowAtIndexPath:indexPath];
+    JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
     
     return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithText:text
                                                                timestamp:hasTimestamp
                                                                   avatar:hasAvatar
-                                                                subtitle:hasSubtitle];
+                                                                subtitle:hasSubtitle
+                                                                    type:type];
 }
 
 #pragma mark - Messages view controller
