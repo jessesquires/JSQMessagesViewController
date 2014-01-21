@@ -183,13 +183,13 @@
     
     if(self.type == JSBubbleMessageTypeNotification) {
         
-        return CGRectIntegral((CGRect){kMarginLeftRight, kMarginTop, bubbleSize.width - (kMarginLeftRight*2), bubbleSize.height + (kMarginTop/2)});
+        return CGRectIntegral((CGRect){kMarginLeftRight, kMarginTop, bubbleSize.width - (kMarginLeftRight*2), bubbleSize.height + (kMarginTop/1.5)});
     }
     
     return CGRectIntegral(CGRectMake((self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width - kMarginLeftRight : kMarginLeftRight),
                                      kMarginTop,
                                      bubbleSize.width,
-                                     bubbleSize.height + (kMarginTop/2) ));
+                                     bubbleSize.height + (kMarginTop/1.5) ));
 }
 
 #pragma mark - Layout
