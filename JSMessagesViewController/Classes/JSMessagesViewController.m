@@ -196,6 +196,13 @@
 {
     JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
     
+    // for JSBubbleMessageTypeNotifications, we keep track of the description of the notification for the
+    // CellIdentifier to ensure that it has the right background image.
+    NSString *notificationDescription = @"";
+    if(type == JSBubbleMessageTypeNotification) {
+        notificationDescription = [self.delegate notificationDescriptionForIndexPath:indexPath];
+    }
+    
     UIImageView *bubbleImageView = [self.delegate bubbleImageViewWithType:type
                                                         forRowAtIndexPath:indexPath];
     
@@ -203,7 +210,7 @@
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
 	BOOL hasSubtitle = [self shouldHaveSubtitleForRowAtIndexPath:indexPath];
     
-    NSString *CellIdentifier = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d", (int)type, hasTimestamp, hasAvatar, hasSubtitle];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d_%@", (int)type, hasTimestamp, hasAvatar, hasSubtitle, notificationDescription];
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(!cell) {
