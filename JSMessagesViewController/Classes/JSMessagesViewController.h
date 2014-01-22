@@ -13,6 +13,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSMessageTableView.h"
 #import "JSBubbleMessageCell.h"
 #import "JSMessageInputView.h"
 #import "JSAvatarImageFactory.h"
@@ -169,7 +170,7 @@
 /**
  *  Returns the table view that displays the messages in `JSMessagesViewController`.
  */
-@property (weak, nonatomic, readonly) UITableView *tableView;
+@property (weak, nonatomic, readonly) JSMessageTableView *tableView;
 
 /**
  *  Returns the message input view with which new messages are composed.
