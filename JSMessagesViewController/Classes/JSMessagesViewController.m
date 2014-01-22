@@ -211,13 +211,13 @@
 	BOOL hasSubtitle = [self shouldHaveSubtitleForRowAtIndexPath:indexPath];
     
     NSString *CellIdentifier = nil;
-    if([self.delegate respondsToSelector:@selector(customCellIdentifierForRowAtIndexPath:)])
-    {
+    if ([self.delegate respondsToSelector:@selector(customCellIdentifierForRowAtIndexPath:)]) {
         CellIdentifier = [self.delegate customCellIdentifierForRowAtIndexPath:indexPath];
     }
 
-    if(!CellIdentifier)
+    if (!CellIdentifier) {
         CellIdentifier = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d", (int)type, hasTimestamp, hasAvatar, hasSubtitle];
+    }
     
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
