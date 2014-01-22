@@ -187,8 +187,6 @@
         bubbleSize = [JSBubbleView neededSizeForText:self.textView.text type:self.type];
     }
     
-    NSLog(@"Bubble Size: (%f, %f), %@", bubbleSize.width, bubbleSize.height, (self.type == JSBubbleMessageTypeNotification ? @"Notification" : @"Message"));
-    
     if(self.type == JSBubbleMessageTypeNotification) {
         
         return CGRectIntegral((CGRect){kMarginLeftRight, kMarginTop, bubbleSize.width - (kMarginLeftRight*2), bubbleSize.height + (kMarginTop / 1.5)});
