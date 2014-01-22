@@ -25,6 +25,8 @@
 
 - (void)sendPressed:(UIButton *)sender;
 
+- (void)handleTapGestureRecognizer:(UITapGestureRecognizer *)tap;
+
 - (BOOL)shouldAllowScroll;
 
 - (void)layoutAndAnimateMessageInputTextView:(UITextView *)textView;
@@ -74,10 +76,22 @@
                                    size.width,
                                    inputViewHeight);
     
+    BOOL allowsPan = YES;
+    if ([self.delegate respondsToSelector:@selector(allowsPanToDismissKeyboard)]) {
+        allowsPan = [self.delegate allowsPanToDismissKeyboard];
+    }
+    
+    UIPanGestureRecognizer *pan = allowsPan ? _tableView.panGestureRecognizer : nil;
+    
     JSMessageInputView *inputView = [[JSMessageInputView alloc] initWithFrame:inputFrame
                                                                         style:inputViewStyle
                                                                      delegate:self
-                                                         panGestureRecognizer:_tableView.panGestureRecognizer];
+                                                         panGestureRecognizer:pan];
+    
+    if (!allowsPan) {
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGestureRecognizer:)];
+        [_tableView addGestureRecognizer:tap];
+    }
     
     if ([self.delegate respondsToSelector:@selector(sendButtonForInputView)]) {
         UIButton *sendButton = [self.delegate sendButtonForInputView];
@@ -181,6 +195,11 @@
 - (void)sendPressed:(UIButton *)sender
 {
     [self.delegate didSendText:[self.messageInputView.textView.text js_stringByTrimingWhitespace]];
+}
+
+- (void)handleTapGestureRecognizer:(UITapGestureRecognizer *)tap
+{
+    [self.messageInputView.textView resignFirstResponder];
 }
 
 #pragma mark - Table view data source

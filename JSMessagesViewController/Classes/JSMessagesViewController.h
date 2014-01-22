@@ -82,6 +82,13 @@
 - (BOOL)shouldPreventScrollToBottomWhileUserScrolling;
 
 /**
+ *  Ask the delegate if the keyboard should be dismissed by panning/swiping downward. The default value is `YES`. Return `NO` to dismiss the keyboard by tapping.
+ *
+ *  @return A boolean value specifying whether the keyboard should be dismissed by panning/swiping.
+ */
+- (BOOL)allowsPanToDismissKeyboard;
+
+/**
  *  Asks the delegate for the send button to be used in messageInputView. Implement this method if you wish to use a custom send button. The button must be a `UIButton` or a subclass of `UIButton`. The button's frame is set for you.
  *
  *  @return A custom `UIButton` to use in messageInputView.

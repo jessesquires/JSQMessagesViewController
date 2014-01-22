@@ -175,6 +175,13 @@
     return YES;
 }
 
+// *** Implemnt to enable/disable pan/tap todismiss keyboard
+//
+- (BOOL)allowsPanToDismissKeyboard
+{
+    return YES;
+}
+
 #pragma mark - Messages view data source: REQUIRED
 
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
