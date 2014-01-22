@@ -221,9 +221,9 @@
     UIImageView *bubbleImageView = [self.delegate bubbleImageViewWithType:type
                                                         forRowAtIndexPath:indexPath];
     
-    NSDate *timestamp = [self.dataSource timestampForRowAtIndexPath:indexPath];
+    JSMessage *message = [self.dataSource messageForRowAtIndexPath:indexPath];
+    
     UIImageView *avatar = [self.dataSource avatarImageViewForRowAtIndexPath:indexPath];
-    NSString *subtitle = [self.dataSource subtitleForRowAtIndexPath:indexPath];
     
     NSString *CellIdentifier = nil;
     if ([self.delegate respondsToSelector:@selector(customCellIdentifierForRowAtIndexPath:)]) {
@@ -232,7 +232,7 @@
 
     if (!CellIdentifier) {
         CellIdentifier = [NSString stringWithFormat:@"JSMessageCell_%d_%d_%d_%d", (int)type,
-                          timestamp != nil, avatar != nil, subtitle != nil];
+                          message.date != nil, avatar != nil, message.sender != nil];
     }
     
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -240,17 +240,12 @@
     if (!cell) {
         cell = [[JSBubbleMessageCell alloc] initWithBubbleType:type
                                                bubbleImageView:bubbleImageView
-                                                  hasTimestamp:timestamp != nil
+                                                       message:message
                                                      hasAvatar:avatar != nil
-                                                   hasSubtitle:subtitle != nil
                                                reuseIdentifier:CellIdentifier];
     }
     
-    [cell setTimestamp:[self.dataSource timestampForRowAtIndexPath:indexPath]];
     [cell setAvatarImageView:[self.dataSource avatarImageViewForRowAtIndexPath:indexPath]];
-	[cell setSubtitle:[self.dataSource subtitleForRowAtIndexPath:indexPath]];
-    [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
-    
     [cell setBackgroundColor:tableView.backgroundColor];
     
 	#if TARGET_IPHONE_SIMULATOR
@@ -270,15 +265,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *text = [self.dataSource textForRowAtIndexPath:indexPath];
-    NSDate *timestamp = [self.dataSource timestampForRowAtIndexPath:indexPath];
+    JSMessage *message = [self.dataSource messageForRowAtIndexPath:indexPath];
     UIImageView *avatar = [self.dataSource avatarImageViewForRowAtIndexPath:indexPath];
-    NSString *subtitle = [self.dataSource subtitleForRowAtIndexPath:indexPath];
     
-    return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithText:text
-                                                               timestamp:timestamp != nil
-                                                                  avatar:avatar != nil
-                                                                subtitle:subtitle != nil];
+    return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithMessage:message
+                                                                     avatar:avatar != nil];
 }
 
 #pragma mark - Messages view controller

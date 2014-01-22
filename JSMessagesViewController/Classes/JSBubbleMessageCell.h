@@ -14,6 +14,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JSBubbleView.h"
+#import "JSMessage.h"
 
 /**
  *  The `JSBubbleMessageCell` class defines the attributes and behavior of the cells that appear in `JSMessagesViewController`. This class includes properties and methods for setting and managing cell content.
@@ -52,35 +53,19 @@
  *
  *  @param type            A constant indicating a message type. @see JSBubbleMessageType for details.
  *  @param bubbleImageView An image view initialized with bubble images. The `UIImageView` properties `image` and `highlightedImage` must not be `nil`. @see JSBubbleImageViewFactory.
- *  @param hasTimestamp    A boolean value indicating whether or not the cell should be initialized with a timestampLabel. Pass `YES` to initialize with a timestamp, `NO` otherwise.
+ *  @param message         A message object containing the message data for the cell.
  *  @param hasAvatar       A boolean value indicating whether or not the cell should be initialized with an avatarImageView. Pass `YES` to initialize with an avatar, `NO` otherwise.
- *  @param hasSubtitle     A boolean value indicating whether or not the cell should be initialized with a subtitleLabel. Pass `YES` to initialize with a subtitle, `NO` otherwise.
  *  @param reuseIdentifier A string used to identify the cell object to be reused for drawing multiple rows of a JSMessagesViewController. This property must not be `nil`.
  *
  *  @return An initialized `JSBubbleMessageCell` object or `nil` if the object could not be created.
  */
 - (instancetype)initWithBubbleType:(JSBubbleMessageType)type
                    bubbleImageView:(UIImageView *)bubbleImageView
-                      hasTimestamp:(BOOL)hasTimestamp
+                           message:(JSMessage *)message
                          hasAvatar:(BOOL)hasAvatar
-                       hasSubtitle:(BOOL)hasSubtitle
                    reuseIdentifier:(NSString *)reuseIdentifier;
 
 #pragma mark - Setters
-
-/**
- *  Sets the message to be displayed in the bubbleView of the cell.
- *
- *  @param msg The message text for the cell.
- */
-- (void)setMessage:(NSString *)msg;
-
-/**
- *  Sets the date to be displayed in the timestampLabel of the cell. The date is formatted for you via `NSDateFormatter` by `JSBubbleMessageCell`.
- *
- *  @param date The date for the cell.
- */
-- (void)setTimestamp:(NSDate *)date;
 
 /**
  *  Sets the imageView for the avatarImageView of the cell. The frame is set for you by `JSBubbleMessageCell`.
@@ -88,13 +73,6 @@
  *  @param imageView An imageView containing an avatar image. The `image` property of the `UIImageView` must not be `nil`.
  */
 - (void)setAvatarImageView:(UIImageView *)imageView;
-
-/**
- *  Sets the text to be displayed in the subtitleLabel of the cell.
- *
- *  @param subtitle The subtitle text for the cell.
- */
-- (void)setSubtitle:(NSString *)subtitle;
 
 #pragma mark - Getters
 
@@ -111,16 +89,12 @@
 /**
  *  Computes and returns the minimum necessary height of a `JSBubbleMessageCell` needed to display its contents.
  *
- *  @param text         The text to display in the cell.
- *  @param hasTimestamp A boolean value indicating whether or not the cell has a timestamp.
- *  @param hasAvatar    A boolean value indicating whether or not the cell has an avatar.
- *  @param hasSubtitle  A boolean value indicating whether or not the cell has a subtitle.
+ *  @param message   The message to display in the cell.
+ *  @param hasAvatar A boolean value indicating whether or not the cell has an avatar.
  *
  *  @return The height required for the frame of the cell in order for the cell to display the entire contents of its subviews.
  */
-+ (CGFloat)neededHeightForBubbleMessageCellWithText:(NSString *)text
-                                          timestamp:(BOOL)hasTimestamp
-                                             avatar:(BOOL)hasAvatar
-                                           subtitle:(BOOL)hasSubtitle;
++ (CGFloat)neededHeightForBubbleMessageCellWithMessage:(JSMessage *)message
+                                                avatar:(BOOL)hasAvatar;
 
 @end

@@ -14,6 +14,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JSMessageTableView.h"
+#import "JSMessage.h"
 #import "JSBubbleMessageCell.h"
 #import "JSMessageInputView.h"
 #import "JSAvatarImageFactory.h"
@@ -114,22 +115,13 @@
 @required
 
 /**
- *  Asks the data source for the text to display for the row at the specified index path.
+ *  Asks the data soruce for the message to display for the row at the specified index path. The message text is displayed in the bubble at index path. The message date is displayed *above* the row at the specified index path. The message sender is displayed *below* the row at the specified index path.
  *
  *  @param indexPath An index path locating a row in the table view.
  *
- *  @return A string containing text for a message. This value must not be `nil`.
+ *  @return A message object containing the message data. This value must not be `nil`.
  */
-- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
-
-/**
- *  Asks the data source for the date to display in the timestamp label *above* the row at the specified index path.
- *
- *  @param indexPath An index path locating a row in the table view.
- *
- *  @return A date object specifying when the message at indexPath was sent. This value may be `nil`.
- */
-- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (JSMessage *)messageForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  *  Asks the data source for the imageView to display for the row at the specified index path. The imageView must have its `image` property set.
@@ -139,15 +131,6 @@
  *  @return An image view specifying the avatar for the message at indexPath. This value may be `nil`.
  */
 - (UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath;
-
-/**
- *  Asks the data source for the text to display in the subtitle label *below* the row at the specified index path.
- *
- *  @param indexPath An index path locating a row in the table view.
- *
- *  @return A string containing the subtitle for the message at indexPath. This value may be `nil`.
- */
-- (NSString *)subtitleForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

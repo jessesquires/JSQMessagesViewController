@@ -24,7 +24,7 @@
 {
     self = [super init];
     if (self) {
-        _text = text;
+        _text = text ? text : @" ";
         _sender = sender;
         _date = date;
     }

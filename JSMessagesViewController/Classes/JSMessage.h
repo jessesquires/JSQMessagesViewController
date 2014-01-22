@@ -20,7 +20,7 @@
 @interface JSMessage : NSObject <NSCoding, NSCopying>
 
 /**
- *  The body text of the message. The default value is `nil`.
+ *  The body text of the message. The default value is the empty string `@" "`. This value must not be `nil`.
  */
 @property (copy, nonatomic) NSString *text;
 
