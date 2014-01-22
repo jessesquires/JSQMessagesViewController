@@ -21,77 +21,6 @@
 #import "UIColor+JSMessagesView.h"
 
 /**
- *  The frequency with which timestamps are displayed in the messages table view.
- */
-typedef NS_ENUM(NSUInteger, JSMessagesViewTimestampPolicy) {
-    /**
-     *  Displays a timestamp above every message bubble.
-     */
-    JSMessagesViewTimestampPolicyAll,
-    /**
-     *  Displays a timestamp above every second message bubble.
-     */
-    JSMessagesViewTimestampPolicyAlternating,
-    /**
-     *  Displays a timestamp above every third message bubble.
-     */
-    JSMessagesViewTimestampPolicyEveryThree,
-    /**
-     *  Displays a timestamp above every fifth message bubble.
-     */
-    JSMessagesViewTimestampPolicyEveryFive,
-    /**
-     *  Displays a timestamp based on the result of the optional delegate method `hasTimestampForRowAtIndexPath:`. 
-     *  @see JSMessagesViewDelegate.
-     */
-    JSMessagesViewTimestampPolicyCustom
-};
-
-/**
- *  The method by which avatars are displayed in the messages table view.
- */
-typedef NS_ENUM(NSUInteger, JSMessagesViewAvatarPolicy) {
-    /**
-     *  Displays an avatar for all incoming and all outgoing messages.
-     */
-    JSMessagesViewAvatarPolicyAll,
-    /**
-     *  Displays an avatar for incoming messages only.
-     */
-    JSMessagesViewAvatarPolicyIncomingOnly,
-    /**
-     *  Display an avatar for outgoing messages only.
-     */
-    JSMessagesViewAvatarPolicyOutgoingOnly,
-    /**
-     *  Does not display any avatars.
-     */
-    JSMessagesViewAvatarPolicyNone
-};
-
-/**
- *  The method by which subtitles are displayed in the messages table view.
- */
-typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
-    /**
-     *  Displays a subtitle for all incoming and all outgoing messages.
-     */
-    JSMessagesViewSubtitlePolicyAll,
-    /**
-     *  Displays a subtitle for incoming messages only.
-     */
-    JSMessagesViewSubtitlePolicyIncomingOnly,
-    /**
-     *  Displays a subtitle for outgoing messages only.
-     */
-    JSMessagesViewSubtitlePolicyOutgoingOnly,
-    /**
-     *  Does not display any subtitles.
-     */
-    JSMessagesViewSubtitlePolicyNone
-};
-
-/**
  *  The delegate of a `JSMessagesViewController` must adopt the `JSMessagesViewDelegate` protocol.
  */
 @protocol JSMessagesViewDelegate <NSObject>
@@ -128,30 +57,6 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
                        forRowAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
- *  Asks the delegate for the timestamp policy.
- *
- *  @return A constant describing the timestamp policy. 
- *  @see JSMessagesViewTimestampPolicy.
- */
-- (JSMessagesViewTimestampPolicy)timestampPolicy;
-
-/**
- *  Asks the delegate for the avatar policy.
- *
- *  @return A constant describing the avatar policy. 
- *  @see JSMessagesViewAvatarPolicy.
- */
-- (JSMessagesViewAvatarPolicy)avatarPolicy;
-
-/**
- *  Asks the delegate for the subtitle policy.
- *
- *  @return A constant describing the subtitle policy. 
- *  @see JSMessagesViewSubtitlePolicy.
- */
-- (JSMessagesViewSubtitlePolicy)subtitlePolicy;
-
-/**
  *  Asks the delegate for the input view style.
  *
  *  @return A constant describing the input view style.
@@ -168,15 +73,6 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  *  @param indexPath The index path for cell.
  */
 - (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath;
-
-/**
- *  Asks the delegate if the row at the specified index path should display a timestamp. You should only implement this method if using `JSMessagesViewTimestampPolicyCustom`. @see JSMessagesViewTimestampPolicy.
- *
- *  @param indexPath The index path of the row to be displayed.
- *
- *  @return `YES` if the row should display a timestamp, `NO` otherwise.
- */
-- (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  *  Asks the delegate if should always scroll to bottom automatically when new messages are sent or received.

@@ -128,21 +128,6 @@
                                                       color:[UIColor js_bubbleBlueColor]];
 }
 
-- (JSMessagesViewTimestampPolicy)timestampPolicy
-{
-    return JSMessagesViewTimestampPolicyEveryThree;
-}
-
-- (JSMessagesViewAvatarPolicy)avatarPolicy
-{
-    return JSMessagesViewAvatarPolicyAll;
-}
-
-- (JSMessagesViewSubtitlePolicy)subtitlePolicy
-{
-    return JSMessagesViewSubtitlePolicyAll;
-}
-
 - (JSMessageInputViewStyle)inputViewStyle
 {
     return JSMessageInputViewStyleFlat;
@@ -176,11 +161,6 @@
     }
 }
 
-//  *** Required if using `JSMessagesViewTimestampPolicyCustom`
-//
-//  - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
-//
-
 //  *** Implement to use a custom send button
 //
 //  The button's frame is set automatically for you
@@ -204,7 +184,11 @@
 
 - (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.timestamps objectAtIndex:indexPath.row];
+    if (indexPath.row % 3 == 0) {
+        return [self.timestamps objectAtIndex:indexPath.row];
+    }
+    
+    return nil;
 }
 
 - (UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath
