@@ -194,10 +194,6 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                 bubbleImageView:bubbleImageView
                         message:message
                          avatar:hasAvatar];
-        
-        [self setText:message.text];
-        [self setTimestamp:message.date];
-        [self setSubtitle:message.sender];
     }
     return self;
 }
@@ -233,19 +229,26 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (void)setText:(NSString *)text
 {
-    _bubbleView.textView.text = text;
+    self.bubbleView.textView.text = text;
 }
 
 - (void)setTimestamp:(NSDate *)date
 {
-    _timestampLabel.text = [NSDateFormatter localizedStringFromDate:date
-                                                          dateStyle:NSDateFormatterMediumStyle
-                                                          timeStyle:NSDateFormatterShortStyle];
+    self.timestampLabel.text = [NSDateFormatter localizedStringFromDate:date
+                                                              dateStyle:NSDateFormatterMediumStyle
+                                                              timeStyle:NSDateFormatterShortStyle];
 }
 
 - (void)setSubtitle:(NSString *)subtitle
 {
-	_subtitleLabel.text = subtitle;
+	self.subtitleLabel.text = subtitle;
+}
+
+- (void)setMessage:(JSMessage *)message
+{
+    [self setText:message.text];
+    [self setTimestamp:message.date];
+    [self setSubtitle:message.sender];
 }
 
 - (void)setAvatarImageView:(UIImageView *)imageView

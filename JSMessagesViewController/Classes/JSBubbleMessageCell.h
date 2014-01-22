@@ -68,6 +68,13 @@
 #pragma mark - Setters
 
 /**
+ *  Sets the message object for the cell.
+ *
+ *  @param message A message object containing text, date, and sender.
+ */
+- (void)setMessage:(JSMessage *)message;
+
+/**
  *  Sets the imageView for the avatarImageView of the cell. The frame is set for you by `JSBubbleMessageCell`.
  *
  *  @param imageView An imageView containing an avatar image. The `image` property of the `UIImageView` must not be `nil`.

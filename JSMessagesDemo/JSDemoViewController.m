@@ -31,37 +31,19 @@
     [[JSBubbleView appearance] setFont:[UIFont systemFontOfSize:16.0f]];
     
     self.title = @"Messages";
-    
     self.messageInputView.textView.placeHolder = @"New Message";
+    self.sender = @"Jobs";
     
     [self setBackgroundColor:[UIColor whiteColor]];
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
-                     @"JSMessagesViewController is simple and easy to use.",
-                     @"It's highly customizable.",
-                     @"It even has data detectors. You can call me tonight. My cell number is 452-123-4567. \nMy website is www.hexedbits.com.",
-                     @"Group chat is possible. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!",
-                     @"Group chat is possible. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!",
-                     @"Group chat is possible. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!",
+                     [[JSMessage alloc] initWithText:@"JSMessagesViewController is simple and easy to use." sender:kSubtitleJobs date:[NSDate distantPast]],
+                     [[JSMessage alloc] initWithText:@"It's highly customizable." sender:kSubtitleWoz date:[NSDate distantPast]],
+                     [[JSMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 452-123-4567. \nMy website is www.hexedbits.com." sender:kSubtitleJobs date:[NSDate distantPast]],
+                     [[JSMessage alloc] initWithText:@"Group chat. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!" sender:kSubtitleCook date:[NSDate distantPast]],
+                     [[JSMessage alloc] initWithText:@"Group chat. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!" sender:kSubtitleJobs date:[NSDate date]],
+                     [[JSMessage alloc] initWithText:@"Group chat. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!" sender:kSubtitleWoz date:[NSDate date]],
                      nil];
-    
-    self.timestamps = [[NSMutableArray alloc] initWithObjects:
-                       [NSDate distantPast],
-                       [NSDate distantPast],
-                       [NSDate distantPast],
-                       [NSDate date],
-                       [NSDate date],
-                       [NSDate date],
-                       nil];
-    
-    self.subtitles = [[NSMutableArray alloc] initWithObjects:
-                      kSubtitleJobs,
-                      kSubtitleWoz,
-                      kSubtitleJobs,
-                      kSubtitleCook,
-                      kSubtitleJobs,
-                      kSubtitleCook,
-                      nil];
     
     self.avatars = [[NSDictionary alloc] initWithObjectsAndKeys:
                     [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-jobs" croppedToCircle:YES], kSubtitleJobs,
@@ -90,22 +72,17 @@
 
 #pragma mark - Messages view delegate: REQUIRED
 
-- (void)didSendText:(NSString *)text
+- (void)didSendMessage:(JSMessage *)message
 {
-    [self.messages addObject:text];
-    
-    [self.timestamps addObject:[NSDate date]];
-    
     if ((self.messages.count - 1) % 2) {
         [JSMessageSoundEffect playMessageSentSound];
-        
-        [self.subtitles addObject:arc4random_uniform(100) % 2 ? kSubtitleCook : kSubtitleWoz];
     }
     else {
         [JSMessageSoundEffect playMessageReceivedSound];
-        
-        [self.subtitles addObject:kSubtitleJobs];
+        message.sender = arc4random_uniform(100) % 2 ? kSubtitleCook : kSubtitleWoz;
     }
+    
+    [self.messages addObject:message];
     
     [self finishSend];
     [self scrollToBottomAnimated:YES];
@@ -184,30 +161,15 @@
 
 #pragma mark - Messages view data source: REQUIRED
 
-- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
+- (JSMessage *)messageForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self.messages objectAtIndex:indexPath.row];
 }
 
-- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath sender:(NSString *)sender
 {
-    if (indexPath.row % 3 == 0) {
-        return [self.timestamps objectAtIndex:indexPath.row];
-    }
-    
-    return nil;
-}
-
-- (UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *subtitle = [self.subtitles objectAtIndex:indexPath.row];
-    UIImage *image = [self.avatars objectForKey:subtitle];
+    UIImage *image = [self.avatars objectForKey:sender];
     return [[UIImageView alloc] initWithImage:image];
-}
-
-- (NSString *)subtitleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [self.subtitles objectAtIndex:indexPath.row];
 }
 
 @end

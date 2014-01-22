@@ -194,7 +194,10 @@
 
 - (void)sendPressed:(UIButton *)sender
 {
-    [self.delegate didSendText:[self.messageInputView.textView.text js_stringByTrimingWhitespace]];
+    JSMessage *message = [[JSMessage alloc] initWithText:[self.messageInputView.textView.text js_stringByTrimingWhitespace]
+                                                  sender:self.sender
+                                                    date:[NSDate date]];
+    [self.delegate didSendMessage:message];
 }
 
 - (void)handleTapGestureRecognizer:(UITapGestureRecognizer *)tap
@@ -223,7 +226,7 @@
     
     JSMessage *message = [self.dataSource messageForRowAtIndexPath:indexPath];
     
-    UIImageView *avatar = [self.dataSource avatarImageViewForRowAtIndexPath:indexPath];
+    UIImageView *avatar = [self.dataSource avatarImageViewForRowAtIndexPath:indexPath sender:message.sender];
     
     NSString *CellIdentifier = nil;
     if ([self.delegate respondsToSelector:@selector(customCellIdentifierForRowAtIndexPath:)]) {
@@ -245,7 +248,8 @@
                                                reuseIdentifier:CellIdentifier];
     }
     
-    [cell setAvatarImageView:[self.dataSource avatarImageViewForRowAtIndexPath:indexPath]];
+    [cell setMessage:message];
+    [cell setAvatarImageView:avatar];
     [cell setBackgroundColor:tableView.backgroundColor];
     
 	#if TARGET_IPHONE_SIMULATOR
@@ -266,7 +270,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     JSMessage *message = [self.dataSource messageForRowAtIndexPath:indexPath];
-    UIImageView *avatar = [self.dataSource avatarImageViewForRowAtIndexPath:indexPath];
+    UIImageView *avatar = [self.dataSource avatarImageViewForRowAtIndexPath:indexPath sender:message.sender];
     
     return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithMessage:message
                                                                      avatar:avatar != nil];

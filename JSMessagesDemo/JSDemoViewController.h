@@ -17,8 +17,11 @@
 @interface JSDemoViewController : JSMessagesViewController <JSMessagesViewDataSource, JSMessagesViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *messages;
-@property (strong, nonatomic) NSMutableArray *timestamps;
-@property (strong, nonatomic) NSMutableArray *subtitles;
 @property (strong, nonatomic) NSDictionary *avatars;
 
 @end
+
+
+
+
+/// separate display timestamp delegate

@@ -30,11 +30,14 @@
 @required
 
 /**
- *  Tells the delegate that the specified text has been sent. Hook into your own backend here.
+ *  Tells the delegate that the specified message has been sent.
  *
- *  @param text A string containing the text that was present in the messageInputView's textView when the send button was pressed.
+ *  @param message A message object containing:
+ *      1. text: the text that was present in the textView of the messageInputView when the send button was pressed.
+ *      2. date: the current date
+ *      3. sender: the value of sender
  */
-- (void)didSendText:(NSString *)text;
+- (void)didSendMessage:(JSMessage *)message;
 
 /**
  *  Asks the delegate for the message type for the row at the specified index path.
@@ -124,13 +127,14 @@
 - (JSMessage *)messageForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
- *  Asks the data source for the imageView to display for the row at the specified index path. The imageView must have its `image` property set.
+ *  Asks the data source for the imageView to display for the row at the specified index path with the given sender. The imageView must have its `image` property set.
  *
  *  @param indexPath An index path locating a row in the table view.
+ *  @param sender    The name of the user who sent the message at indexPath.
  *
  *  @return An image view specifying the avatar for the message at indexPath. This value may be `nil`.
  */
-- (UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath sender:(NSString *)sender;
 
 @end
 
@@ -159,6 +163,11 @@
  *  Returns the message input view with which new messages are composed.
  */
 @property (weak, nonatomic, readonly) JSMessageInputView *messageInputView;
+
+/**
+ *  The name of the user sending messages. The default value is `nil`.
+ */
+@property (copy, nonatomic) NSString *sender;
 
 #pragma mark - Messages view controller
 
