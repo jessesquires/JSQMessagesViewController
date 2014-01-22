@@ -51,17 +51,19 @@
 /**
  *  Initializes a message cell and returns it to the caller.
  *
- *  @param type            A constant indicating a message type. @see JSBubbleMessageType for details.
- *  @param bubbleImageView An image view initialized with bubble images. The `UIImageView` properties `image` and `highlightedImage` must not be `nil`. @see JSBubbleImageViewFactory.
- *  @param message         A message object containing the message data for the cell.
- *  @param hasAvatar       A boolean value indicating whether or not the cell should be initialized with an avatarImageView. Pass `YES` to initialize with an avatar, `NO` otherwise.
- *  @param reuseIdentifier A string used to identify the cell object to be reused for drawing multiple rows of a JSMessagesViewController. This property must not be `nil`.
+ *  @param type              A constant indicating a message type. @see JSBubbleMessageType for details.
+ *  @param bubbleImageView   An image view initialized with bubble images. The `UIImageView` properties `image` and `highlightedImage` must not be `nil`. @see JSBubbleImageViewFactory.
+ *  @param message           A message object containing the message data for the cell.
+ *  @param displaysTimestamp A boolean value indicating whether or not the cell should display the date contained in message. Pass `YES` to display a timestamp, `NO` otherwise.
+ *  @param hasAvatar         A boolean value indicating whether or not the cell should be initialized with an avatarImageView. Pass `YES` to initialize with an avatar, `NO` otherwise.
+ *  @param reuseIdentifier   A string used to identify the cell object to be reused for drawing multiple rows of a JSMessagesViewController. This property must not be `nil`.
  *
  *  @return An initialized `JSBubbleMessageCell` object or `nil` if the object could not be created.
  */
 - (instancetype)initWithBubbleType:(JSBubbleMessageType)type
                    bubbleImageView:(UIImageView *)bubbleImageView
                            message:(JSMessage *)message
+                 displaysTimestamp:(BOOL)displaysTimestamp
                          hasAvatar:(BOOL)hasAvatar
                    reuseIdentifier:(NSString *)reuseIdentifier;
 

@@ -32,6 +32,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 - (void)configureWithType:(JSBubbleMessageType)type
           bubbleImageView:(UIImageView *)bubbleImageView
                   message:(JSMessage *)message
+        displaysTimestamp:(BOOL)displaysTimestamp
                    avatar:(BOOL)hasAvatar;
 
 - (void)setText:(NSString *)text;
@@ -127,6 +128,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 - (void)configureWithType:(JSBubbleMessageType)type
           bubbleImageView:(UIImageView *)bubbleImageView
                   message:(JSMessage *)message
+         displaysTimestamp:(BOOL)displaysTimestamp
                    avatar:(BOOL)hasAvatar
 {
     CGFloat bubbleY = 0.0f;
@@ -134,7 +136,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     
     CGFloat offsetX = 0.0f;
     
-    if (message.date) {
+    if (displaysTimestamp) {
         [self configureTimestampLabel];
         bubbleY = 14.0f;
     }
@@ -185,6 +187,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 - (instancetype)initWithBubbleType:(JSBubbleMessageType)type
                    bubbleImageView:(UIImageView *)bubbleImageView
                            message:(JSMessage *)message
+                 displaysTimestamp:(BOOL)displaysTimestamp
                          hasAvatar:(BOOL)hasAvatar
                    reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -193,6 +196,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
         [self configureWithType:type
                 bubbleImageView:bubbleImageView
                         message:message
+              displaysTimestamp:displaysTimestamp
                          avatar:hasAvatar];
     }
     return self;

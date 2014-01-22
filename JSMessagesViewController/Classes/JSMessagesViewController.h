@@ -72,7 +72,16 @@
 @optional
 
 /**
- *  Tells the delegate to configure or further customize the given cell at the specified index path.
+ *  Asks the delegate if a timestamp should be displayed *above* the row at the specified index path.
+ *
+ *  @param indexPath The index path of the row to be displayed.
+ *
+ *  @return A boolean value specifying whether or not a timestamp should be displayed for the row at indexPath. The default value is `YES`.
+ */
+- (BOOL)shouldDisplayTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  Asks the delegate to configure or further customize the given cell at the specified index path.
  *
  *  @param cell      The message cell to configure.
  *  @param indexPath The index path for cell.

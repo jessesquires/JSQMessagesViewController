@@ -20,8 +20,3 @@
 @property (strong, nonatomic) NSDictionary *avatars;
 
 @end
-
-
-
-
-/// separate display timestamp delegate
