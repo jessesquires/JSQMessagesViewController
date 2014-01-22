@@ -94,6 +94,7 @@
 		88A6AD211839FFBB000F56DA /* input-bar-flat.png in Resources */ = {isa = PBXBuildFile; fileRef = 88A6AD1D1839FFBB000F56DA /* input-bar-flat.png */; };
 		88A6AD221839FFBB000F56DA /* input-bar-flat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88A6AD1E1839FFBB000F56DA /* input-bar-flat@2x.png */; };
 		88BA157A188F8FB900EDD5C0 /* JSMessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1579188F8FB900EDD5C0 /* JSMessageTableView.m */; };
+		88BA157D188F91BE00EDD5C0 /* JSMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BA157C188F91BE00EDD5C0 /* JSMessage.m */; };
 		88E43C74183011830045E52D /* input-bar-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E43C6C183011830045E52D /* input-bar-background.png */; };
 		88E43C75183011830045E52D /* input-bar-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E43C6D183011830045E52D /* input-bar-background@2x.png */; };
 		88E43C76183011830045E52D /* input-field-cover.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E43C6E183011830045E52D /* input-field-cover.png */; };
@@ -201,6 +202,8 @@
 		88A6AD1E1839FFBB000F56DA /* input-bar-flat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input-bar-flat@2x.png"; sourceTree = "<group>"; };
 		88BA1578188F8FB900EDD5C0 /* JSMessageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSMessageTableView.h; sourceTree = "<group>"; };
 		88BA1579188F8FB900EDD5C0 /* JSMessageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSMessageTableView.m; sourceTree = "<group>"; };
+		88BA157B188F91BE00EDD5C0 /* JSMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSMessage.h; sourceTree = "<group>"; };
+		88BA157C188F91BE00EDD5C0 /* JSMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSMessage.m; sourceTree = "<group>"; };
 		88E43C6C183011830045E52D /* input-bar-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input-bar-background.png"; sourceTree = "<group>"; };
 		88E43C6D183011830045E52D /* input-bar-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input-bar-background@2x.png"; sourceTree = "<group>"; };
 		88E43C6E183011830045E52D /* input-field-cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input-field-cover.png"; sourceTree = "<group>"; };
@@ -353,6 +356,8 @@
 				88A3FC38182E0EA000705327 /* JSMessageTextView.m */,
 				88BA1578188F8FB900EDD5C0 /* JSMessageTableView.h */,
 				88BA1579188F8FB900EDD5C0 /* JSMessageTableView.m */,
+				88BA157B188F91BE00EDD5C0 /* JSMessage.h */,
+				88BA157C188F91BE00EDD5C0 /* JSMessage.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -720,6 +725,7 @@
 			files = (
 				88A3FC67182E0EA000705327 /* JSBubbleMessageCell.m in Sources */,
 				88A3FC6B182E0EA000705327 /* JSDismissiveTextView.m in Sources */,
+				88BA157D188F91BE00EDD5C0 /* JSMessage.m in Sources */,
 				88A3FC6F182E0EA000705327 /* JSMessageSoundEffect.m in Sources */,
 				88A3FC69182E0EA000705327 /* JSBubbleView.m in Sources */,
 				88BA157A188F8FB900EDD5C0 /* JSMessageTableView.m in Sources */,
