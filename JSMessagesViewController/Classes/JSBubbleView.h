@@ -82,4 +82,14 @@
  */
 + (CGFloat)neededHeightForText:(NSString *)text type:(JSBubbleMessageType)type;
 
+/**
+ *  Computes and returns the minimum necessary height of a `JSBubbleView` needed to display the given 
+ *  attributedText.
+ *
+ *  @param attributedText The attributedText to display in the bubble view.
+ *
+ *  @return The height required for the frame of the bubble view in order to display the given text.
+ */
++ (CGFloat)neededHeightForAttributedText:(NSAttributedString *)attributedText;
+
 @end

@@ -234,14 +234,14 @@
 		[cell setSubtitle:[self.dataSource subtitleForRowAtIndexPath:indexPath]];
     }
     
-    [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
+    [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath] attributedMsg:[self.dataSource attributedTextForRowAtIndexPath:indexPath]];
     [cell setBackgroundColor:tableView.backgroundColor];
     
-	#if TARGET_IPHONE_SIMULATOR
-        cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeNone;
-	#else
-		cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
-	#endif
+#if TARGET_IPHONE_SIMULATOR
+    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeNone;
+#else
+    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
+#endif
 	
     if([self.delegate respondsToSelector:@selector(configureCell:atIndexPath:)]) {
         [self.delegate configureCell:cell atIndexPath:indexPath];
@@ -255,6 +255,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *text = [self.dataSource textForRowAtIndexPath:indexPath];
+    NSAttributedString *attributedText = [self.dataSource attributedTextForRowAtIndexPath:indexPath];
     
     BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
@@ -262,6 +263,7 @@
     JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
     
     return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithText:text
+                                                          attributedText: attributedText
                                                                timestamp:hasTimestamp
                                                                   avatar:hasAvatar
                                                                 subtitle:hasSubtitle

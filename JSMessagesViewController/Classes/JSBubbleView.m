@@ -179,11 +179,19 @@
 
 - (CGRect)bubbleFrame
 {
-    CGSize bubbleSize = [JSBubbleView neededSizeForText:self.textView.text type:self.type];
+    CGSize bubbleSize;
+    
+    if(self.type == JSBubbleMessageTypeNotification) {
+        bubbleSize = [JSBubbleView neededSizeForAttributedText:self.textView.attributedText];
+    } else {
+        bubbleSize = [JSBubbleView neededSizeForText:self.textView.text type:self.type];
+    }
+    
+    NSLog(@"Bubble Size: (%f, %f), %@", bubbleSize.width, bubbleSize.height, (self.type == JSBubbleMessageTypeNotification ? @"Notification" : @"Message"));
     
     if(self.type == JSBubbleMessageTypeNotification) {
         
-        return CGRectIntegral((CGRect){kMarginLeftRight, kMarginTop, bubbleSize.width - (kMarginLeftRight*2), bubbleSize.height + (kMarginTop/1.5)});
+        return CGRectIntegral((CGRect){kMarginLeftRight, kMarginTop, bubbleSize.width - (kMarginLeftRight*2), bubbleSize.height + (kMarginTop / 1.5)});
     }
     
     return CGRectIntegral(CGRectMake((self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width - kMarginLeftRight : kMarginLeftRight),
@@ -218,35 +226,49 @@
 
 + (CGSize)textSizeForText:(NSString *)txt type:(JSBubbleMessageType)type
 {
-    CGFloat maxWidth = [UIScreen mainScreen].applicationFrame.size.width;
-    if(type != JSBubbleMessageTypeNotification) {
-        maxWidth *= 70.0f;
-    }
+    CGFloat maxWidth = [UIScreen mainScreen].applicationFrame.size.width * .70f;
     
     CGFloat maxHeight = MAX([JSMessageTextView numberOfLinesForMessage:txt],
-                            [txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
+                         [txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
     maxHeight += kJSAvatarImageSize;
     
     CGSize stringSize = [txt sizeWithFont:[[JSBubbleView appearance] font]
                         constrainedToSize:CGSizeMake(maxWidth, maxHeight)];
     
-    if(type == JSBubbleMessageTypeNotification) {
-        return (CGSize){roundf(maxWidth), roundf(stringSize.height)};
-    }
     return CGSizeMake(roundf(stringSize.width), roundf(stringSize.height));
+}
+
++(CGSize)textSizeForAttributedText:(NSAttributedString *)attributedText {
+    CGFloat maxWidth = [UIScreen mainScreen].applicationFrame.size.width - (kBubblePaddingRight * 2);
+    
+    CGRect boundingRect = [attributedText boundingRectWithSize:(CGSize){maxWidth, CGFLOAT_MAX} options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) context:nil];
+    
+    return CGSizeMake(320.0, boundingRect.size.height);
 }
 
 + (CGSize)neededSizeForText:(NSString *)text type:(JSBubbleMessageType)type
 {
     CGSize textSize = [JSBubbleView textSizeForText:text type:type];
     
-	return CGSizeMake(textSize.width + (type == JSBubbleMessageTypeNotification ? 0.0 : kBubblePaddingRight),
+	return CGSizeMake(textSize.width + kBubblePaddingRight,
                       textSize.height + kPaddingTop + kPaddingBottom);
+}
+
++ (CGSize)neededSizeForAttributedText:(NSAttributedString *)attributedText {
+    CGSize attributedTextSize = [JSBubbleView textSizeForAttributedText:attributedText];
+    
+    return CGSizeMake(attributedTextSize.width, attributedTextSize.height + kPaddingTop + kPaddingBottom);
 }
 
 + (CGFloat)neededHeightForText:(NSString *)text type:(JSBubbleMessageType)type
 {
     CGSize size = [JSBubbleView neededSizeForText:text type:type];
+    return size.height + kMarginTop + kMarginBottom;
+}
+
++ (CGFloat)neededHeightForAttributedText:(NSAttributedString *)attributedText {
+    CGSize size = [JSBubbleView neededSizeForAttributedText:attributedText];
+    
     return size.height + kMarginTop + kMarginBottom;
 }
 

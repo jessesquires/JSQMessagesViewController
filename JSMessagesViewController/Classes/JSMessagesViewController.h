@@ -219,6 +219,16 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 - (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
+ *  Asks the data source for the attributed string to display for the row at the specified index path.
+ *
+ *  @param indexPath An index path locating a row in the table view.
+ *
+ *  @return An attributed with text for message.  Can be `nil`.
+ */
+
+-(NSAttributedString *)attributedTextForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
  *  Asks the data source for the date to display in the timestamp label *above* the row at the specified index path.
  *
  *  @param indexPath An index path locating a row in the table view.

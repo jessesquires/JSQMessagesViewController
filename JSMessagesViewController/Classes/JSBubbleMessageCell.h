@@ -72,8 +72,9 @@
  *  Sets the message to be displayed in the bubbleView of the cell.
  *
  *  @param msg The message text for the cell.
+ *  @param attributedMsg The attributed text for the cell.  Can be `nil`.  
  */
-- (void)setMessage:(NSString *)msg;
+- (void)setMessage:(NSString *)msg attributedMsg:(NSAttributedString *)attributedMsg;
 
 /**
  *  Sets the date to be displayed in the timestampLabel of the cell. The date is formatted for you via `NSDateFormatter` by `JSBubbleMessageCell`.
@@ -112,6 +113,7 @@
  *  Computes and returns the minimum necessary height of a `JSBubbleMessageCell` needed to display its contents.
  *
  *  @param text         The text to display in the cell.
+ *  @param attributedText   If applicable, the attributed text to display in the cell.
  *  @param hasTimestamp A boolean value indicating whether or not the cell has a timestamp.
  *  @param hasAvatar    A boolean value indicating whether or not the cell has an avatar.
  *  @param hasSubtitle  A boolean value indicating whether or not the cell has a subtitle.
@@ -119,6 +121,7 @@
  *  @return The height required for the frame of the cell in order for the cell to display the entire contents of its subviews.
  */
 + (CGFloat)neededHeightForBubbleMessageCellWithText:(NSString *)text
+                                     attributedText:(NSAttributedString *)attributedText
                                           timestamp:(BOOL)hasTimestamp
                                              avatar:(BOOL)hasAvatar
                                            subtitle:(BOOL)hasSubtitle
