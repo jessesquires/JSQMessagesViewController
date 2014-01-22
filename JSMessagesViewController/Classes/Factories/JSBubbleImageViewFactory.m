@@ -60,7 +60,7 @@ static NSDictionary *bubbleImageDictionary;
     UIImage *normalBubble = [bubble js_imageMaskWithColor:color];
     UIImage *highlightedBubble = [bubble js_imageMaskWithColor:[color js_darkenColorWithValue:0.12f]];
     
-    if(type == JSBubbleMessageTypeIncoming) {
+    if (type == JSBubbleMessageTypeIncoming) {
         normalBubble = [normalBubble js_imageFlippedHorizontal];
         highlightedBubble = [highlightedBubble js_imageFlippedHorizontal];
     }
@@ -88,7 +88,7 @@ static NSDictionary *bubbleImageDictionary;
     UIImage *image = [UIImage imageNamed:[bubbleImageDictionary objectForKey:@(style)]];
     UIImage *highlightedImage = [JSBubbleImageViewFactory classicHighlightedBubbleImageForStyle:style];
     
-    if(!isOutgoing) {
+    if (!isOutgoing) {
         image = [image js_imageFlippedHorizontal];
         highlightedImage = [highlightedImage js_imageFlippedHorizontal];
     }

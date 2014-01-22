@@ -100,10 +100,10 @@ Support the developement of this **free**, open-source control! via [Square Cash
 ````objective-c
 - (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    if([cell messageType] == JSBubbleMessageTypeOutgoing) {
+    if ([cell messageType] == JSBubbleMessageTypeOutgoing) {
         cell.bubbleView.textView.textColor = [UIColor whiteColor];
     
-        if([cell.bubbleView.textView respondsToSelector:@selector(linkTextAttributes)]) {
+        if ([cell.bubbleView.textView respondsToSelector:@selector(linkTextAttributes)]) {
             NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
             [attrs setValue:[UIColor blueColor] forKey:UITextAttributeTextColor];
             
@@ -111,12 +111,12 @@ Support the developement of this **free**, open-source control! via [Square Cash
         }
     }
     
-    if(cell.timestampLabel) {
+    if (cell.timestampLabel) {
         cell.timestampLabel.textColor = [UIColor lightGrayColor];
         cell.timestampLabel.shadowOffset = CGSizeZero;
     }
     
-    if(cell.subtitleLabel) {
+    if (cell.subtitleLabel) {
         cell.subtitleLabel.textColor = [UIColor lightGrayColor];
     }
 }

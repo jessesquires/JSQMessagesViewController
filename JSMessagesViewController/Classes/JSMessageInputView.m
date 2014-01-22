@@ -52,7 +52,7 @@
     [self addSubview:textView];
 	_textView = textView;
     
-    if(style == JSMessageInputViewStyleClassic) {
+    if (style == JSMessageInputViewStyleClassic) {
         _textView.frame = CGRectMake(6.0f, 3.0f, width, height);
         _textView.backgroundColor = [UIColor whiteColor];
         
@@ -84,7 +84,7 @@
 {
     UIButton *sendButton;
     
-    if(style == JSMessageInputViewStyleClassic) {
+    if (style == JSMessageInputViewStyleClassic) {
         sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
         
         UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 13.0f, 0.0f, 13.0f);
@@ -132,7 +132,7 @@
          panGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer
 {
     self = [super initWithFrame:frame];
-    if(self) {
+    if (self) {
         _style = style;
         [self setup];
         [self configureInputBarWithStyle:style];
@@ -163,10 +163,10 @@
 
 - (void)setSendButton:(UIButton *)btn
 {
-    if(_sendButton)
+    if (_sendButton)
         [_sendButton removeFromSuperview];
     
-    if(self.style == JSMessageInputViewStyleClassic) {
+    if (self.style == JSMessageInputViewStyleClassic) {
         btn.frame = CGRectMake(self.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
     }
     else {
@@ -213,7 +213,7 @@
     // from iOS 7, the content size will be accurate only if the scrolling is enabled.
     self.textView.scrollEnabled = YES;
     
-    if(numLines >= 6) {
+    if (numLines >= 6) {
         CGPoint bottomOffset = CGPointMake(0.0f, self.textView.contentSize.height - self.textView.bounds.size.height);
         [self.textView setContentOffset:bottomOffset animated:YES];
         [self.textView scrollRangeToVisible:NSMakeRange(self.textView.text.length - 2, 1)];

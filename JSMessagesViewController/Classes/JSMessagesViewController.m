@@ -51,7 +51,7 @@
 
 - (void)setup
 {
-    if([self.view isKindOfClass:[UIScrollView class]]) {
+    if ([self.view isKindOfClass:[UIScrollView class]]) {
         // FIXME: hack-ish fix for ipad modal form presentations
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
@@ -83,7 +83,7 @@
                                                                      delegate:self
                                                          panGestureRecognizer:_tableView.panGestureRecognizer];
     
-    if([self.delegate respondsToSelector:@selector(sendButtonForInputView)]) {
+    if ([self.delegate respondsToSelector:@selector(sendButtonForInputView)]) {
         UIButton *sendButton = [self.delegate sendButtonForInputView];
         [inputView setSendButton:sendButton];
     }
@@ -221,7 +221,7 @@
     
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if(!cell) {
+    if (!cell) {
         cell = [[JSBubbleMessageCell alloc] initWithBubbleType:type
                                                bubbleImageView:bubbleImageView
                                                   hasTimestamp:hasTimestamp
@@ -230,15 +230,15 @@
                                                reuseIdentifier:CellIdentifier];
     }
     
-    if(hasTimestamp) {
+    if (hasTimestamp) {
         [cell setTimestamp:[self.dataSource timestampForRowAtIndexPath:indexPath]];
     }
 	
-    if(hasAvatar) {
+    if (hasAvatar) {
         [cell setAvatarImageView:[self.dataSource avatarImageViewForRowAtIndexPath:indexPath]];
     }
     
-	if(hasSubtitle) {
+	if (hasSubtitle) {
 		[cell setSubtitle:[self.dataSource subtitleForRowAtIndexPath:indexPath]];
     }
     
@@ -251,7 +251,7 @@
 		cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
 	#endif
 	
-    if([self.delegate respondsToSelector:@selector(configureCell:atIndexPath:)]) {
+    if ([self.delegate respondsToSelector:@selector(configureCell:atIndexPath:)]) {
         [self.delegate configureCell:cell atIndexPath:indexPath];
     }
     
@@ -292,7 +292,7 @@
             return indexPath.row % 5 == 0;
             
         case JSMessagesViewTimestampPolicyCustom:
-            if([self.delegate respondsToSelector:@selector(hasTimestampForRowAtIndexPath:)])
+            if ([self.delegate respondsToSelector:@selector(hasTimestampForRowAtIndexPath:)])
                 return [self.delegate hasTimestampForRowAtIndexPath:indexPath];
             
         default:
@@ -352,12 +352,12 @@
 
 - (void)scrollToBottomAnimated:(BOOL)animated
 {
-	if(![self shouldAllowScroll])
+	if (![self shouldAllowScroll])
         return;
 	
     NSInteger rows = [self.tableView numberOfRowsInSection:0];
     
-    if(rows > 0) {
+    if (rows > 0) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:rows - 1 inSection:0]
                               atScrollPosition:UITableViewScrollPositionBottom
                                       animated:animated];
@@ -368,7 +368,7 @@
 			  atScrollPosition:(UITableViewScrollPosition)position
 					  animated:(BOOL)animated
 {
-	if(![self shouldAllowScroll])
+	if (![self shouldAllowScroll])
         return;
 	
 	[self.tableView scrollToRowAtIndexPath:indexPath
@@ -378,8 +378,8 @@
 
 - (BOOL)shouldAllowScroll
 {
-    if(self.isUserScrolling) {
-        if([self.delegate respondsToSelector:@selector(shouldPreventScrollToBottomWhileUserScrolling)]
+    if (self.isUserScrolling) {
+        if ([self.delegate respondsToSelector:@selector(shouldPreventScrollToBottomWhileUserScrolling)]
            && [self.delegate shouldPreventScrollToBottomWhileUserScrolling]) {
             return NO;
         }
@@ -406,7 +406,7 @@
 {
     [textView becomeFirstResponder];
 	
-    if(!self.previousTextViewContentHeight)
+    if (!self.previousTextViewContentHeight)
 		self.previousTextViewContentHeight = textView.contentSize.height;
     
     [self scrollToBottomAnimated:YES];
@@ -431,21 +431,21 @@
     BOOL isShrinking = textView.contentSize.height < self.previousTextViewContentHeight;
     CGFloat changeInHeight = textView.contentSize.height - self.previousTextViewContentHeight;
     
-    if(!isShrinking && (self.previousTextViewContentHeight == maxHeight || textView.text.length == 0)) {
+    if (!isShrinking && (self.previousTextViewContentHeight == maxHeight || textView.text.length == 0)) {
         changeInHeight = 0;
     }
     else {
         changeInHeight = MIN(changeInHeight, maxHeight - self.previousTextViewContentHeight);
     }
     
-    if(changeInHeight != 0.0f) {
+    if (changeInHeight != 0.0f) {
         [UIView animateWithDuration:0.25f
                          animations:^{
                              [self setTableViewInsetsWithBottomValue:self.tableView.contentInset.bottom + changeInHeight];
                              
                              [self scrollToBottomAnimated:NO];
                              
-                             if(isShrinking) {
+                             if (isShrinking) {
                                  // if shrinking the view, animate text view frame BEFORE input view frame
                                  [self.messageInputView adjustTextViewHeightBy:changeInHeight];
                              }
@@ -456,7 +456,7 @@
                                                                       inputViewFrame.size.width,
                                                                       inputViewFrame.size.height + changeInHeight);
                              
-                             if(!isShrinking) {
+                             if (!isShrinking) {
                                  // growing the view, animate the text view frame AFTER input view frame
                                  [self.messageInputView adjustTextViewHeightBy:changeInHeight];
                              }
@@ -542,7 +542,7 @@
                          
                          // for ipad modal form presentations
                          CGFloat messageViewFrameBottom = self.view.frame.size.height - inputViewFrame.size.height;
-                         if(inputViewFrameY > messageViewFrameBottom)
+                         if (inputViewFrameY > messageViewFrameBottom)
                              inputViewFrameY = messageViewFrameBottom;
 						 
                          self.messageInputView.frame = CGRectMake(inputViewFrame.origin.x,
@@ -576,7 +576,7 @@
 
 - (void)keyboardWillSnapBackToPoint:(CGPoint)point
 {
-    if(!self.tabBarController.tabBar.hidden){
+    if (!self.tabBarController.tabBar.hidden){
         return;
     }
 	

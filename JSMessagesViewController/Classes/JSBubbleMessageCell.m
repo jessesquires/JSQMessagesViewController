@@ -90,12 +90,12 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 - (void)configureAvatarImageView:(UIImageView *)imageView forMessageType:(JSBubbleMessageType)type
 {
     CGFloat avatarX = 0.5f;
-    if(type == JSBubbleMessageTypeOutgoing) {
+    if (type == JSBubbleMessageTypeOutgoing) {
         avatarX = (self.contentView.frame.size.width - kJSAvatarImageSize);
     }
     
     CGFloat avatarY = self.contentView.frame.size.height - kJSAvatarImageSize;
-    if(_subtitleLabel) {
+    if (_subtitleLabel) {
         avatarY -= kJSSubtitleLabelHeight;
     }
     
@@ -132,19 +132,19 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     
     CGFloat offsetX = 0.0f;
     
-    if(hasTimestamp) {
+    if (hasTimestamp) {
         [self configureTimestampLabel];
         bubbleY = 14.0f;
     }
     
-    if(hasSubtitle) {
+    if (hasSubtitle) {
 		[self configureSubtitleLabelForMessageType:type];
 	}
     
-    if(hasAvatar) {
+    if (hasAvatar) {
         offsetX = 4.0f;
         bubbleX = kJSAvatarImageSize;
-        if(type == JSBubbleMessageTypeOutgoing) {
+        if (type == JSBubbleMessageTypeOutgoing) {
             offsetX = kJSAvatarImageSize - 4.0f;
         }
         
@@ -188,7 +188,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                    reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [self initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-    if(self) {
+    if (self) {
         [self configureWithType:type
                 bubbleImageView:bubbleImageView
                       timestamp:hasTimestamp
@@ -283,7 +283,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 {
     [super layoutSubviews];
     
-    if(self.subtitleLabel) {
+    if (self.subtitleLabel) {
         self.subtitleLabel.frame = CGRectMake(kJSLabelPadding,
                                               self.contentView.frame.size.height - kJSSubtitleLabelHeight,
                                               self.contentView.frame.size.width - (kJSLabelPadding * 2.0f),
@@ -318,7 +318,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (void)handleLongPressGesture:(UILongPressGestureRecognizer *)longPress
 {
-    if(longPress.state != UIGestureRecognizerStateBegan || ![self becomeFirstResponder])
+    if (longPress.state != UIGestureRecognizerStateBegan || ![self becomeFirstResponder])
         return;
     
     UIMenuController *menu = [UIMenuController sharedMenuController];

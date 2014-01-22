@@ -96,7 +96,7 @@
     
     [self.timestamps addObject:[NSDate date]];
     
-    if((self.messages.count - 1) % 2) {
+    if ((self.messages.count - 1) % 2) {
         [JSMessageSoundEffect playMessageSentSound];
         
         [self.subtitles addObject:arc4random_uniform(100) % 2 ? kSubtitleCook : kSubtitleWoz];
@@ -119,7 +119,7 @@
 - (UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type
                        forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row % 2) {
+    if (indexPath.row % 2) {
         return [JSBubbleImageViewFactory bubbleImageViewForType:type
                                                           color:[UIColor js_bubbleLightGrayColor]];
     }
@@ -155,10 +155,10 @@
 //
 - (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    if([cell messageType] == JSBubbleMessageTypeOutgoing) {
+    if ([cell messageType] == JSBubbleMessageTypeOutgoing) {
         cell.bubbleView.textView.textColor = [UIColor whiteColor];
     
-        if([cell.bubbleView.textView respondsToSelector:@selector(linkTextAttributes)]) {
+        if ([cell.bubbleView.textView respondsToSelector:@selector(linkTextAttributes)]) {
             NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
             [attrs setValue:[UIColor blueColor] forKey:UITextAttributeTextColor];
             
@@ -166,12 +166,12 @@
         }
     }
     
-    if(cell.timestampLabel) {
+    if (cell.timestampLabel) {
         cell.timestampLabel.textColor = [UIColor lightGrayColor];
         cell.timestampLabel.shadowOffset = CGSizeZero;
     }
     
-    if(cell.subtitleLabel) {
+    if (cell.subtitleLabel) {
         cell.subtitleLabel.textColor = [UIColor lightGrayColor];
     }
 }

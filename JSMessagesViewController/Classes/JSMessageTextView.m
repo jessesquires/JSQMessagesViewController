@@ -57,7 +57,7 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if(self) {
+    if (self) {
         [self setup];
     }
     return self;
@@ -66,7 +66,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
-    if(self) {
+    if (self) {
         [self setup];
     }
     return self;
@@ -85,12 +85,12 @@
 
 - (void)setPlaceHolder:(NSString *)placeHolder
 {
-    if([placeHolder isEqualToString:_placeHolder]) {
+    if ([placeHolder isEqualToString:_placeHolder]) {
         return;
     }
     
     NSUInteger maxChars = [JSMessageTextView maxCharactersPerLine];
-    if([placeHolder length] > maxChars) {
+    if ([placeHolder length] > maxChars) {
         placeHolder = [placeHolder substringToIndex:maxChars - 8];
         placeHolder = [[placeHolder js_stringByTrimingWhitespace] stringByAppendingFormat:@"..."];
     }
@@ -101,7 +101,7 @@
 
 - (void)setPlaceHolderTextColor:(UIColor *)placeHolderTextColor
 {
-    if([placeHolderTextColor isEqual:_placeHolderTextColor]) {
+    if ([placeHolderTextColor isEqual:_placeHolderTextColor]) {
         return;
     }
     
@@ -170,7 +170,7 @@
 {
     [super drawRect:rect];
     
-    if([self.text length] == 0 && self.placeHolder) {
+    if ([self.text length] == 0 && self.placeHolder) {
         CGRect placeHolderRect = CGRectMake(10.0f,
                                             7.0f,
                                             rect.size.width,

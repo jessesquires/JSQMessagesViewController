@@ -55,7 +55,7 @@
     CGContextSaveGState(context);
     
     // draw shadow
-    if(!CGSizeEqualToSize(shadowOffset, CGSizeZero)) {
+    if (!CGSizeEqualToSize(shadowOffset, CGSizeZero)) {
         CGContextSetShadowWithColor(context,
                                     CGSizeMake(shadowOffset.width, shadowOffset.height),
                                     2.0f,
@@ -63,7 +63,7 @@
     }
     
     // draw border
-    if(borderColor && borderWidth) {
+    if (borderColor && borderWidth) {
         CGPathRef borderPath = (clipToCircle) ? CGPathCreateWithEllipseInRect(imgRect, NULL) : CGPathCreateWithRect(imgRect, NULL);
         CGContextAddPath(context, borderPath);
         
@@ -76,7 +76,7 @@
     
     CGContextRestoreGState(context);
     
-    if(clipToCircle) {
+    if (clipToCircle) {
         UIBezierPath *imgPath = [UIBezierPath bezierPathWithOvalInRect:imgRect];
         [imgPath addClip];
     }

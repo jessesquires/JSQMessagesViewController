@@ -64,7 +64,7 @@
     CGFloat *oldComponents = (CGFloat *)CGColorGetComponents(self.CGColor);
     CGFloat newComponents[4];
     
-    if(isGreyscale) {
+    if (isGreyscale) {
         newComponents[0] = oldComponents[0] - value < 0.0f ? 0.0f : oldComponents[0] - value;
         newComponents[1] = oldComponents[0] - value < 0.0f ? 0.0f : oldComponents[0] - value;
         newComponents[2] = oldComponents[0] - value < 0.0f ? 0.0f : oldComponents[0] - value;

@@ -36,7 +36,7 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if(self) {
+    if (self) {
         self.editable = YES;
         
         // FIXME: this is a hack
@@ -87,23 +87,23 @@
 
 - (void)handleKeyboardWillShowHideNotification:(NSNotification *)notification
 {
-    if([notification.name isEqualToString:UIKeyboardWillShowNotification]) {
+    if ([notification.name isEqualToString:UIKeyboardWillShowNotification]) {
         self.keyboardView.hidden = NO;
     }
-    else if([notification.name isEqualToString:UIKeyboardDidShowNotification]) {
+    else if ([notification.name isEqualToString:UIKeyboardDidShowNotification]) {
         self.keyboardView = self.inputAccessoryView.superview;
         self.keyboardView.hidden = NO;
         
-        if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardDidShow)])
+        if (self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardDidShow)])
             [self.keyboardDelegate keyboardDidShow];
     }
-    else if([notification.name isEqualToString:UIKeyboardDidHideNotification]) {
+    else if ([notification.name isEqualToString:UIKeyboardDidHideNotification]) {
         self.keyboardView.hidden = NO;
         
         BOOL isPhone = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone;
         BOOL keyBoardWasSplitOnPad = [[notification userInfo][@"UIKeyboardFrameChangedByUserInteraction"] boolValue];
         
-        if(isPhone || keyBoardWasSplitOnPad) {
+        if (isPhone || keyBoardWasSplitOnPad) {
             [self resignFirstResponder];
         }
     }
@@ -113,7 +113,7 @@
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)pan
 {
-    if(!self.keyboardView || self.keyboardView.hidden)
+    if (!self.keyboardView || self.keyboardView.hidden)
         return;
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -128,7 +128,7 @@
             self.previousKeyboardY = self.keyboardView.frame.origin.y;
             break;
         case UIGestureRecognizerStateEnded:
-            if(velocity.y > 0 && self.keyboardView.frame.origin.y > self.previousKeyboardY) {
+            if (velocity.y > 0 && self.keyboardView.frame.origin.y > self.previousKeyboardY) {
                 
                 [UIView animateWithDuration:0.3
                                       delay:0
@@ -139,7 +139,7 @@
                                                                           self.keyboardView.frame.size.width,
                                                                           self.keyboardView.frame.size.height);
                                      
-                                     if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardWillBeDismissed)])
+                                     if (self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardWillBeDismissed)])
                                          [self.keyboardDelegate keyboardWillBeDismissed];
                                  }
                                  completion:^(BOOL finished) {
@@ -157,7 +157,7 @@
                                       delay:0
                                     options:UIViewAnimationOptionCurveEaseOut
                                  animations:^{
-                                     if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardWillSnapBackToPoint:)]) {
+                                     if (self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardWillSnapBackToPoint:)]) {
                                          [self.keyboardDelegate keyboardWillSnapBackToPoint:CGPointMake(0.0f, self.previousKeyboardY)];
                                      }
                                      
@@ -172,7 +172,7 @@
         
         default:
             // gesture is currently panning, match keyboard y to touch y
-            if(location.y > self.keyboardView.frame.origin.y || self.keyboardView.frame.origin.y != self.previousKeyboardY) {
+            if (location.y > self.keyboardView.frame.origin.y || self.keyboardView.frame.origin.y != self.previousKeyboardY) {
                 
                 CGFloat newKeyboardY = self.previousKeyboardY + (location.y - self.previousKeyboardY);
                 newKeyboardY = newKeyboardY < self.previousKeyboardY ? self.previousKeyboardY : newKeyboardY;
@@ -183,7 +183,7 @@
                                                      self.keyboardView.frame.size.width,
                                                      self.keyboardView.frame.size.height);
                 
-                if(self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardDidScrollToPoint:)])
+                if (self.keyboardDelegate && [self.keyboardDelegate respondsToSelector:@selector(keyboardDidScrollToPoint:)])
                     [self.keyboardDelegate keyboardDidScrollToPoint:CGPointMake(0.0f, newKeyboardY)];
             }
             break;
