@@ -192,6 +192,15 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
  */
 - (UIButton *)sendButtonForInputView;
 
+/**
+ *  Asks the delegate for a custom cell reuse identifier for the row to be displayed at the specified index path.
+ *
+ *  @param indexPath The index path of the row to be displayed.
+ *
+ *  @return A string specifying the cell reuse identifier for the row at indexPath.
+ */
+- (NSString *)customCellIdentifierForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
 
 
