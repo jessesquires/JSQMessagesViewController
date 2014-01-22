@@ -69,6 +69,8 @@ A messages UI for iPhone and iPad.
     self.title = @"Your view controller title";
     
     self.messageInputView.textView.placeHolder = @"Your placeholder text";
+
+    self.sender = @"Username of sender";
 }
 ````
 
