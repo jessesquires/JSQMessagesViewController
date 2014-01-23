@@ -305,6 +305,10 @@
 		case JSMessagesViewAvatarPolicyOutgoingOnly:
 			return [self.delegate messageTypeForRowAtIndexPath:indexPath] == JSBubbleMessageTypeOutgoing;
             
+        case JSMessagesViewAvatarPolicyCustom:
+            if([self.delegate respondsToSelector:@selector(hasAvatarForRowAtIndexPath:)])
+                return [self.delegate hasAvatarForRowAtIndexPath:indexPath];
+
         case JSMessagesViewAvatarPolicyNone:
         default:
             return NO;
@@ -322,6 +326,10 @@
             
         case JSMessagesViewSubtitlePolicyOutgoingOnly:
             return [self.delegate messageTypeForRowAtIndexPath:indexPath] == JSBubbleMessageTypeOutgoing;
+            
+        case JSMessagesViewSubtitlePolicyCustom:
+            if([self.delegate respondsToSelector:@selector(hasSubtitleForRowAtIndexPath:)])
+                return [self.delegate hasSubtitleForRowAtIndexPath:indexPath];
             
         case JSMessagesViewSubtitlePolicyNone:
         default:
