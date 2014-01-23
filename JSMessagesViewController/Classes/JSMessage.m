@@ -15,6 +15,9 @@
 #import "JSMessage.h"
 
 @implementation JSMessage
+@synthesize text = _text;
+@synthesize sender = _sender;
+@synthesize date = _date;
 
 #pragma mark - Initialization
 

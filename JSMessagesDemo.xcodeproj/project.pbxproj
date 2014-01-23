@@ -217,6 +217,7 @@
 		88E43C801830147E0045E52D /* bubble-classic-typing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble-classic-typing.png"; sourceTree = "<group>"; };
 		88E43C811830147E0045E52D /* bubble-classic-typing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble-classic-typing@2x.png"; sourceTree = "<group>"; };
 		A8C230F1717F4008B2BFAEA6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		D8BD15021891873F00FACA91 /* JSMessagesProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSMessagesProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,6 +359,7 @@
 				88BA1579188F8FB900EDD5C0 /* JSMessageTableView.m */,
 				88BA157B188F91BE00EDD5C0 /* JSMessage.h */,
 				88BA157C188F91BE00EDD5C0 /* JSMessage.m */,
+				D8BD15021891873F00FACA91 /* JSMessagesProtocol.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
