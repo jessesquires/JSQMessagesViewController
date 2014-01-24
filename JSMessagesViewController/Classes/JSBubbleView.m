@@ -86,6 +86,12 @@
         [self bringSubviewToFront:textView];
         _textView = textView;
         
+        UIImageView *foregroundImageView = [[UIImageView alloc]init];
+        [self addSubview:foregroundImageView];
+        [self bringSubviewToFront:foregroundImageView];
+        _foregroundImageView = foregroundImageView;
+        
+        
         if([_textView respondsToSelector:@selector(textContainerInset)]) {
             _textView.textContainerInset = UIEdgeInsetsMake(8.0f, 4.0f, 2.0f, 4.0f);
         }
@@ -237,7 +243,7 @@
 }
 
 +(CGSize)textSizeForAttributedText:(NSAttributedString *)attributedText {
-    CGFloat maxWidth = [UIScreen mainScreen].applicationFrame.size.width - (kBubblePaddingRight * 2);
+    CGFloat maxWidth = 269.0;  // this seems to be the magic number...  not sure exactly why, but it works for sizing.
     
     CGRect boundingRect = [attributedText boundingRectWithSize:(CGSize){maxWidth, CGFLOAT_MAX} options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) context:nil];
     

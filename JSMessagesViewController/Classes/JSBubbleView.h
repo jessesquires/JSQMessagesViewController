@@ -33,6 +33,12 @@
 @property (weak, nonatomic, readonly) UIImageView *bubbleImageView;
 
 /**
+ *  Returns the image view containing the optional image for this bubble view.
+ */
+@property (weak, nonatomic, readonly) UIImageView *foregroundImageView;
+
+
+/**
  *  Returns the text view containing the message text for this bubble view.
  *
  *  @warning You may customize the propeties of textView, however you *must not* change its `font` property directly. Please use the `JSBubbleView` font property instead.
