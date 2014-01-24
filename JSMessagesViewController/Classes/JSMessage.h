@@ -13,11 +13,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JSMessageData.h"
 
 /**
- *  A `JSMessage` object represents a single user message. It contains the message text, its sender, and the date that the message was sent.
+ *  A `JSMessage` object represents a single user message. This is a concrete class that implements the `JSMessageData` protocol. It contains the message text, its sender, and the date that the message was sent.
  */
-@interface JSMessage : NSObject <NSCoding, NSCopying>
+@interface JSMessage : NSObject <JSMessageData, NSCoding, NSCopying>
 
 /**
  *  The body text of the message. The default value is the empty string `@" "`. This value must not be `nil`.
@@ -33,8 +34,6 @@
  *  The date that the message was sent. The default value is `nil`.
  */
 @property (strong, nonatomic) NSDate *date;
-
-//@property (strong, nonatomic) NSURL *mediaURL;
 
 #pragma mark - Initialization
 

@@ -13,6 +13,7 @@
 //
 
 #import "JSDemoViewController.h"
+#import "JSMessage.h"
 
 #define kSubtitleJobs @"Jobs"
 #define kSubtitleWoz @"Steve Wozniak"
@@ -72,17 +73,18 @@
 
 #pragma mark - Messages view delegate: REQUIRED
 
-- (void)didSendMessage:(JSMessage *)message
+- (void)didSendText:(NSString *)text fromSender:(NSString *)sender onDate:(NSDate *)date
 {
     if ((self.messages.count - 1) % 2) {
         [JSMessageSoundEffect playMessageSentSound];
     }
     else {
+        // for demo purposes only, mimicing received messages
         [JSMessageSoundEffect playMessageReceivedSound];
-        message.sender = arc4random_uniform(100) % 2 ? kSubtitleCook : kSubtitleWoz;
+        sender = arc4random_uniform(10) % 2 ? kSubtitleCook : kSubtitleWoz;
     }
     
-    [self.messages addObject:message];
+    [self.messages addObject:[[JSMessage alloc] initWithText:text sender:sender date:date]];
     
     [self finishSend];
     [self scrollToBottomAnimated:YES];

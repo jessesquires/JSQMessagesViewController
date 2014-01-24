@@ -194,10 +194,9 @@
 
 - (void)sendPressed:(UIButton *)sender
 {
-    JSMessage *message = [[JSMessage alloc] initWithText:[self.messageInputView.textView.text js_stringByTrimingWhitespace]
-                                                  sender:self.sender
-                                                    date:[NSDate date]];
-    [self.delegate didSendMessage:message];
+    [self.delegate didSendText:[self.messageInputView.textView.text js_stringByTrimingWhitespace]
+                    fromSender:self.sender
+                        onDate:[NSDate date]];
 }
 
 - (void)handleTapGestureRecognizer:(UITapGestureRecognizer *)tap
@@ -224,9 +223,9 @@
     UIImageView *bubbleImageView = [self.delegate bubbleImageViewWithType:type
                                                         forRowAtIndexPath:indexPath];
     
-    JSMessage *message = [self.dataSource messageForRowAtIndexPath:indexPath];
+    id<JSMessageData> message = [self.dataSource messageForRowAtIndexPath:indexPath];
     
-    UIImageView *avatar = [self.dataSource avatarImageViewForRowAtIndexPath:indexPath sender:message.sender];
+    UIImageView *avatar = [self.dataSource avatarImageViewForRowAtIndexPath:indexPath sender:[message sender]];
     
     BOOL displayTimestamp = YES;
     if ([self.delegate respondsToSelector:@selector(shouldDisplayTimestampForRowAtIndexPath:)]) {
@@ -239,7 +238,7 @@
     }
 
     if (!CellIdentifier) {
-        CellIdentifier = [NSString stringWithFormat:@"JSMessageCell_%d_%d_%d_%d", (int)type, displayTimestamp, avatar != nil, message.sender != nil];
+        CellIdentifier = [NSString stringWithFormat:@"JSMessageCell_%d_%d_%d_%d", (int)type, displayTimestamp, avatar != nil, [message sender] != nil];
     }
     
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -274,8 +273,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSMessage *message = [self.dataSource messageForRowAtIndexPath:indexPath];
-    UIImageView *avatar = [self.dataSource avatarImageViewForRowAtIndexPath:indexPath sender:message.sender];
+    id<JSMessageData> message = [self.dataSource messageForRowAtIndexPath:indexPath];
+    UIImageView *avatar = [self.dataSource avatarImageViewForRowAtIndexPath:indexPath sender:[message sender]];
     
     return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithMessage:message
                                                                      avatar:avatar != nil];

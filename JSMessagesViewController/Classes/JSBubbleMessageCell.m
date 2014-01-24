@@ -31,7 +31,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (void)configureWithType:(JSBubbleMessageType)type
           bubbleImageView:(UIImageView *)bubbleImageView
-                  message:(JSMessage *)message
+                  message:(id<JSMessageData>)message
         displaysTimestamp:(BOOL)displaysTimestamp
                    avatar:(BOOL)hasAvatar;
 
@@ -127,7 +127,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (void)configureWithType:(JSBubbleMessageType)type
           bubbleImageView:(UIImageView *)bubbleImageView
-                  message:(JSMessage *)message
+                  message:(id<JSMessageData>)message
          displaysTimestamp:(BOOL)displaysTimestamp
                    avatar:(BOOL)hasAvatar
 {
@@ -141,7 +141,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
         bubbleY = 14.0f;
     }
     
-    if (message.sender) {
+    if ([message sender]) {
 		[self configureSubtitleLabelForMessageType:type];
 	}
     
@@ -186,7 +186,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (instancetype)initWithBubbleType:(JSBubbleMessageType)type
                    bubbleImageView:(UIImageView *)bubbleImageView
-                           message:(JSMessage *)message
+                           message:(id<JSMessageData>)message
                  displaysTimestamp:(BOOL)displaysTimestamp
                          hasAvatar:(BOOL)hasAvatar
                    reuseIdentifier:(NSString *)reuseIdentifier
@@ -248,11 +248,11 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 	self.subtitleLabel.text = subtitle;
 }
 
-- (void)setMessage:(JSMessage *)message
+- (void)setMessage:(id<JSMessageData>)message
 {
-    [self setText:message.text];
-    [self setTimestamp:message.date];
-    [self setSubtitle:message.sender];
+    [self setText:[message text]];
+    [self setTimestamp:[message date]];
+    [self setSubtitle:[message sender]];
 }
 
 - (void)setAvatarImageView:(UIImageView *)imageView
@@ -272,16 +272,16 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 #pragma mark - Class methods
 
-+ (CGFloat)neededHeightForBubbleMessageCellWithMessage:(JSMessage *)message
++ (CGFloat)neededHeightForBubbleMessageCellWithMessage:(id<JSMessageData>)message
                                                 avatar:(BOOL)hasAvatar
 {
-    CGFloat timestampHeight = message.date ? kJSTimeStampLabelHeight : 0.0f;
+    CGFloat timestampHeight = [message date] ? kJSTimeStampLabelHeight : 0.0f;
     CGFloat avatarHeight = hasAvatar ? kJSAvatarImageSize : 0.0f;
-	CGFloat subtitleHeight = message.sender ? kJSSubtitleLabelHeight : 0.0f;
+	CGFloat subtitleHeight = [message sender] ? kJSSubtitleLabelHeight : 0.0f;
     
     CGFloat subviewHeights = timestampHeight + subtitleHeight + kJSLabelPadding;
     
-    CGFloat bubbleHeight = [JSBubbleView neededHeightForText:message.text];
+    CGFloat bubbleHeight = [JSBubbleView neededHeightForText:[message text]];
     
     return subviewHeights + MAX(avatarHeight, bubbleHeight);
 }

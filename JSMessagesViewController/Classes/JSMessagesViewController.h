@@ -14,7 +14,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JSMessageTableView.h"
-#import "JSMessage.h"
+#import "JSMessageData.h"
 #import "JSBubbleMessageCell.h"
 #import "JSMessageInputView.h"
 #import "JSAvatarImageFactory.h"
@@ -30,14 +30,13 @@
 @required
 
 /**
- *  Tells the delegate that the specified message has been sent.
+ *  Tells the delegate that the user has sent a message with the specified text, sender, and date.
  *
- *  @param message A message object containing:
- *      1. text: the text that was present in the textView of the messageInputView when the send button was pressed.
- *      2. date: the current date
- *      3. sender: the value of sender
+ *  @param text   The text that was present in the textView of the messageInputView when the send button was pressed.
+ *  @param sender The user who sent the message.
+ *  @param date   The date and time at which the message was sent.
  */
-- (void)didSendMessage:(JSMessage *)message;
+- (void)didSendText:(NSString *)text fromSender:(NSString *)sender onDate:(NSDate *)date;
 
 /**
  *  Asks the delegate for the message type for the row at the specified index path.
@@ -127,13 +126,13 @@
 @required
 
 /**
- *  Asks the data soruce for the message to display for the row at the specified index path. The message text is displayed in the bubble at index path. The message date is displayed *above* the row at the specified index path. The message sender is displayed *below* the row at the specified index path.
+ *  Asks the data soruce for the message object to display for the row at the specified index path. The message text is displayed in the bubble at index path. The message date is displayed *above* the row at the specified index path. The message sender is displayed *below* the row at the specified index path.
  *
  *  @param indexPath An index path locating a row in the table view.
  *
- *  @return A message object containing the message data. This value must not be `nil`.
+ *  @return An object that conforms to the `JSMessageData` protocol containing the message data. This value must not be `nil`.
  */
-- (JSMessage *)messageForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (id<JSMessageData>)messageForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  *  Asks the data source for the imageView to display for the row at the specified index path with the given sender. The imageView must have its `image` property set.
