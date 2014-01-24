@@ -319,7 +319,7 @@
     switch ([self.delegate subtitlePolicy]) {
         case JSMessagesViewSubtitlePolicyAll:
             return YES;
-        
+            
         case JSMessagesViewSubtitlePolicyIncomingOnly:
             return [self.delegate messageTypeForRowAtIndexPath:indexPath] == JSBubbleMessageTypeIncoming;
             
@@ -527,7 +527,7 @@
 	UIViewAnimationCurve curve = [[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
 	double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
-    [UIView animateWithDuration:duration
+    [UIView animateWithDuration:0.3
                           delay:0.0
                         options:[self animationOptionsForCurve:curve]
                      animations:^{
