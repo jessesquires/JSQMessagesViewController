@@ -61,9 +61,11 @@
     JSMessageInputViewStyle inputViewStyle = [self.delegate inputViewStyle];
     CGFloat inputViewHeight = (inputViewStyle == JSMessageInputViewStyleFlat) ? 45.0f : 40.0f;
     
-    CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height - inputViewHeight);
+    CGRect tableFrame = CGRectMake(0.0f, 0.0f, size.width, size.height);
 	JSMessageTableView *tableView = [[JSMessageTableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
 	tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    tableView.contentInset = [self tableViewInsetsWithBottomValue:inputViewHeight];
+    tableView.scrollIndicatorInsets = [self tableViewInsetsWithBottomValue:inputViewHeight];
 	tableView.dataSource = self;
 	tableView.delegate = self;
 	[self.view addSubview:tableView];
@@ -497,8 +499,7 @@
 																  inputViewFrame.size.height);
 
                          [self setTableViewInsetsWithBottomValue:self.view.frame.size.height
-                                                                - self.messageInputView.frame.origin.y
-                                                                - inputViewFrame.size.height];
+                                                                - self.messageInputView.frame.origin.y];
                      }
                      completion:nil];
 }
