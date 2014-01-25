@@ -170,6 +170,8 @@ Check out my work at [Hexed Bits](http://www.hexedbits.com).
 
 [FourChat](https://itunes.apple.com/us/app/fourchat/id650833730?mt=8)
 
+[Quick Text Message](https://itunes.apple.com/us/app/quick-text-message-fast-sms/id583729997?mt=8)
+
 [Libraries for developers](https://itunes.apple.com/us/app/libraries-for-developers/id653427112?mt=8)
 
 *[Contact me](mailto:jesse.squires.developer@gmail.com) to have your app listed here.*
