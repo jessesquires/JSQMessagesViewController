@@ -117,6 +117,15 @@
  */
 - (NSString *)customCellIdentifierForRowAtIndexPath:(NSIndexPath *)indexPath;
 
+/**
+ *  Ask the delegate for an additional condition check for enabling the Send button.
+ *  You may account for network connectivity here, etc.
+ *
+ *  @return A boolean value specifying whether the send button can be enabled or not.
+ */
+- (BOOL)allowSendButtonEnabling;
+
+
 @end
 
 

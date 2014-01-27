@@ -362,7 +362,11 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-    self.messageInputView.sendButton.enabled = ([[textView.text js_stringByTrimingWhitespace] length] > 0);
+    BOOL secondCondition = YES;
+    if ([self.delegate respondsToSelector:@selector(allowSendButtonEnabling)])
+        secondCondition = [self.delegate allowSendButtonEnabling];
+    
+    self.messageInputView.sendButton.enabled = ([[textView.text js_stringByTrimingWhitespace] length] > 0) && secondCondition;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
