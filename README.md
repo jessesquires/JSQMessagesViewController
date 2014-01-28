@@ -5,7 +5,8 @@ A messages UI for iPhone and iPad.
 
 `JSMessagesViewController` is a `UIViewController` subclass that is very similar to the iOS Messages app. 
 
-**Note: this is only a messaging UI, not a messaging app.**
+### UPDATE: v4.0.0 is in progress. Stay tuned.
+
 
 ![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2][img2]
 
