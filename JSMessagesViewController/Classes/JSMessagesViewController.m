@@ -125,7 +125,8 @@
 {
     [super viewWillAppear:animated];
     
-    [self scrollToBottomAnimated:NO];
+    if ([self shouldAllowScroll])
+        [self scrollToBottomAnimated:NO];
     
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(handleWillShowKeyboardNotification:)
@@ -136,13 +137,6 @@
 											 selector:@selector(handleWillHideKeyboardNotification:)
 												 name:UIKeyboardWillHideNotification
                                                object:nil];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self scrollToBottomAnimated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -329,6 +323,11 @@
            && [self.delegate shouldPreventScrollToBottomWhileUserScrolling]) {
             return NO;
         }
+    }
+  
+    if ([self.delegate respondsToSelector:@selector(shouldAutoScrollToBottom)] &&
+        ![self.delegate shouldAutoScrollToBottom]) {
+        return NO;
     }
     
     return YES;
