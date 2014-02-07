@@ -95,6 +95,13 @@
 - (BOOL)shouldPreventScrollToBottomWhileUserScrolling;
 
 /**
+ *  Asks the delegate if should scroll to the bottom automatically when the view appears.  Default behavior is YES.
+ *
+ *  @return `YES` if you would like to prevent the table view from being scrolled to the bottom while the screen is displayed, `NO` otherwise.
+ */
+- (BOOL)shouldAutoScrollToBottom;
+
+/**
  *  Ask the delegate if the keyboard should be dismissed by panning/swiping downward. The default value is `YES`. Return `NO` to dismiss the keyboard by tapping.
  *
  *  @return A boolean value specifying whether the keyboard should be dismissed by panning/swiping.
