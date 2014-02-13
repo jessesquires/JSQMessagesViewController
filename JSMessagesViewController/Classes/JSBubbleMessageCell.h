@@ -84,6 +84,13 @@
 - (void)setTimestamp:(NSDate *)date;
 
 /**
+ *  Sets the string to be displayed in the timestampLabel of the cell.
+ *
+ *  @param timestampString The string for the cell
+ */
+- (void)setTimestampString:(NSString *)timestampString;
+
+/**
  *  Sets the imageView for the avatarImageView of the cell. The frame is set for you by `JSBubbleMessageCell`.
  *
  *  @param imageView An imageView containing an avatar image. The `image` property of the `UIImageView` must not be `nil`.

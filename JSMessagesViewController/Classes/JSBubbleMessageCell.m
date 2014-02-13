@@ -243,6 +243,10 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                                                               timeStyle:NSDateFormatterShortStyle];
 }
 
+- (void)setTimestampString:(NSString *)timestampString {
+    self.timestampLabel.text = timestampString;
+}
+
 - (void)setAvatarImageView:(UIImageView *)imageView
 {
     [_avatarImageView removeFromSuperview];

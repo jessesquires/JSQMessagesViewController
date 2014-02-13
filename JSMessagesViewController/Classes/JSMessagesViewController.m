@@ -223,7 +223,8 @@
     }
     
     if(hasTimestamp) {
-        [cell setTimestamp:[self.dataSource timestampForRowAtIndexPath:indexPath]];
+//        [cell setTimestamp:[self.dataSource timestampForRowAtIndexPath:indexPath]];
+        [cell setTimestampString:[self.dataSource timestampStringForRowAtIndexPath:indexPath]];
     }
 	
     if(hasAvatar) {
