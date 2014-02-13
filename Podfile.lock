@@ -1,10 +1,13 @@
 PODS:
   - JSQSystemSoundPlayer (1.4.0)
+  - MHPrettyDate (1.1.1)
 
 DEPENDENCIES:
   - JSQSystemSoundPlayer
+  - MHPrettyDate
 
 SPEC CHECKSUMS:
   JSQSystemSoundPlayer: 28ccd01a92a0cebc6de6361e8499011b4cb6dab7
+  MHPrettyDate: 0486e5e1ddff296748b7a71cd78c9cc785a80cc5
 
 COCOAPODS: 0.29.0

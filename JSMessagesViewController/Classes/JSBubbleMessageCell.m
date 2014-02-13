@@ -16,6 +16,7 @@
 
 #import "JSAvatarImageFactory.h"
 #import "UIColor+JSMessagesView.h"
+#import <MHPrettyDate/MHPrettyDate.h>
 
 static const CGFloat kJSLabelPadding = 5.0f;
 static const CGFloat kJSTimeStampLabelHeight = 15.0f;
@@ -238,13 +239,27 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (void)setTimestamp:(NSDate *)date
 {
-    self.timestampLabel.text = [NSDateFormatter localizedStringFromDate:date
-                                                              dateStyle:NSDateFormatterMediumStyle
-                                                              timeStyle:NSDateFormatterShortStyle];
-}
 
-- (void)setTimestampString:(NSString *)timestampString {
-    self.timestampLabel.text = timestampString;
+    NSString *dateString;
+    
+    if([MHPrettyDate isToday:date]) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+        
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+        [dateFormatter setDoesRelativeDateFormatting:YES];
+        
+        dateString = [NSString stringWithFormat:@"%@ %@", [dateFormatter stringFromDate:date], [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatTodayTimeOnly]];
+    } else if([MHPrettyDate isWithinWeek:date]) {
+        dateString = [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatWithTime withDateStyle:NSDateFormatterMediumStyle];
+    } else {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateFormat:@"E, MMM d h:mm a"];
+        
+        dateString = [dateFormatter stringFromDate:date];
+    }
+
+    self.timestampLabel.text = dateString;
 }
 
 - (void)setAvatarImageView:(UIImageView *)imageView
