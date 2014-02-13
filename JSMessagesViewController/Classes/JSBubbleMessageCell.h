@@ -15,35 +15,47 @@
 #import <UIKit/UIKit.h>
 #import "JSBubbleView.h"
 
+extern NSString * const SideTimeAnimateNotification;
+
 /**
  *  The `JSBubbleMessageCell` class defines the attributes and behavior of the cells that appear in `JSMessagesViewController`. This class includes properties and methods for setting and managing cell content.
  */
 @interface JSBubbleMessageCell : UITableViewCell
 
 /**
- *  Returns the bubble view used in the cell. JSBubbleMessageCell adds the appropriate bubble view when you create the cell with a given cell type and bubbleImageView. This property is never `nil`. 
- *  @see JSBubbleView. 
+ *  Returns the bubble view used in the cell. JSBubbleMessageCell adds the appropriate bubble view when you create the cell with a given cell type and bubbleImageView. This property is never `nil`.
+ *  @see JSBubbleView.
  *  @see JSBubbleMessageType.
  */
 @property (weak, nonatomic, readonly) JSBubbleView *bubbleView;
 
 /**
- *  Returns the label used to display the timestamp for the cell. This property may be `nil` if no timestamp is provided. 
+ *  Returns the label used to display the timestamp for the cell. This property may be `nil` if no timestamp is provided.
  *  @see JSMessagesViewDataSource.
  */
 @property (weak, nonatomic, readonly) UILabel *timestampLabel;
 
 /**
- *  Returns the image view used to display the avatar for the cell. This property may be `nil` if no avatar is provided. 
+ *  Returns the label used to display the timestamp on the side for the cell. This property may be `nil` if no timestamp is provided.
+ *  @see JSMessagesViewDataSource.
+ */
+@property (weak, nonatomic, readonly) UILabel *sideTimestampLabel;
+
+/**
+ *  Returns the image view used to display the avatar for the cell. This property may be `nil` if no avatar is provided.
  *  @see JSMessagesViewDataSource.
  */
 @property (weak, nonatomic, readonly) UIImageView *avatarImageView;
 
 /**
- *  Returns the label used to display the subtitle for the cell. This property may be `nil` if no subtitle is provided. 
+ *  Returns the label used to display the subtitle for the cell. This property may be `nil` if no subtitle is provided.
  *  @see JSMessagesViewDataSource.
  */
 @property (weak, nonatomic, readonly) UILabel *subtitleLabel;
+
+@property (nonatomic) CGFloat sideLabelStartX;
+
+@property (nonatomic) CGFloat bubbleViewStartX;
 
 #pragma mark - Initialization
 
@@ -72,7 +84,7 @@
  *  Sets the message to be displayed in the bubbleView of the cell.
  *
  *  @param msg The message text for the cell.
- *  @param attributedMsg The attributed text for the cell.  Can be `nil`.  
+ *  @param attributedMsg The attributed text for the cell.  Can be `nil`.
  */
 - (void)setMessage:(NSString *)msg attributedMsg:(NSAttributedString *)attributedMsg;
 
@@ -100,7 +112,7 @@
 #pragma mark - Getters
 
 /**
- *  Returns a contant indicating the message type for the cell. 
+ *  Returns a contant indicating the message type for the cell.
  *  @see JSBubbleMessageType.
  *
  *  @return A contant indicating the message type.

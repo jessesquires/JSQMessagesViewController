@@ -22,6 +22,7 @@ static const CGFloat kJSLabelPadding = 5.0f;
 static const CGFloat kJSTimeStampLabelHeight = 15.0f;
 static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
+NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
 
 @interface JSBubbleMessageCell()
 
@@ -67,6 +68,8 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                                                                                              action:@selector(handleLongPressGesture:)];
     [recognizer setMinimumPressDuration:0.4f];
     [self addGestureRecognizer:recognizer];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleAnimateSideTimeNotification:) name:SideTimeAnimateNotification object:nil];
 }
 
 - (void)configureTimestampLabel
@@ -78,14 +81,27 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     label.autoresizingMask =  UIViewAutoresizingFlexibleWidth;
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor js_messagesTimestampColorClassic];
-    label.shadowColor = [UIColor whiteColor];
-    label.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    label.font = [UIFont boldSystemFontOfSize:12.0f];
+    label.textColor = [UIColor colorWithRed:0.557 green:0.557 blue:0.576 alpha:1.0];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:12.0f];
     
     [self.contentView addSubview:label];
     [self.contentView bringSubviewToFront:label];
     _timestampLabel = label;
+    
+    self.sideLabelStartX = self.contentView.frame.size.width;
+    
+    CGFloat sideLabelY = (self.contentView.frame.size.height / 2) - (kJSTimeStampLabelHeight / 2) + 20.0f;
+    
+    UILabel *sideLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.sideLabelStartX, sideLabelY, 150.0, kJSTimeStampLabelHeight)];
+    sideLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    sideLabel.textAlignment = NSTextAlignmentLeft;
+    sideLabel.textColor = [UIColor colorWithRed:0.557 green:0.557 blue:0.576 alpha:1.0];
+    sideLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:12.0f];
+    
+    [self.contentView addSubview:sideLabel];
+    [self.contentView bringSubviewToFront:label];
+    _sideTimestampLabel = sideLabel;
+    
 }
 
 - (void)configureAvatarImageView:(UIImageView *)imageView forMessageType:(JSBubbleMessageType)type
@@ -102,8 +118,8 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     
     imageView.frame = CGRectMake(avatarX, avatarY, kJSAvatarImageSize, kJSAvatarImageSize);
     imageView.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
-                                         | UIViewAutoresizingFlexibleLeftMargin
-                                         | UIViewAutoresizingFlexibleRightMargin);
+                                  | UIViewAutoresizingFlexibleLeftMargin
+                                  | UIViewAutoresizingFlexibleRightMargin);
     
     [self.contentView addSubview:imageView];
     _avatarImageView = imageView;
@@ -161,11 +177,13 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                                                         bubbleType:type
                                                    bubbleImageView:bubbleImageView];
     bubbleView.autoresizingMask = (UIViewAutoresizingFlexibleWidth
-                                    | UIViewAutoresizingFlexibleHeight
-                                    | UIViewAutoresizingFlexibleBottomMargin);
+                                   | UIViewAutoresizingFlexibleHeight
+                                   | UIViewAutoresizingFlexibleBottomMargin);
     
     [self.contentView addSubview:bubbleView];
     [self.contentView sendSubviewToBack:bubbleView];
+    
+    self.bubbleViewStartX = frame.origin.x;
     
     _bubbleView = bubbleView;
 }
@@ -203,6 +221,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 {
     _bubbleView = nil;
     _timestampLabel = nil;
+    _sideTimestampLabel = nil;
     _avatarImageView = nil;
     _subtitleLabel = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -215,6 +234,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     [super prepareForReuse];
     self.bubbleView.textView.text = nil;
     self.timestampLabel.text = nil;
+    self.sideTimestampLabel.text = nil;
     self.avatarImageView = nil;
     self.subtitleLabel.text = nil;
 }
@@ -239,7 +259,8 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (void)setTimestamp:(NSDate *)date
 {
-
+    
+    // timestamp label
     NSString *dateString;
     
     if([MHPrettyDate isToday:date]) {
@@ -258,8 +279,15 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
         
         dateString = [dateFormatter stringFromDate:date];
     }
-
+    
     self.timestampLabel.text = dateString;
+    
+    
+    // side label
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"h:mm a"];
+    
+    self.sideTimestampLabel.text = [dateFormatter stringFromDate:date];
 }
 
 - (void)setAvatarImageView:(UIImageView *)imageView
@@ -382,6 +410,36 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
                                              selector:@selector(handleMenuWillHideNotification:)
                                                  name:UIMenuControllerWillHideMenuNotification
                                                object:nil];
+}
+
+-(void)handleAnimateSideTimeNotification:(NSNotification *)notification {
+    CGFloat xMoved = [notification.object floatValue];
+    
+    [self.layer removeAllAnimations];
+    [UIView animateWithDuration:0.1f animations:^{
+        CGRect sideTimestampFrame = self.sideTimestampLabel.frame;
+        sideTimestampFrame.origin.x -= xMoved;
+        
+        self.sideTimestampLabel.frame = sideTimestampFrame;
+        
+        if(self.bubbleView.type == JSBubbleMessageTypeOutgoing) {
+            CGRect bubbleViewFrame = self.bubbleView.frame;
+            
+            bubbleViewFrame.origin.x -= xMoved;
+            self.bubbleView.frame = bubbleViewFrame;
+        }/* else if(self.bubbleView.type == JSBubbleMessageTypeNotification) {
+          CGRect bubbleViewFrame = self.bubbleView.frame;
+          
+          bubbleViewFrame.size.width -= xMoved;
+          self.bubbleView.frame = bubbleViewFrame;
+          
+          
+          CGRect bubbleImageViewFrame = self.bubbleView.bubbleImageView.frame;
+          bubbleImageViewFrame.size.width -= xMoved;
+          self.bubbleView.bubbleImageView.frame = bubbleImageViewFrame;
+          [self.bubbleView.bubbleImageView setNeedsDisplay];
+          }*/
+    }];
 }
 
 @end
