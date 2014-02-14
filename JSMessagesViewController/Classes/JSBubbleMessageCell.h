@@ -96,6 +96,13 @@ extern NSString * const SideTimeAnimateNotification;
 - (void)setTimestamp:(NSDate *)date;
 
 /**
+ *  Sets the date to be displayed in the sideTimestampLabel of the cell. The date is formatted for you via `NSDateFormatter` by `JSBubbleMessageCell`.  This will always be called.
+ *
+ *  @param date The date for the cell.
+ */
+- (void)setSideTimestamp:(NSDate *)date;
+
+/**
  *  Sets the imageView for the avatarImageView of the cell. The frame is set for you by `JSBubbleMessageCell`.
  *
  *  @param imageView An imageView containing an avatar image. The `image` property of the `UIImageView` must not be `nil`.

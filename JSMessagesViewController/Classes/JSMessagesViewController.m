@@ -222,10 +222,13 @@
                                                reuseIdentifier:CellIdentifier];
     }
     
+    NSDate *timestamp = [self.dataSource timestampForRowAtIndexPath:indexPath];
+    
     if(hasTimestamp) {
-        [cell setTimestamp:[self.dataSource timestampForRowAtIndexPath:indexPath]];
-//        [cell setTimestampString:[self.dataSource timestampStringForRowAtIndexPath:indexPath]];
+        [cell setTimestamp:timestamp];
     }
+    
+    [cell setSideTimestamp:timestamp]; 
 	
     if(hasAvatar) {
         [cell setAvatarImageView:[self.dataSource avatarImageViewForRowAtIndexPath:indexPath]];

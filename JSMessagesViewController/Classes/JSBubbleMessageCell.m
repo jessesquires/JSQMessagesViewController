@@ -28,6 +28,7 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
 
 - (void)setup;
 - (void)configureTimestampLabel;
+- (void)configureSideTimestampLabel;
 - (void)configureAvatarImageView:(UIImageView *)imageView forMessageType:(JSBubbleMessageType)type;
 - (void)configureSubtitleLabelForMessageType:(JSBubbleMessageType)type;
 
@@ -87,21 +88,24 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     [self.contentView addSubview:label];
     [self.contentView bringSubviewToFront:label];
     _timestampLabel = label;
-    
+}
+
+- (void)configureSideTimestampLabel {
     self.sideLabelStartX = self.contentView.frame.size.width;
     
-    CGFloat sideLabelY = (self.contentView.frame.size.height / 2) - (kJSTimeStampLabelHeight / 2) + 20.0f;
+    CGFloat sideLabelY = (self.contentView.frame.size.height / 2) - (kJSTimeStampLabelHeight / 2) + kJSLabelPadding;
+    if(self.timestampLabel) {
+        sideLabelY += kJSTimeStampLabelHeight - 2.0;
+    }
     
     UILabel *sideLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.sideLabelStartX, sideLabelY, 150.0, kJSTimeStampLabelHeight)];
     sideLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     sideLabel.textAlignment = NSTextAlignmentLeft;
     sideLabel.textColor = [UIColor colorWithRed:0.557 green:0.557 blue:0.576 alpha:1.0];
-    sideLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:12.0f];
+    sideLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:11.0f];
     
     [self.contentView addSubview:sideLabel];
-    [self.contentView bringSubviewToFront:label];
     _sideTimestampLabel = sideLabel;
-    
 }
 
 - (void)configureAvatarImageView:(UIImageView *)imageView forMessageType:(JSBubbleMessageType)type
@@ -153,6 +157,8 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
         [self configureTimestampLabel];
         bubbleY = 14.0f;
     }
+    
+    [self configureSideTimestampLabel];
     
     if(hasSubtitle) {
 		[self configureSubtitleLabelForMessageType:type];
@@ -281,8 +287,9 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     }
     
     self.timestampLabel.text = dateString;
-    
-    
+}
+
+- (void)setSideTimestamp:(NSDate *)date {
     // side label
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"h:mm a"];
