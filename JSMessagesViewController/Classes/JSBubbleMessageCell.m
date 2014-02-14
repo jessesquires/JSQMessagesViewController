@@ -423,29 +423,27 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     CGFloat xMoved = [notification.object floatValue];
     
     [self.layer removeAllAnimations];
-    [UIView animateWithDuration:0.1f animations:^{
-        CGRect sideTimestampFrame = self.sideTimestampLabel.frame;
-        sideTimestampFrame.origin.x -= xMoved;
+
+    CGRect sideTimestampFrame = self.sideTimestampLabel.frame;
+    sideTimestampFrame.origin.x = self.sideLabelStartX - xMoved;
+
+    CGRect bubbleViewFrame = self.bubbleView.frame;
+    bubbleViewFrame.origin.x = self.bubbleViewStartX - xMoved;
+
+    CGFloat animationDuration = 0.01f;
+    
+    // this probably means they've "released", so animate it back longer
+    if(xMoved == 0.0 && self.sideTimestampLabel.frame.origin.x - sideTimestampFrame.origin.x < -1.0) {
+        animationDuration = 0.1f;
+    }
+    
+    [UIView animateWithDuration:animationDuration animations:^{
         
         self.sideTimestampLabel.frame = sideTimestampFrame;
         
         if(self.bubbleView.type == JSBubbleMessageTypeOutgoing) {
-            CGRect bubbleViewFrame = self.bubbleView.frame;
-            
-            bubbleViewFrame.origin.x -= xMoved;
             self.bubbleView.frame = bubbleViewFrame;
-        }/* else if(self.bubbleView.type == JSBubbleMessageTypeNotification) {
-          CGRect bubbleViewFrame = self.bubbleView.frame;
-          
-          bubbleViewFrame.size.width -= xMoved;
-          self.bubbleView.frame = bubbleViewFrame;
-          
-          
-          CGRect bubbleImageViewFrame = self.bubbleView.bubbleImageView.frame;
-          bubbleImageViewFrame.size.width -= xMoved;
-          self.bubbleView.bubbleImageView.frame = bubbleImageViewFrame;
-          [self.bubbleView.bubbleImageView setNeedsDisplay];
-          }*/
+        }
     }];
 }
 
