@@ -22,6 +22,9 @@ static const CGFloat kJSLabelPadding = 5.0f;
 static const CGFloat kJSTimeStampLabelHeight = 15.0f;
 static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
+static const CGFloat kFailedCommunicationMarginAddition = 24.0f;
+CGFloat const kFailedImageSize = 22.0f;
+
 NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
 
 @interface JSBubbleMessageCell()
@@ -129,6 +132,18 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     _avatarImageView = imageView;
 }
 
+- (void)configureFailedMessageButton {
+    UIButton *failedButton = [[UIButton alloc] initWithFrame:CGRectMake(self.contentView.frame.size.width - kFailedImageSize*1.5, self.contentView.frame.size.height - kFailedImageSize*1.3, kFailedImageSize, kFailedImageSize)];
+    [failedButton setBackgroundImage:[UIImage imageNamed:@"message_fail"] forState:UIControlStateNormal];
+    failedButton.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
+                                     | UIViewAutoresizingFlexibleLeftMargin
+                                     | UIViewAutoresizingFlexibleRightMargin);
+    
+    [self.contentView addSubview:failedButton];
+    _failedButton = failedButton;
+    
+}
+
 - (void)configureSubtitleLabelForMessageType:(JSBubbleMessageType)type
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -147,6 +162,7 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
                 timestamp:(BOOL)hasTimestamp
                    avatar:(BOOL)hasAvatar
 				 subtitle:(BOOL)hasSubtitle
+       communicationState:(NSString *)communicationState
 {
     CGFloat bubbleY = 0.0f;
     CGFloat bubbleX = 0.0f;
@@ -172,6 +188,12 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
         }
         
         [self configureAvatarImageView:[[UIImageView alloc] init] forMessageType:type];
+    }
+    
+    if ([communicationState isEqualToString:GFCStateFailed]) {
+        offsetX += kFailedCommunicationMarginAddition;
+        
+        [self configureFailedMessageButton];
     }
     
     CGRect frame = CGRectMake(bubbleX - offsetX,
@@ -211,6 +233,7 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
                          hasAvatar:(BOOL)hasAvatar
                        hasSubtitle:(BOOL)hasSubtitle
                    reuseIdentifier:(NSString *)reuseIdentifier
+                communicationState:(NSString *)communicationState
 {
     self = [self initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if(self) {
@@ -218,7 +241,8 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
                 bubbleImageView:bubbleImageView
                       timestamp:hasTimestamp
                          avatar:hasAvatar
-                       subtitle:hasSubtitle];
+                       subtitle:hasSubtitle
+            communicationState:communicationState];
     }
     return self;
 }

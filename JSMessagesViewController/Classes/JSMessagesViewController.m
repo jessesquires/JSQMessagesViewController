@@ -210,6 +210,8 @@
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
 	BOOL hasSubtitle = [self shouldHaveSubtitleForRowAtIndexPath:indexPath];
     
+    NSString *communicationState = [self deliveryStateOfCommunication:indexPath];
+    
     NSString *CellIdentifier = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d_%@", (int)type, hasTimestamp, hasAvatar, hasSubtitle, notificationDescription];
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -219,7 +221,8 @@
                                                   hasTimestamp:hasTimestamp
                                                      hasAvatar:hasAvatar
                                                    hasSubtitle:hasSubtitle
-                                               reuseIdentifier:CellIdentifier];
+                                               reuseIdentifier:CellIdentifier
+                                            communicationState:communicationState];
     }
     
     NSDate *timestamp = [self.dataSource timestampForRowAtIndexPath:indexPath];
@@ -334,6 +337,14 @@
         default:
             return NO;
     }
+}
+
+- (NSString *)deliveryStateOfCommunication:(NSIndexPath *)indexPath
+{
+    if ([self.delegate respondsToSelector:@selector(deliveryStateOfCommunication:)]) {
+        return [self.delegate deliveryStateOfCommunication:indexPath];
+    } else
+        return nil;
 }
 
 - (void)finishSend

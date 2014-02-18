@@ -188,6 +188,13 @@ typedef NS_ENUM(NSUInteger, JSMessagesViewSubtitlePolicy) {
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
+ * Asks the delegate what the current delivery state of a communication is.
+ *
+ * As of 2/17/2014, the possible states are "Delivered", "Read", "Failed"
+ */
+- (NSString *)deliveryStateOfCommunication:(NSIndexPath *)indexPath;
+
+/**
  *  Asks the delegate if should always scroll to bottom automatically when new messages are sent or received.
  *
  *  @return `YES` if you would like to prevent the table view from being scrolled to the bottom while the user is scrolling the table view manually, `NO` otherwise.

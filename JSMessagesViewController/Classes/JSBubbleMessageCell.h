@@ -15,6 +15,10 @@
 #import <UIKit/UIKit.h>
 #import "JSBubbleView.h"
 
+static NSString *GFCStateDelivered = @"Delivered";
+static NSString *GFCStateRead = @"Read";
+static NSString *GFCStateFailed = @"Failed";
+
 extern NSString * const SideTimeAnimateNotification;
 
 /**
@@ -48,6 +52,12 @@ extern NSString * const SideTimeAnimateNotification;
 @property (weak, nonatomic, readonly) UIImageView *avatarImageView;
 
 /**
+ *  Returns the button used to indicate a failed send state for the cell.
+ *  @see JSMessagesViewDataSource.
+ */
+@property (weak, nonatomic) UIButton *failedButton;
+
+/**
  *  Returns the label used to display the subtitle for the cell. This property may be `nil` if no subtitle is provided.
  *  @see JSMessagesViewDataSource.
  */
@@ -76,7 +86,8 @@ extern NSString * const SideTimeAnimateNotification;
                       hasTimestamp:(BOOL)hasTimestamp
                          hasAvatar:(BOOL)hasAvatar
                        hasSubtitle:(BOOL)hasSubtitle
-                   reuseIdentifier:(NSString *)reuseIdentifier;
+                   reuseIdentifier:(NSString *)reuseIdentifier
+                communicationState:(NSString *)state;
 
 #pragma mark - Setters
 
