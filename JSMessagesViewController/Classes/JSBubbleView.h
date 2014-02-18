@@ -53,6 +53,9 @@
  */
 @property (strong, nonatomic) UIFont *font UI_APPEARANCE_SELECTOR;
 
+@property (nonatomic) CGFloat startWidth;
+@property (nonatomic) CGFloat subtractFromWidth; 
+
 #pragma mark - Initialization
 
 /**
@@ -97,5 +100,8 @@
  *  @return The height required for the frame of the bubble view in order to display the given text.
  */
 + (CGFloat)neededHeightForAttributedText:(NSAttributedString *)attributedText;
+
+#pragma mark - Instance methods
+-(void)assignSubtractFromWidth:(CGFloat)value;
 
 @end

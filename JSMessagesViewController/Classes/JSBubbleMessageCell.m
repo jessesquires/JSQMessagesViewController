@@ -13,7 +13,7 @@
 //
 
 #import "JSBubbleMessageCell.h"
-
+#import "JSBubbleView.h"
 #import "JSAvatarImageFactory.h"
 #import "UIColor+JSMessagesView.h"
 #import <MHPrettyDate/MHPrettyDate.h>
@@ -434,7 +434,7 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     
     // this probably means they've "released", so animate it back longer
     if(xMoved == 0.0 && self.sideTimestampLabel.frame.origin.x - sideTimestampFrame.origin.x < -1.0) {
-        animationDuration = 0.1f;
+        animationDuration = 0.5f;
     }
     
     [UIView animateWithDuration:animationDuration animations:^{
@@ -443,6 +443,8 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
         
         if(self.bubbleView.type == JSBubbleMessageTypeOutgoing) {
             self.bubbleView.frame = bubbleViewFrame;
+        } else if(self.bubbleView.type == JSBubbleMessageTypeNotification) {
+            [self.bubbleView assignSubtractFromWidth:xMoved];
         }
     }];
 }
