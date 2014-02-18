@@ -136,8 +136,8 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     UIButton *failedButton = [[UIButton alloc] initWithFrame:CGRectMake(self.contentView.frame.size.width - kFailedImageSize*1.5, self.contentView.frame.size.height - kFailedImageSize*1.3, kFailedImageSize, kFailedImageSize)];
     [failedButton setBackgroundImage:[UIImage imageNamed:@"message_fail"] forState:UIControlStateNormal];
     failedButton.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin
-                                     | UIViewAutoresizingFlexibleLeftMargin
-                                     | UIViewAutoresizingFlexibleRightMargin);
+                               | UIViewAutoresizingFlexibleLeftMargin
+                               | UIViewAutoresizingFlexibleRightMargin);
     
     [self.contentView addSubview:failedButton];
     _failedButton = failedButton;
@@ -191,7 +191,7 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     }
     
     if ([communicationState isEqualToString:GFCStateFailed]) {
-        offsetX += kFailedCommunicationMarginAddition;
+        offsetX = kFailedCommunicationMarginAddition;
         
         [self configureFailedMessageButton];
     }
@@ -212,6 +212,9 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     [self.contentView sendSubviewToBack:bubbleView];
     
     self.bubbleViewStartX = frame.origin.x;
+    if ([communicationState isEqualToString:GFCStateFailed]) {
+        self.failedButtonStartX = self.contentView.frame.size.width - kFailedImageSize*1.5; //TODO: make this right and not hard-coded...
+    }
     
     _bubbleView = bubbleView;
 }
@@ -242,7 +245,7 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
                       timestamp:hasTimestamp
                          avatar:hasAvatar
                        subtitle:hasSubtitle
-            communicationState:communicationState];
+             communicationState:communicationState];
     }
     return self;
 }
@@ -254,6 +257,7 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     _sideTimestampLabel = nil;
     _avatarImageView = nil;
     _subtitleLabel = nil;
+    _failedButton = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -267,6 +271,8 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     self.sideTimestampLabel.text = nil;
     self.avatarImageView = nil;
     self.subtitleLabel.text = nil;
+    [self.failedButton removeFromSuperview];
+    self.failedButton = nil;
 }
 
 - (void)setBackgroundColor:(UIColor *)color
@@ -332,6 +338,13 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
 - (void)setSubtitle:(NSString *)subtitle
 {
 	self.subtitleLabel.text = subtitle;
+}
+
+- (void)setupFailedButton
+{
+    [_failedButton removeFromSuperview];
+    _failedButton = nil;
+    [self configureFailedMessageButton];
 }
 
 #pragma mark - Getters
@@ -453,6 +466,9 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
 
     CGRect bubbleViewFrame = self.bubbleView.frame;
     bubbleViewFrame.origin.x = self.bubbleViewStartX - xMoved;
+    
+    CGRect failedMessageFrame = self.failedButton.frame;
+    failedMessageFrame.origin.x = self.failedButtonStartX - xMoved;
 
     CGFloat animationDuration = 0.01f;
     
@@ -464,6 +480,7 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     [UIView animateWithDuration:animationDuration animations:^{
         
         self.sideTimestampLabel.frame = sideTimestampFrame;
+        self.failedButton.frame = failedMessageFrame; //might call on nil :O
         
         if(self.bubbleView.type == JSBubbleMessageTypeOutgoing) {
             self.bubbleView.frame = bubbleViewFrame;

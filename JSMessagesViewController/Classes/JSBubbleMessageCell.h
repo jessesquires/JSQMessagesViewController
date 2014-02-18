@@ -66,6 +66,7 @@ extern NSString * const SideTimeAnimateNotification;
 @property (nonatomic) CGFloat sideLabelStartX;
 
 @property (nonatomic) CGFloat bubbleViewStartX;
+@property (nonatomic) CGFloat failedButtonStartX;
 
 #pragma mark - Initialization
 
@@ -87,7 +88,7 @@ extern NSString * const SideTimeAnimateNotification;
                          hasAvatar:(BOOL)hasAvatar
                        hasSubtitle:(BOOL)hasSubtitle
                    reuseIdentifier:(NSString *)reuseIdentifier
-                communicationState:(NSString *)state;
+                communicationState:(NSString *)communicationState;
 
 #pragma mark - Setters
 
@@ -126,6 +127,12 @@ extern NSString * const SideTimeAnimateNotification;
  *  @param subtitle The subtitle text for the cell.
  */
 - (void)setSubtitle:(NSString *)subtitle;
+
+/**
+ * Sets up the failed button for outgoing messages
+ *
+ */
+- (void)setupFailedButton;
 
 #pragma mark - Getters
 

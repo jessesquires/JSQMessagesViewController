@@ -212,7 +212,7 @@
     
     NSString *communicationState = [self deliveryStateOfCommunication:indexPath];
     
-    NSString *CellIdentifier = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d_%@", (int)type, hasTimestamp, hasAvatar, hasSubtitle, notificationDescription];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d_%@_%@", (int)type, hasTimestamp, hasAvatar, hasSubtitle, notificationDescription,communicationState];
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(!cell) {
@@ -239,6 +239,10 @@
     
 	if(hasSubtitle) {
 		[cell setSubtitle:[self.dataSource subtitleForRowAtIndexPath:indexPath]];
+    }
+    
+    if ([communicationState isEqualToString:GFCStateFailed]) {
+        [cell setupFailedButton];
     }
     
     [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath] attributedMsg:[self.dataSource attributedTextForRowAtIndexPath:indexPath]];
@@ -346,6 +350,7 @@
     } else
         return nil;
 }
+
 
 - (void)finishSend
 {
