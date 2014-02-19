@@ -55,6 +55,7 @@
 
 @property (nonatomic) CGFloat startWidth;
 @property (nonatomic) CGFloat subtractFromWidth; 
+@property (nonatomic) CGRect  cachedBubbleFrameRect;
 
 #pragma mark - Initialization
 

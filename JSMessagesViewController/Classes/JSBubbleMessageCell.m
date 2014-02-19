@@ -239,6 +239,7 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
 {
     [super prepareForReuse];
     self.bubbleView.textView.text = nil;
+    self.bubbleView.cachedBubbleFrameRect = CGRectNull;
     self.timestampLabel.text = nil;
     self.sideTimestampLabel.text = nil;
     self.avatarImageView = nil;
@@ -430,15 +431,14 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     CGRect bubbleViewFrame = self.bubbleView.frame;
     bubbleViewFrame.origin.x = self.bubbleViewStartX - xMoved;
 
-    CGFloat animationDuration = 0.01f;
+    BOOL isAnimated = NO;
     
     // this probably means they've "released", so animate it back longer
     if(xMoved == 0.0 && self.sideTimestampLabel.frame.origin.x - sideTimestampFrame.origin.x < -1.0) {
-        animationDuration = 0.3f;
+        isAnimated = YES;
     }
     
-    [UIView animateWithDuration:animationDuration animations:^{
-        
+    dispatch_block_t resizeBlock = ^{
         self.sideTimestampLabel.frame = sideTimestampFrame;
         
         if(self.bubbleView.type == JSBubbleMessageTypeOutgoing) {
@@ -446,7 +446,13 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
         } else if(self.bubbleView.type == JSBubbleMessageTypeNotification) {
             [self.bubbleView assignSubtractFromWidth:xMoved];
         }
-    }];
+    };
+    
+    if(isAnimated) {
+        [UIView animateWithDuration:0.3f animations:resizeBlock];
+    } else {
+        resizeBlock();
+    }
 }
 
 @end

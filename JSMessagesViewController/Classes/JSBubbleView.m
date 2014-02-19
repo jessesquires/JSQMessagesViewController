@@ -46,6 +46,7 @@
 @implementation JSBubbleView
 
 @synthesize font = _font;
+@synthesize cachedBubbleFrameRect;
 
 #pragma mark - Setup
 
@@ -100,6 +101,7 @@
         
         self.startWidth = NAN;
         self.subtractFromWidth = 0.0;
+        self.cachedBubbleFrameRect = CGRectNull;
     }
     return self;
 }
@@ -179,20 +181,23 @@
 
 - (CGRect)bubbleFrame
 {
-    CGSize bubbleSize;
-    
-    if(self.type == JSBubbleMessageTypeNotification) {
-        bubbleSize = [JSBubbleView neededSizeForAttributedText:self.textView.attributedText];
-        bubbleSize.width -= self.subtractFromWidth;
+    if(CGRectIsNull(self.cachedBubbleFrameRect)) {
         
-        return CGRectIntegral((CGRect){kMarginLeftRight, kMarginTop, bubbleSize.width - (kMarginLeftRight*2), bubbleSize.height + (kMarginTop / 1.5)});
+        CGSize bubbleSize;
+        
+        if(self.type == JSBubbleMessageTypeNotification) {
+            bubbleSize = [JSBubbleView neededSizeForAttributedText:self.textView.attributedText];
+            
+            self.cachedBubbleFrameRect = CGRectIntegral((CGRect){kMarginLeftRight, kMarginTop, bubbleSize.width - (kMarginLeftRight*2), bubbleSize.height + (kMarginTop / 1.5)});
+        } else {
+            bubbleSize = [JSBubbleView neededSizeForText:self.textView.text type:self.type];
+            self.cachedBubbleFrameRect = CGRectIntegral(CGRectMake((self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width - kMarginLeftRight : kMarginLeftRight),
+                                         kMarginTop,
+                                         bubbleSize.width,
+                                         bubbleSize.height + (kMarginTop/1.5) ));
+        }
     }
-    
-    bubbleSize = [JSBubbleView neededSizeForText:self.textView.text type:self.type];
-    return CGRectIntegral(CGRectMake((self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width - kMarginLeftRight : kMarginLeftRight),
-                                     kMarginTop,
-                                     bubbleSize.width,
-                                     bubbleSize.height + (kMarginTop/1.5) ));
+    return self.cachedBubbleFrameRect;
 }
 
 #pragma mark - Layout
@@ -201,7 +206,11 @@
 {
     [super layoutSubviews];
     
-    self.bubbleImageView.frame = [self bubbleFrame];
+    CGRect bubbleImageViewFrame = [self bubbleFrame];
+    bubbleImageViewFrame.size.width -= self.subtractFromWidth;
+    
+    self.bubbleImageView.frame = bubbleImageViewFrame;
+    
     if(self.type == JSBubbleMessageTypeNotification) {
         // for arrows
         [self.foregroundImageView setFrame:(CGRect){self.bubbleImageView.frame.size.width - kForegroundImageViewOffset, 22.0, 4.0, 7.0}];
@@ -273,7 +282,7 @@
 
 + (CGSize)neededSizeForAttributedText:(NSAttributedString *)attributedText {
     CGSize attributedTextSize = [JSBubbleView textSizeForAttributedText:attributedText];
-    //yy
+
     return CGSizeMake(attributedTextSize.width, attributedTextSize.height + kPaddingTop + kPaddingBottom);
 }
 
