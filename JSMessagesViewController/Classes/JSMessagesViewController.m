@@ -242,9 +242,9 @@
     [cell setBackgroundColor:tableView.backgroundColor];
     
 #if TARGET_IPHONE_SIMULATOR
-    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeNone;
+//    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeNone;
 #else
-    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeNone;
+//    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeNone;
 #endif
 	
     if([self.delegate respondsToSelector:@selector(configureCell:atIndexPath:)]) {

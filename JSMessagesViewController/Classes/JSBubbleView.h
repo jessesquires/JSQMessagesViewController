@@ -43,7 +43,7 @@
  *
  *  @warning You may customize the propeties of textView, however you *must not* change its `font` property directly. Please use the `JSBubbleView` font property instead.
  */
-@property (weak, nonatomic, readonly) UITextView *textView;
+@property (weak, nonatomic, readonly) UILabel *textView;
 
 /**
  *  The font for the text contained in the bubble view. The default value is `[UIFont systemFontOfSize:16.0f]`.

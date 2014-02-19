@@ -434,7 +434,7 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     
     // this probably means they've "released", so animate it back longer
     if(xMoved == 0.0 && self.sideTimestampLabel.frame.origin.x - sideTimestampFrame.origin.x < -1.0) {
-        animationDuration = 0.5f;
+        animationDuration = 0.3f;
     }
     
     [UIView animateWithDuration:animationDuration animations:^{

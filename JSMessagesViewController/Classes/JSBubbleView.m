@@ -71,19 +71,13 @@
         [self addSubview:bubbleImageView];
         _bubbleImageView = bubbleImageView;
         
-        UITextView *textView = [[UITextView alloc] init];
+        UILabel *textView = [[UILabel alloc]init];
         textView.font = [UIFont systemFontOfSize:16.0f];
         textView.textColor = [UIColor blackColor];
-        textView.editable = NO;
         textView.userInteractionEnabled = YES;
-        textView.showsHorizontalScrollIndicator = NO;
-        textView.showsVerticalScrollIndicator = NO;
-        textView.scrollEnabled = NO;
         textView.backgroundColor = [UIColor clearColor];
-        textView.contentInset = UIEdgeInsetsZero;
-        textView.scrollIndicatorInsets = UIEdgeInsetsZero;
-        textView.contentOffset = CGPointZero;
-        textView.dataDetectorTypes = UIDataDetectorTypeNone;
+        textView.lineBreakMode = NSLineBreakByWordWrapping | NSLineBreakByTruncatingTail;
+        textView.numberOfLines = 0;
         [self addSubview:textView];
         [self bringSubviewToFront:textView];
         _textView = textView;
@@ -92,11 +86,7 @@
         [self addSubview:foregroundImageView];
         [self bringSubviewToFront:foregroundImageView];
         _foregroundImageView = foregroundImageView;
-        
-        if([_textView respondsToSelector:@selector(textContainerInset)]) {
-            _textView.textContainerInset = UIEdgeInsetsMake(8.0f, 4.0f, 2.0f, 4.0f);
-        }
-        
+
         [self addTextViewObservers];
         
         //        NOTE: TODO: textView frame & text inset
@@ -220,6 +210,10 @@
     if(isnan(self.startWidth)) {
         self.startWidth = self.bubbleImageView.frame.size.width;
     }
+    [self layoutTextViewFrame];
+}
+
+-(void)layoutTextViewFrame {
     
     CGFloat textX = self.bubbleImageView.frame.origin.x;
     
@@ -229,10 +223,20 @@
     
     CGRect textFrame = CGRectMake(textX,
                                   self.bubbleImageView.frame.origin.y,
-                                  self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f),
+                                  self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f) - kForegroundImageViewOffset,
                                   self.bubbleImageView.frame.size.height - kMarginTop);
     
-    self.textView.frame = CGRectIntegral(textFrame);
+    // to make up for changing this to UILabel, we add/subtract based on this former line of code that only applied to UITextView:
+    //_textView.textContainerInset = UIEdgeInsetsMake(8.0f, 4.0f, 2.0f, 4.0f);
+    // for the insets...  some values had to change to make it work with UILabel.
+    
+    textFrame.origin.y += 4.0f;
+    textFrame.origin.x += 8.0f;
+    textFrame.size.width -= 4.0f;
+    textFrame.size.height -= 2.0f;
+    
+    [self.textView setFrame:textFrame];
+
 }
 
 #pragma mark - Bubble view
@@ -297,6 +301,9 @@
     CGRect foregroundImageViewFrame = self.bubbleImageView.frame;
     foregroundImageViewFrame.size.width = self.startWidth - self.subtractFromWidth - kForegroundImageViewOffset;
     self.foregroundImageView.frame = foregroundImageViewFrame;
+    
+    [self layoutTextViewFrame];
+    
 }
 
 @end
