@@ -298,7 +298,7 @@
     
     self.bubbleImageView.frame = imageViewFrame;
     
-    CGRect foregroundImageViewFrame = self.bubbleImageView.frame;
+    CGRect foregroundImageViewFrame = self.foregroundImageView.frame;
     foregroundImageViewFrame.size.width = self.startWidth - self.subtractFromWidth - kForegroundImageViewOffset;
     self.foregroundImageView.frame = foregroundImageViewFrame;
     
