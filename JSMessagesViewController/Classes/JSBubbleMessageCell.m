@@ -69,8 +69,6 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
                                                                                              action:@selector(handleLongPressGesture:)];
     [recognizer setMinimumPressDuration:0.4f];
     [self addGestureRecognizer:recognizer];
-    
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleAnimateSideTimeNotification:) name:SideTimeAnimateNotification object:nil];
 }
 
 - (void)configureTimestampLabel
@@ -192,6 +190,7 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     self.bubbleViewStartX = frame.origin.x;
     
     _bubbleView = bubbleView;
+    
 }
 
 #pragma mark - Initialization
@@ -230,7 +229,6 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     _sideTimestampLabel = nil;
     _avatarImageView = nil;
     _subtitleLabel = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - TableViewCell
@@ -238,8 +236,12 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
 - (void)prepareForReuse
 {
     [super prepareForReuse];
+    [self slideInSideTime:0.0 allowAnimation:NO];
+    
     self.bubbleView.textView.text = nil;
     self.bubbleView.cachedBubbleFrameRect = CGRectNull;
+    self.bubbleView.startWidth = NAN;
+    self.bubbleView.subtractFromWidth = 0.0;
     self.timestampLabel.text = nil;
     self.sideTimestampLabel.text = nil;
     self.avatarImageView = nil;
@@ -266,25 +268,28 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
 
 - (void)setTimestamp:(NSDate *)date
 {
+    static NSDateFormatter *todayDateFormatter;
+    static NSDateFormatter *pastWeekAgoDateFormatter;
+    if(!todayDateFormatter) {
+        todayDateFormatter = [[NSDateFormatter alloc]init];
+        [todayDateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [todayDateFormatter setTimeStyle:NSDateFormatterNoStyle];
+        [todayDateFormatter setDoesRelativeDateFormatting:YES];
+    }
+    if(!pastWeekAgoDateFormatter) {
+        pastWeekAgoDateFormatter = [[NSDateFormatter alloc]init];
+        [pastWeekAgoDateFormatter setDateFormat:@"E, MMM d h:mm a"];
+    }
     
     // timestamp label
     NSString *dateString;
     
     if([MHPrettyDate isToday:date]) {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-        
-        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-        [dateFormatter setDoesRelativeDateFormatting:YES];
-        
-        dateString = [NSString stringWithFormat:@"%@ %@", [dateFormatter stringFromDate:date], [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatTodayTimeOnly]];
+        dateString = [NSString stringWithFormat:@"%@ %@", [todayDateFormatter stringFromDate:date], [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatTodayTimeOnly]];
     } else if([MHPrettyDate isWithinWeek:date]) {
         dateString = [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatWithTime withDateStyle:NSDateFormatterMediumStyle];
     } else {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-        [dateFormatter setDateFormat:@"E, MMM d h:mm a"];
-        
-        dateString = [dateFormatter stringFromDate:date];
+        dateString = [pastWeekAgoDateFormatter stringFromDate:date];
     }
     
     self.timestampLabel.text = dateString;
@@ -292,8 +297,11 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
 
 - (void)setSideTimestamp:(NSDate *)date {
     // side label
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"h:mm a"];
+    static NSDateFormatter *dateFormatter;
+    if(!dateFormatter) {
+        dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateFormat:@"h:mm a"];
+    }
     
     self.sideTimestampLabel.text = [dateFormatter stringFromDate:date];
 }
@@ -420,17 +428,16 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
                                                object:nil];
 }
 
--(void)handleAnimateSideTimeNotification:(NSNotification *)notification {
-    CGFloat xMoved = [notification.object floatValue];
+-(void)slideInSideTime:(CGFloat)xMoved allowAnimation:(BOOL)allowAnimation {
     
     [self.layer removeAllAnimations];
-
+    
     CGRect sideTimestampFrame = self.sideTimestampLabel.frame;
     sideTimestampFrame.origin.x = self.sideLabelStartX - xMoved;
-
+    
     CGRect bubbleViewFrame = self.bubbleView.frame;
     bubbleViewFrame.origin.x = self.bubbleViewStartX - xMoved;
-
+    
     BOOL isAnimated = NO;
     
     // this probably means they've "released", so animate it back longer
@@ -448,7 +455,7 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
         }
     };
     
-    if(isAnimated) {
+    if(isAnimated && allowAnimation) {
         [UIView animateWithDuration:0.3f animations:resizeBlock];
     } else {
         resizeBlock();

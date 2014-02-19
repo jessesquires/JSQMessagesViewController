@@ -78,6 +78,8 @@ extern NSString * const SideTimeAnimateNotification;
                        hasSubtitle:(BOOL)hasSubtitle
                    reuseIdentifier:(NSString *)reuseIdentifier;
 
+-(void)slideInSideTime:(CGFloat)xMoved allowAnimation:(BOOL)allowAnimation;
+
 #pragma mark - Setters
 
 /**

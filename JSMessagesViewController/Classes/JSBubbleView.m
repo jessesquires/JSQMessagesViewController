@@ -300,6 +300,8 @@
 
 #pragma mark - Instance methods
 -(void)assignSubtractFromWidth:(CGFloat)value {
+    if(isnan(self.startWidth)) { return; }
+    
     self.subtractFromWidth = value;
 
     CGRect imageViewFrame = self.bubbleImageView.frame;

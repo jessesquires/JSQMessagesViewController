@@ -100,6 +100,8 @@
                                  forKeyPath:@"contentSize"
                                     options:NSKeyValueObservingOptionNew
                                     context:nil];
+
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handlSlideInSideTime:) name:SideTimeAnimateNotification object:nil];
 }
 
 #pragma mark - View lifecycle
@@ -109,6 +111,8 @@
     [super viewDidLoad];
     [self setup];
     [[JSBubbleView appearance] setFont:[UIFont systemFontOfSize:16.0f]];
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -147,6 +151,7 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
     [_messageInputView.textView removeObserver:self forKeyPath:@"contentSize"];
     _delegate = nil;
     _dataSource = nil;
@@ -555,6 +560,15 @@
                                                                 - inputViewFrame.size.height];
                      }
                      completion:nil];
+}
+
+#pragma mark - NSNotification Dragging
+-(void)handlSlideInSideTime:(NSNotification *)notification {
+    CGFloat xMoved = [notification.object floatValue];
+    
+    for(JSBubbleMessageCell *curCell in [self.tableView visibleCells]) {
+        [curCell slideInSideTime:xMoved allowAnimation:YES];
+    }
 }
 
 #pragma mark - Dismissive text view delegate
