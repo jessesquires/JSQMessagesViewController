@@ -87,7 +87,7 @@
         [self addSubview:foregroundImageView];
         [self bringSubviewToFront:foregroundImageView];
         _foregroundImageView = foregroundImageView;
-
+        
         [self addTextViewObservers];
         
         //        NOTE: TODO: textView frame & text inset
@@ -192,9 +192,9 @@
         } else {
             bubbleSize = [JSBubbleView neededSizeForText:self.textView.text type:self.type];
             self.cachedBubbleFrameRect = CGRectIntegral(CGRectMake((self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width - kMarginLeftRight : kMarginLeftRight),
-                                         kMarginTop,
-                                         bubbleSize.width,
-                                         bubbleSize.height + (kMarginTop/1.5) ));
+                                                                   kMarginTop,
+                                                                   bubbleSize.width,
+                                                                   bubbleSize.height + (kMarginTop/1.5) ));
         }
     }
     return self.cachedBubbleFrameRect;
@@ -241,11 +241,11 @@
     
     textFrame.origin.y += 4.0f;
     textFrame.origin.x += 8.0f;
-    textFrame.size.width -= 4.0f;
+    textFrame.size.width -= 8.0f;
     textFrame.size.height -= 2.0f;
     
     [self.textView setFrame:textFrame];
-
+    
 }
 
 #pragma mark - Bubble view
@@ -255,7 +255,7 @@
     CGFloat maxWidth = [UIScreen mainScreen].applicationFrame.size.width * .70f;
     
     CGFloat maxHeight = MAX([JSMessageTextView numberOfLinesForMessage:txt],
-                         [txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
+                            [txt js_numberOfLines]) * [JSMessageInputView textViewLineHeight];
     maxHeight += kJSAvatarImageSize;
     
     CGSize stringSize = [txt sizeWithFont:[[JSBubbleView appearance] font]
@@ -282,7 +282,7 @@
 
 + (CGSize)neededSizeForAttributedText:(NSAttributedString *)attributedText {
     CGSize attributedTextSize = [JSBubbleView textSizeForAttributedText:attributedText];
-
+    
     return CGSizeMake(attributedTextSize.width, attributedTextSize.height + kPaddingTop + kPaddingBottom);
 }
 
@@ -303,7 +303,7 @@
     if(isnan(self.startWidth)) { return; }
     
     self.subtractFromWidth = value;
-
+    
     CGRect imageViewFrame = self.bubbleImageView.frame;
     imageViewFrame.size.width = self.startWidth - self.subtractFromWidth;
     
