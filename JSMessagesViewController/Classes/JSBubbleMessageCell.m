@@ -26,6 +26,7 @@ static const CGFloat kFailedCommunicationMarginAddition = 24.0f;
 CGFloat const kFailedImageSize = 22.0f;
 
 NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
+NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
 
 @interface JSBubbleMessageCell()
 
@@ -142,7 +143,16 @@ NSString * const SideTimeAnimateNotification = @"SideTimeAnimateNotification";
     [self.contentView addSubview:failedButton];
     _failedButton = failedButton;
     
+    [failedButton addTarget:self action:@selector(retryPressed:) forControlEvents:UIControlEventTouchUpInside];    
 }
+
+- (void)retryPressed:(id)sender {
+    self.failedButton.alpha = .3;
+    self.failedButton.userInteractionEnabled = NO;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:GFNotificationRetryMessage object:self.uniqueID];
+}
+
 
 - (void)configureSubtitleLabelForMessageType:(JSBubbleMessageType)type
 {

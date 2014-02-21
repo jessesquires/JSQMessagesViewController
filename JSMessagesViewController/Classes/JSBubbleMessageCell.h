@@ -20,6 +20,7 @@ static NSString *GFCStateRead = @"Read";
 static NSString *GFCStateFailed = @"Failed";
 
 extern NSString * const SideTimeAnimateNotification;
+FOUNDATION_EXPORT NSString *const GFNotificationRetryMessage;
 
 /**
  *  The `JSBubbleMessageCell` class defines the attributes and behavior of the cells that appear in `JSMessagesViewController`. This class includes properties and methods for setting and managing cell content.
@@ -67,6 +68,11 @@ extern NSString * const SideTimeAnimateNotification;
 
 @property (nonatomic) CGFloat bubbleViewStartX;
 @property (nonatomic) CGFloat failedButtonStartX;
+
+/**
+ *  ID of the message associated with this cell.  If retry is needed on this message, GFNotificationRetryMessage notification will be sent with this ID
+ */
+@property (nonatomic, strong) NSString *uniqueID;
 
 #pragma mark - Initialization
 
