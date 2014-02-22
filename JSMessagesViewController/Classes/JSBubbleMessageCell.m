@@ -147,9 +147,6 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
 }
 
 - (void)retryPressed:(id)sender {
-    self.failedButton.alpha = .3;
-    self.failedButton.userInteractionEnabled = NO;
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:GFNotificationRetryMessage object:self.uniqueID];
 }
 
