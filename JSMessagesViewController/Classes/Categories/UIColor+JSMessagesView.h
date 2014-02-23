@@ -16,18 +16,6 @@
 
 @interface UIColor (JSMessagesView)
 
-#pragma mark - Colors
-
-/**
- *  @return A color object containing the RGB values for the iOS 6 messages app background color.
- */
-+ (UIColor *)js_backgroundColorClassic;
-
-/**
- *  @return A color object containing the RGB values iOS 6 messages app timestamp text color.
- */
-+ (UIColor *)js_messagesTimestampColorClassic;
-
 #pragma mark - Bubble colors
 
 /**

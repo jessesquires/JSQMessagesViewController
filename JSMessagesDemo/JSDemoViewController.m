@@ -35,8 +35,6 @@
     self.messageInputView.textView.placeHolder = @"New Message";
     self.sender = @"Jobs";
     
-    [self setBackgroundColor:[UIColor whiteColor]];
-    
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      [[JSMessage alloc] initWithText:@"JSMessagesViewController is simple and easy to use." sender:kSubtitleJobs date:[NSDate distantPast]],
                      [[JSMessage alloc] initWithText:@"It's highly customizable." sender:kSubtitleWoz date:[NSDate distantPast]],
@@ -52,9 +50,9 @@
     }
     
     self.avatars = [[NSDictionary alloc] initWithObjectsAndKeys:
-                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-jobs" croppedToCircle:YES], kSubtitleJobs,
-                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-woz" croppedToCircle:YES], kSubtitleWoz,
-                    [JSAvatarImageFactory avatarImageNamed:@"demo-avatar-cook" croppedToCircle:YES], kSubtitleCook,
+                    [JSAvatarImageFactory avatarImage:[UIImage imageNamed:@"demo-avatar-jobs"] croppedToCircle:YES], kSubtitleJobs,
+                    [JSAvatarImageFactory avatarImage:[UIImage imageNamed:@"demo-avatar-woz"] croppedToCircle:YES], kSubtitleWoz,
+                    [JSAvatarImageFactory avatarImage:[UIImage imageNamed:@"demo-avatar-cook"] croppedToCircle:YES], kSubtitleCook,
                     nil];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
@@ -120,11 +118,6 @@
                                                       color:[UIColor js_bubbleBlueColor]];
 }
 
-- (JSMessageInputViewStyle)inputViewStyle
-{
-    return JSMessageInputViewStyleFlat;
-}
-
 #pragma mark - Messages view delegate: OPTIONAL
 
 - (BOOL)shouldDisplayTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -145,19 +138,10 @@
     
         if ([cell.bubbleView.textView respondsToSelector:@selector(linkTextAttributes)]) {
             NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
-            [attrs setValue:[UIColor blueColor] forKey:UITextAttributeTextColor];
+            [attrs setValue:[UIColor blueColor] forKey:NSForegroundColorAttributeName];
             
             cell.bubbleView.textView.linkTextAttributes = attrs;
         }
-    }
-    
-    if (cell.timestampLabel) {
-        cell.timestampLabel.textColor = [UIColor lightGrayColor];
-        cell.timestampLabel.shadowOffset = CGSizeZero;
-    }
-    
-    if (cell.subtitleLabel) {
-        cell.subtitleLabel.textColor = [UIColor lightGrayColor];
     }
     
     #if TARGET_IPHONE_SIMULATOR

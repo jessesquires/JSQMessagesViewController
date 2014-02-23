@@ -16,30 +16,9 @@
 #import "JSMessageTextView.h"
 
 /**
- *  The appearance style of the input bar view for composing a new message.
- */
-typedef NS_ENUM(NSUInteger, JSMessageInputViewStyle) {
-    /**
-     *  An input view style that has the appearance as seen in iOS 6 and before.
-     */
-    JSMessageInputViewStyleClassic,
-    /**
-     *  An input view style that has the appearance as seen in iOS 7 and later.
-     */
-    JSMessageInputViewStyleFlat
-};
-
-
-/**
  *  An instance of `JSMessageInputView` defines the input toolbar for composing a new message that is to be displayed above the keyboard.
  */
 @interface JSMessageInputView : UIImageView
-
-/**
- *  Returns the style appearance for the input view.
- *  @see JSMessageInputViewStyle.
- */
-@property (assign, nonatomic, readonly) JSMessageInputViewStyle style;
 
 /**
  *  Returns the textView into which a new message is composed. This property is never `nil`.
@@ -66,7 +45,6 @@ typedef NS_ENUM(NSUInteger, JSMessageInputViewStyle) {
  *  @return An initialized `JSMessageInputView` object or `nil` if the object could not be successfully initialized.
  */
 - (instancetype)initWithFrame:(CGRect)frame
-                        style:(JSMessageInputViewStyle)style
                      delegate:(id<UITextViewDelegate, JSDismissiveTextViewDelegate>)delegate
          panGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer;
 

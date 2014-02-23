@@ -56,8 +56,7 @@
     
 	_isUserScrolling = NO;
     
-    JSMessageInputViewStyle inputViewStyle = [self.delegate inputViewStyle];
-    CGFloat inputViewHeight = (inputViewStyle == JSMessageInputViewStyleFlat) ? 45.0f : 40.0f;
+    CGFloat inputViewHeight = 45.0f;
     
 	JSMessageTableView *tableView = [[JSMessageTableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
 	tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -68,7 +67,7 @@
     
     [self setTableViewInsetsWithBottomValue:inputViewHeight];
     
-    [self setBackgroundColor:[UIColor js_backgroundColorClassic]];
+    [self setBackgroundColor:[UIColor whiteColor]];
     
     CGRect inputFrame = CGRectMake(0.0f,
                                    self.view.frame.size.height - inputViewHeight,
@@ -83,7 +82,6 @@
     UIPanGestureRecognizer *pan = allowsPan ? _tableView.panGestureRecognizer : nil;
     
     JSMessageInputView *inputView = [[JSMessageInputView alloc] initWithFrame:inputFrame
-                                                                        style:inputViewStyle
                                                                      delegate:self
                                                          panGestureRecognizer:pan];
     

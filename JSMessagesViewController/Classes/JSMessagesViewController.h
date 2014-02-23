@@ -60,14 +60,6 @@
 - (UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type
                        forRowAtIndexPath:(NSIndexPath *)indexPath;
 
-/**
- *  Asks the delegate for the input view style.
- *
- *  @return A constant describing the input view style.
- *  @see JSMessageInputViewStyle.
- */
-- (JSMessageInputViewStyle)inputViewStyle;
-
 @optional
 
 /**
