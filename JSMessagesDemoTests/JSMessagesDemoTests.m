@@ -13,6 +13,8 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "JSMessagesViewController.h"
+
 
 @interface JSMessagesDemoTests : XCTestCase
 
@@ -30,6 +32,12 @@
 - (void)tearDown
 {
     [super tearDown];
+}
+
+- (void)testInit
+{
+    JSMessagesViewController *vc = [[JSMessagesViewController alloc] init];
+    XCTAssertNotNil(vc, @"View controller should not be nil");
 }
 
 @end
