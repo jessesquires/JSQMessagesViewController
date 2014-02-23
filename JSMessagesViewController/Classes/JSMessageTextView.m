@@ -20,7 +20,9 @@
 
 - (void)setup;
 
-- (void)didReceiveTextDidChangeNotification:(NSNotification *)notification;
+- (void)addTextViewNotificationObservers;
+- (void)removeTextViewNotificationObservers;
+- (void)didReceiveTextViewNotification:(NSNotification *)notification;
 
 @end
 
@@ -32,11 +34,6 @@
 
 - (void)setup
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didReceiveTextDidChangeNotification:)
-                                                 name:UITextViewTextDidChangeNotification
-                                               object:self];
-    
     _placeHolderTextColor = [UIColor lightGrayColor];
     
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -52,9 +49,11 @@
     self.keyboardType = UIKeyboardTypeDefault;
     self.returnKeyType = UIReturnKeyDefault;
     self.textAlignment = NSTextAlignmentLeft;
+    
+    [self addTextViewNotificationObservers];
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -63,7 +62,7 @@
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
@@ -74,11 +73,9 @@
 
 - (void)dealloc
 {
+    [self removeTextViewNotificationObservers];
     _placeHolder = nil;
     _placeHolderTextColor = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UITextViewTextDidChangeNotification
-                                                  object:self];
 }
 
 #pragma mark - Setters
@@ -134,21 +131,9 @@
     [self setNeedsDisplay];
 }
 
-- (void)insertText:(NSString *)text
-{
-    [super insertText:text];
-    [self setNeedsDisplay];
-}
-
 - (void)setAttributedText:(NSAttributedString *)attributedText
 {
     [super setAttributedText:attributedText];
-    [self setNeedsDisplay];
-}
-
-- (void)setContentInset:(UIEdgeInsets)contentInset
-{
-    [super setContentInset:contentInset];
     [self setNeedsDisplay];
 }
 
@@ -199,7 +184,40 @@
 
 #pragma mark - Notifications
 
-- (void)didReceiveTextDidChangeNotification:(NSNotification *)notification
+- (void)addTextViewNotificationObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveTextViewNotification:)
+                                                 name:UITextViewTextDidChangeNotification
+                                               object:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveTextViewNotification:)
+                                                 name:UITextViewTextDidBeginEditingNotification
+                                               object:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveTextViewNotification:)
+                                                 name:UITextViewTextDidEndEditingNotification
+                                               object:self];
+}
+
+- (void)removeTextViewNotificationObservers
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UITextViewTextDidChangeNotification
+                                                  object:self];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UITextViewTextDidBeginEditingNotification
+                                                  object:self];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UITextViewTextDidEndEditingNotification
+                                                  object:self];
+}
+
+- (void)didReceiveTextViewNotification:(NSNotification *)notification
 {
     [self setNeedsDisplay];
 }
