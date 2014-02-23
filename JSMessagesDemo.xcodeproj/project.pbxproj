@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6404600EC231419EB620AF48 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFF9601294443728D9481E0 /* libPods.a */; };
+		883F2B2818BA99E6003BC4B5 /* JSQMessages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883F2B2718BA99E6003BC4B5 /* JSQMessages.storyboard */; };
 		885BAC4E185421C8004DCD34 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 885BAC4D185421C8004DCD34 /* QuartzCore.framework */; };
 		885BAC4F185421D4004DCD34 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 885BAC4D185421C8004DCD34 /* QuartzCore.framework */; };
 		88A3FB4A182E079E00705327 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88A3FB49182E079E00705327 /* Foundation.framework */; };
@@ -84,6 +85,7 @@
 
 /* Begin PBXFileReference section */
 		6AFF9601294443728D9481E0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		883F2B2718BA99E6003BC4B5 /* JSQMessages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JSQMessages.storyboard; sourceTree = "<group>"; };
 		885BAC4D185421C8004DCD34 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		88A3FB46182E079E00705327 /* JSMessagesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSMessagesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A3FB49182E079E00705327 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -184,9 +186,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		883F2B2518BA99E6003BC4B5 /* JSQMessagesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				883F2B2618BA99E6003BC4B5 /* Views */,
+			);
+			path = JSQMessagesViewController;
+			sourceTree = "<group>";
+		};
+		883F2B2618BA99E6003BC4B5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				883F2B2718BA99E6003BC4B5 /* JSQMessages.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		88A3FB3D182E079D00705327 = {
 			isa = PBXGroup;
 			children = (
+				883F2B2518BA99E6003BC4B5 /* JSQMessagesViewController */,
 				88A3FC19182E0EA000705327 /* JSMessagesViewController */,
 				88A3FC13182E0B8C00705327 /* JSMessagesViewController.podspec */,
 				88A3FC14182E0B8C00705327 /* LICENSE.txt */,
@@ -465,6 +484,7 @@
 				88A6AD111839FE95000F56DA /* bubble-min@2x.png in Resources */,
 				88A6AD141839FE95000F56DA /* bubble-stroked.png in Resources */,
 				88A6AD201839FFBB000F56DA /* button-photo@2x.png in Resources */,
+				883F2B2818BA99E6003BC4B5 /* JSQMessages.storyboard in Resources */,
 				88A6AD0F1839FE95000F56DA /* bubble-min-tailless@2x.png in Resources */,
 				88A6AD101839FE95000F56DA /* bubble-min.png in Resources */,
 				88A6AD1F1839FFBB000F56DA /* button-photo.png in Resources */,
