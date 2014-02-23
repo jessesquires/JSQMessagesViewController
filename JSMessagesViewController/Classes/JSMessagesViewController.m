@@ -105,11 +105,6 @@
     
     [self.view addSubview:inputView];
     _messageInputView = inputView;
-    
-    [_messageInputView.textView addObserver:self
-                                 forKeyPath:@"contentSize"
-                                    options:NSKeyValueObservingOptionNew
-                                    context:nil];
 }
 
 #pragma mark - View lifecycle
@@ -136,6 +131,11 @@
 											 selector:@selector(handleWillHideKeyboardNotification:)
 												 name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    [self.messageInputView.textView addObserver:self
+                                     forKeyPath:@"contentSize"
+                                        options:NSKeyValueObservingOptionNew
+                                        context:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -154,6 +154,8 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
+    [self.messageInputView.textView removeObserver:self forKeyPath:@"contentSize"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -164,7 +166,6 @@
 
 - (void)dealloc
 {
-    [_messageInputView.textView removeObserver:self forKeyPath:@"contentSize"];
     _delegate = nil;
     _dataSource = nil;
     _tableView = nil;
@@ -517,18 +518,6 @@
 {
     CGRect inputViewFrame = self.messageInputView.frame;
     inputViewFrame.origin.y = self.view.bounds.size.height - inputViewFrame.size.height;
-    self.messageInputView.frame = inputViewFrame;
-}
-
-- (void)keyboardWillSnapBackToPoint:(CGPoint)point
-{
-    if (!self.tabBarController.tabBar.hidden){
-        return;
-    }
-	
-    CGRect inputViewFrame = self.messageInputView.frame;
-    CGPoint keyboardOrigin = [self.view convertPoint:point fromView:nil];
-    inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
     self.messageInputView.frame = inputViewFrame;
 }
 
