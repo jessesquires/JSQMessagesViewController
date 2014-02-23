@@ -1,9 +1,15 @@
 //
-//  JSMessagesDemoTests.m
-//  JSMessagesDemoTests
+//  Created by Jesse Squires
+//  http://www.hexedbits.com
 //
-//  Created by Jesse Squires on 11/8/13.
-//  Copyright (c) 2013 Hexed Bits. All rights reserved.
+//
+//  Documentation
+//  http://cocoadocs.org/docsets/JSMessagesViewController
+//
+//
+//  The MIT License
+//  Copyright (c) 2013 Jesse Squires
+//  http://opensource.org/licenses/MIT
 //
 
 #import <XCTest/XCTest.h>
