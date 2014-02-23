@@ -276,8 +276,14 @@
     id<JSMessageData> message = [self.dataSource messageForRowAtIndexPath:indexPath];
     UIImageView *avatar = [self.dataSource avatarImageViewForRowAtIndexPath:indexPath sender:[message sender]];
     
+    BOOL displayTimestamp = YES;
+    if ([self.delegate respondsToSelector:@selector(shouldDisplayTimestampForRowAtIndexPath:)]) {
+        displayTimestamp = [self.delegate shouldDisplayTimestampForRowAtIndexPath:indexPath];
+    }
+    
     return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithMessage:message
-                                                                     avatar:avatar != nil];
+                                                                     avatar:avatar != nil
+                                                           displayTimestamp:displayTimestamp];
 }
 
 #pragma mark - Messages view controller
