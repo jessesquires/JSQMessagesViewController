@@ -62,7 +62,15 @@
                                                                                            action:@selector(buttonPressed:)];
 }
 
-- (void)buttonPressed:(UIButton *)sender
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self scrollToBottomAnimated:NO];
+}
+
+#pragma mark - Actions
+
+- (void)buttonPressed:(UIBarButtonItem *)sender
 {
     // Testing pushing/popping messages view
     JSDemoViewController *vc = [[JSDemoViewController alloc] initWithNibName:nil bundle:nil];
@@ -155,9 +163,7 @@
     #if TARGET_IPHONE_SIMULATOR
         cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeNone;
     #else
-        if (!cell.hidden) {
-            cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
-        }
+        cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
     #endif
 }
 

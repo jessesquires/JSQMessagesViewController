@@ -120,8 +120,6 @@
 {
     [super viewWillAppear:animated];
     
-    [self scrollToBottomAnimated:NO];
-    
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(handleWillShowKeyboardNotification:)
 												 name:UIKeyboardWillShowNotification
@@ -136,13 +134,6 @@
                                      forKeyPath:@"contentSize"
                                         options:NSKeyValueObservingOptionNew
                                         context:nil];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self scrollToBottomAnimated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

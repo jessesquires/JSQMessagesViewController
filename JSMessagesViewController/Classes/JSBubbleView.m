@@ -79,7 +79,6 @@
         textView.contentInset = UIEdgeInsetsZero;
         textView.scrollIndicatorInsets = UIEdgeInsetsZero;
         textView.contentOffset = CGPointZero;
-        textView.dataDetectorTypes = UIDataDetectorTypeNone;
         [self addSubview:textView];
         [self bringSubviewToFront:textView];
         _textView = textView;
