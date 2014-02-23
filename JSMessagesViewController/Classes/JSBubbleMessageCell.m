@@ -273,11 +273,11 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 #pragma mark - Class methods
 
 + (CGFloat)neededHeightForBubbleMessageCellWithMessage:(id<JSMessageData>)message
-                                                avatar:(BOOL)hasAvatar
-                                      displayTimestamp:(BOOL)displayTimestamp
+                                        displaysAvatar:(BOOL)displaysAvatar
+                                     displaysTimestamp:(BOOL)displaysTimestamp
 {
-    CGFloat timestampHeight = displayTimestamp ? kJSTimeStampLabelHeight : 0.0f;
-    CGFloat avatarHeight = hasAvatar ? kJSAvatarImageSize : 0.0f;
+    CGFloat timestampHeight = displaysTimestamp ? kJSTimeStampLabelHeight : 0.0f;
+    CGFloat avatarHeight = displaysAvatar ? kJSAvatarImageSize : 0.0f;
 	CGFloat subtitleHeight = [message sender] ? kJSSubtitleLabelHeight : 0.0f;
     
     CGFloat subviewHeights = timestampHeight + subtitleHeight + kJSLabelPadding;

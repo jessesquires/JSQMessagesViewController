@@ -282,8 +282,8 @@
     }
     
     return [JSBubbleMessageCell neededHeightForBubbleMessageCellWithMessage:message
-                                                                     avatar:avatar != nil
-                                                           displayTimestamp:displayTimestamp];
+                                                             displaysAvatar:avatar != nil
+                                                          displaysTimestamp:displayTimestamp];
 }
 
 #pragma mark - Messages view controller
