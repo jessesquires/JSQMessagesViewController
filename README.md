@@ -75,6 +75,15 @@ A messages UI for iPhone and iPad.
 }
 ````
 
+````objective-c
+// Scroll to the most recent message before view appears
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self scrollToBottomAnimated:NO];
+}
+````
+
 3. Implement the `JSMessagesViewDelegate` protocol
 4. Implement the `JSMessagesViewDataSource` protocol
 5. Implement `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section` from the [`UITableViewDataSource` protocol](https://developer.apple.com/library/ios/documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html).
@@ -95,6 +104,7 @@ Support the developement of this **free**, open-source control! via [Square Cash
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$5&body=Thanks for developing JSMessagesViewController!">Send $5</a> <em>This control is great!</em></h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$10&body=Thanks for developing JSMessagesViewController!">Send $10</a> <em>This totally saved me time!</em></h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$25&body=Thanks for developing JSMessagesViewController!">Send $25</a> <em>I want new features!</em></h4>
+<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$50&body=Thanks for developing JSMessagesViewController!">Send $50</a> <em>I love this project!</em></h4>
 
 ## Customization
 
@@ -104,6 +114,8 @@ Support the developement of this **free**, open-source control! via [Square Cash
 - (void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     if ([cell messageType] == JSBubbleMessageTypeOutgoing) {
+
+        // Customize any UITextView properties
         cell.bubbleView.textView.textColor = [UIColor whiteColor];
     
         if ([cell.bubbleView.textView respondsToSelector:@selector(linkTextAttributes)]) {
@@ -114,6 +126,7 @@ Support the developement of this **free**, open-source control! via [Square Cash
         }
     }
     
+    // Customize any UILabel properties for timestamps or subtitles
     if (cell.timestampLabel) {
         cell.timestampLabel.textColor = [UIColor lightGrayColor];
         cell.timestampLabel.shadowOffset = CGSizeZero;
@@ -122,6 +135,9 @@ Support the developement of this **free**, open-source control! via [Square Cash
     if (cell.subtitleLabel) {
         cell.subtitleLabel.textColor = [UIColor lightGrayColor];
     }
+
+    // Enable data detectors
+    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
 }
 ````
 
