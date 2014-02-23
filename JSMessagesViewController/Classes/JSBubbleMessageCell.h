@@ -98,12 +98,14 @@
 /**
  *  Computes and returns the minimum necessary height of a `JSBubbleMessageCell` needed to display its contents.
  *
- *  @param message   An object that conforms to the `JSMessageData` protocol to display in the cell.
- *  @param hasAvatar A boolean value indicating whether or not the cell has an avatar.
+ *  @param message          An object that conforms to the `JSMessageData` protocol to display in the cell.
+ *  @param hasAvatar        A boolean value indicating whether or not the cell has an avatar.
+ *  @param displayTimestamp A boolean value indicating whether or not the timestamp is displayed in the cell.
  *
  *  @return The height required for the frame of the cell in order for the cell to display the entire contents of its subviews.
  */
 + (CGFloat)neededHeightForBubbleMessageCellWithMessage:(id<JSMessageData>)message
-                                                avatar:(BOOL)hasAvatar;
+                                                avatar:(BOOL)hasAvatar
+                                      displayTimestamp:(BOOL)displayTimestamp;
 
 @end
