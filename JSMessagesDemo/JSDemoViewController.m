@@ -151,6 +151,14 @@
     if (cell.subtitleLabel) {
         cell.subtitleLabel.textColor = [UIColor lightGrayColor];
     }
+    
+    #if TARGET_IPHONE_SIMULATOR
+        cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeNone;
+    #else
+        if (!cell.hidden) {
+            cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
+        }
+    #endif
 }
 
 //  *** Implement to use a custom send button
