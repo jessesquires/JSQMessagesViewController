@@ -105,11 +105,6 @@
     
     [self.view addSubview:inputView];
     _messageInputView = inputView;
-    
-    [_messageInputView.textView addObserver:self
-                                 forKeyPath:@"contentSize"
-                                    options:NSKeyValueObservingOptionNew
-                                    context:nil];
 }
 
 #pragma mark - View lifecycle
@@ -125,8 +120,6 @@
 {
     [super viewWillAppear:animated];
     
-    [self scrollToBottomAnimated:NO];
-    
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(handleWillShowKeyboardNotification:)
 												 name:UIKeyboardWillShowNotification
@@ -136,13 +129,11 @@
 											 selector:@selector(handleWillHideKeyboardNotification:)
 												 name:UIKeyboardWillHideNotification
                                                object:nil];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
     
-    [self scrollToBottomAnimated:YES];
+    [self.messageInputView.textView addObserver:self
+                                     forKeyPath:@"contentSize"
+                                        options:NSKeyValueObservingOptionNew
+                                        context:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -154,6 +145,8 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
+    [self.messageInputView.textView removeObserver:self forKeyPath:@"contentSize"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -164,7 +157,6 @@
 
 - (void)dealloc
 {
-    [_messageInputView.textView removeObserver:self forKeyPath:@"contentSize"];
     _delegate = nil;
     _dataSource = nil;
     _tableView = nil;
@@ -255,12 +247,6 @@
     [cell setMessage:message];
     [cell setAvatarImageView:avatar];
     [cell setBackgroundColor:tableView.backgroundColor];
-    
-	#if TARGET_IPHONE_SIMULATOR
-        cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeNone;
-	#else
-		cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
-	#endif
 	
     if ([self.delegate respondsToSelector:@selector(configureCell:atIndexPath:)]) {
         [self.delegate configureCell:cell atIndexPath:indexPath];
@@ -523,18 +509,6 @@
 {
     CGRect inputViewFrame = self.messageInputView.frame;
     inputViewFrame.origin.y = self.view.bounds.size.height - inputViewFrame.size.height;
-    self.messageInputView.frame = inputViewFrame;
-}
-
-- (void)keyboardWillSnapBackToPoint:(CGPoint)point
-{
-    if (!self.tabBarController.tabBar.hidden){
-        return;
-    }
-	
-    CGRect inputViewFrame = self.messageInputView.frame;
-    CGPoint keyboardOrigin = [self.view convertPoint:point fromView:nil];
-    inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
     self.messageInputView.frame = inputViewFrame;
 }
 
