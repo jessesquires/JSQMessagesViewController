@@ -39,16 +39,6 @@
 - (void)didSendText:(NSString *)text fromSender:(NSString *)sender onDate:(NSDate *)date;
 
 /**
- *  Asks the delegate for the message type for the row at the specified index path.
- *
- *  @param indexPath The index path of the row to be displayed.
- *
- *  @return A constant describing the message type. 
- *  @see JSBubbleMessageType.
- */
-- (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath;
-
-/**
  *  Asks the delegate for the bubble image view for the row at the specified index path with the specified type.
  *
  *  @param type      The type of message for the row located at indexPath.

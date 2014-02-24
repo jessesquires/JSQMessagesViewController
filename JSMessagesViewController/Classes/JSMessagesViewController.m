@@ -207,12 +207,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
+    id<JSMessageData> message = [self.dataSource messageForRowAtIndexPath:indexPath];
+    
+    JSBubbleMessageType type = [[message sender] isEqualToString:self.sender] ? JSBubbleMessageTypeOutgoing : JSBubbleMessageTypeIncoming;
     
     UIImageView *bubbleImageView = [self.delegate bubbleImageViewWithType:type
                                                         forRowAtIndexPath:indexPath];
-    
-    id<JSMessageData> message = [self.dataSource messageForRowAtIndexPath:indexPath];
     
     UIImageView *avatar = [self.dataSource avatarImageViewForRowAtIndexPath:indexPath sender:[message sender]];
     

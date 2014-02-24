@@ -19,6 +19,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+//    JSDemoViewController *vc = [JSDemoViewController new];
+//	UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+//    
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//	self.window.rootViewController = nc;
+//	[self.window makeKeyAndVisible];
+    
     return YES;
 }
 

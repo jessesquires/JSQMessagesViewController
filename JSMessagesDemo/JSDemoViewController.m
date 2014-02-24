@@ -101,11 +101,6 @@
     [self scrollToBottomAnimated:YES];
 }
 
-- (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return (indexPath.row % 2) ? JSBubbleMessageTypeIncoming : JSBubbleMessageTypeOutgoing;
-}
-
 - (UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type
                        forRowAtIndexPath:(NSIndexPath *)indexPath
 {
