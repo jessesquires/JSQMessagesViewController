@@ -38,19 +38,30 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="geh-v5-qov">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="iOt-Ku-W4J"/>
+                                </constraints>
+                                <items/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Aal-vf-sDR" firstAttribute="leading" secondItem="hDT-ph-vY0" secondAttribute="leading" id="E0N-Nz-vcx"/>
                             <constraint firstItem="qcr-Rh-jiJ" firstAttribute="top" secondItem="Aal-vf-sDR" secondAttribute="bottom" id="Ggs-Hw-qcP"/>
+                            <constraint firstItem="geh-v5-qov" firstAttribute="leading" secondItem="hDT-ph-vY0" secondAttribute="leading" id="Lre-uQ-ua6"/>
                             <constraint firstItem="Aal-vf-sDR" firstAttribute="top" secondItem="hDT-ph-vY0" secondAttribute="top" id="NC1-3n-chX"/>
+                            <constraint firstItem="qcr-Rh-jiJ" firstAttribute="top" secondItem="geh-v5-qov" secondAttribute="bottom" id="W1O-JA-fCo"/>
                             <constraint firstAttribute="trailing" secondItem="Aal-vf-sDR" secondAttribute="trailing" id="gsB-Ao-Yt0"/>
+                            <constraint firstAttribute="trailing" secondItem="geh-v5-qov" secondAttribute="trailing" id="y0V-QE-58r"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dXh-Kd-6zX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="670" y="333"/>
+            <point key="canvasLocation" x="837" y="228"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
