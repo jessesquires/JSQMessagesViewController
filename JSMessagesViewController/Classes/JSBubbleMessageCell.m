@@ -13,7 +13,7 @@
 //
 
 #import "JSBubbleMessageCell.h"
-
+#import "JSBubbleView.h"
 #import "JSAvatarImageFactory.h"
 #import "UIColor+JSMessagesView.h"
 #import <MHPrettyDate/MHPrettyDate.h>
@@ -73,8 +73,6 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
                                                                                              action:@selector(handleLongPressGesture:)];
     [recognizer setMinimumPressDuration:0.4f];
     [self addGestureRecognizer:recognizer];
-    
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleAnimateSideTimeNotification:) name:SideTimeAnimateNotification object:nil];
 }
 
 - (void)configureTimestampLabel
@@ -224,6 +222,7 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
     }
     
     _bubbleView = bubbleView;
+    
 }
 
 #pragma mark - Initialization
@@ -273,7 +272,12 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
 - (void)prepareForReuse
 {
     [super prepareForReuse];
+    [self slideInSideTime:0.0 allowAnimation:NO];
+    
     self.bubbleView.textView.text = nil;
+    self.bubbleView.cachedBubbleFrameRect = CGRectNull;
+    self.bubbleView.startWidth = NAN;
+    self.bubbleView.subtractFromWidth = 0.0;
     self.timestampLabel.text = nil;
     self.sideTimestampLabel.text = nil;
     self.avatarImageView = nil;
@@ -302,25 +306,28 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
 
 - (void)setTimestamp:(NSDate *)date
 {
+    static NSDateFormatter *todayDateFormatter;
+    static NSDateFormatter *pastWeekAgoDateFormatter;
+    if(!todayDateFormatter) {
+        todayDateFormatter = [[NSDateFormatter alloc]init];
+        [todayDateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [todayDateFormatter setTimeStyle:NSDateFormatterNoStyle];
+        [todayDateFormatter setDoesRelativeDateFormatting:YES];
+    }
+    if(!pastWeekAgoDateFormatter) {
+        pastWeekAgoDateFormatter = [[NSDateFormatter alloc]init];
+        [pastWeekAgoDateFormatter setDateFormat:@"E, MMM d h:mm a"];
+    }
     
     // timestamp label
     NSString *dateString;
     
     if([MHPrettyDate isToday:date]) {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-        
-        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-        [dateFormatter setDoesRelativeDateFormatting:YES];
-        
-        dateString = [NSString stringWithFormat:@"%@ %@", [dateFormatter stringFromDate:date], [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatTodayTimeOnly]];
+        dateString = [NSString stringWithFormat:@"%@ %@", [todayDateFormatter stringFromDate:date], [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatTodayTimeOnly]];
     } else if([MHPrettyDate isWithinWeek:date]) {
         dateString = [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatWithTime withDateStyle:NSDateFormatterMediumStyle];
     } else {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-        [dateFormatter setDateFormat:@"E, MMM d h:mm a"];
-        
-        dateString = [dateFormatter stringFromDate:date];
+        dateString = [pastWeekAgoDateFormatter stringFromDate:date];
     }
     
     self.timestampLabel.text = dateString;
@@ -328,8 +335,11 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
 
 - (void)setSideTimestamp:(NSDate *)date {
     // side label
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"h:mm a"];
+    static NSDateFormatter *dateFormatter;
+    if(!dateFormatter) {
+        dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateFormat:@"h:mm a"];
+    }
     
     self.sideTimestampLabel.text = [dateFormatter stringFromDate:date];
 }
@@ -463,36 +473,39 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
                                                object:nil];
 }
 
--(void)handleAnimateSideTimeNotification:(NSNotification *)notification {
-    CGFloat xMoved = [notification.object floatValue];
+-(void)slideInSideTime:(CGFloat)xMoved allowAnimation:(BOOL)allowAnimation {
     
     [self.layer removeAllAnimations];
-
+    
     CGRect sideTimestampFrame = self.sideTimestampLabel.frame;
     sideTimestampFrame.origin.x = self.sideLabelStartX - xMoved;
-
+    
     CGRect bubbleViewFrame = self.bubbleView.frame;
     bubbleViewFrame.origin.x = self.bubbleViewStartX - xMoved;
     
-    CGRect failedMessageFrame = self.failedButton.frame;
-    failedMessageFrame.origin.x = self.failedButtonStartX - xMoved;
-
-    CGFloat animationDuration = 0.01f;
+    BOOL isAnimated = NO;
     
     // this probably means they've "released", so animate it back longer
     if(xMoved == 0.0 && self.sideTimestampLabel.frame.origin.x - sideTimestampFrame.origin.x < -1.0) {
-        animationDuration = 0.1f;
+        isAnimated = YES;
     }
     
-    [UIView animateWithDuration:animationDuration animations:^{
-        
+    dispatch_block_t resizeBlock = ^{
         self.sideTimestampLabel.frame = sideTimestampFrame;
         self.failedButton.frame = failedMessageFrame; //might call on nil :O
         
         if(self.bubbleView.type == JSBubbleMessageTypeOutgoing) {
             self.bubbleView.frame = bubbleViewFrame;
+        } else if(self.bubbleView.type == JSBubbleMessageTypeNotification) {
+            [self.bubbleView assignSubtractFromWidth:xMoved];
         }
-    }];
+    };
+    
+    if(isAnimated && allowAnimation) {
+        [UIView animateWithDuration:0.3f animations:resizeBlock];
+    } else {
+        resizeBlock();
+    }
 }
 
 @end

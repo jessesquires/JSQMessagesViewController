@@ -96,6 +96,8 @@ FOUNDATION_EXPORT NSString *const GFNotificationRetryMessage;
                    reuseIdentifier:(NSString *)reuseIdentifier
                 communicationState:(NSString *)communicationState;
 
+-(void)slideInSideTime:(CGFloat)xMoved allowAnimation:(BOOL)allowAnimation;
+
 #pragma mark - Setters
 
 /**

@@ -43,7 +43,7 @@
  *
  *  @warning You may customize the propeties of textView, however you *must not* change its `font` property directly. Please use the `JSBubbleView` font property instead.
  */
-@property (weak, nonatomic, readonly) UITextView *textView;
+@property (weak, nonatomic, readonly) UILabel *textView;
 
 /**
  *  The font for the text contained in the bubble view. The default value is `[UIFont systemFontOfSize:16.0f]`.
@@ -52,6 +52,10 @@
  *  @bug Setting this property directly, rather than via `UIAppearance` will cause the message bubbles and text to be laid out incorrectly.
  */
 @property (strong, nonatomic) UIFont *font UI_APPEARANCE_SELECTOR;
+
+@property (nonatomic) CGFloat startWidth;
+@property (nonatomic) CGFloat subtractFromWidth; 
+@property (nonatomic) CGRect  cachedBubbleFrameRect;
 
 #pragma mark - Initialization
 
@@ -97,5 +101,8 @@
  *  @return The height required for the frame of the bubble view in order to display the given text.
  */
 + (CGFloat)neededHeightForAttributedText:(NSAttributedString *)attributedText;
+
+#pragma mark - Instance methods
+-(void)assignSubtractFromWidth:(CGFloat)value;
 
 @end
