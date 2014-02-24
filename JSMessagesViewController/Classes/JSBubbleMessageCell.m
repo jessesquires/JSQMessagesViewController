@@ -483,6 +483,9 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
     CGRect bubbleViewFrame = self.bubbleView.frame;
     bubbleViewFrame.origin.x = self.bubbleViewStartX - xMoved;
     
+    CGRect failedMessageFrame = self.failedButton.frame;
+    failedMessageFrame.origin.x = self.failedButtonStartX - xMoved;
+    
     BOOL isAnimated = NO;
     
     // this probably means they've "released", so animate it back longer
