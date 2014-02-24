@@ -30,10 +30,10 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    
     [self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
 }
 
 #pragma mark - View lifecycle
@@ -48,29 +48,46 @@
     [super didReceiveMemoryWarning];
 }
 
-@end
+#pragma mark - Collection view data source
 
-
-/*
-- (void)setupCollectionView
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    self.collectionView.backgroundColor = [UIColor rs_activityBackgroundColor];
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
-    [self.collectionView registerNib:[RSCollectionActivityInstructionHeaderView nib]
-          forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                 withReuseIdentifier:NSStringFromClass([RSCollectionActivityInstructionHeaderView class])];
-    
-    LXReorderableCollectionViewFlowLayout *collectionViewLayout = (LXReorderableCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    collectionViewLayout.panGestureRecognizer.maximumNumberOfTouches = 1;
-    collectionViewLayout.longPressGestureRecognizer.minimumPressDuration = 0.2;
-    collectionViewLayout.longPressGestureRecognizer.numberOfTouchesRequired = 1;
-    collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    
-    CGFloat spacing = 10.0f;
-    collectionViewLayout.itemSize = CGSizeMake(self.collectionView.frame.size.width - (spacing * 2.0f), 0.0f);
-    collectionViewLayout.sectionInset = UIEdgeInsetsMake(spacing, spacing, spacing, spacing);
-    collectionViewLayout.minimumInteritemSpacing = spacing;
-    collectionViewLayout.minimumLineSpacing = spacing;
+    return 5;
 }
- */
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    JSQMessagesCollectionViewCellOutgoing *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]
+                                                                                            forIndexPath:indexPath];
+    
+    return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath
+{
+    return nil; // TODO:
+}
+
+#pragma mark - Collection view delegate
+
+// TODO:
+
+#pragma mark - Collection view delegate flow layout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // TODO:
+    JSQMessagesCollectionViewFlowLayout *layout = (JSQMessagesCollectionViewFlowLayout *)collectionViewLayout;
+    return CGSizeMake(layout.itemSize.width, 150.0f);
+}
+
+@end

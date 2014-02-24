@@ -16,4 +16,24 @@
 
 @implementation JSQMessagesCollectionViewCell
 
+#pragma mark - Initialization
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
+}
+
+#pragma mark - Class methods
+
++ (UINib *)nib
+{
+    return nil;
+}
+
++ (NSString *)cellReuseIdentifier
+{
+    return nil;
+}
+
 @end

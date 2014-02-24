@@ -15,8 +15,11 @@
 #import <UIKit/UIKit.h>
 
 #import "JSQMessagesCollectionView.h"
+#import "JSQMessagesCollectionViewFlowLayout.h"
+#import "JSQMessagesCollectionViewCellIncoming.h"
+#import "JSQMessagesCollectionViewCellOutgoing.h"
 
-@interface JSQMessagesViewController : UIViewController
+@interface JSQMessagesViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic, readonly) JSQMessagesCollectionView *collectionView;
 

@@ -18,7 +18,6 @@
 
 
 @protocol JSQMessagesCollectionViewFlowLayoutDelegate <UICollectionViewDelegateFlowLayout>
-
 @end
 
 
