@@ -146,8 +146,11 @@
     cell1.cellBottomLabel.text = @"sender bottom";
     
     UIImageView *imgView1 = [[UIImageView alloc] initWithFrame:CGRectZero];
-    imgView1.backgroundColor = [UIColor blueColor];
+    imgView1.backgroundColor = [UIColor whiteColor];
+    imgView1.image = [JSQAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo-avatar-jobs"] diameter:kJSQMessagesCollectionViewCellAvatarSizeDefault];
     cell1.avatarImageView = imgView1;
+    
+    
     
     cell2.cellTopLabel.text = @"time";
     cell2.messageBubbleTopLabel.text = @"recipient";
