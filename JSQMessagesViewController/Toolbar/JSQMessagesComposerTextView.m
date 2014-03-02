@@ -35,6 +35,7 @@
     self.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.layer.cornerRadius = 6.0f;
     
+    self.textContainerInset = UIEdgeInsetsMake(5.0f, 0.0f, 5.0f, 0.0f);
     self.contentInset = UIEdgeInsetsZero;
     self.scrollEnabled = YES;
     self.scrollsToTop = NO;
