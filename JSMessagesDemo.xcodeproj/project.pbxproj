@@ -12,7 +12,7 @@
 		883F2B3118BAE9CF003BC4B5 /* JSQMessagesCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F2B3018BAE9CF003BC4B5 /* JSQMessagesCollectionView.m */; };
 		883F2B3418BAE9F7003BC4B5 /* JSQMessagesCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F2B3318BAE9F7003BC4B5 /* JSQMessagesCollectionViewFlowLayout.m */; };
 		883F2B3D18BAF3AD003BC4B5 /* JSQMessagesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F2B3A18BAF3AD003BC4B5 /* JSQMessagesCollectionViewCell.m */; };
-		883F2B3E18BAF3AD003BC4B5 /* JSQMessages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883F2B3C18BAF3AD003BC4B5 /* JSQMessages.storyboard */; };
+		883F2B3E18BAF3AD003BC4B5 /* JSQMessagesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883F2B3C18BAF3AD003BC4B5 /* JSQMessagesViewController.storyboard */; };
 		883F2B4418BAF503003BC4B5 /* JSQMessagesCollectionViewCellOutgoing.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F2B4318BAF503003BC4B5 /* JSQMessagesCollectionViewCellOutgoing.m */; };
 		883F2B4618BAF516003BC4B5 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */ = {isa = PBXBuildFile; fileRef = 883F2B4518BAF516003BC4B5 /* JSQMessagesCollectionViewCellOutgoing.xib */; };
 		883F2B4918BAF534003BC4B5 /* JSQMessagesCollectionViewCellIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F2B4818BAF533003BC4B5 /* JSQMessagesCollectionViewCellIncoming.m */; };
@@ -106,7 +106,7 @@
 		883F2B3318BAE9F7003BC4B5 /* JSQMessagesCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSQMessagesCollectionViewFlowLayout.m; path = Classes/JSQMessagesCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		883F2B3918BAF3AD003BC4B5 /* JSQMessagesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewCell.h; sourceTree = "<group>"; };
 		883F2B3A18BAF3AD003BC4B5 /* JSQMessagesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewCell.m; sourceTree = "<group>"; };
-		883F2B3C18BAF3AD003BC4B5 /* JSQMessages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JSQMessages.storyboard; sourceTree = "<group>"; };
+		883F2B3C18BAF3AD003BC4B5 /* JSQMessagesViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JSQMessagesViewController.storyboard; sourceTree = "<group>"; };
 		883F2B4218BAF503003BC4B5 /* JSQMessagesCollectionViewCellOutgoing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewCellOutgoing.h; sourceTree = "<group>"; };
 		883F2B4318BAF503003BC4B5 /* JSQMessagesCollectionViewCellOutgoing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewCellOutgoing.m; sourceTree = "<group>"; };
 		883F2B4518BAF516003BC4B5 /* JSQMessagesCollectionViewCellOutgoing.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesCollectionViewCellOutgoing.xib; sourceTree = "<group>"; };
@@ -265,7 +265,7 @@
 		883F2B3B18BAF3AD003BC4B5 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				883F2B3C18BAF3AD003BC4B5 /* JSQMessages.storyboard */,
+				883F2B3C18BAF3AD003BC4B5 /* JSQMessagesViewController.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -575,7 +575,7 @@
 				88A6AD111839FE95000F56DA /* bubble-min@2x.png in Resources */,
 				88A6AD141839FE95000F56DA /* bubble-stroked.png in Resources */,
 				88A6AD201839FFBB000F56DA /* button-photo@2x.png in Resources */,
-				883F2B3E18BAF3AD003BC4B5 /* JSQMessages.storyboard in Resources */,
+				883F2B3E18BAF3AD003BC4B5 /* JSQMessagesViewController.storyboard in Resources */,
 				88A6AD0F1839FE95000F56DA /* bubble-min-tailless@2x.png in Resources */,
 				88A6AD101839FE95000F56DA /* bubble-min.png in Resources */,
 				88A6AD1F1839FFBB000F56DA /* button-photo.png in Resources */,
@@ -792,7 +792,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -826,7 +826,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

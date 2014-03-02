@@ -25,9 +25,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIMainStoryboardFile</key>
-	<string>JSQMessages</string>
+	<string>JSQMessagesViewController</string>
 	<key>UIMainStoryboardFile~ipad</key>
-	<string>JSQMessages</string>
+	<string>JSQMessagesViewController</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

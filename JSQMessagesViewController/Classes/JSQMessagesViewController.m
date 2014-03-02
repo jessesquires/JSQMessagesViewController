@@ -19,10 +19,10 @@
 @interface JSQMessagesViewController ()
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
-
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightContraint;
 
+- (void)updateCollectionViewInsets;
 - (void)setCollectionViewInsetsWithBottomValue:(CGFloat)bottom;
 
 @end
@@ -30,6 +30,14 @@
 
 
 @implementation JSQMessagesViewController
+
+#pragma mark - Class methods
+
++ (UIStoryboard *)messagesStoryboard
+{
+    return [UIStoryboard storyboardWithName:NSStringFromClass([JSQMessagesViewController class])
+                                     bundle:[NSBundle mainBundle]];
+}
 
 #pragma mark - Initialization
 
@@ -48,25 +56,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self updateCollectionViewInsets];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    self.view.keyboardTriggerOffset = self.inputToolbar.bounds.size.height;
+    self.view.keyboardTriggerOffset = CGRectGetHeight(self.inputToolbar.bounds);
     
     __weak JSQMessagesViewController *weakSelf = self;
-    __weak JSQMessagesCollectionView *weakCollectionView = self.collectionView;
     __weak JSQMessagesInputToolbar *weakInputToolbar = self.inputToolbar;
     
     [self.view addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView) {
         CGRect toolbarFrame = weakInputToolbar.frame;
-        toolbarFrame.origin.y = keyboardFrameInView.origin.y - toolbarFrame.size.height;
+        toolbarFrame.origin.y = CGRectGetMinY(keyboardFrameInView) - CGRectGetHeight(toolbarFrame);
         
         weakInputToolbar.frame = toolbarFrame;
         
-        [weakSelf setCollectionViewInsetsWithBottomValue:weakCollectionView.frame.size.height - toolbarFrame.origin.y];
+        [weakSelf updateCollectionViewInsets];
     }];
 }
 
@@ -156,6 +164,11 @@
 }
 
 #pragma mark - Utilities
+
+- (void)updateCollectionViewInsets
+{
+    [self setCollectionViewInsetsWithBottomValue:CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame)];
+}
 
 - (void)setCollectionViewInsetsWithBottomValue:(CGFloat)bottom
 {

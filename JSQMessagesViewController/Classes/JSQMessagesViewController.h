@@ -28,4 +28,8 @@
 
 @property (weak, nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
 
+#pragma mark - Class methods
+
++ (UIStoryboard *)messagesStoryboard;
+
 @end
