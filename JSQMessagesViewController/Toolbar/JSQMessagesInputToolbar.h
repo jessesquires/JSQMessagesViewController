@@ -16,6 +16,8 @@
 
 @class JSQMessagesToolbarContentView;
 
+FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
+
 
 @interface JSQMessagesInputToolbar : UIToolbar
 

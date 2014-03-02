@@ -16,6 +16,8 @@
 
 @class JSQMessagesComposerTextView;
 
+FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
+
 
 @interface JSQMessagesToolbarContentView : UIView
 

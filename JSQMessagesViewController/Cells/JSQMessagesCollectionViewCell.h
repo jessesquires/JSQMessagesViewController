@@ -14,25 +14,24 @@
 
 #import <UIKit/UIKit.h>
 
+FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault;
+
+
 @interface JSQMessagesCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic, readonly) UILabel *cellTopLabel;
 @property (weak, nonatomic, readonly) UILabel *messageBubbleTopLabel;
-@property (weak, nonatomic, readonly) UITextView *textView;
 @property (weak, nonatomic, readonly) UILabel *cellBottomLabel;
+
+@property (weak, nonatomic, readonly) UITextView *textView;
 
 @property (weak, nonatomic) UIImageView *bubbleImageView;
 @property (weak, nonatomic) UIImageView *avatarImageView;
 
-@property (weak, nonatomic, readonly) UIView *messageBubbleContainerView;
-@property (weak, nonatomic, readonly) UIView *avatarContainerView;
-
-@property (weak, nonatomic, readonly) NSLayoutConstraint *cellTopLabelHeight;
-@property (weak, nonatomic, readonly) NSLayoutConstraint *bubbleTopLabelHeight;
-
-@property (weak, nonatomic, readonly) NSLayoutConstraint *avatarContainerViewWidth;
-@property (weak, nonatomic, readonly) NSLayoutConstraint *avatarContainerViewHeight;
-@property (weak, nonatomic, readonly) NSLayoutConstraint *cellBottomLabelHeight;
+@property (assign, nonatomic) CGFloat cellTopLabelHeight;
+@property (assign, nonatomic) CGFloat bubbleTopLabelHeight;
+@property (assign, nonatomic) CGFloat cellBottomLabelHeight;
+@property (assign, nonatomic) CGSize avatarViewSize;
 
 @property (strong, nonatomic) UIFont *font UI_APPEARANCE_SELECTOR;
 

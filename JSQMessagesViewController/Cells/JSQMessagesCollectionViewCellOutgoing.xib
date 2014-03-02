@@ -102,14 +102,14 @@
             <size key="customSize" width="317" height="245"/>
             <connections>
                 <outlet property="avatarContainerView" destination="X89-B1-aAd" id="WSI-Zc-qIE"/>
-                <outlet property="avatarContainerViewHeight" destination="tgw-aN-JJu" id="Pvb-90-nP4"/>
-                <outlet property="avatarContainerViewWidth" destination="Pkm-tW-k4z" id="LZ2-Ww-4rg"/>
-                <outlet property="bubbleTopLabelHeight" destination="8TB-va-f8L" id="cGa-0v-pAJ"/>
+                <outlet property="avatarContainerViewHeightContraint" destination="tgw-aN-JJu" id="l0J-4K-5pd"/>
+                <outlet property="avatarContainerViewWidthContraint" destination="Pkm-tW-k4z" id="208-fX-ekD"/>
+                <outlet property="bubbleContainerView" destination="2zh-vR-QJW" id="Zeg-YU-4Ny"/>
+                <outlet property="bubbleTopLabelHeightContraint" destination="8TB-va-f8L" id="Q2I-Up-2er"/>
                 <outlet property="cellBottomLabel" destination="7Uc-dI-YDD" id="gVD-C2-UcZ"/>
-                <outlet property="cellBottomLabelHeight" destination="cPs-M4-tjX" id="SY0-7v-ZHz"/>
+                <outlet property="cellBottomLabelHeightContraint" destination="cPs-M4-tjX" id="yyh-7V-6do"/>
                 <outlet property="cellTopLabel" destination="jxM-YD-sVG" id="acH-pr-spx"/>
-                <outlet property="cellTopLabelHeight" destination="9oK-E7-iXA" id="fGo-fX-dv3"/>
-                <outlet property="messageBubbleContainerView" destination="2zh-vR-QJW" id="Tgy-Wj-3Fh"/>
+                <outlet property="cellTopLabelHeightContraint" destination="9oK-E7-iXA" id="TaU-Wg-TP4"/>
                 <outlet property="messageBubbleTopLabel" destination="p52-YN-yLu" id="SLH-sA-Chu"/>
                 <outlet property="textView" destination="vLY-aM-0Dr" id="YEp-mW-xIY"/>
             </connections>

@@ -14,23 +14,26 @@
 
 #import "JSQMessagesCollectionViewCell.h"
 
+const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
+
 
 @interface JSQMessagesCollectionViewCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *cellTopLabel;
 @property (weak, nonatomic) IBOutlet UILabel *messageBubbleTopLabel;
-@property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UILabel *cellBottomLabel;
 
-@property (weak, nonatomic) IBOutlet UIView *messageBubbleContainerView;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+
+@property (weak, nonatomic) IBOutlet UIView *bubbleContainerView;
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellTopLabelHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubbleTopLabelHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellTopLabelHeightContraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubbleTopLabelHeightContraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBottomLabelHeightContraint;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidth;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBottomLabelHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidthContraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightContraint;
 
 @end
 
@@ -97,7 +100,7 @@
     self.bubbleImageView.backgroundColor = backgroundColor;
     self.avatarImageView.backgroundColor = backgroundColor;
     
-    self.messageBubbleContainerView.backgroundColor = backgroundColor;
+    self.bubbleContainerView.backgroundColor = backgroundColor;
     self.avatarContainerView.backgroundColor = backgroundColor;
 }
 
@@ -108,7 +111,44 @@
     [self setNeedsLayout];
 }
 
-#pragma mark - UIAppearance Getters
+- (void)setBubbleImageView:(UIImageView *)bubbleImageView
+{
+    // TODO:
+    _bubbleImageView = bubbleImageView;
+}
+
+- (void)setAvatarImageView:(UIImageView *)avatarImageView
+{
+    // TOOD:
+    _avatarImageView = avatarImageView;
+}
+
+- (void)setCellTopLabelHeight:(CGFloat)cellTopLabelHeight
+{
+    self.cellTopLabelHeightContraint.constant = cellTopLabelHeight;
+    [self setNeedsUpdateConstraints];
+}
+
+- (void)setBubbleTopLabelHeight:(CGFloat)bubbleTopLabelHeight
+{
+    self.bubbleTopLabelHeightContraint.constant = bubbleTopLabelHeight;
+    [self setNeedsUpdateConstraints];
+}
+
+- (void)setCellBottomLabelHeight:(CGFloat)cellBottomLabelHeight
+{
+    self.cellBottomLabelHeightContraint.constant = cellBottomLabelHeight;
+    [self setNeedsUpdateConstraints];
+}
+
+- (void)setAvatarViewSize:(CGSize)avatarViewSize
+{
+    self.avatarContainerViewWidthContraint.constant = avatarViewSize.width;
+    self.avatarContainerViewHeightContraint.constant = avatarViewSize.height;
+    [self setNeedsUpdateConstraints];
+}
+
+#pragma mark - Getters
 
 - (UIFont *)font
 {
@@ -119,5 +159,25 @@
     return _font;
 }
 
+- (CGFloat)cellTopLabelHeight
+{
+    return self.cellTopLabelHeightContraint.constant;
+}
+
+- (CGFloat)bubbleTopLabelHeight
+{
+    return self.bubbleTopLabelHeightContraint.constant;
+}
+
+- (CGFloat)cellBottomLabelHeight
+{
+    return self.cellBottomLabelHeightContraint.constant;
+}
+
+- (CGSize)avatarViewSize
+{
+    return CGSizeMake(self.avatarContainerViewWidthContraint.constant,
+                      self.avatarContainerViewHeightContraint.constant);
+}
 
 @end

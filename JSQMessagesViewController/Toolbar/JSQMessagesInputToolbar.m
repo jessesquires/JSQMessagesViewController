@@ -18,6 +18,8 @@
 
 #import "UIView+JSQMessages.h"
 
+const CGFloat kJSQMessagesInputToolbarHeightDefault = 44.0f;
+
 
 @interface JSQMessagesInputToolbar ()
 

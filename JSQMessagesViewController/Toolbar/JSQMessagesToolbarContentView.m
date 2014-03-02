@@ -18,8 +18,7 @@
 
 #import "UIView+JSQMessages.h"
 
-
-static const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.0f;
+const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.0f;
 
 
 @interface JSQMessagesToolbarContentView ()
@@ -40,6 +39,14 @@ static const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.
 
 
 @implementation JSQMessagesToolbarContentView
+
+#pragma mark - Class methods
+
++ (UINib *)nib
+{
+    return [UINib nibWithNibName:NSStringFromClass([JSQMessagesToolbarContentView class])
+                          bundle:[NSBundle mainBundle]];
+}
 
 #pragma mark - Initialization
 
@@ -69,6 +76,7 @@ static const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.
         self.leftHorizontalSpacing.constant = 0.0f;
         self.leftBarButtonItemWidth = 0.0f;
         _leftBarButtonItem = nil;
+        self.leftBarButtonContainerView.hidden = YES;
         return;
     }
     
@@ -79,6 +87,7 @@ static const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.
                                              CGRectGetHeight(self.leftBarButtonContainerView.frame));
     }
     
+    self.leftBarButtonContainerView.hidden = NO;
     self.leftHorizontalSpacing.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
     self.leftBarButtonItemWidth = CGRectGetWidth(leftBarButtonItem.frame);
     
@@ -104,6 +113,7 @@ static const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.
         self.rightHorizontalSpacing.constant = 0.0f;
         self.rightBarButtonItemWidth = 0.0f;
         _rightBarButtonItem = nil;
+        self.rightBarButtonContainerView.hidden = YES;
         return;
     }
     
@@ -114,6 +124,7 @@ static const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.
                                               CGRectGetHeight(self.rightBarButtonContainerView.frame));
     }
     
+    self.rightBarButtonContainerView.hidden = NO;
     self.rightHorizontalSpacing.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
     self.rightBarButtonItemWidth = CGRectGetWidth(rightBarButtonItem.frame);
     
@@ -139,14 +150,6 @@ static const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.
 - (CGFloat)rightBarButtonItemWidth
 {
     return self.rightBarButtonContainerViewWidth.constant;
-}
-
-#pragma mark - Class methods
-
-+ (UINib *)nib
-{
-    return [UINib nibWithNibName:NSStringFromClass([JSQMessagesToolbarContentView class])
-                          bundle:[NSBundle mainBundle]];
 }
 
 @end
