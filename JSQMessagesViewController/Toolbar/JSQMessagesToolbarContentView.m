@@ -54,6 +54,10 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.0f;
 {
     [super awakeFromNib];
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    self.leftHorizontalSpacing.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
+    self.rightHorizontalSpacing.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
+    
     self.backgroundColor = [UIColor clearColor];
 }
 

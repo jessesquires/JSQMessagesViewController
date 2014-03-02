@@ -14,7 +14,10 @@
 
 #import "JSQMessagesCollectionViewCell.h"
 
+#import "UIView+JSQMessages.h"
+
 const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
+const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 44.0f;
 
 
 @interface JSQMessagesCollectionViewCell ()
@@ -34,6 +37,8 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidthContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightContraint;
+
+@property (assign, nonatomic) CGSize avatarViewSize;
 
 @end
 
@@ -61,6 +66,13 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 {
     [super awakeFromNib];
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    self.cellTopLabelHeight = kJSQMessagesCollectionViewCellLabelHeightDefault;
+    self.bubbleTopLabelHeight = kJSQMessagesCollectionViewCellLabelHeightDefault;
+    self.cellBottomLabelHeight = kJSQMessagesCollectionViewCellLabelHeightDefault;
+    
+    self.avatarViewSize = CGSizeMake(kJSQMessagesCollectionViewCellAvatarSizeDefault,
+                                     kJSQMessagesCollectionViewCellAvatarSizeDefault);
     
     self.backgroundColor = [UIColor whiteColor];
     
@@ -113,13 +125,52 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 - (void)setBubbleImageView:(UIImageView *)bubbleImageView
 {
-    // TODO:
+    if (!bubbleImageView) {
+        NSAssert(NO, @"%s ERROR : bubbleImageView must not be nil", __PRETTY_FUNCTION__);
+    }
+    
+    if (_bubbleImageView) {
+        [_bubbleImageView removeFromSuperview];
+    }
+    
+    if (CGRectEqualToRect(bubbleImageView.frame, CGRectZero)) {
+        bubbleImageView.frame = CGRectMake(0.0f,
+                                           0.0f,
+                                           CGRectGetWidth(self.bubbleContainerView.frame),
+                                           CGRectGetHeight(self.bubbleContainerView.frame));
+    }
+    
+    [self.bubbleContainerView addSubview:bubbleImageView];
+    [self.bubbleContainerView jsq_pinAllEdgesOfSubview:bubbleImageView];
+    
     _bubbleImageView = bubbleImageView;
 }
 
 - (void)setAvatarImageView:(UIImageView *)avatarImageView
 {
-    // TOOD:
+    if (_avatarImageView) {
+        [_avatarImageView removeFromSuperview];
+    }
+    
+    if (!avatarImageView) {
+        self.avatarViewSize = CGSizeZero;
+        _avatarImageView = nil;
+        self.avatarContainerView.hidden = YES;
+    }
+    
+    if (CGRectEqualToRect(avatarImageView.frame, CGRectZero)) {
+        avatarImageView.frame = CGRectMake(0.0f,
+                                           0.0f,
+                                           CGRectGetWidth(self.avatarContainerView.frame),
+                                           CGRectGetHeight(self.avatarContainerView.frame));
+    }
+    
+    self.avatarContainerView.hidden = NO;
+    self.avatarViewSize = CGSizeMake(CGRectGetWidth(avatarImageView.frame), CGRectGetHeight(avatarImageView.frame));
+    
+    [self.avatarContainerView addSubview:avatarImageView];
+    [self.avatarContainerView jsq_pinAllEdgesOfSubview:avatarImageView];
+    
     _avatarImageView = avatarImageView;
 }
 

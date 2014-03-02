@@ -46,6 +46,8 @@
     [super awakeFromNib];
     [self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
     
+    self.toolbarHeightContraint.constant = kJSQMessagesInputToolbarHeightDefault;
+    
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
@@ -143,12 +145,19 @@
     cell1.textView.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.5];
     cell1.cellBottomLabel.text = @"sender bottom";
     
+    UIImageView *imgView1 = [[UIImageView alloc] initWithFrame:CGRectZero];
+    imgView1.backgroundColor = [UIColor blueColor];
+    cell1.avatarImageView = imgView1;
     
     cell2.cellTopLabel.text = @"time";
     cell2.messageBubbleTopLabel.text = @"recipient";
     cell2.textView.text = @"other text here";
     cell2.textView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5];
     cell2.cellBottomLabel.text = @"recipient bottom";
+    
+    UIImageView *imgView2 = [[UIImageView alloc] initWithFrame:CGRectZero];
+    imgView2.backgroundColor = [UIColor redColor];
+    cell2.avatarImageView = imgView2;
     
     
     return (indexPath.row % 2 == 0) ? cell2 : cell1;
