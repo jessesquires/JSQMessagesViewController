@@ -59,7 +59,7 @@
     [super awakeFromNib];
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-//    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor whiteColor];
     
     self.cellTopLabel.textAlignment = NSTextAlignmentCenter;
     self.cellTopLabel.font = [UIFont boldSystemFontOfSize:12.0f];
@@ -68,10 +68,9 @@
     self.messageBubbleTopLabel.font = [UIFont systemFontOfSize:12.0f];
     self.messageBubbleTopLabel.textColor = [UIColor lightGrayColor];
     
-    self.cellBottomLabel.font = [UIFont boldSystemFontOfSize:12.0f];
+    self.cellBottomLabel.font = [UIFont systemFontOfSize:12.0f];
     self.cellBottomLabel.textColor = [UIColor lightGrayColor];
     
-    self.textView.font = [[JSQMessagesCollectionViewCell appearance] font];
     self.textView.textColor = [UIColor blackColor];
     self.textView.editable = NO;
     self.textView.userInteractionEnabled = YES;
@@ -113,15 +112,11 @@
 
 - (UIFont *)font
 {
-    if (_font == nil) {
+    if (!_font) {
         _font = [[[self class] appearance] font];
     }
     
-    if (_font != nil) {
-        return _font;
-    }
-    
-    return [UIFont systemFontOfSize:16.0f];
+    return _font;
 }
 
 

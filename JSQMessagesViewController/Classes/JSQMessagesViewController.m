@@ -57,6 +57,7 @@
 {
     [super viewDidLoad];
     [self updateCollectionViewInsets];
+    [[JSQMessagesCollectionViewCell appearance] setFont:[UIFont systemFontOfSize:15.0f]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -135,6 +136,20 @@
     
     JSQMessagesCollectionViewCellIncoming *cell2 = [collectionView dequeueReusableCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]
                                                                                              forIndexPath:indexPath];
+    
+    cell1.cellTopLabel.text = @"time";
+    cell1.messageBubbleTopLabel.text = @"sender";
+    cell1.textView.text = @"some sample text";
+    cell1.textView.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.5];
+    cell1.cellBottomLabel.text = @"sender bottom";
+    cell1.avatarContainerView.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.25];
+    
+    cell2.cellTopLabel.text = @"time";
+    cell2.messageBubbleTopLabel.text = @"recipient";
+    cell2.textView.text = @"other text here";
+    cell2.textView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5];
+    cell2.cellBottomLabel.text = @"recipient bottom";
+    cell2.avatarContainerView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.25];
     
     return (indexPath.row % 2 == 0) ? cell2 : cell1;
 }
