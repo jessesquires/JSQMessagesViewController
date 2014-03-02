@@ -15,7 +15,7 @@
 #import "JSBubbleMessageCell.h"
 
 #import "JSAvatarImageFactory.h"
-#import "UIColor+JSMessagesView.h"
+#import "UIColor+JSQMessages.h"
 
 static const CGFloat kJSLabelPadding = 5.0f;
 static const CGFloat kJSTimeStampLabelHeight = 15.0f;

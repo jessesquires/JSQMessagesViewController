@@ -17,7 +17,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "JSBubbleView.h"
 #import "NSString+JSMessagesView.h"
-#import "UIColor+JSMessagesView.h"
+#import "UIColor+JSQMessages.h"
 
 @interface JSMessageInputView ()
 

@@ -20,7 +20,7 @@
 #import "JSAvatarImageFactory.h"
 #import "JSBubbleImageViewFactory.h"
 #import "JSMessageSoundEffect.h"
-#import "UIColor+JSMessagesView.h"
+#import "UIColor+JSQMessages.h"
 
 /**
  *  The delegate of a `JSMessagesViewController` must adopt the `JSMessagesViewDelegate` protocol.

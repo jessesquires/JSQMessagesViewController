@@ -14,7 +14,7 @@
 
 #import "JSBubbleImageViewFactory.h"
 #import "UIImage+JSMessagesView.h"
-#import "UIColor+JSMessagesView.h"
+#import "UIColor+JSQMessages.h"
 
 @interface JSBubbleImageViewFactory()
 
