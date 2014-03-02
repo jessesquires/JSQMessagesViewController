@@ -106,11 +106,11 @@
 {
     if (indexPath.row % 2) {
         return [JSBubbleImageViewFactory bubbleImageViewForType:type
-                                                          color:[UIColor js_bubbleLightGrayColor]];
+                                                          color:[UIColor jsq_messageBubbleLightGrayColor]];
     }
     
     return [JSBubbleImageViewFactory bubbleImageViewForType:type
-                                                      color:[UIColor js_bubbleBlueColor]];
+                                                      color:[UIColor jsq_messageBubbleBlueColor]];
 }
 
 #pragma mark - Messages view delegate: OPTIONAL

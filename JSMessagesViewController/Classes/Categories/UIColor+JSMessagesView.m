@@ -8,17 +8,17 @@
 //
 //
 //  The MIT License
-//  Copyright (c) 2013 Jesse Squires
+//  Copyright (c) 2014 Jesse Squires
 //  http://opensource.org/licenses/MIT
 //
 
 #import "UIColor+JSMessagesView.h"
 
-@implementation UIColor (JSMessagesView)
+@implementation UIColor (JSQMessages)
 
-#pragma mark - Bubble colors
+#pragma mark - Message bubble colors
 
-+ (UIColor *)js_bubbleGreenColor
++ (UIColor *)jsq_messageBubbleGreenColor
 {
     return [UIColor colorWithHue:130.0f / 360.0f
                       saturation:0.68f
@@ -26,7 +26,7 @@
                            alpha:1.0f];
 }
 
-+ (UIColor *)js_bubbleBlueColor
++ (UIColor *)jsq_messageBubbleBlueColor
 {
     return [UIColor colorWithHue:210.0f / 360.0f
                       saturation:0.94f
@@ -34,7 +34,7 @@
                            alpha:1.0f];
 }
 
-+ (UIColor *)js_bubbleLightGrayColor
++ (UIColor *)jsq_messageBubbleLightGrayColor
 {
     return [UIColor colorWithHue:240.0f / 360.0f
                       saturation:0.02f
@@ -44,7 +44,7 @@
 
 #pragma mark - Utilities
 
-- (UIColor *)js_darkenColorWithValue:(CGFloat)value
+- (UIColor *)jsq_darkenColorWithValue:(CGFloat)value
 {
     NSUInteger totalComponents = CGColorGetNumberOfComponents(self.CGColor);
     BOOL isGreyscale = (totalComponents == 2) ? YES : NO;

@@ -8,30 +8,30 @@
 //
 //
 //  The MIT License
-//  Copyright (c) 2013 Jesse Squires
+//  Copyright (c) 2014 Jesse Squires
 //  http://opensource.org/licenses/MIT
 //
 
 #import <UIKit/UIKit.h>
 
-@interface UIColor (JSMessagesView)
+@interface UIColor (JSQMessages)
 
-#pragma mark - Bubble colors
-
-/**
- *  @return A color object containing the HSB values iOS 7 messages app green bubble color.
- */
-+ (UIColor *)js_bubbleGreenColor;
+#pragma mark - Message bubble colors
 
 /**
- *  @return A color object containing the HSB values iOS 7 messages app blue bubble color.
+ *  @return A color object containing HSB values similar to the iOS 7 messages app green bubble color.
  */
-+ (UIColor *)js_bubbleBlueColor;
++ (UIColor *)jsq_messageBubbleGreenColor;
 
 /**
- *  @return A color object containing the HSB values iOS 7 messages app light gray bubble color.
+ *  @return A color object containing HSB values similar to the iOS 7 messages app blue bubble color.
  */
-+ (UIColor *)js_bubbleLightGrayColor;
++ (UIColor *)jsq_messageBubbleBlueColor;
+
+/**
+ *  @return A color object containing HSB values similar to the iOS 7 messages app light gray bubble color.
+ */
++ (UIColor *)jsq_messageBubbleLightGrayColor;
 
 #pragma mark - Utilities
 
@@ -42,6 +42,6 @@
  *
  *  @return A new color object whose brightness is decreased by the given values. The other color values remain the same as the receiver.
  */
-- (UIColor *)js_darkenColorWithValue:(CGFloat)value;
+- (UIColor *)jsq_darkenColorWithValue:(CGFloat)value;
 
 @end
