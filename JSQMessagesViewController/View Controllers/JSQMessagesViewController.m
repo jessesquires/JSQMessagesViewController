@@ -142,8 +142,9 @@
     cell1.cellTopLabel.text = @"time";
     cell1.messageBubbleTopLabel.text = @"sender";
     cell1.textView.text = @"some sample text";
-    cell1.textView.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.5];
     cell1.cellBottomLabel.text = @"sender bottom";
+    
+    cell1.textView.textColor = [UIColor whiteColor];
     
     UIImageView *imgView1 = [[UIImageView alloc] initWithFrame:CGRectZero];
     imgView1.backgroundColor = [UIColor whiteColor];

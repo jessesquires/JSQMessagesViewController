@@ -49,10 +49,10 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KYU-B8-cUW" firstAttribute="leading" secondItem="btS-p8-B7Z" secondAttribute="leading" id="2DX-ie-EHu"/>
-                            <constraint firstItem="KYU-B8-cUW" firstAttribute="top" secondItem="btS-p8-B7Z" secondAttribute="top" id="5gJ-RY-DHJ"/>
-                            <constraint firstAttribute="bottom" secondItem="KYU-B8-cUW" secondAttribute="bottom" id="H7L-Zg-EO4"/>
-                            <constraint firstAttribute="trailing" secondItem="KYU-B8-cUW" secondAttribute="trailing" id="NZf-4i-aZM"/>
+                            <constraint firstAttribute="trailing" secondItem="KYU-B8-cUW" secondAttribute="trailing" id="4qS-03-PFO"/>
+                            <constraint firstAttribute="bottom" secondItem="KYU-B8-cUW" secondAttribute="bottom" id="B2v-Gq-Y1L"/>
+                            <constraint firstItem="KYU-B8-cUW" firstAttribute="leading" secondItem="btS-p8-B7Z" secondAttribute="leading" id="Tg9-9l-vr8"/>
+                            <constraint firstItem="KYU-B8-cUW" firstAttribute="top" secondItem="btS-p8-B7Z" secondAttribute="top" id="aEL-yH-N1p"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Da1-09-wR4">
@@ -80,6 +80,7 @@
             </view>
             <constraints>
                 <constraint firstItem="btS-p8-B7Z" firstAttribute="top" secondItem="Ufa-bF-l1Y" secondAttribute="bottom" id="02q-vf-kFC"/>
+                <constraint firstItem="btS-p8-B7Z" firstAttribute="leading" secondItem="Da1-09-wR4" secondAttribute="trailing" constant="2" id="1DY-Fh-zoP"/>
                 <constraint firstItem="UPz-5x-c1T" firstAttribute="top" secondItem="Da1-09-wR4" secondAttribute="bottom" id="2FH-l9-EdC"/>
                 <constraint firstAttribute="trailing" secondItem="Ufa-bF-l1Y" secondAttribute="trailing" constant="28" id="2uj-Dm-8wc"/>
                 <constraint firstItem="UPz-5x-c1T" firstAttribute="leading" secondItem="4lh-CK-yVn" secondAttribute="leading" id="54r-MX-MGW"/>
@@ -90,12 +91,12 @@
                 <constraint firstItem="btS-p8-B7Z" firstAttribute="width" secondItem="Ufa-bF-l1Y" secondAttribute="width" id="bh8-iC-nYx"/>
                 <constraint firstItem="UPz-5x-c1T" firstAttribute="top" secondItem="Da1-09-wR4" secondAttribute="bottom" id="dDB-B0-c6J"/>
                 <constraint firstItem="Ufa-bF-l1Y" firstAttribute="top" secondItem="afj-rd-iNv" secondAttribute="bottom" id="i9Y-sV-v6b"/>
+                <constraint firstItem="btS-p8-B7Z" firstAttribute="leading" secondItem="Da1-09-wR4" secondAttribute="trailing" constant="2" id="j0I-pm-eex"/>
                 <constraint firstItem="btS-p8-B7Z" firstAttribute="top" secondItem="Ufa-bF-l1Y" secondAttribute="bottom" id="jAu-Dn-7rN"/>
                 <constraint firstItem="Da1-09-wR4" firstAttribute="leading" secondItem="4lh-CK-yVn" secondAttribute="leading" id="jiu-B4-TSD"/>
                 <constraint firstAttribute="trailing" secondItem="btS-p8-B7Z" secondAttribute="trailing" constant="28" id="k2n-jk-kOg"/>
                 <constraint firstAttribute="bottom" secondItem="UPz-5x-c1T" secondAttribute="bottom" id="nsK-Gh-M3Z"/>
                 <constraint firstItem="UPz-5x-c1T" firstAttribute="top" secondItem="btS-p8-B7Z" secondAttribute="bottom" id="s8G-Je-7GA"/>
-                <constraint firstItem="btS-p8-B7Z" firstAttribute="leading" secondItem="Da1-09-wR4" secondAttribute="trailing" constant="2" id="sSU-Vb-Ow8"/>
             </constraints>
             <size key="customSize" width="317" height="245"/>
             <connections>

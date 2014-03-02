@@ -65,7 +65,9 @@
     normalBubble = [JSQMessagesBubbleImageFactory jsq_stretchableImageFromImage:normalBubble withCapInsets:capInsets];
     highlightedBubble = [JSQMessagesBubbleImageFactory jsq_stretchableImageFromImage:highlightedBubble withCapInsets:capInsets];
     
-    return [[UIImageView alloc] initWithImage:normalBubble highlightedImage:highlightedBubble];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:normalBubble highlightedImage:highlightedBubble];
+    imageView.backgroundColor = [UIColor whiteColor];
+    return imageView;
 }
 
 + (UIImage *)jsq_horizontallyFlippedImageFromImage:(UIImage *)image

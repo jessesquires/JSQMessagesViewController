@@ -49,10 +49,10 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="vLY-aM-0Dr" secondAttribute="bottom" id="31g-b4-r5Z"/>
-                            <constraint firstItem="vLY-aM-0Dr" firstAttribute="top" secondItem="2zh-vR-QJW" secondAttribute="top" id="X0X-m7-fdd"/>
-                            <constraint firstItem="vLY-aM-0Dr" firstAttribute="leading" secondItem="2zh-vR-QJW" secondAttribute="leading" id="eLA-VL-DHs"/>
-                            <constraint firstAttribute="trailing" secondItem="vLY-aM-0Dr" secondAttribute="trailing" id="vMb-aP-z2G"/>
+                            <constraint firstItem="vLY-aM-0Dr" firstAttribute="leading" secondItem="2zh-vR-QJW" secondAttribute="leading" id="7rI-Nc-AK3"/>
+                            <constraint firstItem="vLY-aM-0Dr" firstAttribute="top" secondItem="2zh-vR-QJW" secondAttribute="top" id="RiG-21-Bqc"/>
+                            <constraint firstAttribute="bottom" secondItem="vLY-aM-0Dr" secondAttribute="bottom" id="UbF-Bl-Q7v"/>
+                            <constraint firstAttribute="trailing" secondItem="vLY-aM-0Dr" secondAttribute="trailing" id="aVg-yy-8K7"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X89-B1-aAd">
@@ -84,7 +84,6 @@
                 <constraint firstItem="p52-YN-yLu" firstAttribute="leading" secondItem="23f-xH-rkY" secondAttribute="leading" constant="28" id="8Gq-UC-Bc0"/>
                 <constraint firstAttribute="trailing" secondItem="jxM-YD-sVG" secondAttribute="trailing" id="AwY-g7-f1T"/>
                 <constraint firstItem="jxM-YD-sVG" firstAttribute="top" secondItem="23f-xH-rkY" secondAttribute="top" id="HYT-Tw-whz"/>
-                <constraint firstItem="X89-B1-aAd" firstAttribute="leading" secondItem="2zh-vR-QJW" secondAttribute="trailing" constant="2" id="JL6-fN-TyL"/>
                 <constraint firstAttribute="trailing" secondItem="X89-B1-aAd" secondAttribute="trailing" id="KLt-Ix-wDa"/>
                 <constraint firstItem="7Uc-dI-YDD" firstAttribute="top" secondItem="2zh-vR-QJW" secondAttribute="bottom" id="Ngq-ew-t2K"/>
                 <constraint firstItem="p52-YN-yLu" firstAttribute="top" secondItem="jxM-YD-sVG" secondAttribute="bottom" id="WK3-Eh-gG8"/>
@@ -93,10 +92,12 @@
                 <constraint firstItem="2zh-vR-QJW" firstAttribute="top" secondItem="p52-YN-yLu" secondAttribute="bottom" id="hz2-SK-dce"/>
                 <constraint firstItem="7Uc-dI-YDD" firstAttribute="top" secondItem="X89-B1-aAd" secondAttribute="bottom" id="iiF-tn-5Ir"/>
                 <constraint firstItem="p52-YN-yLu" firstAttribute="top" secondItem="jxM-YD-sVG" secondAttribute="bottom" id="jBD-JV-AWk"/>
+                <constraint firstItem="X89-B1-aAd" firstAttribute="leading" secondItem="2zh-vR-QJW" secondAttribute="trailing" constant="2" id="jlj-vM-SVu"/>
                 <constraint firstItem="2zh-vR-QJW" firstAttribute="width" secondItem="p52-YN-yLu" secondAttribute="width" id="kbd-mX-RLt"/>
                 <constraint firstItem="jxM-YD-sVG" firstAttribute="leading" secondItem="23f-xH-rkY" secondAttribute="leading" id="qeB-G5-1Wq"/>
                 <constraint firstItem="7Uc-dI-YDD" firstAttribute="top" secondItem="X89-B1-aAd" secondAttribute="bottom" id="qse-KA-PqF"/>
                 <constraint firstItem="2zh-vR-QJW" firstAttribute="leading" secondItem="23f-xH-rkY" secondAttribute="leading" constant="28" id="tya-FG-SP6"/>
+                <constraint firstItem="X89-B1-aAd" firstAttribute="leading" secondItem="2zh-vR-QJW" secondAttribute="trailing" constant="2" id="vMz-Yi-B0w"/>
             </constraints>
             <size key="customSize" width="317" height="245"/>
             <connections>

@@ -139,6 +139,7 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 44.0f;
                                        CGRectGetWidth(self.bubbleContainerView.frame),
                                        CGRectGetHeight(self.bubbleContainerView.frame));
     
+    [bubbleImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.bubbleContainerView insertSubview:bubbleImageView belowSubview:self.textView];
     [self.bubbleContainerView jsq_pinAllEdgesOfSubview:bubbleImageView];
     [self setNeedsUpdateConstraints];
@@ -169,6 +170,7 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 44.0f;
     self.avatarContainerView.hidden = NO;
     self.avatarViewSize = CGSizeMake(CGRectGetWidth(avatarImageView.frame), CGRectGetHeight(avatarImageView.frame));
     
+    [avatarImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.avatarContainerView addSubview:avatarImageView];
     [self.avatarContainerView jsq_pinAllEdgesOfSubview:avatarImageView];
     [self setNeedsUpdateConstraints];
