@@ -150,7 +150,7 @@
     imgView1.image = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo-avatar-jobs"] diameter:kJSQMessagesCollectionViewCellAvatarSizeDefault];
     cell1.avatarImageView = imgView1;
     
-    
+    cell1.bubbleImageView = [JSQMessagesBubbleImageFactory outgoingBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
     
     cell2.cellTopLabel.text = @"time";
     cell2.messageBubbleTopLabel.text = @"recipient";

@@ -258,11 +258,11 @@
 		883F2B2518BA99E6003BC4B5 /* JSQMessagesViewController */ = {
 			isa = PBXGroup;
 			children = (
-				882F358F18C3C31F00E34A3C /* View Controllers */,
 				885ED81918C29BE5004613D4 /* Categories */,
 				883F2B3818BAF3AD003BC4B5 /* Cells */,
 				882F358A18C3BB8D00E34A3C /* Factories */,
 				885ED81318C29968004613D4 /* Toolbar */,
+				882F358F18C3C31F00E34A3C /* View Controllers */,
 			);
 			path = JSQMessagesViewController;
 			sourceTree = "<group>";

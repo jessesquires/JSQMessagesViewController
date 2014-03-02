@@ -125,23 +125,23 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 44.0f;
 
 - (void)setBubbleImageView:(UIImageView *)bubbleImageView
 {
-    if (!bubbleImageView) {
-        NSAssert(NO, @"%s ERROR : bubbleImageView must not be nil", __PRETTY_FUNCTION__);
-    }
-    
     if (_bubbleImageView) {
         [_bubbleImageView removeFromSuperview];
     }
     
-    if (CGRectEqualToRect(bubbleImageView.frame, CGRectZero)) {
-        bubbleImageView.frame = CGRectMake(0.0f,
-                                           0.0f,
-                                           CGRectGetWidth(self.bubbleContainerView.frame),
-                                           CGRectGetHeight(self.bubbleContainerView.frame));
+    if (!bubbleImageView) {
+        _bubbleImageView = nil;
+        return;
     }
     
-    [self.bubbleContainerView addSubview:bubbleImageView];
+    bubbleImageView.frame = CGRectMake(0.0f,
+                                       0.0f,
+                                       CGRectGetWidth(self.bubbleContainerView.frame),
+                                       CGRectGetHeight(self.bubbleContainerView.frame));
+    
+    [self.bubbleContainerView insertSubview:bubbleImageView belowSubview:self.textView];
     [self.bubbleContainerView jsq_pinAllEdgesOfSubview:bubbleImageView];
+    [self setNeedsUpdateConstraints];
     
     _bubbleImageView = bubbleImageView;
 }
@@ -156,6 +156,7 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 44.0f;
         self.avatarViewSize = CGSizeZero;
         _avatarImageView = nil;
         self.avatarContainerView.hidden = YES;
+        return;
     }
     
     if (CGRectEqualToRect(avatarImageView.frame, CGRectZero)) {
@@ -170,6 +171,7 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 44.0f;
     
     [self.avatarContainerView addSubview:avatarImageView];
     [self.avatarContainerView jsq_pinAllEdgesOfSubview:avatarImageView];
+    [self setNeedsUpdateConstraints];
     
     _avatarImageView = avatarImageView;
 }

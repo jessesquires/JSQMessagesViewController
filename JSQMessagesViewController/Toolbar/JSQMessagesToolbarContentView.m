@@ -97,6 +97,7 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.0f;
     
     [self.leftBarButtonContainerView addSubview:leftBarButtonItem];
     [self.leftBarButtonContainerView jsq_pinAllEdgesOfSubview:leftBarButtonItem];
+    [self setNeedsUpdateConstraints];
     
     _leftBarButtonItem = leftBarButtonItem;
 }
@@ -134,6 +135,7 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.0f;
     
     [self.rightBarButtonContainerView addSubview:rightBarButtonItem];
     [self.rightBarButtonContainerView jsq_pinAllEdgesOfSubview:rightBarButtonItem];
+    [self setNeedsUpdateConstraints];
     
     _rightBarButtonItem = rightBarButtonItem;
 }
