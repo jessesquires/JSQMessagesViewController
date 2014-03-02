@@ -17,6 +17,8 @@
 #import "JSQMessagesToolbarContentView.h"
 
 #import "UIView+JSQMessages.h"
+#import "UIColor+JSQMessages.h"
+#import "UIImage+JSQMessages.h"
 
 const CGFloat kJSQMessagesInputToolbarHeightDefault = 44.0f;
 
@@ -44,9 +46,12 @@ const CGFloat kJSQMessagesInputToolbarHeightDefault = 44.0f;
     _contentView = toolbarContentView;
     
     UIImage *cameraImage = [UIImage imageNamed:@"button-photo"];
+    UIImage *cameraNormal = [cameraImage jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
+    UIImage *cameraHighlighted = [cameraImage jsq_imageMaskedWithColor:[UIColor darkGrayColor]];
+    
     UIButton *cameraButton = [[UIButton alloc] initWithFrame:CGRectZero];
-    [cameraButton setImage:cameraImage forState:UIControlStateNormal];
-    [cameraButton setImage:cameraImage forState:UIControlStateHighlighted];
+    [cameraButton setImage:cameraNormal forState:UIControlStateNormal];
+    [cameraButton setImage:cameraHighlighted forState:UIControlStateHighlighted];
     cameraButton.contentMode = UIViewContentModeScaleAspectFit;
     cameraButton.backgroundColor = [UIColor clearColor];
     cameraButton.tintColor = [UIColor lightGrayColor];
@@ -55,8 +60,8 @@ const CGFloat kJSQMessagesInputToolbarHeightDefault = 44.0f;
     NSString *sendTitle = NSLocalizedString(@"Send", @"Text for the send button on the messages view toolbar");
     UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectZero];
     [sendButton setTitle:sendTitle forState:UIControlStateNormal];
-    [sendButton setTitle:sendTitle forState:UIControlStateHighlighted];
-    [sendButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [sendButton setTitleColor:[UIColor jsq_messageBubbleBlueColor] forState:UIControlStateNormal];
+    [sendButton setTitleColor:[[UIColor jsq_messageBubbleBlueColor] jsq_colorByDarkeningColorWithValue:0.1f] forState:UIControlStateHighlighted];
     [sendButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
     sendButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0f];
     sendButton.contentMode = UIViewContentModeCenter;

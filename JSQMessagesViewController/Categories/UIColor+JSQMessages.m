@@ -44,7 +44,7 @@
 
 #pragma mark - Utilities
 
-- (UIColor *)jsq_darkenColorWithValue:(CGFloat)value
+- (UIColor *)jsq_colorByDarkeningColorWithValue:(CGFloat)value
 {
     NSUInteger totalComponents = CGColorGetNumberOfComponents(self.CGColor);
     BOOL isGreyscale = (totalComponents == 2) ? YES : NO;

@@ -42,6 +42,6 @@
  *
  *  @return A new color object whose brightness is decreased by the given values. The other color values remain the same as the receiver.
  */
-- (UIColor *)jsq_darkenColorWithValue:(CGFloat)value;
+- (UIColor *)jsq_colorByDarkeningColorWithValue:(CGFloat)value;
 
 @end

@@ -32,7 +32,7 @@
     UIImage *bubble = [UIImage imageNamed:@"bubble-min"];
     
     UIImage *normalBubble = [bubble js_imageMaskWithColor:color];
-    UIImage *highlightedBubble = [bubble js_imageMaskWithColor:[color jsq_darkenColorWithValue:0.12f]];
+    UIImage *highlightedBubble = [bubble js_imageMaskWithColor:[color jsq_colorByDarkeningColorWithValue:0.12f]];
     
     if (type == JSBubbleMessageTypeIncoming) {
         normalBubble = [normalBubble js_imageFlippedHorizontal];
