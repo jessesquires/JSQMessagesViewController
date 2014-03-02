@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="prp-gb-8b6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="prp-gb-8b6">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -23,7 +23,7 @@
                                 <collectionViewLayout key="collectionViewLayout" id="ApH-30-MTL" customClass="JSQMessagesCollectionViewFlowLayout"/>
                                 <cells/>
                             </collectionView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="geh-v5-qov">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="geh-v5-qov" customClass="JSQMessagesInputToolbar">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <constraints>
@@ -45,6 +45,9 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Aal-vf-sDR" id="FNZ-V4-ff3"/>
+                        <outlet property="inputToolbar" destination="geh-v5-qov" id="cEQ-Td-bfb"/>
+                        <outlet property="toolbarBottomLayoutGuide" destination="W1O-JA-fCo" id="GdV-om-bOn"/>
+                        <outlet property="toolbarHeightContraint" destination="iOt-Ku-W4J" id="9k8-I4-C21"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dXh-Kd-6zX" userLabel="First Responder" sceneMemberID="firstResponder"/>

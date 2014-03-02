@@ -18,9 +18,13 @@
 #import "JSQMessagesCollectionViewFlowLayout.h"
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesToolbarContentView.h"
+#import "JSQMessagesInputToolbar.h"
 
 @interface JSQMessagesViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic, readonly) JSQMessagesCollectionView *collectionView;
+
+@property (weak, nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
 
 @end

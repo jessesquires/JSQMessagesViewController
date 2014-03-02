@@ -18,6 +18,10 @@
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 
+@property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightContraint;
+
 
 @end
 
@@ -41,6 +45,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+//    self.inputToolbar.contentView.leftBarButtonItem = nil;
+//    self.toolbarHeightContraint.constant = 100.0f;
+//    [self.view setNeedsUpdateConstraints];
 }
 
 - (void)didReceiveMemoryWarning
