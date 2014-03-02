@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -85,9 +85,14 @@
             <size key="customSize" width="317" height="245"/>
             <connections>
                 <outlet property="avatarContainerView" destination="Da1-09-wR4" id="tpM-P4-qUR"/>
+                <outlet property="avatarContainerViewHeight" destination="tZk-AK-JFa" id="fNO-dg-jo5"/>
+                <outlet property="avatarContainerViewWidth" destination="YwX-fW-Me6" id="76D-iF-y4N"/>
                 <outlet property="bubbleTopLabel" destination="Ufa-bF-l1Y" id="xbd-GG-6Gq"/>
+                <outlet property="bubbleTopLabelHeight" destination="fal-sy-hrK" id="cxS-XA-MHx"/>
                 <outlet property="cellBottomLabel" destination="UPz-5x-c1T" id="MKm-hp-T6v"/>
+                <outlet property="cellBottomLabelHeight" destination="xPR-Ph-Ze9" id="DwK-XW-kFN"/>
                 <outlet property="cellTopLabel" destination="afj-rd-iNv" id="bTd-4q-U7e"/>
+                <outlet property="cellTopLabelHeight" destination="fKS-MR-YPI" id="Pd3-QA-5jg"/>
                 <outlet property="messageContainerView" destination="btS-p8-B7Z" id="kv7-T8-iq6"/>
             </connections>
         </collectionViewCell>
