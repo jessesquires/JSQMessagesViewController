@@ -38,7 +38,22 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2zh-vR-QJW">
                         <rect key="frame" x="28" y="40" width="248" height="94"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vLY-aM-0Dr">
+                                <rect key="frame" x="0.0" y="0.0" width="248" height="94"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="vLY-aM-0Dr" secondAttribute="bottom" id="31g-b4-r5Z"/>
+                            <constraint firstItem="vLY-aM-0Dr" firstAttribute="top" secondItem="2zh-vR-QJW" secondAttribute="top" id="X0X-m7-fdd"/>
+                            <constraint firstItem="vLY-aM-0Dr" firstAttribute="leading" secondItem="2zh-vR-QJW" secondAttribute="leading" id="eLA-VL-DHs"/>
+                            <constraint firstAttribute="trailing" secondItem="vLY-aM-0Dr" secondAttribute="trailing" id="vMb-aP-z2G"/>
+                        </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X89-B1-aAd">
                         <rect key="frame" x="276" y="90" width="44" height="44"/>
@@ -89,13 +104,14 @@
                 <outlet property="avatarContainerView" destination="X89-B1-aAd" id="WSI-Zc-qIE"/>
                 <outlet property="avatarContainerViewHeight" destination="tgw-aN-JJu" id="Pvb-90-nP4"/>
                 <outlet property="avatarContainerViewWidth" destination="Pkm-tW-k4z" id="LZ2-Ww-4rg"/>
-                <outlet property="bubbleTopLabel" destination="p52-YN-yLu" id="DWf-Tw-K9u"/>
                 <outlet property="bubbleTopLabelHeight" destination="8TB-va-f8L" id="cGa-0v-pAJ"/>
                 <outlet property="cellBottomLabel" destination="7Uc-dI-YDD" id="gVD-C2-UcZ"/>
                 <outlet property="cellBottomLabelHeight" destination="cPs-M4-tjX" id="SY0-7v-ZHz"/>
                 <outlet property="cellTopLabel" destination="jxM-YD-sVG" id="acH-pr-spx"/>
                 <outlet property="cellTopLabelHeight" destination="9oK-E7-iXA" id="fGo-fX-dv3"/>
-                <outlet property="messageContainerView" destination="2zh-vR-QJW" id="tTj-4B-0D1"/>
+                <outlet property="messageBubbleContainerView" destination="2zh-vR-QJW" id="Tgy-Wj-3Fh"/>
+                <outlet property="messageBubbleTopLabel" destination="p52-YN-yLu" id="SLH-sA-Chu"/>
+                <outlet property="textView" destination="vLY-aM-0Dr" id="YEp-mW-xIY"/>
             </connections>
         </collectionViewCell>
     </objects>

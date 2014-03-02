@@ -16,18 +16,25 @@
 
 @interface JSQMessagesCollectionViewCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *cellTopLabel;
-@property (weak, nonatomic) IBOutlet UILabel *bubbleTopLabel;
-@property (weak, nonatomic) IBOutlet UIView *messageContainerView;
-@property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
-@property (weak, nonatomic) IBOutlet UILabel *cellBottomLabel;
+@property (weak, nonatomic, readonly) UILabel *cellTopLabel;
+@property (weak, nonatomic, readonly) UILabel *messageBubbleTopLabel;
+@property (weak, nonatomic, readonly) UITextView *textView;
+@property (weak, nonatomic, readonly) UILabel *cellBottomLabel;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellTopLabelHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubbleTopLabelHeight;
+@property (weak, nonatomic) UIImageView *bubbleImageView;
+@property (weak, nonatomic) UIImageView *avatarImageView;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidth;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBottomLabelHeight;
+@property (weak, nonatomic, readonly) UIView *messageBubbleContainerView;
+@property (weak, nonatomic, readonly) UIView *avatarContainerView;
+
+@property (weak, nonatomic, readonly) NSLayoutConstraint *cellTopLabelHeight;
+@property (weak, nonatomic, readonly) NSLayoutConstraint *bubbleTopLabelHeight;
+
+@property (weak, nonatomic, readonly) NSLayoutConstraint *avatarContainerViewWidth;
+@property (weak, nonatomic, readonly) NSLayoutConstraint *avatarContainerViewHeight;
+@property (weak, nonatomic, readonly) NSLayoutConstraint *cellBottomLabelHeight;
+
+@property (strong, nonatomic) UIFont *font UI_APPEARANCE_SELECTOR;
 
 #pragma mark - Class methods
 
