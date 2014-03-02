@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6404600EC231419EB620AF48 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFF9601294443728D9481E0 /* libPods.a */; };
 		882F358318C3B46000E34A3C /* UIColor+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 882F358218C3B46000E34A3C /* UIColor+JSQMessages.m */; };
+		882F358618C3B71900E34A3C /* UIImage+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 882F358518C3B71900E34A3C /* UIImage+JSQMessages.m */; };
 		883F2B2D18BAE902003BC4B5 /* JSQMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F2B2C18BAE902003BC4B5 /* JSQMessagesViewController.m */; };
 		883F2B3118BAE9CF003BC4B5 /* JSQMessagesCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F2B3018BAE9CF003BC4B5 /* JSQMessagesCollectionView.m */; };
 		883F2B3418BAE9F7003BC4B5 /* JSQMessagesCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F2B3318BAE9F7003BC4B5 /* JSQMessagesCollectionViewFlowLayout.m */; };
@@ -99,6 +100,8 @@
 		6AFF9601294443728D9481E0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		882F358118C3B46000E34A3C /* UIColor+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+JSQMessages.h"; path = "Categories/UIColor+JSQMessages.h"; sourceTree = "<group>"; };
 		882F358218C3B46000E34A3C /* UIColor+JSQMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+JSQMessages.m"; path = "Categories/UIColor+JSQMessages.m"; sourceTree = "<group>"; };
+		882F358418C3B71900E34A3C /* UIImage+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+JSQMessages.h"; path = "Categories/UIImage+JSQMessages.h"; sourceTree = "<group>"; };
+		882F358518C3B71900E34A3C /* UIImage+JSQMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+JSQMessages.m"; path = "Categories/UIImage+JSQMessages.m"; sourceTree = "<group>"; };
 		883F2B2B18BAE902003BC4B5 /* JSQMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSQMessagesViewController.h; path = Classes/JSQMessagesViewController.h; sourceTree = "<group>"; };
 		883F2B2C18BAE902003BC4B5 /* JSQMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSQMessagesViewController.m; path = Classes/JSQMessagesViewController.m; sourceTree = "<group>"; };
 		883F2B2F18BAE9CF003BC4B5 /* JSQMessagesCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSQMessagesCollectionView.h; path = Classes/JSQMessagesCollectionView.h; sourceTree = "<group>"; };
@@ -290,6 +293,8 @@
 				882F358218C3B46000E34A3C /* UIColor+JSQMessages.m */,
 				885ED81618C29BDD004613D4 /* UIView+JSQMessages.h */,
 				885ED81718C29BDD004613D4 /* UIView+JSQMessages.m */,
+				882F358418C3B71900E34A3C /* UIImage+JSQMessages.h */,
+				882F358518C3B71900E34A3C /* UIImage+JSQMessages.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -700,6 +705,7 @@
 				88A3FB5A182E079E00705327 /* JSAppDelegate.m in Sources */,
 				885ED81C18C29CE0004613D4 /* JSQMessagesInputToolbar.m in Sources */,
 				88A3FC65182E0EA000705327 /* JSBubbleImageViewFactory.m in Sources */,
+				882F358618C3B71900E34A3C /* UIImage+JSQMessages.m in Sources */,
 				882F358318C3B46000E34A3C /* UIColor+JSQMessages.m in Sources */,
 				88A3FC59182E0EA000705327 /* NSString+JSMessagesView.m in Sources */,
 				885ED81F18C2A542004613D4 /* JSQMessagesComposerTextView.m in Sources */,
