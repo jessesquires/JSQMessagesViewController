@@ -156,7 +156,6 @@
 
 - (void)dealloc
 {
-    [self.messageInputView.textView removeObserver:self forKeyPath:@"contentSize"];
     _delegate = nil;
     _dataSource = nil;
     _tableView = nil;
