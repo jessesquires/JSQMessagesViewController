@@ -46,13 +46,12 @@
                     <connections>
                         <outlet property="collectionView" destination="Aal-vf-sDR" id="FNZ-V4-ff3"/>
                         <outlet property="inputToolbar" destination="geh-v5-qov" id="cEQ-Td-bfb"/>
-                        <outlet property="toolbarBottomLayoutGuide" destination="W1O-JA-fCo" id="GdV-om-bOn"/>
                         <outlet property="toolbarHeightContraint" destination="iOt-Ku-W4J" id="9k8-I4-C21"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dXh-Kd-6zX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="350" y="228"/>
+            <point key="canvasLocation" x="117" y="350"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -14,14 +14,16 @@
 
 #import "JSQMessagesViewController.h"
 
+#import <DAKeyboardControl/DAKeyboardControl.h>
+
 @interface JSQMessagesViewController ()
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightContraint;
 
+- (void)setCollectionViewInsetsWithBottomValue:(CGFloat)bottom;
 
 @end
 
@@ -38,6 +40,7 @@
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
+    self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
 }
 
 #pragma mark - View lifecycle
@@ -45,10 +48,32 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
-//    self.inputToolbar.contentView.leftBarButtonItem = nil;
-//    self.toolbarHeightContraint.constant = 100.0f;
-//    [self.view setNeedsUpdateConstraints];
+    self.view.keyboardTriggerOffset = self.inputToolbar.bounds.size.height;
+    
+    __weak JSQMessagesViewController *weakSelf = self;
+    __weak JSQMessagesCollectionView *weakCollectionView = self.collectionView;
+    __weak JSQMessagesInputToolbar *weakInputToolbar = self.inputToolbar;
+    
+    [self.view addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView) {
+        CGRect toolbarFrame = weakInputToolbar.frame;
+        toolbarFrame.origin.y = keyboardFrameInView.origin.y - toolbarFrame.size.height;
+        
+        weakInputToolbar.frame = toolbarFrame;
+        
+        [weakSelf setCollectionViewInsetsWithBottomValue:weakCollectionView.frame.size.height - toolbarFrame.origin.y];
+    }];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.view removeKeyboardControl];
 }
 
 - (void)didReceiveMemoryWarning
@@ -128,6 +153,15 @@
     CGFloat width = collectionView.frame.size.width - layout.sectionInset.left - layout.sectionInset.right;
     
     return CGSizeMake(width, 200.0f);
+}
+
+#pragma mark - Utilities
+
+- (void)setCollectionViewInsetsWithBottomValue:(CGFloat)bottom
+{
+    UIEdgeInsets insets = UIEdgeInsetsMake(self.topLayoutGuide.length, 0.0f, bottom, 0.0f);
+    self.collectionView.contentInset = insets;
+    self.collectionView.scrollIndicatorInsets = insets;
 }
 
 @end

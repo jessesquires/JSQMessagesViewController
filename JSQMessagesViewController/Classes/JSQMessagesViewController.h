@@ -20,6 +20,7 @@
 #import "JSQMessagesCollectionViewCellOutgoing.h"
 #import "JSQMessagesToolbarContentView.h"
 #import "JSQMessagesInputToolbar.h"
+#import "JSQMessagesComposerTextView.h"
 
 @interface JSQMessagesViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
