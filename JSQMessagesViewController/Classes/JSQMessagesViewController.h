@@ -23,7 +23,7 @@
 #import "JSQMessagesInputToolbar.h"
 #import "JSQMessagesComposerTextView.h"
 
-#import "JSQAvatarFactory.h"
+#import "JSQMessagesAvatarFactory.h"
 
 
 @interface JSQMessagesViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>

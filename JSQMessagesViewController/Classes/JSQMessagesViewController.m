@@ -147,7 +147,7 @@
     
     UIImageView *imgView1 = [[UIImageView alloc] initWithFrame:CGRectZero];
     imgView1.backgroundColor = [UIColor whiteColor];
-    imgView1.image = [JSQAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo-avatar-jobs"] diameter:kJSQMessagesCollectionViewCellAvatarSizeDefault];
+    imgView1.image = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo-avatar-jobs"] diameter:kJSQMessagesCollectionViewCellAvatarSizeDefault];
     cell1.avatarImageView = imgView1;
     
     

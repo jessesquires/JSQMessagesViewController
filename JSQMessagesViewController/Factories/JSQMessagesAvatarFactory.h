@@ -14,7 +14,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JSQAvatarFactory : NSObject
+@interface JSQMessagesAvatarFactory : NSObject
 
 /**
 *  Returns a copy of the image object associated with the specified originalImage that is cropped to a circle with the given diameter.

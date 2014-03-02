@@ -12,9 +12,9 @@
 //  http://opensource.org/licenses/MIT
 //
 
-#import "JSQAvatarFactory.h"
+#import "JSQMessagesAvatarFactory.h"
 
-@interface JSQAvatarFactory ()
+@interface JSQMessagesAvatarFactory ()
 
 + (UIImage *)jsq_circularImage:(UIImage *)image withDiamter:(NSUInteger)diameter;
 
@@ -22,13 +22,13 @@
 
 
 
-@implementation JSQAvatarFactory
+@implementation JSQMessagesAvatarFactory
 
 #pragma mark - Public
 
 + (UIImage *)avatarWithImage:(UIImage *)originalImage diameter:(NSUInteger)diameter
 {
-    return [JSQAvatarFactory jsq_circularImage:originalImage withDiamter:diameter];
+    return [JSQMessagesAvatarFactory jsq_circularImage:originalImage withDiamter:diameter];
 }
 
 #pragma mark - Private
