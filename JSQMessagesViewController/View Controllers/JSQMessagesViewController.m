@@ -154,6 +154,8 @@
     
     cell1.messageBubbleImageView = [JSQMessagesBubbleImageFactory outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
     
+    
+    
     cell2.cellTopLabel.text = @"time";
     cell2.messageBubbleTopLabel.text = @"recipient";
     cell2.textView.text = @"other text here";

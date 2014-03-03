@@ -18,6 +18,7 @@
 
 const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
+const CGFloat kJSQMessagesCollectionViewCellMessageBubblePaddingDefault = 40.0f;
 
 
 @interface JSQMessagesCollectionViewCell ()
@@ -39,6 +40,9 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightContraint;
 
 @property (assign, nonatomic) CGSize avatarViewSize;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleTopLabelHorizontalPadding;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleContainerHorizontalPadding;
 
 @end
 
@@ -73,6 +77,8 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
     
     self.avatarViewSize = CGSizeMake(kJSQMessagesCollectionViewCellAvatarSizeDefault,
                                      kJSQMessagesCollectionViewCellAvatarSizeDefault);
+    
+    self.messageBubblePadding = kJSQMessagesCollectionViewCellMessageBubblePaddingDefault;
     
     self.backgroundColor = [UIColor whiteColor];
     
@@ -203,6 +209,13 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
     [self setNeedsUpdateConstraints];
 }
 
+- (void)setMessageBubblePadding:(CGFloat)messageBubblePadding
+{
+    self.messageBubbleTopLabelHorizontalPadding.constant = messageBubblePadding;
+    self.messageBubbleContainerHorizontalPadding.constant = messageBubblePadding;
+    [self setNeedsUpdateConstraints];
+}
+
 #pragma mark - Getters
 
 - (UIFont *)font
@@ -233,6 +246,11 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
 {
     return CGSizeMake(self.avatarContainerViewWidthContraint.constant,
                       self.avatarContainerViewHeightContraint.constant);
+}
+
+- (CGFloat)messageBubblePadding
+{
+    return self.messageBubbleContainerHorizontalPadding.constant;
 }
 
 @end
