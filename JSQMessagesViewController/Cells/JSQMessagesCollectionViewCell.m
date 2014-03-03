@@ -109,7 +109,7 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
     self.messageBubbleTopLabel.backgroundColor = backgroundColor;
     self.cellBottomLabel.backgroundColor = backgroundColor;
     
-    self.bubbleImageView.backgroundColor = backgroundColor;
+    self.messageBubbleImageView.backgroundColor = backgroundColor;
     self.avatarImageView.backgroundColor = backgroundColor;
     
     self.messageBubbleContainerView.backgroundColor = backgroundColor;
@@ -123,28 +123,28 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
     [self setNeedsLayout];
 }
 
-- (void)setBubbleImageView:(UIImageView *)bubbleImageView
+- (void)setMessageBubbleImageView:(UIImageView *)messageBubbleImageView
 {
-    if (_bubbleImageView) {
-        [_bubbleImageView removeFromSuperview];
+    if (_messageBubbleImageView) {
+        [_messageBubbleImageView removeFromSuperview];
     }
     
-    if (!bubbleImageView) {
-        _bubbleImageView = nil;
+    if (!messageBubbleImageView) {
+        _messageBubbleImageView = nil;
         return;
     }
     
-    bubbleImageView.frame = CGRectMake(0.0f,
-                                       0.0f,
-                                       CGRectGetWidth(self.messageBubbleContainerView.frame),
-                                       CGRectGetHeight(self.messageBubbleContainerView.frame));
+    messageBubbleImageView.frame = CGRectMake(0.0f,
+                                              0.0f,
+                                              CGRectGetWidth(self.messageBubbleContainerView.frame),
+                                              CGRectGetHeight(self.messageBubbleContainerView.frame));
     
-    [bubbleImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.messageBubbleContainerView insertSubview:bubbleImageView belowSubview:self.textView];
-    [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:bubbleImageView];
+    [messageBubbleImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.textView];
+    [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:messageBubbleImageView];
     [self setNeedsUpdateConstraints];
     
-    _bubbleImageView = bubbleImageView;
+    _messageBubbleImageView = messageBubbleImageView;
 }
 
 - (void)setAvatarImageView:(UIImageView *)avatarImageView

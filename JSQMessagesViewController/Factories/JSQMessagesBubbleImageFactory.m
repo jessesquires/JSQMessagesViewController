@@ -34,12 +34,12 @@
 
 #pragma mark - Public
 
-+ (UIImageView *)outgoingBubbleImageViewWithColor:(UIColor *)color
++ (UIImageView *)outgoingMessageBubbleImageViewWithColor:(UIColor *)color
 {
     return [JSQMessagesBubbleImageFactory bubbleImageViewWithColor:color flippedForIncoming:NO];
 }
 
-+ (UIImageView *)incomingBubbleImageViewWithColor:(UIColor *)color
++ (UIImageView *)incomingMessageBubbleImageViewWithColor:(UIColor *)color
 {
     return [JSQMessagesBubbleImageFactory bubbleImageViewWithColor:color flippedForIncoming:YES];
 }

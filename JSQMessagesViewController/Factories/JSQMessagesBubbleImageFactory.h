@@ -26,7 +26,7 @@
  *
  *  @return n initialized image view object if created successfully, `nil` otherwise.
  */
-+ (UIImageView *)outgoingBubbleImageViewWithColor:(UIColor *)color;
++ (UIImageView *)outgoingMessageBubbleImageViewWithColor:(UIColor *)color;
 
 /**
  *  Creates an returns an image view object with the specified color for incoming messages. The `image` property of the image view is configured with a flat bubble image, masked to the given color. The `highlightedImage` property is configured similarly, but with a darkened version of the given color.
@@ -35,6 +35,6 @@
  *
  *  @return n initialized image view object if created successfully, `nil` otherwise.
  */
-+ (UIImageView *)incomingBubbleImageViewWithColor:(UIColor *)color;
++ (UIImageView *)incomingMessageBubbleImageViewWithColor:(UIColor *)color;
 
 @end

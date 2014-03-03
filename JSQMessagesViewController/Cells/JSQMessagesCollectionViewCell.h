@@ -26,7 +26,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault;
 
 @property (weak, nonatomic, readonly) UITextView *textView;
 
-@property (weak, nonatomic) UIImageView *bubbleImageView;
+@property (weak, nonatomic) UIImageView *messageBubbleImageView;
 @property (weak, nonatomic) UIImageView *avatarImageView;
 
 // if you change these properties, you must compute your own cell height
