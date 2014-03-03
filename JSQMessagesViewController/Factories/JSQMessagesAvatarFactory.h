@@ -29,4 +29,10 @@
 */
 + (UIImage *)avatarWithImage:(UIImage *)originalImage diameter:(NSUInteger)diameter;
 
++ (UIImage *)avatarWithUserInitials:(NSString *)userInitials
+                    backgroundColor:(UIColor *)backgroundColor
+                          textColor:(UIColor *)textColor
+                               font:(UIFont *)font
+                           diameter:(NSUInteger)diameter;
+
 @end
