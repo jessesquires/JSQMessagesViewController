@@ -28,11 +28,11 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
-@property (weak, nonatomic) IBOutlet UIView *bubbleContainerView;
+@property (weak, nonatomic) IBOutlet UIView *messageBubbleContainerView;
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellTopLabelHeightContraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubbleTopLabelHeightContraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleTopLabelHeightContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBottomLabelHeightContraint;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidthContraint;
@@ -112,7 +112,7 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
     self.bubbleImageView.backgroundColor = backgroundColor;
     self.avatarImageView.backgroundColor = backgroundColor;
     
-    self.bubbleContainerView.backgroundColor = backgroundColor;
+    self.messageBubbleContainerView.backgroundColor = backgroundColor;
     self.avatarContainerView.backgroundColor = backgroundColor;
 }
 
@@ -136,12 +136,12 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
     
     bubbleImageView.frame = CGRectMake(0.0f,
                                        0.0f,
-                                       CGRectGetWidth(self.bubbleContainerView.frame),
-                                       CGRectGetHeight(self.bubbleContainerView.frame));
+                                       CGRectGetWidth(self.messageBubbleContainerView.frame),
+                                       CGRectGetHeight(self.messageBubbleContainerView.frame));
     
     [bubbleImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.bubbleContainerView insertSubview:bubbleImageView belowSubview:self.textView];
-    [self.bubbleContainerView jsq_pinAllEdgesOfSubview:bubbleImageView];
+    [self.messageBubbleContainerView insertSubview:bubbleImageView belowSubview:self.textView];
+    [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:bubbleImageView];
     [self setNeedsUpdateConstraints];
     
     _bubbleImageView = bubbleImageView;
@@ -186,7 +186,7 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
 
 - (void)setBubbleTopLabelHeight:(CGFloat)bubbleTopLabelHeight
 {
-    self.bubbleTopLabelHeightContraint.constant = bubbleTopLabelHeight;
+    self.messageBubbleTopLabelHeightContraint.constant = bubbleTopLabelHeight;
     [self setNeedsUpdateConstraints];
 }
 
@@ -221,7 +221,7 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
 
 - (CGFloat)bubbleTopLabelHeight
 {
-    return self.bubbleTopLabelHeightContraint.constant;
+    return self.messageBubbleTopLabelHeightContraint.constant;
 }
 
 - (CGFloat)cellBottomLabelHeight

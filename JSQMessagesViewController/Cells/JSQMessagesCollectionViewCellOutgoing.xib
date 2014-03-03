@@ -104,13 +104,13 @@
                 <outlet property="avatarContainerView" destination="X89-B1-aAd" id="WSI-Zc-qIE"/>
                 <outlet property="avatarContainerViewHeightContraint" destination="tgw-aN-JJu" id="l0J-4K-5pd"/>
                 <outlet property="avatarContainerViewWidthContraint" destination="Pkm-tW-k4z" id="208-fX-ekD"/>
-                <outlet property="bubbleContainerView" destination="2zh-vR-QJW" id="Zeg-YU-4Ny"/>
-                <outlet property="bubbleTopLabelHeightContraint" destination="8TB-va-f8L" id="Q2I-Up-2er"/>
                 <outlet property="cellBottomLabel" destination="7Uc-dI-YDD" id="gVD-C2-UcZ"/>
                 <outlet property="cellBottomLabelHeightContraint" destination="cPs-M4-tjX" id="yyh-7V-6do"/>
                 <outlet property="cellTopLabel" destination="jxM-YD-sVG" id="acH-pr-spx"/>
                 <outlet property="cellTopLabelHeightContraint" destination="9oK-E7-iXA" id="TaU-Wg-TP4"/>
+                <outlet property="messageBubbleContainerView" destination="2zh-vR-QJW" id="pu0-GU-eZl"/>
                 <outlet property="messageBubbleTopLabel" destination="p52-YN-yLu" id="SLH-sA-Chu"/>
+                <outlet property="messageBubbleTopLabelHeightContraint" destination="8TB-va-f8L" id="wwN-PJ-flN"/>
                 <outlet property="textView" destination="vLY-aM-0Dr" id="YEp-mW-xIY"/>
             </connections>
         </collectionViewCell>
