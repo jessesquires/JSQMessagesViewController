@@ -31,7 +31,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellMessageBubblePaddi
 
 // if you change these properties below, you must compute your own cell height
 @property (assign, nonatomic) CGFloat cellTopLabelHeight;
-@property (assign, nonatomic) CGFloat bubbleTopLabelHeight;
+@property (assign, nonatomic) CGFloat messageBubbleTopLabelHeight;
 @property (assign, nonatomic) CGFloat cellBottomLabelHeight;
 @property (assign, nonatomic) CGFloat messageBubblePadding;
 

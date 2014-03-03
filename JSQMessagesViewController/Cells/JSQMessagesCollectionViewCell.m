@@ -72,7 +72,7 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubblePaddingDefault = 40.0f;
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     self.cellTopLabelHeight = kJSQMessagesCollectionViewCellLabelHeightDefault;
-    self.bubbleTopLabelHeight = kJSQMessagesCollectionViewCellLabelHeightDefault;
+    self.messageBubbleTopLabelHeight = kJSQMessagesCollectionViewCellLabelHeightDefault;
     self.cellBottomLabelHeight = kJSQMessagesCollectionViewCellLabelHeightDefault;
     
     self.avatarViewSize = CGSizeMake(kJSQMessagesCollectionViewCellAvatarSizeDefault,
@@ -190,9 +190,9 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubblePaddingDefault = 40.0f;
     [self setNeedsUpdateConstraints];
 }
 
-- (void)setBubbleTopLabelHeight:(CGFloat)bubbleTopLabelHeight
+- (void)setMessageBubbleTopLabelHeight:(CGFloat)messageBubbleTopLabelHeight
 {
-    self.messageBubbleTopLabelHeightContraint.constant = bubbleTopLabelHeight;
+    self.messageBubbleTopLabelHeightContraint.constant = messageBubbleTopLabelHeight;
     [self setNeedsUpdateConstraints];
 }
 
@@ -232,7 +232,7 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubblePaddingDefault = 40.0f;
     return self.cellTopLabelHeightContraint.constant;
 }
 
-- (CGFloat)bubbleTopLabelHeight
+- (CGFloat)messageBubbleTopLabelHeight
 {
     return self.messageBubbleTopLabelHeightContraint.constant;
 }
