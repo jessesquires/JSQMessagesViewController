@@ -142,7 +142,7 @@
     cell1.cellTopLabel.text = @"time";
     cell1.messageBubbleTopLabel.text = @"sender";
     cell1.textView.text = @"some sample text";
-    cell1.cellBottomLabel.text = @"sender bottom";
+    cell1.cellBottomLabel.text = @"sent";
     
     cell1.textView.textColor = [UIColor whiteColor];
     
@@ -157,7 +157,7 @@
     cell2.messageBubbleTopLabel.text = @"recipient";
     cell2.textView.text = @"other text here";
     cell2.textView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5];
-    cell2.cellBottomLabel.text = @"recipient bottom";
+    cell2.cellBottomLabel.text = @"recieved";
     
     UIImageView *imgView2 = [[UIImageView alloc] initWithFrame:CGRectZero];
     imgView2.backgroundColor = [UIColor redColor];

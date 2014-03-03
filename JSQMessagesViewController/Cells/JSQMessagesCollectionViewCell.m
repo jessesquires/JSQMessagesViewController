@@ -17,7 +17,7 @@
 #import "UIView+JSQMessages.h"
 
 const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
-const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 44.0f;
+const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
 
 
 @interface JSQMessagesCollectionViewCell ()
@@ -83,7 +83,7 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 44.0f;
     self.messageBubbleTopLabel.font = [UIFont systemFontOfSize:12.0f];
     self.messageBubbleTopLabel.textColor = [UIColor lightGrayColor];
     
-    self.cellBottomLabel.font = [UIFont systemFontOfSize:12.0f];
+    self.cellBottomLabel.font = [UIFont systemFontOfSize:11.0f];
     self.cellBottomLabel.textColor = [UIColor lightGrayColor];
     
     self.textView.textColor = [UIColor blackColor];
@@ -163,8 +163,8 @@ const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 44.0f;
     if (CGRectEqualToRect(avatarImageView.frame, CGRectZero)) {
         avatarImageView.frame = CGRectMake(0.0f,
                                            0.0f,
-                                           CGRectGetWidth(self.avatarContainerView.frame),
-                                           CGRectGetHeight(self.avatarContainerView.frame));
+                                           kJSQMessagesCollectionViewCellAvatarSizeDefault,
+                                           kJSQMessagesCollectionViewCellAvatarSizeDefault);
     }
     
     self.avatarContainerView.hidden = NO;
