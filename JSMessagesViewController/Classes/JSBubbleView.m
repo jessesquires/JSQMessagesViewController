@@ -181,6 +181,13 @@
 
 #pragma mark - Getters
 
+- (CGFloat)heightForSingleLine {
+    NSAttributedString *singleLineString = [[NSAttributedString alloc] initWithString:@"."];
+    CGSize bubbleSize = [JSBubbleView neededSizeForAttributedText:singleLineString];
+    return bubbleSize.height;
+}
+
+
 - (CGRect)bubbleFrame
 {
     if(CGRectIsNull(self.cachedBubbleFrameRect)) {
@@ -321,9 +328,12 @@
 }
 
 - (void)configureAvatarView:(UIImageView *)imageview {
+    
+    CGFloat size = [self heightForSingleLine];
+    
     self.avatarImageView = imageview;
     self.avatarImageView.hidden = !self.hasAvatar;
-    self.avatarImageView.frame = CGRectMake(1, 1, self.bubbleImageView.frame.size.height-2, self.bubbleImageView.frame.size.height-2);
+    self.avatarImageView.frame = CGRectMake(1, 1, size-2, size-2);
     self.avatarImageView.layer.cornerRadius = self.bubbleImageView.frame.size.height/2;
     self.avatarImageView.clipsToBounds = YES;
     self.avatarImageView.backgroundColor = [UIColor redColor];
