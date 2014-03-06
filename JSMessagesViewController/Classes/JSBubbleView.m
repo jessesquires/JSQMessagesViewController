@@ -40,6 +40,8 @@
 + (CGSize)neededSizeForText:(NSString *)text type:(JSBubbleMessageType)type;
 + (CGFloat)neededHeightForText:(NSString *)text type:(JSBubbleMessageType)type;
 
+@property (nonatomic, strong) UIImageView *avatarImageView;
+
 @end
 
 
@@ -224,7 +226,8 @@
 
 -(void)layoutTextViewFrame {
     
-    CGFloat textX = self.bubbleImageView.frame.origin.x;
+    CGFloat textX = self.bubbleImageView.frame.origin.x + (self.hasAvatar ? self.bubbleImageView.frame.size.height: 0);
+    
     
     if(self.type == JSBubbleMessageTypeIncoming) {
         textX += (self.bubbleImageView.image.capInsets.left / 2.0f);
@@ -314,6 +317,18 @@
     self.foregroundImageView.frame = foregroundImageViewFrame;
     
     [self layoutTextViewFrame];
+    
+}
+
+- (void)configureAvatarView:(UIImageView *)imageview {
+    self.avatarImageView = imageview;
+    self.avatarImageView.hidden = !self.hasAvatar;
+    self.avatarImageView.frame = CGRectMake(1, 1, self.bubbleImageView.frame.size.height-2, self.bubbleImageView.frame.size.height-2);
+    self.avatarImageView.layer.cornerRadius = self.bubbleImageView.frame.size.height/2;
+    self.avatarImageView.clipsToBounds = YES;
+    self.avatarImageView.backgroundColor = [UIColor redColor];
+    
+    [self.bubbleImageView addSubview:self.avatarImageView];
     
 }
 
