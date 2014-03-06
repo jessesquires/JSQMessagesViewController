@@ -329,6 +329,8 @@
 
 - (void)configureAvatarView:(UIImageView *)imageview {
     
+    [self.avatarImageView removeFromSuperview];
+    
     CGFloat size = [self heightForSingleLine];
     
     self.avatarImageView = imageview;
