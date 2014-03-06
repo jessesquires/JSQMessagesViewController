@@ -336,7 +336,7 @@
     self.avatarImageView = imageview;
     self.avatarImageView.hidden = !self.hasAvatar;
     self.avatarImageView.frame = CGRectMake(1, 1, size-2, size-2);
-    self.avatarImageView.layer.cornerRadius = self.bubbleImageView.frame.size.height/2;
+    self.avatarImageView.layer.cornerRadius = size/2;
     self.avatarImageView.clipsToBounds = YES;
     self.avatarImageView.backgroundColor = [UIColor redColor];
     
