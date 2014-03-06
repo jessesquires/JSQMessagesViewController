@@ -235,7 +235,7 @@
     
     CGRect textFrame = CGRectMake(textX,
                                   self.bubbleImageView.frame.origin.y,
-                                  self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f) - kForegroundImageViewOffset,
+                                  self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f) - kForegroundImageViewOffset - (self.hasAvatar ? self.bubbleImageView.frame.size.height: 0),
                                   self.bubbleImageView.frame.size.height - kMarginTop);
     
     // to make up for changing this to UILabel, we add/subtract based on this former line of code that only applied to UITextView:
