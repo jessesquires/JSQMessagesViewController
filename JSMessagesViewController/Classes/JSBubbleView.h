@@ -57,6 +57,8 @@
 @property (nonatomic) CGFloat subtractFromWidth; 
 @property (nonatomic) CGRect  cachedBubbleFrameRect;
 
+@property (nonatomic, assign) BOOL hasAvatar;
+
 #pragma mark - Initialization
 
 /**
@@ -104,5 +106,7 @@
 
 #pragma mark - Instance methods
 -(void)assignSubtractFromWidth:(CGFloat)value;
+
+- (void)configureAvatarView:(UIImageView *)imageview;
 
 @end

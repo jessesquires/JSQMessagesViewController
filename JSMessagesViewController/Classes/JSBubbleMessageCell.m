@@ -112,6 +112,11 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
 
 - (void)configureAvatarImageView:(UIImageView *)imageView forMessageType:(JSBubbleMessageType)type
 {
+    if (type == JSBubbleMessageTypeNotification) {
+        //For notifications, avatars are inside the bubbleView
+        return;
+    }
+    
     CGFloat avatarX = 0.5f;
     if(type == JSBubbleMessageTypeOutgoing) {
         avatarX = (self.contentView.frame.size.width - kJSAvatarImageSize);
@@ -187,7 +192,7 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
     
     if(hasAvatar) {
         offsetX = 4.0f;
-        bubbleX = kJSAvatarImageSize;
+        if (type != JSBubbleMessageTypeNotification) bubbleX = kJSAvatarImageSize;
         if(type == JSBubbleMessageTypeOutgoing) {
             offsetX = kJSAvatarImageSize - 4.0f;
         }
@@ -209,6 +214,10 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
     JSBubbleView *bubbleView = [[JSBubbleView alloc] initWithFrame:frame
                                                         bubbleType:type
                                                    bubbleImageView:bubbleImageView];
+    
+    if (hasAvatar) bubbleView.hasAvatar = YES;
+    
+    
     bubbleView.autoresizingMask = (UIViewAutoresizingFlexibleWidth
                                    | UIViewAutoresizingFlexibleHeight
                                    | UIViewAutoresizingFlexibleBottomMargin);
@@ -349,7 +358,9 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
     [_avatarImageView removeFromSuperview];
     _avatarImageView = nil;
     
-    [self configureAvatarImageView:imageView forMessageType:[self messageType]];
+    if (self.messageType == JSBubbleMessageTypeNotification) {
+        [self.bubbleView configureAvatarView:imageView];
+    } else [self configureAvatarImageView:imageView forMessageType:[self messageType]];
 }
 
 - (void)setSubtitle:(NSString *)subtitle
