@@ -14,7 +14,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JSBubbleView.h"
-#import "JSMessageData.h"
+#import "JSQMessageData.h"
 
 /**
  *  The `JSBubbleMessageCell` class defines the attributes and behavior of the cells that appear in `JSMessagesViewController`. This class includes properties and methods for setting and managing cell content.
@@ -62,7 +62,7 @@
  */
 - (instancetype)initWithBubbleType:(JSBubbleMessageType)type
                    bubbleImageView:(UIImageView *)bubbleImageView
-                           message:(id<JSMessageData>)message
+                           message:(id<JSQMessageData>)message
                  displaysTimestamp:(BOOL)displaysTimestamp
                          hasAvatar:(BOOL)hasAvatar
                    reuseIdentifier:(NSString *)reuseIdentifier;
@@ -74,7 +74,7 @@
  *
  *  @param message An object that conforms to the `JSMessageData` protocol containing the message data for the cell.
  */
-- (void)setMessage:(id<JSMessageData>)message;
+- (void)setMessage:(id<JSQMessageData>)message;
 
 /**
  *  Sets the imageView for the avatarImageView of the cell. The frame is set for you by `JSBubbleMessageCell`.
@@ -104,7 +104,7 @@
  *
  *  @return The height required for the frame of the cell in order for the cell to display the entire contents of its subviews.
  */
-+ (CGFloat)neededHeightForBubbleMessageCellWithMessage:(id<JSMessageData>)message
++ (CGFloat)neededHeightForBubbleMessageCellWithMessage:(id<JSQMessageData>)message
                                         displaysAvatar:(BOOL)displaysAvatar
                                      displaysTimestamp:(BOOL)displaysTimestamp;
 

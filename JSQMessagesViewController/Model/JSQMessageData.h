@@ -8,17 +8,17 @@
 //
 //
 //  The MIT License
-//  Copyright (c) 2013 Jesse Squires
+//  Copyright (c) 2014 Jesse Squires
 //  http://opensource.org/licenses/MIT
 //
 
 #import <Foundation/Foundation.h>
 
 /**
- *  The `JSMessageData` protocol defines the common interface through which `JSMessagesViewController` interacts with message model objects. 
- *  It declares the methods that a class must implement so that instances of that class can be displayed properly by a `JSMessagesViewController`.
+ *  The `JSQMessageData` protocol defines the common interface through which `JSQMessagesViewController` interacts with message model objects.
+ *  It declares the required and optional methods that a class must implement so that instances of that class can be displayed properly with a `JSQMessagesCollectionViewCell`.
  */
-@protocol JSMessageData <NSObject>
+@protocol JSQMessageData <NSObject>
 
 @required
 

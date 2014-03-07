@@ -23,6 +23,8 @@
 #import "JSQMessagesInputToolbar.h"
 #import "JSQMessagesComposerTextView.h"
 
+#import "JSQMessageData.h"
+
 #import "JSQMessagesBubbleImageFactory.h"
 #import "JSQMessagesAvatarFactory.h"
 

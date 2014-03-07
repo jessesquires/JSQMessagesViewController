@@ -13,12 +13,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JSMessageData.h"
+#import "JSQMessageData.h"
 
 /**
  *  A `JSMessage` object represents a single user message. This is a concrete class that implements the `JSMessageData` protocol. It contains the message text, its sender, and the date that the message was sent.
  */
-@interface JSMessage : NSObject <JSMessageData, NSCoding, NSCopying>
+@interface JSMessage : NSObject <JSQMessageData, NSCoding, NSCopying>
 
 /**
  *  The body text of the message. The default value is the empty string `@" "`. This value must not be `nil`.

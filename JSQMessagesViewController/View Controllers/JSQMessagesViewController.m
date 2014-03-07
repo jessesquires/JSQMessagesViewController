@@ -197,6 +197,12 @@
     JSQMessagesCollectionViewFlowLayout *layout = (JSQMessagesCollectionViewFlowLayout *)collectionViewLayout;
     CGFloat width = collectionView.frame.size.width - layout.sectionInset.left - layout.sectionInset.right;
     
+//    CGRect stringRect = [txt boundingRectWithSize:CGSizeMake(maxWidth, maxHeight)
+//                                          options:NSStringDrawingUsesLineFragmentOrigin
+//                                       attributes:@{ NSFontAttributeName : [[JSBubbleView appearance] font] }
+//                                          context:[[NSStringDrawingContext alloc] init]];
+    
+    
     return CGSizeMake(width, 200.0f);
 }
 

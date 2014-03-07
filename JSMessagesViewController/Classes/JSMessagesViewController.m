@@ -208,7 +208,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<JSMessageData> message = [self.dataSource messageForRowAtIndexPath:indexPath];
+    id<JSQMessageData> message = [self.dataSource messageForRowAtIndexPath:indexPath];
     
     JSBubbleMessageType type = [[message sender] isEqualToString:self.sender] ? JSBubbleMessageTypeOutgoing : JSBubbleMessageTypeIncoming;
     
@@ -257,7 +257,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<JSMessageData> message = [self.dataSource messageForRowAtIndexPath:indexPath];
+    id<JSQMessageData> message = [self.dataSource messageForRowAtIndexPath:indexPath];
     UIImageView *avatar = [self.dataSource avatarImageViewForRowAtIndexPath:indexPath sender:[message sender]];
     
     BOOL displayTimestamp = YES;

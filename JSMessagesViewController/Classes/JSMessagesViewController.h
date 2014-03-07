@@ -14,7 +14,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JSMessageTableView.h"
-#import "JSMessageData.h"
+#import "JSQMessageData.h"
 #import "JSBubbleMessageCell.h"
 #import "JSMessageInputView.h"
 #import "JSAvatarImageFactory.h"
@@ -114,7 +114,7 @@
  *
  *  @return An object that conforms to the `JSMessageData` protocol containing the message data. This value must not be `nil`.
  */
-- (id<JSMessageData>)messageForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (id<JSQMessageData>)messageForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  *  Asks the data source for the imageView to display for the row at the specified index path with the given sender. The imageView must have its `image` property set.
