@@ -236,11 +236,7 @@
         [cell setTimestamp:timestamp];
     }
     
-    [cell setSideTimestamp:timestamp]; 
-	
-    if(hasAvatar) {
-        [cell setAvatarImageView:[self.dataSource avatarImageViewForRowAtIndexPath:indexPath]];
-    }
+    [cell setSideTimestamp:timestamp];
     
 	if(hasSubtitle) {
 		[cell setSubtitle:[self.dataSource subtitleForRowAtIndexPath:indexPath]];
@@ -252,6 +248,10 @@
     
     [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath] attributedMsg:[self.dataSource attributedTextForRowAtIndexPath:indexPath]];
     [cell setBackgroundColor:tableView.backgroundColor];
+    
+    if(hasAvatar) {
+        [cell setAvatarImageView:[self.dataSource avatarImageViewForRowAtIndexPath:indexPath]];
+    }
     
 #if TARGET_IPHONE_SIMULATOR
 //    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeNone;

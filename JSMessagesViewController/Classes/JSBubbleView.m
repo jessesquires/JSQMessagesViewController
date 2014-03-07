@@ -182,7 +182,7 @@
 #pragma mark - Getters
 
 - (CGFloat)heightForSingleLine {
-    NSAttributedString *singleLineString = [[NSAttributedString alloc] initWithString:@"."];
+    NSAttributedString *singleLineString = [[NSAttributedString alloc] initWithString:@"." attributes:[NSDictionary dictionaryWithObject:self.textView.font forKey:NSFontAttributeName]];
     CGSize bubbleSize = [JSBubbleView neededSizeForAttributedText:singleLineString];
     return bubbleSize.height;
 }
@@ -331,7 +331,7 @@
     
     [self.avatarImageView removeFromSuperview];
     
-    CGFloat size = [self heightForSingleLine];
+    CGFloat size = [self heightForSingleLine]  + (kMarginTop / 1.5);
     
     self.avatarImageView = imageview;
     self.avatarImageView.hidden = !self.hasAvatar;
