@@ -8,13 +8,13 @@
 //
 //
 //  The MIT License
-//  Copyright (c) 2013 Jesse Squires
+//  Copyright (c) 2014 Jesse Squires
 //  http://opensource.org/licenses/MIT
 //
 
-#import "JSMessage.h"
+#import "JSQMessage.h"
 
-@implementation JSMessage
+@implementation JSQMessage
 
 #pragma mark - Initialization
 
