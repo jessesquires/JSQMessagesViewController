@@ -71,4 +71,12 @@ const CGFloat kJSQMessagesInputToolbarHeightDefault = 44.0f;
     self.contentView.rightBarButtonItem = sendButton;
 }
 
+#pragma mark - UIToolbar overrides
+
+- (void)setNeedsDisplay
+{
+    [super setNeedsDisplay];
+    [self.contentView setNeedsDisplay];
+}
+
 @end

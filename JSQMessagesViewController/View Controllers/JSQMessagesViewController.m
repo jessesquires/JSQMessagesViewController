@@ -64,6 +64,8 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
+    
+    self.inputToolbar.contentView.textView.placeHolder = @"New Message";
 }
 
 #pragma mark - View lifecycle
@@ -153,12 +155,14 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.inputToolbar.contentView.textView setNeedsDisplay];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.inputToolbar.contentView.textView setNeedsDisplay];
 }
 
 #pragma mark - Collection view data source

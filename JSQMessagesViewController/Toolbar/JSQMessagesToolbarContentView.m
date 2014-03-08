@@ -161,4 +161,12 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.0f;
     return self.rightBarButtonContainerViewWidth.constant;
 }
 
+#pragma mark - UIView overrides
+
+- (void)setNeedsDisplay
+{
+    [super setNeedsDisplay];
+    [self.textView setNeedsDisplay];
+}
+
 @end
