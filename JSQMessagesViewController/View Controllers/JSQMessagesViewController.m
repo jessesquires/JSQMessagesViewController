@@ -16,11 +16,21 @@
 
 #import <DAKeyboardControl/DAKeyboardControl.h>
 
+
+static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
+
+
 @interface JSQMessagesViewController ()
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightContraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
+
+- (void)updateKeyboardTriggerOffset;
+- (BOOL)inputToolbarHasReachedMaximumHeight;
+- (void)scrollComposerTextViewToBottom;
 
 - (void)updateCollectionViewInsets;
 - (void)setCollectionViewInsetsWithBottomValue:(CGFloat)bottom;
@@ -66,25 +76,54 @@
 {
     [super viewWillAppear:animated];
     
-    self.view.keyboardTriggerOffset = CGRectGetHeight(self.inputToolbar.bounds);
+    [self updateKeyboardTriggerOffset];
     
     __weak JSQMessagesViewController *weakSelf = self;
+    __weak UIView *weakView = self.view;
     __weak JSQMessagesInputToolbar *weakInputToolbar = self.inputToolbar;
+    __weak NSLayoutConstraint *weakToolbarBottomLayoutGuide = self.toolbarBottomLayoutGuide;
     
     [self.view addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView) {
-        CGRect toolbarFrame = weakInputToolbar.frame;
-        toolbarFrame.origin.y = CGRectGetMinY(keyboardFrameInView) - CGRectGetHeight(toolbarFrame);
+        CGRect newToolbarFrame = weakInputToolbar.frame;
+        newToolbarFrame.origin.y = CGRectGetMinY(keyboardFrameInView) - CGRectGetHeight(newToolbarFrame);
+        weakInputToolbar.frame = newToolbarFrame;
         
-        weakInputToolbar.frame = toolbarFrame;
+        CGFloat heightFromBottom = CGRectGetHeight(weakView.frame) - CGRectGetMinY(keyboardFrameInView);
+        weakToolbarBottomLayoutGuide.constant = heightFromBottom;
+        [weakSelf.view setNeedsUpdateConstraints];
         
         [weakSelf updateCollectionViewInsets];
     }];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.inputToolbar.contentView.textView addObserver:self
+                                             forKeyPath:NSStringFromSelector(@selector(contentSize))
+                                                options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+                                                context:kJSQKeyValueObservingContext];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [self.view removeKeyboardControl];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    @try {
+        [self.inputToolbar.contentView.textView removeObserver:self
+                                                    forKeyPath:NSStringFromSelector(@selector(contentSize))
+                                                       context:kJSQKeyValueObservingContext];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%s EXCEPTION CAUGHT : %@, %@", __PRETTY_FUNCTION__, exception, [exception userInfo]);
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -206,7 +245,80 @@
     return CGSizeMake(width, 200.0f);
 }
 
-#pragma mark - Utilities
+#pragma mark - Key-value observing
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context == kJSQKeyValueObservingContext) {
+        
+        if (object == self.inputToolbar.contentView.textView
+            && [keyPath isEqualToString:NSStringFromSelector(@selector(contentSize))]) {
+            
+            CGSize oldContentSize = [[change objectForKey:NSKeyValueChangeOldKey] CGSizeValue];
+            CGSize newContentSize = [[change objectForKey:NSKeyValueChangeNewKey] CGSizeValue];
+            
+            CGFloat dy = newContentSize.height - oldContentSize.height;
+            BOOL inputToolbarHeightIsIncreasing = (dy > 0);
+            
+            CGFloat toolbarOriginY = CGRectGetMinY(self.inputToolbar.frame);
+            CGFloat newToolbarOriginY = toolbarOriginY - dy;
+            
+            if (toolbarOriginY == self.topLayoutGuide.length) {
+                
+                if (inputToolbarHeightIsIncreasing) {
+                    [self scrollComposerTextViewToBottom];
+                }
+                
+                return;
+            }
+            
+            if (newToolbarOriginY <= self.topLayoutGuide.length) {
+                dy = toolbarOriginY - self.topLayoutGuide.length;
+                [self scrollComposerTextViewToBottom];
+            }
+            
+            self.toolbarHeightContraint.constant += dy;
+            [self.view setNeedsUpdateConstraints];
+            
+            [UIView animateWithDuration:0.1
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveEaseInOut
+                             animations:^{
+                                 [self.view layoutIfNeeded];
+                             }
+                             completion:^(BOOL finished) {
+                                 [self updateKeyboardTriggerOffset];
+                             }];
+        }
+    }
+}
+
+#pragma mark - Composer text view utilities
+
+- (void)updateKeyboardTriggerOffset
+{
+    self.view.keyboardTriggerOffset = CGRectGetHeight(self.inputToolbar.bounds);
+}
+
+- (BOOL)inputToolbarHasReachedMaximumHeight
+{
+    return (CGRectGetMinY(self.inputToolbar.frame) == self.topLayoutGuide.length);
+}
+
+- (void)scrollComposerTextViewToBottom
+{
+    UITextView *textView = self.inputToolbar.contentView.textView;
+    [UIView animateWithDuration:0.01
+                          delay:0.01
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         CGPoint bottomOffset = CGPointMake(0.0f, textView.contentSize.height - textView.bounds.size.height);
+                         textView.contentOffset = bottomOffset;
+                     }
+                     completion:nil];
+}
+
+#pragma mark - Collection view utilities
 
 - (void)updateCollectionViewInsets
 {
