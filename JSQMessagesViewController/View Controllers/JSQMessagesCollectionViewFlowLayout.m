@@ -17,8 +17,6 @@
 
 @interface JSQMessagesCollectionViewFlowLayout ()
 
-- (void)jsq_configureFlowLayout;
-
 @end
 
 
@@ -27,27 +25,11 @@
 
 #pragma mark - Initialization
 
-- (void)jsq_configureFlowLayout
+- (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
     self.scrollDirection = UICollectionViewScrollDirectionVertical;
-}
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [self jsq_configureFlowLayout];
-    }
-    return self;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self jsq_configureFlowLayout];
-    }
-    return self;
 }
 
 @end

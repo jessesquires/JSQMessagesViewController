@@ -57,6 +57,7 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
 {
     [super awakeFromNib];
     [self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     self.toolbarHeightContraint.constant = kJSQMessagesInputToolbarHeightDefault;
     
