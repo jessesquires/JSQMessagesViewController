@@ -19,6 +19,8 @@
 
 static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
 
+static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
+
 
 @interface JSQMessagesViewController ()
 
@@ -136,6 +138,7 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    NSLog(@"%s MEMORY WARNING!", __PRETTY_FUNCTION__);
 }
 
 #pragma mark - View rotation
@@ -195,8 +198,10 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
     cell1.messageBubbleTopLabel.text = @"sender";
     cell1.textView.text = @"some sample text";
     cell1.cellBottomLabel.text = @"sent";
+    cell1.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0, 0.0f, kJSQMessageBubbleTopLabelHorizontalPadding);
     
     cell1.textView.textColor = [UIColor whiteColor];
+    
     
     UIImageView *imgView1 = [[UIImageView alloc] initWithFrame:CGRectZero];
     imgView1.backgroundColor = [UIColor whiteColor];
@@ -213,6 +218,8 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
     cell2.textView.text = @"other text here";
 //    cell2.textView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5];
     cell2.cellBottomLabel.text = @"recieved";
+    
+    cell2.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, kJSQMessageBubbleTopLabelHorizontalPadding, 0.0f, 0.0f);
     
     UIImageView *imgView2 = [[UIImageView alloc] initWithFrame:CGRectZero];
     imgView2.backgroundColor = [UIColor whiteColor];

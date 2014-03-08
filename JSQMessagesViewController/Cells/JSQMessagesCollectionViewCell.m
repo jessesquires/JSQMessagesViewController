@@ -16,6 +16,7 @@
 
 #import "UIView+JSQMessages.h"
 
+
 const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
 const CGFloat kJSQMessagesCollectionViewCellMessageBubblePaddingDefault = 40.0f;
@@ -23,9 +24,9 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubblePaddingDefault = 40.0f;
 
 @interface JSQMessagesCollectionViewCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *cellTopLabel;
-@property (weak, nonatomic) IBOutlet UILabel *messageBubbleTopLabel;
-@property (weak, nonatomic) IBOutlet UILabel *cellBottomLabel;
+@property (weak, nonatomic) IBOutlet JSQMessagesCollectionViewCellLabel *cellTopLabel;
+@property (weak, nonatomic) IBOutlet JSQMessagesCollectionViewCellLabel *messageBubbleTopLabel;
+@property (weak, nonatomic) IBOutlet JSQMessagesCollectionViewCellLabel *cellBottomLabel;
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
