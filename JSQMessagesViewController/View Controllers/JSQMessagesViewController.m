@@ -28,6 +28,8 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
 
+- (void)jsq_prepareForRotation;
+
 - (void)jsq_updateKeyboardTriggerOffset;
 - (BOOL)jsq_inputToolbarHasReachedMaximumHeight;
 - (void)jsq_adjustInputToolbarForComposerTextViewContentSizeChange:(CGFloat)dy;
@@ -154,13 +156,17 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.inputToolbar.contentView.textView setNeedsDisplay];
+    [self jsq_prepareForRotation];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [self jsq_prepareForRotation];
+}
+
+- (void)jsq_prepareForRotation
+{
     [self.collectionView.collectionViewLayout invalidateLayout];
     [self.inputToolbar.contentView.textView setNeedsDisplay];
 }
