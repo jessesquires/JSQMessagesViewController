@@ -28,9 +28,10 @@
 #import "JSQMessagesBubbleImageFactory.h"
 #import "JSQMessagesAvatarFactory.h"
 
+#import "JSQSystemSoundPlayer+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
-#import "UIView+JSQMessages.h"
 #import "UIImage+JSQMessages.h"
+#import "UIView+JSQMessages.h"
 
 
 @interface JSQMessagesViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>

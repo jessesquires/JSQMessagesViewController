@@ -85,6 +85,7 @@
 		88A6AD211839FFBB000F56DA /* input-bar-flat.png in Resources */ = {isa = PBXBuildFile; fileRef = 88A6AD1D1839FFBB000F56DA /* input-bar-flat.png */; };
 		88A6AD221839FFBB000F56DA /* input-bar-flat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88A6AD1E1839FFBB000F56DA /* input-bar-flat@2x.png */; };
 		88BA157A188F8FB900EDD5C0 /* JSMessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1579188F8FB900EDD5C0 /* JSMessageTableView.m */; };
+		88F2173118CBA96500862636 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F2173018CBA96500862636 /* JSQSystemSoundPlayer+JSQMessages.m */; };
 		FF5F1C19A2B14956BCA42EBB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFF9601294443728D9481E0 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -199,6 +200,8 @@
 		88A6AD1E1839FFBB000F56DA /* input-bar-flat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input-bar-flat@2x.png"; sourceTree = "<group>"; };
 		88BA1578188F8FB900EDD5C0 /* JSMessageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSMessageTableView.h; sourceTree = "<group>"; };
 		88BA1579188F8FB900EDD5C0 /* JSMessageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSMessageTableView.m; sourceTree = "<group>"; };
+		88F2172F18CBA96500862636 /* JSQSystemSoundPlayer+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JSQSystemSoundPlayer+JSQMessages.h"; path = "Categories/JSQSystemSoundPlayer+JSQMessages.h"; sourceTree = "<group>"; };
+		88F2173018CBA96500862636 /* JSQSystemSoundPlayer+JSQMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JSQSystemSoundPlayer+JSQMessages.m"; path = "Categories/JSQSystemSoundPlayer+JSQMessages.m"; sourceTree = "<group>"; };
 		A8C230F1717F4008B2BFAEA6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -310,12 +313,14 @@
 		885ED81918C29BE5004613D4 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				88F2172F18CBA96500862636 /* JSQSystemSoundPlayer+JSQMessages.h */,
+				88F2173018CBA96500862636 /* JSQSystemSoundPlayer+JSQMessages.m */,
 				882F358118C3B46000E34A3C /* UIColor+JSQMessages.h */,
 				882F358218C3B46000E34A3C /* UIColor+JSQMessages.m */,
-				885ED81618C29BDD004613D4 /* UIView+JSQMessages.h */,
-				885ED81718C29BDD004613D4 /* UIView+JSQMessages.m */,
 				882F358418C3B71900E34A3C /* UIImage+JSQMessages.h */,
 				882F358518C3B71900E34A3C /* UIImage+JSQMessages.m */,
+				885ED81618C29BDD004613D4 /* UIView+JSQMessages.h */,
+				885ED81718C29BDD004613D4 /* UIView+JSQMessages.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -726,6 +731,7 @@
 				88A3FC65182E0EA000705327 /* JSBubbleImageViewFactory.m in Sources */,
 				882F358918C3BB8600E34A3C /* JSQMessagesAvatarFactory.m in Sources */,
 				882F358618C3B71900E34A3C /* UIImage+JSQMessages.m in Sources */,
+				88F2173118CBA96500862636 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
 				882F358318C3B46000E34A3C /* UIColor+JSQMessages.m in Sources */,
 				88A3FC59182E0EA000705327 /* NSString+JSMessagesView.m in Sources */,
 				885ED81F18C2A542004613D4 /* JSQMessagesComposerTextView.m in Sources */,
