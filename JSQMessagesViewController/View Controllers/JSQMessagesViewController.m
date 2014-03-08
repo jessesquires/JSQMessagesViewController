@@ -28,14 +28,14 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
 
-- (void)updateKeyboardTriggerOffset;
-- (BOOL)inputToolbarHasReachedMaximumHeight;
-- (void)adjustInputToolbarForComposerTextViewContentSizeChange:(CGFloat)dy;
-- (void)adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy;
-- (void)scrollComposerTextViewToBottomAnimated:(BOOL)animated;
+- (void)jsq_updateKeyboardTriggerOffset;
+- (BOOL)jsq_inputToolbarHasReachedMaximumHeight;
+- (void)jsq_adjustInputToolbarForComposerTextViewContentSizeChange:(CGFloat)dy;
+- (void)jsq_adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy;
+- (void)jsq_scrollComposerTextViewToBottomAnimated:(BOOL)animated;
 
-- (void)updateCollectionViewInsets;
-- (void)setCollectionViewInsetsWithBottomValue:(CGFloat)bottom;
+- (void)jsq_updateCollectionViewInsets;
+- (void)jsq_setCollectionViewInsetsWithBottomValue:(CGFloat)bottom;
 
 @end
 
@@ -70,7 +70,7 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self updateCollectionViewInsets];
+    [self jsq_updateCollectionViewInsets];
     [[JSQMessagesCollectionViewCell appearance] setFont:[UIFont systemFontOfSize:15.0f]];
 }
 
@@ -78,7 +78,7 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
 {
     [super viewWillAppear:animated];
     
-    [self updateKeyboardTriggerOffset];
+    [self jsq_updateKeyboardTriggerOffset];
     
     __weak JSQMessagesViewController *weakSelf = self;
     __weak UIView *weakView = self.view;
@@ -94,7 +94,7 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
         weakToolbarBottomLayoutGuide.constant = heightFromBottom;
         [weakSelf.view setNeedsUpdateConstraints];
         
-        [weakSelf updateCollectionViewInsets];
+        [weakSelf jsq_updateCollectionViewInsets];
     }];
 }
 
@@ -261,32 +261,32 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
             
             CGFloat dy = newContentSize.height - oldContentSize.height;
         
-            [self adjustInputToolbarForComposerTextViewContentSizeChange:dy];
+            [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:dy];
         }
     }
 }
 
 #pragma mark - Composer text view utilities
 
-- (void)updateKeyboardTriggerOffset
+- (void)jsq_updateKeyboardTriggerOffset
 {
     self.view.keyboardTriggerOffset = CGRectGetHeight(self.inputToolbar.bounds);
 }
 
-- (BOOL)inputToolbarHasReachedMaximumHeight
+- (BOOL)jsq_inputToolbarHasReachedMaximumHeight
 {
     return (CGRectGetMinY(self.inputToolbar.frame) == self.topLayoutGuide.length);
 }
 
-- (void)adjustInputToolbarForComposerTextViewContentSizeChange:(CGFloat)dy
+- (void)jsq_adjustInputToolbarForComposerTextViewContentSizeChange:(CGFloat)dy
 {
     BOOL contentSizeIsIncreasing = (dy > 0);
     
-    if ([self inputToolbarHasReachedMaximumHeight]) {
+    if ([self jsq_inputToolbarHasReachedMaximumHeight]) {
         BOOL contentOffsetIsPositive = (self.inputToolbar.contentView.textView.contentOffset.y > 0);
         
         if (contentSizeIsIncreasing || contentOffsetIsPositive) {
-            [self scrollComposerTextViewToBottomAnimated:YES];
+            [self jsq_scrollComposerTextViewToBottomAnimated:YES];
             return;
         }
     }
@@ -297,19 +297,19 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
     //  attempted to increase origin.Y above topLayoutGuide
     if (newToolbarOriginY <= self.topLayoutGuide.length) {
         dy = toolbarOriginY - self.topLayoutGuide.length;
-        [self scrollComposerTextViewToBottomAnimated:YES];
+        [self jsq_scrollComposerTextViewToBottomAnimated:YES];
     }
     
-    [self adjustInputToolbarHeightConstraintByDelta:dy];
+    [self jsq_adjustInputToolbarHeightConstraintByDelta:dy];
     
-    [self updateKeyboardTriggerOffset];
+    [self jsq_updateKeyboardTriggerOffset];
     
     if (dy < 0) {
-        [self scrollComposerTextViewToBottomAnimated:NO];
+        [self jsq_scrollComposerTextViewToBottomAnimated:NO];
     }
 }
 
-- (void)adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy
+- (void)jsq_adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy
 {
     self.toolbarHeightContraint.constant += dy;
     
@@ -321,7 +321,7 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
     [self.view layoutIfNeeded];
 }
 
-- (void)scrollComposerTextViewToBottomAnimated:(BOOL)animated
+- (void)jsq_scrollComposerTextViewToBottomAnimated:(BOOL)animated
 {
     UITextView *textView = self.inputToolbar.contentView.textView;
     CGPoint contentOffsetToShowLastLine = CGPointMake(0.0f, textView.contentSize.height - CGRectGetHeight(textView.bounds));
@@ -342,12 +342,12 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
 
 #pragma mark - Collection view utilities
 
-- (void)updateCollectionViewInsets
+- (void)jsq_updateCollectionViewInsets
 {
-    [self setCollectionViewInsetsWithBottomValue:CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame)];
+    [self jsq_setCollectionViewInsetsWithBottomValue:CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame)];
 }
 
-- (void)setCollectionViewInsetsWithBottomValue:(CGFloat)bottom
+- (void)jsq_setCollectionViewInsetsWithBottomValue:(CGFloat)bottom
 {
     UIEdgeInsets insets = UIEdgeInsetsMake(self.topLayoutGuide.length, 0.0f, bottom, 0.0f);
     self.collectionView.contentInset = insets;
