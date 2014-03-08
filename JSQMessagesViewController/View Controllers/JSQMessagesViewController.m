@@ -30,7 +30,9 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
 
 - (void)updateKeyboardTriggerOffset;
 - (BOOL)inputToolbarHasReachedMaximumHeight;
-- (void)scrollComposerTextViewToBottom;
+- (void)adjustInputToolbarForComposerTextViewContentSizeChange:(CGFloat)dy;
+- (void)adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy;
+- (void)scrollComposerTextViewToBottomAnimated:(BOOL)animated;
 
 - (void)updateCollectionViewInsets;
 - (void)setCollectionViewInsetsWithBottomValue:(CGFloat)bottom;
@@ -258,37 +260,8 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
             CGSize newContentSize = [[change objectForKey:NSKeyValueChangeNewKey] CGSizeValue];
             
             CGFloat dy = newContentSize.height - oldContentSize.height;
-            BOOL inputToolbarHeightIsIncreasing = (dy > 0);
-            
-            CGFloat toolbarOriginY = CGRectGetMinY(self.inputToolbar.frame);
-            CGFloat newToolbarOriginY = toolbarOriginY - dy;
-            
-            if (toolbarOriginY == self.topLayoutGuide.length) {
-                
-                if (inputToolbarHeightIsIncreasing) {
-                    [self scrollComposerTextViewToBottom];
-                }
-                
-                return;
-            }
-            
-            if (newToolbarOriginY <= self.topLayoutGuide.length) {
-                dy = toolbarOriginY - self.topLayoutGuide.length;
-                [self scrollComposerTextViewToBottom];
-            }
-            
-            self.toolbarHeightContraint.constant += dy;
-            [self.view setNeedsUpdateConstraints];
-            
-            [UIView animateWithDuration:0.1
-                                  delay:0.0
-                                options:UIViewAnimationOptionCurveEaseInOut
-                             animations:^{
-                                 [self.view layoutIfNeeded];
-                             }
-                             completion:^(BOOL finished) {
-                                 [self updateKeyboardTriggerOffset];
-                             }];
+        
+            [self adjustInputToolbarForComposerTextViewContentSizeChange:dy];
         }
     }
 }
@@ -305,15 +278,64 @@ static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
     return (CGRectGetMinY(self.inputToolbar.frame) == self.topLayoutGuide.length);
 }
 
-- (void)scrollComposerTextViewToBottom
+- (void)adjustInputToolbarForComposerTextViewContentSizeChange:(CGFloat)dy
+{
+    BOOL contentSizeIsIncreasing = (dy > 0);
+    
+    if ([self inputToolbarHasReachedMaximumHeight]) {
+        BOOL contentOffsetIsPositive = (self.inputToolbar.contentView.textView.contentOffset.y > 0);
+        
+        if (contentSizeIsIncreasing || contentOffsetIsPositive) {
+            [self scrollComposerTextViewToBottomAnimated:YES];
+            return;
+        }
+    }
+    
+    CGFloat toolbarOriginY = CGRectGetMinY(self.inputToolbar.frame);
+    CGFloat newToolbarOriginY = toolbarOriginY - dy;
+    
+    //  attempted to increase origin.Y above topLayoutGuide
+    if (newToolbarOriginY <= self.topLayoutGuide.length) {
+        dy = toolbarOriginY - self.topLayoutGuide.length;
+        [self scrollComposerTextViewToBottomAnimated:YES];
+    }
+    
+    [self adjustInputToolbarHeightConstraintByDelta:dy];
+    
+    [self updateKeyboardTriggerOffset];
+    
+    if (dy < 0) {
+        [self scrollComposerTextViewToBottomAnimated:NO];
+    }
+}
+
+- (void)adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy
+{
+    self.toolbarHeightContraint.constant += dy;
+    
+    if (self.toolbarHeightContraint.constant < kJSQMessagesInputToolbarHeightDefault) {
+        self.toolbarHeightContraint.constant = kJSQMessagesInputToolbarHeightDefault;
+    }
+    
+    [self.view setNeedsUpdateConstraints];
+    [self.view layoutIfNeeded];
+}
+
+- (void)scrollComposerTextViewToBottomAnimated:(BOOL)animated
 {
     UITextView *textView = self.inputToolbar.contentView.textView;
+    CGPoint contentOffsetToShowLastLine = CGPointMake(0.0f, textView.contentSize.height - CGRectGetHeight(textView.bounds));
+    
+    if (!animated) {
+        textView.contentOffset = contentOffsetToShowLastLine;
+        return;
+    }
+    
     [UIView animateWithDuration:0.01
                           delay:0.01
-                        options:UIViewAnimationOptionCurveEaseInOut
+                        options:UIViewAnimationOptionCurveLinear
                      animations:^{
-                         CGPoint bottomOffset = CGPointMake(0.0f, textView.contentSize.height - textView.bounds.size.height);
-                         textView.contentOffset = bottomOffset;
+                         textView.contentOffset = contentOffsetToShowLastLine;
                      }
                      completion:nil];
 }
