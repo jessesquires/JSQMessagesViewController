@@ -238,7 +238,7 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
     UIImageView *imgView1 = [[UIImageView alloc] initWithFrame:CGRectZero];
     imgView1.backgroundColor = [UIColor whiteColor];
     
-    imgView1.image = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo-avatar-jobs"]
+    imgView1.image = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]
                                                       diameter:kJSQMessagesCollectionViewCellAvatarSizeDefault];
     cell1.avatarImageView = imgView1;
     cell1.messageBubbleImageView = [JSQMessagesBubbleImageFactory outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
