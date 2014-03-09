@@ -35,8 +35,6 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 
 - (void)jsq_configureViewController;
 
-- (void)jsq_prepareForRotation;
-
 - (void)jsq_notifyDelegateDidSendMessage;
 - (void)jsq_notifyDelegateDidPressAccessoryButton:(UIButton *)sender;
 
@@ -183,19 +181,16 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [self jsq_prepareForRotation];
+    
+    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.inputToolbar.contentView.textView setNeedsDisplay];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [self jsq_prepareForRotation];
-}
-
-- (void)jsq_prepareForRotation
-{
-    [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.inputToolbar.contentView.textView setNeedsDisplay];
+    
+    // TODO: keyboard
 }
 
 #pragma mark - Messages view controller
