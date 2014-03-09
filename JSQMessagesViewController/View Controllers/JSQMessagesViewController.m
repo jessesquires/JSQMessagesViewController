@@ -17,7 +17,7 @@
 #import <DAKeyboardControl/DAKeyboardControl.h>
 
 
-static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
+static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
 static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 
@@ -360,7 +360,7 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if (context == kJSQKeyValueObservingContext) {
+    if (context == kJSQMessagesKeyValueObservingContext) {
         
         if (object == self.inputToolbar.contentView.textView
             && [keyPath isEqualToString:NSStringFromSelector(@selector(contentSize))]) {
@@ -492,7 +492,7 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
     [self.inputToolbar.contentView.textView addObserver:self
                                              forKeyPath:NSStringFromSelector(@selector(contentSize))
                                                 options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
-                                                context:kJSQKeyValueObservingContext];
+                                                context:kJSQMessagesKeyValueObservingContext];
 }
 
 - (void)jsq_removeObservers
@@ -500,7 +500,7 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
     @try {
         [self.inputToolbar.contentView.textView removeObserver:self
                                                     forKeyPath:NSStringFromSelector(@selector(contentSize))
-                                                       context:kJSQKeyValueObservingContext];
+                                                       context:kJSQMessagesKeyValueObservingContext];
     }
     @catch (NSException *exception) {
         NSLog(@"%s EXCEPTION CAUGHT : %@, %@", __PRETTY_FUNCTION__, exception, [exception userInfo]);

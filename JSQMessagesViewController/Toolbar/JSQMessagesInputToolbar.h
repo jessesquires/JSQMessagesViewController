@@ -39,10 +39,8 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
 
 @property (weak, nonatomic, readonly) JSQMessagesToolbarContentView *contentView;
 
-@property (assign, nonatomic) BOOL sendButtonOnRight; // TODO:
+@property (assign, nonatomic) BOOL sendButtonOnRight;
 
 - (void)toggleSendButtonEnabled;
-
-// TODO: KVO listen for contentView leftBarButton and right. then set target: action: selector:
 
 @end

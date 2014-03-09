@@ -25,8 +25,9 @@
 
 #import "JSQMessageData.h"
 
-#import "JSQMessagesBubbleImageFactory.h"
 #import "JSQMessagesAvatarFactory.h"
+#import "JSQMessagesBubbleImageFactory.h"
+#import "JSQMessagesToolbarButtonFactory.h"
 
 #import "JSQSystemSoundPlayer+JSQMessages.h"
 #import "NSString+JSQMessages.h"
