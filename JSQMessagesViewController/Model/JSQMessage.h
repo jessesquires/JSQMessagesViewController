@@ -38,6 +38,8 @@
 
 #pragma mark - Initialization
 
++ (instancetype)messageWithText:(NSString *)text sender:(NSString *)sender;
+
 /**
  *  Initializes and returns a message object having the given text, sender, and date.
  *

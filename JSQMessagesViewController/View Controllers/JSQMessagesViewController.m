@@ -25,7 +25,7 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 
 
 
-@interface JSQMessagesViewController () <UITextViewDelegate>
+@interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
@@ -36,6 +36,9 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 - (void)jsq_configureViewController;
 
 - (void)jsq_prepareForRotation;
+
+- (void)jsq_notifyDelegateDidSendMessage;
+- (void)jsq_notifyDelegateDidPressAccessoryButton:(UIButton *)sender;
 
 - (void)jsq_configureKeyboardControl;
 - (void)jsq_updateKeyboardTriggerOffset;
@@ -83,6 +86,7 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
     _collectionView.delegate = self;
     _collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     
+    _inputToolbar.delegate = self;
     _inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"New Message", @"Placeholder text for the message input view");
     _inputToolbar.contentView.textView.delegate = self;
     
@@ -333,6 +337,41 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
     
     
     return CGSizeMake(width, 200.0f);
+}
+
+#pragma mark - Input toolbar delegate
+
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar didPressLeftBarButton:(UIButton *)sender
+{
+    if (!toolbar.sendButtonOnRight) {
+        [self jsq_notifyDelegateDidSendMessage];
+    }
+    else {
+        [self jsq_notifyDelegateDidPressAccessoryButton:sender];
+    }
+}
+
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar didPressRightBarButton:(UIButton *)sender
+{
+    if (toolbar.sendButtonOnRight) {
+        [self jsq_notifyDelegateDidSendMessage];
+    }
+    else {
+        [self jsq_notifyDelegateDidPressAccessoryButton:sender];
+    }
+}
+
+- (void)jsq_notifyDelegateDidSendMessage
+{
+    JSQMessage *message = [JSQMessage messageWithText:[self.inputToolbar.contentView.textView.text jsq_stringByTrimingWhitespace]
+                                               sender:self.sender];
+    
+    [self.delegate messagesViewController:self didSendMessage:message];
+}
+
+- (void)jsq_notifyDelegateDidPressAccessoryButton:(UIButton *)sender
+{
+    [self.delegate messagesViewController:self didPressAccessoryButton:sender];
 }
 
 #pragma mark - Text view delegate

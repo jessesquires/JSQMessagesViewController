@@ -18,6 +18,11 @@
 
 #pragma mark - Initialization
 
++ (instancetype)messageWithText:(NSString *)text sender:(NSString *)sender
+{
+    return [[JSQMessage alloc] initWithText:text sender:sender date:[NSDate date]];
+}
+
 - (instancetype)initWithText:(NSString *)text
                       sender:(NSString *)sender
                         date:(NSDate *)date

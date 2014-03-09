@@ -24,6 +24,7 @@
 #import "JSQMessagesComposerTextView.h"
 
 #import "JSQMessageData.h"
+#import "JSQMessage.h"
 
 #import "JSQMessagesAvatarFactory.h"
 #import "JSQMessagesBubbleImageFactory.h"
@@ -42,9 +43,10 @@
 
 @required
 - (void)messagesViewController:(JSQMessagesViewController *)viewController
-                   didSendText:(NSString *)text
-                    fromSender:(NSString *)sender
-                        onDate:(NSDate *)date;
+                didSendMessage:(JSQMessage *)message;
+
+- (void)messagesViewController:(JSQMessagesViewController *)viewController
+       didPressAccessoryButton:(UIButton *)sender;
 
 @end
 
@@ -52,6 +54,8 @@
 
 @interface JSQMessagesViewController : UIViewController <JSQMessagesCollectionViewDataSource,
                                                          UICollectionViewDelegateFlowLayout>
+
+@property (weak, nonatomic) id<JSQMessagesViewControllerDelegate> delegate;
 
 @property (weak, nonatomic, readonly) JSQMessagesCollectionView *collectionView;
 
@@ -62,7 +66,6 @@
  */
 @property (copy, nonatomic) NSString *sender;
 
-// TODO:
 @property (assign, nonatomic) BOOL autoScrollsToMostRecentMessage;
 
 // TODO:
