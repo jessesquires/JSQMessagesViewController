@@ -20,6 +20,7 @@
 const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
 const CGFloat kJSQMessagesCollectionViewCellMessageBubblePaddingDefault = 40.0f;
+const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddingDefault = 20.0f;
 
 
 @interface JSQMessagesCollectionViewCell ()

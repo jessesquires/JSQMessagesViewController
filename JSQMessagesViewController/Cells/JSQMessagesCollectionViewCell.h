@@ -20,6 +20,7 @@
 FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault;
 FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault;
 FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellMessageBubblePaddingDefault;
+FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddingDefault;
 
 
 @interface JSQMessagesCollectionViewCell : UICollectionViewCell

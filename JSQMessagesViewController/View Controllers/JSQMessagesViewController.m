@@ -21,8 +21,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 
-static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
-
 
 
 @interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate, UITextViewDelegate>
@@ -261,75 +259,55 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageForItemAtIndexPath:indexPath];
-//    
-//    NSString *messageSender = [messageData sender];
-//    BOOL isOutgoingMessage = [messageSender isEqualToString:self.sender];
-//    
-//    NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
-//    JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-//    
-//    JSQMessagesCollectionViewFlowLayout *collectionViewLayout = (JSQMessagesCollectionViewFlowLayout *)collectionView.collectionViewLayout;
-//    
-//    cell.messageBubbleImageView = [collectionViewLayout.delegate collectionView:collectionView
-//                                                                         layout:collectionViewLayout
-//                                              bubbleImageViewForItemAtIndexPath:indexPath
-//                                                                         sender:messageSender];
-//    
-//    cell.avatarImageView = [collectionViewLayout.delegate collectionView:collectionView
-//                                                                  layout:collectionViewLayout
-//                                       avatarImageViewForItemAtIndexPath:indexPath
-//                                                                  sender:messageSender];
-//    
-//    cell.backgroundColor = self.collectionView.backgroundColor;
+    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageForItemAtIndexPath:indexPath];
+    
+    NSString *messageSender = [messageData sender];
+    BOOL isOutgoingMessage = [messageSender isEqualToString:self.sender];
+    
+    NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
+    JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    
+    JSQMessagesCollectionViewFlowLayout *collectionViewLayout = (JSQMessagesCollectionViewFlowLayout *)collectionView.collectionViewLayout;
+    
+    cell.messageBubbleImageView = [collectionViewLayout.delegate collectionView:collectionView
+                                                                         layout:collectionViewLayout
+                                              bubbleImageViewForItemAtIndexPath:indexPath
+                                                                         sender:messageSender];
+    
+    cell.avatarImageView = [collectionViewLayout.delegate collectionView:collectionView
+                                                                  layout:collectionViewLayout
+                                       avatarImageViewForItemAtIndexPath:indexPath
+                                                                  sender:messageSender];
+    
+    cell.textView.text = [messageData text];
+    
+    cell.backgroundColor = self.collectionView.backgroundColor;
     
     
     
-    JSQMessagesCollectionViewCellOutgoing *cell1 = [collectionView dequeueReusableCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]
-                                                                                             forIndexPath:indexPath];
-    
-    JSQMessagesCollectionViewCellIncoming *cell2 = [collectionView dequeueReusableCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]
-                                                                                             forIndexPath:indexPath];
-    
-    cell1.cellTopLabel.text = @"time";
-    cell1.messageBubbleTopLabel.text = @"sender";
-    cell1.textView.text = @"some sample text";
-    cell1.cellBottomLabel.text = @"sent";
-    cell1.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0, 0.0f, kJSQMessageBubbleTopLabelHorizontalPadding);
-    
-    cell1.textView.textColor = [UIColor whiteColor];
+    // -----------------------------------------------
     
     
-    UIImageView *imgView1 = [[UIImageView alloc] initWithFrame:CGRectZero];
-    imgView1.backgroundColor = [UIColor whiteColor];
-    
-    imgView1.image = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]
-                                                      diameter:kJSQMessagesCollectionViewCellAvatarSizeDefault];
-    cell1.avatarImageView = imgView1;
-    cell1.messageBubbleImageView = [JSQMessagesBubbleImageFactory outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
+    cell.cellTopLabel.text = @"time";
+    cell.messageBubbleTopLabel.text = messageSender;
     
     
+    if (isOutgoingMessage) {
+        cell.cellBottomLabel.text = @"sent";
+        cell.textView.textColor = [UIColor whiteColor];
+        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f,
+                                                                 kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddingDefault);
+    }
+    else {
+        cell.cellBottomLabel.text = @"recieved";
+        cell.textView.textColor = [UIColor blackColor];
+        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddingDefault,
+                                                                 0.0f, 0.0f);
+    }
     
-    cell2.cellTopLabel.text = @"time";
-    cell2.messageBubbleTopLabel.text = @"recipient";
-    cell2.textView.text = @"other text here";
 //    cell2.textView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5];
-    cell2.cellBottomLabel.text = @"recieved";
     
-    cell2.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, kJSQMessageBubbleTopLabelHorizontalPadding, 0.0f, 0.0f);
-    
-    UIImageView *imgView2 = [[UIImageView alloc] initWithFrame:CGRectZero];
-    imgView2.backgroundColor = [UIColor whiteColor];
-    imgView2.image = [JSQMessagesAvatarFactory avatarWithUserInitials:@"JSQ"
-                                                      backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
-                                                            textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
-                                                                 font:[UIFont systemFontOfSize:14.0f]
-                                                             diameter:kJSQMessagesCollectionViewCellAvatarSizeDefault];
-    cell2.avatarImageView = imgView2;
-    cell2.messageBubbleImageView = [JSQMessagesBubbleImageFactory incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleGreenColor]];
-    
-    
-    return (indexPath.row % 2 == 0) ? cell2 : cell1;
+    return cell;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
