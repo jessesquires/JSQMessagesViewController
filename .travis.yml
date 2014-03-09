@@ -3,7 +3,8 @@ language: objective-c
 before_install: 
 - gem install cocoapods
 - brew update
-- brew upgrade
+- brew unlink xctool
+- brew install xctool
 
 script: 
 - xctool -workspace JSQMessages.xcworkspace -scheme JSQMessagesDemo -sdk iphonesimulator7.0 ONLY_ACTIVE_ARCH=NO clean build
