@@ -27,6 +27,9 @@ const CGFloat kJSQMessagesInputToolbarHeightDefault = 44.0f;
 
 @interface JSQMessagesInputToolbar ()
 
+- (void)jsq_leftBarButtonPressed:(UIButton *)sender;
+- (void)jsq_rightBarButtonPressed:(UIButton *)sender;
+
 @end
 
 
@@ -39,6 +42,8 @@ const CGFloat kJSQMessagesInputToolbarHeightDefault = 44.0f;
 {
     [super awakeFromNib];
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    _sendButtonOnRight = YES;
     
     NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([JSQMessagesToolbarContentView class]) owner:nil options:nil];
     JSQMessagesToolbarContentView *toolbarContentView = [nibViews firstObject];
@@ -73,6 +78,18 @@ const CGFloat kJSQMessagesInputToolbarHeightDefault = 44.0f;
     self.contentView.rightBarButtonItem = sendButton;
     
     [self toggleSendButtonEnabled];
+}
+
+#pragma mark - Actions
+
+- (void)jsq_leftBarButtonPressed:(UIButton *)sender
+{
+    // TODO:
+}
+
+- (void)jsq_rightBarButtonPressed:(UIButton *)sender
+{
+    // TODO:
 }
 
 #pragma mark - Input toolbar

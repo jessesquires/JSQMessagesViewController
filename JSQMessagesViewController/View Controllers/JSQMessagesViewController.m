@@ -251,7 +251,7 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 {
 //    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageForItemAtIndexPath:indexPath];
     
-//    JSQMessagesCollectionViewFlowLayout *collectionViewLayout = (JSQMessagesCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+//    JSQMessagesCollectionViewFlowLayout *collectionViewLayout = (JSQMessagesCollectionViewFlowLayout *)collectionView.collectionViewLayout;
     
 //    [collectionViewLayout.delegate collectionView:(JSQMessagesCollectionView *)collectionView
 //                                           layout:collectionViewLayout

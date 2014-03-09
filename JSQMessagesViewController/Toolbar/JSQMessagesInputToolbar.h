@@ -24,13 +24,10 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
 
 @required
 - (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar
-                 didSendText:(NSString *)text
-                  fromSender:(NSString *)sender
-                      onDate:(NSDate *)date;
+      didPressRightBarButton:(UIButton *)sender;
 
-// did press left bar button
-
-// did press right bar button
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar
+       didPressLeftBarButton:(UIButton *)sender;
 
 @end
 
@@ -41,6 +38,8 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
 @property (weak, nonatomic) id<JSQMessagesInputToolbarDelegate> delegate;
 
 @property (weak, nonatomic, readonly) JSQMessagesToolbarContentView *contentView;
+
+@property (assign, nonatomic) BOOL sendButtonOnRight; // TODO:
 
 - (void)toggleSendButtonEnabled;
 

@@ -37,6 +37,18 @@
 @class JSQMessagesViewController;
 
 
+@protocol JSQMessagesViewControllerDelegate <NSObject>
+
+@required
+- (void)messagesViewController:(JSQMessagesViewController *)viewController
+                   didSendText:(NSString *)text
+                    fromSender:(NSString *)sender
+                        onDate:(NSDate *)date;
+
+@end
+
+
+
 @interface JSQMessagesViewController : UIViewController <JSQMessagesCollectionViewDataSource,
                                                          UICollectionViewDelegateFlowLayout>
 
