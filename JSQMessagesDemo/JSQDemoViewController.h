@@ -12,8 +12,8 @@
 //  http://opensource.org/licenses/MIT
 //
 
-#import <UIKit/UIKit.h>
+#import "JSQMessagesViewController.h"
 
-@interface JSQViewController : UITableViewController
+@interface JSQDemoViewController : JSQMessagesViewController
 
 @end

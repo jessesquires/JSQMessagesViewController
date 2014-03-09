@@ -42,8 +42,8 @@
 
 #pragma mark - Class methods
 
-+ (UIStoryboard *)messagesStoryboard;
++ (UINib *)nib;
 
-+ (JSQMessagesViewController *)messagesViewController;
++ (instancetype)messagesViewController;
 
 @end

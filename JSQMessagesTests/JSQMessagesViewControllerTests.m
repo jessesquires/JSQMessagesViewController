@@ -15,6 +15,7 @@
 #import <XCTest/XCTest.h>
 
 #import "JSQMessagesViewController.h"
+#import "JSQDemoViewController.h"
 
 
 @interface JSQMessagesViewControllerTests : XCTestCase
@@ -37,20 +38,37 @@
     [super tearDown];
 }
 
-- (void)testJSQMessagesInit
+- (void)testJSQMessagesViewControllerInit
 {
-    UIStoryboard *sb = [JSQMessagesViewController messagesStoryboard];
-    XCTAssertNotNil(sb, @"Storyboard should not be nil");
-    
-    id initialVC = [sb instantiateInitialViewController];
-    XCTAssertNotNil(initialVC, @"Storyboard's intial view controller should not be nil");
-    XCTAssertTrue([initialVC isKindOfClass:[JSQMessagesViewController class]], @"Initial view controller should be of type %@", [JSQMessagesViewController class]);
+    UINib *nib = [JSQMessagesViewController nib];
+    XCTAssertNotNil(nib, @"Nib should not be nil");
     
     JSQMessagesViewController *vc = [JSQMessagesViewController messagesViewController];
-    XCTAssertNotNil(vc, @"Messages view controller should not be nil");
-    
+    XCTAssertNotNil(vc, @"View controller should not be nil");
+    XCTAssertNotNil(vc.view, @"View should not be nil");
     XCTAssertNotNil(vc.collectionView, @"Collection view should not be nil");
     XCTAssertNotNil(vc.inputToolbar, @"Input toolbar should not be nil");
+}
+
+- (void)testJSQMessagesViewControllerSublcassInit
+{
+    JSQDemoViewController *demoVC = [JSQDemoViewController messagesViewController];
+    XCTAssertNotNil(demoVC, @"View controller should not be nil");
+    XCTAssertTrue([demoVC isKindOfClass:[JSQDemoViewController class]], @"View controller should be kind of class: %@", [JSQDemoViewController class]);
+    XCTAssertNotNil(demoVC.view, @"View should not be nil");
+    XCTAssertNotNil(demoVC.collectionView, @"Collection view should not be nil");
+    XCTAssertNotNil(demoVC.inputToolbar, @"Input toolbar should not be nil");
+    
+    UIStoryboard *mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    XCTAssertNotNil(mainSB, @"Storyboard should not be nil");
+    
+    demoVC = nil;
+    demoVC = [mainSB instantiateViewControllerWithIdentifier:@"DemoVC"];
+    XCTAssertNotNil(demoVC, @"View controller should not be nil");
+    XCTAssertTrue([demoVC isKindOfClass:[JSQDemoViewController class]], @"View controller should be kind of class: %@", [JSQDemoViewController class]);
+    XCTAssertNotNil(demoVC.view, @"View should not be nil");
+    XCTAssertNotNil(demoVC.collectionView, @"Collection view should not be nil");
+    XCTAssertNotNil(demoVC.inputToolbar, @"Input toolbar should not be nil");
 }
 
 @end

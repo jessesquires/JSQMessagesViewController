@@ -30,6 +30,8 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
 
+- (void)jsq_configureViewController;
+
 - (void)jsq_prepareForRotation;
 
 - (void)jsq_updateKeyboardTriggerOffset;
@@ -49,31 +51,57 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 
 #pragma mark - Class methods
 
-+ (UIStoryboard *)messagesStoryboard
++ (UINib *)nib
 {
-    return [UIStoryboard storyboardWithName:NSStringFromClass([JSQMessagesViewController class])
-                                     bundle:[NSBundle mainBundle]];
+    return [UINib nibWithNibName:NSStringFromClass([JSQMessagesViewController class])
+                          bundle:[NSBundle mainBundle]];
 }
 
-+ (JSQMessagesViewController *)messagesViewController
++ (instancetype)messagesViewController
 {
-    return [[JSQMessagesViewController messagesStoryboard] instantiateInitialViewController];
+    return [[[self class] alloc] initWithNibName:NSStringFromClass([JSQMessagesViewController class])
+                                          bundle:[NSBundle mainBundle]];
 }
 
 #pragma mark - Initialization
 
+- (void)jsq_configureViewController
+{
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    _toolbarHeightContraint.constant = kJSQMessagesInputToolbarHeightDefault;
+    
+    _collectionView.dataSource = self;
+    _collectionView.delegate = self;
+    _collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
+    
+    _inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"New Message", @"Placeholder text for the message input view");
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        [self jsq_configureViewController];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([JSQMessagesViewController class])
+                                      owner:self
+                                    options:nil];
+    }
+    return self;
+}
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.toolbarHeightContraint.constant = kJSQMessagesInputToolbarHeightDefault;
-    
-    self.collectionView.dataSource = self;
-    self.collectionView.delegate = self;
-    self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
-    
-    self.inputToolbar.contentView.textView.placeHolder = @"New Message";
+    [self jsq_configureViewController];
 }
 
 #pragma mark - View lifecycle

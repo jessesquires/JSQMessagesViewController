@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--View Controller - Root View Controller-->
+        <!--Table View Controller - Root View Controller-->
         <scene sceneID="IjL-71-Ll6">
             <objects>
-                <tableViewController id="rXs-qR-ns2" customClass="JSQViewController" sceneMemberID="viewController">
+                <tableViewController id="rXs-qR-ns2" customClass="JSQTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="d0b-Sx-5kJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,7 +27,25 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IcC-ug-dCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="350" y="268"/>
+            <point key="canvasLocation" x="-154" y="74"/>
+        </scene>
+        <!--Demo View Controller-->
+        <scene sceneID="gOX-cv-CuN">
+            <objects>
+                <viewController storyboardIdentifier="DemoVC" id="JdJ-0X-ZL8" customClass="JSQDemoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TE8-r2-pE8"/>
+                        <viewControllerLayoutGuide type="bottom" id="H2n-HB-Ssl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Vop-TB-ImV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B2s-hQ-gD4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="399" y="74"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="A8N-cL-8VP">
@@ -42,7 +60,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OC7-Ng-9xQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-81" y="268"/>
+            <point key="canvasLocation" x="-585" y="74"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

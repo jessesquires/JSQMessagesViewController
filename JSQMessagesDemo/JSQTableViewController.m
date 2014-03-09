@@ -12,12 +12,12 @@
 //  http://opensource.org/licenses/MIT
 //
 
-#import "JSQViewController.h"
+#import "JSQTableViewController.h"
 
-#import "JSQMessagesViewController.h"
+#import "JSQDemoViewController.h"
 
 
-@implementation JSQViewController
+@implementation JSQTableViewController
 
 #pragma mark - View lifecycle
 
@@ -61,8 +61,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIStoryboard *sb = [JSQMessagesViewController messagesStoryboard];
-    JSQMessagesViewController *vc = [sb instantiateInitialViewController];
+//    UIStoryboard *sb = [JSQMessagesViewController messagesStoryboard];
+//    JSQMessagesViewController *vc = [sb instantiateInitialViewController];
+    
+//    JSQDemoViewController *vc = (JSQDemoViewController *)[JSQMessagesViewController messagesViewController];
+    
+    JSQDemoViewController *vc = [JSQDemoViewController messagesViewController];
+
+    NSLog(@"CLASS = %@", [vc class]);
+    
+//    JSQDemoViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoVC"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
