@@ -14,6 +14,22 @@
 
 #import <UIKit/UIKit.h>
 
+@class JSQMessagesCollectionView;
+
+@protocol JSQMessageData;
+
+
+@protocol JSQMessagesCollectionViewDataSource <UICollectionViewDataSource>
+
+- (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView
+           messageForItemAtIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
+
+
 @interface JSQMessagesCollectionView : UICollectionView
+
+@property (weak, nonatomic) id<JSQMessagesCollectionViewDataSource> dataSource;
 
 @end

@@ -14,13 +14,31 @@
 
 #import <UIKit/UIKit.h>
 
+@class JSQMessagesInputToolbar;
 @class JSQMessagesToolbarContentView;
 
 FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
 
 
+@protocol JSQMessagesInputToolbarDelegate <UIToolbarDelegate>
+
+@required
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar
+                 didSendText:(NSString *)text
+                  fromSender:(NSString *)sender
+                      onDate:(NSDate *)date;
+
+@end
+
+
+
 @interface JSQMessagesInputToolbar : UIToolbar
 
+@property (weak, nonatomic) id<JSQMessagesInputToolbarDelegate> delegate;
+
 @property (weak, nonatomic, readonly) JSQMessagesToolbarContentView *contentView;
+
+
+// TODO: KVO listen for contentView leftBarButton and right. then set target: action: selector:
 
 @end

@@ -28,7 +28,6 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    
     self.scrollDirection = UICollectionViewScrollDirectionVertical;
 }
 

@@ -23,13 +23,38 @@
 
 @implementation JSQDemoViewController
 
+#pragma mark - View lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"JSQMessages";
     
-    NSLog(@"LOAD");
-    self.title = @"My Demo";
-    
+//    JSQMessagesCollectionViewFlowLayout *collectionViewLayout = (JSQMessagesCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+//    collectionViewLayout.delegate = self;
+}
+
+#pragma mark - JSQMessages data source
+
+- (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+#pragma mark - JSQMessages collectionView flowLayout delegate
+
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
+                         layout:(JSQMessagesCollectionViewFlowLayout *)layout bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+                         sender:(NSString *)sender
+{
+    return nil;
+}
+
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
+                         layout:(JSQMessagesCollectionViewFlowLayout *)layout avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+                         sender:(NSString *)sender
+{
+    return nil;
 }
 
 @end

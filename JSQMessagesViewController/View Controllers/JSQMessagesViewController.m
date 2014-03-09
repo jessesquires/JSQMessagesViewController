@@ -19,7 +19,10 @@
 
 static void * kJSQKeyValueObservingContext = &kJSQKeyValueObservingContext;
 
+static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
+
 static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
+
 
 
 @interface JSQMessagesViewController ()
@@ -76,6 +79,8 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
     _collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     
     _inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"New Message", @"Placeholder text for the message input view");
+    
+    _sender = kJSQDefaultSender;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -206,7 +211,27 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
     [self.inputToolbar.contentView.textView setNeedsDisplay];
 }
 
+#pragma mark - Messages view controller
+
+- (void)finishSend
+{
+    // TODO:
+}
+
+- (void)scrollToBottomAnimated:(BOOL)animated
+{
+    // TODO:
+}
+
 #pragma mark - Collection view data source
+
+- (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSAssert(NO, @"ERROR: subclasses of %@ must implement the data source method %@",
+             [JSQMessagesViewController class],
+             NSStringFromSelector(@selector(collectionView:messageForItemAtIndexPath:)));
+    return nil;
+}
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -218,8 +243,17 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
     return 1;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+//    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageForItemAtIndexPath:indexPath];
+    
+//    JSQMessagesCollectionViewFlowLayout *collectionViewLayout = (JSQMessagesCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    
+//    [collectionViewLayout.delegate collectionView:(JSQMessagesCollectionView *)collectionView
+//                                           layout:collectionViewLayout
+//        incomingBubbleImageViewForItemAtIndexPath:indexPath];
+    
+    
     JSQMessagesCollectionViewCellOutgoing *cell1 = [collectionView dequeueReusableCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]
                                                                                              forIndexPath:indexPath];
     
