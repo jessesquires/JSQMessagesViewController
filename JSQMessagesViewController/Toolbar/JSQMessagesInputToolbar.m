@@ -46,7 +46,7 @@ const CGFloat kJSQMessagesInputToolbarHeightDefault = 44.0f;
     [self setNeedsUpdateConstraints];
     _contentView = toolbarContentView;
     
-    UIImage *cameraImage = [UIImage imageNamed:@"button-photo"];
+    UIImage *cameraImage = [UIImage imageNamed:@"camera"];
     UIImage *cameraNormal = [cameraImage jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
     UIImage *cameraHighlighted = [cameraImage jsq_imageMaskedWithColor:[UIColor darkGrayColor]];
     

@@ -44,4 +44,6 @@
 
 + (UIStoryboard *)messagesStoryboard;
 
++ (JSQMessagesViewController *)messagesViewController;
+
 @end

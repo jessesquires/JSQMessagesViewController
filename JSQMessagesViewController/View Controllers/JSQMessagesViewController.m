@@ -55,12 +55,16 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
                                      bundle:[NSBundle mainBundle]];
 }
 
++ (JSQMessagesViewController *)messagesViewController
+{
+    return [[JSQMessagesViewController messagesStoryboard] instantiateInitialViewController];
+}
+
 #pragma mark - Initialization
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.toolbarHeightContraint.constant = kJSQMessagesInputToolbarHeightDefault;

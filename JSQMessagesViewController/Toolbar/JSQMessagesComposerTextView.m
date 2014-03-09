@@ -14,6 +14,7 @@
 
 #import "JSQMessagesComposerTextView.h"
 
+#import <QuartzCore/QuartzCore.h>
 
 @interface JSQMessagesComposerTextView ()
 

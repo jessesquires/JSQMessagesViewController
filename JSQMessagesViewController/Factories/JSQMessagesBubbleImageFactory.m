@@ -48,7 +48,7 @@
 
 + (UIImageView *)bubbleImageViewWithColor:(UIColor *)color flippedForIncoming:(BOOL)flippedForIncoming
 {
-    UIImage *bubble = [UIImage imageNamed:@"bubble-min"];
+    UIImage *bubble = [UIImage imageNamed:@"bubble_min"];
     
     UIImage *normalBubble = [bubble jsq_imageMaskedWithColor:color];
     UIImage *highlightedBubble = [bubble jsq_imageMaskedWithColor:[color jsq_colorByDarkeningColorWithValue:0.12f]];
