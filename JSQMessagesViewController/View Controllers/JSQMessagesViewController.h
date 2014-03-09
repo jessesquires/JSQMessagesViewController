@@ -29,6 +29,7 @@
 #import "JSQMessagesAvatarFactory.h"
 
 #import "JSQSystemSoundPlayer+JSQMessages.h"
+#import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
 #import "UIImage+JSQMessages.h"
 #import "UIView+JSQMessages.h"

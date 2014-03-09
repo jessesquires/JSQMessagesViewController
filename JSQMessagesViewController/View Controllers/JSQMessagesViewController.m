@@ -25,7 +25,7 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 
 
 
-@interface JSQMessagesViewController ()
+@interface JSQMessagesViewController () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
@@ -37,7 +37,9 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 
 - (void)jsq_prepareForRotation;
 
+- (void)jsq_configureKeyboardControl;
 - (void)jsq_updateKeyboardTriggerOffset;
+
 - (BOOL)jsq_inputToolbarHasReachedMaximumHeight;
 - (void)jsq_adjustInputToolbarForComposerTextViewContentSizeChange:(CGFloat)dy;
 - (void)jsq_adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy;
@@ -45,6 +47,9 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 
 - (void)jsq_updateCollectionViewInsets;
 - (void)jsq_setCollectionViewInsetsWithBottomValue:(CGFloat)bottom;
+
+- (void)jsq_addObservers;
+- (void)jsq_removeObservers;
 
 @end
 
@@ -79,6 +84,9 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
     _collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     
     _inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"New Message", @"Placeholder text for the message input view");
+    _inputToolbar.contentView.textView.delegate = self;
+    
+    _autoScrollsToMostRecentMessage = YES;
     
     _sender = kJSQDefaultSender;
 }
@@ -121,35 +129,18 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     [self jsq_updateKeyboardTriggerOffset];
+    [self jsq_configureKeyboardControl];
     
-    __weak JSQMessagesViewController *weakSelf = self;
-    __weak UIView *weakView = self.view;
-    __weak JSQMessagesInputToolbar *weakInputToolbar = self.inputToolbar;
-    __weak NSLayoutConstraint *weakToolbarBottomLayoutGuide = self.toolbarBottomLayoutGuide;
-    
-    [self.view addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView) {
-        CGRect newToolbarFrame = weakInputToolbar.frame;
-        newToolbarFrame.origin.y = CGRectGetMinY(keyboardFrameInView) - CGRectGetHeight(newToolbarFrame);
-        weakInputToolbar.frame = newToolbarFrame;
-        
-        CGFloat heightFromBottom = CGRectGetHeight(weakView.frame) - CGRectGetMinY(keyboardFrameInView);
-        weakToolbarBottomLayoutGuide.constant = heightFromBottom;
-        [weakSelf.view setNeedsUpdateConstraints];
-        
-        [weakSelf jsq_updateCollectionViewInsets];
-    }];
+    if (self.autoScrollsToMostRecentMessage) {
+        [self scrollToBottomAnimated:NO];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    [self.inputToolbar.contentView.textView addObserver:self
-                                             forKeyPath:NSStringFromSelector(@selector(contentSize))
-                                                options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
-                                                context:kJSQKeyValueObservingContext];
+    [self jsq_addObservers];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -161,15 +152,7 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    
-    @try {
-        [self.inputToolbar.contentView.textView removeObserver:self
-                                                    forKeyPath:NSStringFromSelector(@selector(contentSize))
-                                                       context:kJSQKeyValueObservingContext];
-    }
-    @catch (NSException *exception) {
-        NSLog(@"%s EXCEPTION CAUGHT : %@, %@", __PRETTY_FUNCTION__, exception, [exception userInfo]);
-    }
+    [self jsq_removeObservers];
 }
 
 - (void)didReceiveMemoryWarning
@@ -215,12 +198,33 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 
 - (void)finishSend
 {
-    // TODO:
+    UITextView *textView = self.inputToolbar.contentView.textView;
+    textView.text = nil;
+    
+    [self.inputToolbar toggleSendButtonEnabled];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
+    
+    [self.collectionView reloadData];
+    
+    if (self.autoScrollsToMostRecentMessage) {
+        [self scrollToBottomAnimated:YES];
+    }
 }
 
 - (void)scrollToBottomAnimated:(BOOL)animated
 {
-    // TODO:
+    if ([self.collectionView numberOfSections] == 0) {
+        return;
+    }
+    
+    NSInteger items = [self.collectionView numberOfItemsInSection:0];
+    
+    if (items > 0) {
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:items - 1 inSection:0]
+                                    atScrollPosition:UICollectionViewScrollPositionBottom
+                                            animated:animated];
+    }
 }
 
 #pragma mark - Collection view data source
@@ -331,6 +335,27 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
     return CGSizeMake(width, 200.0f);
 }
 
+#pragma mark - Text view delegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [textView becomeFirstResponder];
+    
+    if (self.autoScrollsToMostRecentMessage) {
+        [self scrollToBottomAnimated:YES];
+    }
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    [self.inputToolbar toggleSendButtonEnabled];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [textView resignFirstResponder];
+}
+
 #pragma mark - Key-value observing
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -350,12 +375,34 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
     }
 }
 
-#pragma mark - Composer text view utilities
+#pragma mark - Keyboard control utilities
+
+- (void)jsq_configureKeyboardControl
+{
+    __weak JSQMessagesViewController *weakSelf = self;
+    __weak UIView *weakView = self.view;
+    __weak JSQMessagesInputToolbar *weakInputToolbar = self.inputToolbar;
+    __weak NSLayoutConstraint *weakToolbarBottomLayoutGuide = self.toolbarBottomLayoutGuide;
+    
+    [self.view addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView) {
+        CGRect newToolbarFrame = weakInputToolbar.frame;
+        newToolbarFrame.origin.y = CGRectGetMinY(keyboardFrameInView) - CGRectGetHeight(newToolbarFrame);
+        weakInputToolbar.frame = newToolbarFrame;
+        
+        CGFloat heightFromBottom = CGRectGetHeight(weakView.frame) - CGRectGetMinY(keyboardFrameInView);
+        weakToolbarBottomLayoutGuide.constant = heightFromBottom;
+        [weakSelf.view setNeedsUpdateConstraints];
+        
+        [weakSelf jsq_updateCollectionViewInsets];
+    }];
+}
 
 - (void)jsq_updateKeyboardTriggerOffset
 {
     self.view.keyboardTriggerOffset = CGRectGetHeight(self.inputToolbar.bounds);
 }
+
+#pragma mark - Input toolbar utilities
 
 - (BOOL)jsq_inputToolbarHasReachedMaximumHeight
 {
@@ -436,6 +483,28 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
     UIEdgeInsets insets = UIEdgeInsetsMake(self.topLayoutGuide.length, 0.0f, bottom, 0.0f);
     self.collectionView.contentInset = insets;
     self.collectionView.scrollIndicatorInsets = insets;
+}
+
+#pragma mark - Utilities
+
+- (void)jsq_addObservers
+{
+    [self.inputToolbar.contentView.textView addObserver:self
+                                             forKeyPath:NSStringFromSelector(@selector(contentSize))
+                                                options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+                                                context:kJSQKeyValueObservingContext];
+}
+
+- (void)jsq_removeObservers
+{
+    @try {
+        [self.inputToolbar.contentView.textView removeObserver:self
+                                                    forKeyPath:NSStringFromSelector(@selector(contentSize))
+                                                       context:kJSQKeyValueObservingContext];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%s EXCEPTION CAUGHT : %@, %@", __PRETTY_FUNCTION__, exception, [exception userInfo]);
+    }
 }
 
 @end

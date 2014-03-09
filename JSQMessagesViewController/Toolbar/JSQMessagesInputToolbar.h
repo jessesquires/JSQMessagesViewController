@@ -28,6 +28,10 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
                   fromSender:(NSString *)sender
                       onDate:(NSDate *)date;
 
+// did press left bar button
+
+// did press right bar button
+
 @end
 
 
@@ -38,6 +42,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
 
 @property (weak, nonatomic, readonly) JSQMessagesToolbarContentView *contentView;
 
+- (void)toggleSendButtonEnabled;
 
 // TODO: KVO listen for contentView leftBarButton and right. then set target: action: selector:
 

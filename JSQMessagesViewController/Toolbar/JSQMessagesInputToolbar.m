@@ -15,10 +15,12 @@
 #import "JSQMessagesInputToolbar.h"
 
 #import "JSQMessagesToolbarContentView.h"
+#import "JSQMessagesComposerTextView.h"
 
-#import "UIView+JSQMessages.h"
+#import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
 #import "UIImage+JSQMessages.h"
+#import "UIView+JSQMessages.h"
 
 const CGFloat kJSQMessagesInputToolbarHeightDefault = 44.0f;
 
@@ -67,8 +69,18 @@ const CGFloat kJSQMessagesInputToolbarHeightDefault = 44.0f;
     sendButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0f];
     sendButton.contentMode = UIViewContentModeCenter;
     sendButton.backgroundColor = [UIColor clearColor];
-    sendButton.tintColor = [UIColor blueColor];
+    sendButton.tintColor = [UIColor jsq_messageBubbleBlueColor];
     self.contentView.rightBarButtonItem = sendButton;
+    
+    [self toggleSendButtonEnabled];
+}
+
+#pragma mark - Input toolbar
+
+- (void)toggleSendButtonEnabled
+{
+    BOOL hasText = ([[self.contentView.textView.text jsq_stringByTrimingWhitespace] length] > 0);
+    self.contentView.rightBarButtonItem.enabled = hasText;
 }
 
 #pragma mark - UIToolbar overrides

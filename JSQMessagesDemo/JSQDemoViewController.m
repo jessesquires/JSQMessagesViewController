@@ -34,6 +34,11 @@
 //    collectionViewLayout.delegate = self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 #pragma mark - JSQMessages data source
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageForItemAtIndexPath:(NSIndexPath *)indexPath
