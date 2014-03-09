@@ -68,10 +68,8 @@
 
 @property (assign, nonatomic) BOOL autoScrollsToMostRecentMessage;
 
-// TODO:
 @property (copy, nonatomic) NSString *outgoingCellIdentifier;
 
-// TODO:
 @property (copy, nonatomic) NSString *incomingCellIdentifier;
 
 #pragma mark - Class methods

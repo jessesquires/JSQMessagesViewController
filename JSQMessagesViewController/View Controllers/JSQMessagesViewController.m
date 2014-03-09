@@ -90,9 +90,12 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
     _inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"New Message", @"Placeholder text for the message input view");
     _inputToolbar.contentView.textView.delegate = self;
     
+    _sender = kJSQDefaultSender;
+    
     _autoScrollsToMostRecentMessage = YES;
     
-    _sender = kJSQDefaultSender;
+    _outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
+    _incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -259,12 +262,27 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 //    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageForItemAtIndexPath:indexPath];
-    
+//    
+//    NSString *messageSender = [messageData sender];
+//    BOOL isOutgoingMessage = [messageSender isEqualToString:self.sender];
+//    
+//    NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
+//    JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+//    
 //    JSQMessagesCollectionViewFlowLayout *collectionViewLayout = (JSQMessagesCollectionViewFlowLayout *)collectionView.collectionViewLayout;
+//    
+//    cell.messageBubbleImageView = [collectionViewLayout.delegate collectionView:collectionView
+//                                                                         layout:collectionViewLayout
+//                                              bubbleImageViewForItemAtIndexPath:indexPath
+//                                                                         sender:messageSender];
+//    
+//    cell.avatarImageView = [collectionViewLayout.delegate collectionView:collectionView
+//                                                                  layout:collectionViewLayout
+//                                       avatarImageViewForItemAtIndexPath:indexPath
+//                                                                  sender:messageSender];
+//    
+//    cell.backgroundColor = self.collectionView.backgroundColor;
     
-//    [collectionViewLayout.delegate collectionView:(JSQMessagesCollectionView *)collectionView
-//                                           layout:collectionViewLayout
-//        incomingBubbleImageViewForItemAtIndexPath:indexPath];
     
     
     JSQMessagesCollectionViewCellOutgoing *cell1 = [collectionView dequeueReusableCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]
