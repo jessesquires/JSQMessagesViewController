@@ -16,7 +16,7 @@
 
 @interface JSQDemoViewController : JSQMessagesViewController <JSQMessagesCollectionViewFlowLayoutDelegate>
 
-@property (copy, nonatomic) NSMutableArray *messages;
+@property (strong, nonatomic) NSMutableArray *messages;
 
 @property (copy, nonatomic) NSDictionary *avatars;
 

@@ -24,6 +24,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (void)jsqDemo_setupTestModel;
 
+- (void)jsqDemo_setupViewController;
+
 @end
 
 
@@ -32,6 +34,36 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 
 #pragma mark - Initialization
+
+/**
+ *  Override point for initializing programmatically
+ */
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        [self jsqDemo_setupViewController];
+    }
+    return self;
+}
+
+/**
+ *  Override point for initializing via storyboards/nibs
+ */
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self jsqDemo_setupViewController];
+}
+
+- (void)jsqDemo_setupViewController
+{
+    self.sender = kJSQDemoAvatarNameJesse;
+    self.inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"Message", nil);
+    
+    JSQMessagesCollectionViewFlowLayout *collectionViewLayout = (JSQMessagesCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    collectionViewLayout.delegate = self;
+}
 
 - (void)jsqDemo_setupTestModel
 {
@@ -65,12 +97,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                      kJSQDemoAvatarNameWoz : [[UIImageView alloc] initWithImage:wozImage]
                      };
     
-    //  Flip to YES to add more messages for testing
-    BOOL addMoreMessages = NO;
-    if (addMoreMessages) {
-        for (NSUInteger i = 0; i < 3; i++) {
-            [self.messages addObjectsFromArray:self.messages];
-        }
+    //  Change to add more messages for testing
+    NSUInteger messagesToAdd = 0;
+    for (NSUInteger i = 0; i < messagesToAdd; i++) {
+        [self.messages addObjectsFromArray:self.messages];
     }
 }
 
@@ -78,20 +108,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 #pragma mark - View lifecycle
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    
-    self.sender = kJSQDemoAvatarNameJesse;
-    self.inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"Message", nil);
-    
-    JSQMessagesCollectionViewFlowLayout *collectionViewLayout = (JSQMessagesCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    collectionViewLayout.delegate = self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.title = @"JSQMessages";
     
     [self jsqDemo_setupTestModel];

@@ -107,6 +107,19 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddi
     self.textView.contentOffset = CGPointZero;
 }
 
+#pragma mark - Collection view cell
+
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    self.cellTopLabel.text = nil;
+    self.messageBubbleTopLabel.text = nil;
+    self.cellBottomLabel.text = nil;
+    
+    self.textView.text = nil;
+}
+
 #pragma mark - Setters
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor
