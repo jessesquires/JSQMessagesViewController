@@ -35,6 +35,8 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 
 - (void)jsq_configureViewController;
 
+- (void)jsq_prepareForRotation;
+
 - (void)jsq_notifyDelegateDidSendMessage;
 - (void)jsq_notifyDelegateDidPressAccessoryButton:(UIButton *)sender;
 
@@ -47,7 +49,7 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 - (void)jsq_scrollComposerTextViewToBottomAnimated:(BOOL)animated;
 
 - (void)jsq_updateCollectionViewInsets;
-- (void)jsq_setCollectionViewInsetsWithBottomValue:(CGFloat)bottom;
+- (void)jsq_setCollectionViewInsetsTopValue:(CGFloat)top bottomValue:(CGFloat)bottom;
 
 - (void)jsq_addObservers;
 - (void)jsq_removeObservers;
@@ -131,6 +133,8 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.view layoutIfNeeded];
+    
     [self jsq_updateKeyboardTriggerOffset];
     [self jsq_configureKeyboardControl];
     
@@ -181,16 +185,22 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.inputToolbar.contentView.textView setNeedsDisplay];
+    [self jsq_prepareForRotation];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [self jsq_prepareForRotation];
     
     // TODO: keyboard
+}
+
+- (void)jsq_prepareForRotation
+{
+    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView reloadData];
+    [self.inputToolbar.contentView.textView setNeedsDisplay];
 }
 
 #pragma mark - Messages view controller
@@ -509,12 +519,13 @@ static const CGFloat kJSQMessageBubbleTopLabelHorizontalPadding = 20.0f;
 
 - (void)jsq_updateCollectionViewInsets
 {
-    [self jsq_setCollectionViewInsetsWithBottomValue:CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame)];
+    [self jsq_setCollectionViewInsetsTopValue:self.topLayoutGuide.length
+                                  bottomValue:CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame)];
 }
 
-- (void)jsq_setCollectionViewInsetsWithBottomValue:(CGFloat)bottom
+- (void)jsq_setCollectionViewInsetsTopValue:(CGFloat)top bottomValue:(CGFloat)bottom
 {
-    UIEdgeInsets insets = UIEdgeInsetsMake(self.topLayoutGuide.length, 0.0f, bottom, 0.0f);
+    UIEdgeInsets insets = UIEdgeInsetsMake(top, 0.0f, bottom, 0.0f);
     self.collectionView.contentInset = insets;
     self.collectionView.scrollIndicatorInsets = insets;
 }
