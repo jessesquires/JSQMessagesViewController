@@ -157,8 +157,8 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddi
     
     messageBubbleImageView.frame = CGRectMake(0.0f,
                                               0.0f,
-                                              CGRectGetWidth(self.messageBubbleContainerView.frame),
-                                              CGRectGetHeight(self.messageBubbleContainerView.frame));
+                                              CGRectGetWidth(self.messageBubbleContainerView.bounds),
+                                              CGRectGetHeight(self.messageBubbleContainerView.bounds));
     
     [messageBubbleImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.textView];
@@ -189,7 +189,7 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddi
     }
     
     self.avatarContainerView.hidden = NO;
-    self.avatarViewSize = CGSizeMake(CGRectGetWidth(avatarImageView.frame), CGRectGetHeight(avatarImageView.frame));
+    self.avatarViewSize = CGSizeMake(CGRectGetWidth(avatarImageView.bounds), CGRectGetHeight(avatarImageView.bounds));
     
     [avatarImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.avatarContainerView addSubview:avatarImageView];

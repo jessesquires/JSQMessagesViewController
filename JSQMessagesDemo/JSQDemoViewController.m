@@ -90,12 +90,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     
     UIImage *wozImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_woz"]
                                                          diameter:kJSQMessagesCollectionViewCellAvatarSizeDefault];
-    self.avatars = @{
-                     kJSQDemoAvatarNameJesse : [[UIImageView alloc] initWithImage:jsqImage],
-                     kJSQDemoAvatarNameCook : [[UIImageView alloc] initWithImage:cookImage],
-                     kJSQDemoAvatarNameJobs : [[UIImageView alloc] initWithImage:jobsImage],
-                     kJSQDemoAvatarNameWoz : [[UIImageView alloc] initWithImage:wozImage]
-                     };
+    self.avatars = @{ kJSQDemoAvatarNameJesse : jsqImage,
+                      kJSQDemoAvatarNameCook : cookImage,
+                      kJSQDemoAvatarNameJobs : jobsImage,
+                      kJSQDemoAvatarNameWoz : wozImage };
     
     //  Change to add more messages for testing
     NSUInteger messagesToAdd = 0;
@@ -158,7 +156,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                          layout:(JSQMessagesCollectionViewFlowLayout *)layout avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
                          sender:(NSString *)sender
 {
-    return [self.avatars objectForKey:sender];
+    UIImage *avatarImage = [self.avatars objectForKey:sender];
+    return [[UIImageView alloc] initWithImage:avatarImage];
 }
 
 

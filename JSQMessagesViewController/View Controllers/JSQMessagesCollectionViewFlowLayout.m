@@ -31,4 +31,11 @@
     self.scrollDirection = UICollectionViewScrollDirectionVertical;
 }
 
+#pragma mark - Collection view layout overrides
+
+- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
+{
+    return YES;
+}
+
 @end
