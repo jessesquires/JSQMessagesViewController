@@ -85,7 +85,7 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     _collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     
     _inputToolbar.delegate = self;
-    _inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"New Message", @"Placeholder text for the message input view");
+    _inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"New Message", @"Placeholder text for the message input text view");
     _inputToolbar.contentView.textView.delegate = self;
     
     _sender = kJSQDefaultSender;
@@ -338,16 +338,21 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
                             - kJSQMessagesCollectionViewCellMessageBubblePaddingDefault;
     
     UIEdgeInsets textInsets = [JSQMessagesCollectionViewCell defaultTextContainerInset];
-    CGFloat textPadding = textInsets.left + textInsets.right;
+    CGFloat textHorizontalPadding = textInsets.left + textInsets.right;
+    CGFloat textVerticalPadding = textInsets.bottom + textInsets.top;
+    CGFloat textPadding = textHorizontalPadding + textVerticalPadding;
     
     CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maxTextWidth - textPadding, CGFLOAT_MAX)
-                                                         options:NSStringDrawingUsesLineFragmentOrigin
-                                                      attributes:@{ NSFontAttributeName : [[JSQMessagesCollectionViewCell appearance] font] }
+                                                         options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                                      attributes:@{
+                                                                   NSFontAttributeName : [[JSQMessagesCollectionViewCell appearance] font],
+                                                                   NSParagraphStyleAttributeName : [NSParagraphStyle defaultParagraphStyle]
+                                                                   }
                                                          context:nil];
     
     CGFloat cellHeight = CGRectGetHeight(CGRectIntegral(stringRect));
     cellHeight += (kJSQMessagesCollectionViewCellLabelHeightDefault * 3.0f);
-    cellHeight += textPadding;
+    cellHeight += textHorizontalPadding;
     
     return CGSizeMake(cellWidth, cellHeight);
 }
