@@ -327,17 +327,29 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO:
+    id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView
+                                                          messageForItemAtIndexPath:indexPath];
+    
     JSQMessagesCollectionViewFlowLayout *layout = (JSQMessagesCollectionViewFlowLayout *)collectionViewLayout;
-    CGFloat width = collectionView.frame.size.width - layout.sectionInset.left - layout.sectionInset.right;
+    CGFloat cellWidth = collectionView.frame.size.width - layout.sectionInset.left - layout.sectionInset.right;
     
-//    CGRect stringRect = [txt boundingRectWithSize:CGSizeMake(maxWidth, maxHeight)
-//                                          options:NSStringDrawingUsesLineFragmentOrigin
-//                                       attributes:@{ NSFontAttributeName : [[JSBubbleView appearance] font] }
-//                                          context:[[NSStringDrawingContext alloc] init]];
+    CGFloat maxTextWidth = cellWidth
+                            - kJSQMessagesCollectionViewCellAvatarSizeDefault
+                            - kJSQMessagesCollectionViewCellMessageBubblePaddingDefault;
     
+    UIEdgeInsets textInsets = [JSQMessagesCollectionViewCell defaultTextContainerInset];
+    CGFloat textPadding = textInsets.left + textInsets.right;
     
-    return CGSizeMake(width, 200.0f);
+    CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maxTextWidth - textPadding, CGFLOAT_MAX)
+                                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                                      attributes:@{ NSFontAttributeName : [[JSQMessagesCollectionViewCell appearance] font] }
+                                                         context:nil];
+    
+    CGFloat cellHeight = CGRectGetHeight(CGRectIntegral(stringRect));
+    cellHeight += (kJSQMessagesCollectionViewCellLabelHeightDefault * 3.0f);
+    cellHeight += textPadding;
+    
+    return CGSizeMake(cellWidth, cellHeight);
 }
 
 #pragma mark - Input toolbar delegate

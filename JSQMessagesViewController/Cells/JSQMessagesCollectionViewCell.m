@@ -66,6 +66,11 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddi
     return nil;
 }
 
++ (UIEdgeInsets)defaultTextContainerInset
+{
+    return UIEdgeInsetsMake(8.0f, 10.0f, 8.0f, 8.0f);
+}
+
 #pragma mark - Initialization
 
 - (void)awakeFromNib
@@ -103,7 +108,7 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddi
     self.textView.backgroundColor = [UIColor clearColor];
     self.textView.contentInset = UIEdgeInsetsZero;
     self.textView.scrollIndicatorInsets = UIEdgeInsetsZero;
-    self.textView.textContainerInset = UIEdgeInsetsMake(8.0f, 4.0f, 2.0f, 4.0f);
+    self.textView.textContainerInset = [JSQMessagesCollectionViewCell defaultTextContainerInset];
     self.textView.contentOffset = CGPointZero;
 }
 

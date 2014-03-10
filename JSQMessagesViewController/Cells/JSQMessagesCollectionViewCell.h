@@ -48,4 +48,6 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLa
 
 + (NSString *)cellReuseIdentifier;
 
++ (UIEdgeInsets)defaultTextContainerInset;
+
 @end
