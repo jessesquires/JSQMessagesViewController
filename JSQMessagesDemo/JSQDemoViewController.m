@@ -22,6 +22,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 @interface JSQDemoViewController ()
 
+@property (strong, nonatomic) UIImageView *outgoingBubbleImageView;
+@property (strong, nonatomic) UIImageView *incomingBubbleImageView;
+
 - (void)jsqDemo_setupTestModel;
 
 - (void)jsqDemo_setupViewController;
@@ -67,6 +70,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (void)jsqDemo_setupTestModel
 {
+    /**
+     *  Load some fake messages
+     */
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages. Simple, elegant, easy to use." sender:kJSQDemoAvatarNameJesse date:[NSDate distantPast]],
                      [[JSQMessage alloc] initWithText:@"There are super sweet default settings, but you can customize this like crazy." sender:kJSQDemoAvatarNameWoz date:[NSDate distantPast]],
@@ -76,6 +82,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                      [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:kJSQDemoAvatarNameJesse date:[NSDate date]],
                      nil];
     
+    /**
+     *  Create avatar images once and save
+     */
     UIImage *jsqImage = [JSQMessagesAvatarFactory avatarWithUserInitials:@"JSQ"
                                                          backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
                                                                textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
@@ -95,14 +104,18 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                       kJSQDemoAvatarNameJobs : jobsImage,
                       kJSQDemoAvatarNameWoz : wozImage };
     
-    //  Change to add more messages for testing
-    NSUInteger messagesToAdd = 0;
+    /**
+     *  Change to add more messages for testing
+     */
+    NSUInteger messagesToAdd = 2;
     for (NSUInteger i = 0; i < messagesToAdd; i++) {
         [self.messages addObjectsFromArray:self.messages];
     }
     
-    //  Change to YES to add a super long message for testing
-    //  You should see "END" twice
+    /**
+     *  Change to YES to add a super long message for testing
+     *  You should see "END" twice
+     */
     BOOL addREALLYLongMessage = NO;
     if (addREALLYLongMessage) {
         JSQMessage *reallyLongMessage = [JSQMessage messageWithText:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END" sender:kJSQDemoAvatarNameJesse];
@@ -121,6 +134,15 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     self.title = @"JSQMessages";
     
     [self jsqDemo_setupTestModel];
+    
+    /**
+     *  Create bubble images once and save
+     */
+    self.outgoingBubbleImageView = [JSQMessagesBubbleImageFactory
+                                    outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
+    
+    self.incomingBubbleImageView = [JSQMessagesBubbleImageFactory
+                                    incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -153,17 +175,27 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                          layout:(JSQMessagesCollectionViewFlowLayout *)layout bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
                          sender:(NSString *)sender
 {
+    /**
+     *  Reuse created bubble images, but create new imageView to add to each cell
+     *  Otherwise, each cell would be referencing the same imageView and bubbles would disappear from cells
+     */
     if ([sender isEqualToString:self.sender]) {
-        return [JSQMessagesBubbleImageFactory outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
+        return [[UIImageView alloc] initWithImage:self.outgoingBubbleImageView.image
+                                 highlightedImage:self.outgoingBubbleImageView.highlightedImage];
     }
     
-    return [JSQMessagesBubbleImageFactory incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
+    return [[UIImageView alloc] initWithImage:self.incomingBubbleImageView.image
+                             highlightedImage:self.incomingBubbleImageView.highlightedImage];
 }
 
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
                          layout:(JSQMessagesCollectionViewFlowLayout *)layout avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
                          sender:(NSString *)sender
 {
+    /**
+     *  Reuse created avatar images, but create new imageView to add to each cell
+     *  Otherwise, each cell would be referencing the same imageView and avatars would disappear from cells
+     */
     UIImage *avatarImage = [self.avatars objectForKey:sender];
     return [[UIImageView alloc] initWithImage:avatarImage];
 }
