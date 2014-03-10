@@ -154,11 +154,6 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 {
     [super viewWillDisappear:animated];
     [self.view removeKeyboardControl];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
     [self jsq_removeObservers];
 }
 
