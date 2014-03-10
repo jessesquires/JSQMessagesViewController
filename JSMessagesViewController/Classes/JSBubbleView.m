@@ -236,8 +236,9 @@
 
 -(void)layoutTextViewFrame {
     
-    CGFloat textX = self.bubbleImageView.frame.origin.x + (self.hasAvatar ? self.bubbleImageView.frame.size.height: 0);
+    CGFloat offset = [JSBubbleView heightForSingleLine];
     
+    CGFloat textX = self.bubbleImageView.frame.origin.x + (self.hasAvatar ? offset : 0);
     
     if(self.type == JSBubbleMessageTypeIncoming) {
         textX += (self.bubbleImageView.image.capInsets.left / 2.0f);
@@ -245,8 +246,9 @@
     
     CGRect textFrame = CGRectMake(textX,
                                   self.bubbleImageView.frame.origin.y,
-                                  self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f) - kForegroundImageViewOffset - (self.hasAvatar ? self.bubbleImageView.frame.size.height: 0),
+                                  self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f) - kForegroundImageViewOffset - (self.hasAvatar ? offset: 0),
                                   self.bubbleImageView.frame.size.height - kMarginTop);
+
     
     // to make up for changing this to UILabel, we add/subtract based on this former line of code that only applied to UITextView:
     //_textView.textContainerInset = UIEdgeInsetsMake(8.0f, 4.0f, 2.0f, 4.0f);
