@@ -31,11 +31,14 @@
 
 @optional
 
-- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView
-                layout:(JSQMessagesCollectionViewFlowLayout *)layout shouldDisplayTimestampForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
+                      layout:(JSQMessagesCollectionViewFlowLayout *)layout cellTopLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath;
 
-- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView
-                layout:(JSQMessagesCollectionViewFlowLayout *)layout shouldDisplaySenderForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
+                      layout:(JSQMessagesCollectionViewFlowLayout *)layout messageBubbleTopLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath;
+
+- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
+                      layout:(JSQMessagesCollectionViewFlowLayout *)layout cellBottomLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
                 layout:(JSQMessagesCollectionViewFlowLayout *)layout configureItemAtIndexPath:(NSIndexPath *)indexPath

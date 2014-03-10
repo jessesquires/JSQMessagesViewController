@@ -165,22 +165,32 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 #pragma mark - OPTIONAL
 #pragma mark - JSQMessages CollectionView FlowLayout Delegate
 
-- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView
-                layout:(JSQMessagesCollectionViewFlowLayout *)layout shouldDisplayTimestampForItemAtIndexPath:(NSIndexPath *)indexPath
+- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
+                      layout:(JSQMessagesCollectionViewFlowLayout *)layout cellTopLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return NO;
+    // TOOD:
+    return nil;
 }
 
-- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView
-                layout:(JSQMessagesCollectionViewFlowLayout *)layout shouldDisplaySenderForItemAtIndexPath:(NSIndexPath *)indexPath
+- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
+                      layout:(JSQMessagesCollectionViewFlowLayout *)layout messageBubbleTopLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return NO;
+    // TOOD:
+    return nil;
+}
+
+- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
+                      layout:(JSQMessagesCollectionViewFlowLayout *)layout cellBottomLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // TOOD:
+    return nil;
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
                 layout:(JSQMessagesCollectionViewFlowLayout *)layout configureItemAtIndexPath:(NSIndexPath *)indexPath
                 sender:(NSString *)sender
 {
+    // TOOD:
     
 }
 
