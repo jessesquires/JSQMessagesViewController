@@ -280,7 +280,7 @@
 }
 
 +(CGSize)textSizeForAttributedText:(NSAttributedString *)attributedText offset:(CGFloat)offset {
-    CGFloat maxWidth = 269.0 - offset;  // this seems to be the magic number...  not sure exactly why, but it works for sizing.
+    CGFloat maxWidth = 270.0 - offset;  // this seems to be the magic number...  not sure exactly why, but it works for sizing.
     
     CGRect boundingRect = [attributedText boundingRectWithSize:(CGSize){maxWidth, CGFLOAT_MAX} options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) context:nil];
     
@@ -340,8 +340,8 @@
     
     self.avatarImageView = imageview;
     self.avatarImageView.hidden = !self.hasAvatar;
-    self.avatarImageView.frame = CGRectMake(2, 2.5, size-4, size-4);
-    self.avatarImageView.layer.cornerRadius = (size-4)/2;
+    self.avatarImageView.frame = CGRectMake(2, 1.5, size-5, size-5);
+    self.avatarImageView.layer.cornerRadius = (size-5)/2;
     self.avatarImageView.clipsToBounds = YES;
     self.avatarImageView.backgroundColor = [UIColor redColor];
     
