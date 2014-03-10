@@ -152,10 +152,10 @@
         cell.bubbleView.textView.textColor = [UIColor whiteColor];
     
         if([cell.bubbleView.textView respondsToSelector:@selector(linkTextAttributes)]) {
-            NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
-            [attrs setValue:[UIColor blueColor] forKey:UITextAttributeTextColor];
+           // NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
+            //[attrs setValue:[UIColor blueColor] forKey:UITextAttributeTextColor];
             
-            cell.bubbleView.textView.linkTextAttributes = attrs;
+            //cell.bubbleView.textView.linkTextAttributes = attrs;
         }
     }
     

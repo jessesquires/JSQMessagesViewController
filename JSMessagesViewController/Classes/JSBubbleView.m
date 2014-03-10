@@ -181,9 +181,11 @@
 
 #pragma mark - Getters
 
-- (CGFloat)heightForSingleLine {
-    NSAttributedString *singleLineString = [[NSAttributedString alloc] initWithString:@"." attributes:[NSDictionary dictionaryWithObject:self.textView.font forKey:NSFontAttributeName]];
-    CGSize bubbleSize = [JSBubbleView neededSizeForAttributedText:singleLineString];
++ (CGFloat)heightForSingleLine {
+    NSAttributedString *singleLineString = [[NSAttributedString alloc] initWithString:@"." attributes:[NSDictionary dictionaryWithObject:[UIFont systemFontOfSize:16.0f] forKey:NSFontAttributeName]];
+    CGRect boundingRect = [singleLineString boundingRectWithSize:(CGSize){5, CGFLOAT_MAX} options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) context:nil];
+    
+    CGSize bubbleSize = [JSBubbleView neededSizeForAttributedText:singleLineString offset:boundingRect.size.height];
     return bubbleSize.height;
 }
 
@@ -195,7 +197,8 @@
         CGSize bubbleSize;
         
         if(self.type == JSBubbleMessageTypeNotification) {
-            bubbleSize = [JSBubbleView neededSizeForAttributedText:self.textView.attributedText];
+            bubbleSize = [JSBubbleView neededSizeForAttributedText:self.textView.attributedText offset:self.hasAvatar ? [JSBubbleView heightForSingleLine] : 0];
+
             
             self.cachedBubbleFrameRect = CGRectIntegral((CGRect){kMarginLeftRight, kMarginTop, bubbleSize.width - (kMarginLeftRight*2), bubbleSize.height + (kMarginTop / 1.5)});
         } else {
@@ -274,8 +277,8 @@
     return CGSizeMake(roundf(stringSize.width), roundf(stringSize.height));
 }
 
-+(CGSize)textSizeForAttributedText:(NSAttributedString *)attributedText {
-    CGFloat maxWidth = 269.0;  // this seems to be the magic number...  not sure exactly why, but it works for sizing.
++(CGSize)textSizeForAttributedText:(NSAttributedString *)attributedText offset:(CGFloat)offset {
+    CGFloat maxWidth = 269.0 - offset;  // this seems to be the magic number...  not sure exactly why, but it works for sizing.
     
     CGRect boundingRect = [attributedText boundingRectWithSize:(CGSize){maxWidth, CGFLOAT_MAX} options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) context:nil];
     
@@ -290,8 +293,8 @@
                       textSize.height + kPaddingTop + kPaddingBottom);
 }
 
-+ (CGSize)neededSizeForAttributedText:(NSAttributedString *)attributedText {
-    CGSize attributedTextSize = [JSBubbleView textSizeForAttributedText:attributedText];
++ (CGSize)neededSizeForAttributedText:(NSAttributedString *)attributedText offset:(CGFloat)offset {
+    CGSize attributedTextSize = [JSBubbleView textSizeForAttributedText:attributedText offset:offset];
     
     return CGSizeMake(attributedTextSize.width, attributedTextSize.height + kPaddingTop + kPaddingBottom);
 }
@@ -302,8 +305,8 @@
     return size.height + kMarginTop + kMarginBottom;
 }
 
-+ (CGFloat)neededHeightForAttributedText:(NSAttributedString *)attributedText {
-    CGSize size = [JSBubbleView neededSizeForAttributedText:attributedText];
++ (CGFloat)neededHeightForAttributedText:(NSAttributedString *)attributedText offset:(CGFloat)offset {
+    CGSize size = [JSBubbleView neededSizeForAttributedText:attributedText offset:offset];
     
     return size.height + kMarginTop + kMarginBottom;
 }
@@ -331,7 +334,7 @@
     
     [self.avatarImageView removeFromSuperview];
     
-    CGFloat size = [self heightForSingleLine]  + (kMarginTop / 1.5);
+    CGFloat size = [JSBubbleView heightForSingleLine]  + (kMarginTop / 1.5);
     
     self.avatarImageView = imageview;
     self.avatarImageView.hidden = !self.hasAvatar;

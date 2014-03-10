@@ -102,11 +102,14 @@
  *
  *  @return The height required for the frame of the bubble view in order to display the given text.
  */
-+ (CGFloat)neededHeightForAttributedText:(NSAttributedString *)attributedText;
++ (CGFloat)neededHeightForAttributedText:(NSAttributedString *)attributedText offset:(CGFloat)offset;
 
 #pragma mark - Instance methods
 -(void)assignSubtractFromWidth:(CGFloat)value;
 
 - (void)configureAvatarView:(UIImageView *)imageview;
+
+
++ (CGFloat)heightForSingleLine;
 
 @end

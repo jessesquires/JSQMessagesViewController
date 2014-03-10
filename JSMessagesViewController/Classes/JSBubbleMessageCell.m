@@ -397,7 +397,13 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
     
     CGFloat subviewHeights = timestampHeight + subtitleHeight + kJSLabelPadding;
     
-    CGFloat bubbleHeight = attributedText == nil ? [JSBubbleView neededHeightForText:text type:type] : [JSBubbleView neededHeightForAttributedText:attributedText];
+    CGFloat offset = 0;
+    
+    if (type == JSBubbleMessageTypeNotification) {
+        offset = hasAvatar ? [JSBubbleView heightForSingleLine] : 0;
+    }
+    
+    CGFloat bubbleHeight = attributedText == nil ? [JSBubbleView neededHeightForText:text type:type] : [JSBubbleView neededHeightForAttributedText:attributedText offset:offset];
     
     return subviewHeights + MAX(avatarHeight, bubbleHeight);
 }
