@@ -41,6 +41,8 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
 
 @property (assign, nonatomic) BOOL sendButtonOnRight;
 
+- (BOOL)hasText;
+
 - (void)toggleSendButtonEnabled;
 
 @end

@@ -87,9 +87,14 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 #pragma mark - Input toolbar
 
+- (BOOL)hasText
+{
+    return ([[self.contentView.textView.text jsq_stringByTrimingWhitespace] length] > 0);
+}
+
 - (void)toggleSendButtonEnabled
 {
-    BOOL hasText = ([[self.contentView.textView.text jsq_stringByTrimingWhitespace] length] > 0);
+    BOOL hasText = [self hasText];
     
     if (self.sendButtonOnRight) {
         self.contentView.rightBarButtonItem.enabled = hasText;
