@@ -112,7 +112,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                                                 forControlEvents:UIControlEventTouchUpInside];
                 
                 [self.contentView.leftBarButtonItem addTarget:self
-                                                       action:@selector(jsq_rightBarButtonPressed:)
+                                                       action:@selector(jsq_leftBarButtonPressed:)
                                              forControlEvents:UIControlEventTouchUpInside];
             }
             else if ([keyPath isEqualToString:NSStringFromSelector(@selector(rightBarButtonItem))]) {

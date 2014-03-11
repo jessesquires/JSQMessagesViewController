@@ -356,11 +356,11 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 
 - (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar didPressLeftBarButton:(UIButton *)sender
 {
-    if (!toolbar.sendButtonOnRight) {
-        [self jsq_notifyDelegateDidSendMessage];
+    if (toolbar.sendButtonOnRight) {
+        [self jsq_notifyDelegateDidPressAccessoryButton:sender];
     }
     else {
-        [self jsq_notifyDelegateDidPressAccessoryButton:sender];
+        [self jsq_notifyDelegateDidSendMessage];
     }
 }
 
