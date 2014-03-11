@@ -20,25 +20,25 @@ static NSString * const kJSQMessageSentSoundName = @"message_sent";
 
 @implementation JSQSystemSoundPlayer (JSQMessages)
 
-+ (void)playMessageReceivedSound
++ (void)jsq_playMessageReceivedSound
 {
     [[JSQSystemSoundPlayer sharedPlayer] playSoundWithName:kJSQMessageReceivedSoundName
                                                  extension:kJSQSystemSoundTypeAIFF];
 }
 
-+ (void)playMessageReceivedAlert
++ (void)jsq_playMessageReceivedAlert
 {
     [[JSQSystemSoundPlayer sharedPlayer] playAlertSoundWithName:kJSQMessageReceivedSoundName
                                                       extension:kJSQSystemSoundTypeAIFF];
 }
 
-+ (void)playMessageSentSound
++ (void)jsq_playMessageSentSound
 {
     [[JSQSystemSoundPlayer sharedPlayer] playSoundWithName:kJSQMessageSentSoundName
                                                  extension:kJSQSystemSoundTypeAIFF];
 }
 
-+ (void)playMessageSentAlert
++ (void)jsq_playMessageSentAlert
 {
     [[JSQSystemSoundPlayer sharedPlayer] playAlertSoundWithName:kJSQMessageSentSoundName
                                                       extension:kJSQSystemSoundTypeAIFF];

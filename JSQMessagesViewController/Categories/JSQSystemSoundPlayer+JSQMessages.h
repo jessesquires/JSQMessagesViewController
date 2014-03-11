@@ -19,21 +19,21 @@
 /**
  *  Plays the default sound for received messages.
  */
-+ (void)playMessageReceivedSound;
++ (void)jsq_playMessageReceivedSound;
 
 /**
  *  Plays the default sound for received messages *as an alert*, invoking device vibration if available.
  */
-+ (void)playMessageReceivedAlert;
++ (void)jsq_playMessageReceivedAlert;
 
 /**
  *  Plays the default sound for sent messages.
  */
-+ (void)playMessageSentSound;
++ (void)jsq_playMessageSentSound;
 
 /**
  *  Plays the default sound for sent messages *as an alert*, invoking device vibration if available.
  */
-+ (void)playMessageSentAlert;
++ (void)jsq_playMessageSentAlert;
 
 @end
