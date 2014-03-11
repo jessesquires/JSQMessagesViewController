@@ -29,6 +29,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (void)jsqDemo_setupViewController;
 
+- (void)jsqDemo_receiveMessagePressed:(UIBarButtonItem *)sender;
+
 @end
 
 
@@ -59,6 +61,13 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     [self jsqDemo_setupViewController];
 }
 
+
+
+#pragma mark - Demo setup
+
+/**
+ *  Setup your view controller like so from init or awakeFromNib
+ */
 - (void)jsqDemo_setupViewController
 {
     self.sender = kJSQDemoAvatarNameJesse;
@@ -136,6 +145,11 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     
     [self jsqDemo_setupTestModel];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Test Msg"
+                                                                              style:UIBarButtonItemStyleBordered
+                                                                             target:self
+                                                                             action:@selector(jsqDemo_receiveMessagePressed:)];
+    
     /**
      *  Create bubble images once and save
      */
@@ -153,12 +167,28 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 
 
+#pragma mark - Actions
+
+- (void)jsqDemo_receiveMessagePressed:(UIBarButtonItem *)sender
+{
+    JSQMessage *copyMessage = [[self.messages lastObject] copy];
+    NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
+    [copyAvatars removeObject:kJSQDemoAvatarNameJesse];
+    copyMessage.sender = [copyAvatars objectAtIndex:arc4random_uniform([copyAvatars count])];
+    
+    [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+    [self.messages addObject:copyMessage];
+    [self finishSend];
+}
+
+
+
 #pragma mark - REQUIRED
 #pragma mark - JSQMessages ViewController delegate
 
 - (void)messagesViewController:(JSQMessagesViewController *)viewController didSendMessage:(JSQMessage *)message
 {
-    [JSQSystemSoundPlayer jsq_playMessageReceivedAlert];
+    [JSQSystemSoundPlayer jsq_playMessageSentSound];
     [self.messages addObject:message];
     [self finishSend];
 }
