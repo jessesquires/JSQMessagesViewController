@@ -132,6 +132,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     [super viewDidLoad];
     
     self.title = @"JSQMessages";
+    self.delegate = self;
     
     [self jsqDemo_setupTestModel];
     
@@ -153,6 +154,22 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 
 #pragma mark - REQUIRED
+#pragma mark - JSQMessages ViewController delegate
+
+- (void)messagesViewController:(JSQMessagesViewController *)viewController didSendMessage:(JSQMessage *)message
+{
+    [JSQSystemSoundPlayer jsq_playMessageReceivedAlert];
+    [self.messages addObject:message];
+    [self finishSend];
+}
+
+- (void)messagesViewController:(JSQMessagesViewController *)viewController didPressAccessoryButton:(UIButton *)sender
+{
+    // TODO:
+    NSLog(@"Camera pressed!");
+}
+
+
 #pragma mark - JSQMessages CollectionView DataSource
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageForItemAtIndexPath:(NSIndexPath *)indexPath

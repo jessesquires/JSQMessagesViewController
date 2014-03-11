@@ -14,7 +14,8 @@
 
 #import "JSQMessagesViewController.h"
 
-@interface JSQDemoViewController : JSQMessagesViewController <JSQMessagesCollectionViewFlowLayoutDelegate>
+@interface JSQDemoViewController : JSQMessagesViewController <JSQMessagesViewControllerDelegate,
+                                                              JSQMessagesCollectionViewFlowLayoutDelegate>
 
 @property (strong, nonatomic) NSMutableArray *messages;
 
