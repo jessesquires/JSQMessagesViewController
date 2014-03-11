@@ -19,7 +19,6 @@
 
 #import "JSQMessagesToolbarButtonFactory.h"
 
-#import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
 #import "UIImage+JSQMessages.h"
 #import "UIView+JSQMessages.h"
@@ -87,14 +86,9 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 #pragma mark - Input toolbar
 
-- (BOOL)hasText
-{
-    return ([[self.contentView.textView.text jsq_stringByTrimingWhitespace] length] > 0);
-}
-
 - (void)toggleSendButtonEnabled
 {
-    BOOL hasText = [self hasText];
+    BOOL hasText = [self.contentView.textView hasText];
     
     if (self.sendButtonOnRight) {
         self.contentView.rightBarButtonItem.enabled = hasText;

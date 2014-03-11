@@ -16,6 +16,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#import "NSString+JSQMessages.h"
+
 @interface JSQMessagesComposerTextView ()
 
 - (void)jsq_addTextViewNotificationObservers;
@@ -73,6 +75,13 @@
 - (void)dealloc
 {
     [self jsq_removeTextViewNotificationObservers];
+}
+
+#pragma mark - Composer text view
+
+- (BOOL)hasText
+{
+    return ([[self.text jsq_stringByTrimingWhitespace] length] > 0);
 }
 
 #pragma mark - Setters

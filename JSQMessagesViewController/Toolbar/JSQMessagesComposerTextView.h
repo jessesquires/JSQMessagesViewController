@@ -29,4 +29,6 @@
  */
 @property (strong, nonatomic) UIColor *placeHolderTextColor;
 
+- (BOOL)hasText;
+
 @end
