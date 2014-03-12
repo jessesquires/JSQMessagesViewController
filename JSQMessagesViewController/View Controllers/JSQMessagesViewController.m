@@ -127,14 +127,15 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self jsq_updateCollectionViewInsets];
     [[JSQMessagesCollectionViewCell appearance] setFont:[UIFont systemFontOfSize:15.0f]];
+    [self jsq_updateCollectionViewInsets];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.view layoutIfNeeded];
+    [self.collectionView.collectionViewLayout invalidateLayout];
     
     [self jsq_updateKeyboardTriggerOffset];
     [self jsq_configureKeyboardControl];

@@ -157,7 +157,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                                     outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
     
     self.incomingBubbleImageView = [JSQMessagesBubbleImageFactory
-                                    incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
+                                    incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleGreenColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
