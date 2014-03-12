@@ -11,6 +11,15 @@
 //  Copyright (c) 2014 Jesse Squires
 //  http://opensource.org/licenses/MIT
 //
+//
+//
+//  Initial code for springy collection view layout taken from Ash Furrow
+//  ASHSpringyCollectionView
+//
+//  The MIT License
+//  Copyright (c) 2013 Ash Furrow
+//  https://github.com/AshFurrow/ASHSpringyCollectionView
+//
 
 #import "JSQMessagesCollectionViewFlowLayout.h"
 
