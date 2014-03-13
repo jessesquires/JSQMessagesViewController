@@ -137,12 +137,13 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     [self.view layoutIfNeeded];
     [self.collectionView.collectionViewLayout invalidateLayout];
     
-    [self jsq_updateKeyboardTriggerOffset];
-    [self jsq_configureKeyboardControl];
-    
     if (self.autoScrollsToMostRecentMessage) {
         [self scrollToBottomAnimated:NO];
+        [self.collectionView.collectionViewLayout invalidateLayout];
     }
+    
+    [self jsq_updateKeyboardTriggerOffset];
+    [self jsq_configureKeyboardControl];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -196,7 +197,6 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 - (void)jsq_prepareForRotation
 {
     [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.collectionView reloadData];
     [self.inputToolbar.contentView.textView setNeedsDisplay];
 }
 

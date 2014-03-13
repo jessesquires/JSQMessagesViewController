@@ -111,7 +111,11 @@
         [self.dynamicAnimator updateItemUsingCurrentState:[springBehaviour.items firstObject]];
     }];
     
-    return YES;
+    CGRect oldBounds = self.collectionView.bounds;
+    if (CGRectGetWidth(newBounds) != CGRectGetWidth(oldBounds)) {
+        return YES;
+    }
+    return NO;
 }
 
 - (void)prepareForCollectionViewUpdates:(NSArray *)updateItems
@@ -137,6 +141,13 @@
         }
     }];
 }
+
+//- (UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath
+//{
+//    UICollectionViewLayoutAttributes* attributes = [self layoutAttributesForItemAtIndexPath:itemIndexPath];
+//    attributes.alpha = 0.0;
+//    return attributes;
+//}
 
 #pragma mark - Utilities
 
