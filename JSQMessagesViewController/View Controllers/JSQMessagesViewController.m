@@ -202,7 +202,7 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 
 #pragma mark - Messages view controller
 
-- (void)finishSend
+- (void)finishSending
 {
     UITextView *textView = self.inputToolbar.contentView.textView;
     textView.text = nil;

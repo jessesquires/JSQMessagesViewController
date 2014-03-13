@@ -80,7 +80,7 @@
 
 #pragma mark - Messages view controller
 
-- (void)finishSend;
+- (void)finishSending;
 
 - (void)scrollToBottomAnimated:(BOOL)animated;
 

@@ -174,11 +174,11 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     JSQMessage *copyMessage = [[self.messages lastObject] copy];
     NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
     [copyAvatars removeObject:kJSQDemoAvatarNameJesse];
-    copyMessage.sender = [copyAvatars objectAtIndex:arc4random_uniform([copyAvatars count])];
+    copyMessage.sender = [copyAvatars objectAtIndex:arc4random_uniform((int)[copyAvatars count])];
     
     [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
     [self.messages addObject:copyMessage];
-    [self finishSend];
+    [self finishSending];
 }
 
 
@@ -190,7 +190,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 {
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     [self.messages addObject:message];
-    [self finishSend];
+    [self finishSending];
 }
 
 - (void)messagesViewController:(JSQMessagesViewController *)viewController didPressAccessoryButton:(UIButton *)sender
