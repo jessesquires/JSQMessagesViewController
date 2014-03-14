@@ -20,6 +20,7 @@
 
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 @property (assign, nonatomic) BOOL isUserScrolling;
+@property (assign, nonatomic) BOOL isReplacingAutocorrectTextOnSend;
 
 - (void)setup;
 
@@ -185,6 +186,17 @@
 
 - (void)sendPressed:(UIButton *)sender
 {
+    self.isReplacingAutocorrectTextOnSend = YES;
+
+    // resign and become first responder so autocorrect suggestion is filled in
+    UITextView *dummyTextView = [[UITextView alloc] init];
+    [self.view addSubview:dummyTextView];
+    [dummyTextView becomeFirstResponder];
+    [self.messageInputView.textView becomeFirstResponder];
+    [dummyTextView removeFromSuperview];
+
+    self.isReplacingAutocorrectTextOnSend = NO;
+  
     [self.delegate didSendText:[self.messageInputView.textView.text js_stringByTrimingWhitespace]
                     fromSender:self.sender
                         onDate:[NSDate date]];
@@ -464,10 +476,13 @@
 
 - (void)keyboardWillShowHide:(NSNotification *)notification
 {
+    if (self.isReplacingAutocorrectTextOnSend) {
+        return;
+    }
     CGRect keyboardRect = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 	UIViewAnimationCurve curve = [[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
 	double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
+  
     [UIView animateWithDuration:duration
                           delay:0.0
                         options:[self animationOptionsForCurve:curve]
