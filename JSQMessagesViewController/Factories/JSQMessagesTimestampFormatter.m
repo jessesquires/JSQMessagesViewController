@@ -46,8 +46,15 @@
         _dateFormatter = [[NSDateFormatter alloc] init];
         [_dateFormatter setLocale:[NSLocale currentLocale]];
         [_dateFormatter setDoesRelativeDateFormatting:YES];
+        [_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [_dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
         
-        _textAttributes = nil;
+        NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        paragraphStyle.alignment = NSTextAlignmentCenter;
+        
+        _textAttributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f],
+                             NSForegroundColorAttributeName : [UIColor lightGrayColor],
+                             NSParagraphStyleAttributeName : paragraphStyle };
     }
     return self;
 }
@@ -63,7 +70,7 @@
 {
     NSString *timestamp = [self timestampForDate:date];
     
-    return [[NSAttributedString alloc] initWithString:timestamp attributes:nil];
+    return [[NSAttributedString alloc] initWithString:timestamp attributes:self.textAttributes];
 }
 
 @end
