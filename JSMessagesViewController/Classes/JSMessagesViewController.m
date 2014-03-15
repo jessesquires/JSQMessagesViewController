@@ -186,16 +186,18 @@
 
 - (void)sendPressed:(UIButton *)sender
 {
-    self.isReplacingAutocorrectTextOnSend = YES;
+    if (self.messageInputView.textView.isFirstResponder) {
+        self.isReplacingAutocorrectTextOnSend = YES;
 
-    // resign and become first responder so autocorrect suggestion is filled in
-    UITextView *dummyTextView = [[UITextView alloc] init];
-    [self.view addSubview:dummyTextView];
-    [dummyTextView becomeFirstResponder];
-    [self.messageInputView.textView becomeFirstResponder];
-    [dummyTextView removeFromSuperview];
+        // resign and become first responder so autocorrect suggestion is filled in
+        UITextView *dummyTextView = [[UITextView alloc] init];
+        [self.view addSubview:dummyTextView];
+        [dummyTextView becomeFirstResponder];
+        [self.messageInputView.textView becomeFirstResponder];
+        [dummyTextView removeFromSuperview];
 
-    self.isReplacingAutocorrectTextOnSend = NO;
+        self.isReplacingAutocorrectTextOnSend = NO;
+    }
   
     [self.delegate didSendText:[self.messageInputView.textView.text js_stringByTrimingWhitespace]
                     fromSender:self.sender
