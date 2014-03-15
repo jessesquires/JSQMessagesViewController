@@ -326,10 +326,10 @@
 				8897FBA418CBD7C9004F59C3 /* JSQMessagesAvatarFactory.m */,
 				8897FBA518CBD7C9004F59C3 /* JSQMessagesBubbleImageFactory.h */,
 				8897FBA618CBD7C9004F59C3 /* JSQMessagesBubbleImageFactory.m */,
-				885EFC9918CCDB0100F63C35 /* JSQMessagesToolbarButtonFactory.h */,
-				885EFC9A18CCDB0100F63C35 /* JSQMessagesToolbarButtonFactory.m */,
 				88769FE918D4D666005B2A11 /* JSQMessagesTimestampFormatter.h */,
 				88769FEA18D4D666005B2A11 /* JSQMessagesTimestampFormatter.m */,
+				885EFC9918CCDB0100F63C35 /* JSQMessagesToolbarButtonFactory.h */,
+				885EFC9A18CCDB0100F63C35 /* JSQMessagesToolbarButtonFactory.m */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
