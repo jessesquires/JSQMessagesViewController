@@ -16,10 +16,18 @@
 
 @interface JSQMessagesTimestampFormatter : NSObject
 
+@property (copy, nonatomic) NSDictionary *dateTextAttributes;
+
+@property (copy, nonatomic) NSDictionary *timeTextAttributes;
+
 + (JSQMessagesTimestampFormatter *)sharedFormatter;
 
 - (NSString *)timestampForDate:(NSDate *)date;
 
 - (NSAttributedString *)attributedTimestampForDate:(NSDate *)date;
+
+- (NSString *)timeForDate:(NSDate *)date;
+
+- (NSString *)relativeDateForDate:(NSDate *)date;
 
 @end

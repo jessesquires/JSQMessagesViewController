@@ -17,7 +17,6 @@
 @interface JSQMessagesTimestampFormatter ()
 
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
-@property (strong, nonatomic) NSDictionary *textAttributes;
 
 @end
 
@@ -46,15 +45,19 @@
         _dateFormatter = [[NSDateFormatter alloc] init];
         [_dateFormatter setLocale:[NSLocale currentLocale]];
         [_dateFormatter setDoesRelativeDateFormatting:YES];
-        [_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        [_dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+        
+        UIColor *color = [UIColor lightGrayColor];
         
         NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         paragraphStyle.alignment = NSTextAlignmentCenter;
         
-        _textAttributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f],
-                             NSForegroundColorAttributeName : [UIColor lightGrayColor],
-                             NSParagraphStyleAttributeName : paragraphStyle };
+        _dateTextAttributes = @{ NSFontAttributeName : [UIFont boldSystemFontOfSize:12.0f],
+                                 NSForegroundColorAttributeName : color,
+                                 NSParagraphStyleAttributeName : paragraphStyle };
+        
+        _timeTextAttributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f],
+                                 NSForegroundColorAttributeName : color,
+                                 NSParagraphStyleAttributeName : paragraphStyle };
     }
     return self;
 }
@@ -63,14 +66,37 @@
 
 - (NSString *)timestampForDate:(NSDate *)date
 {
+    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [self.dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     return [self.dateFormatter stringFromDate:date];
 }
 
 - (NSAttributedString *)attributedTimestampForDate:(NSDate *)date
 {
-    NSString *timestamp = [self timestampForDate:date];
+    NSString *relativeDate = [self relativeDateForDate:date];
+    NSString *time = [self timeForDate:date];
     
-    return [[NSAttributedString alloc] initWithString:timestamp attributes:self.textAttributes];
+    NSMutableAttributedString *timestamp = [[NSMutableAttributedString alloc] initWithString:relativeDate
+                                                                                  attributes:self.dateTextAttributes];
+    
+    [timestamp appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", time]
+                                                                      attributes:self.timeTextAttributes]];
+    
+    return [[NSAttributedString alloc] initWithAttributedString:timestamp];
+}
+
+- (NSString *)timeForDate:(NSDate *)date
+{
+    [self.dateFormatter setDateStyle:NSDateFormatterNoStyle];
+    [self.dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    return [self.dateFormatter stringFromDate:date];
+}
+
+- (NSString *)relativeDateForDate:(NSDate *)date
+{
+    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    return [self.dateFormatter stringFromDate:date];
 }
 
 @end

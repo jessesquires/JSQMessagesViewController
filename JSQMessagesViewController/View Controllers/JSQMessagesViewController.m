@@ -284,7 +284,7 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     // -----------------------------------------------
     
     
-    cell.cellTopLabel.text = [[JSQMessagesTimestampFormatter sharedFormatter] timestampForDate:[messageData date]];
+    cell.cellTopLabel.attributedText = [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:[messageData date]];
     cell.messageBubbleTopLabel.text = messageSender;
     
     
