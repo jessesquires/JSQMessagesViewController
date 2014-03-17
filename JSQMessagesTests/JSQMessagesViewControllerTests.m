@@ -3,10 +3,6 @@
 //  http://www.hexedbits.com
 //
 //
-//  Documentation
-//  http://cocoadocs.org/docsets/JSMessagesViewController
-//
-//
 //  The MIT License
 //  Copyright (c) 2014 Jesse Squires
 //  http://opensource.org/licenses/MIT
@@ -29,12 +25,10 @@
 - (void)setUp
 {
     [super setUp];
-    
 }
 
 - (void)tearDown
 {
-    
     [super tearDown];
 }
 
@@ -50,7 +44,7 @@
     XCTAssertNotNil(vc.inputToolbar, @"Input toolbar should not be nil");
 }
 
-- (void)testJSQMessagesViewControllerSublcassInit
+- (void)testJSQMessagesViewControllerSubclassInitProgramatically
 {
     JSQDemoViewController *demoVC = [JSQDemoViewController messagesViewController];
     XCTAssertNotNil(demoVC, @"View controller should not be nil");
@@ -58,12 +52,14 @@
     XCTAssertNotNil(demoVC.view, @"View should not be nil");
     XCTAssertNotNil(demoVC.collectionView, @"Collection view should not be nil");
     XCTAssertNotNil(demoVC.inputToolbar, @"Input toolbar should not be nil");
-    
+}
+
+- (void)testJSQMessagesViewControllerSubclassInitStoryboards
+{
     UIStoryboard *mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     XCTAssertNotNil(mainSB, @"Storyboard should not be nil");
     
-    demoVC = nil;
-    demoVC = [mainSB instantiateViewControllerWithIdentifier:@"DemoVC"];
+    JSQDemoViewController *demoVC = [mainSB instantiateViewControllerWithIdentifier:@"DemoVC"];
     XCTAssertNotNil(demoVC, @"View controller should not be nil");
     XCTAssertTrue([demoVC isKindOfClass:[JSQDemoViewController class]], @"View controller should be kind of class: %@", [JSQDemoViewController class]);
     XCTAssertNotNil(demoVC.view, @"View should not be nil");

@@ -20,6 +20,7 @@
 		885D597318CBD2DC00D77BB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 885D597118CBD2DC00D77BB3 /* main.m */; };
 		885D597718CBD43800D77BB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 885D596C18CBD2BF00D77BB3 /* Main.storyboard */; };
 		885EFC9B18CCDB0100F63C35 /* JSQMessagesToolbarButtonFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 885EFC9A18CCDB0100F63C35 /* JSQMessagesToolbarButtonFactory.m */; };
+		8864F90318D68C2C00AE7774 /* JSQMessagesNSStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8864F90218D68C2C00AE7774 /* JSQMessagesNSStringTests.m */; };
 		88769FEB18D4D666005B2A11 /* JSQMessagesTimestampFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 88769FEA18D4D666005B2A11 /* JSQMessagesTimestampFormatter.m */; };
 		8897FBBB18CBD7C9004F59C3 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 8897FB9018CBD7C9004F59C3 /* JSQSystemSoundPlayer+JSQMessages.m */; };
 		8897FBBC18CBD7C9004F59C3 /* UIColor+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 8897FB9218CBD7C9004F59C3 /* UIColor+JSQMessages.m */; };
@@ -98,6 +99,7 @@
 		885D597518CBD2EB00D77BB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = JSQMessagesDemo/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		885EFC9918CCDB0100F63C35 /* JSQMessagesToolbarButtonFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesToolbarButtonFactory.h; sourceTree = "<group>"; };
 		885EFC9A18CCDB0100F63C35 /* JSQMessagesToolbarButtonFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesToolbarButtonFactory.m; sourceTree = "<group>"; };
+		8864F90218D68C2C00AE7774 /* JSQMessagesNSStringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesNSStringTests.m; sourceTree = "<group>"; };
 		88769FE918D4D666005B2A11 /* JSQMessagesTimestampFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesTimestampFormatter.h; sourceTree = "<group>"; };
 		88769FEA18D4D666005B2A11 /* JSQMessagesTimestampFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesTimestampFormatter.m; sourceTree = "<group>"; };
 		8897FB8F18CBD7C9004F59C3 /* JSQSystemSoundPlayer+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JSQSystemSoundPlayer+JSQMessages.h"; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 		885D595418CBD13D00D77BB3 /* JSQMessagesTests */ = {
 			isa = PBXGroup;
 			children = (
+				8864F90218D68C2C00AE7774 /* JSQMessagesNSStringTests.m */,
 				8897FBF518CBF32F004F59C3 /* JSQMessagesViewControllerTests.m */,
 				885D595518CBD13D00D77BB3 /* Supporting Files */,
 			);
@@ -629,6 +632,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8864F90318D68C2C00AE7774 /* JSQMessagesNSStringTests.m in Sources */,
 				8897FBF618CBF32F004F59C3 /* JSQMessagesViewControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
