@@ -38,6 +38,14 @@
 
 #pragma mark - Initialization
 
+/**
+ *  Initializes and returns a message object having the given text, sender, and current system date.
+ *
+ *  @param text   The body text of the message.
+ *  @param sender The name of the user who sent the message.
+ *
+ *  @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
+ */
 + (instancetype)messageWithText:(NSString *)text sender:(NSString *)sender;
 
 /**
