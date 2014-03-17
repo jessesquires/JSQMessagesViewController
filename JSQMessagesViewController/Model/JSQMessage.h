@@ -34,7 +34,7 @@
 /**
  *  The date that the message was sent. The default value is `nil`.
  */
-@property (strong, nonatomic) NSDate *date;
+@property (copy, nonatomic) NSDate *date;
 
 #pragma mark - Initialization
 
