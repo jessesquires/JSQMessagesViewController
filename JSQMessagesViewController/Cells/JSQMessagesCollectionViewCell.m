@@ -101,7 +101,9 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddi
     
     self.textView.textColor = [UIColor blackColor];
     self.textView.editable = NO;
+    self.textView.selectable = YES;
     self.textView.userInteractionEnabled = YES;
+    self.textView.dataDetectorTypes = UIDataDetectorTypeNone;
     self.textView.showsHorizontalScrollIndicator = NO;
     self.textView.showsVerticalScrollIndicator = NO;
     self.textView.scrollEnabled = NO;
