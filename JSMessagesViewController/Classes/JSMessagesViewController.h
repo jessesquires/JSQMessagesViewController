@@ -36,7 +36,7 @@
  *  @param sender The user who sent the message.
  *  @param date   The date and time at which the message was sent.
  */
-- (void)didSendText:(NSString *)text fromSender:(NSString *)sender onDate:(NSDate *)date;
+- (void)didSendText:(NSString *)text fromSender:(NSString *)sender onDate:(NSDate *)date messageIdentifier:(NSString *)messageIdentifier;
 
 /**
  *  Asks the delegate for the message type for the row at the specified index path.
@@ -117,6 +117,7 @@
  */
 - (NSString *)customCellIdentifierForRowAtIndexPath:(NSIndexPath *)indexPath;
 
+
 @end
 
 
@@ -150,7 +151,7 @@
 /**
  *  An instance of `JSMessagesViewController` is a subclass of `UIViewController` specialized to display a messaging interface.
  */
-@interface JSMessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
+@interface JSMessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, JSMessageTableViewDelegate>
 
 /**
  *  The object that acts as the delegate of the receiving messages view.
@@ -185,6 +186,10 @@
  */
 - (void)finishSend;
 
+/**
+ *  Generates a unique string id.
+ */
+-(NSString *)generateUuid;
 
 /**
  *  Sets the background color of the table view, the table view cells, and the table view separator.

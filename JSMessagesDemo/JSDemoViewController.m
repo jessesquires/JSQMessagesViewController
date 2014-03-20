@@ -38,12 +38,12 @@
     [self setBackgroundColor:[UIColor whiteColor]];
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
-                     [[JSMessage alloc] initWithText:@"JSMessagesViewController is simple and easy to use." sender:kSubtitleJobs date:[NSDate distantPast]],
-                     [[JSMessage alloc] initWithText:@"It's highly customizable." sender:kSubtitleWoz date:[NSDate distantPast]],
-                     [[JSMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 452-123-4567. \nMy website is www.hexedbits.com." sender:kSubtitleJobs date:[NSDate distantPast]],
-                     [[JSMessage alloc] initWithText:@"Group chat. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!" sender:kSubtitleCook date:[NSDate distantPast]],
-                     [[JSMessage alloc] initWithText:@"Group chat. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!" sender:kSubtitleJobs date:[NSDate date]],
-                     [[JSMessage alloc] initWithText:@"Group chat. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!" sender:kSubtitleWoz date:[NSDate date]],
+                     [[JSMessage alloc] initWithText:@"JSMessagesViewController is simple and easy to use." sender:kSubtitleJobs date:[NSDate distantPast] messageIdentifier:[self generateUuid]],
+                     [[JSMessage alloc] initWithText:@"It's highly customizable." sender:kSubtitleWoz date:[NSDate distantPast] messageIdentifier:[self generateUuid]],
+                     [[JSMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 452-123-4567. \nMy website is www.hexedbits.com." sender:kSubtitleJobs date:[NSDate distantPast] messageIdentifier:[self generateUuid]],
+                     [[JSMessage alloc] initWithText:@"Group chat. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!" sender:kSubtitleCook date:[NSDate distantPast]  messageIdentifier:[self generateUuid]],
+                     [[JSMessage alloc] initWithText:@"Group chat. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!" sender:kSubtitleJobs date:[NSDate date]  messageIdentifier:[self generateUuid]],
+                     [[JSMessage alloc] initWithText:@"Group chat. Sound effects and images included. Animations are smooth. Messages can be of arbitrary size!" sender:kSubtitleWoz date:[NSDate date]  messageIdentifier:[self generateUuid]],
                      nil];
     
     
@@ -70,6 +70,12 @@
 
 #pragma mark - Actions
 
+// Over ride this method to nil and delete will not be implemented else will use default generatUuid from JSMessagesViewController
+//-(NSString *)generateUuid
+//{
+//    return nil;
+//}
+
 - (void)buttonPressed:(UIBarButtonItem *)sender
 {
     // Testing pushing/popping messages view
@@ -86,7 +92,7 @@
 
 #pragma mark - Messages view delegate: REQUIRED
 
-- (void)didSendText:(NSString *)text fromSender:(NSString *)sender onDate:(NSDate *)date
+- (void)didSendText:(NSString *)text fromSender:(NSString *)sender onDate:(NSDate *)date messageIdentifier:(NSString *)messageIdentifier
 {
     if ((self.messages.count - 1) % 2) {
         [JSMessageSoundEffect playMessageSentSound];
@@ -97,7 +103,7 @@
         sender = arc4random_uniform(10) % 2 ? kSubtitleCook : kSubtitleWoz;
     }
     
-    [self.messages addObject:[[JSMessage alloc] initWithText:text sender:sender date:date]];
+    [self.messages addObject:[[JSMessage alloc] initWithText:text sender:sender date:date messageIdentifier:[self generateUuid]]];
     
     [self finishSend];
     [self scrollToBottomAnimated:YES];
@@ -186,6 +192,16 @@
 - (BOOL)allowsPanToDismissKeyboard
 {
     return YES;
+}
+
+- (void)deleteMessageCell:(JSBubbleMessageCell *)cell
+{
+    NSIndexPath *indexPath = [(UITableView *)cell.superview.superview indexPathForCell:cell];
+    NSString *indexPathString = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
+    
+    NSLog(@"deleteMessageForRowAtIndexPath: %@", indexPathString);
+    [self.messages removeObjectAtIndex:indexPath.row];
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 #pragma mark - Messages view data source: REQUIRED
