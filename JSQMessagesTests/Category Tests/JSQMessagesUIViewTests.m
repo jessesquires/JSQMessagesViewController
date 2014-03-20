@@ -41,7 +41,7 @@
         
         XCTAssertEqual(eachConstraint.multiplier, 1.0f, @"Constraint multiplier should be 1.0");
         
-        XCTAssertEqual(eachConstraint.constant, 0.0f, @"Constraint constant should be 1.0");
+        XCTAssertEqual(eachConstraint.constant, 0.0f, @"Constraint constant should be 0.0");
     }
 }
 
