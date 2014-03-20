@@ -196,7 +196,17 @@
 
 - (void)deleteMessageCell:(JSBubbleMessageCell *)cell
 {
-    NSIndexPath *indexPath = [(UITableView *)cell.superview.superview indexPathForCell:cell];
+    NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
+    NSIndexPath *indexPath;
+    
+    if([systemVersion floatValue] >= 7.0)
+    {
+       indexPath = [(UITableView *)cell.superview.superview indexPathForCell:cell];
+    }
+    else
+    {
+        indexPath = [(UITableView *)cell.superview indexPathForCell:cell];
+    }
     NSString *indexPathString = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
     
     NSLog(@"deleteMessageForRowAtIndexPath: %@", indexPathString);
