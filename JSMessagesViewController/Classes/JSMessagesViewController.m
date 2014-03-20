@@ -63,6 +63,7 @@
 	tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	tableView.dataSource = self;
 	tableView.delegate = self;
+    tableView.messageDelegate = self;
 	[self.view addSubview:tableView];
 	_tableView = tableView;
     
@@ -162,6 +163,19 @@
     _messageInputView = nil;
 }
 
+
+// Basic uuid generation code
+-(NSString *)generateUuid
+{
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    CFStringRef cfReturnValue = CFUUIDCreateString(kCFAllocatorDefault, uuid);
+    NSString *returnValue = [(__bridge NSString *)cfReturnValue copy];
+    CFRelease(cfReturnValue);
+    CFRelease(uuid);
+    
+    return returnValue;
+}
+
 #pragma mark - View rotation
 
 - (BOOL)shouldAutorotate
@@ -187,7 +201,8 @@
 {
     [self.delegate didSendText:[self.messageInputView.textView.text js_stringByTrimingWhitespace]
                     fromSender:self.sender
-                        onDate:[NSDate date]];
+                        onDate:[NSDate date]
+             messageIdentifier:[self generateUuid]];
 }
 
 - (void)handleTapGestureRecognizer:(UITapGestureRecognizer *)tap
@@ -233,7 +248,6 @@
     }
     
     JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
     if (!cell) {
         cell = [[JSBubbleMessageCell alloc] initWithBubbleType:type
                                                bubbleImageView:bubbleImageView

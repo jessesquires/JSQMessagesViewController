@@ -40,4 +40,10 @@
  */
 - (NSDate *)date;
 
+
+/**
+ *  @return The message id for the message.
+ */
+- (NSString *)messageIdentifier;
+
 @end

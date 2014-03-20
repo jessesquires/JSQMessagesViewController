@@ -21,12 +21,14 @@
 - (instancetype)initWithText:(NSString *)text
                       sender:(NSString *)sender
                         date:(NSDate *)date
+            messageIdentifier:(NSString *)messageIdentifier
 {
     self = [super init];
     if (self) {
         _text = text ? text : @" ";
         _sender = sender;
         _date = date;
+        _messageIdentifier = messageIdentifier;
     }
     return self;
 }
@@ -36,6 +38,7 @@
     _text = nil;
     _sender = nil;
     _date = nil;
+    _messageIdentifier = nil;
 }
 
 #pragma mark - NSCoding
@@ -47,6 +50,7 @@
         _text = [aDecoder decodeObjectForKey:@"text"];
         _sender = [aDecoder decodeObjectForKey:@"sender"];
         _date = [aDecoder decodeObjectForKey:@"date"];
+        _messageIdentifier = [aDecoder decodeObjectForKey:@"messageIdentifier"];
     }
     return self;
 }
@@ -56,6 +60,7 @@
     [aCoder encodeObject:self.text forKey:@"text"];
     [aCoder encodeObject:self.sender forKey:@"sender"];
     [aCoder encodeObject:self.date forKey:@"date"];
+    [aCoder encodeObject:self.messageIdentifier forKey:@"messageIdentifier"];
 }
 
 #pragma mark - NSCopying
@@ -64,7 +69,8 @@
 {
     return [[[self class] allocWithZone:zone] initWithText:[self.text copy]
                                                     sender:[self.sender copy]
-                                                      date:[self.date copy]];
+                                                      date:[self.date copy]
+                                         messageIdentifier:[self.messageIdentifier copy]];
 }
 
 @end

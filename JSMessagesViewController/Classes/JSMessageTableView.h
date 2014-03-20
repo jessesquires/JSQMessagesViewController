@@ -14,9 +14,26 @@
 
 #import <UIKit/UIKit.h>
 
+@class JSBubbleMessageCell;
+
+@protocol JSMessageTableViewDelegate <NSObject>
+
+@required
+
+@optional
+
+- (void)deleteMessageCell:(JSBubbleMessageCell *)cell;
+
+@end
 /**
  *  An instance of `JSMessageTableView` is a subclass of `UITableView` and is means for displaying a list of messages between a group of users.
  */
+
 @interface JSMessageTableView : UITableView
+{
+    
+}
+
+@property (nonatomic, assign) id <JSMessageTableViewDelegate> messageDelegate;
 
 @end

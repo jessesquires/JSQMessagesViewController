@@ -46,6 +46,12 @@
  */
 @property (weak, nonatomic, readonly) UILabel *subtitleLabel;
 
+/**
+ *  Returns the message identifier for the cell. This property may be nil if deleting is not required, it should be set to a unique id if deleting a single message feature is desired.
+ *  @see JSMessagesViewDataSource.
+ */
+@property (weak, nonatomic, readonly) NSString *messageIdentifier;
+
 #pragma mark - Initialization
 
 /**
@@ -82,6 +88,13 @@
  *  @param imageView An imageView containing an avatar image. The `image` property of the `UIImageView` must not be `nil`.
  */
 - (void)setAvatarImageView:(UIImageView *)imageView;
+
+/**
+ *  Sets the unique message identifier for the cell. The frame is set for you by `JSBubbleMessageCell`.
+ *
+ *  @param messageIdentifier An nstring containing the unique id.
+ */
+- (void)setMessageIdentifier:(NSString *)messageIdentifier;
 
 #pragma mark - Getters
 

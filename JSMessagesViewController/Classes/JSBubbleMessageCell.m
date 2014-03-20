@@ -13,6 +13,7 @@
 //
 
 #import "JSBubbleMessageCell.h"
+#import "JSMessageTableView.h"
 
 #import "JSAvatarImageFactory.h"
 #import "UIColor+JSMessagesView.h"
@@ -38,6 +39,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 - (void)setText:(NSString *)text;
 - (void)setTimestamp:(NSDate *)date;
 - (void)setSubtitle:(NSString *)subtitle;
+- (void)setMessageIdentifier:(NSString *)messageIdentifier;
 
 - (void)handleLongPressGesture:(UILongPressGestureRecognizer *)longPress;
 
@@ -65,6 +67,7 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     self.textLabel.hidden = YES;
     self.detailTextLabel.text = nil;
     self.detailTextLabel.hidden = YES;
+    self.messageIdentifier = nil;
     
     UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
                                                                                              action:@selector(handleLongPressGesture:)];
@@ -143,6 +146,10 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     
     if ([message sender]) {
 		[self configureSubtitleLabelForMessageType:type];
+	}
+    
+    if ([message messageIdentifier]) {
+		self.messageIdentifier = [message messageIdentifier];
 	}
     
     if (hasAvatar) {
@@ -263,6 +270,11 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     [self configureAvatarImageView:imageView forMessageType:[self messageType]];
 }
 
+- (void)setMessageIdentifier:(NSString *)messageIdentifier
+{
+    _messageIdentifier = messageIdentifier;
+}
+
 #pragma mark - Getters
 
 - (JSBubbleMessageType)messageType
@@ -315,12 +327,40 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
-    return (action == @selector(copy:));
+    BOOL returnValue = NO;
+    
+    if (action == @selector(deleteMessage:))
+    {
+        returnValue = YES;
+    }
+    
+    if(action == @selector(copy:))
+    {
+		returnValue = YES;
+    }
+    
+    return returnValue;
 }
 
 - (void)copy:(id)sender
 {
     [[UIPasteboard generalPasteboard] setString:self.bubbleView.textView.text];
+    [self resignFirstResponder];
+}
+
+- (void)deleteMessage:(id)sender
+{
+    id view = (UITableView *)self.superview;
+    while (view && [view isKindOfClass:[UITableView class]] == NO)
+    {
+        view = [view superview];
+    }
+    
+    JSMessageTableView *tableView = (JSMessageTableView *)view;
+    if(tableView.messageDelegate && [tableView.messageDelegate respondsToSelector:@selector(deleteMessageCell:)])
+    {        
+        [tableView.messageDelegate deleteMessageCell:self];
+    }
     [self resignFirstResponder];
 }
 
@@ -334,6 +374,12 @@ static const CGFloat kJSSubtitleLabelHeight = 15.0f;
     UIMenuController *menu = [UIMenuController sharedMenuController];
     CGRect targetRect = [self convertRect:[self.bubbleView bubbleFrame]
                                  fromView:self.bubbleView];
+    
+    if(self.messageIdentifier != nil)
+    {
+        UIMenuItem* menuDeleteItem = [[UIMenuItem alloc] initWithTitle:@"Delete" action:@selector(deleteMessage:)];
+        menu.menuItems = [NSArray arrayWithObjects: menuDeleteItem, nil];
+    }
     
     [menu setTargetRect:CGRectInset(targetRect, 0.0f, 4.0f) inView:self];
     
