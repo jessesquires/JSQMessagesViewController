@@ -14,7 +14,21 @@
 
 #import "JSQMessagesViewController.h"
 
+@class JSQDemoViewController;
+
+
+@protocol JSQDemoViewControllerDelegate <NSObject>
+
+- (void)didDismissJSQDemoViewController:(JSQDemoViewController *)vc;
+
+@end
+
+
+
+
 @interface JSQDemoViewController : JSQMessagesViewController <JSQMessagesViewControllerDelegate>
+
+@property (weak, nonatomic) id<JSQDemoViewControllerDelegate> delegateModal;
 
 @property (strong, nonatomic) NSMutableArray *messages;
 

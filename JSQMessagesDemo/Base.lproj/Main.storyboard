@@ -35,11 +35,27 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="irr-Pn-9x5"/>
                     <connections>
                         <segue destination="JdJ-0X-ZL8" kind="push" identifier="seguePushDemoVC" id="Hvf-k8-GSP"/>
+                        <segue destination="s4z-xn-r6C" kind="modal" identifier="segueModalDemoVC" id="4UP-0e-ylo"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IcC-ug-dCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-154" y="74"/>
+            <point key="canvasLocation" x="-1712" y="522"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="eGf-GM-ORQ">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="s4z-xn-r6C" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G3q-Gy-0Lf">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="JdJ-0X-ZL8" kind="relationship" relationship="rootViewController" id="fnb-Mm-hX9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8DO-Rt-kgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1260" y="1168"/>
         </scene>
         <!--Demo View Controller-->
         <scene sceneID="gOX-cv-CuN">
@@ -58,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B2s-hQ-gD4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="309" y="74"/>
+            <point key="canvasLocation" x="-791" y="522"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="A8N-cL-8VP">
@@ -73,7 +89,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OC7-Ng-9xQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-585" y="74"/>
+            <point key="canvasLocation" x="-2143" y="522"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -81,4 +97,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="fnb-Mm-hX9"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -31,6 +31,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (void)jsqDemo_receiveMessagePressed:(UIBarButtonItem *)sender;
 
+- (void)jsqDemo_closePressed:(UIBarButtonItem *)sender;
+
 @end
 
 
@@ -160,6 +162,12 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    if (self.delegateModal) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
+                                                                                              target:self
+                                                                                              action:@selector(jsqDemo_closePressed:)];
+    }
 }
 
 
@@ -176,6 +184,11 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
     [self.messages addObject:copyMessage];
     [self finishSending];
+}
+
+- (void)jsqDemo_closePressed:(UIBarButtonItem *)sender
+{
+    [self.delegateModal didDismissJSQDemoViewController:self];
 }
 
 

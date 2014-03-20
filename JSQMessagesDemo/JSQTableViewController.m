@@ -17,6 +17,12 @@
 #import "JSQDemoViewController.h"
 
 
+
+@interface JSQTableViewController () <JSQDemoViewControllerDelegate>
+@end
+
+
+
 @implementation JSQTableViewController
 
 #pragma mark - View lifecycle
@@ -37,7 +43,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -54,39 +60,82 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    switch (indexPath.row) {
-        case 0:
-            cell.textLabel.text = @"Push via storyboard";
-            break;
-        case 1:
-            cell.textLabel.text = @"Push programmatically";
-            break;
+    if (indexPath.section == 0) {
+        switch (indexPath.row) {
+            case 0:
+                cell.textLabel.text = @"Push via storyboard";
+                break;
+            case 1:
+                cell.textLabel.text = @"Push programmatically";
+                break;
+        }
+    }
+    else if (indexPath.section == 1) {
+        switch (indexPath.row) {
+            case 0:
+                cell.textLabel.text = @"Modal via storyboard";
+                break;
+            case 1:
+                cell.textLabel.text = @"Modal programmatically";
+                break;
+        }
     }
     
     return cell;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return @"Choose Presentation";
-}
-
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return @"Copyright © 2014\nJesse Squires\nMIT License";
+    return (section == [tableView numberOfSections] - 1) ? @"Copyright © 2014\nJesse Squires\nMIT License" : nil;
 }
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.row) {
-        case 0:
-            [self performSegueWithIdentifier:@"seguePushDemoVC" sender:self];
-            break;
-        case 1:
-            [self.navigationController pushViewController:[JSQDemoViewController messagesViewController] animated:YES];
-            break;
+    if (indexPath.section == 0) {
+        switch (indexPath.row) {
+            case 0:
+                [self performSegueWithIdentifier:@"seguePushDemoVC" sender:self];
+                break;
+            case 1:
+                [self.navigationController pushViewController:[JSQDemoViewController messagesViewController] animated:YES];
+                break;
+        }
     }
+    else if (indexPath.section == 1) {
+        switch (indexPath.row) {
+            case 0:
+                [self performSegueWithIdentifier:@"segueModalDemoVC" sender:self];
+                break;
+            case 1:
+            {
+                JSQDemoViewController *vc = [JSQDemoViewController messagesViewController];
+                vc.delegateModal = self;
+                UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+                [self presentViewController:nc animated:YES completion:nil];
+            }
+                break;
+        }
+    }
+}
+
+#pragma mark - Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"segueModalDemoVC"]) {
+        UINavigationController *nc = segue.destinationViewController;
+        JSQDemoViewController *vc = (JSQDemoViewController *)nc.topViewController;
+        vc.delegateModal = self;
+    }
+}
+
+#pragma mark - Demo delegate
+
+- (void)didDismissJSQDemoViewController:(JSQDemoViewController *)vc
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
