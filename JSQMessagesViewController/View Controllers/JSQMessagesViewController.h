@@ -54,7 +54,7 @@
 
 
 @interface JSQMessagesViewController : UIViewController <JSQMessagesCollectionViewDataSource,
-                                                         UICollectionViewDelegateFlowLayout>
+                                                         JSQMessagesCollectionViewFlowLayoutDelegate>
 
 @property (weak, nonatomic) id<JSQMessagesViewControllerDelegate> delegate;
 

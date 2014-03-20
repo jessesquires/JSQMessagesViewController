@@ -72,9 +72,6 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 {
     self.sender = kJSQDemoAvatarNameJesse;
     self.inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"Message", nil);
-    
-    JSQMessagesCollectionViewFlowLayout *collectionViewLayout = (JSQMessagesCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    collectionViewLayout.delegate = self;
 }
 
 - (void)jsqDemo_setupTestModel

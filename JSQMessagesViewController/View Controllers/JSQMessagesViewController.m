@@ -31,6 +31,8 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
 
+@property (nonatomic, readonly) JSQMessagesCollectionViewFlowLayout *collectionViewLayout;
+
 - (void)jsq_configureViewController;
 
 - (void)jsq_prepareForRotation;
@@ -84,6 +86,8 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     _collectionView.delegate = self;
     _collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     
+    ((JSQMessagesCollectionViewFlowLayout *)_collectionView.collectionViewLayout).delegate = self;
+    
     _inputToolbar.delegate = self;
     _inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"New Message", @"Placeholder text for the message input text view");
     _inputToolbar.contentView.textView.delegate = self;
@@ -122,12 +126,21 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     [self jsq_configureViewController];
 }
 
+#pragma mark - Getters
+
+- (JSQMessagesCollectionViewFlowLayout *)collectionViewLayout
+{
+    return (JSQMessagesCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [[JSQMessagesCollectionViewCell appearance] setFont:[UIFont systemFontOfSize:15.0f]];
+    
+    self.collectionViewLayout.springinessEnabled = NO;
     [self jsq_updateCollectionViewInsets];
 }
 
@@ -150,6 +163,8 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 {
     [super viewDidAppear:animated];
     [self jsq_addObservers];
+    
+    self.collectionViewLayout.springinessEnabled = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -321,6 +336,26 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 // TODO:
 
 #pragma mark - Collection view delegate flow layout
+
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
+                         layout:(JSQMessagesCollectionViewFlowLayout *)layout bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+                         sender:(NSString *)sender
+{
+    NSAssert(NO, @"ERROR: subclasses of %@ must implement the delegate flow layout method %@",
+             [JSQMessagesViewController class],
+             NSStringFromSelector(@selector(collectionView:layout:bubbleImageViewForItemAtIndexPath:sender:)));
+    return nil;
+}
+
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
+                         layout:(JSQMessagesCollectionViewFlowLayout *)layout avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+                         sender:(NSString *)sender
+{
+    NSAssert(NO, @"ERROR: subclasses of %@ must implement the delegate flow layout method %@",
+             [JSQMessagesViewController class],
+             NSStringFromSelector(@selector(collectionView:layout:avatarImageViewForItemAtIndexPath:sender:)));
+    return nil;
+}
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
