@@ -103,7 +103,7 @@
         sender = arc4random_uniform(10) % 2 ? kSubtitleCook : kSubtitleWoz;
     }
     
-    [self.messages addObject:[[JSMessage alloc] initWithText:text sender:sender date:date messageIdentifier:[self generateUuid]]];
+    [self.messages addObject:[[JSMessage alloc] initWithText:text sender:sender date:date messageIdentifier:messageIdentifier]];
     
     [self finishSend];
     [self scrollToBottomAnimated:YES];
