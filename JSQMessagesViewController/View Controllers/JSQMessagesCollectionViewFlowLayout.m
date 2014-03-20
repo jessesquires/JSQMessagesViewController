@@ -50,11 +50,22 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
     self.scrollDirection = UICollectionViewScrollDirectionVertical;
+    
+    _springinessEnabled = YES;
     
     self.dynamicAnimator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
     self.visibleIndexPaths = [[NSMutableSet alloc] init];
-    self.scrollResistanceFactor = 800;
+    self.springResistanceFactor = 800;
+}
+
+#pragma mark - Setters
+
+- (void)setSpringinessEnabled:(BOOL)springinessEnabled
+{
+    _springinessEnabled = springinessEnabled;
+    [self invalidateLayout];
 }
 
 #pragma mark - Collection view flow layout
@@ -63,34 +74,42 @@
 {
     [super prepareLayout];
     
-    if ([UIApplication sharedApplication].statusBarOrientation != self.interfaceOrientation) {
-        [self.dynamicAnimator removeAllBehaviors];
-        [self.visibleIndexPaths removeAllObjects];
+    if (self.springinessEnabled) {
+        
+        if ([UIApplication sharedApplication].statusBarOrientation != self.interfaceOrientation) {
+            [self.dynamicAnimator removeAllBehaviors];
+            [self.visibleIndexPaths removeAllObjects];
+        }
+        
+        self.interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+        
+        //  pad rect to avoid flickering
+        CGFloat padding = -100.0f;
+        CGRect visibleRect = CGRectInset(self.collectionView.bounds, padding, padding);
+        
+        NSArray *visibleItems = [super layoutAttributesForElementsInRect:visibleRect];
+        NSSet *visibleItemsIndexPaths = [NSSet setWithArray:[visibleItems valueForKey:NSStringFromSelector(@selector(indexPath))]];
+        
+        [self jsq_removeNoLongerVisibleBehaviorsFromVisibleItemsIndexPaths:visibleItemsIndexPaths];
+        
+        [self jsq_addNewlyVisibleBehaviorsFromVisibleItems:visibleItems];
     }
-    
-    self.interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    
-    //  pad rect to avoid flickering
-    CGFloat padding = -100.0f;
-    CGRect visibleRect = CGRectInset(self.collectionView.bounds, padding, padding);
-    
-    NSArray *visibleItems = [super layoutAttributesForElementsInRect:visibleRect];
-    NSSet *visibleItemsIndexPaths = [NSSet setWithArray:[visibleItems valueForKey:NSStringFromSelector(@selector(indexPath))]];
-    
-    [self jsq_removeNoLongerVisibleBehaviorsFromVisibleItemsIndexPaths:visibleItemsIndexPaths];
-    
-    [self jsq_addNewlyVisibleBehaviorsFromVisibleItems:visibleItems];
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    return [self.dynamicAnimator itemsInRect:rect];
+    if (self.springinessEnabled) {
+        return [self.dynamicAnimator itemsInRect:rect];
+    }
+    
+    return [super layoutAttributesForElementsInRect:rect];
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewLayoutAttributes *layoutAttributes = [self.dynamicAnimator layoutAttributesForCellAtIndexPath:indexPath];
-    if (!layoutAttributes) {
+    
+    if (!layoutAttributes || !self.springinessEnabled) {
         layoutAttributes = [super layoutAttributesForItemAtIndexPath:indexPath];
     }
     
@@ -99,22 +118,25 @@
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
 {
-    UIScrollView *scrollView = self.collectionView;
-    CGFloat delta = newBounds.origin.y - scrollView.bounds.origin.y;
-    
-    self.latestDelta = delta;
-    
-    CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];
-    
-    [self.dynamicAnimator.behaviors enumerateObjectsUsingBlock:^(UIAttachmentBehavior *springBehaviour, NSUInteger idx, BOOL *stop) {
-        [self jsq_adjustSpringBehavior:springBehaviour forTouchLocation:touchLocation];
-        [self.dynamicAnimator updateItemUsingCurrentState:[springBehaviour.items firstObject]];
-    }];
-    
-    CGRect oldBounds = self.collectionView.bounds;
-    if (CGRectGetWidth(newBounds) != CGRectGetWidth(oldBounds)) {
-        return YES;
+    if (self.springinessEnabled) {
+        UIScrollView *scrollView = self.collectionView;
+        CGFloat delta = newBounds.origin.y - scrollView.bounds.origin.y;
+        
+        self.latestDelta = delta;
+        
+        CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];
+        
+        [self.dynamicAnimator.behaviors enumerateObjectsUsingBlock:^(UIAttachmentBehavior *springBehaviour, NSUInteger idx, BOOL *stop) {
+            [self jsq_adjustSpringBehavior:springBehaviour forTouchLocation:touchLocation];
+            [self.dynamicAnimator updateItemUsingCurrentState:[springBehaviour.items firstObject]];
+        }];
+        
+        CGRect oldBounds = self.collectionView.bounds;
+        if (CGRectGetWidth(newBounds) != CGRectGetWidth(oldBounds)) {
+            return YES;
+        }
     }
+    
     return NO;
 }
 
@@ -122,24 +144,26 @@
 {
     [super prepareForCollectionViewUpdates:updateItems];
     
-    [updateItems enumerateObjectsUsingBlock:^(UICollectionViewUpdateItem *updateItem, NSUInteger index, BOOL *stop) {
-        if (updateItem.updateAction == UICollectionUpdateActionInsert) {
-            
-            if ([self.dynamicAnimator layoutAttributesForCellAtIndexPath:updateItem.indexPathAfterUpdate]) {
-                *stop = YES;
+    if (self.springinessEnabled) {
+        [updateItems enumerateObjectsUsingBlock:^(UICollectionViewUpdateItem *updateItem, NSUInteger index, BOOL *stop) {
+            if (updateItem.updateAction == UICollectionUpdateActionInsert) {
+                
+                if ([self.dynamicAnimator layoutAttributesForCellAtIndexPath:updateItem.indexPathAfterUpdate]) {
+                    *stop = YES;
+                }
+                
+                CGSize size = self.collectionView.bounds.size;
+                UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
+                attributes.frame = CGRectMake(0.0f,
+                                              size.height - size.width,
+                                              size.width,
+                                              size.width);
+                
+                UIAttachmentBehavior *springBehaviour = [self jsq_springBehaviorWithLayoutAttributesItem:attributes];
+                [self.dynamicAnimator addBehavior:springBehaviour];
             }
-            
-            CGSize size = self.collectionView.bounds.size;
-            UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
-            attributes.frame = CGRectMake(0.0f,
-                                          size.height - size.width,
-                                          size.width,
-                                          size.width);
-            
-            UIAttachmentBehavior *springBehaviour = [self jsq_springBehaviorWithLayoutAttributesItem:attributes];
-            [self.dynamicAnimator addBehavior:springBehaviour];
-        }
-    }];
+        }];
+    }
 }
 
 //- (UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath
@@ -205,7 +229,7 @@
     //  if touch is not (0,0) -- adjust item center "in flight"
     if (!CGPointEqualToPoint(CGPointZero, touchLocation)) {
         CGFloat distanceFromTouch = fabsf(touchLocation.y - springBehavior.anchorPoint.y);
-        CGFloat scrollResistance = distanceFromTouch / self.scrollResistanceFactor;
+        CGFloat scrollResistance = distanceFromTouch / self.springResistanceFactor;
         
         if (self.latestDelta < 0.0f) {
             center.y += MAX(self.latestDelta, self.latestDelta * scrollResistance);
