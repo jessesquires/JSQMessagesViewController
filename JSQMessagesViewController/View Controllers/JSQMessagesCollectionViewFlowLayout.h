@@ -38,21 +38,6 @@
                          layout:(JSQMessagesCollectionViewFlowLayout *)layout avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
                          sender:(NSString *)sender;
 
-@optional
-
-- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
-                      layout:(JSQMessagesCollectionViewFlowLayout *)layout cellTopLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath;
-
-- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
-                      layout:(JSQMessagesCollectionViewFlowLayout *)layout messageBubbleTopLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath;
-
-- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
-                      layout:(JSQMessagesCollectionViewFlowLayout *)layout cellBottomLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath;
-
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView
-                layout:(JSQMessagesCollectionViewFlowLayout *)layout configureItemAtIndexPath:(NSIndexPath *)indexPath
-                sender:(NSString *)sender;
-
 @end
 
 

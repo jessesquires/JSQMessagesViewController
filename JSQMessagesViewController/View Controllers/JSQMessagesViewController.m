@@ -278,7 +278,7 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     cell.textView.text = [messageData text];
     
 //    cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
-//    cell.textView.selectable = NO;
+    cell.textView.selectable = NO;
     
     cell.backgroundColor = self.collectionView.backgroundColor;
     

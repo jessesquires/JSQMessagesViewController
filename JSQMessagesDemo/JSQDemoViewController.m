@@ -116,7 +116,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  Change to add more messages for testing
      */
-    NSUInteger messagesToAdd = 2;
+    NSUInteger messagesToAdd = 1;
     for (NSUInteger i = 0; i < messagesToAdd; i++) {
         [self.messages addObjectsFromArray:self.messages];
     }
@@ -248,37 +248,40 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 }
 
 
+//  TODO:
+//  use supplementary views for top/bottom labels
 
-#pragma mark - OPTIONAL
-#pragma mark - JSQMessages CollectionView FlowLayout Delegate
 
-- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
-                      layout:(JSQMessagesCollectionViewFlowLayout *)layout cellTopLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    // TOOD:
-    return nil;
-}
-
-- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
-                      layout:(JSQMessagesCollectionViewFlowLayout *)layout messageBubbleTopLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    // TOOD:
-    return nil;
-}
-
-- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
-                      layout:(JSQMessagesCollectionViewFlowLayout *)layout cellBottomLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    // TOOD:
-    return nil;
-}
-
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView
-                layout:(JSQMessagesCollectionViewFlowLayout *)layout configureItemAtIndexPath:(NSIndexPath *)indexPath
-                sender:(NSString *)sender
-{
-    // TOOD:
-    
-}
+//#pragma mark - OPTIONAL
+//#pragma mark - JSQMessages CollectionView FlowLayout Delegate
+//
+//- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
+//                      layout:(JSQMessagesCollectionViewFlowLayout *)layout cellTopLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // TOOD:
+//    return nil;
+//}
+//
+//- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
+//                      layout:(JSQMessagesCollectionViewFlowLayout *)layout messageBubbleTopLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // TOOD:
+//    return nil;
+//}
+//
+//- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
+//                      layout:(JSQMessagesCollectionViewFlowLayout *)layout cellBottomLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // TOOD:
+//    return nil;
+//}
+//
+//- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+//                layout:(JSQMessagesCollectionViewFlowLayout *)layout configureItemAtIndexPath:(NSIndexPath *)indexPath
+//                sender:(NSString *)sender
+//{
+//    // TOOD:
+//    
+//}
 
 @end
