@@ -35,19 +35,26 @@
  */
 @property (strong, nonatomic) NSDate *date;
 
+/**
+ *  The unique message identifier. The default value is `nil`.
+ */
+@property (strong, nonatomic) NSString *messageIdentifier;
+
 #pragma mark - Initialization
 
 /**
  *  Initializes and returns a message object having the given text, sender, and date.
  *
- *  @param text   The body text of the message.
- *  @param sender The name of the user who sent the message.
- *  @param date   The date that the message was sent.
+ *  @param text                 The body text of the message.
+ *  @param sender               The name of the user who sent the message.
+ *  @param date                 The date that the message was sent.
+ *  @param messageIdentifier    The unique identifier for the message.
  *
  *  @return An initialized `JSMessage` object or `nil` if the object could not be successfully initialized.
  */
 - (instancetype)initWithText:(NSString *)text
                       sender:(NSString *)sender
-                        date:(NSDate *)date;
+                        date:(NSDate *)date
+           messageIdentifier:(NSString *)messageIdentifier;
 
 @end
