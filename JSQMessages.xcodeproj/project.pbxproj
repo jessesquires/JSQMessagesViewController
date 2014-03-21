@@ -66,6 +66,7 @@
 		8897FBF918CBF967004F59C3 /* JSQDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8897FBF818CBF967004F59C3 /* JSQDemoViewController.m */; };
 		8897FBFB18CBFC1F004F59C3 /* JSQMessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8897FBFA18CBFC1F004F59C3 /* JSQMessagesViewController.xib */; };
 		8897FBFE18CC29D0004F59C3 /* NSString+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 8897FBFD18CC29D0004F59C3 /* NSString+JSQMessages.m */; };
+		88A57A3A18DBFDA10046BA15 /* JSQMessagesAvatarFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A57A3918DBFDA10046BA15 /* JSQMessagesAvatarFactoryTests.m */; };
 		C78CEF093F584B85B4321C83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 343577012CC24261BE4B61A1 /* libPods.a */; };
 		D68A9FB68FC5463D9A5B23E0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 343577012CC24261BE4B61A1 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -169,6 +170,7 @@
 		8897FBFA18CBFC1F004F59C3 /* JSQMessagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesViewController.xib; sourceTree = "<group>"; };
 		8897FBFC18CC29D0004F59C3 /* NSString+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JSQMessages.h"; sourceTree = "<group>"; };
 		8897FBFD18CC29D0004F59C3 /* NSString+JSQMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JSQMessages.m"; sourceTree = "<group>"; };
+		88A57A3918DBFDA10046BA15 /* JSQMessagesAvatarFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSQMessagesAvatarFactoryTests.m; path = "Factory Tests/JSQMessagesAvatarFactoryTests.m"; sourceTree = "<group>"; };
 		A0F1B1EFE54F44FEA6C4F786 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -276,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				885A8F0318D8A8AF00B47E59 /* Category Tests */,
+				88A57A3B18DBFDA60046BA15 /* Factory Tests */,
 				8897FBF518CBF32F004F59C3 /* JSQMessagesViewControllerTests.m */,
 				885D595518CBD13D00D77BB3 /* Supporting Files */,
 			);
@@ -429,6 +432,14 @@
 				8897FBE218CBE86E004F59C3 /* message_sent.aiff */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		88A57A3B18DBFDA60046BA15 /* Factory Tests */ = {
+			isa = PBXGroup;
+			children = (
+				88A57A3918DBFDA10046BA15 /* JSQMessagesAvatarFactoryTests.m */,
+			);
+			name = "Factory Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -649,6 +660,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88A57A3A18DBFDA10046BA15 /* JSQMessagesAvatarFactoryTests.m in Sources */,
 				885A8F0618D8A8AF00B47E59 /* JSQMessagesNSStringTests.m in Sources */,
 				885A8F0718D8A8AF00B47E59 /* JSQMessagesUIColorTests.m in Sources */,
 				885A8F0918D8A8D400B47E59 /* JSQMessagesUIImageTests.m in Sources */,
