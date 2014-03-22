@@ -27,9 +27,9 @@
     [superview addSubview:subview];
     XCTAssertNoThrow([superview jsq_pinAllEdgesOfSubview:subview], @"Pinning edges of subview to superview should not throw");
     
-    XCTAssertTrue([[superview constraints] count] == 4, @"Superview should have 4 constraints");
+    XCTAssertEqual([[superview constraints] count], 4, @"Superview should have 4 constraints");
     
-    XCTAssertTrue([[subview constraints] count] == 0, @"Subview should have 0 constraints");
+    XCTAssertEqual([[subview constraints] count], 0, @"Subview should have 0 constraints");
     
     for (NSLayoutConstraint *eachConstraint in [superview constraints]) {
         

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8855A20318DD60B8005CB88E /* JSQMessagesToolbarButtonFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8855A20218DD60B8005CB88E /* JSQMessagesToolbarButtonFactoryTests.m */; };
 		885A8F0618D8A8AF00B47E59 /* JSQMessagesNSStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 885A8F0418D8A8AF00B47E59 /* JSQMessagesNSStringTests.m */; };
 		885A8F0718D8A8AF00B47E59 /* JSQMessagesUIColorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 885A8F0518D8A8AF00B47E59 /* JSQMessagesUIColorTests.m */; };
 		885A8F0918D8A8D400B47E59 /* JSQMessagesUIImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 885A8F0818D8A8D400B47E59 /* JSQMessagesUIImageTests.m */; };
@@ -84,6 +85,7 @@
 
 /* Begin PBXFileReference section */
 		343577012CC24261BE4B61A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8855A20218DD60B8005CB88E /* JSQMessagesToolbarButtonFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSQMessagesToolbarButtonFactoryTests.m; path = "Factory Tests/JSQMessagesToolbarButtonFactoryTests.m"; sourceTree = "<group>"; };
 		885A8F0418D8A8AF00B47E59 /* JSQMessagesNSStringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesNSStringTests.m; sourceTree = "<group>"; };
 		885A8F0518D8A8AF00B47E59 /* JSQMessagesUIColorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesUIColorTests.m; sourceTree = "<group>"; };
 		885A8F0818D8A8D400B47E59 /* JSQMessagesUIImageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesUIImageTests.m; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 			children = (
 				88A57A3918DBFDA10046BA15 /* JSQMessagesAvatarFactoryTests.m */,
 				88A57A3C18DC012C0046BA15 /* JSQMessagesBubbleImageFactoryTests.m */,
+				8855A20218DD60B8005CB88E /* JSQMessagesToolbarButtonFactoryTests.m */,
 			);
 			name = "Factory Tests";
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88A57A3A18DBFDA10046BA15 /* JSQMessagesAvatarFactoryTests.m in Sources */,
+				8855A20318DD60B8005CB88E /* JSQMessagesToolbarButtonFactoryTests.m in Sources */,
 				885A8F0618D8A8AF00B47E59 /* JSQMessagesNSStringTests.m in Sources */,
 				88A57A3D18DC012C0046BA15 /* JSQMessagesBubbleImageFactoryTests.m in Sources */,
 				885A8F0718D8A8AF00B47E59 /* JSQMessagesUIColorTests.m in Sources */,
