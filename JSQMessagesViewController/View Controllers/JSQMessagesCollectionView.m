@@ -17,6 +17,8 @@
 #import "JSQMessagesCollectionViewFlowLayout.h"
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionSupplementaryView.h"
+
 
 @implementation JSQMessagesCollectionView
 
@@ -29,8 +31,19 @@
     
     self.backgroundColor = [UIColor whiteColor];
     
-    [self registerNib:[JSQMessagesCollectionViewCellIncoming nib] forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]];
-    [self registerNib:[JSQMessagesCollectionViewCellOutgoing nib] forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewCellIncoming nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]];
+    
+    [self registerNib:[JSQMessagesCollectionViewCellOutgoing nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
+    
+    [self registerNib:[JSQMessagesCollectionSupplementaryView nib]
+          forSupplementaryViewOfKind:kJSQMessagesCollectionSupplementaryViewKindRowHeader
+          withReuseIdentifier:[JSQMessagesCollectionSupplementaryView supplementaryViewReuseIdentifier]];
+    
+    [self registerNib:[JSQMessagesCollectionSupplementaryView nib]
+          forSupplementaryViewOfKind:kJSQMessagesCollectionSupplementaryViewKindRowFooter
+          withReuseIdentifier:[JSQMessagesCollectionSupplementaryView supplementaryViewReuseIdentifier]];
     
     JSQMessagesCollectionViewFlowLayout *collectionViewLayout = (JSQMessagesCollectionViewFlowLayout *)self.collectionViewLayout;
     CGFloat inset = 4.0f;

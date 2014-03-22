@@ -19,8 +19,8 @@
 
 FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionSupplementaryViewHeight;
 
-FOUNDATION_EXPORT NSString * const kJSQMessagesCollectionSupplementaryViewCellHeader;
-FOUNDATION_EXPORT NSString * const kJSQMessagesCollectionSupplementaryViewCellFooter;
+FOUNDATION_EXPORT NSString * const kJSQMessagesCollectionSupplementaryViewKindRowHeader;
+FOUNDATION_EXPORT NSString * const kJSQMessagesCollectionSupplementaryViewKindRowFooter;
 
 
 @interface JSQMessagesCollectionSupplementaryView : UICollectionReusableView

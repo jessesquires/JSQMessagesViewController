@@ -17,8 +17,8 @@
 
 const CGFloat kJSQMessagesCollectionSupplementaryViewHeight = 20.0f;
 
-NSString * const kJSQMessagesCollectionSupplementaryViewCellHeader = @"kJSQMessagesCollectionSupplementaryViewCellHeader";
-NSString * const kJSQMessagesCollectionSupplementaryViewCellFooter = @"kJSQMessagesCollectionSupplementaryViewCellFooter";
+NSString * const kJSQMessagesCollectionSupplementaryViewKindRowHeader = @"JSQMessagesRowHeader";
+NSString * const kJSQMessagesCollectionSupplementaryViewKindRowFooter = @"JSQMessagesRowFooter";
 
 
 @interface JSQMessagesCollectionSupplementaryView ()
