@@ -53,7 +53,7 @@
 	_textView = textView;
     
     if(style == JSMessageInputViewStyleClassic) {
-        _textView.frame = CGRectMake(6.0f, 3.0f, width, height);
+        _textView.frame = CGRectMake(7.0f, 7.0f, width, height);
         _textView.backgroundColor = [UIColor whiteColor];
         
         self.image = [[UIImage imageNamed:@"input-bar-background"] resizableImageWithCapInsets:UIEdgeInsetsMake(19.0f, 3.0f, 19.0f, 3.0f)
@@ -69,7 +69,7 @@
         [self addSubview:inputFieldBack];
     }
     else {
-        _textView.frame = CGRectMake(4.0f, 4.5f, width, height);
+        _textView.frame = CGRectMake(5.0f, 5.0f, width, height);
         _textView.backgroundColor = [UIColor clearColor];
         _textView.layer.borderColor = [UIColor colorWithWhite:0.8f alpha:1.0f].CGColor;
         _textView.layer.borderWidth = 0.65f;
@@ -222,7 +222,7 @@
 
 + (CGFloat)textViewLineHeight
 {
-    return 36.0f; // for fontSize 16.0f
+    return 35.0f;//36.0f; // for fontSize 16.0f
 }
 
 + (CGFloat)maxLines
