@@ -14,7 +14,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JSQMessagesCollectionViewCellLabel : UILabel
+@interface JSQMessagesLabel : UILabel
 
 /**
  *  The inset of the text layout area within the label's content area. The default value is `UIEdgeInsetsZero`.

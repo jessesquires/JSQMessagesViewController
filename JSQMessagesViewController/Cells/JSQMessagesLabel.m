@@ -12,9 +12,9 @@
 //  http://opensource.org/licenses/MIT
 //
 
-#import "JSQMessagesCollectionViewCellLabel.h"
+#import "JSQMessagesLabel.h"
 
-@implementation JSQMessagesCollectionViewCellLabel
+@implementation JSQMessagesLabel
 
 #pragma mark - Initialization
 

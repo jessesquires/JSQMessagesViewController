@@ -25,9 +25,9 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddi
 
 @interface JSQMessagesCollectionViewCell ()
 
-@property (weak, nonatomic) IBOutlet JSQMessagesCollectionViewCellLabel *cellTopLabel;
-@property (weak, nonatomic) IBOutlet JSQMessagesCollectionViewCellLabel *messageBubbleTopLabel;
-@property (weak, nonatomic) IBOutlet JSQMessagesCollectionViewCellLabel *cellBottomLabel;
+@property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellTopLabel;
+@property (weak, nonatomic) IBOutlet JSQMessagesLabel *messageBubbleTopLabel;
+@property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellBottomLabel;
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 

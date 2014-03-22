@@ -14,7 +14,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "JSQMessagesCollectionViewCellLabel.h"
+#import "JSQMessagesLabel.h"
 
 
 FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault;
@@ -25,9 +25,9 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLa
 
 @interface JSQMessagesCollectionViewCell : UICollectionViewCell
 
-@property (weak, nonatomic, readonly) JSQMessagesCollectionViewCellLabel *cellTopLabel;
-@property (weak, nonatomic, readonly) JSQMessagesCollectionViewCellLabel *messageBubbleTopLabel;
-@property (weak, nonatomic, readonly) JSQMessagesCollectionViewCellLabel *cellBottomLabel;
+@property (weak, nonatomic, readonly) JSQMessagesLabel *cellTopLabel;
+@property (weak, nonatomic, readonly) JSQMessagesLabel *messageBubbleTopLabel;
+@property (weak, nonatomic, readonly) JSQMessagesLabel *cellBottomLabel;
 
 @property (weak, nonatomic, readonly) UITextView *textView;
 

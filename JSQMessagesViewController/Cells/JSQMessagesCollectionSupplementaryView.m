@@ -23,7 +23,7 @@ NSString * const kJSQMessagesCollectionSupplementaryViewCellFooter = @"kJSQMessa
 
 @interface JSQMessagesCollectionSupplementaryView ()
 
-@property (weak, nonatomic) IBOutlet JSQMessagesCollectionViewCellLabel *label;
+@property (weak, nonatomic) IBOutlet JSQMessagesLabel *label;
 
 @end
 

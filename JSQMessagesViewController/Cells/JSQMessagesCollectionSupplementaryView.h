@@ -14,7 +14,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "JSQMessagesCollectionViewCellLabel.h"
+#import "JSQMessagesLabel.h"
 
 
 FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionSupplementaryViewHeight;
@@ -25,7 +25,7 @@ FOUNDATION_EXPORT NSString * const kJSQMessagesCollectionSupplementaryViewCellFo
 
 @interface JSQMessagesCollectionSupplementaryView : UICollectionReusableView
 
-@property (weak, nonatomic, readonly) JSQMessagesCollectionViewCellLabel *label;
+@property (weak, nonatomic, readonly) JSQMessagesLabel *label;
 
 #pragma mark - Class methods
 
