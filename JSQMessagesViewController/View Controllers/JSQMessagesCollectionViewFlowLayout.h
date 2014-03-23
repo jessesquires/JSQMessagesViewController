@@ -48,7 +48,6 @@
 
 @property (assign, nonatomic) BOOL springinessEnabled;
 
-// determines how much bounce / resistance the collection has
 // A higher number is less bouncy, a lower number is more bouncy
 @property (nonatomic, assign) NSUInteger springResistanceFactor;
 
