@@ -115,7 +115,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  Change to add more messages for testing
      */
-    NSUInteger messagesToAdd = 0;
+    NSUInteger messagesToAdd = 1;
     for (NSUInteger i = 0; i < messagesToAdd; i++) {
         [self.messages addObjectsFromArray:self.messages];
     }

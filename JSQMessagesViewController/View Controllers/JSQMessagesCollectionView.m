@@ -43,7 +43,6 @@
     
     JSQMessagesCollectionViewFlowLayout *collectionViewLayout = (JSQMessagesCollectionViewFlowLayout *)self.collectionViewLayout;
     CGFloat inset = 4.0f;
-    collectionViewLayout.itemSize = CGSizeMake(self.frame.size.width - (inset * 2.0f), 0.0f);
     collectionViewLayout.sectionInset = UIEdgeInsetsMake(inset, inset, inset, inset);
     collectionViewLayout.minimumInteritemSpacing = 4.0f;
     collectionViewLayout.minimumLineSpacing = kJSQMessagesCollectionSupplementaryViewHeightDefault;
