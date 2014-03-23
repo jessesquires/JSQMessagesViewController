@@ -17,10 +17,9 @@
 #import "JSQMessagesLabel.h"
 
 
-FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionSupplementaryViewHeight;
+FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionSupplementaryViewHeightDefault;
 
 FOUNDATION_EXPORT NSString * const kJSQMessagesCollectionSupplementaryViewKindRowHeader;
-FOUNDATION_EXPORT NSString * const kJSQMessagesCollectionSupplementaryViewKindRowFooter;
 
 
 @interface JSQMessagesCollectionSupplementaryView : UICollectionReusableView
