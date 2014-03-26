@@ -12,7 +12,7 @@
 //  http://opensource.org/licenses/MIT
 //
 
-#import "JSQMessagesViewController.h"
+#import "JSQMessages.h"
 
 @class JSQDemoViewController;
 

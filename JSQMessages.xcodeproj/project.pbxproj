@@ -110,6 +110,7 @@
 		885D597518CBD2EB00D77BB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = JSQMessagesDemo/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		885EFC9918CCDB0100F63C35 /* JSQMessagesToolbarButtonFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesToolbarButtonFactory.h; sourceTree = "<group>"; };
 		885EFC9A18CCDB0100F63C35 /* JSQMessagesToolbarButtonFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesToolbarButtonFactory.m; sourceTree = "<group>"; };
+		8866A9AD18E2700D00987407 /* JSQMessages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSQMessages.h; sourceTree = "<group>"; };
 		88769FE918D4D666005B2A11 /* JSQMessagesTimestampFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesTimestampFormatter.h; sourceTree = "<group>"; };
 		88769FEA18D4D666005B2A11 /* JSQMessagesTimestampFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesTimestampFormatter.m; sourceTree = "<group>"; };
 		8897FB8F18CBD7C9004F59C3 /* JSQSystemSoundPlayer+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JSQSystemSoundPlayer+JSQMessages.h"; sourceTree = "<group>"; };
@@ -301,6 +302,7 @@
 		8897FB8D18CBD7C9004F59C3 /* JSQMessagesViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8866A9AD18E2700D00987407 /* JSQMessages.h */,
 				8897FBD018CBE86E004F59C3 /* Assets */,
 				8897FB8E18CBD7C9004F59C3 /* Categories */,
 				8897FB9718CBD7C9004F59C3 /* Cells */,

@@ -16,28 +16,11 @@
 
 #import "JSQMessagesCollectionView.h"
 #import "JSQMessagesCollectionViewFlowLayout.h"
-#import "JSQMessagesCollectionViewCellIncoming.h"
-#import "JSQMessagesCollectionViewCellOutgoing.h"
-
-#import "JSQMessagesToolbarContentView.h"
-#import "JSQMessagesInputToolbar.h"
-#import "JSQMessagesComposerTextView.h"
-
-#import "JSQMessageData.h"
-#import "JSQMessage.h"
-
-#import "JSQMessagesAvatarFactory.h"
-#import "JSQMessagesBubbleImageFactory.h"
-#import "JSQMessagesTimestampFormatter.h"
-#import "JSQMessagesToolbarButtonFactory.h"
-
-#import "JSQSystemSoundPlayer+JSQMessages.h"
-#import "NSString+JSQMessages.h"
-#import "UIColor+JSQMessages.h"
-#import "UIImage+JSQMessages.h"
-#import "UIView+JSQMessages.h"
 
 @class JSQMessagesViewController;
+@class JSQMessagesInputToolbar;
+@class JSQMessage;
+
 
 
 @protocol JSQMessagesViewControllerDelegate <NSObject>

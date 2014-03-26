@@ -16,6 +16,20 @@
 
 #import <DAKeyboardControl/DAKeyboardControl.h>
 
+#import "JSQMessageData.h"
+#import "JSQMessage.h"
+
+#import "JSQMessagesCollectionViewCellIncoming.h"
+#import "JSQMessagesCollectionViewCellOutgoing.h"
+
+#import "JSQMessagesToolbarContentView.h"
+#import "JSQMessagesInputToolbar.h"
+#import "JSQMessagesComposerTextView.h"
+
+#import "JSQMessagesTimestampFormatter.h"
+
+#import "NSString+JSQMessages.h"
+
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
