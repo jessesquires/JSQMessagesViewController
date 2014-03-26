@@ -342,7 +342,7 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
            viewForSupplementaryElementOfKind:(NSString *)kind
                                  atIndexPath:(NSIndexPath *)indexPath
 {
-    return nil; // TODO:
+    return nil; // TODO: load previous messages, typing indicator
 }
 
 #pragma mark - Collection view delegate

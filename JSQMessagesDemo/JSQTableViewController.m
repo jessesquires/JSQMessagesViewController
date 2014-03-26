@@ -99,7 +99,10 @@
                 [self performSegueWithIdentifier:@"seguePushDemoVC" sender:self];
                 break;
             case 1:
-                [self.navigationController pushViewController:[JSQDemoViewController messagesViewController] animated:YES];
+            {
+                JSQDemoViewController *vc = [JSQDemoViewController messagesViewController];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
                 break;
         }
     }
