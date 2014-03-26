@@ -169,6 +169,17 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    /**
+     *  Enable/disable springy bubbles, default is YES.
+     *  For best results, toggle from `viewDidAppear:`
+     */
+    self.collectionViewLayout.springinessEnabled = YES;
+}
+
 
 
 #pragma mark - Actions

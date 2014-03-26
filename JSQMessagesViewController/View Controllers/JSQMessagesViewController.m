@@ -45,8 +45,6 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
 
-@property (nonatomic, readonly) JSQMessagesCollectionViewFlowLayout *collectionViewLayout;
-
 - (void)jsq_configureViewController;
 
 - (void)jsq_prepareForRotation;
@@ -152,8 +150,6 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 {
     [super viewDidLoad];
     [[JSQMessagesCollectionViewCell appearance] setFont:[UIFont systemFontOfSize:15.0f]];
-    
-    self.collectionViewLayout.springinessEnabled = NO;
     [self jsq_updateCollectionViewInsets];
 }
 
@@ -164,8 +160,10 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     [self.collectionView.collectionViewLayout invalidateLayout];
     
     if (self.autoScrollsToMostRecentMessage) {
-        [self scrollToBottomAnimated:NO];
-        [self.collectionView.collectionViewLayout invalidateLayout];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self scrollToBottomAnimated:NO];
+            [self.collectionView.collectionViewLayout invalidateLayout];
+        });
     }
     
     [self jsq_updateKeyboardTriggerOffset];

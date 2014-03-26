@@ -53,7 +53,7 @@
     
     self.scrollDirection = UICollectionViewScrollDirectionVertical;
     
-    _springinessEnabled = YES;
+    _springinessEnabled = NO;
     
     self.dynamicAnimator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
     self.visibleIndexPaths = [[NSMutableSet alloc] init];
@@ -66,6 +66,11 @@
 {
     _springinessEnabled = springinessEnabled;
     [self invalidateLayout];
+    
+    if (!springinessEnabled) {
+        [self.dynamicAnimator removeAllBehaviors];
+        [self.visibleIndexPaths removeAllObjects];
+    }
 }
 
 #pragma mark - Collection view flow layout
