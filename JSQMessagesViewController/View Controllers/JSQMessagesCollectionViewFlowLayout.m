@@ -74,15 +74,14 @@
 {
     [super prepareLayout];
     
+    if ([UIApplication sharedApplication].statusBarOrientation != self.interfaceOrientation) {
+        [self.dynamicAnimator removeAllBehaviors];
+        [self.visibleIndexPaths removeAllObjects];
+    }
+    
+    self.interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
     if (self.springinessEnabled) {
-        
-        if ([UIApplication sharedApplication].statusBarOrientation != self.interfaceOrientation) {
-            [self.dynamicAnimator removeAllBehaviors];
-            [self.visibleIndexPaths removeAllObjects];
-        }
-        
-        self.interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-        
         //  pad rect to avoid flickering
         CGFloat padding = -100.0f;
         CGRect visibleRect = CGRectInset(self.collectionView.bounds, padding, padding);
@@ -130,11 +129,11 @@
             [self jsq_adjustSpringBehavior:springBehaviour forTouchLocation:touchLocation];
             [self.dynamicAnimator updateItemUsingCurrentState:[springBehaviour.items firstObject]];
         }];
-        
-        CGRect oldBounds = self.collectionView.bounds;
-        if (CGRectGetWidth(newBounds) != CGRectGetWidth(oldBounds)) {
-            return YES;
-        }
+    }
+    
+    CGRect oldBounds = self.collectionView.bounds;
+    if (CGRectGetWidth(newBounds) != CGRectGetWidth(oldBounds)) {
+        return YES;
     }
     
     return NO;
@@ -165,13 +164,6 @@
         }];
     }
 }
-
-//- (UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath
-//{
-//    UICollectionViewLayoutAttributes* attributes = [self layoutAttributesForItemAtIndexPath:itemIndexPath];
-//    attributes.alpha = 0.0;
-//    return attributes;
-//}
 
 #pragma mark - Utilities
 
