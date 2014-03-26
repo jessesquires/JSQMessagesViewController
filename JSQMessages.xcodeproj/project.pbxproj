@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8855A20318DD60B8005CB88E /* JSQMessagesToolbarButtonFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8855A20218DD60B8005CB88E /* JSQMessagesToolbarButtonFactoryTests.m */; };
-		8855A20618DE0A0C005CB88E /* JSQMessagesCollectionSupplementaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8855A20518DE0A0C005CB88E /* JSQMessagesCollectionSupplementaryView.m */; };
-		8855A20818DE0ACF005CB88E /* JSQMessagesCollectionSupplementaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8855A20718DE0ACF005CB88E /* JSQMessagesCollectionSupplementaryView.xib */; };
 		885A8F0618D8A8AF00B47E59 /* JSQMessagesNSStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 885A8F0418D8A8AF00B47E59 /* JSQMessagesNSStringTests.m */; };
 		885A8F0718D8A8AF00B47E59 /* JSQMessagesUIColorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 885A8F0518D8A8AF00B47E59 /* JSQMessagesUIColorTests.m */; };
 		885A8F0918D8A8D400B47E59 /* JSQMessagesUIImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 885A8F0818D8A8D400B47E59 /* JSQMessagesUIImageTests.m */; };
@@ -88,9 +86,6 @@
 /* Begin PBXFileReference section */
 		343577012CC24261BE4B61A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8855A20218DD60B8005CB88E /* JSQMessagesToolbarButtonFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSQMessagesToolbarButtonFactoryTests.m; path = "Factory Tests/JSQMessagesToolbarButtonFactoryTests.m"; sourceTree = "<group>"; };
-		8855A20418DE0A0C005CB88E /* JSQMessagesCollectionSupplementaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionSupplementaryView.h; sourceTree = "<group>"; };
-		8855A20518DE0A0C005CB88E /* JSQMessagesCollectionSupplementaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionSupplementaryView.m; sourceTree = "<group>"; };
-		8855A20718DE0ACF005CB88E /* JSQMessagesCollectionSupplementaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesCollectionSupplementaryView.xib; sourceTree = "<group>"; };
 		885A8F0418D8A8AF00B47E59 /* JSQMessagesNSStringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesNSStringTests.m; sourceTree = "<group>"; };
 		885A8F0518D8A8AF00B47E59 /* JSQMessagesUIColorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesUIColorTests.m; sourceTree = "<group>"; };
 		885A8F0818D8A8D400B47E59 /* JSQMessagesUIImageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesUIImageTests.m; sourceTree = "<group>"; };
@@ -337,19 +332,16 @@
 		8897FB9718CBD7C9004F59C3 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				8855A20418DE0A0C005CB88E /* JSQMessagesCollectionSupplementaryView.h */,
-				8855A20518DE0A0C005CB88E /* JSQMessagesCollectionSupplementaryView.m */,
-				8855A20718DE0ACF005CB88E /* JSQMessagesCollectionSupplementaryView.xib */,
 				8897FB9818CBD7C9004F59C3 /* JSQMessagesCollectionViewCell.h */,
 				8897FB9918CBD7C9004F59C3 /* JSQMessagesCollectionViewCell.m */,
 				8897FB9A18CBD7C9004F59C3 /* JSQMessagesCollectionViewCellIncoming.h */,
 				8897FB9B18CBD7C9004F59C3 /* JSQMessagesCollectionViewCellIncoming.m */,
 				8897FB9C18CBD7C9004F59C3 /* JSQMessagesCollectionViewCellIncoming.xib */,
-				8897FB9D18CBD7C9004F59C3 /* JSQMessagesLabel.h */,
-				8897FB9E18CBD7C9004F59C3 /* JSQMessagesLabel.m */,
 				8897FB9F18CBD7C9004F59C3 /* JSQMessagesCollectionViewCellOutgoing.h */,
 				8897FBA018CBD7C9004F59C3 /* JSQMessagesCollectionViewCellOutgoing.m */,
 				8897FBA118CBD7C9004F59C3 /* JSQMessagesCollectionViewCellOutgoing.xib */,
+				8897FB9D18CBD7C9004F59C3 /* JSQMessagesLabel.h */,
+				8897FB9E18CBD7C9004F59C3 /* JSQMessagesLabel.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -557,7 +549,6 @@
 				8897FBED18CBE86E004F59C3 /* bubble_tailless.png in Resources */,
 				8897FBE618CBE86E004F59C3 /* bubble_min@2x.png in Resources */,
 				8897FBE418CBE86E004F59C3 /* bubble@2x.png in Resources */,
-				8855A20818DE0ACF005CB88E /* JSQMessagesCollectionSupplementaryView.xib in Resources */,
 				8897FBE918CBE86E004F59C3 /* bubble_stroked.png in Resources */,
 				8897FBEF18CBE86E004F59C3 /* camera.png in Resources */,
 				8897FBE818CBE86E004F59C3 /* bubble_min_tailless@2x.png in Resources */,
@@ -656,7 +647,6 @@
 				885D597318CBD2DC00D77BB3 /* main.m in Sources */,
 				8897FBC818CBD7C9004F59C3 /* JSQMessagesComposerTextView.m in Sources */,
 				8897FBC018CBD7C9004F59C3 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
-				8855A20618DE0A0C005CB88E /* JSQMessagesCollectionSupplementaryView.m in Sources */,
 				8897FBCD18CBD7C9004F59C3 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				8897FBC218CBD7C9004F59C3 /* JSQMessagesLabel.m in Sources */,
 				8897FBF918CBF967004F59C3 /* JSQDemoViewController.m in Sources */,
