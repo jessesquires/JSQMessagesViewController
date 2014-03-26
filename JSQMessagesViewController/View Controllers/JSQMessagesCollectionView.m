@@ -17,7 +17,6 @@
 #import "JSQMessagesCollectionViewFlowLayout.h"
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
-#import "JSQMessagesCollectionSupplementaryView.h"
 
 
 @implementation JSQMessagesCollectionView
@@ -37,15 +36,11 @@
     [self registerNib:[JSQMessagesCollectionViewCellOutgoing nib]
           forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
     
-    [self registerNib:[JSQMessagesCollectionSupplementaryView nib]
-          forSupplementaryViewOfKind:kJSQMessagesCollectionSupplementaryViewKindRowHeader
-          withReuseIdentifier:[JSQMessagesCollectionSupplementaryView supplementaryViewReuseIdentifier]];
-    
     JSQMessagesCollectionViewFlowLayout *collectionViewLayout = (JSQMessagesCollectionViewFlowLayout *)self.collectionViewLayout;
     CGFloat inset = 4.0f;
     collectionViewLayout.sectionInset = UIEdgeInsetsMake(inset, inset, inset, inset);
     collectionViewLayout.minimumInteritemSpacing = 4.0f;
-    collectionViewLayout.minimumLineSpacing = kJSQMessagesCollectionSupplementaryViewHeightDefault;
+    collectionViewLayout.minimumLineSpacing = 0.0f;
 }
 
 @end
