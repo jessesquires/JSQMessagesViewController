@@ -22,24 +22,8 @@
 @class JSQMessage;
 
 
-
-@protocol JSQMessagesViewControllerDelegate <NSObject>
-
-@required
-- (void)messagesViewController:(JSQMessagesViewController *)viewController
-                didSendMessage:(JSQMessage *)message;
-
-- (void)messagesViewController:(JSQMessagesViewController *)viewController
-       didPressAccessoryButton:(UIButton *)sender;
-
-@end
-
-
-
 @interface JSQMessagesViewController : UIViewController <JSQMessagesCollectionViewDataSource,
                                                          JSQMessagesCollectionViewFlowLayoutDelegate>
-
-@property (weak, nonatomic) id<JSQMessagesViewControllerDelegate> delegate;
 
 @property (weak, nonatomic, readonly) JSQMessagesCollectionView *collectionView;
 
@@ -63,6 +47,10 @@
 + (instancetype)messagesViewController;
 
 #pragma mark - Messages view controller
+
+- (void)didPressSendButton:(UIButton *)sender withMessage:(JSQMessage *)message;
+
+- (void)didPressAccessoryButton:(UIButton *)sender;
 
 - (void)finishSending;
 

@@ -140,7 +140,6 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     [super viewDidLoad];
     
     self.title = @"JSQMessages";
-    self.delegate = self;
     
     [self jsqDemo_setupTestModel];
     
@@ -194,16 +193,16 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 
 #pragma mark - REQUIRED
-#pragma mark - JSQMessages ViewController delegate
+#pragma mark - JSQMessagesViewController method overrides
 
-- (void)messagesViewController:(JSQMessagesViewController *)viewController didSendMessage:(JSQMessage *)message
+- (void)didPressSendButton:(UIButton *)sender withMessage:(JSQMessage *)message
 {
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     [self.messages addObject:message];
     [self finishSending];
 }
 
-- (void)messagesViewController:(JSQMessagesViewController *)viewController didPressAccessoryButton:(UIButton *)sender
+- (void)didPressAccessoryButton:(UIButton *)sender
 {
     // TODO:
     NSLog(@"Camera pressed!");
@@ -256,10 +255,6 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     UIImage *avatarImage = [self.avatars objectForKey:sender];
     return [[UIImageView alloc] initWithImage:avatarImage];
 }
-
-
-//  TODO:
-//  use supplementary views for top/bottom labels
 
 
 //#pragma mark - OPTIONAL

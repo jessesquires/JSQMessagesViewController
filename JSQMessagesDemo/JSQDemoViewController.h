@@ -26,7 +26,7 @@
 
 
 
-@interface JSQDemoViewController : JSQMessagesViewController <JSQMessagesViewControllerDelegate>
+@interface JSQDemoViewController : JSQMessagesViewController
 
 @property (weak, nonatomic) id<JSQDemoViewControllerDelegate> delegateModal;
 

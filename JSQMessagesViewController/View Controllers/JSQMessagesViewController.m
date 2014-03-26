@@ -51,8 +51,7 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 
 - (void)jsq_prepareForRotation;
 
-- (void)jsq_notifyDelegateDidSendMessage;
-- (void)jsq_notifyDelegateDidPressAccessoryButton:(UIButton *)sender;
+- (JSQMessage *)jsq_currentlyComposedMessage;
 
 - (void)jsq_configureKeyboardControl;
 - (void)jsq_updateKeyboardTriggerOffset;
@@ -230,6 +229,10 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 }
 
 #pragma mark - Messages view controller
+
+- (void)didPressSendButton:(UIButton *)sender withMessage:(JSQMessage *)message { }
+
+- (void)didPressAccessoryButton:(UIButton *)sender { }
 
 - (void)finishSending
 {
@@ -410,34 +413,27 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 - (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar didPressLeftBarButton:(UIButton *)sender
 {
     if (toolbar.sendButtonOnRight) {
-        [self jsq_notifyDelegateDidPressAccessoryButton:sender];
+        [self didPressAccessoryButton:sender];
     }
     else {
-        [self jsq_notifyDelegateDidSendMessage];
+        [self didPressSendButton:sender withMessage:[self jsq_currentlyComposedMessage]];
     }
 }
 
 - (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar didPressRightBarButton:(UIButton *)sender
 {
     if (toolbar.sendButtonOnRight) {
-        [self jsq_notifyDelegateDidSendMessage];
+        [self didPressSendButton:sender withMessage:[self jsq_currentlyComposedMessage]];
     }
     else {
-        [self jsq_notifyDelegateDidPressAccessoryButton:sender];
+        [self didPressAccessoryButton:sender];
     }
 }
 
-- (void)jsq_notifyDelegateDidSendMessage
+- (JSQMessage *)jsq_currentlyComposedMessage
 {
-    JSQMessage *message = [JSQMessage messageWithText:[self.inputToolbar.contentView.textView.text jsq_stringByTrimingWhitespace]
-                                               sender:self.sender];
-    
-    [self.delegate messagesViewController:self didSendMessage:message];
-}
-
-- (void)jsq_notifyDelegateDidPressAccessoryButton:(UIButton *)sender
-{
-    [self.delegate messagesViewController:self didPressAccessoryButton:sender];
+    return [JSQMessage messageWithText:[self.inputToolbar.contentView.textView.text jsq_stringByTrimingWhitespace]
+                                sender:self.sender];
 }
 
 #pragma mark - Text view delegate
