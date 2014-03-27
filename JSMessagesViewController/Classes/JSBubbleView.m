@@ -255,8 +255,8 @@
     // for the insets...  some values had to change to make it work with UILabel.
     
     textFrame.origin.y += 4.0f;
-    textFrame.origin.x += 8.0f;
-    textFrame.size.width -= 8.0f;
+    textFrame.origin.x += 13.0f;
+    textFrame.size.width -= 13.0f;
     textFrame.size.height -= 2.0f;
     
     [self.textView setFrame:textFrame];
