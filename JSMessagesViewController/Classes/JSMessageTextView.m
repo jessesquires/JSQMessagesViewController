@@ -49,6 +49,7 @@
     self.keyboardType = UIKeyboardTypeDefault;
     self.returnKeyType = UIReturnKeyDefault;
     self.textAlignment = NSTextAlignmentLeft;
+    self.contentMode = UIViewContentModeRedraw;
     
     [self addTextViewNotificationObservers];
 }
