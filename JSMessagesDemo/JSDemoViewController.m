@@ -201,4 +201,15 @@
     return [[UIImageView alloc] initWithImage:image];
 }
 
+#pragma mark - View rotation
+
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
 @end
