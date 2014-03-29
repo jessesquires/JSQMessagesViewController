@@ -48,6 +48,10 @@
 
 + (instancetype)messagesViewController;
 
+#pragma mark - Initialization
+
+- (void)prepareMessagesViewController;
+
 #pragma mark - Messages view controller
 
 - (void)didPressSendButton:(UIButton *)sender withMessage:(JSQMessage *)message;

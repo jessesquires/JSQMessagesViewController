@@ -45,8 +45,6 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
 
-- (void)jsq_configureViewController;
-
 - (void)jsq_prepareForRotation;
 
 - (JSQMessage *)jsq_currentlyComposedMessage;
@@ -87,7 +85,7 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 
 #pragma mark - Initialization
 
-- (void)jsq_configureViewController
+- (void)prepareMessagesViewController
 {
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -95,7 +93,6 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
-    _collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     
     ((JSQMessagesCollectionViewFlowLayout *)_collectionView.collectionViewLayout).delegate = self;
     
@@ -115,7 +112,7 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self jsq_configureViewController];
+        [self prepareMessagesViewController];
     }
     return self;
 }
@@ -134,7 +131,7 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self jsq_configureViewController];
+    [self prepareMessagesViewController];
 }
 
 #pragma mark - Getters

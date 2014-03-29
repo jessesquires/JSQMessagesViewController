@@ -27,8 +27,6 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (void)jsqDemo_setupTestModel;
 
-- (void)jsqDemo_setupViewController;
-
 - (void)jsqDemo_receiveMessagePressed:(UIBarButtonItem *)sender;
 
 - (void)jsqDemo_closePressed:(UIBarButtonItem *)sender;
@@ -43,38 +41,19 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 #pragma mark - Initialization
 
 /**
- *  Override point for initializing programmatically
+ *  Override point for customization
  */
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (void)prepareMessagesViewController
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        [self jsqDemo_setupViewController];
-    }
-    return self;
-}
-
-/**
- *  Override point for initializing via storyboards/nibs
- */
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    [self jsqDemo_setupViewController];
+    [super prepareMessagesViewController];
+    
+    self.sender = kJSQDemoAvatarNameJesse;
+    self.inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"Message", nil);
 }
 
 
 
 #pragma mark - Demo setup
-
-/**
- *  Setup your view controller like so from init or awakeFromNib
- */
-- (void)jsqDemo_setupViewController
-{
-    self.sender = kJSQDemoAvatarNameJesse;
-    self.inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"Message", nil);
-}
 
 - (void)jsqDemo_setupTestModel
 {
@@ -115,7 +94,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  Change to add more messages for testing
      */
-    NSUInteger messagesToAdd = 1;
+    NSUInteger messagesToAdd = 0;
     for (NSUInteger i = 0; i < messagesToAdd; i++) {
         [self.messages addObjectsFromArray:self.messages];
     }

@@ -31,11 +31,13 @@
 
 @required
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
-                         layout:(JSQMessagesCollectionViewFlowLayout *)layout bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+                         layout:(JSQMessagesCollectionViewFlowLayout *)layout
+bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
                          sender:(NSString *)sender;
 
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
-                         layout:(JSQMessagesCollectionViewFlowLayout *)layout avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+                         layout:(JSQMessagesCollectionViewFlowLayout *)layout
+avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
                          sender:(NSString *)sender;
 
 @end

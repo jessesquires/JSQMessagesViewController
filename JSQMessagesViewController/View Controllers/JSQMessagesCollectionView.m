@@ -30,6 +30,8 @@
     
     self.backgroundColor = [UIColor whiteColor];
     
+    self.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
+    
     [self registerNib:[JSQMessagesCollectionViewCellIncoming nib]
           forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]];
     
@@ -39,8 +41,7 @@
     JSQMessagesCollectionViewFlowLayout *collectionViewLayout = (JSQMessagesCollectionViewFlowLayout *)self.collectionViewLayout;
     CGFloat inset = 4.0f;
     collectionViewLayout.sectionInset = UIEdgeInsetsMake(inset, inset, inset, inset);
-    collectionViewLayout.minimumInteritemSpacing = 4.0f;
-    collectionViewLayout.minimumLineSpacing = 0.0f;
+    collectionViewLayout.minimumLineSpacing = 2.0f;
 }
 
 @end
