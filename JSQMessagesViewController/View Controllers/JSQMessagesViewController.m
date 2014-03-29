@@ -223,7 +223,6 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 - (void)jsq_prepareForRotation
 {
     [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.inputToolbar.contentView.textView setNeedsDisplay];
 }
 
 #pragma mark - Messages view controller

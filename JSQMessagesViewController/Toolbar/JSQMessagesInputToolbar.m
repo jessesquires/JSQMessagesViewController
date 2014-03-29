@@ -158,12 +158,4 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     }
 }
 
-#pragma mark - UIToolbar overrides
-
-- (void)setNeedsDisplay
-{
-    [super setNeedsDisplay];
-    [self.contentView setNeedsDisplay];
-}
-
 @end

@@ -59,6 +59,7 @@
     self.textColor = [UIColor blackColor];
     self.textAlignment = NSTextAlignmentLeft;
     
+    self.contentMode = UIViewContentModeRedraw;
     self.dataDetectorTypes = UIDataDetectorTypeNone;
     self.keyboardAppearance = UIKeyboardAppearanceDefault;
     self.keyboardType = UIKeyboardTypeDefault;
