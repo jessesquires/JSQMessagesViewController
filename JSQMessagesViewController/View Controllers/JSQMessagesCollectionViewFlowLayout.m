@@ -72,7 +72,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     self.avatarViewSize = CGSizeMake(34.0f, 34.0f);
     
     _springinessEnabled = NO;
-    _springResistanceFactor = 850;
+    _springResistanceFactor = 900;
 }
 
 + (Class)layoutAttributesClass
