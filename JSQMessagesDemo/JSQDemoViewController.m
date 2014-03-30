@@ -46,7 +46,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages. Simple, elegant, easy to use." sender:self.sender date:[NSDate distantPast]],
                      [[JSQMessage alloc] initWithText:@"There are super sweet default settings, but you can customize this like crazy." sender:kJSQDemoAvatarNameWoz date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. \nMy website is www.hexedbits.com." sender:self.sender date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com." sender:self.sender date:[NSDate distantPast]],
                      [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App." sender:kJSQDemoAvatarNameJobs date:[NSDate distantPast]],
                      [[JSQMessage alloc] initWithText:@"Jony Ive would be so proud." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
@@ -80,8 +80,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  Change to add more messages for testing
      */
     NSUInteger messagesToAdd = 0;
+    NSArray *copyOfMessages = [self.messages copy];
     for (NSUInteger i = 0; i < messagesToAdd; i++) {
-        [self.messages addObjectsFromArray:self.messages];
+        [self.messages addObjectsFromArray:copyOfMessages];
     }
     
     /**
@@ -128,6 +129,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                                                                              target:self
                                                                              action:@selector(jsqDemo_receiveMessagePressed:)];
 
+    NSLog(@"BOUNDS = %@", NSStringFromCGRect(self.collectionView.bounds));
+    NSLog(@"CONTENT SIZE = %@", NSStringFromCGSize(self.collectionView.contentSize));
+    NSLog(@"CONTENT OFFSET = %@", NSStringFromCGPoint(self.collectionView.contentOffset));
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -139,6 +143,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                                                                                               target:self
                                                                                               action:@selector(jsqDemo_closePressed:)];
     }
+    
+    NSLog(@"CONTENT SIZE = %@", NSStringFromCGSize(self.collectionView.contentSize));
+    NSLog(@"CONTENT OFFSET = %@", NSStringFromCGPoint(self.collectionView.contentOffset));
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -150,6 +157,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  For best results, toggle from `viewDidAppear:`
      */
     self.collectionView.collectionViewLayout.springinessEnabled = YES;
+    
+    
+    NSLog(@"CONTENT SIZE = %@", NSStringFromCGSize(self.collectionView.contentSize));
+    NSLog(@"CONTENT OFFSET = %@", NSStringFromCGPoint(self.collectionView.contentOffset));
 }
 
 
