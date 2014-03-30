@@ -28,8 +28,6 @@
  */
 - (NSString *)text;
 
-@optional
-
 /**
  *  @return The name of the user who sent the message.
  */
