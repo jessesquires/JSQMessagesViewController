@@ -128,10 +128,6 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(jsqDemo_receiveMessagePressed:)];
-
-    NSLog(@"BOUNDS = %@", NSStringFromCGRect(self.collectionView.bounds));
-    NSLog(@"CONTENT SIZE = %@", NSStringFromCGSize(self.collectionView.contentSize));
-    NSLog(@"CONTENT OFFSET = %@", NSStringFromCGPoint(self.collectionView.contentOffset));
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -143,9 +139,6 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                                                                                               target:self
                                                                                               action:@selector(jsqDemo_closePressed:)];
     }
-    
-    NSLog(@"CONTENT SIZE = %@", NSStringFromCGSize(self.collectionView.contentSize));
-    NSLog(@"CONTENT OFFSET = %@", NSStringFromCGPoint(self.collectionView.contentOffset));
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -157,10 +150,6 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  For best results, toggle from `viewDidAppear:`
      */
     self.collectionView.collectionViewLayout.springinessEnabled = YES;
-    
-    
-    NSLog(@"CONTENT SIZE = %@", NSStringFromCGSize(self.collectionView.contentSize));
-    NSLog(@"CONTENT OFFSET = %@", NSStringFromCGPoint(self.collectionView.contentOffset));
 }
 
 
