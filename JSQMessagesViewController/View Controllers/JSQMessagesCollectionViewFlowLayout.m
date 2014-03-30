@@ -34,8 +34,6 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 @interface JSQMessagesCollectionViewFlowLayout ()
 
-@property (strong, nonatomic) NSMutableArray *messageCellAttributes;
-
 @property (strong, nonatomic) UIDynamicAnimator *dynamicAnimator;
 @property (strong, nonatomic) NSMutableSet *visibleIndexPaths;
 @property (assign, nonatomic) UIInterfaceOrientation interfaceOrientation;
@@ -64,8 +62,6 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     [super awakeFromNib];
     
     self.scrollDirection = UICollectionViewScrollDirectionVertical;
-    
-    self.messageCellAttributes = [NSMutableArray new];
     
     self.messageBubbleMinimumHorizontalPadding = 40.0f;
     self.messageBubbleTextContainerInsets = UIEdgeInsetsMake(8.0f, 10.0f, 8.0f, 10.0f);
@@ -137,16 +133,6 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
         
         [self jsq_addNewlyVisibleBehaviorsFromVisibleItems:visibleItems];
     }
-    
-    [self.messageCellAttributes removeAllObjects];
-    
-    for (NSUInteger i = 0; i < [self.collectionView numberOfItemsInSection:0]; i++) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
-        JSQMessagesCollectionViewLayoutAttributes *layoutAttributes = [JSQMessagesCollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-        [self jsq_configureMessageCellLayoutAttributes:layoutAttributes];
-        
-        [self.messageCellAttributes addObject:layoutAttributes];
-    }
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
@@ -169,7 +155,9 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.messageCellAttributes objectAtIndex:indexPath.item];
+    JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)[super layoutAttributesForItemAtIndexPath:indexPath];
+    [self jsq_configureMessageCellLayoutAttributes:customAttributes];
+    return customAttributes;
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
