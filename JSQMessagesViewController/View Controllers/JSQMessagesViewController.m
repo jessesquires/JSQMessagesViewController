@@ -100,7 +100,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     self.sender = @"JSQDefaultSender";
     
-    self.autoScrollsToMostRecentMessage = YES;
+    self.automaticallyScrollsToMostRecentMessage = YES;
     
     self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
     self.incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
@@ -135,7 +135,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.view layoutIfNeeded];
     [self.collectionView.collectionViewLayout invalidateLayout];
     
-    if (self.autoScrollsToMostRecentMessage) {
+    if (self.automaticallyScrollsToMostRecentMessage) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self scrollToBottomAnimated:NO];
             [self.collectionView.collectionViewLayout invalidateLayout];
@@ -218,7 +218,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     [self.collectionView reloadData];
     
-    if (self.autoScrollsToMostRecentMessage) {
+    if (self.automaticallyScrollsToMostRecentMessage) {
         [self scrollToBottomAnimated:YES];
     }
 }
@@ -413,7 +413,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     [textView becomeFirstResponder];
     
-    if (self.autoScrollsToMostRecentMessage) {
+    if (self.automaticallyScrollsToMostRecentMessage) {
         [self scrollToBottomAnimated:YES];
     }
 }

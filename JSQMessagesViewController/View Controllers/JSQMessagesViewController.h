@@ -34,7 +34,7 @@
  */
 @property (copy, nonatomic) NSString *sender;
 
-@property (assign, nonatomic) BOOL autoScrollsToMostRecentMessage;
+@property (assign, nonatomic) BOOL automaticallyScrollsToMostRecentMessage;
 
 @property (copy, nonatomic) NSString *outgoingCellIdentifier;
 
