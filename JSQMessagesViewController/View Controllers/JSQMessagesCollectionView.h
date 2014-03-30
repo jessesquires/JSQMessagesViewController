@@ -25,6 +25,14 @@
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView
                       messageForItemAtIndexPath:(NSIndexPath *)indexPath;
 
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
+                 bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+                 sender:(NSString *)sender;
+
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
+                 avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+                 sender:(NSString *)sender;
+
 /*
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
                  bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath

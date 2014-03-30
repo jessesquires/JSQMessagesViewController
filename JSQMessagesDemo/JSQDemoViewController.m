@@ -214,11 +214,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     return [self.messages count];
 }
 
-
-#pragma mark - JSQMessages CollectionView FlowLayout Delegate
-
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
-                         layout:(JSQMessagesCollectionViewFlowLayout *)layout bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+                    bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
                          sender:(NSString *)sender
 {
     /**
@@ -235,7 +232,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 }
 
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
-                         layout:(JSQMessagesCollectionViewFlowLayout *)layout avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+                    avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
                          sender:(NSString *)sender
 {
     /**
@@ -247,6 +244,12 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 }
 
 
+
+
+
+
+
+#pragma mark - JSQMessages CollectionView FlowLayout Delegate
 //#pragma mark - OPTIONAL
 //#pragma mark - JSQMessages CollectionView FlowLayout Delegate
 //

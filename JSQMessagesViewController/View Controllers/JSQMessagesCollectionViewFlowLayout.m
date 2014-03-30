@@ -23,6 +23,8 @@
 
 #import "JSQMessagesCollectionViewFlowLayout.h"
 
+#import "JSQMessagesCollectionViewLayoutAttributes.h"
+
 
 @interface JSQMessagesCollectionViewFlowLayout ()
 
@@ -58,6 +60,11 @@
     self.dynamicAnimator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
     self.visibleIndexPaths = [[NSMutableSet alloc] init];
     self.springResistanceFactor = 800;
+}
+
++ (Class)layoutAttributesClass
+{
+    return [JSQMessagesCollectionViewLayoutAttributes class];
 }
 
 #pragma mark - Setters
@@ -102,22 +109,39 @@
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
+    NSLog(@"LAYOUT RECT");
+    NSArray *attributes;
+    
     if (self.springinessEnabled) {
-        return [self.dynamicAnimator itemsInRect:rect];
+        attributes = [self.dynamicAnimator itemsInRect:rect];
+    }
+    else {
+        attributes = [super layoutAttributesForElementsInRect:rect];
     }
     
-    return [super layoutAttributesForElementsInRect:rect];
+    [attributes enumerateObjectsUsingBlock:^(JSQMessagesCollectionViewLayoutAttributes *attributes, NSUInteger idx, BOOL *stop) {
+//        attributes.backgroundColor = [UIColor purpleColor];
+    }];
+    
+    return attributes;
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewLayoutAttributes *layoutAttributes = [self.dynamicAnimator layoutAttributesForCellAtIndexPath:indexPath];
+    NSLog(@"ATTRRS INDEX");
     
-    if (!layoutAttributes || !self.springinessEnabled) {
+    UICollectionViewLayoutAttributes *layoutAttributes;
+    
+    if (self.springinessEnabled) {
+        layoutAttributes = [self.dynamicAnimator layoutAttributesForCellAtIndexPath:indexPath];
+    }
+    else {
         layoutAttributes = [super layoutAttributesForItemAtIndexPath:indexPath];
     }
     
-    return layoutAttributes;
+    JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
+    
+    return customAttributes;
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
@@ -170,7 +194,7 @@
     }
 }
 
-#pragma mark - Utilities
+#pragma mark - Spring behavior utilities
 
 - (UIAttachmentBehavior *)jsq_springBehaviorWithLayoutAttributesItem:(UICollectionViewLayoutAttributes *)item
 {

@@ -289,24 +289,15 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    JSQMessagesCollectionViewFlowLayout *collectionViewLayout = (JSQMessagesCollectionViewFlowLayout *)collectionView.collectionViewLayout;
-    
-    cell.messageBubbleImageView = [collectionViewLayout.delegate collectionView:collectionView
-                                                                         layout:collectionViewLayout
-                                              bubbleImageViewForItemAtIndexPath:indexPath
-                                                                         sender:messageSender];
-    
-    cell.avatarImageView = [collectionViewLayout.delegate collectionView:collectionView
-                                                                  layout:collectionViewLayout
-                                       avatarImageViewForItemAtIndexPath:indexPath
-                                                                  sender:messageSender];
-    
+    cell.messageBubbleImageView = [self collectionView:collectionView bubbleImageViewForItemAtIndexPath:indexPath sender:messageSender];
+    cell.avatarImageView = [self collectionView:collectionView avatarImageViewForItemAtIndexPath:indexPath sender:messageSender];
     cell.textView.text = [messageData text];
+    
+    cell.backgroundColor = self.collectionView.backgroundColor;
     
 //    cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
     cell.textView.selectable = NO;
     
-    cell.backgroundColor = self.collectionView.backgroundColor;
     
     
     
@@ -349,22 +340,22 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 #pragma mark - Collection view delegate flow layout
 
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
-                         layout:(JSQMessagesCollectionViewFlowLayout *)layout bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+    bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
                          sender:(NSString *)sender
 {
     NSAssert(NO, @"ERROR: subclasses of %@ must implement the delegate flow layout method %@",
              [JSQMessagesViewController class],
-             NSStringFromSelector(@selector(collectionView:layout:bubbleImageViewForItemAtIndexPath:sender:)));
+             NSStringFromSelector(@selector(collectionView:bubbleImageViewForItemAtIndexPath:sender:)));
     return nil;
 }
 
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
-                         layout:(JSQMessagesCollectionViewFlowLayout *)layout avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+    avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
                          sender:(NSString *)sender
 {
     NSAssert(NO, @"ERROR: subclasses of %@ must implement the delegate flow layout method %@",
              [JSQMessagesViewController class],
-             NSStringFromSelector(@selector(collectionView:layout:avatarImageViewForItemAtIndexPath:sender:)));
+             NSStringFromSelector(@selector(collectionView:avatarImageViewForItemAtIndexPath:sender:)));
     return nil;
 }
 
