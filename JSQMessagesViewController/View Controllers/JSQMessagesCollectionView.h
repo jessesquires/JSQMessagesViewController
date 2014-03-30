@@ -22,25 +22,31 @@
 @protocol JSQMessagesCollectionViewDataSource <UICollectionViewDataSource>
 
 @required
+
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView
                       messageDataForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
-                 bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
-                 sender:(NSString *)sender;
+                 sender:(NSString *)sender
+                 bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
-                 avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
-                 sender:(NSString *)sender;
+                 sender:(NSString *)sender
+                 avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath;
 
-//- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView
-//                        attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath;
-//
-//- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView
-//                        attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath;
-//
-//- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView
-//                        attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
+@optional
+
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView
+                        sender:(NSString *)sender
+                        attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath;
+
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView
+                        sender:(NSString *)sender
+                        attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath;
+
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView
+                        sender:(NSString *)sender
+                        attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

@@ -206,17 +206,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     return [self.messages objectAtIndex:indexPath.row];
 }
 
-
-#pragma mark - UICollectionView DataSource
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return [self.messages count];
-}
-
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
-                    bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
-                         sender:(NSString *)sender
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender  bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
      *  Reuse created bubble images, but create new imageView to add to each cell
@@ -231,9 +221,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                              highlightedImage:self.incomingBubbleImageView.highlightedImage];
 }
 
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
-                    avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
-                         sender:(NSString *)sender
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender  avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
      *  Reuse created avatar images, but create new imageView to add to each cell
@@ -243,43 +231,26 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     return [[UIImageView alloc] initWithImage:avatarImage];
 }
 
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [[NSAttributedString alloc] initWithString:sender];
+}
 
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [[NSAttributedString alloc] initWithString:sender];
+}
 
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [[NSAttributedString alloc] initWithString:sender];
+}
 
+#pragma mark - UICollectionView DataSource
 
-
-
-#pragma mark - JSQMessages CollectionView FlowLayout Delegate
-//#pragma mark - OPTIONAL
-//#pragma mark - JSQMessages CollectionView FlowLayout Delegate
-//
-//- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
-//                      layout:(JSQMessagesCollectionViewFlowLayout *)layout cellTopLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    // TOOD:
-//    return nil;
-//}
-//
-//- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
-//                      layout:(JSQMessagesCollectionViewFlowLayout *)layout messageBubbleTopLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    // TOOD:
-//    return nil;
-//}
-//
-//- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
-//                      layout:(JSQMessagesCollectionViewFlowLayout *)layout cellBottomLabelTextForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    // TOOD:
-//    return nil;
-//}
-//
-//- (void)collectionView:(JSQMessagesCollectionView *)collectionView
-//                layout:(JSQMessagesCollectionViewFlowLayout *)layout configureItemAtIndexPath:(NSIndexPath *)indexPath
-//                sender:(NSString *)sender
-//{
-//    // TOOD:
-//    
-//}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [self.messages count];
+}
 
 @end

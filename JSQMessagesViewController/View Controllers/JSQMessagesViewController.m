@@ -259,15 +259,42 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     }
 }
 
-#pragma mark - Collection view data source
+#pragma mark - JSQMessages collection view data source
 
-- (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageForItemAtIndexPath:(NSIndexPath *)indexPath
+- (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSAssert(NO, @"ERROR: subclasses of %@ must implement the data source method %@",
-             [JSQMessagesViewController class],
-             NSStringFromSelector(@selector(collectionView:messageForItemAtIndexPath:)));
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
     return nil;
 }
+
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender  bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
+    return nil;
+}
+
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender  avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
+    return nil;
+}
+
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+#pragma mark - Collection view data source
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -289,39 +316,43 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    cell.messageBubbleImageView = [self collectionView:collectionView bubbleImageViewForItemAtIndexPath:indexPath sender:messageSender];
-    cell.avatarImageView = [self collectionView:collectionView avatarImageViewForItemAtIndexPath:indexPath sender:messageSender];
     cell.textView.text = [messageData text];
     
-    cell.backgroundColor = self.collectionView.backgroundColor;
+    cell.messageBubbleImageView = [collectionView.dataSource collectionView:collectionView
+                                                                     sender:messageSender bubbleImageViewForItemAtIndexPath:indexPath];
     
-//    cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
-    cell.textView.selectable = NO;
+    cell.avatarImageView = [collectionView.dataSource collectionView:collectionView
+                                                              sender:messageSender avatarImageViewForItemAtIndexPath:indexPath];
     
+    cell.cellTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView
+                                                                          sender:messageSender attributedTextForCellTopLabelAtIndexPath:indexPath];
     
+    cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView
+                                                                                   sender:messageSender attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
     
+    cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView
+                                                                             sender:messageSender attributedTextForCellBottomLabelAtIndexPath:indexPath];
     
-    // -----------------------------------------------
-    
-    
-    cell.cellTopLabel.attributedText = [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:[messageData date]];
-    cell.messageBubbleTopLabel.text = messageSender;
-    
+    cell.backgroundColor = [UIColor clearColor];
     
     if (isOutgoingMessage) {
-        cell.cellBottomLabel.text = @"sent";
         cell.textView.textColor = [UIColor whiteColor];
-        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f,
+        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f,
+                                                                 0.0f,
+                                                                 0.0f,
                                                                  kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInsetDefault);
     }
     else {
-        cell.cellBottomLabel.text = @"recieved";
         cell.textView.textColor = [UIColor blackColor];
-        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInsetDefault,
-                                                                 0.0f, 0.0f);
+        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f,
+                                                                 kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInsetDefault,
+                                                                 0.0f,
+                                                                 0.0f);
     }
     
-//    cell2.textView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5];
+    // TODO:
+    //cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
+    cell.textView.selectable = NO;
     
     return cell;
 }
@@ -338,26 +369,6 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 // TODO:
 
 #pragma mark - Collection view delegate flow layout
-
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
-    bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
-                         sender:(NSString *)sender
-{
-    NSAssert(NO, @"ERROR: subclasses of %@ must implement the delegate flow layout method %@",
-             [JSQMessagesViewController class],
-             NSStringFromSelector(@selector(collectionView:bubbleImageViewForItemAtIndexPath:sender:)));
-    return nil;
-}
-
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
-    avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
-                         sender:(NSString *)sender
-{
-    NSAssert(NO, @"ERROR: subclasses of %@ must implement the delegate flow layout method %@",
-             [JSQMessagesViewController class],
-             NSStringFromSelector(@selector(collectionView:avatarImageViewForItemAtIndexPath:sender:)));
-    return nil;
-}
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout

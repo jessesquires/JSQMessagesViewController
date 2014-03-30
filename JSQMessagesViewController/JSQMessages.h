@@ -18,6 +18,7 @@
 #import "JSQMessagesViewController.h"
 #import "JSQMessagesCollectionView.h"
 #import "JSQMessagesCollectionViewFlowLayout.h"
+#import "JSQMessagesCollectionViewLayoutAttributes.h"
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
 
