@@ -30,7 +30,7 @@
 @property (weak, nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
 
 /**
- *  The name of the user sending messages. The default value is `@"JSQDefaultSender"`.
+ *  The name of the user sending messages. This value must not be nil. The default value is `@"JSQDefaultSender"`.
  */
 @property (copy, nonatomic) NSString *sender;
 
@@ -45,10 +45,6 @@
 + (UINib *)nib;
 
 + (instancetype)messagesViewController;
-
-#pragma mark - Initialization
-
-- (void)prepareMessagesViewController;
 
 #pragma mark - Messages view controller
 

@@ -33,8 +33,6 @@
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
-static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
-
 
 
 @interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate, UITextViewDelegate>
@@ -44,6 +42,8 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
+
+- (void)jsq_prepareMessagesViewController;
 
 - (void)jsq_prepareForRotation;
 
@@ -85,34 +85,29 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 
 #pragma mark - Initialization
 
-- (void)prepareMessagesViewController
+- (void)jsq_prepareMessagesViewController
 {
     self.view.backgroundColor = [UIColor whiteColor];
     
-    _toolbarHeightContraint.constant = kJSQMessagesInputToolbarHeightDefault;
+    self.toolbarHeightContraint.constant = kJSQMessagesInputToolbarHeightDefault;
     
-    _collectionView.dataSource = self;
-    _collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
     
-    _inputToolbar.delegate = self;
-    _inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"New Message", @"Placeholder text for the message input text view");
-    _inputToolbar.contentView.textView.delegate = self;
+    self.inputToolbar.delegate = self;
+    self.inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"New Message", @"Placeholder text for the message input text view");
+    self.inputToolbar.contentView.textView.delegate = self;
     
-    _sender = kJSQDefaultSender;
+    self.sender = @"JSQDefaultSender";
     
-    _autoScrollsToMostRecentMessage = YES;
+    self.autoScrollsToMostRecentMessage = YES;
     
-    _outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
-    _incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
-}
-
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        [self prepareMessagesViewController];
-    }
-    return self;
+    self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
+    self.incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
+    
+    [[JSQMessagesCollectionViewCell appearance] setFont:[UIFont systemFontOfSize:15.0f]];
+    
+    [self jsq_updateCollectionViewInsets];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -126,19 +121,12 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     return self;
 }
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    [self prepareMessagesViewController];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[JSQMessagesCollectionViewCell appearance] setFont:[UIFont systemFontOfSize:15.0f]];
-    [self jsq_updateCollectionViewInsets];
+    [self jsq_prepareMessagesViewController];
 }
 
 - (void)viewWillAppear:(BOOL)animated

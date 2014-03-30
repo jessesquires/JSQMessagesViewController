@@ -14,7 +14,6 @@
 
 #import "JSQDemoViewController.h"
 
-static NSString * const kJSQDemoAvatarNameJesse = @"Jesse Squires";
 static NSString * const kJSQDemoAvatarNameCook = @"Tim Cook";
 static NSString * const kJSQDemoAvatarNameJobs = @"Jobs";
 static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
@@ -37,22 +36,6 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 @implementation JSQDemoViewController
 
-
-#pragma mark - Initialization
-
-/**
- *  Override point for customization
- */
-- (void)prepareMessagesViewController
-{
-    [super prepareMessagesViewController];
-    
-    self.sender = kJSQDemoAvatarNameJesse;
-    self.inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"Message", nil);
-}
-
-
-
 #pragma mark - Demo setup
 
 - (void)jsqDemo_setupTestModel
@@ -61,12 +44,12 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  Load some fake messages
      */
     self.messages = [[NSMutableArray alloc] initWithObjects:
-                     [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages. Simple, elegant, easy to use." sender:kJSQDemoAvatarNameJesse date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages. Simple, elegant, easy to use." sender:self.sender date:[NSDate distantPast]],
                      [[JSQMessage alloc] initWithText:@"There are super sweet default settings, but you can customize this like crazy." sender:kJSQDemoAvatarNameWoz date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. \nMy website is www.hexedbits.com." sender:kJSQDemoAvatarNameJesse date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. \nMy website is www.hexedbits.com." sender:self.sender date:[NSDate distantPast]],
                      [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App." sender:kJSQDemoAvatarNameJobs date:[NSDate distantPast]],
                      [[JSQMessage alloc] initWithText:@"Jony Ive would be so proud." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
-                     [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:kJSQDemoAvatarNameJesse date:[NSDate date]],
+                     [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
                      nil];
     
     /**
@@ -88,7 +71,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     
     UIImage *wozImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_woz"]
                                                          diameter:diameter];
-    self.avatars = @{ kJSQDemoAvatarNameJesse : jsqImage,
+    self.avatars = @{ self.sender : jsqImage,
                       kJSQDemoAvatarNameCook : cookImage,
                       kJSQDemoAvatarNameJobs : jobsImage,
                       kJSQDemoAvatarNameWoz : wozImage };
@@ -107,7 +90,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      */
     BOOL addREALLYLongMessage = NO;
     if (addREALLYLongMessage) {
-        JSQMessage *reallyLongMessage = [JSQMessage messageWithText:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END" sender:kJSQDemoAvatarNameJesse];
+        JSQMessage *reallyLongMessage = [JSQMessage messageWithText:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END" sender:self.sender];
         [self.messages addObject:reallyLongMessage];
     }
 }
@@ -116,18 +99,20 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 #pragma mark - View lifecycle
 
+/**
+ *  Override point for customization
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.title = @"JSQMessages";
     
-    [self jsqDemo_setupTestModel];
+    self.sender = @"Jesse Squires";
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Test Msg"
-                                                                              style:UIBarButtonItemStyleBordered
-                                                                             target:self
-                                                                             action:@selector(jsqDemo_receiveMessagePressed:)];
+    self.inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"Message", nil);
+    
+    [self jsqDemo_setupTestModel];
     
     /**
      *  Create bubble images once and save
@@ -137,6 +122,12 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     
     self.incomingBubbleImageView = [JSQMessagesBubbleImageFactory
                                     incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleGreenColor]];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Test Msg"
+                                                                              style:UIBarButtonItemStyleBordered
+                                                                             target:self
+                                                                             action:@selector(jsqDemo_receiveMessagePressed:)];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -169,7 +160,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 {
     JSQMessage *copyMessage = [[self.messages lastObject] copy];
     NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
-    [copyAvatars removeObject:kJSQDemoAvatarNameJesse];
+    [copyAvatars removeObject:self.sender];
     copyMessage.sender = [copyAvatars objectAtIndex:arc4random_uniform((int)[copyAvatars count])];
     
     [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
