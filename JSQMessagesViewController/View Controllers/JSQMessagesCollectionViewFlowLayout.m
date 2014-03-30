@@ -154,9 +154,9 @@
         layoutAttributes = [super layoutAttributesForItemAtIndexPath:indexPath];
     }
     
-    JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
+//    JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
     
-    return customAttributes;
+    return layoutAttributes;
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
