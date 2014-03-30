@@ -23,15 +23,20 @@
 
 #import "JSQMessagesCollectionViewFlowLayout.h"
 
+#import "JSQMessagesCollectionView.h"
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 
 
 @interface JSQMessagesCollectionViewFlowLayout ()
 
+@property (strong, nonatomic) NSMutableArray *messageCellAttributes;
+
 @property (strong, nonatomic) UIDynamicAnimator *dynamicAnimator;
 @property (strong, nonatomic) NSMutableSet *visibleIndexPaths;
 @property (assign, nonatomic) UIInterfaceOrientation interfaceOrientation;
 @property (assign, nonatomic) CGFloat latestDelta;
+
+- (void)jsq_configureMessageCellLayoutAttributes:(JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
 
 - (UIAttachmentBehavior *)jsq_springBehaviorWithLayoutAttributesItem:(UICollectionViewLayoutAttributes *)item;
 
@@ -55,8 +60,10 @@
     
     self.scrollDirection = UICollectionViewScrollDirectionVertical;
     
+    self.messageCellAttributes = [NSMutableArray new];
+    
     _springinessEnabled = NO;
-    _springResistanceFactor = 800;
+    _springResistanceFactor = 850;
     
     self.messageBubbleMinimumHorizontalPadding = 60.0f;
 }
@@ -93,7 +100,7 @@
 - (NSMutableSet *)visibleIndexPaths
 {
     if (!_visibleIndexPaths) {
-        _visibleIndexPaths = [[NSMutableSet alloc] init];
+        _visibleIndexPaths = [NSMutableSet new];
     }
     return _visibleIndexPaths;
 }
@@ -123,6 +130,16 @@
         
         [self jsq_addNewlyVisibleBehaviorsFromVisibleItems:visibleItems];
     }
+    
+    [self.messageCellAttributes removeAllObjects];
+    
+    for (NSUInteger i = 0; i < [self.collectionView numberOfItemsInSection:0]; i++) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+        JSQMessagesCollectionViewLayoutAttributes *layoutAttributes = [JSQMessagesCollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+        [self jsq_configureMessageCellLayoutAttributes:layoutAttributes];
+        
+        [self.messageCellAttributes addObject:layoutAttributes];
+    }
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
@@ -137,7 +154,7 @@
     }
     
     [attributes enumerateObjectsUsingBlock:^(JSQMessagesCollectionViewLayoutAttributes *attributes, NSUInteger idx, BOOL *stop) {
-        // TODO:
+        [self jsq_configureMessageCellLayoutAttributes:attributes];
     }];
     
     return attributes;
@@ -145,18 +162,7 @@
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewLayoutAttributes *layoutAttributes;
-    
-    if (self.springinessEnabled) {
-        layoutAttributes = [self.dynamicAnimator layoutAttributesForCellAtIndexPath:indexPath];
-    }
-    else {
-        layoutAttributes = [super layoutAttributesForItemAtIndexPath:indexPath];
-    }
-    
-//    JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
-    
-    return layoutAttributes;
+    return [self.messageCellAttributes objectAtIndex:indexPath.item];
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
@@ -207,6 +213,25 @@
             }
         }];
     }
+}
+
+#pragma mark - Message cell layout utilities
+
+- (void)jsq_configureMessageCellLayoutAttributes:(JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes
+{
+    NSIndexPath *indexPath = layoutAttributes.indexPath;
+    
+    layoutAttributes.cellTopLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
+                                                                                layout:self
+                                                      heightForCellTopLabelAtIndexPath:indexPath];
+    
+    layoutAttributes.messageBubbleTopLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
+                                                                                         layout:self
+                                                      heightForMessageBubbleTopLabelAtIndexPath:indexPath];
+    
+    layoutAttributes.cellBottomLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
+                                                                                   layout:self
+                                                      heightForCellBottomLabelAtIndexPath:indexPath];
 }
 
 #pragma mark - Spring behavior utilities

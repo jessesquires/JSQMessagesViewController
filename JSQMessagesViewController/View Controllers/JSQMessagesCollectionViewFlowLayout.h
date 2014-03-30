@@ -24,30 +24,11 @@
 #import <UIKit/UIKit.h>
 
 @class JSQMessagesCollectionView;
-@class JSQMessagesCollectionViewFlowLayout;
-
-
-@protocol JSQMessagesCollectionViewDelegateFlowLayout <UICollectionViewDelegateFlowLayout>
-
-- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
-           layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout
-           heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath;
-
-- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
-           layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout
-           heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath;
-
-- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
-           layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout
-           heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
-
-@end
-
 
 
 @interface JSQMessagesCollectionViewFlowLayout : UICollectionViewFlowLayout
 
-@property (weak, nonatomic) id<JSQMessagesCollectionViewDelegateFlowLayout> delegate;
+@property (nonatomic, readonly) JSQMessagesCollectionView *collectionView;
 
 @property (assign, nonatomic) BOOL springinessEnabled;
 

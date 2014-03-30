@@ -94,8 +94,6 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     
-    ((JSQMessagesCollectionViewFlowLayout *)_collectionView.collectionViewLayout).delegate = self;
-    
     _inputToolbar.delegate = self;
     _inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"New Message", @"Placeholder text for the message input text view");
     _inputToolbar.contentView.textView.delegate = self;

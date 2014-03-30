@@ -14,9 +14,12 @@
 
 #import <UIKit/UIKit.h>
 
+#import "JSQMessagesCollectionViewFlowLayout.h"
+
 @class JSQMessagesCollectionView;
 
 @protocol JSQMessageData;
+
 
 
 @protocol JSQMessagesCollectionViewDataSource <UICollectionViewDataSource>
@@ -52,8 +55,28 @@
 
 
 
+@protocol JSQMessagesCollectionViewDelegateFlowLayout <UICollectionViewDelegateFlowLayout>
+
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+           layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout
+           heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath;
+
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+           layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout
+           heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath;
+
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+           layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout
+           heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
+
+
 @interface JSQMessagesCollectionView : UICollectionView
 
 @property (weak, nonatomic) id<JSQMessagesCollectionViewDataSource> dataSource;
+
+@property (weak, nonatomic) id<JSQMessagesCollectionViewDelegateFlowLayout> delegate;
 
 @end

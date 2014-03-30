@@ -128,9 +128,9 @@
     
     JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
     
-//    self.cellTopLabelHeightContraint.constant = customAttributes.cellTopLabelHeight;
-//    self.messageBubbleTopLabelHeightContraint.constant = customAttributes.messageBubbleTopLabelHeight;
-//    self.cellBottomLabelHeightContraint.constant = customAttributes.cellBottomLabelHeight;
+    self.cellTopLabelHeightContraint.constant = customAttributes.cellTopLabelHeight;
+    self.messageBubbleTopLabelHeightContraint.constant = customAttributes.messageBubbleTopLabelHeight;
+    self.cellBottomLabelHeightContraint.constant = customAttributes.cellBottomLabelHeight;
     
     // TODO: bubble size / padding
     

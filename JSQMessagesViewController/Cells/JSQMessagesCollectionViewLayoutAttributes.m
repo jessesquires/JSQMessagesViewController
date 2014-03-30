@@ -42,7 +42,7 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInset
 
 - (void)setCellBottomLabelHeight:(CGFloat)cellBottomLabelHeight
 {
-    _cellTopLabelHeight = floorf(cellBottomLabelHeight);
+    _cellBottomLabelHeight = floorf(cellBottomLabelHeight);
 }
 
 #pragma mark - NSObject
