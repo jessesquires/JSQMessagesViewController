@@ -182,7 +182,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 
 
-#pragma mark - REQUIRED
+
 #pragma mark - JSQMessagesViewController method overrides
 
 - (void)didPressSendButton:(UIButton *)sender withMessage:(JSQMessage *)message
@@ -197,6 +197,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     // TODO:
     NSLog(@"Camera pressed!");
 }
+
 
 
 #pragma mark - JSQMessages CollectionView DataSource
@@ -251,6 +252,29 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [self.messages count];
+}
+
+
+
+
+#pragma mark - JSQMessages collection view flow layout delegate
+
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return kJSQMessagesCollectionViewCellLabelHeightDefault;
+}
+
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return kJSQMessagesCollectionViewCellLabelHeightDefault;
+}
+
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return kJSQMessagesCollectionViewCellLabelHeightDefault;
 }
 
 @end

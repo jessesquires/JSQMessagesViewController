@@ -17,12 +17,6 @@
 #import "JSQMessagesLabel.h"
 
 
-FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault;
-FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault;
-FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellMessageBubbleMinimumPaddingDefault;
-FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInsetDefault;
-
-
 @interface JSQMessagesCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic, readonly) JSQMessagesLabel *cellTopLabel;

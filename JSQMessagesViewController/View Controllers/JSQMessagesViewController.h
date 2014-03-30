@@ -22,6 +22,10 @@
 @class JSQMessage;
 
 
+
+#import "JSQMessagesCollectionViewLayoutAttributes.h"
+
+
 @interface JSQMessagesViewController : UIViewController <JSQMessagesCollectionViewDataSource,
                                                          JSQMessagesCollectionViewDelegateFlowLayout>
 

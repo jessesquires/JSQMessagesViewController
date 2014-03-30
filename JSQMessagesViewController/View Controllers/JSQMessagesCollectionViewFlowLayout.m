@@ -127,7 +127,6 @@
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    NSLog(@"LAYOUT RECT");
     NSArray *attributes;
     
     if (self.springinessEnabled) {
@@ -138,7 +137,7 @@
     }
     
     [attributes enumerateObjectsUsingBlock:^(JSQMessagesCollectionViewLayoutAttributes *attributes, NSUInteger idx, BOOL *stop) {
-//        attributes.backgroundColor = [UIColor purpleColor];
+        // TODO:
     }];
     
     return attributes;
@@ -146,8 +145,6 @@
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"ATTRRS INDEX");
-    
     UICollectionViewLayoutAttributes *layoutAttributes;
     
     if (self.springinessEnabled) {

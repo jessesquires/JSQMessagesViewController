@@ -29,16 +29,16 @@
 
 @protocol JSQMessagesCollectionViewDelegateFlowLayout <UICollectionViewDelegateFlowLayout>
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView
-           layout:(UICollectionViewLayout *)collectionViewLayout
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+           layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout
            heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath;
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView
-           layout:(UICollectionViewLayout *)collectionViewLayout
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+           layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout
            heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath;
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView
-           layout:(UICollectionViewLayout *)collectionViewLayout
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+           layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout
            heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
