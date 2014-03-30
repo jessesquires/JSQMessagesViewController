@@ -14,18 +14,14 @@
 
 #import <UIKit/UIKit.h>
 
-FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault;
-FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault;
-FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellMessageBubbleMinimumPaddingDefault;
-FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInsetDefault;
-
-
 
 @interface JSQMessagesCollectionViewLayoutAttributes : UICollectionViewLayoutAttributes <NSCopying>
 
 @property (assign, nonatomic) CGSize messageBubbleSize;
 
 @property (assign, nonatomic) UIEdgeInsets messageBubbleTextContainerInsets;
+
+@property (assign, nonatomic) CGSize avatarViewSize;
 
 @property (assign, nonatomic) CGFloat cellTopLabelHeight;
 

@@ -76,16 +76,16 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                                                          backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
                                                                textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
                                                                     font:[UIFont systemFontOfSize:14.0f]
-                                                                diameter:kJSQMessagesCollectionViewCellAvatarSizeDefault];
+                                                                diameter:self.collectionViewLayout.avatarViewSize.width];
     
     UIImage *cookImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_cook"]
-                                                          diameter:kJSQMessagesCollectionViewCellAvatarSizeDefault];
+                                                          diameter:self.collectionViewLayout.avatarViewSize.width];
     
     UIImage *jobsImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]
-                                                          diameter:kJSQMessagesCollectionViewCellAvatarSizeDefault];
+                                                          diameter:self.collectionViewLayout.avatarViewSize.width];
     
     UIImage *wozImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_woz"]
-                                                         diameter:kJSQMessagesCollectionViewCellAvatarSizeDefault];
+                                                         diameter:self.collectionViewLayout.avatarViewSize.width];
     self.avatars = @{ kJSQDemoAvatarNameJesse : jsqImage,
                       kJSQDemoAvatarNameCook : cookImage,
                       kJSQDemoAvatarNameJobs : jobsImage,

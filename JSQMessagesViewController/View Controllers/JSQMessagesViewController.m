@@ -333,19 +333,15 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     
     cell.backgroundColor = [UIColor clearColor];
     
+    CGFloat bubbleTopLabelInset = 60.0f;
+    
     if (isOutgoingMessage) {
         cell.textView.textColor = [UIColor whiteColor];
-        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f,
-                                                                 0.0f,
-                                                                 0.0f,
-                                                                 kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInsetDefault);
+        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
     }
     else {
         cell.textView.textColor = [UIColor blackColor];
-        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f,
-                                                                 kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInsetDefault,
-                                                                 0.0f,
-                                                                 0.0f);
+        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
     }
     
     // TODO:
@@ -375,9 +371,7 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     
     CGFloat cellWidth = collectionView.frame.size.width - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right;
     
-    CGFloat maxTextWidth = cellWidth
-                            - kJSQMessagesCollectionViewCellAvatarSizeDefault
-                            - collectionViewLayout.messageBubbleMinimumHorizontalPadding;
+    CGFloat maxTextWidth = cellWidth - collectionViewLayout.avatarViewSize.width - collectionViewLayout.messageBubbleMinimumHorizontalPadding;
     
     UIEdgeInsets textInsets = collectionViewLayout.messageBubbleTextContainerInsets;
     CGFloat textHorizontalPadding = textInsets.left + textInsets.right;

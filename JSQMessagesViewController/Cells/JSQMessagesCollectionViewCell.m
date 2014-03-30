@@ -66,18 +66,15 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    self.cellTopLabelHeightContraint.constant = kJSQMessagesCollectionViewCellLabelHeightDefault;
-    self.messageBubbleTopLabelHeightContraint.constant = kJSQMessagesCollectionViewCellLabelHeightDefault;
-    self.cellBottomLabelHeightContraint.constant = kJSQMessagesCollectionViewCellLabelHeightDefault;
-    
-    self.avatarViewSize = CGSizeMake(kJSQMessagesCollectionViewCellAvatarSizeDefault,
-                                     kJSQMessagesCollectionViewCellAvatarSizeDefault);
-    
-    self.messageBubbleContainerHorizontalPadding.constant = kJSQMessagesCollectionViewCellMessageBubbleMinimumPaddingDefault;
-    
     self.backgroundColor = [UIColor whiteColor];
+    
+    self.cellTopLabelHeightContraint.constant = 0.0f;
+    self.messageBubbleTopLabelHeightContraint.constant = 0.0f;
+    self.cellBottomLabelHeightContraint.constant = 0.0f;
+    
+    self.avatarViewSize = CGSizeZero;
     
     self.cellTopLabel.textAlignment = NSTextAlignmentCenter;
     self.cellTopLabel.font = [UIFont boldSystemFontOfSize:12.0f];
@@ -122,13 +119,15 @@
     
     JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
     
+    // TODO: bubble size / padding
+    
     self.textView.textContainerInset = customAttributes.messageBubbleTextContainerInsets;
+    
+    self.avatarViewSize = customAttributes.avatarViewSize;
     
     self.cellTopLabelHeightContraint.constant = customAttributes.cellTopLabelHeight;
     self.messageBubbleTopLabelHeightContraint.constant = customAttributes.messageBubbleTopLabelHeight;
     self.cellBottomLabelHeightContraint.constant = customAttributes.cellBottomLabelHeight;
-    
-    // TODO: bubble size / padding
     
     [self setNeedsUpdateConstraints];
 }
@@ -192,13 +191,6 @@
         _avatarImageView = nil;
         self.avatarContainerView.hidden = YES;
         return;
-    }
-    
-    if (CGRectEqualToRect(avatarImageView.frame, CGRectZero)) {
-        avatarImageView.frame = CGRectMake(0.0f,
-                                           0.0f,
-                                           kJSQMessagesCollectionViewCellAvatarSizeDefault,
-                                           kJSQMessagesCollectionViewCellAvatarSizeDefault);
     }
     
     self.avatarContainerView.hidden = NO;

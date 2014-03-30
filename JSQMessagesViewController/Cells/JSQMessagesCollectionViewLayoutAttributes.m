@@ -14,12 +14,6 @@
 
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 
-const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
-const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
-const CGFloat kJSQMessagesCollectionViewCellMessageBubbleMinimumPaddingDefault = 40.0f;
-const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInsetDefault = 60.0f;
-
-
 
 @implementation JSQMessagesCollectionViewLayoutAttributes
 
@@ -28,6 +22,11 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInset
 - (void)setMessageBubbleSize:(CGSize)messageBubbleSize
 {
     _messageBubbleSize = CGSizeMake(ceilf(messageBubbleSize.width), ceilf(messageBubbleSize.height));
+}
+
+- (void)setAvatarViewSize:(CGSize)avatarViewSize
+{
+    _avatarViewSize = CGSizeMake(ceil(avatarViewSize.width), ceilf(avatarViewSize.height));
 }
 
 - (void)setCellTopLabelHeight:(CGFloat)cellTopLabelHeight
@@ -57,6 +56,7 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInset
     
     if (!CGSizeEqualToSize(layoutAttributes.messageBubbleSize, self.messageBubbleSize)
         || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.messageBubbleTextContainerInsets, self.messageBubbleTextContainerInsets)
+        || !CGSizeEqualToSize(layoutAttributes.avatarViewSize, self.avatarViewSize)
         || layoutAttributes.cellTopLabelHeight != self.cellTopLabelHeight
         || layoutAttributes.messageBubbleTopLabelHeight != self.messageBubbleTopLabelHeight
         || layoutAttributes.cellBottomLabelHeight != self.cellBottomLabelHeight) {
@@ -71,7 +71,8 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInset
     NSUInteger customHash = (int)self.cellTopLabelHeight
                             ^ (int)self.messageBubbleTopLabelHeight
                             ^ (int)self.cellBottomLabelHeight
-                            ^ (int)(self.messageBubbleSize.width + self.messageBubbleSize.height);
+                            ^ (int)(self.messageBubbleSize.width + self.messageBubbleSize.height)
+                            ^ (int)(self.avatarViewSize.width + self.avatarViewSize.height);
     
     return [super hash] ^ customHash;
 }
@@ -83,6 +84,7 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInset
     JSQMessagesCollectionViewLayoutAttributes *copy = [super copyWithZone:zone];
     copy.messageBubbleSize = self.messageBubbleSize;
     copy.messageBubbleTextContainerInsets = self.messageBubbleTextContainerInsets;
+    copy.avatarViewSize = self.avatarViewSize;
     copy.cellTopLabelHeight = self.cellTopLabelHeight;
     copy.messageBubbleTopLabelHeight = self.messageBubbleTopLabelHeight;
     copy.cellBottomLabelHeight = self.cellBottomLabelHeight;

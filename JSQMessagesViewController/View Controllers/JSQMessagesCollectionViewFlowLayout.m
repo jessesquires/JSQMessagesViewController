@@ -29,6 +29,8 @@
 #import "JSQMessagesCollectionViewCell.h"
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 
+const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
+
 
 @interface JSQMessagesCollectionViewFlowLayout ()
 
@@ -65,8 +67,9 @@
     
     self.messageCellAttributes = [NSMutableArray new];
     
-    self.messageBubbleMinimumHorizontalPadding = kJSQMessagesCollectionViewCellMessageBubbleMinimumPaddingDefault;
+    self.messageBubbleMinimumHorizontalPadding = 40.0f;
     self.messageBubbleTextContainerInsets = UIEdgeInsetsMake(8.0f, 10.0f, 8.0f, 10.0f);
+    self.avatarViewSize = CGSizeMake(34.0f, 34.0f);
     
     _springinessEnabled = NO;
     _springResistanceFactor = 850;
@@ -226,6 +229,8 @@
     NSIndexPath *indexPath = layoutAttributes.indexPath;
     
     layoutAttributes.messageBubbleTextContainerInsets = self.messageBubbleTextContainerInsets;
+    
+    layoutAttributes.avatarViewSize = self.avatarViewSize;
     
     layoutAttributes.cellTopLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
                                                                                 layout:self
