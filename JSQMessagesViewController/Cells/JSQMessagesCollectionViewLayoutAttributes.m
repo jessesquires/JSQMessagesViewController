@@ -16,6 +16,28 @@
 
 @implementation JSQMessagesCollectionViewLayoutAttributes
 
+#pragma mark - Setters
+
+- (void)setMessageBubbleSize:(CGSize)messageBubbleSize
+{
+    _messageBubbleSize = CGSizeMake(ceilf(messageBubbleSize.width), ceilf(messageBubbleSize.height));
+}
+
+- (void)setCellTopLabelHeight:(CGFloat)cellTopLabelHeight
+{
+    _cellTopLabelHeight = floorf(cellTopLabelHeight);
+}
+
+- (void)setMessageBubbleTopLabelHeight:(CGFloat)messageBubbleTopLabelHeight
+{
+    _messageBubbleTopLabelHeight = floorf(messageBubbleTopLabelHeight);
+}
+
+- (void)setCellBottomLabelHeight:(CGFloat)cellBottomLabelHeight
+{
+    _cellTopLabelHeight = floorf(cellBottomLabelHeight);
+}
+
 #pragma mark - NSObject
 
 - (BOOL)isEqual:(id)object
@@ -38,8 +60,12 @@
 
 - (NSUInteger)hash
 {
-    NSUInteger customHash = self.cellTopLabelHeight ^ self.messageBubbleTopLabelHeight ^ self.cellBottomLabelHeight;
-    customHash ^= ( (int)self.messageBubbleSize.width ^ (int)self.messageBubbleSize.height );
+    NSUInteger customHash = (int)self.cellTopLabelHeight
+                            ^ (int)self.messageBubbleTopLabelHeight
+                            ^ (int)self.cellBottomLabelHeight
+                            ^ (int)self.messageBubbleSize.width
+                            ^ (int)self.messageBubbleSize.height;
+    
     return [super hash] ^ customHash;
 }
 

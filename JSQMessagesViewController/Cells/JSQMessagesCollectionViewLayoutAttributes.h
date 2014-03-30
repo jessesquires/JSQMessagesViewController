@@ -17,8 +17,11 @@
 @interface JSQMessagesCollectionViewLayoutAttributes : UICollectionViewLayoutAttributes <NSCopying>
 
 @property (assign, nonatomic) CGSize messageBubbleSize;
-@property (assign, nonatomic) NSUInteger cellTopLabelHeight;
-@property (assign, nonatomic) NSUInteger messageBubbleTopLabelHeight;
-@property (assign, nonatomic) NSUInteger cellBottomLabelHeight;
+
+@property (assign, nonatomic) CGFloat cellTopLabelHeight;
+
+@property (assign, nonatomic) CGFloat messageBubbleTopLabelHeight;
+
+@property (assign, nonatomic) CGFloat cellBottomLabelHeight;
 
 @end
