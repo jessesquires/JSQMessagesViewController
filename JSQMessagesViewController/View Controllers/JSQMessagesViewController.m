@@ -321,12 +321,12 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
         cell.cellBottomLabel.text = @"sent";
         cell.textView.textColor = [UIColor whiteColor];
         cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f,
-                                                                 kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddingDefault);
+                                                                 kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInsetDefault);
     }
     else {
         cell.cellBottomLabel.text = @"recieved";
         cell.textView.textColor = [UIColor blackColor];
-        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddingDefault,
+        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInsetDefault,
                                                                  0.0f, 0.0f);
     }
     
@@ -380,7 +380,7 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     
     CGFloat maxTextWidth = cellWidth
                             - kJSQMessagesCollectionViewCellAvatarSizeDefault
-                            - kJSQMessagesCollectionViewCellMessageBubblePaddingDefault;
+                            - kJSQMessagesCollectionViewCellMessageBubbleMinimumPaddingDefault;
     
     UIEdgeInsets textInsets = [JSQMessagesCollectionViewCell defaultTextContainerInset];
     CGFloat textHorizontalPadding = textInsets.left + textInsets.right;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8829D95118E744940038A8B5 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8829D95018E744940038A8B5 /* JSQMessagesCollectionViewLayoutAttributes.m */; };
 		8855A20318DD60B8005CB88E /* JSQMessagesToolbarButtonFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8855A20218DD60B8005CB88E /* JSQMessagesToolbarButtonFactoryTests.m */; };
 		885A8F0618D8A8AF00B47E59 /* JSQMessagesNSStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 885A8F0418D8A8AF00B47E59 /* JSQMessagesNSStringTests.m */; };
 		885A8F0718D8A8AF00B47E59 /* JSQMessagesUIColorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 885A8F0518D8A8AF00B47E59 /* JSQMessagesUIColorTests.m */; };
@@ -85,6 +86,8 @@
 
 /* Begin PBXFileReference section */
 		343577012CC24261BE4B61A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8829D94F18E744940038A8B5 /* JSQMessagesCollectionViewLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewLayoutAttributes.h; sourceTree = "<group>"; };
+		8829D95018E744940038A8B5 /* JSQMessagesCollectionViewLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewLayoutAttributes.m; sourceTree = "<group>"; };
 		8855A20218DD60B8005CB88E /* JSQMessagesToolbarButtonFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSQMessagesToolbarButtonFactoryTests.m; path = "Factory Tests/JSQMessagesToolbarButtonFactoryTests.m"; sourceTree = "<group>"; };
 		885A8F0418D8A8AF00B47E59 /* JSQMessagesNSStringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesNSStringTests.m; sourceTree = "<group>"; };
 		885A8F0518D8A8AF00B47E59 /* JSQMessagesUIColorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesUIColorTests.m; sourceTree = "<group>"; };
@@ -342,6 +345,8 @@
 				8897FB9F18CBD7C9004F59C3 /* JSQMessagesCollectionViewCellOutgoing.h */,
 				8897FBA018CBD7C9004F59C3 /* JSQMessagesCollectionViewCellOutgoing.m */,
 				8897FBA118CBD7C9004F59C3 /* JSQMessagesCollectionViewCellOutgoing.xib */,
+				8829D94F18E744940038A8B5 /* JSQMessagesCollectionViewLayoutAttributes.h */,
+				8829D95018E744940038A8B5 /* JSQMessagesCollectionViewLayoutAttributes.m */,
 				8897FB9D18CBD7C9004F59C3 /* JSQMessagesLabel.h */,
 				8897FB9E18CBD7C9004F59C3 /* JSQMessagesLabel.m */,
 			);
@@ -639,6 +644,7 @@
 			files = (
 				885EFC9B18CCDB0100F63C35 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				8897FBBD18CBD7C9004F59C3 /* UIImage+JSQMessages.m in Sources */,
+				8829D95118E744940038A8B5 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
 				8897FBBE18CBD7C9004F59C3 /* UIView+JSQMessages.m in Sources */,
 				885D596A18CBD2A600D77BB3 /* JSQAppDelegate.m in Sources */,
 				8897FBCC18CBD7C9004F59C3 /* JSQMessagesCollectionView.m in Sources */,

@@ -14,13 +14,15 @@
 
 #import "JSQMessagesCollectionViewCell.h"
 
+#import "JSQMessagesCollectionViewLayoutAttributes.h"
+
 #import "UIView+JSQMessages.h"
 
 
 const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault = 34.0f;
-const CGFloat kJSQMessagesCollectionViewCellMessageBubblePaddingDefault = 40.0f;
-const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddingDefault = 20.0f;
+const CGFloat kJSQMessagesCollectionViewCellMessageBubbleMinimumPaddingDefault = 40.0f;
+const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInsetDefault = 60.0f;
 
 
 @interface JSQMessagesCollectionViewCell ()
@@ -41,10 +43,9 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddi
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidthContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightContraint;
 
-@property (assign, nonatomic) CGSize avatarViewSize;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleTopLabelHorizontalPadding;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleContainerHorizontalPadding;
+
+@property (assign, nonatomic) CGSize avatarViewSize;
 
 @end
 
@@ -78,14 +79,14 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddi
     [super awakeFromNib];
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    self.cellTopLabelHeight = kJSQMessagesCollectionViewCellLabelHeightDefault;
-    self.messageBubbleTopLabelHeight = kJSQMessagesCollectionViewCellLabelHeightDefault;
-    self.cellBottomLabelHeight = kJSQMessagesCollectionViewCellLabelHeightDefault;
+    self.cellTopLabelHeightContraint.constant = kJSQMessagesCollectionViewCellLabelHeightDefault;
+    self.messageBubbleTopLabelHeightContraint.constant = kJSQMessagesCollectionViewCellLabelHeightDefault;
+    self.cellBottomLabelHeightContraint.constant = kJSQMessagesCollectionViewCellLabelHeightDefault;
     
     self.avatarViewSize = CGSizeMake(kJSQMessagesCollectionViewCellAvatarSizeDefault,
                                      kJSQMessagesCollectionViewCellAvatarSizeDefault);
     
-    self.messageBubblePadding = kJSQMessagesCollectionViewCellMessageBubblePaddingDefault;
+    self.messageBubbleContainerHorizontalPadding.constant = kJSQMessagesCollectionViewCellMessageBubbleMinimumPaddingDefault;
     
     self.backgroundColor = [UIColor whiteColor];
     
@@ -125,6 +126,21 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddi
     self.cellBottomLabel.text = nil;
     
     self.textView.text = nil;
+}
+
+- (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
+{
+    [super applyLayoutAttributes:layoutAttributes];
+    
+    JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
+    
+//    self.cellTopLabelHeightContraint.constant = customAttributes.cellTopLabelHeight;
+//    self.messageBubbleTopLabelHeightContraint.constant = customAttributes.messageBubbleTopLabelHeight;
+//    self.cellBottomLabelHeightContraint.constant = customAttributes.cellBottomLabelHeight;
+    
+    // TODO: bubble size / padding
+    
+    [self setNeedsUpdateConstraints];
 }
 
 #pragma mark - Setters
@@ -206,35 +222,10 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddi
     _avatarImageView = avatarImageView;
 }
 
-- (void)setCellTopLabelHeight:(CGFloat)cellTopLabelHeight
-{
-    self.cellTopLabelHeightContraint.constant = cellTopLabelHeight;
-    [self setNeedsUpdateConstraints];
-}
-
-- (void)setMessageBubbleTopLabelHeight:(CGFloat)messageBubbleTopLabelHeight
-{
-    self.messageBubbleTopLabelHeightContraint.constant = messageBubbleTopLabelHeight;
-    [self setNeedsUpdateConstraints];
-}
-
-- (void)setCellBottomLabelHeight:(CGFloat)cellBottomLabelHeight
-{
-    self.cellBottomLabelHeightContraint.constant = cellBottomLabelHeight;
-    [self setNeedsUpdateConstraints];
-}
-
 - (void)setAvatarViewSize:(CGSize)avatarViewSize
 {
     self.avatarContainerViewWidthContraint.constant = avatarViewSize.width;
     self.avatarContainerViewHeightContraint.constant = avatarViewSize.height;
-    [self setNeedsUpdateConstraints];
-}
-
-- (void)setMessageBubblePadding:(CGFloat)messageBubblePadding
-{
-    self.messageBubbleTopLabelHorizontalPadding.constant = messageBubblePadding;
-    self.messageBubbleContainerHorizontalPadding.constant = messageBubblePadding;
     [self setNeedsUpdateConstraints];
 }
 
@@ -247,21 +238,6 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddi
     }
     
     return _font;
-}
-
-- (CGFloat)cellTopLabelHeight
-{
-    return self.cellTopLabelHeightContraint.constant;
-}
-
-- (CGFloat)messageBubbleTopLabelHeight
-{
-    return self.messageBubbleTopLabelHeightContraint.constant;
-}
-
-- (CGFloat)cellBottomLabelHeight
-{
-    return self.cellBottomLabelHeightContraint.constant;
 }
 
 - (CGSize)avatarViewSize

@@ -19,8 +19,8 @@
 
 FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault;
 FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellAvatarSizeDefault;
-FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellMessageBubblePaddingDefault;
-FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalPaddingDefault;
+FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellMessageBubbleMinimumPaddingDefault;
+FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInsetDefault;
 
 
 @interface JSQMessagesCollectionViewCell : UICollectionViewCell
@@ -33,12 +33,6 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLa
 
 @property (weak, nonatomic) UIImageView *messageBubbleImageView;
 @property (weak, nonatomic) UIImageView *avatarImageView;
-
-// if you change these properties below, you must compute your own cell height
-@property (assign, nonatomic) CGFloat cellTopLabelHeight;
-@property (assign, nonatomic) CGFloat messageBubbleTopLabelHeight;
-@property (assign, nonatomic) CGFloat cellBottomLabelHeight;
-@property (assign, nonatomic) CGFloat messageBubblePadding;
 
 @property (strong, nonatomic) UIFont *font UI_APPEARANCE_SELECTOR;
 
