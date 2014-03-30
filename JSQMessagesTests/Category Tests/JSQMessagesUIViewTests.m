@@ -21,15 +21,15 @@
 
 - (void)testViewAutoLayoutPinEdges
 {
-    UIView *superview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    UIView *subview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    UIView *superview = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 50.0f, 50.0f)];
+    UIView *subview = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 50.0f, 50.0f)];
     
     [superview addSubview:subview];
     XCTAssertNoThrow([superview jsq_pinAllEdgesOfSubview:subview], @"Pinning edges of subview to superview should not throw");
     
-    XCTAssertEqual([[superview constraints] count], 4, @"Superview should have 4 constraints");
+    XCTAssertEqual([[superview constraints] count], 4U, @"Superview should have 4 constraints");
     
-    XCTAssertEqual([[subview constraints] count], 0, @"Subview should have 0 constraints");
+    XCTAssertEqual([[subview constraints] count], 0U, @"Subview should have 0 constraints");
     
     for (NSLayoutConstraint *eachConstraint in [superview constraints]) {
         
