@@ -66,6 +66,8 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     [super awakeFromNib];
     
     self.scrollDirection = UICollectionViewScrollDirectionVertical;
+    self.sectionInset = UIEdgeInsetsMake(10.0f, 4.0f, 10.0f, 4.0f);
+    self.minimumLineSpacing = 4.0f;
     
     self.messageBubbleSizes = [NSMutableDictionary new];
     

@@ -44,11 +44,11 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  Load some fake messages
      */
     self.messages = [[NSMutableArray alloc] initWithObjects:
-                     [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages. Simple, elegant, easy to use." sender:self.sender date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"There are super sweet default settings, but you can customize this like crazy." sender:kJSQDemoAvatarNameWoz date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages: A messaging UI framework for iOS." sender:self.sender date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithText:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy." sender:kJSQDemoAvatarNameWoz date:[NSDate distantPast]],
                      [[JSQMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com." sender:self.sender date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App." sender:kJSQDemoAvatarNameJobs date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"Jony Ive would be so proud." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
+                     [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. Or better." sender:kJSQDemoAvatarNameJobs date:[NSDate date]],
+                     [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
                      nil];
     
@@ -122,7 +122,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                                     outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
     
     self.incomingBubbleImageView = [JSQMessagesBubbleImageFactory
-                                    incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleGreenColor]];
+                                    incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Test Msg"
                                                                               style:UIBarButtonItemStyleBordered
@@ -226,7 +226,12 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[NSAttributedString alloc] initWithString:sender];
+    if (indexPath.item % 3 == 0) {
+        JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
+        return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
+    }
+    
+    return nil;
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -236,7 +241,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[NSAttributedString alloc] initWithString:sender];
+    return nil;
 }
 
 #pragma mark - UICollectionView DataSource
@@ -262,7 +267,11 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    if (indexPath.item % 3 == 0) {
+        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    }
+    
+    return 0.0f;
 }
 
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
@@ -274,7 +283,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    
+    return 0.0f;
 }
 
 @end

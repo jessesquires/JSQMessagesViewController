@@ -37,10 +37,6 @@
     
     [self registerNib:[JSQMessagesCollectionViewCellOutgoing nib]
           forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
-    
-    CGFloat inset = 4.0f;
-    self.collectionViewLayout.sectionInset = UIEdgeInsetsMake(inset, inset, inset, inset);
-    self.collectionViewLayout.minimumLineSpacing = 4.0f;
 }
 
 @end
