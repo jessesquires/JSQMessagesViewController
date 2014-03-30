@@ -281,7 +281,7 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageForItemAtIndexPath:indexPath];
+    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
     
     NSString *messageSender = [messageData sender];
     BOOL isOutgoingMessage = [messageSender isEqualToString:self.sender];
@@ -363,8 +363,7 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView
-                                                          messageForItemAtIndexPath:indexPath];
+    id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
     
     JSQMessagesCollectionViewFlowLayout *layout = (JSQMessagesCollectionViewFlowLayout *)collectionViewLayout;
     CGFloat cellWidth = collectionView.frame.size.width - layout.sectionInset.left - layout.sectionInset.right;

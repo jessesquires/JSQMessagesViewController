@@ -23,7 +23,7 @@
 
 @required
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView
-                      messageForItemAtIndexPath:(NSIndexPath *)indexPath;
+                      messageDataForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
                  bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -33,34 +33,15 @@
                  avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
                  sender:(NSString *)sender;
 
-/*
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
-                 bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
-                 sender:(NSString *)sender;
+//- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView
+//                        attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath;
+//
+//- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView
+//                        attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath;
+//
+//- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView
+//                        attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
 
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView
-                 avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
-                 sender:(NSString *)sender;
-
-- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView
-                        attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath;
-
-- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView
-                        attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath;
-
-- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView
-                        attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
-
-- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
-              textForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath;
-
-- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
-              textForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath;
-
-- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView
-              textForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
-
-*/
 @end
 
 
