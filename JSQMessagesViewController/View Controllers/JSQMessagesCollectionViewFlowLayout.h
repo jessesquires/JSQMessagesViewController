@@ -27,9 +27,19 @@
 @class JSQMessagesCollectionViewFlowLayout;
 
 
-@protocol JSQMessagesCollectionViewFlowLayoutDelegate <UICollectionViewDelegateFlowLayout>
+@protocol JSQMessagesCollectionViewDelegateFlowLayout <UICollectionViewDelegateFlowLayout>
 
-@required
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+           layout:(UICollectionViewLayout *)collectionViewLayout
+           heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath;
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+           layout:(UICollectionViewLayout *)collectionViewLayout
+           heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath;
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+           layout:(UICollectionViewLayout *)collectionViewLayout
+           heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -37,11 +47,13 @@
 
 @interface JSQMessagesCollectionViewFlowLayout : UICollectionViewFlowLayout
 
-@property (weak, nonatomic) id<JSQMessagesCollectionViewFlowLayoutDelegate> delegate;
+@property (weak, nonatomic) id<JSQMessagesCollectionViewDelegateFlowLayout> delegate;
 
 @property (assign, nonatomic) BOOL springinessEnabled;
 
 // A higher number is less bouncy, a lower number is more bouncy
-@property (nonatomic, assign) NSUInteger springResistanceFactor;
+@property (assign, nonatomic) NSUInteger springResistanceFactor;
+
+@property (assign, nonatomic) CGFloat messageBubbleMinimumHorizontalPadding;
 
 @end

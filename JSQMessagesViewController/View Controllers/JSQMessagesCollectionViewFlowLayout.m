@@ -56,10 +56,9 @@
     self.scrollDirection = UICollectionViewScrollDirectionVertical;
     
     _springinessEnabled = NO;
+    _springResistanceFactor = 800;
     
-    self.dynamicAnimator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
-    self.visibleIndexPaths = [[NSMutableSet alloc] init];
-    self.springResistanceFactor = 800;
+    self.messageBubbleMinimumHorizontalPadding = 60.0f;
 }
 
 + (Class)layoutAttributesClass
@@ -72,12 +71,31 @@
 - (void)setSpringinessEnabled:(BOOL)springinessEnabled
 {
     _springinessEnabled = springinessEnabled;
-    [self invalidateLayout];
     
     if (!springinessEnabled) {
-        [self.dynamicAnimator removeAllBehaviors];
-        [self.visibleIndexPaths removeAllObjects];
+        [_dynamicAnimator removeAllBehaviors];
+        [_visibleIndexPaths removeAllObjects];
     }
+    
+    [self invalidateLayout];
+}
+
+#pragma mark - Getters
+
+- (UIDynamicAnimator *)dynamicAnimator
+{
+    if (!_dynamicAnimator) {
+        _dynamicAnimator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
+    }
+    return _dynamicAnimator;
+}
+
+- (NSMutableSet *)visibleIndexPaths
+{
+    if (!_visibleIndexPaths) {
+        _visibleIndexPaths = [[NSMutableSet alloc] init];
+    }
+    return _visibleIndexPaths;
 }
 
 #pragma mark - Collection view flow layout

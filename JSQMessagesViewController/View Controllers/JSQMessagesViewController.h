@@ -23,7 +23,7 @@
 
 
 @interface JSQMessagesViewController : UIViewController <JSQMessagesCollectionViewDataSource,
-                                                         JSQMessagesCollectionViewFlowLayoutDelegate>
+                                                         JSQMessagesCollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic, readonly) JSQMessagesCollectionView *collectionView;
 
