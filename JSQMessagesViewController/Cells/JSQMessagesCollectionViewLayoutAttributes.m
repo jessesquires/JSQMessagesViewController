@@ -56,6 +56,7 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInset
     JSQMessagesCollectionViewLayoutAttributes *layoutAttributes = (JSQMessagesCollectionViewLayoutAttributes *)object;
     
     if (!CGSizeEqualToSize(layoutAttributes.messageBubbleSize, self.messageBubbleSize)
+        || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.messageBubbleTextContainerInsets, self.messageBubbleTextContainerInsets)
         || layoutAttributes.cellTopLabelHeight != self.cellTopLabelHeight
         || layoutAttributes.messageBubbleTopLabelHeight != self.messageBubbleTopLabelHeight
         || layoutAttributes.cellBottomLabelHeight != self.cellBottomLabelHeight) {
@@ -70,8 +71,7 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInset
     NSUInteger customHash = (int)self.cellTopLabelHeight
                             ^ (int)self.messageBubbleTopLabelHeight
                             ^ (int)self.cellBottomLabelHeight
-                            ^ (int)self.messageBubbleSize.width
-                            ^ (int)self.messageBubbleSize.height;
+                            ^ (int)(self.messageBubbleSize.width + self.messageBubbleSize.height);
     
     return [super hash] ^ customHash;
 }
@@ -82,6 +82,7 @@ const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLabelHorizontalInset
 {
     JSQMessagesCollectionViewLayoutAttributes *copy = [super copyWithZone:zone];
     copy.messageBubbleSize = self.messageBubbleSize;
+    copy.messageBubbleTextContainerInsets = self.messageBubbleTextContainerInsets;
     copy.cellTopLabelHeight = self.cellTopLabelHeight;
     copy.messageBubbleTopLabelHeight = self.messageBubbleTopLabelHeight;
     copy.cellBottomLabelHeight = self.cellBottomLabelHeight;

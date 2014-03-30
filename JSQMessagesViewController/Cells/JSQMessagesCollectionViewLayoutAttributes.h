@@ -25,6 +25,8 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellMessageBubbleTopLa
 
 @property (assign, nonatomic) CGSize messageBubbleSize;
 
+@property (assign, nonatomic) UIEdgeInsets messageBubbleTextContainerInsets;
+
 @property (assign, nonatomic) CGFloat cellTopLabelHeight;
 
 @property (assign, nonatomic) CGFloat messageBubbleTopLabelHeight;

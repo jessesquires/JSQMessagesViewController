@@ -37,4 +37,6 @@
 
 @property (assign, nonatomic) CGFloat messageBubbleMinimumHorizontalPadding;
 
+@property (assign, nonatomic) UIEdgeInsets messageBubbleTextContainerInsets;
+
 @end

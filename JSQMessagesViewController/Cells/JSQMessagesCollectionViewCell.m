@@ -61,11 +61,6 @@
     return nil;
 }
 
-+ (UIEdgeInsets)defaultTextContainerInset
-{
-    return UIEdgeInsetsMake(8.0f, 10.0f, 8.0f, 8.0f);
-}
-
 #pragma mark - Initialization
 
 - (void)awakeFromNib
@@ -105,7 +100,6 @@
     self.textView.backgroundColor = [UIColor clearColor];
     self.textView.contentInset = UIEdgeInsetsZero;
     self.textView.scrollIndicatorInsets = UIEdgeInsetsZero;
-    self.textView.textContainerInset = [JSQMessagesCollectionViewCell defaultTextContainerInset];
     self.textView.contentOffset = CGPointZero;
 }
 
@@ -127,6 +121,8 @@
     [super applyLayoutAttributes:layoutAttributes];
     
     JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
+    
+    self.textView.textContainerInset = customAttributes.messageBubbleTextContainerInsets;
     
     self.cellTopLabelHeightContraint.constant = customAttributes.cellTopLabelHeight;
     self.messageBubbleTopLabelHeightContraint.constant = customAttributes.messageBubbleTopLabelHeight;

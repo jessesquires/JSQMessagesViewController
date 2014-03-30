@@ -36,6 +36,4 @@
 
 + (NSString *)cellReuseIdentifier;
 
-+ (UIEdgeInsets)defaultTextContainerInset;
-
 @end

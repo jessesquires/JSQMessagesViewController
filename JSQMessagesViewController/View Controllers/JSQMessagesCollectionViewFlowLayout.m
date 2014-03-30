@@ -23,7 +23,10 @@
 
 #import "JSQMessagesCollectionViewFlowLayout.h"
 
+#import "JSQMessageData.h"
+
 #import "JSQMessagesCollectionView.h"
+#import "JSQMessagesCollectionViewCell.h"
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 
 
@@ -62,10 +65,11 @@
     
     self.messageCellAttributes = [NSMutableArray new];
     
+    self.messageBubbleMinimumHorizontalPadding = kJSQMessagesCollectionViewCellMessageBubbleMinimumPaddingDefault;
+    self.messageBubbleTextContainerInsets = UIEdgeInsetsMake(8.0f, 10.0f, 8.0f, 10.0f);
+    
     _springinessEnabled = NO;
     _springResistanceFactor = 850;
-    
-    self.messageBubbleMinimumHorizontalPadding = 60.0f;
 }
 
 + (Class)layoutAttributesClass
@@ -220,6 +224,8 @@
 - (void)jsq_configureMessageCellLayoutAttributes:(JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes
 {
     NSIndexPath *indexPath = layoutAttributes.indexPath;
+    
+    layoutAttributes.messageBubbleTextContainerInsets = self.messageBubbleTextContainerInsets;
     
     layoutAttributes.cellTopLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
                                                                                 layout:self

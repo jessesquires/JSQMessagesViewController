@@ -368,20 +368,18 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
 
 #pragma mark - Collection view delegate flow layout
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout *)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(JSQMessagesCollectionView *)collectionView
+                  layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
+    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
     
-    JSQMessagesCollectionViewFlowLayout *layout = (JSQMessagesCollectionViewFlowLayout *)collectionViewLayout;
-    CGFloat cellWidth = collectionView.frame.size.width - layout.sectionInset.left - layout.sectionInset.right;
+    CGFloat cellWidth = collectionView.frame.size.width - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right;
     
     CGFloat maxTextWidth = cellWidth
                             - kJSQMessagesCollectionViewCellAvatarSizeDefault
-                            - kJSQMessagesCollectionViewCellMessageBubbleMinimumPaddingDefault;
+                            - collectionViewLayout.messageBubbleMinimumHorizontalPadding;
     
-    UIEdgeInsets textInsets = [JSQMessagesCollectionViewCell defaultTextContainerInset];
+    UIEdgeInsets textInsets = collectionViewLayout.messageBubbleTextContainerInsets;
     CGFloat textHorizontalPadding = textInsets.left + textInsets.right;
     CGFloat textVerticalPadding = textInsets.bottom + textInsets.top;
     CGFloat textPadding = textHorizontalPadding + textVerticalPadding;
@@ -395,8 +393,10 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
                                                          context:nil];
     
     CGFloat cellHeight = CGRectGetHeight(CGRectIntegral(stringRect));
-    cellHeight += (kJSQMessagesCollectionViewCellLabelHeightDefault * 3.0f);
     cellHeight += textHorizontalPadding;
+    cellHeight += [self collectionView:collectionView layout:collectionViewLayout heightForCellTopLabelAtIndexPath:indexPath];
+    cellHeight += [self collectionView:collectionView layout:collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:indexPath];
+    cellHeight += [self collectionView:collectionView layout:collectionViewLayout heightForCellBottomLabelAtIndexPath:indexPath];
     
     return CGSizeMake(cellWidth, cellHeight);
 }
