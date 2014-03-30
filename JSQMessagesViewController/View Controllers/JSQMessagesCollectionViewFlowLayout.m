@@ -70,7 +70,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     self.messageBubbleSizes = [NSMutableDictionary new];
     
     self.messageBubbleMinimumHorizontalPadding = 40.0f;
-    self.messageBubbleTextContainerInsets = UIEdgeInsetsMake(8.0f, 10.0f, 8.0f, 10.0f);
+    self.messageBubbleTextContainerInsets = UIEdgeInsetsMake(6.0f, 12.0f, 8.0f, 12.0f);
     self.avatarViewSize = CGSizeMake(34.0f, 34.0f);
     
     _springinessEnabled = NO;
@@ -102,6 +102,11 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 }
 
 #pragma mark - Getters
+
+- (CGFloat)itemWidth
+{
+    return self.collectionView.frame.size.width - self.sectionInset.left - self.sectionInset.right;
+}
 
 - (UIDynamicAnimator *)dynamicAnimator
 {
@@ -239,16 +244,14 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
     
-    CGFloat cellWidth = self.collectionView.frame.size.width - self.sectionInset.left - self.sectionInset.right;
-    
-    CGFloat maxTextWidth = cellWidth - self.avatarViewSize.width - self.messageBubbleMinimumHorizontalPadding;
+    CGFloat maximumTextWidth = self.itemWidth - self.avatarViewSize.width - self.messageBubbleMinimumHorizontalPadding;
     
     UIEdgeInsets textInsets = self.messageBubbleTextContainerInsets;
     CGFloat textHorizontalPadding = textInsets.left + textInsets.right;
     CGFloat textVerticalPadding = textInsets.bottom + textInsets.top;
     CGFloat textPadding = textHorizontalPadding + textVerticalPadding;
     
-    CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maxTextWidth - textPadding, CGFLOAT_MAX)
+    CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth - textPadding, CGFLOAT_MAX)
                                                          options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                                                       attributes:@{
                                                                    NSFontAttributeName : [[JSQMessagesCollectionViewCell appearance] font],
@@ -265,7 +268,19 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 {
     NSIndexPath *indexPath = layoutAttributes.indexPath;
     
-    layoutAttributes.messageBubbleSize = [self messageBubbleSizeForItemAtIndexPath:indexPath];
+    CGSize messageBubbleSize = [self messageBubbleSizeForItemAtIndexPath:indexPath];
+    CGFloat remainingItemWidthForBubble = self.itemWidth - self.avatarViewSize.width;
+    CGFloat maximumBubbleWidth = remainingItemWidthForBubble - self.messageBubbleMinimumHorizontalPadding;
+    
+    CGFloat messageBubblePadding;
+    if (messageBubbleSize.width < maximumBubbleWidth) {
+        messageBubblePadding = remainingItemWidthForBubble - messageBubbleSize.width - self.messageBubbleMinimumHorizontalPadding;
+    }
+    else {
+        messageBubblePadding = self.messageBubbleMinimumHorizontalPadding;
+    }
+    
+    layoutAttributes.messageBubbleHorizontalPadding = messageBubblePadding;
     
     layoutAttributes.messageBubbleTextContainerInsets = self.messageBubbleTextContainerInsets;
     

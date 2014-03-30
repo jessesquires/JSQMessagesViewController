@@ -19,9 +19,9 @@
 
 #pragma mark - Setters
 
-- (void)setMessageBubbleSize:(CGSize)messageBubbleSize
+- (void)setMessageBubbleHorizontalPadding:(CGFloat)messageBubbleHorizontalPadding
 {
-    _messageBubbleSize = CGSizeMake(ceilf(messageBubbleSize.width), ceilf(messageBubbleSize.height));
+    _messageBubbleHorizontalPadding = ceilf(messageBubbleHorizontalPadding);
 }
 
 - (void)setAvatarViewSize:(CGSize)avatarViewSize
@@ -54,7 +54,7 @@
     
     JSQMessagesCollectionViewLayoutAttributes *layoutAttributes = (JSQMessagesCollectionViewLayoutAttributes *)object;
     
-    if (!CGSizeEqualToSize(layoutAttributes.messageBubbleSize, self.messageBubbleSize)
+    if (layoutAttributes.messageBubbleHorizontalPadding != self.messageBubbleHorizontalPadding
         || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.messageBubbleTextContainerInsets, self.messageBubbleTextContainerInsets)
         || !CGSizeEqualToSize(layoutAttributes.avatarViewSize, self.avatarViewSize)
         || layoutAttributes.cellTopLabelHeight != self.cellTopLabelHeight
@@ -68,11 +68,11 @@
 
 - (NSUInteger)hash
 {
-    NSUInteger customHash = (int)self.cellTopLabelHeight
+    NSUInteger customHash = (int)self.messageBubbleHorizontalPadding
+                            ^ (int)(self.avatarViewSize.width + self.avatarViewSize.height)
+                            ^ (int)self.cellTopLabelHeight
                             ^ (int)self.messageBubbleTopLabelHeight
-                            ^ (int)self.cellBottomLabelHeight
-                            ^ (int)(self.messageBubbleSize.width + self.messageBubbleSize.height)
-                            ^ (int)(self.avatarViewSize.width + self.avatarViewSize.height);
+                            ^ (int)self.cellBottomLabelHeight;
     
     return [super hash] ^ customHash;
 }
@@ -82,7 +82,7 @@
 - (instancetype)copyWithZone:(NSZone *)zone
 {
     JSQMessagesCollectionViewLayoutAttributes *copy = [super copyWithZone:zone];
-    copy.messageBubbleSize = self.messageBubbleSize;
+    copy.messageBubbleHorizontalPadding = self.messageBubbleHorizontalPadding;
     copy.messageBubbleTextContainerInsets = self.messageBubbleTextContainerInsets;
     copy.avatarViewSize = self.avatarViewSize;
     copy.cellTopLabelHeight = self.cellTopLabelHeight;

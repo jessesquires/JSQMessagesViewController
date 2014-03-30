@@ -325,7 +325,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
     }
     
-    // TODO:
+    // TODO: data detectors
     //cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
     cell.textView.selectable = NO;
     
@@ -341,26 +341,24 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - Collection view delegate
 
-// TODO:
+// TODO: copy & paste
 
 #pragma mark - Collection view delegate flow layout
 
 - (CGSize)collectionView:(JSQMessagesCollectionView *)collectionView
                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat cellWidth = collectionView.frame.size.width - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right;
-    
-    CGFloat textHorizontalPadding = collectionViewLayout.messageBubbleTextContainerInsets.left + collectionViewLayout.messageBubbleTextContainerInsets.right;
+    CGFloat textVerticalPadding = collectionViewLayout.messageBubbleTextContainerInsets.top + collectionViewLayout.messageBubbleTextContainerInsets.bottom;
     
     CGSize bubbleSize = [collectionViewLayout messageBubbleSizeForItemAtIndexPath:indexPath];
     
     CGFloat cellHeight = bubbleSize.height;
-    cellHeight += textHorizontalPadding;
+    cellHeight += textVerticalPadding;
     cellHeight += [self collectionView:collectionView layout:collectionViewLayout heightForCellTopLabelAtIndexPath:indexPath];
     cellHeight += [self collectionView:collectionView layout:collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:indexPath];
     cellHeight += [self collectionView:collectionView layout:collectionViewLayout heightForCellBottomLabelAtIndexPath:indexPath];
     
-    return CGSizeMake(cellWidth, cellHeight);
+    return CGSizeMake(collectionViewLayout.itemWidth, cellHeight);
 }
 
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView

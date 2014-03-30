@@ -119,12 +119,9 @@
     
     JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
     
-    // TODO: bubble size / padding
-    
+    self.messageBubbleContainerHorizontalPadding.constant = customAttributes.messageBubbleHorizontalPadding;
     self.textView.textContainerInset = customAttributes.messageBubbleTextContainerInsets;
-    
     self.avatarViewSize = customAttributes.avatarViewSize;
-    
     self.cellTopLabelHeightContraint.constant = customAttributes.cellTopLabelHeight;
     self.messageBubbleTopLabelHeightContraint.constant = customAttributes.messageBubbleTopLabelHeight;
     self.cellBottomLabelHeightContraint.constant = customAttributes.cellBottomLabelHeight;
@@ -226,11 +223,6 @@
 {
     return CGSizeMake(self.avatarContainerViewWidthContraint.constant,
                       self.avatarContainerViewHeightContraint.constant);
-}
-
-- (CGFloat)messageBubblePadding
-{
-    return self.messageBubbleContainerHorizontalPadding.constant;
 }
 
 @end

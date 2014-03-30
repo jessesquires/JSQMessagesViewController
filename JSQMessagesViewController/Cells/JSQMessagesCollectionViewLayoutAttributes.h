@@ -17,7 +17,7 @@
 
 @interface JSQMessagesCollectionViewLayoutAttributes : UICollectionViewLayoutAttributes <NSCopying>
 
-@property (assign, nonatomic) CGSize messageBubbleSize;
+@property (assign, nonatomic) CGFloat messageBubbleHorizontalPadding;
 
 @property (assign, nonatomic) UIEdgeInsets messageBubbleTextContainerInsets;
 

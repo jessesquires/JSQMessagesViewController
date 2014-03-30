@@ -187,7 +187,6 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
-    // TODO:
     NSLog(@"Camera pressed!");
 }
 

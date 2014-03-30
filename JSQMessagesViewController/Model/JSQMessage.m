@@ -43,6 +43,13 @@
     _date = nil;
 }
 
+#pragma mark - NSObject
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %@, %@, %@>", [self class], self.sender, self.date, self.text];
+}
+
 #pragma mark - NSCoding
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder

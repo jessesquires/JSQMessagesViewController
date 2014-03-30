@@ -30,12 +30,14 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 
 @interface JSQMessagesCollectionViewFlowLayout : UICollectionViewFlowLayout
 
-@property (nonatomic, readonly) JSQMessagesCollectionView *collectionView;
+@property (readonly, nonatomic) JSQMessagesCollectionView *collectionView;
 
 @property (assign, nonatomic) BOOL springinessEnabled;
 
 // A higher number is less bouncy, a lower number is more bouncy
 @property (assign, nonatomic) NSUInteger springResistanceFactor;
+
+@property (readonly, nonatomic) CGFloat itemWidth;
 
 @property (assign, nonatomic) CGFloat messageBubbleMinimumHorizontalPadding;
 
