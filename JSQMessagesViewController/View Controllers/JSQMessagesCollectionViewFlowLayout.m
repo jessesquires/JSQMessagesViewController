@@ -34,10 +34,14 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 @interface JSQMessagesCollectionViewFlowLayout ()
 
+@property (strong, nonatomic) NSMutableDictionary *messageBubbleSizes;
+
 @property (strong, nonatomic) UIDynamicAnimator *dynamicAnimator;
 @property (strong, nonatomic) NSMutableSet *visibleIndexPaths;
 @property (assign, nonatomic) UIInterfaceOrientation interfaceOrientation;
 @property (assign, nonatomic) CGFloat latestDelta;
+
+- (void)jsq_didReceiveApplicationMemoryWarningNotification:(NSNotification *)notification;
 
 - (void)jsq_configureMessageCellLayoutAttributes:(JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
 
@@ -63,12 +67,19 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     self.scrollDirection = UICollectionViewScrollDirectionVertical;
     
+    self.messageBubbleSizes = [NSMutableDictionary new];
+    
     self.messageBubbleMinimumHorizontalPadding = 40.0f;
     self.messageBubbleTextContainerInsets = UIEdgeInsetsMake(8.0f, 10.0f, 8.0f, 10.0f);
     self.avatarViewSize = CGSizeMake(34.0f, 34.0f);
     
     _springinessEnabled = NO;
     _springResistanceFactor = 900;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(jsq_didReceiveApplicationMemoryWarningNotification:)
+                                                 name:UIApplicationDidReceiveMemoryWarningNotification
+                                               object:nil];
 }
 
 + (Class)layoutAttributesClass
@@ -106,6 +117,13 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
         _visibleIndexPaths = [NSMutableSet new];
     }
     return _visibleIndexPaths;
+}
+
+#pragma mark - Notifications
+
+- (void)jsq_didReceiveApplicationMemoryWarningNotification:(NSNotification *)notification
+{
+    [self.messageBubbleSizes removeAllObjects];
 }
 
 #pragma mark - Collection view flow layout
@@ -212,9 +230,42 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 #pragma mark - Message cell layout utilities
 
+- (CGSize)messageBubbleSizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSValue *cachedSize = [self.messageBubbleSizes objectForKey:indexPath];
+    if (cachedSize) {
+        return [cachedSize CGSizeValue];
+    }
+    
+    id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
+    
+    CGFloat cellWidth = self.collectionView.frame.size.width - self.sectionInset.left - self.sectionInset.right;
+    
+    CGFloat maxTextWidth = cellWidth - self.avatarViewSize.width - self.messageBubbleMinimumHorizontalPadding;
+    
+    UIEdgeInsets textInsets = self.messageBubbleTextContainerInsets;
+    CGFloat textHorizontalPadding = textInsets.left + textInsets.right;
+    CGFloat textVerticalPadding = textInsets.bottom + textInsets.top;
+    CGFloat textPadding = textHorizontalPadding + textVerticalPadding;
+    
+    CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maxTextWidth - textPadding, CGFLOAT_MAX)
+                                                         options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                                      attributes:@{
+                                                                   NSFontAttributeName : [[JSQMessagesCollectionViewCell appearance] font],
+                                                                   NSParagraphStyleAttributeName : [NSParagraphStyle defaultParagraphStyle]
+                                                                   }
+                                                         context:nil];
+    
+    CGSize size = CGRectIntegral(stringRect).size;
+    [self.messageBubbleSizes setObject:[NSValue valueWithCGSize:size] forKey:indexPath];
+    return size;
+}
+
 - (void)jsq_configureMessageCellLayoutAttributes:(JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes
 {
     NSIndexPath *indexPath = layoutAttributes.indexPath;
+    
+    layoutAttributes.messageBubbleSize = [self messageBubbleSizeForItemAtIndexPath:indexPath];
     
     layoutAttributes.messageBubbleTextContainerInsets = self.messageBubbleTextContainerInsets;
     

@@ -37,11 +37,12 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 // A higher number is less bouncy, a lower number is more bouncy
 @property (assign, nonatomic) NSUInteger springResistanceFactor;
 
-// TODO:
 @property (assign, nonatomic) CGFloat messageBubbleMinimumHorizontalPadding;
 
 @property (assign, nonatomic) UIEdgeInsets messageBubbleTextContainerInsets;
 
 @property (assign, nonatomic) CGSize avatarViewSize;
+
+- (CGSize)messageBubbleSizeForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

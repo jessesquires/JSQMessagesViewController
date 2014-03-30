@@ -348,26 +348,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (CGSize)collectionView:(JSQMessagesCollectionView *)collectionView
                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    
     CGFloat cellWidth = collectionView.frame.size.width - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right;
     
-    CGFloat maxTextWidth = cellWidth - collectionViewLayout.avatarViewSize.width - collectionViewLayout.messageBubbleMinimumHorizontalPadding;
+    CGFloat textHorizontalPadding = collectionViewLayout.messageBubbleTextContainerInsets.left + collectionViewLayout.messageBubbleTextContainerInsets.right;
     
-    UIEdgeInsets textInsets = collectionViewLayout.messageBubbleTextContainerInsets;
-    CGFloat textHorizontalPadding = textInsets.left + textInsets.right;
-    CGFloat textVerticalPadding = textInsets.bottom + textInsets.top;
-    CGFloat textPadding = textHorizontalPadding + textVerticalPadding;
+    CGSize bubbleSize = [collectionViewLayout messageBubbleSizeForItemAtIndexPath:indexPath];
     
-    CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maxTextWidth - textPadding, CGFLOAT_MAX)
-                                                         options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
-                                                      attributes:@{
-                                                                   NSFontAttributeName : [[JSQMessagesCollectionViewCell appearance] font],
-                                                                   NSParagraphStyleAttributeName : [NSParagraphStyle defaultParagraphStyle]
-                                                                   }
-                                                         context:nil];
-    
-    CGFloat cellHeight = CGRectGetHeight(CGRectIntegral(stringRect));
+    CGFloat cellHeight = bubbleSize.height;
     cellHeight += textHorizontalPadding;
     cellHeight += [self collectionView:collectionView layout:collectionViewLayout heightForCellTopLabelAtIndexPath:indexPath];
     cellHeight += [self collectionView:collectionView layout:collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:indexPath];
