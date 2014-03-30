@@ -254,6 +254,14 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     return [self.messages count];
 }
 
+- (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    /**
+     *  Override point for customizing cells
+     */
+    JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    return cell;
+}
 
 
 
