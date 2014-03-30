@@ -27,8 +27,6 @@
 
 @property (weak, nonatomic, readonly) JSQMessagesCollectionView *collectionView;
 
-@property (weak, nonatomic, readonly) JSQMessagesCollectionViewFlowLayout *collectionViewLayout;
-
 @property (weak, nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
 
 /**

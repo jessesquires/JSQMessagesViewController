@@ -72,20 +72,22 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  Create avatar images once and save
      */
+    CGFloat diameter = self.collectionView.collectionViewLayout.avatarViewSize.width;
+    
     UIImage *jsqImage = [JSQMessagesAvatarFactory avatarWithUserInitials:@"JSQ"
                                                          backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
                                                                textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
                                                                     font:[UIFont systemFontOfSize:14.0f]
-                                                                diameter:self.collectionViewLayout.avatarViewSize.width];
+                                                                diameter:diameter];
     
     UIImage *cookImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_cook"]
-                                                          diameter:self.collectionViewLayout.avatarViewSize.width];
+                                                          diameter:diameter];
     
     UIImage *jobsImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]
-                                                          diameter:self.collectionViewLayout.avatarViewSize.width];
+                                                          diameter:diameter];
     
     UIImage *wozImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_woz"]
-                                                         diameter:self.collectionViewLayout.avatarViewSize.width];
+                                                         diameter:diameter];
     self.avatars = @{ kJSQDemoAvatarNameJesse : jsqImage,
                       kJSQDemoAvatarNameCook : cookImage,
                       kJSQDemoAvatarNameJobs : jobsImage,
@@ -156,7 +158,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  Enable/disable springy bubbles, default is YES.
      *  For best results, toggle from `viewDidAppear:`
      */
-    self.collectionViewLayout.springinessEnabled = YES;
+    self.collectionView.collectionViewLayout.springinessEnabled = YES;
 }
 
 

@@ -79,4 +79,6 @@
 
 @property (weak, nonatomic) id<JSQMessagesCollectionViewDelegateFlowLayout> delegate;
 
+@property (strong, nonatomic) JSQMessagesCollectionViewFlowLayout *collectionViewLayout;
+
 @end

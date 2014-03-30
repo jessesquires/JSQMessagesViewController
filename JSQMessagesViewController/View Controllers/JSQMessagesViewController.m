@@ -132,13 +132,6 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     [self prepareMessagesViewController];
 }
 
-#pragma mark - Getters
-
-- (JSQMessagesCollectionViewFlowLayout *)collectionViewLayout
-{
-    return (JSQMessagesCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -170,7 +163,7 @@ static NSString * const kJSQDefaultSender = @"JSQDefaultSender";
     [super viewDidAppear:animated];
     [self jsq_addObservers];
     
-    self.collectionViewLayout.springinessEnabled = YES;
+    self.collectionView.collectionViewLayout.springinessEnabled = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
