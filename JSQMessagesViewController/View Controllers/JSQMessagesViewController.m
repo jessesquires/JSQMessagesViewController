@@ -192,12 +192,21 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     [self jsq_prepareForRotation];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
-    // TODO: keyboard
+    // TODO: deal with keyboard on rotation
+    [self.inputToolbar.contentView.textView resignFirstResponder];
 }
 
 - (void)jsq_prepareForRotation
 {
+    // TODO: deal with keyboard on rotation
+    [self.inputToolbar.contentView.textView resignFirstResponder];
+    
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
