@@ -40,7 +40,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IcC-ug-dCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1712" y="522"/>
+            <point key="canvasLocation" x="-1764" y="518"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eGf-GM-ORQ">
@@ -50,12 +50,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="JdJ-0X-ZL8" kind="relationship" relationship="rootViewController" id="fnb-Mm-hX9"/>
+                        <segue destination="2Qx-iu-03V" kind="relationship" relationship="rootViewController" id="cuu-7c-yOr"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8DO-Rt-kgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1260" y="1168"/>
+            <point key="canvasLocation" x="-1217" y="844"/>
         </scene>
         <!--Demo View Controller-->
         <scene sceneID="gOX-cv-CuN">
@@ -74,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B2s-hQ-gD4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-791" y="522"/>
+            <point key="canvasLocation" x="-1217" y="154"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="A8N-cL-8VP">
@@ -89,7 +89,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OC7-Ng-9xQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2143" y="522"/>
+            <point key="canvasLocation" x="-2195" y="518"/>
+        </scene>
+        <!--Demo View Controller-->
+        <scene sceneID="Rr5-W8-Xyh">
+            <objects>
+                <viewController id="2Qx-iu-03V" customClass="JSQDemoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hTc-sT-can"/>
+                        <viewControllerLayoutGuide type="bottom" id="BPF-eU-3uQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SsE-pA-zOd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="gBw-Dh-o4F"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jTG-EA-PIP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-788" y="844"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -97,7 +116,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="fnb-Mm-hX9"/>
-    </inferredMetricsTieBreakers>
 </document>
