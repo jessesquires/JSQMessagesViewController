@@ -34,4 +34,8 @@
 
 @property (copy, nonatomic) NSDictionary *avatars;
 
+- (void)receiveMessagePressed:(UIBarButtonItem *)sender;
+
+- (void)closePressed:(UIBarButtonItem *)sender;
+
 @end

@@ -14,6 +14,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JSQTableViewController : UITableViewController
+#import "JSQDemoViewController.h"
+
+@interface JSQTableViewController : UITableViewController <JSQDemoViewControllerDelegate>
+
+- (IBAction)unwindSegue:(UIStoryboardSegue *)sender;
 
 @end

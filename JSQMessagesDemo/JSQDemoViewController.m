@@ -26,10 +26,6 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (void)jsqDemo_setupTestModel;
 
-- (void)jsqDemo_receiveMessagePressed:(UIBarButtonItem *)sender;
-
-- (void)jsqDemo_closePressed:(UIBarButtonItem *)sender;
-
 @end
 
 
@@ -127,7 +123,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Test Msg"
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
-                                                                             action:@selector(jsqDemo_receiveMessagePressed:)];
+                                                                             action:@selector(receiveMessagePressed:)];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -137,7 +133,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     if (self.delegateModal) {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
                                                                                               target:self
-                                                                                              action:@selector(jsqDemo_closePressed:)];
+                                                                                              action:@selector(closePressed:)];
     }
 }
 
@@ -156,7 +152,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 #pragma mark - Actions
 
-- (void)jsqDemo_receiveMessagePressed:(UIBarButtonItem *)sender
+- (void)receiveMessagePressed:(UIBarButtonItem *)sender
 {
     JSQMessage *copyMessage = [[self.messages lastObject] copy];
     NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
@@ -168,7 +164,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     [self finishSending];
 }
 
-- (void)jsqDemo_closePressed:(UIBarButtonItem *)sender
+- (void)closePressed:(UIBarButtonItem *)sender
 {
     [self.delegateModal didDismissJSQDemoViewController:self];
 }
