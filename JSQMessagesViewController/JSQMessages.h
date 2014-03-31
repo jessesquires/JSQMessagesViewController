@@ -16,18 +16,20 @@
 #define JSQMessages_JSQMessages_h
 
 #import "JSQMessagesViewController.h"
+
 #import "JSQMessagesCollectionView.h"
-#import "JSQMessagesCollectionViewFlowLayout.h"
-#import "JSQMessagesCollectionViewLayoutAttributes.h"
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
 
-#import "JSQMessagesToolbarContentView.h"
-#import "JSQMessagesInputToolbar.h"
-#import "JSQMessagesComposerTextView.h"
+#import "JSQMessagesCollectionViewFlowLayout.h"
+#import "JSQMessagesCollectionViewLayoutAttributes.h"
 
-#import "JSQMessageData.h"
+#import "JSQMessagesComposerTextView.h"
+#import "JSQMessagesInputToolbar.h"
+#import "JSQMessagesToolbarContentView.h"
+
 #import "JSQMessage.h"
+#import "JSQMessageData.h"
 
 #import "JSQMessagesAvatarFactory.h"
 #import "JSQMessagesBubbleImageFactory.h"
