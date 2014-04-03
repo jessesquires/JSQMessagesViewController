@@ -252,12 +252,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     if (items > 0) {
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:items - 1 inSection:0]
-                                    atScrollPosition:UICollectionViewScrollPositionBottom
+                                    atScrollPosition:UICollectionViewScrollPositionTop
                                             animated:animated];
     }
-    
-    CGFloat bottomSectionInset = self.collectionView.collectionViewLayout.sectionInset.bottom;
-    self.collectionView.contentOffset = CGPointMake(0.0f, self.collectionView.contentOffset.y + bottomSectionInset);
 }
 
 #pragma mark - JSQMessages collection view data source
