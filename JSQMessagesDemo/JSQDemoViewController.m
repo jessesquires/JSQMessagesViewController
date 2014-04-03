@@ -155,6 +155,11 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 - (void)receiveMessagePressed:(UIBarButtonItem *)sender
 {
     JSQMessage *copyMessage = [[self.messages lastObject] copy];
+    
+    if (!copyMessage) {
+        return;
+    }
+    
     NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
     [copyAvatars removeObject:self.sender];
     copyMessage.sender = [copyAvatars objectAtIndex:arc4random_uniform((int)[copyAvatars count])];

@@ -57,6 +57,8 @@
 
 @protocol JSQMessagesCollectionViewDelegateFlowLayout <UICollectionViewDelegateFlowLayout>
 
+@optional
+
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
            layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout
            heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath;
