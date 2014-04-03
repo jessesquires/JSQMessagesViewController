@@ -54,7 +54,8 @@
     
     JSQMessagesCollectionViewLayoutAttributes *layoutAttributes = (JSQMessagesCollectionViewLayoutAttributes *)object;
     
-    if (layoutAttributes.messageBubbleHorizontalPadding != self.messageBubbleHorizontalPadding
+    if ([layoutAttributes.messageBubbleFont isEqual:self.messageBubbleFont]
+        || layoutAttributes.messageBubbleHorizontalPadding != self.messageBubbleHorizontalPadding
         || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.messageBubbleTextContainerInsets, self.messageBubbleTextContainerInsets)
         || !CGSizeEqualToSize(layoutAttributes.avatarViewSize, self.avatarViewSize)
         || layoutAttributes.cellTopLabelHeight != self.cellTopLabelHeight
@@ -68,7 +69,8 @@
 
 - (NSUInteger)hash
 {
-    NSUInteger customHash = (int)self.messageBubbleHorizontalPadding
+    NSUInteger customHash = [self.messageBubbleFont hash]
+                            ^ (int)self.messageBubbleHorizontalPadding
                             ^ (int)(self.avatarViewSize.width + self.avatarViewSize.height)
                             ^ (int)self.cellTopLabelHeight
                             ^ (int)self.messageBubbleTopLabelHeight
@@ -82,6 +84,7 @@
 - (instancetype)copyWithZone:(NSZone *)zone
 {
     JSQMessagesCollectionViewLayoutAttributes *copy = [super copyWithZone:zone];
+    copy.messageBubbleFont = self.messageBubbleFont;
     copy.messageBubbleHorizontalPadding = self.messageBubbleHorizontalPadding;
     copy.messageBubbleTextContainerInsets = self.messageBubbleTextContainerInsets;
     copy.avatarViewSize = self.avatarViewSize;

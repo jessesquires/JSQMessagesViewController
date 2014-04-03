@@ -28,7 +28,7 @@
 @property (weak, nonatomic) UIImageView *messageBubbleImageView;
 @property (weak, nonatomic) UIImageView *avatarImageView;
 
-@property (strong, nonatomic) UIFont *font UI_APPEARANCE_SELECTOR;
+// TODO: textview frame insets
 
 #pragma mark - Class methods
 

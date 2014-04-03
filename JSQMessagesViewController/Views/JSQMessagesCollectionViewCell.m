@@ -47,8 +47,6 @@
 
 @implementation JSQMessagesCollectionViewCell
 
-@synthesize font = _font;
-
 #pragma mark - Class methods
 
 + (UINib *)nib
@@ -119,6 +117,7 @@
     
     JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
     
+    self.textView.font = customAttributes.messageBubbleFont;
     self.messageBubbleContainerHorizontalPaddingConstraint.constant = customAttributes.messageBubbleHorizontalPadding;
     self.textView.textContainerInset = customAttributes.messageBubbleTextContainerInsets;
     self.avatarViewSize = customAttributes.avatarViewSize;
@@ -144,13 +143,6 @@
     
     self.messageBubbleContainerView.backgroundColor = backgroundColor;
     self.avatarContainerView.backgroundColor = backgroundColor;
-}
-
-- (void)setFont:(UIFont *)font
-{
-    _font = font;
-    _textView.font = font;
-    [self setNeedsLayout];
 }
 
 - (void)setMessageBubbleImageView:(UIImageView *)messageBubbleImageView
@@ -209,15 +201,6 @@
 }
 
 #pragma mark - Getters
-
-- (UIFont *)font
-{
-    if (!_font) {
-        _font = [[[self class] appearance] font];
-    }
-    
-    return _font;
-}
 
 - (CGSize)avatarViewSize
 {

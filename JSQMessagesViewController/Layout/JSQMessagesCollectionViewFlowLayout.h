@@ -39,10 +39,14 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 
 @property (readonly, nonatomic) CGFloat itemWidth;
 
-@property (assign, nonatomic) CGFloat messageBubbleMinimumHorizontalPadding;
+@property (strong, nonatomic) UIFont *messageBubbleFont;
+
+// more of a suggestion or recommendation to the layout
+@property (assign, nonatomic) CGFloat messageBubbleLeftRightMargin;
 
 @property (assign, nonatomic) UIEdgeInsets messageBubbleTextContainerInsets;
 
+// TODO: need incoming and outgoing
 @property (assign, nonatomic) CGSize avatarViewSize;
 
 - (CGSize)messageBubbleSizeForItemAtIndexPath:(NSIndexPath *)indexPath;
