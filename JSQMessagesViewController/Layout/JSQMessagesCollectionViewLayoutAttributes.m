@@ -17,6 +17,13 @@
 
 @implementation JSQMessagesCollectionViewLayoutAttributes
 
+#pragma mark - Lifecycle
+
+- (void)dealloc
+{
+    _messageBubbleFont = nil;
+}
+
 #pragma mark - Setters
 
 - (void)setMessageBubbleHorizontalPadding:(CGFloat)messageBubbleHorizontalPadding
