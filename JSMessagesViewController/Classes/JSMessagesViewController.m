@@ -464,6 +464,11 @@
         changeInHeight = MIN(changeInHeight, maxHeight - self.previousTextViewContentHeight);
     }
     
+    //self.previous = 0 on first time view displayed. There were sizing issues when there was text already, as the layout method was called with a changeInHeight value
+    if (self.previousTextViewContentHeight == 0 && ![textView.text isEqualToString:@""]) {
+        changeInHeight = textView.contentSize.height-36; //TODO: magic 36 for default bar-size...where do you come from, 36?
+    }
+    
     if(changeInHeight != 0.0f) {
         [UIView animateWithDuration:0.25f
                          animations:^{
