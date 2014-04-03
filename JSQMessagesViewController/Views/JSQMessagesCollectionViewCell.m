@@ -37,7 +37,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidthContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightContraint;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleContainerHorizontalPaddingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleLeftRightMarginConstraint;
 
 @property (assign, nonatomic) CGSize avatarViewSize;
 
@@ -118,7 +118,7 @@
     JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
     
     self.textView.font = customAttributes.messageBubbleFont;
-    self.messageBubbleContainerHorizontalPaddingConstraint.constant = customAttributes.messageBubbleHorizontalPadding;
+    self.messageBubbleLeftRightMarginConstraint.constant = customAttributes.messageBubbleLeftRightMargin;
     self.textView.textContainerInset = customAttributes.messageBubbleTextContainerInsets;
     self.avatarViewSize = customAttributes.avatarViewSize;
     self.cellTopLabelHeightContraint.constant = customAttributes.cellTopLabelHeight;

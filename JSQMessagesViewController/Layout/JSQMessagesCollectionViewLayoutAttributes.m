@@ -26,9 +26,9 @@
 
 #pragma mark - Setters
 
-- (void)setMessageBubbleHorizontalPadding:(CGFloat)messageBubbleHorizontalPadding
+- (void)setMessageBubbleLeftRightMargin:(CGFloat)messageBubbleLeftRightMargin
 {
-    _messageBubbleHorizontalPadding = ceilf(messageBubbleHorizontalPadding);
+    _messageBubbleLeftRightMargin = ceilf(messageBubbleLeftRightMargin);
 }
 
 - (void)setAvatarViewSize:(CGSize)avatarViewSize
@@ -62,7 +62,7 @@
     JSQMessagesCollectionViewLayoutAttributes *layoutAttributes = (JSQMessagesCollectionViewLayoutAttributes *)object;
     
     if ([layoutAttributes.messageBubbleFont isEqual:self.messageBubbleFont]
-        || layoutAttributes.messageBubbleHorizontalPadding != self.messageBubbleHorizontalPadding
+        || layoutAttributes.messageBubbleLeftRightMargin != self.messageBubbleLeftRightMargin
         || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.messageBubbleTextContainerInsets, self.messageBubbleTextContainerInsets)
         || !CGSizeEqualToSize(layoutAttributes.avatarViewSize, self.avatarViewSize)
         || layoutAttributes.cellTopLabelHeight != self.cellTopLabelHeight
@@ -77,7 +77,7 @@
 - (NSUInteger)hash
 {
     NSUInteger customHash = [self.messageBubbleFont hash]
-                            ^ (int)self.messageBubbleHorizontalPadding
+                            ^ (int)self.messageBubbleLeftRightMargin
                             ^ (int)(self.avatarViewSize.width + self.avatarViewSize.height)
                             ^ (int)self.cellTopLabelHeight
                             ^ (int)self.messageBubbleTopLabelHeight
@@ -92,7 +92,7 @@
 {
     JSQMessagesCollectionViewLayoutAttributes *copy = [super copyWithZone:zone];
     copy.messageBubbleFont = self.messageBubbleFont;
-    copy.messageBubbleHorizontalPadding = self.messageBubbleHorizontalPadding;
+    copy.messageBubbleLeftRightMargin = self.messageBubbleLeftRightMargin;
     copy.messageBubbleTextContainerInsets = self.messageBubbleTextContainerInsets;
     copy.avatarViewSize = self.avatarViewSize;
     copy.cellTopLabelHeight = self.cellTopLabelHeight;

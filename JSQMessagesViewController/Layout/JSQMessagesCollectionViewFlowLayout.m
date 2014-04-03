@@ -308,7 +308,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     CGFloat textPadding = [self jsq_messageBubbleTextContainerInsetsTotal];
     CGFloat messageBubblePadding = remainingItemWidthForBubble - messageBubbleSize.width - textPadding;
     
-    layoutAttributes.messageBubbleHorizontalPadding = messageBubblePadding;
+    layoutAttributes.messageBubbleLeftRightMargin = messageBubblePadding;
     
     layoutAttributes.messageBubbleTextContainerInsets = self.messageBubbleTextContainerInsets;
     
