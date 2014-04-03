@@ -119,6 +119,19 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     return self;
 }
 
+- (void)dealloc
+{
+    _collectionView = nil;
+    _inputToolbar = nil;
+    
+    _toolbarHeightContraint = nil;
+    _toolbarBottomLayoutGuide = nil;
+    
+    _sender = nil;
+    _outgoingCellIdentifier = nil;
+    _incomingCellIdentifier = nil;
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -197,7 +210,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
     // TODO: deal with keyboard on rotation
-    [self.inputToolbar.contentView.textView resignFirstResponder];
 }
 
 - (void)jsq_prepareForRotation
@@ -243,6 +255,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                     atScrollPosition:UICollectionViewScrollPositionBottom
                                             animated:animated];
     }
+    
+    CGFloat bottomSectionInset = self.collectionView.collectionViewLayout.sectionInset.bottom;
+    self.collectionView.contentOffset = CGPointMake(0.0f, self.collectionView.contentOffset.y + bottomSectionInset);
 }
 
 #pragma mark - JSQMessages collection view data source
@@ -253,13 +268,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     return nil;
 }
 
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender  bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
     return nil;
 }
 
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender  avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
     return nil;
@@ -295,14 +310,20 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+    NSAssert(messageData, @"ERROR: messageData must not be nil");
     
     NSString *messageSender = [messageData sender];
+    NSAssert(messageSender, @"ERROR: messageData sender must not be nil");
+    
     BOOL isOutgoingMessage = [messageSender isEqualToString:self.sender];
     
     NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    cell.textView.text = [messageData text];
+    NSString *messageText = [messageData text];
+    NSAssert(messageText, @"ERROR: messageData text must not be nil");
+    
+    cell.textView.text = messageText;
     
     cell.messageBubbleImageView = [collectionView.dataSource collectionView:collectionView
                                                                      sender:messageSender bubbleImageViewForItemAtIndexPath:indexPath];
