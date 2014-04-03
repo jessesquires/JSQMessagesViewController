@@ -37,8 +37,6 @@
 - (void)handleWillHideKeyboardNotification:(NSNotification *)notification;
 - (void)keyboardWillShowHide:(NSNotification *)notification;
 
-- (UIViewAnimationOptions)animationOptionsForCurve:(UIViewAnimationCurve)curve;
-
 @end
 
 
@@ -470,8 +468,9 @@
     
     [UIView animateWithDuration:duration
                           delay:0.0
-                        options:[self animationOptionsForCurve:curve]
+                        options:0
                      animations:^{
+                         [UIView setAnimationCurve:curve];
                          CGFloat keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;
                          
                          CGRect inputViewFrame = self.messageInputView.frame;
@@ -508,28 +507,6 @@
     CGRect inputViewFrame = self.messageInputView.frame;
     inputViewFrame.origin.y = self.view.bounds.size.height - inputViewFrame.size.height;
     self.messageInputView.frame = inputViewFrame;
-}
-
-#pragma mark - Utilities
-
-- (UIViewAnimationOptions)animationOptionsForCurve:(UIViewAnimationCurve)curve
-{
-    switch (curve) {
-        case UIViewAnimationCurveEaseInOut:
-            return UIViewAnimationOptionCurveEaseInOut;
-            
-        case UIViewAnimationCurveEaseIn:
-            return UIViewAnimationOptionCurveEaseIn;
-            
-        case UIViewAnimationCurveEaseOut:
-            return UIViewAnimationOptionCurveEaseOut;
-            
-        case UIViewAnimationCurveLinear:
-            return UIViewAnimationOptionCurveLinear;
-            
-        default:
-            return kNilOptions;
-    }
 }
 
 @end
