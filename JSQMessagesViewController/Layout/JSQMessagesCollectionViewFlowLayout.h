@@ -46,8 +46,9 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 
 @property (assign, nonatomic) UIEdgeInsets messageBubbleTextContainerInsets;
 
-// TODO: need incoming and outgoing
-@property (assign, nonatomic) CGSize avatarViewSize;
+@property (assign, nonatomic) CGSize incomingAvatarViewSize;
+
+@property (assign, nonatomic) CGSize outgoingAvatarViewSize;
 
 - (CGSize)messageBubbleSizeForItemAtIndexPath:(NSIndexPath *)indexPath;
 

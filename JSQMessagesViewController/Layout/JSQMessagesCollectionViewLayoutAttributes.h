@@ -23,7 +23,9 @@
 
 @property (assign, nonatomic) UIEdgeInsets messageBubbleTextContainerInsets;
 
-@property (assign, nonatomic) CGSize avatarViewSize;
+@property (assign, nonatomic) CGSize incomingAvatarViewSize;
+
+@property (assign, nonatomic) CGSize outgoingAvatarViewSize;
 
 @property (assign, nonatomic) CGFloat cellTopLabelHeight;
 

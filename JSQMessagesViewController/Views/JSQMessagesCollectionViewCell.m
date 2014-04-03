@@ -14,6 +14,8 @@
 
 #import "JSQMessagesCollectionViewCell.h"
 
+#import "JSQMessagesCollectionViewCellIncoming.h"
+#import "JSQMessagesCollectionViewCellOutgoing.h"
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 
 #import "UIView+JSQMessages.h"
@@ -120,10 +122,16 @@
     self.textView.font = customAttributes.messageBubbleFont;
     self.messageBubbleLeftRightMarginConstraint.constant = customAttributes.messageBubbleLeftRightMargin;
     self.textView.textContainerInset = customAttributes.messageBubbleTextContainerInsets;
-    self.avatarViewSize = customAttributes.avatarViewSize;
     self.cellTopLabelHeightContraint.constant = customAttributes.cellTopLabelHeight;
     self.messageBubbleTopLabelHeightContraint.constant = customAttributes.messageBubbleTopLabelHeight;
     self.cellBottomLabelHeightContraint.constant = customAttributes.cellBottomLabelHeight;
+    
+    if ([self isKindOfClass:[JSQMessagesCollectionViewCellIncoming class]]) {
+        self.avatarViewSize = customAttributes.incomingAvatarViewSize;
+    }
+    else if ([self isKindOfClass:[JSQMessagesCollectionViewCellOutgoing class]]) {
+        self.avatarViewSize = customAttributes.outgoingAvatarViewSize;
+    }
     
     [self setNeedsUpdateConstraints];
 }

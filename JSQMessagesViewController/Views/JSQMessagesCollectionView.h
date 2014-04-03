@@ -26,6 +26,8 @@
 
 @required
 
+- (NSString *)sender;
+
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView
                       messageDataForItemAtIndexPath:(NSIndexPath *)indexPath;
 

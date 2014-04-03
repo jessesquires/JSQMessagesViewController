@@ -51,22 +51,24 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  Create avatar images once and save
      */
-    CGFloat diameter = self.collectionView.collectionViewLayout.avatarViewSize.width;
+    CGFloat outgoingDiameter = self.collectionView.collectionViewLayout.outgoingAvatarViewSize.width;
     
     UIImage *jsqImage = [JSQMessagesAvatarFactory avatarWithUserInitials:@"JSQ"
                                                          backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
                                                                textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
                                                                     font:[UIFont systemFontOfSize:14.0f]
-                                                                diameter:diameter];
+                                                                diameter:outgoingDiameter];
+    
+    CGFloat incomingDiameter = self.collectionView.collectionViewLayout.incomingAvatarViewSize.width;
     
     UIImage *cookImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_cook"]
-                                                          diameter:diameter];
+                                                          diameter:incomingDiameter];
     
     UIImage *jobsImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]
-                                                          diameter:diameter];
+                                                          diameter:incomingDiameter];
     
     UIImage *wozImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_woz"]
-                                                         diameter:diameter];
+                                                         diameter:incomingDiameter];
     self.avatars = @{ self.sender : jsqImage,
                       kJSQDemoAvatarNameCook : cookImage,
                       kJSQDemoAvatarNameJobs : jobsImage,

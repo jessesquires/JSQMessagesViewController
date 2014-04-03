@@ -31,9 +31,14 @@
     _messageBubbleLeftRightMargin = ceilf(messageBubbleLeftRightMargin);
 }
 
-- (void)setAvatarViewSize:(CGSize)avatarViewSize
+- (void)setIncomingAvatarViewSize:(CGSize)incomingAvatarViewSize
 {
-    _avatarViewSize = CGSizeMake(ceil(avatarViewSize.width), ceilf(avatarViewSize.height));
+    _incomingAvatarViewSize = CGSizeMake(ceil(incomingAvatarViewSize.width), ceilf(incomingAvatarViewSize.height));
+}
+
+- (void)setOutgoingAvatarViewSize:(CGSize)outgoingAvatarViewSize
+{
+    _outgoingAvatarViewSize = CGSizeMake(ceil(outgoingAvatarViewSize.width), ceilf(outgoingAvatarViewSize.height));
 }
 
 - (void)setCellTopLabelHeight:(CGFloat)cellTopLabelHeight
@@ -64,7 +69,8 @@
     if ([layoutAttributes.messageBubbleFont isEqual:self.messageBubbleFont]
         || layoutAttributes.messageBubbleLeftRightMargin != self.messageBubbleLeftRightMargin
         || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.messageBubbleTextContainerInsets, self.messageBubbleTextContainerInsets)
-        || !CGSizeEqualToSize(layoutAttributes.avatarViewSize, self.avatarViewSize)
+        || !CGSizeEqualToSize(layoutAttributes.incomingAvatarViewSize, self.incomingAvatarViewSize)
+        || !CGSizeEqualToSize(layoutAttributes.outgoingAvatarViewSize, self.outgoingAvatarViewSize)
         || layoutAttributes.cellTopLabelHeight != self.cellTopLabelHeight
         || layoutAttributes.messageBubbleTopLabelHeight != self.messageBubbleTopLabelHeight
         || layoutAttributes.cellBottomLabelHeight != self.cellBottomLabelHeight) {
@@ -78,7 +84,8 @@
 {
     NSUInteger customHash = [self.messageBubbleFont hash]
                             ^ (int)self.messageBubbleLeftRightMargin
-                            ^ (int)(self.avatarViewSize.width + self.avatarViewSize.height)
+                            ^ (int)(self.incomingAvatarViewSize.width + self.incomingAvatarViewSize.height)
+                            ^ (int)(self.outgoingAvatarViewSize.width + self.outgoingAvatarViewSize.height)
                             ^ (int)self.cellTopLabelHeight
                             ^ (int)self.messageBubbleTopLabelHeight
                             ^ (int)self.cellBottomLabelHeight;
@@ -94,7 +101,8 @@
     copy.messageBubbleFont = self.messageBubbleFont;
     copy.messageBubbleLeftRightMargin = self.messageBubbleLeftRightMargin;
     copy.messageBubbleTextContainerInsets = self.messageBubbleTextContainerInsets;
-    copy.avatarViewSize = self.avatarViewSize;
+    copy.incomingAvatarViewSize = self.incomingAvatarViewSize;
+    copy.outgoingAvatarViewSize = self.outgoingAvatarViewSize;
     copy.cellTopLabelHeight = self.cellTopLabelHeight;
     copy.messageBubbleTopLabelHeight = self.messageBubbleTopLabelHeight;
     copy.cellBottomLabelHeight = self.cellBottomLabelHeight;

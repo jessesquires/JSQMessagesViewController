@@ -47,6 +47,8 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 - (CGFloat)jsq_messageBubbleTextContainerInsetsTotal;
 
+- (CGSize)jsq_avatarSizeForIndexPath:(NSIndexPath *)indexPath;
+
 - (UIAttachmentBehavior *)jsq_springBehaviorWithLayoutAttributesItem:(UICollectionViewLayoutAttributes *)item;
 
 - (void)jsq_addNewlyVisibleBehaviorsFromVisibleItems:(NSArray *)visibleItems;
@@ -76,7 +78,10 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     self.messageBubbleFont = [UIFont systemFontOfSize:15.0f];
     self.messageBubbleLeftRightMargin = 40.0f;
     self.messageBubbleTextContainerInsets = UIEdgeInsetsMake(10.0f, 8.0f, 10.0f, 8.0f);
-    self.avatarViewSize = CGSizeMake(34.0f, 34.0f);
+    
+    CGSize defaultAvatarSize = CGSizeMake(34.0f, 34.0f);
+    self.incomingAvatarViewSize = defaultAvatarSize;
+    self.outgoingAvatarViewSize = defaultAvatarSize;
     
     _springinessEnabled = NO;
     _springResistanceFactor = 900;
@@ -132,9 +137,15 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     [self invalidateLayout];
 }
 
-- (void)setAvatarViewSize:(CGSize)avatarViewSize
+- (void)setIncomingAvatarViewSize:(CGSize)incomingAvatarViewSize
 {
-    _avatarViewSize = avatarViewSize;
+    _incomingAvatarViewSize = incomingAvatarViewSize;
+    [self invalidateLayout];
+}
+
+- (void)setOutgoingAvatarViewSize:(CGSize)outgoingAvatarViewSize
+{
+    _outgoingAvatarViewSize = outgoingAvatarViewSize;
     [self invalidateLayout];
 }
 
@@ -281,7 +292,9 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
     
-    CGFloat maximumTextWidth = self.itemWidth - self.avatarViewSize.width - self.messageBubbleLeftRightMargin;
+    CGSize avatarSize = [self jsq_avatarSizeForIndexPath:indexPath];
+    
+    CGFloat maximumTextWidth = self.itemWidth - avatarSize.width - self.messageBubbleLeftRightMargin;
     
     CGFloat textInsetsTotal = [self jsq_messageBubbleTextContainerInsetsTotal];
     
@@ -304,7 +317,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     NSIndexPath *indexPath = layoutAttributes.indexPath;
     
     CGSize messageBubbleSize = [self messageBubbleSizeForItemAtIndexPath:indexPath];
-    CGFloat remainingItemWidthForBubble = self.itemWidth - self.avatarViewSize.width;
+    CGFloat remainingItemWidthForBubble = self.itemWidth - [self jsq_avatarSizeForIndexPath:indexPath].width;
     CGFloat textPadding = [self jsq_messageBubbleTextContainerInsetsTotal];
     CGFloat messageBubblePadding = remainingItemWidthForBubble - messageBubbleSize.width - textPadding;
     
@@ -314,7 +327,9 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     layoutAttributes.messageBubbleFont = self.messageBubbleFont;
     
-    layoutAttributes.avatarViewSize = self.avatarViewSize;
+    layoutAttributes.incomingAvatarViewSize = self.incomingAvatarViewSize;
+    
+    layoutAttributes.outgoingAvatarViewSize = self.outgoingAvatarViewSize;
     
     layoutAttributes.cellTopLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
                                                                                 layout:self
@@ -333,6 +348,18 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 {
     UIEdgeInsets insets = self.messageBubbleTextContainerInsets;
     return insets.left + insets.right + insets.bottom + insets.top;
+}
+
+- (CGSize)jsq_avatarSizeForIndexPath:(NSIndexPath *)indexPath
+{
+    id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
+    NSString *messageSender = [messageData sender];
+   
+    if ([messageSender isEqualToString:[self.collectionView.dataSource sender]]) {
+        return self.outgoingAvatarViewSize;
+    }
+    
+    return self.incomingAvatarViewSize;
 }
 
 #pragma mark - Spring behavior utilities
