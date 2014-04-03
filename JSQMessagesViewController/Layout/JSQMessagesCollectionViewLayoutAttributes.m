@@ -67,13 +67,13 @@
     JSQMessagesCollectionViewLayoutAttributes *layoutAttributes = (JSQMessagesCollectionViewLayoutAttributes *)object;
     
     if ([layoutAttributes.messageBubbleFont isEqual:self.messageBubbleFont]
-        || layoutAttributes.messageBubbleLeftRightMargin != self.messageBubbleLeftRightMargin
         || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.messageBubbleTextContainerInsets, self.messageBubbleTextContainerInsets)
         || !CGSizeEqualToSize(layoutAttributes.incomingAvatarViewSize, self.incomingAvatarViewSize)
         || !CGSizeEqualToSize(layoutAttributes.outgoingAvatarViewSize, self.outgoingAvatarViewSize)
-        || layoutAttributes.cellTopLabelHeight != self.cellTopLabelHeight
-        || layoutAttributes.messageBubbleTopLabelHeight != self.messageBubbleTopLabelHeight
-        || layoutAttributes.cellBottomLabelHeight != self.cellBottomLabelHeight) {
+        || (int)layoutAttributes.messageBubbleLeftRightMargin != (int)self.messageBubbleLeftRightMargin
+        || (int)layoutAttributes.cellTopLabelHeight != (int)self.cellTopLabelHeight
+        || (int)layoutAttributes.messageBubbleTopLabelHeight != (int)self.messageBubbleTopLabelHeight
+        || (int)layoutAttributes.cellBottomLabelHeight != (int)self.cellBottomLabelHeight) {
         return NO;
     }
     
