@@ -44,6 +44,9 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 // more of a suggestion or recommendation to the layout
 @property (assign, nonatomic) CGFloat messageBubbleLeftRightMargin;
 
+// where right == avatar side, left = margin side
+@property (assign, nonatomic) UIEdgeInsets messageBubbleTextViewFrameInsets;
+
 @property (assign, nonatomic) UIEdgeInsets messageBubbleTextViewTextContainerInsets;
 
 @property (assign, nonatomic) CGSize incomingAvatarViewSize;

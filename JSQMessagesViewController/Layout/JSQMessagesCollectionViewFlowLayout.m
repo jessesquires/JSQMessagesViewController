@@ -77,6 +77,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     self.messageBubbleFont = [UIFont systemFontOfSize:15.0f];
     self.messageBubbleLeftRightMargin = 40.0f;
+    self.messageBubbleTextViewFrameInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 6.0f);
     self.messageBubbleTextViewTextContainerInsets = UIEdgeInsetsMake(10.0f, 8.0f, 10.0f, 8.0f);
     
     CGSize defaultAvatarSize = CGSizeMake(34.0f, 34.0f);
@@ -323,6 +324,8 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     CGFloat messageBubblePadding = remainingItemWidthForBubble - messageBubbleSize.width - textPadding;
     
     layoutAttributes.messageBubbleLeftRightMargin = messageBubblePadding;
+    
+    layoutAttributes.textViewFrameInsets = self.messageBubbleTextViewFrameInsets;
     
     layoutAttributes.textViewTextContainerInsets = self.messageBubbleTextViewTextContainerInsets;
     

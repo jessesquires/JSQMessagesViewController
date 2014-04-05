@@ -128,6 +128,7 @@
     
     self.textView.font = customAttributes.messageBubbleFont;
     self.messageBubbleLeftRightMarginConstraint.constant = customAttributes.messageBubbleLeftRightMargin;
+    self.textViewFrameInsets = customAttributes.textViewFrameInsets;
     self.textView.textContainerInset = customAttributes.textViewTextContainerInsets;
     self.cellTopLabelHeightContraint.constant = customAttributes.cellTopLabelHeight;
     self.messageBubbleTopLabelHeightContraint.constant = customAttributes.messageBubbleTopLabelHeight;
