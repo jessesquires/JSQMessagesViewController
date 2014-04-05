@@ -35,4 +35,20 @@
     [self jsq_pinSubview:subview toEdge:NSLayoutAttributeTrailing];
 }
 
+- (UIView *)jsq_findFirstResponder
+{
+    if ([self isFirstResponder]) {
+        return self;
+    }
+    
+    for (UIView *eachSubview in self.subviews) {
+        UIView *firstResponder = [eachSubview jsq_findFirstResponder];
+        if (firstResponder) {
+            return firstResponder;
+        }
+    }
+    
+    return nil;
+}
+
 @end
