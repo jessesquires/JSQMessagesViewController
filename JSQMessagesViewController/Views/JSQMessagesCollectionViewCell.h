@@ -28,8 +28,6 @@
 @property (weak, nonatomic) UIImageView *messageBubbleImageView;
 @property (weak, nonatomic) UIImageView *avatarImageView;
 
-// TODO: textview frame insets
-
 #pragma mark - Class methods
 
 + (UINib *)nib;

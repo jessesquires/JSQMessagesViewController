@@ -32,6 +32,11 @@
 @property (weak, nonatomic) IBOutlet UIView *messageBubbleContainerView;
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewTopVerticalSpaceConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewBottomVerticalSpaceConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewAvatarHorizontalSpaceConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewMarginHorizontalSpaceConstraint;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellTopLabelHeightContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleTopLabelHeightContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBottomLabelHeightContraint;
@@ -40,6 +45,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightContraint;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleLeftRightMarginConstraint;
+
+@property (assign, nonatomic) UIEdgeInsets textViewFrameInsets;
 
 @property (assign, nonatomic) CGSize avatarViewSize;
 
@@ -208,12 +215,29 @@
     [self setNeedsUpdateConstraints];
 }
 
+- (void)setTextViewFrameInsets:(UIEdgeInsets)textViewFrameInsets
+{
+    self.textViewTopVerticalSpaceConstraint.constant = textViewFrameInsets.top;
+    self.textViewBottomVerticalSpaceConstraint.constant = textViewFrameInsets.bottom;
+    self.textViewAvatarHorizontalSpaceConstraint.constant = textViewFrameInsets.right;
+    self.textViewMarginHorizontalSpaceConstraint.constant = textViewFrameInsets.left;
+    [self setNeedsUpdateConstraints];
+}
+
 #pragma mark - Getters
 
 - (CGSize)avatarViewSize
 {
     return CGSizeMake(self.avatarContainerViewWidthContraint.constant,
                       self.avatarContainerViewHeightContraint.constant);
+}
+
+- (UIEdgeInsets)textViewFrameInsets
+{
+    return UIEdgeInsetsMake(self.textViewTopVerticalSpaceConstraint.constant,
+                            self.textViewMarginHorizontalSpaceConstraint.constant,
+                            self.textViewBottomVerticalSpaceConstraint.constant,
+                            self.textViewAvatarHorizontalSpaceConstraint.constant);
 }
 
 @end
