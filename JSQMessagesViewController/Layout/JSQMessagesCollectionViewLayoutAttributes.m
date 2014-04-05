@@ -67,7 +67,7 @@
     JSQMessagesCollectionViewLayoutAttributes *layoutAttributes = (JSQMessagesCollectionViewLayoutAttributes *)object;
     
     if ([layoutAttributes.messageBubbleFont isEqual:self.messageBubbleFont]
-        || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.messageBubbleTextContainerInsets, self.messageBubbleTextContainerInsets)
+        || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewTextContainerInsets, self.textViewTextContainerInsets)
         || !CGSizeEqualToSize(layoutAttributes.incomingAvatarViewSize, self.incomingAvatarViewSize)
         || !CGSizeEqualToSize(layoutAttributes.outgoingAvatarViewSize, self.outgoingAvatarViewSize)
         || (int)layoutAttributes.messageBubbleLeftRightMargin != (int)self.messageBubbleLeftRightMargin
@@ -100,7 +100,7 @@
     JSQMessagesCollectionViewLayoutAttributes *copy = [super copyWithZone:zone];
     copy.messageBubbleFont = self.messageBubbleFont;
     copy.messageBubbleLeftRightMargin = self.messageBubbleLeftRightMargin;
-    copy.messageBubbleTextContainerInsets = self.messageBubbleTextContainerInsets;
+    copy.textViewTextContainerInsets = self.textViewTextContainerInsets;
     copy.incomingAvatarViewSize = self.incomingAvatarViewSize;
     copy.outgoingAvatarViewSize = self.outgoingAvatarViewSize;
     copy.cellTopLabelHeight = self.cellTopLabelHeight;

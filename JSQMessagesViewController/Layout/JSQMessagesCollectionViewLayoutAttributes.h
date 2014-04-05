@@ -21,7 +21,7 @@
 
 @property (assign, nonatomic) CGFloat messageBubbleLeftRightMargin;
 
-@property (assign, nonatomic) UIEdgeInsets messageBubbleTextContainerInsets;
+@property (assign, nonatomic) UIEdgeInsets textViewTextContainerInsets;
 
 @property (assign, nonatomic) CGSize incomingAvatarViewSize;
 

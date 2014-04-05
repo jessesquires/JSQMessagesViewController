@@ -77,7 +77,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     self.messageBubbleFont = [UIFont systemFontOfSize:15.0f];
     self.messageBubbleLeftRightMargin = 40.0f;
-    self.messageBubbleTextContainerInsets = UIEdgeInsetsMake(10.0f, 8.0f, 10.0f, 8.0f);
+    self.messageBubbleTextViewTextContainerInsets = UIEdgeInsetsMake(10.0f, 8.0f, 10.0f, 8.0f);
     
     CGSize defaultAvatarSize = CGSizeMake(34.0f, 34.0f);
     self.incomingAvatarViewSize = defaultAvatarSize;
@@ -131,9 +131,9 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     [self invalidateLayout];
 }
 
-- (void)setMessageBubbleTextContainerInsets:(UIEdgeInsets)messageBubbleTextContainerInsets
+- (void)setMessageBubbleTextViewTextContainerInsets:(UIEdgeInsets)messageBubbleTextContainerInsets
 {
-    _messageBubbleTextContainerInsets = messageBubbleTextContainerInsets;
+    _messageBubbleTextViewTextContainerInsets = messageBubbleTextContainerInsets;
     [self invalidateLayout];
 }
 
@@ -306,7 +306,8 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     CGSize stringSize = CGRectIntegral(stringRect).size;
     
     CGSize finalSize = CGSizeMake(stringSize.width,
-                                  stringSize.height + self.messageBubbleTextContainerInsets.top + self.messageBubbleTextContainerInsets.bottom);
+                                  stringSize.height + self.messageBubbleTextViewTextContainerInsets.top
+                                                    + self.messageBubbleTextViewTextContainerInsets.bottom);
     
     [self.messageBubbleSizes setObject:[NSValue valueWithCGSize:finalSize] forKey:indexPath];
     return finalSize;
@@ -323,7 +324,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     layoutAttributes.messageBubbleLeftRightMargin = messageBubblePadding;
     
-    layoutAttributes.messageBubbleTextContainerInsets = self.messageBubbleTextContainerInsets;
+    layoutAttributes.textViewTextContainerInsets = self.messageBubbleTextViewTextContainerInsets;
     
     layoutAttributes.messageBubbleFont = self.messageBubbleFont;
     
@@ -346,7 +347,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 - (CGFloat)jsq_messageBubbleTextContainerInsetsTotal
 {
-    UIEdgeInsets insets = self.messageBubbleTextContainerInsets;
+    UIEdgeInsets insets = self.messageBubbleTextViewTextContainerInsets;
     return insets.left + insets.right + insets.bottom + insets.top;
 }
 
