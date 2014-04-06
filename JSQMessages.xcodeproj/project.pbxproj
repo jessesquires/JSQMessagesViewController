@@ -70,6 +70,7 @@
 		8897FBF918CBF967004F59C3 /* JSQDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8897FBF818CBF967004F59C3 /* JSQDemoViewController.m */; };
 		88A57A3A18DBFDA10046BA15 /* JSQMessagesAvatarFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A57A3918DBFDA10046BA15 /* JSQMessagesAvatarFactoryTests.m */; };
 		88A57A3D18DC012C0046BA15 /* JSQMessagesBubbleImageFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A57A3C18DC012C0046BA15 /* JSQMessagesBubbleImageFactoryTests.m */; };
+		88ADC6FC18F0999000FE0266 /* JSQMessagesKeyboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88ADC6FB18F0999000FE0266 /* JSQMessagesKeyboardController.m */; };
 		C78CEF093F584B85B4321C83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 343577012CC24261BE4B61A1 /* libPods.a */; };
 		D68A9FB68FC5463D9A5B23E0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 343577012CC24261BE4B61A1 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -179,6 +180,8 @@
 		8897FBF818CBF967004F59C3 /* JSQDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSQDemoViewController.m; path = JSQMessagesDemo/JSQDemoViewController.m; sourceTree = SOURCE_ROOT; };
 		88A57A3918DBFDA10046BA15 /* JSQMessagesAvatarFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSQMessagesAvatarFactoryTests.m; path = "Factory Tests/JSQMessagesAvatarFactoryTests.m"; sourceTree = "<group>"; };
 		88A57A3C18DC012C0046BA15 /* JSQMessagesBubbleImageFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSQMessagesBubbleImageFactoryTests.m; path = "Factory Tests/JSQMessagesBubbleImageFactoryTests.m"; sourceTree = "<group>"; };
+		88ADC6FA18F0999000FE0266 /* JSQMessagesKeyboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesKeyboardController.h; sourceTree = "<group>"; };
+		88ADC6FB18F0999000FE0266 /* JSQMessagesKeyboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesKeyboardController.m; sourceTree = "<group>"; };
 		A0F1B1EFE54F44FEA6C4F786 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -283,6 +286,8 @@
 		8816A66518E9250400111919 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				88ADC6FA18F0999000FE0266 /* JSQMessagesKeyboardController.h */,
+				88ADC6FB18F0999000FE0266 /* JSQMessagesKeyboardController.m */,
 				8816A66618E9250400111919 /* JSQMessagesViewController.h */,
 				8816A66718E9250400111919 /* JSQMessagesViewController.m */,
 				8816A66818E9250400111919 /* JSQMessagesViewController.xib */,
@@ -663,6 +668,7 @@
 				8816A6AF18E9250400111919 /* JSQMessagesCollectionViewCell.m in Sources */,
 				885D596B18CBD2A600D77BB3 /* JSQTableViewController.m in Sources */,
 				8816A6B618E9250400111919 /* JSQMessagesLabel.m in Sources */,
+				88ADC6FC18F0999000FE0266 /* JSQMessagesKeyboardController.m in Sources */,
 				8816A6B418E9250400111919 /* JSQMessagesComposerTextView.m in Sources */,
 				8816A6AA18E9250400111919 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				8816A6A418E9250400111919 /* UIView+JSQMessages.m in Sources */,
