@@ -51,6 +51,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (JSQMessage *)jsq_currentlyComposedMessage;
 
+- (void)jsq_updateKeyboardTriggerPoint;
+
 - (BOOL)jsq_inputToolbarHasReachedMaximumHeight;
 - (void)jsq_adjustInputToolbarForComposerTextViewContentSizeChange:(CGFloat)dy;
 - (void)jsq_adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy;
@@ -107,7 +109,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self jsq_updateCollectionViewInsets];
     
     self.keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextView:self.inputToolbar.contentView.textView
-                                                                        referenceView:self.collectionView
+                                                                          contextView:self.collectionView
+                                                                 panGestureRecognizer:self.collectionView.panGestureRecognizer
                                                                              delegate:self];
 }
 
@@ -157,6 +160,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             [self.collectionView.collectionViewLayout invalidateLayout];
         });
     }
+    
+    [self jsq_updateKeyboardTriggerPoint];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -487,9 +492,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self jsq_updateCollectionViewInsets];
 }
 
-- (CGFloat)keyboardTriggerOffset
+- (void)jsq_updateKeyboardTriggerPoint
 {
-    return CGRectGetHeight(self.inputToolbar.bounds);
+    self.keyboardController.keyboardTriggerPoint = CGPointMake(0.0f, CGRectGetHeight(self.inputToolbar.bounds));
 }
 
 #pragma mark - Input toolbar utilities
@@ -522,6 +527,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     
     [self jsq_adjustInputToolbarHeightConstraintByDelta:dy];
+    
+    [self jsq_updateKeyboardTriggerPoint];
     
     if (dy < 0) {
         [self jsq_scrollComposerTextViewToBottomAnimated:NO];

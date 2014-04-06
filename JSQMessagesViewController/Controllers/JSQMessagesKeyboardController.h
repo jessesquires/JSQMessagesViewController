@@ -20,8 +20,6 @@
 @required
 - (void)keyboardDidChangeFrame:(CGRect)keyboardFrame;
 
-- (CGFloat)keyboardTriggerOffset;
-
 @end
 
 
@@ -30,12 +28,17 @@
 
 @property (weak, nonatomic) id<JSQMessagesKeyboardControllerDelegate> delegate;
 
-@property (weak, nonatomic) UIView *referenceView;
+@property (weak, nonatomic, readonly) UITextView *textView;
 
-@property (weak, nonatomic) UITextView *textView;
+@property (weak, nonatomic, readonly) UIView *contextView;
+
+@property (weak, nonatomic, readonly) UIPanGestureRecognizer *panGestureRecognizer;
+
+@property (assign, nonatomic) CGPoint keyboardTriggerPoint;
 
 - (instancetype)initWithTextView:(UITextView *)textView
-                   referenceView:(UIView *)referenceView
+                     contextView:(UIView *)contextView
+            panGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer
                         delegate:(id<JSQMessagesKeyboardControllerDelegate>)delegate;
 
 - (void)beginListeningForKeyboard;
