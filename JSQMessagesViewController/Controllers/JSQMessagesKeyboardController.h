@@ -38,7 +38,8 @@
                    referenceView:(UIView *)referenceView
                         delegate:(id<JSQMessagesKeyboardControllerDelegate>)delegate;
 
-- (void)add;
-- (void)remove;
+- (void)beginListeningForKeyboard;
+
+- (void)endListeningForKeyboard;
 
 @end

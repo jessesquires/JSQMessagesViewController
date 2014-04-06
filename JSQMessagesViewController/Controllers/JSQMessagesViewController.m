@@ -14,7 +14,7 @@
 
 #import "JSQMessagesViewController.h"
 
-#import <DAKeyboardControl/DAKeyboardControl.h>
+#import "JSQMessagesKeyboardController.h"
 
 #import "JSQMessageData.h"
 #import "JSQMessage.h"
@@ -35,7 +35,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 
 
-@interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate, UITextViewDelegate>
+@interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate, JSQMessagesKeyboardControllerDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
@@ -43,14 +43,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightContraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
 
+@property (strong, nonatomic) JSQMessagesKeyboardController *keyboardController;
+
 - (void)jsq_prepareMessagesViewController;
 
 - (void)jsq_prepareForRotation;
 
 - (JSQMessage *)jsq_currentlyComposedMessage;
-
-- (void)jsq_configureKeyboardControl;
-- (void)jsq_updateKeyboardTriggerOffset;
 
 - (BOOL)jsq_inputToolbarHasReachedMaximumHeight;
 - (void)jsq_adjustInputToolbarForComposerTextViewContentSizeChange:(CGFloat)dy;
@@ -106,6 +105,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
     
     [self jsq_updateCollectionViewInsets];
+    
+    self.keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextView:self.inputToolbar.contentView.textView
+                                                                        referenceView:self.collectionView
+                                                                             delegate:self];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -130,6 +133,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     _sender = nil;
     _outgoingCellIdentifier = nil;
     _incomingCellIdentifier = nil;
+    
+    _keyboardController = nil;
 }
 
 #pragma mark - View lifecycle
@@ -152,15 +157,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             [self.collectionView.collectionViewLayout invalidateLayout];
         });
     }
-    
-    [self jsq_updateKeyboardTriggerOffset];
-    [self jsq_configureKeyboardControl];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [self jsq_addObservers];
+    [self.keyboardController beginListeningForKeyboard];
     
     self.collectionView.collectionViewLayout.springinessEnabled = YES;
 }
@@ -168,8 +171,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [self.view removeKeyboardControl];
     [self jsq_removeObservers];
+    [self.keyboardController endListeningForKeyboard];
 }
 
 - (void)didReceiveMemoryWarning
@@ -208,14 +211,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    
+    [self jsq_prepareForRotation];
     // TODO: deal with keyboard on rotation
 }
 
 - (void)jsq_prepareForRotation
 {
     // TODO: deal with keyboard on rotation
-    [self.inputToolbar.contentView.textView resignFirstResponder];
+//    [self.inputToolbar.contentView.textView resignFirstResponder];
     
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
@@ -350,7 +353,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
     }
     
-    cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
+//    cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
+    cell.textView.selectable = NO;
     
     return cell;
 }
@@ -467,31 +471,25 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
 }
 
-#pragma mark - Keyboard control utilities
+#pragma mark - Keyboard controller delegate
 
-- (void)jsq_configureKeyboardControl
+- (void)keyboardDidChangeFrame:(CGRect)keyboardFrame
 {
-    __weak JSQMessagesViewController *weakSelf = self;
-    __weak UIView *weakView = self.view;
-    __weak JSQMessagesInputToolbar *weakInputToolbar = self.inputToolbar;
-    __weak NSLayoutConstraint *weakToolbarBottomLayoutGuide = self.toolbarBottomLayoutGuide;
+    CGRect newToolbarFrame = self.inputToolbar.frame;
+    newToolbarFrame.origin.y = CGRectGetMinY(keyboardFrame) - CGRectGetHeight(newToolbarFrame);
     
-    [self.view addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView) {
-        CGRect newToolbarFrame = weakInputToolbar.frame;
-        newToolbarFrame.origin.y = CGRectGetMinY(keyboardFrameInView) - CGRectGetHeight(newToolbarFrame);
-        weakInputToolbar.frame = newToolbarFrame;
-        
-        CGFloat heightFromBottom = CGRectGetHeight(weakView.frame) - CGRectGetMinY(keyboardFrameInView);
-        weakToolbarBottomLayoutGuide.constant = heightFromBottom;
-        [weakSelf.view setNeedsUpdateConstraints];
-        
-        [weakSelf jsq_updateCollectionViewInsets];
-    }];
+    self.inputToolbar.frame = newToolbarFrame;
+    
+    CGFloat heightFromBottom = CGRectGetHeight(self.view.frame) - CGRectGetMinY(keyboardFrame);
+    self.toolbarBottomLayoutGuide.constant = heightFromBottom;
+    [self.view setNeedsUpdateConstraints];
+    
+    [self jsq_updateCollectionViewInsets];
 }
 
-- (void)jsq_updateKeyboardTriggerOffset
+- (CGFloat)keyboardTriggerOffset
 {
-    self.view.keyboardTriggerOffset = CGRectGetHeight(self.inputToolbar.bounds);
+    return CGRectGetHeight(self.inputToolbar.bounds);
 }
 
 #pragma mark - Input toolbar utilities
@@ -524,8 +522,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     
     [self jsq_adjustInputToolbarHeightConstraintByDelta:dy];
-    
-    [self jsq_updateKeyboardTriggerOffset];
     
     if (dy < 0) {
         [self jsq_scrollComposerTextViewToBottomAnimated:NO];
