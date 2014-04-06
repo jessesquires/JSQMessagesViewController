@@ -26,6 +26,21 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 @property (weak, nonatomic) UIView *keyboardView;
 
+- (void)jsq_registerForNotifications;
+- (void)jsq_unregisterForNotifications;
+
+- (void)jsq_didReceiveKeyboardDidShowNotification:(NSNotification *)notification;
+- (void)jsq_didReceiveKeyboardWillChangeFrameNotification:(NSNotification *)notification;
+- (void)jsq_didReceiveKeyboardDidChangeFrameNotification:(NSNotification *)notification;
+- (void)jsq_didReceiveKeyboardDidHideNotification:(NSNotification *)notification;
+- (void)jsq_handleKeyboardNotification:(NSNotification *)notification completion:(JSQAnimationCompletionBlock)completion;
+
+- (void)jsq_setKeyboardViewHidden:(BOOL)hidden;
+
+- (void)jsq_removeKeyboardFrameObserver;
+
+- (void)jsq_handlePanGestureRecognizer:(UIPanGestureRecognizer *)pan;
+
 @end
 
 
@@ -52,6 +67,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)dealloc
 {
+    [self jsq_removeKeyboardFrameObserver];
+    [self jsq_unregisterForNotifications];
     _textView = nil;
     _contextView = nil;
     _panGestureRecognizer = nil;
@@ -64,14 +81,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 - (void)setKeyboardView:(UIView *)keyboardView
 {
     if (_keyboardView) {
-        @try {
-            [_keyboardView removeObserver:self
-                               forKeyPath:NSStringFromSelector(@selector(frame))
-                                  context:kJSQMessagesKeyboardControllerKeyValueObservingContext];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"%s EXCEPTION CAUGHT : %@, %@", __PRETTY_FUNCTION__, exception, [exception userInfo]);
-        }
+        [self jsq_removeKeyboardFrameObserver];
     }
     
     _keyboardView = keyboardView;
@@ -95,7 +105,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 - (void)endListeningForKeyboard
 {
     self.textView.inputAccessoryView = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self jsq_unregisterForNotifications];
 }
 
 #pragma mark - Notifications
@@ -123,9 +133,15 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                                                object:nil];
 }
 
+- (void)jsq_unregisterForNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)jsq_didReceiveKeyboardDidShowNotification:(NSNotification *)notification
 {
     self.keyboardView = self.textView.inputAccessoryView.superview;
+    [self jsq_setKeyboardViewHidden:NO];
     
     [self jsq_handleKeyboardNotification:notification completion:^(BOOL finished) {
         [self.panGestureRecognizer addTarget:self action:@selector(jsq_handlePanGestureRecognizer:)];
@@ -139,6 +155,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)jsq_didReceiveKeyboardDidChangeFrameNotification:(NSNotification *)notification
 {
+    [self jsq_setKeyboardViewHidden:NO];
+    
     [self jsq_handleKeyboardNotification:notification completion:nil];
 }
 
@@ -148,32 +166,11 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     
     [self jsq_handleKeyboardNotification:notification completion:^(BOOL finished) {
         [self.panGestureRecognizer removeTarget:self action:NULL];
+        
+        [self jsq_setKeyboardViewHidden:YES];
+        [self.textView resignFirstResponder];
     }];
 }
-
-#pragma mark - Key-value observing
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if (context == kJSQMessagesKeyboardControllerKeyValueObservingContext) {
-        
-        if (object == self.keyboardView && [keyPath isEqualToString:NSStringFromSelector(@selector(frame))]) {
-            
-            CGRect oldKeyboardFrameSize = [[change objectForKey:NSKeyValueChangeOldKey] CGRectValue];
-            CGRect newKeyboardFrameSize = [[change objectForKey:NSKeyValueChangeNewKey] CGRectValue];
-            
-            if (CGRectEqualToRect(newKeyboardFrameSize, oldKeyboardFrameSize)) {
-                return;
-            }
-            
-            if (!CGRectIsNull(newKeyboardFrameSize)) {
-                [self.delegate keyboardDidChangeFrame:newKeyboardFrameSize];
-            }
-        }
-    }
-}
-
-#pragma mark - Keyboard utilities
 
 - (void)jsq_handleKeyboardNotification:(NSNotification *)notification completion:(JSQAnimationCompletionBlock)completion
 {
@@ -200,13 +197,51 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                      }];
 }
 
+- (void)jsq_setKeyboardViewHidden:(BOOL)hidden
+{
+    self.keyboardView.hidden = hidden;
+    self.keyboardView.userInteractionEnabled = !hidden;
+}
+
+#pragma mark - Key-value observing
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context == kJSQMessagesKeyboardControllerKeyValueObservingContext) {
+        
+        if (object == self.keyboardView && [keyPath isEqualToString:NSStringFromSelector(@selector(frame))]) {
+            
+            CGRect oldKeyboardFrameSize = [[change objectForKey:NSKeyValueChangeOldKey] CGRectValue];
+            CGRect newKeyboardFrameSize = [[change objectForKey:NSKeyValueChangeNewKey] CGRectValue];
+            
+            if (CGRectEqualToRect(newKeyboardFrameSize, oldKeyboardFrameSize)) {
+                return;
+            }
+            
+            if (!CGRectIsNull(newKeyboardFrameSize)) {
+                [self.delegate keyboardDidChangeFrame:newKeyboardFrameSize];
+            }
+        }
+    }
+}
+
+- (void)jsq_removeKeyboardFrameObserver
+{
+    @try {
+        [_keyboardView removeObserver:self
+                           forKeyPath:NSStringFromSelector(@selector(frame))
+                              context:kJSQMessagesKeyboardControllerKeyValueObservingContext];
+    }
+    @catch (NSException * __unused exception) { }
+}
+
 #pragma mark - Pan gesture recognizer
 
 - (void)jsq_handlePanGestureRecognizer:(UIPanGestureRecognizer *)pan
 {
     CGPoint touch = [pan locationInView:nil];
     
-    CGFloat referenceViewHeight = CGRectGetHeight(self.contextView.frame);
+    CGFloat contextViewHeight = CGRectGetHeight(self.contextView.frame);
     CGFloat keyboardViewHeight = CGRectGetHeight(self.keyboardView.frame);
     
     CGRect newKeyboardViewFrame = self.keyboardView.frame;
@@ -215,8 +250,10 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
         case UIGestureRecognizerStateChanged:
         {
             newKeyboardViewFrame.origin.y = touch.y + self.keyboardTriggerPoint.y;
-            newKeyboardViewFrame.origin.y = MIN(newKeyboardViewFrame.origin.y, referenceViewHeight);
-            newKeyboardViewFrame.origin.y = MAX(newKeyboardViewFrame.origin.y, referenceViewHeight - keyboardViewHeight);
+            
+            //  bound frame between bottom of view and height of keyboard
+            newKeyboardViewFrame.origin.y = MIN(newKeyboardViewFrame.origin.y, contextViewHeight);
+            newKeyboardViewFrame.origin.y = MAX(newKeyboardViewFrame.origin.y, contextViewHeight - keyboardViewHeight);
             
             if (CGRectGetMinY(newKeyboardViewFrame) == CGRectGetMinY(self.keyboardView.frame)) {
                 return;
@@ -231,6 +268,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                              completion:nil];
         }
             break;
+            
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:
@@ -238,9 +276,9 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
             CGPoint velocity = [pan velocityInView:self.contextView];
             BOOL shouldHide = (velocity.y > 0.0f);
             
-            newKeyboardViewFrame.origin.y = shouldHide ? referenceViewHeight : (referenceViewHeight - keyboardViewHeight);
+            newKeyboardViewFrame.origin.y = shouldHide ? contextViewHeight : (contextViewHeight - keyboardViewHeight);
             
-            [UIView animateWithDuration:0.2
+            [UIView animateWithDuration:0.25
                                   delay:0.0
                                 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseOut
                              animations:^{
@@ -248,6 +286,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                              }
                              completion:^(BOOL finished) {
                                  if (shouldHide) {
+                                     [self jsq_setKeyboardViewHidden:YES];
+                                     [self jsq_removeKeyboardFrameObserver];
                                      [self.textView resignFirstResponder];
                                  }
                              }];

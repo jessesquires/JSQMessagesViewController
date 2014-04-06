@@ -598,9 +598,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                                     forKeyPath:NSStringFromSelector(@selector(contentSize))
                                                        context:kJSQMessagesKeyValueObservingContext];
     }
-    @catch (NSException *exception) {
-        NSLog(@"%s EXCEPTION CAUGHT : %@, %@", __PRETTY_FUNCTION__, exception, [exception userInfo]);
-    }
+    @catch (NSException * __unused exception) { }
 }
 
 @end
