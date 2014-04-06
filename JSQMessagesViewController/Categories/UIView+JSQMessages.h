@@ -31,11 +31,4 @@
  */
 - (void)jsq_pinAllEdgesOfSubview:(UIView *)subview;
 
-/**
- *  Asks the receiver if it is currently the first responder. If not, then it recursively searches the subviews of the receiver to find the current first responder.
- *
- *  @return The receiver if it is currently the first responder, otherwise the first responder contained in the receiever's subviews or nil if there is no first responder.
- */
-- (UIView *)jsq_findFirstResponder;
-
 @end

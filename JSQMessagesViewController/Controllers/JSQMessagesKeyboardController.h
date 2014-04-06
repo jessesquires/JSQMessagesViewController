@@ -11,6 +11,15 @@
 //  Copyright (c) 2014 Jesse Squires
 //  http://opensource.org/licenses/MIT
 //
+//
+//
+//  Ideas for keyboard controller taken from Daniel Amitay
+//  DAKeyboardControl
+//
+//  The MIT License
+//  Copyright (c) 2012 Daniel Amitay
+//  https://github.com/danielamitay/DAKeyboardControl
+//
 
 #import <Foundation/Foundation.h>
 
