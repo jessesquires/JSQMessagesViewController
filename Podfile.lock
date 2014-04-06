@@ -1,13 +1,10 @@
 PODS:
-  - DAKeyboardControl (2.3.0)
   - JSQSystemSoundPlayer (1.4.0)
 
 DEPENDENCIES:
-  - DAKeyboardControl (~> 2.0)
   - JSQSystemSoundPlayer
 
 SPEC CHECKSUMS:
-  DAKeyboardControl: 219d6e32b9343eb85151255c43b1f238d8f0bbf7
   JSQSystemSoundPlayer: 28ccd01a92a0cebc6de6361e8499011b4cb6dab7
 
 COCOAPODS: 0.31.0
