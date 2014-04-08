@@ -29,6 +29,19 @@
 */
 + (UIImage *)avatarWithImage:(UIImage *)originalImage diameter:(NSUInteger)diameter;
 
+/**
+ *  Returns an image object with a circular shape that displays the specified userInitials with the given backgroundColor, textColor, font, and diameter.
+ *
+ *  @param userInitials    The user initials to display in the avatar image.
+ *  @param backgroundColor The background color of the avatar.
+ *  @param textColor       The color of the text of the userInitials.
+ *  @param font            The font applied to userInitials.
+ *  @param diameter        The diameter of the avatar image.
+ *
+ *  @return A new avatar image object having the specified attributes if created successfully, otherwise `nil`.
+ *
+ *  @discussion This method does not attempt to detect or correct incompatible parameters. That is to say, you are responsible for providing a font size and diameter that sense. For example a font size of `14.0f` and a diameter of `34.0f` will result in an avatar similar to Messages in iOS 7. However, a font size `30.0f` and diameter of `10.0f` will not produce a desirable image. Further, this method does not check the length of userInitials. It is recommended that you pass a string of length `2` or `3`.
+ */
 + (UIImage *)avatarWithUserInitials:(NSString *)userInitials
                     backgroundColor:(UIColor *)backgroundColor
                           textColor:(UIColor *)textColor

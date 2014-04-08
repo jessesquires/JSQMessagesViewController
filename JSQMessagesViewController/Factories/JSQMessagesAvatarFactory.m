@@ -45,7 +45,7 @@
                                   NSForegroundColorAttributeName : textColor };
     
     CGRect textFrame = [text boundingRectWithSize:frame.size
-                                          options:NSStringDrawingUsesLineFragmentOrigin
+                                          options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
                                        attributes:attributes
                                           context:nil];
     
