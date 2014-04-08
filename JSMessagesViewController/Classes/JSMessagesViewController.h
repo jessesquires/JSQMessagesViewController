@@ -71,6 +71,14 @@
 @optional
 
 /**
+ *  Tells the delegate that whether the user should send a message with the specified text and sender.
+ *
+ *  @param text   The text that was present in the textView of the messageInputView when the send button was pressed.
+ *  @param sender The user who sent the message.
+ */
+- (BOOL)shouldSendText:(NSString *)text fromSender:(NSString *)sender;
+
+/**
  *  Asks the delegate if a timestamp should be displayed *above* the row at the specified index path.
  *
  *  @param indexPath The index path of the row to be displayed.

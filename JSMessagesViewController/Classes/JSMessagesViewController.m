@@ -185,9 +185,16 @@
 
 - (void)sendPressed:(UIButton *)sender
 {
-    [self.delegate didSendText:[self.messageInputView.textView.text js_stringByTrimingWhitespace]
-                    fromSender:self.sender
-                        onDate:[NSDate date]];
+    NSString *message = [self.messageInputView.textView.text js_stringByTrimingWhitespace];
+    BOOL shouldSend = YES;
+    if ([self.delegate respondsToSelector:@selector(shouldSendText:fromSender:)]) {
+        shouldSend = [self.delegate shouldSendText:message fromSender:self.sender];
+    }
+    if (shouldSend) {
+        [self.delegate didSendText:message
+                        fromSender:self.sender
+                            onDate:[NSDate date]];
+    }
 }
 
 - (void)handleTapGestureRecognizer:(UITapGestureRecognizer *)tap
