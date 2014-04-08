@@ -52,9 +52,9 @@
  *
  *  @return A formatted, attributed string representation of date.
  *
- *  @see timestampForDate:
- *  @see dateTextAttributes
- *  @see timeTextAttributes
+ *  @see `timestampForDate:`.
+ *  @see dateTextAttributes.
+ *  @see timeTextAttributes.
  */
 - (NSAttributedString *)attributedTimestampForDate:(NSDate *)date;
 
