@@ -181,7 +181,7 @@
     return CGRectIntegral(CGRectMake((self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width : 0.0f),
                                      kMarginTop,
                                      bubbleSize.width,
-                                     bubbleSize.height + kMarginTop));
+                                     bubbleSize.height + kMarginBottom));
 }
 
 #pragma mark - Layout
