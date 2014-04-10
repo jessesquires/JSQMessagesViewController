@@ -22,30 +22,36 @@
 @class JSQMessage;
 
 /**
- *  The `JSQMessagesViewController` class represents a view controller whose content consists of a `JSQMessagesCollectionView` and `JSQMessagesInputToolbar` and is specialized to display a messaging interface.
+ *  The `JSQMessagesViewController` class represents a view controller whose content consists of 
+ *  a `JSQMessagesCollectionView` and `JSQMessagesInputToolbar` and is specialized to display a messaging interface.
  */
 @interface JSQMessagesViewController : UIViewController <JSQMessagesCollectionViewDataSource,
                                                          JSQMessagesCollectionViewDelegateFlowLayout>
 
 /**
- *  Returns the collection view object managed by this view controller. This view controller is the collection view's data source and delegate.
+ *  Returns the collection view object managed by this view controller. 
+ *  This view controller is the collection view's data source and delegate.
  */
 @property (weak, nonatomic, readonly) JSQMessagesCollectionView *collectionView;
 
 /**
- *  Returns the input toolbar view object managed by this view controller. This view controller is the toolbar's delegate.
+ *  Returns the input toolbar view object managed by this view controller. 
+ *  This view controller is the toolbar's delegate.
  */
 @property (weak, nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
 
 /**
- *  The name of the user sending messages. This value must not be `nil`. The default value is `@"JSQDefaultSender"`.
+ *  The name of the user sending messages. This value must not be `nil`. 
+ *  The default value is `@"JSQDefaultSender"`.
  */
 @property (copy, nonatomic) NSString *sender;
 
 /**
- *  Specifies whether or not the view controller should automatically scroll to the most recent message when the view appears and when sending, receiving, and composing a new message.
+ *  Specifies whether or not the view controller should automatically scroll to the most recent message 
+ *  when the view appears and when sending, receiving, and composing a new message.
  *
- *  @discussion The default value is `YES`, which allows the view controller to scroll automatically to the most recent message. Set to `NO` if you want to manage scrolling yourself.
+ *  @discussion The default value is `YES`, which allows the view controller to scroll automatically to the most recent message. 
+ *  Set to `NO` if you want to manage scrolling yourself.
  */
 @property (assign, nonatomic) BOOL automaticallyScrollsToMostRecentMessage;
 
@@ -56,7 +62,10 @@
  *  
  *  @see JSQMessagesCollectionViewCellOutgoing.
  *
- *  @warning Overriding this property's default value is *not* recommended. You should only override this property's default value if you are proividing your own cell prototypes. These prototypes must be registered with the collectionView for reuse and you are then responsible for completely overriding many delegate and data source methods for the collectionView, including `collectionView: cellForItemAtIndexPath:`.
+ *  @warning Overriding this property's default value is *not* recommended. 
+ *  You should only override this property's default value if you are proividing your own cell prototypes.
+ *  These prototypes must be registered with the collectionView for reuse and you are then responsible for 
+ *  completely overriding many delegate and data source methods for the collectionView, including `collectionView: cellForItemAtIndexPath:`.
  */
 @property (copy, nonatomic) NSString *outgoingCellIdentifier;
 
@@ -67,7 +76,10 @@
  *
  *  @see JSQMessagesCollectionViewCellIncoming.
  *
- *  @warning Overriding this property's default value is *not* recommended. You should only override this property's default value if you are proividing your own cell prototypes. These prototypes must be registered with the collectionView for reuse and you are then responsible for completely overriding many delegate and data source methods for the collectionView, including `collectionView: cellForItemAtIndexPath:`.
+ *  @warning Overriding this property's default value is *not* recommended. 
+ *  You should only override this property's default value if you are proividing your own cell prototypes. 
+ *  These prototypes must be registered with the collectionView for reuse and you are then responsible for 
+ *  completely overriding many delegate and data source methods for the collectionView, including `collectionView: cellForItemAtIndexPath:`.
  */
 @property (copy, nonatomic) NSString *incomingCellIdentifier;
 
@@ -105,7 +117,8 @@
 - (void)didPressAccessoryButton:(UIButton *)sender;
 
 /**
- *  Completes the "sending" of a new message by animating and resetting the `inputToolbar`, animating the addition of a new collection view cell in the collection view, reloading the collection view, and scrolling to the newly sent message as specified by `automaticallyScrollsToMostRecentMessage`.
+ *  Completes the "sending" of a new message by animating and resetting the `inputToolbar`, animating the addition of a new collection view cell in the collection view, 
+ *  reloading the collection view, and scrolling to the newly sent message as specified by `automaticallyScrollsToMostRecentMessage`.
  *
  *  @discussion You should call this method at the end of `didPressSendButton: withMessage:` after adding the new message to your data source and performing any related tasks.
  *
