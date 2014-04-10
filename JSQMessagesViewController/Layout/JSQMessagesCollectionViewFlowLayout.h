@@ -82,8 +82,6 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
  */
 @property (assign, nonatomic) CGFloat messageBubbleLeftRightMargin;
 
-// where right == avatar side, left = margin side
-
 /**
  *  Specifies the margins used lay out the text view frame within a `JSQMessagesCollectionViewCell`. The values provided inset the frame by the specified amount in the following ways: 
  *  
