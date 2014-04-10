@@ -18,6 +18,7 @@
 
 #import "NSString+JSQMessages.h"
 
+
 @interface JSQMessagesComposerTextView ()
 
 - (void)jsq_addTextViewNotificationObservers;

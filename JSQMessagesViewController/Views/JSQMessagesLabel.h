@@ -14,6 +14,10 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  `JSQMessagesLabel` is a subclass of `UILabel` that adds support for a `textInsets` property,
+ *  which is similar to the `textContainerInset` property of `UITextView`.
+ */
 @interface JSQMessagesLabel : UILabel
 
 /**
