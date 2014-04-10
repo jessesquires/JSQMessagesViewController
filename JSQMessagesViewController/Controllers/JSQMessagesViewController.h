@@ -58,7 +58,7 @@
 /**
  *  The collection view cell identifier to use for dequeuing outgoing message collection view cells in the collectionView.
  *
- *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]`.
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]`. This value must not be `nil`.
  *  
  *  @see JSQMessagesCollectionViewCellOutgoing.
  *
@@ -72,7 +72,7 @@
 /**
  *  The collection view cell identifier to use for dequeuing incoming message collection view cells in the collectionView.
  *
- *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]`.
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]`. This value must not be `nil`.
  *
  *  @see JSQMessagesCollectionViewCellIncoming.
  *
