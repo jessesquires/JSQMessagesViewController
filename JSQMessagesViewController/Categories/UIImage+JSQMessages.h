@@ -19,7 +19,7 @@
 /**
  *  Creates and returns a new image object that is masked with the specified mask color.
  *
- *  @param maskColor The color value for the mask.
+ *  @param maskColor The color value for the mask. This value must not be `nil`.
  *
  *  @return A new image object masked with the specified color.
  */

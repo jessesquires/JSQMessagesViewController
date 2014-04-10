@@ -18,6 +18,8 @@
 
 - (UIImage *)jsq_imageMaskedWithColor:(UIColor *)maskColor
 {
+    NSAssert(maskColor, @"ERROR %s : maskColor must not be nil.", __PRETTY_FUNCTION__);
+    
     CGRect imageRect = CGRectMake(0.0f, 0.0f, self.size.width, self.size.height);
     
     UIGraphicsBeginImageContextWithOptions(imageRect.size, NO, self.scale);
