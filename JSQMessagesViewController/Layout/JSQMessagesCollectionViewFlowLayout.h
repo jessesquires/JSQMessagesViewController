@@ -71,16 +71,17 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 @property (readonly, nonatomic) CGFloat itemWidth;
 
 /**
- *  Specifies the font for message bubbles in the collectionView. The default value is the system font at size `15.0f`.
+ *  The font used to display the body a text message in the message bubble of each `JSQMessagesCollectionViewCell` in the collectionView. The default value is the system font at size `15.0f`.
  */
 @property (strong, nonatomic) UIFont *messageBubbleFont;
 
 /**
- *  Specifies the margin in points between message bubbles and the edge of the collectionView that is used to lay out message bubbles within a `JSQMessagesCollectionViewCell`.
+ *  The horizontal spacing used to lay out the text view frame within each `JSQMessagesCollectionViewCell`.
+ *  This value specifies the horizontal spacing between the message bubble and the edge of the collection view cell in which it is displayed.
  *
- *  @discussion The default value is `40.0f`. 
- *  For *outgoing* messages, this value specifies the amount of spacing from the left most edge of the collectionView to the left most edge of a message bubble with in a cell.
- *  For *incoming* messages, this value specifies the amount of spacing from the right most edge of the collectionView to the right most edge of a message bubble with in a cell.
+ *  @discussion The default value is `40.0f`. This value must be positive.
+ *  For *outgoing* messages, this value specifies the amount of spacing from the left most edge of the collectionView to the left most edge of a message bubble within a cell.
+ *  For *incoming* messages, this value specifies the amount of spacing from the right most edge of the collectionView to the right most edge of a message bubble within a cell.
  *
  *  @warning This value may not be exact when the layout object finishes laying out its items, due to the constraints it must satisfy. 
  *  This value should be considered more of a recommendation or suggestion to the layout, not an exact value.
@@ -91,8 +92,8 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 @property (assign, nonatomic) CGFloat messageBubbleLeftRightMargin;
 
 /**
- *  Specifies the margins used lay out the text view frame within a `JSQMessagesCollectionViewCell`. 
- *  The values provided inset the frame by the specified amount in the following ways:
+ *  The inset of the frame of the text view within each `JSQMessagesCollectionViewCell`. 
+ *  The inset values should be positive and are applied in the following ways:
  *  
  *  1. The right value insets the text view frame on the side adjacent to the avatar image (or where the avatar would normally appear). For outgoing messages this is the right side, for incoming messages this is the left side.
  *  2. The left value insets the text view frame on the side opposite the avatar image (or where the avatar would normally appear). For outgoing messages this is the left side, for incoming messages this is the right side.
@@ -109,8 +110,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 @property (assign, nonatomic) UIEdgeInsets messageBubbleTextViewFrameInsets;
 
 /**
- *  Specifies the padding used to lay out the text within the text view of a `JSQMessagesCollectionViewCell`. 
- *  More specifically, this provides the value for the textView property `textContainerInset`.
+ *  The inset of the text container's layout area within the text view's content area in each `JSQMessagesCollectionViewCell`. The specified inset values should be positive.
  *
  *  @discussion The default value is `(10.0f, 8.0f, 10.0f, 8.0f)`.
  *
@@ -122,14 +122,14 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 @property (assign, nonatomic) UIEdgeInsets messageBubbleTextViewTextContainerInsets;
 
 /**
- *  Specifies the size of the avatar image for incoming messages.
+ *  The size of the avatar image view for incoming messages.
  *
  *  @discussion The default value is `(34.0f, 34.0f)`. Set to `CGSizeZero` to remove incoming avatars.
  */
 @property (assign, nonatomic) CGSize incomingAvatarViewSize;
 
 /**
- *  Specifies the size of the avatar image for outgoing messages.
+ *  The size of the avatar image view for outgoing messages.
  *
  *  @discussion The default value is `(34.0f, 34.0f)`. Set to `CGSizeZero` to remove outgoing avatars.
  */
