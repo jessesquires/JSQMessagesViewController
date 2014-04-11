@@ -350,7 +350,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     CGFloat bubbleTopLabelInset = 60.0f;
     
     if (isOutgoingMessage) {
-        cell.textView.textColor = [UIColor whiteColor];
         cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
     }
     else {
@@ -358,8 +357,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
     }
     
-//    cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
-    cell.textView.selectable = NO;
+    cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
     
     return cell;
 }
@@ -373,7 +371,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - Collection view delegate
 
-// TODO: copy & paste
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
 
 #pragma mark - Collection view delegate flow layout
 

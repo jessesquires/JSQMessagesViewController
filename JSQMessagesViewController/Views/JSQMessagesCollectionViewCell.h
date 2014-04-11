@@ -28,6 +28,8 @@
 @property (weak, nonatomic) UIImageView *messageBubbleImageView;
 @property (weak, nonatomic) UIImageView *avatarImageView;
 
+@property (weak, nonatomic, readonly) UILongPressGestureRecognizer *longPressGestureRecognizer;
+
 #pragma mark - Class methods
 
 + (UINib *)nib;

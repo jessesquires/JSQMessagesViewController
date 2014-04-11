@@ -50,6 +50,13 @@
 
 @property (assign, nonatomic) CGSize avatarViewSize;
 
+@property (weak, nonatomic, readwrite) UILongPressGestureRecognizer *longPressGestureRecognizer;
+
+- (void)jsq_handleLongPressGesture:(UILongPressGestureRecognizer *)longPress;
+
+- (void)jsq_didReceiveMenuWillHideNotification:(NSNotification *)notification;
+- (void)jsq_didReceiveMenuWillShowNotification:(NSNotification *)notification;
+
 @end
 
 
@@ -93,7 +100,7 @@
     self.cellBottomLabel.font = [UIFont systemFontOfSize:11.0f];
     self.cellBottomLabel.textColor = [UIColor lightGrayColor];
     
-    self.textView.textColor = [UIColor blackColor];
+    self.textView.textColor = [UIColor whiteColor];
     self.textView.editable = NO;
     self.textView.selectable = YES;
     self.textView.userInteractionEnabled = YES;
@@ -105,6 +112,13 @@
     self.textView.contentInset = UIEdgeInsetsZero;
     self.textView.scrollIndicatorInsets = UIEdgeInsetsZero;
     self.textView.contentOffset = CGPointZero;
+    self.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor],
+                                          NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleLongPressGesture:)];
+    longPress.minimumPressDuration = 0.4f;
+    [self addGestureRecognizer:longPress];
+    self.longPressGestureRecognizer = longPress;
 }
 
 #pragma mark - Collection view cell
@@ -239,6 +253,75 @@
                             self.textViewMarginHorizontalSpaceConstraint.constant,
                             self.textViewBottomVerticalSpaceConstraint.constant,
                             self.textViewAvatarHorizontalSpaceConstraint.constant);
+}
+
+#pragma mark - UIResponder
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (BOOL)becomeFirstResponder
+{
+    return [super becomeFirstResponder];
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+    return (action == @selector(copy:));
+}
+
+- (void)copy:(id)sender
+{
+    [[UIPasteboard generalPasteboard] setString:self.textView.text];
+    [self resignFirstResponder];
+}
+
+#pragma mark - Gesture recognizers
+
+- (void)jsq_handleLongPressGesture:(UILongPressGestureRecognizer *)longPress
+{
+    if (longPress.state != UIGestureRecognizerStateBegan || ![self becomeFirstResponder]) {
+        return;
+    }
+    
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    CGRect targetRect = [self convertRect:self.messageBubbleImageView.frame fromView:self.messageBubbleImageView];
+    
+    [menu setTargetRect:CGRectInset(targetRect, 0.0f, 4.0f) inView:self];
+    
+    self.messageBubbleImageView.highlighted = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(jsq_didReceiveMenuWillShowNotification:)
+                                                 name:UIMenuControllerWillShowMenuNotification
+                                               object:nil];
+    
+    [menu setMenuVisible:YES animated:YES];
+}
+
+#pragma mark - Notifications
+
+- (void)jsq_didReceiveMenuWillHideNotification:(NSNotification *)notification
+{
+    self.messageBubbleImageView.highlighted = NO;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIMenuControllerWillHideMenuNotification
+                                                  object:nil];
+}
+
+- (void)jsq_didReceiveMenuWillShowNotification:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIMenuControllerWillShowMenuNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(jsq_didReceiveMenuWillHideNotification:)
+                                                 name:UIMenuControllerWillHideMenuNotification
+                                               object:nil];
 }
 
 @end
