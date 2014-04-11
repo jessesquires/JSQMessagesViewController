@@ -129,6 +129,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)dealloc
 {
+    [self jsq_removeObservers];
+    
     _collectionView = nil;
     _inputToolbar = nil;
     
@@ -602,6 +604,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_addObservers
 {
+    [self jsq_removeObservers];
+    
     [self.inputToolbar.contentView.textView addObserver:self
                                              forKeyPath:NSStringFromSelector(@selector(contentSize))
                                                 options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew

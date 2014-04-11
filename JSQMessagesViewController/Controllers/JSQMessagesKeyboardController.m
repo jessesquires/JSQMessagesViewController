@@ -119,6 +119,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)jsq_registerForNotifications
 {
+    [self jsq_unregisterForNotifications];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(jsq_didReceiveKeyboardDidShowNotification:)
                                                  name:UIKeyboardDidShowNotification
