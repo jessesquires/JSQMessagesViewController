@@ -73,6 +73,10 @@
            layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout
            heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
 
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+ didTapAvatarImageView:(UIImageView *)avatarImageView
+           atIndexPath:(NSIndexPath *)indexPath;
+
 @end
 
 

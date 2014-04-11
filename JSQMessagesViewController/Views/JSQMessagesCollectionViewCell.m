@@ -51,8 +51,10 @@
 @property (assign, nonatomic) CGSize avatarViewSize;
 
 @property (weak, nonatomic, readwrite) UILongPressGestureRecognizer *longPressGestureRecognizer;
+@property (weak, nonatomic, readwrite) UITapGestureRecognizer *tapGestureRecognizer;
 
 - (void)jsq_handleLongPressGesture:(UILongPressGestureRecognizer *)longPress;
+- (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap;
 
 - (void)jsq_didReceiveMenuWillHideNotification:(NSNotification *)notification;
 - (void)jsq_didReceiveMenuWillShowNotification:(NSNotification *)notification;
@@ -119,6 +121,10 @@
     longPress.minimumPressDuration = 0.4f;
     [self addGestureRecognizer:longPress];
     self.longPressGestureRecognizer = longPress;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
+    [self.avatarContainerView addGestureRecognizer:tap];
+    self.tapGestureRecognizer = tap;
 }
 
 #pragma mark - Collection view cell
@@ -298,7 +304,14 @@
                                                  name:UIMenuControllerWillShowMenuNotification
                                                object:nil];
     
+    [self.delegate messagesCollectionViewCellWillDisplayActionMenu:self];
+    
     [menu setMenuVisible:YES animated:YES];
+}
+
+- (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap
+{
+    [self.delegate messagesCollectionViewCellDidTapAvatar:self];
 }
 
 #pragma mark - Notifications

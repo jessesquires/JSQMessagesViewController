@@ -16,8 +16,23 @@
 
 #import "JSQMessagesLabel.h"
 
+@class JSQMessagesCollectionViewCell;
+
+
+@protocol JSQMessagesCollectionViewCellDelegate <NSObject>
+
+@required
+- (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell;
+
+- (void)messagesCollectionViewCellWillDisplayActionMenu:(JSQMessagesCollectionViewCell *)cell;
+
+@end
+
+
 
 @interface JSQMessagesCollectionViewCell : UICollectionViewCell
+
+@property (weak, nonatomic) id<JSQMessagesCollectionViewCellDelegate> delegate;
 
 @property (weak, nonatomic, readonly) JSQMessagesLabel *cellTopLabel;
 @property (weak, nonatomic, readonly) JSQMessagesLabel *messageBubbleTopLabel;
@@ -29,6 +44,7 @@
 @property (weak, nonatomic) UIImageView *avatarImageView;
 
 @property (weak, nonatomic, readonly) UILongPressGestureRecognizer *longPressGestureRecognizer;
+@property (weak, nonatomic, readonly) UITapGestureRecognizer *tapGestureRecognizer;
 
 #pragma mark - Class methods
 

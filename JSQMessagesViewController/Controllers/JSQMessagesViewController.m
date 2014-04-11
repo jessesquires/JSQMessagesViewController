@@ -35,7 +35,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 
 
-@interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate, JSQMessagesKeyboardControllerDelegate, UITextViewDelegate>
+@interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate,
+                                         JSQMessagesCollectionViewCellDelegate,
+                                         JSQMessagesKeyboardControllerDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
@@ -324,6 +326,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    cell.delegate = self;
     
     NSString *messageText = [messageData text];
     NSAssert(messageText, @"ERROR: messageData text must not be nil");
@@ -407,6 +410,24 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     return 0.0f;
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+ didTapAvatarImageView:(UIImageView *)avatarImageView
+           atIndexPath:(NSIndexPath *)indexPath { }
+
+#pragma mark - Messages collection view cell delegate
+
+- (void)messagesCollectionViewCellWillDisplayActionMenu:(JSQMessagesCollectionViewCell *)cell
+{
+    NSLog(@"WILL DISPLAY");
+}
+
+- (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell
+{
+    [self.collectionView.delegate collectionView:self.collectionView
+                           didTapAvatarImageView:cell.avatarImageView
+                                     atIndexPath:[self.collectionView indexPathForCell:cell]];
 }
 
 #pragma mark - Input toolbar delegate
