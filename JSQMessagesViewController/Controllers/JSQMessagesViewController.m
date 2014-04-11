@@ -418,11 +418,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - Messages collection view cell delegate
 
-- (void)messagesCollectionViewCellWillDisplayActionMenu:(JSQMessagesCollectionViewCell *)cell
-{
-    NSLog(@"WILL DISPLAY");
-}
-
 - (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell
 {
     [self.collectionView.delegate collectionView:self.collectionView

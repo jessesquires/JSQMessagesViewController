@@ -24,8 +24,6 @@
 @required
 - (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell;
 
-- (void)messagesCollectionViewCellWillDisplayActionMenu:(JSQMessagesCollectionViewCell *)cell;
-
 @end
 
 

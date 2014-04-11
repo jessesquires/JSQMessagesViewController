@@ -293,7 +293,7 @@
     }
     
     UIMenuController *menu = [UIMenuController sharedMenuController];
-    CGRect targetRect = [self convertRect:self.messageBubbleImageView.frame fromView:self.messageBubbleImageView];
+    CGRect targetRect = [self convertRect:self.messageBubbleImageView.bounds fromView:self.messageBubbleImageView];
     
     [menu setTargetRect:CGRectInset(targetRect, 0.0f, 4.0f) inView:self];
     
@@ -302,9 +302,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(jsq_didReceiveMenuWillShowNotification:)
                                                  name:UIMenuControllerWillShowMenuNotification
-                                               object:nil];
-    
-    [self.delegate messagesCollectionViewCellWillDisplayActionMenu:self];
+                                               object:menu];
     
     [menu setMenuVisible:YES animated:YES];
 }
@@ -334,7 +332,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(jsq_didReceiveMenuWillHideNotification:)
                                                  name:UIMenuControllerWillHideMenuNotification
-                                               object:nil];
+                                               object:[notification object]];
 }
 
 @end
