@@ -451,6 +451,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (JSQMessage *)jsq_currentlyComposedMessage
 {
+    //  add a space to accept any auto-correct suggestions
+    NSString *text = self.inputToolbar.contentView.textView.text;
+    self.inputToolbar.contentView.textView.text = [text stringByAppendingString:@" "];
+    
     return [JSQMessage messageWithText:[self.inputToolbar.contentView.textView.text jsq_stringByTrimingWhitespace]
                                 sender:self.sender];
 }
