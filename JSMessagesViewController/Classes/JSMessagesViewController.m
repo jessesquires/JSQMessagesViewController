@@ -185,6 +185,10 @@
 
 - (void)sendPressed:(UIButton *)sender
 {
+    //  add a space to accept any auto-correct suggestions
+    NSString *text = self.messageInputView.textView.text;
+    self.messageInputView.textView.text = [text stringByAppendingString:@" "];
+    
     [self.delegate didSendText:[self.messageInputView.textView.text js_stringByTrimingWhitespace]
                     fromSender:self.sender
                         onDate:[NSDate date]];
