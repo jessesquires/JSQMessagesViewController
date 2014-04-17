@@ -503,12 +503,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)keyboardDidChangeFrame:(CGRect)keyboardFrame
 {
+    CGFloat additionalStatusBarHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame) - 20.0f;
+    
     CGRect newToolbarFrame = self.inputToolbar.frame;
-    newToolbarFrame.origin.y = CGRectGetMinY(keyboardFrame) - CGRectGetHeight(newToolbarFrame);
+    newToolbarFrame.origin.y = CGRectGetMinY(keyboardFrame) - CGRectGetHeight(newToolbarFrame) - additionalStatusBarHeight;
     
     self.inputToolbar.frame = newToolbarFrame;
     
-    CGFloat heightFromBottom = CGRectGetHeight(self.view.frame) - CGRectGetMinY(keyboardFrame);
+    CGFloat heightFromBottom = CGRectGetHeight(self.view.frame) - CGRectGetMinY(keyboardFrame) + additionalStatusBarHeight;
     self.toolbarBottomLayoutGuide.constant = heightFromBottom;
     [self.view setNeedsUpdateConstraints];
     

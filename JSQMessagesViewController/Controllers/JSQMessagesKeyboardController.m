@@ -250,7 +250,9 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 {
     CGPoint touch = [pan locationInView:nil];
     
-    CGFloat contextViewHeight = CGRectGetHeight(self.contextView.frame);
+    CGFloat additionalStatusBarHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame) - 20.0f;
+    
+    CGFloat contextViewHeight = CGRectGetHeight(self.contextView.frame) + additionalStatusBarHeight;
     CGFloat keyboardViewHeight = CGRectGetHeight(self.keyboardView.frame);
     
     CGRect newKeyboardViewFrame = self.keyboardView.frame;
