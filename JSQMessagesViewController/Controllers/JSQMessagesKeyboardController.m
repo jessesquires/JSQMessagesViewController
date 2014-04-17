@@ -282,7 +282,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:
         {
-            BOOL keyboardViewIsHidden = (CGRectGetHeight(self.contextView.frame) - CGRectGetMinY(self.keyboardView.frame) == 0.0f);
+            BOOL keyboardViewIsHidden = (CGRectGetHeight(self.contextView.frame) - CGRectGetMinY(self.keyboardView.frame) <= 0.0f);
             
             if(keyboardViewIsHidden) {
                 return;
