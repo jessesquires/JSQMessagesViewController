@@ -47,6 +47,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @property (strong, nonatomic) JSQMessagesKeyboardController *keyboardController;
 
+@property (assign, nonatomic) CGFloat statusBarChangeInHeight;
+
 - (void)jsq_prepareMessagesViewController;
 
 - (void)jsq_prepareForRotation;
@@ -65,6 +67,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_addObservers;
 - (void)jsq_removeObservers;
+
+- (void)jsq_registerForNotifications;
+- (void)jsq_unregisterForNotifications;
 
 @end
 
@@ -129,6 +134,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)dealloc
 {
+    [self jsq_unregisterForNotifications];
     [self jsq_removeObservers];
     
     _collectionView = nil;
@@ -150,6 +156,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     [super viewDidLoad];
     [self jsq_prepareMessagesViewController];
+    [self jsq_registerForNotifications];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -480,6 +487,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [textView resignFirstResponder];
 }
 
+#pragma mark - Notifications
+
+- (void)jsq_handleDidChangeStatusBarFrameNotification:(NSNotification *)notification
+{
+    CGRect previousStatusBarFrame = [[[notification userInfo] objectForKey:UIApplicationStatusBarFrameUserInfoKey] CGRectValue];
+    CGRect currentStatusBarFrame = [UIApplication sharedApplication].statusBarFrame;
+    CGFloat statusBarHeightDelta = CGRectGetHeight(currentStatusBarFrame) - CGRectGetHeight(previousStatusBarFrame);
+    self.statusBarChangeInHeight = MAX(statusBarHeightDelta, 0.0f);
+}
+
 #pragma mark - Key-value observing
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -503,14 +520,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)keyboardDidChangeFrame:(CGRect)keyboardFrame
 {
-    CGRect newToolbarFrame = self.inputToolbar.frame;
-    newToolbarFrame.origin.y = CGRectGetMinY(keyboardFrame) - CGRectGetHeight(newToolbarFrame);
+    CGFloat heightFromBottom = CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(keyboardFrame);
     
-    self.inputToolbar.frame = newToolbarFrame;
+    heightFromBottom = MAX(0.0f, heightFromBottom + self.statusBarChangeInHeight);
     
-    CGFloat heightFromBottom = CGRectGetHeight(self.view.frame) - CGRectGetMinY(keyboardFrame);
     self.toolbarBottomLayoutGuide.constant = heightFromBottom;
     [self.view setNeedsUpdateConstraints];
+    [self.view layoutIfNeeded];
     
     [self jsq_updateCollectionViewInsets];
 }
@@ -624,6 +640,21 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                                        context:kJSQMessagesKeyValueObservingContext];
     }
     @catch (NSException * __unused exception) { }
+}
+
+- (void)jsq_registerForNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(jsq_handleDidChangeStatusBarFrameNotification:)
+                                                 name:UIApplicationDidChangeStatusBarFrameNotification
+                                               object:nil];
+}
+
+- (void)jsq_unregisterForNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidChangeStatusBarFrameNotification
+                                                  object:nil];
 }
 
 @end
