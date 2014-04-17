@@ -282,24 +282,28 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:
         {
-            CGPoint velocity = [pan velocityInView:self.contextView];
-            BOOL shouldHide = (velocity.y > 0.0f);
+            // Check if keyboard is visible before performing animations on it (issue #213)
+            if(CGRectGetHeight(self.contextView.frame) - CGRectGetMinY(self.keyboardView.frame) > 0) {
             
-            newKeyboardViewFrame.origin.y = shouldHide ? contextViewHeight : (contextViewHeight - keyboardViewHeight);
-            
-            [UIView animateWithDuration:0.25
-                                  delay:0.0
-                                options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseOut
-                             animations:^{
-                                 self.keyboardView.frame = newKeyboardViewFrame;
-                             }
-                             completion:^(BOOL finished) {
-                                 if (shouldHide) {
-                                     [self jsq_setKeyboardViewHidden:YES];
-                                     [self jsq_removeKeyboardFrameObserver];
-                                     [self.textView resignFirstResponder];
+                CGPoint velocity = [pan velocityInView:self.contextView];
+                BOOL shouldHide = (velocity.y > 0.0f);
+                
+                newKeyboardViewFrame.origin.y = shouldHide ? contextViewHeight : (contextViewHeight - keyboardViewHeight);
+                
+                [UIView animateWithDuration:0.25
+                                      delay:0.0
+                                    options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseOut
+                                 animations:^{
+                                     self.keyboardView.frame = newKeyboardViewFrame;
                                  }
-                             }];
+                                 completion:^(BOOL finished) {
+                                     if (shouldHide) {
+                                         [self jsq_setKeyboardViewHidden:YES];
+                                         [self jsq_removeKeyboardFrameObserver];
+                                         [self.textView resignFirstResponder];
+                                     }
+                                 }];
+            }
         }
             break;
             
