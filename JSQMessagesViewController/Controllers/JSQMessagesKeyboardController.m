@@ -252,8 +252,11 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     
     CGFloat contextViewHeight = CGRectGetHeight(self.contextView.frame);
     CGFloat keyboardViewHeight = CGRectGetHeight(self.keyboardView.frame);
+    CGFloat dragThresholdY = (contextViewHeight - keyboardViewHeight - self.keyboardTriggerPoint.y);
     
     CGRect newKeyboardViewFrame = self.keyboardView.frame;
+    
+    BOOL userIsDraggingNearThresholdForDismissing = (touch.y > dragThresholdY);
     
     switch (pan.state) {
         case UIGestureRecognizerStateChanged:
@@ -288,7 +291,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
             }
             
             CGPoint velocity = [pan velocityInView:self.contextView];
-            BOOL shouldHide = (velocity.y > 0.0f);
+            BOOL userIsScrollingDown = (velocity.y > 0.0f);
+            BOOL shouldHide = (userIsScrollingDown && userIsDraggingNearThresholdForDismissing);
             
             newKeyboardViewFrame.origin.y = shouldHide ? contextViewHeight : (contextViewHeight - keyboardViewHeight);
             
