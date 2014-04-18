@@ -282,6 +282,11 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:
         {
+            BOOL keyboardViewIsHidden = (CGRectGetMinY(self.keyboardView.frame) >= CGRectGetMaxY(self.contextView.frame));
+            if(keyboardViewIsHidden) {
+                return;
+            }
+            
             CGPoint velocity = [pan velocityInView:self.contextView];
             BOOL shouldHide = (velocity.y > 0.0f);
             
