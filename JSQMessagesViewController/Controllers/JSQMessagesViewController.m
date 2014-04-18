@@ -234,7 +234,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)jsq_prepareForRotation
 {
     // TODO: deal with keyboard on rotation
-//    [self.inputToolbar.contentView.textView resignFirstResponder];
+    
+    self.statusBarChangeInHeight = 0.0f;
+    [self.inputToolbar.contentView.textView resignFirstResponder];
     
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
