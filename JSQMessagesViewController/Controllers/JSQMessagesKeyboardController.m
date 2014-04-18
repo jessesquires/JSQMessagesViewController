@@ -258,6 +258,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     
     BOOL userIsDraggingNearThresholdForDismissing = (touch.y > dragThresholdY);
     
+    self.keyboardView.userInteractionEnabled = !userIsDraggingNearThresholdForDismissing;
+    
     switch (pan.state) {
         case UIGestureRecognizerStateChanged:
         {
@@ -303,6 +305,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                                  self.keyboardView.frame = newKeyboardViewFrame;
                              }
                              completion:^(BOOL finished) {
+                                 self.keyboardView.userInteractionEnabled = !shouldHide;
+                                 
                                  if (shouldHide) {
                                      [self jsq_setKeyboardViewHidden:YES];
                                      [self jsq_removeKeyboardFrameObserver];
