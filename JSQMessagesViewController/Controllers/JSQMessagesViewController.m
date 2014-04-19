@@ -514,6 +514,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             CGFloat dy = newContentSize.height - oldContentSize.height;
         
             [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:dy];
+            [self jsq_updateCollectionViewInsets];
+            if (self.automaticallyScrollsToMostRecentMessage) {
+                [self scrollToBottomAnimated:NO];
+            }
         }
     }
 }
