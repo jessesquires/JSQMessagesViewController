@@ -515,7 +515,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         
             [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:dy];
             [self jsq_updateCollectionViewInsets];
-            [self scrollToBottomAnimated:NO];
+            if (self.automaticallyScrollsToMostRecentMessage) {
+                [self scrollToBottomAnimated:NO];
+            }
         }
     }
 }
