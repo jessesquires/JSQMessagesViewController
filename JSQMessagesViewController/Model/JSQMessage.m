@@ -47,7 +47,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %@, %@, %@>", [self class], self.sender, self.date, self.text];
+    return [NSString stringWithFormat:@"<%@>[ %@, %@, %@ ]", [self class], self.sender, self.date, self.text];
 }
 
 #pragma mark - NSCoding
