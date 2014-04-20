@@ -220,13 +220,27 @@
 @end
 
 
-
+/**
+ *  The `JSQMessagesCollectionView` class manages an ordered collection of message data items and presents
+ *  them using a specialized layout for messages.
+ */
 @interface JSQMessagesCollectionView : UICollectionView
 
+/**
+ *  The object that provides the data for the collection view.
+ *  The data source must adopt the `JSQMessagesCollectionViewDataSource` protocol.
+ */
 @property (weak, nonatomic) id<JSQMessagesCollectionViewDataSource> dataSource;
 
+/**
+ *  The object that acts as the delegate of the collection view. 
+ *  The delegate must adpot the `JSQMessagesCollectionViewDelegateFlowLayout` protocol.
+ */
 @property (weak, nonatomic) id<JSQMessagesCollectionViewDelegateFlowLayout> delegate;
 
+/**
+ *  The layout used to organize the collection view’s items.
+ */
 @property (strong, nonatomic) JSQMessagesCollectionViewFlowLayout *collectionViewLayout;
 
 @end
