@@ -14,6 +14,10 @@
 
 #import "JSQMessagesCollectionViewCell.h"
 
+/**
+ *  A `JSQMessagesCollectionViewCellOutgoing` object is a concrete instance of `JSQMessagesCollectionViewCell`
+ *  that represents an outgoing message data item.
+ */
 @interface JSQMessagesCollectionViewCellOutgoing : JSQMessagesCollectionViewCell
 
 @end
