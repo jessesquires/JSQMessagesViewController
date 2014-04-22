@@ -21,6 +21,7 @@
 
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesTypingIndicatorFooterView.h"
 
 #import "JSQMessagesToolbarContentView.h"
 #import "JSQMessagesInputToolbar.h"
@@ -29,6 +30,7 @@
 #import "JSQMessagesTimestampFormatter.h"
 
 #import "NSString+JSQMessages.h"
+#import "UIColor+JSQMessages.h"
 
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
@@ -113,6 +115,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
     self.incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
     
+    self.typingIndicatorColor = [UIColor jsq_messageBubbleLightGrayColor];
+    self.showTypingIndicator = NO;
+    
     [self jsq_updateCollectionViewInsets];
     
     self.keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextView:self.inputToolbar.contentView.textView
@@ -148,6 +153,20 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     _incomingCellIdentifier = nil;
     
     _keyboardController = nil;
+}
+
+#pragma mark - Setters
+
+- (void)setShowTypingIndicator:(BOOL)showTypingIndicator
+{
+    if (_showTypingIndicator == showTypingIndicator) {
+        return;
+    }
+    
+    _showTypingIndicator = showTypingIndicator;
+    
+    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self scrollToBottomAnimated:YES];
 }
 
 #pragma mark - View lifecycle
@@ -255,6 +274,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.inputToolbar toggleSendButtonEnabled];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
+    
+    self.showTypingIndicator = NO;
     
     [self.collectionView reloadData];
     
@@ -376,11 +397,31 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     return cell;
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+- (UICollectionReusableView *)collectionView:(JSQMessagesCollectionView *)collectionView
            viewForSupplementaryElementOfKind:(NSString *)kind
                                  atIndexPath:(NSIndexPath *)indexPath
 {
-    return nil; // TODO: load previous messages, typing indicator
+    if (self.showTypingIndicator && [kind isEqualToString:UICollectionElementKindSectionFooter]) {
+        return [collectionView dequeueTypingIndicatorFooterViewIncoming:YES
+                                                     withIndicatorColor:[self.typingIndicatorColor jsq_colorByDarkeningColorWithValue:0.3f]
+                                                            bubbleColor:self.typingIndicatorColor
+                                                           forIndexPath:indexPath];
+    }
+    else if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        // TODO: load previous messages header
+    }
+    
+    return nil;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    if (!self.showTypingIndicator) {
+        return CGSizeZero;
+    }
+    
+    return CGSizeMake([collectionViewLayout itemWidth], kJSQMessagesTypingIndicatorFooterViewHeight);
 }
 
 #pragma mark - Collection view delegate

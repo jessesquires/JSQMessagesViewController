@@ -83,6 +83,22 @@
  */
 @property (copy, nonatomic) NSString *incomingCellIdentifier;
 
+/**
+ *  The color for the typing indicator for incoming messages.
+ *
+ *  @discussion The color specified is used for the typing indicator bubble image color.
+ *  This color is then slightly darkened and used to color the typing indicator ellipsis.
+ *  The default value is the light gray color value return by `jsq_messageBubbleLightGrayColor`.
+ */
+@property (strong, nonatomic) UIColor *typingIndicatorColor;
+
+/**
+ *  Specifies whether or not the view controller should show the typing indicator for an incoming message.
+ *  @discussion Setting this property to `YES` will animate showing the typing indicator immediately.
+ *  Setting this property to `NO` will animate hiding the typing indicator immediately.
+ */
+@property (assign, nonatomic) BOOL showTypingIndicator;
+
 #pragma mark - Class methods
 
 /**

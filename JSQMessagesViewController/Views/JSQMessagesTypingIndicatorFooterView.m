@@ -104,6 +104,8 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
         self.typingIndicatorImageViewRightHorizontalConstraint.constant = indicatorMarginMinimumSpacing;
     }
     
+    [self setNeedsUpdateConstraints];
+    
     self.typingIndicatorImageView.image = [[UIImage imageNamed:@"typing"] jsq_imageMaskedWithColor:indicatorColor];
     self.typingIndicatorImageView.contentMode = UIViewContentModeScaleAspectFit;
 }
