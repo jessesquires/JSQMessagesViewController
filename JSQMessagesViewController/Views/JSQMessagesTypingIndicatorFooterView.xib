@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="JSQMessagesTypingIndicatorFooterView" id="ajJ-uk-b04" customClass="JSQMessagesTypingIndicatorFooterView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z1D-Tr-HPK">
+                    <rect key="frame" x="6" y="6" width="64" height="34"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="365-TI-0fL"/>
+                        <constraint firstAttribute="width" constant="64" id="nS4-br-DxL"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vwf-dy-PS6">
+                    <rect key="frame" x="24" y="6" width="34" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="34" id="CMT-z0-hca"/>
+                        <constraint firstAttribute="height" constant="34" id="j0C-FV-2gV"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Vwf-dy-PS6" secondAttribute="trailing" constant="262" id="1Tm-qD-wIK"/>
+                <constraint firstAttribute="bottom" secondItem="Z1D-Tr-HPK" secondAttribute="bottom" constant="6" id="EVf-Sx-8mX"/>
+                <constraint firstAttribute="bottom" secondItem="Vwf-dy-PS6" secondAttribute="bottom" constant="6" id="Hik-Wl-aK2"/>
+                <constraint firstItem="Vwf-dy-PS6" firstAttribute="leading" secondItem="ajJ-uk-b04" secondAttribute="leading" constant="24" id="IWI-VE-aQY"/>
+                <constraint firstItem="Vwf-dy-PS6" firstAttribute="top" secondItem="ajJ-uk-b04" secondAttribute="top" constant="6" id="J3J-wd-G2Z"/>
+                <constraint firstAttribute="trailing" secondItem="Z1D-Tr-HPK" secondAttribute="trailing" constant="250" id="YMl-ej-UZl"/>
+                <constraint firstItem="Z1D-Tr-HPK" firstAttribute="leading" secondItem="ajJ-uk-b04" secondAttribute="leading" constant="6" id="dat-H8-s6q"/>
+                <constraint firstItem="Z1D-Tr-HPK" firstAttribute="top" secondItem="ajJ-uk-b04" secondAttribute="top" constant="6" id="oZq-Eq-mtj"/>
+            </constraints>
+            <connections>
+                <outlet property="bubbleImageView" destination="Z1D-Tr-HPK" id="WpE-rP-oYB"/>
+                <outlet property="bubbleImageViewLeftHorizontalConstraint" destination="dat-H8-s6q" id="fje-5G-u1M"/>
+                <outlet property="bubbleImageViewRightHorizontalConstraint" destination="YMl-ej-UZl" id="Thu-7D-dhU"/>
+                <outlet property="typingIndicatorImageView" destination="Vwf-dy-PS6" id="wQA-Pe-rx6"/>
+                <outlet property="typingIndicatorImageViewLeftHorizontalConstraint" destination="IWI-VE-aQY" id="tw1-D9-uay"/>
+                <outlet property="typingIndicatorImageViewRightHorizontalConstraint" destination="1Tm-qD-wIK" id="FUp-oC-c0I"/>
+            </connections>
+        </collectionReusableView>
+    </objects>
+</document>

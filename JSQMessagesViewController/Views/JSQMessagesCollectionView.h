@@ -17,6 +17,7 @@
 #import "JSQMessagesCollectionViewFlowLayout.h"
 
 @class JSQMessagesCollectionView;
+@class JSQMessagesTypingIndicatorFooterView;
 
 @protocol JSQMessageData;
 
@@ -243,4 +244,20 @@
  */
 @property (strong, nonatomic) JSQMessagesCollectionViewFlowLayout *collectionViewLayout;
 
+/**
+ *  Returns a `JSQMessagesTypingIndicatorFooterView` object configured with the specified parameters.
+ *
+ *  @param isIncoming     Specifies whether the typing indicator should be displayed
+ *                        for an incoming message or outgoing message.
+ *  @param indicatorColor The color of the typing indicator ellipsis.
+ *  @param bubbleColor    The color of the message bubble.
+ *  @param indexPath      The index path specifying the location of the 
+ *                        supplementary view in the collection view.
+ *
+ *  @return A valid `JSQMessagesTypingIndicatorFooterView` object.
+ */
+- (JSQMessagesTypingIndicatorFooterView *)dequeueTypingIndicatorFooterViewIncoming:(BOOL)isIncoming
+                                                                withIndicatorColor:(UIColor *)indicatorColor
+                                                                       bubbleColor:(UIColor *)bubbleColor
+                                                                      forIndexPath:(NSIndexPath *)indexPath;
 @end
