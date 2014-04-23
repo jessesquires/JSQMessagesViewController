@@ -58,28 +58,32 @@
 /**
  *  The collection view cell identifier to use for dequeuing outgoing message collection view cells in the collectionView.
  *
- *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]`. This value must not be `nil`.
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]`. 
+ *  This value must not be `nil`.
  *  
  *  @see JSQMessagesCollectionViewCellOutgoing.
  *
  *  @warning Overriding this property's default value is *not* recommended. 
  *  You should only override this property's default value if you are proividing your own cell prototypes.
  *  These prototypes must be registered with the collectionView for reuse and you are then responsible for 
- *  completely overriding many delegate and data source methods for the collectionView, including `collectionView: cellForItemAtIndexPath:`.
+ *  completely overriding many delegate and data source methods for the collectionView, 
+ *  including `collectionView: cellForItemAtIndexPath:`.
  */
 @property (copy, nonatomic) NSString *outgoingCellIdentifier;
 
 /**
  *  The collection view cell identifier to use for dequeuing incoming message collection view cells in the collectionView.
  *
- *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]`. This value must not be `nil`.
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]`. 
+ *  This value must not be `nil`.
  *
  *  @see JSQMessagesCollectionViewCellIncoming.
  *
  *  @warning Overriding this property's default value is *not* recommended. 
  *  You should only override this property's default value if you are proividing your own cell prototypes. 
  *  These prototypes must be registered with the collectionView for reuse and you are then responsible for 
- *  completely overriding many delegate and data source methods for the collectionView, including `collectionView: cellForItemAtIndexPath:`.
+ *  completely overriding many delegate and data source methods for the collectionView, 
+ *  including `collectionView: cellForItemAtIndexPath:`.
  */
 @property (copy, nonatomic) NSString *incomingCellIdentifier;
 
@@ -104,7 +108,8 @@
 /**
  *  Returns the `UINib` object initialized for `JSQMessagesViewController`.
  *
- *  @return The initialized `UINib` object or `nil` if there were errors during initialization or the nib file could not be located.
+ *  @return The initialized `UINib` object or `nil` if there were errors during initialization 
+ *  or the nib file could not be located.
  */
 + (UINib *)nib;
 
@@ -133,10 +138,13 @@
 - (void)didPressAccessoryButton:(UIButton *)sender;
 
 /**
- *  Completes the "sending" of a new message by animating and resetting the `inputToolbar`, animating the addition of a new collection view cell in the collection view, 
- *  reloading the collection view, and scrolling to the newly sent message as specified by `automaticallyScrollsToMostRecentMessage`.
+ *  Completes the "sending" of a new message by animating and resetting the `inputToolbar`, 
+ *  animating the addition of a new collection view cell in the collection view,
+ *  reloading the collection view, and scrolling to the newly sent message 
+ *  as specified by `automaticallyScrollsToMostRecentMessage`.
  *
- *  @discussion You should call this method at the end of `didPressSendButton: withMessage:` after adding the new message to your data source and performing any related tasks.
+ *  @discussion You should call this method at the end of `didPressSendButton: withMessage:` 
+ *  after adding the new message to your data source and performing any related tasks.
  *
  *  @see `automaticallyScrollsToMostRecentMessage`.
  *  @see `didPressSendButton: withMessage:`.
