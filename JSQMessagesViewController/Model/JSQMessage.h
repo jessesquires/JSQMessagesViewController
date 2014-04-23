@@ -17,22 +17,24 @@
 #import "JSQMessageData.h"
 
 /**
- *  A `JSQMessage` model object represents a single user message. This is a concrete class that implements the `JSQMessageData` protocol. It contains the message text, its sender, and the date that the message was sent.
+ *  A `JSQMessage` model object represents a single user message. 
+ *  This is a concrete class that implements the `JSQMessageData` protocol. 
+ *  It contains the message text, its sender, and the date that the message was sent.
  */
 @interface JSQMessage : NSObject <JSQMessageData, NSCoding, NSCopying>
 
 /**
- *  The body text of the message. The default value is the empty string `@" "`. This value must not be `nil`.
+ *  The body text of the message. This value must not be `nil`.
  */
 @property (copy, nonatomic) NSString *text;
 
 /**
- *  The name of user who sent the message. The default value is `nil`.
+ *  The name of user who sent the message. This value must not be `nil`.
  */
 @property (copy, nonatomic) NSString *sender;
 
 /**
- *  The date that the message was sent. The default value is `nil`.
+ *  The date that the message was sent. This value must not be `nil`.
  */
 @property (copy, nonatomic) NSDate *date;
 

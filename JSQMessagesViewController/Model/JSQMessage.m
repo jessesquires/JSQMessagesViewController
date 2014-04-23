@@ -27,9 +27,13 @@
                       sender:(NSString *)sender
                         date:(NSDate *)date
 {
+    NSAssert(text, @"ERROR: text must not be nil: %s", __PRETTY_FUNCTION__);
+    NSAssert(sender, @"ERROR: sender must not be nil: %s", __PRETTY_FUNCTION__);
+    NSAssert(date, @"ERROR: date must not be nil: %s", __PRETTY_FUNCTION__);
+    
     self = [super init];
     if (self) {
-        _text = text ? text : @" ";
+        _text = text;
         _sender = sender;
         _date = date;
     }
