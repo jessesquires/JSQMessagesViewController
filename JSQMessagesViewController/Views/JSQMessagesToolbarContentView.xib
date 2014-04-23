@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -52,11 +52,11 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="leftBarButtonContainerView" destination="LEq-G7-jGt" id="F0V-4N-1Mo"/>
-                <outlet property="leftBarButtonContainerViewWidth" destination="eMy-Af-wwH" id="QSj-3t-SUf"/>
-                <outlet property="leftHorizontalSpacing" destination="LAU-fo-GJJ" id="bd1-WE-kfO"/>
+                <outlet property="leftBarButtonContainerViewWidthConstraint" destination="eMy-Af-wwH" id="9Jw-2j-hrn"/>
+                <outlet property="leftHorizontalSpacingConstraint" destination="LAU-fo-GJJ" id="4zo-CQ-0sV"/>
                 <outlet property="rightBarButtonContainerView" destination="Myo-1S-Vg1" id="0SR-cw-EkD"/>
-                <outlet property="rightBarButtonContainerViewWidth" destination="yde-S9-dHe" id="9eZ-jg-tNN"/>
-                <outlet property="rightHorizontalSpacing" destination="ds6-61-GNv" id="g7S-IN-w3f"/>
+                <outlet property="rightBarButtonContainerViewWidthConstraint" destination="yde-S9-dHe" id="oU1-07-P3e"/>
+                <outlet property="rightHorizontalSpacingConstraint" destination="ds6-61-GNv" id="qwC-Fa-kjV"/>
                 <outlet property="textView" destination="dm4-NT-mvr" id="PFw-HO-oT8"/>
             </connections>
         </view>
