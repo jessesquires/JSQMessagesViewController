@@ -249,10 +249,10 @@
  *
  *  @param isIncoming     Specifies whether the typing indicator should be displayed
  *                        for an incoming message or outgoing message.
- *  @param indicatorColor The color of the typing indicator ellipsis.
- *  @param bubbleColor    The color of the message bubble.
+ *  @param indicatorColor The color of the typing indicator ellipsis. This value must not be `nil`.
+ *  @param bubbleColor    The color of the message bubble. This value must not be `nil`.
  *  @param indexPath      The index path specifying the location of the 
- *                        supplementary view in the collection view.
+ *                        supplementary view in the collection view. This value must not be `nil`.
  *
  *  @return A valid `JSQMessagesTypingIndicatorFooterView` object.
  */

@@ -15,9 +15,8 @@
 #import <UIKit/UIKit.h>
 
 /**
- *  An instance of `JSQMessagesComposerTextView` is a subclass of `UITextView` that is 
- *  styled and used for composing messages in a `JSQMessagesViewController`.
- *  It is a subview of a `JSQMessagesToolbarContentView`.
+ *  An instance of `JSQMessagesComposerTextView` is a subclass of `UITextView` that is styled and used 
+ *  for composing messages in a `JSQMessagesViewController`. It is a subview of a `JSQMessagesToolbarContentView`.
  */
 @interface JSQMessagesComposerTextView : UITextView
 
@@ -32,7 +31,8 @@
 @property (strong, nonatomic) UIColor *placeHolderTextColor;
 
 /**
- *  Determines whether or not the text view contains text after trimming white space from the front and back of its string.
+ *  Determines whether or not the text view contains text after trimming white space 
+ *  from the front and back of its string.
  *
  *  @return `YES` if the text view contains text, `NO` otherwise.
  */

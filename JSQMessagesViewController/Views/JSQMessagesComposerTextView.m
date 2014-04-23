@@ -77,6 +77,8 @@
 - (void)dealloc
 {
     [self jsq_removeTextViewNotificationObservers];
+    _placeHolder = nil;
+    _placeHolderTextColor = nil;
 }
 
 #pragma mark - Composer text view

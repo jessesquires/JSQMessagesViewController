@@ -101,7 +101,9 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 - (void)dealloc
 {
     _messageBubbleFont = nil;
+    
     _messageBubbleSizes = nil;
+    
     _dynamicAnimator = nil;
     _visibleIndexPaths = nil;
 }

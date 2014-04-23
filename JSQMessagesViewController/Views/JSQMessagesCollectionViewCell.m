@@ -69,11 +69,13 @@
 
 + (UINib *)nib
 {
+    NSAssert(NO, @"ERROR: method must be overridden in subclasses: %s", __PRETTY_FUNCTION__);
     return nil;
 }
 
 + (NSString *)cellReuseIdentifier
 {
+    NSAssert(NO, @"ERROR: method must be overridden in subclasses: %s", __PRETTY_FUNCTION__);
     return nil;
 }
 
@@ -125,6 +127,24 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
     [self.avatarContainerView addGestureRecognizer:tap];
     self.tapGestureRecognizer = tap;
+}
+
+- (void)dealloc
+{
+    _delegate = nil;
+    
+    _cellTopLabel = nil;
+    _messageBubbleTopLabel = nil;
+    _cellBottomLabel = nil;
+    _textView = nil;
+    _messageBubbleImageView = nil;
+    _avatarImageView = nil;
+    
+    [_longPressGestureRecognizer removeTarget:nil action:NULL];
+    _longPressGestureRecognizer = nil;
+    
+    [_tapGestureRecognizer removeTarget:nil action:NULL];
+    _tapGestureRecognizer = nil;
 }
 
 #pragma mark - Collection view cell

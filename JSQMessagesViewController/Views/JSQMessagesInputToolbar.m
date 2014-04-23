@@ -70,6 +70,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 - (void)dealloc
 {
     [self jsq_removeObservers];
+    _contentView = nil;
 }
 
 #pragma mark - Actions
@@ -131,6 +132,8 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 - (void)jsq_addObservers
 {
+    [self jsq_removeObservers];
+    
     [self.contentView addObserver:self
                        forKeyPath:NSStringFromSelector(@selector(leftBarButtonItem))
                           options:0
@@ -153,9 +156,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                           forKeyPath:NSStringFromSelector(@selector(rightBarButtonItem))
                              context:kJSQMessagesInputToolbarKeyValueObservingContext];
     }
-    @catch (NSException *exception) {
-        NSLog(@"%s EXCEPTION CAUGHT : %@, %@", __PRETTY_FUNCTION__, exception, [exception userInfo]);
-    }
+    @catch (NSException *exception) { }
 }
 
 @end
