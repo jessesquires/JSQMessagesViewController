@@ -59,6 +59,12 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     self.backgroundColor = [UIColor whiteColor];
 }
 
+- (void)dealloc
+{
+    _bubbleImageView = nil;
+    _typingIndicatorImageView = nil;
+}
+
 #pragma mark - Reusable view
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor
@@ -75,6 +81,10 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
               collectionView:(UICollectionView *)collectionView
 
 {
+    NSAssert(indicatorColor, @"ERROR: indicatorColor must not be nil: %s", __PRETTY_FUNCTION__);
+    NSAssert(bubbleColor, @"ERROR: bubbleColor must not be nil: %s", __PRETTY_FUNCTION__);
+    NSAssert(collectionView, @"ERROR: collectionView must not be nil: %s", __PRETTY_FUNCTION__);
+    
     CGFloat collectionViewWidth = CGRectGetWidth(collectionView.frame);
     CGFloat bubbleWidth = CGRectGetWidth(self.bubbleImageView.frame);
     CGFloat indicatorWidth = CGRectGetWidth(self.typingIndicatorImageView.frame);

@@ -51,9 +51,9 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight;
  *
  *  @param isIncoming     Specifies whether the typing indicator should be displayed 
  *                        for an incoming message or outgoing message.
- *  @param indicatorColor The color of the typing indicator ellipsis.
- *  @param bubbleColor    The color of the message bubble.
- *  @param collectionView The collection view in which the footer view will appear.
+ *  @param indicatorColor The color of the typing indicator ellipsis. This value must not be `nil`.
+ *  @param bubbleColor    The color of the message bubble. This value must not be `nil`.
+ *  @param collectionView The collection view in which the footer view will appear. This value must not be `nil`.
  */
 - (void)configureForIncoming:(BOOL)isIncoming
               indicatorColor:(UIColor *)indicatorColor
