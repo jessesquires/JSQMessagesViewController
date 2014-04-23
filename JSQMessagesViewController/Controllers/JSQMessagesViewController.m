@@ -219,7 +219,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    NSLog(@"%s MEMORY WARNING!", __PRETTY_FUNCTION__);
+    NSLog(@"MEMORY WARNING: %s", __PRETTY_FUNCTION__);
 }
 
 #pragma mark - View rotation
@@ -355,10 +355,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    NSAssert(messageData, @"ERROR: messageData must not be nil");
+    NSAssert(messageData, @"ERROR: messageData must not be nil: %s", __PRETTY_FUNCTION__);
     
     NSString *messageSender = [messageData sender];
-    NSAssert(messageSender, @"ERROR: messageData sender must not be nil");
+    NSAssert(messageSender, @"ERROR: messageData sender must not be nil: %s", __PRETTY_FUNCTION__);
     
     BOOL isOutgoingMessage = [messageSender isEqualToString:self.sender];
     
@@ -367,7 +367,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.delegate = self;
     
     NSString *messageText = [messageData text];
-    NSAssert(messageText, @"ERROR: messageData text must not be nil");
+    NSAssert(messageText, @"ERROR: messageData text must not be nil: %s", __PRETTY_FUNCTION__);
     
     cell.textView.text = messageText;
     

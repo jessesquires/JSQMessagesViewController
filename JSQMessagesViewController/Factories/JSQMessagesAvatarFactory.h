@@ -21,24 +21,26 @@
 @interface JSQMessagesAvatarFactory : NSObject
 
 /**
-*  Returns a copy of the image object associated with the specified originalImage that is cropped to a circle with the given diameter.
+*  Returns a copy of the image object associated with the specified originalImage that is 
+*  cropped to a circle with the given diameter.
 *
-*  @param originalImage The origin image object from which an avatar is created.
-*  @param diameter      An integer value specifying the diameter size of the avatar in points.
+*  @param originalImage The origin image object from which an avatar is created. This value must not be `nil`.
+*  @param diameter      An integer value specifying the diameter size of the avatar in points. This value must be greater than `0.0f`.
 *
-*  @return A new avatar image object for the specified originalImage that is cropped to a circle with the given diameter, 
-*  or `nil` if originalImage is not a valid, initialized image object.
+*  @return A new avatar image object for the specified originalImage that is cropped to a circle 
+*  with the given diameter, or `nil` if originalImage is not a valid, initialized image object.
 */
 + (UIImage *)avatarWithImage:(UIImage *)originalImage diameter:(NSUInteger)diameter;
 
 /**
- *  Returns an image object with a circular shape that displays the specified userInitials with the given backgroundColor, textColor, font, and diameter.
+ *  Returns an image object with a circular shape that displays the specified userInitials 
+ *  with the given backgroundColor, textColor, font, and diameter.
  *
- *  @param userInitials    The user initials to display in the avatar image.
- *  @param backgroundColor The background color of the avatar.
- *  @param textColor       The color of the text of the userInitials.
- *  @param font            The font applied to userInitials.
- *  @param diameter        The diameter of the avatar image.
+ *  @param userInitials    The user initials to display in the avatar image. This value must not be `nil`.
+ *  @param backgroundColor The background color of the avatar. This value must not be `nil`.
+ *  @param textColor       The color of the text of the userInitials. This value must not be `nil`.
+ *  @param font            The font applied to userInitials. This value must not be `nil`.
+ *  @param diameter        The diameter of the avatar image. This value must be greater than `0.0f`.
  *
  *  @return A new avatar image object having the specified attributes if created successfully, otherwise `nil`.
  *

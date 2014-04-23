@@ -206,7 +206,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     return [self.messages objectAtIndex:indexPath.row];
 }
 
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender  bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
      *  Reuse created bubble images, but create new imageView to add to each cell
@@ -221,7 +221,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                              highlightedImage:self.incomingBubbleImageView.highlightedImage];
 }
 
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender  avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
      *  Reuse created avatar images, but create new imageView to add to each cell

@@ -28,6 +28,8 @@
 
 + (UIImage *)avatarWithImage:(UIImage *)originalImage diameter:(NSUInteger)diameter
 {
+    NSAssert(originalImage, @"ERROR: originalImage must not be nil: %s", __PRETTY_FUNCTION__);
+    NSAssert(diameter > 0.0f, @"ERROR: diameter must be greater than 0: %s", __PRETTY_FUNCTION__);
     return [JSQMessagesAvatarFactory jsq_circularImage:originalImage withDiamter:diameter];
 }
 
@@ -37,6 +39,12 @@
                                font:(UIFont *)font
                            diameter:(NSUInteger)diameter
 {
+    NSAssert(userInitials, @"ERROR: userInitials must not be nil: %s", __PRETTY_FUNCTION__);
+    NSAssert(backgroundColor, @"ERROR: backgroundColor must not be nil: %s", __PRETTY_FUNCTION__);
+    NSAssert(textColor, @"ERROR: textColor must not be nil: %s", __PRETTY_FUNCTION__);
+    NSAssert(font, @"ERROR: font must not be nil: %s", __PRETTY_FUNCTION__);
+    NSAssert(diameter > 0.0f, @"ERROR: diameter must be greater than 0: %s", __PRETTY_FUNCTION__);
+    
     CGRect frame = CGRectMake(0.0f, 0.0f, diameter, diameter);
     
     NSString *text = [userInitials uppercaseString];

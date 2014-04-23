@@ -25,9 +25,9 @@
  *  The `image` property of the image view is configured with a flat bubble image, masked to the given color. 
  *  The `highlightedImage` property is configured similarly, but with a darkened version of the given color.
  *
- *  @param color The color of the bubble image in the image view.
+ *  @param color The color of the bubble image in the image view. This value must not be `nil`.
  *
- *  @return n initialized image view object if created successfully, `nil` otherwise.
+ *  @return An initialized image view object if created successfully, `nil` otherwise.
  */
 + (UIImageView *)outgoingMessageBubbleImageViewWithColor:(UIColor *)color;
 
@@ -36,9 +36,9 @@
  *  The `image` property of the image view is configured with a flat bubble image, masked to the given color. 
  *  The `highlightedImage` property is configured similarly, but with a darkened version of the given color.
  *
- *  @param color The color of the bubble image in the image view.
+ *  @param color The color of the bubble image in the image view. This value must not be `nil`.
  *
- *  @return n initialized image view object if created successfully, `nil` otherwise.
+ *  @return An initialized image view object if created successfully, `nil` otherwise.
  */
 + (UIImageView *)incomingMessageBubbleImageViewWithColor:(UIColor *)color;
 
