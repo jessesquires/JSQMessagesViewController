@@ -74,13 +74,17 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 @property (readonly, nonatomic) CGFloat itemWidth;
 
 /**
- *  The font used to display the body a text message in the message bubble of each `JSQMessagesCollectionViewCell` in the collectionView. The default value is the system font at size `15.0f`.
+ *  The font used to display the body a text message in the message bubble of each 
+ *  `JSQMessagesCollectionViewCell` in the collectionView. 
+ *  
+ *  @discussion The default value is the system font at size `15.0f`. This value must not be `nil`.
  */
 @property (strong, nonatomic) UIFont *messageBubbleFont;
 
 /**
  *  The horizontal spacing used to lay out the text view frame within each `JSQMessagesCollectionViewCell`.
- *  This value specifies the horizontal spacing between the message bubble and the edge of the collection view cell in which it is displayed.
+ *  This value specifies the horizontal spacing between the message bubble and 
+ *  the edge of the collection view cell in which it is displayed.
  *
  *  @discussion The default value is `40.0f`. This value must be positive.
  *  For *outgoing* messages, this value specifies the amount of spacing from the left most 
