@@ -85,7 +85,7 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:0.557 green:0.557 blue:0.576 alpha:1.0];
-    label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:12.0f];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:11.5f];
     
     [self.contentView addSubview:label];
     [self.contentView bringSubviewToFront:label];

@@ -28,6 +28,8 @@
 
 #define kForegroundImageViewOffset 12.0f
 
+#define kMessageBubbleTailWidth 6.0f
+
 
 @interface JSBubbleView()
 
@@ -75,7 +77,7 @@
         _bubbleImageView = bubbleImageView;
         
         UILabel *textView = [[UILabel alloc]init];
-        textView.font = [UIFont systemFontOfSize:16.0f];
+        textView.font = [UIFont systemFontOfSize:17.0f];
         textView.textColor = [UIColor blackColor];
         textView.userInteractionEnabled = YES;
         textView.backgroundColor = [UIColor clearColor];
@@ -241,12 +243,20 @@
     CGFloat textX = self.bubbleImageView.frame.origin.x + (self.hasAvatar ? offset : 0);
     
     if(self.type == JSBubbleMessageTypeIncoming) {
-        textX += (self.bubbleImageView.image.capInsets.left / 2.0f);
+        textX += kMessageBubbleTailWidth;  // begin after left-tail
     }
+
+    CGFloat textWidth = self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f);
+    if(self.type == JSBubbleMessageTypeNotification) {
+        textWidth -= kForegroundImageViewOffset;
+    } else {  // for message bubbles, subtract 4.0f to make sure it's 10.0f from the end.  (the end does not include the tail)
+        textWidth -= 4.0f;
+    }
+    textWidth -= (self.hasAvatar ? offset : 0);
     
     CGRect textFrame = CGRectMake(textX,
                                   self.bubbleImageView.frame.origin.y,
-                                  self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f) - kForegroundImageViewOffset - (self.hasAvatar ? offset: 0),
+                                  textWidth,
                                   self.bubbleImageView.frame.size.height - kMarginTop);
 
     
@@ -255,12 +265,11 @@
     // for the insets...  some values had to change to make it work with UILabel.
     
     textFrame.origin.y += 4.0f;
-    textFrame.origin.x += 8.0f;
-    textFrame.size.width -= 8.0f;
+    textFrame.origin.x += 10.0f;
+    textFrame.size.width -= 10.0f;
     textFrame.size.height -= 2.0f;
     
     [self.textView setFrame:textFrame];
-    
 }
 
 #pragma mark - Bubble view
