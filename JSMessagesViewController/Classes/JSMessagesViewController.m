@@ -504,7 +504,6 @@
     [self animationForMessageInputViewAtPoint:point];
 }
 
-
 - (void)keyboardDidScrollToPoint:(CGPoint)point
 {
     [self animationForMessageInputViewAtPoint:point];
