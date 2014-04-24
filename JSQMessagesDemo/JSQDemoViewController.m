@@ -171,7 +171,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
         
         [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
         [self.messages addObject:copyMessage];
-        [self finishSending];
+        [self finishReceivingMessage];
     });
 }
 
@@ -189,7 +189,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 {
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     [self.messages addObject:message];
-    [self finishSending];
+    [self finishSendingMessage];
 }
 
 - (void)didPressAccessoryButton:(UIButton *)sender

@@ -149,7 +149,20 @@
  *  @see `automaticallyScrollsToMostRecentMessage`.
  *  @see `didPressSendButton: withMessage:`.
  */
-- (void)finishSending;
+- (void)finishSendingMessage;
+
+/**
+ *  Completes the "receiving" of a new message by animating the typing indicator,
+ *  animating the addition of a new collection view cell in the collection view,
+ *  reloading the collection view, and scrolling to the newly sent message
+ *  as specified by `automaticallyScrollsToMostRecentMessage`.
+ *
+ *  @discussion You should call this method after adding a new "received" message
+ *  to your data source and performing any related tasks.
+ *
+ *  @see `automaticallyScrollsToMostRecentMessage`.
+ */
+- (void)finishReceivingMessage;
 
 /**
  *  Scrolls the collection view such that the bottom most cell is completely visible, above the `inputToolbar`.

@@ -55,6 +55,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_prepareForRotation;
 
+- (void)jsq_finishSendingOrReceivingMessage;
+
 - (JSQMessage *)jsq_currentlyComposedMessage;
 
 - (void)jsq_updateKeyboardTriggerPoint;
@@ -272,7 +274,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)didPressAccessoryButton:(UIButton *)sender { }
 
-- (void)finishSending
+- (void)finishSendingMessage
 {
     UITextView *textView = self.inputToolbar.contentView.textView;
     textView.text = nil;
@@ -281,6 +283,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
     
+    [self jsq_finishSendingOrReceivingMessage];
+}
+
+- (void)finishReceivingMessage
+{
+    [self jsq_finishSendingOrReceivingMessage];
+}
+
+- (void)jsq_finishSendingOrReceivingMessage
+{
     self.showTypingIndicator = NO;
     
     [self.collectionView reloadData];
