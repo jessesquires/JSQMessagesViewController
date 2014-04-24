@@ -181,7 +181,7 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
     
     if(hasTimestamp) {
         [self configureTimestampLabel];
-        bubbleY = 14.0f;
+        bubbleY = self.timestampLabel.frame.origin.y + self.timestampLabel.frame.size.height;// 14.0f;
     }
     
     [self configureSideTimestampLabel];
@@ -391,7 +391,7 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
                                            subtitle:(BOOL)hasSubtitle
                                                type:(JSBubbleMessageType)type
 {
-    CGFloat timestampHeight = hasTimestamp ? kJSTimeStampLabelHeight : 0.0f;
+    CGFloat timestampHeight = hasTimestamp ? kJSLabelPadding + kJSTimeStampLabelHeight : 0.0f;
     CGFloat avatarHeight = hasAvatar ? kJSAvatarImageSize : 0.0f;
 	CGFloat subtitleHeight = hasSubtitle ? kJSSubtitleLabelHeight : 0.0f;
     
