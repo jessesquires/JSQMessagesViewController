@@ -503,7 +503,8 @@
 - (void)keyboardWillSnapBackToPoint:(CGPoint)point
 {
     [self animationForMessageInputViewAtPoint:point];
-    [self scrollToBottomAnimated:YES];
+    if ([self.messageInputView.textView isFirstResponder])
+        [self scrollToBottomAnimated:YES];
 }
 
 - (void)keyboardDidScrollToPoint:(CGPoint)point
