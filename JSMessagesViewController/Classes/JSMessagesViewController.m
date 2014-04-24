@@ -499,7 +499,18 @@
 
 #pragma mark - Dismissive text view delegate
 
+- (void)keyboardWillSnapBackToPoint:(CGPoint)point
+{
+    [self animationForMessageInputViewAtPoint:point];
+}
+
+
 - (void)keyboardDidScrollToPoint:(CGPoint)point
+{
+    [self animationForMessageInputViewAtPoint:point];
+}
+
+- (void)animationForMessageInputViewAtPoint:(CGPoint)point
 {
     CGRect inputViewFrame = self.messageInputView.frame;
     CGPoint keyboardOrigin = [self.view convertPoint:point fromView:nil];
