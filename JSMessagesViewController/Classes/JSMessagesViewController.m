@@ -493,6 +493,7 @@
 
                          [self setTableViewInsetsWithBottomValue:self.view.frame.size.height
                                                                 - self.messageInputView.frame.origin.y];
+                         [self scrollToBottomAnimated:YES];
                      }
                      completion:nil];
 }
@@ -502,6 +503,7 @@
 - (void)keyboardWillSnapBackToPoint:(CGPoint)point
 {
     [self animationForMessageInputViewAtPoint:point];
+    [self scrollToBottomAnimated:YES];
 }
 
 - (void)keyboardDidScrollToPoint:(CGPoint)point
