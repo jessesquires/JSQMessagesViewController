@@ -22,8 +22,8 @@
 #define kMarginBottom 4.0f
 #define kPaddingTop 4.0f
 #define kPaddingBottom 8.0f
-#define kNotificationBubblePaddingRight 35.0f
-#define kBubblePaddingRight 25.0f
+#define kNotificationBubblePaddingRight 43.0f
+#define kBubblePaddingRight 33.0f
 
 #define kMarginLeftRight 10.0f
 
@@ -242,6 +242,7 @@
     CGFloat offset = [JSBubbleView heightForSingleLine];
     
     CGFloat textX = self.bubbleImageView.frame.origin.x + (self.hasAvatar ? offset : 0);
+    CGFloat textY = self.bubbleImageView.frame.origin.y;
     
     if(self.type == JSBubbleMessageTypeIncoming) {
         textX += kMessageBubbleTailWidth;  // begin after left-tail
@@ -249,15 +250,16 @@
 
     CGFloat textWidth = self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f);
     if(self.type == JSBubbleMessageTypeNotification) {
+        textY += 1.0f;
         textWidth -= kForegroundImageViewOffset;
-        textWidth -= 10.0f;
+        textWidth -= 14.0f;
     } else {  // for message bubbles, subtract 4.0f to make sure it's 10.0f from the end.  (the end does not include the tail)
-        textWidth -= 4.0f;
+        textWidth -= 20.0f;
     }
     textWidth -= (self.hasAvatar ? offset : 0);
     
     CGRect textFrame = CGRectMake(textX,
-                                  self.bubbleImageView.frame.origin.y,
+                                  textY,
                                   textWidth,
                                   self.bubbleImageView.frame.size.height - kMarginTop);
 
@@ -267,7 +269,7 @@
     // for the insets...  some values had to change to make it work with UILabel.
     
     textFrame.origin.y += 4.0f;
-    textFrame.origin.x += 10.0f;
+    textFrame.origin.x += 14.0f;
     textFrame.size.height -= 2.0f;
     
     [self.textView setFrame:textFrame];
