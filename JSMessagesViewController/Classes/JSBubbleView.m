@@ -22,7 +22,8 @@
 #define kMarginBottom 4.0f
 #define kPaddingTop 4.0f
 #define kPaddingBottom 8.0f
-#define kBubblePaddingRight 35.0f
+#define kNotificationBubblePaddingRight 35.0f
+#define kBubblePaddingRight 25.0f
 
 #define kMarginLeftRight 10.0f
 
@@ -249,6 +250,7 @@
     CGFloat textWidth = self.bubbleImageView.frame.size.width - (self.bubbleImageView.image.capInsets.right / 2.0f);
     if(self.type == JSBubbleMessageTypeNotification) {
         textWidth -= kForegroundImageViewOffset;
+        textWidth -= 10.0f;
     } else {  // for message bubbles, subtract 4.0f to make sure it's 10.0f from the end.  (the end does not include the tail)
         textWidth -= 4.0f;
     }
@@ -266,7 +268,6 @@
     
     textFrame.origin.y += 4.0f;
     textFrame.origin.x += 10.0f;
-    textFrame.size.width -= 10.0f;
     textFrame.size.height -= 2.0f;
     
     [self.textView setFrame:textFrame];
@@ -300,7 +301,9 @@
 {
     CGSize textSize = [JSBubbleView textSizeForText:text type:type];
     
-	return CGSizeMake(textSize.width + kBubblePaddingRight,
+    CGFloat bubblePaddingRight = (type == JSBubbleMessageTypeNotification ? kNotificationBubblePaddingRight : kBubblePaddingRight);
+    
+	return CGSizeMake(textSize.width + bubblePaddingRight,
                       textSize.height + kPaddingTop + kPaddingBottom);
 }
 
