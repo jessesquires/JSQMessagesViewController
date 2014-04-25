@@ -188,8 +188,6 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 - (void)invalidateLayout
 {
     [super invalidateLayout];
-    [self.dynamicAnimator removeAllBehaviors];
-    [self.visibleIndexPaths removeAllObjects];
     [self.messageBubbleSizes removeAllObjects];
 }
 
