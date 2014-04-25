@@ -255,6 +255,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  This logic should be consistent with what you return from `heightForCellTopLabelAtIndexPath:`
      *  The other label text delegate methods should follow similarly.
+     *
+     *  Show a timestamp for every 3rd message
      */
     if (indexPath.item % 3 == 0) {
         JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
@@ -266,6 +268,20 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
+    /**
+     *  iOS7-style sender name labels
+     */
+    if ([sender isEqualToString:self.sender]) {
+        return nil;
+    }
+    
+    if (indexPath.item - 1 > 0) {
+        JSQMessage *previousMessage = [self.messages objectAtIndex:indexPath.row - 1];
+        if ([[previousMessage sender] isEqualToString:sender]) {
+            return nil;
+        }
+    }
+    
     /**
      *  Don't specify attributes to use the defaults.
      */
@@ -303,6 +319,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  This logic should be consistent with what you return from `attributedTextForCellTopLabelAtIndexPath:`
      *  The other label height delegate methods should follow similarly.
+     *
+     *  Show a timestamp for every 3rd message
      */
     if (indexPath.item % 3 == 0) {
         return kJSQMessagesCollectionViewCellLabelHeightDefault;
@@ -314,6 +332,21 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
+    /**
+     *  iOS7-style sender name labels
+     */
+    JSQMessage *currentMessage = [self.messages objectAtIndex:indexPath.row];
+    if ([[currentMessage sender] isEqualToString:self.sender]) {
+        return 0.0f;
+    }
+    
+    if (indexPath.item - 1 > 0) {
+        JSQMessage *previousMessage = [self.messages objectAtIndex:indexPath.row - 1];
+        if ([[previousMessage sender] isEqualToString:[currentMessage sender]]) {
+            return 0.0f;
+        }
+    }
+    
     return kJSQMessagesCollectionViewCellLabelHeightDefault;
 }
 
