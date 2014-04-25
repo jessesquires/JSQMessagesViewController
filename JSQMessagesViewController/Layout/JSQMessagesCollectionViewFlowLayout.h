@@ -63,7 +63,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
  *  Specifies the degree of resistence for the "springiness" of items in the layout. 
  *  This property has no effect if `springinessEnabled` is set to `NO`.
  *
- *  @discussion The default value is `900`. Increasing this value increases the resistance, that is, items become less "bouncy". 
+ *  @discussion The default value is `1000`. Increasing this value increases the resistance, that is, items become less "bouncy". 
  *  Decrease this value in order to make items more "bouncy".
  */
 @property (assign, nonatomic) NSUInteger springResistanceFactor;

@@ -85,7 +85,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     self.outgoingAvatarViewSize = defaultAvatarSize;
     
     _springinessEnabled = NO;
-    _springResistanceFactor = 900;
+    _springResistanceFactor = 1000;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(jsq_didReceiveApplicationMemoryWarningNotification:)
