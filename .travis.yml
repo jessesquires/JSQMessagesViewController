@@ -7,5 +7,4 @@ before_install:
 - brew upgrade xctool
 
 script: 
-- xctool -workspace JSQMessages.xcworkspace -scheme JSQMessagesDemo -sdk iphonesimulator7.0 ONLY_ACTIVE_ARCH=NO clean build
-- xctool -workspace JSQMessages.xcworkspace -scheme JSQMessagesTests -sdk iphonesimulator7.0 ONLY_ACTIVE_ARCH=NO clean build run-tests -freshInstall
+- xctool clean build test -workspace JSQMessages.xcworkspace -scheme JSQMessages -sdk iphonesimulator7.0 ONLY_ACTIVE_ARCH=NO
