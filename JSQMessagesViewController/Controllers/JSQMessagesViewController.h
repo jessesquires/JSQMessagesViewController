@@ -22,8 +22,10 @@
 @class JSQMessage;
 
 /**
- *  The `JSQMessagesViewController` class represents a view controller whose content consists of 
+ *  The `JSQMessagesViewController` class is an abstract class that represents a view controller whose content consists of
  *  a `JSQMessagesCollectionView` and `JSQMessagesInputToolbar` and is specialized to display a messaging interface.
+ *
+ *  @warning This class is intended to be subclassed. You should not use it directly.
  */
 @interface JSQMessagesViewController : UIViewController <JSQMessagesCollectionViewDataSource,
                                                          JSQMessagesCollectionViewDelegateFlowLayout>

@@ -40,6 +40,8 @@
  *  The `JSQMessagesCollectionViewCell` is an abstract class that presents the content for a single message data item
  *  when that item is within the collection view’s visible bounds. The layout and presentation 
  *  of cells is managed by the collection view and its corresponding layout object.
+ *
+ *  @warning This class is intended to be subclassed. You should not use it directly.
  */
 @interface JSQMessagesCollectionViewCell : UICollectionViewCell
 
