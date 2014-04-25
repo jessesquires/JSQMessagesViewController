@@ -28,9 +28,9 @@
 
 + (JSQMessagesTimestampFormatter *)sharedFormatter
 {
-    static JSQMessagesTimestampFormatter *_sharedFormatter;
+    static JSQMessagesTimestampFormatter *_sharedFormatter = nil;
     
-    static dispatch_once_t onceToken;
+    static dispatch_once_t onceToken = 0;
     dispatch_once(&onceToken, ^{
         _sharedFormatter = [[JSQMessagesTimestampFormatter alloc] init];
     });

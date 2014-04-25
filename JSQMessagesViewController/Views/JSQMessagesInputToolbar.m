@@ -156,7 +156,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                           forKeyPath:NSStringFromSelector(@selector(rightBarButtonItem))
                              context:kJSQMessagesInputToolbarKeyValueObservingContext];
     }
-    @catch (NSException *exception) { }
+    @catch (NSException *__unused exception) { }
 }
 
 @end
