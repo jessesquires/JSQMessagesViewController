@@ -185,6 +185,14 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 #pragma mark - Collection view flow layout
 
+- (void)invalidateLayout
+{
+    [super invalidateLayout];
+    [self.dynamicAnimator removeAllBehaviors];
+    [self.visibleIndexPaths removeAllObjects];
+    [self.messageBubbleSizes removeAllObjects];
+}
+
 - (void)prepareLayout
 {
     [super prepareLayout];
