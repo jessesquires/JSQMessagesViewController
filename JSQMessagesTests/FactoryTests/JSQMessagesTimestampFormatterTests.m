@@ -23,6 +23,8 @@
 {
     JSQMessagesTimestampFormatter *formatter = [JSQMessagesTimestampFormatter sharedFormatter];
     XCTAssertNotNil(formatter, @"Formatter should not be nil");
+    XCTAssertNotNil(formatter.dateTextAttributes, @"Attributes should not be nil");
+    XCTAssertNotNil(formatter.timeTextAttributes, @"Attributes should not be nil");
 }
 
 @end
