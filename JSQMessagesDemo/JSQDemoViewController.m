@@ -109,8 +109,6 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     
     self.sender = @"Jesse Squires";
     
-    self.inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"Message", nil);
-    
     [self jsqDemo_setupTestModel];
     
     /**
@@ -156,6 +154,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (void)receiveMessagePressed:(UIBarButtonItem *)sender
 {
+    /**
+     *  The following is simply to simulate received messages for the demo.
+     *  Do not actually do this.
+     */
     self.showTypingIndicator = !self.showTypingIndicator;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -169,6 +171,13 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
         [copyAvatars removeObject:self.sender];
         copyMessage.sender = [copyAvatars objectAtIndex:arc4random_uniform((int)[copyAvatars count])];
         
+        /**
+         *  This you should do upon receiving a message:
+         *
+         *  1. Play sound (optional)
+         *  2. Add new id<JSQMessageData> object to your data source
+         *  3. Call `finishReceivingMessage`
+         */
         [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
         [self.messages addObject:copyMessage];
         [self finishReceivingMessage];
@@ -187,6 +196,13 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (void)didPressSendButton:(UIButton *)sender withMessage:(JSQMessage *)message
 {
+    /**
+     *  Sending a message. Your implementation of this method should do *at least* the following:
+     *
+     *  1. Play sound (optional)
+     *  2. Add new id<JSQMessageData> object to your data source
+     *  3. Call `finishSendingMessage`
+     */
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     [self.messages addObject:message];
     [self finishSendingMessage];
@@ -195,6 +211,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
     NSLog(@"Camera pressed!");
+    /**
+     *  Accessory button has no default functionality, yet.
+     */
 }
 
 
@@ -233,6 +252,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
+    /**
+     *  This logic should be consistent with what you return from `heightForCellTopLabelAtIndexPath:`
+     *  The other label text delegate methods should follow similarly.
+     */
     if (indexPath.item % 3 == 0) {
         JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
         return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
@@ -243,6 +266,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
+    /**
+     *  Don't specify attributes to use the defaults.
+     */
     return [[NSAttributedString alloc] initWithString:sender];
 }
 
@@ -274,6 +300,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
+    /**
+     *  This logic should be consistent with what you return from `attributedTextForCellTopLabelAtIndexPath:`
+     *  The other label height delegate methods should follow similarly.
+     */
     if (indexPath.item % 3 == 0) {
         return kJSQMessagesCollectionViewCellLabelHeightDefault;
     }
