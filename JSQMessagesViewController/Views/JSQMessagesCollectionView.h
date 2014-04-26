@@ -18,6 +18,7 @@
 
 @class JSQMessagesCollectionView;
 @class JSQMessagesTypingIndicatorFooterView;
+@class JSQMessagesLoadEarlierHeaderView;
 
 @protocol JSQMessageData;
 
@@ -218,6 +219,17 @@
  didTapAvatarImageView:(UIImageView *)avatarImageView
            atIndexPath:(NSIndexPath *)indexPath;
 
+/**
+ *  Notifies the delegate that the collection view's header did receive a tap event.
+ *
+ *  @param collectionView The collection view object that is notifying you of the tap event.
+ *  @param headerView     The header view in the collection view.
+ *  @param sender         The button that was tapped.
+ */
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+        header:(JSQMessagesLoadEarlierHeaderView *)headerView
+        didTapLoadEarlierMessagesButton:(UIButton *)sender;
+
 @end
 
 
@@ -260,4 +272,14 @@
                                                                 withIndicatorColor:(UIColor *)indicatorColor
                                                                        bubbleColor:(UIColor *)bubbleColor
                                                                       forIndexPath:(NSIndexPath *)indexPath;
+/**
+ *  Returns a `JSQMessagesLoadEarlierHeaderView` object for the specified index path.
+ *
+ *  @param indexPath The index path specifying the location of the
+ *                   supplementary view in the collection view. This value must not be `nil`.
+ *
+ *  @return A valid `JSQMessagesLoadEarlierHeaderView` object.
+ */
+- (JSQMessagesLoadEarlierHeaderView *)dequeueLoadEarlierMessagesViewHeaderForIndexPath:(NSIndexPath *)indexPath;
+
 @end

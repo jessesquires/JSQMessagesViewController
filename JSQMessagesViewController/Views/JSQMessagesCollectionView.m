@@ -19,6 +19,11 @@
 #import "JSQMessagesCollectionViewCellOutgoing.h"
 
 #import "JSQMessagesTypingIndicatorFooterView.h"
+#import "JSQMessagesLoadEarlierHeaderView.h"
+
+
+@interface JSQMessagesCollectionView () <JSQMessagesLoadEarlierHeaderViewDelegate>
+@end
 
 
 @implementation JSQMessagesCollectionView
@@ -43,6 +48,10 @@
     [self registerNib:[JSQMessagesTypingIndicatorFooterView nib]
           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
           withReuseIdentifier:[JSQMessagesTypingIndicatorFooterView footerReuseIdentifier]];
+    
+    [self registerNib:[JSQMessagesLoadEarlierHeaderView nib]
+          forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+          withReuseIdentifier:[JSQMessagesLoadEarlierHeaderView headerReuseIdentifier]];
 }
 
 #pragma mark - Typing indicator
@@ -62,6 +71,26 @@
                       collectionView:self];
     
     return footerView;
+}
+
+#pragma mark - Load earlier messages header
+
+- (JSQMessagesLoadEarlierHeaderView *)dequeueLoadEarlierMessagesViewHeaderForIndexPath:(NSIndexPath *)indexPath
+{
+    JSQMessagesLoadEarlierHeaderView *headerView = [super dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                                                                             withReuseIdentifier:[JSQMessagesLoadEarlierHeaderView headerReuseIdentifier]
+                                                                                    forIndexPath:indexPath];
+    headerView.delegate = self;
+    return headerView;
+}
+
+#pragma mark - Load earlier messages header delegate
+
+- (void)headerView:(JSQMessagesLoadEarlierHeaderView *)headerView didPressLoadButton:(UIButton *)sender
+{
+    if ([self.delegate respondsToSelector:@selector(collectionView:header:didTapLoadEarlierMessagesButton:)]) {
+        [self.delegate collectionView:self header:headerView didTapLoadEarlierMessagesButton:sender];
+    }
 }
 
 @end
