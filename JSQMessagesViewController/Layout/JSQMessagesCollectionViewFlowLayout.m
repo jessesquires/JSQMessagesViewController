@@ -381,8 +381,8 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 {
     UIAttachmentBehavior *springBehavior = [[UIAttachmentBehavior alloc] initWithItem:item attachedToAnchor:item.center];
     springBehavior.length = 1.0f;
-    springBehavior.damping = 0.8f;
-    springBehavior.frequency = 1.0f;
+    springBehavior.damping = 1.0f;
+    springBehavior.frequency = 0.5f;
     return springBehavior;
 }
 
