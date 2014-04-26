@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 	s.name				= 'JSQMessagesViewController'
-	s.version			= '5.0.0-beta1'
-	s.summary			= 'A messages UI for iPhone and iPad.'
+	s.version			= '5.0.0-beta2'
+	s.summary			= 'An elegant messages UI framework for iOS.'
 	s.homepage			= 'https://github.com/jessesquires/MessagesTableViewController'
 	s.social_media_url	= 'https://twitter.com/jesse_squires'
 	s.license			= 'MIT'
