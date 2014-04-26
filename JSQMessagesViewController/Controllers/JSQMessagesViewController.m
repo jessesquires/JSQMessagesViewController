@@ -148,6 +148,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self jsq_registerForNotifications:NO];
     [self jsq_removeObservers];
     
+    _collectionView.dataSource = nil;
+    _collectionView.delegate = nil;
     _collectionView = nil;
     _inputToolbar = nil;
     
@@ -158,6 +160,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     _outgoingCellIdentifier = nil;
     _incomingCellIdentifier = nil;
     
+    [_keyboardController endListeningForKeyboard];
     _keyboardController = nil;
 }
 
