@@ -156,6 +156,8 @@
 {
     _delegate = nil;
     _dataSource = nil;
+    _tableView.delegate = nil;
+    _tableView.dataSource = nil;
     _tableView = nil;
     _messageInputView = nil;
 }
