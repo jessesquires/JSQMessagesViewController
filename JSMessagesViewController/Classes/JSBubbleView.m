@@ -252,9 +252,9 @@
     if(self.type == JSBubbleMessageTypeNotification) {
         textY += 1.0f;
         textWidth -= kForegroundImageViewOffset;
-        textWidth -= 14.0f;
-    } else {  // for message bubbles, subtract 4.0f to make sure it's 10.0f from the end.  (the end does not include the tail)
-        textWidth -= 20.0f;
+        textWidth -= 12.0f;
+    } else {
+        textWidth -= 18.0f;
     }
     textWidth -= (self.hasAvatar ? offset : 0);
     
@@ -269,7 +269,7 @@
     // for the insets...  some values had to change to make it work with UILabel.
     
     textFrame.origin.y += 4.0f;
-    textFrame.origin.x += 14.0f;
+    textFrame.origin.x += 12.0f;
     textFrame.size.height -= 2.0f;
     
     [self.textView setFrame:textFrame];
