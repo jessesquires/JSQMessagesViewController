@@ -37,6 +37,8 @@
 - (void)handleWillHideKeyboardNotification:(NSNotification *)notification;
 - (void)keyboardWillShowHide:(NSNotification *)notification;
 
+- (void)animationForMessageInputViewAtPoint:(CGPoint)point;
+
 @end
 
 
@@ -503,16 +505,26 @@
 
 - (void)keyboardDidScrollToPoint:(CGPoint)point
 {
-    CGRect inputViewFrame = self.messageInputView.frame;
-    CGPoint keyboardOrigin = [self.view convertPoint:point fromView:nil];
-    inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
-    self.messageInputView.frame = inputViewFrame;
+    [self animationForMessageInputViewAtPoint:point];
+}
+
+- (void)keyboardWillSnapBackToPoint:(CGPoint)point
+{
+    [self animationForMessageInputViewAtPoint:point];
 }
 
 - (void)keyboardWillBeDismissed
 {
     CGRect inputViewFrame = self.messageInputView.frame;
     inputViewFrame.origin.y = self.view.bounds.size.height - inputViewFrame.size.height;
+    self.messageInputView.frame = inputViewFrame;
+}
+
+- (void)animationForMessageInputViewAtPoint:(CGPoint)point
+{
+    CGRect inputViewFrame = self.messageInputView.frame;
+    CGPoint keyboardOrigin = [self.view convertPoint:point fromView:nil];
+    inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
     self.messageInputView.frame = inputViewFrame;
 }
 
