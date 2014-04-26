@@ -69,8 +69,9 @@
         [self addSubview:inputFieldBack];
     }
     else {
-        _textView.frame = CGRectMake(4.0f, 4.5f, width, height);
-        _textView.backgroundColor = [UIColor clearColor];
+        _textView.frame = CGRectMake(7.0f, 7.5f, width - 3.0f, height - 6.0f);//(4.0f, 4.5f, width, height);
+        
+        _textView.backgroundColor = [UIColor colorWithRed:250/255.0f green:250/255.0f blue:250/255.0f alpha:1.0f]; //[UIColor clearColor];
         _textView.layer.borderColor = [UIColor colorWithWhite:0.8f alpha:1.0f].CGColor;
         _textView.layer.borderWidth = 0.65f;
         _textView.layer.cornerRadius = 6.0f;
@@ -170,7 +171,7 @@
         btn.frame = CGRectMake(self.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
     }
     else {
-        CGFloat padding = 8.0f;
+        CGFloat padding = 16.0f;
         btn.frame = CGRectMake(self.textView.frame.origin.x + self.textView.frame.size.width,
                                padding,
                                60.0f,
@@ -205,8 +206,8 @@
                        options:NSKeyValueObservingOptionNew
                        context:nil];
 
-    self.textView.contentInset = UIEdgeInsetsMake((numLines >= 6 ? 4.0f : 0.0f),
-                                                  0.0f,
+    self.textView.contentInset = UIEdgeInsetsMake((numLines >= 6 ? 4.0f : -2.0f),
+                                                  2.0f,
                                                   (numLines >= 6 ? 4.0f : 0.0f),
                                                   0.0f);
     

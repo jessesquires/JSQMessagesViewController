@@ -41,7 +41,7 @@
     
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.scrollIndicatorInsets = UIEdgeInsetsMake(10.0f, 0.0f, 10.0f, 8.0f);
-    self.contentInset = UIEdgeInsetsZero;
+    self.contentInset = UIEdgeInsetsMake(-2.0f, 2.0f, 0.0f, 0.0f);
     self.scrollEnabled = YES;
     self.scrollsToTop = NO;
     self.userInteractionEnabled = YES;
