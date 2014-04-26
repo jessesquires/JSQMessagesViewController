@@ -63,6 +63,8 @@
 		8897FBF418CBF1B3004F59C3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8897FBF318CBF1B3004F59C3 /* QuartzCore.framework */; };
 		8897FBF918CBF967004F59C3 /* JSQDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8897FBF818CBF967004F59C3 /* JSQDemoViewController.m */; };
 		88ADC6FC18F0999000FE0266 /* JSQMessagesKeyboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88ADC6FB18F0999000FE0266 /* JSQMessagesKeyboardController.m */; };
+		88BC4D2F190C41ED002E5CC6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 885D592E18CBD13D00D77BB3 /* CoreGraphics.framework */; };
+		88BC4D30190C41F6002E5CC6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8897FBF318CBF1B3004F59C3 /* QuartzCore.framework */; };
 		88CC8806190A2C7F006258A0 /* JSQMessagesNSStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CC87FB190A2C7F006258A0 /* JSQMessagesNSStringTests.m */; };
 		88CC8807190A2C7F006258A0 /* JSQMessagesUIColorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CC87FC190A2C7F006258A0 /* JSQMessagesUIColorTests.m */; };
 		88CC8808190A2C7F006258A0 /* JSQMessagesUIImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CC87FD190A2C7F006258A0 /* JSQMessagesUIImageTests.m */; };
@@ -213,6 +215,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88BC4D30190C41F6002E5CC6 /* QuartzCore.framework in Frameworks */,
+				88BC4D2F190C41ED002E5CC6 /* CoreGraphics.framework in Frameworks */,
 				885D594F18CBD13D00D77BB3 /* XCTest.framework in Frameworks */,
 				885D595118CBD13D00D77BB3 /* UIKit.framework in Frameworks */,
 				885D595018CBD13D00D77BB3 /* Foundation.framework in Frameworks */,
@@ -846,6 +850,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JSQMessagesDemo/JSQMessages-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/JSQMessagesDemo/JSQMessages-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -863,6 +868,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JSQMessagesDemo/JSQMessages-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/JSQMessagesDemo/JSQMessages-Info.plist";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
