@@ -86,7 +86,9 @@
     NSMutableAttributedString *timestamp = [[NSMutableAttributedString alloc] initWithString:relativeDate
                                                                                   attributes:self.dateTextAttributes];
     
-    [timestamp appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", time]
+    [timestamp appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+    
+    [timestamp appendAttributedString:[[NSAttributedString alloc] initWithString:time
                                                                       attributes:self.timeTextAttributes]];
     
     return [[NSAttributedString alloc] initWithAttributedString:timestamp];
