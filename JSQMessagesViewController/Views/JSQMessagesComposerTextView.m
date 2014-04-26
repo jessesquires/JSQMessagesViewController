@@ -96,7 +96,7 @@
         return;
     }
     
-    _placeHolder = placeHolder;
+    _placeHolder = [placeHolder copy];
     [self setNeedsDisplay];
 }
 
