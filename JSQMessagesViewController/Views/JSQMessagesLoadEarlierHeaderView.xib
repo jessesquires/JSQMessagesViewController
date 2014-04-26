@@ -7,11 +7,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="JSQMessagesLoadEarlierHeaderView" id="0Ms-a6-YUP" customClass="JSQMessagesLoadEarlierHeaderView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kM4-IZ-dgW">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Button">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
