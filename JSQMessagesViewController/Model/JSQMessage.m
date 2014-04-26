@@ -49,6 +49,24 @@
 
 #pragma mark - NSObject
 
+- (BOOL)isEqual:(id)object
+{
+    if (![object isKindOfClass:[self class]]) {
+        return NO;
+    }
+    
+    JSQMessage *msg = (JSQMessage *)object;
+    
+    return [self.text isEqualToString:msg.text]
+            && [self.sender isEqualToString:msg.sender]
+            && ([self.date compare:msg.date] == NSOrderedSame);
+}
+
+- (NSUInteger)hash
+{
+    return [super hash] ^ [self.text hash] ^ [self.sender hash] ^ [self.date hash];
+}
+
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"<%@>[ %@, %@, %@ ]", [self class], self.sender, self.date, self.text];
