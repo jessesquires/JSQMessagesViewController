@@ -105,6 +105,13 @@
  */
 @property (assign, nonatomic) BOOL showTypingIndicator;
 
+/**
+ *  Specifies whether or not the view controller should show the "load earlier messages" header view.
+ *  @discussion Setting this property to `YES` will show the header view immediately.
+ *  Settings this property to `NO` will hide the header view immediately.
+ */
+@property (assign, nonatomic) BOOL showLoadEarlierMessagesHeader;
+
 #pragma mark - Class methods
 
 /**

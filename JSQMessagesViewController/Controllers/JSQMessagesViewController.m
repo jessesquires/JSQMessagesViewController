@@ -21,7 +21,9 @@
 
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
+
 #import "JSQMessagesTypingIndicatorFooterView.h"
+#import "JSQMessagesLoadEarlierHeaderView.h"
 
 #import "JSQMessagesToolbarContentView.h"
 #import "JSQMessagesInputToolbar.h"
@@ -39,7 +41,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate,
                                          JSQMessagesCollectionViewCellDelegate,
-                                         JSQMessagesKeyboardControllerDelegate, UITextViewDelegate>
+                                         JSQMessagesKeyboardControllerDelegate,
+                                         UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
@@ -124,6 +127,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.typingIndicatorColor = [UIColor jsq_messageBubbleLightGrayColor];
     self.showTypingIndicator = NO;
     
+    self.showLoadEarlierMessagesHeader = NO;
+    
     [self jsq_updateCollectionViewInsets];
     
     self.keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextView:self.inputToolbar.contentView.textView
@@ -176,6 +181,17 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     [self.collectionView.collectionViewLayout invalidateLayout];
     [self scrollToBottomAnimated:YES];
+}
+
+- (void)setShowLoadEarlierMessagesHeader:(BOOL)showLoadEarlierMessagesHeader
+{
+    if (_showLoadEarlierMessagesHeader == showLoadEarlierMessagesHeader) {
+        return;
+    }
+    
+    _showLoadEarlierMessagesHeader = showLoadEarlierMessagesHeader;
+    
+    [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 #pragma mark - View lifecycle
@@ -429,7 +445,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                                            forIndexPath:indexPath];
     }
     else if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        // TODO: load previous messages header
+        return [collectionView dequeueLoadEarlierMessagesViewHeaderForIndexPath:indexPath];
     }
     
     return nil;
@@ -443,6 +459,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     
     return CGSizeMake([collectionViewLayout itemWidth], kJSQMessagesTypingIndicatorFooterViewHeight);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    if (!self.showLoadEarlierMessagesHeader) {
+        return CGSizeZero;
+    }
+    
+    return CGSizeMake([collectionViewLayout itemWidth], kJSQMessagesLoadEarlierHeaderViewHeight);
 }
 
 #pragma mark - Collection view delegate
