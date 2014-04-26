@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3848156984ED4CE9A20DBF0E"
+               BlueprintIdentifier = "5B185E1CBBDD4078BDD6E5B6"
                BuildableName = "libPods.a"
                BlueprintName = "Pods"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -34,6 +34,20 @@
                ReferencedContainer = "container:JSMessagesDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "88A3FB69182E079E00705327"
+               BuildableName = "JSMessagesDemoTests.xctest"
+               BlueprintName = "JSMessagesDemoTests"
+               ReferencedContainer = "container:JSMessagesDemo.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -42,6 +56,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "88A3FB69182E079E00705327"
+               BuildableName = "JSMessagesDemoTests.xctest"
+               BlueprintName = "JSMessagesDemoTests"
+               ReferencedContainer = "container:JSMessagesDemo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

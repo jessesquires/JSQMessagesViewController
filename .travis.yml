@@ -1,7 +1,10 @@
 language: objective-c
 
-before_install: gem install cocoapods
+before_install: 
+- export LANG=en_US.UTF-8
+- gem install cocoapods
+- brew update
+- brew upgrade xctool
 
 script: 
-- xctool -workspace JSMessagesDemo.xcworkspace -scheme JSMessagesDemo -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO clean build test
-- xctool -workspace JSMessagesDemo.xcworkspace -scheme JSMessagesDemoTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO clean build run-tests -freshInstall
+- xctool clean build test -workspace JSMessagesDemo.xcworkspace -scheme JSMessagesDemo -sdk iphonesimulator6.0 ONLY_ACTIVE_ARCH=NO
