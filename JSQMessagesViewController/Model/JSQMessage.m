@@ -78,18 +78,18 @@
 {
     self = [super init];
     if (self) {
-        _text = [aDecoder decodeObjectForKey:@"text"];
-        _sender = [aDecoder decodeObjectForKey:@"sender"];
-        _date = [aDecoder decodeObjectForKey:@"date"];
+        _text = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(text))];
+        _sender = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(sender))];
+        _date = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(date))];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeObject:self.text forKey:@"text"];
-    [aCoder encodeObject:self.sender forKey:@"sender"];
-    [aCoder encodeObject:self.date forKey:@"date"];
+    [aCoder encodeObject:self.text forKey:NSStringFromSelector(@selector(text))];
+    [aCoder encodeObject:self.sender forKey:NSStringFromSelector(@selector(sender))];
+    [aCoder encodeObject:self.date forKey:NSStringFromSelector(@selector(date))];
 }
 
 #pragma mark - NSCopying
