@@ -44,7 +44,7 @@
 
 /**
  *  The name of the user sending messages. This value must not be `nil`. 
- *  The default value is `@"JSQDefaultSender"`.
+ *  The default value is `JSQDefaultSender`.
  */
 @property (copy, nonatomic) NSString *sender;
 
@@ -94,7 +94,7 @@
  *
  *  @discussion The color specified is used for the typing indicator bubble image color.
  *  This color is then slightly darkened and used to color the typing indicator ellipsis.
- *  The default value is the light gray color value return by `jsq_messageBubbleLightGrayColor`.
+ *  The default value is the light gray color value return by `[UIColor jsq_messageBubbleLightGrayColor]`.
  */
 @property (strong, nonatomic) UIColor *typingIndicatorColor;
 
