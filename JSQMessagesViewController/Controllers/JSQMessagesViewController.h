@@ -124,6 +124,8 @@
 
 /**
  *  Creates and returns a new `JSQMessagesViewController` object.
+ *  
+ *  @discussion This is the designated initializer for programmatic instantiation.
  *
  *  @return The initialized messages view controller if successful, otherwise `nil`.
  */
