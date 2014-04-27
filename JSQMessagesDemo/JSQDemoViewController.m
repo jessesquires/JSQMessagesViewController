@@ -112,6 +112,11 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     [self jsqDemo_setupTestModel];
     
     /**
+     *  Remove camera button since media messages are not yet implemented
+     */
+    // self.inputToolbar.contentView.leftBarButtonItem = nil;
+    
+    /**
      *  Create bubble images once and save
      */
     self.outgoingBubbleImageView = [JSQMessagesBubbleImageFactory
