@@ -3,7 +3,7 @@
 //  http://www.hexedbits.com
 //
 //
-//  The MIT License
+//  MIT License
 //  Copyright (c) 2014 Jesse Squires
 //  http://opensource.org/licenses/MIT
 //
