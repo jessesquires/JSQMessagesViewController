@@ -38,8 +38,11 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 @property (strong, nonatomic) UIDynamicAnimator *dynamicAnimator;
 @property (strong, nonatomic) NSMutableSet *visibleIndexPaths;
+
 @property (assign, nonatomic) UIInterfaceOrientation interfaceOrientation;
 @property (assign, nonatomic) CGFloat latestDelta;
+
+- (void)jsq_setupFlowLayout;
 
 - (void)jsq_didReceiveApplicationMemoryWarningNotification:(NSNotification *)notification;
 
@@ -65,24 +68,22 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 #pragma mark - Initialization
 
-- (void)awakeFromNib
+- (void)jsq_setupFlowLayout
 {
-    [super awakeFromNib];
-    
     self.scrollDirection = UICollectionViewScrollDirectionVertical;
     self.sectionInset = UIEdgeInsetsMake(10.0f, 4.0f, 10.0f, 4.0f);
     self.minimumLineSpacing = 4.0f;
     
-    self.messageBubbleSizes = [NSMutableDictionary new];
+    _messageBubbleSizes = [NSMutableDictionary new];
     
-    self.messageBubbleFont = [UIFont systemFontOfSize:15.0f];
-    self.messageBubbleLeftRightMargin = 40.0f;
-    self.messageBubbleTextViewFrameInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 6.0f);
-    self.messageBubbleTextViewTextContainerInsets = UIEdgeInsetsMake(10.0f, 8.0f, 10.0f, 8.0f);
+    _messageBubbleFont = [UIFont systemFontOfSize:15.0f];
+    _messageBubbleLeftRightMargin = 40.0f;
+    _messageBubbleTextViewFrameInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 6.0f);
+    _messageBubbleTextViewTextContainerInsets = UIEdgeInsetsMake(10.0f, 8.0f, 10.0f, 8.0f);
     
     CGSize defaultAvatarSize = CGSizeMake(34.0f, 34.0f);
-    self.incomingAvatarViewSize = defaultAvatarSize;
-    self.outgoingAvatarViewSize = defaultAvatarSize;
+    _incomingAvatarViewSize = defaultAvatarSize;
+    _outgoingAvatarViewSize = defaultAvatarSize;
     
     _springinessEnabled = NO;
     _springResistanceFactor = 1000;
@@ -93,6 +94,21 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
                                                object:nil];
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self jsq_setupFlowLayout];
+    }
+    return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self jsq_setupFlowLayout];
+}
+
 + (Class)layoutAttributesClass
 {
     return [JSQMessagesCollectionViewLayoutAttributes class];
@@ -100,6 +116,10 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidReceiveMemoryWarningNotification
+                                                  object:nil];
+    
     _messageBubbleFont = nil;
     
     _messageBubbleSizes = nil;
@@ -181,6 +201,8 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 - (void)jsq_didReceiveApplicationMemoryWarningNotification:(NSNotification *)notification
 {
     [self.messageBubbleSizes removeAllObjects];
+    [self.dynamicAnimator removeAllBehaviors];
+    [self.visibleIndexPaths removeAllObjects];
 }
 
 #pragma mark - Collection view flow layout
