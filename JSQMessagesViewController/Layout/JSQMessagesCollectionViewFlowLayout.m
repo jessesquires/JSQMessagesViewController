@@ -42,7 +42,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 @property (assign, nonatomic) UIInterfaceOrientation interfaceOrientation;
 @property (assign, nonatomic) CGFloat latestDelta;
 
-- (void)jsq_setupFlowLayout;
+- (void)jsq_configureFlowLayout;
 
 - (void)jsq_didReceiveApplicationMemoryWarningNotification:(NSNotification *)notification;
 
@@ -68,7 +68,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 #pragma mark - Initialization
 
-- (void)jsq_setupFlowLayout
+- (void)jsq_configureFlowLayout
 {
     self.scrollDirection = UICollectionViewScrollDirectionVertical;
     self.sectionInset = UIEdgeInsetsMake(10.0f, 4.0f, 10.0f, 4.0f);
@@ -98,7 +98,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 {
     self = [super init];
     if (self) {
-        [self jsq_setupFlowLayout];
+        [self jsq_configureFlowLayout];
     }
     return self;
 }
@@ -106,7 +106,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self jsq_setupFlowLayout];
+    [self jsq_configureFlowLayout];
 }
 
 + (Class)layoutAttributesClass

@@ -10,9 +10,10 @@
 
 #import <XCTest/XCTest.h>
 
+#import "JSQMessagesCollectionView.h"
+#import "JSQMessagesCollectionViewFlowLayout.h"
 
 @interface JSQMessagesCollectionViewTests : XCTestCase
-
 @end
 
 
@@ -28,4 +29,13 @@
     [super tearDown];
 }
 
+- (void)testCollectionViewInit
+{
+    JSQMessagesCollectionViewFlowLayout *layout = [[JSQMessagesCollectionViewFlowLayout alloc] init];
+    
+    JSQMessagesCollectionView *view = [[JSQMessagesCollectionView alloc] initWithFrame:[UIScreen mainScreen].bounds
+                                                                  collectionViewLayout:layout];
+    
+    XCTAssertNotNil(view, @"Collection view should not be nil");
+}
 @end

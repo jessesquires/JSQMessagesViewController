@@ -54,7 +54,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @property (assign, nonatomic) CGFloat statusBarChangeInHeight;
 
-- (void)jsq_prepareMessagesViewController;
+- (void)jsq_configureMessagesViewController;
 
 - (void)jsq_prepareForRotation;
 
@@ -104,7 +104,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - Initialization
 
-- (void)jsq_prepareMessagesViewController
+- (void)jsq_configureMessagesViewController
 {
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -199,7 +199,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self jsq_prepareMessagesViewController];
+    [self jsq_configureMessagesViewController];
     [self jsq_registerForNotifications:YES];
 }
 

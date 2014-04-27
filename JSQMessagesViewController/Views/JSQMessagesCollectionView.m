@@ -23,6 +23,9 @@
 
 
 @interface JSQMessagesCollectionView () <JSQMessagesLoadEarlierHeaderViewDelegate>
+
+- (void)jsq_configureCollectionView;
+
 @end
 
 
@@ -30,9 +33,8 @@
 
 #pragma mark - Initialization
 
-- (void)awakeFromNib
+- (void)jsq_configureCollectionView
 {
-    [super awakeFromNib];
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     self.backgroundColor = [UIColor whiteColor];
@@ -52,6 +54,21 @@
     [self registerNib:[JSQMessagesLoadEarlierHeaderView nib]
           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
           withReuseIdentifier:[JSQMessagesLoadEarlierHeaderView headerReuseIdentifier]];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout
+{
+    self = [super initWithFrame:frame collectionViewLayout:layout];
+    if (self) {
+        [self jsq_configureCollectionView];
+    }
+    return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self jsq_configureCollectionView];
 }
 
 #pragma mark - Typing indicator
