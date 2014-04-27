@@ -63,4 +63,13 @@
                       sender:(NSString *)sender
                         date:(NSDate *)date;
 
+/**
+ *  Returns a boolean value that indicates whether a given message is equal to the receiver.
+ *
+ *  @param aMessage The message with which to compare the receiver.
+ *
+ *  @return `YES` if aMessage is equivalent to the receiver, otherwise `NO`.
+ */
+- (BOOL)isEqualToMessage:(JSQMessage *)aMessage;
+
 @end
