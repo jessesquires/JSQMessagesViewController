@@ -63,7 +63,7 @@
  *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]`. 
  *  This value must not be `nil`.
  *  
- *  @see JSQMessagesCollectionViewCellOutgoing.
+ *  @see `JSQMessagesCollectionViewCellOutgoing`.
  *
  *  @warning Overriding this property's default value is *not* recommended. 
  *  You should only override this property's default value if you are proividing your own cell prototypes.
@@ -79,7 +79,7 @@
  *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]`. 
  *  This value must not be `nil`.
  *
- *  @see JSQMessagesCollectionViewCellIncoming.
+ *  @see `JSQMessagesCollectionViewCellIncoming`.
  *
  *  @warning Overriding this property's default value is *not* recommended. 
  *  You should only override this property's default value if you are proividing your own cell prototypes. 
