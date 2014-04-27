@@ -4,10 +4,14 @@
 //
 //
 //  Documentation
-//  http://cocoadocs.org/docsets/JSMessagesViewController
+//  http://cocoadocs.org/docsets/JSQMessagesViewController
 //
 //
-//  The MIT License
+//  GitHub
+//  https://github.com/jessesquires/JSQMessagesViewController
+//
+//
+//  MIT License
 //  Copyright (c) 2014 Jesse Squires
 //  http://opensource.org/licenses/MIT
 //
