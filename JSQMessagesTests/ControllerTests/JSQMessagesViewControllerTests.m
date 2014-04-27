@@ -15,22 +15,10 @@
 
 
 @interface JSQMessagesViewControllerTests : XCTestCase
-
 @end
 
 
-
 @implementation JSQMessagesViewControllerTests
-
-- (void)setUp
-{
-    [super setUp];
-}
-
-- (void)tearDown
-{
-    [super tearDown];
-}
 
 - (void)testJSQMessagesViewControllerInit
 {
@@ -42,7 +30,14 @@
     XCTAssertNotNil(vc.view, @"View should not be nil");
     XCTAssertNotNil(vc.collectionView, @"Collection view should not be nil");
     XCTAssertNotNil(vc.inputToolbar, @"Input toolbar should not be nil");
-    XCTAssertEqualObjects(vc.sender, @"JSQDefaultSender", @"Sender should be equal to default value");
+ 
+    XCTAssertEqualObjects(vc.sender, @"JSQDefaultSender", @"Property should be equal to default value");
+    XCTAssertEqual(vc.automaticallyAdjustsScrollViewInsets, YES, @"Property should be equal to default value");
+    XCTAssertEqualObjects(vc.incomingCellIdentifier, [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier], @"Property should be equal to default value");
+    XCTAssertEqualObjects(vc.outgoingCellIdentifier, [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier], @"Property should be equal to default value");
+    XCTAssertEqualObjects(vc.typingIndicatorColor, [UIColor jsq_messageBubbleLightGrayColor], @"Property should be equal to default value");
+    XCTAssertEqual(vc.showTypingIndicator, NO, @"Property should be equal to default value");
+    XCTAssertEqual(vc.showLoadEarlierMessagesHeader, NO, @"Property should be equal to default value");
 }
 
 - (void)testJSQMessagesViewControllerSubclassInitProgramatically
