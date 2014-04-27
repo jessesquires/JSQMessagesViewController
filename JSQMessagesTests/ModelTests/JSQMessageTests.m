@@ -66,4 +66,14 @@
     XCTAssertFalse([msg isEqualToMessage:nil], @"Initialized message should not be equal to nil");
 }
 
+- (void)testMessageArchiving
+{
+    JSQMessage *msg = [JSQMessage messageWithText:self.text sender:self.sender];
+    NSData *msgData = [NSKeyedArchiver archivedDataWithRootObject:msg];
+    
+    JSQMessage *unarchivedMsg = [NSKeyedUnarchiver unarchiveObjectWithData:msgData];
+    
+    XCTAssertTrue([msg isEqualToMessage:unarchivedMsg], @"Message should be equal");
+}
+
 @end
