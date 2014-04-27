@@ -27,19 +27,19 @@
 
 /**
  *  @return The body text of the message. 
- *  @warning This value must not be `nil`.
+ *  @warning You must not return `nil` from this method.
  */
 - (NSString *)text;
 
 /**
  *  @return The name of the user who sent the message.
- *  @warning This value must not be `nil`.
+ *  @warning You must not return `nil` from this method.
  */
 - (NSString *)sender;
 
 /**
  *  @return The date that the message was sent.
- *  @warning This value must not be `nil`.
+ *  @warning You must not return `nil` from this method.
  */
 - (NSDate *)date;
 
