@@ -19,6 +19,16 @@
 
 @implementation JSQMessagesBubbleImageFactoryTests
 
+- (void)setUp
+{
+    [super setUp];
+}
+
+- (void)tearDown
+{
+    [super tearDown];
+}
+
 - (void)testOutgoingMessageBubbleImageView
 {
     UIImage *bubble = [UIImage imageNamed:@"bubble_min"];

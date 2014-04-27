@@ -21,6 +21,16 @@
 
 @implementation JSQMessagesToolbarButtonFactoryTests
 
+- (void)setUp
+{
+    [super setUp];
+}
+
+- (void)tearDown
+{
+    [super tearDown];
+}
+
 - (void)testDefaultSendButtonItem
 {
     UIButton *button = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];

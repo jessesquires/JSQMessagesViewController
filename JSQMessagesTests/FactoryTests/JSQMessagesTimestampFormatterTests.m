@@ -19,6 +19,16 @@
 
 @implementation JSQMessagesTimestampFormatterTests
 
+- (void)setUp
+{
+    [super setUp];
+}
+
+- (void)tearDown
+{
+    [super tearDown];
+}
+
 - (void)testTimestampFormatterInit
 {
     JSQMessagesTimestampFormatter *formatter = [JSQMessagesTimestampFormatter sharedFormatter];

@@ -20,6 +20,16 @@
 
 @implementation JSQMessagesViewControllerTests
 
+- (void)setUp
+{
+    [super setUp];
+}
+
+- (void)tearDown
+{
+    [super tearDown];
+}
+
 - (void)testJSQMessagesViewControllerInit
 {
     UINib *nib = [JSQMessagesViewController nib];

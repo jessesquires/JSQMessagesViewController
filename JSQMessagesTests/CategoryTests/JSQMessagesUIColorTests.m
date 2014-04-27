@@ -19,6 +19,16 @@
 
 @implementation JSQMessagesUIColorTests
 
+- (void)setUp
+{
+    [super setUp];
+}
+
+- (void)tearDown
+{
+    [super tearDown];
+}
+
 - (void)testGreenColor
 {
     CGFloat h, s, b, a;

@@ -19,6 +19,16 @@
 
 @implementation JSQMessagesUIImageTests
 
+- (void)setUp
+{
+    [super setUp];
+}
+
+- (void)tearDown
+{
+    [super tearDown];
+}
+
 - (void)testImageMasking
 {
     UIImage *img = [UIImage imageNamed:@"bubble_min"];

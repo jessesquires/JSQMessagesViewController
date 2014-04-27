@@ -19,6 +19,16 @@
 
 @implementation JSQMessagesAvatarFactoryTests
 
+- (void)setUp
+{
+    [super setUp];
+}
+
+- (void)tearDown
+{
+    [super tearDown];
+}
+
 - (void)testAvatarImage
 {
     UIImage *image = [UIImage imageNamed:@"demo_avatar_jobs"];

@@ -19,6 +19,16 @@
 
 @implementation JSQMessagesKeyboardControllerTests
 
+- (void)setUp
+{
+    [super setUp];
+}
+
+- (void)tearDown
+{
+    [super tearDown];
+}
+
 - (void)testKeyboardControllerInit
 {
     JSQMessagesKeyboardController *keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextView:[UITextView new]

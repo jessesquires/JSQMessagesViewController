@@ -19,6 +19,16 @@
 
 @implementation JSQMessagesUIViewTests
 
+- (void)setUp
+{
+    [super setUp];
+}
+
+- (void)tearDown
+{
+    [super tearDown];
+}
+
 - (void)testViewAutoLayoutPinEdges
 {
     UIView *superview = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 50.0f, 50.0f)];
