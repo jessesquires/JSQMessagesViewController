@@ -76,6 +76,10 @@
 
 - (BOOL)isEqual:(id)object
 {
+    if (self == object) {
+        return YES;
+    }
+    
     if (![object isKindOfClass:[self class]]) {
         return NO;
     }
@@ -99,15 +103,10 @@
 
 - (NSUInteger)hash
 {
-    NSUInteger customHash = [self.messageBubbleFont hash]
-                            ^ (int)self.messageBubbleLeftRightMargin
-                            ^ (int)(self.incomingAvatarViewSize.width + self.incomingAvatarViewSize.height)
-                            ^ (int)(self.outgoingAvatarViewSize.width + self.outgoingAvatarViewSize.height)
-                            ^ (int)self.cellTopLabelHeight
-                            ^ (int)self.messageBubbleTopLabelHeight
-                            ^ (int)self.cellBottomLabelHeight;
-    
-    return [super hash] ^ customHash;
+    return [self.indexPath hash]
+            ^ (NSUInteger)self.cellTopLabelHeight
+            ^ (NSUInteger)self.messageBubbleTopLabelHeight
+            ^ (NSUInteger)self.cellBottomLabelHeight;
 }
 
 #pragma mark - NSCopying

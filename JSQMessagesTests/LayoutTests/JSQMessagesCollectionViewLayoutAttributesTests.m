@@ -44,8 +44,9 @@
     attrs.cellBottomLabelHeight = 15.0f;
     XCTAssertNotNil(attrs, @"Layout attributes should not be nil");
     
-    XCTAssertEqualObjects(attrs, [attrs copy], @"Copied attributes should be equal");
-    XCTAssertEqual([attrs hash], [[attrs copy] hash], @"Copied attributes hashes should be equal");
+    JSQMessagesCollectionViewLayoutAttributes *copy = [attrs copy];
+    XCTAssertEqualObjects(attrs, copy, @"Copied attributes should be equal");
+    XCTAssertEqual([attrs hash], [copy hash], @"Copied attributes hashes should be equal");
 }
 
 @end
