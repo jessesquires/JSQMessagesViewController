@@ -117,7 +117,11 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 - (void)endListeningForKeyboard
 {
     self.textView.inputAccessoryView = nil;
+    
     [self jsq_unregisterForNotifications];
+    
+    [self jsq_setKeyboardViewHidden:NO];
+    self.keyboardView = nil;
 }
 
 #pragma mark - Notifications
@@ -263,6 +267,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     
     CGFloat contextViewHeight = CGRectGetHeight(self.contextView.frame);
     CGFloat keyboardViewHeight = CGRectGetHeight(self.keyboardView.frame);
+    
     CGFloat dragThresholdY = (contextViewHeight - keyboardViewHeight - self.keyboardTriggerPoint.y);
     
     CGRect newKeyboardViewFrame = self.keyboardView.frame;
@@ -303,7 +308,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                 return;
             }
             
-            CGPoint velocity = [pan velocityInView:self.contextView];
+            CGPoint velocity = [pan velocityInView:nil];
             BOOL userIsScrollingDown = (velocity.y > 0.0f);
             BOOL shouldHide = (userIsScrollingDown && userIsDraggingNearThresholdForDismissing);
             
