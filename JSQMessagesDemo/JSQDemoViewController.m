@@ -140,8 +140,6 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                                                                                               target:self
                                                                                               action:@selector(closePressed:)];
     }
-    
-    self.showLoadEarlierMessagesHeader = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
