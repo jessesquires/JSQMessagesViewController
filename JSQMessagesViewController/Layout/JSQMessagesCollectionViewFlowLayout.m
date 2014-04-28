@@ -80,6 +80,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     _messageBubbleLeftRightMargin = 40.0f;
     _messageBubbleTextViewFrameInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 6.0f);
     _messageBubbleTextViewTextContainerInsets = UIEdgeInsetsMake(10.0f, 8.0f, 10.0f, 8.0f);
+    _messageBubbleTopLabelLeftRightInset = 60.0f;
     
     CGSize defaultAvatarSize = CGSizeMake(34.0f, 34.0f);
     _incomingAvatarViewSize = defaultAvatarSize;
@@ -158,6 +159,13 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 - (void)setMessageBubbleTextViewTextContainerInsets:(UIEdgeInsets)messageBubbleTextContainerInsets
 {
     _messageBubbleTextViewTextContainerInsets = messageBubbleTextContainerInsets;
+    [self invalidateLayout];
+}
+
+- (void)setMessageBubbleTopLabelLeftRightInset:(CGFloat)messageBubbleTopLabelLeftRightInset
+{
+    NSAssert(messageBubbleTopLabelLeftRightInset >= 0.0f, @"ERROR: messageBubbleTopLabelLeftRightInset must be greater than or equal to 0: %s", __PRETTY_FUNCTION__);
+    _messageBubbleTopLabelLeftRightInset = messageBubbleTopLabelLeftRightInset;
     [self invalidateLayout];
 }
 
