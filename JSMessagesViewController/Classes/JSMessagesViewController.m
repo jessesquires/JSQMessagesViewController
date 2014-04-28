@@ -54,6 +54,10 @@
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
     
+    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
 	_isUserScrolling = NO;
     
     JSMessageInputViewStyle inputViewStyle = [self.delegate inputViewStyle];
@@ -233,7 +237,7 @@
     if ([self.delegate respondsToSelector:@selector(customCellIdentifierForRowAtIndexPath:)]) {
         CellIdentifier = [self.delegate customCellIdentifierForRowAtIndexPath:indexPath];
     }
-
+    
     if (!CellIdentifier) {
         CellIdentifier = [NSString stringWithFormat:@"JSMessageCell_%d_%d_%d_%d", (int)type, displayTimestamp, avatar != nil, [message sender] != nil];
     }
@@ -323,7 +327,7 @@
 {
     if (self.isUserScrolling) {
         if ([self.delegate respondsToSelector:@selector(shouldPreventScrollToBottomWhileUserScrolling)]
-           && [self.delegate shouldPreventScrollToBottomWhileUserScrolling]) {
+            && [self.delegate shouldPreventScrollToBottomWhileUserScrolling]) {
             return NO;
         }
     }
@@ -494,9 +498,9 @@
 																  inputViewFrameY,
 																  inputViewFrame.size.width,
 																  inputViewFrame.size.height);
-
+                         
                          [self setTableViewInsetsWithBottomValue:self.view.frame.size.height
-                                                                - self.messageInputView.frame.origin.y];
+                          - self.messageInputView.frame.origin.y];
                      }
                      completion:nil];
 }
