@@ -54,9 +54,8 @@
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
     
-    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
+    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)])
         self.automaticallyAdjustsScrollViewInsets = NO;
-    }
     
 	_isUserScrolling = NO;
     
@@ -237,7 +236,7 @@
     if ([self.delegate respondsToSelector:@selector(customCellIdentifierForRowAtIndexPath:)]) {
         CellIdentifier = [self.delegate customCellIdentifierForRowAtIndexPath:indexPath];
     }
-
+    
     if (!CellIdentifier) {
         CellIdentifier = [NSString stringWithFormat:@"JSMessageCell_%d_%d_%d_%d", (int)type, displayTimestamp, avatar != nil, [message sender] != nil];
     }
@@ -327,7 +326,7 @@
 {
     if (self.isUserScrolling) {
         if ([self.delegate respondsToSelector:@selector(shouldPreventScrollToBottomWhileUserScrolling)]
-           && [self.delegate shouldPreventScrollToBottomWhileUserScrolling]) {
+            && [self.delegate shouldPreventScrollToBottomWhileUserScrolling]) {
             return NO;
         }
     }
@@ -345,16 +344,6 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     self.isUserScrolling = NO;
-}
-
-#pragma mark - UITextView Helper method
-
-- (CGFloat)getTextViewContentHeight:(UITextView*)textView {
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        return ceilf([textView sizeThatFits:textView.frame.size].height);
-    } else {
-        return textView.contentSize.height;
-    }
 }
 
 #pragma mark - Text view delegate
@@ -385,10 +374,8 @@
 {
     CGFloat maxHeight = [JSMessageInputView maxHeight];
     
-    CGFloat contentHeight = [self getTextViewContentHeight:textView];
-    
-    BOOL isShrinking = contentHeight < self.previousTextViewContentHeight;
-    CGFloat changeInHeight = contentHeight - self.previousTextViewContentHeight;
+    BOOL isShrinking = textView.contentSize.height < self.previousTextViewContentHeight;
+    CGFloat changeInHeight = textView.contentSize.height - self.previousTextViewContentHeight;
     
     if (!isShrinking && (self.previousTextViewContentHeight == maxHeight || textView.text.length == 0)) {
         changeInHeight = 0;
@@ -423,7 +410,7 @@
                          completion:^(BOOL finished) {
                          }];
         
-        self.previousTextViewContentHeight = MIN(contentHeight, maxHeight);
+        self.previousTextViewContentHeight = MIN(textView.contentSize.height, maxHeight);
     }
     
     // Once we reached the max height, we have to consider the bottom offset for the text view.
@@ -434,7 +421,7 @@
         dispatch_after(popTime,
                        dispatch_get_main_queue(),
                        ^(void) {
-                           CGPoint bottomOffset = CGPointMake(0.0f, contentHeight - textView.bounds.size.height);
+                           CGPoint bottomOffset = CGPointMake(0.0f, textView.contentSize.height - textView.bounds.size.height);
                            [textView setContentOffset:bottomOffset animated:YES];
                        });
     }
@@ -510,9 +497,9 @@
 																  inputViewFrameY,
 																  inputViewFrame.size.width,
 																  inputViewFrame.size.height);
-
+                         
                          [self setTableViewInsetsWithBottomValue:self.view.frame.size.height
-                                                                - self.messageInputView.frame.origin.y];
+                          - self.messageInputView.frame.origin.y];
                      }
                      completion:nil];
 }
