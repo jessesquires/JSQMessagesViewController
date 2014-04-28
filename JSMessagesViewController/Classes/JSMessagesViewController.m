@@ -54,8 +54,9 @@
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
     
-    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)])
+    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     
 	_isUserScrolling = NO;
     
