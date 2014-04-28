@@ -69,8 +69,10 @@
 @property (weak, nonatomic, readonly) UIPanGestureRecognizer *panGestureRecognizer;
 
 /**
- *  Specifies the point in the `contextView` at which the `panGestureRecognizer` 
+ *  Specifies the distance from the keyboard at which the `panGestureRecognizer`
  *  should trigger user interaction with the keyboard by panning.
+ *
+ *  @discussion The x value of the point is not used.
  */
 @property (assign, nonatomic) CGPoint keyboardTriggerPoint;
 
