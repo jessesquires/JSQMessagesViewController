@@ -54,6 +54,10 @@
         ((UIScrollView *)self.view).scrollEnabled = NO;
     }
     
+    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
 	_isUserScrolling = NO;
     
     JSMessageInputViewStyle inputViewStyle = [self.delegate inputViewStyle];
