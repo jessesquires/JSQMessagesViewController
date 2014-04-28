@@ -34,7 +34,7 @@
 /**
  *  Tells the delegate that the keyboard frame has changed.
  *
- *  @param keyboardFrame The new frame of the keyboard in the contextView's coordinate system.
+ *  @param keyboardFrame The new frame of the keyboard in its own window's coordinate system.
  */
 - (void)keyboardDidChangeFrame:(CGRect)keyboardFrame;
 

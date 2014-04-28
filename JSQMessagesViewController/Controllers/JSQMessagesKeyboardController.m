@@ -43,7 +43,6 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 - (void)jsq_handleKeyboardNotification:(NSNotification *)notification completion:(JSQAnimationCompletionBlock)completion;
 
 - (void)jsq_setKeyboardViewHidden:(BOOL)hidden;
-- (void)jsq_notifyDelegateOfNewKeyboardFrame:(CGRect)newKeyboardFrame;
 
 - (void)jsq_removeKeyboardFrameObserver;
 
@@ -195,16 +194,21 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     NSDictionary *userInfo = [notification userInfo];
     
     CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    UIViewAnimationCurve animationCurve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    double animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
+    if (CGRectIsNull(keyboardEndFrame)) {
+        return;
+    }
+    
+    UIViewAnimationCurve animationCurve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
     NSInteger animationCurveOption = (animationCurve << 16);
+    
+    double animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
     [UIView animateWithDuration:animationDuration
                           delay:0.0
                         options:animationCurveOption
                      animations:^{
-                         [self jsq_notifyDelegateOfNewKeyboardFrame:keyboardEndFrame];
+                         [self.delegate keyboardDidChangeFrame:keyboardEndFrame];
                      }
                      completion:^(BOOL finished) {
                          if (completion) {
@@ -221,14 +225,6 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     self.keyboardView.userInteractionEnabled = !hidden;
 }
 
-- (void)jsq_notifyDelegateOfNewKeyboardFrame:(CGRect)newKeyboardFrame
-{
-    if (!CGRectIsNull(newKeyboardFrame)) {
-        CGRect keyboardEndFrameConverted = [self.contextView convertRect:newKeyboardFrame fromView:nil];
-        [self.delegate keyboardDidChangeFrame:keyboardEndFrameConverted];
-    }
-}
-
 #pragma mark - Key-value observing
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -240,11 +236,11 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
             CGRect oldKeyboardFrame = [[change objectForKey:NSKeyValueChangeOldKey] CGRectValue];
             CGRect newKeyboardFrame = [[change objectForKey:NSKeyValueChangeNewKey] CGRectValue];
             
-            if (CGRectEqualToRect(newKeyboardFrame, oldKeyboardFrame)) {
+            if (CGRectEqualToRect(newKeyboardFrame, oldKeyboardFrame) || CGRectIsNull(newKeyboardFrame)) {
                 return;
             }
             
-            [self jsq_notifyDelegateOfNewKeyboardFrame:newKeyboardFrame];
+            [self.delegate keyboardDidChangeFrame:newKeyboardFrame];
         }
     }
 }
@@ -265,10 +261,13 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 {
     CGPoint touch = [pan locationInView:nil];
     
-    CGFloat contextViewHeight = CGRectGetHeight(self.contextView.frame);
+    //  system keyboard is added to a new UIWindow, need to operate in window coordinates
+    //  also, keyboard always slides from bottom of screen, not the bottom of a view
+    CGFloat contextViewWindowHeight = CGRectGetHeight(self.contextView.window.frame);
+    
     CGFloat keyboardViewHeight = CGRectGetHeight(self.keyboardView.frame);
     
-    CGFloat dragThresholdY = (contextViewHeight - keyboardViewHeight - self.keyboardTriggerPoint.y);
+    CGFloat dragThresholdY = (contextViewWindowHeight - keyboardViewHeight - self.keyboardTriggerPoint.y);
     
     CGRect newKeyboardViewFrame = self.keyboardView.frame;
     
@@ -282,8 +281,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
             newKeyboardViewFrame.origin.y = touch.y + self.keyboardTriggerPoint.y;
             
             //  bound frame between bottom of view and height of keyboard
-            newKeyboardViewFrame.origin.y = MIN(newKeyboardViewFrame.origin.y, contextViewHeight);
-            newKeyboardViewFrame.origin.y = MAX(newKeyboardViewFrame.origin.y, contextViewHeight - keyboardViewHeight);
+            newKeyboardViewFrame.origin.y = MIN(newKeyboardViewFrame.origin.y, contextViewWindowHeight);
+            newKeyboardViewFrame.origin.y = MAX(newKeyboardViewFrame.origin.y, contextViewWindowHeight - keyboardViewHeight);
             
             if (CGRectGetMinY(newKeyboardViewFrame) == CGRectGetMinY(self.keyboardView.frame)) {
                 return;
@@ -303,7 +302,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:
         {
-            BOOL keyboardViewIsHidden = (CGRectGetMinY(self.keyboardView.frame) >= CGRectGetMaxY([UIScreen mainScreen].bounds));
+            BOOL keyboardViewIsHidden = (CGRectGetMinY(self.keyboardView.frame) >= contextViewWindowHeight);
             if (keyboardViewIsHidden) {
                 return;
             }
@@ -312,7 +311,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
             BOOL userIsScrollingDown = (velocity.y > 0.0f);
             BOOL shouldHide = (userIsScrollingDown && userIsDraggingNearThresholdForDismissing);
             
-            newKeyboardViewFrame.origin.y = shouldHide ? contextViewHeight : (contextViewHeight - keyboardViewHeight);
+            newKeyboardViewFrame.origin.y = shouldHide ? contextViewWindowHeight : (contextViewWindowHeight - keyboardViewHeight);
             
             [UIView animateWithDuration:0.25
                                   delay:0.0

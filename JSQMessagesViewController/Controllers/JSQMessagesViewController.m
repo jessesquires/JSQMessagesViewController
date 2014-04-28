@@ -618,7 +618,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)keyboardDidChangeFrame:(CGRect)keyboardFrame
 {
-    CGFloat heightFromBottom = CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(keyboardFrame);
+    CGRect keyboardFrameConverted = [self.view convertRect:keyboardFrame fromView:nil];
+    
+    CGFloat heightFromBottom = CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(keyboardFrameConverted);
     
     heightFromBottom = MAX(0.0f, heightFromBottom + self.statusBarChangeInHeight);
     
