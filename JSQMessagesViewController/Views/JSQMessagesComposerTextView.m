@@ -21,11 +21,13 @@
 
 @interface JSQMessagesComposerTextView ()
 
+- (void)jsq_configureTextView;
+
 - (void)jsq_addTextViewNotificationObservers;
 - (void)jsq_removeTextViewNotificationObservers;
 - (void)jsq_didReceiveTextViewNotification:(NSNotification *)notification;
 
-- (NSDictionary *)jsq_textViewTextAttributes;
+- (NSDictionary *)jsq_placeholderTextAttributes;
 
 @end
 
@@ -35,9 +37,8 @@
 
 #pragma mark - Initialization
 
-- (void)awakeFromNib
+- (void)jsq_configureTextView
 {
-    [super awakeFromNib];
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     CGFloat cornerRadius = 6.0f;
@@ -72,6 +73,21 @@
     _placeHolderTextColor = [UIColor lightGrayColor];
     
     [self jsq_addTextViewNotificationObservers];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame textContainer:(NSTextContainer *)textContainer
+{
+    self = [super initWithFrame:frame textContainer:textContainer];
+    if (self) {
+        [self jsq_configureTextView];
+    }
+    return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self jsq_configureTextView];
 }
 
 - (void)dealloc
@@ -146,7 +162,7 @@
         [self.placeHolderTextColor set];
         
         [self.placeHolder drawInRect:CGRectInset(rect, 7.0f, 5.0f)
-                      withAttributes:[self jsq_textViewTextAttributes]];
+                      withAttributes:[self jsq_placeholderTextAttributes]];
     }
 }
 
@@ -192,7 +208,7 @@
 
 #pragma mark - Utilities
 
-- (NSDictionary *)jsq_textViewTextAttributes
+- (NSDictionary *)jsq_placeholderTextAttributes
 {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
