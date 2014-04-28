@@ -43,6 +43,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 - (void)jsq_handleKeyboardNotification:(NSNotification *)notification completion:(JSQAnimationCompletionBlock)completion;
 
 - (void)jsq_setKeyboardViewHidden:(BOOL)hidden;
+- (void)jsq_notifyDelegateOfNewKeyboardFrame:(CGRect)newKeyboardFrame;
 
 - (void)jsq_removeKeyboardFrameObserver;
 
@@ -199,9 +200,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                           delay:0.0
                         options:animationCurveOption
                      animations:^{
-                         if (!CGRectIsNull(keyboardEndFrame)) {
-                             [self.delegate keyboardDidChangeFrame:keyboardEndFrame];
-                         }
+                         [self jsq_notifyDelegateOfNewKeyboardFrame:keyboardEndFrame];
                      }
                      completion:^(BOOL finished) {
                          if (completion) {
@@ -210,10 +209,20 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                      }];
 }
 
+#pragma mark - Utilities
+
 - (void)jsq_setKeyboardViewHidden:(BOOL)hidden
 {
     self.keyboardView.hidden = hidden;
     self.keyboardView.userInteractionEnabled = !hidden;
+}
+
+- (void)jsq_notifyDelegateOfNewKeyboardFrame:(CGRect)newKeyboardFrame
+{
+    if (!CGRectIsNull(newKeyboardFrame)) {
+        CGRect keyboardEndFrameConverted = [self.contextView convertRect:newKeyboardFrame fromView:nil];
+        [self.delegate keyboardDidChangeFrame:keyboardEndFrameConverted];
+    }
 }
 
 #pragma mark - Key-value observing
@@ -224,16 +233,14 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
         
         if (object == self.keyboardView && [keyPath isEqualToString:NSStringFromSelector(@selector(frame))]) {
             
-            CGRect oldKeyboardFrameSize = [[change objectForKey:NSKeyValueChangeOldKey] CGRectValue];
-            CGRect newKeyboardFrameSize = [[change objectForKey:NSKeyValueChangeNewKey] CGRectValue];
+            CGRect oldKeyboardFrame = [[change objectForKey:NSKeyValueChangeOldKey] CGRectValue];
+            CGRect newKeyboardFrame = [[change objectForKey:NSKeyValueChangeNewKey] CGRectValue];
             
-            if (CGRectEqualToRect(newKeyboardFrameSize, oldKeyboardFrameSize)) {
+            if (CGRectEqualToRect(newKeyboardFrame, oldKeyboardFrame)) {
                 return;
             }
             
-            if (!CGRectIsNull(newKeyboardFrameSize)) {
-                [self.delegate keyboardDidChangeFrame:newKeyboardFrameSize];
-            }
+            [self jsq_notifyDelegateOfNewKeyboardFrame:newKeyboardFrame];
         }
     }
 }
