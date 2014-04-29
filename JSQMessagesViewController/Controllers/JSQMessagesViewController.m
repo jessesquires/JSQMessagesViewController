@@ -413,7 +413,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                                             bubbleColor:self.typingIndicatorColor
                                                            forIndexPath:indexPath];
     }
-    else if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+    else if (self.showLoadEarlierMessagesHeader && [kind isEqualToString:UICollectionElementKindSectionHeader]) {
         return [collectionView dequeueLoadEarlierMessagesViewHeaderForIndexPath:indexPath];
     }
     
