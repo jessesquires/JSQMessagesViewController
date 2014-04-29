@@ -201,11 +201,13 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     
     double animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
+    CGRect keyboardEndFrameConverted = [self.contextView convertRect:keyboardEndFrame fromView:nil];
+    
     [UIView animateWithDuration:animationDuration
                           delay:0.0
                         options:animationCurveOption
                      animations:^{
-                         [self.delegate keyboardDidChangeFrame:keyboardEndFrame];
+                         [self.delegate keyboardDidChangeFrame:keyboardEndFrameConverted];
                      }
                      completion:^(BOOL finished) {
                          if (completion) {
@@ -237,6 +239,9 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                 return;
             }
             
+            //  do not convert frame to contextView coordinates here
+            //  KVO is triggered during panning (see below)
+            //  panning occurs in contextView coordinates already
             [self.delegate keyboardDidChangeFrame:newKeyboardFrame];
         }
     }
@@ -256,11 +261,14 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)jsq_handlePanGestureRecognizer:(UIPanGestureRecognizer *)pan
 {
-    CGPoint touch = [pan locationInView:nil];
+    CGPoint touch = [pan locationInView:self.contextView];
     
     //  system keyboard is added to a new UIWindow, need to operate in window coordinates
     //  also, keyboard always slides from bottom of screen, not the bottom of a view
     CGFloat contextViewWindowHeight = CGRectGetHeight(self.contextView.window.frame);
+    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        contextViewWindowHeight = CGRectGetWidth(self.contextView.window.frame);
+    }
     
     CGFloat keyboardViewHeight = CGRectGetHeight(self.keyboardView.frame);
     
@@ -304,7 +312,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                 return;
             }
             
-            CGPoint velocity = [pan velocityInView:nil];
+            CGPoint velocity = [pan velocityInView:self.contextView];
             BOOL userIsScrollingDown = (velocity.y > 0.0f);
             BOOL shouldHide = (userIsScrollingDown && userIsDraggingNearThresholdForDismissing);
             
