@@ -41,7 +41,7 @@
     
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.scrollIndicatorInsets = UIEdgeInsetsMake(10.0f, 0.0f, 10.0f, 8.0f);
-    self.contentInset = UIEdgeInsetsMake(-2.0f, 2.0f, 0.0f, 0.0f);
+    self.contentInset = UIEdgeInsetsMake(-2.0f, 5.0f, 0.0f, 0.0f);
     self.scrollEnabled = YES;
     self.scrollsToTop = NO;
     self.userInteractionEnabled = YES;
@@ -171,7 +171,7 @@
     [super drawRect:rect];
     
     if([self.text length] == 0 && self.placeHolder) {
-        CGRect placeHolderRect = CGRectMake(10.0f,
+        CGRect placeHolderRect = CGRectMake(5.0f,
                                             7.0f,
                                             rect.size.width,
                                             rect.size.height);
