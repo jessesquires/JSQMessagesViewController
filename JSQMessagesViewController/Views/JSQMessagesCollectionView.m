@@ -38,8 +38,8 @@
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     self.backgroundColor = [UIColor whiteColor];
-    
     self.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
+    self.alwaysBounceVertical = YES;
     
     [self registerNib:[JSQMessagesCollectionViewCellIncoming nib]
           forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]];
