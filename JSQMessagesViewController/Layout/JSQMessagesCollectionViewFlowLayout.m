@@ -39,12 +39,12 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 @property (strong, nonatomic) UIDynamicAnimator *dynamicAnimator;
 @property (strong, nonatomic) NSMutableSet *visibleIndexPaths;
 
-@property (assign, nonatomic) UIInterfaceOrientation interfaceOrientation;
 @property (assign, nonatomic) CGFloat latestDelta;
 
 - (void)jsq_configureFlowLayout;
 
 - (void)jsq_didReceiveApplicationMemoryWarningNotification:(NSNotification *)notification;
+- (void)jsq_didReceiveDeviceOrientationDidChangeNotification:(NSNotification *)notification;
 
 - (void)jsq_configureMessageCellLayoutAttributes:(JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
 
@@ -92,6 +92,11 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
                                              selector:@selector(jsq_didReceiveApplicationMemoryWarningNotification:)
                                                  name:UIApplicationDidReceiveMemoryWarningNotification
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(jsq_didReceiveDeviceOrientationDidChangeNotification:)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil];
 }
 
 - (instancetype)init
@@ -116,9 +121,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIApplicationDidReceiveMemoryWarningNotification
-                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     _messageBubbleFont = nil;
     
@@ -205,24 +208,24 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     [self.visibleIndexPaths removeAllObjects];
 }
 
+- (void)jsq_didReceiveDeviceOrientationDidChangeNotification:(NSNotification *)notification
+{
+    [self.dynamicAnimator removeAllBehaviors];
+    [self.visibleIndexPaths removeAllObjects];
+    [self invalidateLayout];
+}
+
 #pragma mark - Collection view flow layout
 
 - (void)invalidateLayout
 {
-    [super invalidateLayout];
     [self.messageBubbleSizes removeAllObjects];
+    [super invalidateLayout];
 }
 
 - (void)prepareLayout
 {
     [super prepareLayout];
-    
-    if ([UIApplication sharedApplication].statusBarOrientation != self.interfaceOrientation) {
-        [self.dynamicAnimator removeAllBehaviors];
-        [self.visibleIndexPaths removeAllObjects];
-    }
-    
-    self.interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     
     if (self.springinessEnabled) {
         //  pad rect to avoid flickering
@@ -300,7 +303,9 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
                 }
                 
                 CGSize size = self.collectionView.bounds.size;
-                UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
+                JSQMessagesCollectionViewLayoutAttributes *attributes = [JSQMessagesCollectionViewLayoutAttributes
+                                                                         layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
+                [self jsq_configureMessageCellLayoutAttributes:attributes];
                 attributes.frame = CGRectMake(0.0f,
                                               size.height - size.width,
                                               size.width,
@@ -337,11 +342,12 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     CGSize stringSize = CGRectIntegral(stringRect).size;
     
-    CGSize finalSize = CGSizeMake(stringSize.width,
-                                  stringSize.height + self.messageBubbleTextViewTextContainerInsets.top
-                                                    + self.messageBubbleTextViewTextContainerInsets.bottom);
+    CGFloat verticalInsets = self.messageBubbleTextViewTextContainerInsets.top + self.messageBubbleTextViewTextContainerInsets.bottom;
+    
+    CGSize finalSize = CGSizeMake(stringSize.width, stringSize.height + verticalInsets);
     
     [self.messageBubbleSizes setObject:[NSValue valueWithCGSize:finalSize] forKey:indexPath];
+    
     return finalSize;
 }
 

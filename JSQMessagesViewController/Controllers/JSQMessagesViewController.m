@@ -56,8 +56,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_configureMessagesViewController;
 
-- (void)jsq_prepareForRotation;
-
 - (void)jsq_finishSendingOrReceivingMessage;
 
 - (JSQMessage *)jsq_currentlyComposedMessage;
@@ -256,35 +254,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         return UIInterfaceOrientationMaskAllButUpsideDown;
     }
     return UIInterfaceOrientationMaskAll;
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [self jsq_prepareForRotation];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [self jsq_prepareForRotation];
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    [self jsq_prepareForRotation];
-    
-    // TODO: deal with keyboard on rotation
-}
-
-- (void)jsq_prepareForRotation
-{
-    // TODO: deal with keyboard on rotation
-    
-    [self.inputToolbar.contentView.textView resignFirstResponder];
-    [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.collectionView reloadData];
 }
 
 #pragma mark - Messages view controller
