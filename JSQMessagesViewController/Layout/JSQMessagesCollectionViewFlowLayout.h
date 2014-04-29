@@ -140,6 +140,21 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 @property (assign, nonatomic) UIEdgeInsets messageBubbleTextViewTextContainerInsets;
 
 /**
+ *  The horizontal spacing used to lay out the bubble's top label of each `JSQMessagesCollectionViewCell`.
+ *  This value specifies the horizontal spacing between the bubble's top label and
+ *  the edge of the collection view.
+ *
+ *  @discussion The default value is `60.0f`. This value must be positive.
+ *  For *outgoing* messages, this value specifies the amount of spacing from the right
+ *  edge of the collectionView to the right most edge of the messageBubbleTopLabel.
+ *
+ *  For *incoming* messages, this value specifies the amount of spacing from the left
+ *  edge of the collectionView to the left most edge of a messageBubbleTopLabel.
+ *
+ */
+@property (assign, nonatomic) CGFloat messageBubbleTopLabelLeftRightInset;
+
+/**
  *  The size of the avatar image view for incoming messages.
  *
  *  @discussion The default value is `(34.0f, 34.0f)`. Set to `CGSizeZero` to remove incoming avatars.
