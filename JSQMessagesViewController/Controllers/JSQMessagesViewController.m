@@ -256,6 +256,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     return UIInterfaceOrientationMaskAll;
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [self.collectionView.collectionViewLayout invalidateLayout];
+}
+
 #pragma mark - Messages view controller
 
 - (void)didPressSendButton:(UIButton *)button
