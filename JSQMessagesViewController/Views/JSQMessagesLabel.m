@@ -14,15 +14,37 @@
 
 #import "JSQMessagesLabel.h"
 
+
+@interface JSQMessagesLabel ()
+
+- (void)jsq_configureLabel;
+
+@end
+
+
 @implementation JSQMessagesLabel
 
 #pragma mark - Initialization
 
+- (void)jsq_configureLabel
+{
+    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.textInsets = UIEdgeInsetsZero;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self jsq_configureLabel];
+    }
+    return self;
+}
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-    self.textInsets = UIEdgeInsetsZero;
+    [self jsq_configureLabel];
 }
 
 #pragma mark - Setters

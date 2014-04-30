@@ -10,6 +10,7 @@
 
 #import <XCTest/XCTest.h>
 
+#import "JSQMessagesViewController.h"
 #import "JSQMessagesInputToolbar.h"
 
 
@@ -27,6 +28,17 @@
 - (void)tearDown
 {
     [super tearDown];
+}
+
+- (void)testInputToolbarInit
+{
+    JSQMessagesViewController *vc = [JSQMessagesViewController messagesViewController];
+    [vc loadView];
+    
+    JSQMessagesInputToolbar *toolbar = vc.inputToolbar;
+    XCTAssertNotNil(toolbar, @"Toolbar should not be nil");
+    XCTAssertNotNil(toolbar.contentView, @"Toolbar content view should not be nil");
+    XCTAssertEqual(toolbar.sendButtonOnRight, YES, @"Property should be equal to default value");
 }
 
 @end
