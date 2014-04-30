@@ -19,7 +19,6 @@
 
 @class JSQMessagesViewController;
 @class JSQMessagesInputToolbar;
-@class JSQMessage;
 
 /**
  *  The `JSQMessagesViewController` class is an abstract class that represents a view controller whose content consists of
@@ -134,12 +133,18 @@
 #pragma mark - Messages view controller
 
 /**
- *  This method is called when the user taps the send button on the `inputToolbar` after composing the specified message.
+ *  This method is called when the user taps the send button on the inputToolbar
+ *  after composing a message with the specified data.
  *
- *  @param sender  The send button that was pressed by the user.
- *  @param message The message composed by the user.
+ *  @param button The send button that was pressed by the user.
+ *  @param text   The message text.
+ *  @param sender The message sender.
+ *  @param date   The message date.
  */
-- (void)didPressSendButton:(UIButton *)sender withMessage:(JSQMessage *)message;
+- (void)didPressSendButton:(UIButton *)button
+           withMessageText:(NSString *)text
+                    sender:(NSString *)sender
+                      date:(NSDate *)date;
 
 /**
  *  This method is called when the user taps the accessory button on the `inputToolbar`.

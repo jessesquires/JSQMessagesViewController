@@ -165,12 +165,13 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      */
     self.showTypingIndicator = !self.showTypingIndicator;
     
+    JSQMessage *copyMessage = [[self.messages lastObject] copy];
+    
+    if (!copyMessage) {
+        return;
+    }
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        JSQMessage *copyMessage = [[self.messages lastObject] copy];
-        
-        if (!copyMessage) {
-            return;
-        }
         
         NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
         [copyAvatars removeObject:self.sender];
@@ -199,7 +200,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 #pragma mark - JSQMessagesViewController method overrides
 
-- (void)didPressSendButton:(UIButton *)sender withMessage:(JSQMessage *)message
+- (void)didPressSendButton:(UIButton *)button
+           withMessageText:(NSString *)text
+                    sender:(NSString *)sender
+                      date:(NSDate *)date
 {
     /**
      *  Sending a message. Your implementation of this method should do *at least* the following:
@@ -209,7 +213,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  3. Call `finishSendingMessage`
      */
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
+    
+    JSQMessage *message = [[JSQMessage alloc] initWithText:text sender:sender date:date];
     [self.messages addObject:message];
+    
     [self finishSendingMessage];
 }
 

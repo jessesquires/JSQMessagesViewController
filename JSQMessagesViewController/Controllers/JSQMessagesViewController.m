@@ -58,7 +58,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_finishSendingOrReceivingMessage;
 
-- (JSQMessage *)jsq_currentlyComposedMessage;
+- (NSString *)jsq_currentlyComposedMessageText;
 
 - (void)jsq_updateKeyboardTriggerPoint;
 - (void)jsq_setToolbarBottomLayoutGuideConstant:(CGFloat)constant;
@@ -258,7 +258,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - Messages view controller
 
-- (void)didPressSendButton:(UIButton *)sender withMessage:(JSQMessage *)message { }
+- (void)didPressSendButton:(UIButton *)button
+           withMessageText:(NSString *)text
+                    sender:(NSString *)sender
+                      date:(NSDate *)date { }
 
 - (void)didPressAccessoryButton:(UIButton *)sender { }
 
@@ -501,28 +504,32 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         [self didPressAccessoryButton:sender];
     }
     else {
-        [self didPressSendButton:sender withMessage:[self jsq_currentlyComposedMessage]];
+        [self didPressSendButton:sender
+                 withMessageText:[self jsq_currentlyComposedMessageText]
+                          sender:self.sender
+                            date:[NSDate date]];
     }
 }
 
 - (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar didPressRightBarButton:(UIButton *)sender
 {
     if (toolbar.sendButtonOnRight) {
-        [self didPressSendButton:sender withMessage:[self jsq_currentlyComposedMessage]];
+        [self didPressSendButton:sender
+                 withMessageText:[self jsq_currentlyComposedMessageText]
+                          sender:self.sender
+                            date:[NSDate date]];
     }
     else {
         [self didPressAccessoryButton:sender];
     }
 }
 
-- (JSQMessage *)jsq_currentlyComposedMessage
+- (NSString *)jsq_currentlyComposedMessageText
 {
     //  add a space to accept any auto-correct suggestions
     NSString *text = self.inputToolbar.contentView.textView.text;
     self.inputToolbar.contentView.textView.text = [text stringByAppendingString:@" "];
-    
-    return [JSQMessage messageWithText:[self.inputToolbar.contentView.textView.text jsq_stringByTrimingWhitespace]
-                                sender:self.sender];
+    return [self.inputToolbar.contentView.textView.text jsq_stringByTrimingWhitespace];
 }
 
 #pragma mark - Text view delegate
