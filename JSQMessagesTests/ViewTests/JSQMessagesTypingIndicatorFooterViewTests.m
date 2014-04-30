@@ -29,4 +29,13 @@
     [super tearDown];
 }
 
+- (void)testTypingIndicatorFooterViewInit
+{
+    UINib *footerView = [JSQMessagesTypingIndicatorFooterView nib];
+    XCTAssertNotNil(footerView, @"Nib should not be nil");
+    
+    NSString *footerId = [JSQMessagesTypingIndicatorFooterView footerReuseIdentifier];
+    XCTAssertNotNil(footerId, @"Footer view identifier should not be nil");
+}
+
 @end

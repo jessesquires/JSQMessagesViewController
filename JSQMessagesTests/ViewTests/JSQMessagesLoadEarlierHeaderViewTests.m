@@ -29,4 +29,13 @@
     [super tearDown];
 }
 
+- (void)testLoadEarlierHeaderViewInit
+{
+    UINib *headerView = [JSQMessagesLoadEarlierHeaderView nib];
+    XCTAssertNotNil(headerView, @"Nib should not be nil");
+    
+    NSString *headerId = [JSQMessagesLoadEarlierHeaderView headerReuseIdentifier];
+    XCTAssertNotNil(headerId, @"Header view identifier should not be nil");
+}
+
 @end
