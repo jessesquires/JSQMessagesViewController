@@ -56,7 +56,7 @@ However, you may use the provided `JSQMessage` class.
 
 ### Demo Project
 
-A demo project is included, `JSMessagesDemo.xcworkspace`. Run `pod install` first.
+A demo project is included, `JSQMessages.xcworkspace`. Run `pod install` first.
 
 ## Documentation
 
