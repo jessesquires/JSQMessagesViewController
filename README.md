@@ -45,18 +45,14 @@
 
 ## Getting Started
 
-### Model
+*See the included demo project: `JSQMessages.xcworkspace`. Run `pod install` before opening.*
 
-Your model objects should conform to the `JSQMessageData` protocol. 
-However, you may use the provided `JSQMessage` class.
+* **Model**
+  Your model objects should conform to the `JSQMessageData` protocol. 
+  However, you may use the provided `JSQMessage` class.
 
-### View Controller
-
-1. Subclass `JSQMessagesViewController`
-
-### Demo Project
-
-A demo project is included, `JSQMessages.xcworkspace`. Run `pod install` first.
+* **View Controller**
+  Subclass `JSQMessagesViewController`
 
 ## Documentation
 
@@ -69,7 +65,7 @@ Please follow these sweet [contribution guidelines](https://github.com/jessesqui
 
 ## Donate
 
-Support the developement of this **free**, open-source framework, via [Square Cash](https://square.com/cash).
+Support the development of this **free**, open-source framework! via [Square Cash](https://square.com/cash).
 
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$1&body=Thanks for developing JSMessagesViewController!">Send $1</a> <em>Just saying thanks!</em></h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$5&body=Thanks for developing JSMessagesViewController!">Send $5</a> <em>This control is great!</em></h4>
@@ -87,7 +83,7 @@ Created by [@jesse_squires](https://twitter.com/jesse_squires), a [programming-m
 
 Assets extracted using [@0xced](https://github.com/0xced) **/** [iOS-Artwork-Extractor](https://github.com/0xced/iOS-Artwork-Extractor).
 
-Originally inspired by [@soffes](http://github.com/soffes) **/** [SSMessagingViewController][https://github.com/soffes/ssmessagesviewcontroller].
+Originally inspired by [@soffes](http://github.com/soffes) **/** [SSMessagingViewController](https://github.com/soffes/ssmessagesviewcontroller).
 
 Many thanks to [the contributors](https://github.com/jessesquires/MessagesTableViewController/graphs/contributors) of this project.
 
@@ -113,9 +109,9 @@ Check out my work at [Hexed Bits](http://www.hexedbits.com).
 
 ## License
 
-JSQMessagesViewController is released under an [MIT License][mitLink]. See LICENSE for details.
+JSQMessagesViewController is released under an [MIT License][mitLink]. See `LICENSE` for details.
 
-Copyright &copy; 2014 Jesse Squires
+**Copyright &copy; 2014 Jesse Squires.**
 
 *Please provide attribution, it is greatly appreciated.*
 
