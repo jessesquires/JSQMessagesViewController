@@ -82,13 +82,13 @@ Please follow these sweet [contribution guidelines](https://github.com/jessesqui
 
 ## Credits
 
-Created by [@jesse_squires](https://twitter.com/jesse_squires), a [programming-motherfucker](http://programming-motherfucker.com).
+>Created by [@jesse_squires](https://twitter.com/jesse_squires), a [programming-motherfucker](http://programming-motherfucker.com).
 
 * Assets extracted using [@0xced](https://github.com/0xced) **/** [iOS-Artwork-Extractor](https://github.com/0xced/iOS-Artwork-Extractor).
 
 * Originally inspired by [@soffes](http://github.com/soffes) **/** [SSMessagingViewController](https://github.com/soffes/ssmessagesviewcontroller).
 
-* **Many thanks to [the contributors](https://github.com/jessesquires/MessagesTableViewController/graphs/contributors) of this project.**
+* *Many thanks to [the contributors](https://github.com/jessesquires/MessagesTableViewController/graphs/contributors) of this project.*
 
 ## About
 
