@@ -252,7 +252,7 @@
     if(self.type == JSBubbleMessageTypeNotification) {
         textY += 1.0f;
         textWidth -= kForegroundImageViewOffset;
-        textWidth -= 12.0f;
+        textWidth -= 22.0f;
     } else {
         textWidth -= 18.0f;
     }
