@@ -30,12 +30,13 @@
 * iOS 7.0+ 
 * ARC
 * [JSQSystemSoundPlayer][playerLink]
+* Need support for iOS 6? See branch `iOS6_support_stable`.
 
 ## Installation
 
 #### From [CocoaPods](http://www.cocoapods.org)
 
-`pod 'JSMessagesViewController'`
+`pod 'JSQMessagesViewController'`
 
 #### From source
 
