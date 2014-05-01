@@ -67,7 +67,7 @@ Please follow these sweet [contribution guidelines](https://github.com/jessesqui
 
 ## Donate
 
-Support the development of this **free**, open-source framework! via [Square Cash](https://square.com/cash).
+>Support the development of this **free**, open-source framework! via [Square Cash](https://square.com/cash).
 
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$1&body=Thanks for developing JSMessagesViewController!">Send $1</a> <em>Just saying thanks!</em></h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$5&body=Thanks for developing JSMessagesViewController!">Send $5</a> <em>This control is great!</em></h4>
@@ -113,7 +113,7 @@ Check out my work at [Hexed Bits](http://www.hexedbits.com).
 
 JSQMessagesViewController is released under an [MIT License][mitLink]. See `LICENSE` for details.
 
-**Copyright &copy; 2014 Jesse Squires.**
+>**Copyright &copy; 2014 Jesse Squires.**
 
 *Please provide attribution, it is greatly appreciated.*
 
