@@ -1,13 +1,12 @@
-# JSMessagesViewController 
+# JSQMessagesViewController 
+
+*An elegant messages UI framework for iOS*
+
 [![Build Status](https://secure.travis-ci.org/jessesquires/MessagesTableViewController.png)](http://travis-ci.org/jessesquires/MessagesTableViewController) [![Version Status](https://cocoapod-badges.herokuapp.com/v/JSMessagesViewController/badge.png)][docsLink] [![license MIT](http://b.repl.ca/v1/license-MIT-blue.png)][mitLink]
-
-A messages UI for iPhone and iPad.
-
-`JSMessagesViewController` is a `UIViewController` subclass that is very similar to the iOS Messages app. 
 
 ![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2][img2]
 
-*See more [screenshots](https://github.com/jessesquires/MessagesTableViewController/tree/master/Screenshots) in the `Screenshots/` directory.*
+>More [screenshots](https://www.cocoacontrols.com/controls/jsmessagesviewcontroller)
 
 ## Features 
 
