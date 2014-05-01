@@ -45,14 +45,16 @@
 
 ## Getting Started
 
-*See the included demo project: `JSQMessages.xcworkspace`. Run `pod install` before opening.*
+>See the included demo project: `JSQMessages.xcworkspace`. Run `pod install` before opening.
 
 * **Model**
-  Your model objects should conform to the `JSQMessageData` protocol. 
-  However, you may use the provided `JSQMessage` class.
+
+  * Your model objects should conform to the `JSQMessageData` protocol. 
+  * However, you may use the provided `JSQMessage` class.
 
 * **View Controller**
-  Subclass `JSQMessagesViewController`
+
+  1. Subclass `JSQMessagesViewController`
 
 ## Documentation
 
