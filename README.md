@@ -13,7 +13,7 @@
 * Highly configurable & customizable
 * Data detectors
 * Timestamps
-* Avatars
+* Custom avatars with photos or initials
 * Custom chat bubbles
 * Subtitles
 * Arbitrary message sizes
@@ -125,5 +125,5 @@ Check out my work at [Hexed Bits](http://www.hexedbits.com).
 [mitLink]:http://opensource.org/licenses/MIT
 [playerLink]:https://github.com/jessesquires/JSQSystemSoundPlayer
 
-[img1]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot-ios7.png
-[img2]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot5.png
+[img1]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/screenshot0.png
+[img2]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/screenshot1.png
