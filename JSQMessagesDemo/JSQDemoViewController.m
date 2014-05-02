@@ -14,27 +14,17 @@
 
 #import "JSQDemoViewController.h"
 
+
 static NSString * const kJSQDemoAvatarNameCook = @"Tim Cook";
 static NSString * const kJSQDemoAvatarNameJobs = @"Jobs";
 static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
-
-
-@interface JSQDemoViewController ()
-
-@property (strong, nonatomic) UIImageView *outgoingBubbleImageView;
-@property (strong, nonatomic) UIImageView *incomingBubbleImageView;
-
-- (void)jsqDemo_setupTestModel;
-
-@end
-
 
 
 @implementation JSQDemoViewController
 
 #pragma mark - Demo setup
 
-- (void)jsqDemo_setupTestModel
+- (void)setupTestModel
 {
     /**
      *  Load some fake messages for demo.
@@ -121,7 +111,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     
     self.sender = @"Jesse Squires";
     
-    [self jsqDemo_setupTestModel];
+    [self setupTestModel];
     
     /**
      *  Remove camera button since media messages are not yet implemented
