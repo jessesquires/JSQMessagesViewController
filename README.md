@@ -125,5 +125,5 @@ Check out my work at [Hexed Bits](http://www.hexedbits.com).
 [mitLink]:http://opensource.org/licenses/MIT
 [playerLink]:https://github.com/jessesquires/JSQSystemSoundPlayer
 
-[img1]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/screenshot0.png
-[img2]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/screenshot1.png
+[img1]:https://raw.githubusercontent.com/jessesquires/MessagesTableViewController/develop/Screenshots/screenshot0.png
+[img2]:https://raw.githubusercontent.com/jessesquires/MessagesTableViewController/develop/Screenshots/screenshot1.png
