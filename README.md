@@ -1,6 +1,6 @@
 # JSQMessagesViewController 
 
-*An elegant messages UI framework for iOS*
+*An elegant messages UI framework for iOS* 
 
 [![Build Status](https://secure.travis-ci.org/jessesquires/MessagesTableViewController.png)](http://travis-ci.org/jessesquires/MessagesTableViewController) [![Version Status](https://cocoapod-badges.herokuapp.com/v/JSMessagesViewController/badge.png)][docsLink] [![license MIT](http://b.repl.ca/v1/license-MIT-blue.png)][mitLink]
 
@@ -49,22 +49,21 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project. Install
 
 ## Getting Started
 
->See the included demo project: `JSQMessages.xcworkspace`. Run `pod install` before opening.
+* **Demo project**
+  * There's a fucking sweet demo project: `JSQMessages.xcworkspace`.
+  * Run `pod install` first.
 
 * **Model**
-
-  * Your model objects should conform to the `JSQMessageData` protocol. 
+  * Your model objects should conform to the `JSQMessageData` protocol.
   * However, you may use the provided `JSQMessage` class.
 
 * **View Controller**
-
-  * Subclass `JSQMessagesViewController`
-  * Implement the required methods in the `JSQMessagesCollectionViewDataSource` protocol
-  * Implement the required methods in the `JSQMessagesCollectionViewDelegateFlowLayout` protocol
+  * Subclass `JSQMessagesViewController`.
+  * Implement the required methods in the `JSQMessagesCollectionViewDataSource` protocol.
+  * Implement the required methods in the `JSQMessagesCollectionViewDelegateFlowLayout` protocol.
 
 * **Customizing**
-
-  * TODO
+  * The demo project is well-commented. This should help you configure your view however you like.
 
 ## Documentation
 
@@ -76,9 +75,9 @@ Please follow these sweet [contribution guidelines](https://github.com/jessesqui
 
 ## Donate
 
->Support the development of this **free**, open-source framework! via [Square Cash](https://square.com/cash).
+Support the development of this **free**, open-source framework! Donate via [Square Cash](https://square.com/cash).
 
-<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$1&body=Thanks for developing JSMessagesViewController!">Send $1</a> <em>Just saying thanks!</em></h4>
+><h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$1&body=Thanks for developing JSMessagesViewController!">Send $1</a> <em>Just saying thanks!</em></h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$5&body=Thanks for developing JSMessagesViewController!">Send $5</a> <em>This control is great!</em></h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$10&body=Thanks for developing JSMessagesViewController!">Send $10</a> <em>This totally saved me time!</em></h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$25&body=Thanks for developing JSMessagesViewController!">Send $25</a> <em>I want new features!</em></h4>
@@ -116,16 +115,14 @@ Check out my work at [Hexed Bits](http://www.hexedbits.com).
 
 ## License
 
-JSQMessagesViewController is released under an [MIT License][mitLink]. See `LICENSE` for details.
+`JSQMessagesViewController` is released under an [MIT License][mitLink]. See `LICENSE` for details.
 
 >**Copyright &copy; 2014 Jesse Squires.**
 
 *Please provide attribution, it is greatly appreciated.*
 
 [docsLink]:http://cocoadocs.org/docsets/JSMessagesViewController/4.0.0
-
 [mitLink]:http://opensource.org/licenses/MIT
-
 [playerLink]:https://github.com/jessesquires/JSQSystemSoundPlayer
 
 [img1]:https://raw.github.com/jessesquires/MessagesTableViewController/master/Screenshots/iphone5-screenshot-ios7.png
