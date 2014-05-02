@@ -219,11 +219,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.collectionView.collectionViewLayout.springinessEnabled = YES;
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self jsq_addActionToInteractivePopGestureRecognizer:NO];
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     [self jsq_removeObservers];
-    [self jsq_addActionToInteractivePopGestureRecognizer:NO];
     [self.keyboardController endListeningForKeyboard];
 }
 
