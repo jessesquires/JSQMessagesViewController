@@ -30,19 +30,22 @@
 * iOS 7.0+ 
 * ARC
 * [JSQSystemSoundPlayer][playerLink]
-* Need support for iOS 6? See branch `iOS6_support_stable`.
+* Need support for iOS 6? See branch `iOS6_support_stable`
 
 ## Installation
 
-#### From [CocoaPods](http://www.cocoapods.org)
+````
+pod 'JSQMessagesViewController'
+````
 
-`pod 'JSQMessagesViewController'`
+Otherwise, drag the `JSQMessagesViewController/` folder to your project. Install [`JSQSystemSoundPlayer`][playerLink] and add the `QuartzCore.framework`.
 
-#### From source
+>**NOTE:** 
+>
+>This repo was formerly named `MessagesTableViewController`.
+>
+>And this pod was formerly named `JSMessagesViewController`.
 
-* Drag the `JSQMessagesViewController/` folder to your project
-* Install [JSQSystemSoundPlayer][playerLink]
-* Add the `QuartzCore.framework`
 
 ## Getting Started
 
@@ -56,6 +59,8 @@
 * **View Controller**
 
   * Subclass `JSQMessagesViewController`
+  * Implement the required methods in the `JSQMessagesCollectionViewDataSource` protocol
+  * Implement the required methods in the `JSQMessagesCollectionViewDelegateFlowLayout` protocol
 
 * **Customizing**
 
@@ -63,8 +68,7 @@
 
 ## Documentation
 
-Read the fucking documentation. It is [available here][docsLink] via [CocoaDocs](http://cocoadocs.org). 
-Thanks [@CocoaDocs](https://twitter.com/CocoaDocs)!
+Read the fucking documentation, [available here][docsLink] via [@CocoaDocs](https://twitter.com/CocoaDocs).
 
 ## Contributing
 
@@ -82,12 +86,10 @@ Please follow these sweet [contribution guidelines](https://github.com/jessesqui
 
 ## Credits
 
->Created by [@jesse_squires](https://twitter.com/jesse_squires), a [programming-motherfucker](http://programming-motherfucker.com).
+Created by [@jesse_squires](https://twitter.com/jesse_squires), a [programming-motherfucker](http://programming-motherfucker.com).
 
 * Assets extracted using [@0xced](https://github.com/0xced) **/** [iOS-Artwork-Extractor](https://github.com/0xced/iOS-Artwork-Extractor).
-
 * Originally inspired by [@soffes](http://github.com/soffes) **/** [SSMessagingViewController](https://github.com/soffes/ssmessagesviewcontroller).
-
 * *Many thanks to [the contributors](https://github.com/jessesquires/MessagesTableViewController/graphs/contributors) of this project.*
 
 ## About
