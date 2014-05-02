@@ -67,9 +67,9 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project. Install
 
 ## Documentation
 
-Read the fucking documentation, [available here][docsLink] via [@CocoaDocs](https://twitter.com/CocoaDocs).
+Read the fucking docs, [available here][docsLink] via [@CocoaDocs](https://twitter.com/CocoaDocs).
 
-## Contributing
+## Contribute
 
 Please follow these sweet [contribution guidelines](https://github.com/jessesquires/HowToContribute).
 
@@ -93,9 +93,9 @@ Created by [@jesse_squires](https://twitter.com/jesse_squires), a [programming-m
 
 ## About
 
-I initially developed this control to use in [Hemoglobe](http://www.hemoglobe.com) for private messages between users.
+I initially developed this framework to use in [Hemoglobe](http://bit.ly/hemoglobeapp) for private messages between users. 
 
-As it turns out, messaging is a popular thing that iOS devs and users want. Thus, I am supporting this project in my free time and have added features way beyond what [Hemoglobe](http://www.hemoglobe.com) ever needed.
+As it turns out, messaging is something that iOS devs and users really want. Messaging of any kind has turned out to be an increasingly popular mobile app feature in all sorts of contexts and for all sorts of reasons. Thus, I am supporting this project in my free time and have added features way beyond what Hemoglobe ever needed.
 
 Check out my work at [Hexed Bits](http://www.hexedbits.com).
 
