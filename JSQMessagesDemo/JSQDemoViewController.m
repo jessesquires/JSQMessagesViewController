@@ -37,7 +37,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 - (void)jsqDemo_setupTestModel
 {
     /**
-     *  Load some fake messages
+     *  Load some fake messages for demo.
+     *
+     *  You should have a mutable array or orderedSet, or something.
      */
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages: A messaging UI framework for iOS." sender:self.sender date:[NSDate distantPast]],
@@ -49,7 +51,11 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                      nil];
     
     /**
-     *  Create avatar images once and save
+     *  Create avatar images once.
+     *
+     *  Be sure to create your avatars one time and reuse them for good performance.
+     *
+     *  If you are not using avatars, ignore this.
      */
     CGFloat outgoingDiameter = self.collectionView.collectionViewLayout.outgoingAvatarViewSize.width;
     
@@ -99,7 +105,13 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 #pragma mark - View lifecycle
 
 /**
- *  Override point for customization
+ *  Override point for customization.
+ *
+ *  Customize your view.
+ *  Look at the properties on `JSQMessagesViewController` to see what is possible.
+ *
+ *  Customize your layout.
+ *  Look at the properties on `JSQMessagesCollectionViewFlowLayout` to see what is possible.
  */
 - (void)viewDidLoad
 {
@@ -117,7 +129,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     // self.inputToolbar.contentView.leftBarButtonItem = nil;
     
     /**
-     *  Create bubble images once and save
+     *  Create bubble images.
+     *
+     *  Be sure to create your avatars one time and reuse them for good performance.
+     *
      */
     self.outgoingBubbleImageView = [JSQMessagesBubbleImageFactory
                                     outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
@@ -162,6 +177,11 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  The following is simply to simulate received messages for the demo.
      *  Do not actually do this.
+     */
+    
+    
+    /**
+     *  Show the tpying indicator
      */
     self.showTypingIndicator = !self.showTypingIndicator;
     
@@ -240,6 +260,11 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
+     *  You may return nil here if you do not want bubbles.
+     *  In this case, you should set the background color of your collection view cell's textView.
+     */
+    
+    /**
      *  Reuse created bubble images, but create new imageView to add to each cell
      *  Otherwise, each cell would be referencing the same imageView and bubbles would disappear from cells
      */
@@ -255,8 +280,25 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
+     *  Return `nil` here if you do not want avatars.
+     *  If you do return `nil`, be sure to do the following in `viewDidLoad`:
+     *
+     *  self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
+     *  self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+     *
+     *  It is possible to have only outgoing avatars or only incoming avatars, too.
+     */
+    
+    /**
      *  Reuse created avatar images, but create new imageView to add to each cell
      *  Otherwise, each cell would be referencing the same imageView and avatars would disappear from cells
+     *
+     *  Note: these images will be sized according to these values:
+     *
+     *  self.collectionView.collectionViewLayout.incomingAvatarViewSize
+     *  self.collectionView.collectionViewLayout.outgoingAvatarViewSize
+     *
+     *  Override the defaults in `viewDidLoad`
      */
     UIImage *avatarImage = [self.avatars objectForKey:sender];
     return [[UIImageView alloc] initWithImage:avatarImage];
@@ -266,7 +308,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 {
     /**
      *  This logic should be consistent with what you return from `heightForCellTopLabelAtIndexPath:`
-     *  The other label text delegate methods should follow similarly.
+     *  The other label text delegate methods should follow a similar pattern.
      *
      *  Show a timestamp for every 3rd message
      */
@@ -318,6 +360,21 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  Override point for customizing cells
      */
     JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    
+    /**
+     *  Configure almost *anything* on the cell
+     *  
+     *  Text colors, label text, label colors, etc.
+     *
+     *
+     *  DO NOT set `cell.textView.font` !
+     *  Instead, you need to set `self.collectionView.collectionViewLayout.messageBubbleFont` to the font you want in `viewDidLoad`
+     *
+     *  
+     *  DO NOT manipulate cell layout information!
+     *  Instead, override the properties you want on `self.collectionView.collectionViewLayout` from `viewDidLoad`
+     */
+    
     return cell;
 }
 
@@ -329,8 +386,12 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
+     *  Each label in a cell has a `height` delegate method that corresponds to its text dataSource method
+     */
+    
+    /**
      *  This logic should be consistent with what you return from `attributedTextForCellTopLabelAtIndexPath:`
-     *  The other label height delegate methods should follow similarly.
+     *  The other label height delegate methods should follow similarly
      *
      *  Show a timestamp for every 3rd message
      */
