@@ -138,10 +138,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *
      */
     self.outgoingBubbleImageView = [JSQMessagesBubbleImageFactory
-                                    outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
+                                    outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
     
     self.incomingBubbleImageView = [JSQMessagesBubbleImageFactory
-                                    incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
+                                    incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleGreenColor]];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"typing"]
                                                                               style:UIBarButtonItemStyleBordered
@@ -377,6 +377,18 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  DO NOT manipulate cell layout information!
      *  Instead, override the properties you want on `self.collectionView.collectionViewLayout` from `viewDidLoad`
      */
+    
+    JSQMessage *msg = [self.messages objectAtIndex:indexPath.row];
+    
+    if ([msg.sender isEqualToString:self.sender]) {
+        cell.textView.textColor = [UIColor blackColor];
+    }
+    else {
+        cell.textView.textColor = [UIColor whiteColor];
+    }
+    
+    cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
+                                          NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     
     return cell;
 }
