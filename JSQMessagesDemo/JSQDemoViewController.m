@@ -125,8 +125,11 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     
     /**
      *  Remove camera button since media messages are not yet implemented
+     *
+     *   self.inputToolbar.contentView.leftBarButtonItem = nil;
+     *
+     *  Or, you can set a custom `leftBarButtonItem` and a custom `rightBarButtonItem`
      */
-    // self.inputToolbar.contentView.leftBarButtonItem = nil;
     
     /**
      *  Create bubble images.
@@ -140,7 +143,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     self.incomingBubbleImageView = [JSQMessagesBubbleImageFactory
                                     incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Test Msg"
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"typing"]
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(receiveMessagePressed:)];
