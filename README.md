@@ -2,11 +2,11 @@
 
 *An elegant messages UI framework for iOS* 
 
-[![Build Status](https://secure.travis-ci.org/jessesquires/MessagesTableViewController.png)](http://travis-ci.org/jessesquires/MessagesTableViewController) [![Version Status](https://cocoapod-badges.herokuapp.com/v/JSMessagesViewController/badge.png)][docsLink] [![license MIT](http://b.repl.ca/v1/license-MIT-blue.png)][mitLink]
+[![Build Status](https://secure.travis-ci.org/jessesquires/JSQMessagesViewController.svg)](http://travis-ci.org/jessesquires/JSQMessagesViewController) [![Version Status](https://cocoapod-badges.herokuapp.com/v/JSQMessagesViewController/badge.png)][docsLink] [![license MIT](http://b.repl.ca/v1/license-MIT-blue.png)][mitLink]
 
 ![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2][img2]
 
-> [More screenshots here](https://www.cocoacontrols.com/controls/jsmessagesviewcontroller)
+> [More screenshots here](https://www.cocoacontrols.com/controls/jsqmessagesviewcontroller)
 
 ## Features 
 
@@ -121,9 +121,9 @@ Check out my work at [Hexed Bits](http://www.hexedbits.com).
 
 *Please provide attribution, it is greatly appreciated.*
 
-[docsLink]:http://cocoadocs.org/docsets/JSMessagesViewController/4.0.0
+[docsLink]:http://cocoadocs.org/docsets/JSQMessagesViewController
 [mitLink]:http://opensource.org/licenses/MIT
 [playerLink]:https://github.com/jessesquires/JSQSystemSoundPlayer
 
-[img1]:https://raw.githubusercontent.com/jessesquires/MessagesTableViewController/develop/Screenshots/screenshot0.png
-[img2]:https://raw.githubusercontent.com/jessesquires/MessagesTableViewController/develop/Screenshots/screenshot1.png
+[img1]:https://raw.githubusercontent.com/jessesquires/JSQMessagesViewController/develop/Screenshots/screenshot0.png
+[img2]:https://raw.githubusercontent.com/jessesquires/JSQMessagesViewController/develop/Screenshots/screenshot1.png
