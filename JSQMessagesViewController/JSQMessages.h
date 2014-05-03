@@ -11,9 +11,9 @@
 //  https://github.com/jessesquires/JSQMessagesViewController
 //
 //
-//  MIT License
+//  License
 //  Copyright (c) 2014 Jesse Squires
-//  http://opensource.org/licenses/MIT
+//  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
 #ifndef JSQMessages_JSQMessages_h

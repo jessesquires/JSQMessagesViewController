@@ -4,20 +4,20 @@
 //
 //
 //  Documentation
-//  http://cocoadocs.org/docsets/JSMessagesViewController
+//  http://cocoadocs.org/docsets/JSQMessagesViewController
 //
 //
-//  The MIT License
+//  GitHub
+//  https://github.com/jessesquires/JSQMessagesViewController
+//
+//
+//  License
 //  Copyright (c) 2014 Jesse Squires
-//  http://opensource.org/licenses/MIT
+//  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 //
-//
-//  Initial code for springy collection view layout taken from Ash Furrow
+//  Ideas for springy collection view layout taken from Ash Furrow
 //  ASHSpringyCollectionView
-//
-//  The MIT License
-//  Copyright (c) 2013 Ash Furrow
 //  https://github.com/AshFurrow/ASHSpringyCollectionView
 //
 
