@@ -6,7 +6,7 @@
 
 ![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2][img2]
 
-> [More screenshots here](https://www.cocoacontrols.com/controls/jsqmessagesviewcontroller)
+> More screenshots available at [CocoaControls](https://www.cocoacontrols.com/controls/jsqmessagesviewcontroller)
 
 ## Features 
 
@@ -30,7 +30,13 @@
 * iOS 7.0+ 
 * ARC
 * [JSQSystemSoundPlayer][playerLink]
-* Need support for iOS 6? See branch `iOS6_support_stable`
+
+*Need support for iOS 6? [You shouldn't](http://www.macrumors.com/2014/03/24/ios-7-adoption-85/). But, there's a branch for that!* 
+````
+git checkout iOS6_support_stable
+````
+
+*Note: this branch does not include many of the latest hip and fancy features.*
 
 ## Installation
 
@@ -46,6 +52,10 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project. Install
 >
 >And this pod was formerly named `JSMessagesViewController`.
 
+For iOS 6.0 support:
+````
+pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'iOS6_support_stable'
+````
 
 ## Getting Started
 
@@ -75,7 +85,9 @@ Please follow these sweet [contribution guidelines](https://github.com/jessesqui
 
 ## Donate
 
-Support the development of this **free**, open-source framework! Donate via [Square Cash](https://square.com/cash).
+Support the development of this **free**, open-source framework! 
+
+>*Donations made via [Square Cash](https://square.com/cash)*
 
 ><h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$1&body=Thanks for developing JSMessagesViewController!">Send $1</a> <em>Just saying thanks!</em></h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$5&body=Thanks for developing JSMessagesViewController!">Send $5</a> <em>This control is great!</em></h4>
