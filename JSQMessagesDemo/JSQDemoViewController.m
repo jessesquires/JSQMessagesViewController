@@ -251,10 +251,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.messages objectAtIndex:indexPath.row];
+    return [self.messages objectAtIndex:indexPath.item];
 }
 
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
      *  You may return nil here if you do not want bubbles.
@@ -265,7 +265,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  Reuse created bubble images, but create new imageView to add to each cell
      *  Otherwise, each cell would be referencing the same imageView and bubbles would disappear from cells
      */
-    if ([sender isEqualToString:self.sender]) {
+    
+    JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
+    
+    if ([message.sender isEqualToString:self.sender]) {
         return [[UIImageView alloc] initWithImage:self.outgoingBubbleImageView.image
                                  highlightedImage:self.outgoingBubbleImageView.highlightedImage];
     }
@@ -274,7 +277,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                              highlightedImage:self.incomingBubbleImageView.highlightedImage];
 }
 
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
      *  Return `nil` here if you do not want avatars.
@@ -297,11 +300,13 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *
      *  Override the defaults in `viewDidLoad`
      */
-    UIImage *avatarImage = [self.avatars objectForKey:sender];
+    JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
+    
+    UIImage *avatarImage = [self.avatars objectForKey:message.sender];
     return [[UIImageView alloc] initWithImage:avatarImage];
 }
 
-- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
      *  This logic should be consistent with what you return from `heightForCellTopLabelAtIndexPath:`
@@ -317,18 +322,20 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     return nil;
 }
 
-- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
+    JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
+    
     /**
      *  iOS7-style sender name labels
      */
-    if ([sender isEqualToString:self.sender]) {
+    if ([message.sender isEqualToString:self.sender]) {
         return nil;
     }
     
     if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.messages objectAtIndex:indexPath.row - 1];
-        if ([[previousMessage sender] isEqualToString:sender]) {
+        JSQMessage *previousMessage = [self.messages objectAtIndex:indexPath.item - 1];
+        if ([[previousMessage sender] isEqualToString:message.sender]) {
             return nil;
         }
     }
@@ -336,10 +343,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  Don't specify attributes to use the defaults.
      */
-    return [[NSAttributedString alloc] initWithString:sender];
+    return [[NSAttributedString alloc] initWithString:message.sender];
 }
 
-- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView sender:(NSString *)sender attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     return nil;
 }
@@ -372,7 +379,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  Instead, override the properties you want on `self.collectionView.collectionViewLayout` from `viewDidLoad`
      */
     
-    JSQMessage *msg = [self.messages objectAtIndex:indexPath.row];
+    JSQMessage *msg = [self.messages objectAtIndex:indexPath.item];
     
     if ([msg.sender isEqualToString:self.sender]) {
         cell.textView.textColor = [UIColor blackColor];
@@ -417,13 +424,13 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  iOS7-style sender name labels
      */
-    JSQMessage *currentMessage = [self.messages objectAtIndex:indexPath.row];
+    JSQMessage *currentMessage = [self.messages objectAtIndex:indexPath.item];
     if ([[currentMessage sender] isEqualToString:self.sender]) {
         return 0.0f;
     }
     
     if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.messages objectAtIndex:indexPath.row - 1];
+        JSQMessage *previousMessage = [self.messages objectAtIndex:indexPath.item - 1];
         if ([[previousMessage sender] isEqualToString:[currentMessage sender]]) {
             return 0.0f;
         }
