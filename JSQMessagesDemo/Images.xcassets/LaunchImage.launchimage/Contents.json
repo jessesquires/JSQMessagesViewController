@@ -5,14 +5,16 @@
       "idiom" : "iphone",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
+      "filename" : "splash_iphone35inch.png",
       "scale" : "2x"
     },
     {
-      "orientation" : "portrait",
+      "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "retina4",
-      "extent" : "full-screen",
+      "filename" : "slpash_iphone4inch.png",
       "minimum-system-version" : "7.0",
+      "orientation" : "portrait",
       "scale" : "2x"
     },
     {
@@ -20,6 +22,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
+      "filename" : "jsq_messages_splash_ipad.png",
       "scale" : "1x"
     },
     {
@@ -27,6 +30,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
+      "filename" : "jsq_messages_splash_ipad~landscape.png",
       "scale" : "1x"
     },
     {
@@ -34,6 +38,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
+      "filename" : "jsq_messages_splash_ipad@2x.png",
       "scale" : "2x"
     },
     {
@@ -41,6 +46,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
+      "filename" : "jsq_messages_splash_ipad@2x~landscape.png",
       "scale" : "2x"
     }
   ],
