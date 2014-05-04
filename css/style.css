@@ -1,0 +1,145 @@
+/*
+LIGHT GRAY: #F2F2F2
+GREEN: #37AE4A
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Muli);
+
+body {
+	font-family: 'Muli', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	background-color: #F2F2F2;
+	color: #F2F2F2;
+}
+
+ul {
+	-webkit-padding-start: 0px !important;
+	-webkit-margin-before: 0px !important;
+	-webkit-margin-after: 0px !important;
+}
+
+ul li {
+	list-style-type: none;
+	color: #F2F2F2;
+	display: inline-block;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.navbar .container {
+	height: 44px;
+}
+
+.navbar-brand {
+	height: 44px;
+	margin: 4px;
+	font-size: 20px;
+}
+
+.chatbubble {
+	margin-top: -6px;
+	margin-right: 2px;
+}
+
+.iphone-screenshots {
+	margin: 0 auto;
+	padding-bottom: 30px;
+}
+
+header {
+	padding-top: 80px;
+	text-align: center;
+}
+
+article {
+	padding: 40px;
+}
+
+#about {
+	padding-top: 100px;
+	padding-bottom: 100px;
+}
+#features h4,
+#about h4,
+#donate h4 {
+	font-size: 24px;
+	text-align: center;
+	font-weight: bolder;
+}
+
+#features {
+	background: #37AE4A;
+}
+
+#features ul li {
+	font-size: 16px;
+	line-height: 32px;
+	padding: 4px;
+	display: block;
+}
+
+#about {
+	background-color: rgba(12,45,17,1);
+	background-image: url(/img/golden-gate-green.jpg);
+	background-repeat: no-repeat;
+	background-position: bottom left;
+	background-size: cover;
+}
+
+#about p {
+	color: #F2F2F2;
+	font-size: 16px;
+	line-height: 25px;
+}
+
+#donate {
+	text-align: center;
+}
+
+#donate .btn-default {
+	background: none;
+	color: #F2F2F2;
+}
+
+#donate ul li {
+	margin-left: 10px;
+}
+
+footer {
+	background: #2F322B;
+	color: #F2F2F2;
+	padding: 16px;
+	text-align: left;
+}
+
+.btn-black {
+	color: #F2F2F2;
+	background-color: #383838;
+	border-color: #383838;
+}
+
+.btn-black:hover,
+.btn-black:focus,
+.btn-black:active,
+.btn-black.active {
+	color: #F2F2F2;
+	background-color: #2b2b2b;
+	border-color: #1f1f1f;
+}
+
+.btn-black.disabled:hover,
+.btn-black.disabled:focus,
+.btn-black.disabled:active,
+.btn-black.disabled.active,
+.btn-black[disabled]:hover,
+.btn-black[disabled]:focus,
+.btn-black[disabled]:active,
+.btn-black[disabled].active,
+fieldset[disabled] .btn-black:hover,
+fieldset[disabled] .btn-black:focus,
+fieldset[disabled] .btn-black:active,
+fieldset[disabled] .btn-black.active {
+	color: #F2F2F2;
+	background-color: #383838;
+	border-color: #383838;
+}
