@@ -109,7 +109,7 @@ I initially developed this framework to use in [Hemoglobe](http://bit.ly/hmglb) 
 
 As it turns out, messaging is something that iOS devs and users really want. Messaging of any kind has turned out to be an increasingly popular mobile app feature in all sorts of contexts and for all sorts of reasons. Thus, I am supporting this project in my free time and have added features way beyond what Hemoglobe ever needed.
 
-Check out my work at [Hexed Bits](http://www.hexedbits.com).
+Check out my work at [Hexed Bits](http://bit.ly/0x29A).
 
 ## Apps Using This Control
 
