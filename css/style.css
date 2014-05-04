@@ -80,7 +80,7 @@ article {
 
 #about {
 	background-color: rgba(12,45,17,1);
-	background-image: url("img/golden-gate-green.jpg");
+	background-image: url('../img/golden-gate-green.jpg');
 	background-repeat: no-repeat;
 	background-position: bottom left;
 	background-size: cover;
