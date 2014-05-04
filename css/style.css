@@ -9,7 +9,6 @@ body {
 	font-family: 'Muli', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	background-color: #F2F2F2;
-	color: #F2F2F2;
 }
 
 ul {
@@ -24,6 +23,14 @@ ul li {
 	display: inline-block;
 	margin-top: 5px;
 	margin-bottom: 5px;
+}
+
+.center { 
+	float: none; 
+	margin-left: auto; 
+	margin-right: auto; 
+	display: block;
+	text-align: center;
 }
 
 .navbar .container {
@@ -41,9 +48,10 @@ ul li {
 	margin-right: 2px;
 }
 
-.iphone-screenshots {
-	margin: 0 auto;
-	padding-bottom: 30px;
+.screenshots {
+	height: auto;
+	width: 750px;
+	padding-bottom: 20px;
 }
 
 header {
@@ -65,6 +73,7 @@ article {
 	font-size: 24px;
 	text-align: center;
 	font-weight: bolder;
+	color: #F2F2F2;
 }
 
 #features {
