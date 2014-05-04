@@ -8,23 +8,6 @@
 
 > More screenshots available at [CocoaControls](https://www.cocoacontrols.com/controls/jsqmessagesviewcontroller)
 
-## Features 
-
-* Highly configurable & customizable
-* Data detectors
-* Timestamps
-* Custom avatars with photos or initials
-* Custom chat bubbles
-* Subtitles
-* Arbitrary message sizes
-* Copy & paste messages
-* Group chat
-* Smooth keyboard animations
-* UIDynamics for springy bubbles
-* Dynamic input text view resizing
-* Smooth animations
-* Universal
-
 ## Requirements
 
 * iOS 7.0+ 
