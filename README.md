@@ -1,6 +1,6 @@
 # JSQMessagesViewController 
 
-*An elegant messages UI framework for iOS* 
+*An elegant messages UI library for iOS* 
 
 [![Build Status](https://secure.travis-ci.org/jessesquires/JSQMessagesViewController.svg)](http://travis-ci.org/jessesquires/JSQMessagesViewController) [![Version Status](https://cocoapod-badges.herokuapp.com/v/JSQMessagesViewController/badge.png)][docsLink] [![license MIT](http://b.repl.ca/v1/license-MIT-blue.png)][mitLink]
 
@@ -85,7 +85,7 @@ Please follow these sweet [contribution guidelines](https://github.com/jessesqui
 
 ## Donate
 
-Support the development of this **free**, open-source framework! 
+Support the development of this **free**, open-source library! 
 
 >*Donations made via [Square Cash](https://square.com/cash)*
 
@@ -105,13 +105,13 @@ Created by [**@jesse_squires**](https://twitter.com/jesse_squires), a [programmi
 
 ## About
 
-I initially developed this framework to use in [Hemoglobe](http://bit.ly/hmglb) for private messages between users. 
+I initially developed this library to use in [Hemoglobe](http://bit.ly/hmglb) for private messages between users. 
 
 As it turns out, messaging is something that iOS devs and users really want. Messaging of any kind has turned out to be an increasingly popular mobile app feature in all sorts of contexts and for all sorts of reasons. Thus, I am supporting this project in my free time and have added features way beyond what Hemoglobe ever needed.
 
 Check out my work at [Hexed Bits](http://bit.ly/0x29A).
 
-## Apps Using This Control
+## Apps using this library
 
 * [Hemoglobe](http://bit.ly/hemoglobeapp)
 * [Schools App](https://itunes.apple.com/us/app/schools-app/id495845755)
