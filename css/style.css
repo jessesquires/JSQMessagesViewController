@@ -44,6 +44,8 @@ ul li {
 }
 
 .chatbubble {
+	width: 48px;
+	height: 48px;
 	margin-top: -6px;
 	margin-right: 2px;
 }
@@ -67,6 +69,7 @@ article {
 	padding-top: 100px;
 	padding-bottom: 100px;
 }
+
 #features h4,
 #about h4,
 #donate h4 {
