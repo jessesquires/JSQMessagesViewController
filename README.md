@@ -96,6 +96,7 @@ Check out my work at [Hexed Bits](http://bit.ly/0x29A).
 
 * [Hemoglobe](http://bit.ly/hemoglobeapp)
 * [Schools App](https://itunes.apple.com/us/app/schools-app/id495845755)
+* [Spark Social](https://itunes.apple.com/us/app/spark-social/id823785892)
 * [Spabbit](https://itunes.apple.com/us/app/spabbit/id737363908)
 * [Instaply](https://itunes.apple.com/us/app/instaply/id558562920)
 * [Loopse](https://itunes.apple.com/us/app/loopse-spots-friends-sessions/id704783915)
