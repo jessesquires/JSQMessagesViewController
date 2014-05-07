@@ -227,6 +227,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     [super viewWillDisappear:animated];
     [self jsq_addActionToInteractivePopGestureRecognizer:NO];
+    self.collectionView.collectionViewLayout.springinessEnabled = NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
