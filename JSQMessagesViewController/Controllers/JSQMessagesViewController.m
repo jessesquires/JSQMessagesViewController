@@ -387,6 +387,19 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
     cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellBottomLabelAtIndexPath:indexPath];
     
+    if (isOutgoingMessage) {
+        cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
+                                                 CGRectGetMinY(cell.avatarImageView.bounds),
+                                                 collectionView.collectionViewLayout.outgoingAvatarViewSize.width,
+                                                 collectionView.collectionViewLayout.outgoingAvatarViewSize.height);
+    }
+    else {
+        cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
+                                                 CGRectGetMinY(cell.avatarImageView.bounds),
+                                                 collectionView.collectionViewLayout.incomingAvatarViewSize.width,
+                                                 collectionView.collectionViewLayout.incomingAvatarViewSize.height);
+    }
+    
     cell.backgroundColor = [UIColor clearColor];
     
     CGFloat bubbleTopLabelInset = 60.0f;
