@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 	s.name					= 'JSQMessagesViewController'
 	s.version				= '5.0.0'
-	s.summary				= 'An elegant messages UI framework for iOS.'
+	s.summary				= 'An elegant messages UI library for iOS.'
 	s.homepage				= 'https://github.com/jessesquires/JSQMessagesViewController'
 	s.license				= 'MIT'
 	s.screenshots			= 'https://raw.githubusercontent.com/jessesquires/JSQMessagesViewController/develop/Screenshots/screenshot0.png'
