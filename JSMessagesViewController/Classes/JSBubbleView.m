@@ -27,7 +27,7 @@
 
 #define kMarginLeftRight 10.0f
 
-#define kForegroundImageViewOffset 12.0f
+#define kForegroundImageViewOffset 24.0f
 
 #define kMessageBubbleTailWidth 6.0f
 
@@ -228,7 +228,7 @@
     
     if(self.type == JSBubbleMessageTypeNotification) {
         // for arrows
-        [self.foregroundImageView setFrame:(CGRect){self.bubbleImageView.frame.size.width - kForegroundImageViewOffset, 22.0, 4.0, 7.0}];
+        [self.foregroundImageView setFrame:(CGRect){self.bubbleImageView.frame.size.width - kForegroundImageViewOffset, 16.0, 25.0, 18.0}];
     }
     
     if(isnan(self.startWidth)) {
