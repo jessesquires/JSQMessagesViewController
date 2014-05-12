@@ -51,6 +51,8 @@
     XCTAssertEqualObjects(formatter.dateTextAttributes, dateAttrs, @"Date attributes should be equal to default values");
     
     XCTAssertEqualObjects(formatter.timeTextAttributes, timeAttrs, @"Time attributes should be equal to default values");
+    
+    XCTAssertNotNil(formatter.dateFormatter, @"Property should not be nil");
 }
 
 - (void)testTimestampForDate

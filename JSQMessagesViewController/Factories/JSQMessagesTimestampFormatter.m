@@ -20,7 +20,7 @@
 
 @interface JSQMessagesTimestampFormatter ()
 
-@property (strong, nonatomic) NSDateFormatter *dateFormatter;
+@property (strong, nonatomic, readwrite) NSDateFormatter *dateFormatter;
 
 @end
 
@@ -77,6 +77,10 @@
 
 - (NSString *)timestampForDate:(NSDate *)date
 {
+    if (!date) {
+        return nil;
+    }
+    
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [self.dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     return [self.dateFormatter stringFromDate:date];
@@ -84,6 +88,10 @@
 
 - (NSAttributedString *)attributedTimestampForDate:(NSDate *)date
 {
+    if (!date) {
+        return nil;
+    }
+    
     NSString *relativeDate = [self relativeDateForDate:date];
     NSString *time = [self timeForDate:date];
     
@@ -100,6 +108,10 @@
 
 - (NSString *)timeForDate:(NSDate *)date
 {
+    if (!date) {
+        return nil;
+    }
+    
     [self.dateFormatter setDateStyle:NSDateFormatterNoStyle];
     [self.dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     return [self.dateFormatter stringFromDate:date];
@@ -107,6 +119,10 @@
 
 - (NSString *)relativeDateForDate:(NSDate *)date
 {
+    if (!date) {
+        return nil;
+    }
+    
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     return [self.dateFormatter stringFromDate:date];
