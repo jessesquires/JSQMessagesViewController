@@ -373,6 +373,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     BOOL isOutgoingMessage = [messageSender isEqualToString:self.sender];
     
+    if ( [collectionView.dataSource respondsToSelector:@selector(collectionView:isOutgoingMessageAtIndexPath:)] ) {
+        isOutgoingMessage = [collectionView.dataSource collectionView:collectionView isOutgoingMessageAtIndexPath:indexPath];
+    }
+    
     NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = self;

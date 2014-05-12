@@ -140,6 +140,16 @@
  */
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
 
+/**
+ * Asks the data source if this message is outgoing or not.
+ *
+ *  @param collectionView The object representing the collection view requestthis information
+ *  @param indexPath      The index path that specifies the location of the item.
+ *
+ *  @return YES if is outgoing, NO if incoming,
+ */
+- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView isOutgoingMessageAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
 
 
