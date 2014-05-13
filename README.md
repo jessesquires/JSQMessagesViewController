@@ -40,6 +40,10 @@ pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMes
 
 ## Getting Started
 
+````
+#import <JSQMessagesViewController/JSQMessages.h>    // import all headers
+````
+
 * **Demo project**
   * There's a fucking sweet demo project: `JSQMessages.xcworkspace`.
   * Run `pod install` first.
