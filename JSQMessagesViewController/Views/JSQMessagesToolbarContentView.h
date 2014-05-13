@@ -41,9 +41,10 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
 /**
  *  A custom button item displayed on the left of the toolbar content view.
  *
- *  @discusson The frame of this button is ignored. When you set this property, the button
+ *  @discussion The frame of this button is ignored. When you set this property, the button
  *  is fitted within a pre-defined default content view, whose height is determined by the
  *  height of the toolbar. You may specify a new width using `leftBarButtonItemWidth`.
+ *  Set this value to `nil` to remove the button.
  */
 @property (weak, nonatomic) UIButton *leftBarButtonItem;
 
@@ -55,9 +56,10 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
 /**
  *  A custom button item displayed on the right of the toolbar content view.
  *
- *  @discusson The frame of this button is ignored. When you set this property, the button
+ *  @discussion The frame of this button is ignored. When you set this property, the button
  *  is fitted within a pre-defined default content view, whose height is determined by the
  *  height of the toolbar. You may specify a new width using `rightBarButtonItemWidth`.
+ *  Set this value to `nil` to remove the button.
  */
 @property (weak, nonatomic) UIButton *rightBarButtonItem;
 

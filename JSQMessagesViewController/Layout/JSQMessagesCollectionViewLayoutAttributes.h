@@ -61,14 +61,14 @@
  *  (or where the avatar would normally appear). For outgoing messages this is the left side, 
  *  for incoming messages this is the right side.
  *
- *  3. The top value insets the top of the frame
+ *  3. The top value insets the top of the frame.
  *
  *  4. The bottom value insets the bottom of the frame.
  */
 @property (assign, nonatomic) UIEdgeInsets textViewFrameInsets;
 
 /**
- *  The size of the avatar image view of a `JSQMessagesCollectionViewCellIncoming`.
+ *  The size of the `avatarImageView` of a `JSQMessagesCollectionViewCellIncoming`.
  *  The size values should be greater than or equal to `0.0`.
  *
  *  @see `JSQMessagesCollectionViewCellIncoming`.
@@ -76,7 +76,7 @@
 @property (assign, nonatomic) CGSize incomingAvatarViewSize;
 
 /**
- *  The size of the avatar image view of a `JSQMessagesCollectionViewCellOutgoing`.
+ *  The size of the `avatarImageView` of a `JSQMessagesCollectionViewCellOutgoing`.
  *  The size values should be greater than or equal to `0.0`.
  *
  *  @see `JSQMessagesCollectionViewCellOutgoing`.
@@ -84,7 +84,7 @@
 @property (assign, nonatomic) CGSize outgoingAvatarViewSize;
 
 /**
- *  The height of the cellTopLabel of a `JSQMessagesCollectionViewCell`.
+ *  The height of the `cellTopLabel` of a `JSQMessagesCollectionViewCell`.
  *  This value should be greater than or equal to `0.0`.
  *
  *  @see `JSQMessagesCollectionViewCell`.
@@ -92,7 +92,7 @@
 @property (assign, nonatomic) CGFloat cellTopLabelHeight;
 
 /**
- *  The height of the messageBubbleTopLabel of a `JSQMessagesCollectionViewCell`.
+ *  The height of the `messageBubbleTopLabel` of a `JSQMessagesCollectionViewCell`.
  *  This value should be greater than or equal to `0.0`.
  *
  *  @see `JSQMessagesCollectionViewCell`.
@@ -100,7 +100,7 @@
 @property (assign, nonatomic) CGFloat messageBubbleTopLabelHeight;
 
 /**
- *  The height of the cellBottomLabel of a `JSQMessagesCollectionViewCell`.
+ *  The height of the `cellBottomLabel` of a `JSQMessagesCollectionViewCell`.
  *  This value should be greater than or equal to `0.0`.
  *
  *  @see `JSQMessagesCollectionViewCell`.

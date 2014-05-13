@@ -47,7 +47,7 @@
 
 /**
  *  The name of the user sending messages. This value must not be `nil`. 
- *  The default value is `JSQDefaultSender`.
+ *  The default value is `@"JSQDefaultSender"`.
  */
 @property (copy, nonatomic) NSString *sender;
 
@@ -72,7 +72,7 @@
  *  You should only override this property's default value if you are proividing your own cell prototypes.
  *  These prototypes must be registered with the collectionView for reuse and you are then responsible for 
  *  completely overriding many delegate and data source methods for the collectionView, 
- *  including `collectionView: cellForItemAtIndexPath:`.
+ *  including `collectionView:cellForItemAtIndexPath:`.
  */
 @property (copy, nonatomic) NSString *outgoingCellIdentifier;
 
@@ -88,7 +88,7 @@
  *  You should only override this property's default value if you are proividing your own cell prototypes. 
  *  These prototypes must be registered with the collectionView for reuse and you are then responsible for 
  *  completely overriding many delegate and data source methods for the collectionView, 
- *  including `collectionView: cellForItemAtIndexPath:`.
+ *  including `collectionView:cellForItemAtIndexPath:`.
  */
 @property (copy, nonatomic) NSString *incomingCellIdentifier;
 
@@ -163,7 +163,7 @@
  *  reloading the collection view, and scrolling to the newly sent message 
  *  as specified by `automaticallyScrollsToMostRecentMessage`.
  *
- *  @discussion You should call this method at the end of `didPressSendButton: withMessage:` 
+ *  @discussion You should call this method at the end of `didPressSendButton:withMessage:` 
  *  after adding the new message to your data source and performing any related tasks.
  *
  *  @see `automaticallyScrollsToMostRecentMessage`.

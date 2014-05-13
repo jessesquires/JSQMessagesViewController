@@ -113,7 +113,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
  *      (or where the avatar would normally appear). For outgoing messages this is the left side, 
  *      for incoming messages this is the right side.
  *
- *  3. The top value insets the top of the frame
+ *  3. The top value insets the top of the frame.
  *
  *  4. The bottom value insets the bottom of the frame.
  *
@@ -122,7 +122,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
  *  @warning Adjusting this value is an advanced endeavour and not recommended. 
  *  You will only need to adjust this value should you choose to provide your own bubble image assets.
  *  Changing this value may also require you to manually calculate the itemSize for each cell 
- *  in the layout by overriding the delegate method `collectionView: layout: sizeForItemAtIndexPath:`
+ *  in the layout by overriding the delegate method `collectionView:layout:sizeForItemAtIndexPath:`
  */
 @property (assign, nonatomic) UIEdgeInsets messageBubbleTextViewFrameInsets;
 
@@ -135,7 +135,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
  *  @warning Adjusting this value is an advanced endeavour and not recommended. 
  *  You will only need to adjust this value should you choose to provide your own bubble image assets.
  *  Changing this value may also require you to manually calculate the itemSize for each cell
- *  in the layout by overriding the delegate method `collectionView: layout: sizeForItemAtIndexPath:`
+ *  in the layout by overriding the delegate method `collectionView:layout:sizeForItemAtIndexPath:`
  */
 @property (assign, nonatomic) UIEdgeInsets messageBubbleTextViewTextContainerInsets;
 
