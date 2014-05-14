@@ -103,6 +103,7 @@ Check out my work at [Hexed Bits](http://bit.ly/0x29A).
 * [Schools App](https://itunes.apple.com/us/app/schools-app/id495845755)
 * [Spark Social](https://itunes.apple.com/us/app/spark-social/id823785892)
 * [Spabbit](https://itunes.apple.com/us/app/spabbit/id737363908)
+* [Elodie](https://itunes.apple.com/app/elodie/id821610181)
 * [Instaply](https://itunes.apple.com/us/app/instaply/id558562920)
 * [Loopse](https://itunes.apple.com/us/app/loopse-spots-friends-sessions/id704783915)
 * [Oxwall Messenger](https://github.com/tochman/OxwallMessenger)
