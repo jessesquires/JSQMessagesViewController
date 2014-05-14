@@ -99,6 +99,7 @@ Check out my work at [Hexed Bits](http://bit.ly/0x29A).
 ## Apps using this library
 
 * [Hemoglobe](http://bit.ly/hemoglobeapp)
+* [ClassDojo](https://itunes.apple.com/us/app/classdojo/id552602056)
 * [Schools App](https://itunes.apple.com/us/app/schools-app/id495845755)
 * [Spark Social](https://itunes.apple.com/us/app/spark-social/id823785892)
 * [Spabbit](https://itunes.apple.com/us/app/spabbit/id737363908)
