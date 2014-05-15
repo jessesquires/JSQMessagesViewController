@@ -35,7 +35,8 @@
 /**
  *  Returns the image view containing the optional image for this bubble view.
  */
-@property (weak, nonatomic, readonly) UIImageView *foregroundImageView;
+//@property (weak, nonatomic, readonly) UIImageView *foregroundImageView;
+@property (weak, nonatomic, readonly) UIButton *foregroundImageButton;
 
 
 /**

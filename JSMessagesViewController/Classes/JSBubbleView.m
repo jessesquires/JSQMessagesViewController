@@ -27,7 +27,7 @@
 
 #define kMarginLeftRight 10.0f
 
-#define kForegroundImageViewOffset 24.0f
+#define kForegroundImageViewOffset 22.0f //for fist bump or right-side image on notification
 
 #define kMessageBubbleTailWidth 6.0f
 
@@ -88,10 +88,10 @@
         [self bringSubviewToFront:textView];
         _textView = textView;
         
-        UIImageView *foregroundImageView = [[UIImageView alloc]init];
-        [self addSubview:foregroundImageView];
-        [self bringSubviewToFront:foregroundImageView];
-        _foregroundImageView = foregroundImageView;
+        UIButton *foregroundImageButton = [[UIButton alloc]init];
+        [self addSubview:foregroundImageButton];
+        [self bringSubviewToFront:foregroundImageButton];
+        _foregroundImageButton = foregroundImageButton;
         
         [self addTextViewObservers];
         
@@ -227,8 +227,10 @@
     self.bubbleImageView.frame = bubbleImageViewFrame;
     
     if(self.type == JSBubbleMessageTypeNotification) {
-        // for arrows
-        [self.foregroundImageView setFrame:(CGRect){self.bubbleImageView.frame.size.width - kForegroundImageViewOffset, 16.0, 25.0, 18.0}];
+        // for fist bump icon
+        [self.foregroundImageButton setFrame:(CGRect){self.bubbleImageView.frame.size.width - kForegroundImageViewOffset, 0, self.frame.size.width-(self.bubbleImageView.frame.size.width-kForegroundImageViewOffset), self.frame.size.height}];
+        self.foregroundImageButton.center = CGPointMake(self.foregroundImageButton.center.x, self.bubbleImageView.center.y);
+        [self.foregroundImageButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     }
     
     if(isnan(self.startWidth)) {
@@ -338,9 +340,9 @@
     
     self.bubbleImageView.frame = imageViewFrame;
     
-    CGRect foregroundImageViewFrame = self.foregroundImageView.frame;
-    foregroundImageViewFrame.size.width = self.startWidth - self.subtractFromWidth - kForegroundImageViewOffset;
-    self.foregroundImageView.frame = foregroundImageViewFrame;
+    CGRect foregroundImageButtonFrame = self.foregroundImageButton.frame;
+    foregroundImageButtonFrame.size.width = self.startWidth - self.subtractFromWidth - kForegroundImageViewOffset;
+    self.foregroundImageButton.frame = foregroundImageButtonFrame;
     
     [self layoutTextViewFrame];
     

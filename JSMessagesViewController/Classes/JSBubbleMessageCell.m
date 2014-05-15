@@ -431,6 +431,10 @@ NSString * const GFNotificationRetryMessage = @"GFNotificationRetryMessage";
 
 - (BOOL)becomeFirstResponder
 {
+    if (self.bubbleView.type == JSBubbleMessageTypeNotification) {
+        return NO;
+    }
+    
     return [super becomeFirstResponder];
 }
 
