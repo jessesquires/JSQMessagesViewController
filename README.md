@@ -112,6 +112,7 @@ Check out my work at [Hexed Bits](http://bit.ly/0x29A).
 * [Libraries for developers](https://itunes.apple.com/us/app/libraries-for-developers/id653427112)
 * [Buhz|Hyve](http://itunes.apple.com/us/app/buhz-hyve/id818568956)
 * [AwesomeChat](https://github.com/relatedcode/AwesomeChat)
+* [Kytt](https://itunes.apple.com/de/app/kytt-neue-leute-in-der-umgebung/id848959696)
 
 ## License
 
