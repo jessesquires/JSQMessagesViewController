@@ -11,7 +11,7 @@
 @interface JSQMessagesCollectionViewImageCell : JSQMessagesCollectionViewCell
 
 /**
- *  Returns the text view of the cell. This text view contains the message body text.
+ *  Returns the image view of the cell. This image view contains the message image attachement.
  */
 @property (weak, nonatomic, readonly) UIImageView *imageView;
 

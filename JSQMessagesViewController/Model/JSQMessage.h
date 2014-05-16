@@ -42,6 +42,9 @@
  */
 @property (copy, nonatomic) NSDate *date;
 
+/**
+ * The image attached to the message. This value can be nil
+ */
 @property (copy, nonatomic) UIImage *image;
 
 #pragma mark - Initialization

@@ -67,6 +67,10 @@
  */
 @property (assign, nonatomic) UIEdgeInsets textViewFrameInsets;
 
+/**
+ *  Mimics the textViewFrameInsets property but for image cells.
+ *  Idealy, both of these will be consolidated into one 'contentViewFrameInsets' property.
+ */
 @property (assign, nonatomic) UIEdgeInsets imageViewFrameInsets;
 
 /**

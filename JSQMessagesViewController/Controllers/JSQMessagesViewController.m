@@ -393,6 +393,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                                                                     forIndexPath:indexPath];
     cell.delegate = self;
     
+    // This is a bit hacked. The appropriate contentView is grabbed with a selector from the nib based on the content type.
+    // I think the best way to fix this (and avoid all the subclassing) is for each cell to have a base contentView in which images or text views will be added. After the subview is added and pinned to the edges of the content view, the content view would then size itself appropriately in the collection view layout and the cell will display correctly. 
     if ([messageData image]) {
         if ([cell respondsToSelector:@selector(imageView)]) {
             UIImageView *imageView = [cell performSelector:@selector(imageView)];

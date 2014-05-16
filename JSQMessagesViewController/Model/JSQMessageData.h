@@ -53,7 +53,7 @@
 - (UIImage *)image;
 
 /**
- *  Sets the image so that the Collection View Layout can calulate its size
+ *  Sets the image so that the Collection View Layout can calulate its size. I think this method will be needed after an image is asynchronously downloaded.
  */
 - (void)setImage:(UIImage *)image;
 
