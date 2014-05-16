@@ -33,14 +33,12 @@ ul li {
 	text-align: center;
 }
 
-.navbar .container {
-	height: 44px;
-}
-
-.navbar-brand {
-	height: 44px;
-	margin: 4px;
-	font-size: 20px;
+.header {
+	background-color: #2b2b2b;
+	color: #F2F2F2;
+	height: 54px;
+	margin-bottom: 40px;
+	padding-left: 20px;
 }
 
 .chatbubble {
@@ -56,9 +54,9 @@ ul li {
 	padding-bottom: 20px;
 }
 
-header {
-	padding-top: 80px;
+.jumbotron {
 	text-align: center;
+	background-color: #F2F2F2;
 }
 
 article {
@@ -66,14 +64,14 @@ article {
 }
 
 #about {
-	padding-top: 100px;
-	padding-bottom: 100px;
+	padding-top: 50px;
+	padding-bottom: 50px;
 }
 
 #features h4,
 #about h4,
 #donate h4 {
-	font-size: 24px;
+	font-size: 28px;
 	text-align: center;
 	font-weight: bolder;
 	color: #F2F2F2;
@@ -107,6 +105,11 @@ article {
 #donate {
 	text-align: center;
 	margin-top: 30px;
+}
+
+#donate small {
+	margin-top: 50px;
+	color: #ffffff;
 }
 
 #donate .btn-default {
