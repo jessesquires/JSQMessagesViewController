@@ -252,7 +252,7 @@
     if(self.type == JSBubbleMessageTypeNotification) {
         textY += 1.0f;
         textWidth -= kForegroundImageViewOffset;
-        textWidth -= 12.0f;
+        textWidth -= 22.0f;
     } else {
         textWidth -= 18.0f;
     }
@@ -292,7 +292,7 @@
 }
 
 +(CGSize)textSizeForAttributedText:(NSAttributedString *)attributedText offset:(CGFloat)offset {
-    CGFloat maxWidth = 270.0 - offset;  // this seems to be the magic number...  not sure exactly why, but it works for sizing.
+    CGFloat maxWidth = 255.0 - offset;  // this seems to be the magic number...  not sure exactly why, but it works for sizing.
     
     CGRect boundingRect = [attributedText boundingRectWithSize:(CGSize){maxWidth, CGFLOAT_MAX} options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) context:nil];
     
