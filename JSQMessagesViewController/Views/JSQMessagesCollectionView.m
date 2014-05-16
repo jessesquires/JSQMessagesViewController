@@ -19,8 +19,10 @@
 #import "JSQMessagesCollectionView.h"
 
 #import "JSQMessagesCollectionViewFlowLayout.h"
-#import "JSQMessagesCollectionViewCellIncoming.h"
-#import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewTextCellIncoming.h"
+#import "JSQMessagesCollectionViewTextCellOutgoing.h"
+#import "JSQMessagesCollectionViewImageCellIncoming.h"
+#import "JSQMessagesCollectionViewImageCellOutgoing.h"
 
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
@@ -46,19 +48,25 @@
     self.alwaysBounceVertical = YES;
     self.bounces = YES;
     
-    [self registerNib:[JSQMessagesCollectionViewCellIncoming nib]
-          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewTextCellIncoming nib]
+forCellWithReuseIdentifier:[JSQMessagesCollectionViewTextCellIncoming cellReuseIdentifier]];
     
-    [self registerNib:[JSQMessagesCollectionViewCellOutgoing nib]
-          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewTextCellOutgoing nib]
+forCellWithReuseIdentifier:[JSQMessagesCollectionViewTextCellOutgoing cellReuseIdentifier]];
+    
+    [self registerNib:[JSQMessagesCollectionViewImageCellIncoming nib]
+forCellWithReuseIdentifier:[JSQMessagesCollectionViewImageCellIncoming cellReuseIdentifier]];
+    
+    [self registerNib:[JSQMessagesCollectionViewImageCellOutgoing nib]
+forCellWithReuseIdentifier:[JSQMessagesCollectionViewImageCellOutgoing cellReuseIdentifier]];
     
     [self registerNib:[JSQMessagesTypingIndicatorFooterView nib]
-          forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-          withReuseIdentifier:[JSQMessagesTypingIndicatorFooterView footerReuseIdentifier]];
+forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+  withReuseIdentifier:[JSQMessagesTypingIndicatorFooterView footerReuseIdentifier]];
     
     [self registerNib:[JSQMessagesLoadEarlierHeaderView nib]
-          forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-          withReuseIdentifier:[JSQMessagesLoadEarlierHeaderView headerReuseIdentifier]];
+forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+  withReuseIdentifier:[JSQMessagesLoadEarlierHeaderView headerReuseIdentifier]];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout

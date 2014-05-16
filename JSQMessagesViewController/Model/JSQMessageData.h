@@ -47,4 +47,14 @@
  */
 - (NSDate *)date;
 
+/**
+ * @return The image attached to the message
+ */
+- (UIImage *)image;
+
+/**
+ *  Sets the image so that the Collection View Layout can calulate its size. I think this method will be needed after an image is asynchronously downloaded.
+ */
+- (void)setImage:(UIImage *)image;
+
 @end

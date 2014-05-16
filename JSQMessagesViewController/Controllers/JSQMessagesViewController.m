@@ -23,8 +23,11 @@
 #import "JSQMessageData.h"
 #import "JSQMessage.h"
 
-#import "JSQMessagesCollectionViewCellIncoming.h"
-#import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewTextCellIncoming.h"
+#import "JSQMessagesCollectionViewTextCellOutgoing.h"
+
+#import "JSQMessagesCollectionViewImageCellIncoming.h"
+#import "JSQMessagesCollectionViewImageCellOutgoing.h"
 
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
@@ -123,8 +126,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     self.automaticallyScrollsToMostRecentMessage = YES;
     
-    self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
-    self.incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
+    self.outgoingCellIdentifier = [JSQMessagesCollectionViewTextCellOutgoing cellReuseIdentifier];
+    self.incomingCellIdentifier = [JSQMessagesCollectionViewTextCellIncoming cellReuseIdentifier];
+    self.outgoingImageCellIdentifier = [JSQMessagesCollectionViewImageCellOutgoing cellReuseIdentifier];
+    self.incomingImageCellIdentifier = [JSQMessagesCollectionViewImageCellIncoming cellReuseIdentifier];
     
     self.typingIndicatorColor = [UIColor jsq_messageBubbleLightGrayColor];
     self.showTypingIndicator = NO;
@@ -372,15 +377,40 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     NSAssert(messageSender, @"ERROR: messageData sender must not be nil: %s", __PRETTY_FUNCTION__);
     
     BOOL isOutgoingMessage = [messageSender isEqualToString:self.sender];
-    
-    NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
-    JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    cell.delegate = self;
+    BOOL isImageMessage = [messageData image];
     
     NSString *messageText = [messageData text];
     NSAssert(messageText, @"ERROR: messageData text must not be nil: %s", __PRETTY_FUNCTION__);
     
-    cell.textView.text = messageText;
+    NSString *cellIdentifier;
+    if (isImageMessage) {
+        cellIdentifier = isOutgoingMessage ? self.outgoingImageCellIdentifier : self.incomingImageCellIdentifier;
+    } else {
+        cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
+    }
+    
+    JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier
+                                                                                    forIndexPath:indexPath];
+    cell.delegate = self;
+    
+    // This is a bit hacked. The appropriate contentView is grabbed with a selector from the nib based on the content type.
+    // I think the best way to fix this (and avoid all the subclassing) is for each cell to have a base contentView in which images or text views will be added. After the subview is added and pinned to the edges of the content view, the content view would then size itself appropriately in the collection view layout and the cell will display correctly. 
+    if ([messageData image]) {
+        if ([cell respondsToSelector:@selector(imageView)]) {
+            UIImageView *imageView = [cell performSelector:@selector(imageView)];
+            [imageView setImage:[messageData image]];
+        }
+    } else {
+        if ([cell respondsToSelector:@selector(textView)]) {
+            UITextView *textView = [cell performSelector:@selector(textView)];
+            textView.text = messageText;
+            textView.dataDetectorTypes = UIDataDetectorTypeAll;
+            if (!isOutgoingMessage) {
+                textView.textColor = [UIColor blackColor];
+            }
+        }
+    }
+    
     cell.messageBubbleImageView = [collectionView.dataSource collectionView:collectionView bubbleImageViewForItemAtIndexPath:indexPath];
     cell.avatarImageView = [collectionView.dataSource collectionView:collectionView avatarImageViewForItemAtIndexPath:indexPath];
     cell.cellTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellTopLabelAtIndexPath:indexPath];
@@ -410,8 +440,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     else {
         cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
     }
-    
-    cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
     
     return cell;
 }

@@ -92,6 +92,10 @@
  */
 @property (copy, nonatomic) NSString *incomingCellIdentifier;
 
+@property (copy, nonatomic) NSString *outgoingImageCellIdentifier;
+
+@property (copy, nonatomic) NSString *incomingImageCellIdentifier;
+
 /**
  *  The color for the typing indicator for incoming messages.
  *

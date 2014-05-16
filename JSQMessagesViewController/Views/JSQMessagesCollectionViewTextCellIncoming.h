@@ -16,12 +16,12 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import "JSQMessagesCollectionViewCell.h"
+#import "JSQMessagesCollectionViewTextCell.h"
 
 /**
  *  A `JSQMessagesCollectionViewCellIncoming` object is a concrete instance of `JSQMessagesCollectionViewCell`
  *  that represents an incoming message data item.
  */
-@interface JSQMessagesCollectionViewCellIncoming : JSQMessagesCollectionViewCell
+@interface JSQMessagesCollectionViewTextCellIncoming : JSQMessagesCollectionViewTextCell
 
 @end

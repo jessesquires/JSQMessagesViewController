@@ -16,21 +16,21 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewTextCellIncoming.h"
 
-@implementation JSQMessagesCollectionViewCellOutgoing
+@implementation JSQMessagesCollectionViewTextCellIncoming
 
 #pragma mark - Overrides
 
 + (UINib *)nib
 {
-    return [UINib nibWithNibName:NSStringFromClass([JSQMessagesCollectionViewCellOutgoing class])
+    return [UINib nibWithNibName:NSStringFromClass([JSQMessagesCollectionViewTextCellIncoming class])
                           bundle:[NSBundle mainBundle]];
 }
 
 + (NSString *)cellReuseIdentifier
 {
-    return NSStringFromClass([JSQMessagesCollectionViewCellOutgoing class]);
+    return NSStringFromClass([JSQMessagesCollectionViewTextCellIncoming class]);
 }
 
 #pragma mark - Initialization
@@ -38,8 +38,8 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    self.messageBubbleTopLabel.textAlignment = NSTextAlignmentRight;
-    self.cellBottomLabel.textAlignment = NSTextAlignmentRight;
+    self.messageBubbleTopLabel.textAlignment = NSTextAlignmentLeft;
+    self.cellBottomLabel.textAlignment = NSTextAlignmentLeft;
 }
 
 @end

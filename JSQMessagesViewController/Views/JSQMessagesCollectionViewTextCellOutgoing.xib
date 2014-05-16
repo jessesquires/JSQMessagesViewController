@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="JSQMessagesCollectionViewCellOutgoing" id="23f-xH-rkY" customClass="JSQMessagesCollectionViewCellOutgoing">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="JSQMessagesCollectionViewTextCellOutgoing" id="23f-xH-rkY" customClass="JSQMessagesCollectionViewTextCellOutgoing">
             <rect key="frame" x="0.0" y="0.0" width="320" height="154"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -108,15 +108,16 @@
                 <outlet property="cellBottomLabelHeightContraint" destination="cPs-M4-tjX" id="yyh-7V-6do"/>
                 <outlet property="cellTopLabel" destination="jxM-YD-sVG" id="acH-pr-spx"/>
                 <outlet property="cellTopLabelHeightContraint" destination="9oK-E7-iXA" id="TaU-Wg-TP4"/>
+                <outlet property="contentView" destination="vLY-aM-0Dr" id="DIh-Va-9Bm"/>
+                <outlet property="contentViewAvatarHorizontalSpaceConstraint" destination="aVg-yy-8K7" id="aQY-q1-uxv"/>
+                <outlet property="contentViewBottomVerticalSpaceConstraint" destination="RiG-21-Bqc" id="IrP-UC-IUu"/>
+                <outlet property="contentViewMarginHorizontalSpaceConstraint" destination="7rI-Nc-AK3" id="3b6-rY-qW0"/>
+                <outlet property="contentViewTopVerticalSpaceConstraint" destination="UbF-Bl-Q7v" id="rxF-DD-Cii"/>
                 <outlet property="messageBubbleContainerView" destination="2zh-vR-QJW" id="pu0-GU-eZl"/>
                 <outlet property="messageBubbleLeftRightMarginConstraint" destination="tya-FG-SP6" id="3oJ-6X-GCK"/>
                 <outlet property="messageBubbleTopLabel" destination="p52-YN-yLu" id="SLH-sA-Chu"/>
                 <outlet property="messageBubbleTopLabelHeightContraint" destination="8TB-va-f8L" id="wwN-PJ-flN"/>
-                <outlet property="textView" destination="vLY-aM-0Dr" id="YEp-mW-xIY"/>
-                <outlet property="textViewAvatarHorizontalSpaceConstraint" destination="aVg-yy-8K7" id="CIe-Bi-eng"/>
-                <outlet property="textViewBottomVerticalSpaceConstraint" destination="UbF-Bl-Q7v" id="KHP-49-3u4"/>
-                <outlet property="textViewMarginHorizontalSpaceConstraint" destination="7rI-Nc-AK3" id="ciu-j6-IpH"/>
-                <outlet property="textViewTopVerticalSpaceConstraint" destination="RiG-21-Bqc" id="i3j-z0-feE"/>
+                <outlet property="textView" destination="vLY-aM-0Dr" id="26F-kD-LLO"/>
             </connections>
         </collectionViewCell>
     </objects>

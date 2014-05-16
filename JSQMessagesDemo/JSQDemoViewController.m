@@ -240,12 +240,37 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
     NSLog(@"Camera pressed!");
-    /**
-     *  Accessory button has no default functionality, yet.
-     */
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    [imagePicker setDelegate:self];
+    
+    [self presentViewController:imagePicker
+                       animated:YES
+                     completion:nil];
 }
 
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    
+    JSQMessage *message = [JSQMessage messageWithText:@" "
+                                               sender:self.sender];
+    [message setImage:image];
+    [self.messages addObject:message];
+    
+    [self dismissViewControllerAnimated:YES
+                             completion:^{
+                                 [self finishSendingMessage];
+                             }];
+}
 
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
+}
 
 #pragma mark - JSQMessages CollectionView DataSource
 
@@ -374,22 +399,26 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  DO NOT set `cell.textView.font` !
      *  Instead, you need to set `self.collectionView.collectionViewLayout.messageBubbleFont` to the font you want in `viewDidLoad`
      *
-     *  
+     *
      *  DO NOT manipulate cell layout information!
      *  Instead, override the properties you want on `self.collectionView.collectionViewLayout` from `viewDidLoad`
      */
     
     JSQMessage *msg = [self.messages objectAtIndex:indexPath.item];
     
-    if ([msg.sender isEqualToString:self.sender]) {
-        cell.textView.textColor = [UIColor blackColor];
+    if ([cell isKindOfClass:[JSQMessagesCollectionViewTextCell class]]) {
+        UITextView *textView = [cell performSelector:@selector(textView)];
+        
+        if ([msg.sender isEqualToString:self.sender]) {
+            textView.textColor = [UIColor blackColor];
+        }
+        else {
+            textView.textColor = [UIColor whiteColor];
+        }
+        
+        textView.linkTextAttributes = @{ NSForegroundColorAttributeName : textView.textColor,
+                                         NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     }
-    else {
-        cell.textView.textColor = [UIColor whiteColor];
-    }
-    
-    cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
-                                          NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     
     return cell;
 }
