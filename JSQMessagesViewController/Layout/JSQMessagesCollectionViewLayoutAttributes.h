@@ -67,6 +67,8 @@
  */
 @property (assign, nonatomic) UIEdgeInsets textViewFrameInsets;
 
+@property (assign, nonatomic) UIEdgeInsets imageViewFrameInsets;
+
 /**
  *  The size of the `avatarImageView` of a `JSQMessagesCollectionViewCellIncoming`.
  *  The size values should be greater than or equal to `0.0`.

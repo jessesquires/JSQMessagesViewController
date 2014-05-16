@@ -75,7 +75,7 @@
 /**
  *  Returns the text view of the cell. This text view contains the message body text.
  */
-@property (weak, nonatomic, readonly) UITextView *textView;
+@property (weak, nonatomic, readonly) UIView *contentView;
 
 /**
  *  The bubble image view of the cell that is responsible for displaying bubble images.

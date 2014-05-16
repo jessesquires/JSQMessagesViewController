@@ -93,6 +93,7 @@
     if (![layoutAttributes.messageBubbleFont isEqual:self.messageBubbleFont]
         || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewFrameInsets, self.textViewFrameInsets)
         || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewTextContainerInsets, self.textViewTextContainerInsets)
+        || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.imageViewFrameInsets, self.imageViewFrameInsets)
         || !CGSizeEqualToSize(layoutAttributes.incomingAvatarViewSize, self.incomingAvatarViewSize)
         || !CGSizeEqualToSize(layoutAttributes.outgoingAvatarViewSize, self.outgoingAvatarViewSize)
         || (int)layoutAttributes.messageBubbleLeftRightMargin != (int)self.messageBubbleLeftRightMargin
@@ -121,6 +122,7 @@
     copy.messageBubbleFont = self.messageBubbleFont;
     copy.messageBubbleLeftRightMargin = self.messageBubbleLeftRightMargin;
     copy.textViewFrameInsets = self.textViewFrameInsets;
+    copy.imageViewFrameInsets = self.imageViewFrameInsets;
     copy.textViewTextContainerInsets = self.textViewTextContainerInsets;
     copy.incomingAvatarViewSize = self.incomingAvatarViewSize;
     copy.outgoingAvatarViewSize = self.outgoingAvatarViewSize;

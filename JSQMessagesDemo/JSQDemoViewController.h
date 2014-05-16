@@ -30,7 +30,7 @@
 
 
 
-@interface JSQDemoViewController : JSQMessagesViewController
+@interface JSQDemoViewController : JSQMessagesViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) id<JSQDemoViewControllerDelegate> delegateModal;
 

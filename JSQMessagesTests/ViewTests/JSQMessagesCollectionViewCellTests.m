@@ -10,8 +10,8 @@
 
 #import <XCTest/XCTest.h>
 
-#import "JSQMessagesCollectionViewCellIncoming.h"
-#import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewTextCellIncoming.h"
+#import "JSQMessagesCollectionViewTextCellOutgoing.h"
 
 
 @interface JSQMessagesCollectionViewCellTests : XCTestCase
@@ -32,16 +32,16 @@
 
 - (void)testMessagesCollectionViewCellInit
 {
-    UINib *incomingCell = [JSQMessagesCollectionViewCellIncoming nib];
+    UINib *incomingCell = [JSQMessagesCollectionViewTextCellIncoming nib];
     XCTAssertNotNil(incomingCell, @"Nib should not be nil");
     
-    NSString *incomingCellId = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
+    NSString *incomingCellId = [JSQMessagesCollectionViewTextCellIncoming cellReuseIdentifier];
     XCTAssertNotNil(incomingCellId, @"Cell identifier should not be nil");
     
-    UINib *outgoingCell = [JSQMessagesCollectionViewCellOutgoing nib];
+    UINib *outgoingCell = [JSQMessagesCollectionViewTextCellOutgoing nib];
     XCTAssertNotNil(outgoingCell, @"Nib should not be nil");
     
-    NSString *outgoingCellId = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
+    NSString *outgoingCellId = [JSQMessagesCollectionViewTextCellOutgoing cellReuseIdentifier];
     XCTAssertNotNil(outgoingCellId, @"Cell identifier should not be nil");
 }
 

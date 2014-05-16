@@ -42,6 +42,8 @@
  */
 @property (copy, nonatomic) NSDate *date;
 
+@property (copy, nonatomic) UIImage *image;
+
 #pragma mark - Initialization
 
 /**

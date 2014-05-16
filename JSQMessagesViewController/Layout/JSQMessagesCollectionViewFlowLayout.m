@@ -342,12 +342,25 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     CGSize stringSize = CGRectIntegral(stringRect).size;
     
-    CGFloat verticalInsets = self.messageBubbleTextViewTextContainerInsets.top + self.messageBubbleTextViewTextContainerInsets.bottom;
-    
-    CGSize finalSize = CGSizeMake(stringSize.width, stringSize.height + verticalInsets);
+    CGSize finalSize = CGSizeZero;
+    if ([messageData image]) {
+        CGSize imageSize = [[messageData image] size];
+        if (imageSize.width > maximumTextWidth) {
+            imageSize.height = imageSize.height * (maximumTextWidth/imageSize.width);
+            imageSize.width = maximumTextWidth;
+        }
+        finalSize = CGSizeMake(imageSize.width,
+                               imageSize.height
+                               + self.messageBubbleTextViewTextContainerInsets.top
+                               + self.messageBubbleTextViewTextContainerInsets.bottom);
+    } else {
+        finalSize = CGSizeMake(stringSize.width,
+                               stringSize.height
+                               + self.messageBubbleTextViewTextContainerInsets.top
+                               + self.messageBubbleTextViewTextContainerInsets.bottom);
+    }
     
     [self.messageBubbleSizes setObject:[NSValue valueWithCGSize:finalSize] forKey:indexPath];
-    
     return finalSize;
 }
 
