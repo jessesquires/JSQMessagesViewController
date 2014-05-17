@@ -294,7 +294,7 @@
 }
 
 +(CGSize)textSizeForAttributedText:(NSAttributedString *)attributedText offset:(CGFloat)offset {
-    CGFloat maxWidth = 270.0 - offset;  // this seems to be the magic number...  not sure exactly why, but it works for sizing.
+    CGFloat maxWidth = 255.0 - offset;  // this seems to be the magic number...  not sure exactly why, but it works for sizing.
     
     CGRect boundingRect = [attributedText boundingRectWithSize:(CGSize){maxWidth, CGFLOAT_MAX} options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) context:nil];
     
