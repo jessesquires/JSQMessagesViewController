@@ -35,11 +35,22 @@
     NSAssert(sender, @"ERROR: sender must not be nil: %s", __PRETTY_FUNCTION__);
     NSAssert(date, @"ERROR: date must not be nil: %s", __PRETTY_FUNCTION__);
     
-    self = [super init];
+    self = [self init];
     if (self) {
         _text = text;
         _sender = sender;
         _date = date;
+    }
+    return self;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _text = @"";
+        _sender = @"";
+        _date = [NSDate date];
     }
     return self;
 }

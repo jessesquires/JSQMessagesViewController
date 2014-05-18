@@ -37,6 +37,7 @@
     XCTAssertNotNil(nib, @"Nib should not be nil");
     
     JSQMessagesViewController *vc = [JSQMessagesViewController messagesViewController];
+    [vc view];
     XCTAssertNotNil(vc, @"View controller should not be nil");
     XCTAssertNotNil(vc.view, @"View should not be nil");
     XCTAssertNotNil(vc.collectionView, @"Collection view should not be nil");
@@ -54,6 +55,7 @@
 - (void)testJSQMessagesViewControllerSubclassInitProgramatically
 {
     JSQDemoViewController *demoVC = [JSQDemoViewController messagesViewController];
+    [demoVC view];
     XCTAssertNotNil(demoVC, @"View controller should not be nil");
     XCTAssertTrue([demoVC isKindOfClass:[JSQDemoViewController class]], @"View controller should be kind of class: %@", [JSQDemoViewController class]);
     XCTAssertNotNil(demoVC.view, @"View should not be nil");
@@ -67,6 +69,7 @@
     XCTAssertNotNil(mainSB, @"Storyboard should not be nil");
     
     JSQDemoViewController *demoVC = [mainSB instantiateViewControllerWithIdentifier:@"DemoVC"];
+    [demoVC view];
     XCTAssertNotNil(demoVC, @"View controller should not be nil");
     XCTAssertTrue([demoVC isKindOfClass:[JSQDemoViewController class]], @"View controller should be kind of class: %@", [JSQDemoViewController class]);
     XCTAssertNotNil(demoVC.view, @"View should not be nil");
