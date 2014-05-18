@@ -23,6 +23,9 @@
 
 #import "JSQMessagesKeyboardController.h"
 
+NSString * const JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame = @"JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame";
+
+
 static void * kJSQMessagesKeyboardControllerKeyValueObservingContext = &kJSQMessagesKeyboardControllerKeyValueObservingContext;
 
 typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
@@ -208,6 +211,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                         options:animationCurveOption
                      animations:^{
                          [self.delegate keyboardDidChangeFrame:keyboardEndFrameConverted];
+                         [[NSNotificationCenter defaultCenter] postNotificationName:JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame object:self];
                      }
                      completion:^(BOOL finished) {
                          if (completion) {
@@ -243,6 +247,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
             //  KVO is triggered during panning (see below)
             //  panning occurs in contextView coordinates already
             [self.delegate keyboardDidChangeFrame:newKeyboardFrame];
+            [[NSNotificationCenter defaultCenter] postNotificationName:JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame object:self];
         }
     }
 }

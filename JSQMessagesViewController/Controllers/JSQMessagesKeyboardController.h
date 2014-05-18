@@ -24,8 +24,18 @@
 #import <Foundation/Foundation.h>
 
 /**
+ *  Posted when the system keyboard frame changes.
+ *  The object of the notification is the `JSQMessagesKeyboardController` object. There is no `userInfo` dictionary.
+ */
+FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame;
+
+
+/**
  *  The `JSQMessagesKeyboardControllerDelegate` protocol defines methods that 
  *  allow you to respond to the frame change events of the system keyboard.
+ *
+ *  A `JSQMessagesKeyboardController` object also posts the `JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame`
+ *  in response to frame change events of the system keyboard.
  */
 @protocol JSQMessagesKeyboardControllerDelegate <NSObject>
 
@@ -43,8 +53,11 @@
 
 /**
  *  An instance of `JSQMessagesKeyboardController` manages responding to the hiding and showing 
- *  of the system keyboard for editing its `textView` within its specified `contextView`. It also controls user interaction with
- *  the system keyboard via its `panGestureRecognizer`, allow the user to interactively pan the keyboard up and down in the `contextView`.
+ *  of the system keyboard for editing its `textView` within its specified `contextView`. 
+ *  It also controls user interaction with the system keyboard via its `panGestureRecognizer`, 
+ *  allow the user to interactively pan the keyboard up and down in the `contextView`.
+ *  
+ *  When the system keyboard frame changes, it posts the `JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame`.
  */
 @interface JSQMessagesKeyboardController : NSObject
 
