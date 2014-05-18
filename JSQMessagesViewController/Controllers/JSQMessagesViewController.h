@@ -21,7 +21,6 @@
 #import "JSQMessagesCollectionView.h"
 #import "JSQMessagesCollectionViewFlowLayout.h"
 
-@class JSQMessagesViewController;
 @class JSQMessagesInputToolbar;
 
 /**
