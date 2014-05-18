@@ -101,6 +101,7 @@ Check out my work at [Hexed Bits](http://bit.ly/0x29A).
 * [Hemoglobe](http://bit.ly/hemoglobeapp)
 * [ClassDojo](https://itunes.apple.com/us/app/classdojo/id552602056)
 * [Schools App](https://itunes.apple.com/us/app/schools-app/id495845755)
+* [Kytt](https://itunes.apple.com/de/app/kytt-neue-leute-in-der-umgebung/id848959696)
 * [Spark Social](https://itunes.apple.com/us/app/spark-social/id823785892)
 * [Spabbit](https://itunes.apple.com/us/app/spabbit/id737363908)
 * [Elodie](https://itunes.apple.com/app/elodie/id821610181)
@@ -112,7 +113,6 @@ Check out my work at [Hexed Bits](http://bit.ly/0x29A).
 * [Libraries for developers](https://itunes.apple.com/us/app/libraries-for-developers/id653427112)
 * [Buhz|Hyve](http://itunes.apple.com/us/app/buhz-hyve/id818568956)
 * [AwesomeChat](https://github.com/relatedcode/AwesomeChat)
-* [Kytt](https://itunes.apple.com/de/app/kytt-neue-leute-in-der-umgebung/id848959696)
 
 ## License
 
