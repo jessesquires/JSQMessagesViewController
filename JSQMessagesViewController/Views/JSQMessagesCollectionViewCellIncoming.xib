@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -101,16 +101,16 @@
             <size key="customSize" width="317" height="245"/>
             <connections>
                 <outlet property="avatarContainerView" destination="Da1-09-wR4" id="tpM-P4-qUR"/>
-                <outlet property="avatarContainerViewHeightContraint" destination="tZk-AK-JFa" id="lC8-ae-nn0"/>
-                <outlet property="avatarContainerViewWidthContraint" destination="YwX-fW-Me6" id="58k-Kj-LOm"/>
+                <outlet property="avatarContainerViewHeightConstraint" destination="tZk-AK-JFa" id="tPu-mC-ITh"/>
+                <outlet property="avatarContainerViewWidthConstraint" destination="YwX-fW-Me6" id="5PN-NL-hEP"/>
                 <outlet property="cellBottomLabel" destination="UPz-5x-c1T" id="MKm-hp-T6v"/>
-                <outlet property="cellBottomLabelHeightContraint" destination="xPR-Ph-Ze9" id="FrY-vY-MM0"/>
+                <outlet property="cellBottomLabelHeightConstraint" destination="xPR-Ph-Ze9" id="nvV-Tk-AIs"/>
                 <outlet property="cellTopLabel" destination="afj-rd-iNv" id="bTd-4q-U7e"/>
-                <outlet property="cellTopLabelHeightContraint" destination="fKS-MR-YPI" id="Sab-Ev-pSi"/>
+                <outlet property="cellTopLabelHeightConstraint" destination="fKS-MR-YPI" id="YWd-Rd-qSL"/>
                 <outlet property="messageBubbleContainerView" destination="btS-p8-B7Z" id="2sk-5p-NEd"/>
                 <outlet property="messageBubbleLeftRightMarginConstraint" destination="k2n-jk-kOg" id="DoB-EE-Ka1"/>
                 <outlet property="messageBubbleTopLabel" destination="Ufa-bF-l1Y" id="VtH-te-blR"/>
-                <outlet property="messageBubbleTopLabelHeightContraint" destination="fal-sy-hrK" id="BDy-BF-MYD"/>
+                <outlet property="messageBubbleTopLabelHeightConstraint" destination="fal-sy-hrK" id="kgv-NO-Gud"/>
                 <outlet property="textView" destination="KYU-B8-cUW" id="1Yv-ln-EUZ"/>
                 <outlet property="textViewAvatarHorizontalSpaceConstraint" destination="Tg9-9l-vr8" id="HWn-aO-NbR"/>
                 <outlet property="textViewBottomVerticalSpaceConstraint" destination="B2v-Gq-Y1L" id="oKV-Ti-Oci"/>

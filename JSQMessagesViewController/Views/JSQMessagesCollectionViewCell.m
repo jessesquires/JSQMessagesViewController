@@ -41,12 +41,12 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewAvatarHorizontalSpaceConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewMarginHorizontalSpaceConstraint;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellTopLabelHeightContraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleTopLabelHeightContraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBottomLabelHeightContraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellTopLabelHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleTopLabelHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBottomLabelHeightConstraint;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidthContraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightContraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightConstraint;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleLeftRightMarginConstraint;
 
@@ -92,9 +92,9 @@
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     self.backgroundColor = [UIColor whiteColor];
     
-    self.cellTopLabelHeightContraint.constant = 0.0f;
-    self.messageBubbleTopLabelHeightContraint.constant = 0.0f;
-    self.cellBottomLabelHeightContraint.constant = 0.0f;
+    self.cellTopLabelHeightConstraint.constant = 0.0f;
+    self.messageBubbleTopLabelHeightConstraint.constant = 0.0f;
+    self.cellBottomLabelHeightConstraint.constant = 0.0f;
     
     self.avatarViewSize = CGSizeZero;
     
@@ -173,9 +173,9 @@
     self.messageBubbleLeftRightMarginConstraint.constant = customAttributes.messageBubbleLeftRightMargin;
     self.textViewFrameInsets = customAttributes.textViewFrameInsets;
     self.textView.textContainerInset = customAttributes.textViewTextContainerInsets;
-    self.cellTopLabelHeightContraint.constant = customAttributes.cellTopLabelHeight;
-    self.messageBubbleTopLabelHeightContraint.constant = customAttributes.messageBubbleTopLabelHeight;
-    self.cellBottomLabelHeightContraint.constant = customAttributes.cellBottomLabelHeight;
+    self.cellTopLabelHeightConstraint.constant = customAttributes.cellTopLabelHeight;
+    self.messageBubbleTopLabelHeightConstraint.constant = customAttributes.messageBubbleTopLabelHeight;
+    self.cellBottomLabelHeightConstraint.constant = customAttributes.cellBottomLabelHeight;
     
     if ([self isKindOfClass:[JSQMessagesCollectionViewCellIncoming class]]) {
         self.avatarViewSize = customAttributes.incomingAvatarViewSize;
@@ -254,8 +254,8 @@
 
 - (void)setAvatarViewSize:(CGSize)avatarViewSize
 {
-    self.avatarContainerViewWidthContraint.constant = avatarViewSize.width;
-    self.avatarContainerViewHeightContraint.constant = avatarViewSize.height;
+    self.avatarContainerViewWidthConstraint.constant = avatarViewSize.width;
+    self.avatarContainerViewHeightConstraint.constant = avatarViewSize.height;
     [self setNeedsUpdateConstraints];
 }
 
@@ -272,8 +272,8 @@
 
 - (CGSize)avatarViewSize
 {
-    return CGSizeMake(self.avatarContainerViewWidthContraint.constant,
-                      self.avatarContainerViewHeightContraint.constant);
+    return CGSizeMake(self.avatarContainerViewWidthConstraint.constant,
+                      self.avatarContainerViewHeightConstraint.constant);
 }
 
 - (UIEdgeInsets)textViewFrameInsets

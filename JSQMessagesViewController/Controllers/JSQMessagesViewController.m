@@ -51,7 +51,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightContraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
 
 @property (strong, nonatomic) JSQMessagesKeyboardController *keyboardController;
@@ -110,7 +110,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.toolbarHeightContraint.constant = kJSQMessagesInputToolbarHeightDefault;
+    self.toolbarHeightConstraint.constant = kJSQMessagesInputToolbarHeightDefault;
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
@@ -149,7 +149,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     _collectionView = nil;
     _inputToolbar = nil;
     
-    _toolbarHeightContraint = nil;
+    _toolbarHeightConstraint = nil;
     _toolbarBottomLayoutGuide = nil;
     
     _sender = nil;
@@ -693,10 +693,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy
 {
-    self.toolbarHeightContraint.constant += dy;
+    self.toolbarHeightConstraint.constant += dy;
     
-    if (self.toolbarHeightContraint.constant < kJSQMessagesInputToolbarHeightDefault) {
-        self.toolbarHeightContraint.constant = kJSQMessagesInputToolbarHeightDefault;
+    if (self.toolbarHeightConstraint.constant < kJSQMessagesInputToolbarHeightDefault) {
+        self.toolbarHeightConstraint.constant = kJSQMessagesInputToolbarHeightDefault;
     }
     
     [self.view setNeedsUpdateConstraints];
