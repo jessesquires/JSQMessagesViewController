@@ -132,8 +132,6 @@ static void * kJSQMessagesInputToolbarRightBarButtonItemKeyValueObservingContext
 
 - (void)jsq_addObservers
 {
-    [self jsq_removeObservers];
-    
     [self.contentView addObserver:self
                        forKeyPath:NSStringFromSelector(@selector(leftBarButtonItem))
                           options:0
@@ -147,16 +145,13 @@ static void * kJSQMessagesInputToolbarRightBarButtonItemKeyValueObservingContext
 
 - (void)jsq_removeObservers
 {
-    @try {
-        [_contentView removeObserver:self
-                          forKeyPath:NSStringFromSelector(@selector(leftBarButtonItem))
-                             context:kJSQMessagesInputToolbarLeftBarButtonItemKeyValueObservingContext];
-        
-        [_contentView removeObserver:self
-                          forKeyPath:NSStringFromSelector(@selector(rightBarButtonItem))
-                             context:kJSQMessagesInputToolbarRightBarButtonItemKeyValueObservingContext];
-    }
-    @catch (NSException *__unused exception) { }
+    [_contentView removeObserver:self
+                      forKeyPath:NSStringFromSelector(@selector(leftBarButtonItem))
+                         context:kJSQMessagesInputToolbarLeftBarButtonItemKeyValueObservingContext];
+    
+    [_contentView removeObserver:self
+                      forKeyPath:NSStringFromSelector(@selector(rightBarButtonItem))
+                         context:kJSQMessagesInputToolbarRightBarButtonItemKeyValueObservingContext];
 }
 
 @end
