@@ -142,7 +142,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)dealloc
 {
     [self jsq_registerForNotifications:NO];
-    [self jsq_removeObservers];
     
     _collectionView.dataSource = nil;
     _collectionView.delegate = nil;
@@ -741,8 +740,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_addObservers
 {
-    [self jsq_removeObservers];
-    
     [self.inputToolbar.contentView.textView addObserver:self
                                              forKeyPath:NSStringFromSelector(@selector(contentSize))
                                                 options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
@@ -751,12 +748,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_removeObservers
 {
-    @try {
-        [self.inputToolbar.contentView.textView removeObserver:self
-                                                    forKeyPath:NSStringFromSelector(@selector(contentSize))
-                                                       context:kJSQMessagesKeyValueObservingContext];
-    }
-    @catch (NSException * __unused exception) { }
+    [self.inputToolbar.contentView.textView removeObserver:self
+                                                forKeyPath:NSStringFromSelector(@selector(contentSize))
+                                                   context:kJSQMessagesKeyValueObservingContext];
 }
 
 - (void)jsq_registerForNotifications:(BOOL)registerForNotifications
