@@ -582,20 +582,18 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     if (context == kJSQMessagesKeyValueObservingContext) {
         
-        if (object == self.inputToolbar.contentView.textView
-            && [keyPath isEqualToString:NSStringFromSelector(@selector(contentSize))]) {
-            
-            CGSize oldContentSize = [[change objectForKey:NSKeyValueChangeOldKey] CGSizeValue];
-            CGSize newContentSize = [[change objectForKey:NSKeyValueChangeNewKey] CGSizeValue];
-            
-            CGFloat dy = newContentSize.height - oldContentSize.height;
+        CGSize oldContentSize = [[change objectForKey:NSKeyValueChangeOldKey] CGSizeValue];
+        CGSize newContentSize = [[change objectForKey:NSKeyValueChangeNewKey] CGSizeValue];
         
-            [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:dy];
-            [self jsq_updateCollectionViewInsets];
-            if (self.automaticallyScrollsToMostRecentMessage) {
-                [self scrollToBottomAnimated:NO];
-            }
+        CGFloat dy = newContentSize.height - oldContentSize.height;
+        
+        [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:dy];
+        [self jsq_updateCollectionViewInsets];
+        if (self.automaticallyScrollsToMostRecentMessage) {
+            [self scrollToBottomAnimated:NO];
         }
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
 

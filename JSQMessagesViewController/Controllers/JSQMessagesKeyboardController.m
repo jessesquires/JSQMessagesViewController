@@ -240,21 +240,20 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 {
     if (context == kJSQMessagesKeyboardControllerKeyValueObservingContext) {
         
-        if (object == self.keyboardView && [keyPath isEqualToString:NSStringFromSelector(@selector(frame))]) {
-            
-            CGRect oldKeyboardFrame = [[change objectForKey:NSKeyValueChangeOldKey] CGRectValue];
-            CGRect newKeyboardFrame = [[change objectForKey:NSKeyValueChangeNewKey] CGRectValue];
-            
-            if (CGRectEqualToRect(newKeyboardFrame, oldKeyboardFrame) || CGRectIsNull(newKeyboardFrame)) {
-                return;
-            }
-            
-            //  do not convert frame to contextView coordinates here
-            //  KVO is triggered during panning (see below)
-            //  panning occurs in contextView coordinates already
-            [self.delegate keyboardDidChangeFrame:newKeyboardFrame];
-            [[NSNotificationCenter defaultCenter] postNotificationName:JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame object:self];
+        CGRect oldKeyboardFrame = [[change objectForKey:NSKeyValueChangeOldKey] CGRectValue];
+        CGRect newKeyboardFrame = [[change objectForKey:NSKeyValueChangeNewKey] CGRectValue];
+        
+        if (CGRectEqualToRect(newKeyboardFrame, oldKeyboardFrame) || CGRectIsNull(newKeyboardFrame)) {
+            return;
         }
+        
+        //  do not convert frame to contextView coordinates here
+        //  KVO is triggered during panning (see below)
+        //  panning occurs in contextView coordinates already
+        [self.delegate keyboardDidChangeFrame:newKeyboardFrame];
+        [[NSNotificationCenter defaultCenter] postNotificationName:JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame object:self];
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
 
