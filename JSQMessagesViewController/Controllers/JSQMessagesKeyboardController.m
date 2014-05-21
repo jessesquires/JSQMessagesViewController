@@ -47,6 +47,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)jsq_setKeyboardViewHidden:(BOOL)hidden;
 
+- (void)jsq_addKeyboardFrameObserver;
 - (void)jsq_removeKeyboardFrameObserver;
 
 - (void)jsq_handlePanGestureRecognizer:(UIPanGestureRecognizer *)pan;
@@ -104,7 +105,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     _keyboardView = keyboardView;
     
     if (keyboardView) {
-        [self jsq_addKeyboardObserver];
+        [self jsq_addKeyboardFrameObserver];
     }
 }
 
