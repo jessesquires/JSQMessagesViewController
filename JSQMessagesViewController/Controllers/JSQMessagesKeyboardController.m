@@ -246,7 +246,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
         //  panning occurs in contextView coordinates already
         [self.delegate keyboardDidChangeFrame:newKeyboardFrame];
         [[NSNotificationCenter defaultCenter] postNotificationName:JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame object:self];
-    } else {
+    }
+    else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }

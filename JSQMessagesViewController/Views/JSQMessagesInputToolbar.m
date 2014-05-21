@@ -125,7 +125,8 @@ static void * kJSQMessagesInputToolbarRightBarButtonItemKeyValueObservingContext
         [self.contentView.rightBarButtonItem addTarget:self
                                                 action:@selector(jsq_rightBarButtonPressed:)
                                       forControlEvents:UIControlEventTouchUpInside];
-    } else {
+    }
+    else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }

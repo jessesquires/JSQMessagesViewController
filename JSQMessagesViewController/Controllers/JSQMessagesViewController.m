@@ -592,7 +592,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         if (self.automaticallyScrollsToMostRecentMessage) {
             [self scrollToBottomAnimated:NO];
         }
-    } else {
+    }
+    else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
