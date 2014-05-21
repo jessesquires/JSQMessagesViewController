@@ -81,8 +81,10 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)dealloc
 {
-    //use setter to remove self as a KVO observer of the keyboardView
-    self.keyboardView = nil;
+    if (_keyboardView) {
+        [self jsq_removeKeyboardFrameObserver];
+    }
+    _keyboardView = nil;
     
     [self jsq_unregisterForNotifications];
     _textView = nil;
