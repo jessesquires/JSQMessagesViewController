@@ -230,14 +230,6 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 #pragma mark - Key-value observing
 
-- (void)jsq_addKeyboardFrameObserver
-{
-    [_keyboardView addObserver:self
-                    forKeyPath:NSStringFromSelector(@selector(frame))
-                       options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew)
-                       context:kJSQMessagesKeyboardControllerKeyValueObservingContext];
-}
-
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (context == kJSQMessagesKeyboardControllerKeyValueObservingContext) {
@@ -257,6 +249,14 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
+}
+
+- (void)jsq_addKeyboardFrameObserver
+{
+    [_keyboardView addObserver:self
+                    forKeyPath:NSStringFromSelector(@selector(frame))
+                       options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew)
+                       context:kJSQMessagesKeyboardControllerKeyValueObservingContext];
 }
 
 - (void)jsq_removeKeyboardFrameObserver
