@@ -230,7 +230,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 #pragma mark - Key-value observing
 
-- (void)jsq_addKeyboardObserver
+- (void)jsq_addKeyboardFrameObserver
 {
     [_keyboardView addObserver:self
                     forKeyPath:NSStringFromSelector(@selector(frame))
