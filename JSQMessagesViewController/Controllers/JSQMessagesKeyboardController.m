@@ -81,13 +81,14 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)dealloc
 {
-    [self jsq_removeKeyboardFrameObserver];
+    //use setter to remove self as a KVO observer of the keyboardView
+    self.keyboardView = nil;
+    
     [self jsq_unregisterForNotifications];
     _textView = nil;
     _contextView = nil;
     _panGestureRecognizer = nil;
     _delegate = nil;
-    _keyboardView = nil;
 }
 
 #pragma mark - Setters
@@ -101,10 +102,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     _keyboardView = keyboardView;
     
     if (keyboardView) {
-        [_keyboardView addObserver:self
-                        forKeyPath:NSStringFromSelector(@selector(frame))
-                           options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew)
-                           context:kJSQMessagesKeyboardControllerKeyValueObservingContext];
+        [self jsq_addKeyboardObserver];
     }
 }
 
@@ -230,36 +228,40 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 #pragma mark - Key-value observing
 
+- (void)jsq_addKeyboardObserver
+{
+    [_keyboardView addObserver:self
+                    forKeyPath:NSStringFromSelector(@selector(frame))
+                       options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew)
+                       context:kJSQMessagesKeyboardControllerKeyValueObservingContext];
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (context == kJSQMessagesKeyboardControllerKeyValueObservingContext) {
         
-        if (object == self.keyboardView && [keyPath isEqualToString:NSStringFromSelector(@selector(frame))]) {
-            
-            CGRect oldKeyboardFrame = [[change objectForKey:NSKeyValueChangeOldKey] CGRectValue];
-            CGRect newKeyboardFrame = [[change objectForKey:NSKeyValueChangeNewKey] CGRectValue];
-            
-            if (CGRectEqualToRect(newKeyboardFrame, oldKeyboardFrame) || CGRectIsNull(newKeyboardFrame)) {
-                return;
-            }
-            
-            //  do not convert frame to contextView coordinates here
-            //  KVO is triggered during panning (see below)
-            //  panning occurs in contextView coordinates already
-            [self.delegate keyboardDidChangeFrame:newKeyboardFrame];
-            [[NSNotificationCenter defaultCenter] postNotificationName:JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame object:self];
+        CGRect oldKeyboardFrame = [[change objectForKey:NSKeyValueChangeOldKey] CGRectValue];
+        CGRect newKeyboardFrame = [[change objectForKey:NSKeyValueChangeNewKey] CGRectValue];
+        
+        if (CGRectEqualToRect(newKeyboardFrame, oldKeyboardFrame) || CGRectIsNull(newKeyboardFrame)) {
+            return;
         }
+        
+        //  do not convert frame to contextView coordinates here
+        //  KVO is triggered during panning (see below)
+        //  panning occurs in contextView coordinates already
+        [self.delegate keyboardDidChangeFrame:newKeyboardFrame];
+        [[NSNotificationCenter defaultCenter] postNotificationName:JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame object:self];
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
 
 - (void)jsq_removeKeyboardFrameObserver
 {
-    @try {
-        [_keyboardView removeObserver:self
-                           forKeyPath:NSStringFromSelector(@selector(frame))
-                              context:kJSQMessagesKeyboardControllerKeyValueObservingContext];
-    }
-    @catch (NSException * __unused exception) { }
+    [_keyboardView removeObserver:self
+                       forKeyPath:NSStringFromSelector(@selector(frame))
+                          context:kJSQMessagesKeyboardControllerKeyValueObservingContext];
 }
 
 #pragma mark - Pan gesture recognizer
@@ -334,7 +336,6 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                                  
                                  if (shouldHide) {
                                      [self jsq_setKeyboardViewHidden:YES];
-                                     [self jsq_removeKeyboardFrameObserver];
                                      [self.textView resignFirstResponder];
                                  }
                              }];
