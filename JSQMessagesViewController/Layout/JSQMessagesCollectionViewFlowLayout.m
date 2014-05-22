@@ -432,7 +432,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 - (void)jsq_addNewlyVisibleBehaviorsFromVisibleItems:(NSArray *)visibleItems
 {
     //  a "newly visible" item is in `visibleItems` but not in `self.visibleIndexPaths`
-    NSIndexSet *indexSet = [visibleItems indexesOfObjectsWithOptions:NSEnumerationConcurrent
+    NSIndexSet *indexSet = [visibleItems indexesOfObjectsWithOptions:0
                                                          passingTest:^BOOL(UICollectionViewLayoutAttributes *item, NSUInteger index, BOOL *stop) {
                                                              return ![self.visibleIndexPaths containsObject:item.indexPath];
                                                          }];
@@ -452,7 +452,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 - (void)jsq_removeNoLongerVisibleBehaviorsFromVisibleItemsIndexPaths:(NSSet *)visibleItemsIndexPaths
 {
     NSArray *behaviors = self.dynamicAnimator.behaviors;
-    NSIndexSet *indexSet = [behaviors indexesOfObjectsWithOptions:NSEnumerationConcurrent
+    NSIndexSet *indexSet = [behaviors indexesOfObjectsWithOptions:0
                                                       passingTest:^BOOL(UIAttachmentBehavior *springBehaviour, NSUInteger index, BOOL *stop) {
                                                           UICollectionViewLayoutAttributes *layoutAttributes = [springBehaviour.items firstObject];
                                                           return ![visibleItemsIndexPaths containsObject:layoutAttributes.indexPath];
