@@ -34,7 +34,10 @@
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @property (weak, nonatomic) IBOutlet UIView *messageBubbleContainerView;
+@property (weak, nonatomic) IBOutlet UIImageView *messageBubbleImageView;
+
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewTopVerticalSpaceConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewBottomVerticalSpaceConstraint;
@@ -150,6 +153,9 @@
     
     [_tapGestureRecognizer removeTarget:nil action:NULL];
     _tapGestureRecognizer = nil;
+    
+    [_avatarImageSource bindImageView:nil];
+    [_messageBubbleImageSource bindImageView:nil];
 }
 
 #pragma mark - Collection view cell
@@ -209,52 +215,42 @@
     self.avatarContainerView.backgroundColor = backgroundColor;
 }
 
-- (void)setMessageBubbleImageView:(UIImageView *)messageBubbleImageView
+- (void)setMessageBubbleImageSource:(id<JSQMessagesImageViewSource>)messageBubbleImageSource
 {
-    if (_messageBubbleImageView) {
-        [_messageBubbleImageView removeFromSuperview];
+    if (_messageBubbleImageSource) {
+        [_messageBubbleImageSource bindImageView:nil];
     }
     
-    if (!messageBubbleImageView) {
-        _messageBubbleImageView = nil;
+    UIImageView *bubbleView = self.messageBubbleImageView;
+    _messageBubbleImageSource = messageBubbleImageSource;
+    
+    if (!messageBubbleImageSource) {
+        bubbleView.hidden = YES;
         return;
     }
     
-    messageBubbleImageView.frame = CGRectMake(0.0f,
-                                              0.0f,
-                                              CGRectGetWidth(self.messageBubbleContainerView.bounds),
-                                              CGRectGetHeight(self.messageBubbleContainerView.bounds));
-    
-    [messageBubbleImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.textView];
-    [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:messageBubbleImageView];
-    [self setNeedsUpdateConstraints];
-    
-    _messageBubbleImageView = messageBubbleImageView;
+    bubbleView.hidden = NO;
+    [messageBubbleImageSource bindImageView:bubbleView];
 }
 
-- (void)setAvatarImageView:(UIImageView *)avatarImageView
+- (void)setAvatarImage:(id<JSQMessagesImageViewSource>)avatarImageSource
 {
-    if (_avatarImageView) {
-        [_avatarImageView removeFromSuperview];
+    if (_avatarImageSource) {
+        [_avatarImageSource bindImageView:nil];
     }
     
-    if (!avatarImageView) {
+    UIImageView *avatarView = self.avatarImageView;
+    _avatarImageSource = avatarImageSource;
+    
+    if (!avatarImageSource) {
         self.avatarViewSize = CGSizeZero;
-        _avatarImageView = nil;
-        self.avatarContainerView.hidden = YES;
+        avatarView.hidden = YES;
         return;
     }
     
-    self.avatarContainerView.hidden = NO;
-    self.avatarViewSize = CGSizeMake(CGRectGetWidth(avatarImageView.bounds), CGRectGetHeight(avatarImageView.bounds));
-    
-    [avatarImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.avatarContainerView addSubview:avatarImageView];
-    [self.avatarContainerView jsq_pinAllEdgesOfSubview:avatarImageView];
-    [self setNeedsUpdateConstraints];
-    
-    _avatarImageView = avatarImageView;
+    [avatarImageSource bindImageView:avatarView];
+    self.avatarViewSize = [avatarImageSource imageSize];
+    avatarView.hidden = NO;
 }
 
 - (void)setAvatarViewSize:(CGSize)avatarViewSize

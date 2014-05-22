@@ -19,6 +19,7 @@
 #import <UIKit/UIKit.h>
 
 #import "JSQMessagesLabel.h"
+#import "JSQMessagesImageViewSource.h"
 
 @class JSQMessagesCollectionViewCell;
 
@@ -81,13 +82,23 @@
  *  The bubble image view of the cell that is responsible for displaying bubble images.
  *  The default value is `nil`.
  */
-@property (weak, nonatomic) UIImageView *messageBubbleImageView;
+@property (weak, nonatomic, readonly) UIImageView *messageBubbleImageView;
+
+/**
+ *  Image view source responsible for populating `messageBubbleImageView`.
+ */
+@property (strong, nonatomic) id<JSQMessagesImageViewSource> messageBubbleImageSource;
 
 /**
  *  The avatar image view of the cell that is responsible for displaying avatar images.
  *  The default value is `nil`.
  */
-@property (weak, nonatomic) UIImageView *avatarImageView;
+@property (weak, nonatomic, readonly) UIImageView *avatarImageView;
+
+/**
+ *  Image view source responsible for populating `avatarImageView`
+ */
+@property (strong, nonatomic) id<JSQMessagesImageViewSource> avatarImageSource;
 
 /**
  *  Returns the underlying gesture recognizer for long press gestures in the cell.

@@ -19,6 +19,7 @@
 #import <UIKit/UIKit.h>
 
 #import "JSQMessagesCollectionViewFlowLayout.h"
+#import "JSQMessagesImageViewSource.h"
 
 @class JSQMessagesCollectionView;
 @class JSQMessagesTypingIndicatorFooterView;
@@ -55,46 +56,49 @@
                       messageDataForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
- *  Asks the data source for the bubble image view that corresponds to the specified 
+ *  Asks the data source for the bubble image view source that corresponds to the specified
  *  message data item at indexPath in the collectionView.
  *
  *  @param collectionView The object representing the collection view requesting this information.
  *  @param indexPath      The index path that specifies the location of the item.
  *
- *  @return A configured imageView object. You may return `nil` from this method if you do not 
- *  want the specified item to display a message bubble image.
+ *  @return A configured object conforming to `JSQMessagesImageViewSource` protocol.
+ *  You may return `nil` from this method if you do not want the specified item to display a message bubble image.
  *
- *  @discussion It is recommended that you utilize `JSQMessagesBubbleImageFactory` to return valid imageViews. 
- *  However, you may provide your own.
- *  If providing your own bubble image view, please ensure the following:
- *      1. The imageView object must contain valid values for its `image` and `highlightedImage` properties.
- *      2. The images provided in the imageView must be stretchable images.
- *  Note that providing your own bubble image views will require additional configuration of the collectionView layout object.
+ *  @discussion It is recommended that you utilize `JSQMessagesBubbleImageFactory` to create a valid image
+ *  and then configure a `JSQMessagesSimpleImageViewSource` with it. However, you may provide your own.
+ *
+ *  If providing your own bubble image, please ensure the following:
+ *      1. The images provided in must be stretchable.
+ *  Note that providing your own bubble images will require additional configuration of the collectionView layout object.
  *
  *  @see `JSQMessagesBubbleImageFactory`.
  *  @see `JSQMessagesCollectionViewFlowLayout`.
+ *  @see `JSQMessagesImageViewSource`.
+ *  @see `JSQMessagesSimpleImageViewSource`
  */
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (id<JSQMessagesImageViewSource>)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewSourceForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
- *  Asks the data source for the avatar image view that corresponds to the specified
+ *  Asks the data source for the avatar image view source that corresponds to the specified
  *  message data item at indexPath in the collectionView.
  *
  *  @param collectionView The object representing the collection view requesting this information.
  *  @param indexPath      The index path that specifies the location of the item.
  *
- *  @return A configured imageView object. You may return `nil` from this method if you do not want 
- *  the specified item to display an avatar.
+ *  @return A configured object conforming to `JSQMessagesImageViewSource` protocol.
+ *  You may return `nil` from this method if you do not want the specified item to display an avatar.
  *
- *  @discussion It is recommended that you utilize `JSQMessagesAvatarFactory` to return a styled avatar image. 
- *  However, you may provide your own.
- *  Note that the size of the imageView is ignored. To specify avatar image view sizes, 
+ *  @discussion It is recommended that you utilize `JSQMessagesAvatarFactory` to create a styled avatar image
+ *  and then configure a `JSQMessagesSimpleImageViewSource` with it. However, you may provide your own.
+ *  Note that the size of the image is ignored. To specify avatar image view sizes,
  *  set the appropriate properties on the collectionView's layout object.
  *
  *  @see `JSQMessagesAvatarFactory`.
  *  @see `JSQMessagesCollectionViewFlowLayout`.
+ *  @see `JSQMessagesImageViewSource`.
  */
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (id<JSQMessagesImageViewSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewSourceForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @optional
 
