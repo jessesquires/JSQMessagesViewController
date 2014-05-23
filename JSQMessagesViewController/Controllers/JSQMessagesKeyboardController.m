@@ -233,7 +233,9 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if (context == kJSQMessagesKeyboardControllerKeyValueObservingContext) {
+    if (context == kJSQMessagesKeyboardControllerKeyValueObservingContext
+        && object == _keyboardView
+        && [keyPath isEqualToString:NSStringFromSelector(@selector(frame))]) {
         
         CGRect oldKeyboardFrame = [[change objectForKey:NSKeyValueChangeOldKey] CGRectValue];
         CGRect newKeyboardFrame = [[change objectForKey:NSKeyValueChangeNewKey] CGRectValue];

@@ -580,7 +580,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if (context == kJSQMessagesKeyValueObservingContext) {
+    if (context == kJSQMessagesKeyValueObservingContext
+        && object == self.inputToolbar.contentView.textView
+        && [keyPath isEqualToString:NSStringFromSelector(@selector(contentSize))]) {
         
         CGSize oldContentSize = [[change objectForKey:NSKeyValueChangeOldKey] CGSizeValue];
         CGSize newContentSize = [[change objectForKey:NSKeyValueChangeNewKey] CGSizeValue];
