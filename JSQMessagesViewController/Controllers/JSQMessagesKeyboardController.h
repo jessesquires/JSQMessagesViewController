@@ -25,9 +25,16 @@
 
 /**
  *  Posted when the system keyboard frame changes.
- *  The object of the notification is the `JSQMessagesKeyboardController` object. There is no `userInfo` dictionary.
+ *  The object of the notification is the `JSQMessagesKeyboardController` object. 
+ *  The `userInfo` dictionary contains the new keyboard frame for key
+ *  `JSQMessagesKeyboardControllerUserInfoKeyKeyboardDidChangeFrame`.
  */
 FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame;
+
+/**
+ *  Contains the new keyboard frame wrapped in an `NSValue` object.
+ */
+FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeyboardDidChangeFrame;
 
 
 /**
