@@ -80,6 +80,8 @@ Support the development of this **free**, open-source library!
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$25&body=Thanks for developing JSQMessagesViewController!">Send $25</a> <em>I want new features!</em></h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$50&body=Thanks for developing JSQMessagesViewController!">Send $50</a> <em>I love this project!</em></h4>
 
+*Can't use Square Cash? Message me about donating via [Amazon Payments](https://payments.amazon.com/home). I hate PayPal.*
+
 ## Credits
 
 Created by [**@jesse_squires**](https://twitter.com/jesse_squires), a [programming-motherfucker](http://programming-motherfucker.com).
@@ -113,6 +115,7 @@ Check out my work at [Hexed Bits](http://bit.ly/0x29A).
 * [Libraries for developers](https://itunes.apple.com/us/app/libraries-for-developers/id653427112)
 * [Buhz|Hyve](http://itunes.apple.com/us/app/buhz-hyve/id818568956)
 * [AwesomeChat](https://github.com/relatedcode/AwesomeChat)
+* *Your app here*
 
 ## License
 
