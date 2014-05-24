@@ -254,7 +254,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     return [self.messages objectAtIndex:indexPath.item];
 }
 
-- (id<JSQMessagesImageViewSource>)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewSourceForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
      *  You may return nil here if you do not want bubbles.
@@ -269,15 +269,15 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
     
     if ([message.sender isEqualToString:self.sender]) {
-        return [[JSQMessagesSimpleImageViewSource alloc] initWithImage:self.outgoingBubbleImageView.image
-                                     highlightedImage:self.outgoingBubbleImageView.highlightedImage];
+        return [[UIImageView alloc] initWithImage:self.outgoingBubbleImageView.image
+                                 highlightedImage:self.outgoingBubbleImageView.highlightedImage];
     }
     
-    return [[JSQMessagesSimpleImageViewSource alloc] initWithImage:self.incomingBubbleImageView.image
-                                 highlightedImage:self.incomingBubbleImageView.highlightedImage];
+    return [[UIImageView alloc] initWithImage:self.incomingBubbleImageView.image
+                             highlightedImage:self.incomingBubbleImageView.highlightedImage];
 }
 
-- (id<JSQMessagesImageViewSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewSourceForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
      *  Return `nil` here if you do not want avatars.
@@ -303,7 +303,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
     
     UIImage *avatarImage = [self.avatars objectForKey:message.sender];
-    return [[JSQMessagesSimpleImageViewSource alloc] initWithImage:avatarImage];
+    return [[UIImageView alloc] initWithImage:avatarImage];
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
