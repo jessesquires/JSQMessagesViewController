@@ -66,9 +66,9 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                         delegate:(id<JSQMessagesKeyboardControllerDelegate>)delegate
 
 {
-    NSAssert(textView, @"ERROR: textView must not be nil: %s", __PRETTY_FUNCTION__);
-    NSAssert(contextView, @"ERROR: contextView must not be nil: %s", __PRETTY_FUNCTION__);
-    NSAssert(panGestureRecognizer, @"ERROR: panGestureRecognizer must not be nil: %s", __PRETTY_FUNCTION__);
+    NSParameterAssert(textView != nil);
+    NSParameterAssert(contextView != nil);
+    NSParameterAssert(panGestureRecognizer != nil);
     
     self = [super init];
     if (self) {

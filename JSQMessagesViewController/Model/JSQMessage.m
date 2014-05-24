@@ -31,9 +31,9 @@
                       sender:(NSString *)sender
                         date:(NSDate *)date
 {
-    NSAssert(text, @"ERROR: text must not be nil: %s", __PRETTY_FUNCTION__);
-    NSAssert(sender, @"ERROR: sender must not be nil: %s", __PRETTY_FUNCTION__);
-    NSAssert(date, @"ERROR: date must not be nil: %s", __PRETTY_FUNCTION__);
+    NSParameterAssert(text != nil);
+    NSParameterAssert(sender != nil);
+    NSParameterAssert(date != nil);
     
     self = [self init];
     if (self) {

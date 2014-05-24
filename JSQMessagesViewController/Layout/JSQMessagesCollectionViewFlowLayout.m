@@ -147,7 +147,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 - (void)setMessageBubbleFont:(UIFont *)messageBubbleFont
 {
-    NSAssert(messageBubbleFont, @"ERROR: messageBubbleFont must not be nil: %s", __PRETTY_FUNCTION__);
+    NSParameterAssert(messageBubbleFont != nil);
     _messageBubbleFont = messageBubbleFont;
     [self invalidateLayout];
 }

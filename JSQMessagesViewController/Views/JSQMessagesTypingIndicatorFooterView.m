@@ -85,9 +85,9 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
               collectionView:(UICollectionView *)collectionView
 
 {
-    NSAssert(indicatorColor, @"ERROR: indicatorColor must not be nil: %s", __PRETTY_FUNCTION__);
-    NSAssert(bubbleColor, @"ERROR: bubbleColor must not be nil: %s", __PRETTY_FUNCTION__);
-    NSAssert(collectionView, @"ERROR: collectionView must not be nil: %s", __PRETTY_FUNCTION__);
+    NSParameterAssert(indicatorColor != nil);
+    NSParameterAssert(bubbleColor != nil);
+    NSParameterAssert(collectionView != nil);
     
     CGFloat collectionViewWidth = CGRectGetWidth(collectionView.frame);
     CGFloat bubbleWidth = CGRectGetWidth(self.bubbleImageView.frame);

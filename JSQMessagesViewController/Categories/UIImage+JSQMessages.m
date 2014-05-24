@@ -22,7 +22,7 @@
 
 - (UIImage *)jsq_imageMaskedWithColor:(UIColor *)maskColor
 {
-    NSAssert(maskColor, @"ERROR: maskColor must not be nil: %s", __PRETTY_FUNCTION__);
+    NSParameterAssert(maskColor != nil);
     
     CGRect imageRect = CGRectMake(0.0f, 0.0f, self.size.width, self.size.height);
     
