@@ -64,6 +64,7 @@
 - (void)jsq_didReceiveMenuWillShowNotification:(NSNotification *)notification;
 
 - (void)jsq_updateConstraint:(NSLayoutConstraint *)constraint withConstant:(CGFloat)constant;
+
 @end
 
 
@@ -169,19 +170,27 @@
     
     JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
     
-    UITextView *textView = self.textView;
-    if (textView.font != customAttributes.messageBubbleFont) {
-        textView.font = customAttributes.messageBubbleFont;
+    if (self.textView.font != customAttributes.messageBubbleFont) {
+        self.textView.font = customAttributes.messageBubbleFont;
     }
-    if (!UIEdgeInsetsEqualToEdgeInsets(textView.textContainerInset, customAttributes.textViewTextContainerInsets)) {
-        textView.textContainerInset = customAttributes.textViewTextContainerInsets;
+    
+    if (!UIEdgeInsetsEqualToEdgeInsets(self.textView.textContainerInset, customAttributes.textViewTextContainerInsets)) {
+        self.textView.textContainerInset = customAttributes.textViewTextContainerInsets;
     }
+    
     self.textViewFrameInsets = customAttributes.textViewFrameInsets;
 
-    [self jsq_updateConstraint:self.messageBubbleLeftRightMarginConstraint withConstant:customAttributes.messageBubbleLeftRightMargin];
-    [self jsq_updateConstraint:self.cellTopLabelHeightConstraint withConstant:customAttributes.cellTopLabelHeight];
-    [self jsq_updateConstraint:self.messageBubbleTopLabelHeightConstraint withConstant:customAttributes.messageBubbleTopLabelHeight];
-    [self jsq_updateConstraint:self.cellBottomLabelHeightConstraint withConstant:customAttributes.cellBottomLabelHeight];
+    [self jsq_updateConstraint:self.messageBubbleLeftRightMarginConstraint
+                  withConstant:customAttributes.messageBubbleLeftRightMargin];
+    
+    [self jsq_updateConstraint:self.cellTopLabelHeightConstraint
+                  withConstant:customAttributes.cellTopLabelHeight];
+    
+    [self jsq_updateConstraint:self.messageBubbleTopLabelHeightConstraint
+                  withConstant:customAttributes.messageBubbleTopLabelHeight];
+    
+    [self jsq_updateConstraint:self.cellBottomLabelHeightConstraint
+                  withConstant:customAttributes.cellBottomLabelHeight];
     
     if ([self isKindOfClass:[JSQMessagesCollectionViewCellIncoming class]]) {
         self.avatarViewSize = customAttributes.incomingAvatarViewSize;
@@ -189,7 +198,6 @@
     else if ([self isKindOfClass:[JSQMessagesCollectionViewCellOutgoing class]]) {
         self.avatarViewSize = customAttributes.outgoingAvatarViewSize;
     }
-   
 }
 
 #pragma mark - Setters
@@ -259,12 +267,20 @@
 
 - (void)setAvatarViewSize:(CGSize)avatarViewSize
 {
+    if (CGSizeEqualToSize(avatarViewSize, self.avatarViewSize)) {
+        return;
+    }
+    
     [self jsq_updateConstraint:self.avatarContainerViewWidthConstraint withConstant:avatarViewSize.width];
     [self jsq_updateConstraint:self.avatarContainerViewHeightConstraint withConstant:avatarViewSize.height];
 }
 
 - (void)setTextViewFrameInsets:(UIEdgeInsets)textViewFrameInsets
 {
+    if (UIEdgeInsetsEqualToEdgeInsets(textViewFrameInsets, self.textViewFrameInsets)) {
+        return;
+    }
+    
     [self jsq_updateConstraint:self.textViewTopVerticalSpaceConstraint withConstant:textViewFrameInsets.top];
     [self jsq_updateConstraint:self.textViewBottomVerticalSpaceConstraint withConstant:textViewFrameInsets.bottom];
     [self jsq_updateConstraint:self.textViewAvatarHorizontalSpaceConstraint withConstant:textViewFrameInsets.right];
@@ -287,7 +303,7 @@
                             self.textViewAvatarHorizontalSpaceConstraint.constant);
 }
 
-#pragma mark - Helpers
+#pragma mark - Utilities
 
 - (void)jsq_updateConstraint:(NSLayoutConstraint *)constraint withConstant:(CGFloat)constant
 {

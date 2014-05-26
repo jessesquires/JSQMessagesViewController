@@ -20,6 +20,8 @@
 
 @implementation JSQMessagesCollectionViewFlowLayoutInvalidationContext
 
+#pragma mark - Initialization
+
 - (instancetype)init
 {
     self = [super init];
@@ -30,11 +32,23 @@
     return self;
 }
 
-+ (instancetype)defaultContext
++ (instancetype)context
 {
-    JSQMessagesCollectionViewFlowLayoutInvalidationContext *context = [[self alloc] init];
+    JSQMessagesCollectionViewFlowLayoutInvalidationContext *context = [[JSQMessagesCollectionViewFlowLayoutInvalidationContext alloc] init];
     context.invalidateFlowLayoutDelegateMetrics = YES;
     context.invalidateFlowLayoutAttributes = YES;
     return context;
 }
+
+#pragma mark - NSObject
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: invalidateFlowLayoutDelegateMetrics=%d, invalidateFlowLayoutAttributes=%d, invalidateDataSourceCounts=%d>",
+            [self class],
+            self.invalidateFlowLayoutDelegateMetrics,
+            self.invalidateFlowLayoutAttributes,
+            self.invalidateDataSourceCounts];
+}
+
 @end

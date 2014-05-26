@@ -19,22 +19,23 @@
 #import <UIKit/UIKit.h>
 
 /**
- *  The `JSQMessagesCollectionViewFlowLayoutInvalidationContext` is a custom invalidation context
- *  object used by `JSQMessagesCollectionViewDelegateFlowLayout`. Its purpose is to override the default
- *  behaviour of `UICollectionViewFlowLayout` which re-computes layout information upon each invalidation,
- *  causing a lot of useless computations when `JSQMessagesCollectionViewDelegateFlowLayout` is used with
- *  `springinessEnabled` set to `YES`
+ *  A `JSQMessagesCollectionViewFlowLayoutInvalidationContext` object specifies properties for 
+ *  determining whether to recompute the size of items or their position in the layout. 
+ *  The flow layout object creates instances of this class when it needs to invalidate its contents 
+ *  in response to changes. You can also create instances when invalidating the flow layout manually.
  *
- *  @see `JSQMessagesCollectionViewDelegateFlowLayout`
  */
 @interface JSQMessagesCollectionViewFlowLayoutInvalidationContext : UICollectionViewFlowLayoutInvalidationContext
 
 /**
- *  Creates an invalidation context identical to the newly created instance of
- *  `UICollectionViewFlowLayoutInvalidationContext`.
- *  Pass returned object to `-[JSQMessagesCollectionViewFlowLayoutInvalidationContext invalidateWithContext:]
- *  to get the "real" invalidation.
+ *  Creates and returns a new `JSQMessagesCollectionViewFlowLayoutInvalidationContext` object.
+ *
+ *  @discussion When you need to invalidate the `JSQMessagesCollectionViewFlowLayout` object for your
+ *  `JSQMessagesViewController` subclass, you should use this method to instantiate a new invalidation 
+ *  context and pass this object to `invalidateLayoutWithContext:`.
+ *
+ *  @return An initialized invalidation context object if successful, otherwise `nil`.
  */
-+ (instancetype)defaultContext;
++ (instancetype)context;
 
 @end
