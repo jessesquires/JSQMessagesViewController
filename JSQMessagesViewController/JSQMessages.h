@@ -29,6 +29,7 @@
 
 #import "JSQMessagesCollectionViewFlowLayout.h"
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
+#import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
 
 #import "JSQMessagesComposerTextView.h"
 #import "JSQMessagesInputToolbar.h"
