@@ -115,6 +115,7 @@ Check out my work at [Hexed Bits](http://bit.ly/0x29A).
 * [Libraries for developers](https://itunes.apple.com/us/app/libraries-for-developers/id653427112)
 * [Buhz|Hyve](http://itunes.apple.com/us/app/buhz-hyve/id818568956)
 * [AwesomeChat](https://github.com/relatedcode/AwesomeChat)
+* [PocketSuite](https://itunes.apple.com/us/app/pocketsuite/id721795146)
 * *Your app here*
 
 ## License
