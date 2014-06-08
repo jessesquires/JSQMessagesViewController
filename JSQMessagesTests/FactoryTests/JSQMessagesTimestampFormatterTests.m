@@ -60,7 +60,7 @@
 {
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setCalendar:[NSCalendar currentCalendar]];
-    [components setYear:2014];
+    [components setYear:2013];
     [components setMonth:6];
     [components setDay:6];
     [components setHour:19];
@@ -71,11 +71,11 @@
     
     NSString *timestampString = [[JSQMessagesTimestampFormatter sharedFormatter] timestampForDate:date];
     
-    XCTAssertEqualObjects(timestampString, @"Jun 6, 2014, 7:06 PM", @"Timestamp string should return expected value");
+    XCTAssertEqualObjects(timestampString, @"Jun 6, 2013, 7:06 PM", @"Timestamp string should return expected value");
     
     NSAttributedString *timestampAttributedString = [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:date];
     
-    XCTAssertEqualObjects([timestampAttributedString string], @"Jun 6, 2014 7:06 PM", @"Attributed timestamp string should return expected value");
+    XCTAssertEqualObjects([timestampAttributedString string], @"Jun 6, 2013 7:06 PM", @"Attributed timestamp string should return expected value");
 }
 
 - (void)testTimeForDate
