@@ -43,7 +43,9 @@
 
 
 
-@implementation JSMessagesViewController
+@implementation JSMessagesViewController {
+  BOOL viewWillAppearHasSetupObservers;
+}
 
 #pragma mark - Initialization
 
@@ -122,21 +124,25 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(handleWillShowKeyboardNotification:)
-												 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(handleWillHideKeyboardNotification:)
-												 name:UIKeyboardWillHideNotification
-                                               object:nil];
-    
-    [self.messageInputView.textView addObserver:self
-                                     forKeyPath:@"contentSize"
-                                        options:NSKeyValueObservingOptionNew
-                                        context:nil];
+
+    if (!viewWillAppearHasSetupObservers) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleWillShowKeyboardNotification:)
+                                                     name:UIKeyboardWillShowNotification
+                                                   object:nil];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleWillHideKeyboardNotification:)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
+
+        [self.messageInputView.textView addObserver:self
+                                         forKeyPath:@"contentSize"
+                                            options:NSKeyValueObservingOptionNew
+                                            context:nil];
+
+        viewWillAppearHasSetupObservers = YES;
+  }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -145,11 +151,15 @@
     
     [self.messageInputView resignFirstResponder];
     [self setEditing:NO animated:YES];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-    
-    [self.messageInputView.textView removeObserver:self forKeyPath:@"contentSize"];
+
+    if (viewWillAppearHasSetupObservers) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+
+        [self.messageInputView.textView removeObserver:self forKeyPath:@"contentSize"];
+
+        viewWillAppearHasSetupObservers = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning
