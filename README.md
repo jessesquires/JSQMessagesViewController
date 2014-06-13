@@ -35,7 +35,7 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project. Install
 
 For iOS 6.0 support:
 ````
-pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'iOS6_support_stable'
+pod 'JQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'iOS6_support_stable'
 ````
 
 ## Getting Started
