@@ -17,7 +17,7 @@
 //
 
 #import "JSQDemoViewController.h"
-
+#import "VImagePicker.h"
 
 static NSString * const kJSQDemoAvatarNameCook = @"Tim Cook";
 static NSString * const kJSQDemoAvatarNameJobs = @"Jobs";
@@ -137,6 +137,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     self.incomingBubbleImageView = [JSQMessagesBubbleImageFactory
                                     incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleGreenColor]];
     
+    self.picker = [VImagePicker new];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"typing"]
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
@@ -162,7 +164,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  Enable/disable springy bubbles, default is YES.
      *  For best results, toggle from `viewDidAppear:`
      */
-    self.collectionView.collectionViewLayout.springinessEnabled = YES;
+    self.collectionView.collectionViewLayout.springinessEnabled = NO;
 }
 
 

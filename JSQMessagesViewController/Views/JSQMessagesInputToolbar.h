@@ -91,4 +91,10 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
  */
 - (void)toggleSendButtonEnabled;
 
+
+/**
+ *  Programatically hide the keyboard
+ */
+- (void) hideKeyboard;
+
 @end

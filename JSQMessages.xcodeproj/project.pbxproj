@@ -95,6 +95,7 @@
 		88D1B0CD190606F100AFE162 /* typing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88D1B0CB190606F100AFE162 /* typing@2x.png */; };
 		C78CEF093F584B85B4321C83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 343577012CC24261BE4B61A1 /* libPods.a */; };
 		D68A9FB68FC5463D9A5B23E0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 343577012CC24261BE4B61A1 /* libPods.a */; };
+		EB426BB6194F410300A89161 /* VImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EB426BB5194F410300A89161 /* VImagePicker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,6 +229,8 @@
 		88D1B0CA190606F100AFE162 /* typing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = typing.png; sourceTree = "<group>"; };
 		88D1B0CB190606F100AFE162 /* typing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "typing@2x.png"; sourceTree = "<group>"; };
 		A0F1B1EFE54F44FEA6C4F786 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		EB426BB4194F410300A89161 /* VImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VImagePicker.h; sourceTree = "<group>"; };
+		EB426BB5194F410300A89161 /* VImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VImagePicker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				8816A67218E9250400111919 /* JSQMessages.h */,
+				EB426BB3194F410300A89161 /* Utilities */,
 				8816A64718E9250400111919 /* Assets */,
 				8816A65A18E9250400111919 /* Categories */,
 				8816A66518E9250400111919 /* Controllers */,
@@ -562,6 +566,15 @@
 			path = FactoryTests;
 			sourceTree = "<group>";
 		};
+		EB426BB3194F410300A89161 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EB426BB4194F410300A89161 /* VImagePicker.h */,
+				EB426BB5194F410300A89161 /* VImagePicker.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -781,6 +794,7 @@
 				8816A6B418E9250400111919 /* JSQMessagesComposerTextView.m in Sources */,
 				8816A6AA18E9250400111919 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				8816A6A418E9250400111919 /* UIView+JSQMessages.m in Sources */,
+				EB426BB6194F410300A89161 /* VImagePicker.m in Sources */,
 				8816A6A718E9250400111919 /* JSQMessagesAvatarFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
