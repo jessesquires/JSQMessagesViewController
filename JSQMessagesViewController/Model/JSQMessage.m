@@ -40,6 +40,7 @@
         _text = text;
         _sender = sender;
         _date = date;
+        _kind = JSQMessageTextKind;
     }
     return self;
 }
@@ -51,6 +52,7 @@
         _text = @"";
         _sender = @"";
         _date = [NSDate date];
+        _kind = JSQMessageTextKind;
     }
     return self;
 }

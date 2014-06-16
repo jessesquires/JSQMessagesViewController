@@ -348,16 +348,25 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     CGFloat textInsetsTotal = [self jsq_messageBubbleTextContainerInsetsTotal];
     
-    CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth - textInsetsTotal, CGFLOAT_MAX)
-                                                         options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-                                                      attributes:@{ NSFontAttributeName : self.messageBubbleFont }
-                                                         context:nil];
-    
-    CGSize stringSize = CGRectIntegral(stringRect).size;
-    
-    CGFloat verticalInsets = self.messageBubbleTextViewTextContainerInsets.top + self.messageBubbleTextViewTextContainerInsets.bottom;
-    
-    CGSize finalSize = CGSizeMake(stringSize.width, stringSize.height + verticalInsets);
+    CGSize finalSize;
+
+    if (messageData.kind == JSQMessageTextKind)
+    {
+        CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth - textInsetsTotal, CGFLOAT_MAX)
+                                                             options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                                          attributes:@{ NSFontAttributeName : self.messageBubbleFont }
+                                                             context:nil];
+        
+        CGSize stringSize = CGRectIntegral(stringRect).size;
+        
+        CGFloat verticalInsets = self.messageBubbleTextViewTextContainerInsets.top + self.messageBubbleTextViewTextContainerInsets.bottom;
+        
+        finalSize = CGSizeMake(stringSize.width, stringSize.height + verticalInsets);
+    }
+    else if (messageData.kind == JSQMessageLocalMediaKind || messageData.kind == JSQMessageRemoteMediaKind)
+    {
+        finalSize = CGSizeMake(100, 100);
+    }
     
     [self.messageBubbleSizes setObject:[NSValue valueWithCGSize:finalSize] forKey:indexPath];
     

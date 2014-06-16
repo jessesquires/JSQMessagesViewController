@@ -242,12 +242,16 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
     NSLog(@"Camera pressed!");
-    /**
-     *  Accessory button has no default functionality, yet.
-     */
+    
+    [self.inputToolbar hideKeyboard];
+    [self.picker pickImageFromViewController:self
+                                     handler:^(UIImage *image, NSError *error) {
+
+                                     }
+                              dismissHandler:^{
+
+                              }];
 }
-
-
 
 #pragma mark - JSQMessages CollectionView DataSource
 

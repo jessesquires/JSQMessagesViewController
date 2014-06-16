@@ -27,6 +27,7 @@
  */
 @interface JSQMessage : NSObject <JSQMessageData, NSCoding, NSCopying>
 
+@property (nonatomic) JSQMessageKind kind;
 /**
  *  The body text of the message. This value must not be `nil`.
  */
