@@ -27,11 +27,25 @@
  */
 @interface JSQMessage : NSObject <JSQMessageData, NSCoding, NSCopying>
 
-@property (nonatomic) JSQMessageKind kind;
 /**
- *  The body text of the message. This value must not be `nil`.
+ *  Message kind
+ */
+@property (nonatomic) JSQMessageKind kind;
+
+/**
+ *  The body text of the message.
  */
 @property (copy, nonatomic) NSString *text;
+
+/**
+ *  The image of the message.
+ */
+@property (copy, nonatomic) UIImage *image;
+
+/**
+ *  The URL of the remote message.
+ */
+@property (copy, nonatomic) NSURL *url;
 
 /**
  *  The name of user who sent the message. This value must not be `nil`.
@@ -67,6 +81,52 @@
 - (instancetype)initWithText:(NSString *)text
                       sender:(NSString *)sender
                         date:(NSDate *)date;
+
+/**
+ *  Initializes and returns a message object having the given image, sender, and current system date.
+ *
+ *  @param image  The image of the message
+ *  @param sender The name of the user who sent the message
+ *
+ *  @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized
+ */
++ (instancetype)messageWithImage:(UIImage *)image sender:(NSString *)sender;
+
+/**
+ *  Initializes and returns a message object having the given image, sender, and date.
+ *
+ *  @param image   The image of the message.
+ *  @param sender The name of the user who sent the message.
+ *  @param date   The date that the message was sent.
+ *
+ *  @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
+ */
+- (instancetype)initWithImage:(UIImage *)image
+                       sender:(NSString *)sender
+                         date:(NSDate *)date;
+
+/**
+ *  Initializes and returns a message object having the given URL, sender, and current system date.
+ *
+ *  @param url  The URL for the remote image of the message
+ *  @param sender The name of the user who sent the message
+ *
+ *  @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized
+ */
++ (instancetype)messageWithURL:(NSURL *)url sender:(NSString *)sender;
+
+/**
+ *  Initializes and returns a message object having the given image, sender, and date.
+ *
+ *  @param url   The URL for the remote image of the message.
+ *  @param sender The name of the user who sent the message.
+ *  @param date   The date that the message was sent.
+ *
+ *  @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
+ */
+- (instancetype)initWithURL:(NSURL *)url
+                     sender:(NSString *)sender
+                       date:(NSDate *)date;
 
 /**
  *  Returns a boolean value that indicates whether a given message is equal to the receiver.

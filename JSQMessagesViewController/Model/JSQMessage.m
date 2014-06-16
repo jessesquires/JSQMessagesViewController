@@ -45,6 +45,54 @@
     return self;
 }
 
++ (instancetype)messageWithImage:(UIImage *)image sender:(NSString *)sender;
+{
+    return [[self alloc] initWithImage:image sender:sender date:[NSDate date]];
+}
+
+- (instancetype)initWithImage:(UIImage *)image
+                       sender:(NSString *)sender
+                         date:(NSDate *)date;
+{
+    NSParameterAssert(image != nil);
+    NSParameterAssert(sender != nil);
+    NSParameterAssert(date != nil);
+
+    self = [self init];
+    if (self)
+    {
+        _sender = sender;
+        _date = [NSDate date];
+        _image = image;
+        _kind = JSQMessageLocalMediaKind;
+    }
+    return self;
+}
+
++ (instancetype)messageWithURL:(NSURL *)url sender:(NSString *)sender;
+{
+    return [[self alloc] initWithURL:url sender:sender date:[NSDate date]];
+}
+
+- (instancetype)initWithURL:(NSURL *)url
+                     sender:(NSString *)sender
+                       date:(NSDate *)date;
+{
+    NSParameterAssert(url != nil);
+    NSParameterAssert(sender != nil);
+    NSParameterAssert(date != nil);
+    
+    self = [self init];
+    if (self)
+    {
+        _sender = sender;
+        _date = [NSDate date];
+        _url = url;
+        _kind = JSQMessageRemoteMediaKind;
+    }
+    return self;
+}
+
 - (instancetype)init
 {
     self = [super init];
