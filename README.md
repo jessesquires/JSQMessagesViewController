@@ -114,6 +114,7 @@ Check out my work at [Hexed Bits](http://bit.ly/0x29A).
 * [Buhz|Hyve](http://itunes.apple.com/us/app/buhz-hyve/id818568956)
 * [AwesomeChat](https://github.com/relatedcode/AwesomeChat)
 * [PocketSuite](https://itunes.apple.com/us/app/pocketsuite/id721795146)
+* [Ringring.io](https://github.com/ringring-io/ringring-ios)
 * *Your app here*
 
 ## License
