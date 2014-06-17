@@ -19,7 +19,7 @@
 #import "JSQMessages.h"
 
 @class JSQDemoViewController;
-@class VImagePicker;
+@class JSQImagePicker;
 
 @protocol JSQDemoViewControllerDelegate <NSObject>
 
@@ -39,7 +39,7 @@
 
 @property (strong, nonatomic) UIImageView *outgoingBubbleImageView;
 @property (strong, nonatomic) UIImageView *incomingBubbleImageView;
-@property (strong, nonatomic) VImagePicker *picker;
+@property (strong, nonatomic) JSQImagePicker *picker;
 
 - (void)receiveMessagePressed:(UIBarButtonItem *)sender;
 

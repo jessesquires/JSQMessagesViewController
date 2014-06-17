@@ -17,7 +17,7 @@
 //
 
 #import "JSQDemoViewController.h"
-#import "VImagePicker.h"
+#import "JSQImagePicker.h"
 
 static NSString * const kJSQDemoAvatarNameCook = @"Tim Cook";
 static NSString * const kJSQDemoAvatarNameJobs = @"Jobs";
@@ -138,7 +138,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     self.incomingBubbleImageView = [JSQMessagesBubbleImageFactory
                                     incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleGreenColor]];
     
-    self.picker = [VImagePicker new];
+    self.picker = [JSQImagePicker new];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"typing"]
                                                                               style:UIBarButtonItemStyleBordered
@@ -168,8 +168,6 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     self.collectionView.collectionViewLayout.springinessEnabled = NO;
 }
 
-
-
 #pragma mark - Actions
 
 - (void)receiveMessagePressed:(UIBarButtonItem *)sender
@@ -185,7 +183,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      */
     self.showTypingIndicator = !self.showTypingIndicator;
     
-    JSQMessage *copyMessage = [[self.messages lastObject] copy];
+    JSQMessage *copyMessage = [JSQMessage messageWithImage:[UIImage imageNamed:@"pirlo"] sender:kJSQDemoAvatarNameJobs];
     
     if (!copyMessage) {
         return;

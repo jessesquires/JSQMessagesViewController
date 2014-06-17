@@ -6,24 +6,24 @@
 //  Copyright (c) 2014 Voalte Inc. All rights reserved.
 //
 
-#import "VImagePicker.h"
+#import "JSQImagePicker.h"
 
 #define kCameraIndex  0
 #define kAlbumIndex  1
 #define kDismissIndex  2
 
-@interface VImagePicker () <UIImagePickerControllerDelegate, UIActionSheetDelegate>
+@interface JSQImagePicker () <UIImagePickerControllerDelegate, UIActionSheetDelegate>
 
 @property (nonatomic) UIViewController *presentingVC;
-@property (nonatomic, copy) VPickerHandler handler;
+@property (nonatomic, copy) JSQPickerHandler handler;
 @property (nonatomic, copy) dispatch_block_t dismissHandler;
 
 @end
 
-@implementation VImagePicker
+@implementation JSQImagePicker
 
 - (void) pickImageFromViewController:(UIViewController *)viewController
-                             handler:(VPickerHandler)uploadHandler
+                             handler:(JSQPickerHandler)uploadHandler
                       dismissHandler:(dispatch_block_t)dismissHandler;
 
 {

@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^VPickerHandler)(UIImage *image, NSError *error);
+typedef void(^JSQPickerHandler)(UIImage *image, NSError *error);
 
-@interface VImagePicker : NSObject
+@interface JSQImagePicker : NSObject
 
 - (void) pickImageFromViewController:(UIViewController *)viewController
-                             handler:(VPickerHandler)uploadHandler
+                             handler:(JSQPickerHandler)uploadHandler
                       dismissHandler:(dispatch_block_t)dismissHandler;
 
 @end
