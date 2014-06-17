@@ -234,7 +234,15 @@
                                               CGRectGetHeight(self.messageBubbleContainerView.bounds));
     
     [messageBubbleImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.textView];
+    
+    if (self.textView)
+    {
+        [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.textView];
+    }
+    else if (self.mediaImageView)
+    {
+        [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.mediaImageView];
+    }
     [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:messageBubbleImageView];
     [self setNeedsUpdateConstraints];
     
