@@ -7,7 +7,10 @@
 //
 
 #import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesMediaHandler.h"
 
 @interface JSQMessagesCollectionViewCellOutgoingMedia : JSQMessagesCollectionViewCellOutgoing
+
+@property (nonatomic) JSQMessagesMediaHandler *mediaHandler;
 
 @end

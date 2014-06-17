@@ -100,6 +100,7 @@
 		EBB0ABA21950449A00388B97 /* JSQMessagesCollectionViewCellIncomingMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = EBB0ABA11950449A00388B97 /* JSQMessagesCollectionViewCellIncomingMedia.m */; };
 		EBB0ABA41950537E00388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB0ABA31950537E00388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.xib */; };
 		EBB0ABA61950547200388B97 /* JSQMessagesCollectionViewCellIncomingMedia.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB0ABA51950547200388B97 /* JSQMessagesCollectionViewCellIncomingMedia.xib */; };
+		EBB0ABA91950868F00388B97 /* JSQMessagesMediaHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = EBB0ABA81950868F00388B97 /* JSQMessagesMediaHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -241,6 +242,8 @@
 		EBB0ABA11950449A00388B97 /* JSQMessagesCollectionViewCellIncomingMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewCellIncomingMedia.m; sourceTree = "<group>"; };
 		EBB0ABA31950537E00388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesCollectionViewCellOutgoingMedia.xib; sourceTree = "<group>"; };
 		EBB0ABA51950547200388B97 /* JSQMessagesCollectionViewCellIncomingMedia.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesCollectionViewCellIncomingMedia.xib; sourceTree = "<group>"; };
+		EBB0ABA71950868F00388B97 /* JSQMessagesMediaHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesMediaHandler.h; sourceTree = "<group>"; };
+		EBB0ABA81950868F00388B97 /* JSQMessagesMediaHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesMediaHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -421,6 +424,8 @@
 				8816A68A18E9250400111919 /* JSQMessagesInputToolbar.m */,
 				8816A68B18E9250400111919 /* JSQMessagesLabel.h */,
 				8816A68C18E9250400111919 /* JSQMessagesLabel.m */,
+				EBB0ABA71950868F00388B97 /* JSQMessagesMediaHandler.h */,
+				EBB0ABA81950868F00388B97 /* JSQMessagesMediaHandler.m */,
 				88BC4D31190C6057002E5CC6 /* JSQMessagesLoadEarlierHeaderView.h */,
 				88BC4D32190C6057002E5CC6 /* JSQMessagesLoadEarlierHeaderView.m */,
 				88BC4D34190C6086002E5CC6 /* JSQMessagesLoadEarlierHeaderView.xib */,
@@ -805,6 +810,7 @@
 				8816A6A018E9250400111919 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
 				8816A6A818E9250400111919 /* JSQMessagesBubbleImageFactory.m in Sources */,
 				8816A6AD18E9250400111919 /* JSQMessage.m in Sources */,
+				EBB0ABA91950868F00388B97 /* JSQMessagesMediaHandler.m in Sources */,
 				EBB0AB9F1950448100388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.m in Sources */,
 				8897FBF918CBF967004F59C3 /* JSQDemoViewController.m in Sources */,
 				8816A6AF18E9250400111919 /* JSQMessagesCollectionViewCell.m in Sources */,

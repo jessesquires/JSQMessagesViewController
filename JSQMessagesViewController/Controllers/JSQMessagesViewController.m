@@ -442,12 +442,31 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
         
     }
-    else if (messageData.kind == JSQMessageLocalMediaKind ||
-             messageData.kind == JSQMessageRemoteMediaKind)
+    else
     {
-
+        JSQMessagesMediaHandler *mediaHandler;
+        
+        if (isOutgoingMessage)
+        {
+            JSQMessagesCollectionViewCellOutgoingMedia *mediaCell = (JSQMessagesCollectionViewCellOutgoingMedia *) cell;
+            mediaHandler = mediaCell.mediaHandler;
+        }
+        else
+        {
+            JSQMessagesCollectionViewCellIncomingMedia *mediaCell = (JSQMessagesCollectionViewCellIncomingMedia *) cell;
+            mediaHandler = mediaCell.mediaHandler;
+        }
+        
+        if (messageData.kind == JSQMessageLocalMediaKind)
+        {
+            [mediaHandler setMediaFromImage:messageData.image];
+        }
+        else if (messageData.kind == JSQMessageRemoteMediaKind)
+        {
+            [mediaHandler setMediaFromURL:messageData.url];
+        }
     }
-    
+
     return cell;
 }
 

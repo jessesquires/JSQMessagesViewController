@@ -21,4 +21,13 @@
     return NSStringFromClass([JSQMessagesCollectionViewCellIncomingMedia class]);
 }
 
+#pragma mark - Initialization
+
+- (void) awakeFromNib
+{
+    [super awakeFromNib];
+    
+    self.mediaHandler = [JSQMessagesMediaHandler mediaHandlerWithCell:self];
+}
+
 @end
