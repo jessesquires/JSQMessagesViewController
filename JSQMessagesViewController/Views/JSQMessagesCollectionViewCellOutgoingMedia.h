@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Hexed Bits. All rights reserved.
 //
 
-#import "JSQMessagesCollectionViewCell.h"
+#import "JSQMessagesCollectionViewCellOutgoing.h"
 
-@interface JSQMessagesCollectionViewCellOutgoingMedia : JSQMessagesCollectionViewCell
+@interface JSQMessagesCollectionViewCellOutgoingMedia : JSQMessagesCollectionViewCellOutgoing
 
 @end

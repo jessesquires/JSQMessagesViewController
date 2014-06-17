@@ -98,6 +98,8 @@
 		EB426BB6194F410300A89161 /* VImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EB426BB5194F410300A89161 /* VImagePicker.m */; };
 		EBB0AB9F1950448100388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = EBB0AB9E1950448100388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.m */; };
 		EBB0ABA21950449A00388B97 /* JSQMessagesCollectionViewCellIncomingMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = EBB0ABA11950449A00388B97 /* JSQMessagesCollectionViewCellIncomingMedia.m */; };
+		EBB0ABA41950537E00388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB0ABA31950537E00388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.xib */; };
+		EBB0ABA61950547200388B97 /* JSQMessagesCollectionViewCellIncomingMedia.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB0ABA51950547200388B97 /* JSQMessagesCollectionViewCellIncomingMedia.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -237,6 +239,8 @@
 		EBB0AB9E1950448100388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewCellOutgoingMedia.m; sourceTree = "<group>"; };
 		EBB0ABA01950449A00388B97 /* JSQMessagesCollectionViewCellIncomingMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewCellIncomingMedia.h; sourceTree = "<group>"; };
 		EBB0ABA11950449A00388B97 /* JSQMessagesCollectionViewCellIncomingMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewCellIncomingMedia.m; sourceTree = "<group>"; };
+		EBB0ABA31950537E00388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesCollectionViewCellOutgoingMedia.xib; sourceTree = "<group>"; };
+		EBB0ABA51950547200388B97 /* JSQMessagesCollectionViewCellIncomingMedia.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesCollectionViewCellIncomingMedia.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -407,8 +411,10 @@
 				8816A68618E9250400111919 /* JSQMessagesCollectionViewCellOutgoing.xib */,
 				EBB0AB9D1950448100388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.h */,
 				EBB0AB9E1950448100388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.m */,
+				EBB0ABA31950537E00388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.xib */,
 				EBB0ABA01950449A00388B97 /* JSQMessagesCollectionViewCellIncomingMedia.h */,
 				EBB0ABA11950449A00388B97 /* JSQMessagesCollectionViewCellIncomingMedia.m */,
+				EBB0ABA51950547200388B97 /* JSQMessagesCollectionViewCellIncomingMedia.xib */,
 				8816A68718E9250400111919 /* JSQMessagesComposerTextView.h */,
 				8816A68818E9250400111919 /* JSQMessagesComposerTextView.m */,
 				8816A68918E9250400111919 /* JSQMessagesInputToolbar.h */,
@@ -671,6 +677,7 @@
 			files = (
 				88D1B0CC190606F100AFE162 /* typing.png in Resources */,
 				885D597718CBD43800D77BB3 /* Main.storyboard in Resources */,
+				EBB0ABA41950537E00388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.xib in Resources */,
 				8816A69E18E9250400111919 /* message_received.aiff in Resources */,
 				885D596918CBD2A600D77BB3 /* Images.xcassets in Resources */,
 				8816A6B318E9250400111919 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
@@ -688,6 +695,7 @@
 				8816A6B818E9250400111919 /* JSQMessagesToolbarContentView.xib in Resources */,
 				8816A69F18E9250400111919 /* message_sent.aiff in Resources */,
 				8816A69518E9250400111919 /* bubble_min_tailless@2x.png in Resources */,
+				EBB0ABA61950547200388B97 /* JSQMessagesCollectionViewCellIncomingMedia.xib in Resources */,
 				8816A69A18E9250400111919 /* bubble_tailless.png in Resources */,
 				8816A69818E9250400111919 /* bubble_stroked_tailless.png in Resources */,
 				8816A69718E9250400111919 /* bubble_stroked@2x.png in Resources */,

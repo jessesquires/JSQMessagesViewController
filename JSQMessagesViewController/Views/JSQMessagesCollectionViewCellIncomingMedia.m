@@ -10,9 +10,15 @@
 
 @implementation JSQMessagesCollectionViewCellIncomingMedia
 
++ (UINib *)nib
+{
+    return [UINib nibWithNibName:NSStringFromClass([JSQMessagesCollectionViewCellIncomingMedia class])
+                          bundle:[NSBundle mainBundle]];
+}
+
 + (NSString *)cellReuseIdentifier;
 {
-    return NSStringFromClass([self class]);
+    return NSStringFromClass([JSQMessagesCollectionViewCellIncomingMedia class]);
 }
 
 @end

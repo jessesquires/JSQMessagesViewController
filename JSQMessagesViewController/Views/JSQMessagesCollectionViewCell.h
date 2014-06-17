@@ -77,6 +77,13 @@
  */
 @property (weak, nonatomic, readonly) UITextView *textView;
 
+
+/**
+ *  Returns the image view for displaying media in the cell.
+ */
+
+@property (weak, nonatomic) IBOutlet UIImageView *mediaImageView;
+
 /**
  *  The bubble image view of the cell that is responsible for displaying bubble images.
  *  The default value is `nil`.

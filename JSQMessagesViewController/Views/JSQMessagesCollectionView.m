@@ -54,10 +54,10 @@
     [self registerNib:[JSQMessagesCollectionViewCellOutgoing nib]
           forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
     
-    [self registerClass:[JSQMessagesCollectionViewCellIncomingMedia class]
+    [self registerNib:[JSQMessagesCollectionViewCellIncomingMedia nib]
 forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncomingMedia cellReuseIdentifier]];
     
-    [self registerClass:[JSQMessagesCollectionViewCellOutgoingMedia class]
+    [self registerNib:[JSQMessagesCollectionViewCellOutgoingMedia nib]
 forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoingMedia cellReuseIdentifier]];
 
     [self registerNib:[JSQMessagesTypingIndicatorFooterView nib]
