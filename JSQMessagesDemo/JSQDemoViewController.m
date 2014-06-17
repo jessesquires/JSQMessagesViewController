@@ -42,6 +42,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                      [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." sender:kJSQDemoAvatarNameJobs date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
+                     [JSQMessage messageWithImage:[UIImage imageNamed:@"keepcalm"] sender:kJSQDemoAvatarNameCook],
                      nil];
     
     /**
@@ -369,7 +370,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  Override point for customizing cells
      */
-    JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    UICollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
     /**
      *  Configure almost *anything* on the cell
@@ -387,15 +388,20 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     
     JSQMessage *msg = [self.messages objectAtIndex:indexPath.item];
     
-    if ([msg.sender isEqualToString:self.sender]) {
-        cell.textView.textColor = [UIColor blackColor];
+    if (msg.kind == JSQMessageTextKind)
+    {
+        JSQMessagesCollectionViewCell *textCell = (JSQMessagesCollectionViewCell *) cell;
+        
+        if ([msg.sender isEqualToString:self.sender]) {
+            textCell.textView.textColor = [UIColor blackColor];
+        }
+        else {
+            textCell.textView.textColor = [UIColor whiteColor];
+        }
+        
+        textCell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : textCell.textView.textColor,
+                                              NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     }
-    else {
-        cell.textView.textColor = [UIColor whiteColor];
-    }
-    
-    cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
-                                          NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     
     return cell;
 }
