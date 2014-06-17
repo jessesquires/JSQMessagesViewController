@@ -28,7 +28,8 @@
 {
     _cell = cell;
     
-    cell.mediaImageView.contentMode = UIViewContentModeScaleAspectFit;
+    cell.mediaImageView.contentMode = UIViewContentModeScaleAspectFill;
+    cell.mediaImageView.clipsToBounds = YES;
 }
 
 - (void) setMediaFromImage:(UIImage *)image;
@@ -42,12 +43,20 @@
 
 }
 
+- (void) cellWillBeReused;
+{
+    self.cell.mediaImageView.image = nil;
+}
+
 #pragma mark Private
 
 - (void) maskImageViewWithBallon
 {
+    /**
+     *  Snippet from https://github.com/SocialObjects-Software/SOMessaging
+     */
     CALayer *layer = self.cell.messageBubbleImageView.layer;
-    layer.frame    = (CGRect){{0,0},self.cell.messageBubbleImageView.layer.frame.size};
+    layer.frame = (CGRect){{0,0},self.cell.messageBubbleImageView.layer.frame.size};
     self.cell.mediaImageView.layer.mask = layer;
     [self.cell.mediaImageView setNeedsDisplay];
 }

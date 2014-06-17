@@ -17,4 +17,6 @@
 - (void) setMediaFromImage:(UIImage *)image;
 - (void) setMediaFromURL:(NSURL *)imageURL;
 
+- (void) cellWillBeReused;
+
 @end

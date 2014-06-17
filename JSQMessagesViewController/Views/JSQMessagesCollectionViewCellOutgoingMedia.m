@@ -30,4 +30,13 @@
     self.mediaHandler = [JSQMessagesMediaHandler mediaHandlerWithCell:self];
 }
 
+#pragma mark - UITableViewCell
+
+-(void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    [self.mediaHandler cellWillBeReused];
+}
+
 @end

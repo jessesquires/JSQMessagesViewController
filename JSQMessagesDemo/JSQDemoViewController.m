@@ -244,10 +244,17 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 {
     NSLog(@"Camera pressed!");
     
+    __weak __typeof(self) weakSelf = self;
+    
     [self.inputToolbar hideKeyboard];
     [self.picker pickImageFromViewController:self
                                      handler:^(UIImage *image, NSError *error) {
+                                         
+                                         __typeof(self) strongSelf = weakSelf;
 
+                                         JSQMessage *copyMessage = [JSQMessage messageWithImage:image sender:strongSelf.sender];
+                                         [strongSelf.messages addObject:copyMessage];
+                                         [strongSelf finishReceivingMessage];
                                      }
                               dismissHandler:^{
 
