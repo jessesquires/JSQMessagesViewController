@@ -95,7 +95,7 @@
 		88D1B0CD190606F100AFE162 /* typing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88D1B0CB190606F100AFE162 /* typing@2x.png */; };
 		C78CEF093F584B85B4321C83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 343577012CC24261BE4B61A1 /* libPods.a */; };
 		D68A9FB68FC5463D9A5B23E0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 343577012CC24261BE4B61A1 /* libPods.a */; };
-		EB426BB6194F410300A89161 /* VImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EB426BB5194F410300A89161 /* VImagePicker.m */; };
+		EB426BB6194F410300A89161 /* JSQImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EB426BB5194F410300A89161 /* JSQImagePicker.m */; };
 		EBB0AB9F1950448100388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = EBB0AB9E1950448100388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.m */; };
 		EBB0ABA21950449A00388B97 /* JSQMessagesCollectionViewCellIncomingMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = EBB0ABA11950449A00388B97 /* JSQMessagesCollectionViewCellIncomingMedia.m */; };
 		EBB0ABA41950537E00388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB0ABA31950537E00388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.xib */; };
@@ -234,8 +234,8 @@
 		88D1B0CA190606F100AFE162 /* typing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = typing.png; sourceTree = "<group>"; };
 		88D1B0CB190606F100AFE162 /* typing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "typing@2x.png"; sourceTree = "<group>"; };
 		A0F1B1EFE54F44FEA6C4F786 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		EB426BB4194F410300A89161 /* VImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VImagePicker.h; sourceTree = "<group>"; };
-		EB426BB5194F410300A89161 /* VImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VImagePicker.m; sourceTree = "<group>"; };
+		EB426BB4194F410300A89161 /* JSQImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQImagePicker.h; sourceTree = "<group>"; };
+		EB426BB5194F410300A89161 /* JSQImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQImagePicker.m; sourceTree = "<group>"; };
 		EBB0AB9D1950448100388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewCellOutgoingMedia.h; sourceTree = "<group>"; };
 		EBB0AB9E1950448100388B97 /* JSQMessagesCollectionViewCellOutgoingMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewCellOutgoingMedia.m; sourceTree = "<group>"; };
 		EBB0ABA01950449A00388B97 /* JSQMessagesCollectionViewCellIncomingMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewCellIncomingMedia.h; sourceTree = "<group>"; };
@@ -590,8 +590,8 @@
 		EB426BB3194F410300A89161 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				EB426BB4194F410300A89161 /* VImagePicker.h */,
-				EB426BB5194F410300A89161 /* VImagePicker.m */,
+				EB426BB4194F410300A89161 /* JSQImagePicker.h */,
+				EB426BB5194F410300A89161 /* JSQImagePicker.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -820,7 +820,7 @@
 				8816A6B418E9250400111919 /* JSQMessagesComposerTextView.m in Sources */,
 				8816A6AA18E9250400111919 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				8816A6A418E9250400111919 /* UIView+JSQMessages.m in Sources */,
-				EB426BB6194F410300A89161 /* VImagePicker.m in Sources */,
+				EB426BB6194F410300A89161 /* JSQImagePicker.m in Sources */,
 				8816A6A718E9250400111919 /* JSQMessagesAvatarFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
