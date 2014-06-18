@@ -42,9 +42,6 @@
 #import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
 
-#import <URBMediaFocusViewController/URBMediaFocusViewController.h>
-#import <SDWebImage/SDImageCache.h>
-
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
 
@@ -558,30 +555,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
   didTapMediaImageView:(UIImageView *)mediaImageView
-           atIndexPath:(NSIndexPath *)indexPath
-{
-    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView
-                                                 messageDataForItemAtIndexPath:indexPath];
-    
-    URBMediaFocusViewController *mediaViewController = [URBMediaFocusViewController new];
-
-    UIImage *image;
-    
-    if (messageData.image)
-    {
-        image = messageData.image;
-    }
-    else if (messageData.url)
-    {
-        image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:messageData.url.absoluteString];
-    }
-    
-    [mediaViewController showImage:image
-                          fromView:mediaImageView
-                  inViewController:self];
-
-    self.mediaViewController = mediaViewController;
-}
+           atIndexPath:(NSIndexPath *)indexPath { }
 
 #pragma mark - Messages collection view cell delegate
 

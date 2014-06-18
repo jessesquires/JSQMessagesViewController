@@ -211,9 +211,6 @@
 /**
  *  Notifies the delegate that the media image view at the specified indexPath did receive a tap event.
  *
- *  Note: A default implementation will be provided by `JSQMessagesViewController`. If you want a
- *  behaviour, override this method and don't call super
- *
  *  @param collectionView   The collection view object that is notifying you of the tap event.
  *  @param mediaImageView   The media image view that was tapped.
  *  @param indexPath        The index path of the item for which the avatar was tapped.
