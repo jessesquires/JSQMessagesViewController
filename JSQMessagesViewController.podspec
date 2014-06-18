@@ -17,4 +17,6 @@ Pod::Spec.new do |s|
 
 	s.dependency 'JSQSystemSoundPlayer'
 	s.dependency 'SDWebImage'
+	s.dependency 'URBMediaFocusViewController'
+
 end

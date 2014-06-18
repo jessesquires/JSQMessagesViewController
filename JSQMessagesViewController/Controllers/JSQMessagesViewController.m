@@ -42,6 +42,8 @@
 #import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
 
+#import <URBMediaFocusViewController/URBMediaFocusViewController.h>
+#import <SDWebImage/SDImageCache.h>
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
@@ -60,7 +62,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @property (strong, nonatomic) JSQMessagesKeyboardController *keyboardController;
 
+@property (nonatomic) UIViewController *mediaViewController;
+
 @property (assign, nonatomic) CGFloat statusBarChangeInHeight;
+
 
 - (void)jsq_configureMessagesViewController;
 
@@ -551,6 +556,33 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
  didTapAvatarImageView:(UIImageView *)avatarImageView
            atIndexPath:(NSIndexPath *)indexPath { }
 
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+  didTapMediaImageView:(UIImageView *)mediaImageView
+           atIndexPath:(NSIndexPath *)indexPath
+{
+    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView
+                                                 messageDataForItemAtIndexPath:indexPath];
+    
+    URBMediaFocusViewController *mediaViewController = [URBMediaFocusViewController new];
+
+    UIImage *image;
+    
+    if (messageData.image)
+    {
+        image = messageData.image;
+    }
+    else if (messageData.url)
+    {
+        image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:messageData.url.absoluteString];
+    }
+    
+    [mediaViewController showImage:image
+                          fromView:mediaImageView
+                  inViewController:self];
+
+    self.mediaViewController = mediaViewController;
+}
+
 #pragma mark - Messages collection view cell delegate
 
 - (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell
@@ -558,6 +590,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.collectionView.delegate collectionView:self.collectionView
                            didTapAvatarImageView:cell.avatarImageView
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
+}
+
+- (void)messagesCollectionViewCellDidTapMedia:(JSQMessagesCollectionViewCell *)cell;
+{
+    [self.collectionView.delegate collectionView:self.collectionView
+                            didTapMediaImageView:cell.mediaImageView
+                                     atIndexPath:[self.collectionView indexPathForCell:cell]];
+
 }
 
 #pragma mark - Input toolbar delegate

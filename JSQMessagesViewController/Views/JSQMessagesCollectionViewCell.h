@@ -37,6 +37,13 @@
  */
 - (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell;
 
+/**
+ *  Tells the delegate that the mediaImageView of a cell has been tapped.
+ *
+ *  @param cell The cell that received the tap.
+ */
+- (void)messagesCollectionViewCellDidTapMedia:(JSQMessagesCollectionViewCell *)cell;
+
 @end
 
 
