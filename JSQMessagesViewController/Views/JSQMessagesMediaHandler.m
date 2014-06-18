@@ -67,6 +67,14 @@
 - (void) maskImageViewWithBubble
 {
     /**
+     *  For the next snippet of code to work, the mediaImageView's frame
+     *  must be the same as the messageBubbleImageView's frame
+     */
+    [self.cell.mediaImageView removeConstraints:self.cell.mediaImageView.constraints];
+    [self.cell layoutIfNeeded];
+    [self.cell.mediaImageView setFrame:self.cell.messageBubbleImageView.frame];
+    
+    /**
      *  Snippet from https://github.com/SocialObjects-Software/SOMessaging
      */
     CALayer *layer = self.cell.messageBubbleImageView.layer;
