@@ -332,10 +332,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
     
-    self.showTypingIndicator = NO;
-    
     [self.collectionView reloadData];
     
+	self.showTypingIndicator = NO;
+
     if (self.automaticallyHandlesScrolling) {
         [self scrollToBottomAnimated:YES];
     }
@@ -366,7 +366,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     NSInteger items = [self.collectionView numberOfItemsInSection:0];
     
     if (items > 0) {
-		//[self.collectionView performBatchUpdates:nil completion:nil];
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:items - 1 inSection:0]
                                     atScrollPosition:UICollectionViewScrollPositionTop
                                             animated:animated];
