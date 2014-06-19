@@ -162,7 +162,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  Enable/disable springy bubbles, default is YES.
      *  For best results, toggle from `viewDidAppear:`
      */
-    self.collectionView.collectionViewLayout.springinessEnabled = YES;
+    self.collectionView.collectionViewLayout.springinessEnabled = NO;
 }
 
 
@@ -198,10 +198,12 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
          *  This you should do upon receiving a message:
          *
          *  1. Play sound (optional)
-         *  2. Add new id<JSQMessageData> object to your data source
-         *  3. Call `finishReceivingMessage`
+		 *	2. Call `startReceivingMessage`
+         *  3. Add new id<JSQMessageData> object to your data source
+         *  4. Call `finishReceivingMessage`
          */
         [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+		[self startReceivingMessage];
         [self.messages addObject:copyMessage];
         [self finishReceivingMessage];
     });

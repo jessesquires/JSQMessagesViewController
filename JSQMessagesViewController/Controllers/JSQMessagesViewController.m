@@ -49,6 +49,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                          JSQMessagesCollectionViewCellDelegate,
                                          JSQMessagesKeyboardControllerDelegate,
                                          UITextViewDelegate>
+{
+	bool _shouldScrollToBottomOnAppear;
+	bool _lastMessageWasVisible;
+}
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
@@ -61,8 +65,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 @property (assign, nonatomic) CGFloat statusBarChangeInHeight;
 
 - (void)jsq_configureMessagesViewController;
-
-- (void)jsq_finishSendingOrReceivingMessage;
 
 - (NSString *)jsq_currentlyComposedMessageText;
 
@@ -110,6 +112,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_configureMessagesViewController
 {
+	_lastMessageWasVisible = true;
+	
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.toolbarHeightConstraint.constant = kJSQMessagesInputToolbarHeightDefault;
@@ -123,7 +127,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     self.sender = @"JSQDefaultSender";
     
-    self.automaticallyScrollsToMostRecentMessage = YES;
+    self.automaticallyHandlesScrolling = YES;
     
     self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
     self.incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
@@ -205,11 +209,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.view layoutIfNeeded];
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     
-    if (self.automaticallyScrollsToMostRecentMessage) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+    if (self.automaticallyHandlesScrolling) {
+		_shouldScrollToBottomOnAppear = false;
+		
+		[self scrollToBottomAnimated:NO];
+		[self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+		
+        /*dispatch_async(dispatch_get_main_queue(), ^{
             [self scrollToBottomAnimated:NO];
             [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-        });
+        });*/
     }
     
     [self jsq_updateKeyboardTriggerPoint];
@@ -266,6 +275,46 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
+#pragma mark - Deprecated
+
+- (BOOL) automaticallyScrollsToMostRecentMessage
+{
+	return _automaticallyHandlesScrolling;
+}
+
+- (void) setAutomaticallyScrollsToMostRecentMessage:(BOOL)value
+{
+	_automaticallyHandlesScrolling = value;
+}
+
+#pragma mark - Cell helper methods
+
+- (bool) isLastMessageVisible
+{
+	bool lastMessageWasVisible = true;
+	
+	NSInteger row = [self.collectionView numberOfItemsInSection:0]-1;
+	if(row >= 0)
+	{
+		NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+		lastMessageWasVisible = [self.collectionView.indexPathsForVisibleItems containsObject:indexPath];
+	}
+	
+	return lastMessageWasVisible;
+}
+
+- (NSIndexPath*) indexPathForBottomVisibleMessage
+{
+	NSArray* visible = self.collectionView.indexPathsForVisibleItems;
+	visible = [visible sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+		NSIndexPath *path1 = (NSIndexPath *)obj1;
+		NSIndexPath *path2 = (NSIndexPath *)obj2;
+		return [path1 compare:path2];
+	}];
+	
+	return visible.lastObject;
+}
+
 #pragma mark - Messages view controller
 
 - (void)didPressSendButton:(UIButton *)button
@@ -284,21 +333,27 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
     
-    [self jsq_finishSendingOrReceivingMessage];
+    self.showTypingIndicator = NO;
+    
+    [self.collectionView reloadData];
+    
+    if (self.automaticallyHandlesScrolling) {
+        [self scrollToBottomAnimated:YES];
+    }
+}
+
+- (void)startReceivingMessage
+{
+	_lastMessageWasVisible = [self isLastMessageVisible];
 }
 
 - (void)finishReceivingMessage
-{
-    [self jsq_finishSendingOrReceivingMessage];
-}
-
-- (void)jsq_finishSendingOrReceivingMessage
 {
     self.showTypingIndicator = NO;
     
     [self.collectionView reloadData];
     
-    if (self.automaticallyScrollsToMostRecentMessage) {
+    if (self.automaticallyHandlesScrolling && _lastMessageWasVisible) {
         [self scrollToBottomAnimated:YES];
     }
 }
@@ -312,6 +367,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     NSInteger items = [self.collectionView numberOfItemsInSection:0];
     
     if (items > 0) {
+		[self.collectionView performBatchUpdates:nil completion:nil];
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:items - 1 inSection:0]
                                     atScrollPosition:UICollectionViewScrollPositionTop
                                             animated:animated];
