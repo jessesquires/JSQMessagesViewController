@@ -299,18 +299,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 	return lastMessageWasVisible;
 }
 
-- (NSIndexPath*) indexPathForBottomVisibleMessage
-{
-	NSArray* visible = self.collectionView.indexPathsForVisibleItems;
-	visible = [visible sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-		NSIndexPath *path1 = (NSIndexPath *)obj1;
-		NSIndexPath *path2 = (NSIndexPath *)obj2;
-		return [path1 compare:path2];
-	}];
-	
-	return visible.lastObject;
-}
-
 #pragma mark - Messages view controller
 
 - (void)didPressSendButton:(UIButton *)button
@@ -638,16 +626,18 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         
         if (object == self.inputToolbar.contentView.textView
             && [keyPath isEqualToString:NSStringFromSelector(@selector(contentSize))]) {
-            
             CGSize oldContentSize = [[change objectForKey:NSKeyValueChangeOldKey] CGSizeValue];
             CGSize newContentSize = [[change objectForKey:NSKeyValueChangeNewKey] CGSizeValue];
             
             CGFloat dy = newContentSize.height - oldContentSize.height;
         
+			CGPoint offset = self.collectionView.contentOffset;
+			offset.y += dy;
+			
             [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:dy];
             [self jsq_updateCollectionViewInsets];
-            if (self.automaticallyScrollsToMostRecentMessage) {
-                [self scrollToBottomAnimated:NO];
+            if (self.automaticallyHandlesScrolling) {
+				[self.collectionView setContentOffset:offset animated:NO];
             }
         }
     }
