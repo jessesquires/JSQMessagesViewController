@@ -211,13 +211,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (self.automaticallyHandlesScrolling) {
 		_shouldScrollToBottomOnAppear = false;
 		
-		[self scrollToBottomAnimated:NO];
-		[self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-		
-        /*dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             [self scrollToBottomAnimated:NO];
             [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-        });*/
+        });
     }
     
     [self jsq_updateKeyboardTriggerPoint];
