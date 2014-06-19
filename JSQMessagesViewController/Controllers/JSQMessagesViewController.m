@@ -177,7 +177,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     _showTypingIndicator = showTypingIndicator;
     
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-    [self scrollToBottomAnimated:YES];
 }
 
 - (void)setShowLoadEarlierMessagesHeader:(BOOL)showLoadEarlierMessagesHeader
@@ -349,9 +348,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)finishReceivingMessage
 {
-    self.showTypingIndicator = NO;
-    
     [self.collectionView reloadData];
+	
+    self.showTypingIndicator = NO;
     
     if (self.automaticallyHandlesScrolling && _lastMessageWasVisible) {
         [self scrollToBottomAnimated:YES];
@@ -367,7 +366,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     NSInteger items = [self.collectionView numberOfItemsInSection:0];
     
     if (items > 0) {
-		[self.collectionView performBatchUpdates:nil completion:nil];
+		//[self.collectionView performBatchUpdates:nil completion:nil];
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:items - 1 inSection:0]
                                     atScrollPosition:UICollectionViewScrollPositionTop
                                             animated:animated];
