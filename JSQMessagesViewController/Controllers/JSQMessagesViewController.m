@@ -143,6 +143,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                                                           contextView:self.view
                                                                  panGestureRecognizer:self.collectionView.panGestureRecognizer
                                                                              delegate:self];
+	
+	UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleCollectionTapGestureRecognizer:)];
+	[self.collectionView addGestureRecognizer:tapRecognizer];
 }
 
 - (void)dealloc
@@ -588,10 +591,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     [textView becomeFirstResponder];
-    
-    if (self.automaticallyScrollsToMostRecentMessage) {
-        [self scrollToBottomAnimated:YES];
-    }
 }
 
 - (void)textViewDidChange:(UITextView *)textView
@@ -694,6 +693,15 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         default:
             break;
     }
+}
+
+- (void) jsq_handleCollectionTapGestureRecognizer:(UITapGestureRecognizer*)gestureRecognizer
+{
+	if(gestureRecognizer.state == UIGestureRecognizerStateEnded)
+	{
+		if([self.inputToolbar.contentView.textView isFirstResponder])
+			[self.inputToolbar.contentView.textView resignFirstResponder];
+	}
 }
 
 #pragma mark - Input toolbar utilities
