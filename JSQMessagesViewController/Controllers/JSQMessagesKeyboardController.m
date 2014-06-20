@@ -70,7 +70,6 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 {
     NSParameterAssert(textView != nil);
     NSParameterAssert(contextView != nil);
-    NSParameterAssert(panGestureRecognizer != nil);
     
     self = [super init];
     if (self) {
@@ -301,6 +300,11 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     self.keyboardView.userInteractionEnabled = !userIsDraggingNearThresholdForDismissing;
     
     switch (pan.state) {
+		case UIGestureRecognizerStateBegan:
+			_panInProgress = true;
+			[self.delegate keyboardPanStarted];
+			break;
+			
         case UIGestureRecognizerStateChanged:
         {
             newKeyboardViewFrame.origin.y = touch.y + self.keyboardTriggerPoint.y;
@@ -329,6 +333,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
         {
             BOOL keyboardViewIsHidden = (CGRectGetMinY(self.keyboardView.frame) >= contextViewWindowHeight);
             if (keyboardViewIsHidden) {
+				_panInProgress = false;
+				[self.delegate keyboardPanFinished];
                 return;
             }
             
@@ -352,6 +358,9 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                                      [self jsq_removeKeyboardFrameObserver];
                                      [self.textView resignFirstResponder];
                                  }
+								 
+								 _panInProgress = false;
+								 [self.delegate keyboardPanFinished];
                              }];
         }
             break;

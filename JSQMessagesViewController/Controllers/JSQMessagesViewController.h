@@ -63,6 +63,20 @@
 @property (assign, nonatomic) BOOL automaticallyHandlesScrolling;
 
 /**
+ *  Specifies whether or not the view controller should hide keyboard when collection view is tapped.
+ *
+ *  @discussion The default value is `YES`. Set to `NO` if you do not want to hide keyboard on tap.
+ */
+@property (assign, nonatomic) BOOL keyboardHidesByTappingCollection;
+
+/**
+ *  Specifies whether or not keyboard can be hidden via pan gesture.
+ *
+ *  @discussion The default value is `YES`. Set to `NO` if you do not want to hide keyboard via panning.
+ */
+@property (assign, nonatomic, getter = keyboardHidesByPanGesture, setter = setKeyboardHidesByPanGesture:) BOOL keyboardHidesByPanGesture;
+
+/**
  *  The collection view cell identifier to use for dequeuing outgoing message collection view cells in the collectionView.
  *
  *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]`. 

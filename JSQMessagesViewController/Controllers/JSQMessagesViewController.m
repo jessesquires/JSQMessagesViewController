@@ -52,6 +52,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
 	bool _shouldScrollToBottomOnAppear;
 	bool _lastMessageWasVisible;
+	
+	BOOL _keyboardHidesByPanGesture;
 }
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
@@ -128,6 +130,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.sender = @"JSQDefaultSender";
     
     self.automaticallyHandlesScrolling = YES;
+	self.keyboardHidesByTappingCollection = YES;
+	self.keyboardHidesByPanGesture = YES;
     
     self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
     self.incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
@@ -141,8 +145,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     self.keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextView:self.inputToolbar.contentView.textView
                                                                           contextView:self.view
-                                                                 panGestureRecognizer:self.collectionView.panGestureRecognizer
+                                                                 panGestureRecognizer:nil
                                                                              delegate:self];
+	
+	self.keyboardController.panGestureRecognizer = self.keyboardHidesByPanGesture ? self.collectionView.panGestureRecognizer : nil;
 	
 	UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleCollectionTapGestureRecognizer:)];
 	[self.collectionView addGestureRecognizer:tapRecognizer];
@@ -191,6 +197,26 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     _showLoadEarlierMessagesHeader = showLoadEarlierMessagesHeader;
     
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (BOOL)keyboardHidesByPanGesture
+{
+	return _keyboardHidesByPanGesture;
+}
+
+- (void)setKeyboardHidesByPanGesture:(BOOL)value
+{
+	_keyboardHidesByPanGesture = value;
+	if(_keyboardHidesByPanGesture)
+	{
+		self.keyboardController.panGestureRecognizer = self.collectionView.panGestureRecognizer;
+		self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
+	}
+	else
+	{
+		self.keyboardController.panGestureRecognizer = nil;
+		self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeNone;
+	}
 }
 
 #pragma mark - View lifecycle
@@ -644,6 +670,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - Keyboard controller delegate
 
+- (void)keyboardPanStarted
+{
+}
+
+- (void)keyboardPanFinished
+{
+}
+
 - (void)keyboardWillChangeFrame:(CGRect)keyboardFrame fromFrame:(CGRect)fromFrame
 {
     CGFloat heightFromBottom = CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(keyboardFrame);
@@ -709,6 +743,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void) jsq_handleCollectionTapGestureRecognizer:(UITapGestureRecognizer*)gestureRecognizer
 {
+	if(!_keyboardHidesByTappingCollection)
+		return;
+	
 	if(gestureRecognizer.state == UIGestureRecognizerStateEnded)
 	{
 		if([self.inputToolbar.contentView.textView isFirstResponder])

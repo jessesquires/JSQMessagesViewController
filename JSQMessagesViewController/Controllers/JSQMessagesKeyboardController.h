@@ -48,8 +48,15 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
 
 @required
 
-//- (void)keyboardPanStarted;
-//- (void)keyboardPanFinished;
+/**
+ *  Tells the delegate that the keyboard pan with gesture is started.
+ */
+- (void)keyboardPanStarted;
+
+/**
+ *  Tells the delegate that the keyboard pan with gesture is finished.
+ */
+- (void)keyboardPanFinished;
 
 /**
  *  Tells the delegate that the keyboard frame will be changed.
@@ -98,7 +105,7 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
 /**
  *  The pan gesture recognizer responsible for handling user interaction with the system keyboard.
  */
-@property (weak, nonatomic, readonly) UIPanGestureRecognizer *panGestureRecognizer;
+@property (weak, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
 
 /**
  *  Specifies the distance from the keyboard at which the `panGestureRecognizer`
