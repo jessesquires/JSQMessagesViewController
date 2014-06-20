@@ -48,6 +48,17 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
 
 @required
 
+//- (void)keyboardPanStarted;
+//- (void)keyboardPanFinished;
+
+/**
+ *  Tells the delegate that the keyboard frame will be changed.
+ *
+ *  @param keyboardFrame The new frame of the keyboard in the coordinate system of the `contextView`.
+ *  @param fromFrame The old frame of the keyboard in the coordinate system of the `contextView`.
+ */
+- (void)keyboardWillChangeFrame:(CGRect)keyboardFrame fromFrame:(CGRect)fromFrame;
+
 /**
  *  Tells the delegate that the keyboard frame has changed.
  *
