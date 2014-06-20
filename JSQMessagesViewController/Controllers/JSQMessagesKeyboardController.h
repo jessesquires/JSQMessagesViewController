@@ -116,6 +116,11 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
 @property (assign, nonatomic) CGPoint keyboardTriggerPoint;
 
 /**
+ *  Specifies that the keyboard dismissal via pan gesture is in progress.
+ */
+@property (assign, nonatomic, readonly) BOOL panInProgress;
+
+/**
  *  Creates a new keyboard controller object with the specified textView, contextView, panGestureRecognizer, and delegate.
  *
  *  @param textView             The text view in which the user is editing with the system keyboard. This value must not be `nil`.

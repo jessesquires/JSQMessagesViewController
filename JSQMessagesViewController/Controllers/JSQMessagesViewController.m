@@ -680,11 +680,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)keyboardWillChangeFrame:(CGRect)keyboardFrame fromFrame:(CGRect)fromFrame
 {
+	NSLog(@"From %@ | To %@", NSStringFromCGRect(fromFrame), NSStringFromCGRect(keyboardFrame));
+	
     CGFloat heightFromBottom = CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(keyboardFrame);
     
     heightFromBottom = MAX(0.0f, heightFromBottom + self.statusBarChangeInHeight);
     
-	if (self.automaticallyHandlesScrolling) {
+	if (self.automaticallyHandlesScrolling && !self.keyboardController.panInProgress)
+	{
 		CGFloat heightDelta = CGRectGetMinY(fromFrame) - CGRectGetMinY(keyboardFrame);
 
 		CGPoint offset = self.collectionView.contentOffset;

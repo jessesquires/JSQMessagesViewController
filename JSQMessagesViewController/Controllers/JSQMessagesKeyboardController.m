@@ -34,7 +34,6 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 @interface JSQMessagesKeyboardController () <UIGestureRecognizerDelegate>
 {
-	bool _panInProgress;
 }
 
 @property (weak, nonatomic) UIView *keyboardView;
@@ -177,6 +176,9 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)jsq_didReceiveKeyboardWillChangeFrameNotification:(NSNotification *)notification
 {
+	if(_panInProgress)
+		return;
+
     NSDictionary *userInfo = [notification userInfo];
     
     CGRect keyboardBeginFrame = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
@@ -209,7 +211,10 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 {
     [self jsq_setKeyboardViewHidden:NO];
     
-	 NSDictionary *userInfo = [notification userInfo];
+	if(_panInProgress)
+		return;
+	
+	NSDictionary *userInfo = [notification userInfo];
 	
 	CGRect keyboardBeginFrame = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -301,7 +306,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     
     switch (pan.state) {
 		case UIGestureRecognizerStateBegan:
-			_panInProgress = true;
+			_panInProgress = YES;
 			[self.delegate keyboardPanStarted];
 			break;
 			
@@ -333,7 +338,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
         {
             BOOL keyboardViewIsHidden = (CGRectGetMinY(self.keyboardView.frame) >= contextViewWindowHeight);
             if (keyboardViewIsHidden) {
-				_panInProgress = false;
+				_panInProgress = NO;
 				[self.delegate keyboardPanFinished];
                 return;
             }
@@ -359,7 +364,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                                      [self.textView resignFirstResponder];
                                  }
 								 
-								 _panInProgress = false;
+								 self->_panInProgress = NO;
 								 [self.delegate keyboardPanFinished];
                              }];
         }
