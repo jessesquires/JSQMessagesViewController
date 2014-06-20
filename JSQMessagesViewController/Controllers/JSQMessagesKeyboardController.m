@@ -194,6 +194,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 {
     NSDictionary *userInfo = [notification userInfo];
     
+    CGRect keyboardBeginFrame = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
     if (CGRectIsNull(keyboardEndFrame)) {
@@ -205,13 +206,14 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     
     double animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
+    CGRect keyboardBeginFrameConverted = [self.contextView convertRect:keyboardBeginFrame fromView:nil];
     CGRect keyboardEndFrameConverted = [self.contextView convertRect:keyboardEndFrame fromView:nil];
     
     [UIView animateWithDuration:animationDuration
                           delay:0.0
                         options:animationCurveOption
                      animations:^{
-                         [self.delegate keyboardDidChangeFrame:keyboardEndFrameConverted];
+                         [self.delegate keyboardDidChangeFrame:keyboardEndFrameConverted fromFrame:keyboardBeginFrameConverted];
                          [self jsq_postKeyboardFrameNotificationForFrame:keyboardEndFrameConverted];
                      }
                      completion:^(BOOL finished) {
@@ -254,7 +256,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
             //  do not convert frame to contextView coordinates here
             //  KVO is triggered during panning (see below)
             //  panning occurs in contextView coordinates already
-            [self.delegate keyboardDidChangeFrame:newKeyboardFrame];
+            [self.delegate keyboardDidChangeFrame:newKeyboardFrame fromFrame:oldKeyboardFrame];
             [self jsq_postKeyboardFrameNotificationForFrame:newKeyboardFrame];
         }
     }

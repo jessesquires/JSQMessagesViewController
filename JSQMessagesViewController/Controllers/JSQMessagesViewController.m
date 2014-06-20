@@ -644,13 +644,21 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - Keyboard controller delegate
 
-- (void)keyboardDidChangeFrame:(CGRect)keyboardFrame
+- (void)keyboardDidChangeFrame:(CGRect)keyboardFrame fromFrame:(CGRect)fromFrame
 {
     CGFloat heightFromBottom = CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(keyboardFrame);
     
     heightFromBottom = MAX(0.0f, heightFromBottom + self.statusBarChangeInHeight);
     
     [self jsq_setToolbarBottomLayoutGuideConstant:heightFromBottom];
+	
+	if (self.automaticallyHandlesScrolling) {
+		CGFloat heightDelta = CGRectGetMinY(fromFrame) - CGRectGetMinY(keyboardFrame);
+		CGPoint offset = self.collectionView.contentOffset;
+		offset.y += heightDelta;
+		
+		[self.collectionView setContentOffset:offset animated:NO];
+	}
 }
 
 - (void)jsq_setToolbarBottomLayoutGuideConstant:(CGFloat)constant
