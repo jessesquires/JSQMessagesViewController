@@ -247,7 +247,13 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      */
 }
 
-
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+		 didTapMessage:(id<JSQMessageData>)messageData
+           atIndexPath:(NSIndexPath *)indexPath
+{
+	UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Message" message:[messageData text] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+	[alertView show];
+}
 
 #pragma mark - JSQMessages CollectionView DataSource
 

@@ -565,15 +565,38 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
  didTapAvatarImageView:(UIImageView *)avatarImageView
-           atIndexPath:(NSIndexPath *)indexPath { }
+           atIndexPath:(NSIndexPath *)indexPath
+{
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+		 didTapMessage:(id<JSQMessageData>)messageData
+           atIndexPath:(NSIndexPath *)indexPath
+{
+}
 
 #pragma mark - Messages collection view cell delegate
 
 - (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell
 {
+	if(![self.collectionView.delegate respondsToSelector:@selector(collectionView:didTapAvatarImageView:atIndexPath:)])
+		return;
+	
     [self.collectionView.delegate collectionView:self.collectionView
                            didTapAvatarImageView:cell.avatarImageView
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
+}
+
+- (void)messagesCollectionViewCellDidTapMessage:(JSQMessagesCollectionViewCell *)cell
+{
+	if(![self.collectionView.delegate respondsToSelector:@selector(collectionView:didTapMessage:atIndexPath:)])
+		return;
+	
+	NSIndexPath* indexPath =[self.collectionView indexPathForCell:cell];
+	id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
+	
+	
+	[self.collectionView.delegate collectionView:self.collectionView didTapMessage:messageData atIndexPath:indexPath];
 }
 
 #pragma mark - Input toolbar delegate

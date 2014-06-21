@@ -209,6 +209,17 @@
            atIndexPath:(NSIndexPath *)indexPath;
 
 /**
+ *  Notifies the delegate that the message view at the specified indexPath did receive a tap event.
+ *
+ *  @param collectionView  The collection view object that is notifying you of the tap event.
+ *  @param messageView     The message view of the cell that was tapped.
+ *  @param indexPath       The index path of the item for which the message was tapped.
+ */
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+		 didTapMessage:(id<JSQMessageData>)messageData
+           atIndexPath:(NSIndexPath *)indexPath;
+
+/**
  *  Notifies the delegate that the collection view's header did receive a tap event.
  *
  *  @param collectionView The collection view object that is notifying you of the tap event.

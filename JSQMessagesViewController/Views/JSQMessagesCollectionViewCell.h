@@ -37,6 +37,15 @@
  */
 - (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell;
 
+@optional
+
+/**
+ *  Tells the delegate that the messageView of a cell has been tapped.
+ *
+ *  @param cell The cell that received the tap.
+ */
+- (void)messagesCollectionViewCellDidTapMessage:(JSQMessagesCollectionViewCell *)cell;
+
 @end
 
 
