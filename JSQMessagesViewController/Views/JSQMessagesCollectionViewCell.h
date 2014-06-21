@@ -30,12 +30,7 @@
 
 @required
 
-/**
- *  Tells the delegate that the avatarImageView of a cell has been tapped.
- *
- *  @param cell The cell that received the tap.
- */
-- (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell;
+- (BOOL)shouldCellRecognizeTaps:(JSQMessagesCollectionViewCell *)cell;
 
 /**
  *  Tells the delegate that the messageView of a cell has been tapped.
@@ -43,6 +38,13 @@
  *  @param cell The cell that received the tap.
  */
 - (void)messagesCollectionViewCellDidTapMessage:(JSQMessagesCollectionViewCell *)cell;
+
+/**
+ *  Tells the delegate that the avatarImageView of a cell has been tapped.
+ *
+ *  @param cell The cell that received the tap.
+ */
+- (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell;
 
 @end
 

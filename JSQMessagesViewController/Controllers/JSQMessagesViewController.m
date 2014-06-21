@@ -569,13 +569,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
 }
 
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView
-		 didTapMessage:(id<JSQMessageData>)messageData
-           atIndexPath:(NSIndexPath *)indexPath
-{
-}
-
 #pragma mark - Messages collection view cell delegate
+
+- (BOOL)shouldCellRecognizeTaps:(JSQMessagesCollectionViewCell *)cell
+{
+	return [self.collectionView.delegate respondsToSelector:@selector(collectionView:didTapMessage:atIndexPath:)]
+	&& ![self.inputToolbar.contentView.textView isFirstResponder];
+}
 
 - (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell
 {
@@ -590,9 +590,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)messagesCollectionViewCellDidTapMessage:(JSQMessagesCollectionViewCell *)cell
 {
 	if(![self.collectionView.delegate respondsToSelector:@selector(collectionView:didTapMessage:atIndexPath:)])
-		return;
-	
-	if([self.inputToolbar.contentView.textView isFirstResponder])
 		return;
 	
 	NSIndexPath* indexPath =[self.collectionView indexPathForCell:cell];
