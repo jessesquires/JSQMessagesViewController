@@ -56,9 +56,10 @@
 
 @property (weak, nonatomic, readwrite) UILongPressGestureRecognizer *longPressGestureRecognizer;
 @property (weak, nonatomic, readwrite) UITapGestureRecognizer *tapGestureRecognizer;
+@property (weak, nonatomic, readwrite) UITapGestureRecognizer *avatarTapGestureRecognizer;
 
 - (void)jsq_handleLongPressGesture:(UILongPressGestureRecognizer *)longPress;
-- (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap;
+- (void)jsq_handleAvatarTapGesture:(UITapGestureRecognizer *)tap;
 
 - (void)jsq_didReceiveMenuWillHideNotification:(NSNotification *)notification;
 - (void)jsq_didReceiveMenuWillShowNotification:(NSNotification *)notification;
@@ -125,14 +126,18 @@
     self.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor],
                                           NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleLongPressGesture:)];
-    longPress.minimumPressDuration = 0.4f;
-    [self addGestureRecognizer:longPress];
-    self.longPressGestureRecognizer = longPress;
+    UILongPressGestureRecognizer* longRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleLongPressGesture:)];
+    longRecognizer.minimumPressDuration = 0.4f;
+    [self addGestureRecognizer:longRecognizer];
+	self.longPressGestureRecognizer = longRecognizer;
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
-    [self.avatarContainerView addGestureRecognizer:tap];
-    self.tapGestureRecognizer = tap;
+	UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
+    [self addGestureRecognizer:tapRecognizer];
+    self.tapGestureRecognizer = tapRecognizer;
+	
+    UITapGestureRecognizer* avatarTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleAvatarTapGesture:)];
+    [self.avatarContainerView addGestureRecognizer:avatarTapRecognizer];
+    self.avatarTapGestureRecognizer = avatarTapRecognizer;
 }
 
 - (void)dealloc
@@ -149,8 +154,11 @@
     [_longPressGestureRecognizer removeTarget:nil action:NULL];
     _longPressGestureRecognizer = nil;
     
-    [_tapGestureRecognizer removeTarget:nil action:NULL];
-    _tapGestureRecognizer = nil;
+	[_tapGestureRecognizer removeTarget:nil action:NULL];
+	_tapGestureRecognizer = nil;
+	
+    [_avatarTapGestureRecognizer removeTarget:nil action:NULL];
+    _avatarTapGestureRecognizer = nil;
 }
 
 #pragma mark - Collection view cell
@@ -362,6 +370,11 @@
 }
 
 - (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap
+{
+	[self.delegate messagesCollectionViewCellDidTapMessage:self];
+}
+
+- (void)jsq_handleAvatarTapGesture:(UITapGestureRecognizer *)tap
 {
     [self.delegate messagesCollectionViewCellDidTapAvatar:self];
 }

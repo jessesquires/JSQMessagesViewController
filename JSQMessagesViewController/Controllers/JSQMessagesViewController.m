@@ -592,9 +592,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 	if(![self.collectionView.delegate respondsToSelector:@selector(collectionView:didTapMessage:atIndexPath:)])
 		return;
 	
+	if([self.inputToolbar.contentView.textView isFirstResponder])
+		return;
+	
 	NSIndexPath* indexPath =[self.collectionView indexPathForCell:cell];
 	id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
-	
 	
 	[self.collectionView.delegate collectionView:self.collectionView didTapMessage:messageData atIndexPath:indexPath];
 }
