@@ -237,7 +237,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.view layoutIfNeeded];
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     
-    if (self.automaticallyHandlesScrolling) {
+    if (self.automaticallyHandlesScrolling && _shouldScrollToBottomOnAppear) {
 		_shouldScrollToBottomOnAppear = false;
 		
         dispatch_async(dispatch_get_main_queue(), ^{
