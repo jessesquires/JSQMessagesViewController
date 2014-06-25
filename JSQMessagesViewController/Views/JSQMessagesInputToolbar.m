@@ -27,18 +27,26 @@
 #import "UIImage+JSQMessages.h"
 #import "UIView+JSQMessages.h"
 
+#import <KVOController/FBKVOController.h>
+
 const CGFloat kJSQMessagesInputToolbarHeightDefault = 44.0f;
 
 static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesInputToolbarKeyValueObservingContext;
 
 
 @interface JSQMessagesInputToolbar ()
+{
+    FBKVOController* _KVOController;
+}
 
 - (void)jsq_leftBarButtonPressed:(UIButton *)sender;
 - (void)jsq_rightBarButtonPressed:(UIButton *)sender;
 
 - (void)jsq_addObservers;
-- (void)jsq_removeObservers;
+/**
+ *  By: Rishabh Tayal: No need to remove overser anymore.
+ */
+//- (void)jsq_removeObservers;
 
 @end
 
@@ -73,7 +81,10 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 - (void)dealloc
 {
-    [self jsq_removeObservers];
+    /**
+     *  By: Rishabh Tayal: No need to remove overser anymore.
+     */
+    //    [self jsq_removeObservers];
     _contentView = nil;
 }
 
@@ -136,31 +147,53 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 - (void)jsq_addObservers
 {
-    [self jsq_removeObservers];
+    /**
+     *  By: Rishabh Tayal: No need to remove overser anymore.
+     */
+    //    [self jsq_removeObservers];
     
-    [self.contentView addObserver:self
-                       forKeyPath:NSStringFromSelector(@selector(leftBarButtonItem))
-                          options:0
-                          context:kJSQMessagesInputToolbarKeyValueObservingContext];
+    //Create KCO Controller instance
+    _KVOController = [FBKVOController controllerWithObserver:self];
     
-    [self.contentView addObserver:self
-                       forKeyPath:NSStringFromSelector(@selector(rightBarButtonItem))
-                          options:0
-                          context:kJSQMessagesInputToolbarKeyValueObservingContext];
+    /**
+     *  By Rishabh Tayal: Using KVOController for Key Value observe
+     *
+     *  @param @selectorleftBarButtonItem
+     *
+     *  @return
+     */
+    [_KVOController observe:self keyPath:NSStringFromSelector(@selector(leftBarButtonItem)) options:0 context:kJSQMessagesInputToolbarKeyValueObservingContext];
+    [_KVOController observe:self keyPath:NSStringFromSelector(@selector(rightBarButtonItem)) options:0 context:kJSQMessagesInputToolbarKeyValueObservingContext];
+    
+    /**
+     *  By: Rishabh Tayal: Using KVOController for Key Value obsere
+     */
+    //    [self.contentView addObserver:self
+    //                       forKeyPath:NSStringFromSelector(@selector(leftBarButtonItem))
+    //                          options:0
+    //                          context:kJSQMessagesInputToolbarKeyValueObservingContext];
+    //
+    //    [self.contentView addObserver:self
+    //                       forKeyPath:NSStringFromSelector(@selector(rightBarButtonItem))
+    //                          options:0
+    //                          context:kJSQMessagesInputToolbarKeyValueObservingContext];
 }
 
-- (void)jsq_removeObservers
-{
-    @try {
-        [_contentView removeObserver:self
-                          forKeyPath:NSStringFromSelector(@selector(leftBarButtonItem))
-                             context:kJSQMessagesInputToolbarKeyValueObservingContext];
-        
-        [_contentView removeObserver:self
-                          forKeyPath:NSStringFromSelector(@selector(rightBarButtonItem))
-                             context:kJSQMessagesInputToolbarKeyValueObservingContext];
-    }
-    @catch (NSException *__unused exception) { }
-}
+/**
+ *  By: Rishabh Tayal: No need to remove overser anymore.
+ */
+//- (void)jsq_removeObservers
+//{
+//    @try {
+//        [_contentView removeObserver:self
+//                          forKeyPath:NSStringFromSelector(@selector(leftBarButtonItem))
+//                             context:kJSQMessagesInputToolbarKeyValueObservingContext];
+//
+//        [_contentView removeObserver:self
+//                          forKeyPath:NSStringFromSelector(@selector(rightBarButtonItem))
+//                             context:kJSQMessagesInputToolbarKeyValueObservingContext];
+//    }
+//    @catch (NSException *__unused exception) { }
+//}
 
 @end
