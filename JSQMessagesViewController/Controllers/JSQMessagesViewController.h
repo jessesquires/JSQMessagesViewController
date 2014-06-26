@@ -114,6 +114,14 @@
  */
 @property (assign, nonatomic) BOOL showLoadEarlierMessagesHeader;
 
+/**
+ * Specifies an extra space to be added to the calculated contentInsets.top of this view controller's
+ * collectionView.
+ * @discussion Use this if you have any view on top of this view controller's collectionView and you want upper
+ * messages to be displayed correctly.
+ */
+@property (assign, nonatomic) CGFloat extraTopContentInset;
+
 #pragma mark - Class methods
 
 /**
