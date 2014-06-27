@@ -209,5 +209,6 @@
 @optional
 
 - (BOOL)messagesViewControllerShouldBeginEditingTextView:(JSQMessagesViewController *)messagesViewController;
+- (BOOL)messagesViewControllerDidEndEditingTextView:(JSQMessagesViewController *)messagesViewController;
 
 @end

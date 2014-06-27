@@ -569,6 +569,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     [textView resignFirstResponder];
+    if ([self.delegate respondsToSelector:@selector(messagesViewControllerDidEndEditingTextView:)]) {
+        [self.delegate messagesViewControllerDidEndEditingTextView:self];
+    }
 }
 
 #pragma mark - Notifications
