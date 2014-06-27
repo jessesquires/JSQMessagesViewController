@@ -23,6 +23,8 @@
 
 @class JSQMessagesInputToolbar;
 
+@protocol JSQMessagesViewControllerDelegate;
+
 /**
  *  The `JSQMessagesViewController` class is an abstract class that represents a view controller whose content consists of
  *  a `JSQMessagesCollectionView` and `JSQMessagesInputToolbar` and is specialized to display a messaging interface.
@@ -31,6 +33,8 @@
  */
 @interface JSQMessagesViewController : UIViewController <JSQMessagesCollectionViewDataSource,
                                                          JSQMessagesCollectionViewDelegateFlowLayout>
+
+@property (weak, nonatomic) id<JSQMessagesViewControllerDelegate> delegate;
 
 /**
  *  Returns the collection view object managed by this view controller. 
@@ -189,5 +193,13 @@
  *  @param animated Pass `YES` if you want to animate scrolling, `NO` if it should be immediate.
  */
 - (void)scrollToBottomAnimated:(BOOL)animated;
+
+@end
+
+@protocol JSQMessagesViewControllerDelegate<NSObject>
+
+@optional
+
+- (BOOL)messagesViewControllerShouldBeginEditingTextView:(JSQMessagesViewController *)messagesViewController;
 
 @end

@@ -546,6 +546,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - Text view delegate
 
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    if ([self.delegate respondsToSelector:@selector(messagesViewControllerShouldBeginEditingTextView:)]) {
+        return [self.delegate messagesViewControllerShouldBeginEditingTextView:self];
+    }
+    return YES;
+}
+
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     [textView becomeFirstResponder];
