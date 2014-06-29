@@ -687,9 +687,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 	if (self.automaticallyHandlesScrolling && !self.keyboardController.panInProgress)
 	{
 		CGFloat heightDelta = CGRectGetMinY(fromFrame) - CGRectGetMinY(keyboardFrame);
-
 		CGPoint offset = self.collectionView.contentOffset;
 		offset.y += heightDelta;
+		
+		if(offset.y < -self.collectionView.contentInset.top)
+			offset.y = -self.collectionView.contentInset.top;
+			
 		[self.collectionView setContentOffset:offset animated:NO];
 	}
 	
