@@ -30,6 +30,15 @@
 
 @required
 
+- (BOOL)shouldCellRecognizeTaps:(JSQMessagesCollectionViewCell *)cell;
+
+/**
+ *  Tells the delegate that the messageView of a cell has been tapped.
+ *
+ *  @param cell The cell that received the tap.
+ */
+- (void)messagesCollectionViewCellDidTapMessage:(JSQMessagesCollectionViewCell *)cell;
+
 /**
  *  Tells the delegate that the avatarImageView of a cell has been tapped.
  *
@@ -97,10 +106,16 @@
 @property (weak, nonatomic, readonly) UILongPressGestureRecognizer *longPressGestureRecognizer;
 
 /**
+ *  Returns the underlying gesture recognizer for tap gestures in the messageBubbleImageView of the cell.
+ *  This gesture handles the tap event for the messageBubbleImageView and notifies the cell's delegate.
+ */
+@property (weak, nonatomic, readonly) UITapGestureRecognizer *tapGestureRecognizer;
+
+/**
  *  Returns the underlying gesture recognizer for tap gestures in the avatarImageView of the cell.
  *  This gesture handles the tap event for the avatarImageView and notifies the cell's delegate.
  */
-@property (weak, nonatomic, readonly) UITapGestureRecognizer *tapGestureRecognizer;
+@property (weak, nonatomic, readonly) UITapGestureRecognizer *avatarTapGestureRecognizer;
 
 #pragma mark - Class methods
 

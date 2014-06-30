@@ -25,7 +25,7 @@
 #import "UIView+JSQMessages.h"
 
 
-@interface JSQMessagesCollectionViewCell ()
+@interface JSQMessagesCollectionViewCell () <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellTopLabel;
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *messageBubbleTopLabel;
@@ -56,9 +56,10 @@
 
 @property (weak, nonatomic, readwrite) UILongPressGestureRecognizer *longPressGestureRecognizer;
 @property (weak, nonatomic, readwrite) UITapGestureRecognizer *tapGestureRecognizer;
+@property (weak, nonatomic, readwrite) UITapGestureRecognizer *avatarTapGestureRecognizer;
 
 - (void)jsq_handleLongPressGesture:(UILongPressGestureRecognizer *)longPress;
-- (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap;
+- (void)jsq_handleAvatarTapGesture:(UITapGestureRecognizer *)tap;
 
 - (void)jsq_didReceiveMenuWillHideNotification:(NSNotification *)notification;
 - (void)jsq_didReceiveMenuWillShowNotification:(NSNotification *)notification;
@@ -125,14 +126,21 @@
     self.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor],
                                           NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleLongPressGesture:)];
-    longPress.minimumPressDuration = 0.4f;
-    [self addGestureRecognizer:longPress];
-    self.longPressGestureRecognizer = longPress;
+    UILongPressGestureRecognizer* longRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleLongPressGesture:)];
+	longRecognizer.delegate = self;
+    longRecognizer.minimumPressDuration = 0.4f;
+    [self addGestureRecognizer:longRecognizer];
+	self.longPressGestureRecognizer = longRecognizer;
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
-    [self.avatarContainerView addGestureRecognizer:tap];
-    self.tapGestureRecognizer = tap;
+	UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
+	tapRecognizer.delegate = self;
+    [self addGestureRecognizer:tapRecognizer];
+    self.tapGestureRecognizer = tapRecognizer;
+	
+    UITapGestureRecognizer* avatarTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleAvatarTapGesture:)];
+	avatarTapRecognizer.delegate = self;
+    [self.avatarContainerView addGestureRecognizer:avatarTapRecognizer];
+    self.avatarTapGestureRecognizer = avatarTapRecognizer;
 }
 
 - (void)dealloc
@@ -149,8 +157,11 @@
     [_longPressGestureRecognizer removeTarget:nil action:NULL];
     _longPressGestureRecognizer = nil;
     
-    [_tapGestureRecognizer removeTarget:nil action:NULL];
-    _tapGestureRecognizer = nil;
+	[_tapGestureRecognizer removeTarget:nil action:NULL];
+	_tapGestureRecognizer = nil;
+	
+    [_avatarTapGestureRecognizer removeTarget:nil action:NULL];
+    _avatarTapGestureRecognizer = nil;
 }
 
 #pragma mark - Collection view cell
@@ -340,6 +351,11 @@
 
 #pragma mark - Gesture recognizers
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+	return [self.delegate shouldCellRecognizeTaps:self];
+}
+
 - (void)jsq_handleLongPressGesture:(UILongPressGestureRecognizer *)longPress
 {
     if (longPress.state != UIGestureRecognizerStateBegan || ![self becomeFirstResponder]) {
@@ -362,6 +378,19 @@
 }
 
 - (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap
+{
+	self.messageBubbleImageView.highlighted = YES;
+	
+	double delayInSeconds = 0.3;
+	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+	dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+		self.messageBubbleImageView.highlighted = NO;
+	});
+	
+	[self.delegate messagesCollectionViewCellDidTapMessage:self];
+}
+
+- (void)jsq_handleAvatarTapGesture:(UITapGestureRecognizer *)tap
 {
     [self.delegate messagesCollectionViewCellDidTapAvatar:self];
 }

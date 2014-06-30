@@ -43,6 +43,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                      [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
                      nil];
+	
+	/*self.messages = [[NSMutableArray alloc] initWithObjects:
+                     [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages: A messaging UI framework for iOS." sender:self.sender date:[NSDate distantPast]],
+                     nil];*/
     
     /**
      *  Create avatar images once.
@@ -162,7 +166,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  Enable/disable springy bubbles, default is YES.
      *  For best results, toggle from `viewDidAppear:`
      */
-    self.collectionView.collectionViewLayout.springinessEnabled = YES;
+    self.collectionView.collectionViewLayout.springinessEnabled = NO;
 }
 
 
@@ -198,10 +202,12 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
          *  This you should do upon receiving a message:
          *
          *  1. Play sound (optional)
-         *  2. Add new id<JSQMessageData> object to your data source
-         *  3. Call `finishReceivingMessage`
+         *  2. Call `startReceivingMessage`
+         *  3. Add new id<JSQMessageData> object to your data source
+         *  4. Call `finishReceivingMessage`
          */
         [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+        [self startReceivingMessage];
         [self.messages addObject:copyMessage];
         [self finishReceivingMessage];
     });
@@ -245,7 +251,13 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      */
 }
 
-
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+		 didTapMessage:(id<JSQMessageData>)messageData
+           atIndexPath:(NSIndexPath *)indexPath
+{
+	//UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:[messageData sender] message:[messageData text] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+	//[alertView show];
+}
 
 #pragma mark - JSQMessages CollectionView DataSource
 
