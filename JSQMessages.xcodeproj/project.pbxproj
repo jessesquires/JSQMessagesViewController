@@ -615,7 +615,7 @@
 				ORGANIZATIONNAME = "Hexed Bits";
 				TargetAttributes = {
 					885D592818CBD13D00D77BB3 = {
-						DevelopmentTeam = 5VRJU68BZ5;
+						DevelopmentTeam = 9482TP233U;
 					};
 					885D594C18CBD13D00D77BB3 = {
 						TestTargetID = 885D592818CBD13D00D77BB3;

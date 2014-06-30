@@ -43,6 +43,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                      [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
                      nil];
+	
+	/*self.messages = [[NSMutableArray alloc] initWithObjects:
+                     [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages: A messaging UI framework for iOS." sender:self.sender date:[NSDate distantPast]],
+                     nil];*/
     
     /**
      *  Create avatar images once.
@@ -162,7 +166,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  Enable/disable springy bubbles, default is YES.
      *  For best results, toggle from `viewDidAppear:`
      */
-    self.collectionView.collectionViewLayout.springinessEnabled = YES;
+    self.collectionView.collectionViewLayout.springinessEnabled = NO;
 }
 
 
