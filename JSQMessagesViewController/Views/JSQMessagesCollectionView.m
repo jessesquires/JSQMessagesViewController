@@ -20,7 +20,13 @@
 
 #import "JSQMessagesCollectionViewFlowLayout.h"
 #import "JSQMessagesCollectionViewCellIncoming.h"
+#import "JSQMessagesCollectionViewCellIncomingPhoto.h"
+#import "JSQMessagesCollectionViewCellIncomingVideo.h"
+#import "JSQMessagesCollectionViewCellIncomingAudio.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewCellOutgoingPhoto.h"
+#import "JSQMessagesCollectionViewCellOutgoingVideo.h"
+#import "JSQMessagesCollectionViewCellOutgoingAudio.h"
 
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
@@ -49,8 +55,28 @@
     [self registerNib:[JSQMessagesCollectionViewCellIncoming nib]
           forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]];
     
+    [self registerNib:[JSQMessagesCollectionViewCellIncomingPhoto nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncomingPhoto cellReuseIdentifier]];
+    
+    [self registerNib:[JSQMessagesCollectionViewCellIncomingVideo nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncomingVideo cellReuseIdentifier]];
+    
+    [self registerNib:[JSQMessagesCollectionViewCellIncomingAudio nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncomingAudio cellReuseIdentifier]];
+    
+    
     [self registerNib:[JSQMessagesCollectionViewCellOutgoing nib]
           forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
+    
+    [self registerNib:[JSQMessagesCollectionViewCellOutgoingPhoto nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoingPhoto cellReuseIdentifier]];
+    
+    [self registerNib:[JSQMessagesCollectionViewCellOutgoingVideo nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoingVideo cellReuseIdentifier]];
+    
+    [self registerNib:[JSQMessagesCollectionViewCellOutgoingAudio nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoingAudio cellReuseIdentifier]];
+    
     
     [self registerNib:[JSQMessagesTypingIndicatorFooterView nib]
           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter

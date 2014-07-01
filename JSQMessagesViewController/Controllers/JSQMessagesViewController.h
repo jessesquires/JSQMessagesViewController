@@ -76,6 +76,54 @@
 @property (copy, nonatomic) NSString *outgoingCellIdentifier;
 
 /**
+ *  The collection view cell identifier to use for dequeuing outgoing message collection view cells in the collectionView.
+ *
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellOutgoingPhoto cellReuseIdentifier]`.
+ *  This value must not be `nil`.
+ *
+ *  @see `JSQMessagesCollectionViewCellOutgoingPhoto`.
+ *
+ *  @warning Overriding this property's default value is *not* recommended.
+ *  You should only override this property's default value if you are proividing your own cell prototypes.
+ *  These prototypes must be registered with the collectionView for reuse and you are then responsible for
+ *  completely overriding many delegate and data source methods for the collectionView,
+ *  including `collectionView:cellForItemAtIndexPath:`.
+ */
+@property (copy, nonatomic) NSString *outgoingPhotoCellIdentifier;
+
+/**
+ *  The collection view cell identifier to use for dequeuing outgoing message collection view cells in the collectionView.
+ *
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellOutgoingVideo cellReuseIdentifier]`.
+ *  This value must not be `nil`.
+ *
+ *  @see `JSQMessagesCollectionViewCellOutgoingVideo`.
+ *
+ *  @warning Overriding this property's default value is *not* recommended.
+ *  You should only override this property's default value if you are proividing your own cell prototypes.
+ *  These prototypes must be registered with the collectionView for reuse and you are then responsible for
+ *  completely overriding many delegate and data source methods for the collectionView,
+ *  including `collectionView:cellForItemAtIndexPath:`.
+ */
+@property (copy, nonatomic) NSString *outgoingVideoCellIdentifier;
+
+/**
+ *  The collection view cell identifier to use for dequeuing outgoing message collection view cells in the collectionView.
+ *
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellOutgoingAudio cellReuseIdentifier]`.
+ *  This value must not be `nil`.
+ *
+ *  @see `JSQMessagesCollectionViewCellOutgoingAudio`.
+ *
+ *  @warning Overriding this property's default value is *not* recommended.
+ *  You should only override this property's default value if you are proividing your own cell prototypes.
+ *  These prototypes must be registered with the collectionView for reuse and you are then responsible for
+ *  completely overriding many delegate and data source methods for the collectionView,
+ *  including `collectionView:cellForItemAtIndexPath:`.
+ */
+@property (copy, nonatomic) NSString *outgoingAudioCellIdentifier;
+
+/**
  *  The collection view cell identifier to use for dequeuing incoming message collection view cells in the collectionView.
  *
  *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]`. 
@@ -90,6 +138,54 @@
  *  including `collectionView:cellForItemAtIndexPath:`.
  */
 @property (copy, nonatomic) NSString *incomingCellIdentifier;
+
+/**
+ *  The collection view cell identifier to use for dequeuing incoming message collection view cells in the collectionView.
+ *
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellIncomingPhoto cellReuseIdentifier]`.
+ *  This value must not be `nil`.
+ *
+ *  @see `JSQMessagesCollectionViewCellIncomingPhoto`.
+ *
+ *  @warning Overriding this property's default value is *not* recommended.
+ *  You should only override this property's default value if you are proividing your own cell prototypes.
+ *  These prototypes must be registered with the collectionView for reuse and you are then responsible for
+ *  completely overriding many delegate and data source methods for the collectionView,
+ *  including `collectionView:cellForItemAtIndexPath:`.
+ */
+@property (copy, nonatomic) NSString *incomingPhotoCellIdentifier;
+
+/**
+ *  The collection view cell identifier to use for dequeuing incoming message collection view cells in the collectionView.
+ *
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellIncomingVideo cellReuseIdentifier]`.
+ *  This value must not be `nil`.
+ *
+ *  @see `JSQMessagesCollectionViewCellIncomingVideo`.
+ *
+ *  @warning Overriding this property's default value is *not* recommended.
+ *  You should only override this property's default value if you are proividing your own cell prototypes.
+ *  These prototypes must be registered with the collectionView for reuse and you are then responsible for
+ *  completely overriding many delegate and data source methods for the collectionView,
+ *  including `collectionView:cellForItemAtIndexPath:`.
+ */
+@property (copy, nonatomic) NSString *incomingVideoCellIdentifier;
+
+/**
+ *  The collection view cell identifier to use for dequeuing incoming message collection view cells in the collectionView.
+ *
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellIncomingAudio cellReuseIdentifier]`.
+ *  This value must not be `nil`.
+ *
+ *  @see `JSQMessagesCollectionViewCellIncomingAudio`.
+ *
+ *  @warning Overriding this property's default value is *not* recommended.
+ *  You should only override this property's default value if you are proividing your own cell prototypes.
+ *  These prototypes must be registered with the collectionView for reuse and you are then responsible for
+ *  completely overriding many delegate and data source methods for the collectionView,
+ *  including `collectionView:cellForItemAtIndexPath:`.
+ */
+@property (copy, nonatomic) NSString *incomingAudioCellIdentifier;
 
 /**
  *  The color for the typing indicator for incoming messages.

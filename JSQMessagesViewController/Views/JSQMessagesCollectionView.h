@@ -209,6 +209,39 @@
            atIndexPath:(NSIndexPath *)indexPath;
 
 /**
+ *  Notifies the delegate that the avatar image view at the specified indexPath did receive a tap event.
+ *
+ *  @param collectionView      The collection view object that is notifying you of the tap event.
+ *  @param mediaPhotoImageView The media image view that was tapped.
+ *  @param indexPath           The index path of the item for which the avatar was tapped.
+ */
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+      didTapMediaPhoto:(UIImageView *)mediaPhotoImageView
+           atIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  Notifies the delegate that the avatar image view at the specified indexPath did receive a tap event.
+ *
+ *  @param collectionView  The collection view object that is notifying you of the tap event.
+ *  @param videoData       The video data that was tapped.
+ *  @param indexPath       The index path of the item for which the avatar was tapped.
+ */
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+      didTapMediaVideo:(NSData *)videoData
+           atIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  Notifies the delegate that the avatar image view at the specified indexPath did receive a tap event.
+ *
+ *  @param collectionView  The collection view object that is notifying you of the tap event.
+ *  @param audioData       The audio data that was tapped.
+ *  @param indexPath       The index path of the item for which the avatar was tapped.
+ */
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+      didTapMediaAudio:(NSData *)audioData
+           atIndexPath:(NSIndexPath *)indexPath;
+
+/**
  *  Notifies the delegate that the collection view's header did receive a tap event.
  *
  *  @param collectionView The collection view object that is notifying you of the tap event.

@@ -21,6 +21,9 @@
 #import "JSQMessagesLabel.h"
 
 @class JSQMessagesCollectionViewCell;
+@class JSQMessagesCollectionViewCellIncomingPhoto;
+@class JSQMessagesCollectionViewCellIncomingVideo;
+@class JSQMessagesCollectionViewCellIncomingAudio;
 
 /**
  *  The `JSQMessagesCollectionViewCellDelegate` protocol defines methods that allow you to manage
@@ -36,6 +39,27 @@
  *  @param cell The cell that received the tap.
  */
 - (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell;
+
+/**
+ *  Tells the delegate that the photo of a cell has been tapped.
+ *
+ *  @param cell The cell that received the tap.
+ */
+- (void)messagesCollectionViewCellDidTapMediaPhoto:(JSQMessagesCollectionViewCellIncomingPhoto *)cell;
+
+/**
+ *  Tells the delegate that the video of a cell has been tapped.
+ *
+ *  @param cell The cell that received the tap.
+ */
+- (void)messagesCollectionViewCellDidTapMediaVideo:(JSQMessagesCollectionViewCellIncomingVideo *)cell;
+
+/**
+ *  Tells the delegate that the audio of a cell has been tapped.
+ *
+ *  @param cell The cell that received the tap.
+ */
+- (void)messagesCollectionViewCellDidTapMediaAudio:(JSQMessagesCollectionViewCellIncomingAudio *)cell;
 
 @end
 
@@ -77,6 +101,7 @@
  */
 @property (weak, nonatomic, readonly) UITextView *textView;
 
+@property (weak, nonatomic, readonly) UIView *messageBubbleContainerView;
 /**
  *  The bubble image view of the cell that is responsible for displaying bubble images.
  *  The default value is `nil`.

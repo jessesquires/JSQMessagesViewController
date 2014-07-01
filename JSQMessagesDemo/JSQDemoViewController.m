@@ -237,12 +237,30 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     [self finishSendingMessage];
 }
 
-- (void)didPressAccessoryButton:(UIButton *)sender
+- (void)didPressAccessoryButton:(UIButton *)sensder
 {
     NSLog(@"Camera pressed!");
     /**
      *  Accessory button has no default functionality, yet.
      */
+    
+    
+    NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
+    [copyAvatars removeObject:self.sender];
+    
+    NSString *sender = [copyAvatars objectAtIndex:arc4random_uniform((int)[copyAvatars count])];
+    JSQMessage *copyMessage = [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:sender];
+    
+    /**
+     *  This you should do upon receiving a message:
+     *
+     *  1. Play sound (optional)
+     *  2. Add new id<JSQMessageData> object to your data source
+     *  3. Call `finishReceivingMessage`
+     */
+    [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+    [self.messages addObject:copyMessage];
+    [self finishReceivingMessage];
 }
 
 
@@ -381,15 +399,17 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     
     JSQMessage *msg = [self.messages objectAtIndex:indexPath.item];
     
-    if ([msg.sender isEqualToString:self.sender]) {
-        cell.textView.textColor = [UIColor blackColor];
+    if (cell.textView) {
+        if ([msg.sender isEqualToString:self.sender]) {
+            cell.textView.textColor = [UIColor blackColor];
+        }
+        else {
+            cell.textView.textColor = [UIColor whiteColor];
+        }
+        
+        cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
+                                              NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     }
-    else {
-        cell.textView.textColor = [UIColor whiteColor];
-    }
-    
-    cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
-                                          NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     
     return cell;
 }

@@ -28,7 +28,17 @@
 @interface JSQMessage : NSObject <JSQMessageData, NSCoding, NSCopying>
 
 /**
- *  The body text of the message. This value must not be `nil`.
+ *  The type of the message. Default is `JSQMessageText`.
+ */
+@property (nonatomic) JSQMessageType type;
+
+/**
+ *  The media data of the message. Default is `nil`.
+ */
+@property (strong, nonatomic) NSData *data;
+
+/**
+ *  The body text of the message.
  */
 @property (copy, nonatomic) NSString *text;
 
@@ -38,7 +48,7 @@
 @property (copy, nonatomic) NSString *sender;
 
 /**
- *  The date that the message was sent. This value must not be `nil`.
+ *  The date that the message was sent. This value must not be `nil`. Default is current system date.
  */
 @property (copy, nonatomic) NSDate *date;
 
@@ -55,6 +65,36 @@
 + (instancetype)messageWithText:(NSString *)text sender:(NSString *)sender;
 
 /**
+ *    Initializes and returns a message object having the given image, sender, and current system date.
+ *
+ *    @param image  The image of the message.
+ *    @param sender The name of the user who sent the message.
+ *
+ *    @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
+ */
++ (instancetype)messageWithImage:(UIImage *)image sender:(NSString *)sender;
+
+/**
+ *    Initializes and returns a message object having the given video data, sender, and current system date.
+ *
+ *    @param video  The video data of the message.
+ *    @param sender The name of the user who sent the message.
+ *
+ *    @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
+ */
++ (instancetype)messageWithVideo:(NSData *)video sender:(NSString *)sender;
+
+/**
+ *    Initializes and returns a message object having the given audio data, sender, and current system date.
+ *
+ *    @param audio  The audio data of the message.
+ *    @param sender The name of the user who sent the message.
+ *
+ *    @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
+ */
++ (instancetype)messageWithAudio:(NSData *)audio sender:(NSString *)sender;
+
+/**
  *  Initializes and returns a message object having the given text, sender, and date.
  *
  *  @param text   The body text of the message.
@@ -66,6 +106,45 @@
 - (instancetype)initWithText:(NSString *)text
                       sender:(NSString *)sender
                         date:(NSDate *)date;
+
+/**
+ *  Initializes and returns a message object having the given image, sender, and date.
+ *
+ *  @param image  The image of the message.
+ *  @param sender The name of the user who sent the message.
+ *  @param date   The date that the message was sent.
+ *
+ *  @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
+ */
+- (instancetype)initWithImage:(UIImage *)image
+                       sender:(NSString *)sender
+                         date:(NSDate *)date;
+
+/**
+ *  Initializes and returns a message object having the given video data, sender, and date.
+ *
+ *  @param video  The video data of the message.
+ *  @param sender The name of the user who sent the message.
+ *  @param date   The date that the message was sent.
+ *
+ *  @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
+ */
+- (instancetype)initWithVideo:(NSData *)video
+                       sender:(NSString *)sender
+                         date:(NSDate *)date;
+
+/**
+ *  Initializes and returns a message object having the given audio data, sender, and date.
+ *
+ *  @param audio  The audio data of the message.
+ *  @param sender The name of the user who sent the message.
+ *  @param date   The date that the message was sent.
+ *
+ *  @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
+ */
+- (instancetype)initWithAudio:(NSData *)audio
+                       sender:(NSString *)sender
+                         date:(NSDate *)date;
 
 /**
  *  Returns a boolean value that indicates whether a given message is equal to the receiver.

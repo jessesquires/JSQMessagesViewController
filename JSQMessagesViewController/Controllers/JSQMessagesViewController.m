@@ -26,7 +26,14 @@
 #import "JSQMessage.h"
 
 #import "JSQMessagesCollectionViewCellIncoming.h"
+#import "JSQMessagesCollectionViewCellIncomingPhoto.h"
+#import "JSQMessagesCollectionViewCellIncomingVideo.h"
+#import "JSQMessagesCollectionViewCellIncomingAudio.h"
+
 #import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewCellOutgoingPhoto.h"
+#import "JSQMessagesCollectionViewCellOutgoingVideo.h"
+#import "JSQMessagesCollectionViewCellOutgoingAudio.h"
 
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
@@ -126,7 +133,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.automaticallyScrollsToMostRecentMessage = YES;
     
     self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
+    self.outgoingPhotoCellIdentifier = [JSQMessagesCollectionViewCellOutgoingPhoto cellReuseIdentifier];
+    self.outgoingVideoCellIdentifier = [JSQMessagesCollectionViewCellOutgoingVideo cellReuseIdentifier];
+    self.outgoingAudioCellIdentifier = [JSQMessagesCollectionViewCellOutgoingAudio cellReuseIdentifier];
+    
     self.incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
+    self.incomingPhotoCellIdentifier = [JSQMessagesCollectionViewCellIncomingPhoto cellReuseIdentifier];
+    self.incomingVideoCellIdentifier = [JSQMessagesCollectionViewCellIncomingVideo cellReuseIdentifier];
+    self.incomingVideoCellIdentifier = [JSQMessagesCollectionViewCellIncomingAudio cellReuseIdentifier];
     
     self.typingIndicatorColor = [UIColor jsq_messageBubbleLightGrayColor];
     self.showTypingIndicator = NO;
@@ -156,7 +170,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     _sender = nil;
     _outgoingCellIdentifier = nil;
+    _outgoingPhotoCellIdentifier = nil;
+    _outgoingVideoCellIdentifier = nil;
+    _outgoingAudioCellIdentifier = nil;
     _incomingCellIdentifier = nil;
+    _incomingPhotoCellIdentifier = nil;
+    _incomingVideoCellIdentifier = nil;
+    _incomingAudioCellIdentifier = nil;
     
     [_keyboardController endListeningForKeyboard];
     _keyboardController = nil;
@@ -374,20 +394,88 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     NSParameterAssert(messageSender != nil);
     
     BOOL isOutgoingMessage = [messageSender isEqualToString:self.sender];
+    NSString *cellIdentifier = nil;
+    JSQMessageType messageType = [messageData type];
+
+    switch (messageType) {
+        case JSQMessageText:
+            cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
+            break;
+        case JSQMessagePhoto:
+            cellIdentifier = isOutgoingMessage ? self.outgoingPhotoCellIdentifier : self.incomingPhotoCellIdentifier;
+            break;
+        case JSQMessageVideo:
+            cellIdentifier = isOutgoingMessage ? self.outgoingVideoCellIdentifier : self.incomingVideoCellIdentifier;
+            break;
+        case JSQMessageAudio:
+            cellIdentifier = isOutgoingMessage ? self.outgoingAudioCellIdentifier : self.incomingAudioCellIdentifier;
+            break;
+    }
     
-    NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = self;
-    
-    NSString *messageText = [messageData text];
-    NSParameterAssert(messageText != nil);
-    
-    cell.textView.text = messageText;
     cell.messageBubbleImageView = [collectionView.dataSource collectionView:collectionView bubbleImageViewForItemAtIndexPath:indexPath];
     cell.avatarImageView = [collectionView.dataSource collectionView:collectionView avatarImageViewForItemAtIndexPath:indexPath];
     cell.cellTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellTopLabelAtIndexPath:indexPath];
     cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
     cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellBottomLabelAtIndexPath:indexPath];
+    
+    switch (messageType) {
+        case JSQMessageText:
+        {
+            NSString *messageText = [messageData text];
+            NSParameterAssert(messageText != nil);
+            
+            cell.textView.text = messageText;
+            
+            CGFloat bubbleTopLabelInset = 60.0f;
+            
+            if (isOutgoingMessage) {
+                cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
+            }
+            else {
+                cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
+            }
+            
+            cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
+        }
+            break;
+        case JSQMessagePhoto:
+        {
+            NSParameterAssert([messageData data] != nil);
+            UIImage *image = [UIImage imageWithData:[messageData data]];
+            
+            if (isOutgoingMessage) {
+                JSQMessagesCollectionViewCellOutgoingPhoto *inheritCell = (JSQMessagesCollectionViewCellOutgoingPhoto *)cell;
+//                inheritCell.mediaImageView.image = image;
+            }
+            else {
+                JSQMessagesCollectionViewCellIncomingPhoto *inheritCell = (JSQMessagesCollectionViewCellIncomingPhoto *)cell;
+                inheritCell.mediaImageView.image = image;
+            }
+        }
+            break;
+        case JSQMessageVideo:
+        {
+            if (isOutgoingMessage) {
+                JSQMessagesCollectionViewCellOutgoingVideo *inheritCell = (JSQMessagesCollectionViewCellOutgoingVideo *)cell;
+            }
+            else {
+                JSQMessagesCollectionViewCellIncomingVideo *inheritCell = (JSQMessagesCollectionViewCellIncomingVideo *)cell;
+            }
+        }
+            break;
+        case JSQMessageAudio:
+        {
+            if (isOutgoingMessage) {
+                JSQMessagesCollectionViewCellOutgoingAudio *inheritCell = (JSQMessagesCollectionViewCellOutgoingAudio *)cell;
+            }
+            else {
+                JSQMessagesCollectionViewCellIncomingAudio *inheritCell = (JSQMessagesCollectionViewCellIncomingAudio *)cell;
+            }
+        }
+            break;
+    }
     
     if (isOutgoingMessage) {
         cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
@@ -403,17 +491,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     
     cell.backgroundColor = [UIColor clearColor];
-    
-    CGFloat bubbleTopLabelInset = 60.0f;
-    
-    if (isOutgoingMessage) {
-        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
-    }
-    else {
-        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
-    }
-    
-    cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
     
     return cell;
 }
@@ -499,6 +576,18 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
  didTapAvatarImageView:(UIImageView *)avatarImageView
            atIndexPath:(NSIndexPath *)indexPath { }
 
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+      didTapMediaPhoto:(UIImageView *)mediaPhotoImageView
+           atIndexPath:(NSIndexPath *)indexPath {}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+      didTapMediaVideo:(NSData *)videoData
+           atIndexPath:(NSIndexPath *)indexPath {}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+      didTapMediaAudio:(NSData *)audioData
+           atIndexPath:(NSIndexPath *)indexPath {}
+
 #pragma mark - Messages collection view cell delegate
 
 - (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell
@@ -507,6 +596,28 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                            didTapAvatarImageView:cell.avatarImageView
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
 }
+
+- (void)messagesCollectionViewCellDidTapMediaPhoto:(JSQMessagesCollectionViewCellIncomingPhoto *)cell
+{
+    [self.collectionView.delegate collectionView:self.collectionView
+                                didTapMediaPhoto:cell.mediaImageView
+                                     atIndexPath:[self.collectionView indexPathForCell:cell]];
+}
+
+- (void)messagesCollectionViewCellDidTapMediaVideo:(JSQMessagesCollectionViewCellIncomingVideo *)cell
+{
+    [self.collectionView.delegate collectionView:self.collectionView
+                                didTapMediaVideo:cell.videoData
+                                     atIndexPath:[self.collectionView indexPathForCell:cell]];
+}
+
+- (void)messagesCollectionViewCellDidTapMediaAudio:(JSQMessagesCollectionViewCellIncomingAudio *)cell
+{
+    [self.collectionView.delegate collectionView:self.collectionView
+                                didTapMediaAudio:cell.audioData
+                                     atIndexPath:[self.collectionView indexPathForCell:cell]];
+}
+
 
 #pragma mark - Input toolbar delegate
 
