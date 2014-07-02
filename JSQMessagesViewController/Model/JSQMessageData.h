@@ -55,9 +55,9 @@ typedef NS_ENUM(NSUInteger, JSQMessageType) {
 - (NSURL *)url;
 
 /**
- *  @return The thumbnail for the video. Valid only when `type` set to `JSQMessageVideo` or `JSQMessageRemoteVideo`.
+ *  @return The thumbnail for video or photo.
  */
-- (UIImage *)videoThumbnail;
+- (UIImage *)thumbnail;
 
 @required
 

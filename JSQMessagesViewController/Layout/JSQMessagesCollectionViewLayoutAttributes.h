@@ -68,7 +68,7 @@
 @property (assign, nonatomic) UIEdgeInsets textViewFrameInsets;
 
 /**
- *  The size of the `avatarImageView` of a `JSQMessagesCollectionViewCellIncoming`.
+ *  The size of the `avatarImageView` of a `JSQMessagesCollectionViewCellIncoming` or it's subclass.
  *  The size values should be greater than or equal to `0.0`.
  *
  *  @see `JSQMessagesCollectionViewCellIncoming`.
@@ -76,12 +76,24 @@
 @property (assign, nonatomic) CGSize incomingAvatarViewSize;
 
 /**
- *  The size of the `avatarImageView` of a `JSQMessagesCollectionViewCellOutgoing`.
+ *  The size of the `avatarImageView` of a `JSQMessagesCollectionViewCellOutgoing` or it's subclass.
  *  The size values should be greater than or equal to `0.0`.
  *
  *  @see `JSQMessagesCollectionViewCellOutgoing`.
  */
 @property (assign, nonatomic) CGSize outgoingAvatarViewSize;
+
+/**
+ *  The size of the `mediaImageView` of a `JSQMessagesCollectionViewCellOutgoing` or it's subclass.
+ *  The size values should be greater than or equal to `0.0`.
+ */
+@property (assign, nonatomic) CGSize incomingMediaImageSize;
+
+/**
+ *  The size of the `mediaImageView` of a `JSQMessagesCollectionViewCellOutgoing` or it's subclass.
+ *  The size values should be greater than or equal to `0.0`.
+ */
+@property (assign, nonatomic) CGSize outgoingMediaImageSize;
 
 /**
  *  The height of the `cellTopLabel` of a `JSQMessagesCollectionViewCell`.

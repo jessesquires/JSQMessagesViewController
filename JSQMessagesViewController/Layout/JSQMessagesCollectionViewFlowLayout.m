@@ -87,6 +87,10 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     _incomingAvatarViewSize = defaultAvatarSize;
     _outgoingAvatarViewSize = defaultAvatarSize;
     
+    CGSize defaultMediaImageSize = CGSizeMake(120.0f, 160.0f);
+    _incomingMediaImageSize = defaultMediaImageSize;
+    _outgoingMediaImageSize = defaultMediaImageSize;
+    
     _springinessEnabled = NO;
     _springResistanceFactor = 1000;
     
@@ -179,6 +183,18 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 - (void)setOutgoingAvatarViewSize:(CGSize)outgoingAvatarViewSize
 {
     _outgoingAvatarViewSize = outgoingAvatarViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setIncomingMediaImageSize:(CGSize)incomingMediaImageSize
+{
+    _incomingMediaImageSize = incomingMediaImageSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setOutgoingMediaImageSize:(CGSize)outgoingMediaImageSize
+{
+    _outgoingMediaImageSize = outgoingMediaImageSize;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
@@ -341,7 +357,9 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     }
     
     id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
+    NSString *messageSender = [messageData sender];
     
+    BOOL isOutgoingMessage = [messageSender isEqualToString:[self.collectionView.dataSource sender]];
     CGSize finalSize = CGSizeZero;
     
     switch ([messageData type]) {
@@ -367,9 +385,12 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
             break;
         case JSQMessagePhoto:
         case JSQMessageVideo:
-            finalSize = CGSizeMake(100.f, 200.f);
+        case JSQMessageRemotePhoto:
+        case JSQMessageRemoteVideo:
+            finalSize = isOutgoingMessage ? self.outgoingMediaImageSize : self.incomingMediaImageSize;
             break;
         case JSQMessageAudio:
+        case JSQMessageRemoteAudio:
             
             break;
     }
@@ -399,6 +420,10 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     layoutAttributes.incomingAvatarViewSize = self.incomingAvatarViewSize;
     
     layoutAttributes.outgoingAvatarViewSize = self.outgoingAvatarViewSize;
+    
+    layoutAttributes.incomingMediaImageSize = self.incomingMediaImageSize;
+    
+    layoutAttributes.outgoingMediaImageSize = self.outgoingMediaImageSize;
     
     layoutAttributes.cellTopLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
                                                                                 layout:self

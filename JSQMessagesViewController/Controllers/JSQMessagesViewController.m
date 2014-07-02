@@ -402,17 +402,21 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
             break;
         case JSQMessagePhoto:
+        case JSQMessageRemotePhoto:
             cellIdentifier = isOutgoingMessage ? self.outgoingPhotoCellIdentifier : self.incomingPhotoCellIdentifier;
             break;
         case JSQMessageVideo:
+        case JSQMessageRemoteVideo:
             cellIdentifier = isOutgoingMessage ? self.outgoingVideoCellIdentifier : self.incomingVideoCellIdentifier;
             break;
         case JSQMessageAudio:
+        case JSQMessageRemoteAudio:
             cellIdentifier = isOutgoingMessage ? self.outgoingAudioCellIdentifier : self.incomingAudioCellIdentifier;
             break;
     }
     
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
     cell.delegate = self;
     cell.messageBubbleImageView = [collectionView.dataSource collectionView:collectionView bubbleImageViewForItemAtIndexPath:indexPath];
     cell.avatarImageView = [collectionView.dataSource collectionView:collectionView avatarImageViewForItemAtIndexPath:indexPath];
@@ -424,9 +428,18 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     if (isOutgoingMessage) {
         cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
+        cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
+                                                 CGRectGetMinY(cell.avatarImageView.bounds),
+                                                 collectionView.collectionViewLayout.outgoingAvatarViewSize.width,
+                                                 collectionView.collectionViewLayout.outgoingAvatarViewSize.height);
+
     }
     else {
         cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
+        cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
+                                                 CGRectGetMinY(cell.avatarImageView.bounds),
+                                                 collectionView.collectionViewLayout.incomingAvatarViewSize.width,
+                                                 collectionView.collectionViewLayout.incomingAvatarViewSize.height);
     }
     
     switch (messageType) {
@@ -446,51 +459,90 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             UIImage *image = [UIImage imageWithData:[messageData data]];
             
             if (isOutgoingMessage) {
-                JSQMessagesCollectionViewCellOutgoingPhoto *inheritCell = (JSQMessagesCollectionViewCellOutgoingPhoto *)cell;
-                inheritCell.mediaImageView.image = image;
+                JSQMessagesCollectionViewCellOutgoingPhoto *outgoingPhotoCell  = (JSQMessagesCollectionViewCellOutgoingPhoto *)cell;
+                outgoingPhotoCell.mediaImageView.image = image;
             }
             else {
-                JSQMessagesCollectionViewCellIncomingPhoto *inheritCell = (JSQMessagesCollectionViewCellIncomingPhoto *)cell;
-                inheritCell.mediaImageView.image = image;
+                JSQMessagesCollectionViewCellIncomingPhoto *incomingPhotoCell = (JSQMessagesCollectionViewCellIncomingPhoto *)cell;
+                incomingPhotoCell.mediaImageView.image = image;
             }
         }
             break;
         case JSQMessageVideo:
         {
-            if (isOutgoingMessage) {
-                JSQMessagesCollectionViewCellOutgoingVideo *inheritCell = (JSQMessagesCollectionViewCellOutgoingVideo *)cell;
-            }
-            else {
-                JSQMessagesCollectionViewCellIncomingVideo *inheritCell = (JSQMessagesCollectionViewCellIncomingVideo *)cell;
-            }
+//            if (isOutgoingMessage) {
+//                JSQMessagesCollectionViewCellOutgoingVideo *inheritCell = (JSQMessagesCollectionViewCellOutgoingVideo *)cell;
+//            }
+//            else {
+//                JSQMessagesCollectionViewCellIncomingVideo *inheritCell = (JSQMessagesCollectionViewCellIncomingVideo *)cell;
+//            }
         }
             break;
         case JSQMessageAudio:
         {
+//            if (isOutgoingMessage) {
+//                JSQMessagesCollectionViewCellOutgoingAudio *inheritCell = (JSQMessagesCollectionViewCellOutgoingAudio *)cell;
+//            }
+//            else {
+//                JSQMessagesCollectionViewCellIncomingAudio *inheritCell = (JSQMessagesCollectionViewCellIncomingAudio *)cell;
+//            }
+        }
+            break;
+        case JSQMessageRemotePhoto:
+        {
+            NSURL *url = [messageData url];
+            NSParameterAssert(url);
+            
+            UIImageView *mediaImageView = nil;
+            
             if (isOutgoingMessage) {
-                JSQMessagesCollectionViewCellOutgoingAudio *inheritCell = (JSQMessagesCollectionViewCellOutgoingAudio *)cell;
+                JSQMessagesCollectionViewCellOutgoingPhoto *outgoingPhotoCell = (JSQMessagesCollectionViewCellOutgoingPhoto *)cell;
+                mediaImageView = outgoingPhotoCell.mediaImageView;
             }
             else {
-                JSQMessagesCollectionViewCellIncomingAudio *inheritCell = (JSQMessagesCollectionViewCellIncomingAudio *)cell;
+                JSQMessagesCollectionViewCellIncomingPhoto *incomingPhotoCell = (JSQMessagesCollectionViewCellIncomingPhoto *)cell;
+                mediaImageView = incomingPhotoCell.mediaImageView;
+            }
+            
+            void (^JSQMessagesCollectionViewCellAnimateDisplayBlock)(UIImage *, NSTimeInterval) = ^(UIImage *sourceImage, NSTimeInterval duration) {
+                if (duration > 0.f) {
+                    [UIView transitionWithView:mediaImageView.superview
+                                      duration:duration
+                                       options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationOptionAllowUserInteraction
+                                    animations:^{
+                                        mediaImageView.image = sourceImage;
+                                    } completion:nil];
+                }
+                else {
+                    mediaImageView.image = sourceImage;
+                }
+            };
+            
+            if ([messageData data]) {
+                UIImage *sourceImage = [UIImage imageWithData:[messageData data]];
+                JSQMessagesCollectionViewCellAnimateDisplayBlock(sourceImage, 0);
+            }
+            else {
+                // Check whether there has a placeholder image.
+                if ([messageData thumbnail]) {
+                    
+                    UIImage *placeholde = [messageData thumbnail];
+                    mediaImageView.image = placeholde;
+                }
+                
+                [collectionView.dataSource collectionView:collectionView
+                                   wantsSourceImageForURL:url
+                         mediaImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *sourceImage) {
+                             JSQMessagesCollectionViewCellAnimateDisplayBlock(sourceImage, .3f);
+                         }];
             }
         }
             break;
+        case JSQMessageRemoteVideo:
+            break;
+        case JSQMessageRemoteAudio:
+            break;
     }
-    
-    if (isOutgoingMessage) {
-        cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
-                                                 CGRectGetMinY(cell.avatarImageView.bounds),
-                                                 collectionView.collectionViewLayout.outgoingAvatarViewSize.width,
-                                                 collectionView.collectionViewLayout.outgoingAvatarViewSize.height);
-    }
-    else {
-        cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
-                                                 CGRectGetMinY(cell.avatarImageView.bounds),
-                                                 collectionView.collectionViewLayout.incomingAvatarViewSize.width,
-                                                 collectionView.collectionViewLayout.incomingAvatarViewSize.height);
-    }
-    
-    cell.backgroundColor = [UIColor clearColor];
     
     return cell;
 }
@@ -614,15 +666,21 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)messagesCollectionViewCellDidTapMediaVideo:(JSQMessagesCollectionViewCell *)cell
 {
+    id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView
+                                                      messageDataForItemAtIndexPath:[self.collectionView indexPathForCell:cell]];
+    NSData *videoData = [messageData data];
     [self.collectionView.delegate collectionView:self.collectionView
-                                didTapMediaVideo:nil
+                                didTapMediaVideo:videoData
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
 }
 
 - (void)messagesCollectionViewCellDidTapMediaAudio:(JSQMessagesCollectionViewCell *)cell
 {
+    id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView
+                                                      messageDataForItemAtIndexPath:[self.collectionView indexPathForCell:cell]];
+    NSData *audioData = [messageData data];
     [self.collectionView.delegate collectionView:self.collectionView
-                                didTapMediaAudio:nil
+                                didTapMediaAudio:audioData
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
 }
 

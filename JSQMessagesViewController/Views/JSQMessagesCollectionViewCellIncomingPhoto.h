@@ -10,7 +10,15 @@
 
 @interface JSQMessagesCollectionViewCellIncomingPhoto : JSQMessagesCollectionViewCellIncoming
 
+/**
+ *  Return the thumbnail for the photo.
+ */
 @property (weak, nonatomic, readonly) UIImageView *mediaImageView;
+
+/**
+ *  Returns the underlying gesture recognizer for tap gestures in the `mediaImageView` of the cell.
+ *  This gesture handles the tap event for the `mediaImageView` and notifies the cell's delegate.
+ */
 @property (strong, nonatomic, readonly) UITapGestureRecognizer *mediaImageViewTapGestureRecognizer;
 
 @end

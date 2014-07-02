@@ -43,9 +43,9 @@
 @property (strong, nonatomic) NSURL *url;
 
 /**
- *  The thumbnail for the video. Valid only when `type` set to `JSQMessageVideo` or `JSQMessageRemoteVideo`.
+ *  The thumbnail for the video or photo.
  */
-@property (strong, nonatomic) UIImage *videoThumbnail;
+@property (strong, nonatomic) UIImage *thumbnail;
 
 /**
  *  The body text of the message.

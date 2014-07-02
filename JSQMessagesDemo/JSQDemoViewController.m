@@ -42,8 +42,15 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                      [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." sender:kJSQDemoAvatarNameJobs date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage005.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage001"] sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage015.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage016.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage017.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage018.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage019.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage035.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
                      nil];
-    
+
     /**
      *  Create avatar images once.
      *
@@ -77,7 +84,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  Change to add more messages for testing
      */
-    NSUInteger messagesToAdd = 0;
+    NSUInteger messagesToAdd = 5;
     NSArray *copyOfMessages = [self.messages copy];
     for (NSUInteger i = 0; i < messagesToAdd; i++) {
         [self.messages addObjectsFromArray:copyOfMessages];
@@ -419,6 +426,35 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     return cell;
 }
 
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+wantsSourceImageForURL:(NSURL *)url mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+       completionBlock:(JSQMessagesCollectionViewDataSourceCompletionBlock)completionBlock {
+    
+    JSQMessage *message = self.messages[indexPath.item];
+    /**
+     *  Here you can download images from the Internet.
+     */
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        UIImage *sourceImage = nil;
+
+        if (message.data) {
+            sourceImage = [UIImage imageWithData:[message data]];
+        }
+        else {
+            message.data = [NSData dataWithContentsOfURL:url];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                /**
+                 *  Before the image display you should generate a thumbnail to improve performance. Omitted here.
+                 */
+                completionBlock([UIImage imageWithData:message.data]);
+            });
+        }
+    });
+}
 
 
 #pragma mark - JSQMessages collection view flow layout delegate

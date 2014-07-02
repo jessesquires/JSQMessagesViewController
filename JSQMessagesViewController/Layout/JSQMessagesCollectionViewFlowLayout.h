@@ -154,6 +154,20 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 @property (assign, nonatomic) CGSize outgoingAvatarViewSize;
 
 /**
+ *  The size of the thumbnail of video or image for incoming messages.
+ *
+ *  @discussion The default value is `(120.0f, 160.0f)`(3:4). Set to `CGSizeZero` to remove incoming media image.
+ */
+@property (assign, nonatomic) CGSize incomingMediaImageSize;
+
+/**
+ *  The size of the thumbnail of video or image for outgoing messages.
+ *
+ *  @discussion The default value is `(120.0f, 160.0f)`(3:4). Set to `CGSizeZero` to remove incoming media image.
+ */
+@property (assign, nonatomic) CGSize outgoingMediaImageSize;
+
+/**
  *  Computes and returns the size of the `messageBubbleImageView` property of a `JSQMessagesCollectionViewCell` 
  *  to display its entire message contents. Note, this is *not* the entire cell, but only its message bubble.
  *

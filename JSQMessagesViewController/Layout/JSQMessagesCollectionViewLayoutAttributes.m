@@ -54,6 +54,16 @@
     _outgoingAvatarViewSize = CGSizeMake(ceil(outgoingAvatarViewSize.width), ceilf(outgoingAvatarViewSize.height));
 }
 
+- (void)setIncomingMediaImageSize:(CGSize)incomingMediaImageSize {
+    NSParameterAssert(incomingMediaImageSize.width >= 0.0f && incomingMediaImageSize.height >= 0.0f);
+    _incomingMediaImageSize = CGSizeMake(ceil(incomingMediaImageSize.width), ceilf(incomingMediaImageSize.height));;
+}
+
+- (void)setOutgoingMediaImageSize:(CGSize)outgoingMediaImageSize {
+    NSParameterAssert(outgoingMediaImageSize.width >= 0.0f && outgoingMediaImageSize.height >= 0.0f);
+    _outgoingMediaImageSize = CGSizeMake(ceil(outgoingMediaImageSize.width), ceilf(outgoingMediaImageSize.height));;
+}
+
 - (void)setCellTopLabelHeight:(CGFloat)cellTopLabelHeight
 {
     NSParameterAssert(cellTopLabelHeight >= 0.0f);
@@ -91,6 +101,8 @@
         || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewTextContainerInsets, self.textViewTextContainerInsets)
         || !CGSizeEqualToSize(layoutAttributes.incomingAvatarViewSize, self.incomingAvatarViewSize)
         || !CGSizeEqualToSize(layoutAttributes.outgoingAvatarViewSize, self.outgoingAvatarViewSize)
+        || !CGSizeEqualToSize(layoutAttributes.incomingMediaImageSize, self.incomingMediaImageSize)
+        || !CGSizeEqualToSize(layoutAttributes.outgoingMediaImageSize, self.outgoingMediaImageSize)
         || (int)layoutAttributes.messageBubbleLeftRightMargin != (int)self.messageBubbleLeftRightMargin
         || (int)layoutAttributes.cellTopLabelHeight != (int)self.cellTopLabelHeight
         || (int)layoutAttributes.messageBubbleTopLabelHeight != (int)self.messageBubbleTopLabelHeight
@@ -120,6 +132,8 @@
     copy.textViewTextContainerInsets = self.textViewTextContainerInsets;
     copy.incomingAvatarViewSize = self.incomingAvatarViewSize;
     copy.outgoingAvatarViewSize = self.outgoingAvatarViewSize;
+    copy.incomingMediaImageSize = self.incomingMediaImageSize;
+    self.outgoingMediaImageSize = self.outgoingMediaImageSize;
     copy.cellTopLabelHeight = self.cellTopLabelHeight;
     copy.messageBubbleTopLabelHeight = self.messageBubbleTopLabelHeight;
     copy.cellBottomLabelHeight = self.cellBottomLabelHeight;

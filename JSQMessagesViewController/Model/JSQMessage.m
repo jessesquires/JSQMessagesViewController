@@ -109,7 +109,7 @@
     if (self) {
         _type = JSQMessageRemotePhoto;
         _url = url;
-        _data = UIImageJPEGRepresentation(placeholder, 1.f);
+        _thumbnail = placeholder;
         _sender = sender;
         _date = date;
         
@@ -147,7 +147,7 @@
     self = [self init];
     if (self) {
         _type = JSQMessageRemoteVideo;
-        _videoThumbnail = thumbnail;
+        _thumbnail = thumbnail;
         _url = url;
         _sender = sender;
         _date = date;
@@ -168,7 +168,7 @@
     self = [self init];
     if (self) {
         _type = JSQMessageVideo;
-        _videoThumbnail = thumbnail;
+        _thumbnail = thumbnail;
         _data = videoData;
         _sender = sender;
         _date = date;
@@ -281,7 +281,7 @@
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"<%@>[ %@, %@, %@, %d, %d, %@, %@ ]",
-            [self class], self.sender, self.date, self.text, [self.data length], self.type, self.url, self.videoThumbnail];
+            [self class], self.sender, self.date, self.text, [self.data length], self.type, self.url, self.thumbnail];
 }
 
 #pragma mark - NSCoding
@@ -296,7 +296,7 @@
         _data = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(data))];
         _type = [[aDecoder decodeObjectForKey:NSStringFromSelector(@selector(type))] unsignedIntegerValue];
         _url = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(url))];
-        _videoThumbnail = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(videoThumbnail))];
+        _thumbnail = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(thumbnail))];
     }
     return self;
 }
@@ -309,7 +309,7 @@
     [aCoder encodeObject:self.data forKey:NSStringFromSelector(@selector(data))];
     [aCoder encodeObject:@(self.type) forKey:NSStringFromSelector(@selector(type))];
     [aCoder encodeObject:self.url forKey:NSStringFromSelector(@selector(url))];
-    [aCoder encodeObject:self.videoThumbnail forKey:NSStringFromSelector(@selector(videoThumbnail))];
+    [aCoder encodeObject:self.thumbnail forKey:NSStringFromSelector(@selector(thumbnail))];
 }
 
 #pragma mark - NSCopying
@@ -323,7 +323,7 @@
     message.data = [self.data copy];
     message.type = [[@(self.type) copy] unsignedIntegerValue];
     message.url = [self.url copy];
-    message.videoThumbnail = [self.videoThumbnail copy];
+    message.thumbnail = [self.thumbnail copy];
     
     return message;
 }

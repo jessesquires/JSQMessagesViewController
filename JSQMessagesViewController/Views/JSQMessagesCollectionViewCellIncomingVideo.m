@@ -8,24 +8,128 @@
 
 #import "JSQMessagesCollectionViewCellIncomingVideo.h"
 
+#import "UIView+JSQMessages.h"
+
+@interface JSQMessagesCollectionViewCellIncomingVideo ()
+
+@property (weak ,nonatomic, readwrite) IBOutlet UIImageView *mediaImageView;
+@property (strong, nonatomic, readwrite) UITapGestureRecognizer *overlayViewTapGestureRecognizer;
+
+
+- (void)jsq_handleOverlayViewTapped:(UITapGestureRecognizer *)tapGesture;
+
+@end
+
 @implementation JSQMessagesCollectionViewCellIncomingVideo
+@synthesize messageBubbleImageView = _messageBubbleImageView;
 
-- (id)initWithFrame:(CGRect)frame
+- (void)dealloc {
+    _mediaImageView = nil;
+    _overlayViewTapGestureRecognizer = nil;
+}
+
+
+#pragma mark - Overrides
+
++ (UINib *)nib
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+    return [UINib nibWithNibName:NSStringFromClass([self class])
+                          bundle:[NSBundle mainBundle]];
+}
+
++ (NSString *)cellReuseIdentifier
+{
+    return NSStringFromClass([self class]);
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    self.longPressGestureRecognizer.enabled = NO;
+    
+    self.mediaImageView.userInteractionEnabled = YES;
+    
+    self.mediaImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.mediaImageView.clipsToBounds = YES;
+}
+
+- (void)setOverlayView:(UIView *)overlayView
+{
+    if (_overlayView) {
+        [_overlayView removeFromSuperview];
     }
-    return self;
+    
+    if (!overlayView) {
+        _overlayView = nil;
+        return;
+    }
+    
+    
+    [overlayView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.messageBubbleContainerView addSubview:overlayView];
+//    [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:overlayView];
+    
+    NSLayoutConstraint *constraint = [NSLayoutConstraint
+                                      constraintWithItem:overlayView
+                                      attribute:NSLayoutAttributeWidth
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:nil
+                                      attribute:NSLayoutAttributeNotAnAttribute
+                                      multiplier:1.f
+                                      constant:CGRectGetWidth(overlayView.bounds)];
+    
+    [self setNeedsUpdateConstraints];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleOverlayViewTapped:)];
+    [overlayView addGestureRecognizer:tap];
+    self.overlayViewTapGestureRecognizer = tap;
+    
+    _overlayView = overlayView;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)setMessageBubbleImageView:(UIImageView *)messageBubbleImageView
 {
-    // Drawing code
+    if (_messageBubbleImageView) {
+        [_messageBubbleImageView removeFromSuperview];
+    }
+    
+    if (!messageBubbleImageView) {
+        _messageBubbleImageView = nil;
+        return;
+    }
+    
+    messageBubbleImageView.frame = CGRectMake(0.0f,
+                                              0.0f,
+                                              CGRectGetWidth(self.messageBubbleContainerView.bounds),
+                                              CGRectGetHeight(self.messageBubbleContainerView.bounds));
+    
+    [messageBubbleImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.mediaImageView];
+    [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:messageBubbleImageView];
+    [self setNeedsUpdateConstraints];
+    
+    _messageBubbleImageView = messageBubbleImageView;
+    
+    // Delay 0.1 seconds to wait for the completion of their frame set.
+    // It should be optimized , there should be a better way than this to do it.
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self applyMask];
+    });
 }
-*/
+
+- (void)applyMask {
+    CALayer *layer = self.messageBubbleImageView.layer;
+    layer.bounds = self.mediaImageView.frame;
+    self.mediaImageView.layer.mask = layer;
+}
+
+#pragma mark -
+
+- (void)jsq_handleOverlayViewTapped:(UITapGestureRecognizer *)tapGesture
+{
+    [self.delegate messagesCollectionViewCellDidTapMediaVideo:self];
+}
+
+
 
 @end

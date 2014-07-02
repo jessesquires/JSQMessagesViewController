@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		44E73A51192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E73A50192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m */; };
 		452E01461963E6A200842B06 /* JSQMessagesCollectionViewCellOutgoingPhoto.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452E01451963E6A200842B06 /* JSQMessagesCollectionViewCellOutgoingPhoto.xib */; };
+		45C32B4B196445E800DDEA4B /* JSQMessagesCollectionViewCellIncomingVideo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45C32B4A196445E800DDEA4B /* JSQMessagesCollectionViewCellIncomingVideo.xib */; };
 		45E6B38A19628E9D0066458B /* JSQMessagesCollectionViewCellIncomingPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6B38919628E9D0066458B /* JSQMessagesCollectionViewCellIncomingPhoto.m */; };
 		45E6B3991962965A0066458B /* JSQMessagesCollectionViewCellIncomingVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6B3981962965A0066458B /* JSQMessagesCollectionViewCellIncomingVideo.m */; };
 		45E6B39C196296630066458B /* JSQMessagesCollectionViewCellIncomingAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6B39B196296630066458B /* JSQMessagesCollectionViewCellIncomingAudio.m */; };
@@ -120,6 +121,7 @@
 		44E73A4F192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewFlowLayoutInvalidationContext.h; sourceTree = "<group>"; };
 		44E73A50192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewFlowLayoutInvalidationContext.m; sourceTree = "<group>"; };
 		452E01451963E6A200842B06 /* JSQMessagesCollectionViewCellOutgoingPhoto.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesCollectionViewCellOutgoingPhoto.xib; sourceTree = "<group>"; };
+		45C32B4A196445E800DDEA4B /* JSQMessagesCollectionViewCellIncomingVideo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesCollectionViewCellIncomingVideo.xib; sourceTree = "<group>"; };
 		45E6B38819628E9D0066458B /* JSQMessagesCollectionViewCellIncomingPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewCellIncomingPhoto.h; sourceTree = "<group>"; };
 		45E6B38919628E9D0066458B /* JSQMessagesCollectionViewCellIncomingPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewCellIncomingPhoto.m; sourceTree = "<group>"; };
 		45E6B3971962965A0066458B /* JSQMessagesCollectionViewCellIncomingVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewCellIncomingVideo.h; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 				45E6B39D1962A9F90066458B /* JSQMessagesCollectionViewCellIncomingPhoto.xib */,
 				45E6B3971962965A0066458B /* JSQMessagesCollectionViewCellIncomingVideo.h */,
 				45E6B3981962965A0066458B /* JSQMessagesCollectionViewCellIncomingVideo.m */,
+				45C32B4A196445E800DDEA4B /* JSQMessagesCollectionViewCellIncomingVideo.xib */,
 				45E6B39A196296630066458B /* JSQMessagesCollectionViewCellIncomingAudio.h */,
 				45E6B39B196296630066458B /* JSQMessagesCollectionViewCellIncomingAudio.m */,
 				8816A68418E9250400111919 /* JSQMessagesCollectionViewCellOutgoing.h */,
@@ -685,6 +688,7 @@
 				88D1B0CC190606F100AFE162 /* typing.png in Resources */,
 				885D597718CBD43800D77BB3 /* Main.storyboard in Resources */,
 				8816A69E18E9250400111919 /* message_received.aiff in Resources */,
+				45C32B4B196445E800DDEA4B /* JSQMessagesCollectionViewCellIncomingVideo.xib in Resources */,
 				885D596918CBD2A600D77BB3 /* Images.xcassets in Resources */,
 				8816A6B318E9250400111919 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
 				8816A69418E9250400111919 /* bubble_min_tailless.png in Resources */,

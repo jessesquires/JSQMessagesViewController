@@ -15,7 +15,6 @@
 @property (weak ,nonatomic, readwrite) IBOutlet UIImageView *mediaImageView;
 @property (strong, nonatomic, readwrite) UITapGestureRecognizer *mediaImageViewTapGestureRecognizer;
 
-
 - (void)jsq_handleMediaImageViewTapped:(UITapGestureRecognizer *)tapGesture;
 
 @end
@@ -48,7 +47,7 @@
     self.longPressGestureRecognizer.enabled = NO;
     
     self.mediaImageView.userInteractionEnabled = YES;
-
+    
     self.mediaImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.mediaImageView.clipsToBounds = YES;
     
@@ -81,17 +80,18 @@
     [self setNeedsUpdateConstraints];
     
     _messageBubbleImageView = messageBubbleImageView;
+    
+    // Delay 0.1 seconds to wait for the completion of their frame set.
+    // It should be optimized , there should be a better way than this to do it.
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self applyMask];
+    });
 }
 
-- (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
-{
-    [super applyLayoutAttributes:layoutAttributes];
-    
-    if (!self.mediaImageView.layer.mask) {
-        CALayer *layer = self.messageBubbleImageView.layer;
-        layer.bounds = self.mediaImageView.frame;
-        self.mediaImageView.layer.mask = layer;
-    }
+- (void)applyMask {
+    CALayer *layer = self.messageBubbleImageView.layer;
+    layer.bounds = self.mediaImageView.frame;
+    self.mediaImageView.layer.mask = layer;
 }
 
 
