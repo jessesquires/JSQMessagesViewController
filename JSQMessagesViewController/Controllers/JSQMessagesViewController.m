@@ -140,7 +140,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
     self.incomingPhotoCellIdentifier = [JSQMessagesCollectionViewCellIncomingPhoto cellReuseIdentifier];
     self.incomingVideoCellIdentifier = [JSQMessagesCollectionViewCellIncomingVideo cellReuseIdentifier];
-    self.incomingVideoCellIdentifier = [JSQMessagesCollectionViewCellIncomingAudio cellReuseIdentifier];
+    self.incomingAudioCellIdentifier = [JSQMessagesCollectionViewCellIncomingAudio cellReuseIdentifier];
     
     self.typingIndicatorColor = [UIColor jsq_messageBubbleLightGrayColor];
     self.showTypingIndicator = NO;
@@ -373,6 +373,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     return nil;
 }
 
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+  wantsThumbnailForURL:(NSURL *)url
+mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+       completionBlock:(JSQMessagesCollectionViewDataSourceCompletionBlock)completionBlock {};
+
 #pragma mark - Collection view data source
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -470,12 +475,17 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             break;
         case JSQMessageVideo:
         {
-//            if (isOutgoingMessage) {
-//                JSQMessagesCollectionViewCellOutgoingVideo *inheritCell = (JSQMessagesCollectionViewCellOutgoingVideo *)cell;
-//            }
-//            else {
-//                JSQMessagesCollectionViewCellIncomingVideo *inheritCell = (JSQMessagesCollectionViewCellIncomingVideo *)cell;
-//            }
+            if (isOutgoingMessage) {
+//                JSQMessagesCollectionViewCellOutgoingVideo *outgoingVideoCell = (JSQMessagesCollectionViewCellOutgoingVideo *)cell;
+            }
+            else {
+                JSQMessagesCollectionViewCellIncomingVideo *incomingVideoCell = (JSQMessagesCollectionViewCellIncomingVideo *)cell;
+                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+                [button setImage:[UIImage imageNamed:@"demo_play_button"] forState:UIControlStateNormal];
+                [button sizeToFit];
+                incomingVideoCell.overlayView = button;
+                incomingVideoCell.mediaImageView.image = [UIImage imageNamed:@"FICDDemoImage001"];
+            }
         }
             break;
         case JSQMessageAudio:
@@ -531,7 +541,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                 }
                 
                 [collectionView.dataSource collectionView:collectionView
-                                   wantsSourceImageForURL:url
+                                     wantsThumbnailForURL:url
                          mediaImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *sourceImage) {
                              JSQMessagesCollectionViewCellAnimateDisplayBlock(sourceImage, .3f);
                          }];

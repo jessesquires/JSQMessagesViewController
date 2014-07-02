@@ -67,17 +67,8 @@
     
     [overlayView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.messageBubbleContainerView addSubview:overlayView];
-//    [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:overlayView];
-    
-    NSLayoutConstraint *constraint = [NSLayoutConstraint
-                                      constraintWithItem:overlayView
-                                      attribute:NSLayoutAttributeWidth
-                                      relatedBy:NSLayoutRelationEqual
-                                      toItem:nil
-                                      attribute:NSLayoutAttributeNotAnAttribute
-                                      multiplier:1.f
-                                      constant:CGRectGetWidth(overlayView.bounds)];
-    
+
+    [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:overlayView];
     [self setNeedsUpdateConstraints];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleOverlayViewTapped:)];

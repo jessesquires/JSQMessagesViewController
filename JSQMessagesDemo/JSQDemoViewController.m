@@ -49,6 +49,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage018.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage019.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage035.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
+                     [JSQMessage messageWithVideo:[NSData data] sender:kJSQDemoAvatarNameWoz],
                      nil];
 
     /**
@@ -381,6 +382,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     return nil;
 }
 
+
 #pragma mark - UICollectionView DataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -428,7 +430,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
-wantsSourceImageForURL:(NSURL *)url mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+  wantsThumbnailForURL:(NSURL *)url mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
        completionBlock:(JSQMessagesCollectionViewDataSourceCompletionBlock)completionBlock {
     
     JSQMessage *message = self.messages[indexPath.item];
@@ -510,6 +512,14 @@ wantsSourceImageForURL:(NSURL *)url mediaImageViewForItemAtIndexPath:(NSIndexPat
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender
 {
     NSLog(@"Load earlier messages!");
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMediaPhoto:(UIImageView *)mediaPhotoImageView atIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"");
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMediaVideo:(NSData *)videoData atIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"");
 }
 
 @end
