@@ -237,7 +237,7 @@
     [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.textView];
     [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:messageBubbleImageView];
     [self setNeedsUpdateConstraints];
-    NSLog(@"__%@", self.messageBubbleContainerView);
+
     _messageBubbleImageView = messageBubbleImageView;
 }
 

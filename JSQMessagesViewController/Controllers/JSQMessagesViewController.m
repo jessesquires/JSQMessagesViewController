@@ -420,6 +420,15 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
     cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellBottomLabelAtIndexPath:indexPath];
     
+    CGFloat bubbleTopLabelInset = 60.0f;
+    
+    if (isOutgoingMessage) {
+        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
+    }
+    else {
+        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
+    }
+    
     switch (messageType) {
         case JSQMessageText:
         {
@@ -427,15 +436,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             NSParameterAssert(messageText != nil);
             
             cell.textView.text = messageText;
-            
-            CGFloat bubbleTopLabelInset = 60.0f;
-            
-            if (isOutgoingMessage) {
-                cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
-            }
-            else {
-                cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
-            }
             
             cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
         }

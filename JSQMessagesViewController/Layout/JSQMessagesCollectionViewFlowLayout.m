@@ -342,22 +342,37 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
     
-    CGSize avatarSize = [self jsq_avatarSizeForIndexPath:indexPath];
+    CGSize finalSize = CGSizeZero;
     
-    CGFloat maximumTextWidth = self.itemWidth - avatarSize.width - self.messageBubbleLeftRightMargin;
-    
-    CGFloat textInsetsTotal = [self jsq_messageBubbleTextContainerInsetsTotal];
-    
-    CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth - textInsetsTotal, CGFLOAT_MAX)
-                                                         options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-                                                      attributes:@{ NSFontAttributeName : self.messageBubbleFont }
-                                                         context:nil];
-    
-    CGSize stringSize = CGRectIntegral(stringRect).size;
-    
-    CGFloat verticalInsets = self.messageBubbleTextViewTextContainerInsets.top + self.messageBubbleTextViewTextContainerInsets.bottom;
-    
-    CGSize finalSize = CGSizeMake(stringSize.width, stringSize.height + verticalInsets);
+    switch ([messageData type]) {
+        case JSQMessageText:
+        {
+            CGSize avatarSize = [self jsq_avatarSizeForIndexPath:indexPath];
+            
+            CGFloat maximumTextWidth = self.itemWidth - avatarSize.width - self.messageBubbleLeftRightMargin;
+            
+            CGFloat textInsetsTotal = [self jsq_messageBubbleTextContainerInsetsTotal];
+            
+            CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth - textInsetsTotal, CGFLOAT_MAX)
+                                                                 options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                                              attributes:@{ NSFontAttributeName : self.messageBubbleFont }
+                                                                 context:nil];
+            
+            CGSize stringSize = CGRectIntegral(stringRect).size;
+            
+            CGFloat verticalInsets = self.messageBubbleTextViewTextContainerInsets.top + self.messageBubbleTextViewTextContainerInsets.bottom;
+            
+            finalSize = CGSizeMake(stringSize.width, stringSize.height + verticalInsets);
+        }
+            break;
+        case JSQMessagePhoto:
+        case JSQMessageVideo:
+            finalSize = CGSizeMake(100.f, 200.f);
+            break;
+        case JSQMessageAudio:
+            
+            break;
+    }
     
     [self.messageBubbleSizes setObject:[NSValue valueWithCGSize:finalSize] forKey:indexPath];
     

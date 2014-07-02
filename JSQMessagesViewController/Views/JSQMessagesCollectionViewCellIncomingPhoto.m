@@ -48,9 +48,10 @@
     self.longPressGestureRecognizer.enabled = NO;
     
     self.mediaImageView.userInteractionEnabled = YES;
+
     self.mediaImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.mediaImageView.clipsToBounds = YES;
-    self.mediaImageView.backgroundColor = [UIColor redColor];
+    
     
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleMediaImageViewTapped:)];
@@ -75,19 +76,29 @@
                                               CGRectGetHeight(self.messageBubbleContainerView.bounds));
     
     [messageBubbleImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
     [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.mediaImageView];
     [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:messageBubbleImageView];
     [self setNeedsUpdateConstraints];
-    NSLog(@"%@", self.messageBubbleContainerView);
+    
     _messageBubbleImageView = messageBubbleImageView;
 }
 
+- (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
+{
+    [super applyLayoutAttributes:layoutAttributes];
+    
+    if (!self.mediaImageView.layer.mask) {
+        CALayer *layer = self.messageBubbleImageView.layer;
+        layer.bounds = self.mediaImageView.frame;
+        self.mediaImageView.layer.mask = layer;
+    }
+}
 
 
 #pragma mark -
 
-- (void)jsq_handleMediaImageViewTapped:(UITapGestureRecognizer *)tapGesture {
+- (void)jsq_handleMediaImageViewTapped:(UITapGestureRecognizer *)tapGesture
+{
     [self.delegate messagesCollectionViewCellDidTapMediaPhoto:self];
 }
 

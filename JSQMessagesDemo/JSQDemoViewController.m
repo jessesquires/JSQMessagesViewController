@@ -141,6 +141,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(receiveMessagePressed:)];
+    self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:18.f];
 }
 
 - (void)viewWillAppear:(BOOL)animated
