@@ -31,14 +31,34 @@
     return [[JSQMessage alloc] initWithImage:image sender:sender date:[NSDate date]];
 }
 
++ (instancetype)messageWithImageURL:(NSURL *)url placeholderImage:(UIImage *)placeholder sender:(NSString *)sender
+{
+    return [[JSQMessage alloc] initWithImageURL:url placeholderImage:placeholder sender:sender date:[NSDate date]];
+}
+
 + (instancetype)messageWithVideo:(NSData *)video sender:(NSString *)sender {
     return [[JSQMessage alloc] initWithVideo:video sender:sender date:[NSDate date]];
 }
 
-+ (instancetype)messageWithAudio:(NSData *)audio sender:(NSString *)sender {
++ (instancetype)messageWithVideoThumbnail:(UIImage *)thumbnail videoData:(NSData *)videoData sender:(NSString *)sender
+{
+    return [[JSQMessage alloc] initWithVideoThumbnail:thumbnail videoData:videoData sender:sender date:[NSDate date]];
+}
+
++ (instancetype)messageWithVideoThumbnail:(UIImage *)thumbnail videoURL:(NSURL *)url sender:(NSString *)sender
+{
+    return [[JSQMessage alloc] initWithVideoThumbnail:thumbnail videoURL:url sender:sender date:[NSDate date]];
+}
+
++ (instancetype)messageWithAudio:(NSData *)audio sender:(NSString *)sender
+{
     return [[JSQMessage alloc] initWithAudio:audio sender:sender date:[NSDate date]];
 }
 
++ (instancetype)messageWithAudioURL:(NSURL *)url sender:(NSString *)sender
+{
+    return [[JSQMessage alloc] initWithAudioURL:url sender:sender date:[NSDate date]];
+}
 
 - (instancetype)initWithText:(NSString *)text
                       sender:(NSString *)sender
@@ -75,6 +95,28 @@
     return self;
 }
 
+- (instancetype)initWithImageURL:(NSURL *)url
+                placeholderImage:(UIImage *)placeholder
+                          sender:(NSString *)sender
+                            date:(NSDate *)date
+{
+    NSParameterAssert(url != nil);
+    NSParameterAssert(placeholder != nil);
+    NSParameterAssert(sender != nil);
+    NSParameterAssert(date != nil);
+    
+    self = [self init];
+    if (self) {
+        _type = JSQMessageRemotePhoto;
+        _url = url;
+        _data = UIImageJPEGRepresentation(placeholder, 1.f);
+        _sender = sender;
+        _date = date;
+        
+    }
+    return self;
+}
+
 - (instancetype)initWithVideo:(NSData *)video
                        sender:(NSString *)sender
                          date:(NSDate *)date {
@@ -92,6 +134,49 @@
     return self;
 }
 
+- (instancetype)initWithVideoThumbnail:(UIImage *)thumbnail
+                              videoURL:(NSURL *)url
+                                sender:(NSString *)sender
+                                  date:(NSDate *)date
+{
+    NSParameterAssert(thumbnail != nil);
+    NSParameterAssert(url != nil);
+    NSParameterAssert(sender != nil);
+    NSParameterAssert(date != nil);
+    
+    self = [self init];
+    if (self) {
+        _type = JSQMessageRemoteVideo;
+        _videoThumbnail = thumbnail;
+        _url = url;
+        _sender = sender;
+        _date = date;
+    }
+    return self;
+}
+
+- (instancetype)initWithVideoThumbnail:(UIImage *)thumbnail
+                             videoData:(NSData *)videoData
+                                sender:(NSString *)sender
+                                  date:(NSDate *)date
+{
+    NSParameterAssert(thumbnail != nil);
+    NSParameterAssert(videoData != nil);
+    NSParameterAssert(sender != nil);
+    NSParameterAssert(date != nil);
+    
+    self = [self init];
+    if (self) {
+        _type = JSQMessageVideo;
+        _videoThumbnail = thumbnail;
+        _data = videoData;
+        _sender = sender;
+        _date = date;
+    }
+    return self;
+}
+
+
 - (instancetype)initWithAudio:(NSData *)audio
                        sender:(NSString *)sender
                          date:(NSDate *)date {
@@ -103,6 +188,22 @@
     if (self) {
         _type = JSQMessageAudio;
         _data = audio;
+        _sender = sender;
+        _date = date;
+    }
+    return self;
+}
+
+- (instancetype)initWithAudioURL:(NSURL *)url
+                          sender:(NSString *)sender
+                            date:(NSDate *)date
+{
+    NSParameterAssert(url != nil);
+    NSParameterAssert(sender != nil);
+    
+    self = [self init];
+    if (self) {
+        _type = JSQMessageRemoteAudio;
         _sender = sender;
         _date = date;
     }
@@ -144,6 +245,11 @@
         case JSQMessageAudio:
             mediaDataEqual = [self.data isEqualToData:aMessage.data];
             break;
+        case JSQMessageRemotePhoto:
+        case JSQMessageRemoteVideo:
+        case JSQMessageRemoteAudio:
+            mediaDataEqual = [self.url isEqual:aMessage.url];
+            break;
     }
     
     return [self.text isEqualToString:aMessage.text]
@@ -169,13 +275,13 @@
 
 - (NSUInteger)hash
 {
-    return [self.text hash] ^ [self.sender hash] ^ [self.date hash] ^ [self.data hash];
+    return [self.text hash] ^ [self.sender hash] ^ [self.date hash];
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@>[ %@, %@, %@, %d, %d ]",
-            [self class], self.sender, self.date, self.text, [self.data length], self.type];
+    return [NSString stringWithFormat:@"<%@>[ %@, %@, %@, %d, %d, %@, %@ ]",
+            [self class], self.sender, self.date, self.text, [self.data length], self.type, self.url, self.videoThumbnail];
 }
 
 #pragma mark - NSCoding
@@ -189,6 +295,8 @@
         _date = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(date))];
         _data = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(data))];
         _type = [[aDecoder decodeObjectForKey:NSStringFromSelector(@selector(type))] unsignedIntegerValue];
+        _url = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(url))];
+        _videoThumbnail = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(videoThumbnail))];
     }
     return self;
 }
@@ -200,6 +308,8 @@
     [aCoder encodeObject:self.date forKey:NSStringFromSelector(@selector(date))];
     [aCoder encodeObject:self.data forKey:NSStringFromSelector(@selector(data))];
     [aCoder encodeObject:@(self.type) forKey:NSStringFromSelector(@selector(type))];
+    [aCoder encodeObject:self.url forKey:NSStringFromSelector(@selector(url))];
+    [aCoder encodeObject:self.videoThumbnail forKey:NSStringFromSelector(@selector(videoThumbnail))];
 }
 
 #pragma mark - NSCopying
@@ -212,6 +322,8 @@
     message.date = [self.date copy];
     message.data = [self.data copy];
     message.type = [[@(self.type) copy] unsignedIntegerValue];
+    message.url = [self.url copy];
+    message.videoThumbnail = [self.videoThumbnail copy];
     
     return message;
 }

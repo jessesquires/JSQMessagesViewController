@@ -22,7 +22,10 @@ typedef NS_ENUM(NSUInteger, JSQMessageType) {
     JSQMessageText,
     JSQMessagePhoto,
     JSQMessageVideo,
-    JSQMessageAudio
+    JSQMessageAudio,
+    JSQMessageRemotePhoto,
+    JSQMessageRemoteVideo,
+    JSQMessageRemoteAudio
 };
 
 /**
@@ -45,6 +48,16 @@ typedef NS_ENUM(NSUInteger, JSQMessageType) {
  *  @return The media data of the message. This can be photo, video or audio, depends on message type.
  */
 - (NSData *)data;
+
+/**
+ *  @return The url for the data of the message. If the `type` value is non-remote, this value will be ignored.
+ */
+- (NSURL *)url;
+
+/**
+ *  @return The thumbnail for the video. Valid only when `type` set to `JSQMessageVideo` or `JSQMessageRemoteVideo`.
+ */
+- (UIImage *)videoThumbnail;
 
 @required
 

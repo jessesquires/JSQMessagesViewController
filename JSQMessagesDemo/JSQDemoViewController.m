@@ -111,11 +111,13 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 {
     [super viewDidLoad];
     
-    self.title = @"JSQMessages";
+//    self.title = @"JSQMessages";
     
     self.sender = @"Jesse Squires";
     
     [self setupTestModel];
+    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
+    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
     
     /**
      *  Remove camera button since media messages are not yet implemented
@@ -250,8 +252,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     [copyAvatars removeObject:self.sender];
     
     NSString *sender = [copyAvatars objectAtIndex:arc4random_uniform((int)[copyAvatars count])];
-    JSQMessage *copyMessage = [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:sender];
-    
+    static BOOL is = YES;
+    JSQMessage *copyMessage = [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:is ? self.sender : sender];
+    is = ! is;
     /**
      *  This you should do upon receiving a message:
      *
@@ -298,6 +301,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    return nil;
     /**
      *  Return `nil` here if you do not want avatars.
      *  If you do return `nil`, be sure to do the following in `viewDidLoad`:

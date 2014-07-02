@@ -447,7 +447,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             
             if (isOutgoingMessage) {
                 JSQMessagesCollectionViewCellOutgoingPhoto *inheritCell = (JSQMessagesCollectionViewCellOutgoingPhoto *)cell;
-//                inheritCell.mediaImageView.image = image;
+                inheritCell.mediaImageView.image = image;
             }
             else {
                 JSQMessagesCollectionViewCellIncomingPhoto *inheritCell = (JSQMessagesCollectionViewCellIncomingPhoto *)cell;
@@ -597,24 +597,32 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
 }
 
-- (void)messagesCollectionViewCellDidTapMediaPhoto:(JSQMessagesCollectionViewCellIncomingPhoto *)cell
+- (void)messagesCollectionViewCellDidTapMediaPhoto:(JSQMessagesCollectionViewCell *)cell
 {
+    UIImageView *imageView = nil;
+    if ([cell isMemberOfClass:[JSQMessagesCollectionViewCellOutgoingPhoto class]]) {
+        imageView = [(JSQMessagesCollectionViewCellOutgoingPhoto *)cell mediaImageView];
+    }
+    else {
+        imageView = [(JSQMessagesCollectionViewCellIncomingPhoto *)cell mediaImageView];
+    }
+    
     [self.collectionView.delegate collectionView:self.collectionView
-                                didTapMediaPhoto:cell.mediaImageView
+                                didTapMediaPhoto:imageView
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
 }
 
-- (void)messagesCollectionViewCellDidTapMediaVideo:(JSQMessagesCollectionViewCellIncomingVideo *)cell
+- (void)messagesCollectionViewCellDidTapMediaVideo:(JSQMessagesCollectionViewCell *)cell
 {
     [self.collectionView.delegate collectionView:self.collectionView
-                                didTapMediaVideo:cell.videoData
+                                didTapMediaVideo:nil
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
 }
 
-- (void)messagesCollectionViewCellDidTapMediaAudio:(JSQMessagesCollectionViewCellIncomingAudio *)cell
+- (void)messagesCollectionViewCellDidTapMediaAudio:(JSQMessagesCollectionViewCell *)cell
 {
     [self.collectionView.delegate collectionView:self.collectionView
-                                didTapMediaAudio:cell.audioData
+                                didTapMediaAudio:nil
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
 }
 

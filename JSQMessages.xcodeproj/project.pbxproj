@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		44E73A51192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E73A50192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m */; };
+		452E01461963E6A200842B06 /* JSQMessagesCollectionViewCellOutgoingPhoto.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452E01451963E6A200842B06 /* JSQMessagesCollectionViewCellOutgoingPhoto.xib */; };
 		45E6B38A19628E9D0066458B /* JSQMessagesCollectionViewCellIncomingPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6B38919628E9D0066458B /* JSQMessagesCollectionViewCellIncomingPhoto.m */; };
 		45E6B3991962965A0066458B /* JSQMessagesCollectionViewCellIncomingVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6B3981962965A0066458B /* JSQMessagesCollectionViewCellIncomingVideo.m */; };
 		45E6B39C196296630066458B /* JSQMessagesCollectionViewCellIncomingAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6B39B196296630066458B /* JSQMessagesCollectionViewCellIncomingAudio.m */; };
@@ -118,6 +119,7 @@
 		343577012CC24261BE4B61A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E73A4F192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewFlowLayoutInvalidationContext.h; sourceTree = "<group>"; };
 		44E73A50192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewFlowLayoutInvalidationContext.m; sourceTree = "<group>"; };
+		452E01451963E6A200842B06 /* JSQMessagesCollectionViewCellOutgoingPhoto.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesCollectionViewCellOutgoingPhoto.xib; sourceTree = "<group>"; };
 		45E6B38819628E9D0066458B /* JSQMessagesCollectionViewCellIncomingPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewCellIncomingPhoto.h; sourceTree = "<group>"; };
 		45E6B38919628E9D0066458B /* JSQMessagesCollectionViewCellIncomingPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewCellIncomingPhoto.m; sourceTree = "<group>"; };
 		45E6B3971962965A0066458B /* JSQMessagesCollectionViewCellIncomingVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewCellIncomingVideo.h; sourceTree = "<group>"; };
@@ -424,6 +426,7 @@
 				8816A68618E9250400111919 /* JSQMessagesCollectionViewCellOutgoing.xib */,
 				45E6B39F1962B1440066458B /* JSQMessagesCollectionViewCellOutgoingPhoto.h */,
 				45E6B3A01962B1440066458B /* JSQMessagesCollectionViewCellOutgoingPhoto.m */,
+				452E01451963E6A200842B06 /* JSQMessagesCollectionViewCellOutgoingPhoto.xib */,
 				45E6B3A21962B1510066458B /* JSQMessagesCollectionViewCellOutgoingVideo.h */,
 				45E6B3A31962B1510066458B /* JSQMessagesCollectionViewCellOutgoingVideo.m */,
 				45E6B3A51962B1580066458B /* JSQMessagesCollectionViewCellOutgoingAudio.h */,
@@ -693,6 +696,7 @@
 				8816A69018E9250400111919 /* bubble.png in Resources */,
 				8816A69918E9250400111919 /* bubble_stroked_tailless@2x.png in Resources */,
 				88BC4D35190C6086002E5CC6 /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
+				452E01461963E6A200842B06 /* JSQMessagesCollectionViewCellOutgoingPhoto.xib in Resources */,
 				8816A69B18E9250400111919 /* bubble_tailless@2x.png in Resources */,
 				88D1B0C9190604AF00AFE162 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				8816A6B818E9250400111919 /* JSQMessagesToolbarContentView.xib in Resources */,

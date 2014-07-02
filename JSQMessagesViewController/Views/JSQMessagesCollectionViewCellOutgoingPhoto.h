@@ -10,4 +10,7 @@
 
 @interface JSQMessagesCollectionViewCellOutgoingPhoto : JSQMessagesCollectionViewCellOutgoing
 
+@property (weak, nonatomic, readonly) UIImageView *mediaImageView;
+@property (strong, nonatomic, readonly) UITapGestureRecognizer *mediaImageViewTapGestureRecognizer;
+
 @end
