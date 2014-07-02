@@ -480,11 +480,7 @@ mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
             }
             else {
                 JSQMessagesCollectionViewCellIncomingVideo *incomingVideoCell = (JSQMessagesCollectionViewCellIncomingVideo *)cell;
-                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-                [button setImage:[UIImage imageNamed:@"demo_play_button"] forState:UIControlStateNormal];
-                [button sizeToFit];
-                incomingVideoCell.overlayView = button;
-                incomingVideoCell.mediaImageView.image = [UIImage imageNamed:@"FICDDemoImage001"];
+                    incomingVideoCell.mediaImageView.image = [UIImage imageNamed:@"FICDDemoImage001"];
             }
         }
             break;

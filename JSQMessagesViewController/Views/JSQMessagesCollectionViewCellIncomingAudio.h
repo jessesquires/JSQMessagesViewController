@@ -6,9 +6,13 @@
 //  Copyright (c) 2014年 Hexed Bits. All rights reserved.
 //
 
-#import "JSQMessagesCollectionViewCellIncoming.h"
+#import "JSQMessagesCollectionViewCell.h"
 
-@interface JSQMessagesCollectionViewCellIncomingAudio : JSQMessagesCollectionViewCellIncoming
+/**
+ *  A `JSQMessagesCollectionViewCellIncomingAudio` object is a concrete instance of `JSQMessagesCollectionViewCell`
+ *  that represents an incoming audio message item.
+ */
+@interface JSQMessagesCollectionViewCellIncomingAudio : JSQMessagesCollectionViewCell
 
 @property (weak, nonatomic, readonly) NSData *audioData;
 

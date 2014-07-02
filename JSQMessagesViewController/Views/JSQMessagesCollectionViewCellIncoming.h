@@ -20,7 +20,7 @@
 
 /**
  *  A `JSQMessagesCollectionViewCellIncoming` object is a concrete instance of `JSQMessagesCollectionViewCell`
- *  that represents an incoming message data item.
+ *  that represents an incoming text message item.
  */
 @interface JSQMessagesCollectionViewCellIncoming : JSQMessagesCollectionViewCell
 

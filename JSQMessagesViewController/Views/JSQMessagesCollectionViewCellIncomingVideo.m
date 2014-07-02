@@ -8,6 +8,7 @@
 
 #import "JSQMessagesCollectionViewCellIncomingVideo.h"
 
+#import "JSQMessagesCollectionViewLayoutAttributes.h"
 #import "UIView+JSQMessages.h"
 
 @interface JSQMessagesCollectionViewCellIncomingVideo ()
@@ -17,13 +18,15 @@
 
 
 - (void)jsq_handleOverlayViewTapped:(UITapGestureRecognizer *)tapGesture;
+- (void)applyMask;
 
 @end
 
 @implementation JSQMessagesCollectionViewCellIncomingVideo
 @synthesize messageBubbleImageView = _messageBubbleImageView;
 
-- (void)dealloc {
+- (void)dealloc
+{
     _mediaImageView = nil;
     _overlayViewTapGestureRecognizer = nil;
 }
@@ -42,7 +45,8 @@
     return NSStringFromClass([self class]);
 }
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     [super awakeFromNib];
     
     self.longPressGestureRecognizer.enabled = NO;
@@ -51,31 +55,6 @@
     
     self.mediaImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.mediaImageView.clipsToBounds = YES;
-}
-
-- (void)setOverlayView:(UIView *)overlayView
-{
-    if (_overlayView) {
-        [_overlayView removeFromSuperview];
-    }
-    
-    if (!overlayView) {
-        _overlayView = nil;
-        return;
-    }
-    
-    
-    [overlayView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.messageBubbleContainerView addSubview:overlayView];
-
-    [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:overlayView];
-    [self setNeedsUpdateConstraints];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleOverlayViewTapped:)];
-    [overlayView addGestureRecognizer:tap];
-    self.overlayViewTapGestureRecognizer = tap;
-    
-    _overlayView = overlayView;
 }
 
 - (void)setMessageBubbleImageView:(UIImageView *)messageBubbleImageView
@@ -108,19 +87,59 @@
     });
 }
 
-- (void)applyMask {
+- (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
+{
+    [super applyLayoutAttributes:layoutAttributes];
+    
+    JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
+    
+    if (![self.overlayView isEqual:customAttributes.incomingVideoOverlayView]) {
+        self.overlayView = customAttributes.incomingVideoOverlayView;
+    }
+}
+
+#pragma mark - Custom Accessors
+
+- (void)setOverlayView:(UIView *)overlayView
+{
+    if (_overlayView) {
+        [_overlayView removeFromSuperview];
+    }
+    
+    if (!overlayView) {
+        _overlayView = nil;
+        return;
+    }
+    
+    
+    [overlayView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.messageBubbleContainerView addSubview:overlayView];
+
+    [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:overlayView];
+    [self setNeedsUpdateConstraints];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleOverlayViewTapped:)];
+    [overlayView addGestureRecognizer:tap];
+    self.overlayViewTapGestureRecognizer = tap;
+    
+    _overlayView = overlayView;
+}
+
+#pragma mark - Helper
+
+- (void)applyMask
+{
     CALayer *layer = self.messageBubbleImageView.layer;
     layer.bounds = self.mediaImageView.frame;
     self.mediaImageView.layer.mask = layer;
 }
 
-#pragma mark -
+#pragma mark - Delegate
 
 - (void)jsq_handleOverlayViewTapped:(UITapGestureRecognizer *)tapGesture
 {
     [self.delegate messagesCollectionViewCellDidTapMediaVideo:self];
 }
-
 
 
 @end

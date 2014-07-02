@@ -10,22 +10,22 @@
 
 @implementation JSQMessagesCollectionViewCellOutgoingVideo
 
-- (id)initWithFrame:(CGRect)frame
+#pragma mark - Overrides
+
++ (UINib *)nib
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+    return [UINib nibWithNibName:NSStringFromClass([self class])
+                          bundle:[NSBundle mainBundle]];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
++ (NSString *)cellReuseIdentifier
 {
-    // Drawing code
+    return NSStringFromClass([self class]);
 }
-*/
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+}
 
 @end

@@ -119,4 +119,18 @@
  */
 @property (assign, nonatomic) CGFloat cellBottomLabelHeight;
 
+/**
+ *	The view overlaid on the video thumbnail for incoming video messages.
+ *
+ *  @discussion The default value is `nil`. Set to `nil` if you want to ignore all tap events.
+ */
+@property (strong, nonatomic) UIView *incomingVideoOverlayView;
+
+/**
+ *	The view overlaid on the video thumbnail for outgoing video messages.
+ *
+ *  @discussion The default value is `nil`. Set to `nil` if you want to ignore all tap events.
+ */
+@property (strong, nonatomic) UIView *outgoingVideoOverlayView;
+
 @end

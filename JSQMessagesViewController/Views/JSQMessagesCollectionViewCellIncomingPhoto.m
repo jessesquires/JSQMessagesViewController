@@ -16,13 +16,15 @@
 @property (strong, nonatomic, readwrite) UITapGestureRecognizer *mediaImageViewTapGestureRecognizer;
 
 - (void)jsq_handleMediaImageViewTapped:(UITapGestureRecognizer *)tapGesture;
+- (void)applyMask;
 
 @end
 
 @implementation JSQMessagesCollectionViewCellIncomingPhoto
 @synthesize messageBubbleImageView = _messageBubbleImageView;
 
-- (void)dealloc {
+- (void)dealloc
+{
     _mediaImageView = nil;
     _mediaImageViewTapGestureRecognizer = nil;
 }
@@ -41,7 +43,8 @@
     return NSStringFromClass([self class]);
 }
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     [super awakeFromNib];
     
     self.longPressGestureRecognizer.enabled = NO;
@@ -88,7 +91,10 @@
     });
 }
 
-- (void)applyMask {
+#pragma mark - Helper
+
+- (void)applyMask
+{
     CALayer *layer = self.messageBubbleImageView.layer;
     layer.bounds = self.mediaImageView.frame;
     self.mediaImageView.layer.mask = layer;

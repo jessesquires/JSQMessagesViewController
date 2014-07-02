@@ -26,6 +26,8 @@
 - (void)dealloc
 {
     _messageBubbleFont = nil;
+    _incomingVideoOverlayView = nil;
+    _outgoingVideoOverlayView = nil;
 }
 
 #pragma mark - Setters
@@ -82,6 +84,16 @@
     _cellBottomLabelHeight = floorf(cellBottomLabelHeight);
 }
 
+- (void)setIncomingVideoOverlayView:(UIView *)incomingVideoOverlayView
+{
+    _incomingVideoOverlayView = incomingVideoOverlayView;
+}
+
+- (void)setOutgoingVideoOverlayView:(UIView *)outgoingVideoOverlayView
+{
+    _outgoingVideoOverlayView = outgoingVideoOverlayView;
+}
+
 #pragma mark - NSObject
 
 - (BOOL)isEqual:(id)object
@@ -103,6 +115,8 @@
         || !CGSizeEqualToSize(layoutAttributes.outgoingAvatarViewSize, self.outgoingAvatarViewSize)
         || !CGSizeEqualToSize(layoutAttributes.incomingMediaImageSize, self.incomingMediaImageSize)
         || !CGSizeEqualToSize(layoutAttributes.outgoingMediaImageSize, self.outgoingMediaImageSize)
+        || ![layoutAttributes.incomingVideoOverlayView isEqual:self.incomingVideoOverlayView]
+        || ![layoutAttributes.outgoingVideoOverlayView isEqual:self.outgoingVideoOverlayView]
         || (int)layoutAttributes.messageBubbleLeftRightMargin != (int)self.messageBubbleLeftRightMargin
         || (int)layoutAttributes.cellTopLabelHeight != (int)self.cellTopLabelHeight
         || (int)layoutAttributes.messageBubbleTopLabelHeight != (int)self.messageBubbleTopLabelHeight
@@ -133,10 +147,13 @@
     copy.incomingAvatarViewSize = self.incomingAvatarViewSize;
     copy.outgoingAvatarViewSize = self.outgoingAvatarViewSize;
     copy.incomingMediaImageSize = self.incomingMediaImageSize;
-    self.outgoingMediaImageSize = self.outgoingMediaImageSize;
+    copy.outgoingMediaImageSize = self.outgoingMediaImageSize;
     copy.cellTopLabelHeight = self.cellTopLabelHeight;
     copy.messageBubbleTopLabelHeight = self.messageBubbleTopLabelHeight;
     copy.cellBottomLabelHeight = self.cellBottomLabelHeight;
+    copy.incomingVideoOverlayView = self.incomingVideoOverlayView;
+    copy.outgoingVideoOverlayView = self.outgoingVideoOverlayView;
+    
     return copy;
 }
 

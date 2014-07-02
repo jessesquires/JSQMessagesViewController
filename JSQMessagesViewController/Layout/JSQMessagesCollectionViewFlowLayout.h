@@ -154,18 +154,32 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 @property (assign, nonatomic) CGSize outgoingAvatarViewSize;
 
 /**
- *  The size of the thumbnail of video or image for incoming messages.
+ *  The size of the thumbnail of video or image for incoming media messages.
  *
  *  @discussion The default value is `(120.0f, 160.0f)`(3:4). Set to `CGSizeZero` to remove incoming media image.
  */
 @property (assign, nonatomic) CGSize incomingMediaImageSize;
 
 /**
- *  The size of the thumbnail of video or image for outgoing messages.
+ *  The size of the thumbnail of video or image for outgoing media messages.
  *
  *  @discussion The default value is `(120.0f, 160.0f)`(3:4). Set to `CGSizeZero` to remove incoming media image.
  */
 @property (assign, nonatomic) CGSize outgoingMediaImageSize;
+
+/**
+ *	The view overlaid on the video thumbnail for incoming video messages.
+ *
+ *  @discussion The default value is `nil`. Set to `nil` if you want to ignore all tap events.
+ */
+@property (strong, nonatomic) UIView *incomingVideoOverlayView;
+
+/**
+ *	The view overlaid on the video thumbnail for outgoing video messages.
+ *
+ *  @discussion The default value is `nil`. Set to `nil` if you want to ignore all tap events.
+ */
+@property (strong, nonatomic) UIView *outgoingVideoOverlayView;
 
 /**
  *  Computes and returns the size of the `messageBubbleImageView` property of a `JSQMessagesCollectionViewCell` 

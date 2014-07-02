@@ -91,6 +91,9 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     _incomingMediaImageSize = defaultMediaImageSize;
     _outgoingMediaImageSize = defaultMediaImageSize;
     
+    _incomingVideoOverlayView = nil;
+    _outgoingVideoOverlayView = nil;
+    
     _springinessEnabled = NO;
     _springResistanceFactor = 1000;
     
@@ -140,6 +143,9 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     _dynamicAnimator = nil;
     _visibleIndexPaths = nil;
+    
+    _incomingVideoOverlayView = nil;
+    _outgoingVideoOverlayView = nil;
 }
 
 #pragma mark - Setters
@@ -195,6 +201,18 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 - (void)setOutgoingMediaImageSize:(CGSize)outgoingMediaImageSize
 {
     _outgoingMediaImageSize = outgoingMediaImageSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setIncomingVideoOverlayView:(UIView *)incomingVideoOverlayView
+{
+    _incomingVideoOverlayView = incomingVideoOverlayView;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setOutgoingVideoOverlayView:(UIView *)outgoingVideoOverlayView
+{
+    _outgoingVideoOverlayView = outgoingVideoOverlayView;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
@@ -424,6 +442,10 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     layoutAttributes.incomingMediaImageSize = self.incomingMediaImageSize;
     
     layoutAttributes.outgoingMediaImageSize = self.outgoingMediaImageSize;
+    
+    layoutAttributes.incomingVideoOverlayView = self.incomingVideoOverlayView;
+    
+    layoutAttributes.outgoingVideoOverlayView = self.outgoingVideoOverlayView;
     
     layoutAttributes.cellTopLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
                                                                                 layout:self

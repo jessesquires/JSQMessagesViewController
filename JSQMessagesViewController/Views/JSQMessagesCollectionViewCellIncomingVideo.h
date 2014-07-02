@@ -6,13 +6,17 @@
 //  Copyright (c) 2014年 Hexed Bits. All rights reserved.
 //
 
-#import "JSQMessagesCollectionViewCellIncoming.h"
+#import "JSQMessagesCollectionViewCell.h"
 
-@interface JSQMessagesCollectionViewCellIncomingVideo : JSQMessagesCollectionViewCellIncoming
+/**
+ *  A `JSQMessagesCollectionViewCellIncomingVideo` object is a concrete instance of `JSQMessagesCollectionViewCell`
+ *  that represents an incoming video message item.
+ */
+@interface JSQMessagesCollectionViewCellIncomingVideo : JSQMessagesCollectionViewCell
 
 
 /**
- *  The overlay view on the `mediaImageView`. You can easily add a play button to here.
+ *  The overlay view on the `mediaImageView`. You can easily assign it a play button.
  *  Default is `nil`.
  */
 @property (strong, nonatomic) IBOutlet UIView *overlayView;
@@ -20,7 +24,7 @@
 /**
  *  Returns the underlying gesture recognizer for tap gestures in the `overlayView` of the cell.
  *  This gesture handles the tap event for the `overlayView` and notifies the cell's delegate.
- *  Default is `nil`.
+ *  Return `nil` if the `overlayView` not set.
  */
 @property (strong, nonatomic, readonly) UITapGestureRecognizer *overlayViewTapGestureRecognizer;
 

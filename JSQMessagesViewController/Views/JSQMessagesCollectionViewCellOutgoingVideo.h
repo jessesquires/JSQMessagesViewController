@@ -6,9 +6,13 @@
 //  Copyright (c) 2014年 Hexed Bits. All rights reserved.
 //
 
-#import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewCell.h"
 
-@interface JSQMessagesCollectionViewCellOutgoingVideo : JSQMessagesCollectionViewCellOutgoing
+/**
+ *  A `JSQMessagesCollectionViewCellOutgoingVideo` object is a concrete instance of `JSQMessagesCollectionViewCell`
+ *  that represents an outgoing video message item.
+ */
+@interface JSQMessagesCollectionViewCellOutgoingVideo : JSQMessagesCollectionViewCell
 
 /**
  *  Return the thumbnail for the video.

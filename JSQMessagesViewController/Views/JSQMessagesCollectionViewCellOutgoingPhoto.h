@@ -6,9 +6,13 @@
 //  Copyright (c) 2014年 Hexed Bits. All rights reserved.
 //
 
-#import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewCell.h"
 
-@interface JSQMessagesCollectionViewCellOutgoingPhoto : JSQMessagesCollectionViewCellOutgoing
+/**
+ *  A `JSQMessagesCollectionViewCellOutgoingPhoto` object is a concrete instance of `JSQMessagesCollectionViewCell`
+ *  that represents an outgoing photo message item.
+ */
+@interface JSQMessagesCollectionViewCellOutgoingPhoto : JSQMessagesCollectionViewCell
 
 /**
  *  Return the thumbnail for the photo.

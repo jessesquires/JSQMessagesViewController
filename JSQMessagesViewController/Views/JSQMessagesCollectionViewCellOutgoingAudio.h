@@ -6,8 +6,12 @@
 //  Copyright (c) 2014年 Hexed Bits. All rights reserved.
 //
 
-#import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewCell.h"
 
-@interface JSQMessagesCollectionViewCellOutgoingAudio : JSQMessagesCollectionViewCellOutgoing
+/**
+ *  A `JSQMessagesCollectionViewCellOutgoingAudio` object is a concrete instance of `JSQMessagesCollectionViewCell`
+ *  that represents an outgoing audio message item.
+ */
+@interface JSQMessagesCollectionViewCellOutgoingAudio : JSQMessagesCollectionViewCell
 
 @end

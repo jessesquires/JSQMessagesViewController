@@ -50,6 +50,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage019.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage035.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
                      [JSQMessage messageWithVideo:[NSData data] sender:kJSQDemoAvatarNameWoz],
+//                     [JSQMessage messageWithVideo:[NSData data] sender:self.sender],
                      nil];
 
     /**
@@ -126,6 +127,16 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     [self setupTestModel];
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+    
+    UIButton *incommingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [incommingButton setImage:[UIImage imageNamed:@"demo_play_button"] forState:UIControlStateNormal];
+    [incommingButton sizeToFit];
+    self.collectionView.collectionViewLayout.incomingVideoOverlayView = incommingButton;
+    
+    UIButton *outgoingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [outgoingButton setImage:[UIImage imageNamed:@"demo_play_button_large"] forState:UIControlStateNormal];
+    [outgoingButton sizeToFit];
+    self.collectionView.collectionViewLayout.outgoingVideoOverlayView = outgoingButton;
     
     /**
      *  Remove camera button since media messages are not yet implemented
