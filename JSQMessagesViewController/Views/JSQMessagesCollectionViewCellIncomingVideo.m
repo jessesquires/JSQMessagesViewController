@@ -28,6 +28,7 @@
 - (void)dealloc
 {
     _mediaImageView = nil;
+    _overlayView = nil;
     _overlayViewTapGestureRecognizer = nil;
 }
 

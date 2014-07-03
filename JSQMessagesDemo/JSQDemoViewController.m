@@ -54,11 +54,14 @@ static NSString * const kJSQDemoVideoMessageURLString = @"http://archive.org/dow
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage015.jpg"] placeholderImage:placeholderImage sender:self.sender],
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage016.jpg"] placeholderImage:placeholderImage sender:self.sender],
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage017.jpg"] placeholderImage:placeholderImage sender:self.sender],
-                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage018.jpg"] placeholderImage:placeholderImage sender:self.sender],
-                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage019.jpg"] placeholderImage:placeholderImage sender:self.sender],
-                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage035.jpg"] placeholderImage:placeholderImage sender:self.sender],
+                     
+                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage010"] sender:self.sender],
+                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage009"] sender:kJSQDemoAvatarNameCook],
+                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage008"] sender:kJSQDemoAvatarNameWoz],
+                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage007"] sender:self.sender],
+                     
                      [JSQMessage messageWithVideoThumbnail:videoPlaceholderImage videoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] sender:self.sender],
-                     [JSQMessage messageWithVideoThumbnail:videoPlaceholderImage videoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] sender:kJSQDemoAvatarNameWoz],
+                     [JSQMessage messageWithVideoPlaceholderImage:videoPlaceholderImage videoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] sender:kJSQDemoAvatarNameJobs],
                      nil];
 
     /**
@@ -276,7 +279,6 @@ static NSString * const kJSQDemoVideoMessageURLString = @"http://archive.org/dow
      *  Accessory button has no default functionality, yet.
      */
     
-    
     NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
     [copyAvatars removeObject:self.sender];
     
@@ -330,7 +332,6 @@ static NSString * const kJSQDemoVideoMessageURLString = @"http://archive.org/dow
 
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
     /**
      *  Return `nil` here if you do not want avatars.
      *  If you do return `nil`, be sure to do the following in `viewDidLoad`:
@@ -473,7 +474,14 @@ static NSString * const kJSQDemoVideoMessageURLString = @"http://archive.org/dow
             /**
              *  Generate thumbnails from remote url.
              */
-            UIImage *remoteThumbnail = [JSQMessagesThumbnailFactory thumbnaiFromURL:url];
+            UIImage *remoteThumbnail = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:url];
+            
+            /**
+             *  May not support this format or video encoding is incorrect.
+             */
+            if (!remoteThumbnail) {
+                NSLog(@"Error, Can not generate thumbnail for URL: %@", url);
+            }
             
             message.thumbnail = remoteThumbnail;
             message.videoThumbnailPlaceholder = nil;
@@ -487,11 +495,10 @@ static NSString * const kJSQDemoVideoMessageURLString = @"http://archive.org/dow
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
             /**
              *  Before the image display you should generate a thumbnail to improve performance. Omitted here.
              */
-            completionBlock([UIImage imageWithData:message.data]);
+            completionBlock(thumbnail);
         });
     });
 }

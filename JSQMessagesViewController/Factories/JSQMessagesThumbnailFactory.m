@@ -12,13 +12,16 @@
 
 @implementation JSQMessagesThumbnailFactory
 
-+ (UIImage *)thumbnaiFromURL:(NSURL *)videoURL
++ (UIImage *)thumbnailFromVideoURL:(NSURL *)videoURL
 {
-    return [self thumbnaiFromURL:videoURL atTime:CMTimeMake(1, 1)];
+    return [self thumbnailFromVideoURL:videoURL atTime:CMTimeMake(1, 1)];
 }
 
-+ (UIImage *)thumbnaiFromURL:(NSURL *)videoURL atTime:(CMTime)time
++ (UIImage *)thumbnailFromVideoURL:(NSURL *)videoURL atTime:(CMTime)time
 {
+    NSParameterAssert(videoURL != nil);
+    NSParameterAssert(CMTIME_IS_VALID(time));
+    
     AVURLAsset *asset = [AVURLAsset URLAssetWithURL:videoURL options:@{AVURLAssetPreferPreciseDurationAndTimingKey: @NO}];
     AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
     imageGenerator.appliesPreferredTrackTransform = YES;

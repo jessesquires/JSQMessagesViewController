@@ -438,8 +438,8 @@ handlePhotoMessageWithMessageData:(id<JSQMessageData>)messageData
                 
                 [collectionView.dataSource collectionView:collectionView
                                      wantsThumbnailForURL:[messageData url]
-                         mediaImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *sourceImage) {
-                             JSQMessagesCollectionViewCellAnimateDisplayBlock(mediaImageView, sourceImage, .3f);
+                         mediaImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *thumbnail) {
+                             JSQMessagesCollectionViewCellAnimateDisplayBlock(mediaImageView, thumbnail, .3f);
                          }];
             }
         }
@@ -493,8 +493,8 @@ handleVideoMessageWithMessageData:(id<JSQMessageData>)messageData
                 
                 [collectionView.dataSource collectionView:collectionView
                                      wantsThumbnailForURL:[messageData url]
-                         mediaImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *sourceImage) {
-                             JSQMessagesCollectionViewCellAnimateDisplayBlock(mediaImageView, sourceImage, .3f);
+                         mediaImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *thumbnail) {
+                             JSQMessagesCollectionViewCellAnimateDisplayBlock(mediaImageView, thumbnail, .3f);
                          }];
             }
         }
