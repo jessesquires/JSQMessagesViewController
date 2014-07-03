@@ -45,7 +45,7 @@ typedef NS_ENUM(NSUInteger, JSQMessageType) {
 - (NSString *)text;
 
 /**
- *  @return The media data of the message. This can be photo, video or audio, depends on message type.
+ *  @return The media data of the message. This can be photo or audio, depends on the message type.
  */
 - (NSData *)data;
 

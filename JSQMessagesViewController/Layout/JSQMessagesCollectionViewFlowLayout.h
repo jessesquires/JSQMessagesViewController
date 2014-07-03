@@ -156,14 +156,14 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 /**
  *  The size of the thumbnail of video or image for incoming media messages.
  *
- *  @discussion The default value is `(120.0f, 160.0f)`(3:4). Set to `CGSizeZero` to remove incoming media image.
+ *  @discussion The default value is `(120.0f, 160.0f)`(3:4). This value must not be `CGSizeZero`.
  */
 @property (assign, nonatomic) CGSize incomingMediaImageSize;
 
 /**
  *  The size of the thumbnail of video or image for outgoing media messages.
  *
- *  @discussion The default value is `(120.0f, 160.0f)`(3:4). Set to `CGSizeZero` to remove incoming media image.
+ *  @discussion The default value is `(120.0f, 160.0f)`(3:4). This value must not be `CGSizeZero`.
  */
 @property (assign, nonatomic) CGSize outgoingMediaImageSize;
 

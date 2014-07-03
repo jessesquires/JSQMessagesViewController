@@ -38,6 +38,10 @@ static NSString * const kJSQDemoVideoMessageURLString = @"http://archive.org/dow
      *
      *  You should have a mutable array or orderedSet, or something.
      */
+    
+    UIImage *placeholderImage = [UIImage imageNamed:@"demo_image_placeholder"];
+    UIImage *videoPlaceholderImage = [UIImage imageNamed:@"demo_video_placeholder"];
+    
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages: A messaging UI framework for iOS." sender:self.sender date:[NSDate distantPast]],
                      [[JSQMessage alloc] initWithText:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy." sender:kJSQDemoAvatarNameWoz date:[NSDate distantPast]],
@@ -45,16 +49,16 @@ static NSString * const kJSQDemoVideoMessageURLString = @"http://archive.org/dow
                      [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." sender:kJSQDemoAvatarNameJobs date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
-                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage005.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage001"] sender:self.sender],
-                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage015.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
-                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage016.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
-                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage017.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
-                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage018.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
-                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage019.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
-                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage035.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
-                     [JSQMessage messageWithVideoThumbnail:[UIImage imageNamed:@"FICDDemoImage002"] videoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] sender:self.sender],
-                     [JSQMessage messageWithVideoThumbnail:[UIImage imageNamed:@"FICDDemoImage003"] videoURL:[NSURL URLWithString:@""] sender:kJSQDemoAvatarNameWoz],
                      
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage005.jpg"] placeholderImage:placeholderImage sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage015.jpg"] placeholderImage:placeholderImage sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage016.jpg"] placeholderImage:placeholderImage sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage017.jpg"] placeholderImage:placeholderImage sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage018.jpg"] placeholderImage:placeholderImage sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage019.jpg"] placeholderImage:placeholderImage sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage035.jpg"] placeholderImage:placeholderImage sender:self.sender],
+                     [JSQMessage messageWithVideoThumbnail:videoPlaceholderImage videoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] sender:self.sender],
+                     [JSQMessage messageWithVideoThumbnail:videoPlaceholderImage videoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] sender:kJSQDemoAvatarNameWoz],
                      nil];
 
     /**
@@ -90,7 +94,7 @@ static NSString * const kJSQDemoVideoMessageURLString = @"http://archive.org/dow
     /**
      *  Change to add more messages for testing
      */
-    NSUInteger messagesToAdd = 5;
+    NSUInteger messagesToAdd = 0;
     NSArray *copyOfMessages = [self.messages copy];
     for (NSUInteger i = 0; i < messagesToAdd; i++) {
         [self.messages addObjectsFromArray:copyOfMessages];
@@ -133,13 +137,15 @@ static NSString * const kJSQDemoVideoMessageURLString = @"http://archive.org/dow
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
     
+    self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:18.f];
+    
     UIButton *incommingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [incommingButton setImage:[UIImage imageNamed:@"demo_play_button"] forState:UIControlStateNormal];
+    [incommingButton setImage:[UIImage imageNamed:@"demo_play_button_in"] forState:UIControlStateNormal];
     [incommingButton sizeToFit];
     self.collectionView.collectionViewLayout.incomingVideoOverlayView = incommingButton;
     
     UIButton *outgoingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [outgoingButton setImage:[UIImage imageNamed:@"demo_play_button_large"] forState:UIControlStateNormal];
+    [outgoingButton setImage:[UIImage imageNamed:@"demo_play_button_out"] forState:UIControlStateNormal];
     [outgoingButton sizeToFit];
     self.collectionView.collectionViewLayout.outgoingVideoOverlayView = outgoingButton;
     
@@ -167,7 +173,6 @@ static NSString * const kJSQDemoVideoMessageURLString = @"http://archive.org/dow
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(receiveMessagePressed:)];
-    self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:18.f];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -547,11 +552,13 @@ static NSString * const kJSQDemoVideoMessageURLString = @"http://archive.org/dow
     NSLog(@"Load earlier messages!");
 }
 
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMediaPhoto:(UIImageView *)mediaPhotoImageView atIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMediaPhoto:(UIImageView *)mediaPhotoImageView atIndexPath:(NSIndexPath *)indexPath
+{
     NSLog(@"");
 }
 
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMediaVideo:(NSData *)videoData atIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMediaVideoForURL:(NSURL *)videoURL atIndexPath:(NSIndexPath *)indexPath
+{
     NSLog(@"");
 }
 

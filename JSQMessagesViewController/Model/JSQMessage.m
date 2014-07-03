@@ -18,6 +18,8 @@
 
 #import "JSQMessage.h"
 
+#import "NSString+JSQMessages.h"
+
 @implementation JSQMessage
 
 #pragma mark - Initialization
@@ -35,11 +37,6 @@
 + (instancetype)messageWithImageURL:(NSURL *)url placeholderImage:(UIImage *)placeholder sender:(NSString *)sender
 {
     return [[self alloc] initWithImageURL:url placeholderImage:placeholder sender:sender date:[NSDate date]];
-}
-
-+ (instancetype)messageWithVideoThumbnail:(UIImage *)thumbnail videoData:(NSData *)videoData sender:(NSString *)sender
-{
-    return [[self alloc] initWithVideoThumbnail:thumbnail videoData:videoData sender:sender date:[NSDate date]];
 }
 
 + (instancetype)messageWithVideoThumbnail:(UIImage *)thumbnail videoURL:(NSURL *)url sender:(NSString *)sender
@@ -102,16 +99,25 @@
                           sender:(NSString *)sender
                             date:(NSDate *)date
 {
-    NSParameterAssert(url != nil);
+    NSParameterAssert(url != nil && [[[url absoluteString] jsq_stringByTrimingWhitespace] length] > 0);
     NSParameterAssert(placeholder != nil);
     NSParameterAssert(sender != nil);
     NSParameterAssert(date != nil);
     
     self = [self init];
     if (self) {
-        _type = JSQMessageRemotePhoto;
-        _url = url;
-        _thumbnail = placeholder;
+        
+        if ([url isFileURL]) {
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            NSParameterAssert(data != nil);
+            _data = data;
+            _type = JSQMessagePhoto;
+        }
+        else {
+            _type = JSQMessageRemotePhoto;
+            _url = url;
+            _thumbnail = placeholder;
+        }
         _sender = sender;
         _date = date;
         
@@ -125,36 +131,23 @@
                                   date:(NSDate *)date
 {
     NSParameterAssert(thumbnail != nil);
-    NSParameterAssert(url != nil);
+    NSParameterAssert(url != nil && [[[url absoluteString] jsq_stringByTrimingWhitespace] length] > 0);
     NSParameterAssert(sender != nil);
     NSParameterAssert(date != nil);
     
     self = [self init];
     if (self) {
-        _type = JSQMessageRemoteVideo;
+        if ([url isFileURL]) {
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            NSParameterAssert(data != nil);
+            _type = JSQMessageVideo;
+        }
+        else {
+            _type = JSQMessageRemoteVideo;
+        }
+        
         _thumbnail = thumbnail;
         _url = url;
-        _sender = sender;
-        _date = date;
-    }
-    return self;
-}
-
-- (instancetype)initWithVideoThumbnail:(UIImage *)thumbnail
-                             videoData:(NSData *)videoData
-                                sender:(NSString *)sender
-                                  date:(NSDate *)date
-{
-    NSParameterAssert(thumbnail != nil);
-    NSParameterAssert(videoData != nil);
-    NSParameterAssert(sender != nil);
-    NSParameterAssert(date != nil);
-    
-    self = [self init];
-    if (self) {
-        _type = JSQMessageVideo;
-        _thumbnail = thumbnail;
-        _data = videoData;
         _sender = sender;
         _date = date;
     }
@@ -166,8 +159,8 @@
                                        sender:(NSString *)sender
                                          date:(NSDate *)date
 {
+    NSParameterAssert(url != nil && ![url isFileURL] && [[[url absoluteString] jsq_stringByTrimingWhitespace] length] > 0);
     NSParameterAssert(placeholder != nil);
-    NSParameterAssert(url != nil);
     NSParameterAssert(sender != nil);
     NSParameterAssert(date != nil);
     
@@ -203,7 +196,7 @@
                           sender:(NSString *)sender
                             date:(NSDate *)date
 {
-    NSParameterAssert(url != nil);
+    NSParameterAssert(url != nil && [[[url absoluteString] jsq_stringByTrimingWhitespace] length] > 0);
     NSParameterAssert(sender != nil);
     
     self = [self init];

@@ -95,8 +95,8 @@
     
     JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
     
-    if (![self.overlayView isEqual:customAttributes.incomingVideoOverlayView]) {
-        self.overlayView = customAttributes.incomingVideoOverlayView;
+    if (![self.overlayView isEqual:customAttributes.outgoingVideoOverlayView]) {
+        self.overlayView = customAttributes.outgoingVideoOverlayView;
     }
 }
 
@@ -117,7 +117,6 @@
     
     [overlayView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.messageBubbleContainerView addSubview:overlayView];
-    
     [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:overlayView];
     [self setNeedsUpdateConstraints];
     

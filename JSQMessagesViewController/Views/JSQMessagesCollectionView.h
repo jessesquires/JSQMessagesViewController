@@ -239,21 +239,6 @@ mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
  *  Notifies the delegate that the avatar image view at the specified indexPath did receive a tap event.
  *
  *  @param collectionView  The collection view object that is notifying you of the tap event.
- *  @param videoData       The video data that was tapped.
- *  @param indexPath       The index path of the item for which the avatar was tapped.
- *
- *  @note This method is higher priority than the `collectionView:didTapMediaVideoForURL:atIndexPath:`,
- *  If the message has a URL and data, will call this method,
- *  and the `collectionView:didTapMediaVideoForURL:atIndexPath:` will not be called.
- */
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView
-      didTapMediaVideo:(NSData *)videoData
-           atIndexPath:(NSIndexPath *)indexPath;
-
-/**
- *  Notifies the delegate that the avatar image view at the specified indexPath did receive a tap event.
- *
- *  @param collectionView  The collection view object that is notifying you of the tap event.
  *  @param videoURL        The video url that was tapped.
  *  @param indexPath       The index path of the item for which the avatar was tapped.
  */

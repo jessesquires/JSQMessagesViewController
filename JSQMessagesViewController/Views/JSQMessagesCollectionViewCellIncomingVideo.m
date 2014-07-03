@@ -115,10 +115,8 @@
         return;
     }
     
-    
     [overlayView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.messageBubbleContainerView addSubview:overlayView];
-    
     [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:overlayView];
     [self setNeedsUpdateConstraints];
     

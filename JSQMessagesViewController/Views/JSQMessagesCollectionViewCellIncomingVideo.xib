@@ -44,23 +44,12 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kMd-XW-u8H">
-                                <rect key="frame" x="102" y="27" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="kMd-XW-u8H" secondAttribute="bottom" priority="250" constant="27" id="E69-u0-Z7z"/>
                             <constraint firstItem="hH6-1u-J1w" firstAttribute="top" secondItem="2eH-Gq-7jJ" secondAttribute="top" id="GcD-8t-mA7"/>
-                            <constraint firstAttribute="trailing" secondItem="kMd-XW-u8H" secondAttribute="trailing" priority="250" constant="102" id="Jre-g7-qhM"/>
-                            <constraint firstAttribute="centerX" secondItem="kMd-XW-u8H" secondAttribute="centerX" id="Wpx-IE-YGq"/>
                             <constraint firstAttribute="bottom" secondItem="hH6-1u-J1w" secondAttribute="bottom" id="cnv-jb-xQt"/>
                             <constraint firstItem="hH6-1u-J1w" firstAttribute="leading" secondItem="2eH-Gq-7jJ" secondAttribute="leading" constant="6" id="dcm-Po-G6h"/>
-                            <constraint firstItem="kMd-XW-u8H" firstAttribute="leading" secondItem="2eH-Gq-7jJ" secondAttribute="leading" priority="250" constant="102" id="oIB-dX-e3e"/>
-                            <constraint firstItem="kMd-XW-u8H" firstAttribute="top" secondItem="2eH-Gq-7jJ" secondAttribute="top" priority="250" constant="27" id="t6H-FO-rej"/>
-                            <constraint firstAttribute="centerY" secondItem="kMd-XW-u8H" secondAttribute="centerY" id="ww7-9L-EZ2"/>
                             <constraint firstAttribute="trailing" secondItem="hH6-1u-J1w" secondAttribute="trailing" id="zcm-eh-MNC"/>
                         </constraints>
                     </view>
@@ -121,7 +110,6 @@
                 <outlet property="messageBubbleLeftRightMarginConstraint" destination="0os-6y-VSs" id="byO-P0-wX7"/>
                 <outlet property="messageBubbleTopLabel" destination="vZi-HV-Jfp" id="Agz-7f-XQB"/>
                 <outlet property="messageBubbleTopLabelHeightConstraint" destination="pUZ-aX-Iwp" id="rBQ-dl-Jli"/>
-                <outlet property="overlayView" destination="kMd-XW-u8H" id="BeD-Wt-8yR"/>
                 <outlet property="textViewAvatarHorizontalSpaceConstraint" destination="dcm-Po-G6h" id="hzM-q9-Fht"/>
                 <outlet property="textViewBottomVerticalSpaceConstraint" destination="cnv-jb-xQt" id="zyA-bN-X4M"/>
                 <outlet property="textViewMarginHorizontalSpaceConstraint" destination="zcm-eh-MNC" id="cq9-Dd-ONl"/>

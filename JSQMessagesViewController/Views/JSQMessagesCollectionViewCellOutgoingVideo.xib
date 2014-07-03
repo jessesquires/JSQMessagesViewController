@@ -43,24 +43,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="238" height="94"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ly-hP-TKK">
-                                <rect key="frame" x="102" y="27" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="sVx-8Y-exZ" secondAttribute="bottom" id="3AG-nu-M6B"/>
-                            <constraint firstItem="5ly-hP-TKK" firstAttribute="top" secondItem="0aB-iI-UCJ" secondAttribute="top" constant="27" id="7Of-p4-uMM"/>
-                            <constraint firstAttribute="centerX" secondItem="5ly-hP-TKK" secondAttribute="centerX" id="Cg4-YZ-F5I"/>
                             <constraint firstItem="sVx-8Y-exZ" firstAttribute="leading" secondItem="0aB-iI-UCJ" secondAttribute="leading" id="DAi-b8-53f"/>
                             <constraint firstItem="sVx-8Y-exZ" firstAttribute="top" secondItem="0aB-iI-UCJ" secondAttribute="top" id="Hvu-bq-u8t"/>
                             <constraint firstAttribute="trailing" secondItem="sVx-8Y-exZ" secondAttribute="trailing" constant="6" id="MzC-Bx-tgA"/>
-                            <constraint firstAttribute="centerY" secondItem="5ly-hP-TKK" secondAttribute="centerY" id="tBY-9Q-5CI"/>
-                            <constraint firstAttribute="bottom" secondItem="5ly-hP-TKK" secondAttribute="bottom" constant="27" id="vfb-KW-cby"/>
-                            <constraint firstItem="5ly-hP-TKK" firstAttribute="leading" secondItem="0aB-iI-UCJ" secondAttribute="leading" constant="102" id="wJC-s1-dJm"/>
-                            <constraint firstAttribute="trailing" secondItem="5ly-hP-TKK" secondAttribute="trailing" constant="102" id="xbR-mC-oKw"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="meJ-Lv-BZH">
@@ -121,7 +110,6 @@
                 <outlet property="messageBubbleLeftRightMarginConstraint" destination="0c5-Ep-alp" id="7eC-m8-GsF"/>
                 <outlet property="messageBubbleTopLabel" destination="6ut-Vg-Dng" id="7Ef-Be-0dy"/>
                 <outlet property="messageBubbleTopLabelHeightConstraint" destination="jkI-Qs-CsZ" id="kXK-T6-1Mj"/>
-                <outlet property="overlayView" destination="5ly-hP-TKK" id="ZuY-0X-1dk"/>
                 <outlet property="textViewAvatarHorizontalSpaceConstraint" destination="MzC-Bx-tgA" id="BRG-WF-e9C"/>
                 <outlet property="textViewBottomVerticalSpaceConstraint" destination="3AG-nu-M6B" id="tiY-42-1nk"/>
                 <outlet property="textViewMarginHorizontalSpaceConstraint" destination="DAi-b8-53f" id="lDf-SB-C6r"/>

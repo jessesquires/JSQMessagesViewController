@@ -85,13 +85,13 @@
 
 /**
  *  The size of the `mediaImageView` of a `JSQMessagesCollectionViewCellOutgoing` or it's subclass.
- *  The size values should be greater than or equal to `0.0`.
+ *  The size values should be greater than `0.0`.
  */
 @property (assign, nonatomic) CGSize incomingMediaImageSize;
 
 /**
  *  The size of the `mediaImageView` of a `JSQMessagesCollectionViewCellOutgoing` or it's subclass.
- *  The size values should be greater than or equal to `0.0`.
+ *  The size values should be greater than `0.0`.
  */
 @property (assign, nonatomic) CGSize outgoingMediaImageSize;
 

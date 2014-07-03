@@ -48,6 +48,22 @@
 #import "UIColor+JSQMessages.h"
 
 
+
+static inline void JSQMessagesCollectionViewCellAnimateDisplayBlock(UIImageView *mediaImageView, UIImage *thumbnail, NSTimeInterval duration) {
+    if (duration > 0.f) {
+        [UIView transitionWithView:mediaImageView.superview
+                          duration:duration
+                           options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationOptionAllowUserInteraction
+                        animations:^{
+                            mediaImageView.image = thumbnail;
+                        } completion:nil];
+    }
+    else {
+        mediaImageView.image = thumbnail;
+    }
+}
+
+
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
 
@@ -378,6 +394,147 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
        completionBlock:(JSQMessagesCollectionViewDataSourceCompletionBlock)completionBlock {};
 
+
+#pragma mark - CollectionView Message Configure Helper
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+handlePhotoMessageWithMessageData:(id<JSQMessageData>)messageData
+    collectionViewCell:(JSQMessagesCollectionViewCell *)cell
+         cellIndexPath:(NSIndexPath *)indexPath isOutgoingMessage:(BOOL)isOutgoingMessage
+{
+    UIImageView *mediaImageView = nil;
+    
+    if (isOutgoingMessage) {
+        JSQMessagesCollectionViewCellOutgoingPhoto *outgoingPhotoCell = (JSQMessagesCollectionViewCellOutgoingPhoto *)cell;
+        mediaImageView = outgoingPhotoCell.mediaImageView;
+    }
+    else {
+        JSQMessagesCollectionViewCellIncomingPhoto *incomingPhotoCell = (JSQMessagesCollectionViewCellIncomingPhoto *)cell;
+        mediaImageView = incomingPhotoCell.mediaImageView;
+    }
+    
+    switch ([messageData type]) {
+        case JSQMessagePhoto:
+        {
+            NSParameterAssert([messageData data] != nil);
+            UIImage *image = [UIImage imageWithData:[messageData data]];
+            mediaImageView.image = image;
+        }
+            break;
+            
+        case JSQMessageRemotePhoto:
+        {
+            if ([messageData data]) {
+                UIImage *thumbnail = [UIImage imageWithData:[messageData data]];
+                JSQMessagesCollectionViewCellAnimateDisplayBlock(mediaImageView, thumbnail, 0);
+            }
+            else {
+                NSParameterAssert([messageData url] != nil);
+                
+                if ([messageData thumbnail]) {
+                    UIImage *placeholde = [messageData thumbnail];
+                    mediaImageView.image = placeholde;
+                }
+                
+                [collectionView.dataSource collectionView:collectionView
+                                     wantsThumbnailForURL:[messageData url]
+                         mediaImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *sourceImage) {
+                             JSQMessagesCollectionViewCellAnimateDisplayBlock(mediaImageView, sourceImage, .3f);
+                         }];
+            }
+        }
+            break;
+        case JSQMessageText:
+        case JSQMessageVideo:
+        case JSQMessageAudio:
+        case JSQMessageRemoteVideo:
+        case JSQMessageRemoteAudio:
+            NSAssert(NO, @"ERROR: Pass in invalid message type [%d] to method: %s", [messageData type], __PRETTY_FUNCTION__);
+            break;
+            
+    }
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+handleVideoMessageWithMessageData:(id<JSQMessageData>)messageData
+    collectionViewCell:(JSQMessagesCollectionViewCell *)cell
+         cellIndexPath:(NSIndexPath *)indexPath isOutgoingMessage:(BOOL)isOutgoingMessage
+{
+    UIImageView *mediaImageView = nil;
+    
+    if (isOutgoingMessage) {
+        JSQMessagesCollectionViewCellOutgoingVideo *outgoingVideoCell = (JSQMessagesCollectionViewCellOutgoingVideo *)cell;
+        mediaImageView = outgoingVideoCell.mediaImageView;
+    }
+    else {
+        JSQMessagesCollectionViewCellIncomingVideo *incomingVideoCell = (JSQMessagesCollectionViewCellIncomingVideo *)cell;
+        mediaImageView = incomingVideoCell.mediaImageView;
+    }
+    
+    switch ([messageData type]) {
+    case JSQMessageVideo:
+        {
+            NSParameterAssert([messageData thumbnail] != nil);
+            mediaImageView.image = [messageData thumbnail];
+        }
+        break;
+            
+    case JSQMessageRemoteVideo:
+        {
+            NSParameterAssert([messageData videoThumbnailPlaceholder] != nil || [messageData thumbnail] != nil);
+            
+            if ([messageData thumbnail]) {
+                mediaImageView.image = [messageData thumbnail];
+            }
+            else {
+                NSParameterAssert([messageData url] != nil);
+                
+                mediaImageView.image = [messageData videoThumbnailPlaceholder];
+                
+                [collectionView.dataSource collectionView:collectionView
+                                     wantsThumbnailForURL:[messageData url]
+                         mediaImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *sourceImage) {
+                             JSQMessagesCollectionViewCellAnimateDisplayBlock(mediaImageView, sourceImage, .3f);
+                         }];
+            }
+        }
+        break;
+            
+    case JSQMessageText:
+    case JSQMessageAudio:
+    case JSQMessagePhoto:
+    case JSQMessageRemoteAudio:
+    case JSQMessageRemotePhoto:
+            NSAssert(NO, @"ERROR: Pass in invalid message type [%d] to method: %s", [messageData type], __PRETTY_FUNCTION__);
+            break;
+    }
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+handleAudioMessageWithMessageData:(id<JSQMessageData>)messageData
+    collectionViewCell:(JSQMessagesCollectionViewCell *)cell
+         cellIndexPath:(NSIndexPath *)indexPath isOutgoingMessage:(BOOL)isOutgoingMessage
+{
+    
+    switch ([messageData type]) {
+        case JSQMessageAudio:
+            
+            break;
+        
+        case JSQMessageRemoteAudio:
+            
+            break;
+            
+        case JSQMessageText:
+        case JSQMessagePhoto:
+        case JSQMessageVideo:
+        case JSQMessageRemotePhoto:
+        case JSQMessageRemoteVideo:
+            NSAssert(NO, @"ERROR: Pass in invalid message type [%d] to method: %s", [messageData type], __PRETTY_FUNCTION__);
+            break;
+    }
+}
+
 #pragma mark - Collection view data source
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -454,105 +611,23 @@ mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
             NSParameterAssert(messageText != nil);
             
             cell.textView.text = messageText;
-            
             cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
         }
             break;
-        case JSQMessagePhoto:
-        {
-            NSParameterAssert([messageData data] != nil);
-            UIImage *image = [UIImage imageWithData:[messageData data]];
             
-            if (isOutgoingMessage) {
-                JSQMessagesCollectionViewCellOutgoingPhoto *outgoingPhotoCell  = (JSQMessagesCollectionViewCellOutgoingPhoto *)cell;
-                outgoingPhotoCell.mediaImageView.image = image;
-            }
-            else {
-                JSQMessagesCollectionViewCellIncomingPhoto *incomingPhotoCell = (JSQMessagesCollectionViewCellIncomingPhoto *)cell;
-                incomingPhotoCell.mediaImageView.image = image;
-            }
-        }
+        case JSQMessagePhoto:
+        case JSQMessageRemotePhoto:
+            [self collectionView:collectionView handlePhotoMessageWithMessageData:messageData collectionViewCell:cell cellIndexPath:indexPath isOutgoingMessage:isOutgoingMessage];
             break;
+            
         case JSQMessageVideo:
         case JSQMessageRemoteVideo:
-        {
-            NSParameterAssert([messageData thumbnail]);
-            
-            NSData *videoData = [messageData data];
-            NSURL *sourceURL = [messageData url];
-            NSParameterAssert(videoData != nil || sourceURL != nil);
-            
-            if (isOutgoingMessage) {
-                JSQMessagesCollectionViewCellOutgoingVideo *outgoingVideoCell = (JSQMessagesCollectionViewCellOutgoingVideo *)cell;
-                outgoingVideoCell.mediaImageView.image = [messageData thumbnail];
-            }
-            else {
-                JSQMessagesCollectionViewCellIncomingVideo *incomingVideoCell = (JSQMessagesCollectionViewCellIncomingVideo *)cell;
-                incomingVideoCell.mediaImageView.image = [messageData thumbnail];
-            }
-        }
+            [self collectionView:collectionView handleVideoMessageWithMessageData:messageData collectionViewCell:cell cellIndexPath:indexPath isOutgoingMessage:isOutgoingMessage];
             break;
+            
         case JSQMessageAudio:
-        {
-//            if (isOutgoingMessage) {
-//                JSQMessagesCollectionViewCellOutgoingAudio *inheritCell = (JSQMessagesCollectionViewCellOutgoingAudio *)cell;
-//            }
-//            else {
-//                JSQMessagesCollectionViewCellIncomingAudio *inheritCell = (JSQMessagesCollectionViewCellIncomingAudio *)cell;
-//            }
-        }
-            break;
-        case JSQMessageRemotePhoto:
-        {
-            NSURL *url = [messageData url];
-            NSParameterAssert(url);
-            
-            UIImageView *mediaImageView = nil;
-            
-            if (isOutgoingMessage) {
-                JSQMessagesCollectionViewCellOutgoingPhoto *outgoingPhotoCell = (JSQMessagesCollectionViewCellOutgoingPhoto *)cell;
-                mediaImageView = outgoingPhotoCell.mediaImageView;
-            }
-            else {
-                JSQMessagesCollectionViewCellIncomingPhoto *incomingPhotoCell = (JSQMessagesCollectionViewCellIncomingPhoto *)cell;
-                mediaImageView = incomingPhotoCell.mediaImageView;
-            }
-            
-            void (^JSQMessagesCollectionViewCellAnimateDisplayBlock)(UIImage *, NSTimeInterval) = ^(UIImage *sourceImage, NSTimeInterval duration) {
-                if (duration > 0.f) {
-                    [UIView transitionWithView:mediaImageView.superview
-                                      duration:duration
-                                       options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationOptionAllowUserInteraction
-                                    animations:^{
-                                        mediaImageView.image = sourceImage;
-                                    } completion:nil];
-                }
-                else {
-                    mediaImageView.image = sourceImage;
-                }
-            };
-            
-            if ([messageData data]) {
-                UIImage *sourceImage = [UIImage imageWithData:[messageData data]];
-                JSQMessagesCollectionViewCellAnimateDisplayBlock(sourceImage, 0);
-            }
-            else {
-                // Check whether there has a placeholder image.
-                if ([messageData thumbnail]) {
-                    
-                    UIImage *placeholde = [messageData thumbnail];
-                    mediaImageView.image = placeholde;
-                }
-                
-                [collectionView.dataSource collectionView:collectionView
-                                     wantsThumbnailForURL:url
-                         mediaImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *sourceImage) {
-                             JSQMessagesCollectionViewCellAnimateDisplayBlock(sourceImage, .3f);
-                         }];
-            }
-        }
-            break;
         case JSQMessageRemoteAudio:
+            [self collectionView:collectionView handleAudioMessageWithMessageData:messageData collectionViewCell:cell cellIndexPath:indexPath isOutgoingMessage:isOutgoingMessage];
             break;
     }
     
@@ -645,10 +720,6 @@ mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
            atIndexPath:(NSIndexPath *)indexPath {}
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
-      didTapMediaVideo:(NSData *)videoData
-           atIndexPath:(NSIndexPath *)indexPath {}
-
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView
 didTapMediaVideoForURL:(NSURL *)videoURL
            atIndexPath:(NSIndexPath *)indexPath {}
 
@@ -688,16 +759,9 @@ didTapMediaAudioForURL:(NSURL *)audioURL
 {
     id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView
                                                       messageDataForItemAtIndexPath:[self.collectionView indexPathForCell:cell]];
-    if ([messageData data]) {
-        [self.collectionView.delegate collectionView:self.collectionView
-                                    didTapMediaVideo:[messageData data]
-                                         atIndexPath:[self.collectionView indexPathForCell:cell]];
-    }
-    else {
-        [self.collectionView.delegate collectionView:self.collectionView
-                              didTapMediaVideoForURL:[messageData url]
-                                         atIndexPath:[self.collectionView indexPathForCell:cell]];
-    }
+    [self.collectionView.delegate collectionView:self.collectionView
+                          didTapMediaVideoForURL:[messageData url]
+                                     atIndexPath:[self.collectionView indexPathForCell:cell]];
 }
 
 - (void)messagesCollectionViewCellDidTapMediaAudio:(JSQMessagesCollectionViewCell *)cell
