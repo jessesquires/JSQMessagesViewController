@@ -24,7 +24,7 @@
 static NSString * const kJSQDemoAvatarNameCook = @"Tim Cook";
 static NSString * const kJSQDemoAvatarNameJobs = @"Jobs";
 static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
-static NSString * const kJSQDemoVideoMessageURLString = @"http://archive.org/download/WaltDisneyCartoons-MickeyMouseMinnieMouseDonaldDuckGoofyAndPluto/WaltDisneyCartoons-MickeyMouseMinnieMouseDonaldDuckGoofyAndPluto-HawaiianHoliday1937-Video.mp4";
+static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/download/AppleAds/Apple-Icloud-TvAd-IcloudHarmony.mp4";
 
 
 @implementation JSQDemoViewController
@@ -60,9 +60,15 @@ static NSString * const kJSQDemoVideoMessageURLString = @"http://archive.org/dow
                      [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage008"] sender:kJSQDemoAvatarNameWoz],
                      [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage007"] sender:self.sender],
                      
-                     [JSQMessage messageWithVideoThumbnail:videoPlaceholderImage videoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] sender:self.sender],
                      [JSQMessage messageWithVideoPlaceholderImage:videoPlaceholderImage videoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] sender:kJSQDemoAvatarNameJobs],
                      nil];
+    
+    /**
+     *    Add a local video message.
+     */
+    NSURL *localVideoURL = [[NSBundle mainBundle] URLForResource:@"demo_yoona" withExtension:@"mp4"];
+    [self.messages addObject:[JSQMessage messageWithVideoThumbnail:videoPlaceholderImage videoURL:localVideoURL sender:self.sender]];
+    
 
     /**
      *  Create avatar images once.

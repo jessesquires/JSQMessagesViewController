@@ -14,7 +14,34 @@
 
 + (UIImage *)thumbnailFromVideoURL:(NSURL *)videoURL
 {
-    return [self thumbnailFromVideoURL:videoURL atTime:CMTimeMake(1, 1)];
+    return [self thumbnailFromVideoURL:videoURL atSeconds:1];
+}
+
++ (UIImage *)thumbnailFromVideoURL:(NSURL *)videoURL atSeconds:(NSUInteger)second
+{
+    NSParameterAssert(videoURL != nil);
+    NSParameterAssert(second >= 0);
+    
+    /**
+     *  Default set to 25 frames per second.
+     */
+    CMTime time = CMTimeMake(25, 25);
+    
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:videoURL options:@{AVURLAssetPreferPreciseDurationAndTimingKey: @NO}];
+    AVAssetTrack *assetTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] lastObject];
+    
+    if (assetTrack) {
+        NSUInteger fps = ceilf(assetTrack.nominalFrameRate);
+        time = CMTimeMake((int64_t)(second * fps), (int32_t)fps);
+    }
+    CMTimeShow(time);
+    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    imageGenerator.appliesPreferredTrackTransform = YES;
+    CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:NULL error:NULL];
+    UIImage *thumbnai = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    
+    return thumbnai;
 }
 
 + (UIImage *)thumbnailFromVideoURL:(NSURL *)videoURL atTime:(CMTime)time

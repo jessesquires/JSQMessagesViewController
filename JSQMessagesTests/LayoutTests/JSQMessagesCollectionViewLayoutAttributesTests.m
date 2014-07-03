@@ -32,6 +32,14 @@
 
 - (void)testLayoutAttributesInitAndIsEqual
 {
+    UIButton *incommingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [incommingButton setImage:[UIImage imageNamed:@"demo_play_button_in"] forState:UIControlStateNormal];
+    [incommingButton sizeToFit];
+    
+    UIButton *outgoingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [outgoingButton setImage:[UIImage imageNamed:@"demo_play_button_out"] forState:UIControlStateNormal];
+    [outgoingButton sizeToFit];
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
     JSQMessagesCollectionViewLayoutAttributes *attrs = [JSQMessagesCollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     attrs.messageBubbleFont = [UIFont systemFontOfSize:15.0f];
@@ -43,6 +51,11 @@
     attrs.cellTopLabelHeight = 20.0f;
     attrs.messageBubbleTopLabelHeight = 10.0f;
     attrs.cellBottomLabelHeight = 15.0f;
+    attrs.incomingMediaImageSize = CGSizeMake(120.f, 160.f);
+    attrs.outgoingMediaImageSize = CGSizeMake(120.f, 160.f);
+    attrs.incomingVideoOverlayView = incommingButton;
+    attrs.outgoingVideoOverlayView = outgoingButton;
+    
     XCTAssertNotNil(attrs, @"Layout attributes should not be nil");
     
     JSQMessagesCollectionViewLayoutAttributes *copy = [attrs copy];

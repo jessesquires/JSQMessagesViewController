@@ -13,6 +13,8 @@
 		457A72E71965262500912C0E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457A72E61965262500912C0E /* AVFoundation.framework */; };
 		457A72E91965279800912C0E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457A72E81965279800912C0E /* CoreMedia.framework */; };
 		457A72EC19652A3500912C0E /* JSQMessagesThumbnailFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 457A72EB19652A3500912C0E /* JSQMessagesThumbnailFactory.m */; };
+		457A72EE1965716100912C0E /* JSQMessagesThumbnailFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 457A72ED1965716100912C0E /* JSQMessagesThumbnailFactoryTests.m */; };
+		457A72F11965772500912C0E /* demo_yoona.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 457A72F01965772500912C0E /* demo_yoona.mp4 */; };
 		45C32B4B196445E800DDEA4B /* JSQMessagesCollectionViewCellIncomingVideo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45C32B4A196445E800DDEA4B /* JSQMessagesCollectionViewCellIncomingVideo.xib */; };
 		45E6B38A19628E9D0066458B /* JSQMessagesCollectionViewCellIncomingPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6B38919628E9D0066458B /* JSQMessagesCollectionViewCellIncomingPhoto.m */; };
 		45E6B3991962965A0066458B /* JSQMessagesCollectionViewCellIncomingVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6B3981962965A0066458B /* JSQMessagesCollectionViewCellIncomingVideo.m */; };
@@ -130,6 +132,8 @@
 		457A72E81965279800912C0E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		457A72EA19652A3500912C0E /* JSQMessagesThumbnailFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesThumbnailFactory.h; sourceTree = "<group>"; };
 		457A72EB19652A3500912C0E /* JSQMessagesThumbnailFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesThumbnailFactory.m; sourceTree = "<group>"; };
+		457A72ED1965716100912C0E /* JSQMessagesThumbnailFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesThumbnailFactoryTests.m; sourceTree = "<group>"; };
+		457A72F01965772500912C0E /* demo_yoona.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo_yoona.mp4; sourceTree = "<group>"; };
 		45C32B4A196445E800DDEA4B /* JSQMessagesCollectionViewCellIncomingVideo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesCollectionViewCellIncomingVideo.xib; sourceTree = "<group>"; };
 		45E6B38819628E9D0066458B /* JSQMessagesCollectionViewCellIncomingPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewCellIncomingPhoto.h; sourceTree = "<group>"; };
 		45E6B38919628E9D0066458B /* JSQMessagesCollectionViewCellIncomingPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewCellIncomingPhoto.m; sourceTree = "<group>"; };
@@ -294,6 +298,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		457A72EF1965772500912C0E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				457A72F01965772500912C0E /* demo_yoona.mp4 */,
+			);
+			name = Resources;
+			path = JSQMessagesDemo/Resources;
+			sourceTree = SOURCE_ROOT;
+		};
 		8816A64618E9250400111919 /* JSQMessagesViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,6 +519,7 @@
 		885D593218CBD13D00D77BB3 /* JSQMessagesDemo */ = {
 			isa = PBXGroup;
 			children = (
+				457A72EF1965772500912C0E /* Resources */,
 				885D596418CBD2A600D77BB3 /* Images.xcassets */,
 				885D596518CBD2A600D77BB3 /* JSQAppDelegate.h */,
 				885D596618CBD2A600D77BB3 /* JSQAppDelegate.m */,
@@ -613,6 +627,7 @@
 				88CC8803190A2C7F006258A0 /* JSQMessagesBubbleImageFactoryTests.m */,
 				88CC8804190A2C7F006258A0 /* JSQMessagesTimestampFormatterTests.m */,
 				88CC8805190A2C7F006258A0 /* JSQMessagesToolbarButtonFactoryTests.m */,
+				457A72ED1965716100912C0E /* JSQMessagesThumbnailFactoryTests.m */,
 			);
 			path = FactoryTests;
 			sourceTree = "<group>";
@@ -728,6 +743,7 @@
 				8816A69718E9250400111919 /* bubble_stroked@2x.png in Resources */,
 				8816A6A618E9250400111919 /* JSQMessagesViewController.xib in Resources */,
 				8816A69618E9250400111919 /* bubble_stroked.png in Resources */,
+				457A72F11965772500912C0E /* demo_yoona.mp4 in Resources */,
 				45E6B39E1962A9F90066458B /* JSQMessagesCollectionViewCellIncomingPhoto.xib in Resources */,
 				8816A69318E9250400111919 /* bubble_min@2x.png in Resources */,
 				88D1B0CD190606F100AFE162 /* typing@2x.png in Resources */,
@@ -855,6 +871,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				457A72EE1965716100912C0E /* JSQMessagesThumbnailFactoryTests.m in Sources */,
 				88CC880D190A2C7F006258A0 /* JSQMessagesTimestampFormatterTests.m in Sources */,
 				88BC4D3D190D8CCD002E5CC6 /* JSQMessagesCollectionViewFlowLayoutTests.m in Sources */,
 				88CC880B190A2C7F006258A0 /* JSQMessagesAvatarFactoryTests.m in Sources */,
