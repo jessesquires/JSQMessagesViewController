@@ -312,7 +312,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     NSInteger items = [self.collectionView numberOfItemsInSection:0];
     
     if (items > 0) {
-        [self.collectionView scrollRectToVisible:CGRectMake(0, self.collectionView.contentSize.height - 1, 1, 1)
+        [self.collectionView scrollRectToVisible:CGRectMake(0, self.collectionView.collectionViewLayout.collectionViewContentSize.height - 1, 1, 1)
                                         animated:animated];
     }
 }
