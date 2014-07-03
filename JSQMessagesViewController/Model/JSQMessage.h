@@ -21,8 +21,8 @@
 #import "JSQMessageData.h"
 
 /**
- *  A `JSQMessage` model object represents a single user message. 
- *  This is a concrete class that implements the `JSQMessageData` protocol. 
+ *  A `JSQMessage` model object represents a single user message.
+ *  This is a concrete class that implements the `JSQMessageData` protocol.
  *  It contains the message text, its sender, and the date that the message was sent.
  */
 @interface JSQMessage : NSObject <JSQMessageData, NSCoding, NSCopying>
@@ -43,12 +43,17 @@
 @property (strong, nonatomic) NSURL *url;
 
 /**
- *  The thumbnail for the video or photo.
+ *  The thumbnail for the video or photo. Default is `nil`.
  */
 @property (strong, nonatomic) UIImage *thumbnail;
 
 /**
- *  The body text of the message.
+ *  The placeholder image of the video thumbnail of the message. Default is `nil`.
+ */
+@property (strong, nonatomic) UIImage *videoThumbnailPlaceholder;
+
+/**
+ *  The body text of the message. Default is empty.
  */
 @property (copy, nonatomic) NSString *text;
 
@@ -91,19 +96,12 @@
  *    @param placeholder The image to be set initially, until the image request finishes.
  *    @param sender      The name of the user who sent the message.
  *
+ *    @discussion If you use this method to initialize the message, you need to implement
+ *    `collectionView:wantsThumbnailForURL:mediaImageViewForItemAtIndexPath:completionBlock:` data source method.
+ *
  *    @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
  */
 + (instancetype)messageWithImageURL:(NSURL *)url placeholderImage:(UIImage *)placeholder sender:(NSString *)sender;
-
-/**
- *    Initializes and returns a message object having the given video data, sender, and current system date.
- *
- *    @param video  The video data of the message.
- *    @param sender The name of the user who sent the message.
- *
- *    @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
- */
-+ (instancetype)messageWithVideo:(NSData *)video sender:(NSString *)sender;
 
 /**
  *    Initializes and returns a message object having the given video thumbnail, video data, sender, and current system date.
@@ -126,6 +124,21 @@
  *    @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
  */
 + (instancetype)messageWithVideoThumbnail:(UIImage *)thumbnail videoURL:(NSURL *)url sender:(NSString *)sender;
+
+/**
+ *    Initializes and returns a message object having the given placeholder image, video url, sender, and current system date.
+ *
+ *    @param placeholder The video thumbnail placeholder to be set initially, until the actual thumbnail request finishes.
+ *    @param url         The url for the video.
+ *    @param sender      The name of the user who sent the message.
+ *
+ *    @discussion This method can be used in when you know the url of the video, but not yet downloaded it, 
+ *    so you may not have thumbnail. If you use this method to initialize the message, you need to implement
+ *    `collectionView:wantsThumbnailForURL:mediaImageViewForItemAtIndexPath:completionBlock:` data source method.
+ *
+ *    @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
+ */
++ (instancetype)messageWithVideoPlaceholderImage:(UIImage *)placeholder videoURL:(NSURL *)url sender:(NSString *)sender;
 
 /**
  *    Initializes and returns a message object having the given audio data, sender, and current system date.
@@ -182,25 +195,15 @@
  *    @param sender      The name of the user who sent the message.
  *    @param date        The date that the message was sent.
  *
+ *    @discussion If you use this method to initialize the message, you need to implement
+ *    `collectionView:wantsThumbnailForURL:mediaImageViewForItemAtIndexPath:completionBlock:` data source method.
+ *
  *    @return @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
  */
 - (instancetype)initWithImageURL:(NSURL *)url
                 placeholderImage:(UIImage *)placeholder
                           sender:(NSString *)sender
                             date:(NSDate *)date;
-
-/**
- *  Initializes and returns a message object having the given video data, sender, and date.
- *
- *  @param video  The video data of the message.
- *  @param sender The name of the user who sent the message.
- *  @param date   The date that the message was sent.
- *
- *  @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
- */
-- (instancetype)initWithVideo:(NSData *)video
-                       sender:(NSString *)sender
-                         date:(NSDate *)date;
 
 /**
  *    Initializes and returns a message object having the given video thumbnail, video data, sender, and date.
@@ -231,6 +234,26 @@
                               videoURL:(NSURL *)url
                                 sender:(NSString *)sender
                                   date:(NSDate *)date;
+
+/**
+ *    Initializes and returns a message object having the given placeholder image, video url, sender, and current system date.
+ *
+ *    @param placeholder The video thumbnail placeholder to be set initially, until the actual thumbnail request finishes.
+ *    @param url         The url for the video.
+ *    @param sender      The name of the user who sent the message.
+ *    @param date        The date that the message was sent.
+ *
+ *    @discussion This method can be used in when you know the url of the video, but not yet downloaded it,
+ *    so you may not have thumbnail. If you use this method to initialize the message, you need to implement
+ *    `collectionView:wantsThumbnailForURL:mediaImageViewForItemAtIndexPath:completionBlock:` data source method.
+ *
+ *    @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
+ */
+- (instancetype)initWithVideoPlaceholderImage:(UIImage *)placeholder
+                                     videoURL:(NSURL *)url
+                                       sender:(NSString *)sender
+                                         date:(NSDate *)date;
+
 /**
  *  Initializes and returns a message object having the given audio data, sender, and date.
  *

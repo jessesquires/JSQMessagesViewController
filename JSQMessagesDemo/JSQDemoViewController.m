@@ -18,10 +18,13 @@
 
 #import "JSQDemoViewController.h"
 
+#import "JSQMessagesThumbnailFactory.h"
+
 
 static NSString * const kJSQDemoAvatarNameCook = @"Tim Cook";
 static NSString * const kJSQDemoAvatarNameJobs = @"Jobs";
 static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
+static NSString * const kJSQDemoVideoMessageURLString = @"http://archive.org/download/WaltDisneyCartoons-MickeyMouseMinnieMouseDonaldDuckGoofyAndPluto/WaltDisneyCartoons-MickeyMouseMinnieMouseDonaldDuckGoofyAndPluto-HawaiianHoliday1937-Video.mp4";
 
 
 @implementation JSQDemoViewController
@@ -49,8 +52,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage018.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage019.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage035.jpg"] placeholderImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:self.sender],
-                     [JSQMessage messageWithVideo:[NSData data] sender:kJSQDemoAvatarNameWoz],
-//                     [JSQMessage messageWithVideo:[NSData data] sender:self.sender],
+                     [JSQMessage messageWithVideoThumbnail:[UIImage imageNamed:@"FICDDemoImage002"] videoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] sender:self.sender],
+                     [JSQMessage messageWithVideoThumbnail:[UIImage imageNamed:@"FICDDemoImage003"] videoURL:[NSURL URLWithString:@""] sender:kJSQDemoAvatarNameWoz],
+                     
                      nil];
 
     /**
@@ -125,6 +129,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     self.sender = @"Jesse Squires";
     
     [self setupTestModel];
+    
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
     
@@ -445,27 +450,44 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
        completionBlock:(JSQMessagesCollectionViewDataSourceCompletionBlock)completionBlock {
     
     JSQMessage *message = self.messages[indexPath.item];
+    
     /**
      *  Here you can download images from the Internet.
      */
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-        UIImage *sourceImage = nil;
-
-        if (message.data) {
-            sourceImage = [UIImage imageWithData:[message data]];
-        }
-        else {
+        UIImage *thumbnail = nil;
+        
+        if (message.type == JSQMessageRemotePhoto) {
             message.data = [NSData dataWithContentsOfURL:url];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                /**
-                 *  Before the image display you should generate a thumbnail to improve performance. Omitted here.
-                 */
-                completionBlock([UIImage imageWithData:message.data]);
-            });
+            thumbnail = [UIImage imageWithData:message.data];
+            message.type = JSQMessagePhoto;
         }
+        else if (message.type == JSQMessageRemoteVideo) {
+            
+            /**
+             *  Generate thumbnails from remote url.
+             */
+            UIImage *remoteThumbnail = [JSQMessagesThumbnailFactory thumbnaiFromURL:url];
+            
+            message.thumbnail = remoteThumbnail;
+            message.videoThumbnailPlaceholder = nil;
+            
+            /**
+             *  Change the message type, so next time we will not need to ask the data source method.
+             */
+            message.type = JSQMessageVideo;
+            
+            thumbnail = message.thumbnail;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            /**
+             *  Before the image display you should generate a thumbnail to improve performance. Omitted here.
+             */
+            completionBlock([UIImage imageWithData:message.data]);
+        });
     });
 }
 

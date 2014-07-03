@@ -116,7 +116,7 @@
                 <outlet property="cellBottomLabelHeightConstraint" destination="rc2-Zg-ysJ" id="lVV-Wi-8V8"/>
                 <outlet property="cellTopLabel" destination="aN5-oP-Lfg" id="W0z-a1-cpf"/>
                 <outlet property="cellTopLabelHeightConstraint" destination="5ax-xz-Kz9" id="C62-gG-cAQ"/>
-                <outlet property="mediaImageView" destination="hH6-1u-J1w" id="xPw-my-PBd"/>
+                <outlet property="mediaImageView" destination="hH6-1u-J1w" id="cXM-Tg-9UN"/>
                 <outlet property="messageBubbleContainerView" destination="2eH-Gq-7jJ" id="lCn-gs-J4p"/>
                 <outlet property="messageBubbleLeftRightMarginConstraint" destination="0os-6y-VSs" id="byO-P0-wX7"/>
                 <outlet property="messageBubbleTopLabel" destination="vZi-HV-Jfp" id="Agz-7f-XQB"/>

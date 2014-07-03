@@ -19,7 +19,7 @@
  *  The overlay view on the `mediaImageView`. You can easily assign it a play button.
  *  Default is `nil`.
  */
-@property (strong, nonatomic) IBOutlet UIView *overlayView;
+@property (weak, nonatomic) IBOutlet UIView *overlayView;
 
 /**
  *  Returns the underlying gesture recognizer for tap gestures in the `overlayView` of the cell.

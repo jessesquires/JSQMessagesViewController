@@ -59,6 +59,15 @@ typedef NS_ENUM(NSUInteger, JSQMessageType) {
  */
 - (UIImage *)thumbnail;
 
+/**
+ *  @discussion Normally, you can directly use the `thumbnail`. 
+ *  But when you know the url of a video, but not yet downloaded it, you may not have thumbnail,
+ *  In this case, this comes in handy.
+ *
+ *  @return The placeholder image of the video thumbnail, only valid when `type` is `JSQMessageRemoteVideo`.
+ */
+- (UIImage *)videoThumbnailPlaceholder;
+
 @required
 
 /**

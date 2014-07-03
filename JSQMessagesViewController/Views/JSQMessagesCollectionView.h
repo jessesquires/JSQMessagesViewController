@@ -97,21 +97,6 @@ typedef void (^JSQMessagesCollectionViewDataSourceCompletionBlock)(UIImage *thum
  */
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath;
 
-/**
- *    Asks the data source for the image to display in the `mediaImageView` for the the specified
- *
- *    @param collectionView  The object representing the collection view requesting this information.
- *    @param url             The url for the image
- *    @param indexPath       The index path that specifies the location of the item.
- *    @param completionBlock The completion block that the receiver must call when it has a source image ready.
- *
- *    @discussion To improve performance, thumbnail and `mediaImageView` should always be the same size.
- */
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView
-  wantsThumbnailForURL:(NSURL *)url
-mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
-       completionBlock:(JSQMessagesCollectionViewDataSourceCompletionBlock)completionBlock;
-
 @optional
 
 /**
@@ -155,6 +140,21 @@ mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
  *  @see `JSQMessagesCollectionViewCell`.
  */
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *    Asks the data source for the image to display in the `mediaImageView` for the the specified
+ *
+ *    @param collectionView  The object representing the collection view requesting this information.
+ *    @param url             The url for the image
+ *    @param indexPath       The index path that specifies the location of the item.
+ *    @param completionBlock The completion block that the receiver must call when it has a source image ready.
+ *
+ *    @discussion To improve performance, thumbnail and `mediaImageView` should always be the same size.
+ */
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+  wantsThumbnailForURL:(NSURL *)url
+mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+       completionBlock:(JSQMessagesCollectionViewDataSourceCompletionBlock)completionBlock;
 
 @end
 
@@ -241,6 +241,10 @@ mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
  *  @param collectionView  The collection view object that is notifying you of the tap event.
  *  @param videoData       The video data that was tapped.
  *  @param indexPath       The index path of the item for which the avatar was tapped.
+ *
+ *  @note This method is higher priority than the `collectionView:didTapMediaVideoForURL:atIndexPath:`,
+ *  If the message has a URL and data, will call this method,
+ *  and the `collectionView:didTapMediaVideoForURL:atIndexPath:` will not be called.
  */
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
       didTapMediaVideo:(NSData *)videoData
@@ -250,11 +254,37 @@ mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
  *  Notifies the delegate that the avatar image view at the specified indexPath did receive a tap event.
  *
  *  @param collectionView  The collection view object that is notifying you of the tap event.
- *  @param audioData       The audio data that was tapped.
+ *  @param videoURL        The video url that was tapped.
  *  @param indexPath       The index path of the item for which the avatar was tapped.
  */
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
+didTapMediaVideoForURL:(NSURL *)videoURL
+           atIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  Notifies the delegate that the avatar image view at the specified indexPath did receive a tap event.
+ *
+ *  @param collectionView  The collection view object that is notifying you of the tap event.
+ *  @param audioData       The audio data that was tapped.
+ *  @param indexPath       The index path of the item for which the avatar was tapped.
+ *
+ *  @note This method is higher priority than the `collectionView:didTapMediaAudioForURL:atIndexPath:`,
+ *  If the message has a URL and data, will call this method,
+ *  and the `collectionView:didTapMediaAudioForURL:atIndexPath:` will not be called.
+ */
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
       didTapMediaAudio:(NSData *)audioData
+           atIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  Notifies the delegate that the avatar image view at the specified indexPath did receive a tap event.
+ *
+ *  @param collectionView  The collection view object that is notifying you of the tap event.
+ *  @param audioURL        The audio url that was tapped.
+ *  @param indexPath       The index path of the item for which the avatar was tapped.
+ */
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+didTapMediaAudioForURL:(NSURL *)audioURL
            atIndexPath:(NSIndexPath *)indexPath;
 
 /**

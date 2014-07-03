@@ -24,40 +24,42 @@
 
 + (instancetype)messageWithText:(NSString *)text sender:(NSString *)sender
 {
-    return [[JSQMessage alloc] initWithText:text sender:sender date:[NSDate date]];
+    return [[self alloc] initWithText:text sender:sender date:[NSDate date]];
 }
 
-+ (instancetype)messageWithImage:(UIImage *)image sender:(NSString *)sender {
-    return [[JSQMessage alloc] initWithImage:image sender:sender date:[NSDate date]];
++ (instancetype)messageWithImage:(UIImage *)image sender:(NSString *)sender
+{
+    return [[self alloc] initWithImage:image sender:sender date:[NSDate date]];
 }
 
 + (instancetype)messageWithImageURL:(NSURL *)url placeholderImage:(UIImage *)placeholder sender:(NSString *)sender
 {
-    return [[JSQMessage alloc] initWithImageURL:url placeholderImage:placeholder sender:sender date:[NSDate date]];
-}
-
-+ (instancetype)messageWithVideo:(NSData *)video sender:(NSString *)sender {
-    return [[JSQMessage alloc] initWithVideo:video sender:sender date:[NSDate date]];
+    return [[self alloc] initWithImageURL:url placeholderImage:placeholder sender:sender date:[NSDate date]];
 }
 
 + (instancetype)messageWithVideoThumbnail:(UIImage *)thumbnail videoData:(NSData *)videoData sender:(NSString *)sender
 {
-    return [[JSQMessage alloc] initWithVideoThumbnail:thumbnail videoData:videoData sender:sender date:[NSDate date]];
+    return [[self alloc] initWithVideoThumbnail:thumbnail videoData:videoData sender:sender date:[NSDate date]];
 }
 
 + (instancetype)messageWithVideoThumbnail:(UIImage *)thumbnail videoURL:(NSURL *)url sender:(NSString *)sender
 {
-    return [[JSQMessage alloc] initWithVideoThumbnail:thumbnail videoURL:url sender:sender date:[NSDate date]];
+    return [[self alloc] initWithVideoThumbnail:thumbnail videoURL:url sender:sender date:[NSDate date]];
+}
+
++ (instancetype)messageWithVideoPlaceholderImage:(UIImage *)placeholder videoURL:(NSURL *)url sender:(NSString *)sender
+{
+    return [[self alloc] initWithVideoPlaceholderImage:placeholder videoURL:url sender:sender date:[NSDate date]];
 }
 
 + (instancetype)messageWithAudio:(NSData *)audio sender:(NSString *)sender
 {
-    return [[JSQMessage alloc] initWithAudio:audio sender:sender date:[NSDate date]];
+    return [[self alloc] initWithAudio:audio sender:sender date:[NSDate date]];
 }
 
 + (instancetype)messageWithAudioURL:(NSURL *)url sender:(NSString *)sender
 {
-    return [[JSQMessage alloc] initWithAudioURL:url sender:sender date:[NSDate date]];
+    return [[self alloc] initWithAudioURL:url sender:sender date:[NSDate date]];
 }
 
 - (instancetype)initWithText:(NSString *)text
@@ -117,23 +119,6 @@
     return self;
 }
 
-- (instancetype)initWithVideo:(NSData *)video
-                       sender:(NSString *)sender
-                         date:(NSDate *)date {
-    NSParameterAssert(video != nil);
-    NSParameterAssert(sender != nil);
-    NSParameterAssert(date != nil);
-    
-    self = [self init];
-    if (self) {
-        _type = JSQMessageVideo;
-        _data = video;
-        _sender = sender;
-        _date = date;
-    }
-    return self;
-}
-
 - (instancetype)initWithVideoThumbnail:(UIImage *)thumbnail
                               videoURL:(NSURL *)url
                                 sender:(NSString *)sender
@@ -176,6 +161,26 @@
     return self;
 }
 
+- (instancetype)initWithVideoPlaceholderImage:(UIImage *)placeholder
+                                     videoURL:(NSURL *)url
+                                       sender:(NSString *)sender
+                                         date:(NSDate *)date
+{
+    NSParameterAssert(placeholder != nil);
+    NSParameterAssert(url != nil);
+    NSParameterAssert(sender != nil);
+    NSParameterAssert(date != nil);
+    
+    self = [self init];
+    if (self) {
+        _type = JSQMessageRemoteVideo;
+        _videoThumbnailPlaceholder = placeholder;
+        _url = url;
+        _sender = sender;
+        _date = date;
+    }
+    return self;
+}
 
 - (instancetype)initWithAudio:(NSData *)audio
                        sender:(NSString *)sender
@@ -214,11 +219,14 @@
 {
     self = [super init];
     if (self) {
+        _type = JSQMessageText;
+        _data = nil;
+        _url = nil;
+        _thumbnail = nil;
+        _videoThumbnailPlaceholder = nil;
         _text = @"";
         _sender = @"";
         _date = [NSDate date];
-        _data = nil;
-        _type = JSQMessageText;
     }
     return self;
 }
@@ -226,6 +234,9 @@
 - (void)dealloc
 {
     _data = nil;
+    _url = nil;
+    _thumbnail = nil;
+    _videoThumbnailPlaceholder = nil;
     _text = nil;
     _sender = nil;
     _date = nil;
@@ -297,6 +308,7 @@
         _type = [[aDecoder decodeObjectForKey:NSStringFromSelector(@selector(type))] unsignedIntegerValue];
         _url = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(url))];
         _thumbnail = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(thumbnail))];
+        _videoThumbnailPlaceholder = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(videoThumbnailPlaceholder))];
     }
     return self;
 }
@@ -310,22 +322,24 @@
     [aCoder encodeObject:@(self.type) forKey:NSStringFromSelector(@selector(type))];
     [aCoder encodeObject:self.url forKey:NSStringFromSelector(@selector(url))];
     [aCoder encodeObject:self.thumbnail forKey:NSStringFromSelector(@selector(thumbnail))];
+    [aCoder encodeObject:self.videoThumbnailPlaceholder forKey:NSStringFromSelector(@selector(videoThumbnailPlaceholder))];
 }
 
 #pragma mark - NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone
 {
-    JSQMessage *message = [[[self class] alloc] init];
-    message.text = [self.text copy];
-    message.sender = [self.sender copy];
-    message.date = [self.date copy];
-    message.data = [self.data copy];
-    message.type = [[@(self.type) copy] unsignedIntegerValue];
-    message.url = [self.url copy];
-    message.thumbnail = [self.thumbnail copy];
+    JSQMessage *copy = [[[self class] alloc] init];
+    copy.text = [self.text copy];
+    copy.sender = [self.sender copy];
+    copy.date = [self.date copy];
+    copy.data = [self.data copy];
+    copy.type = [[@(self.type) copy] unsignedIntegerValue];
+    copy.url = [self.url copy];
+    copy.thumbnail = [self.thumbnail copy];
+    copy.videoThumbnailPlaceholder = [self.videoThumbnailPlaceholder copy];
     
-    return message;
+    return copy;
 }
 
 @end

@@ -49,10 +49,12 @@
 {
     [super awakeFromNib];
     
+    self.messageBubbleTopLabel.textAlignment = NSTextAlignmentLeft;
+    self.cellBottomLabel.textAlignment = NSTextAlignmentLeft;
+    
     self.longPressGestureRecognizer.enabled = NO;
     
     self.mediaImageView.userInteractionEnabled = YES;
-    
     self.mediaImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.mediaImageView.clipsToBounds = YES;
 }
@@ -103,10 +105,12 @@
 - (void)setOverlayView:(UIView *)overlayView
 {
     if (_overlayView) {
+        [_overlayView removeGestureRecognizer:self.overlayViewTapGestureRecognizer];
         [_overlayView removeFromSuperview];
     }
     
     if (!overlayView) {
+        self.overlayViewTapGestureRecognizer = nil;
         _overlayView = nil;
         return;
     }
@@ -114,7 +118,7 @@
     
     [overlayView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.messageBubbleContainerView addSubview:overlayView];
-
+    
     [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:overlayView];
     [self setNeedsUpdateConstraints];
     

@@ -15,14 +15,21 @@
 @interface JSQMessagesCollectionViewCellOutgoingVideo : JSQMessagesCollectionViewCell
 
 /**
+ *  The overlay view on the `mediaImageView`. You can easily assign it a play button.
+ *  Default is `nil`.
+ */
+@property (weak, nonatomic) IBOutlet UIView *overlayView;
+
+/**
+ *  Returns the underlying gesture recognizer for tap gestures in the `overlayView` of the cell.
+ *  This gesture handles the tap event for the `overlayView` and notifies the cell's delegate.
+ *  Return `nil` if the `overlayView` not set.
+ */
+@property (strong, nonatomic, readonly) UITapGestureRecognizer *overlayViewTapGestureRecognizer;
+
+/**
  *  Return the thumbnail for the video.
  */
 @property (weak, nonatomic, readonly) UIImageView *mediaImageView;
-
-/**
- *  Returns the underlying gesture recognizer for tap gestures in the `mediaImageView` of the cell.
- *  This gesture handles the tap event for the `mediaImageView` and notifies the cell's delegate.
- */
-@property (strong, nonatomic, readonly) UITapGestureRecognizer *mediaImageViewTapGestureRecognizer;
 
 @end

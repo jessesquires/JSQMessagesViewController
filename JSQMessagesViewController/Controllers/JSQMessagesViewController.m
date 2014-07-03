@@ -474,13 +474,21 @@ mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
         }
             break;
         case JSQMessageVideo:
+        case JSQMessageRemoteVideo:
         {
+            NSParameterAssert([messageData thumbnail]);
+            
+            NSData *videoData = [messageData data];
+            NSURL *sourceURL = [messageData url];
+            NSParameterAssert(videoData != nil || sourceURL != nil);
+            
             if (isOutgoingMessage) {
-//                JSQMessagesCollectionViewCellOutgoingVideo *outgoingVideoCell = (JSQMessagesCollectionViewCellOutgoingVideo *)cell;
+                JSQMessagesCollectionViewCellOutgoingVideo *outgoingVideoCell = (JSQMessagesCollectionViewCellOutgoingVideo *)cell;
+                outgoingVideoCell.mediaImageView.image = [messageData thumbnail];
             }
             else {
                 JSQMessagesCollectionViewCellIncomingVideo *incomingVideoCell = (JSQMessagesCollectionViewCellIncomingVideo *)cell;
-                    incomingVideoCell.mediaImageView.image = [UIImage imageNamed:@"FICDDemoImage001"];
+                incomingVideoCell.mediaImageView.image = [messageData thumbnail];
             }
         }
             break;
@@ -543,8 +551,6 @@ mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
                          }];
             }
         }
-            break;
-        case JSQMessageRemoteVideo:
             break;
         case JSQMessageRemoteAudio:
             break;
@@ -643,7 +649,15 @@ mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
            atIndexPath:(NSIndexPath *)indexPath {}
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
+didTapMediaVideoForURL:(NSURL *)videoURL
+           atIndexPath:(NSIndexPath *)indexPath {}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
       didTapMediaAudio:(NSData *)audioData
+           atIndexPath:(NSIndexPath *)indexPath {}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+didTapMediaAudioForURL:(NSURL *)audioURL
            atIndexPath:(NSIndexPath *)indexPath {}
 
 #pragma mark - Messages collection view cell delegate
@@ -674,20 +688,32 @@ mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView
                                                       messageDataForItemAtIndexPath:[self.collectionView indexPathForCell:cell]];
-    NSData *videoData = [messageData data];
-    [self.collectionView.delegate collectionView:self.collectionView
-                                didTapMediaVideo:videoData
-                                     atIndexPath:[self.collectionView indexPathForCell:cell]];
+    if ([messageData data]) {
+        [self.collectionView.delegate collectionView:self.collectionView
+                                    didTapMediaVideo:[messageData data]
+                                         atIndexPath:[self.collectionView indexPathForCell:cell]];
+    }
+    else {
+        [self.collectionView.delegate collectionView:self.collectionView
+                              didTapMediaVideoForURL:[messageData url]
+                                         atIndexPath:[self.collectionView indexPathForCell:cell]];
+    }
 }
 
 - (void)messagesCollectionViewCellDidTapMediaAudio:(JSQMessagesCollectionViewCell *)cell
 {
     id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView
                                                       messageDataForItemAtIndexPath:[self.collectionView indexPathForCell:cell]];
-    NSData *audioData = [messageData data];
-    [self.collectionView.delegate collectionView:self.collectionView
-                                didTapMediaAudio:audioData
-                                     atIndexPath:[self.collectionView indexPathForCell:cell]];
+    if ([messageData data]) {
+        [self.collectionView.delegate collectionView:self.collectionView
+                                    didTapMediaAudio:[messageData data]
+                                         atIndexPath:[self.collectionView indexPathForCell:cell]];
+    }
+    else {
+        [self.collectionView.delegate collectionView:self.collectionView
+                              didTapMediaAudioForURL:[messageData url]
+                                         atIndexPath:[self.collectionView indexPathForCell:cell]];
+    }
 }
 
 

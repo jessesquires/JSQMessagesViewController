@@ -47,13 +47,14 @@
 {
     [super awakeFromNib];
     
+    self.messageBubbleTopLabel.textAlignment = NSTextAlignmentLeft;
+    self.cellBottomLabel.textAlignment = NSTextAlignmentLeft;
+    
     self.longPressGestureRecognizer.enabled = NO;
     
     self.mediaImageView.userInteractionEnabled = YES;
-    
     self.mediaImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.mediaImageView.clipsToBounds = YES;
-    
     
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleMediaImageViewTapped:)];

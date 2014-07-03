@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="JSQMessagesCollectionViewCellOutgoingVideo" id="mzd-rV-3X8" customClass="JSQMessagesCollectionViewCellOutgoingVideo">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="154"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="154"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cell top label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eU0-pC-F0N" customClass="JSQMessagesLabel">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Mn1-di-4oi"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bubble top label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ut-Vg-Dng" customClass="JSQMessagesLabel">
+                        <rect key="frame" x="0.0" y="20" width="320" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="jkI-Qs-CsZ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0aB-iI-UCJ">
+                        <rect key="frame" x="40" y="40" width="244" height="94"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sVx-8Y-exZ">
+                                <rect key="frame" x="0.0" y="0.0" width="238" height="94"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ly-hP-TKK">
+                                <rect key="frame" x="102" y="27" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="sVx-8Y-exZ" secondAttribute="bottom" id="3AG-nu-M6B"/>
+                            <constraint firstItem="5ly-hP-TKK" firstAttribute="top" secondItem="0aB-iI-UCJ" secondAttribute="top" constant="27" id="7Of-p4-uMM"/>
+                            <constraint firstAttribute="centerX" secondItem="5ly-hP-TKK" secondAttribute="centerX" id="Cg4-YZ-F5I"/>
+                            <constraint firstItem="sVx-8Y-exZ" firstAttribute="leading" secondItem="0aB-iI-UCJ" secondAttribute="leading" id="DAi-b8-53f"/>
+                            <constraint firstItem="sVx-8Y-exZ" firstAttribute="top" secondItem="0aB-iI-UCJ" secondAttribute="top" id="Hvu-bq-u8t"/>
+                            <constraint firstAttribute="trailing" secondItem="sVx-8Y-exZ" secondAttribute="trailing" constant="6" id="MzC-Bx-tgA"/>
+                            <constraint firstAttribute="centerY" secondItem="5ly-hP-TKK" secondAttribute="centerY" id="tBY-9Q-5CI"/>
+                            <constraint firstAttribute="bottom" secondItem="5ly-hP-TKK" secondAttribute="bottom" constant="27" id="vfb-KW-cby"/>
+                            <constraint firstItem="5ly-hP-TKK" firstAttribute="leading" secondItem="0aB-iI-UCJ" secondAttribute="leading" constant="102" id="wJC-s1-dJm"/>
+                            <constraint firstAttribute="trailing" secondItem="5ly-hP-TKK" secondAttribute="trailing" constant="102" id="xbR-mC-oKw"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="meJ-Lv-BZH">
+                        <rect key="frame" x="286" y="100" width="34" height="34"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="26j-wb-jEx"/>
+                            <constraint firstAttribute="width" constant="34" id="wbA-hw-SK4"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cell bottom label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Car-St-DLs" customClass="JSQMessagesLabel">
+                        <rect key="frame" x="0.0" y="134" width="320" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="me2-5d-O4c"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="0aB-iI-UCJ" firstAttribute="leading" secondItem="mzd-rV-3X8" secondAttribute="leading" constant="40" id="0c5-Ep-alp"/>
+                <constraint firstAttribute="trailing" secondItem="eU0-pC-F0N" secondAttribute="trailing" id="0it-3R-bYb"/>
+                <constraint firstItem="Car-St-DLs" firstAttribute="leading" secondItem="mzd-rV-3X8" secondAttribute="leading" id="5u9-Dv-H2F"/>
+                <constraint firstAttribute="trailing" secondItem="6ut-Vg-Dng" secondAttribute="trailing" id="70i-kg-rxb"/>
+                <constraint firstItem="meJ-Lv-BZH" firstAttribute="leading" secondItem="0aB-iI-UCJ" secondAttribute="trailing" constant="2" id="7Lo-ob-cbQ"/>
+                <constraint firstAttribute="bottom" secondItem="Car-St-DLs" secondAttribute="bottom" id="Deu-ah-Lxu"/>
+                <constraint firstAttribute="trailing" secondItem="meJ-Lv-BZH" secondAttribute="trailing" id="Epj-pP-jvj"/>
+                <constraint firstItem="Car-St-DLs" firstAttribute="top" secondItem="meJ-Lv-BZH" secondAttribute="bottom" id="Kz1-pf-Eq2"/>
+                <constraint firstItem="eU0-pC-F0N" firstAttribute="top" secondItem="mzd-rV-3X8" secondAttribute="top" id="Lyy-84-aJo"/>
+                <constraint firstItem="Car-St-DLs" firstAttribute="top" secondItem="0aB-iI-UCJ" secondAttribute="bottom" id="MaH-a3-5Qe"/>
+                <constraint firstItem="6ut-Vg-Dng" firstAttribute="top" secondItem="eU0-pC-F0N" secondAttribute="bottom" id="SET-wZ-c5O"/>
+                <constraint firstItem="6ut-Vg-Dng" firstAttribute="top" secondItem="eU0-pC-F0N" secondAttribute="bottom" id="VAO-4g-Zjo"/>
+                <constraint firstAttribute="trailing" secondItem="Car-St-DLs" secondAttribute="trailing" id="Vp1-B7-Crb"/>
+                <constraint firstItem="meJ-Lv-BZH" firstAttribute="leading" secondItem="0aB-iI-UCJ" secondAttribute="trailing" constant="2" id="aH8-dR-2Ns"/>
+                <constraint firstItem="6ut-Vg-Dng" firstAttribute="leading" secondItem="mzd-rV-3X8" secondAttribute="leading" id="byC-1e-cB0"/>
+                <constraint firstItem="0aB-iI-UCJ" firstAttribute="top" secondItem="6ut-Vg-Dng" secondAttribute="bottom" id="jSf-eR-9Vz"/>
+                <constraint firstItem="eU0-pC-F0N" firstAttribute="leading" secondItem="mzd-rV-3X8" secondAttribute="leading" id="oOH-ZC-bfE"/>
+                <constraint firstItem="0aB-iI-UCJ" firstAttribute="top" secondItem="6ut-Vg-Dng" secondAttribute="bottom" id="pJL-Ky-cxR"/>
+                <constraint firstItem="Car-St-DLs" firstAttribute="top" secondItem="meJ-Lv-BZH" secondAttribute="bottom" id="woi-ws-8CV"/>
+            </constraints>
+            <size key="customSize" width="317" height="245"/>
+            <connections>
+                <outlet property="avatarContainerView" destination="meJ-Lv-BZH" id="OXg-8I-Mr4"/>
+                <outlet property="avatarContainerViewHeightConstraint" destination="26j-wb-jEx" id="3de-e9-MyX"/>
+                <outlet property="avatarContainerViewWidthConstraint" destination="wbA-hw-SK4" id="pl7-mA-lLT"/>
+                <outlet property="cellBottomLabel" destination="Car-St-DLs" id="VrS-4B-Mgr"/>
+                <outlet property="cellBottomLabelHeightConstraint" destination="me2-5d-O4c" id="gpp-fP-F1L"/>
+                <outlet property="cellTopLabel" destination="eU0-pC-F0N" id="zlI-FD-ViF"/>
+                <outlet property="cellTopLabelHeightConstraint" destination="Mn1-di-4oi" id="Xjs-bG-c6x"/>
+                <outlet property="mediaImageView" destination="sVx-8Y-exZ" id="PlQ-Rg-eAa"/>
+                <outlet property="messageBubbleContainerView" destination="0aB-iI-UCJ" id="Jgm-S3-egx"/>
+                <outlet property="messageBubbleLeftRightMarginConstraint" destination="0c5-Ep-alp" id="7eC-m8-GsF"/>
+                <outlet property="messageBubbleTopLabel" destination="6ut-Vg-Dng" id="7Ef-Be-0dy"/>
+                <outlet property="messageBubbleTopLabelHeightConstraint" destination="jkI-Qs-CsZ" id="kXK-T6-1Mj"/>
+                <outlet property="overlayView" destination="5ly-hP-TKK" id="ZuY-0X-1dk"/>
+                <outlet property="textViewAvatarHorizontalSpaceConstraint" destination="MzC-Bx-tgA" id="BRG-WF-e9C"/>
+                <outlet property="textViewBottomVerticalSpaceConstraint" destination="3AG-nu-M6B" id="tiY-42-1nk"/>
+                <outlet property="textViewMarginHorizontalSpaceConstraint" destination="DAi-b8-53f" id="lDf-SB-C6r"/>
+                <outlet property="textViewTopVerticalSpaceConstraint" destination="Hvu-bq-u8t" id="ttp-mv-Or4"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>
