@@ -111,19 +111,19 @@
 /**
  *    Initializes and returns a message object having the given video thumbnail, video url, sender, and current system date.
  *
- *    @param thumbnail The thumbnail for the video.
  *    @param url       The url for the video of the message. Can be remote or local URL, the type of this message will automatically set.
+ *    @param thumbnail The thumbnail for the video.
  *    @param sender    The name of the user who sent the message.
  *
  *    @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
  */
-+ (instancetype)messageWithVideoThumbnail:(UIImage *)thumbnail videoURL:(NSURL *)url sender:(NSString *)sender;
++ (instancetype)messageWithVideoURL:(NSURL *)url thumbnail:(UIImage *)thumbnail sender:(NSString *)sender;
 
 /**
  *    Initializes and returns a message object having the given placeholder image, video url, sender, and current system date.
  *
- *    @param placeholder The video thumbnail placeholder to be set initially, until the actual thumbnail request finishes.
  *    @param remoteURL   The url for the video of the message. Can *NOT* be a local URL, the type of this message will automatically set.
+ *    @param placeholder The video thumbnail placeholder to be set initially, until the actual thumbnail request finishes.
  *    @param sender      The name of the user who sent the message.
  *
  *    @discussion This method can be used in when you know the url of the video, but not yet downloaded it, 
@@ -132,7 +132,7 @@
  *
  *    @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
  */
-+ (instancetype)messageWithVideoPlaceholderImage:(UIImage *)placeholder videoURL:(NSURL *)remoteURL sender:(NSString *)sender;
++ (instancetype)messageWithVideoURL:(NSURL *)remoteURL placeholderImage:(UIImage *)placeholder sender:(NSString *)sender;
 
 /**
  *    Initializes and returns a message object having the given audio data, sender, and current system date.
@@ -203,23 +203,23 @@
 /**
  *    Initializes and returns a message object having the given video thumbnail, video url, sender, and date.
  *
- *    @param thumbnail The thumbnail for the video.
  *    @param url       The url for the video. Can be remote or local URL, the type of this message will automatically set.
+ *    @param thumbnail The thumbnail for the video.
  *    @param sender    The name of the user who sent the message.
  *    @param date      The date that the message was sent.
  *
  *    @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
  */
-- (instancetype)initWithVideoThumbnail:(UIImage *)thumbnail
-                              videoURL:(NSURL *)url
-                                sender:(NSString *)sender
-                                  date:(NSDate *)date;
+- (instancetype)initWithVideoURL:(NSURL *)url
+                       thumbnail:(UIImage *)thumbnail
+                          sender:(NSString *)sender
+                            date:(NSDate *)date;
 
 /**
  *    Initializes and returns a message object having the given placeholder image, video url, sender, and current system date.
  *
+ *    @param remoteURL   The url for the video. Can *NOT* be a local URL, the type of this message will automatically set.
  *    @param placeholder The video thumbnail placeholder to be set initially, until the actual thumbnail request finishes.
- *    @param url         The url for the video. Can *NOT* be a local URL, the type of this message will automatically set.
  *    @param sender      The name of the user who sent the message.
  *    @param date        The date that the message was sent.
  *
@@ -229,10 +229,10 @@
  *
  *    @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
  */
-- (instancetype)initWithVideoPlaceholderImage:(UIImage *)placeholder
-                                     videoURL:(NSURL *)url
-                                       sender:(NSString *)sender
-                                         date:(NSDate *)date;
+- (instancetype)initWithVideoURL:(NSURL *)remoteURL
+                placeholderImage:(UIImage *)placeholder
+                          sender:(NSString *)sender
+                            date:(NSDate *)date;
 
 /**
  *  Initializes and returns a message object having the given audio data, sender, and date.

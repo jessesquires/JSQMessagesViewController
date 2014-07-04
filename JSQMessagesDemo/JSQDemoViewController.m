@@ -60,14 +60,14 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
                      [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage008"] sender:kJSQDemoAvatarNameWoz],
                      [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage007"] sender:self.sender],
                      
-                     [JSQMessage messageWithVideoPlaceholderImage:videoPlaceholderImage videoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] sender:kJSQDemoAvatarNameJobs],
+                     [JSQMessage messageWithVideoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] placeholderImage:videoPlaceholderImage sender:kJSQDemoAvatarNameWoz],
                      nil];
     
     /**
      *    Add a local video message.
      */
-    NSURL *localVideoURL = [[NSBundle mainBundle] URLForResource:@"demo_yoona" withExtension:@"mp4"];
-    [self.messages addObject:[JSQMessage messageWithVideoThumbnail:videoPlaceholderImage videoURL:localVideoURL sender:self.sender]];
+    NSURL *localVideoURL = [[NSBundle mainBundle] URLForResource:@"demo_video" withExtension:@"mp4"];
+    [self.messages addObject:[JSQMessage messageWithVideoURL:localVideoURL thumbnail:videoPlaceholderImage sender:self.sender]];
     
 
     /**
@@ -471,9 +471,12 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
         UIImage *thumbnail = nil;
         
         if (message.type == JSQMessageRemotePhoto) {
-            message.data = [NSData dataWithContentsOfURL:url];
-            thumbnail = [UIImage imageWithData:message.data];
-            message.type = JSQMessagePhoto;
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            if (data) {
+                message.data = data;
+                thumbnail = [UIImage imageWithData:message.data];
+                message.type = JSQMessagePhoto;
+            }
         }
         else if (message.type == JSQMessageRemoteVideo) {
             
@@ -488,16 +491,17 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
             if (!remoteThumbnail) {
                 NSLog(@"Error, Can not generate thumbnail for URL: %@", url);
             }
-            
-            message.thumbnail = remoteThumbnail;
-            message.videoThumbnailPlaceholder = nil;
-            
-            /**
-             *  Change the message type, so next time we will not need to ask the data source method.
-             */
-            message.type = JSQMessageVideo;
-            
-            thumbnail = message.thumbnail;
+            else {
+                message.thumbnail = remoteThumbnail;
+                message.videoThumbnailPlaceholder = nil;
+                
+                /**
+                 *  Change the message type, so next time we will not need to ask the data source method.
+                 */
+                message.type = JSQMessageVideo;
+                
+                thumbnail = message.thumbnail;
+            }
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -565,7 +569,7 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
     NSLog(@"Load earlier messages!");
 }
 
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMediaPhoto:(UIImageView *)mediaPhotoImageView atIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMediaPhoto:(UIImageView *)imageView atIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"");
 }

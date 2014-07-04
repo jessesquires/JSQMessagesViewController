@@ -716,7 +716,7 @@ handleAudioMessageWithMessageData:(id<JSQMessageData>)messageData
            atIndexPath:(NSIndexPath *)indexPath { }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
-      didTapMediaPhoto:(UIImageView *)mediaPhotoImageView
+      didTapMediaPhoto:(UIImageView *)imageView
            atIndexPath:(NSIndexPath *)indexPath {}
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView

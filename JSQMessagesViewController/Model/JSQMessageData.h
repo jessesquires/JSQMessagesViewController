@@ -50,7 +50,7 @@ typedef NS_ENUM(NSUInteger, JSQMessageType) {
 - (NSData *)data;
 
 /**
- *  @return The url for the data of the message. If the `type` value is non-remote, this value will be ignored.
+ *  @return The url for the data of the message.
  */
 - (NSURL *)url;
 

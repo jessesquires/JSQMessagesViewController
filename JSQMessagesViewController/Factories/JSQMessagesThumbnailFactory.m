@@ -34,7 +34,6 @@
         NSUInteger fps = ceilf(assetTrack.nominalFrameRate);
         time = CMTimeMake((int64_t)(second * fps), (int32_t)fps);
     }
-    CMTimeShow(time);
     AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
     imageGenerator.appliesPreferredTrackTransform = YES;
     CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:NULL error:NULL];

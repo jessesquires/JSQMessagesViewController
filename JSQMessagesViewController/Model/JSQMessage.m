@@ -39,14 +39,14 @@
     return [[self alloc] initWithImageURL:url placeholderImage:placeholder sender:sender date:[NSDate date]];
 }
 
-+ (instancetype)messageWithVideoThumbnail:(UIImage *)thumbnail videoURL:(NSURL *)url sender:(NSString *)sender
++ (instancetype)messageWithVideoURL:(NSURL *)url thumbnail:(UIImage *)thumbnail sender:(NSString *)sender
 {
-    return [[self alloc] initWithVideoThumbnail:thumbnail videoURL:url sender:sender date:[NSDate date]];
+    return [[self alloc] initWithVideoURL:url thumbnail:thumbnail sender:sender date:[NSDate date]];
 }
 
-+ (instancetype)messageWithVideoPlaceholderImage:(UIImage *)placeholder videoURL:(NSURL *)url sender:(NSString *)sender
++ (instancetype)messageWithVideoURL:(NSURL *)remoteURL placeholderImage:(UIImage *)placeholder sender:(NSString *)sender
 {
-    return [[self alloc] initWithVideoPlaceholderImage:placeholder videoURL:url sender:sender date:[NSDate date]];
+    return [[self alloc] initWithVideoURL:remoteURL placeholderImage:placeholder sender:sender date:[NSDate date]];
 }
 
 + (instancetype)messageWithAudio:(NSData *)audio sender:(NSString *)sender
@@ -125,10 +125,10 @@
     return self;
 }
 
-- (instancetype)initWithVideoThumbnail:(UIImage *)thumbnail
-                              videoURL:(NSURL *)url
-                                sender:(NSString *)sender
-                                  date:(NSDate *)date
+- (instancetype)initWithVideoURL:(NSURL *)url
+                       thumbnail:(UIImage *)thumbnail
+                          sender:(NSString *)sender
+                            date:(NSDate *)date
 {
     NSParameterAssert(thumbnail != nil);
     NSParameterAssert(url != nil && [[[url absoluteString] jsq_stringByTrimingWhitespace] length] > 0);
@@ -154,12 +154,12 @@
     return self;
 }
 
-- (instancetype)initWithVideoPlaceholderImage:(UIImage *)placeholder
-                                     videoURL:(NSURL *)url
-                                       sender:(NSString *)sender
-                                         date:(NSDate *)date
+- (instancetype)initWithVideoURL:(NSURL *)remoteURL
+                placeholderImage:(UIImage *)placeholder
+                          sender:(NSString *)sender
+                            date:(NSDate *)date
 {
-    NSParameterAssert(url != nil && ![url isFileURL] && [[[url absoluteString] jsq_stringByTrimingWhitespace] length] > 0);
+    NSParameterAssert(remoteURL != nil && ![remoteURL isFileURL] && [[[remoteURL absoluteString] jsq_stringByTrimingWhitespace] length] > 0);
     NSParameterAssert(placeholder != nil);
     NSParameterAssert(sender != nil);
     NSParameterAssert(date != nil);
@@ -168,7 +168,7 @@
     if (self) {
         _type = JSQMessageRemoteVideo;
         _videoThumbnailPlaceholder = placeholder;
-        _url = url;
+        _url = remoteURL;
         _sender = sender;
         _date = date;
     }
@@ -198,12 +198,14 @@
 {
     NSParameterAssert(url != nil && [[[url absoluteString] jsq_stringByTrimingWhitespace] length] > 0);
     NSParameterAssert(sender != nil);
+    NSParameterAssert(date != nil);
     
     self = [self init];
     if (self) {
         _type = JSQMessageRemoteAudio;
         _sender = sender;
         _date = date;
+        _url = url;
     }
     return self;
 }
@@ -239,6 +241,20 @@
 
 - (BOOL)isEqualToMessage:(JSQMessage *)aMessage
 {
+    BOOL textEqual = [self.text isEqualToString:aMessage.text];
+    
+    BOOL senderEqual = [self.sender isEqualToString:aMessage.sender];
+    
+    BOOL dateEqual = [self.date compare:aMessage.date] == NSOrderedSame;
+    
+    BOOL thumbnailEqual = (!self.thumbnail && !aMessage.thumbnail)
+    ? YES
+    : [UIImageJPEGRepresentation(self.thumbnail, .1f) isEqual:UIImageJPEGRepresentation(aMessage.thumbnail, .1f)];
+    
+    BOOL thumbnailPlaceholderEqual = (!self.videoThumbnailPlaceholder && !aMessage.videoThumbnailPlaceholder)
+    ? YES
+    : [UIImageJPEGRepresentation(self.videoThumbnailPlaceholder, .1f) isEqual:UIImageJPEGRepresentation(aMessage.videoThumbnailPlaceholder, .1f)];
+    
     BOOL mediaDataEqual = NO;
     switch (aMessage.type) {
         case JSQMessageText:
@@ -247,7 +263,7 @@
         case JSQMessagePhoto:
         case JSQMessageVideo:
         case JSQMessageAudio:
-            mediaDataEqual = [self.data isEqualToData:aMessage.data];
+            mediaDataEqual = self.data ? [self.data isEqualToData:aMessage.data] : [self.url isEqual:aMessage.url];
             break;
         case JSQMessageRemotePhoto:
         case JSQMessageRemoteVideo:
@@ -255,11 +271,8 @@
             mediaDataEqual = [self.url isEqual:aMessage.url];
             break;
     }
-    
-    return [self.text isEqualToString:aMessage.text]
-            && [self.sender isEqualToString:aMessage.sender]
-            && ([self.date compare:aMessage.date] == NSOrderedSame)
-            && mediaDataEqual;
+
+    return textEqual && senderEqual && dateEqual && thumbnailEqual && thumbnailPlaceholderEqual && mediaDataEqual;
 }
 
 #pragma mark - NSObject
