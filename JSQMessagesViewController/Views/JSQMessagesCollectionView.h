@@ -145,14 +145,14 @@ typedef void (^JSQMessagesCollectionViewDataSourceCompletionBlock)(UIImage *thum
  *    Asks the data source for the image to display in the `mediaImageView` for the the specified
  *
  *    @param collectionView  The object representing the collection view requesting this information.
- *    @param url             The url for the image
+ *    @param sourceURL       The url for the image
  *    @param indexPath       The index path that specifies the location of the item.
  *    @param completionBlock The completion block that the receiver must call when it has a source image ready.
  *
  *    @discussion To improve performance, thumbnail and `mediaImageView` should always be the same size.
  */
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
-  wantsThumbnailForURL:(NSURL *)url
+  wantsThumbnailForURL:(NSURL *)sourceURL
 mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
        completionBlock:(JSQMessagesCollectionViewDataSourceCompletionBlock)completionBlock;
 

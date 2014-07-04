@@ -390,7 +390,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
-  wantsThumbnailForURL:(NSURL *)url
+  wantsThumbnailForURL:(NSURL *)sourceURL
 mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
        completionBlock:(JSQMessagesCollectionViewDataSourceCompletionBlock)completionBlock {};
 
@@ -402,6 +402,8 @@ handlePhotoMessageWithMessageData:(id<JSQMessageData>)messageData
     collectionViewCell:(JSQMessagesCollectionViewCell *)cell
          cellIndexPath:(NSIndexPath *)indexPath isOutgoingMessage:(BOOL)isOutgoingMessage
 {
+    NSParameterAssert([messageData thumbnailImage] != nil);
+    
     UIImageView *mediaImageView = nil;
     
     if (isOutgoingMessage) {
@@ -416,32 +418,24 @@ handlePhotoMessageWithMessageData:(id<JSQMessageData>)messageData
     switch ([messageData type]) {
         case JSQMessagePhoto:
         {
-            NSParameterAssert([messageData data] != nil);
-            UIImage *image = [UIImage imageWithData:[messageData data]];
-            mediaImageView.image = image;
+            UIImage *thumbnailImage = [messageData thumbnailImage];
+            mediaImageView.image = thumbnailImage;
         }
             break;
             
         case JSQMessageRemotePhoto:
         {
-            if ([messageData data]) {
-                UIImage *thumbnail = [UIImage imageWithData:[messageData data]];
-                JSQMessagesCollectionViewCellAnimateDisplayBlock(mediaImageView, thumbnail, 0);
-            }
-            else {
-                NSParameterAssert([messageData url] != nil);
-                
-                if ([messageData thumbnail]) {
-                    UIImage *placeholde = [messageData thumbnail];
-                    mediaImageView.image = placeholde;
-                }
-                
-                [collectionView.dataSource collectionView:collectionView
-                                     wantsThumbnailForURL:[messageData url]
-                         mediaImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *thumbnail) {
-                             JSQMessagesCollectionViewCellAnimateDisplayBlock(mediaImageView, thumbnail, .3f);
-                         }];
-            }
+            NSParameterAssert([messageData sourceURL] != nil);
+            
+            UIImage *thumbnailImage = [messageData thumbnailImage];
+            mediaImageView.image = thumbnailImage;
+            
+            [collectionView.dataSource collectionView:collectionView
+                                 wantsThumbnailForURL:[messageData sourceURL]
+                     mediaImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *thumbnail) {
+                         JSQMessagesCollectionViewCellAnimateDisplayBlock(mediaImageView, thumbnail, .3f);
+                     }];
+
         }
             break;
         case JSQMessageText:
@@ -460,6 +454,8 @@ handleVideoMessageWithMessageData:(id<JSQMessageData>)messageData
     collectionViewCell:(JSQMessagesCollectionViewCell *)cell
          cellIndexPath:(NSIndexPath *)indexPath isOutgoingMessage:(BOOL)isOutgoingMessage
 {
+    NSParameterAssert([messageData sourceURL] != nil);
+    
     UIImageView *mediaImageView = nil;
     
     if (isOutgoingMessage) {
@@ -474,25 +470,28 @@ handleVideoMessageWithMessageData:(id<JSQMessageData>)messageData
     switch ([messageData type]) {
     case JSQMessageVideo:
         {
-            NSParameterAssert([messageData thumbnail] != nil);
-            mediaImageView.image = [messageData thumbnail];
+            NSParameterAssert([messageData videoThumbnail] != nil);
+            UIImage *thumbnailImage = [messageData videoThumbnail];
+            mediaImageView.image = thumbnailImage;
         }
         break;
             
     case JSQMessageRemoteVideo:
         {
-            NSParameterAssert([messageData videoThumbnailPlaceholder] != nil || [messageData thumbnail] != nil);
+            NSParameterAssert([messageData videoThumbnailPlaceholder] != nil || [messageData videoThumbnail] != nil);
             
-            if ([messageData thumbnail]) {
-                mediaImageView.image = [messageData thumbnail];
+            UIImage *thumbnailImage = nil;
+            
+            if ([messageData videoThumbnail]) {
+                thumbnailImage = [messageData videoThumbnail];
+                mediaImageView.image = thumbnailImage;
             }
             else {
-                NSParameterAssert([messageData url] != nil);
-                
-                mediaImageView.image = [messageData videoThumbnailPlaceholder];
+                thumbnailImage = [messageData videoThumbnailPlaceholder];
+                mediaImageView.image = thumbnailImage;
                 
                 [collectionView.dataSource collectionView:collectionView
-                                     wantsThumbnailForURL:[messageData url]
+                                     wantsThumbnailForURL:[messageData sourceURL]
                          mediaImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *thumbnail) {
                              JSQMessagesCollectionViewCellAnimateDisplayBlock(mediaImageView, thumbnail, .3f);
                          }];
@@ -760,7 +759,7 @@ didTapMediaAudioForURL:(NSURL *)audioURL
     id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView
                                                       messageDataForItemAtIndexPath:[self.collectionView indexPathForCell:cell]];
     [self.collectionView.delegate collectionView:self.collectionView
-                          didTapMediaVideoForURL:[messageData url]
+                          didTapMediaVideoForURL:[messageData sourceURL]
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
 }
 
@@ -768,14 +767,14 @@ didTapMediaAudioForURL:(NSURL *)audioURL
 {
     id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView
                                                       messageDataForItemAtIndexPath:[self.collectionView indexPathForCell:cell]];
-    if ([messageData data]) {
+    if ([messageData audio]) {
         [self.collectionView.delegate collectionView:self.collectionView
-                                    didTapMediaAudio:[messageData data]
+                                    didTapMediaAudio:[messageData audio]
                                          atIndexPath:[self.collectionView indexPathForCell:cell]];
     }
     else {
         [self.collectionView.delegate collectionView:self.collectionView
-                              didTapMediaAudioForURL:[messageData url]
+                              didTapMediaAudioForURL:[messageData sourceURL]
                                          atIndexPath:[self.collectionView indexPathForCell:cell]];
     }
 }

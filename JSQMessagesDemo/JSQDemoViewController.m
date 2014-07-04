@@ -50,16 +50,24 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
                      [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
                      
-                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage005.jpg"] placeholderImage:placeholderImage sender:self.sender],
-                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage015.jpg"] placeholderImage:placeholderImage sender:self.sender],
-                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage016.jpg"] placeholderImage:placeholderImage sender:self.sender],
-                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage017.jpg"] placeholderImage:placeholderImage sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage005.jpg"]
+                                    placeholderImage:placeholderImage sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage015.jpg"]
+                                    placeholderImage:placeholderImage sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage016.jpg"]
+                                    placeholderImage:placeholderImage sender:self.sender],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage017.jpg"]
+                                    placeholderImage:placeholderImage sender:self.sender],
                      
-                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage010"] sender:self.sender],
-                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage009"] sender:kJSQDemoAvatarNameCook],
-                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage008"] sender:kJSQDemoAvatarNameWoz],
-                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage007"] sender:self.sender],
-                     
+                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoLargeImage000"]
+                                   thumbnailImage:[UIImage imageNamed:@"FICDDemoSmallImage000"] sender:self.sender],
+                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoLargeImage001"]
+                                   thumbnailImage:[UIImage imageNamed:@"FICDDemoSmallImage001"] sender:kJSQDemoAvatarNameJobs],
+                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoLargeImage002"]
+                                   thumbnailImage:[UIImage imageNamed:@"FICDDemoSmallImage002"] sender:self.sender],
+                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoLargeImage003"]
+                                   thumbnailImage:[UIImage imageNamed:@"FICDDemoSmallImage003"] sender:kJSQDemoAvatarNameWoz],
+//
                      [JSQMessage messageWithVideoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] placeholderImage:videoPlaceholderImage sender:kJSQDemoAvatarNameWoz],
                      nil];
     
@@ -103,7 +111,7 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
     /**
      *  Change to add more messages for testing
      */
-    NSUInteger messagesToAdd = 0;
+    NSUInteger messagesToAdd = 50;
     NSArray *copyOfMessages = [self.messages copy];
     for (NSUInteger i = 0; i < messagesToAdd; i++) {
         [self.messages addObjectsFromArray:copyOfMessages];
@@ -284,24 +292,6 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
     /**
      *  Accessory button has no default functionality, yet.
      */
-    
-    NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
-    [copyAvatars removeObject:self.sender];
-    
-    NSString *sender = [copyAvatars objectAtIndex:arc4random_uniform((int)[copyAvatars count])];
-    static BOOL is = YES;
-    JSQMessage *copyMessage = [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoImage000"] sender:is ? self.sender : sender];
-    is = ! is;
-    /**
-     *  This you should do upon receiving a message:
-     *
-     *  1. Play sound (optional)
-     *  2. Add new id<JSQMessageData> object to your data source
-     *  3. Call `finishReceivingMessage`
-     */
-    [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
-    [self.messages addObject:copyMessage];
-    [self finishReceivingMessage];
 }
 
 
@@ -338,6 +328,7 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
 
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    return nil;
     /**
      *  Return `nil` here if you do not want avatars.
      *  If you do return `nil`, be sure to do the following in `viewDidLoad`:
@@ -458,10 +449,11 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
 
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
-  wantsThumbnailForURL:(NSURL *)url mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+  wantsThumbnailForURL:(NSURL *)sourceURL mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
        completionBlock:(JSQMessagesCollectionViewDataSourceCompletionBlock)completionBlock {
     
     JSQMessage *message = self.messages[indexPath.item];
+    BOOL isOutgoingMessage = [[message sender] isEqualToString:self.sender];
     
     /**
      *  Here you can download images from the Internet.
@@ -471,10 +463,28 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
         UIImage *thumbnail = nil;
         
         if (message.type == JSQMessageRemotePhoto) {
-            NSData *data = [NSData dataWithContentsOfURL:url];
-            if (data) {
-                message.data = data;
-                thumbnail = [UIImage imageWithData:message.data];
+            NSData *imageData = [NSData dataWithContentsOfURL:sourceURL];
+            
+            if (imageData) {
+                UIImage *sourceImage = [UIImage imageWithData:imageData];
+                message.sourceImage = sourceImage;
+                
+                /**
+                 *  Before the image display you should generate a thumbnail to improve performance.
+                 */
+                CGFloat screenScale = [[UIScreen mainScreen] scale];
+                CGSize mediaImageViewSize = isOutgoingMessage
+                ? collectionView.collectionViewLayout.outgoingMediaImageSize
+                : collectionView.collectionViewLayout.incomingMediaImageSize;
+                
+                CGRect contextBounds = CGRectMake(0.f, 0.f, mediaImageViewSize.width * screenScale, mediaImageViewSize.height * screenScale);
+                
+                UIGraphicsBeginImageContext(contextBounds.size);
+                [sourceImage drawInRect:contextBounds];
+                thumbnail = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
+                
+                message.thumbnailImage = thumbnail;
                 message.type = JSQMessagePhoto;
             }
         }
@@ -483,31 +493,28 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
             /**
              *  Generate thumbnails from remote url.
              */
-            UIImage *remoteThumbnail = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:url];
+            UIImage *remoteThumbnail = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:sourceURL];
             
             /**
              *  May not support this format or video encoding is incorrect.
              */
             if (!remoteThumbnail) {
-                NSLog(@"Error, Can not generate thumbnail for URL: %@", url);
+                NSLog(@"Error, Can not generate thumbnail for URL: %@", sourceURL);
             }
             else {
-                message.thumbnail = remoteThumbnail;
+                thumbnail = remoteThumbnail;
+                
+                message.videoThumbnail = remoteThumbnail;
                 message.videoThumbnailPlaceholder = nil;
                 
                 /**
                  *  Change the message type, so next time we will not need to ask the data source method.
                  */
                 message.type = JSQMessageVideo;
-                
-                thumbnail = message.thumbnail;
             }
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            /**
-             *  Before the image display you should generate a thumbnail to improve performance. Omitted here.
-             */
             completionBlock(thumbnail);
         });
     });

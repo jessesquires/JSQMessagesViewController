@@ -67,7 +67,7 @@
 //    XCTAssertNil(remoteVideoThumbnailWithTooLargeTime, @"Remote thumbnail with too large time should be nil");
     
     /**
-     *  Our local video frame rate is 24 frames per second.
+     *  Our local video frame rate is 25 frames per second.
      */
     NSURL *localVideoURL = [[NSBundle mainBundle] URLForResource:@"demo_video" withExtension:@"mp4"];
     XCTAssertNotNil(localVideoURL, @"Local video url should not be nil");
@@ -81,7 +81,7 @@
     UIImage *localVideoThumbnailAtTooLongSecond = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:localVideoURL atSeconds:60];
     XCTAssertNil(localVideoThumbnailAtTooLongSecond, @"Local video thumbnail at too long second should be nil");
     
-    UIImage *localVideoThumbnail = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:localVideoURL atTime:CMTimeMake(24, 24)];
+    UIImage *localVideoThumbnail = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:localVideoURL atTime:CMTimeMake(25, 25)];
     XCTAssertNotNil(localVideoThumbnail, @"Local video thumbnail shou not be nil");
     
 //    UIImage *localVideoThumbnailWithTooLargeTime = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:localVideoURL atTime:CMTimeMake(24 * 60 * 55, 24)];

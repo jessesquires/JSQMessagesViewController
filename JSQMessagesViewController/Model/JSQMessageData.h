@@ -40,24 +40,32 @@ typedef NS_ENUM(NSUInteger, JSQMessageType) {
 @optional
 
 /**
- *  @return The body text of the message.
+ *  @return The body text of the message. Only valid when `type` is `JSQMessageText`.
  */
 - (NSString *)text;
 
-/**
- *  @return The media data of the message. This can be photo or audio, depends on the message type.
- */
-- (NSData *)data;
 
 /**
- *  @return The url for the data of the message.
+ *  @return The audio data of the message. Only valid when `type` is `JSQMessageAudio`.
  */
-- (NSURL *)url;
+- (NSData *)audio;
+
 
 /**
- *  @return The thumbnail for video or photo.
+ *  @return The full-size image of the message. Only valid when `type` is `JSQMessagePhoto`.
  */
-- (UIImage *)thumbnail;
+- (UIImage *)sourceImage;
+
+/**
+ *  @return The thumbnail of the `sourceImage` of the message. Only valid when `type` is `JSQMessagePhoto` or `JSQMessageRemotePhoto`.
+ */
+- (UIImage *)thumbnailImage;
+
+
+/**
+ *  @return The thumbnail of the video of the message. Only valid when `type` is `JSQMessageVideo` or `JSQMessageRemoteVideo`.
+ */
+- (UIImage *)videoThumbnail;
 
 /**
  *  @discussion Normally, you can directly use the `thumbnail`. 
@@ -67,6 +75,12 @@ typedef NS_ENUM(NSUInteger, JSQMessageType) {
  *  @return The placeholder image of the video thumbnail, only valid when `type` is `JSQMessageRemoteVideo`.
  */
 - (UIImage *)videoThumbnailPlaceholder;
+
+
+/**
+ *  @return The url for the data of the message.
+ */
+- (NSURL *)sourceURL;
 
 @required
 
