@@ -16,7 +16,6 @@
 @property (weak ,nonatomic, readwrite) IBOutlet UIImageView *mediaImageView;
 @property (strong, nonatomic, readwrite) UITapGestureRecognizer *overlayViewTapGestureRecognizer;
 
-
 - (void)jsq_handleOverlayViewTapped:(UITapGestureRecognizer *)tapGesture;
 - (void)applyMask;
 
@@ -60,6 +59,13 @@
     self.mediaImageView.clipsToBounds = YES;
 }
 
+- (void)setBackgroundColor:(UIColor *)backgroundColor
+{
+    [super setBackgroundColor:backgroundColor];
+    self.mediaImageView.backgroundColor = backgroundColor;
+    self.overlayView.backgroundColor = backgroundColor;
+}
+
 - (void)setMessageBubbleImageView:(UIImageView *)messageBubbleImageView
 {
     if (_messageBubbleImageView) {
@@ -90,16 +96,6 @@
     });
 }
 
-- (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
-{
-    [super applyLayoutAttributes:layoutAttributes];
-    
-    JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
-    
-    if (![self.overlayView isEqual:customAttributes.outgoingVideoOverlayView]) {
-        self.overlayView = customAttributes.outgoingVideoOverlayView;
-    }
-}
 
 #pragma mark - Custom Accessors
 

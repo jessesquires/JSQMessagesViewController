@@ -154,32 +154,46 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 @property (assign, nonatomic) CGSize outgoingAvatarViewSize;
 
 /**
- *  The size of the thumbnail of video or image for incoming media messages.
+ *  The size of the thumbnail for incoming photo messages.
  *
  *  @discussion The default value is `(120.0f, 160.0f)`(3:4). This value must not be `CGSizeZero`.
  */
-@property (assign, nonatomic) CGSize incomingMediaImageSize;
+@property (assign, nonatomic) CGSize incomingThumbnailImageSize;
 
 /**
- *  The size of the thumbnail of video or image for outgoing media messages.
+ *  The size of the thumbnail for outgoing photo messages.
  *
  *  @discussion The default value is `(120.0f, 160.0f)`(3:4). This value must not be `CGSizeZero`.
  */
-@property (assign, nonatomic) CGSize outgoingMediaImageSize;
+@property (assign, nonatomic) CGSize outgoingThumbnailImageSize;
 
 /**
- *	The view overlaid on the video thumbnail for incoming video messages.
+ *  The size of the thumbnail for incoming video messages.
  *
- *  @discussion The default value is `nil`. Set to `nil` if you want to ignore all tap events.
+ *  @discussion The default value is `(120.0f, 160.0f)`(3:4). This value must not be `CGSizeZero`.
  */
-@property (strong, nonatomic) UIView *incomingVideoOverlayView;
+@property (assign, nonatomic) CGSize incomingVideoThumbnailSize;
 
 /**
- *	The view overlaid on the video thumbnail for outgoing video messages.
+ *  The size of the thumbnail for outgoing video messages.
  *
- *  @discussion The default value is `nil`. Set to `nil` if you want to ignore all tap events.
+ *  @discussion The default value is `(120.0f, 160.0f)`(3:4). This value must not be `CGSizeZero`.
  */
-@property (strong, nonatomic) UIView *outgoingVideoOverlayView;
+@property (assign, nonatomic) CGSize outgoingVideoThumbnailSize;
+
+/**
+ *	The size of video overlay view for incoming video messages.
+ *
+ *  @discussion The default value is `(40.0f, 40.0f)`. Set to `CGSizeZero` to remove incoming video overlay view.
+ */
+@property (assign, nonatomic) CGSize incomingVideoOverlayViewSize;
+
+/**
+ *	The size of video overlay view for outgoing video messages.
+ *
+ *  @discussion The default value is `(40.0f, 40.0f)`. Set to `CGSizeZero` to remove outgoing video overlay view.
+ */
+@property (assign, nonatomic) CGSize outgoingVideoOverlayViewSize;
 
 /**
  *  Computes and returns the size of the `messageBubbleImageView` property of a `JSQMessagesCollectionViewCell` 

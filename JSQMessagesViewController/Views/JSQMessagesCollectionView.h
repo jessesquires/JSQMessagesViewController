@@ -142,6 +142,32 @@ typedef void (^JSQMessagesCollectionViewDataSourceCompletionBlock)(UIImage *thum
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
+ *  Asks the data source for the video overlay view that corresponds to the incoming video
+ *  message data item at indexPath in the collectionView.
+ *
+ *	@param collectionView The object representing the collection view requesting this information.
+ *	@param indexPath      The index path that specifies the location of the item.
+ *
+ *	@return A configured view object. You may return `nil` from this method if you do not want
+ *  the specified item to display an overlay view.
+ */
+- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView incomingVideoOverlayViewForItemAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  Asks the data source for the video overlay view that corresponds to the outgoing video
+ *  message data item at indexPath in the collectionView.
+ *
+ *	@param collectionView The object representing the collection view requesting this information.
+ *	@param indexPath      The index path that specifies the location of the item.
+ *
+ *	@return A configured view object. You may return `nil` from this method if you do not want
+ *  the specified item to display an overlay view.
+ */
+- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView outgoingVideoOverlayViewForItemAtIndexPath:(NSIndexPath *)indexPath;
+
+
+
+/**
  *    Asks the data source for the image to display in the `mediaImageView` for the the specified
  *
  *    @param collectionView  The object representing the collection view requesting this information.

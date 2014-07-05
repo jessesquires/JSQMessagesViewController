@@ -87,12 +87,16 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     _incomingAvatarViewSize = defaultAvatarSize;
     _outgoingAvatarViewSize = defaultAvatarSize;
     
-    CGSize defaultMediaImageSize = CGSizeMake(120.0f, 160.0f);
-    _incomingMediaImageSize = defaultMediaImageSize;
-    _outgoingMediaImageSize = defaultMediaImageSize;
+    CGSize defaultMediaThumbnailImageSize = CGSizeMake(120.0f, 160.0f);
+    _incomingThumbnailImageSize = defaultMediaThumbnailImageSize;
+    _outgoingThumbnailImageSize = defaultMediaThumbnailImageSize;
     
-    _incomingVideoOverlayView = nil;
-    _outgoingVideoOverlayView = nil;
+    _incomingVideoThumbnailSize = defaultMediaThumbnailImageSize;
+    _outgoingVideoThumbnailSize = defaultMediaThumbnailImageSize;
+    
+    CGSize defalutOverlayViewSize = CGSizeMake(40.f, 40.f);
+    _incomingVideoOverlayViewSize = defalutOverlayViewSize;
+    _outgoingVideoOverlayViewSize = defalutOverlayViewSize;
     
     _springinessEnabled = NO;
     _springResistanceFactor = 1000;
@@ -143,9 +147,6 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     _dynamicAnimator = nil;
     _visibleIndexPaths = nil;
-    
-    _incomingVideoOverlayView = nil;
-    _outgoingVideoOverlayView = nil;
 }
 
 #pragma mark - Setters
@@ -192,27 +193,39 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
-- (void)setIncomingMediaImageSize:(CGSize)incomingMediaImageSize
+- (void)setIncomingThumbnailImageSize:(CGSize)incomingThumbnailImageSize
 {
-    _incomingMediaImageSize = incomingMediaImageSize;
+    _incomingThumbnailImageSize = incomingThumbnailImageSize;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
-- (void)setOutgoingMediaImageSize:(CGSize)outgoingMediaImageSize
+- (void)setOutgoingThumbnailImageSize:(CGSize)outgoingThumbnailImageSize
 {
-    _outgoingMediaImageSize = outgoingMediaImageSize;
+    _outgoingThumbnailImageSize = outgoingThumbnailImageSize;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
-- (void)setIncomingVideoOverlayView:(UIView *)incomingVideoOverlayView
+- (void)setIncomingVideoThumbnailSize:(CGSize)incomingVideoThumbnailSize
 {
-    _incomingVideoOverlayView = incomingVideoOverlayView;
+    _incomingVideoThumbnailSize = incomingVideoThumbnailSize;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
-- (void)setOutgoingVideoOverlayView:(UIView *)outgoingVideoOverlayView
+- (void)setOutgoingVideoThumbnailSize:(CGSize)outgoingVideoThumbnailSize
 {
-    _outgoingVideoOverlayView = outgoingVideoOverlayView;
+    _outgoingVideoThumbnailSize = outgoingVideoThumbnailSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setIncomingVideoOverlayViewSize:(CGSize )incomingVideoOverlayViewSize
+{
+    _incomingVideoOverlayViewSize = incomingVideoOverlayViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setOutgoingVideoOverlayViewSize:(CGSize )outgoingVideoOverlayViewSize
+{
+    _outgoingVideoOverlayViewSize = outgoingVideoOverlayViewSize;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
@@ -402,10 +415,12 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
         }
             break;
         case JSQMessagePhoto:
-        case JSQMessageVideo:
         case JSQMessageRemotePhoto:
+            finalSize = isOutgoingMessage ? self.outgoingThumbnailImageSize : self.incomingThumbnailImageSize;
+            break;
+        case JSQMessageVideo:
         case JSQMessageRemoteVideo:
-            finalSize = isOutgoingMessage ? self.outgoingMediaImageSize : self.incomingMediaImageSize;
+            finalSize = isOutgoingMessage ? self.outgoingVideoThumbnailSize : self.incomingVideoThumbnailSize;
             break;
         case JSQMessageAudio:
         case JSQMessageRemoteAudio:
@@ -428,24 +443,17 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     CGFloat messageBubblePadding = remainingItemWidthForBubble - messageBubbleSize.width - textPadding;
     
     layoutAttributes.messageBubbleLeftRightMargin = messageBubblePadding;
-    
     layoutAttributes.textViewFrameInsets = self.messageBubbleTextViewFrameInsets;
-    
     layoutAttributes.textViewTextContainerInsets = self.messageBubbleTextViewTextContainerInsets;
-    
     layoutAttributes.messageBubbleFont = self.messageBubbleFont;
-    
     layoutAttributes.incomingAvatarViewSize = self.incomingAvatarViewSize;
-    
     layoutAttributes.outgoingAvatarViewSize = self.outgoingAvatarViewSize;
-    
-    layoutAttributes.incomingMediaImageSize = self.incomingMediaImageSize;
-    
-    layoutAttributes.outgoingMediaImageSize = self.outgoingMediaImageSize;
-    
-    layoutAttributes.incomingVideoOverlayView = self.incomingVideoOverlayView;
-    
-    layoutAttributes.outgoingVideoOverlayView = self.outgoingVideoOverlayView;
+    layoutAttributes.incomingThumbnailImageSize = self.incomingThumbnailImageSize;
+    layoutAttributes.outgoingThumbnailImageSize = self.outgoingThumbnailImageSize;
+    layoutAttributes.incomingVideoThumbnailSize = self.incomingVideoThumbnailSize;
+    layoutAttributes.outgoingVideoThumbnailSize = self.outgoingVideoThumbnailSize;
+    layoutAttributes.incomingVideoOverlayViewSize = self.incomingVideoOverlayViewSize;
+    layoutAttributes.outgoingVideoOverlayViewSize = self.outgoingVideoOverlayViewSize;
     
     layoutAttributes.cellTopLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
                                                                                 layout:self

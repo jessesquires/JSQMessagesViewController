@@ -19,7 +19,14 @@
 #import "JSQMessagesCollectionViewCell.h"
 
 #import "JSQMessagesCollectionViewCellIncoming.h"
+#import "JSQMessagesCollectionViewCellIncomingPhoto.h"
+#import "JSQMessagesCollectionViewCellIncomingVideo.h"
+#import "JSQMessagesCollectionViewCellIncomingAudio.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewCellOutgoingPhoto.h"
+#import "JSQMessagesCollectionViewCellOutgoingVideo.h"
+#import "JSQMessagesCollectionViewCellOutgoingAudio.h"
+
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 
 #import "UIView+JSQMessages.h"
@@ -51,7 +58,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleLeftRightMarginConstraint;
 
 @property (assign, nonatomic) UIEdgeInsets textViewFrameInsets;
-
 @property (assign, nonatomic) CGSize avatarViewSize;
 
 @property (weak, nonatomic, readwrite) UILongPressGestureRecognizer *longPressGestureRecognizer;
@@ -192,10 +198,16 @@
     [self jsq_updateConstraint:self.cellBottomLabelHeightConstraint
                   withConstant:customAttributes.cellBottomLabelHeight];
     
-    if ([self isKindOfClass:[JSQMessagesCollectionViewCellIncoming class]]) {
+    if ([self isKindOfClass:[JSQMessagesCollectionViewCellIncoming class]]      ||
+        [self isKindOfClass:[JSQMessagesCollectionViewCellIncomingPhoto class]] ||
+        [self isKindOfClass:[JSQMessagesCollectionViewCellIncomingVideo class]] ||
+        [self isKindOfClass:[JSQMessagesCollectionViewCellIncomingAudio class]]) {
         self.avatarViewSize = customAttributes.incomingAvatarViewSize;
     }
-    else if ([self isKindOfClass:[JSQMessagesCollectionViewCellOutgoing class]]) {
+    else if ([self isKindOfClass:[JSQMessagesCollectionViewCellOutgoing class]]      ||
+             [self isKindOfClass:[JSQMessagesCollectionViewCellOutgoingPhoto class]] ||
+             [self isKindOfClass:[JSQMessagesCollectionViewCellOutgoingVideo class]] ||
+             [self isKindOfClass:[JSQMessagesCollectionViewCellOutgoingAudio class]] ) {
         self.avatarViewSize = customAttributes.outgoingAvatarViewSize;
     }
 }

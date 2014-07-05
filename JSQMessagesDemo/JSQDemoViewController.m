@@ -111,7 +111,7 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
     /**
      *  Change to add more messages for testing
      */
-    NSUInteger messagesToAdd = 50;
+    NSUInteger messagesToAdd = 1;
     NSArray *copyOfMessages = [self.messages copy];
     for (NSUInteger i = 0; i < messagesToAdd; i++) {
         [self.messages addObjectsFromArray:copyOfMessages];
@@ -151,21 +151,16 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
     
     [self setupTestModel];
     
-    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
-    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+    
+//    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeMake(50, 50);
+//    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeMake(70, 70);
+//    self.collectionView.collectionViewLayout.incomingThumbnailImageSize = CGSizeMake(100, 100);
+//    self.collectionView.collectionViewLayout.outgoingThumbnailImageSize = CGSizeMake(200, 200);
+    self.collectionView.collectionViewLayout.incomingVideoOverlayViewSize = CGSizeMake(80, 80);
+//    self.collectionView.collectionViewLayout.outgoingVideoOverlayViewSize = CGSizeMake(120, 120);
     
     self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:18.f];
-    
-    UIButton *incommingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [incommingButton setImage:[UIImage imageNamed:@"demo_play_button_in"] forState:UIControlStateNormal];
-    [incommingButton sizeToFit];
-    self.collectionView.collectionViewLayout.incomingVideoOverlayView = incommingButton;
-    
-    UIButton *outgoingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [outgoingButton setImage:[UIImage imageNamed:@"demo_play_button_out"] forState:UIControlStateNormal];
-    [outgoingButton sizeToFit];
-    self.collectionView.collectionViewLayout.outgoingVideoOverlayView = outgoingButton;
-    
+
     /**
      *  Remove camera button since media messages are not yet implemented
      *
@@ -328,7 +323,6 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
 
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
     /**
      *  Return `nil` here if you do not want avatars.
      *  If you do return `nil`, be sure to do the following in `viewDidLoad`:
@@ -401,6 +395,134 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
     return nil;
 }
 
+- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView incomingVideoOverlayViewForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    /**
+     *  Return `nil` here if you do not want overlay view for incoming video message.
+     *  If you do return `nil`, be sure to do the following in `viewDidLoad`:
+     *
+     *  self.collectionView.collectionViewLayout.incomingVideoOverlayViewSize = CGSizeZero;
+     */
+    
+    /**
+     *  You should create new view to add to each cell
+     *  Otherwise, each cell would be referencing the same view.
+     *
+     *  Note: these views will be sized according to these values:
+     *
+     *  self.collectionView.collectionViewLayout.incomingVideoOverlayViewSize
+     *
+     *  Override the defaults in `viewDidLoad`
+     */
+    UIButton *incommingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [incommingButton setImage:[UIImage imageNamed:@"demo_play_button_in"] forState:UIControlStateNormal];
+    [incommingButton sizeToFit];
+    return incommingButton;
+}
+
+- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView outgoingVideoOverlayViewForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    /**
+     *  Return `nil` here if you do not want overlay view for outgoing video message.
+     *  If you do return `nil`, be sure to do the following in `viewDidLoad`:
+     *
+     *  self.collectionView.collectionViewLayout.outgoingVideoOverlayViewSize = CGSizeZero;
+     */
+    
+    /**
+     *  You should create new view to add to each cell
+     *  Otherwise, each cell would be referencing the same view.
+     *
+     *  Note: these views will be sized according to these values:
+     *
+     *  self.collectionView.collectionViewLayout.outgoingVideoOverlayViewSize
+     *
+     *  Override the defaults in `viewDidLoad`
+     */
+    UIButton *outgoingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [outgoingButton setImage:[UIImage imageNamed:@"demo_play_button_out"] forState:UIControlStateNormal];
+    [outgoingButton sizeToFit];
+    return outgoingButton;
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+  wantsThumbnailForURL:(NSURL *)sourceURL mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+       completionBlock:(JSQMessagesCollectionViewDataSourceCompletionBlock)completionBlock {
+    
+    JSQMessage *message = self.messages[indexPath.item];
+    BOOL isOutgoingMessage = [[message sender] isEqualToString:self.sender];
+    
+    /**
+     *  Here you can download images from the Internet.
+     */
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        UIImage *thumbnail = nil;
+        
+        if (message.type == JSQMessageRemotePhoto) {
+            NSData *imageData = [NSData dataWithContentsOfURL:sourceURL];
+            
+            if (imageData) {
+                UIImage *sourceImage = [UIImage imageWithData:imageData];
+                message.sourceImage = sourceImage;
+                
+                /**
+                 *  Before the image display you should generate a thumbnail to improve performance.
+                 */
+                CGFloat screenScale = [[UIScreen mainScreen] scale];
+                CGSize mediaImageViewSize = isOutgoingMessage
+                ? collectionView.collectionViewLayout.outgoingThumbnailImageSize
+                : collectionView.collectionViewLayout.incomingThumbnailImageSize;
+                
+                CGRect contextBounds = CGRectMake(0.f, 0.f, mediaImageViewSize.width * screenScale, mediaImageViewSize.height * screenScale);
+                
+                UIGraphicsBeginImageContext(contextBounds.size);
+                [sourceImage drawInRect:contextBounds];
+                thumbnail = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
+                
+                message.thumbnailImage = thumbnail;
+                message.type = JSQMessagePhoto;
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completionBlock(thumbnail);
+                });
+            }
+            else {
+                NSLog(@"Error, Can not download image for URL:%@", message.sourceURL);
+            }
+        }
+        else if (message.type == JSQMessageRemoteVideo) {
+            
+            /**
+             *  Generate thumbnails from remote url.
+             */
+            UIImage *remoteThumbnail = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:sourceURL];
+            
+            /**
+             *  May not support this format or video encoding is incorrect.
+             */
+            if (!remoteThumbnail) {
+                NSLog(@"Error, Can not generate thumbnail for URL: %@", sourceURL);
+            }
+            else {
+                thumbnail = remoteThumbnail;
+                
+                message.videoThumbnail = remoteThumbnail;
+                message.videoThumbnailPlaceholder = nil;
+                
+                /**
+                 *  Change the message type, so next time we will not need to ask the data source method.
+                 */
+                message.type = JSQMessageVideo;
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completionBlock(thumbnail);
+                });
+            }
+        }
+    });
+}
 
 #pragma mark - UICollectionView DataSource
 
@@ -445,79 +567,6 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
     }
     
     return cell;
-}
-
-
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView
-  wantsThumbnailForURL:(NSURL *)sourceURL mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
-       completionBlock:(JSQMessagesCollectionViewDataSourceCompletionBlock)completionBlock {
-    
-    JSQMessage *message = self.messages[indexPath.item];
-    BOOL isOutgoingMessage = [[message sender] isEqualToString:self.sender];
-    
-    /**
-     *  Here you can download images from the Internet.
-     */
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-
-        UIImage *thumbnail = nil;
-        
-        if (message.type == JSQMessageRemotePhoto) {
-            NSData *imageData = [NSData dataWithContentsOfURL:sourceURL];
-            
-            if (imageData) {
-                UIImage *sourceImage = [UIImage imageWithData:imageData];
-                message.sourceImage = sourceImage;
-                
-                /**
-                 *  Before the image display you should generate a thumbnail to improve performance.
-                 */
-                CGFloat screenScale = [[UIScreen mainScreen] scale];
-                CGSize mediaImageViewSize = isOutgoingMessage
-                ? collectionView.collectionViewLayout.outgoingMediaImageSize
-                : collectionView.collectionViewLayout.incomingMediaImageSize;
-                
-                CGRect contextBounds = CGRectMake(0.f, 0.f, mediaImageViewSize.width * screenScale, mediaImageViewSize.height * screenScale);
-                
-                UIGraphicsBeginImageContext(contextBounds.size);
-                [sourceImage drawInRect:contextBounds];
-                thumbnail = UIGraphicsGetImageFromCurrentImageContext();
-                UIGraphicsEndImageContext();
-                
-                message.thumbnailImage = thumbnail;
-                message.type = JSQMessagePhoto;
-            }
-        }
-        else if (message.type == JSQMessageRemoteVideo) {
-            
-            /**
-             *  Generate thumbnails from remote url.
-             */
-            UIImage *remoteThumbnail = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:sourceURL];
-            
-            /**
-             *  May not support this format or video encoding is incorrect.
-             */
-            if (!remoteThumbnail) {
-                NSLog(@"Error, Can not generate thumbnail for URL: %@", sourceURL);
-            }
-            else {
-                thumbnail = remoteThumbnail;
-                
-                message.videoThumbnail = remoteThumbnail;
-                message.videoThumbnailPlaceholder = nil;
-                
-                /**
-                 *  Change the message type, so next time we will not need to ask the data source method.
-                 */
-                message.type = JSQMessageVideo;
-            }
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completionBlock(thumbnail);
-        });
-    });
 }
 
 
@@ -585,5 +634,6 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
 {
     NSLog(@"");
 }
+
 
 @end

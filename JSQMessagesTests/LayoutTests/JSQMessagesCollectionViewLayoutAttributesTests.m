@@ -51,10 +51,8 @@
     attrs.cellTopLabelHeight = 20.0f;
     attrs.messageBubbleTopLabelHeight = 10.0f;
     attrs.cellBottomLabelHeight = 15.0f;
-    attrs.incomingMediaImageSize = CGSizeMake(120.f, 160.f);
-    attrs.outgoingMediaImageSize = CGSizeMake(120.f, 160.f);
-    attrs.incomingVideoOverlayView = incommingButton;
-    attrs.outgoingVideoOverlayView = outgoingButton;
+    attrs.incomingThumbnailImageSize = CGSizeMake(120.f, 160.f);
+    attrs.outgoingThumbnailImageSize = CGSizeMake(120.f, 160.f);
     
     XCTAssertNotNil(attrs, @"Layout attributes should not be nil");
     

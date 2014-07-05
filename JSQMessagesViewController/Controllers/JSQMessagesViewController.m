@@ -389,6 +389,18 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     return nil;
 }
 
+- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView
+incomingVideoOverlayViewForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView
+outgoingVideoOverlayViewForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
   wantsThumbnailForURL:(NSURL *)sourceURL
 mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -461,10 +473,24 @@ handleVideoMessageWithMessageData:(id<JSQMessageData>)messageData
     if (isOutgoingMessage) {
         JSQMessagesCollectionViewCellOutgoingVideo *outgoingVideoCell = (JSQMessagesCollectionViewCellOutgoingVideo *)cell;
         mediaImageView = outgoingVideoCell.mediaImageView;
+        
+        UIView *overlayView = [collectionView.dataSource collectionView:collectionView outgoingVideoOverlayViewForItemAtIndexPath:indexPath];
+        overlayView.bounds = CGRectMake(CGRectGetMinX(outgoingVideoCell.overlayView.bounds),
+                                                          CGRectGetMinY(outgoingVideoCell.overlayView.bounds),
+                                                          collectionView.collectionViewLayout.outgoingVideoOverlayViewSize.width,
+                                                          collectionView.collectionViewLayout.outgoingVideoOverlayViewSize.height);
+        outgoingVideoCell.overlayView = overlayView;
     }
     else {
         JSQMessagesCollectionViewCellIncomingVideo *incomingVideoCell = (JSQMessagesCollectionViewCellIncomingVideo *)cell;
         mediaImageView = incomingVideoCell.mediaImageView;
+        
+        UIView *overlayView = [collectionView.dataSource collectionView:collectionView incomingVideoOverlayViewForItemAtIndexPath:indexPath];
+        overlayView.bounds = CGRectMake(CGRectGetMinX(incomingVideoCell.overlayView.bounds),
+                                                          CGRectGetMinY(incomingVideoCell.overlayView.bounds),
+                                                          collectionView.collectionViewLayout.incomingVideoOverlayViewSize.width,
+                                                          collectionView.collectionViewLayout.incomingVideoOverlayViewSize.height);
+        incomingVideoCell.overlayView = overlayView;
     }
     
     switch ([messageData type]) {
@@ -580,27 +606,28 @@ handleAudioMessageWithMessageData:(id<JSQMessageData>)messageData
     cell.backgroundColor = [UIColor clearColor];
     cell.delegate = self;
     cell.messageBubbleImageView = [collectionView.dataSource collectionView:collectionView bubbleImageViewForItemAtIndexPath:indexPath];
-    cell.avatarImageView = [collectionView.dataSource collectionView:collectionView avatarImageViewForItemAtIndexPath:indexPath];
     cell.cellTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellTopLabelAtIndexPath:indexPath];
     cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
     cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellBottomLabelAtIndexPath:indexPath];
     
     CGFloat bubbleTopLabelInset = 60.0f;
+    UIImageView *avatarImageView = [collectionView.dataSource collectionView:collectionView avatarImageViewForItemAtIndexPath:indexPath];
     
     if (isOutgoingMessage) {
         cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
-        cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
+        avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
                                                  CGRectGetMinY(cell.avatarImageView.bounds),
                                                  collectionView.collectionViewLayout.outgoingAvatarViewSize.width,
                                                  collectionView.collectionViewLayout.outgoingAvatarViewSize.height);
-
+        cell.avatarImageView = avatarImageView;
     }
     else {
         cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
-        cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
+        avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
                                                  CGRectGetMinY(cell.avatarImageView.bounds),
                                                  collectionView.collectionViewLayout.incomingAvatarViewSize.width,
                                                  collectionView.collectionViewLayout.incomingAvatarViewSize.height);
+        cell.avatarImageView = avatarImageView;
     }
     
     switch (messageType) {

@@ -63,6 +63,12 @@
     self.mediaImageViewTapGestureRecognizer = tap;
 }
 
+- (void)setBackgroundColor:(UIColor *)backgroundColor
+{
+    [super setBackgroundColor:backgroundColor];
+    self.mediaImageView.backgroundColor = backgroundColor;
+}
+
 - (void)setMessageBubbleImageView:(UIImageView *)messageBubbleImageView
 {
     if (_messageBubbleImageView) {

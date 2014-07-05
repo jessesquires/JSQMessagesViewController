@@ -23,7 +23,13 @@
 
 #import "JSQMessagesCollectionView.h"
 #import "JSQMessagesCollectionViewCellIncoming.h"
+#import "JSQMessagesCollectionViewCellIncomingPhoto.h"
+#import "JSQMessagesCollectionViewCellIncomingVideo.h"
+#import "JSQMessagesCollectionViewCellIncomingAudio.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewCellOutgoingPhoto.h"
+#import "JSQMessagesCollectionViewCellOutgoingVideo.h"
+#import "JSQMessagesCollectionViewCellOutgoingAudio.h"
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
 
@@ -42,6 +48,7 @@
 #import "JSQMessagesBubbleImageFactory.h"
 #import "JSQMessagesTimestampFormatter.h"
 #import "JSQMessagesToolbarButtonFactory.h"
+#import "JSQMessagesThumbnailFactory.h"
 
 #import "JSQSystemSoundPlayer+JSQMessages.h"
 #import "NSString+JSQMessages.h"

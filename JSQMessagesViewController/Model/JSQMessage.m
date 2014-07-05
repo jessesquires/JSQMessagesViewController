@@ -297,10 +297,10 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@>[type: %d, sender: %@, date: %@, text: %@, \
-            audio data length: %d, sourceImage: %@, thumbnailImage: %@, videoThumbnail: %@,\
-            videoThumbnailPlaceholder: %@, sourceURL: %@ ]",
-            [self class], self.type, self.sender, self.date, self.text,
+    return [NSString stringWithFormat:@"<%@: %p; type = %d; sender = %@; date = %@; text = '%@'; "
+            @"audio data length = %d; sourceImage = %@; thumbnailImage = %@; "
+             @"videoThumbnail = %@; videoThumbnailPlaceholder = %@; sourceURL = %@>",
+            [self class], self, self.type, self.sender, self.date, self.text,
             [self.audio length], self.sourceImage, self.thumbnailImage, self.videoThumbnail,
             self.videoThumbnailPlaceholder, self.sourceURL];
 }

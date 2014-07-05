@@ -25,6 +25,7 @@
 @implementation JSQMessagesCollectionViewCellIncomingVideo
 @synthesize messageBubbleImageView = _messageBubbleImageView;
 
+
 - (void)dealloc
 {
     _mediaImageView = nil;
@@ -58,6 +59,13 @@
     self.mediaImageView.userInteractionEnabled = YES;
     self.mediaImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.mediaImageView.clipsToBounds = YES;
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor
+{
+    [super setBackgroundColor:backgroundColor];
+    self.mediaImageView.backgroundColor = backgroundColor;
+    self.overlayView.backgroundColor = backgroundColor;
 }
 
 - (void)setMessageBubbleImageView:(UIImageView *)messageBubbleImageView
@@ -96,10 +104,9 @@
     
     JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
     
-    if (![self.overlayView isEqual:customAttributes.incomingVideoOverlayView]) {
-        self.overlayView = customAttributes.incomingVideoOverlayView;
-    }
 }
+
+
 
 #pragma mark - Custom Accessors
 

@@ -31,4 +31,11 @@
     self.cellBottomLabel.textAlignment = NSTextAlignmentLeft;
 }
 
+- (void)setBackgroundColor:(UIColor *)backgroundColor
+{
+    [super setBackgroundColor:backgroundColor];
+//    self.mediaImageView.backgroundColor = backgroundColor;
+//    self.overlayView.backgroundColor = backgroundColor;
+}
+
 @end

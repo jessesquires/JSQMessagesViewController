@@ -47,8 +47,8 @@
     XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(layout.messageBubbleTextViewTextContainerInsets, UIEdgeInsetsMake(10.0f, 8.0f, 10.0f, 8.0f)), @"Property should be equal to default value");
     XCTAssertTrue(CGSizeEqualToSize(layout.incomingAvatarViewSize, CGSizeMake(34.0f, 34.0f)), @"Property should be equal to default value");
     XCTAssertTrue(CGSizeEqualToSize(layout.outgoingAvatarViewSize, CGSizeMake(34.0f, 34.0f)), @"Property should be equal to default value");
-    XCTAssertTrue(CGSizeEqualToSize(layout.incomingMediaImageSize, CGSizeMake(120.0f, 160.0f)), @"Property should be equal to default value");
-    XCTAssertTrue(CGSizeEqualToSize(layout.outgoingMediaImageSize, CGSizeMake(120.0f, 160.0f)), @"Property should be equal to default value");
+    XCTAssertTrue(CGSizeEqualToSize(layout.incomingThumbnailImageSize, CGSizeMake(120.0f, 160.0f)), @"Property should be equal to default value");
+    XCTAssertTrue(CGSizeEqualToSize(layout.outgoingThumbnailImageSize, CGSizeMake(120.0f, 160.0f)), @"Property should be equal to default value");
 }
 
 @end

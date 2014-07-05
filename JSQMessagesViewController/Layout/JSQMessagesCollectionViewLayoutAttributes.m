@@ -26,8 +26,6 @@
 - (void)dealloc
 {
     _messageBubbleFont = nil;
-    _incomingVideoOverlayView = nil;
-    _outgoingVideoOverlayView = nil;
 }
 
 #pragma mark - Setters
@@ -56,14 +54,40 @@
     _outgoingAvatarViewSize = CGSizeMake(ceil(outgoingAvatarViewSize.width), ceilf(outgoingAvatarViewSize.height));
 }
 
-- (void)setIncomingMediaImageSize:(CGSize)incomingMediaImageSize {
-    NSParameterAssert(incomingMediaImageSize.width >= 0.0f && incomingMediaImageSize.height >= 0.0f);
-    _incomingMediaImageSize = CGSizeMake(ceil(incomingMediaImageSize.width), ceilf(incomingMediaImageSize.height));;
+- (void)setIncomingThumbnailImageSize:(CGSize)incomingThumbnailImageSize
+{
+    NSParameterAssert(incomingThumbnailImageSize.width > 0.0f && incomingThumbnailImageSize.height > 0.0f);
+    _incomingThumbnailImageSize = CGSizeMake(ceil(incomingThumbnailImageSize.width), ceilf(incomingThumbnailImageSize.height));
 }
 
-- (void)setOutgoingMediaImageSize:(CGSize)outgoingMediaImageSize {
-    NSParameterAssert(outgoingMediaImageSize.width >= 0.0f && outgoingMediaImageSize.height >= 0.0f);
-    _outgoingMediaImageSize = CGSizeMake(ceil(outgoingMediaImageSize.width), ceilf(outgoingMediaImageSize.height));;
+- (void)setOutgoingThumbnailImageSize:(CGSize)outgoingThumbnailImageSize
+{
+    NSParameterAssert(outgoingThumbnailImageSize.width > 0.0f && outgoingThumbnailImageSize.height > 0.0f);
+    _outgoingThumbnailImageSize = CGSizeMake(ceil(outgoingThumbnailImageSize.width), ceilf(outgoingThumbnailImageSize.height));
+}
+
+- (void)setIncomingVideoThumbnailSize:(CGSize)incomingVideoThumbnailSize
+{
+    NSParameterAssert(incomingVideoThumbnailSize.width > 0.0f && incomingVideoThumbnailSize.height > 0.0f);
+    _incomingVideoThumbnailSize = CGSizeMake(ceil(incomingVideoThumbnailSize.width), ceilf(incomingVideoThumbnailSize.height));
+}
+
+- (void)setOutgoingVideoThumbnailSize:(CGSize)outgoingVideoThumbnailSize
+{
+    NSParameterAssert(outgoingVideoThumbnailSize.width > 0.0f && outgoingVideoThumbnailSize.height > 0.0f);
+    _outgoingVideoThumbnailSize = CGSizeMake(ceil(outgoingVideoThumbnailSize.width), ceilf(outgoingVideoThumbnailSize.height));
+}
+
+- (void)setIncomingVideoOverlayViewSize:(CGSize)incomingVideoOverlayViewSize
+{
+    NSParameterAssert(incomingVideoOverlayViewSize.width >= 0.0f && incomingVideoOverlayViewSize.height >= 0.0f);
+    _incomingVideoOverlayViewSize = CGSizeMake(ceil(incomingVideoOverlayViewSize.width), ceilf(incomingVideoOverlayViewSize.height));
+}
+
+- (void)setOutgoingVideoOverlayViewSize:(CGSize)outgoingVideoOverlayViewSize
+{
+    NSParameterAssert(outgoingVideoOverlayViewSize.width >= 0.0f && outgoingVideoOverlayViewSize.height >= 0.0f);
+    _outgoingVideoOverlayViewSize = CGSizeMake(ceil(outgoingVideoOverlayViewSize.width), ceilf(outgoingVideoOverlayViewSize.height));
 }
 
 - (void)setCellTopLabelHeight:(CGFloat)cellTopLabelHeight
@@ -84,15 +108,6 @@
     _cellBottomLabelHeight = floorf(cellBottomLabelHeight);
 }
 
-- (void)setIncomingVideoOverlayView:(UIView *)incomingVideoOverlayView
-{
-    _incomingVideoOverlayView = incomingVideoOverlayView;
-}
-
-- (void)setOutgoingVideoOverlayView:(UIView *)outgoingVideoOverlayView
-{
-    _outgoingVideoOverlayView = outgoingVideoOverlayView;
-}
 
 #pragma mark - NSObject
 
@@ -113,10 +128,12 @@
         || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewTextContainerInsets, self.textViewTextContainerInsets)
         || !CGSizeEqualToSize(layoutAttributes.incomingAvatarViewSize, self.incomingAvatarViewSize)
         || !CGSizeEqualToSize(layoutAttributes.outgoingAvatarViewSize, self.outgoingAvatarViewSize)
-        || !CGSizeEqualToSize(layoutAttributes.incomingMediaImageSize, self.incomingMediaImageSize)
-        || !CGSizeEqualToSize(layoutAttributes.outgoingMediaImageSize, self.outgoingMediaImageSize)
-        || ![layoutAttributes.incomingVideoOverlayView isEqual:self.incomingVideoOverlayView]
-        || ![layoutAttributes.outgoingVideoOverlayView isEqual:self.outgoingVideoOverlayView]
+        || !CGSizeEqualToSize(layoutAttributes.incomingThumbnailImageSize, self.incomingThumbnailImageSize)
+        || !CGSizeEqualToSize(layoutAttributes.outgoingThumbnailImageSize, self.outgoingThumbnailImageSize)
+        || !CGSizeEqualToSize(layoutAttributes.incomingVideoThumbnailSize, self.incomingVideoThumbnailSize)
+        || !CGSizeEqualToSize(layoutAttributes.outgoingVideoThumbnailSize, self.outgoingVideoThumbnailSize)
+        || !CGSizeEqualToSize(layoutAttributes.incomingVideoOverlayViewSize, self.incomingVideoOverlayViewSize)
+        || !CGSizeEqualToSize(layoutAttributes.outgoingVideoOverlayViewSize, self.outgoingVideoOverlayViewSize)
         || (int)layoutAttributes.messageBubbleLeftRightMargin != (int)self.messageBubbleLeftRightMargin
         || (int)layoutAttributes.cellTopLabelHeight != (int)self.cellTopLabelHeight
         || (int)layoutAttributes.messageBubbleTopLabelHeight != (int)self.messageBubbleTopLabelHeight
@@ -146,13 +163,15 @@
     copy.textViewTextContainerInsets = self.textViewTextContainerInsets;
     copy.incomingAvatarViewSize = self.incomingAvatarViewSize;
     copy.outgoingAvatarViewSize = self.outgoingAvatarViewSize;
-    copy.incomingMediaImageSize = self.incomingMediaImageSize;
-    copy.outgoingMediaImageSize = self.outgoingMediaImageSize;
+    copy.incomingThumbnailImageSize = self.incomingThumbnailImageSize;
+    copy.outgoingThumbnailImageSize = self.outgoingThumbnailImageSize;
+    copy.incomingVideoThumbnailSize = self.incomingVideoThumbnailSize;
+    copy.outgoingVideoThumbnailSize = self.outgoingVideoThumbnailSize;
+    copy.incomingVideoOverlayViewSize = self.incomingVideoOverlayViewSize;
+    copy.outgoingVideoOverlayViewSize = self.outgoingVideoOverlayViewSize;
     copy.cellTopLabelHeight = self.cellTopLabelHeight;
     copy.messageBubbleTopLabelHeight = self.messageBubbleTopLabelHeight;
     copy.cellBottomLabelHeight = self.cellBottomLabelHeight;
-    copy.incomingVideoOverlayView = self.incomingVideoOverlayView;
-    copy.outgoingVideoOverlayView = self.outgoingVideoOverlayView;
     
     return copy;
 }

@@ -84,16 +84,42 @@
 @property (assign, nonatomic) CGSize outgoingAvatarViewSize;
 
 /**
- *  The size of the `mediaImageView` of a `JSQMessagesCollectionViewCellOutgoing` or it's subclass.
+ *  The size of the `mediaImageView` of a `JSQMessagesCollectionViewCellIncomingPhoto`.
  *  The size values should be greater than `0.0`.
  */
-@property (assign, nonatomic) CGSize incomingMediaImageSize;
+@property (assign, nonatomic) CGSize incomingThumbnailImageSize;
 
 /**
- *  The size of the `mediaImageView` of a `JSQMessagesCollectionViewCellOutgoing` or it's subclass.
+ *  The size of the `mediaImageView` of a `JSQMessagesCollectionViewCellOutgoingPhoto`.
  *  The size values should be greater than `0.0`.
  */
-@property (assign, nonatomic) CGSize outgoingMediaImageSize;
+@property (assign, nonatomic) CGSize outgoingThumbnailImageSize;
+
+/**
+ *  The size of the `mediaImageView` of a `JSQMessagesCollectionViewCellIncomingVideo`.
+ *  The size values should be greater than `0.0`.
+ */
+@property (assign, nonatomic) CGSize incomingVideoThumbnailSize;
+
+/**
+ *  The size of the `mediaImageView` of a `JSQMessagesCollectionViewCellOutgoingVideo`.
+ *  The size values should be greater than `0.0`.
+ */
+@property (assign, nonatomic) CGSize outgoingVideoThumbnailSize;
+
+/**
+ *	The size of the `overlayView` of a `JSQMessagesCollectionViewCellIncomingVideo`.
+ *
+ *  @see `JSQMessagesCollectionViewCellIncomingVideo`.
+ */
+@property (assign, nonatomic) CGSize incomingVideoOverlayViewSize;
+
+/**
+ *	The size of the `overlayView` of a `JSQMessagesCollectionViewCellOutgoingVideo`.
+ *
+ *  @see `JSQMessagesCollectionViewCellOutgoingVideo`
+ */
+@property (assign, nonatomic) CGSize outgoingVideoOverlayViewSize;
 
 /**
  *  The height of the `cellTopLabel` of a `JSQMessagesCollectionViewCell`.
@@ -118,19 +144,5 @@
  *  @see `JSQMessagesCollectionViewCell`.
  */
 @property (assign, nonatomic) CGFloat cellBottomLabelHeight;
-
-/**
- *	The view overlaid on the video thumbnail for incoming video messages.
- *
- *  @discussion The default value is `nil`. Set to `nil` if you want to ignore all tap events.
- */
-@property (strong, nonatomic) UIView *incomingVideoOverlayView;
-
-/**
- *	The view overlaid on the video thumbnail for outgoing video messages.
- *
- *  @discussion The default value is `nil`. Set to `nil` if you want to ignore all tap events.
- */
-@property (strong, nonatomic) UIView *outgoingVideoOverlayView;
 
 @end
