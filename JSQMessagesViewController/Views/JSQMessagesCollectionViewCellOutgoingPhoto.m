@@ -12,21 +12,31 @@
 
 @interface JSQMessagesCollectionViewCellOutgoingPhoto ()
 
-@property (weak ,nonatomic, readwrite) IBOutlet UIImageView *mediaImageView;
-@property (strong, nonatomic, readwrite) UITapGestureRecognizer *mediaImageViewTapGestureRecognizer;
+@property (weak, nonatomic, readwrite) IBOutlet UIImageView *thumbnailImageView;
+@property (weak, nonatomic) IBOutlet UIView *activityIndicatorContainerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *activityIndicatorContainerViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *activityIndicatorContainerViewHeightConstraint;
 
-- (void)jsq_handleMediaImageViewTapped:(UITapGestureRecognizer *)tapGesture;
+@property (assign, nonatomic) CGSize activityIndicatorViewSize;
+
+@property (strong, nonatomic, readwrite) UITapGestureRecognizer *thumbnailImageViewTapGestureRecognizer;
+
+
+- (void)jsq_handleThumbnailImageViewTapped:(UITapGestureRecognizer *)tapGesture;
 - (void)applyMask;
 
 @end
 
 @implementation JSQMessagesCollectionViewCellOutgoingPhoto
+
 @synthesize messageBubbleImageView = _messageBubbleImageView;
 
 - (void)dealloc
 {
-    _mediaImageView = nil;
-    _mediaImageViewTapGestureRecognizer = nil;
+    _thumbnailImageView = nil;
+    _activityIndicatorView = nil;
+    _activityIndicatorContainerView = nil;
+    _thumbnailImageViewTapGestureRecognizer = nil;
 }
 
 
@@ -52,21 +62,23 @@
     
     self.longPressGestureRecognizer.enabled = NO;
     
-    self.mediaImageView.userInteractionEnabled = YES;
-    self.mediaImageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.mediaImageView.clipsToBounds = YES;
+    self.thumbnailImageView.userInteractionEnabled = YES;
+    self.thumbnailImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.thumbnailImageView.clipsToBounds = YES;
     
+    self.activityIndicatorContainerView.userInteractionEnabled = NO;
     
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleMediaImageViewTapped:)];
-    [self.mediaImageView addGestureRecognizer:tap];
-    self.mediaImageViewTapGestureRecognizer = tap;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleThumbnailImageViewTapped:)];
+    [self.thumbnailImageView addGestureRecognizer:tap];
+    self.thumbnailImageViewTapGestureRecognizer = tap;
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor
 {
     [super setBackgroundColor:backgroundColor];
-    self.mediaImageView.backgroundColor = backgroundColor;
+    self.thumbnailImageView.backgroundColor = backgroundColor;
+    self.activityIndicatorView.backgroundColor = backgroundColor;
+    self.activityIndicatorContainerView.backgroundColor = backgroundColor;
 }
 
 - (void)setMessageBubbleImageView:(UIImageView *)messageBubbleImageView
@@ -86,34 +98,80 @@
                                               CGRectGetHeight(self.messageBubbleContainerView.bounds));
     
     [messageBubbleImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.mediaImageView];
+    [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.thumbnailImageView];
     [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:messageBubbleImageView];
     [self setNeedsUpdateConstraints];
     
     _messageBubbleImageView = messageBubbleImageView;
     
     // Delay 0.1 seconds to wait for the completion of their frame set.
-    // It should be optimized , there should be a better way than this to do it.
+    // It should be optimized ,there should be a better way to do it.
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self applyMask];
     });
 }
 
+
+#pragma mark - Custom Accessors
+
+- (void)setActivityIndicatorView:(UIView<JSQMessagesActivityIndicator> *)activityIndicatorView
+{
+    if (_activityIndicatorView) {
+        [_activityIndicatorView removeFromSuperview];
+    }
+    
+    if (!activityIndicatorView) {
+        self.activityIndicatorViewSize = CGSizeZero;
+        _activityIndicatorView = nil;
+        self.activityIndicatorContainerView.hidden = YES;
+        return;
+    }
+    
+    self.activityIndicatorContainerView.hidden = NO;
+    self.activityIndicatorViewSize = activityIndicatorView.bounds.size;
+    
+    [activityIndicatorView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.activityIndicatorContainerView addSubview:activityIndicatorView];
+    [self.activityIndicatorContainerView jsq_pinAllEdgesOfSubview:activityIndicatorView];
+    [self setNeedsUpdateConstraints];
+    
+    _activityIndicatorView = activityIndicatorView;
+}
+
+- (void)setActivityIndicatorViewSize:(CGSize)activityIndicatorViewSize
+{
+    if (CGSizeEqualToSize(activityIndicatorViewSize, self.activityIndicatorViewSize)) {
+        return;
+    }
+    
+    [self jsq_updateConstraint:self.activityIndicatorContainerViewWidthConstraint withConstant:activityIndicatorViewSize.width];
+    [self jsq_updateConstraint:self.activityIndicatorContainerViewHeightConstraint withConstant:activityIndicatorViewSize.height];
+}
+
+- (CGSize)activityIndicatorViewSize
+{
+    return CGSizeMake(self.activityIndicatorContainerViewWidthConstraint.constant,
+                      self.activityIndicatorContainerViewHeightConstraint.constant);
+}
+
+
 #pragma mark - Helper
 
 - (void)applyMask
 {
-    CALayer *layer = self.messageBubbleImageView.layer;
-    layer.bounds = self.mediaImageView.frame;
-    self.mediaImageView.layer.mask = layer;
+    if (!self.thumbnailImageView.layer.mask) {
+        CALayer *layer = self.messageBubbleImageView.layer;
+        layer.bounds = self.thumbnailImageView.frame;
+        self.thumbnailImageView.layer.mask = layer;
+    }
 }
 
 
-#pragma mark -
+#pragma mark - Gesture recognizers
 
-- (void)jsq_handleMediaImageViewTapped:(UITapGestureRecognizer *)tapGesture
+- (void)jsq_handleThumbnailImageViewTapped:(UITapGestureRecognizer *)tapGesture
 {
-    [self.delegate messagesCollectionViewCellDidTapMediaPhoto:self];
+    [self.delegate messagesCollectionViewCellDidTapPhoto:self];
 }
 
 @end

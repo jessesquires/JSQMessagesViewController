@@ -8,6 +8,8 @@
 
 #import "JSQMessagesCollectionViewCell.h"
 
+@protocol JSQMessagesActivityIndicator;
+
 /**
  *  A `JSQMessagesCollectionViewCellIncomingPhoto` object is a concrete instance of `JSQMessagesCollectionViewCell`
  *  that represents an incoming photo message item.
@@ -15,14 +17,17 @@
 @interface JSQMessagesCollectionViewCellIncomingPhoto : JSQMessagesCollectionViewCell
 
 /**
- *  Return the thumbnail for the photo.
+ *  The thumbnail image view of the cell that is responsible for displaying thumbnail images.
+ *  The default value is `nil`.
  */
-@property (weak, nonatomic, readonly) UIImageView *mediaImageView;
+@property (weak, nonatomic, readonly) UIImageView *thumbnailImageView;
+
+@property (weak, nonatomic) UIView <JSQMessagesActivityIndicator> *activityIndicatorView;
 
 /**
- *  Returns the underlying gesture recognizer for tap gestures in the `mediaImageView` of the cell.
- *  This gesture handles the tap event for the `mediaImageView` and notifies the cell's delegate.
+ *  Returns the underlying gesture recognizer for tap gestures in the `thumbnailImageView` of the cell.
+ *  This gesture handles the tap event for the `thumbnailImageView` and notifies the cell's delegate.
  */
-@property (strong, nonatomic, readonly) UITapGestureRecognizer *mediaImageViewTapGestureRecognizer;
+@property (strong, nonatomic, readonly) UITapGestureRecognizer *thumbnailImageViewTapGestureRecognizer;
 
 @end

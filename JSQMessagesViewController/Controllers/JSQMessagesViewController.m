@@ -22,6 +22,7 @@
 
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
 
+#import "JSQMessagesActivityIndicator.h"
 #import "JSQMessageData.h"
 #import "JSQMessage.h"
 
@@ -389,49 +390,56 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     return nil;
 }
 
-- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView
-incomingVideoOverlayViewForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(JSQMessagesCollectionView *)collectionView sizeForAudioPlayerViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeZero;
+}
+
+- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView viewForAudioPlayerViewAtIndexPath:(NSIndexPath *)indexPath
 {
     return nil;
 }
 
-- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView
-outgoingVideoOverlayViewForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView viewForVideoOverlayViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+- (UIView <JSQMessagesActivityIndicator> *)collectionView:(JSQMessagesCollectionView *)collectionView viewForPhotoActivityIndicatorViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+- (UIView <JSQMessagesActivityIndicator> *)collectionView:(JSQMessagesCollectionView *)collectionView viewForVideoActivityIndicatorViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+- (UIView <JSQMessagesActivityIndicator> *)collectionView:(JSQMessagesCollectionView *)collectionView viewForAudioActivityIndicatorViewAtIndexPath:(NSIndexPath *)indexPath
 {
     return nil;
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
   wantsThumbnailForURL:(NSURL *)sourceURL
-mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+thumbnailImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
        completionBlock:(JSQMessagesCollectionViewDataSourceCompletionBlock)completionBlock {};
 
 
 #pragma mark - CollectionView Message Configure Helper
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
-handlePhotoMessageWithMessageData:(id<JSQMessageData>)messageData
-    collectionViewCell:(JSQMessagesCollectionViewCell *)cell
-         cellIndexPath:(NSIndexPath *)indexPath isOutgoingMessage:(BOOL)isOutgoingMessage
+handleIncomingPhotoMessageWithMessageData:(id<JSQMessageData>)messageData
+    collectionViewCell:(JSQMessagesCollectionViewCellIncomingPhoto *)incomingPhotoCell
+         cellIndexPath:(NSIndexPath *)indexPath
 {
     NSParameterAssert([messageData thumbnailImage] != nil);
-    
-    UIImageView *mediaImageView = nil;
-    
-    if (isOutgoingMessage) {
-        JSQMessagesCollectionViewCellOutgoingPhoto *outgoingPhotoCell = (JSQMessagesCollectionViewCellOutgoingPhoto *)cell;
-        mediaImageView = outgoingPhotoCell.mediaImageView;
-    }
-    else {
-        JSQMessagesCollectionViewCellIncomingPhoto *incomingPhotoCell = (JSQMessagesCollectionViewCellIncomingPhoto *)cell;
-        mediaImageView = incomingPhotoCell.mediaImageView;
-    }
     
     switch ([messageData type]) {
         case JSQMessagePhoto:
         {
             UIImage *thumbnailImage = [messageData thumbnailImage];
-            mediaImageView.image = thumbnailImage;
+            incomingPhotoCell.thumbnailImageView.image = thumbnailImage;
         }
             break;
             
@@ -440,14 +448,28 @@ handlePhotoMessageWithMessageData:(id<JSQMessageData>)messageData
             NSParameterAssert([messageData sourceURL] != nil);
             
             UIImage *thumbnailImage = [messageData thumbnailImage];
-            mediaImageView.image = thumbnailImage;
+            incomingPhotoCell.thumbnailImageView.image = thumbnailImage;
+            
+            /**
+             *	Do not direct assignment, because it would not trigger the setter methods when later modify its properties.
+             */
+            UIView <JSQMessagesActivityIndicator> *activityIndicatorView = nil;
+            activityIndicatorView = [collectionView.dataSource collectionView:collectionView viewForPhotoActivityIndicatorViewAtIndexPath:indexPath];
+            activityIndicatorView.bounds = CGRectMake(CGRectGetMinX(activityIndicatorView.bounds),
+                                                      CGRectGetMinY(activityIndicatorView.bounds),
+                                                      collectionView.collectionViewLayout.incomingPhotoActivityIndicatorViewSize.width,
+                                                      collectionView.collectionViewLayout.incomingPhotoActivityIndicatorViewSize.height);
+            
+            incomingPhotoCell.activityIndicatorView = activityIndicatorView;
+            
+            [incomingPhotoCell.activityIndicatorView startAnimation];
             
             [collectionView.dataSource collectionView:collectionView
                                  wantsThumbnailForURL:[messageData sourceURL]
-                     mediaImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *thumbnail) {
-                         JSQMessagesCollectionViewCellAnimateDisplayBlock(mediaImageView, thumbnail, .3f);
-                     }];
-
+                 thumbnailImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *thumbnail) {
+                     JSQMessagesCollectionViewCellAnimateDisplayBlock(incomingPhotoCell.thumbnailImageView, thumbnail, .3f);
+                     [incomingPhotoCell.activityIndicatorView stopAnimation];
+                 }];
         }
             break;
         case JSQMessageText:
@@ -462,43 +484,151 @@ handlePhotoMessageWithMessageData:(id<JSQMessageData>)messageData
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
-handleVideoMessageWithMessageData:(id<JSQMessageData>)messageData
-    collectionViewCell:(JSQMessagesCollectionViewCell *)cell
-         cellIndexPath:(NSIndexPath *)indexPath isOutgoingMessage:(BOOL)isOutgoingMessage
+handleOutgoingPhotoMessageWithMessageData:(id<JSQMessageData>)messageData
+    collectionViewCell:(JSQMessagesCollectionViewCellOutgoingPhoto *)outgoingPhotoCell
+         cellIndexPath:(NSIndexPath *)indexPath
+{
+    NSParameterAssert([messageData thumbnailImage] != nil);
+
+    switch ([messageData type]) {
+        case JSQMessagePhoto:
+        {
+            UIImage *thumbnailImage = [messageData thumbnailImage];
+            outgoingPhotoCell.thumbnailImageView.image = thumbnailImage;
+        }
+            break;
+            
+        case JSQMessageRemotePhoto:
+        {
+            NSParameterAssert([messageData sourceURL] != nil);
+            
+            UIImage *thumbnailImage = [messageData thumbnailImage];
+            outgoingPhotoCell.thumbnailImageView.image = thumbnailImage;
+            
+            /**
+             *	Do not direct assignment, because it would not trigger the setter methods when later modify its properties.
+             */
+            UIView <JSQMessagesActivityIndicator> *activityIndicatorView = nil;
+            activityIndicatorView = [collectionView.dataSource collectionView:collectionView viewForPhotoActivityIndicatorViewAtIndexPath:indexPath];
+            activityIndicatorView.bounds = CGRectMake(CGRectGetMinX(activityIndicatorView.bounds),
+                                                      CGRectGetMinY(activityIndicatorView.bounds),
+                                                      collectionView.collectionViewLayout.outgoingPhotoActivityIndicatorViewSize.width,
+                                                      collectionView.collectionViewLayout.outgoingPhotoActivityIndicatorViewSize.height);
+            
+            outgoingPhotoCell.activityIndicatorView = activityIndicatorView;
+            
+            [outgoingPhotoCell.activityIndicatorView startAnimation];
+            [collectionView.dataSource collectionView:collectionView
+                                 wantsThumbnailForURL:[messageData sourceURL]
+                 thumbnailImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *thumbnail) {
+                     JSQMessagesCollectionViewCellAnimateDisplayBlock(outgoingPhotoCell.thumbnailImageView, thumbnail, .3f);
+                     [outgoingPhotoCell.activityIndicatorView stopAnimation];
+                 }];
+        }
+            break;
+        case JSQMessageText:
+        case JSQMessageVideo:
+        case JSQMessageAudio:
+        case JSQMessageRemoteVideo:
+        case JSQMessageRemoteAudio:
+            NSAssert(NO, @"ERROR: Pass in invalid message type [%d] to method: %s", [messageData type], __PRETTY_FUNCTION__);
+            break;
+            
+    }
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+handleIncomingVideoMessageWithMessageData:(id<JSQMessageData>)messageData
+    collectionViewCell:(JSQMessagesCollectionViewCellIncomingVideo *)incomingVideoCell
+         cellIndexPath:(NSIndexPath *)indexPath
 {
     NSParameterAssert([messageData sourceURL] != nil);
     
-    UIImageView *mediaImageView = nil;
+    /**
+     *	Do not direct assignment, because it would not trigger the setter methods when later modify its properties.
+     */
+    UIView *overlayView = [collectionView.dataSource collectionView:collectionView viewForVideoOverlayViewAtIndexPath:indexPath];
+    overlayView.bounds = CGRectMake(CGRectGetMinX(incomingVideoCell.overlayView.bounds),
+                                    CGRectGetMinY(incomingVideoCell.overlayView.bounds),
+                                    collectionView.collectionViewLayout.incomingVideoOverlayViewSize.width,
+                                    collectionView.collectionViewLayout.incomingVideoOverlayViewSize.height);
     
-    if (isOutgoingMessage) {
-        JSQMessagesCollectionViewCellOutgoingVideo *outgoingVideoCell = (JSQMessagesCollectionViewCellOutgoingVideo *)cell;
-        mediaImageView = outgoingVideoCell.mediaImageView;
-        
-        UIView *overlayView = [collectionView.dataSource collectionView:collectionView outgoingVideoOverlayViewForItemAtIndexPath:indexPath];
-        overlayView.bounds = CGRectMake(CGRectGetMinX(outgoingVideoCell.overlayView.bounds),
-                                                          CGRectGetMinY(outgoingVideoCell.overlayView.bounds),
-                                                          collectionView.collectionViewLayout.outgoingVideoOverlayViewSize.width,
-                                                          collectionView.collectionViewLayout.outgoingVideoOverlayViewSize.height);
-        outgoingVideoCell.overlayView = overlayView;
+    incomingVideoCell.overlayView = overlayView;
+    
+    switch ([messageData type]) {
+        case JSQMessageVideo:
+        {
+            NSParameterAssert([messageData videoThumbnail] != nil);
+            UIImage *thumbnailImage = [messageData videoThumbnail];
+            incomingVideoCell.thumbnailImageView.image = thumbnailImage;
+        }
+            break;
+            
+        case JSQMessageRemoteVideo:
+        {
+            NSParameterAssert([messageData videoThumbnailPlaceholder] != nil || [messageData videoThumbnail] != nil);
+            
+            if ([messageData videoThumbnail]) {
+                incomingVideoCell.thumbnailImageView.image = [messageData videoThumbnail];
+            }
+            else {
+                incomingVideoCell.thumbnailImageView.image = [messageData videoThumbnailPlaceholder];
+                
+                /**
+                 *	Do not direct assignment, because it would not trigger the setter methods when later modify its properties.
+                 */
+                UIView <JSQMessagesActivityIndicator> *activityIndicatorView = nil;
+                activityIndicatorView = [collectionView.dataSource collectionView:collectionView viewForVideoActivityIndicatorViewAtIndexPath:indexPath];
+                activityIndicatorView.bounds = CGRectMake(CGRectGetMinX(activityIndicatorView.bounds),
+                                                          CGRectGetMinY(activityIndicatorView.bounds),
+                                                          collectionView.collectionViewLayout.incomingVideoActivityIndicatorViewSize.width,
+                                                          collectionView.collectionViewLayout.incomingVideoActivityIndicatorViewSize.height);
+                
+                incomingVideoCell.activityIndicatorView = activityIndicatorView;
+                
+                [incomingVideoCell.activityIndicatorView startAnimation];
+                
+                [collectionView.dataSource collectionView:collectionView
+                                     wantsThumbnailForURL:[messageData sourceURL]
+                     thumbnailImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *thumbnail) {
+                         JSQMessagesCollectionViewCellAnimateDisplayBlock(incomingVideoCell.thumbnailImageView, thumbnail, .3f);
+                         [incomingVideoCell.activityIndicatorView stopAnimation];
+                     }];
+            }
+        }
+            break;
+            
+        case JSQMessageText:
+        case JSQMessageAudio:
+        case JSQMessagePhoto:
+        case JSQMessageRemoteAudio:
+        case JSQMessageRemotePhoto:
+            NSAssert(NO, @"ERROR: Pass in invalid message type [%d] to method: %s", [messageData type], __PRETTY_FUNCTION__);
+            break;
     }
-    else {
-        JSQMessagesCollectionViewCellIncomingVideo *incomingVideoCell = (JSQMessagesCollectionViewCellIncomingVideo *)cell;
-        mediaImageView = incomingVideoCell.mediaImageView;
-        
-        UIView *overlayView = [collectionView.dataSource collectionView:collectionView incomingVideoOverlayViewForItemAtIndexPath:indexPath];
-        overlayView.bounds = CGRectMake(CGRectGetMinX(incomingVideoCell.overlayView.bounds),
-                                                          CGRectGetMinY(incomingVideoCell.overlayView.bounds),
-                                                          collectionView.collectionViewLayout.incomingVideoOverlayViewSize.width,
-                                                          collectionView.collectionViewLayout.incomingVideoOverlayViewSize.height);
-        incomingVideoCell.overlayView = overlayView;
-    }
+
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+handleOutgoingVideoMessageWithMessageData:(id<JSQMessageData>)messageData
+    collectionViewCell:(JSQMessagesCollectionViewCellOutgoingVideo *)outgoingVideoCell
+         cellIndexPath:(NSIndexPath *)indexPath
+{
+    NSParameterAssert([messageData sourceURL] != nil);
+
+    UIView *overlayView = [collectionView.dataSource collectionView:collectionView viewForVideoOverlayViewAtIndexPath:indexPath];
+    overlayView.bounds = CGRectMake(CGRectGetMinX(outgoingVideoCell.overlayView.bounds),
+                                                      CGRectGetMinY(outgoingVideoCell.overlayView.bounds),
+                                                      collectionView.collectionViewLayout.outgoingVideoOverlayViewSize.width,
+                                                      collectionView.collectionViewLayout.outgoingVideoOverlayViewSize.height);
+    outgoingVideoCell.overlayView = overlayView;
     
     switch ([messageData type]) {
     case JSQMessageVideo:
         {
             NSParameterAssert([messageData videoThumbnail] != nil);
             UIImage *thumbnailImage = [messageData videoThumbnail];
-            mediaImageView.image = thumbnailImage;
+            outgoingVideoCell.thumbnailImageView.image = thumbnailImage;
         }
         break;
             
@@ -506,21 +636,32 @@ handleVideoMessageWithMessageData:(id<JSQMessageData>)messageData
         {
             NSParameterAssert([messageData videoThumbnailPlaceholder] != nil || [messageData videoThumbnail] != nil);
             
-            UIImage *thumbnailImage = nil;
-            
             if ([messageData videoThumbnail]) {
-                thumbnailImage = [messageData videoThumbnail];
-                mediaImageView.image = thumbnailImage;
+                outgoingVideoCell.thumbnailImageView.image = [messageData videoThumbnail];
             }
             else {
-                thumbnailImage = [messageData videoThumbnailPlaceholder];
-                mediaImageView.image = thumbnailImage;
+                outgoingVideoCell.thumbnailImageView.image = [messageData videoThumbnailPlaceholder];
+                
+                /**
+                 *	Do not direct assignment, because it would not trigger the setter methods when later modify its properties.
+                 */
+                UIView <JSQMessagesActivityIndicator> *activityIndicatorView = nil;
+                activityIndicatorView = [collectionView.dataSource collectionView:collectionView viewForVideoActivityIndicatorViewAtIndexPath:indexPath];
+                activityIndicatorView.bounds = CGRectMake(CGRectGetMinX(activityIndicatorView.bounds),
+                                                          CGRectGetMinY(activityIndicatorView.bounds),
+                                                          collectionView.collectionViewLayout.outgoingVideoActivityIndicatorViewSize.width,
+                                                          collectionView.collectionViewLayout.outgoingVideoActivityIndicatorViewSize.height);
+                
+                outgoingVideoCell.activityIndicatorView = activityIndicatorView;
+                
+                [outgoingVideoCell.activityIndicatorView startAnimation];
                 
                 [collectionView.dataSource collectionView:collectionView
                                      wantsThumbnailForURL:[messageData sourceURL]
-                         mediaImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *thumbnail) {
-                             JSQMessagesCollectionViewCellAnimateDisplayBlock(mediaImageView, thumbnail, .3f);
-                         }];
+                     thumbnailImageViewForItemAtIndexPath:indexPath completionBlock:^(UIImage *thumbnail) {
+                         JSQMessagesCollectionViewCellAnimateDisplayBlock(outgoingVideoCell.thumbnailImageView, thumbnail, .3f);
+                         [outgoingVideoCell.activityIndicatorView stopAnimation];
+                     }];
             }
         }
         break;
@@ -536,10 +677,23 @@ handleVideoMessageWithMessageData:(id<JSQMessageData>)messageData
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
-handleAudioMessageWithMessageData:(id<JSQMessageData>)messageData
-    collectionViewCell:(JSQMessagesCollectionViewCell *)cell
-         cellIndexPath:(NSIndexPath *)indexPath isOutgoingMessage:(BOOL)isOutgoingMessage
+handleIncomingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
+    collectionViewCell:(JSQMessagesCollectionViewCellIncomingAudio *)incomingAudioCell
+         cellIndexPath:(NSIndexPath *)indexPath
 {
+    NSParameterAssert([messageData sourceURL] != nil || [messageData audio] != nil);
+    
+    UIView *playerView = [collectionView.dataSource collectionView:collectionView viewForAudioPlayerViewAtIndexPath:indexPath];
+    if (!playerView) {
+        return;
+    }
+    
+    CGSize playerViewSize = [collectionView.dataSource collectionView:collectionView sizeForAudioPlayerViewAtIndexPath:indexPath];
+    CGSize finalPlayerViewSize = CGSizeEqualToSize(CGSizeZero, playerViewSize) ? collectionView.collectionViewLayout.incomingAudioPlayerViewSize : playerViewSize;
+    
+    playerView.bounds = CGRectMake(CGRectGetMinX(playerView.bounds), CGRectGetMinY(playerView.bounds),
+                                   finalPlayerViewSize.width, finalPlayerViewSize.height);
+    incomingAudioCell.playerView = playerView;
     
     switch ([messageData type]) {
         case JSQMessageAudio:
@@ -547,7 +701,69 @@ handleAudioMessageWithMessageData:(id<JSQMessageData>)messageData
             break;
         
         case JSQMessageRemoteAudio:
+        {
+            /**
+             *	Do not direct assignment, because it would not trigger the setter methods when later modify its properties.
+             */
+            UIView <JSQMessagesActivityIndicator> *activityIndicatorView = nil;
+            activityIndicatorView = [collectionView.dataSource collectionView:collectionView viewForAudioActivityIndicatorViewAtIndexPath:indexPath];
+            activityIndicatorView.bounds = CGRectMake(CGRectGetMinX(activityIndicatorView.bounds),
+                                                      CGRectGetMinY(activityIndicatorView.bounds),
+                                                      collectionView.collectionViewLayout.incomingAudioActivityIndicatorViewSize.width,
+                                                      collectionView.collectionViewLayout.incomingAudioActivityIndicatorViewSize.height);
             
+            incomingAudioCell.activityIndicatorView = activityIndicatorView;
+        }
+            break;
+            
+        case JSQMessageText:
+        case JSQMessagePhoto:
+        case JSQMessageVideo:
+        case JSQMessageRemotePhoto:
+        case JSQMessageRemoteVideo:
+            NSAssert(NO, @"ERROR: Pass in invalid message type [%d] to method: %s", [messageData type], __PRETTY_FUNCTION__);
+            break;
+    }
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
+    collectionViewCell:(JSQMessagesCollectionViewCellOutgoingAudio *)outgoingAudioCell
+         cellIndexPath:(NSIndexPath *)indexPath
+{
+    NSParameterAssert([messageData sourceURL] != nil || [messageData audio] != nil);
+    
+    UIView *playerView = [collectionView.dataSource collectionView:collectionView viewForAudioPlayerViewAtIndexPath:indexPath];
+    if (!playerView) {
+        return;
+    }
+    
+    CGSize playerViewSize = [collectionView.dataSource collectionView:collectionView sizeForAudioPlayerViewAtIndexPath:indexPath];
+    CGSize finalPlayerViewSize = CGSizeEqualToSize(CGSizeZero, playerViewSize) ? collectionView.collectionViewLayout.outgoingAudioPlayerViewSize : playerViewSize;
+    
+    playerView.bounds = CGRectMake(CGRectGetMinX(playerView.bounds), CGRectGetMinY(playerView.bounds),
+                                   finalPlayerViewSize.width, finalPlayerViewSize.height);
+    outgoingAudioCell.playerView = playerView;
+    
+    switch ([messageData type]) {
+        case JSQMessageAudio:
+            
+            break;
+            
+        case JSQMessageRemoteAudio:
+        {
+            /**
+             *	Do not direct assignment, because it would not trigger the setter methods when later modify its properties.
+             */
+            UIView <JSQMessagesActivityIndicator> *activityIndicatorView = nil;
+            activityIndicatorView = [collectionView.dataSource collectionView:collectionView viewForAudioActivityIndicatorViewAtIndexPath:indexPath];
+            activityIndicatorView.bounds = CGRectMake(CGRectGetMinX(activityIndicatorView.bounds),
+                                                      CGRectGetMinY(activityIndicatorView.bounds),
+                                                      collectionView.collectionViewLayout.outgoingAudioActivityIndicatorViewSize.width,
+                                                      collectionView.collectionViewLayout.outgoingAudioActivityIndicatorViewSize.height);
+            
+            outgoingAudioCell.activityIndicatorView = activityIndicatorView;
+        }
             break;
             
         case JSQMessageText:
@@ -643,17 +859,38 @@ handleAudioMessageWithMessageData:(id<JSQMessageData>)messageData
             
         case JSQMessagePhoto:
         case JSQMessageRemotePhoto:
-            [self collectionView:collectionView handlePhotoMessageWithMessageData:messageData collectionViewCell:cell cellIndexPath:indexPath isOutgoingMessage:isOutgoingMessage];
+            if (isOutgoingMessage) {
+                JSQMessagesCollectionViewCellOutgoingPhoto *outgoingPhotoCell = (JSQMessagesCollectionViewCellOutgoingPhoto *)cell;
+                [self collectionView:collectionView handleOutgoingPhotoMessageWithMessageData:messageData collectionViewCell:outgoingPhotoCell cellIndexPath:indexPath];
+            }
+            else {
+                JSQMessagesCollectionViewCellIncomingPhoto *incomingPhotoCell = (JSQMessagesCollectionViewCellIncomingPhoto *)cell;
+                [self collectionView:collectionView handleIncomingPhotoMessageWithMessageData:messageData collectionViewCell:incomingPhotoCell cellIndexPath:indexPath];
+            }
             break;
             
         case JSQMessageVideo:
         case JSQMessageRemoteVideo:
-            [self collectionView:collectionView handleVideoMessageWithMessageData:messageData collectionViewCell:cell cellIndexPath:indexPath isOutgoingMessage:isOutgoingMessage];
+            if (isOutgoingMessage) {
+                JSQMessagesCollectionViewCellOutgoingVideo *outgoingVideoCell = (JSQMessagesCollectionViewCellOutgoingVideo *)cell;
+                [self collectionView:collectionView handleOutgoingVideoMessageWithMessageData:messageData collectionViewCell:outgoingVideoCell cellIndexPath:indexPath];
+            }
+            else {
+                JSQMessagesCollectionViewCellIncomingVideo *incomingVideoCell = (JSQMessagesCollectionViewCellIncomingVideo *)cell;
+                [self collectionView:collectionView handleIncomingVideoMessageWithMessageData:messageData collectionViewCell:incomingVideoCell cellIndexPath:indexPath];
+            }
             break;
             
         case JSQMessageAudio:
         case JSQMessageRemoteAudio:
-            [self collectionView:collectionView handleAudioMessageWithMessageData:messageData collectionViewCell:cell cellIndexPath:indexPath isOutgoingMessage:isOutgoingMessage];
+            if (isOutgoingMessage) {
+                JSQMessagesCollectionViewCellOutgoingAudio *outgoingAudioCell = (JSQMessagesCollectionViewCellOutgoingAudio *)cell;
+                [self collectionView:collectionView handleOutgoingAudioMessageWithMessageData:messageData collectionViewCell:outgoingAudioCell cellIndexPath:indexPath];
+            }
+            else {
+                JSQMessagesCollectionViewCellIncomingAudio *incomingAudioCell = (JSQMessagesCollectionViewCellIncomingAudio *)cell;
+                [self collectionView:collectionView handleIncomingAudioMessageWithMessageData:messageData collectionViewCell:incomingAudioCell cellIndexPath:indexPath];
+            }
             break;
     }
     
@@ -742,19 +979,19 @@ handleAudioMessageWithMessageData:(id<JSQMessageData>)messageData
            atIndexPath:(NSIndexPath *)indexPath { }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
-      didTapMediaPhoto:(UIImageView *)imageView
+           didTapPhoto:(UIImageView *)imageView
            atIndexPath:(NSIndexPath *)indexPath {}
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
-didTapMediaVideoForURL:(NSURL *)videoURL
+     didTapVideoForURL:(NSURL *)videoURL
            atIndexPath:(NSIndexPath *)indexPath {}
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
-      didTapMediaAudio:(NSData *)audioData
+           didTapAudio:(NSData *)audioData
            atIndexPath:(NSIndexPath *)indexPath {}
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
-didTapMediaAudioForURL:(NSURL *)audioURL
+     didTapAudioForURL:(NSURL *)audioURL
            atIndexPath:(NSIndexPath *)indexPath {}
 
 #pragma mark - Messages collection view cell delegate
@@ -766,42 +1003,42 @@ didTapMediaAudioForURL:(NSURL *)audioURL
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
 }
 
-- (void)messagesCollectionViewCellDidTapMediaPhoto:(JSQMessagesCollectionViewCell *)cell
+- (void)messagesCollectionViewCellDidTapPhoto:(JSQMessagesCollectionViewCell *)cell
 {
     UIImageView *imageView = nil;
     if ([cell isMemberOfClass:[JSQMessagesCollectionViewCellOutgoingPhoto class]]) {
-        imageView = [(JSQMessagesCollectionViewCellOutgoingPhoto *)cell mediaImageView];
+        imageView = [(JSQMessagesCollectionViewCellOutgoingPhoto *)cell thumbnailImageView];
     }
     else {
-        imageView = [(JSQMessagesCollectionViewCellIncomingPhoto *)cell mediaImageView];
+        imageView = [(JSQMessagesCollectionViewCellIncomingPhoto *)cell thumbnailImageView];
     }
     
     [self.collectionView.delegate collectionView:self.collectionView
-                                didTapMediaPhoto:imageView
+                                didTapPhoto:imageView
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
 }
 
-- (void)messagesCollectionViewCellDidTapMediaVideo:(JSQMessagesCollectionViewCell *)cell
+- (void)messagesCollectionViewCellDidTapVideo:(JSQMessagesCollectionViewCell *)cell
 {
     id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView
                                                       messageDataForItemAtIndexPath:[self.collectionView indexPathForCell:cell]];
     [self.collectionView.delegate collectionView:self.collectionView
-                          didTapMediaVideoForURL:[messageData sourceURL]
+                          didTapVideoForURL:[messageData sourceURL]
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
 }
 
-- (void)messagesCollectionViewCellDidTapMediaAudio:(JSQMessagesCollectionViewCell *)cell
+- (void)messagesCollectionViewCellDidTapAudio:(JSQMessagesCollectionViewCell *)cell
 {
     id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView
                                                       messageDataForItemAtIndexPath:[self.collectionView indexPathForCell:cell]];
     if ([messageData audio]) {
         [self.collectionView.delegate collectionView:self.collectionView
-                                    didTapMediaAudio:[messageData audio]
+                                    didTapAudio:[messageData audio]
                                          atIndexPath:[self.collectionView indexPathForCell:cell]];
     }
     else {
         [self.collectionView.delegate collectionView:self.collectionView
-                              didTapMediaAudioForURL:[messageData sourceURL]
+                              didTapAudioForURL:[messageData sourceURL]
                                          atIndexPath:[self.collectionView indexPathForCell:cell]];
     }
 }

@@ -8,18 +8,23 @@
 
 #import "JSQMessagesCollectionViewCell.h"
 
+@protocol JSQMessagesActivityIndicator;
+
 /**
  *  A `JSQMessagesCollectionViewCellIncomingVideo` object is a concrete instance of `JSQMessagesCollectionViewCell`
  *  that represents an incoming video message item.
  */
 @interface JSQMessagesCollectionViewCellIncomingVideo : JSQMessagesCollectionViewCell
 
+@property (weak, nonatomic, readonly) UIImageView *thumbnailImageView;
 
 /**
  *  The overlay view on the `mediaImageView`. You can easily assign it a play button.
  *  Default is `nil`.
  */
-@property (strong, nonatomic) UIView *overlayView;
+@property (weak, nonatomic) UIView *overlayView;
+
+@property (weak, nonatomic) UIView <JSQMessagesActivityIndicator> *activityIndicatorView;
 
 /**
  *  Returns the underlying gesture recognizer for tap gestures in the `overlayView` of the cell.
@@ -27,10 +32,5 @@
  *  Return `nil` if the `overlayView` not set.
  */
 @property (strong, nonatomic, readonly) UITapGestureRecognizer *overlayViewTapGestureRecognizer;
-
-/**
- *  Return the thumbnail for the video.
- */
-@property (weak, nonatomic, readonly) UIImageView *mediaImageView;
 
 @end

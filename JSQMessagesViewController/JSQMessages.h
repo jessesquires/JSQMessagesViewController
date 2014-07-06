@@ -43,6 +43,7 @@
 
 #import "JSQMessage.h"
 #import "JSQMessageData.h"
+#import "JSQMessagesActivityIndicator.h"
 
 #import "JSQMessagesAvatarFactory.h"
 #import "JSQMessagesBubbleImageFactory.h"

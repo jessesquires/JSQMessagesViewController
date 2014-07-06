@@ -27,7 +27,7 @@
      */
     CMTime time = CMTimeMake(25, 25);
     
-    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:videoURL options:@{AVURLAssetPreferPreciseDurationAndTimingKey: @NO}];
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:videoURL options:@{AVURLAssetPreferPreciseDurationAndTimingKey: @YES}];
     AVAssetTrack *assetTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] lastObject];
     
     if (assetTrack) {
@@ -48,7 +48,7 @@
     NSParameterAssert(videoURL != nil);
     NSParameterAssert(CMTIME_IS_VALID(time));
     
-    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:videoURL options:@{AVURLAssetPreferPreciseDurationAndTimingKey: @NO}];
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:videoURL options:@{AVURLAssetPreferPreciseDurationAndTimingKey: @YES}];
     AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
     imageGenerator.appliesPreferredTrackTransform = YES;
     CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:NULL error:NULL];

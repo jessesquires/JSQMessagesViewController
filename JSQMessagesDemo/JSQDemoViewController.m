@@ -19,13 +19,15 @@
 #import "JSQDemoViewController.h"
 
 #import "JSQMessagesThumbnailFactory.h"
+#import "JSQMessagesActivityIndicatorView.h"
+#import "JSQAudioPlayerView.h"
 
 
 static NSString * const kJSQDemoAvatarNameCook = @"Tim Cook";
 static NSString * const kJSQDemoAvatarNameJobs = @"Jobs";
 static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/download/AppleAds/Apple-Icloud-TvAd-IcloudHarmony.mp4";
-
+static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.archive.org/9/items/FurElise_656/FurElise_64kb.mp3";
 
 @implementation JSQDemoViewController
 
@@ -41,6 +43,7 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
     
     UIImage *placeholderImage = [UIImage imageNamed:@"demo_image_placeholder"];
     UIImage *videoPlaceholderImage = [UIImage imageNamed:@"demo_video_placeholder"];
+    NSURL *localAudioURL = [[NSBundle mainBundle] URLForResource:@"demo_for_Elise" withExtension:@"mp3"];
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages: A messaging UI framework for iOS." sender:self.sender date:[NSDate distantPast]],
@@ -51,11 +54,11 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
                      [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
                      
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage005.jpg"]
-                                    placeholderImage:placeholderImage sender:self.sender],
+                                    placeholderImage:placeholderImage sender:kJSQDemoAvatarNameWoz],
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage015.jpg"]
-                                    placeholderImage:placeholderImage sender:self.sender],
+                                    placeholderImage:placeholderImage sender:kJSQDemoAvatarNameWoz],
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage016.jpg"]
-                                    placeholderImage:placeholderImage sender:self.sender],
+                                    placeholderImage:placeholderImage sender:kJSQDemoAvatarNameWoz],
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage017.jpg"]
                                     placeholderImage:placeholderImage sender:self.sender],
                      
@@ -67,17 +70,20 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
                                    thumbnailImage:[UIImage imageNamed:@"FICDDemoSmallImage002"] sender:self.sender],
                      [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoLargeImage003"]
                                    thumbnailImage:[UIImage imageNamed:@"FICDDemoSmallImage003"] sender:kJSQDemoAvatarNameWoz],
-//
                      [JSQMessage messageWithVideoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] placeholderImage:videoPlaceholderImage sender:kJSQDemoAvatarNameWoz],
+                     [JSQMessage messageWithVideoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] placeholderImage:videoPlaceholderImage sender:self.sender],
+                     
+                     [JSQMessage messageWithAudio:[NSData dataWithContentsOfURL:localAudioURL] sender:self.sender],
+                     [JSQMessage messageWithAudioURL:localAudioURL sender:kJSQDemoAvatarNameWoz],
+                     [JSQMessage messageWithAudioURL:[NSURL URLWithString:kJSQDemoAudioMessageURLString] sender:kJSQDemoAvatarNameCook],
                      nil];
     
     /**
      *    Add a local video message.
      */
     NSURL *localVideoURL = [[NSBundle mainBundle] URLForResource:@"demo_video" withExtension:@"mp4"];
-    [self.messages addObject:[JSQMessage messageWithVideoURL:localVideoURL thumbnail:videoPlaceholderImage sender:self.sender]];
+    [self.messages addObject:[JSQMessage messageWithVideoURL:localVideoURL thumbnail:[UIImage imageNamed:@"demo_video_thumbnail"] sender:self.sender]];
     
-
     /**
      *  Create avatar images once.
      *
@@ -152,11 +158,11 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
     [self setupTestModel];
     
     
-//    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeMake(50, 50);
-//    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeMake(70, 70);
+//    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
+//    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
 //    self.collectionView.collectionViewLayout.incomingThumbnailImageSize = CGSizeMake(100, 100);
 //    self.collectionView.collectionViewLayout.outgoingThumbnailImageSize = CGSizeMake(200, 200);
-    self.collectionView.collectionViewLayout.incomingVideoOverlayViewSize = CGSizeMake(80, 80);
+//    self.collectionView.collectionViewLayout.incomingVideoOverlayViewSize = CGSizeMake(80, 80);
 //    self.collectionView.collectionViewLayout.outgoingVideoOverlayViewSize = CGSizeMake(120, 120);
     
     self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:18.f];
@@ -395,7 +401,7 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
     return nil;
 }
 
-- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView incomingVideoOverlayViewForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView viewForVideoOverlayViewAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
      *  Return `nil` here if you do not want overlay view for incoming video message.
@@ -414,10 +420,9 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
      *
      *  Override the defaults in `viewDidLoad`
      */
-    UIButton *incommingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [incommingButton setImage:[UIImage imageNamed:@"demo_play_button_in"] forState:UIControlStateNormal];
-    [incommingButton sizeToFit];
-    return incommingButton;
+    
+    UIImageView *incomingVideoOverlayView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"demo_play_button_in"] highlightedImage:nil];
+    return incomingVideoOverlayView;
 }
 
 - (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView outgoingVideoOverlayViewForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -439,14 +444,33 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
      *
      *  Override the defaults in `viewDidLoad`
      */
-    UIButton *outgoingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [outgoingButton setImage:[UIImage imageNamed:@"demo_play_button_out"] forState:UIControlStateNormal];
-    [outgoingButton sizeToFit];
-    return outgoingButton;
+    UIImageView *outgoingVideoOverlayView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"demo_play_button_out"] highlightedImage:nil];
+    return outgoingVideoOverlayView;
+}
+
+- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView viewForAudioPlayerViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [[JSQAudioPlayerView alloc] initWithFrame:CGRectMake(0, 0, 150, 40)];
+}
+
+- (UIView <JSQMessagesActivityIndicator> *)collectionView:(JSQMessagesCollectionView *)collectionView viewForPhotoActivityIndicatorViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [JSQMessagesActivityIndicatorView new];
+}
+
+
+- (UIView <JSQMessagesActivityIndicator> *)collectionView:(JSQMessagesCollectionView *)collectionView viewForVideoActivityIndicatorViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [JSQMessagesActivityIndicatorView new];
+}
+
+- (UIView<JSQMessagesActivityIndicator> *)collectionView:(JSQMessagesCollectionView *)collectionView viewForAudioActivityIndicatorViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [JSQMessagesActivityIndicatorView new];
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
-  wantsThumbnailForURL:(NSURL *)sourceURL mediaImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+  wantsThumbnailForURL:(NSURL *)sourceURL thumbnailImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
        completionBlock:(JSQMessagesCollectionViewDataSourceCompletionBlock)completionBlock {
     
     JSQMessage *message = self.messages[indexPath.item];
@@ -625,12 +649,22 @@ static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/do
     NSLog(@"Load earlier messages!");
 }
 
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMediaPhoto:(UIImageView *)imageView atIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapPhoto:(UIImageView *)imageView atIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"");
 }
 
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMediaVideoForURL:(NSURL *)videoURL atIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapVideoForURL:(NSURL *)videoURL atIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"");
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAudio:(NSData *)audioData atIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"");
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAudioForURL:(NSURL *)audioURL atIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"");
 }

@@ -195,6 +195,11 @@
     NSParameterAssert(sender != nil);
     NSParameterAssert(date != nil);
     
+    if ([sourceURL isFileURL]) {
+        NSData *audio = [NSData dataWithContentsOfURL:sourceURL];
+        return [self initWithAudio:audio sender:sender date:date];
+    }
+    
     self = [self init];
     if (self) {
         _type = JSQMessageRemoteAudio;

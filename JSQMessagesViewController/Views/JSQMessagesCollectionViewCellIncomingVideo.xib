@@ -42,14 +42,36 @@
                             <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hH6-1u-J1w">
                                 <rect key="frame" x="6" y="0.0" width="238" height="94"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7O3-15-JqG">
+                                <rect key="frame" x="102" y="27" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="17L-Mp-lGP"/>
+                                    <constraint firstAttribute="width" constant="40" id="JWD-ry-TGf"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86r-CQ-t7o">
+                                <rect key="frame" x="102" y="27" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="3hD-eo-WyG"/>
+                                    <constraint firstAttribute="height" constant="40" id="K9K-mw-nK8"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="86r-CQ-t7o" firstAttribute="centerY" secondItem="2eH-Gq-7jJ" secondAttribute="centerY" id="03u-23-1Lj"/>
                             <constraint firstItem="hH6-1u-J1w" firstAttribute="top" secondItem="2eH-Gq-7jJ" secondAttribute="top" id="GcD-8t-mA7"/>
                             <constraint firstAttribute="bottom" secondItem="hH6-1u-J1w" secondAttribute="bottom" id="cnv-jb-xQt"/>
                             <constraint firstItem="hH6-1u-J1w" firstAttribute="leading" secondItem="2eH-Gq-7jJ" secondAttribute="leading" constant="6" id="dcm-Po-G6h"/>
+                            <constraint firstItem="7O3-15-JqG" firstAttribute="centerX" secondItem="2eH-Gq-7jJ" secondAttribute="centerX" id="egm-CT-0v0"/>
+                            <constraint firstItem="7O3-15-JqG" firstAttribute="centerY" secondItem="2eH-Gq-7jJ" secondAttribute="centerY" id="gU9-BO-qTk"/>
+                            <constraint firstItem="86r-CQ-t7o" firstAttribute="centerX" secondItem="2eH-Gq-7jJ" secondAttribute="centerX" id="oi3-Zy-X0j"/>
                             <constraint firstAttribute="trailing" secondItem="hH6-1u-J1w" secondAttribute="trailing" id="zcm-eh-MNC"/>
                         </constraints>
                     </view>
@@ -98,6 +120,9 @@
             </constraints>
             <size key="customSize" width="317" height="245"/>
             <connections>
+                <outlet property="activityIndicatorContainerView" destination="86r-CQ-t7o" id="RGF-fi-TLD"/>
+                <outlet property="activityIndicatorContainerViewHeightConstraint" destination="K9K-mw-nK8" id="e7o-g2-wQT"/>
+                <outlet property="activityIndicatorContainerViewWidthConstraint" destination="3hD-eo-WyG" id="pDY-Vq-9BR"/>
                 <outlet property="avatarContainerView" destination="xRh-Dp-u1D" id="Jit-1v-I8p"/>
                 <outlet property="avatarContainerViewHeightConstraint" destination="sRI-LN-4aN" id="Ai5-G0-9a3"/>
                 <outlet property="avatarContainerViewWidthConstraint" destination="5zX-g6-hEb" id="nFf-hX-CUw"/>
@@ -105,15 +130,14 @@
                 <outlet property="cellBottomLabelHeightConstraint" destination="rc2-Zg-ysJ" id="lVV-Wi-8V8"/>
                 <outlet property="cellTopLabel" destination="aN5-oP-Lfg" id="W0z-a1-cpf"/>
                 <outlet property="cellTopLabelHeightConstraint" destination="5ax-xz-Kz9" id="C62-gG-cAQ"/>
-                <outlet property="mediaImageView" destination="hH6-1u-J1w" id="cXM-Tg-9UN"/>
                 <outlet property="messageBubbleContainerView" destination="2eH-Gq-7jJ" id="lCn-gs-J4p"/>
                 <outlet property="messageBubbleLeftRightMarginConstraint" destination="0os-6y-VSs" id="byO-P0-wX7"/>
                 <outlet property="messageBubbleTopLabel" destination="vZi-HV-Jfp" id="Agz-7f-XQB"/>
                 <outlet property="messageBubbleTopLabelHeightConstraint" destination="pUZ-aX-Iwp" id="rBQ-dl-Jli"/>
-                <outlet property="textViewAvatarHorizontalSpaceConstraint" destination="dcm-Po-G6h" id="hzM-q9-Fht"/>
-                <outlet property="textViewBottomVerticalSpaceConstraint" destination="cnv-jb-xQt" id="zyA-bN-X4M"/>
-                <outlet property="textViewMarginHorizontalSpaceConstraint" destination="zcm-eh-MNC" id="cq9-Dd-ONl"/>
-                <outlet property="textViewTopVerticalSpaceConstraint" destination="GcD-8t-mA7" id="ux1-fP-bhb"/>
+                <outlet property="overlayContainerView" destination="7O3-15-JqG" id="Dxc-BA-EB2"/>
+                <outlet property="overlayContainerViewHeightConstraint" destination="17L-Mp-lGP" id="j4W-zZ-T8u"/>
+                <outlet property="overlayContainerViewWidthConstraint" destination="JWD-ry-TGf" id="fgq-A1-v5v"/>
+                <outlet property="thumbnailImageView" destination="hH6-1u-J1w" id="sdr-Ix-P8q"/>
             </connections>
         </collectionViewCell>
     </objects>

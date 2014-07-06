@@ -39,18 +39,28 @@
                         <rect key="frame" x="36" y="40" width="244" height="94"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ywd-rH-euJ">
-                                <rect key="frame" x="6" y="0.0" width="238" height="94"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="auz-8f-hKe">
+                                <rect key="frame" x="0.0" y="0.0" width="244" height="94"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xzr-QL-HCJ">
+                                <rect key="frame" x="112" y="37" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="1ld-o9-pW7"/>
+                                    <constraint firstAttribute="width" constant="20" id="Kp7-tV-Im0"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ywd-rH-euJ" firstAttribute="top" secondItem="qct-pr-tmi" secondAttribute="top" id="51I-qa-fwy"/>
-                            <constraint firstAttribute="trailing" secondItem="ywd-rH-euJ" secondAttribute="trailing" id="FQb-Ru-uqI"/>
-                            <constraint firstAttribute="bottom" secondItem="ywd-rH-euJ" secondAttribute="bottom" id="a60-SP-fnX"/>
-                            <constraint firstItem="ywd-rH-euJ" firstAttribute="leading" secondItem="qct-pr-tmi" secondAttribute="leading" constant="6" id="bcV-xb-sMJ"/>
+                            <constraint firstAttribute="height" secondItem="auz-8f-hKe" secondAttribute="height" id="GKl-tz-ScY"/>
+                            <constraint firstAttribute="centerX" secondItem="auz-8f-hKe" secondAttribute="centerX" id="J43-bS-BR5"/>
+                            <constraint firstItem="Xzr-QL-HCJ" firstAttribute="centerY" secondItem="auz-8f-hKe" secondAttribute="centerY" id="Tzh-tk-adi"/>
+                            <constraint firstItem="Xzr-QL-HCJ" firstAttribute="centerX" secondItem="auz-8f-hKe" secondAttribute="centerX" id="aNa-vz-Osa"/>
+                            <constraint firstAttribute="centerY" secondItem="auz-8f-hKe" secondAttribute="centerY" id="nc6-GL-3Gy"/>
+                            <constraint firstAttribute="width" secondItem="auz-8f-hKe" secondAttribute="width" id="qZZ-yS-MJS"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Baw-If-OzX">
@@ -98,6 +108,9 @@
             </constraints>
             <size key="customSize" width="317" height="245"/>
             <connections>
+                <outlet property="activityIndicatorContainerView" destination="Xzr-QL-HCJ" id="hlW-wC-8wu"/>
+                <outlet property="activityIndicatorContainerViewHeightConstraint" destination="1ld-o9-pW7" id="hVH-8u-9RN"/>
+                <outlet property="activityIndicatorContainerViewWidthConstraint" destination="Kp7-tV-Im0" id="ier-CV-jtE"/>
                 <outlet property="avatarContainerView" destination="Baw-If-OzX" id="ZVN-BG-hn5"/>
                 <outlet property="avatarContainerViewHeightConstraint" destination="xQ9-gx-p4c" id="bsS-l9-6yN"/>
                 <outlet property="avatarContainerViewWidthConstraint" destination="2qQ-8X-FmO" id="o10-SO-lkK"/>
@@ -105,15 +118,11 @@
                 <outlet property="cellBottomLabelHeightConstraint" destination="RBf-az-N4o" id="BQu-6L-0UA"/>
                 <outlet property="cellTopLabel" destination="m0S-cH-MmY" id="t1H-7j-9fo"/>
                 <outlet property="cellTopLabelHeightConstraint" destination="a9Q-4W-kcb" id="meT-Dc-VXd"/>
-                <outlet property="mediaImageView" destination="ywd-rH-euJ" id="Uap-9o-smA"/>
                 <outlet property="messageBubbleContainerView" destination="qct-pr-tmi" id="PIF-w6-dad"/>
                 <outlet property="messageBubbleLeftRightMarginConstraint" destination="noy-vC-Mbf" id="ywe-mI-7jC"/>
                 <outlet property="messageBubbleTopLabel" destination="QUC-2F-Ot8" id="Urh-jJ-UUG"/>
                 <outlet property="messageBubbleTopLabelHeightConstraint" destination="6dI-dZ-2zq" id="yju-P5-99u"/>
-                <outlet property="textViewAvatarHorizontalSpaceConstraint" destination="bcV-xb-sMJ" id="Ruw-ME-rZm"/>
-                <outlet property="textViewBottomVerticalSpaceConstraint" destination="a60-SP-fnX" id="oOC-QF-pD0"/>
-                <outlet property="textViewMarginHorizontalSpaceConstraint" destination="FQb-Ru-uqI" id="SNl-9m-EJB"/>
-                <outlet property="textViewTopVerticalSpaceConstraint" destination="51I-qa-fwy" id="wUJ-Fo-Qs5"/>
+                <outlet property="thumbnailImageView" destination="auz-8f-hKe" id="IPf-ZL-bY6"/>
             </connections>
         </collectionViewCell>
     </objects>

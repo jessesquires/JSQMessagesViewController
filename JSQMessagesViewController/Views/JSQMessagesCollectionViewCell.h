@@ -42,21 +42,21 @@
  *
  *  @param cell The cell that received the tap.
  */
-- (void)messagesCollectionViewCellDidTapMediaPhoto:(JSQMessagesCollectionViewCell *)cell;
+- (void)messagesCollectionViewCellDidTapPhoto:(JSQMessagesCollectionViewCell *)cell;
 
 /**
  *  Tells the delegate that the video of a cell has been tapped.
  *
  *  @param cell The cell that received the tap.
  */
-- (void)messagesCollectionViewCellDidTapMediaVideo:(JSQMessagesCollectionViewCell *)cell;
+- (void)messagesCollectionViewCellDidTapVideo:(JSQMessagesCollectionViewCell *)cell;
 
 /**
  *  Tells the delegate that the audio of a cell has been tapped.
  *
  *  @param cell The cell that received the tap.
  */
-- (void)messagesCollectionViewCellDidTapMediaAudio:(JSQMessagesCollectionViewCell *)cell;
+- (void)messagesCollectionViewCellDidTapAudio:(JSQMessagesCollectionViewCell *)cell;
 
 @end
 
@@ -98,12 +98,13 @@
  */
 @property (weak, nonatomic, readonly) UITextView *textView;
 
-@property (weak, nonatomic, readonly) UIView *messageBubbleContainerView;
 /**
  *  The bubble image view of the cell that is responsible for displaying bubble images.
  *  The default value is `nil`.
  */
 @property (weak, nonatomic) UIImageView *messageBubbleImageView;
+
+@property (weak, nonatomic, readonly) UIView *messageBubbleContainerView;
 
 /**
  *  The avatar image view of the cell that is responsible for displaying avatar images.

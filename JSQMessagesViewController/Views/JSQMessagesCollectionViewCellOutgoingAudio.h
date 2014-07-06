@@ -8,10 +8,17 @@
 
 #import "JSQMessagesCollectionViewCell.h"
 
+@protocol JSQMessagesActivityIndicator;
+
 /**
  *  A `JSQMessagesCollectionViewCellOutgoingAudio` object is a concrete instance of `JSQMessagesCollectionViewCell`
  *  that represents an outgoing audio message item.
  */
 @interface JSQMessagesCollectionViewCellOutgoingAudio : JSQMessagesCollectionViewCell
+
+@property (weak, nonatomic) UIView *playerView;
+
+@property (weak, nonatomic) UIView <JSQMessagesActivityIndicator> *activityIndicatorView;
+
 
 @end

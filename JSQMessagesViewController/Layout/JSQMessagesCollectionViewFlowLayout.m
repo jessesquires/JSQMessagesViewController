@@ -94,9 +94,22 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     _incomingVideoThumbnailSize = defaultMediaThumbnailImageSize;
     _outgoingVideoThumbnailSize = defaultMediaThumbnailImageSize;
     
-    CGSize defalutOverlayViewSize = CGSizeMake(40.f, 40.f);
-    _incomingVideoOverlayViewSize = defalutOverlayViewSize;
-    _outgoingVideoOverlayViewSize = defalutOverlayViewSize;
+    CGSize defaultAudioPlayerViewSize = CGSizeMake(150.f, 40.f);
+    _incomingAudioPlayerViewSize = defaultAudioPlayerViewSize;
+    _outgoingAudioPlayerViewSize = defaultAudioPlayerViewSize;
+    
+    
+    CGSize defaultOverlayViewSize = CGSizeMake(40.f, 40.f);
+    _incomingVideoOverlayViewSize = defaultOverlayViewSize;
+    _outgoingVideoOverlayViewSize = defaultOverlayViewSize;
+    
+    CGSize defaultActivityIndicatorViewSize = CGSizeMake(20.f, 20.f);
+    _incomingPhotoActivityIndicatorViewSize = defaultActivityIndicatorViewSize;
+    _outgoingPhotoActivityIndicatorViewSize = defaultActivityIndicatorViewSize;
+    _incomingVideoActivityIndicatorViewSize = defaultActivityIndicatorViewSize;
+    _outgoingVideoActivityIndicatorViewSize = defaultActivityIndicatorViewSize;
+    _incomingAudioActivityIndicatorViewSize = defaultActivityIndicatorViewSize;
+    _outgoingAudioActivityIndicatorViewSize = defaultActivityIndicatorViewSize;
     
     _springinessEnabled = NO;
     _springResistanceFactor = 1000;
@@ -217,6 +230,18 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
+- (void)setIncomingAudioPlayerViewSize:(CGSize)incomingAudioPlayerSize
+{
+    _incomingAudioPlayerViewSize = incomingAudioPlayerSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setOutgoingAudioPlayerViewSize:(CGSize)outgoingAudioPlayerSize
+{
+    _outgoingAudioPlayerViewSize = outgoingAudioPlayerSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
 - (void)setIncomingVideoOverlayViewSize:(CGSize )incomingVideoOverlayViewSize
 {
     _incomingVideoOverlayViewSize = incomingVideoOverlayViewSize;
@@ -228,6 +253,43 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     _outgoingVideoOverlayViewSize = outgoingVideoOverlayViewSize;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
+
+- (void)setIncomingPhotoActivityIndicatorViewSize:(CGSize)incomingPhotoActivityIndicatorViewSize
+{
+    _incomingPhotoActivityIndicatorViewSize = incomingPhotoActivityIndicatorViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setOutgoingPhotoActivityIndicatorViewSize:(CGSize)outgoingPhotoActivityIndicatorViewSize
+{
+    _outgoingPhotoActivityIndicatorViewSize = outgoingPhotoActivityIndicatorViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setIncomingVideoActivityIndicatorViewSize:(CGSize)incomingVideoActivityIndicatorViewSize
+{
+    _incomingVideoActivityIndicatorViewSize = incomingVideoActivityIndicatorViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setOutgoingVideoActivityIndicatorViewSize:(CGSize)outgoingVideoActivityIndicatorViewSize
+{
+    _outgoingVideoActivityIndicatorViewSize = outgoingVideoActivityIndicatorViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setIncomingAudioActivityIndicatorViewSize:(CGSize)incomingAudioActivityIndicatorViewSize
+{
+    _incomingAudioActivityIndicatorViewSize = incomingAudioActivityIndicatorViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setOutgoingAudioActivityIndicatorViewSize:(CGSize)outgoingAudioActivityIndicatorViewSize
+{
+    _outgoingAudioActivityIndicatorViewSize = outgoingAudioActivityIndicatorViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
 
 #pragma mark - Getters
 
@@ -424,7 +486,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
             break;
         case JSQMessageAudio:
         case JSQMessageRemoteAudio:
-            
+            finalSize = isOutgoingMessage ? self.outgoingAudioPlayerViewSize : self.incomingAudioPlayerViewSize;
             break;
     }
     
@@ -452,8 +514,16 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     layoutAttributes.outgoingThumbnailImageSize = self.outgoingThumbnailImageSize;
     layoutAttributes.incomingVideoThumbnailSize = self.incomingVideoThumbnailSize;
     layoutAttributes.outgoingVideoThumbnailSize = self.outgoingVideoThumbnailSize;
+    layoutAttributes.incomingAudioPlayerViewSize = self.incomingAudioPlayerViewSize;
+    layoutAttributes.outgoingAudioPlayerViewSize = self.outgoingAudioPlayerViewSize;
     layoutAttributes.incomingVideoOverlayViewSize = self.incomingVideoOverlayViewSize;
     layoutAttributes.outgoingVideoOverlayViewSize = self.outgoingVideoOverlayViewSize;
+    layoutAttributes.incomingPhotoActivityIndicatorViewSize = self.incomingPhotoActivityIndicatorViewSize;
+    layoutAttributes.outgoingPhotoActivityIndicatorViewSize = self.outgoingPhotoActivityIndicatorViewSize;
+    layoutAttributes.incomingVideoActivityIndicatorViewSize = self.incomingVideoActivityIndicatorViewSize;
+    layoutAttributes.outgoingVideoActivityIndicatorViewSize = self.outgoingVideoActivityIndicatorViewSize;
+    layoutAttributes.incomingAudioActivityIndicatorViewSize = self.incomingAudioActivityIndicatorViewSize;
+    layoutAttributes.outgoingAudioActivityIndicatorViewSize = self.outgoingAudioActivityIndicatorViewSize;
     
     layoutAttributes.cellTopLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
                                                                                 layout:self
