@@ -53,7 +53,7 @@
     self.videoThumbnailPlaceholder = [UIImage imageNamed:@"demo_video_placeholder"];
     self.remoteImageURL = [NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage000.jpg"];
     self.localImageURL = [[NSBundle mainBundle] URLForResource:@"FICDDemoImage000" withExtension:@"png"];
-    self.remoteVideoURL = [NSURL URLWithString:@"https://archive.org/download/AppleAds/Apple-Icloud-TvAd-IcloudHarmony.mp4"];
+    self.remoteVideoURL = [NSURL URLWithString:@"https://ia600301.us.archive.org/8/items/AppleAds/Apple-TvAd-MacbookAir.mp4"];
     self.localVideoURL = [[NSBundle mainBundle] URLForResource:@"demo_video" withExtension:@"mp4"];
     self.remoteAudioURL = [NSURL URLWithString:@"https://ia700304.us.archive.org/9/items/FurElise_656/FurElise_64kb.mp3"];
     self.localAudioURL = [[NSBundle mainBundle] URLForResource:@"demo_for_Elise" withExtension:@"mp3"];

@@ -1,9 +1,19 @@
 //
-//  JSQMessagesThumbnailFactory.h
-//  JSQMessages
+//  Created by Vincent Sit
+//  http://www.hexedbits.com
 //
-//  Created by Vincent Sit on 14-7-3.
-//  Copyright (c) 2014年 Hexed Bits. All rights reserved.
+//
+//  Documentation
+//  http://cocoadocs.org/docsets/JSQMessagesViewController
+//
+//
+//  GitHub
+//  https://github.com/jessesquires/JSQMessagesViewController
+//
+//
+//  License
+//  Copyright (c) 2014 Jesse Squires
+//  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
 #import <Foundation/Foundation.h>
@@ -12,7 +22,7 @@
 
 /**
  *  `JSQMessagesThumbnailFactory` is a factory that provides a means for creating the video thumbnail
- *  to be displayed in the `mediaImageView` of `JSQMessagesCollectionViewCellIncomingVideo` or `JSQMessagesCollectionViewCellOutgoingVideo`.
+ *  to be displayed in the `mediaImageView` of `JSQMessagesCollectionViewVideoCellIncoming` or `JSQMessagesCollectionViewVideoCellOutgoing`.
  */
 @interface JSQMessagesThumbnailFactory : NSObject
 

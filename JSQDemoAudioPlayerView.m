@@ -1,26 +1,33 @@
 //
-//  JSQAudioPlayerView.m
-//  JSQMessages
+//  Created by Vincent Sit
+//  http://www.hexedbits.com
 //
-//  Created by Vincent Sit on 14-7-6.
-//  Copyright (c) 2014年 Hexed Bits. All rights reserved.
 //
-
-#import "JSQAudioPlayerView.h"
+//  Documentation
+//  http://cocoadocs.org/docsets/JSQMessagesViewController
+//
+//
+//  GitHub
+//  https://github.com/jessesquires/JSQMessagesViewController
+//
+//
+//  License
+//  Copyright (c) 2014 Jesse Squires
+//  Released under an MIT license: http://opensource.org/licenses/MIT
+//
+#import "JSQDemoAudioPlayerView.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import "JSQMessage.h"
 
-@interface JSQAudioPlayerView ()
+@interface JSQDemoAudioPlayerView ()
 
 @property (strong, nonatomic) UILabel *durationLabel;
 @property (strong, nonatomic) UIImageView *animationContainer;
-@property (strong, nonatomic) NSArray *animationImages;
-@property (assign, nonatomic) BOOL isAnimation;
 
 @end
 
-@implementation JSQAudioPlayerView
+@implementation JSQDemoAudioPlayerView
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -34,16 +41,15 @@
         _durationLabel.font = [UIFont systemFontOfSize:12];
         [self addSubview:_durationLabel];
         
-        _animationContainer = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"demo_audio_normal"] highlightedImage:[UIImage imageNamed:@"demo_audio_press"]];
+        _animationContainer = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"demo_audio_normal"] highlightedImage:[UIImage imageNamed:@"demo_audio_press"]];
         _animationContainer.frame = CGRectZero;
         _animationContainer.userInteractionEnabled = YES;
+        _animationContainer.animationImages = @[[UIImage imageNamed:@"demo_audio_play_0"],
+                                                [UIImage imageNamed:@"demo_audio_play_1"],
+                                                [UIImage imageNamed:@"demo_audio_play_2"],
+                                                [UIImage imageNamed:@"demo_audio_normal"]];
+        _animationContainer.animationDuration = 1.f;
         [self addSubview:_animationContainer];
-        
-        _isAnimation = YES;
-        
-        _animationImages = @[[UIImage imageNamed:@"demo_audio_play_1"],
-                             [UIImage imageNamed:@"demo_audio_play_2"],
-                             [UIImage imageNamed:@"demo_audio_normal"]];
     }
     return self;
 }
@@ -96,23 +102,17 @@
 
 - (void)startAnimation
 {
-    static int i = 0;
-    self.animationContainer.image = self.animationImages[i];
-    i ++;
-    i = i > 2 ? 0 : i;
-    
-    if (self.isAnimation) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self startAnimation];
-        });
-    }
-    self.isAnimation = YES;
+    [self.animationContainer startAnimating];
 }
 
 - (void)stopAnimation
 {
-    self.isAnimation = NO;
+    [self.animationContainer stopAnimating];
 }
 
+- (BOOL)isAnimating
+{
+    return [self.animationContainer isAnimating];
+}
 
 @end

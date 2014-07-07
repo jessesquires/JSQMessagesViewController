@@ -1,17 +1,27 @@
 //
-//  JSQMessagesCollectionViewCellOutgoingVideo.m
-//  JSQMessages
+//  Created by Vincent Sit
+//  http://www.hexedbits.com
 //
-//  Created by Vincent Sit on 14-7-1.
-//  Copyright (c) 2014年 Hexed Bits. All rights reserved.
+//
+//  Documentation
+//  http://cocoadocs.org/docsets/JSQMessagesViewController
+//
+//
+//  GitHub
+//  https://github.com/jessesquires/JSQMessagesViewController
+//
+//
+//  License
+//  Copyright (c) 2014 Jesse Squires
+//  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import "JSQMessagesCollectionViewCellOutgoingVideo.h"
+#import "JSQMessagesCollectionViewVideoCell.h"
 
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 #import "UIView+JSQMessages.h"
 
-@interface JSQMessagesCollectionViewCellOutgoingVideo ()
+@interface JSQMessagesCollectionViewVideoCell ()
 
 @property (weak, nonatomic, readwrite) IBOutlet UIImageView *thumbnailImageView;
 @property (weak, nonatomic) IBOutlet UIView *activityIndicatorContainerView;
@@ -30,7 +40,7 @@
 
 @end
 
-@implementation JSQMessagesCollectionViewCellOutgoingVideo
+@implementation JSQMessagesCollectionViewVideoCell
 
 @synthesize messageBubbleImageView = _messageBubbleImageView;
 
@@ -44,26 +54,26 @@
     _overlayViewTapGestureRecognizer = nil;
 }
 
-
 #pragma mark - Overrides
 
 + (UINib *)nib
 {
-    return [UINib nibWithNibName:NSStringFromClass([self class])
-                          bundle:[NSBundle mainBundle]];
+    NSAssert(NO, @"ERROR: method must be overridden in subclasses: %s", __PRETTY_FUNCTION__);
+    return nil;
 }
 
 + (NSString *)cellReuseIdentifier
 {
-    return NSStringFromClass([self class]);
+    NSAssert(NO, @"ERROR: method must be overridden in subclasses: %s", __PRETTY_FUNCTION__);
+    return nil;
 }
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     
-    self.messageBubbleTopLabel.textAlignment = NSTextAlignmentRight;
-    self.cellBottomLabel.textAlignment = NSTextAlignmentRight;
+    self.messageBubbleTopLabel.textAlignment = NSTextAlignmentLeft;
+    self.cellBottomLabel.textAlignment = NSTextAlignmentLeft;
     
     self.longPressGestureRecognizer.enabled = NO;
     
@@ -126,6 +136,15 @@
 
 
 #pragma mark - Custom Accessors
+
+- (void)setThumbnailImage:(UIImage *)thumbnailImage
+{
+    if (_thumbnailImage != thumbnailImage) {
+        self.thumbnailImageView.image = thumbnailImage;
+        
+        _thumbnailImage = thumbnailImage;
+    }
+}
 
 - (void)setOverlayView:(UIView *)overlayView
 {
@@ -228,5 +247,6 @@
 {
     [self.delegate messagesCollectionViewCellDidTapVideo:self];
 }
+
 
 @end

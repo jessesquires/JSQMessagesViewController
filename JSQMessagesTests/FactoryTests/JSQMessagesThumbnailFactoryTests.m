@@ -1,9 +1,19 @@
 //
-//  JSQMessagesThumbnailFactoryTests.m
-//  JSQMessages
+//  Created by Vincent Sit
+//  http://www.hexedbits.com
 //
-//  Created by Vincent Sit on 14-7-3.
-//  Copyright (c) 2014年 Hexed Bits. All rights reserved.
+//
+//  Documentation
+//  http://cocoadocs.org/docsets/JSQMessagesViewController
+//
+//
+//  GitHub
+//  https://github.com/jessesquires/JSQMessagesViewController
+//
+//
+//  License
+//  Copyright (c) 2014 Jesse Squires
+//  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
 #import <XCTest/XCTest.h>
@@ -30,7 +40,7 @@
 
 - (void)testThumbnail
 {
-    NSURL *remoteVideoURL = [NSURL URLWithString:@"https://archive.org/download/AppleAds/Apple-Icloud-TvAd-IcloudHarmony.mp4"];
+    NSURL *remoteVideoURL = [NSURL URLWithString:@"https://ia600301.us.archive.org/8/items/AppleAds/Apple-TvAd-MacbookAir.mp4"];
     XCTAssertNotNil(remoteVideoURL, @"Remote video url should not be nil");
     
     UIImage *remoteVideoThumbnail = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:remoteVideoURL];
@@ -48,7 +58,7 @@
  */
 - (void)testThumbnailSpecifiedTime
 {
-    NSURL *remoteVideoURL = [NSURL URLWithString:@"https://archive.org/download/AppleAds/Apple-Icloud-TvAd-IcloudHarmony.mp4"];
+    NSURL *remoteVideoURL = [NSURL URLWithString:@"https://ia600301.us.archive.org/8/items/AppleAds/Apple-TvAd-MacbookAir.mp4"];
     XCTAssertNotNil(remoteVideoURL, @"Remote video url should not be nil");
     
     UIImage *remoteVideoThumbnailAtSecond = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:remoteVideoURL atSeconds:1];
@@ -65,7 +75,7 @@
     
 //    UIImage *remoteVideoThumbnailWithTooLargeTime = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:remoteVideoURL atTime:CMTimeMake(25 * 60 * 9, 25)];
 //    XCTAssertNil(remoteVideoThumbnailWithTooLargeTime, @"Remote thumbnail with too large time should be nil");
-    
+
     /**
      *  Our local video frame rate is 25 frames per second.
      */

@@ -86,114 +86,114 @@
 @property (assign, nonatomic) CGSize outgoingAvatarViewSize;
 
 /**
- *  The size of the `thumbnailImageView` of a `JSQMessagesCollectionViewCellIncomingPhoto`.
+ *  The size of the `thumbnailImageView` of a `JSQMessagesCollectionViewPhotoCellIncoming`.
  *  The size values should be greater than `0.0`.
  *
- *  @see `JSQMessagesCollectionViewCellIncomingPhoto`.
+ *  @see `JSQMessagesCollectionViewPhotoCellIncoming`.
  */
 @property (assign, nonatomic) CGSize incomingThumbnailImageSize;
 
 /**
- *  The size of the `thumbnailImageView` of a `JSQMessagesCollectionViewCellOutgoingPhoto`.
+ *  The size of the `thumbnailImageView` of a `JSQMessagesCollectionViewPhotoCellOutgoing`.
  *  The size values should be greater than `0.0`.
  *
- *  @see `JSQMessagesCollectionViewCellOutgoingPhoto`.
+ *  @see `JSQMessagesCollectionViewPhotoCellOutgoing`.
  */
 @property (assign, nonatomic) CGSize outgoingThumbnailImageSize;
 
 /**
- *  The size of the `thumbnailImageView` of a `JSQMessagesCollectionViewCellIncomingVideo`.
+ *  The size of the `thumbnailImageView` of a `JSQMessagesCollectionViewVideoCellIncoming`.
  *  The size values should be greater than `0.0`.
  *
- *  @see `JSQMessagesCollectionViewCellIncomingVideo`.
+ *  @see `JSQMessagesCollectionViewVideoCellIncoming`.
  */
 @property (assign, nonatomic) CGSize incomingVideoThumbnailSize;
 
 /**
- *  The size of the `thumbnailImageView` of a `JSQMessagesCollectionViewCellOutgoingVideo`.
+ *  The size of the `thumbnailImageView` of a `JSQMessagesCollectionViewVideoCellOutgoing`.
  *  The size values should be greater than `0.0`.
  *
- *  @see `JSQMessagesCollectionViewCellOutgoingVideo`.
+ *  @see `JSQMessagesCollectionViewVideoCellOutgoing`.
  */
 @property (assign, nonatomic) CGSize outgoingVideoThumbnailSize;
 
 /**
- *  The size of the `playerView` of a `JSQMessagesCollectionViewCellIncomingAudio`.
+ *  The size of the `playerView` of a `JSQMessagesCollectionViewAudioCellIncoming`.
  *  The size values should be greater than or equal to `0.0`.
  *
- *  @see `JSQMessagesCollectionViewCellIncomingAudio`.
+ *  @see `JSQMessagesCollectionViewAudioCellIncoming`.
  */
 @property (assign, nonatomic) CGSize incomingAudioPlayerViewSize;
 
 /**
- *  The size of the `playerView` of a `JSQMessagesCollectionViewCellOutgoingAudio`.
+ *  The size of the `playerView` of a `JSQMessagesCollectionViewAudioCellOutgoing`.
  *  The size values should be greater than or equal to `0.0`.
  *
- *  @see `JSQMessagesCollectionViewCellOutgoingAudio`.
+ *  @see `JSQMessagesCollectionViewAudioCellOutgoing`.
  */
 @property (assign, nonatomic) CGSize outgoingAudioPlayerViewSize;
 
 /**
- *	The size of the `overlayView` of a `JSQMessagesCollectionViewCellIncomingVideo`.
+ *	The size of the `overlayView` of a `JSQMessagesCollectionViewVideoCellIncoming`.
  *  The size values should be greater than or equal to `0.0`.
  *
- *  @see `JSQMessagesCollectionViewCellIncomingVideo`.
+ *  @see `JSQMessagesCollectionViewVideoCellIncoming`.
  */
 @property (assign, nonatomic) CGSize incomingVideoOverlayViewSize;
 
 /**
- *	The size of the `overlayView` of a `JSQMessagesCollectionViewCellOutgoingVideo`.
+ *	The size of the `overlayView` of a `JSQMessagesCollectionViewVideoCellOutgoing`.
  *  The size values should be greater than or equal to `0.0`.
  *
- *  @see `JSQMessagesCollectionViewCellOutgoingVideo`
+ *  @see `JSQMessagesCollectionViewVideoCellOutgoing`
  */
 @property (assign, nonatomic) CGSize outgoingVideoOverlayViewSize;
 
 /**
- *  The size of the `activityIndicatorView` of a `JSQMessagesCollectionViewCellIncomingPhoto`.
+ *  The size of the `activityIndicatorView` of a `JSQMessagesCollectionViewPhotoCellIncoming`.
  *  The size values should be greater than or equal to `0.0`.
  *
- *  @see `JSQMessagesCollectionViewCellIncomingPhoto`.
+ *  @see `JSQMessagesCollectionViewPhotoCellIncoming`.
  */
 @property (assign, nonatomic) CGSize incomingPhotoActivityIndicatorViewSize;
 
 /**
- *  The size of the `activityIndicatorView` of a `JSQMessagesCollectionViewCellOutgoingPhoto`.
+ *  The size of the `activityIndicatorView` of a `JSQMessagesCollectionViewPhotoCellOutgoing`.
  *  The size values should be greater than or equal to `0.0`.
  *
- *  @see `JSQMessagesCollectionViewCellOutgoingPhoto`.
+ *  @see `JSQMessagesCollectionViewPhotoCellOutgoing`.
  */
 @property (assign, nonatomic) CGSize outgoingPhotoActivityIndicatorViewSize;
 
 /**
- *  The size of the `activityIndicatorView` of a `JSQMessagesCollectionViewCellIncomingVideo`.
+ *  The size of the `activityIndicatorView` of a `JSQMessagesCollectionViewVideoCellIncoming`.
  *  The size values should be greater than or equal to `0.0`.
  *
- *  @see `JSQMessagesCollectionViewCellIncomingVideo`.
+ *  @see `JSQMessagesCollectionViewVideoCellIncoming`.
  */
 @property (assign, nonatomic) CGSize incomingVideoActivityIndicatorViewSize;
 
 /**
- *  The size of the `activityIndicatorView` of a `JSQMessagesCollectionViewCellOutgoingVideo`.
+ *  The size of the `activityIndicatorView` of a `JSQMessagesCollectionViewVideoCellOutgoing`.
  *  The size values should be greater than or equal to `0.0`.
  *
- *  @see `JSQMessagesCollectionViewCellOutgoingVideo`.
+ *  @see `JSQMessagesCollectionViewVideoCellOutgoing`.
  */
 @property (assign, nonatomic) CGSize outgoingVideoActivityIndicatorViewSize;
 
 /**
- *  The size of the `activityIndicatorView` of a `JSQMessagesCollectionViewCellIncomingAudio`.
+ *  The size of the `activityIndicatorView` of a `JSQMessagesCollectionViewAudioCellIncoming`.
  *  The size values should be greater than or equal to `0.0`.
  *
- *  @see `JSQMessagesCollectionViewCellIncomingAudio`.
+ *  @see `JSQMessagesCollectionViewAudioCellIncoming`.
  */
 @property (assign, nonatomic) CGSize incomingAudioActivityIndicatorViewSize;
 
 /**
- *  The size of the `activityIndicatorView` of a `JSQMessagesCollectionViewCellOutgoingAudio`.
+ *  The size of the `activityIndicatorView` of a `JSQMessagesCollectionViewAudioCellOutgoing`.
  *  The size values should be greater than or equal to `0.0`.
  *
- *  @see `JSQMessagesCollectionViewCellOutgoingAudio`.
+ *  @see `JSQMessagesCollectionViewAudioCellOutgoing`.
  */
 @property (assign, nonatomic) CGSize outgoingAudioActivityIndicatorViewSize;
 

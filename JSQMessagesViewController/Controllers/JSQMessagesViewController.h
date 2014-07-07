@@ -78,10 +78,10 @@
 /**
  *  The collection view cell identifier to use for dequeuing outgoing message collection view cells in the collectionView.
  *
- *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellOutgoingPhoto cellReuseIdentifier]`.
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewPhotoCellOutgoing cellReuseIdentifier]`.
  *  This value must not be `nil`.
  *
- *  @see `JSQMessagesCollectionViewCellOutgoingPhoto`.
+ *  @see `JSQMessagesCollectionViewPhotoCellOutgoing`.
  *
  *  @warning Overriding this property's default value is *not* recommended.
  *  You should only override this property's default value if you are proividing your own cell prototypes.
@@ -94,10 +94,10 @@
 /**
  *  The collection view cell identifier to use for dequeuing outgoing message collection view cells in the collectionView.
  *
- *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellOutgoingVideo cellReuseIdentifier]`.
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewVideoCellOutgoing cellReuseIdentifier]`.
  *  This value must not be `nil`.
  *
- *  @see `JSQMessagesCollectionViewCellOutgoingVideo`.
+ *  @see `JSQMessagesCollectionViewVideoCellOutgoing`.
  *
  *  @warning Overriding this property's default value is *not* recommended.
  *  You should only override this property's default value if you are proividing your own cell prototypes.
@@ -110,10 +110,10 @@
 /**
  *  The collection view cell identifier to use for dequeuing outgoing message collection view cells in the collectionView.
  *
- *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellOutgoingAudio cellReuseIdentifier]`.
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewAudioCellOutgoing cellReuseIdentifier]`.
  *  This value must not be `nil`.
  *
- *  @see `JSQMessagesCollectionViewCellOutgoingAudio`.
+ *  @see `JSQMessagesCollectionViewAudioCellOutgoing`.
  *
  *  @warning Overriding this property's default value is *not* recommended.
  *  You should only override this property's default value if you are proividing your own cell prototypes.
@@ -142,10 +142,10 @@
 /**
  *  The collection view cell identifier to use for dequeuing incoming message collection view cells in the collectionView.
  *
- *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellIncomingPhoto cellReuseIdentifier]`.
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewPhotoCellIncoming cellReuseIdentifier]`.
  *  This value must not be `nil`.
  *
- *  @see `JSQMessagesCollectionViewCellIncomingPhoto`.
+ *  @see `JSQMessagesCollectionViewPhotoCellIncoming`.
  *
  *  @warning Overriding this property's default value is *not* recommended.
  *  You should only override this property's default value if you are proividing your own cell prototypes.
@@ -158,10 +158,10 @@
 /**
  *  The collection view cell identifier to use for dequeuing incoming message collection view cells in the collectionView.
  *
- *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellIncomingVideo cellReuseIdentifier]`.
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewVideoCellIncoming cellReuseIdentifier]`.
  *  This value must not be `nil`.
  *
- *  @see `JSQMessagesCollectionViewCellIncomingVideo`.
+ *  @see `JSQMessagesCollectionViewVideoCellIncoming`.
  *
  *  @warning Overriding this property's default value is *not* recommended.
  *  You should only override this property's default value if you are proividing your own cell prototypes.
@@ -174,10 +174,10 @@
 /**
  *  The collection view cell identifier to use for dequeuing incoming message collection view cells in the collectionView.
  *
- *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewCellIncomingAudio cellReuseIdentifier]`.
+ *  @discussion The default value is the string returned by `[JSQMessagesCollectionViewAudioCellIncoming cellReuseIdentifier]`.
  *  This value must not be `nil`.
  *
- *  @see `JSQMessagesCollectionViewCellIncomingAudio`.
+ *  @see `JSQMessagesCollectionViewAudioCellIncoming`.
  *
  *  @warning Overriding this property's default value is *not* recommended.
  *  You should only override this property's default value if you are proividing your own cell prototypes.

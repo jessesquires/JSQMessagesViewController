@@ -99,12 +99,15 @@
 @property (weak, nonatomic, readonly) UITextView *textView;
 
 /**
+ *  Returns the container view of bubble image view.
+ */
+@property (weak, nonatomic, readonly) UIView *messageBubbleContainerView;
+
+/**
  *  The bubble image view of the cell that is responsible for displaying bubble images.
  *  The default value is `nil`.
  */
 @property (weak, nonatomic) UIImageView *messageBubbleImageView;
-
-@property (weak, nonatomic, readonly) UIView *messageBubbleContainerView;
 
 /**
  *  The avatar image view of the cell that is responsible for displaying avatar images.

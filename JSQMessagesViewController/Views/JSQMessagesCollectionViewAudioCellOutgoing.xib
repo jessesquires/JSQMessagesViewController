@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="JSQMessagesCollectionViewCellOutgoingAudio" id="qmn-7X-TtP" customClass="JSQMessagesCollectionViewCellOutgoingAudio">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="JSQMessagesCollectionViewAudioCellOutgoing" id="qmn-7X-TtP" customClass="JSQMessagesCollectionViewAudioCellOutgoing">
             <rect key="frame" x="0.0" y="0.0" width="320" height="154"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -39,7 +39,7 @@
                         <rect key="frame" x="40" y="40" width="244" height="94"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4DA-Ct-WRV">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4DA-Ct-WRV" userLabel="activityIndicatorContainerView">
                                 <rect key="frame" x="10" y="27" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -95,7 +95,7 @@
                 <constraint firstAttribute="trailing" secondItem="I1I-kb-G5l" secondAttribute="trailing" id="RJn-36-zag"/>
                 <constraint firstItem="YIG-RS-OPn" firstAttribute="leading" secondItem="bNe-hZ-yI5" secondAttribute="trailing" constant="2" id="Rc5-uk-17K"/>
                 <constraint firstItem="cpy-6W-3U6" firstAttribute="top" secondItem="I1I-kb-G5l" secondAttribute="bottom" id="TI5-mX-Ax6"/>
-                <constraint firstItem="bNe-hZ-yI5" firstAttribute="top" secondItem="cpy-6W-3U6" secondAttribute="bottom" id="av0-Gy-k59"/>
+                <constraint firstItem="bNe-hZ-yI5" firstAttribute="top" secondItem="cpy-6W-3U6" secondAttribute="bottom" priority="750" id="av0-Gy-k59"/>
                 <constraint firstItem="nUr-Dg-yiW" firstAttribute="top" secondItem="YIG-RS-OPn" secondAttribute="bottom" id="fw3-8J-Rvs"/>
                 <constraint firstItem="nUr-Dg-yiW" firstAttribute="top" secondItem="bNe-hZ-yI5" secondAttribute="bottom" id="phD-6v-NdG"/>
             </constraints>

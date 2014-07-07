@@ -20,13 +20,13 @@
 
 #import "JSQMessagesThumbnailFactory.h"
 #import "JSQMessagesActivityIndicatorView.h"
-#import "JSQAudioPlayerView.h"
+#import "JSQDemoAudioPlayerView.h"
 
 
 static NSString * const kJSQDemoAvatarNameCook = @"Tim Cook";
 static NSString * const kJSQDemoAvatarNameJobs = @"Jobs";
 static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
-static NSString * const kJSQDemoVideoMessageURLString = @"https://archive.org/download/AppleAds/Apple-Icloud-TvAd-IcloudHarmony.mp4";
+static NSString * const kJSQDemoVideoMessageURLString = @"https://ia600301.us.archive.org/8/items/AppleAds/Apple-TvAd-MacbookAir.mp4";
 static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.archive.org/9/items/FurElise_656/FurElise_64kb.mp3";
 
 @implementation JSQDemoViewController
@@ -73,8 +73,8 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
                      [JSQMessage messageWithVideoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] placeholderImage:videoPlaceholderImage sender:kJSQDemoAvatarNameWoz],
                      [JSQMessage messageWithVideoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] placeholderImage:videoPlaceholderImage sender:self.sender],
                      
-//                     [JSQMessage messageWithAudio:[NSData dataWithContentsOfURL:localAudioURL] sender:self.sender],
-//                     [JSQMessage messageWithAudioURL:localAudioURL sender:kJSQDemoAvatarNameWoz],
+                     [JSQMessage messageWithAudio:[NSData dataWithContentsOfURL:localAudioURL] sender:self.sender],
+                     [JSQMessage messageWithAudioURL:localAudioURL sender:kJSQDemoAvatarNameWoz],
                      [JSQMessage messageWithAudioURL:[NSURL URLWithString:kJSQDemoAudioMessageURLString] sender:kJSQDemoAvatarNameCook],
                      [JSQMessage messageWithAudioURL:[NSURL URLWithString:kJSQDemoAudioMessageURLString] sender:self.sender],
                      nil];
@@ -453,7 +453,7 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 - (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView viewForAudioPlayerViewAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage *message = self.messages[indexPath.item];
-    JSQAudioPlayerView *player = [JSQAudioPlayerView new];
+    JSQDemoAudioPlayerView *player = [JSQDemoAudioPlayerView new];
     player.message = message;
     player.incomingMessage = ![message.sender isEqual:self.sender];
     
@@ -464,7 +464,6 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 {
     return [JSQMessagesActivityIndicatorView new];
 }
-
 
 - (UIView <JSQMessagesActivityIndicator> *)collectionView:(JSQMessagesCollectionView *)collectionView viewForVideoActivityIndicatorViewAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -536,7 +535,7 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
             UIImage *remoteThumbnail = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:sourceURL];
             
             /**
-             *  May not support this format or video encoding is incorrect.
+             *  May not support this format or video encoding is incorrect or network error.
              */
             if (!remoteThumbnail) {
                 NSLog(@"Error, Can not generate thumbnail for URL: %@", sourceURL);
@@ -674,13 +673,27 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAudio:(NSData *)audioData atIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"");
+    JSQMessagesCollectionViewAudioCellIncoming *incomingAudioCell = (JSQMessagesCollectionViewAudioCellIncoming *)[collectionView cellForItemAtIndexPath:indexPath];
+    JSQDemoAudioPlayerView *player = (JSQDemoAudioPlayerView *)incomingAudioCell.playerView;
+    if ([player isAnimating]) {
+        [player stopAnimation];
+    }
+    else {
+        [player startAnimation];
+    }
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAudioForURL:(NSURL *)audioURL atIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"");
-    JSQMessagesCollectionViewCellIncomingAudio *incomingAudioCell = (JSQMessagesCollectionViewCellIncomingAudio *)[collectionView cellForItemAtIndexPath:indexPath];
-    [(JSQAudioPlayerView *)incomingAudioCell.playerView startAnimation];
+    JSQMessagesCollectionViewAudioCellIncoming *incomingAudioCell = (JSQMessagesCollectionViewAudioCellIncoming *)[collectionView cellForItemAtIndexPath:indexPath];
+    JSQDemoAudioPlayerView *player = (JSQDemoAudioPlayerView *)incomingAudioCell.playerView;
+    if ([player isAnimating]) {
+        [player stopAnimation];
+    }
+    else {
+        [player startAnimation];
+    }
 }
 
 

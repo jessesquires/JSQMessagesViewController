@@ -27,14 +27,14 @@
 #import "JSQMessage.h"
 
 #import "JSQMessagesCollectionViewCellIncoming.h"
-#import "JSQMessagesCollectionViewCellIncomingPhoto.h"
-#import "JSQMessagesCollectionViewCellIncomingVideo.h"
-#import "JSQMessagesCollectionViewCellIncomingAudio.h"
+#import "JSQMessagesCollectionViewPhotoCellIncoming.h"
+#import "JSQMessagesCollectionViewVideoCellIncoming.h"
+#import "JSQMessagesCollectionViewAudioCellIncoming.h"
 
 #import "JSQMessagesCollectionViewCellOutgoing.h"
-#import "JSQMessagesCollectionViewCellOutgoingPhoto.h"
-#import "JSQMessagesCollectionViewCellOutgoingVideo.h"
-#import "JSQMessagesCollectionViewCellOutgoingAudio.h"
+#import "JSQMessagesCollectionViewPhotoCellOutgoing.h"
+#import "JSQMessagesCollectionViewVideoCellOutgoing.h"
+#import "JSQMessagesCollectionViewAudioCellOutgoing.h"
 
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
@@ -150,14 +150,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.automaticallyScrollsToMostRecentMessage = YES;
     
     self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
-    self.outgoingPhotoCellIdentifier = [JSQMessagesCollectionViewCellOutgoingPhoto cellReuseIdentifier];
-    self.outgoingVideoCellIdentifier = [JSQMessagesCollectionViewCellOutgoingVideo cellReuseIdentifier];
-    self.outgoingAudioCellIdentifier = [JSQMessagesCollectionViewCellOutgoingAudio cellReuseIdentifier];
+    self.outgoingPhotoCellIdentifier = [JSQMessagesCollectionViewPhotoCellOutgoing cellReuseIdentifier];
+    self.outgoingVideoCellIdentifier = [JSQMessagesCollectionViewVideoCellOutgoing cellReuseIdentifier];
+    self.outgoingAudioCellIdentifier = [JSQMessagesCollectionViewAudioCellOutgoing cellReuseIdentifier];
     
     self.incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
-    self.incomingPhotoCellIdentifier = [JSQMessagesCollectionViewCellIncomingPhoto cellReuseIdentifier];
-    self.incomingVideoCellIdentifier = [JSQMessagesCollectionViewCellIncomingVideo cellReuseIdentifier];
-    self.incomingAudioCellIdentifier = [JSQMessagesCollectionViewCellIncomingAudio cellReuseIdentifier];
+    self.incomingPhotoCellIdentifier = [JSQMessagesCollectionViewPhotoCellIncoming cellReuseIdentifier];
+    self.incomingVideoCellIdentifier = [JSQMessagesCollectionViewVideoCellIncoming cellReuseIdentifier];
+    self.incomingAudioCellIdentifier = [JSQMessagesCollectionViewAudioCellIncoming cellReuseIdentifier];
     
     self.typingIndicatorColor = [UIColor jsq_messageBubbleLightGrayColor];
     self.showTypingIndicator = NO;
@@ -430,7 +430,7 @@ thumbnailImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
 handleIncomingPhotoMessageWithMessageData:(id<JSQMessageData>)messageData
-    collectionViewCell:(JSQMessagesCollectionViewCellIncomingPhoto *)incomingPhotoCell
+    collectionViewCell:(JSQMessagesCollectionViewPhotoCellIncoming *)incomingPhotoCell
          cellIndexPath:(NSIndexPath *)indexPath
 {
     NSParameterAssert([messageData thumbnailImage] != nil);
@@ -439,7 +439,7 @@ handleIncomingPhotoMessageWithMessageData:(id<JSQMessageData>)messageData
         case JSQMessagePhoto:
         {
             UIImage *thumbnailImage = [messageData thumbnailImage];
-            incomingPhotoCell.thumbnailImageView.image = thumbnailImage;
+            incomingPhotoCell.thumbnailImage = thumbnailImage;
         }
             break;
             
@@ -448,7 +448,7 @@ handleIncomingPhotoMessageWithMessageData:(id<JSQMessageData>)messageData
             NSParameterAssert([messageData sourceURL] != nil);
             
             UIImage *thumbnailImage = [messageData thumbnailImage];
-            incomingPhotoCell.thumbnailImageView.image = thumbnailImage;
+            incomingPhotoCell.thumbnailImage = thumbnailImage;
             
             /**
              *	Do not direct assignment, because it would not trigger the setter methods when later modify its properties.
@@ -485,7 +485,7 @@ handleIncomingPhotoMessageWithMessageData:(id<JSQMessageData>)messageData
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
 handleOutgoingPhotoMessageWithMessageData:(id<JSQMessageData>)messageData
-    collectionViewCell:(JSQMessagesCollectionViewCellOutgoingPhoto *)outgoingPhotoCell
+    collectionViewCell:(JSQMessagesCollectionViewPhotoCellOutgoing *)outgoingPhotoCell
          cellIndexPath:(NSIndexPath *)indexPath
 {
     NSParameterAssert([messageData thumbnailImage] != nil);
@@ -494,7 +494,7 @@ handleOutgoingPhotoMessageWithMessageData:(id<JSQMessageData>)messageData
         case JSQMessagePhoto:
         {
             UIImage *thumbnailImage = [messageData thumbnailImage];
-            outgoingPhotoCell.thumbnailImageView.image = thumbnailImage;
+            outgoingPhotoCell.thumbnailImage = thumbnailImage;
         }
             break;
             
@@ -503,7 +503,7 @@ handleOutgoingPhotoMessageWithMessageData:(id<JSQMessageData>)messageData
             NSParameterAssert([messageData sourceURL] != nil);
             
             UIImage *thumbnailImage = [messageData thumbnailImage];
-            outgoingPhotoCell.thumbnailImageView.image = thumbnailImage;
+            outgoingPhotoCell.thumbnailImage = thumbnailImage;
             
             /**
              *	Do not direct assignment, because it would not trigger the setter methods when later modify its properties.
@@ -539,7 +539,7 @@ handleOutgoingPhotoMessageWithMessageData:(id<JSQMessageData>)messageData
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
 handleIncomingVideoMessageWithMessageData:(id<JSQMessageData>)messageData
-    collectionViewCell:(JSQMessagesCollectionViewCellIncomingVideo *)incomingVideoCell
+    collectionViewCell:(JSQMessagesCollectionViewVideoCellIncoming *)incomingVideoCell
          cellIndexPath:(NSIndexPath *)indexPath
 {
     NSParameterAssert([messageData sourceURL] != nil);
@@ -560,7 +560,7 @@ handleIncomingVideoMessageWithMessageData:(id<JSQMessageData>)messageData
         {
             NSParameterAssert([messageData videoThumbnail] != nil);
             UIImage *thumbnailImage = [messageData videoThumbnail];
-            incomingVideoCell.thumbnailImageView.image = thumbnailImage;
+            incomingVideoCell.thumbnailImage = thumbnailImage;
         }
             break;
             
@@ -569,10 +569,10 @@ handleIncomingVideoMessageWithMessageData:(id<JSQMessageData>)messageData
             NSParameterAssert([messageData videoThumbnailPlaceholder] != nil || [messageData videoThumbnail] != nil);
             
             if ([messageData videoThumbnail]) {
-                incomingVideoCell.thumbnailImageView.image = [messageData videoThumbnail];
+                incomingVideoCell.thumbnailImage = [messageData videoThumbnail];
             }
             else {
-                incomingVideoCell.thumbnailImageView.image = [messageData videoThumbnailPlaceholder];
+                incomingVideoCell.thumbnailImage = [messageData videoThumbnailPlaceholder];
                 
                 /**
                  *	Do not direct assignment, because it would not trigger the setter methods when later modify its properties.
@@ -611,7 +611,7 @@ handleIncomingVideoMessageWithMessageData:(id<JSQMessageData>)messageData
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
 handleOutgoingVideoMessageWithMessageData:(id<JSQMessageData>)messageData
-    collectionViewCell:(JSQMessagesCollectionViewCellOutgoingVideo *)outgoingVideoCell
+    collectionViewCell:(JSQMessagesCollectionViewVideoCellOutgoing *)outgoingVideoCell
          cellIndexPath:(NSIndexPath *)indexPath
 {
     NSParameterAssert([messageData sourceURL] != nil);
@@ -628,7 +628,7 @@ handleOutgoingVideoMessageWithMessageData:(id<JSQMessageData>)messageData
         {
             NSParameterAssert([messageData videoThumbnail] != nil);
             UIImage *thumbnailImage = [messageData videoThumbnail];
-            outgoingVideoCell.thumbnailImageView.image = thumbnailImage;
+            outgoingVideoCell.thumbnailImage = thumbnailImage;
         }
         break;
             
@@ -637,10 +637,10 @@ handleOutgoingVideoMessageWithMessageData:(id<JSQMessageData>)messageData
             NSParameterAssert([messageData videoThumbnailPlaceholder] != nil || [messageData videoThumbnail] != nil);
             
             if ([messageData videoThumbnail]) {
-                outgoingVideoCell.thumbnailImageView.image = [messageData videoThumbnail];
+                outgoingVideoCell.thumbnailImage = [messageData videoThumbnail];
             }
             else {
-                outgoingVideoCell.thumbnailImageView.image = [messageData videoThumbnailPlaceholder];
+                outgoingVideoCell.thumbnailImage = [messageData videoThumbnailPlaceholder];
                 
                 /**
                  *	Do not direct assignment, because it would not trigger the setter methods when later modify its properties.
@@ -678,7 +678,7 @@ handleOutgoingVideoMessageWithMessageData:(id<JSQMessageData>)messageData
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
 handleIncomingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
-    collectionViewCell:(JSQMessagesCollectionViewCellIncomingAudio *)incomingAudioCell
+    collectionViewCell:(JSQMessagesCollectionViewAudioCellIncoming *)incomingAudioCell
          cellIndexPath:(NSIndexPath *)indexPath
 {
     NSParameterAssert([messageData sourceURL] != nil || [messageData audio] != nil);
@@ -728,7 +728,7 @@ handleIncomingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
 handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
-    collectionViewCell:(JSQMessagesCollectionViewCellOutgoingAudio *)outgoingAudioCell
+    collectionViewCell:(JSQMessagesCollectionViewAudioCellOutgoing *)outgoingAudioCell
          cellIndexPath:(NSIndexPath *)indexPath
 {
     NSParameterAssert([messageData sourceURL] != nil || [messageData audio] != nil);
@@ -860,11 +860,11 @@ handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
         case JSQMessagePhoto:
         case JSQMessageRemotePhoto:
             if (isOutgoingMessage) {
-                JSQMessagesCollectionViewCellOutgoingPhoto *outgoingPhotoCell = (JSQMessagesCollectionViewCellOutgoingPhoto *)cell;
+                JSQMessagesCollectionViewPhotoCellOutgoing *outgoingPhotoCell = (JSQMessagesCollectionViewPhotoCellOutgoing *)cell;
                 [self collectionView:collectionView handleOutgoingPhotoMessageWithMessageData:messageData collectionViewCell:outgoingPhotoCell cellIndexPath:indexPath];
             }
             else {
-                JSQMessagesCollectionViewCellIncomingPhoto *incomingPhotoCell = (JSQMessagesCollectionViewCellIncomingPhoto *)cell;
+                JSQMessagesCollectionViewPhotoCellIncoming *incomingPhotoCell = (JSQMessagesCollectionViewPhotoCellIncoming *)cell;
                 [self collectionView:collectionView handleIncomingPhotoMessageWithMessageData:messageData collectionViewCell:incomingPhotoCell cellIndexPath:indexPath];
             }
             break;
@@ -872,11 +872,11 @@ handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
         case JSQMessageVideo:
         case JSQMessageRemoteVideo:
             if (isOutgoingMessage) {
-                JSQMessagesCollectionViewCellOutgoingVideo *outgoingVideoCell = (JSQMessagesCollectionViewCellOutgoingVideo *)cell;
+                JSQMessagesCollectionViewVideoCellOutgoing *outgoingVideoCell = (JSQMessagesCollectionViewVideoCellOutgoing *)cell;
                 [self collectionView:collectionView handleOutgoingVideoMessageWithMessageData:messageData collectionViewCell:outgoingVideoCell cellIndexPath:indexPath];
             }
             else {
-                JSQMessagesCollectionViewCellIncomingVideo *incomingVideoCell = (JSQMessagesCollectionViewCellIncomingVideo *)cell;
+                JSQMessagesCollectionViewVideoCellIncoming *incomingVideoCell = (JSQMessagesCollectionViewVideoCellIncoming *)cell;
                 [self collectionView:collectionView handleIncomingVideoMessageWithMessageData:messageData collectionViewCell:incomingVideoCell cellIndexPath:indexPath];
             }
             break;
@@ -884,11 +884,11 @@ handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
         case JSQMessageAudio:
         case JSQMessageRemoteAudio:
             if (isOutgoingMessage) {
-                JSQMessagesCollectionViewCellOutgoingAudio *outgoingAudioCell = (JSQMessagesCollectionViewCellOutgoingAudio *)cell;
+                JSQMessagesCollectionViewAudioCellOutgoing *outgoingAudioCell = (JSQMessagesCollectionViewAudioCellOutgoing *)cell;
                 [self collectionView:collectionView handleOutgoingAudioMessageWithMessageData:messageData collectionViewCell:outgoingAudioCell cellIndexPath:indexPath];
             }
             else {
-                JSQMessagesCollectionViewCellIncomingAudio *incomingAudioCell = (JSQMessagesCollectionViewCellIncomingAudio *)cell;
+                JSQMessagesCollectionViewAudioCellIncoming *incomingAudioCell = (JSQMessagesCollectionViewAudioCellIncoming *)cell;
                 [self collectionView:collectionView handleIncomingAudioMessageWithMessageData:messageData collectionViewCell:incomingAudioCell cellIndexPath:indexPath];
             }
             break;
@@ -1014,11 +1014,11 @@ handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
 - (void)messagesCollectionViewCellDidTapPhoto:(JSQMessagesCollectionViewCell *)cell
 {
     UIImageView *imageView = nil;
-    if ([cell isMemberOfClass:[JSQMessagesCollectionViewCellOutgoingPhoto class]]) {
-        imageView = [(JSQMessagesCollectionViewCellOutgoingPhoto *)cell thumbnailImageView];
+    if ([cell isMemberOfClass:[JSQMessagesCollectionViewPhotoCellOutgoing class]]) {
+        imageView = [(JSQMessagesCollectionViewPhotoCellOutgoing *)cell thumbnailImageView];
     }
     else {
-        imageView = [(JSQMessagesCollectionViewCellIncomingPhoto *)cell thumbnailImageView];
+        imageView = [(JSQMessagesCollectionViewPhotoCellIncoming *)cell thumbnailImageView];
     }
     
     [self.collectionView.delegate collectionView:self.collectionView

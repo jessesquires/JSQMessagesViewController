@@ -19,13 +19,13 @@
 #import "JSQMessagesCollectionViewCell.h"
 
 #import "JSQMessagesCollectionViewCellIncoming.h"
-#import "JSQMessagesCollectionViewCellIncomingPhoto.h"
-#import "JSQMessagesCollectionViewCellIncomingVideo.h"
-#import "JSQMessagesCollectionViewCellIncomingAudio.h"
+#import "JSQMessagesCollectionViewPhotoCellIncoming.h"
+#import "JSQMessagesCollectionViewVideoCellIncoming.h"
+#import "JSQMessagesCollectionViewAudioCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
-#import "JSQMessagesCollectionViewCellOutgoingPhoto.h"
-#import "JSQMessagesCollectionViewCellOutgoingVideo.h"
-#import "JSQMessagesCollectionViewCellOutgoingAudio.h"
+#import "JSQMessagesCollectionViewPhotoCellOutgoing.h"
+#import "JSQMessagesCollectionViewVideoCellOutgoing.h"
+#import "JSQMessagesCollectionViewAudioCellOutgoing.h"
 
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 
@@ -193,22 +193,22 @@
     [self jsq_updateConstraint:self.cellBottomLabelHeightConstraint
                   withConstant:customAttributes.cellBottomLabelHeight];
     
-    if (![self isKindOfClass:[JSQMessagesCollectionViewCellIncomingAudio class]] &&
-        ![self isKindOfClass:[JSQMessagesCollectionViewCellOutgoingAudio class]]) {
+    if (![self isKindOfClass:[JSQMessagesCollectionViewAudioCellIncoming class]] &&
+        ![self isKindOfClass:[JSQMessagesCollectionViewAudioCellOutgoing class]]) {
         [self jsq_updateConstraint:self.messageBubbleLeftRightMarginConstraint
                       withConstant:customAttributes.messageBubbleLeftRightMargin];
     }
     
     if ([self isKindOfClass:[JSQMessagesCollectionViewCellIncoming class]]      ||
-        [self isKindOfClass:[JSQMessagesCollectionViewCellIncomingPhoto class]] ||
-        [self isKindOfClass:[JSQMessagesCollectionViewCellIncomingVideo class]] ||
-        [self isKindOfClass:[JSQMessagesCollectionViewCellIncomingAudio class]]) {
+        [self isKindOfClass:[JSQMessagesCollectionViewPhotoCellIncoming class]] ||
+        [self isKindOfClass:[JSQMessagesCollectionViewVideoCellIncoming class]] ||
+        [self isKindOfClass:[JSQMessagesCollectionViewAudioCellIncoming class]]) {
         self.avatarViewSize = customAttributes.incomingAvatarViewSize;
     }
     else if ([self isKindOfClass:[JSQMessagesCollectionViewCellOutgoing class]]      ||
-             [self isKindOfClass:[JSQMessagesCollectionViewCellOutgoingPhoto class]] ||
-             [self isKindOfClass:[JSQMessagesCollectionViewCellOutgoingVideo class]] ||
-             [self isKindOfClass:[JSQMessagesCollectionViewCellOutgoingAudio class]] ) {
+             [self isKindOfClass:[JSQMessagesCollectionViewPhotoCellOutgoing class]] ||
+             [self isKindOfClass:[JSQMessagesCollectionViewVideoCellOutgoing class]] ||
+             [self isKindOfClass:[JSQMessagesCollectionViewAudioCellOutgoing class]] ) {
         self.avatarViewSize = customAttributes.outgoingAvatarViewSize;
     }
 }

@@ -20,13 +20,13 @@
 
 #import "JSQMessagesCollectionViewFlowLayout.h"
 #import "JSQMessagesCollectionViewCellIncoming.h"
-#import "JSQMessagesCollectionViewCellIncomingPhoto.h"
-#import "JSQMessagesCollectionViewCellIncomingVideo.h"
-#import "JSQMessagesCollectionViewCellIncomingAudio.h"
+#import "JSQMessagesCollectionViewPhotoCellIncoming.h"
+#import "JSQMessagesCollectionViewVideoCellIncoming.h"
+#import "JSQMessagesCollectionViewAudioCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
-#import "JSQMessagesCollectionViewCellOutgoingPhoto.h"
-#import "JSQMessagesCollectionViewCellOutgoingVideo.h"
-#import "JSQMessagesCollectionViewCellOutgoingAudio.h"
+#import "JSQMessagesCollectionViewPhotoCellOutgoing.h"
+#import "JSQMessagesCollectionViewVideoCellOutgoing.h"
+#import "JSQMessagesCollectionViewAudioCellOutgoing.h"
 
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
@@ -55,27 +55,27 @@
     [self registerNib:[JSQMessagesCollectionViewCellIncoming nib]
           forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]];
     
-    [self registerNib:[JSQMessagesCollectionViewCellIncomingPhoto nib]
-          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncomingPhoto cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewPhotoCellIncoming nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewPhotoCellIncoming cellReuseIdentifier]];
     
-    [self registerNib:[JSQMessagesCollectionViewCellIncomingVideo nib]
-          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncomingVideo cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewVideoCellIncoming nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewVideoCellIncoming cellReuseIdentifier]];
     
-    [self registerNib:[JSQMessagesCollectionViewCellIncomingAudio nib]
-          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncomingAudio cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewAudioCellIncoming nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewAudioCellIncoming cellReuseIdentifier]];
     
     
     [self registerNib:[JSQMessagesCollectionViewCellOutgoing nib]
           forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
     
-    [self registerNib:[JSQMessagesCollectionViewCellOutgoingPhoto nib]
-          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoingPhoto cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewPhotoCellOutgoing nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewPhotoCellOutgoing cellReuseIdentifier]];
     
-    [self registerNib:[JSQMessagesCollectionViewCellOutgoingVideo nib]
-          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoingVideo cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewVideoCellOutgoing nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewVideoCellOutgoing cellReuseIdentifier]];
     
-    [self registerNib:[JSQMessagesCollectionViewCellOutgoingAudio nib]
-          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoingAudio cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewAudioCellOutgoing nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewAudioCellOutgoing cellReuseIdentifier]];
     
     
     [self registerNib:[JSQMessagesTypingIndicatorFooterView nib]
