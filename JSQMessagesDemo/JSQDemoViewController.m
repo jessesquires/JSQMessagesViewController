@@ -159,17 +159,6 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
     self.sender = @"Jesse Squires";
     
     [self setupTestModel];
-    
-    
-//    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
-//    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
-//    self.collectionView.collectionViewLayout.incomingThumbnailImageSize = CGSizeMake(100, 100);
-//    self.collectionView.collectionViewLayout.outgoingThumbnailImageSize = CGSizeMake(200, 200);
-//    self.collectionView.collectionViewLayout.incomingVideoOverlayViewSize = CGSizeMake(80, 80);
-//    self.collectionView.collectionViewLayout.outgoingVideoOverlayViewSize = CGSizeMake(120, 120);
-    self.collectionView.collectionViewLayout.incomingAudioPlayerViewSize = CGSizeMake(230, 40);
-    
-    self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:18.f];
 
     /**
      *  Remove camera button since media messages are not yet implemented
@@ -479,7 +468,8 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 
 - (CGSize)collectionView:(JSQMessagesCollectionView *)collectionView sizeForAudioPlayerViewAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(100, 40);
+    CGFloat width = arc4random() % 100;
+    return CGSizeMake(100 + width, 40);
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
