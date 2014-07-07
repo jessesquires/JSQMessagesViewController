@@ -49,6 +49,7 @@
 		45FA8733196A952400A600E0 /* JSQMessagesCollectionViewPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FA8732196A952400A600E0 /* JSQMessagesCollectionViewPhotoCell.m */; };
 		45FA8736196A978500A600E0 /* JSQMessagesCollectionViewVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FA8735196A978500A600E0 /* JSQMessagesCollectionViewVideoCell.m */; };
 		45FA8739196A98FD00A600E0 /* JSQMessagesCollectionViewAudioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FA8738196A98FD00A600E0 /* JSQMessagesCollectionViewAudioCell.m */; };
+		45FA873B196AB1E800A600E0 /* JSQMessagesActivityIndicatorViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FA873A196AB1E800A600E0 /* JSQMessagesActivityIndicatorViewTests.m */; };
 		8816A69018E9250400111919 /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 8816A64918E9250400111919 /* bubble.png */; };
 		8816A69118E9250400111919 /* bubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8816A64A18E9250400111919 /* bubble@2x.png */; };
 		8816A69218E9250400111919 /* bubble_min.png in Resources */ = {isa = PBXBuildFile; fileRef = 8816A64B18E9250400111919 /* bubble_min.png */; };
@@ -207,6 +208,7 @@
 		45FA8735196A978500A600E0 /* JSQMessagesCollectionViewVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewVideoCell.m; sourceTree = "<group>"; };
 		45FA8737196A98FD00A600E0 /* JSQMessagesCollectionViewAudioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewAudioCell.h; sourceTree = "<group>"; };
 		45FA8738196A98FD00A600E0 /* JSQMessagesCollectionViewAudioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewAudioCell.m; sourceTree = "<group>"; };
+		45FA873A196AB1E800A600E0 /* JSQMessagesActivityIndicatorViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesActivityIndicatorViewTests.m; sourceTree = "<group>"; };
 		8816A64918E9250400111919 /* bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble.png; sourceTree = "<group>"; };
 		8816A64A18E9250400111919 /* bubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble@2x.png"; sourceTree = "<group>"; };
 		8816A64B18E9250400111919 /* bubble_min.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_min.png; sourceTree = "<group>"; };
@@ -698,6 +700,7 @@
 				88C28BE01910A166004E90B1 /* JSQMessagesLoadEarlierHeaderViewTests.m */,
 				88C28BE21910A180004E90B1 /* JSQMessagesToolbarContentViewTests.m */,
 				88C28BE41910A19E004E90B1 /* JSQMessagesTypingIndicatorFooterViewTests.m */,
+				45FA873A196AB1E800A600E0 /* JSQMessagesActivityIndicatorViewTests.m */,
 			);
 			path = ViewTests;
 			sourceTree = "<group>";
@@ -1013,6 +1016,7 @@
 				88CC8807190A2C7F006258A0 /* JSQMessagesUIColorTests.m in Sources */,
 				88BC4D4D190E25CF002E5CC6 /* JSQMessagesComposerTextViewTests.m in Sources */,
 				88C28BE11910A166004E90B1 /* JSQMessagesLoadEarlierHeaderViewTests.m in Sources */,
+				45FA873B196AB1E800A600E0 /* JSQMessagesActivityIndicatorViewTests.m in Sources */,
 				88BC4D49190DB480002E5CC6 /* JSQMessagesCollectionViewLayoutAttributesTests.m in Sources */,
 				88BC4D4B190E2429002E5CC6 /* JSQMessagesCollectionViewCellTests.m in Sources */,
 				88BC4D46190D8D35002E5CC6 /* JSQMessageTests.m in Sources */,
@@ -1148,14 +1152,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: YiZhou Wang (XZ8VB4FZ2E)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JSQMessagesDemo/JSQMessages-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/JSQMessagesDemo/JSQMessages-Info.plist";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "52B01AB0-2133-4E3B-AC78-7D2DCFE7CD12";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1173,7 +1177,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/JSQMessagesDemo/JSQMessages-Info.plist";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "52B01AB0-2133-4E3B-AC78-7D2DCFE7CD12";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

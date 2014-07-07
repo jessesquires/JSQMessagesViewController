@@ -70,6 +70,7 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
                                    thumbnailImage:[UIImage imageNamed:@"FICDDemoSmallImage002"] sender:self.sender],
                      [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoLargeImage003"]
                                    thumbnailImage:[UIImage imageNamed:@"FICDDemoSmallImage003"] sender:kJSQDemoAvatarNameWoz],
+                     
                      [JSQMessage messageWithVideoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] placeholderImage:videoPlaceholderImage sender:kJSQDemoAvatarNameWoz],
                      [JSQMessage messageWithVideoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] placeholderImage:videoPlaceholderImage sender:self.sender],
                      
@@ -83,7 +84,8 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
      *    Add a local video message.
      */
     NSURL *localVideoURL = [[NSBundle mainBundle] URLForResource:@"demo_video" withExtension:@"mp4"];
-    [self.messages addObject:[JSQMessage messageWithVideoURL:localVideoURL thumbnail:[UIImage imageNamed:@"demo_video_thumbnail"] sender:self.sender]];
+    UIImage *localVideoThumbnail = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:localVideoURL atSeconds:2];
+    [self.messages addObject:[JSQMessage messageWithVideoURL:localVideoURL thumbnail:localVideoThumbnail sender:self.sender]];
     
     /**
      *  Create avatar images once.

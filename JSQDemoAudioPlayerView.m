@@ -20,6 +20,11 @@
 #import <AVFoundation/AVFoundation.h>
 #import "JSQMessage.h"
 
+
+/**
+ *  Don't judge my bad code!!!
+ */
+
 @interface JSQDemoAudioPlayerView ()
 
 @property (strong, nonatomic) UILabel *durationLabel;
