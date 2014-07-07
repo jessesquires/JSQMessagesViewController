@@ -948,6 +948,14 @@ handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
 {
     CGSize bubbleSize = [collectionViewLayout messageBubbleSizeForItemAtIndexPath:indexPath];
     
+    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+    if (JSQMessageRemoteAudio == [messageData type] || JSQMessageAudio == [messageData type]) {
+        CGSize audioBubbleSize = [collectionView.dataSource collectionView:collectionView sizeForAudioPlayerViewAtIndexPath:indexPath];
+        if (!CGSizeEqualToSize(CGSizeZero, audioBubbleSize)) {
+            bubbleSize = audioBubbleSize;
+        }
+    }
+    
     CGFloat cellHeight = bubbleSize.height;
     cellHeight += [self collectionView:collectionView layout:collectionViewLayout heightForCellTopLabelAtIndexPath:indexPath];
     cellHeight += [self collectionView:collectionView layout:collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:indexPath];

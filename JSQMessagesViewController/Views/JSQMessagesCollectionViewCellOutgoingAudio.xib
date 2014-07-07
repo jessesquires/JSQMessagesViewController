@@ -39,15 +39,6 @@
                         <rect key="frame" x="40" y="40" width="244" height="94"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tml-hg-tud">
-                                <rect key="frame" x="0.0" y="0.0" width="244" height="94"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="94" id="VN6-QH-YV0"/>
-                                    <constraint firstAttribute="width" constant="244" id="w2d-E6-hUO"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4DA-Ct-WRV">
                                 <rect key="frame" x="10" y="27" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -60,10 +51,10 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="tml-hg-tud" firstAttribute="leading" secondItem="4DA-Ct-WRV" secondAttribute="leading" constant="-10" id="2bx-KZ-CJn"/>
-                            <constraint firstItem="tml-hg-tud" firstAttribute="centerY" secondItem="4DA-Ct-WRV" secondAttribute="centerY" id="9Ib-aB-0ZE"/>
-                            <constraint firstAttribute="centerX" secondItem="tml-hg-tud" secondAttribute="centerX" id="Rf4-N1-gIC"/>
-                            <constraint firstAttribute="centerY" secondItem="tml-hg-tud" secondAttribute="centerY" id="YbV-uA-omU"/>
+                            <constraint firstAttribute="centerY" secondItem="4DA-Ct-WRV" secondAttribute="centerY" id="5bn-6x-4qA"/>
+                            <constraint firstAttribute="width" constant="244" id="ce8-J1-OtL"/>
+                            <constraint firstAttribute="height" constant="94" id="efv-sC-31W"/>
+                            <constraint firstItem="4DA-Ct-WRV" firstAttribute="leading" secondItem="bNe-hZ-yI5" secondAttribute="leading" constant="10" id="jWO-tD-SBb"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YIG-RS-OPn">
@@ -97,7 +88,6 @@
                 <constraint firstItem="cpy-6W-3U6" firstAttribute="top" secondItem="I1I-kb-G5l" secondAttribute="bottom" id="CfO-p6-U8m"/>
                 <constraint firstAttribute="trailing" secondItem="nUr-Dg-yiW" secondAttribute="trailing" id="EAm-tI-ClX"/>
                 <constraint firstItem="YIG-RS-OPn" firstAttribute="leading" secondItem="bNe-hZ-yI5" secondAttribute="trailing" constant="2" id="Eoc-st-gqp"/>
-                <constraint firstItem="bNe-hZ-yI5" firstAttribute="top" secondItem="cpy-6W-3U6" secondAttribute="bottom" id="GtG-NL-321"/>
                 <constraint firstItem="nUr-Dg-yiW" firstAttribute="leading" secondItem="qmn-7X-TtP" secondAttribute="leading" id="Lp7-3O-csp"/>
                 <constraint firstAttribute="trailing" secondItem="cpy-6W-3U6" secondAttribute="trailing" id="MF7-MT-kFi"/>
                 <constraint firstItem="I1I-kb-G5l" firstAttribute="top" secondItem="qmn-7X-TtP" secondAttribute="top" id="MFS-Ff-xI7"/>
@@ -106,7 +96,6 @@
                 <constraint firstItem="YIG-RS-OPn" firstAttribute="leading" secondItem="bNe-hZ-yI5" secondAttribute="trailing" constant="2" id="Rc5-uk-17K"/>
                 <constraint firstItem="cpy-6W-3U6" firstAttribute="top" secondItem="I1I-kb-G5l" secondAttribute="bottom" id="TI5-mX-Ax6"/>
                 <constraint firstItem="bNe-hZ-yI5" firstAttribute="top" secondItem="cpy-6W-3U6" secondAttribute="bottom" id="av0-Gy-k59"/>
-                <constraint firstItem="bNe-hZ-yI5" firstAttribute="leading" secondItem="qmn-7X-TtP" secondAttribute="leading" constant="40" id="eWM-x4-Rzh"/>
                 <constraint firstItem="nUr-Dg-yiW" firstAttribute="top" secondItem="YIG-RS-OPn" secondAttribute="bottom" id="fw3-8J-Rvs"/>
                 <constraint firstItem="nUr-Dg-yiW" firstAttribute="top" secondItem="bNe-hZ-yI5" secondAttribute="bottom" id="phD-6v-NdG"/>
             </constraints>
@@ -123,12 +112,10 @@
                 <outlet property="cellTopLabel" destination="I1I-kb-G5l" id="t0v-1N-K5j"/>
                 <outlet property="cellTopLabelHeightConstraint" destination="guz-0L-QHb" id="IWE-j8-TTA"/>
                 <outlet property="messageBubbleContainerView" destination="bNe-hZ-yI5" id="2eY-Vj-FUy"/>
-                <outlet property="messageBubbleLeftRightMarginConstraint" destination="eWM-x4-Rzh" id="XTh-yQ-7Dh"/>
+                <outlet property="messageBubbleContainerViewHeightConstraint" destination="efv-sC-31W" id="VsP-HR-EW5"/>
+                <outlet property="messageBubbleContainerViewWidthConstraint" destination="ce8-J1-OtL" id="UIt-ht-QLT"/>
                 <outlet property="messageBubbleTopLabel" destination="cpy-6W-3U6" id="CQj-f1-mpf"/>
                 <outlet property="messageBubbleTopLabelHeightConstraint" destination="DGw-x0-xgK" id="yCw-xo-Ll8"/>
-                <outlet property="playerContainerView" destination="tml-hg-tud" id="6hr-2E-Q1x"/>
-                <outlet property="playerContainerViewHeightConstraint" destination="VN6-QH-YV0" id="Y5c-Fg-FJ3"/>
-                <outlet property="playerContainerViewWidthConstraint" destination="w2d-E6-hUO" id="c8d-x3-rD0"/>
             </connections>
         </collectionViewCell>
     </objects>

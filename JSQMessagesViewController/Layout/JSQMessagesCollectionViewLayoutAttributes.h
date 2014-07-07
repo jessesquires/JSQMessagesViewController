@@ -39,6 +39,8 @@
  *
  *  For *incoming* messages, this value specifies the amount of spacing from the right most edge 
  *  of the collection view cell to the right most edge of a message bubble with in the cell.
+ *
+ *  @note Audio message will ignore this value.
  */
 @property (assign, nonatomic) CGFloat messageBubbleLeftRightMargin;
 

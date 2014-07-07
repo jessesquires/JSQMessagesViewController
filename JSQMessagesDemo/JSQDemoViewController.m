@@ -73,9 +73,10 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
                      [JSQMessage messageWithVideoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] placeholderImage:videoPlaceholderImage sender:kJSQDemoAvatarNameWoz],
                      [JSQMessage messageWithVideoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] placeholderImage:videoPlaceholderImage sender:self.sender],
                      
-                     [JSQMessage messageWithAudio:[NSData dataWithContentsOfURL:localAudioURL] sender:self.sender],
-                     [JSQMessage messageWithAudioURL:localAudioURL sender:kJSQDemoAvatarNameWoz],
+//                     [JSQMessage messageWithAudio:[NSData dataWithContentsOfURL:localAudioURL] sender:self.sender],
+//                     [JSQMessage messageWithAudioURL:localAudioURL sender:kJSQDemoAvatarNameWoz],
                      [JSQMessage messageWithAudioURL:[NSURL URLWithString:kJSQDemoAudioMessageURLString] sender:kJSQDemoAvatarNameCook],
+                     [JSQMessage messageWithAudioURL:[NSURL URLWithString:kJSQDemoAudioMessageURLString] sender:self.sender],
                      nil];
     
     /**
@@ -164,6 +165,7 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 //    self.collectionView.collectionViewLayout.outgoingThumbnailImageSize = CGSizeMake(200, 200);
 //    self.collectionView.collectionViewLayout.incomingVideoOverlayViewSize = CGSizeMake(80, 80);
 //    self.collectionView.collectionViewLayout.outgoingVideoOverlayViewSize = CGSizeMake(120, 120);
+    self.collectionView.collectionViewLayout.incomingAudioPlayerViewSize = CGSizeMake(230, 40);
     
     self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:18.f];
 
@@ -450,7 +452,12 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 
 - (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView viewForAudioPlayerViewAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[JSQAudioPlayerView alloc] initWithFrame:CGRectMake(0, 0, 150, 40)];
+    JSQMessage *message = self.messages[indexPath.item];
+    JSQAudioPlayerView *player = [JSQAudioPlayerView new];
+    player.message = message;
+    player.incomingMessage = ![message.sender isEqual:self.sender];
+    
+    return player;
 }
 
 - (UIView <JSQMessagesActivityIndicator> *)collectionView:(JSQMessagesCollectionView *)collectionView viewForPhotoActivityIndicatorViewAtIndexPath:(NSIndexPath *)indexPath
@@ -467,6 +474,11 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 - (UIView<JSQMessagesActivityIndicator> *)collectionView:(JSQMessagesCollectionView *)collectionView viewForAudioActivityIndicatorViewAtIndexPath:(NSIndexPath *)indexPath
 {
     return [JSQMessagesActivityIndicatorView new];
+}
+
+- (CGSize)collectionView:(JSQMessagesCollectionView *)collectionView sizeForAudioPlayerViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(100, 40);
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
@@ -667,6 +679,8 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAudioForURL:(NSURL *)audioURL atIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"");
+    JSQMessagesCollectionViewCellIncomingAudio *incomingAudioCell = (JSQMessagesCollectionViewCellIncomingAudio *)[collectionView cellForItemAtIndexPath:indexPath];
+    [(JSQAudioPlayerView *)incomingAudioCell.playerView startAnimation];
 }
 
 

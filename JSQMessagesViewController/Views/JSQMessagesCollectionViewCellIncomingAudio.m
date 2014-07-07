@@ -8,16 +8,16 @@
 
 #import "JSQMessagesCollectionViewCellIncomingAudio.h"
 
+#import "JSQMessagesCollectionViewLayoutAttributes.h"
 #import "UIView+JSQMessages.h"
 
 @interface JSQMessagesCollectionViewCellIncomingAudio ()
 
-@property (weak, nonatomic) IBOutlet UIView *playerContainerView;
 @property (weak, nonatomic) IBOutlet UIView *activityIndicatorContainerView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *playerContainerViewWidthConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *playerContainerViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *activityIndicatorContainerViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *activityIndicatorContainerViewHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleContainerViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleContainerViewHeightConstraint;
 
 @property (strong, nonatomic, readwrite) UITapGestureRecognizer *audioTapGestureRecognizer;
 @property (assign, nonatomic) CGSize activityIndicatorViewSize;
@@ -30,6 +30,13 @@
 @implementation JSQMessagesCollectionViewCellIncomingAudio
 
 @synthesize messageBubbleImageView = _messageBubbleImageView;
+
+- (void)dealloc
+{
+    _activityIndicatorView = nil;
+    _activityIndicatorContainerView = nil;
+    _audioTapGestureRecognizer = nil;
+}
 
 #pragma mark - Overrides
 
@@ -60,11 +67,18 @@
     self.audioTapGestureRecognizer = tap;
 }
 
+- (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
+{
+    [super applyLayoutAttributes:layoutAttributes];
+    
+    JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
+    self.activityIndicatorViewSize = customAttributes.incomingAudioActivityIndicatorViewSize;
+}
+
 - (void)setBackgroundColor:(UIColor *)backgroundColor
 {
     [super setBackgroundColor:backgroundColor];
     self.playerView.backgroundColor = backgroundColor;
-    self.playerContainerView.backgroundColor = backgroundColor;
     self.activityIndicatorView.backgroundColor = backgroundColor;
     self.activityIndicatorContainerView.backgroundColor = backgroundColor;
 }
@@ -86,7 +100,14 @@
                                               CGRectGetHeight(self.messageBubbleContainerView.bounds));
     
     [messageBubbleImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.messageBubbleContainerView addSubview:messageBubbleImageView];
+    
+    if (self.playerView) {
+        [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.playerView];
+    }
+    else {
+        [self.messageBubbleContainerView addSubview:messageBubbleImageView];
+    }
+    
     [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:messageBubbleImageView];
     [self setNeedsUpdateConstraints];
     
@@ -105,16 +126,16 @@
     if (!playerView) {
         self.playerViewSize = CGSizeZero;
         _playerView = nil;
-        self.playerContainerView.hidden = YES;
+        self.messageBubbleContainerView.hidden = YES;
         return;
     }
     
-    self.playerContainerView.hidden = NO;
+    self.messageBubbleContainerView.hidden = NO;
     self.playerViewSize = playerView.bounds.size;
     
     [playerView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.playerContainerView addSubview:playerView];
-    [self.playerContainerView jsq_pinAllEdgesOfSubview:playerView];
+    [self.messageBubbleContainerView insertSubview:playerView aboveSubview:self.messageBubbleImageView];
+    [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:playerView];
     [self setNeedsUpdateConstraints];
     
     _playerView = playerView;
@@ -154,12 +175,27 @@
     [self jsq_updateConstraint:self.activityIndicatorContainerViewHeightConstraint withConstant:activityIndicatorViewSize.height];
 }
 
+- (void)setPlayerViewSize:(CGSize)playerViewSize
+{
+    if (CGSizeEqualToSize(playerViewSize, self.playerViewSize)) {
+        return;
+    }
+    
+    [self jsq_updateConstraint:self.messageBubbleContainerViewWidthConstraint withConstant:playerViewSize.width];
+    [self jsq_updateConstraint:self.messageBubbleContainerViewHeightConstraint withConstant:playerViewSize.height];
+}
+
 - (CGSize)activityIndicatorViewSize
 {
     return CGSizeMake(self.activityIndicatorContainerViewWidthConstraint.constant,
                       self.activityIndicatorContainerViewHeightConstraint.constant);
 }
 
+- (CGSize)playerViewSize
+{
+    return CGSizeMake(self.messageBubbleContainerViewWidthConstraint.constant,
+                      self.messageBubbleContainerViewHeightConstraint.constant);
+}
 
 #pragma mark - Gesture recognizers
 

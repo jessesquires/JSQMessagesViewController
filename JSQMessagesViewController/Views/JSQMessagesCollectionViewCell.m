@@ -184,9 +184,6 @@
     
     self.textViewFrameInsets = customAttributes.textViewFrameInsets;
 
-    [self jsq_updateConstraint:self.messageBubbleLeftRightMarginConstraint
-                  withConstant:customAttributes.messageBubbleLeftRightMargin];
-    
     [self jsq_updateConstraint:self.cellTopLabelHeightConstraint
                   withConstant:customAttributes.cellTopLabelHeight];
     
@@ -195,6 +192,12 @@
     
     [self jsq_updateConstraint:self.cellBottomLabelHeightConstraint
                   withConstant:customAttributes.cellBottomLabelHeight];
+    
+    if (![self isKindOfClass:[JSQMessagesCollectionViewCellIncomingAudio class]] &&
+        ![self isKindOfClass:[JSQMessagesCollectionViewCellOutgoingAudio class]]) {
+        [self jsq_updateConstraint:self.messageBubbleLeftRightMarginConstraint
+                      withConstant:customAttributes.messageBubbleLeftRightMargin];
+    }
     
     if ([self isKindOfClass:[JSQMessagesCollectionViewCellIncoming class]]      ||
         [self isKindOfClass:[JSQMessagesCollectionViewCellIncomingPhoto class]] ||

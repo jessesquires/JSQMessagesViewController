@@ -15,6 +15,8 @@
 
 @property (strong, nonatomic) UILabel *durationLabel;
 @property (strong, nonatomic) UIImageView *animationContainer;
+@property (strong, nonatomic) NSArray *animationImages;
+@property (assign, nonatomic) BOOL isAnimation;
 
 @end
 
@@ -35,10 +37,13 @@
         _animationContainer = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"demo_audio_normal"] highlightedImage:[UIImage imageNamed:@"demo_audio_press"]];
         _animationContainer.frame = CGRectZero;
         _animationContainer.userInteractionEnabled = YES;
-        _animationContainer.animationImages = @[[UIImage imageNamed:@"demo_audio_play_1"],
-                                                [UIImage imageNamed:@"demo_audio_play_2"],
-                                                [UIImage imageNamed:@"demo_audio_normal"]];
         [self addSubview:_animationContainer];
+        
+        _isAnimation = YES;
+        
+        _animationImages = @[[UIImage imageNamed:@"demo_audio_play_1"],
+                             [UIImage imageNamed:@"demo_audio_play_2"],
+                             [UIImage imageNamed:@"demo_audio_normal"]];
     }
     return self;
 }
@@ -46,16 +51,24 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.durationLabel.frame = CGRectMake(10, (CGRectGetHeight(self.bounds) - 20) / 2, 50, 20);
-    self.animationContainer.frame = CGRectMake(CGRectGetMaxX(self.durationLabel.frame), CGRectGetMinY(self.durationLabel.frame), 34, 34);
+    
+    if (self.incomingMessage) {
+        self.durationLabel.frame = CGRectMake(30, (CGRectGetHeight(self.bounds) - CGRectGetHeight(self.durationLabel.bounds)) / 2, CGRectGetWidth(self.durationLabel.bounds), CGRectGetHeight(self.durationLabel.bounds));
+        self.animationContainer.frame = CGRectMake(CGRectGetMaxX(self.durationLabel.frame), CGRectGetMinY(self.durationLabel.frame) - 10, 34, 34);
+    }
+    else {
+        self.animationContainer.frame = CGRectMake(10, (CGRectGetHeight(self.bounds) - 34) / 2, 34, 34);
+        self.durationLabel.frame = CGRectMake(CGRectGetMaxX(self.animationContainer.frame), (CGRectGetHeight(self.bounds) - CGRectGetHeight(self.durationLabel.bounds)) / 2, CGRectGetWidth(self.durationLabel.bounds), CGRectGetHeight(self.durationLabel.bounds));
+    }
 }
 
 - (void)setMessage:(JSQMessage *)message
 {
     if (_message != message) {
         
-        CGFloat duration = [self durationFromAudioFileURL:message.sourceURL];
-        self.durationLabel.text = [NSString stringWithFormat:@"%d \"", (NSUInteger)ceil(duration)];
+//        CGFloat duration = [self durationFromAudioFileURL:message.sourceURL];
+        self.durationLabel.text = [NSString stringWithFormat:@"%d\"", (NSUInteger)ceil(111)];
+        [self.durationLabel sizeToFit];
         
         _message = message;
     }
@@ -83,12 +96,23 @@
 
 - (void)startAnimation
 {
-    [self.animationContainer startAnimating];
+    static int i = 0;
+    self.animationContainer.image = self.animationImages[i];
+    i ++;
+    i = i > 2 ? 0 : i;
+    
+    if (self.isAnimation) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self startAnimation];
+        });
+    }
+    self.isAnimation = YES;
 }
 
 - (void)stopAnimation
 {
-    [self.animationContainer stopAnimating];
+    self.isAnimation = NO;
 }
+
 
 @end

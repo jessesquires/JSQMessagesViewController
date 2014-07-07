@@ -39,15 +39,6 @@
                         <rect key="frame" x="36" y="40" width="244" height="94"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YgT-VF-CBi" userLabel="playerContainerView">
-                                <rect key="frame" x="0.0" y="0.0" width="244" height="94"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="244" id="JHv-ck-xg6"/>
-                                    <constraint firstAttribute="height" constant="94" id="iW9-r1-YsU"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Yt-KD-nlq" userLabel="activityIndicatorContainerView">
                                 <rect key="frame" x="194" y="27" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -60,10 +51,10 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="YgT-VF-CBi" secondAttribute="centerX" id="FCT-86-RFn"/>
-                            <constraint firstItem="YgT-VF-CBi" firstAttribute="centerY" secondItem="0Yt-KD-nlq" secondAttribute="centerY" id="PPj-KJ-xdt"/>
-                            <constraint firstAttribute="centerY" secondItem="YgT-VF-CBi" secondAttribute="centerY" id="cm4-Hs-eIB"/>
-                            <constraint firstItem="YgT-VF-CBi" firstAttribute="trailing" secondItem="0Yt-KD-nlq" secondAttribute="trailing" constant="10" id="eYn-MY-GMT"/>
+                            <constraint firstAttribute="trailing" secondItem="0Yt-KD-nlq" secondAttribute="trailing" constant="10" id="9dq-Mp-JII"/>
+                            <constraint firstItem="0Yt-KD-nlq" firstAttribute="centerY" secondItem="jMK-Un-L1w" secondAttribute="centerY" id="R0P-lb-SVj"/>
+                            <constraint firstAttribute="width" constant="244" id="r6q-Yq-pWo"/>
+                            <constraint firstAttribute="height" constant="94" id="zMy-xD-bSW"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMh-jh-0zb">
@@ -91,16 +82,14 @@
             </view>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="IXL-Hs-7g9" secondAttribute="bottom" id="5Zg-bM-tT8"/>
-                <constraint firstAttribute="trailing" secondItem="jMK-Un-L1w" secondAttribute="trailing" constant="40" id="ADW-vj-ouL"/>
                 <constraint firstItem="jMK-Un-L1w" firstAttribute="leading" secondItem="FMh-jh-0zb" secondAttribute="trailing" constant="2" id="GBE-R0-yBd"/>
                 <constraint firstItem="FMh-jh-0zb" firstAttribute="leading" secondItem="bey-7p-8jM" secondAttribute="leading" id="Im2-fC-zGF"/>
                 <constraint firstItem="IXL-Hs-7g9" firstAttribute="top" secondItem="FMh-jh-0zb" secondAttribute="bottom" id="MTI-nr-RRT"/>
                 <constraint firstItem="zf8-dG-fDL" firstAttribute="top" secondItem="lWC-pq-dUY" secondAttribute="bottom" id="VBB-9F-thp"/>
-                <constraint firstItem="jMK-Un-L1w" firstAttribute="top" secondItem="zf8-dG-fDL" secondAttribute="bottom" id="a4O-dL-6vn"/>
                 <constraint firstItem="IXL-Hs-7g9" firstAttribute="top" secondItem="FMh-jh-0zb" secondAttribute="bottom" id="aDY-hB-KeL"/>
                 <constraint firstItem="IXL-Hs-7g9" firstAttribute="top" secondItem="jMK-Un-L1w" secondAttribute="bottom" id="d95-5h-Phr"/>
                 <constraint firstAttribute="trailing" secondItem="IXL-Hs-7g9" secondAttribute="trailing" id="e8Z-Fw-iSm"/>
-                <constraint firstItem="jMK-Un-L1w" firstAttribute="top" secondItem="zf8-dG-fDL" secondAttribute="bottom" id="etO-EW-AO0"/>
+                <constraint firstItem="jMK-Un-L1w" firstAttribute="top" secondItem="zf8-dG-fDL" secondAttribute="bottom" priority="750" id="etO-EW-AO0"/>
                 <constraint firstItem="zf8-dG-fDL" firstAttribute="leading" secondItem="bey-7p-8jM" secondAttribute="leading" id="g2Z-0J-ibe"/>
                 <constraint firstItem="jMK-Un-L1w" firstAttribute="leading" secondItem="FMh-jh-0zb" secondAttribute="trailing" constant="2" id="mJk-Jn-uUS"/>
                 <constraint firstItem="lWC-pq-dUY" firstAttribute="top" secondItem="bey-7p-8jM" secondAttribute="top" id="rf2-9O-5du"/>
@@ -122,12 +111,10 @@
                 <outlet property="cellTopLabel" destination="lWC-pq-dUY" id="4hQ-ln-MzD"/>
                 <outlet property="cellTopLabelHeightConstraint" destination="pa3-bd-iBf" id="ZGp-Ie-4kc"/>
                 <outlet property="messageBubbleContainerView" destination="jMK-Un-L1w" id="CAD-10-Arb"/>
-                <outlet property="messageBubbleLeftRightMarginConstraint" destination="ADW-vj-ouL" id="U6e-0w-2xi"/>
+                <outlet property="messageBubbleContainerViewHeightConstraint" destination="zMy-xD-bSW" id="XHj-Px-LPk"/>
+                <outlet property="messageBubbleContainerViewWidthConstraint" destination="r6q-Yq-pWo" id="kn6-4R-rV2"/>
                 <outlet property="messageBubbleTopLabel" destination="zf8-dG-fDL" id="mtd-WG-qZp"/>
                 <outlet property="messageBubbleTopLabelHeightConstraint" destination="5JX-Hp-pRX" id="o1Q-n3-xWM"/>
-                <outlet property="playerContainerView" destination="YgT-VF-CBi" id="9xq-ls-34G"/>
-                <outlet property="playerContainerViewHeightConstraint" destination="iW9-r1-YsU" id="gLo-a9-JyN"/>
-                <outlet property="playerContainerViewWidthConstraint" destination="JHv-ck-xg6" id="Yro-f8-9ZY"/>
             </connections>
         </collectionViewCell>
     </objects>
