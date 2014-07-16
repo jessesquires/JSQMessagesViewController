@@ -77,7 +77,7 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.0f;
     self.rightBarButtonItem = nil;
     self.rightBarButtonItem2 = nil;
     
-    self.button.hidden = YES;
+    self.button.alpha = 0;
     
     self.backgroundColor = [UIColor clearColor];
 }

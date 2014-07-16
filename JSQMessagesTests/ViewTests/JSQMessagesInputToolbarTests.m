@@ -39,7 +39,6 @@
     JSQMessagesInputToolbar *toolbar = vc.inputToolbar;
     XCTAssertNotNil(toolbar, @"Toolbar should not be nil");
     XCTAssertNotNil(toolbar.contentView, @"Toolbar content view should not be nil");
-    XCTAssertEqual(toolbar.sendButtonOnRight, YES, @"Property should be equal to default value");
 }
 
 @end

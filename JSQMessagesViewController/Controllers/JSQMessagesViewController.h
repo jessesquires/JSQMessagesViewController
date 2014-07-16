@@ -235,22 +235,17 @@
  *  This method is called when the user taps the send button on the inputToolbar
  *  after composing a message with the specified data.
  *
- *  @param button The send button that was pressed by the user.
  *  @param text   The message text.
  *  @param sender The message sender.
  *  @param date   The message date.
  */
-- (void)didPressSendButton:(UIButton *)button
-           withMessageText:(NSString *)text
-                    sender:(NSString *)sender
-                      date:(NSDate *)date;
+- (void)didSendMessageWithText:(NSString *)text
+                        sender:(NSString *)sender
+                          date:(NSDate *)date;
 
-/**
- *  This method is called when the user taps the accessory button on the `inputToolbar`.
- *
- *  @param sender The accessory button that was pressed by the user.
- */
-- (void)didPressAccessoryButton:(UIButton *)sender;
+- (void)didPressLeftBarButton:(UIButton *)sender;
+- (void)didPressRightBarButton:(UIButton *)sender;
+- (void)didPressRightBarButton2:(UIButton *)sender;
 
 /**
  *  Completes the "sending" of a new message by animating and resetting the `inputToolbar`, 
