@@ -159,7 +159,11 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
     self.sender = @"Jesse Squires";
     
     [self setupTestModel];
-
+    
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [button setBackgroundColor:[UIColor redColor]];
+//    self.inputToolbar.contentView.rightBarButtonItem2 = button;
+    
     /**
      *  Remove camera button since media messages are not yet implemented
      *
@@ -286,6 +290,21 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
     /**
      *  Accessory button has no default functionality, yet.
      */
+    
+    UIButton *recorderButton = self.inputToolbar.contentView.button;
+    UITextView *composerTextView = self.inputToolbar.contentView.textView;
+    
+    if ([recorderButton isHidden]) {
+        [composerTextView resignFirstResponder];
+        composerTextView.hidden = YES;
+        recorderButton.hidden = NO;
+        
+    }
+    else {
+        recorderButton.hidden = YES;
+        composerTextView.hidden = NO;
+        [composerTextView becomeFirstResponder];
+    }
 }
 
 

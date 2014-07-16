@@ -38,6 +38,7 @@
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
 
 #import "JSQMessagesComposerTextView.h"
+#import "JSQMessagesRecorderButton.h"
 #import "JSQMessagesInputToolbar.h"
 #import "JSQMessagesToolbarContentView.h"
 
