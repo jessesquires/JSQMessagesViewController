@@ -43,7 +43,7 @@
 
 + (UIButton *)defaultSendButtonItem
 {
-    NSString *sendTitle = NSLocalizedString(@"Send", @"Text for the send button on the messages view toolbar");
+    NSString *sendTitle = NSLocalizedString(@"S", @"Text for the send button on the messages view toolbar");
     
     UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectZero];
     [sendButton setTitle:sendTitle forState:UIControlStateNormal];

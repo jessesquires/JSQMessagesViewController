@@ -39,6 +39,7 @@
 		457A72EC19652A3500912C0E /* JSQMessagesThumbnailFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 457A72EB19652A3500912C0E /* JSQMessagesThumbnailFactory.m */; };
 		457A72EE1965716100912C0E /* JSQMessagesThumbnailFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 457A72ED1965716100912C0E /* JSQMessagesThumbnailFactoryTests.m */; };
 		45C32B4B196445E800DDEA4B /* JSQMessagesCollectionViewVideoCellIncoming.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45C32B4A196445E800DDEA4B /* JSQMessagesCollectionViewVideoCellIncoming.xib */; };
+		45D80EEB19764FB4001F7903 /* JSQMessagesRecorderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D80EEA19764FB4001F7903 /* JSQMessagesRecorderButton.m */; };
 		45E6B38A19628E9D0066458B /* JSQMessagesCollectionViewPhotoCellIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6B38919628E9D0066458B /* JSQMessagesCollectionViewPhotoCellIncoming.m */; };
 		45E6B3991962965A0066458B /* JSQMessagesCollectionViewVideoCellIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6B3981962965A0066458B /* JSQMessagesCollectionViewVideoCellIncoming.m */; };
 		45E6B39C196296630066458B /* JSQMessagesCollectionViewAudioCellIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6B39B196296630066458B /* JSQMessagesCollectionViewAudioCellIncoming.m */; };
@@ -189,6 +190,8 @@
 		457A72EB19652A3500912C0E /* JSQMessagesThumbnailFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesThumbnailFactory.m; sourceTree = "<group>"; };
 		457A72ED1965716100912C0E /* JSQMessagesThumbnailFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesThumbnailFactoryTests.m; sourceTree = "<group>"; };
 		45C32B4A196445E800DDEA4B /* JSQMessagesCollectionViewVideoCellIncoming.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesCollectionViewVideoCellIncoming.xib; sourceTree = "<group>"; };
+		45D80EE919764FB4001F7903 /* JSQMessagesRecorderButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesRecorderButton.h; sourceTree = "<group>"; };
+		45D80EEA19764FB4001F7903 /* JSQMessagesRecorderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesRecorderButton.m; sourceTree = "<group>"; };
 		45E6B38819628E9D0066458B /* JSQMessagesCollectionViewPhotoCellIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = JSQMessagesCollectionViewPhotoCellIncoming.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		45E6B38919628E9D0066458B /* JSQMessagesCollectionViewPhotoCellIncoming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewPhotoCellIncoming.m; sourceTree = "<group>"; };
 		45E6B3971962965A0066458B /* JSQMessagesCollectionViewVideoCellIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = JSQMessagesCollectionViewVideoCellIncoming.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -563,6 +566,8 @@
 				935093EE196962970077445E /* JSQMessagesCollectionViewAudioCellOutgoing.xib */,
 				8816A68718E9250400111919 /* JSQMessagesComposerTextView.h */,
 				8816A68818E9250400111919 /* JSQMessagesComposerTextView.m */,
+				45D80EE919764FB4001F7903 /* JSQMessagesRecorderButton.h */,
+				45D80EEA19764FB4001F7903 /* JSQMessagesRecorderButton.m */,
 				8816A68918E9250400111919 /* JSQMessagesInputToolbar.h */,
 				8816A68A18E9250400111919 /* JSQMessagesInputToolbar.m */,
 				8816A68B18E9250400111919 /* JSQMessagesLabel.h */,
@@ -988,6 +993,7 @@
 				45E6B3A11962B1440066458B /* JSQMessagesCollectionViewPhotoCellOutgoing.m in Sources */,
 				8816A6AF18E9250400111919 /* JSQMessagesCollectionViewCell.m in Sources */,
 				885D596B18CBD2A600D77BB3 /* JSQTableViewController.m in Sources */,
+				45D80EEB19764FB4001F7903 /* JSQMessagesRecorderButton.m in Sources */,
 				935B089C19684C7700779D58 /* JSQMessagesActivityIndicatorView.m in Sources */,
 				8816A6B618E9250400111919 /* JSQMessagesLabel.m in Sources */,
 				45E6B3991962965A0066458B /* JSQMessagesCollectionViewVideoCellIncoming.m in Sources */,

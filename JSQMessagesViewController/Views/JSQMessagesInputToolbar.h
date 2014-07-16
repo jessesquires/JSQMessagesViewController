@@ -43,6 +43,9 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
 - (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar
       didPressRightBarButton:(UIButton *)sender;
 
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar
+     didPressRightBarButton2:(UIButton *)sender;
+
 /**
  *  Tells the delegate that the toolbar's `leftBarButtonItem` has been pressed.
  *

@@ -19,6 +19,7 @@
 #import <UIKit/UIKit.h>
 
 @class JSQMessagesComposerTextView;
+@class JSQMessagesRecorderButton;
 
 /**
  *  A constant value representing the default spacing to use for the left and right edges 
@@ -37,6 +38,11 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
  *  Returns the text view in which the user composes a message.
  */
 @property (weak, nonatomic, readonly) JSQMessagesComposerTextView *textView;
+
+/**
+ *  Returns the recorder button in which the user recording a audio message.
+ */
+@property (weak, nonatomic, readonly) JSQMessagesRecorderButton *button;
 
 /**
  *  A custom button item displayed on the left of the toolbar content view.
@@ -63,10 +69,15 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
  */
 @property (weak, nonatomic) UIButton *rightBarButtonItem;
 
+@property (weak, nonatomic) UIButton *rightBarButtonItem2;
+
+
 /**
  *  Specifies the width of the rightBarButtonItem.
  */
 @property (assign, nonatomic) CGFloat rightBarButtonItemWidth;
+
+@property (assign, nonatomic) CGFloat rightBarButtonItem2Width;
 
 #pragma mark - Class methods
 
