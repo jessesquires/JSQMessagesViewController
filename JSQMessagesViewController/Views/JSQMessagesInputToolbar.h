@@ -86,12 +86,13 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
  *  It only specifies whether the `rightBarButtonItem `or the `leftBarButtonItem` is the send button.
  *  The other button then acts as the accessory button.
  */
-@property (assign, nonatomic) BOOL sendButtonOnRight;
+//@property (assign, nonatomic) BOOL sendButtonOnRight;
 
 /**
  *  Enables or disables the send button based on whether or not its `textView` has text.
  *  That is, the send button will be enabled if there is text in the `textView`, and disabled otherwise.
  */
-- (void)toggleSendButtonEnabled;
+//- (void)toggleSendButtonEnabled;
+- (void)toggleRecorderButtonHidden;
 
 @end

@@ -20,6 +20,7 @@
 
 #import "JSQMessagesToolbarContentView.h"
 #import "JSQMessagesComposerTextView.h"
+#import "JSQMessagesRecorderButton.h"
 
 #import "JSQMessagesToolbarButtonFactory.h"
 
@@ -53,7 +54,6 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     [super awakeFromNib];
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    self.sendButtonOnRight = YES;
     
     NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([JSQMessagesToolbarContentView class]) owner:nil options:nil];
     JSQMessagesToolbarContentView *toolbarContentView = [nibViews firstObject];
@@ -68,14 +68,27 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     self.contentView.leftBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
     self.contentView.rightBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
     self.contentView.rightBarButtonItem2 = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
-    
-    [self toggleSendButtonEnabled];
 }
 
 - (void)dealloc
 {
     [self jsq_removeObservers];
     _contentView = nil;
+}
+
+- (void)toggleRecorderButtonHidden
+{
+    BOOL isRecording = self.contentView.textView.alpha == 0.f;
+    
+    [UIView animateWithDuration:.2f
+                     animations:^{
+                         self.contentView.button.alpha = isRecording ? 0.f : 1.f;
+                         self.contentView.textView.alpha = isRecording ? 1.f : 0.f;
+                     } completion:^(BOOL finished) {
+                         isRecording
+                         ? [self.contentView.textView becomeFirstResponder]
+                         : [self.contentView.textView resignFirstResponder];
+                     }];
 }
 
 #pragma mark - Actions
@@ -93,20 +106,6 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 - (void)jsq_rightBarButton2Pressed:(UIButton *)sender
 {
     [self.delegate messagesInputToolbar:self didPressRightBarButton2:sender];
-}
-
-#pragma mark - Input toolbar
-
-- (void)toggleSendButtonEnabled
-{
-    BOOL hasText = [self.contentView.textView hasText];
-    
-    if (self.sendButtonOnRight) {
-        self.contentView.rightBarButtonItem.enabled = hasText;
-    }
-    else {
-        self.contentView.leftBarButtonItem.enabled = hasText;
-    }
 }
 
 #pragma mark - Key-value observing
@@ -132,13 +131,14 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                                                            action:NULL
                                                  forControlEvents:UIControlEventTouchUpInside];
                 
-                [self.contentView.rightBarButtonItem2 removeTarget:self
-                                                            action:NULL
-                                                  forControlEvents:UIControlEventTouchUpInside];
-                
                 [self.contentView.rightBarButtonItem addTarget:self
                                                         action:@selector(jsq_rightBarButtonPressed:)
                                               forControlEvents:UIControlEventTouchUpInside];
+            }
+            else if ([keyPath isEqualToString:NSStringFromSelector(@selector(rightBarButtonItem2))]) {
+                [self.contentView.rightBarButtonItem2 removeTarget:self
+                                                            action:NULL
+                                                  forControlEvents:UIControlEventTouchUpInside];
                 
                 [self.contentView.rightBarButtonItem2 addTarget:self
                                                          action:@selector(jsq_rightBarButton2Pressed:)

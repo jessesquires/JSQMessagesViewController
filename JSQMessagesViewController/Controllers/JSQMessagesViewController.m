@@ -305,19 +305,20 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - Messages view controller
 
-- (void)didPressSendButton:(UIButton *)button
-           withMessageText:(NSString *)text
-                    sender:(NSString *)sender
-                      date:(NSDate *)date { }
+- (void)didSendMessageWithText:(NSString *)text
+                        sender:(NSString *)sender
+                          date:(NSDate *)date {}
 
-- (void)didPressAccessoryButton:(UIButton *)sender { }
+- (void)didPressLeftBarButton:(UIButton *)sender {}
+
+- (void)didPressRightBarButton:(UIButton *)sender {}
+
+- (void)didPressRightBarButton2:(UIButton *)sender {}
 
 - (void)finishSendingMessage
 {
     UITextView *textView = self.inputToolbar.contentView.textView;
     textView.text = nil;
-    
-    [self.inputToolbar toggleSendButtonEnabled];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
     
@@ -477,7 +478,7 @@ handleIncomingPhotoMessageWithMessageData:(id<JSQMessageData>)messageData
         case JSQMessageAudio:
         case JSQMessageRemoteVideo:
         case JSQMessageRemoteAudio:
-            NSAssert(NO, @"ERROR: Pass in invalid message type [%d] to method: %s", [messageData type], __PRETTY_FUNCTION__);
+            NSAssert(NO, @"ERROR: Pass in invalid message type [%u] to method: %s", [messageData type], __PRETTY_FUNCTION__);
             break;
             
     }
@@ -531,7 +532,7 @@ handleOutgoingPhotoMessageWithMessageData:(id<JSQMessageData>)messageData
         case JSQMessageAudio:
         case JSQMessageRemoteVideo:
         case JSQMessageRemoteAudio:
-            NSAssert(NO, @"ERROR: Pass in invalid message type [%d] to method: %s", [messageData type], __PRETTY_FUNCTION__);
+            NSAssert(NO, @"ERROR: Pass in invalid message type [%u] to method: %s", [messageData type], __PRETTY_FUNCTION__);
             break;
             
     }
@@ -603,7 +604,7 @@ handleIncomingVideoMessageWithMessageData:(id<JSQMessageData>)messageData
         case JSQMessagePhoto:
         case JSQMessageRemoteAudio:
         case JSQMessageRemotePhoto:
-            NSAssert(NO, @"ERROR: Pass in invalid message type [%d] to method: %s", [messageData type], __PRETTY_FUNCTION__);
+            NSAssert(NO, @"ERROR: Pass in invalid message type [%u] to method: %s", [messageData type], __PRETTY_FUNCTION__);
             break;
     }
 
@@ -671,7 +672,7 @@ handleOutgoingVideoMessageWithMessageData:(id<JSQMessageData>)messageData
     case JSQMessagePhoto:
     case JSQMessageRemoteAudio:
     case JSQMessageRemotePhoto:
-            NSAssert(NO, @"ERROR: Pass in invalid message type [%d] to method: %s", [messageData type], __PRETTY_FUNCTION__);
+            NSAssert(NO, @"ERROR: Pass in invalid message type [%u] to method: %s", [messageData type], __PRETTY_FUNCTION__);
             break;
     }
 }
@@ -721,7 +722,7 @@ handleIncomingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
         case JSQMessageVideo:
         case JSQMessageRemotePhoto:
         case JSQMessageRemoteVideo:
-            NSAssert(NO, @"ERROR: Pass in invalid message type [%d] to method: %s", [messageData type], __PRETTY_FUNCTION__);
+            NSAssert(NO, @"ERROR: Pass in invalid message type [%u] to method: %s", [messageData type], __PRETTY_FUNCTION__);
             break;
     }
 }
@@ -771,7 +772,7 @@ handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
         case JSQMessageVideo:
         case JSQMessageRemotePhoto:
         case JSQMessageRemoteVideo:
-            NSAssert(NO, @"ERROR: Pass in invalid message type [%d] to method: %s", [messageData type], __PRETTY_FUNCTION__);
+            NSAssert(NO, @"ERROR: Pass in invalid message type [%u] to method: %s", [messageData type], __PRETTY_FUNCTION__);
             break;
     }
 }
@@ -1056,28 +1057,17 @@ handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
 
 - (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar didPressLeftBarButton:(UIButton *)sender
 {
-    if (toolbar.sendButtonOnRight) {
-        [self didPressAccessoryButton:sender];
-    }
-    else {
-        [self didPressSendButton:sender
-                 withMessageText:[self jsq_currentlyComposedMessageText]
-                          sender:self.sender
-                            date:[NSDate date]];
-    }
+    [self didPressLeftBarButton:sender];
 }
 
 - (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar didPressRightBarButton:(UIButton *)sender
 {
-    if (toolbar.sendButtonOnRight) {
-        [self didPressSendButton:sender
-                 withMessageText:[self jsq_currentlyComposedMessageText]
-                          sender:self.sender
-                            date:[NSDate date]];
-    }
-    else {
-        [self didPressAccessoryButton:sender];
-    }
+    [self didPressRightBarButton:sender];
+}
+
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar didPressRightBarButton2:(UIButton *)sender
+{
+    [self didPressRightBarButton2:sender];
 }
 
 - (NSString *)jsq_currentlyComposedMessageText
@@ -1099,14 +1089,20 @@ handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
     }
 }
 
-- (void)textViewDidChange:(UITextView *)textView
-{
-    [self.inputToolbar toggleSendButtonEnabled];
-}
-
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     [textView resignFirstResponder];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        [self didSendMessageWithText:[self jsq_currentlyComposedMessageText]
+                              sender:self.sender
+                                date:[NSDate date]];
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark - Notifications

@@ -264,10 +264,9 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 
 #pragma mark - JSQMessagesViewController method overrides
 
-- (void)didPressSendButton:(UIButton *)button
-           withMessageText:(NSString *)text
-                    sender:(NSString *)sender
-                      date:(NSDate *)date
+- (void)didSendMessageWithText:(NSString *)text
+                        sender:(NSString *)sender
+                          date:(NSDate *)date
 {
     /**
      *  Sending a message. Your implementation of this method should do *at least* the following:
@@ -284,29 +283,25 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
     [self finishSendingMessage];
 }
 
-- (void)didPressAccessoryButton:(UIButton *)sensder
+- (void)didPressLeftBarButton:(UIButton *)sender
 {
     NSLog(@"Camera pressed!");
     /**
      *  Accessory button has no default functionality, yet.
      */
     
-    UIButton *recorderButton = self.inputToolbar.contentView.button;
-    UITextView *composerTextView = self.inputToolbar.contentView.textView;
-    
-    if ([recorderButton isHidden]) {
-        [composerTextView resignFirstResponder];
-        composerTextView.hidden = YES;
-        recorderButton.hidden = NO;
-        
-    }
-    else {
-        recorderButton.hidden = YES;
-        composerTextView.hidden = NO;
-        [composerTextView becomeFirstResponder];
-    }
+    [self.inputToolbar toggleRecorderButtonHidden];
 }
 
+- (void)didPressRightBarButton:(UIButton *)sender
+{
+    NSLog(@"");
+}
+
+- (void)didPressRightBarButton2:(UIButton *)sender
+{
+    NSLog(@"");
+}
 
 
 #pragma mark - JSQMessages CollectionView DataSource
