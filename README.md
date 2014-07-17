@@ -17,7 +17,7 @@
 git checkout iOS6_support_stable
 ````
 
-*Note: this branch does not include many of the latest hip and fancy features.*
+*Note: the `iOS6_support_stable` branch does not include many of the latest hip and fancy features or fixes*
 
 ## Installation
 
@@ -95,7 +95,7 @@ I initially developed this library to use in [Hemoglobe](http://bit.ly/hmglb) fo
 
 As it turns out, messaging is something that iOS devs and users really want. Messaging of any kind has turned out to be an increasingly popular mobile app feature in all sorts of contexts and for all sorts of reasons. Thus, I am supporting this project in my free time and have added features way beyond what Hemoglobe ever needed.
 
-Check out my work at [Hexed Bits](http://bit.ly/0x29A).
+Feel free to check out my work at [Hexed Bits](http://bit.ly/0x29A), or read [my blog](http://bit.ly/jsqsf).
 
 ## Apps using this library
 
@@ -113,9 +113,10 @@ Check out my work at [Hexed Bits](http://bit.ly/0x29A).
 * [Quick Text Message](https://itunes.apple.com/us/app/quick-text-message-fast-sms/id583729997)
 * [Libraries for developers](https://itunes.apple.com/us/app/libraries-for-developers/id653427112)
 * [Buhz|Hyve](http://itunes.apple.com/us/app/buhz-hyve/id818568956)
-* [AwesomeChat](https://github.com/relatedcode/AwesomeChat)
 * [PocketSuite](https://itunes.apple.com/us/app/pocketsuite/id721795146)
 * [Ringring.io](https://github.com/ringring-io/ringring-ios)
+* [AwesomeChat](https://github.com/relatedcode/AwesomeChat)
+* [ParseChat](https://github.com/relatedcode/ParseChat)
 * *Your app here*
 
 ## License
