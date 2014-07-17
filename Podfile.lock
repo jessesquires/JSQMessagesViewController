@@ -4,18 +4,15 @@ PODS:
   - SDWebImage (3.6):
     - SDWebImage/Core
   - SDWebImage/Core (3.6)
-  - URBMediaFocusViewController (0.5.5)
 
 DEPENDENCIES:
   - JSQSystemSoundPlayer
   - OCMock
   - SDWebImage
-  - URBMediaFocusViewController
 
 SPEC CHECKSUMS:
   JSQSystemSoundPlayer: a662f27f4ebac9f867116fc6c3926c19206c5e60
   OCMock: 6db79185520e24f9f299548f2b8b07e41d881bd5
   SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
-  URBMediaFocusViewController: 4dff9de3767e60b96ba325c897d4ffa7131a122e
 
 COCOAPODS: 0.33.1

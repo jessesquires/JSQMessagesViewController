@@ -360,6 +360,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     return nil;
 }
 
+-(UIImage *)collectionView:(JSQMessagesCollectionView *)collectionView accesoryViewForCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
 #pragma mark - Collection view data source
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -409,6 +414,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.cellTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellTopLabelAtIndexPath:indexPath];
     cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
     cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellBottomLabelAtIndexPath:indexPath];
+    
+    UIImage *accesoryImage = [collectionView.dataSource collectionView:collectionView accesoryViewForCellAtIndexPath:indexPath];
+    if (accesoryImage) {
+        [cell.accessoryImageView setImage:accesoryImage];
+    } else {
+        [cell.accessoryImageView setImage:nil];
+    }
     
     if (isOutgoingMessage) {
         cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),

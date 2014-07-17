@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -72,16 +72,26 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LI1-Z4-Jre">
+                        <rect key="frame" x="290" y="77" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="KdO-x7-rH9"/>
+                            <constraint firstAttribute="width" constant="20" id="srE-H4-ZmH"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="hdf-9C-JMF" secondAttribute="trailing" id="2FH-vH-V19"/>
+                <constraint firstItem="LI1-Z4-Jre" firstAttribute="leading" secondItem="Jtj-Qs-prL" secondAttribute="trailing" constant="10" id="2Z3-CP-pc0"/>
                 <constraint firstAttribute="trailing" secondItem="ONx-C0-kFd" secondAttribute="trailing" id="3uw-5y-Vtr"/>
                 <constraint firstItem="H9J-EQ-qgf" firstAttribute="top" secondItem="hdf-9C-JMF" secondAttribute="bottom" id="Cze-Nh-O8x"/>
                 <constraint firstAttribute="trailing" secondItem="H9J-EQ-qgf" secondAttribute="trailing" constant="40" id="DLY-7U-bZs"/>
                 <constraint firstItem="Y0K-Wo-u3W" firstAttribute="leading" secondItem="pjQ-SZ-du9" secondAttribute="leading" id="NBd-0y-fFj"/>
                 <constraint firstItem="Y0K-Wo-u3W" firstAttribute="top" secondItem="LWW-s6-BkW" secondAttribute="bottom" id="Nt8-rL-rir"/>
+                <constraint firstItem="LI1-Z4-Jre" firstAttribute="centerY" secondItem="Jtj-Qs-prL" secondAttribute="centerY" id="Rf2-jn-pzH"/>
                 <constraint firstAttribute="trailing" secondItem="Y0K-Wo-u3W" secondAttribute="trailing" id="dU2-Ko-pgd"/>
                 <constraint firstItem="H9J-EQ-qgf" firstAttribute="leading" secondItem="LWW-s6-BkW" secondAttribute="trailing" constant="2" id="egt-Xe-pDe"/>
                 <constraint firstItem="LWW-s6-BkW" firstAttribute="leading" secondItem="pjQ-SZ-du9" secondAttribute="leading" id="exi-mH-pI6"/>
@@ -97,6 +107,7 @@
             </constraints>
             <size key="customSize" width="317" height="245"/>
             <connections>
+                <outlet property="accessoryImageView" destination="LI1-Z4-Jre" id="fGK-oP-Jvh"/>
                 <outlet property="avatarContainerView" destination="LWW-s6-BkW" id="24p-Og-h6G"/>
                 <outlet property="avatarContainerViewHeightConstraint" destination="p5y-d7-uqW" id="wof-NL-lHB"/>
                 <outlet property="avatarContainerViewWidthConstraint" destination="s2g-gJ-NVc" id="nEp-LM-Pld"/>

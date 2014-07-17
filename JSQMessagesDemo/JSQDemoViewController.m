@@ -363,6 +363,16 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     return nil;
 }
 
+-(UIImage *)collectionView:(JSQMessagesCollectionView *)collectionView accesoryViewForCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.item == 0)
+    {
+        return [UIImage imageNamed:@"accesoryImage"];
+    }
+    else
+        return nil;
+}
+
 #pragma mark - UICollectionView DataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section

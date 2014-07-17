@@ -140,6 +140,8 @@
     self.mediaImageView.userInteractionEnabled = YES;
     [self.mediaImageView addGestureRecognizer:tapMedia];
     self.tapMediaGestureRecognizer = tapMedia;
+    
+    [self setAccesoryImageSize:15.0];
 }
 
 - (void)dealloc
@@ -303,6 +305,16 @@
     [self jsq_updateConstraint:self.textViewBottomVerticalSpaceConstraint withConstant:textViewFrameInsets.bottom];
     [self jsq_updateConstraint:self.textViewAvatarHorizontalSpaceConstraint withConstant:textViewFrameInsets.right];
     [self jsq_updateConstraint:self.textViewMarginHorizontalSpaceConstraint withConstant:textViewFrameInsets.left];
+}
+
+-(void)setAccesoryImageSize:(CGFloat)accesoryImageSize
+{
+    [self.accessoryImageView removeConstraints:self.accessoryImageView.constraints];
+    
+    NSLayoutConstraint *widhtConstraint = [NSLayoutConstraint constraintWithItem:self.accessoryImageView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1  constant:accesoryImageSize];
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.accessoryImageView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:self.accessoryImageView attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+    
+    [self.accessoryImageView addConstraints:@[widhtConstraint, heightConstraint]];
 }
 
 #pragma mark - Getters

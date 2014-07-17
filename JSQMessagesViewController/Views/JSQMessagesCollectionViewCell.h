@@ -111,6 +111,12 @@
 @property (weak, nonatomic) UIImageView *avatarImageView;
 
 /**
+ *  The accessory image view.
+ */
+@property (weak, nonatomic) IBOutlet UIImageView *accessoryImageView;
+@property (nonatomic) CGFloat accesoryImageSize;
+
+/**
  *  Returns the underlying gesture recognizer for long press gestures in the cell.
  *  This gesture handles the copy action for the cell.
  *  Access this property when you need to override or more precisely control the long press gesture.
