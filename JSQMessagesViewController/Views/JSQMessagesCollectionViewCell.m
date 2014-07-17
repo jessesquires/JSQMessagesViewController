@@ -352,7 +352,7 @@
 
 - (void)copy:(id)sender
 {
-    [[UIPasteboard generalPasteboard] setString:self.textView.text];
+    [self.delegate messagesCollectionViewCellDidRequestCopy:self];
     [self resignFirstResponder];
 }
 

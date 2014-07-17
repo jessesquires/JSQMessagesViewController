@@ -557,6 +557,33 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
   didTapMediaImageView:(UIImageView *)mediaImageView
            atIndexPath:(NSIndexPath *)indexPath { }
 
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCopyMessageAtIndexPath:(NSIndexPath *)indexPath;
+{
+    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+    
+    switch ([messageData kind]) {
+        case JSQMessageTextKind:
+        {
+            NSString *text = [messageData text];
+            [[UIPasteboard generalPasteboard] setString:text];
+        }
+            break;
+        case JSQMessageLocalMediaKind:
+        {
+            UIImage *image = [messageData image];
+            [[UIPasteboard generalPasteboard] setImage:image];
+        }
+            break;
+            
+        case JSQMessageRemoteMediaKind:
+        {
+            NSString *remoteURL = [[messageData url] absoluteString];
+            [[UIPasteboard generalPasteboard] setString:remoteURL];
+        }
+            break;
+    }
+}
+
 #pragma mark - Messages collection view cell delegate
 
 - (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell
@@ -572,6 +599,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                             didTapMediaImageView:cell.mediaImageView
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
 
+}
+
+- (void)messagesCollectionViewCellDidRequestCopy:(JSQMessagesCollectionViewCell *)cell;
+{
+    [self.collectionView.delegate collectionView:self.collectionView
+                    didTapCopyMessageAtIndexPath:[self.collectionView indexPathForCell:cell]];
 }
 
 #pragma mark - Input toolbar delegate

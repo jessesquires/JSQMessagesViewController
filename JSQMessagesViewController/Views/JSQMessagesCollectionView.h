@@ -230,6 +230,14 @@
         header:(JSQMessagesLoadEarlierHeaderView *)headerView
         didTapLoadEarlierMessagesButton:(UIButton *)sender;
 
+/**
+ *  Notifies the delegate that the user requested to copy the content of a cell to the UIPasteboard
+ *
+ *  @param collectionView The collection view object that is notifying you of the copy event
+ *  @param indexPath      The index path of the item requested to be copied
+ */
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCopyMessageAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
 
 

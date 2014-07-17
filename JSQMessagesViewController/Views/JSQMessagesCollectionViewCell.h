@@ -44,6 +44,13 @@
  */
 - (void)messagesCollectionViewCellDidTapMedia:(JSQMessagesCollectionViewCell *)cell;
 
+/**
+ *  Tells the delegate that the user requested to copy this cell's contents.
+ *
+ *  @param cell The cell that received the tap.
+ */
+- (void)messagesCollectionViewCellDidRequestCopy:(JSQMessagesCollectionViewCell *)cell;
+
 @end
 
 
