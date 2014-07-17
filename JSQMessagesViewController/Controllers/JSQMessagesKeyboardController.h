@@ -49,11 +49,30 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
 @required
 
 /**
+ *  Tells the delegate that the keyboard pan with gesture is started.
+ */
+- (void)keyboardPanStarted;
+
+/**
+ *  Tells the delegate that the keyboard pan with gesture is finished.
+ */
+- (void)keyboardPanFinished;
+
+/**
+ *  Tells the delegate that the keyboard frame will be changed.
+ *
+ *  @param keyboardFrame The new frame of the keyboard in the coordinate system of the `contextView`.
+ *  @param fromFrame The old frame of the keyboard in the coordinate system of the `contextView`.
+ */
+- (void)keyboardWillChangeFrame:(CGRect)keyboardFrame fromFrame:(CGRect)fromFrame;
+
+/**
  *  Tells the delegate that the keyboard frame has changed.
  *
  *  @param keyboardFrame The new frame of the keyboard in the coordinate system of the `contextView`.
+ *  @param fromFrame The old frame of the keyboard in the coordinate system of the `contextView`.
  */
-- (void)keyboardDidChangeFrame:(CGRect)keyboardFrame;
+- (void)keyboardDidChangeFrame:(CGRect)keyboardFrame fromFrame:(CGRect)fromFrame;
 
 @end
 
@@ -86,7 +105,7 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
 /**
  *  The pan gesture recognizer responsible for handling user interaction with the system keyboard.
  */
-@property (weak, nonatomic, readonly) UIPanGestureRecognizer *panGestureRecognizer;
+@property (weak, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
 
 /**
  *  Specifies the distance from the keyboard at which the `panGestureRecognizer`
@@ -95,6 +114,11 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
  *  @discussion The x value of the point is not used.
  */
 @property (assign, nonatomic) CGPoint keyboardTriggerPoint;
+
+/**
+ *  Specifies that the keyboard dismissal via pan gesture is in progress.
+ */
+@property (assign, nonatomic, readonly) BOOL panInProgress;
 
 /**
  *  Creates a new keyboard controller object with the specified textView, contextView, panGestureRecognizer, and delegate.
