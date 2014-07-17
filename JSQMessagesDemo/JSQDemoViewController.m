@@ -159,8 +159,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     [super viewDidAppear:animated];
     
     /**
-     *  Enable/disable springy bubbles, default is YES.
-     *  For best results, toggle from `viewDidAppear:`
+     *  Enable/disable springy bubbles, default is NO.
+     *  You must set this from `viewDidAppear:`
+     *  Note: this feature is mostly stable, but still experimental
      */
     self.collectionView.collectionViewLayout.springinessEnabled = YES;
 }

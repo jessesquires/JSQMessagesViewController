@@ -220,8 +220,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self jsq_addObservers];
     [self jsq_addActionToInteractivePopGestureRecognizer:YES];
     [self.keyboardController beginListeningForKeyboard];
-    
-    self.collectionView.collectionViewLayout.springinessEnabled = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated

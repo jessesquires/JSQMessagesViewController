@@ -55,7 +55,10 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
  *  Specifies whether or not the layout should enable spring behavior dynamics for its items using `UIDynamics`.
  *
  *  @discussion The default value is `NO`, which disables "springy" or "bouncy" items in the layout. 
- *  Set to `YES` if you want items to have spring behavior dynamics.
+ *  Set to `YES` if you want items to have spring behavior dynamics. You *must* set this property from `viewDidAppear:`
+ *  in your `JSQMessagesViewController` subclass.
+ *
+ *  @warning Though this feature is mostly stable, it is still considered an experimental feature.
  */
 @property (assign, nonatomic) BOOL springinessEnabled;
 
