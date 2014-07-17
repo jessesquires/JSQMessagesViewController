@@ -315,6 +315,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)didPressRightBarButton2:(UIButton *)sender {}
 
+- (void)didStartRecording:(UIButton *)sender {}
+
+- (void)didFinishRecording:(UIButton *)sender {}
+
+- (void)didCanceldRecording:(UIButton *)sender {}
+
+- (void)didDragExitRecordButton:(UIButton *)sender {}
+
+- (void)didDragEnterRecordButton:(UIButton *)sender {}
+
 - (void)finishSendingMessage
 {
     UITextView *textView = self.inputToolbar.contentView.textView;
@@ -1069,6 +1079,32 @@ handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
 {
     [self didPressRightBarButton2:sender];
 }
+
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar recorderButtonDidTouchDown:(UIButton *)sender
+{
+    [self didStartRecording:sender];
+}
+
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar recorderButtonDidTouchUpInside:(UIButton *)sender
+{
+    [self didFinishRecording:sender];
+}
+
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar recorderButtonDidTouchUpOutside:(UIButton *)sender
+{
+    [self didCanceldRecording:sender];
+}
+
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar recorderButtonDidTouchDragExit:(UIButton *)sender
+{
+    [self didDragExitRecordButton:sender];
+}
+
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar recorderButtonDidTouchDragEnter:(UIButton *)sender
+{
+    [self didDragEnterRecordButton:sender];
+}
+
 
 - (NSString *)jsq_currentlyComposedMessageText
 {

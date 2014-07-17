@@ -303,6 +303,30 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
     NSLog(@"");
 }
 
+- (void)didStartRecording:(UIButton *)sender
+{
+    NSLog(@"");
+}
+
+- (void)didFinishRecording:(UIButton *)sender
+{
+    NSLog(@"");
+}
+
+- (void)didCanceldRecording:(UIButton *)sender
+{
+    NSLog(@"");
+}
+
+- (void)didDragExitRecordButton:(UIButton *)sender
+{
+    NSLog(@"");
+}
+
+- (void)didDragEnterRecordButton:(UIButton *)sender
+{
+    NSLog(@"");
+}
 
 #pragma mark - JSQMessages CollectionView DataSource
 
