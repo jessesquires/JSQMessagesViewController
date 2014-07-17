@@ -29,8 +29,14 @@
     self.layer.borderWidth = 0.5f;
     self.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.layer.cornerRadius = cornerRadius;
+<<<<<<< HEAD
+}
+    
+
+=======
     
     
 }
+>>>>>>> 8034dfd... Update: 添加toolbar 第二个按钮.
 
 @end

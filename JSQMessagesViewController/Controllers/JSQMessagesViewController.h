@@ -247,8 +247,14 @@
 - (void)didPressRightBarButton:(UIButton *)sender;
 - (void)didPressRightBarButton2:(UIButton *)sender;
 
+- (void)didStartRecording:(UIButton *)sender;
+- (void)didFinishRecording:(UIButton *)sender;
+- (void)didCanceldRecording:(UIButton *)sender;
+- (void)didDragExitRecordButton:(UIButton *)sender;
+- (void)didDragEnterRecordButton:(UIButton *)sender;
+
 /**
- *  Completes the "sending" of a new message by animating and resetting the `inputToolbar`, 
+ *  Completes the "sending" of a new message by animating and resetting the `inputToolbar`,
  *  animating the addition of a new collection view cell in the collection view,
  *  reloading the collection view, and scrolling to the newly sent message 
  *  as specified by `automaticallyScrollsToMostRecentMessage`.

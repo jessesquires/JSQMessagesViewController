@@ -37,6 +37,12 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 - (void)jsq_leftBarButtonPressed:(UIButton *)sender;
 - (void)jsq_rightBarButtonPressed:(UIButton *)sender;
+- (void)jsq_rightBarButton2Pressed:(UIButton *)sender;
+- (void)jsq_recorderButtonTouchDown:(UIButton *)sender;
+- (void)jsq_recorderButtonTouchUpInside:(UIButton *)sender;
+- (void)jsq_recorderButtonTouchUpOutside:(UIButton *)sender;
+- (void)jsq_recorderButtonTouchDragExit:(UIButton *)sender;
+- (void)jsq_recorderButtonTouchDragEnter:(UIButton *)sender;
 
 - (void)jsq_addObservers;
 - (void)jsq_removeObservers;
@@ -68,6 +74,11 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     self.contentView.leftBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
     self.contentView.rightBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
     self.contentView.rightBarButtonItem2 = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
+<<<<<<< HEAD
+=======
+    
+    [self toggleSendButtonEnabled];
+>>>>>>> 8034dfd... Update: 添加toolbar 第二个按钮.
 }
 
 - (void)dealloc
@@ -107,6 +118,36 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 {
     [self.delegate messagesInputToolbar:self didPressRightBarButton2:sender];
 }
+<<<<<<< HEAD
+=======
+
+#pragma mark - Input toolbar
+>>>>>>> 8034dfd... Update: 添加toolbar 第二个按钮.
+
+- (void)jsq_recorderButtonTouchDown:(UIButton *)sender
+{
+    [self.delegate messagesInputToolbar:self recorderButtonDidTouchDown:sender];
+}
+
+- (void)jsq_recorderButtonTouchUpInside:(UIButton *)sender
+{
+    [self.delegate messagesInputToolbar:self recorderButtonDidTouchUpInside:sender];
+}
+
+- (void)jsq_recorderButtonTouchUpOutside:(UIButton *)sender
+{
+    [self.delegate messagesInputToolbar:self recorderButtonDidTouchUpOutside:sender];
+}
+
+- (void)jsq_recorderButtonTouchDragExit:(UIButton *)sender
+{
+    [self.delegate messagesInputToolbar:self recorderButtonDidTouchDragExit:sender];
+}
+
+- (void)jsq_recorderButtonTouchDragEnter:(UIButton *)sender
+{
+    [self.delegate messagesInputToolbar:self recorderButtonDidTouchDragEnter:sender];
+}
 
 #pragma mark - Key-value observing
 
@@ -131,9 +172,17 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                                                            action:NULL
                                                  forControlEvents:UIControlEventTouchUpInside];
                 
+                [self.contentView.rightBarButtonItem2 removeTarget:self
+                                                            action:NULL
+                                                  forControlEvents:UIControlEventTouchUpInside];
+                
                 [self.contentView.rightBarButtonItem addTarget:self
                                                         action:@selector(jsq_rightBarButtonPressed:)
                                               forControlEvents:UIControlEventTouchUpInside];
+                
+                [self.contentView.rightBarButtonItem2 addTarget:self
+                                                         action:@selector(jsq_rightBarButton2Pressed:)
+                                               forControlEvents:UIControlEventTouchUpInside];
             }
             else if ([keyPath isEqualToString:NSStringFromSelector(@selector(rightBarButtonItem2))]) {
                 [self.contentView.rightBarButtonItem2 removeTarget:self
@@ -144,7 +193,52 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                                                          action:@selector(jsq_rightBarButton2Pressed:)
                                                forControlEvents:UIControlEventTouchUpInside];
             }
+            else if ([keyPath isEqualToString:[NSStringFromSelector(@selector(button)) stringByAppendingString:@".alpha"]]) {
+                [self.contentView.button removeTarget:self
+                                               action:@selector(jsq_recorderButtonTouchDown:)
+                                     forControlEvents:UIControlEventTouchDown];
+                
+                [self.contentView.button removeTarget:self
+                                            action:@selector(jsq_recorderButtonTouchUpInside:)
+                                  forControlEvents:UIControlEventTouchUpInside];
+                
+                [self.contentView.button removeTarget:self
+                                               action:@selector(jsq_recorderButtonTouchUpOutside:)
+                                     forControlEvents:UIControlEventTouchUpOutside];
+                
+                [self.contentView.button removeTarget:self
+                                               action:@selector(jsq_recorderButtonTouchDragExit:)
+                                     forControlEvents:UIControlEventTouchDragExit];
+                
+                [self.contentView.button removeTarget:self
+                                               action:@selector(jsq_recorderButtonTouchDragEnter:)
+                                     forControlEvents:UIControlEventTouchDragEnter];
+                
+                
+                [self.contentView.button addTarget:self
+                                               action:@selector(jsq_recorderButtonTouchDown:)
+                                     forControlEvents:UIControlEventTouchDown];
+                
+                [self.contentView.button addTarget:self
+                                               action:@selector(jsq_recorderButtonTouchUpInside:)
+                                     forControlEvents:UIControlEventTouchUpInside];
+                
+                [self.contentView.button addTarget:self
+                                               action:@selector(jsq_recorderButtonTouchUpOutside:)
+                                     forControlEvents:UIControlEventTouchUpOutside];
+                
+                [self.contentView.button addTarget:self
+                                               action:@selector(jsq_recorderButtonTouchDragExit:)
+                                     forControlEvents:UIControlEventTouchDragExit];
+                
+                [self.contentView.button addTarget:self
+                                               action:@selector(jsq_recorderButtonTouchDragEnter:)
+                                     forControlEvents:UIControlEventTouchDragEnter];
+            }
         }
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
 
@@ -166,6 +260,14 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                        forKeyPath:NSStringFromSelector(@selector(rightBarButtonItem2))
                           options:0
                           context:kJSQMessagesInputToolbarKeyValueObservingContext];
+<<<<<<< HEAD
+    
+    [self.contentView addObserver:self
+                       forKeyPath:[NSStringFromSelector(@selector(button)) stringByAppendingString:@".alpha"]
+                          options:0
+                          context:kJSQMessagesInputToolbarKeyValueObservingContext];
+=======
+>>>>>>> 8034dfd... Update: 添加toolbar 第二个按钮.
 }
 
 - (void)jsq_removeObservers
@@ -182,6 +284,13 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
         [_contentView removeObserver:self
                           forKeyPath:NSStringFromSelector(@selector(rightBarButtonItem2))
                              context:kJSQMessagesInputToolbarKeyValueObservingContext];
+<<<<<<< HEAD
+        
+        [_contentView removeObserver:self
+                          forKeyPath:[NSStringFromSelector(@selector(button)) stringByAppendingString:@".alpha"]
+                             context:kJSQMessagesInputToolbarKeyValueObservingContext];
+=======
+>>>>>>> 8034dfd... Update: 添加toolbar 第二个按钮.
     }
     @catch (NSException *__unused exception) { }
 }
