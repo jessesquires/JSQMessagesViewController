@@ -79,6 +79,7 @@ Support the development of this **free**, open-source library!
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$10&body=Thanks for developing JSQMessagesViewController!">Send $10</a> <em>This totally saved me time!</em></h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$25&body=Thanks for developing JSQMessagesViewController!">Send $25</a> <em>I want new features!</em></h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$50&body=Thanks for developing JSQMessagesViewController!">Send $50</a> <em>I love this project!</em></h4>
+>*You can also send donations via [PayPal](https://www.paypal.com) to jesse.squires.developer@gmail.com*
 
 ## Credits
 
@@ -114,6 +115,7 @@ Check out my work at [Hexed Bits](http://bit.ly/0x29A).
 * [Buhz|Hyve](http://itunes.apple.com/us/app/buhz-hyve/id818568956)
 * [AwesomeChat](https://github.com/relatedcode/AwesomeChat)
 * [PocketSuite](https://itunes.apple.com/us/app/pocketsuite/id721795146)
+* [Ringring.io](https://github.com/ringring-io/ringring-ios)
 * *Your app here*
 
 ## License
