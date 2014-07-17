@@ -35,4 +35,6 @@
  */
 - (void)jsq_pinAllEdgesOfSubview:(UIView *)subview;
 
+- (void)jsq_updateConstraint:(NSLayoutConstraint *)constraint withConstant:(CGFloat)constant;
+
 @end

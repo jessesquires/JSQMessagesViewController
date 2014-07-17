@@ -18,11 +18,16 @@
 
 #import "JSQDemoViewController.h"
 
+#import "JSQMessagesThumbnailFactory.h"
+#import "JSQMessagesActivityIndicatorView.h"
+#import "JSQDemoAudioPlayerView.h"
+
 
 static NSString * const kJSQDemoAvatarNameCook = @"Tim Cook";
 static NSString * const kJSQDemoAvatarNameJobs = @"Jobs";
 static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
-
+static NSString * const kJSQDemoVideoMessageURLString = @"https://ia600301.us.archive.org/8/items/AppleAds/Apple-TvAd-MacbookAir.mp4";
+static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.archive.org/9/items/FurElise_656/FurElise_64kb.mp3";
 
 @implementation JSQDemoViewController
 
@@ -35,6 +40,11 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *
      *  You should have a mutable array or orderedSet, or something.
      */
+    
+    UIImage *placeholderImage = [UIImage imageNamed:@"demo_image_placeholder"];
+    UIImage *videoPlaceholderImage = [UIImage imageNamed:@"demo_video_placeholder"];
+    NSURL *localAudioURL = [[NSBundle mainBundle] URLForResource:@"demo_for_Elise" withExtension:@"mp3"];
+    
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages: A messaging UI framework for iOS." sender:self.sender date:[NSDate distantPast]],
                      [[JSQMessage alloc] initWithText:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy." sender:kJSQDemoAvatarNameWoz date:[NSDate distantPast]],
@@ -42,7 +52,40 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                      [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." sender:kJSQDemoAvatarNameJobs date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
+                     
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage005.jpg"]
+                                    placeholderImage:placeholderImage sender:kJSQDemoAvatarNameWoz],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage015.jpg"]
+                                    placeholderImage:placeholderImage sender:kJSQDemoAvatarNameWoz],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage016.jpg"]
+                                    placeholderImage:placeholderImage sender:kJSQDemoAvatarNameWoz],
+                     [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage017.jpg"]
+                                    placeholderImage:placeholderImage sender:self.sender],
+                     
+                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoLargeImage000"]
+                                   thumbnailImage:[UIImage imageNamed:@"FICDDemoSmallImage000"] sender:self.sender],
+                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoLargeImage001"]
+                                   thumbnailImage:[UIImage imageNamed:@"FICDDemoSmallImage001"] sender:kJSQDemoAvatarNameJobs],
+                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoLargeImage002"]
+                                   thumbnailImage:[UIImage imageNamed:@"FICDDemoSmallImage002"] sender:self.sender],
+                     [JSQMessage messageWithImage:[UIImage imageNamed:@"FICDDemoLargeImage003"]
+                                   thumbnailImage:[UIImage imageNamed:@"FICDDemoSmallImage003"] sender:kJSQDemoAvatarNameWoz],
+                     
+                     [JSQMessage messageWithVideoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] placeholderImage:videoPlaceholderImage sender:kJSQDemoAvatarNameWoz],
+                     [JSQMessage messageWithVideoURL:[NSURL URLWithString:kJSQDemoVideoMessageURLString] placeholderImage:videoPlaceholderImage sender:self.sender],
+                     
+                     [JSQMessage messageWithAudio:[NSData dataWithContentsOfURL:localAudioURL] sender:self.sender],
+                     [JSQMessage messageWithAudioURL:localAudioURL sender:kJSQDemoAvatarNameWoz],
+                     [JSQMessage messageWithAudioURL:[NSURL URLWithString:kJSQDemoAudioMessageURLString] sender:kJSQDemoAvatarNameCook],
+                     [JSQMessage messageWithAudioURL:[NSURL URLWithString:kJSQDemoAudioMessageURLString] sender:self.sender],
                      nil];
+    
+    /**
+     *    Add a local video message.
+     */
+    NSURL *localVideoURL = [[NSBundle mainBundle] URLForResource:@"demo_video" withExtension:@"mp4"];
+    UIImage *localVideoThumbnail = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:localVideoURL atSeconds:2];
+    [self.messages addObject:[JSQMessage messageWithVideoURL:localVideoURL thumbnail:localVideoThumbnail sender:self.sender]];
     
     /**
      *  Create avatar images once.
@@ -77,7 +120,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  Change to add more messages for testing
      */
-    NSUInteger messagesToAdd = 0;
+    NSUInteger messagesToAdd = 1;
     NSArray *copyOfMessages = [self.messages copy];
     for (NSUInteger i = 0; i < messagesToAdd; i++) {
         [self.messages addObjectsFromArray:copyOfMessages];
@@ -111,11 +154,15 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 {
     [super viewDidLoad];
     
-    self.title = @"JSQMessages";
+//    self.title = @"JSQMessages";
     
     self.sender = @"Jesse Squires";
     
     [self setupTestModel];
+    
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [button setBackgroundColor:[UIColor redColor]];
+//    self.inputToolbar.contentView.rightBarButtonItem2 = button;
     
     /**
      *  Remove camera button since media messages are not yet implemented
@@ -217,10 +264,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 #pragma mark - JSQMessagesViewController method overrides
 
-- (void)didPressSendButton:(UIButton *)button
-           withMessageText:(NSString *)text
-                    sender:(NSString *)sender
-                      date:(NSDate *)date
+- (void)didSendMessageWithText:(NSString *)text
+                        sender:(NSString *)sender
+                          date:(NSDate *)date
 {
     /**
      *  Sending a message. Your implementation of this method should do *at least* the following:
@@ -237,15 +283,50 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     [self finishSendingMessage];
 }
 
-- (void)didPressAccessoryButton:(UIButton *)sender
+- (void)didPressLeftBarButton:(UIButton *)sender
 {
     NSLog(@"Camera pressed!");
     /**
      *  Accessory button has no default functionality, yet.
      */
+    
+    [self.inputToolbar toggleRecorderButtonHidden];
 }
 
+- (void)didPressRightBarButton:(UIButton *)sender
+{
+    NSLog(@"");
+}
 
+- (void)didPressRightBarButton2:(UIButton *)sender
+{
+    NSLog(@"");
+}
+
+- (void)didStartRecording:(UIButton *)sender
+{
+    NSLog(@"");
+}
+
+- (void)didFinishRecording:(UIButton *)sender
+{
+    NSLog(@"");
+}
+
+- (void)didCanceldRecording:(UIButton *)sender
+{
+    NSLog(@"");
+}
+
+- (void)didDragExitRecordButton:(UIButton *)sender
+{
+    NSLog(@"");
+}
+
+- (void)didDragEnterRecordButton:(UIButton *)sender
+{
+    NSLog(@"");
+}
 
 #pragma mark - JSQMessages CollectionView DataSource
 
@@ -351,6 +432,163 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     return nil;
 }
 
+- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView viewForVideoOverlayViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    /**
+     *  Return `nil` here if you do not want overlay view for incoming video message.
+     *  If you do return `nil`, be sure to do the following in `viewDidLoad`:
+     *
+     *  self.collectionView.collectionViewLayout.incomingVideoOverlayViewSize = CGSizeZero;
+     */
+    
+    /**
+     *  You should create new view to add to each cell
+     *  Otherwise, each cell would be referencing the same view.
+     *
+     *  Note: these views will be sized according to these values:
+     *
+     *  self.collectionView.collectionViewLayout.incomingVideoOverlayViewSize
+     *
+     *  Override the defaults in `viewDidLoad`
+     */
+    
+    UIImageView *incomingVideoOverlayView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"demo_play_button_in"] highlightedImage:nil];
+    return incomingVideoOverlayView;
+}
+
+- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView outgoingVideoOverlayViewForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    /**
+     *  Return `nil` here if you do not want overlay view for outgoing video message.
+     *  If you do return `nil`, be sure to do the following in `viewDidLoad`:
+     *
+     *  self.collectionView.collectionViewLayout.outgoingVideoOverlayViewSize = CGSizeZero;
+     */
+    
+    /**
+     *  You should create new view to add to each cell
+     *  Otherwise, each cell would be referencing the same view.
+     *
+     *  Note: these views will be sized according to these values:
+     *
+     *  self.collectionView.collectionViewLayout.outgoingVideoOverlayViewSize
+     *
+     *  Override the defaults in `viewDidLoad`
+     */
+    UIImageView *outgoingVideoOverlayView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"demo_play_button_out"] highlightedImage:nil];
+    return outgoingVideoOverlayView;
+}
+
+- (UIView *)collectionView:(JSQMessagesCollectionView *)collectionView viewForAudioPlayerViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    JSQMessage *message = self.messages[indexPath.item];
+    JSQDemoAudioPlayerView *player = [JSQDemoAudioPlayerView new];
+    player.message = message;
+    player.incomingMessage = ![message.sender isEqual:self.sender];
+    
+    return player;
+}
+
+- (UIView <JSQMessagesActivityIndicator> *)collectionView:(JSQMessagesCollectionView *)collectionView viewForPhotoActivityIndicatorViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [JSQMessagesActivityIndicatorView new];
+}
+
+- (UIView <JSQMessagesActivityIndicator> *)collectionView:(JSQMessagesCollectionView *)collectionView viewForVideoActivityIndicatorViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [JSQMessagesActivityIndicatorView new];
+}
+
+- (UIView<JSQMessagesActivityIndicator> *)collectionView:(JSQMessagesCollectionView *)collectionView viewForAudioActivityIndicatorViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [JSQMessagesActivityIndicatorView new];
+}
+
+- (CGSize)collectionView:(JSQMessagesCollectionView *)collectionView sizeForAudioPlayerViewAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat width = arc4random() % 100;
+    return CGSizeMake(100 + width, 40);
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+  wantsThumbnailForURL:(NSURL *)sourceURL thumbnailImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+       completionBlock:(JSQMessagesCollectionViewDataSourceCompletionBlock)completionBlock {
+    
+    JSQMessage *message = self.messages[indexPath.item];
+    BOOL isOutgoingMessage = [[message sender] isEqualToString:self.sender];
+    
+    /**
+     *  Here you can download images from the Internet.
+     */
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        UIImage *thumbnail = nil;
+        
+        if (message.type == JSQMessageRemotePhoto) {
+            NSData *imageData = [NSData dataWithContentsOfURL:sourceURL];
+            
+            if (imageData) {
+                UIImage *sourceImage = [UIImage imageWithData:imageData];
+                message.sourceImage = sourceImage;
+                
+                /**
+                 *  Before the image display you should generate a thumbnail to improve performance.
+                 */
+                CGFloat screenScale = [[UIScreen mainScreen] scale];
+                CGSize mediaImageViewSize = isOutgoingMessage
+                ? collectionView.collectionViewLayout.outgoingThumbnailImageSize
+                : collectionView.collectionViewLayout.incomingThumbnailImageSize;
+                
+                CGRect contextBounds = CGRectMake(0.f, 0.f, mediaImageViewSize.width * screenScale, mediaImageViewSize.height * screenScale);
+                
+                UIGraphicsBeginImageContext(contextBounds.size);
+                [sourceImage drawInRect:contextBounds];
+                thumbnail = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
+                
+                message.thumbnailImage = thumbnail;
+                message.type = JSQMessagePhoto;
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completionBlock(thumbnail);
+                });
+            }
+            else {
+                NSLog(@"Error, Can not download image for URL:%@", message.sourceURL);
+            }
+        }
+        else if (message.type == JSQMessageRemoteVideo) {
+            
+            /**
+             *  Generate thumbnails from remote url.
+             */
+            UIImage *remoteThumbnail = [JSQMessagesThumbnailFactory thumbnailFromVideoURL:sourceURL];
+            
+            /**
+             *  May not support this format or video encoding is incorrect or network error.
+             */
+            if (!remoteThumbnail) {
+                NSLog(@"Error, Can not generate thumbnail for URL: %@", sourceURL);
+            }
+            else {
+                thumbnail = remoteThumbnail;
+                
+                message.videoThumbnail = remoteThumbnail;
+                message.videoThumbnailPlaceholder = nil;
+                
+                /**
+                 *  Change the message type, so next time we will not need to ask the data source method.
+                 */
+                message.type = JSQMessageVideo;
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completionBlock(thumbnail);
+                });
+            }
+        }
+    });
+}
+
 #pragma mark - UICollectionView DataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -381,19 +619,20 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     
     JSQMessage *msg = [self.messages objectAtIndex:indexPath.item];
     
-    if ([msg.sender isEqualToString:self.sender]) {
-        cell.textView.textColor = [UIColor blackColor];
+    if (cell.textView) {
+        if ([msg.sender isEqualToString:self.sender]) {
+            cell.textView.textColor = [UIColor blackColor];
+        }
+        else {
+            cell.textView.textColor = [UIColor whiteColor];
+        }
+        
+        cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
+                                              NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     }
-    else {
-        cell.textView.textColor = [UIColor whiteColor];
-    }
-    
-    cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
-                                          NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     
     return cell;
 }
-
 
 
 #pragma mark - JSQMessages collection view flow layout delegate
@@ -450,5 +689,42 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 {
     NSLog(@"Load earlier messages!");
 }
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapPhoto:(UIImageView *)imageView atIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"");
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapVideoForURL:(NSURL *)videoURL atIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"");
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAudio:(NSData *)audioData atIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"");
+    JSQMessagesCollectionViewAudioCellIncoming *incomingAudioCell = (JSQMessagesCollectionViewAudioCellIncoming *)[collectionView cellForItemAtIndexPath:indexPath];
+    JSQDemoAudioPlayerView *player = (JSQDemoAudioPlayerView *)incomingAudioCell.playerView;
+    if ([player isAnimating]) {
+        [player stopAnimation];
+    }
+    else {
+        [player startAnimation];
+    }
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAudioForURL:(NSURL *)audioURL atIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"");
+    JSQMessagesCollectionViewAudioCellIncoming *incomingAudioCell = (JSQMessagesCollectionViewAudioCellIncoming *)[collectionView cellForItemAtIndexPath:indexPath];
+    JSQDemoAudioPlayerView *player = (JSQDemoAudioPlayerView *)incomingAudioCell.playerView;
+    if ([player isAnimating]) {
+        [player stopAnimation];
+    }
+    else {
+        [player startAnimation];
+    }
+}
+
 
 @end

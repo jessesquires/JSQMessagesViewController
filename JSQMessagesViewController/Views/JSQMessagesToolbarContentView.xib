@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -10,53 +10,79 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LEq-G7-jGt">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LEq-G7-jGt" userLabel="View1">
                     <rect key="frame" x="4" y="6" width="34" height="32"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="32" id="0sE-GV-joM"/>
-                        <constraint firstAttribute="width" constant="34" id="eMy-Af-wwH"/>
+                        <constraint firstAttribute="height" priority="750" constant="32" id="0sE-GV-joM"/>
+                        <constraint firstAttribute="width" priority="750" constant="34" id="eMy-Af-wwH"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Myo-1S-Vg1">
-                    <rect key="frame" x="266" y="6" width="50" height="32"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Myo-1S-Vg1" userLabel="View2">
+                    <rect key="frame" x="244" y="6" width="34" height="32"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="32" id="NaR-re-dJ4"/>
-                        <constraint firstAttribute="width" constant="50" id="yde-S9-dHe"/>
+                        <constraint firstAttribute="height" priority="750" constant="32" id="NaR-re-dJ4"/>
+                        <constraint firstAttribute="width" priority="750" constant="34" id="yde-S9-dHe"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QDk-bA-zls" userLabel="View3">
+                    <rect key="frame" x="282" y="6" width="34" height="32"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" priority="750" constant="34" id="Mer-Qs-dJC"/>
+                        <constraint firstAttribute="height" priority="750" constant="32" id="pTv-eB-gxQ"/>
                     </constraints>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dm4-NT-mvr" customClass="JSQMessagesComposerTextView">
-                    <rect key="frame" x="42" y="7" width="220" height="30"/>
+                    <rect key="frame" x="42" y="7" width="198" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FtK-IS-U2H" customClass="JSQMessagesRecorderButton">
+                    <rect key="frame" x="42" y="7" width="198" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" title="Hold to Talk">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="Myo-1S-Vg1" firstAttribute="centerY" secondItem="QDk-bA-zls" secondAttribute="centerY" id="1YC-kR-md2"/>
+                <constraint firstAttribute="trailing" secondItem="QDk-bA-zls" secondAttribute="trailing" constant="4" id="E8s-XI-QHM"/>
+                <constraint firstItem="QDk-bA-zls" firstAttribute="leading" secondItem="Myo-1S-Vg1" secondAttribute="trailing" constant="4" id="ETQ-PA-Tq4"/>
+                <constraint firstItem="FtK-IS-U2H" firstAttribute="centerY" secondItem="dm4-NT-mvr" secondAttribute="centerY" id="Fm3-EV-aY9"/>
                 <constraint firstItem="LEq-G7-jGt" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="4" id="LAU-fo-GJJ"/>
-                <constraint firstAttribute="bottom" secondItem="Myo-1S-Vg1" secondAttribute="bottom" constant="6" id="MrS-9f-xyz"/>
+                <constraint firstAttribute="bottom" secondItem="QDk-bA-zls" secondAttribute="bottom" constant="6" id="MuE-qG-PjP"/>
                 <constraint firstAttribute="bottom" secondItem="LEq-G7-jGt" secondAttribute="bottom" constant="6" id="OUX-jX-Hem"/>
-                <constraint firstItem="dm4-NT-mvr" firstAttribute="leading" secondItem="LEq-G7-jGt" secondAttribute="trailing" constant="4" id="bel-3t-t11"/>
-                <constraint firstAttribute="trailing" secondItem="Myo-1S-Vg1" secondAttribute="trailing" constant="4" id="ds6-61-GNv"/>
+                <constraint firstItem="FtK-IS-U2H" firstAttribute="height" secondItem="dm4-NT-mvr" secondAttribute="height" id="WEF-Au-Koj"/>
                 <constraint firstItem="dm4-NT-mvr" firstAttribute="leading" secondItem="LEq-G7-jGt" secondAttribute="trailing" constant="4" id="iAi-RG-Qmv"/>
                 <constraint firstItem="dm4-NT-mvr" firstAttribute="top" secondItem="1" secondAttribute="top" constant="7" id="nrs-7L-psn"/>
-                <constraint firstItem="Myo-1S-Vg1" firstAttribute="leading" secondItem="dm4-NT-mvr" secondAttribute="trailing" constant="4" id="pv2-Ct-lcA"/>
                 <constraint firstAttribute="bottom" secondItem="dm4-NT-mvr" secondAttribute="bottom" constant="7" id="qgN-FG-QNm"/>
+                <constraint firstItem="FtK-IS-U2H" firstAttribute="width" secondItem="dm4-NT-mvr" secondAttribute="width" id="rtN-td-jY5"/>
                 <constraint firstItem="Myo-1S-Vg1" firstAttribute="leading" secondItem="dm4-NT-mvr" secondAttribute="trailing" constant="4" id="uLl-Th-DGe"/>
+                <constraint firstItem="FtK-IS-U2H" firstAttribute="centerX" secondItem="dm4-NT-mvr" secondAttribute="centerX" id="wvZ-Gr-ieM"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="button" destination="FtK-IS-U2H" id="SQO-mQ-LcZ"/>
                 <outlet property="leftBarButtonContainerView" destination="LEq-G7-jGt" id="F0V-4N-1Mo"/>
                 <outlet property="leftBarButtonContainerViewWidthConstraint" destination="eMy-Af-wwH" id="9Jw-2j-hrn"/>
                 <outlet property="leftHorizontalSpacingConstraint" destination="LAU-fo-GJJ" id="4zo-CQ-0sV"/>
+                <outlet property="rightBarButton2ContainerView" destination="QDk-bA-zls" id="Ibq-V1-4yE"/>
+                <outlet property="rightBarButton2ContainerViewWidthConstraint" destination="Mer-Qs-dJC" id="5m7-GH-heX"/>
                 <outlet property="rightBarButtonContainerView" destination="Myo-1S-Vg1" id="0SR-cw-EkD"/>
                 <outlet property="rightBarButtonContainerViewWidthConstraint" destination="yde-S9-dHe" id="oU1-07-P3e"/>
-                <outlet property="rightHorizontalSpacingConstraint" destination="ds6-61-GNv" id="qwC-Fa-kjV"/>
+                <outlet property="rightHorizontalSpacingConstraint" destination="ETQ-PA-Tq4" id="wyR-Og-dXo"/>
+                <outlet property="rightHorizontalSpacingConstraint2" destination="E8s-XI-QHM" id="uUD-Se-J2F"/>
                 <outlet property="textView" destination="dm4-NT-mvr" id="PFw-HO-oT8"/>
             </connections>
         </view>

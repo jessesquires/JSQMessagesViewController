@@ -154,6 +154,110 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 @property (assign, nonatomic) CGSize outgoingAvatarViewSize;
 
 /**
+ *  The size of the thumbnail for incoming photo messages.
+ *
+ *  @discussion The default value is `(120.0f, 160.0f)`(3:4). This value must not be `CGSizeZero`.
+ */
+@property (assign, nonatomic) CGSize incomingThumbnailImageSize;
+
+/**
+ *  The size of the thumbnail for outgoing photo messages.
+ *
+ *  @discussion The default value is `(120.0f, 160.0f)`(3:4). This value must not be `CGSizeZero`.
+ */
+@property (assign, nonatomic) CGSize outgoingThumbnailImageSize;
+
+/**
+ *  The size of the thumbnail for incoming video messages.
+ *
+ *  @discussion The default value is `(120.0f, 160.0f)`(3:4). This value must not be `CGSizeZero`.
+ */
+@property (assign, nonatomic) CGSize incomingVideoThumbnailSize;
+
+/**
+ *  The size of the thumbnail for outgoing video messages.
+ *
+ *  @discussion The default value is `(120.0f, 160.0f)`(3:4). This value must not be `CGSizeZero`.
+ */
+@property (assign, nonatomic) CGSize outgoingVideoThumbnailSize;
+
+/**
+ *  The size of the player view for incoming audio messages.
+ *
+ *  @discussion The default value is `(150.0f, 40.0f)`. Set to `CGSizeZero` to remove incoming audio player view.
+ */
+@property (assign, nonatomic) CGSize incomingAudioPlayerViewSize;
+
+/**
+ *  The size of the player view for outgoing audio messages.
+ *
+ *  @discussion The default value is `(150.0f, 40.0f)`. Set to `CGSizeZero` to remove outgoing audio player view.
+ */
+@property (assign, nonatomic) CGSize outgoingAudioPlayerViewSize;
+
+/**
+ *	The size of video overlay view for incoming video messages.
+ *
+ *  @discussion The default value is `(40.0f, 40.0f)`. Set to `CGSizeZero` to remove incoming video overlay view.
+ */
+@property (assign, nonatomic) CGSize incomingVideoOverlayViewSize;
+
+/**
+ *	The size of video overlay view for outgoing video messages.
+ *
+ *  @discussion The default value is `(40.0f, 40.0f)`. Set to `CGSizeZero` to remove outgoing video overlay view.
+ */
+@property (assign, nonatomic) CGSize outgoingVideoOverlayViewSize;
+
+/**
+ *	The size of activity indicator view for incoming photo messages.
+ *
+ *  @discussion The default value is `(20.0f, 20.0f)`. Set to `CGSizeZero` to remove activity indicator view for
+ *  incoming photo message.
+ */
+@property (assign, nonatomic) CGSize incomingPhotoActivityIndicatorViewSize;
+
+/**
+ *	The size of activity indicator view for outgoing photo messages.
+ *
+ *  @discussion The default value is `(20.0f, 20.0f)`. Set to `CGSizeZero` to remove activity indicator view for
+ *  outgoing photo message.
+ */
+@property (assign, nonatomic) CGSize outgoingPhotoActivityIndicatorViewSize;
+
+/**
+ *	The size of activity indicator view for incoming video messages.
+ *
+ *  @discussion The default value is `(20.0f, 20.0f)`. Set to `CGSizeZero` to remove activity indicator view for
+ *  incoming video message.
+ */
+@property (assign, nonatomic) CGSize incomingVideoActivityIndicatorViewSize;
+
+/**
+ *	The size of activity indicator view for outgoing video messages.
+ *
+ *  @discussion The default value is `(20.0f, 20.0f)`. Set to `CGSizeZero` to remove activity indicator view for
+ *  outgoing video message.
+ */
+@property (assign, nonatomic) CGSize outgoingVideoActivityIndicatorViewSize;
+
+/**
+ *	The size of activity indicator view for incoming audio messages.
+ *
+ *  @discussion The default value is `(20.0f, 20.0f)`. Set to `CGSizeZero` to remove activity indicator view for
+ *  incoming audio message.
+ */
+@property (assign, nonatomic) CGSize incomingAudioActivityIndicatorViewSize;
+
+/**
+ *	The size of activity indicator view for outgoing audio messages.
+ *
+ *  @discussion The default value is `(20.0f, 20.0f)`. Set to `CGSizeZero` to remove activity indicator view for
+ *  outgoing audio message.
+ */
+@property (assign, nonatomic) CGSize outgoingAudioActivityIndicatorViewSize;
+
+/**
  *  Computes and returns the size of the `messageBubbleImageView` property of a `JSQMessagesCollectionViewCell` 
  *  to display its entire message contents. Note, this is *not* the entire cell, but only its message bubble.
  *

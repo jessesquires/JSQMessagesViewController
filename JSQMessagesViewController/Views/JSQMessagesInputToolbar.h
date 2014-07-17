@@ -43,6 +43,9 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
 - (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar
       didPressRightBarButton:(UIButton *)sender;
 
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar
+     didPressRightBarButton2:(UIButton *)sender;
+
 /**
  *  Tells the delegate that the toolbar's `leftBarButtonItem` has been pressed.
  *
@@ -51,6 +54,22 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
  */
 - (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar
        didPressLeftBarButton:(UIButton *)sender;
+
+
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar
+  recorderButtonDidTouchDown:(UIButton *)sender;
+
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar
+  recorderButtonDidTouchUpInside:(UIButton *)sender;
+
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar
+  recorderButtonDidTouchUpOutside:(UIButton *)sender;
+
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar
+  recorderButtonDidTouchDragExit:(UIButton *)sender;
+
+- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar
+  recorderButtonDidTouchDragEnter:(UIButton *)sender;
 
 @end
 
@@ -83,12 +102,13 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
  *  It only specifies whether the `rightBarButtonItem `or the `leftBarButtonItem` is the send button.
  *  The other button then acts as the accessory button.
  */
-@property (assign, nonatomic) BOOL sendButtonOnRight;
+//@property (assign, nonatomic) BOOL sendButtonOnRight;
 
 /**
  *  Enables or disables the send button based on whether or not its `textView` has text.
  *  That is, the send button will be enabled if there is text in the `textView`, and disabled otherwise.
  */
-- (void)toggleSendButtonEnabled;
+//- (void)toggleSendButtonEnabled;
+- (void)toggleRecorderButtonHidden;
 
 @end

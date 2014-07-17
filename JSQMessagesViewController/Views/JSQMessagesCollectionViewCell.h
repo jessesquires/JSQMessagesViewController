@@ -37,6 +37,27 @@
  */
 - (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell;
 
+/**
+ *  Tells the delegate that the photo of a cell has been tapped.
+ *
+ *  @param cell The cell that received the tap.
+ */
+- (void)messagesCollectionViewCellDidTapPhoto:(JSQMessagesCollectionViewCell *)cell;
+
+/**
+ *  Tells the delegate that the video of a cell has been tapped.
+ *
+ *  @param cell The cell that received the tap.
+ */
+- (void)messagesCollectionViewCellDidTapVideo:(JSQMessagesCollectionViewCell *)cell;
+
+/**
+ *  Tells the delegate that the audio of a cell has been tapped.
+ *
+ *  @param cell The cell that received the tap.
+ */
+- (void)messagesCollectionViewCellDidTapAudio:(JSQMessagesCollectionViewCell *)cell;
+
 @end
 
 
@@ -76,6 +97,11 @@
  *  Returns the text view of the cell. This text view contains the message body text.
  */
 @property (weak, nonatomic, readonly) UITextView *textView;
+
+/**
+ *  Returns the container view of bubble image view.
+ */
+@property (weak, nonatomic, readonly) UIView *messageBubbleContainerView;
 
 /**
  *  The bubble image view of the cell that is responsible for displaying bubble images.

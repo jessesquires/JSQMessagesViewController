@@ -24,13 +24,13 @@
 
 + (UINib *)nib
 {
-    return [UINib nibWithNibName:NSStringFromClass([JSQMessagesCollectionViewCellIncoming class])
+    return [UINib nibWithNibName:NSStringFromClass([self class])
                           bundle:[NSBundle mainBundle]];
 }
 
 + (NSString *)cellReuseIdentifier
 {
-    return NSStringFromClass([JSQMessagesCollectionViewCellIncoming class]);
+    return NSStringFromClass([self class]);
 }
 
 #pragma mark - Initialization
