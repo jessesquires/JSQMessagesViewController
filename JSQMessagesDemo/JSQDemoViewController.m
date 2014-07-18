@@ -286,11 +286,7 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 - (void)didPressLeftBarButton:(UIButton *)sender
 {
     NSLog(@"Camera pressed!");
-    /**
-     *  Accessory button has no default functionality, yet.
-     */
     
-<<<<<<< HEAD
     [self.inputToolbar toggleRecorderButtonHidden];
 }
 
@@ -311,29 +307,13 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 
 - (void)didFinishRecording:(UIButton *)sender
 {
-    NSLog(@"");
-=======
-    UIButton *recorderButton = self.inputToolbar.contentView.button;
-    UITextView *composerTextView = self.inputToolbar.contentView.textView;
     
-    if ([recorderButton isHidden]) {
-        [composerTextView resignFirstResponder];
-        composerTextView.hidden = YES;
-        recorderButton.hidden = NO;
-        
-    }
-    else {
-        recorderButton.hidden = YES;
-        composerTextView.hidden = NO;
-        [composerTextView becomeFirstResponder];
-    }
->>>>>>> 8034dfd... Update: 添加toolbar 第二个按钮.
 }
 
 - (void)didCanceldRecording:(UIButton *)sender
 {
-    NSLog(@"");
 }
+
 
 - (void)didDragExitRecordButton:(UIButton *)sender
 {

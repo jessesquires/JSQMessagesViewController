@@ -74,11 +74,6 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     self.contentView.leftBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
     self.contentView.rightBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
     self.contentView.rightBarButtonItem2 = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
-<<<<<<< HEAD
-=======
-    
-    [self toggleSendButtonEnabled];
->>>>>>> 8034dfd... Update: 添加toolbar 第二个按钮.
 }
 
 - (void)dealloc
@@ -118,11 +113,8 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 {
     [self.delegate messagesInputToolbar:self didPressRightBarButton2:sender];
 }
-<<<<<<< HEAD
-=======
 
 #pragma mark - Input toolbar
->>>>>>> 8034dfd... Update: 添加toolbar 第二个按钮.
 
 - (void)jsq_recorderButtonTouchDown:(UIButton *)sender
 {
@@ -172,13 +164,14 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                                                            action:NULL
                                                  forControlEvents:UIControlEventTouchUpInside];
                 
-                [self.contentView.rightBarButtonItem2 removeTarget:self
-                                                            action:NULL
-                                                  forControlEvents:UIControlEventTouchUpInside];
-                
                 [self.contentView.rightBarButtonItem addTarget:self
                                                         action:@selector(jsq_rightBarButtonPressed:)
                                               forControlEvents:UIControlEventTouchUpInside];
+            }
+            else if ([keyPath isEqualToString:NSStringFromSelector(@selector(rightBarButtonItem2))]) {
+                [self.contentView.rightBarButtonItem2 removeTarget:self
+                                                            action:NULL
+                                                  forControlEvents:UIControlEventTouchUpInside];
                 
                 [self.contentView.rightBarButtonItem2 addTarget:self
                                                          action:@selector(jsq_rightBarButton2Pressed:)
@@ -260,14 +253,11 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                        forKeyPath:NSStringFromSelector(@selector(rightBarButtonItem2))
                           options:0
                           context:kJSQMessagesInputToolbarKeyValueObservingContext];
-<<<<<<< HEAD
     
     [self.contentView addObserver:self
                        forKeyPath:[NSStringFromSelector(@selector(button)) stringByAppendingString:@".alpha"]
                           options:0
                           context:kJSQMessagesInputToolbarKeyValueObservingContext];
-=======
->>>>>>> 8034dfd... Update: 添加toolbar 第二个按钮.
 }
 
 - (void)jsq_removeObservers
@@ -284,13 +274,11 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
         [_contentView removeObserver:self
                           forKeyPath:NSStringFromSelector(@selector(rightBarButtonItem2))
                              context:kJSQMessagesInputToolbarKeyValueObservingContext];
-<<<<<<< HEAD
         
         [_contentView removeObserver:self
                           forKeyPath:[NSStringFromSelector(@selector(button)) stringByAppendingString:@".alpha"]
                              context:kJSQMessagesInputToolbarKeyValueObservingContext];
-=======
->>>>>>> 8034dfd... Update: 添加toolbar 第二个按钮.
+
     }
     @catch (NSException *__unused exception) { }
 }

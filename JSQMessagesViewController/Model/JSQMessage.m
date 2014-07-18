@@ -302,7 +302,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; type = %lu; sender = %@; date = %@; text = '%@'; "
+    return [NSString stringWithFormat:@"<%@: %p; type = %u; sender = %@; date = %@; text = '%@'; "
             @"audio data length = %lu; sourceImage = %@; thumbnailImage = %@; "
              @"videoThumbnail = %@; videoThumbnailPlaceholder = %@; sourceURL = %@>",
             [self class], self, self.type, self.sender, self.date, self.text,
