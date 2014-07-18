@@ -58,8 +58,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @property (strong, nonatomic) JSQMessagesKeyboardController *keyboardController;
 
-@property (nonatomic) UIViewController *mediaViewController;
-
 @property (assign, nonatomic) CGFloat statusBarChangeInHeight;
 
 
