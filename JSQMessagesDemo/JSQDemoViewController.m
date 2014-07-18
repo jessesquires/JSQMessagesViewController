@@ -154,7 +154,7 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 {
     [super viewDidLoad];
     
-//    self.title = @"JSQMessages";
+    self.title = @"JSQMessages";
     
     self.sender = @"Jesse Squires";
     

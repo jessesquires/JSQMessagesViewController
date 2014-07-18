@@ -1,6 +1,6 @@
 //
 //  Created by Vincent Sit
-//  http://www.hexedbits.com
+//  http://xuexuefeng.com
 //
 //
 //  Documentation
