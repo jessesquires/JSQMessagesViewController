@@ -87,6 +87,30 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     _incomingAvatarViewSize = defaultAvatarSize;
     _outgoingAvatarViewSize = defaultAvatarSize;
     
+    CGSize defaultMediaThumbnailImageSize = CGSizeMake(120.0f, 160.0f);
+    _incomingThumbnailImageSize = defaultMediaThumbnailImageSize;
+    _outgoingThumbnailImageSize = defaultMediaThumbnailImageSize;
+    
+    _incomingVideoThumbnailSize = defaultMediaThumbnailImageSize;
+    _outgoingVideoThumbnailSize = defaultMediaThumbnailImageSize;
+    
+    CGSize defaultAudioPlayerViewSize = CGSizeMake(150.f, 40.f);
+    _incomingAudioPlayerViewSize = defaultAudioPlayerViewSize;
+    _outgoingAudioPlayerViewSize = defaultAudioPlayerViewSize;
+    
+    
+    CGSize defaultOverlayViewSize = CGSizeMake(40.f, 40.f);
+    _incomingVideoOverlayViewSize = defaultOverlayViewSize;
+    _outgoingVideoOverlayViewSize = defaultOverlayViewSize;
+    
+    CGSize defaultActivityIndicatorViewSize = CGSizeMake(20.f, 20.f);
+    _incomingPhotoActivityIndicatorViewSize = defaultActivityIndicatorViewSize;
+    _outgoingPhotoActivityIndicatorViewSize = defaultActivityIndicatorViewSize;
+    _incomingVideoActivityIndicatorViewSize = defaultActivityIndicatorViewSize;
+    _outgoingVideoActivityIndicatorViewSize = defaultActivityIndicatorViewSize;
+    _incomingAudioActivityIndicatorViewSize = defaultActivityIndicatorViewSize;
+    _outgoingAudioActivityIndicatorViewSize = defaultActivityIndicatorViewSize;
+    
     _springinessEnabled = NO;
     _springResistanceFactor = 1000;
     
@@ -181,6 +205,91 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     _outgoingAvatarViewSize = outgoingAvatarViewSize;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
+
+- (void)setIncomingThumbnailImageSize:(CGSize)incomingThumbnailImageSize
+{
+    _incomingThumbnailImageSize = incomingThumbnailImageSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setOutgoingThumbnailImageSize:(CGSize)outgoingThumbnailImageSize
+{
+    _outgoingThumbnailImageSize = outgoingThumbnailImageSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setIncomingVideoThumbnailSize:(CGSize)incomingVideoThumbnailSize
+{
+    _incomingVideoThumbnailSize = incomingVideoThumbnailSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setOutgoingVideoThumbnailSize:(CGSize)outgoingVideoThumbnailSize
+{
+    _outgoingVideoThumbnailSize = outgoingVideoThumbnailSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setIncomingAudioPlayerViewSize:(CGSize)incomingAudioPlayerSize
+{
+    _incomingAudioPlayerViewSize = incomingAudioPlayerSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setOutgoingAudioPlayerViewSize:(CGSize)outgoingAudioPlayerSize
+{
+    _outgoingAudioPlayerViewSize = outgoingAudioPlayerSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setIncomingVideoOverlayViewSize:(CGSize )incomingVideoOverlayViewSize
+{
+    _incomingVideoOverlayViewSize = incomingVideoOverlayViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setOutgoingVideoOverlayViewSize:(CGSize )outgoingVideoOverlayViewSize
+{
+    _outgoingVideoOverlayViewSize = outgoingVideoOverlayViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setIncomingPhotoActivityIndicatorViewSize:(CGSize)incomingPhotoActivityIndicatorViewSize
+{
+    _incomingPhotoActivityIndicatorViewSize = incomingPhotoActivityIndicatorViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setOutgoingPhotoActivityIndicatorViewSize:(CGSize)outgoingPhotoActivityIndicatorViewSize
+{
+    _outgoingPhotoActivityIndicatorViewSize = outgoingPhotoActivityIndicatorViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setIncomingVideoActivityIndicatorViewSize:(CGSize)incomingVideoActivityIndicatorViewSize
+{
+    _incomingVideoActivityIndicatorViewSize = incomingVideoActivityIndicatorViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setOutgoingVideoActivityIndicatorViewSize:(CGSize)outgoingVideoActivityIndicatorViewSize
+{
+    _outgoingVideoActivityIndicatorViewSize = outgoingVideoActivityIndicatorViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setIncomingAudioActivityIndicatorViewSize:(CGSize)incomingAudioActivityIndicatorViewSize
+{
+    _incomingAudioActivityIndicatorViewSize = incomingAudioActivityIndicatorViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setOutgoingAudioActivityIndicatorViewSize:(CGSize)outgoingAudioActivityIndicatorViewSize
+{
+    _outgoingAudioActivityIndicatorViewSize = outgoingAudioActivityIndicatorViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
 
 #pragma mark - Getters
 
@@ -341,23 +450,45 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     }
     
     id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
+    NSString *messageSender = [messageData sender];
     
-    CGSize avatarSize = [self jsq_avatarSizeForIndexPath:indexPath];
+    BOOL isOutgoingMessage = [messageSender isEqualToString:[self.collectionView.dataSource sender]];
+    CGSize finalSize = CGSizeZero;
     
-    CGFloat maximumTextWidth = self.itemWidth - avatarSize.width - self.messageBubbleLeftRightMargin;
-    
-    CGFloat textInsetsTotal = [self jsq_messageBubbleTextContainerInsetsTotal];
-    
-    CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth - textInsetsTotal, CGFLOAT_MAX)
-                                                         options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-                                                      attributes:@{ NSFontAttributeName : self.messageBubbleFont }
-                                                         context:nil];
-    
-    CGSize stringSize = CGRectIntegral(stringRect).size;
-    
-    CGFloat verticalInsets = self.messageBubbleTextViewTextContainerInsets.top + self.messageBubbleTextViewTextContainerInsets.bottom;
-    
-    CGSize finalSize = CGSizeMake(stringSize.width, stringSize.height + verticalInsets);
+    switch ([messageData type]) {
+        case JSQMessageText:
+        {
+            CGSize avatarSize = [self jsq_avatarSizeForIndexPath:indexPath];
+            
+            CGFloat maximumTextWidth = self.itemWidth - avatarSize.width - self.messageBubbleLeftRightMargin;
+            
+            CGFloat textInsetsTotal = [self jsq_messageBubbleTextContainerInsetsTotal];
+            
+            CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth - textInsetsTotal, CGFLOAT_MAX)
+                                                                 options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                                              attributes:@{ NSFontAttributeName : self.messageBubbleFont }
+                                                                 context:nil];
+            
+            CGSize stringSize = CGRectIntegral(stringRect).size;
+            
+            CGFloat verticalInsets = self.messageBubbleTextViewTextContainerInsets.top + self.messageBubbleTextViewTextContainerInsets.bottom;
+            
+            finalSize = CGSizeMake(stringSize.width, stringSize.height + verticalInsets);
+        }
+            break;
+        case JSQMessagePhoto:
+        case JSQMessageRemotePhoto:
+            finalSize = isOutgoingMessage ? self.outgoingThumbnailImageSize : self.incomingThumbnailImageSize;
+            break;
+        case JSQMessageVideo:
+        case JSQMessageRemoteVideo:
+            finalSize = isOutgoingMessage ? self.outgoingVideoThumbnailSize : self.incomingVideoThumbnailSize;
+            break;
+        case JSQMessageAudio:
+        case JSQMessageRemoteAudio:
+            finalSize = isOutgoingMessage ? self.outgoingAudioPlayerViewSize : self.incomingAudioPlayerViewSize;
+            break;
+    }
     
     [self.messageBubbleSizes setObject:[NSValue valueWithCGSize:finalSize] forKey:indexPath];
     
@@ -374,16 +505,25 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     CGFloat messageBubblePadding = remainingItemWidthForBubble - messageBubbleSize.width - textPadding;
     
     layoutAttributes.messageBubbleLeftRightMargin = messageBubblePadding;
-    
     layoutAttributes.textViewFrameInsets = self.messageBubbleTextViewFrameInsets;
-    
     layoutAttributes.textViewTextContainerInsets = self.messageBubbleTextViewTextContainerInsets;
-    
     layoutAttributes.messageBubbleFont = self.messageBubbleFont;
-    
     layoutAttributes.incomingAvatarViewSize = self.incomingAvatarViewSize;
-    
     layoutAttributes.outgoingAvatarViewSize = self.outgoingAvatarViewSize;
+    layoutAttributes.incomingThumbnailImageSize = self.incomingThumbnailImageSize;
+    layoutAttributes.outgoingThumbnailImageSize = self.outgoingThumbnailImageSize;
+    layoutAttributes.incomingVideoThumbnailSize = self.incomingVideoThumbnailSize;
+    layoutAttributes.outgoingVideoThumbnailSize = self.outgoingVideoThumbnailSize;
+    layoutAttributes.incomingAudioPlayerViewSize = self.incomingAudioPlayerViewSize;
+    layoutAttributes.outgoingAudioPlayerViewSize = self.outgoingAudioPlayerViewSize;
+    layoutAttributes.incomingVideoOverlayViewSize = self.incomingVideoOverlayViewSize;
+    layoutAttributes.outgoingVideoOverlayViewSize = self.outgoingVideoOverlayViewSize;
+    layoutAttributes.incomingPhotoActivityIndicatorViewSize = self.incomingPhotoActivityIndicatorViewSize;
+    layoutAttributes.outgoingPhotoActivityIndicatorViewSize = self.outgoingPhotoActivityIndicatorViewSize;
+    layoutAttributes.incomingVideoActivityIndicatorViewSize = self.incomingVideoActivityIndicatorViewSize;
+    layoutAttributes.outgoingVideoActivityIndicatorViewSize = self.outgoingVideoActivityIndicatorViewSize;
+    layoutAttributes.incomingAudioActivityIndicatorViewSize = self.incomingAudioActivityIndicatorViewSize;
+    layoutAttributes.outgoingAudioActivityIndicatorViewSize = self.outgoingAudioActivityIndicatorViewSize;
     
     layoutAttributes.cellTopLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
                                                                                 layout:self

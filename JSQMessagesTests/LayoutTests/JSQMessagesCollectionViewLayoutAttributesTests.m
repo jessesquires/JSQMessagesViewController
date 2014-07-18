@@ -32,6 +32,14 @@
 
 - (void)testLayoutAttributesInitAndIsEqual
 {
+    UIButton *incommingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [incommingButton setImage:[UIImage imageNamed:@"demo_play_button_in"] forState:UIControlStateNormal];
+    [incommingButton sizeToFit];
+    
+    UIButton *outgoingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [outgoingButton setImage:[UIImage imageNamed:@"demo_play_button_out"] forState:UIControlStateNormal];
+    [outgoingButton sizeToFit];
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
     JSQMessagesCollectionViewLayoutAttributes *attrs = [JSQMessagesCollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     attrs.messageBubbleFont = [UIFont systemFontOfSize:15.0f];
@@ -43,6 +51,22 @@
     attrs.cellTopLabelHeight = 20.0f;
     attrs.messageBubbleTopLabelHeight = 10.0f;
     attrs.cellBottomLabelHeight = 15.0f;
+    attrs.incomingThumbnailImageSize = CGSizeMake(120.f, 160.f);
+    attrs.outgoingThumbnailImageSize = CGSizeMake(120.f, 160.f);
+    attrs.incomingVideoThumbnailSize = CGSizeMake(120.f, 160.f);
+    attrs.outgoingVideoThumbnailSize = CGSizeMake(120.f, 160.f);
+    attrs.incomingAudioPlayerViewSize = CGSizeMake(150.f, 40.f);
+    attrs.outgoingAudioPlayerViewSize = CGSizeMake(150.f, 40.f);
+    attrs.incomingVideoOverlayViewSize = CGSizeMake(40.f, 40.f);
+    attrs.outgoingVideoOverlayViewSize = CGSizeMake(40.f, 40.f);
+    attrs.incomingPhotoActivityIndicatorViewSize = CGSizeMake(20.f, 20.f);
+    attrs.outgoingPhotoActivityIndicatorViewSize = CGSizeMake(20.f, 20.f);
+    attrs.incomingVideoActivityIndicatorViewSize = CGSizeMake(20.f, 20.f);
+    attrs.outgoingVideoActivityIndicatorViewSize = CGSizeMake(20.f, 20.f);
+    attrs.incomingAudioActivityIndicatorViewSize = CGSizeMake(20.f, 20.f);
+    attrs.outgoingAudioActivityIndicatorViewSize = CGSizeMake(20.f, 20.f);
+    
+    
     XCTAssertNotNil(attrs, @"Layout attributes should not be nil");
     
     JSQMessagesCollectionViewLayoutAttributes *copy = [attrs copy];

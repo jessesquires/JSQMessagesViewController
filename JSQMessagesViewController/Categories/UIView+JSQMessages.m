@@ -39,4 +39,14 @@
     [self jsq_pinSubview:subview toEdge:NSLayoutAttributeTrailing];
 }
 
+- (void)jsq_updateConstraint:(NSLayoutConstraint *)constraint withConstant:(CGFloat)constant
+{
+    if (constraint.constant == constant) {
+        return;
+    }
+    
+    constraint.constant = constant;
+    [self setNeedsUpdateConstraints];
+}
+
 @end
