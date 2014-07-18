@@ -30,5 +30,4 @@
     self.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.layer.cornerRadius = cornerRadius;
 }
-    
 @end

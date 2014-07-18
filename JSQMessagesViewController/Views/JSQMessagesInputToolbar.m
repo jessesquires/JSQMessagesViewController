@@ -114,6 +114,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     [self.delegate messagesInputToolbar:self didPressRightBarButton2:sender];
 }
 
+
 #pragma mark - Input toolbar
 
 - (void)jsq_recorderButtonTouchDown:(UIButton *)sender
@@ -167,15 +168,6 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                 [self.contentView.rightBarButtonItem addTarget:self
                                                         action:@selector(jsq_rightBarButtonPressed:)
                                               forControlEvents:UIControlEventTouchUpInside];
-            }
-            else if ([keyPath isEqualToString:NSStringFromSelector(@selector(rightBarButtonItem2))]) {
-                [self.contentView.rightBarButtonItem2 removeTarget:self
-                                                            action:NULL
-                                                  forControlEvents:UIControlEventTouchUpInside];
-                
-                [self.contentView.rightBarButtonItem2 addTarget:self
-                                                         action:@selector(jsq_rightBarButton2Pressed:)
-                                               forControlEvents:UIControlEventTouchUpInside];
             }
             else if ([keyPath isEqualToString:NSStringFromSelector(@selector(rightBarButtonItem2))]) {
                 [self.contentView.rightBarButtonItem2 removeTarget:self
@@ -278,7 +270,6 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
         [_contentView removeObserver:self
                           forKeyPath:[NSStringFromSelector(@selector(button)) stringByAppendingString:@".alpha"]
                              context:kJSQMessagesInputToolbarKeyValueObservingContext];
-
     }
     @catch (NSException *__unused exception) { }
 }

@@ -307,13 +307,13 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 
 - (void)didFinishRecording:(UIButton *)sender
 {
-    
+    NSLog(@"");
 }
 
 - (void)didCanceldRecording:(UIButton *)sender
 {
+    NSLog(@"");
 }
-
 
 - (void)didDragExitRecordButton:(UIButton *)sender
 {
