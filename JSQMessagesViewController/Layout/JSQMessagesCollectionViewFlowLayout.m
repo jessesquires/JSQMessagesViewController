@@ -31,6 +31,8 @@
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
 
+#import <CoreText/CoreText.h>
+
 const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 
@@ -347,17 +349,20 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     CGFloat maximumTextWidth = self.itemWidth - avatarSize.width - self.messageBubbleLeftRightMargin;
     
     CGFloat textInsetsTotal = [self jsq_messageBubbleTextContainerInsetsTotal];
-    
+
     CGSize finalSize;
 
     if (messageData.kind == JSQMessageTextKind)
     {
-        CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth - textInsetsTotal, CGFLOAT_MAX)
-                                                             options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-                                                          attributes:@{ NSFontAttributeName : self.messageBubbleFont }
-                                                             context:nil];
+        /**
+         *  Fixed with diff https://github.com/rahulgautam/JSQMessagesViewController/commit/6846215619e414b625af02a8cd276681188a3421
+         */
         
-        CGSize stringSize = CGRectIntegral(stringRect).size;
+        NSAttributedString *string = [[NSAttributedString alloc] initWithString:[messageData text]
+                                                                     attributes:@{ NSFontAttributeName : self.messageBubbleFont }];
+        
+        CGSize stringSize = [self jsq_frameSizeForAttributedString:string
+                                                          maxwidth:maximumTextWidth - textInsetsTotal];
         
         CGFloat verticalInsets = self.messageBubbleTextViewTextContainerInsets.top + self.messageBubbleTextViewTextContainerInsets.bottom;
         
@@ -367,6 +372,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     {
         finalSize = CGSizeMake(100, 100);
     }
+
     
     [self.messageBubbleSizes setObject:[NSValue valueWithCGSize:finalSize] forKey:indexPath];
     
@@ -423,6 +429,29 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     }
     
     return self.incomingAvatarViewSize;
+}
+
+- (CGSize)jsq_frameSizeForAttributedString:(NSAttributedString *)attributedString maxwidth:(CGFloat)width
+{
+    CTTypesetterRef typesetter = CTTypesetterCreateWithAttributedString((CFAttributedStringRef)attributedString);
+    CFIndex offset = 0, length;
+    CGFloat y = 0;
+    do {
+        length = CTTypesetterSuggestLineBreak(typesetter, offset, width);
+        CTLineRef line = CTTypesetterCreateLine(typesetter, CFRangeMake(offset, length));
+        
+        CGFloat ascent, descent, leading;
+        CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
+        
+        CFRelease(line);
+        
+        offset += length;
+        y += ascent + descent + leading;
+    } while (offset < [attributedString length]);
+    
+    CFRelease(typesetter);
+    
+    return CGSizeMake(width, ceil(y));
 }
 
 #pragma mark - Spring behavior utilities
