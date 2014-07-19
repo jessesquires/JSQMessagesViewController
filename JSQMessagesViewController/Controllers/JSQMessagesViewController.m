@@ -59,6 +59,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @property (assign, nonatomic) CGFloat statusBarChangeInHeight;
 
+@property (assign, nonatomic) BOOL jsq_isObserving;
+
 - (void)jsq_configureMessagesViewController;
 
 - (void)jsq_finishSendingOrReceivingMessage;
@@ -110,6 +112,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)jsq_configureMessagesViewController
 {
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.jsq_isObserving = NO;
     
     self.toolbarHeightConstraint.constant = kJSQMessagesInputToolbarHeightDefault;
     
@@ -752,22 +756,32 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_addObservers
 {
-    [self jsq_removeObservers];
+    if (self.jsq_isObserving) {
+        return;
+    }
     
     [self.inputToolbar.contentView.textView addObserver:self
                                              forKeyPath:NSStringFromSelector(@selector(contentSize))
                                                 options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
                                                 context:kJSQMessagesKeyValueObservingContext];
+    
+    self.jsq_isObserving = YES;
 }
 
 - (void)jsq_removeObservers
 {
+    if (!_jsq_isObserving) {
+        return;
+    }
+    
     @try {
-        [self.inputToolbar.contentView.textView removeObserver:self
-                                                    forKeyPath:NSStringFromSelector(@selector(contentSize))
-                                                       context:kJSQMessagesKeyValueObservingContext];
+        [_inputToolbar.contentView.textView removeObserver:self
+                                                forKeyPath:NSStringFromSelector(@selector(contentSize))
+                                                   context:kJSQMessagesKeyValueObservingContext];
     }
     @catch (NSException * __unused exception) { }
+    
+    _jsq_isObserving = NO;
 }
 
 - (void)jsq_registerForNotifications:(BOOL)registerForNotifications

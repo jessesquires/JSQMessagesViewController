@@ -34,6 +34,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 @interface JSQMessagesKeyboardController () <UIGestureRecognizerDelegate>
 
+@property (assign, nonatomic) BOOL jsq_isObserving;
+
 @property (weak, nonatomic) UIView *keyboardView;
 
 - (void)jsq_registerForNotifications;
@@ -76,6 +78,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
         _contextView = contextView;
         _panGestureRecognizer = panGestureRecognizer;
         _delegate = delegate;
+        _jsq_isObserving = NO;
     }
     return self;
 }
@@ -101,11 +104,13 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     
     _keyboardView = keyboardView;
     
-    if (keyboardView) {
+    if (keyboardView && !_jsq_isObserving) {
         [_keyboardView addObserver:self
                         forKeyPath:NSStringFromSelector(@selector(frame))
                            options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew)
                            context:kJSQMessagesKeyboardControllerKeyValueObservingContext];
+        
+        _jsq_isObserving = YES;
     }
 }
 
@@ -262,12 +267,18 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)jsq_removeKeyboardFrameObserver
 {
+    if (!_jsq_isObserving) {
+        return;
+    }
+    
     @try {
         [_keyboardView removeObserver:self
                            forKeyPath:NSStringFromSelector(@selector(frame))
                               context:kJSQMessagesKeyboardControllerKeyValueObservingContext];
     }
     @catch (NSException * __unused exception) { }
+    
+    _jsq_isObserving = NO;
 }
 
 #pragma mark - Pan gesture recognizer
