@@ -295,9 +295,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_finishSendingOrReceivingMessage
 {
-    self.showTypingIndicator = NO;
-    
     [self.collectionView reloadData];
+    
+    self.showTypingIndicator = NO;
     
     if (self.automaticallyScrollsToMostRecentMessage) {
         [self scrollToBottomAnimated:YES];
