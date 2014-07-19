@@ -19,7 +19,14 @@
 #import "JSQMessagesCollectionViewCell.h"
 
 #import "JSQMessagesCollectionViewCellIncoming.h"
+#import "JSQMessagesCollectionViewPhotoCellIncoming.h"
+#import "JSQMessagesCollectionViewVideoCellIncoming.h"
+#import "JSQMessagesCollectionViewAudioCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewPhotoCellOutgoing.h"
+#import "JSQMessagesCollectionViewVideoCellOutgoing.h"
+#import "JSQMessagesCollectionViewAudioCellOutgoing.h"
+
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 
 #import "UIView+JSQMessages.h"
@@ -33,7 +40,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
-@property (weak, nonatomic) IBOutlet UIView *messageBubbleContainerView;
+@property (weak, nonatomic, readwrite) IBOutlet UIView *messageBubbleContainerView;
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewTopVerticalSpaceConstraint;
@@ -51,7 +58,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleLeftRightMarginConstraint;
 
 @property (assign, nonatomic) UIEdgeInsets textViewFrameInsets;
-
 @property (assign, nonatomic) CGSize avatarViewSize;
 
 @property (weak, nonatomic, readwrite) UILongPressGestureRecognizer *longPressGestureRecognizer;
@@ -62,8 +68,6 @@
 
 - (void)jsq_didReceiveMenuWillHideNotification:(NSNotification *)notification;
 - (void)jsq_didReceiveMenuWillShowNotification:(NSNotification *)notification;
-
-- (void)jsq_updateConstraint:(NSLayoutConstraint *)constraint withConstant:(CGFloat)constant;
 
 @end
 
@@ -180,9 +184,6 @@
     
     self.textViewFrameInsets = customAttributes.textViewFrameInsets;
 
-    [self jsq_updateConstraint:self.messageBubbleLeftRightMarginConstraint
-                  withConstant:customAttributes.messageBubbleLeftRightMargin];
-    
     [self jsq_updateConstraint:self.cellTopLabelHeightConstraint
                   withConstant:customAttributes.cellTopLabelHeight];
     
@@ -192,10 +193,22 @@
     [self jsq_updateConstraint:self.cellBottomLabelHeightConstraint
                   withConstant:customAttributes.cellBottomLabelHeight];
     
-    if ([self isKindOfClass:[JSQMessagesCollectionViewCellIncoming class]]) {
+    if (![self isKindOfClass:[JSQMessagesCollectionViewAudioCellIncoming class]] &&
+        ![self isKindOfClass:[JSQMessagesCollectionViewAudioCellOutgoing class]]) {
+        [self jsq_updateConstraint:self.messageBubbleLeftRightMarginConstraint
+                      withConstant:customAttributes.messageBubbleLeftRightMargin];
+    }
+    
+    if ([self isKindOfClass:[JSQMessagesCollectionViewCellIncoming class]]      ||
+        [self isKindOfClass:[JSQMessagesCollectionViewPhotoCellIncoming class]] ||
+        [self isKindOfClass:[JSQMessagesCollectionViewVideoCellIncoming class]] ||
+        [self isKindOfClass:[JSQMessagesCollectionViewAudioCellIncoming class]]) {
         self.avatarViewSize = customAttributes.incomingAvatarViewSize;
     }
-    else if ([self isKindOfClass:[JSQMessagesCollectionViewCellOutgoing class]]) {
+    else if ([self isKindOfClass:[JSQMessagesCollectionViewCellOutgoing class]]      ||
+             [self isKindOfClass:[JSQMessagesCollectionViewPhotoCellOutgoing class]] ||
+             [self isKindOfClass:[JSQMessagesCollectionViewVideoCellOutgoing class]] ||
+             [self isKindOfClass:[JSQMessagesCollectionViewAudioCellOutgoing class]] ) {
         self.avatarViewSize = customAttributes.outgoingAvatarViewSize;
     }
 }
@@ -237,7 +250,7 @@
     [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.textView];
     [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:messageBubbleImageView];
     [self setNeedsUpdateConstraints];
-    
+
     _messageBubbleImageView = messageBubbleImageView;
 }
 
@@ -301,18 +314,6 @@
                             self.textViewMarginHorizontalSpaceConstraint.constant,
                             self.textViewBottomVerticalSpaceConstraint.constant,
                             self.textViewAvatarHorizontalSpaceConstraint.constant);
-}
-
-#pragma mark - Utilities
-
-- (void)jsq_updateConstraint:(NSLayoutConstraint *)constraint withConstant:(CGFloat)constant
-{
-    if (constraint.constant == constant) {
-        return;
-    }
-    
-    constraint.constant = constant;
-    [self setNeedsUpdateConstraints];
 }
 
 #pragma mark - UIResponder
