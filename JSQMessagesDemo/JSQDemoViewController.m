@@ -179,9 +179,15 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     
     
     /**
-     *  Show the tpying indicator
+     *  Set the typing indicator to be shown
      */
     self.showTypingIndicator = !self.showTypingIndicator;
+    
+    /**
+     *  Scroll to actually view the indicator
+     */
+    [self scrollToBottomAnimated:NO];
+    
     
     JSQMessage *copyMessage = [[self.messages lastObject] copy];
     
