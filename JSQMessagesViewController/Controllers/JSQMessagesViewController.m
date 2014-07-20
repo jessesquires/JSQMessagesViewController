@@ -55,6 +55,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
 
+@property (weak, nonatomic) UIView *snapshotView;
+
 @property (strong, nonatomic) JSQMessagesKeyboardController *keyboardController;
 
 @property (assign, nonatomic) CGFloat statusBarChangeInHeight;
@@ -223,6 +225,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self jsq_addObservers];
     [self jsq_addActionToInteractivePopGestureRecognizer:YES];
     [self.keyboardController beginListeningForKeyboard];
+    
+    if (self.snapshotView) {
+        [self.snapshotView removeFromSuperview];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -646,21 +652,29 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStateBegan:
         {
+            if (self.snapshotView) {
+                [self.snapshotView removeFromSuperview];
+            }
+            
             [self.keyboardController endListeningForKeyboard];
             [self.inputToolbar.contentView.textView resignFirstResponder];
             [UIView animateWithDuration:0.0
                              animations:^{
                                  [self jsq_setToolbarBottomLayoutGuideConstant:0.0f];
                              }];
+            
+            UIView *snapshot = [self.view snapshotViewAfterScreenUpdates:YES];
+            [self.view addSubview:snapshot];
+            self.snapshotView = snapshot;
         }
             break;
         case UIGestureRecognizerStateChanged:
-            //  TODO: handle this animation better
             break;
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateFailed:
             [self.keyboardController beginListeningForKeyboard];
+            [self.snapshotView removeFromSuperview];
             break;
         default:
             break;
