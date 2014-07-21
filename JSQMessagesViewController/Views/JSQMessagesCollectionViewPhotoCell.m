@@ -90,12 +90,14 @@
 
 - (void)setMessageBubbleImageView:(UIImageView *)messageBubbleImageView
 {
-    if (_messageBubbleImageView) {
+    if (!messageBubbleImageView) {
         [_messageBubbleImageView removeFromSuperview];
+        _messageBubbleImageView = nil;
+        return;
     }
     
-    if (!messageBubbleImageView) {
-        _messageBubbleImageView = nil;
+    if (_messageBubbleImageView) {
+        _messageBubbleImageView.image = messageBubbleImageView.image;
         return;
     }
     
@@ -111,9 +113,7 @@
     
     _messageBubbleImageView = messageBubbleImageView;
     
-    // Delay 0.1 seconds to wait for the completion of their frame set.
-    // It should be optimized ,there should be a better way to do it.
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self applyMask];
     });
 }
@@ -175,11 +175,9 @@
 
 - (void)applyMask
 {
-    if (!self.thumbnailImageView.layer.mask) {
-        CALayer *layer = self.messageBubbleImageView.layer;
-        layer.bounds = self.thumbnailImageView.frame;
-        self.thumbnailImageView.layer.mask = layer;
-    }
+    CALayer *layer = self.messageBubbleImageView.layer;
+    layer.bounds = self.thumbnailImageView.frame;
+    self.thumbnailImageView.layer.mask = layer;
 }
 
 
