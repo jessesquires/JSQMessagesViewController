@@ -4,7 +4,6 @@ before_install:
 - export LANG=en_US.UTF-8
 - gem install cocoapods
 - brew update
-- brew upgrade xctool
 
 script: 
 - xctool clean build test -workspace JSQMessages.xcworkspace -scheme JSQMessages -sdk iphonesimulator7.0 ONLY_ACTIVE_ARCH=NO

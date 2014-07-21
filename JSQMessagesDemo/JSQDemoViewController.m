@@ -180,7 +180,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     
     
     /**
-     *  Show the tpying indicator
+     *  Set the typing indicator to be shown
      */
     self.showTypingIndicator = !self.showTypingIndicator;
     
