@@ -425,13 +425,19 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         [cell.accessoryImageView setImage:nil];
     }
     
-    if (isOutgoingMessage) {
+    CGFloat bubbleTopLabelInset = 60.0f;
+
+    if (isOutgoingMessage)
+    {
+        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
         cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
                                                  CGRectGetMinY(cell.avatarImageView.bounds),
                                                  collectionView.collectionViewLayout.outgoingAvatarViewSize.width,
                                                  collectionView.collectionViewLayout.outgoingAvatarViewSize.height);
     }
-    else {
+    else
+    {
+        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
         cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
                                                  CGRectGetMinY(cell.avatarImageView.bounds),
                                                  collectionView.collectionViewLayout.incomingAvatarViewSize.width,
@@ -446,18 +452,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         NSParameterAssert(messageText != nil);
         
         cell.textView.text = messageText;
-        
-        CGFloat bubbleTopLabelInset = 60.0f;
-        
-        if (isOutgoingMessage) {
-            cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
-        }
-        else {
-            cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
-        }
-        
         cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
-        
     }
     else
     {
