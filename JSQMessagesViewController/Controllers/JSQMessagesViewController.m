@@ -66,8 +66,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_configureMessagesViewController;
 
-- (void)jsq_finishSendingOrReceivingMessage;
-
 - (NSString *)jsq_currentlyComposedMessageText;
 
 - (void)jsq_updateKeyboardTriggerPoint;
@@ -180,8 +178,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     
     _showTypingIndicator = showTypingIndicator;
-    
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+    [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 - (void)setShowLoadEarlierMessagesHeader:(BOOL)showLoadEarlierMessagesHeader
@@ -191,8 +189,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     
     _showLoadEarlierMessagesHeader = showLoadEarlierMessagesHeader;
-    
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView reloadData];
 }
 
 #pragma mark - View lifecycle
@@ -294,19 +293,19 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
     
-    [self jsq_finishSendingOrReceivingMessage];
+    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+    [self.collectionView reloadData];
+    
+    if (self.automaticallyScrollsToMostRecentMessage) {
+        [self scrollToBottomAnimated:YES];
+    }
 }
 
 - (void)finishReceivingMessage
 {
-    [self jsq_finishSendingOrReceivingMessage];
-}
-
-- (void)jsq_finishSendingOrReceivingMessage
-{
-    [self.collectionView reloadData];
-    
     self.showTypingIndicator = NO;
+    
+    [self.collectionView reloadData];
     
     if (self.automaticallyScrollsToMostRecentMessage) {
         [self scrollToBottomAnimated:YES];

@@ -184,7 +184,13 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      */
     self.showTypingIndicator = !self.showTypingIndicator;
     
-    JSQMessage *copyMessage = [JSQMessage messageWithImage:[UIImage imageNamed:@"pirlo"] sender:kJSQDemoAvatarNameJobs];
+    /**
+     *  Scroll to actually view the indicator
+     */
+    [self scrollToBottomAnimated:YES];
+    
+    
+    JSQMessage *copyMessage = [[self.messages lastObject] copy];
     
     if (!copyMessage) {
         return;

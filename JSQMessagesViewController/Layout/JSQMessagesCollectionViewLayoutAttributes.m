@@ -105,10 +105,7 @@
 
 - (NSUInteger)hash
 {
-    return [self.indexPath hash]
-            ^ (NSUInteger)self.cellTopLabelHeight
-            ^ (NSUInteger)self.messageBubbleTopLabelHeight
-            ^ (NSUInteger)self.cellBottomLabelHeight;
+    return [self.indexPath hash];
 }
 
 #pragma mark - NSCopying
