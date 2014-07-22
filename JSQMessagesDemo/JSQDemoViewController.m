@@ -186,7 +186,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  Scroll to actually view the indicator
      */
-    [self scrollToBottomAnimated:NO];
+    [self scrollToBottomAnimated:YES];
     
     
     JSQMessage *copyMessage = [[self.messages lastObject] copy];
