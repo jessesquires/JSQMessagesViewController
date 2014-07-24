@@ -111,11 +111,13 @@ Feel free to check out my work at [Hexed Bits](http://bit.ly/0x29A), or read [my
 * [Loopse](https://itunes.apple.com/us/app/loopse-spots-friends-sessions/id704783915)
 * [Oxwall Messenger](https://github.com/tochman/OxwallMessenger)
 * [FourChat](https://itunes.apple.com/us/app/fourchat/id650833730)
+* [vCinity](https://itunes.apple.com/us/app/vcinity-chat-without-internet/id875395391)
 * [Quick Text Message](https://itunes.apple.com/us/app/quick-text-message-fast-sms/id583729997)
 * [Libraries for developers](https://itunes.apple.com/us/app/libraries-for-developers/id653427112)
 * [Buhz|Hyve](http://itunes.apple.com/us/app/buhz-hyve/id818568956)
 * [PocketSuite](https://itunes.apple.com/us/app/pocketsuite/id721795146)
 * [Ringring.io](https://github.com/ringring-io/ringring-ios)
+* [gDecide](https://itunes.apple.com/ca/app/gdecide/id716801285)
 * [AwesomeChat](https://github.com/relatedcode/AwesomeChat)
 * [ParseChat](https://github.com/relatedcode/ParseChat)
 * *Your app here*
