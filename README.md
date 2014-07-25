@@ -12,7 +12,7 @@
 * ARC
 * [JSQSystemSoundPlayer][playerLink]
 
-*Need support for iOS 6? [You shouldn't](http://www.macrumors.com/2014/03/24/ios-7-adoption-85/). But, there's a branch for that!* 
+*Need support for iOS 6? [You shouldn't](http://www.macrumors.com/2014/07/14/apple-ios-7-adoption-90-percent/). But, there's a branch for that!* 
 ````
 git checkout iOS6_support_stable
 ````
