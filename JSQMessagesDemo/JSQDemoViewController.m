@@ -405,6 +405,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 #pragma mark - JSQMessages collection view flow layout delegate
 
+#pragma mark - Adjusting cell label heights
+
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -452,10 +454,27 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     return 0.0f;
 }
 
+#pragma mark - Responding to collection view tap events
+
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender
 {
     NSLog(@"Load earlier messages!");
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAvatarImageView:(UIImageView *)avatarImageView atIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Tapped avatar!");
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Tapped message bubble!");
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation
+{
+    NSLog(@"Tapped cell at %@!", NSStringFromCGPoint(touchLocation));
 }
 
 @end

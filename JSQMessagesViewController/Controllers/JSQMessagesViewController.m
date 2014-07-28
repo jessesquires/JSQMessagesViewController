@@ -516,6 +516,19 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
 }
 
+- (void)messagesCollectionViewCellDidTapMessageBubble:(JSQMessagesCollectionViewCell *)cell
+{
+    [self.collectionView.delegate collectionView:self.collectionView
+                  didTapMessageBubbleAtIndexPath:[self.collectionView indexPathForCell:cell]];
+}
+
+- (void)messagesCollectionViewCellDidTapCell:(JSQMessagesCollectionViewCell *)cell atPosition:(CGPoint)position
+{
+    [self.collectionView.delegate collectionView:self.collectionView
+                           didTapCellAtIndexPath:[self.collectionView indexPathForCell:cell]
+                                   touchLocation:position];
+}
+
 #pragma mark - Input toolbar delegate
 
 - (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar didPressLeftBarButton:(UIButton *)sender

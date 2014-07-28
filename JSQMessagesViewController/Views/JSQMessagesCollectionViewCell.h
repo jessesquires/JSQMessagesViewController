@@ -31,11 +31,33 @@
 @required
 
 /**
- *  Tells the delegate that the avatarImageView of a cell has been tapped.
+ *  Tells the delegate that the avatarImageView of the cell has been tapped.
  *
- *  @param cell The cell that received the tap.
+ *  @param cell The cell that received the tap touch event.
  */
 - (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell;
+
+/**
+ *  Tells the delegate that the message bubble of the cell has been tapped.
+ *
+ *  @param cell The cell that received the tap touch event.
+ */
+- (void)messagesCollectionViewCellDidTapMessageBubble:(JSQMessagesCollectionViewCell *)cell;
+
+/**
+ *  Tells the delegate that the cell has been tapped at the point specified by position.
+ *
+ *  @param cell The cell that received the tap touch event.
+ *  @param position The location of the received touch in the cell's coordinate system.
+ *
+ *  @discussion This method is *only* called if position is *not* within the bounds of the cell's
+ *  avatar image view or message bubble image view. In other words, this method is *not* called when the cell's
+ *  avatar or message bubble are tapped.
+ *
+ *  @see `messagesCollectionViewCellDidTapAvatar:`
+ *  @see `messagesCollectionViewCellDidTapMessageBubble:`
+ */
+- (void)messagesCollectionViewCellDidTapCell:(JSQMessagesCollectionViewCell *)cell atPosition:(CGPoint)position;
 
 @end
 

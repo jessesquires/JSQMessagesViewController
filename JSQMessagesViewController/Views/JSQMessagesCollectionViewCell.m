@@ -131,7 +131,7 @@
     self.longPressGestureRecognizer = longPress;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
-    [self.avatarContainerView addGestureRecognizer:tap];
+    [self addGestureRecognizer:tap];
     self.tapGestureRecognizer = tap;
 }
 
@@ -363,7 +363,17 @@
 
 - (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap
 {
-    [self.delegate messagesCollectionViewCellDidTapAvatar:self];
+    CGPoint touchPt = [tap locationInView:self];
+    
+    if (CGRectContainsPoint(self.avatarContainerView.frame, touchPt)) {
+        [self.delegate messagesCollectionViewCellDidTapAvatar:self];
+    }
+    else if (CGRectContainsPoint(self.messageBubbleContainerView.frame, touchPt)) {
+        [self.delegate messagesCollectionViewCellDidTapMessageBubble:self];
+    }
+    else {
+        [self.delegate messagesCollectionViewCellDidTapCell:self atPosition:touchPt];
+    }
 }
 
 #pragma mark - Notifications
