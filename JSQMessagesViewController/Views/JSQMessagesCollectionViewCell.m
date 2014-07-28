@@ -60,7 +60,6 @@
 
 - (void)jsq_handleLongPressGesture:(UILongPressGestureRecognizer *)longPress;
 - (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap;
-- (void)jsq_handleTapMediaGesture:(UITapGestureRecognizer *)tap;
 
 - (void)jsq_didReceiveMenuWillHideNotification:(NSNotification *)notification;
 - (void)jsq_didReceiveMenuWillShowNotification:(NSNotification *)notification;
@@ -133,13 +132,8 @@
     self.longPressGestureRecognizer = longPress;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
-    [self.avatarContainerView addGestureRecognizer:tap];
+    [self addGestureRecognizer:tap];
     self.tapGestureRecognizer = tap;
-    
-    UITapGestureRecognizer *tapMedia = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapMediaGesture:)];
-    self.mediaImageView.userInteractionEnabled = YES;
-    [self.mediaImageView addGestureRecognizer:tapMedia];
-    self.tapMediaGestureRecognizer = tapMedia;
     
     [self setAccesoryImageSize:15.0];
 }
@@ -393,12 +387,17 @@
 
 - (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap
 {
-    [self.delegate messagesCollectionViewCellDidTapAvatar:self];
-}
-
-- (void) jsq_handleTapMediaGesture:(UITapGestureRecognizer *)tap
-{
-    [self.delegate messagesCollectionViewCellDidTapMedia:self];
+    CGPoint touchPt = [tap locationInView:self];
+    
+    if (CGRectContainsPoint(self.avatarContainerView.frame, touchPt)) {
+        [self.delegate messagesCollectionViewCellDidTapAvatar:self];
+    }
+    else if (CGRectContainsPoint(self.messageBubbleContainerView.frame, touchPt)) {
+        [self.delegate messagesCollectionViewCellDidTapMessageBubble:self];
+    }
+    else {
+        [self.delegate messagesCollectionViewCellDidTapCell:self atPosition:touchPt];
+    }
 }
 
 #pragma mark - Notifications

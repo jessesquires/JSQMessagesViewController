@@ -140,6 +140,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     self.showLoadEarlierMessagesHeader = NO;
     
+    self.topContentAdditionalInset = 0.0f;
+    
     [self jsq_updateCollectionViewInsets];
     
     self.keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextView:self.inputToolbar.contentView.textView
@@ -603,18 +605,23 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                      atIndexPath:[self.collectionView indexPathForCell:cell]];
 }
 
-- (void)messagesCollectionViewCellDidTapMedia:(JSQMessagesCollectionViewCell *)cell;
-{
-    [self.collectionView.delegate collectionView:self.collectionView
-                            didTapMediaImageView:cell.mediaImageView
-                                     atIndexPath:[self.collectionView indexPathForCell:cell]];
-
-}
-
 - (void)messagesCollectionViewCellDidRequestCopy:(JSQMessagesCollectionViewCell *)cell;
 {
     [self.collectionView.delegate collectionView:self.collectionView
                     didTapCopyMessageAtIndexPath:[self.collectionView indexPathForCell:cell]];
+}
+
+- (void)messagesCollectionViewCellDidTapMessageBubble:(JSQMessagesCollectionViewCell *)cell
+{
+    [self.collectionView.delegate collectionView:self.collectionView
+                  didTapMessageBubbleAtIndexPath:[self.collectionView indexPathForCell:cell]];
+}
+
+- (void)messagesCollectionViewCellDidTapCell:(JSQMessagesCollectionViewCell *)cell atPosition:(CGPoint)position
+{
+    [self.collectionView.delegate collectionView:self.collectionView
+                           didTapCellAtIndexPath:[self.collectionView indexPathForCell:cell]
+                                   touchLocation:position];
 }
 
 #pragma mark - Input toolbar delegate
@@ -857,7 +864,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_updateCollectionViewInsets
 {
-    [self jsq_setCollectionViewInsetsTopValue:self.topLayoutGuide.length
+    [self jsq_setCollectionViewInsetsTopValue:self.topLayoutGuide.length + self.topContentAdditionalInset
                                   bottomValue:CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame)];
 }
 

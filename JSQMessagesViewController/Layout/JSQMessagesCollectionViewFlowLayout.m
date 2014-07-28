@@ -377,27 +377,32 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
     CGSize finalSize;
 
-    if (messageData.kind == JSQMessageTextKind)
-    {
-        /**
-         *  Fixed with diff https://github.com/rahulgautam/JSQMessagesViewController/commit/6846215619e414b625af02a8cd276681188a3421
-         */
-        
-        NSAttributedString *string = [[NSAttributedString alloc] initWithString:[messageData text]
-                                                                     attributes:@{ NSFontAttributeName : self.messageBubbleFont }];
-        
-        CGSize stringSize = [self jsq_frameSizeForAttributedString:string
-                                                          maxwidth:maximumTextWidth - textInsetsTotal];
-        
-        CGFloat verticalInsets = self.messageBubbleTextViewTextContainerInsets.top + self.messageBubbleTextViewTextContainerInsets.bottom;
-        
-        finalSize = CGSizeMake(stringSize.width, stringSize.height + verticalInsets);
+    switch (messageData.kind) {
+        case JSQMessageTextKind:
+        {
+            /**
+             *  Fixed with diff https://github.com/rahulgautam/JSQMessagesViewController/commit/6846215619e414b625af02a8cd276681188a3421
+             */
+            
+            NSAttributedString *string = [[NSAttributedString alloc] initWithString:[messageData text]
+                                                                         attributes:@{ NSFontAttributeName : self.messageBubbleFont }];
+            
+            CGSize stringSize = [self jsq_frameSizeForAttributedString:string
+                                                              maxwidth:maximumTextWidth - textInsetsTotal];
+            
+            CGFloat verticalInsets = self.messageBubbleTextViewTextContainerInsets.top + self.messageBubbleTextViewTextContainerInsets.bottom;
+            
+            finalSize = CGSizeMake(stringSize.width, stringSize.height + verticalInsets);
+        }
+            break;
+            
+        case JSQMessageLocalMediaKind:
+        case JSQMessageRemoteMediaKind:
+        {
+            finalSize = CGSizeMake(100, 100);
+        }
+            break;
     }
-    else if (messageData.kind == JSQMessageLocalMediaKind || messageData.kind == JSQMessageRemoteMediaKind)
-    {
-        finalSize = CGSizeMake(100, 100);
-    }
-
     
     [self.messageBubbleSizes setObject:[NSValue valueWithCGSize:finalSize] forKey:indexPath];
     
@@ -458,6 +463,10 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 - (CGSize)jsq_frameSizeForAttributedString:(NSAttributedString *)attributedString maxwidth:(CGFloat)width
 {
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFMutableAttributedStringRef)attributedString);
+    CGSize suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, 0), NULL, CGSizeMake(width, CGFLOAT_MAX), NULL);
+    CFRelease(framesetter);
+    
     CTTypesetterRef typesetter = CTTypesetterCreateWithAttributedString((CFAttributedStringRef)attributedString);
     CFIndex offset = 0, length;
     CGFloat y = 0;
@@ -476,7 +485,7 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     CFRelease(typesetter);
     
-    return CGSizeMake(width, ceil(y));
+    return CGSizeMake(suggestedSize.width, ceil(y));
 }
 
 #pragma mark - Spring behavior utilities
