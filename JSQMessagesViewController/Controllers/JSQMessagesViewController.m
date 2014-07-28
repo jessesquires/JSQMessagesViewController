@@ -200,13 +200,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                 options:nil];
     [self jsq_configureMessagesViewController];
     [self jsq_registerForNotifications:YES];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.view layoutIfNeeded];
-    [self.collectionView.collectionViewLayout invalidateLayout];
     
     if (self.automaticallyScrollsToMostRecentMessage) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -214,6 +207,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
         });
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.view layoutIfNeeded];
+    [self.collectionView.collectionViewLayout invalidateLayout];
     
     [self jsq_updateKeyboardTriggerPoint];
 }
