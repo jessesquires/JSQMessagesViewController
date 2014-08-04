@@ -210,7 +210,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     
     double animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
-    CGRect keyboardEndFrameConverted = [self.contextView convertRect:keyboardEndFrame fromView:nil];
+    CGRect keyboardEndFrameConverted = keyboardEndFrame;
     
     [UIView animateWithDuration:animationDuration
                           delay:0.0
@@ -285,8 +285,11 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)jsq_handlePanGestureRecognizer:(UIPanGestureRecognizer *)pan
 {
+    CGFloat yOffset = self.contextView.frame.origin.y;
+
     CGPoint touch = [pan locationInView:self.contextView];
-    
+    touch = CGPointMake(touch.x, touch.y + yOffset);
+
     //  system keyboard is added to a new UIWindow, need to operate in window coordinates
     //  also, keyboard always slides from bottom of screen, not the bottom of a view
     CGFloat contextViewWindowHeight = CGRectGetHeight(self.contextView.window.frame);
@@ -296,7 +299,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     
     CGFloat keyboardViewHeight = CGRectGetHeight(self.keyboardView.frame);
     
-    CGFloat dragThresholdY = (contextViewWindowHeight - keyboardViewHeight - self.keyboardTriggerPoint.y);
+    CGFloat dragThresholdY = (contextViewWindowHeight - keyboardViewHeight - self.keyboardTriggerPoint.y - yOffset);
     
     CGRect newKeyboardViewFrame = self.keyboardView.frame;
     
