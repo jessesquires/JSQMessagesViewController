@@ -17,6 +17,7 @@
 //
 
 #import "JSQMessagesTimestampFormatter.h"
+#import <UIKit/UIKit.h>
 
 @interface JSQMessagesTimestampFormatter ()
 
