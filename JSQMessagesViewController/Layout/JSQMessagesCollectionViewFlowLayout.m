@@ -225,8 +225,12 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 
 - (void)invalidateLayoutWithContext:(JSQMessagesCollectionViewFlowLayoutInvalidationContext *)context
 {
-    if (context.invalidateDataSourceCounts
-        || context.invalidateFlowLayoutAttributes
+    if (context.invalidateDataSourceCounts) {
+        context.invalidateFlowLayoutAttributes = YES;
+        context.invalidateFlowLayoutDelegateMetrics = YES;
+    }
+    
+    if (context.invalidateFlowLayoutAttributes
         || context.invalidateFlowLayoutDelegateMetrics) {
         [self.messageBubbleSizes removeAllObjects];
     }
