@@ -1,13 +1,20 @@
 PODS:
   - JSQSystemSoundPlayer (1.5.1)
+  - MQTTKit (0.1.0-next)
   - OCMock (2.2.4)
 
 DEPENDENCIES:
   - JSQSystemSoundPlayer
+  - MQTTKit (from `https://github.com/mobile-web-messaging/MQTTKit.git`)
   - OCMock
+
+EXTERNAL SOURCES:
+  MQTTKit:
+    :git: https://github.com/mobile-web-messaging/MQTTKit.git
 
 SPEC CHECKSUMS:
   JSQSystemSoundPlayer: a662f27f4ebac9f867116fc6c3926c19206c5e60
+  MQTTKit: eca7270c24d16fe7865143d3e86f393f3275c544
   OCMock: 6db79185520e24f9f299548f2b8b07e41d881bd5
 
 COCOAPODS: 0.33.1

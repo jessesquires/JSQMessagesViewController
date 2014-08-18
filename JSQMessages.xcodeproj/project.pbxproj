@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		44E73A51192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E73A50192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m */; };
+		5544860B199DC5F800A21C1C /* JSQChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5544860A199DC5F800A21C1C /* JSQChatViewController.m */; };
+		5553850F199CA63B00B5EBE5 /* JSQChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5553850E199CA63B00B5EBE5 /* JSQChatManager.m */; };
+		55EE041F199D069400C0071E /* getMacAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EE041E199D069400C0071E /* getMacAddress.m */; };
 		8816A69018E9250400111919 /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 8816A64918E9250400111919 /* bubble.png */; };
 		8816A69118E9250400111919 /* bubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8816A64A18E9250400111919 /* bubble@2x.png */; };
 		8816A69218E9250400111919 /* bubble_min.png in Resources */ = {isa = PBXBuildFile; fileRef = 8816A64B18E9250400111919 /* bubble_min.png */; };
@@ -111,6 +114,12 @@
 		343577012CC24261BE4B61A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E73A4F192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewFlowLayoutInvalidationContext.h; sourceTree = "<group>"; };
 		44E73A50192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewFlowLayoutInvalidationContext.m; sourceTree = "<group>"; };
+		55448609199DC5F800A21C1C /* JSQChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSQChatViewController.h; path = JSQMessagesDemo/JSQChatViewController.h; sourceTree = SOURCE_ROOT; };
+		5544860A199DC5F800A21C1C /* JSQChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSQChatViewController.m; path = JSQMessagesDemo/JSQChatViewController.m; sourceTree = SOURCE_ROOT; };
+		5553850D199CA63B00B5EBE5 /* JSQChatManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSQChatManager.h; path = JSQMessagesDemo/JSQChatManager.h; sourceTree = SOURCE_ROOT; };
+		5553850E199CA63B00B5EBE5 /* JSQChatManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSQChatManager.m; path = JSQMessagesDemo/JSQChatManager.m; sourceTree = SOURCE_ROOT; };
+		55EE041D199D069400C0071E /* getMacAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = getMacAddress.h; path = JSQMessagesDemo/getMacAddress.h; sourceTree = SOURCE_ROOT; };
+		55EE041E199D069400C0071E /* getMacAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = getMacAddress.m; path = JSQMessagesDemo/getMacAddress.m; sourceTree = SOURCE_ROOT; };
 		8816A64918E9250400111919 /* bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble.png; sourceTree = "<group>"; };
 		8816A64A18E9250400111919 /* bubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble@2x.png"; sourceTree = "<group>"; };
 		8816A64B18E9250400111919 /* bubble_min.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_min.png; sourceTree = "<group>"; };
@@ -451,6 +460,8 @@
 		885D593218CBD13D00D77BB3 /* JSQMessagesDemo */ = {
 			isa = PBXGroup;
 			children = (
+				55EE041D199D069400C0071E /* getMacAddress.h */,
+				55EE041E199D069400C0071E /* getMacAddress.m */,
 				885D596418CBD2A600D77BB3 /* Images.xcassets */,
 				885D596518CBD2A600D77BB3 /* JSQAppDelegate.h */,
 				885D596618CBD2A600D77BB3 /* JSQAppDelegate.m */,
@@ -460,6 +471,10 @@
 				885D596818CBD2A600D77BB3 /* JSQTableViewController.m */,
 				885D596C18CBD2BF00D77BB3 /* Main.storyboard */,
 				885D593318CBD13D00D77BB3 /* Supporting Files */,
+				5553850D199CA63B00B5EBE5 /* JSQChatManager.h */,
+				5553850E199CA63B00B5EBE5 /* JSQChatManager.m */,
+				55448609199DC5F800A21C1C /* JSQChatViewController.h */,
+				5544860A199DC5F800A21C1C /* JSQChatViewController.m */,
 			);
 			name = JSQMessagesDemo;
 			path = JSQMessages;
@@ -615,7 +630,7 @@
 				ORGANIZATIONNAME = "Hexed Bits";
 				TargetAttributes = {
 					885D592818CBD13D00D77BB3 = {
-						DevelopmentTeam = 5VRJU68BZ5;
+						DevelopmentTeam = 9BV576U92E;
 					};
 					885D594C18CBD13D00D77BB3 = {
 						TestTargetID = 885D592818CBD13D00D77BB3;
@@ -759,6 +774,7 @@
 				885D596A18CBD2A600D77BB3 /* JSQAppDelegate.m in Sources */,
 				8816A6AE18E9250400111919 /* JSQMessagesCollectionView.m in Sources */,
 				8816A6AB18E9250400111919 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
+				55EE041F199D069400C0071E /* getMacAddress.m in Sources */,
 				8816A6B518E9250400111919 /* JSQMessagesInputToolbar.m in Sources */,
 				88BC4D33190C6057002E5CC6 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
 				8816A6A318E9250400111919 /* UIImage+JSQMessages.m in Sources */,
@@ -779,9 +795,11 @@
 				8816A6B618E9250400111919 /* JSQMessagesLabel.m in Sources */,
 				88ADC6FC18F0999000FE0266 /* JSQMessagesKeyboardController.m in Sources */,
 				8816A6B418E9250400111919 /* JSQMessagesComposerTextView.m in Sources */,
+				5553850F199CA63B00B5EBE5 /* JSQChatManager.m in Sources */,
 				8816A6AA18E9250400111919 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				8816A6A418E9250400111919 /* UIView+JSQMessages.m in Sources */,
 				8816A6A718E9250400111919 /* JSQMessagesAvatarFactory.m in Sources */,
+				5544860B199DC5F800A21C1C /* JSQChatViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -933,14 +951,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Chen (6D6SZ5H4VZ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Chen (6D6SZ5H4VZ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JSQMessagesDemo/JSQMessages-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/JSQMessagesDemo/JSQMessages-Info.plist";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "EEED124A-8370-4E9A-9886-96C433DC8BEE";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -951,14 +969,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Chen (6D6SZ5H4VZ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Chen (6D6SZ5H4VZ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JSQMessagesDemo/JSQMessages-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/JSQMessagesDemo/JSQMessages-Info.plist";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "EEED124A-8370-4E9A-9886-96C433DC8BEE";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

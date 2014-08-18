@@ -17,11 +17,13 @@
 //
 
 #import "JSQAppDelegate.h"
+#import "JSQChatManager.h"
 
 @implementation JSQAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[JSQChatManager defaultManager] mqttInit];
     return YES;
 }
 

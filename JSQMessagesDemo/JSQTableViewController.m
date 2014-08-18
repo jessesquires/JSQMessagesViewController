@@ -17,6 +17,8 @@
 //
 
 #import "JSQTableViewController.h"
+#import "JSQChatManager.h"
+#import "JSQChatViewController.h"
 
 @implementation JSQTableViewController
 
@@ -32,18 +34,34 @@
 {
     [super viewWillAppear:animated];
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewContactStatus) name:NOTIFICATION_OF_CONTACT_STATUS object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Notification
+- (void)handleNewContactStatus
+{
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    NSUInteger num = [JSQChatManager defaultManager].contacts.count;
+    return num;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -55,6 +73,9 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
+    cell.textLabel.text = [[[JSQChatManager defaultManager].contacts allKeys] objectAtIndex:indexPath.row];
+    
+    /*
     if (indexPath.section == 0) {
         switch (indexPath.row) {
             case 0:
@@ -75,6 +96,7 @@
                 break;
         }
     }
+     */
     
     return cell;
 }
@@ -88,6 +110,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    JSQChatViewController *vc = [JSQChatViewController messagesViewController];
+    vc.contactName = [[[JSQChatManager defaultManager].contacts allKeys] objectAtIndex:indexPath.row];
+    ContactObject * chatObj = [[JSQChatManager defaultManager].contacts objectForKey:vc.contactName];
+    vc.messages = chatObj.messages;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    /*
     if (indexPath.section == 0) {
         switch (indexPath.row) {
             case 0:
@@ -116,6 +145,7 @@
                 break;
         }
     }
+     */
 }
 
 #pragma mark - Segues
