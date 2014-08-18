@@ -17,6 +17,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  *  `JSQMessagesToolbarButtonFactory` is a factory that provides a means for creating the default
