@@ -22,6 +22,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  *  Posted when the system keyboard frame changes.

@@ -17,6 +17,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  *  `JSQMessagesAvatarFactory` is a factory that provides a means for creating and styling avatar images 

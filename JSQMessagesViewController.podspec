@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 	s.name					= 'JSQMessagesViewController'
-	s.version				= '5.2.1'
+	s.version				= '5.2.2'
 	s.summary				= 'An elegant messages UI library for iOS.'
 	s.homepage				= 'http://jessesquires.github.io/JSQMessagesViewController'
 	s.license				= 'MIT'
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 	s.source				= { :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :tag => s.version.to_s }
 	s.platform				= :ios, '7.0'	
 	s.source_files			= 'JSQMessagesViewController/**/*.{h,m}'
-	s.resources				= 'JSQMessagesViewController/Assets/**/**/*', 'JSQMessagesViewController/**/*.{xib}'
+	s.resources				= 'JSQMessagesViewController/Assets/**/*', 'JSQMessagesViewController/**/*.{xib}'
 	s.frameworks			= 'QuartzCore'
 	s.requires_arc			= true
 
