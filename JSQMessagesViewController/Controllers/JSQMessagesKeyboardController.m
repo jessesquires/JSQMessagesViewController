@@ -210,14 +210,12 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     
     double animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
-    CGRect keyboardEndFrameConverted = keyboardEndFrame;
-    
     [UIView animateWithDuration:animationDuration
                           delay:0.0
                         options:animationCurveOption
                      animations:^{
-                         [self.delegate keyboardDidChangeFrame:keyboardEndFrameConverted];
-                         [self jsq_postKeyboardFrameNotificationForFrame:keyboardEndFrameConverted];
+                         [self.delegate keyboardDidChangeFrame:keyboardEndFrame];
+                         [self jsq_postKeyboardFrameNotificationForFrame:keyboardEndFrame];
                      }
                      completion:^(BOOL finished) {
                          if (completion) {
@@ -285,10 +283,10 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)jsq_handlePanGestureRecognizer:(UIPanGestureRecognizer *)pan
 {
-    CGFloat yOffset = self.contextView.frame.origin.y;
-
+    CGFloat contextViewOriginY = CGRectGetMinY(self.contextView.frame);
+    
     CGPoint touch = [pan locationInView:self.contextView];
-    touch = CGPointMake(touch.x, touch.y + yOffset);
+    touch = CGPointMake(touch.x, touch.y + contextViewOriginY);
 
     //  system keyboard is added to a new UIWindow, need to operate in window coordinates
     //  also, keyboard always slides from bottom of screen, not the bottom of a view
@@ -299,7 +297,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     
     CGFloat keyboardViewHeight = CGRectGetHeight(self.keyboardView.frame);
     
-    CGFloat dragThresholdY = (contextViewWindowHeight - keyboardViewHeight - self.keyboardTriggerPoint.y - yOffset);
+    CGFloat dragThresholdY = (contextViewWindowHeight - keyboardViewHeight - self.keyboardTriggerPoint.y - contextViewOriginY);
     
     CGRect newKeyboardViewFrame = self.keyboardView.frame;
     
