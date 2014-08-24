@@ -200,7 +200,7 @@
 /**
  *  Notifies the delegate that the avatar image view at the specified indexPath did receive a tap event.
  *
- *  @param collectionView  The collection view object that is notifying you of the tap event.
+ *  @param collectionView  The collection view object that is notifying the delegate of the tap event.
  *  @param avatarImageView The avatar image view that was tapped.
  *  @param indexPath       The index path of the item for which the avatar was tapped.
  */
@@ -211,7 +211,7 @@
 /**
  *  Notifies the delegate that the message bubble at the specified indexPath did receive a tap event.
  *
- *  @param collectionView The collection view object that is notifying you of the tap event.
+ *  @param collectionView The collection view object that is notifying the delegate of the tap event.
  *  @param indexPath      The index path of the item for which the message bubble was tapped.
  */
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath;
@@ -219,7 +219,7 @@
 /**
  *  Notifies the delegate that the cell at the specified indexPath did receive a tap event at the specified touchLocation.
  *
- *  @param collectionView The collection view object that is notifying you of the tap event.
+ *  @param collectionView The collection view object that is notifying the delegate of the tap event.
  *  @param indexPath      The index path of the item for which the message bubble was tapped.
  *  @param touchLocation  The location of the touch event in the cell's coordinate system.
  *
@@ -237,7 +237,7 @@
 /**
  *  Notifies the delegate that the collection view's header did receive a tap event.
  *
- *  @param collectionView The collection view object that is notifying you of the tap event.
+ *  @param collectionView The collection view object that is notifying the delegate of the tap event.
  *  @param headerView     The header view in the collection view.
  *  @param sender         The button that was tapped.
  */
