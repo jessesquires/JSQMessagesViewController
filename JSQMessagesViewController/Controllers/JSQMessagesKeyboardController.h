@@ -24,6 +24,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@class JSQMessagesKeyboardController;
+
 /**
  *  Posted when the system keyboard frame changes.
  *  The object of the notification is the `JSQMessagesKeyboardController` object. 
@@ -52,9 +54,10 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
 /**
  *  Tells the delegate that the keyboard frame has changed.
  *
- *  @param keyboardFrame The new frame of the keyboard in the coordinate system of the `contextView`.
+ *  @param keyboardController The keyboard controller that is notifying the delegate.
+ *  @param keyboardFrame      The new frame of the keyboard in the coordinate system of the `contextView`.
  */
-- (void)keyboardDidChangeFrame:(CGRect)keyboardFrame;
+- (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame;
 
 @end
 
@@ -96,6 +99,20 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
  *  @discussion The x value of the point is not used.
  */
 @property (assign, nonatomic) CGPoint keyboardTriggerPoint;
+
+/**
+ *  Returns the current change in height of the status bar, if its original frame has changed.
+ *
+ *  @discussion This value is updated when the keyboard controller receives the 
+ *  `UIApplicationDidChangeStatusBarFrameNotification` notification. This value reflects the difference
+ *  in the status bar height when the in-call or tethering status bar notification is present.
+ */
+@property (assign, nonatomic, readonly) NSUInteger statusBarChangeInHeight;
+
+/**
+ *  Returns `YES` if the keyboard is currently visible, `NO` otherwise.
+ */
+@property (assign, nonatomic, readonly) BOOL keyboardIsVisible;
 
 /**
  *  Creates a new keyboard controller object with the specified textView, contextView, panGestureRecognizer, and delegate.
