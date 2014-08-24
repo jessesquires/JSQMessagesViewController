@@ -38,8 +38,6 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 @property (weak, nonatomic) UIView *keyboardView;
 
-@property (assign, nonatomic, readwrite) NSUInteger statusBarChangeInHeight;
-
 - (void)jsq_registerForNotifications;
 - (void)jsq_unregisterForNotifications;
 
@@ -48,8 +46,6 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 - (void)jsq_didReceiveKeyboardDidChangeFrameNotification:(NSNotification *)notification;
 - (void)jsq_didReceiveKeyboardDidHideNotification:(NSNotification *)notification;
 - (void)jsq_handleKeyboardNotification:(NSNotification *)notification completion:(JSQAnimationCompletionBlock)completion;
-
-- (void)jsq_handleDidChangeStatusBarFrameNotification:(NSNotification *)notification;
 
 - (void)jsq_setKeyboardViewHidden:(BOOL)hidden;
 
@@ -84,7 +80,6 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
         _panGestureRecognizer = panGestureRecognizer;
         _delegate = delegate;
         _jsq_isObserving = NO;
-        _statusBarChangeInHeight = 0;
     }
     return self;
 }
@@ -125,6 +120,15 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 - (BOOL)keyboardIsVisible
 {
     return self.keyboardView != nil;
+}
+
+- (CGRect)currentKeyboardFrame
+{
+    if (!self.keyboardIsVisible) {
+        return CGRectNull;
+    }
+    
+    return self.keyboardView.frame;
 }
 
 #pragma mark - Keyboard controller
@@ -169,11 +173,6 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(jsq_didReceiveKeyboardDidHideNotification:)
                                                  name:UIKeyboardDidHideNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(jsq_handleDidChangeStatusBarFrameNotification:)
-                                                 name:UIApplicationDidChangeStatusBarFrameNotification
                                                object:nil];
 }
 
@@ -241,22 +240,6 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                              completion(finished);
                          }
                      }];
-}
-
-- (void)jsq_handleDidChangeStatusBarFrameNotification:(NSNotification *)notification
-{
-    CGRect previousStatusBarFrame = [[[notification userInfo] objectForKey:UIApplicationStatusBarFrameUserInfoKey] CGRectValue];
-    CGRect currentStatusBarFrame = [UIApplication sharedApplication].statusBarFrame;
-    CGFloat statusBarHeightDelta = CGRectGetHeight(currentStatusBarFrame) - CGRectGetHeight(previousStatusBarFrame);
-    self.statusBarChangeInHeight = MAX(statusBarHeightDelta, 0.0f);
-    
-    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-        self.statusBarChangeInHeight = 0;
-    }
-    
-    if (self.keyboardIsVisible) {
-        [self jsq_notifyKeyboardFrameNotificationForFrame:self.keyboardView.frame];
-    }
 }
 
 #pragma mark - Utilities

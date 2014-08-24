@@ -65,6 +65,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (NSString *)jsq_currentlyComposedMessageText;
 
+- (void)jsq_handleDidChangeStatusBarFrameNotification:(NSNotification *)notification;
+
 - (void)jsq_updateKeyboardTriggerPoint;
 - (void)jsq_setToolbarBottomLayoutGuideConstant:(CGFloat)constant;
 
@@ -80,6 +82,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_addObservers;
 - (void)jsq_removeObservers;
+
+- (void)jsq_registerForNotifications:(BOOL)registerForNotifications;
 
 - (void)jsq_addActionToInteractivePopGestureRecognizer:(BOOL)addAction;
 
@@ -144,6 +148,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)dealloc
 {
+    [self jsq_registerForNotifications:NO];
     [self jsq_removeObservers];
     
     _collectionView.dataSource = nil;
@@ -196,6 +201,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                   owner:self
                                 options:nil];
     [self jsq_configureMessagesViewController];
+    [self jsq_registerForNotifications:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -598,6 +604,15 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [textView resignFirstResponder];
 }
 
+#pragma mark - Notifications
+
+- (void)jsq_handleDidChangeStatusBarFrameNotification:(NSNotification *)notification
+{
+    if (self.keyboardController.keyboardIsVisible) {
+        [self jsq_setToolbarBottomLayoutGuideConstant:CGRectGetHeight(self.keyboardController.currentKeyboardFrame)];
+    }
+}
+
 #pragma mark - Key-value observing
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -627,7 +642,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     CGFloat heightFromBottom = CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(keyboardFrame);
     
-    heightFromBottom = MAX(0.0f, heightFromBottom + keyboardController.statusBarChangeInHeight);
+    heightFromBottom = MAX(0.0f, heightFromBottom);
     
     [self jsq_setToolbarBottomLayoutGuideConstant:heightFromBottom];
 }
@@ -796,6 +811,21 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     @catch (NSException * __unused exception) { }
     
     _jsq_isObserving = NO;
+}
+
+- (void)jsq_registerForNotifications:(BOOL)registerForNotifications
+{
+    if (registerForNotifications) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(jsq_handleDidChangeStatusBarFrameNotification:)
+                                                     name:UIApplicationDidChangeStatusBarFrameNotification
+                                                   object:nil];
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                        name:UIApplicationDidChangeStatusBarFrameNotification
+                                                      object:nil];
+    }
 }
 
 - (void)jsq_addActionToInteractivePopGestureRecognizer:(BOOL)addAction

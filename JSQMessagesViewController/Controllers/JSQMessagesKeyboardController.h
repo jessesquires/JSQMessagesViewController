@@ -101,18 +101,14 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
 @property (assign, nonatomic) CGPoint keyboardTriggerPoint;
 
 /**
- *  Returns the current change in height of the status bar, if its original frame has changed.
- *
- *  @discussion This value is updated when the keyboard controller receives the 
- *  `UIApplicationDidChangeStatusBarFrameNotification` notification. This value reflects the difference
- *  in the status bar height when the in-call or tethering status bar notification is present.
- */
-@property (assign, nonatomic, readonly) NSUInteger statusBarChangeInHeight;
-
-/**
  *  Returns `YES` if the keyboard is currently visible, `NO` otherwise.
  */
 @property (assign, nonatomic, readonly) BOOL keyboardIsVisible;
+
+/**
+ *  Returns the current frame of the keyboard if it is visible, otherwise `CGRectNull`.
+ */
+@property (assign, nonatomic, readonly) CGRect currentKeyboardFrame;
 
 /**
  *  Creates a new keyboard controller object with the specified textView, contextView, panGestureRecognizer, and delegate.
