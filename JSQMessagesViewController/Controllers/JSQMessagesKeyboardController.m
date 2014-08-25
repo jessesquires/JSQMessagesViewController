@@ -306,22 +306,22 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)jsq_handlePanGestureRecognizer:(UIPanGestureRecognizer *)pan
 {
-    CGPoint touch = [pan locationInView:self.contextView];
-    CGPoint touchInWindow = [pan locationInView:nil];
+    CGPoint touchInWindow = [pan locationInView:nil];   //Get the touch in UIWindow coordinates
 
-    CGFloat contextViewHeight = CGRectGetHeight(self.contextView.frame);
-    CGFloat keyboardViewHeight = CGRectGetHeight(self.keyboardView.frame);
-    
+    //  system keyboard is added to a new UIWindow, need to operate in window coordinates
+    //  also, keyboard always slides from bottom of screen, not the bottom of a view
     CGFloat contextViewWindowHeight = CGRectGetHeight(self.contextView.window.frame);
     if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
         contextViewWindowHeight = CGRectGetWidth(self.contextView.window.frame);
     }
+
+    CGFloat keyboardViewHeight = CGRectGetHeight(self.keyboardView.frame);
     
-    CGFloat dragThresholdY = (contextViewHeight - keyboardViewHeight - self.keyboardTriggerPoint.y);
+    CGFloat dragThresholdY = (contextViewWindowHeight - keyboardViewHeight - self.keyboardTriggerPoint.y);
     
     CGRect newKeyboardViewFrame = self.keyboardView.frame;
     
-    BOOL userIsDraggingNearThresholdForDismissing = (touch.y > dragThresholdY);
+    BOOL userIsDraggingNearThresholdForDismissing = (touchInWindow.y > dragThresholdY);
     
     self.keyboardView.userInteractionEnabled = !userIsDraggingNearThresholdForDismissing;
     
