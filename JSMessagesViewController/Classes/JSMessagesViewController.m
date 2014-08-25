@@ -20,7 +20,7 @@
 
 @property (assign, nonatomic) CGFloat previousTextViewContentHeight;
 @property (assign, nonatomic) BOOL isUserScrolling;
-@property (assign, nonatomic) BOOL viewWillAppearHasSetupObservers;
+@property (assign, nonatomic) BOOL isObserving;
 
 - (void)setup;
 
@@ -118,13 +118,14 @@
     [super viewDidLoad];
     [self setup];
     [[JSBubbleView appearance] setFont:[UIFont systemFontOfSize:16.0f]];
+    self.isObserving = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 
-    if (!self.viewWillAppearHasSetupObservers) {
+    if (!self.isObserving) {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleWillShowKeyboardNotification:)
                                                      name:UIKeyboardWillShowNotification
@@ -140,7 +141,7 @@
                                             options:NSKeyValueObservingOptionNew
                                             context:nil];
 
-        self.viewWillAppearHasSetupObservers = YES;
+        self.isObserving = YES;
   }
 }
 
@@ -151,13 +152,13 @@
     [self.messageInputView resignFirstResponder];
     [self setEditing:NO animated:YES];
 
-    if (self.viewWillAppearHasSetupObservers) {
+    if (self.isObserving) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 
         [self.messageInputView.textView removeObserver:self forKeyPath:@"contentSize"];
 
-        self.viewWillAppearHasSetupObservers = NO;
+        self.isObserving = NO;
     }
 }
 
