@@ -312,9 +312,11 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     CGFloat contextViewHeight = CGRectGetHeight(self.contextView.frame);
     CGFloat keyboardViewHeight = CGRectGetHeight(self.keyboardView.frame);
     
-    CGFloat contextViewOriginY = CGRectGetMinY(self.contextView.frame);
-    CGFloat screenHeight = contextViewHeight + contextViewOriginY;
-
+    CGFloat contextViewWindowHeight = CGRectGetHeight(self.contextView.window.frame);
+    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        contextViewWindowHeight = CGRectGetWidth(self.contextView.window.frame);
+    }
+    
     CGFloat dragThresholdY = (contextViewHeight - keyboardViewHeight - self.keyboardTriggerPoint.y);
     
     CGRect newKeyboardViewFrame = self.keyboardView.frame;
@@ -332,8 +334,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
             }
 
             //  bound frame between bottom of view and height of keyboard
-            newKeyboardViewFrame.origin.y = MIN(newKeyboardViewFrame.origin.y, screenHeight);
-            newKeyboardViewFrame.origin.y = MAX(newKeyboardViewFrame.origin.y, screenHeight - keyboardViewHeight);
+            newKeyboardViewFrame.origin.y = MIN(newKeyboardViewFrame.origin.y, contextViewWindowHeight);
+            newKeyboardViewFrame.origin.y = MAX(newKeyboardViewFrame.origin.y, contextViewWindowHeight - keyboardViewHeight);
             
             if (CGRectGetMinY(newKeyboardViewFrame) == CGRectGetMinY(self.keyboardView.frame)) {
                 return;
@@ -362,7 +364,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
             BOOL userIsScrollingDown = (velocity.y > 0.0f);
             BOOL shouldHide = (userIsScrollingDown && userIsDraggingNearThresholdForDismissing);
             
-            newKeyboardViewFrame.origin.y = shouldHide ? screenHeight : (screenHeight - keyboardViewHeight);
+            newKeyboardViewFrame.origin.y = shouldHide ? contextViewWindowHeight : (contextViewWindowHeight - keyboardViewHeight);
             
             [UIView animateWithDuration:0.25
                                   delay:0.0

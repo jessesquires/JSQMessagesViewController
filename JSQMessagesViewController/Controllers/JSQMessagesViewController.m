@@ -640,8 +640,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame
 {
-    NSString *keyboardFrameString = NSStringFromCGRect(keyboardFrame);
-    
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     
     CGRect collectionViewFrame = [window convertRect:self.collectionView.frame
