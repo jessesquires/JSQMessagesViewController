@@ -640,16 +640,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame
 {
-    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIWindow *window = self.view.window;
     
     CGRect collectionViewFrame = [window convertRect:self.collectionView.frame
                                             fromView:self.view];
     
     CGRect coveredFrame = CGRectIntersection(collectionViewFrame, keyboardFrame);
-    
+
     coveredFrame = [window convertRect:coveredFrame toView:self.view];
     
-    CGFloat heightFromBottom = coveredFrame.size.height;
+    CGFloat heightFromBottom = CGRectGetHeight(coveredFrame);
     
     [self jsq_setToolbarBottomLayoutGuideConstant:heightFromBottom];
 }
