@@ -154,11 +154,6 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                                                                                               target:self
                                                                                               action:@selector(closePressed:)];
     }
-    
-    self.inputToolbar.contentView.rightBarButtonItem.backgroundColor = [UIColor lightGrayColor];
-    self.inputToolbar.contentView.rightBarButtonItemWidth = 180.0f;
-    [self.inputToolbar setNeedsUpdateConstraints];
-    [self.inputToolbar setNeedsLayout];
 }
 
 - (void)viewDidAppear:(BOOL)animated
