@@ -203,6 +203,18 @@
     }
 }
 
+- (void)setHighlighted:(BOOL)highlighted
+{
+    [super setHighlighted:highlighted];
+    self.messageBubbleImageView.highlighted = highlighted;
+}
+
+- (void)setSelected:(BOOL)selected
+{
+    [super setSelected:selected];
+    self.messageBubbleImageView.highlighted = selected;
+}
+
 #pragma mark - Setters
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor
@@ -366,6 +378,11 @@
 
 - (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap
 {
+    if ([UIMenuController sharedMenuController].isMenuVisible) {
+        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+        return;
+    }
+    
     CGPoint touchPt = [tap locationInView:self];
     
     if (CGRectContainsPoint(self.avatarContainerView.frame, touchPt)) {
