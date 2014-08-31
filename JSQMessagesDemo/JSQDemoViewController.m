@@ -141,8 +141,6 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(receiveMessagePressed:)];
-    
-
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -59,14 +59,9 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.0f;
     [super awakeFromNib];
     
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.leftBarButtonContainerView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.rightBarButtonContainerView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     self.leftHorizontalSpacingConstraint.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
     self.rightHorizontalSpacingConstraint.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
-    
-    self.leftBarButtonItem = nil;
-    self.rightBarButtonItem = nil;
     
     self.backgroundColor = [UIColor clearColor];
 }
@@ -96,18 +91,15 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.0f;
     }
     
     if (!leftBarButtonItem) {
+        _leftBarButtonItem = nil;
         self.leftHorizontalSpacingConstraint.constant = 0.0f;
         self.leftBarButtonItemWidth = 0.0f;
-        _leftBarButtonItem = nil;
         self.leftBarButtonContainerView.hidden = YES;
         return;
     }
     
     if (CGRectEqualToRect(leftBarButtonItem.frame, CGRectZero)) {
-        leftBarButtonItem.frame = CGRectMake(0.0f,
-                                             0.0f,
-                                             CGRectGetWidth(self.leftBarButtonContainerView.frame),
-                                             CGRectGetHeight(self.leftBarButtonContainerView.frame));
+        leftBarButtonItem.frame = self.leftBarButtonContainerView.bounds;
     }
     
     self.leftBarButtonContainerView.hidden = NO;
@@ -123,6 +115,10 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.0f;
 
 - (void)setLeftBarButtonItemWidth:(CGFloat)leftBarButtonItemWidth
 {
+    self.leftBarButtonItem.frame = CGRectMake(0.0f,
+                                              0.0f,
+                                              leftBarButtonItemWidth,
+                                              CGRectGetHeight(self.leftBarButtonContainerView.frame));
     self.leftBarButtonContainerViewWidthConstraint.constant = leftBarButtonItemWidth;
     [self setNeedsUpdateConstraints];
 }
@@ -134,18 +130,15 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.0f;
     }
     
     if (!rightBarButtonItem) {
+        _rightBarButtonItem = nil;
         self.rightHorizontalSpacingConstraint.constant = 0.0f;
         self.rightBarButtonItemWidth = 0.0f;
-        _rightBarButtonItem = nil;
         self.rightBarButtonContainerView.hidden = YES;
         return;
     }
     
     if (CGRectEqualToRect(rightBarButtonItem.frame, CGRectZero)) {
-        rightBarButtonItem.frame = CGRectMake(0.0f,
-                                              0.0f,
-                                              CGRectGetWidth(self.rightBarButtonContainerView.frame),
-                                              CGRectGetHeight(self.rightBarButtonContainerView.frame));
+        rightBarButtonItem.frame = self.rightBarButtonContainerView.bounds;
     }
     
     self.rightBarButtonContainerView.hidden = NO;
@@ -161,6 +154,10 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.0f;
 
 - (void)setRightBarButtonItemWidth:(CGFloat)rightBarButtonItemWidth
 {
+    self.rightBarButtonItem.frame = CGRectMake(0.0f,
+                                               0.0f,
+                                               rightBarButtonItemWidth,
+                                               CGRectGetHeight(self.rightBarButtonContainerView.frame));
     self.rightBarButtonContainerViewWidthConstraint.constant = rightBarButtonItemWidth;
     [self setNeedsUpdateConstraints];
 }
