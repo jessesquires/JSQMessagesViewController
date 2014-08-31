@@ -37,6 +37,8 @@
 
 #import "JSQMessage.h"
 #import "JSQMessageData.h"
+#import "JSQMessagesCollectionViewDataSource.h"
+#import "JSQMessagesCollectionViewDelegateFlowLayout.h"
 
 #import "JSQMessagesAvatarFactory.h"
 #import "JSQMessagesBubbleImageFactory.h"
