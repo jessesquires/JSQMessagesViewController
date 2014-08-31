@@ -16,6 +16,9 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
+#ifndef JSQMessages_JSQMessageData_h
+#define JSQMessages_JSQMessageData_h
+
 #import <Foundation/Foundation.h>
 
 /**
@@ -48,3 +51,5 @@
 - (NSDate *)date;
 
 @end
+
+#endif
