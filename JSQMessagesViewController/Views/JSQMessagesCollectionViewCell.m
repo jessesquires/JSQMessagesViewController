@@ -162,6 +162,9 @@
     self.cellTopLabel.text = nil;
     self.messageBubbleTopLabel.text = nil;
     self.cellBottomLabel.text = nil;
+    self.textView.dataDetectorTypes = UIDataDetectorTypeNone;
+    self.textView.text = nil;
+    self.textView.attributedText = nil;
 }
 
 - (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
