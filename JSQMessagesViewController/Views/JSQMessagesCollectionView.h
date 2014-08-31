@@ -21,8 +21,8 @@
 #import "JSQMessagesCollectionViewFlowLayout.h"
 #import "JSQMessagesCollectionViewDelegateFlowLayout.h"
 #import "JSQMessagesCollectionViewDataSource.h"
+#import "JSQMessagesCollectionViewCell.h"
 
-@class JSQMessagesCollectionView;
 @class JSQMessagesTypingIndicatorFooterView;
 @class JSQMessagesLoadEarlierHeaderView;
 
@@ -31,7 +31,7 @@
  *  The `JSQMessagesCollectionView` class manages an ordered collection of message data items and presents
  *  them using a specialized layout for messages.
  */
-@interface JSQMessagesCollectionView : UICollectionView
+@interface JSQMessagesCollectionView : UICollectionView <JSQMessagesCollectionViewCellDelegate>
 
 /**
  *  The object that provides the data for the collection view.

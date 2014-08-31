@@ -46,7 +46,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 
 @interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate,
-                                         JSQMessagesCollectionViewCellDelegate,
                                          JSQMessagesKeyboardControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
@@ -385,7 +384,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    cell.delegate = self;
+    cell.delegate = collectionView;
     
     NSString *messageText = [messageData text];
     NSParameterAssert(messageText != nil);
@@ -512,28 +511,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
  didTapCellAtIndexPath:(NSIndexPath *)indexPath
          touchLocation:(CGPoint)touchLocation { }
-
-#pragma mark - Messages collection view cell delegate
-
-- (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell
-{
-    [self.collectionView.delegate collectionView:self.collectionView
-                           didTapAvatarImageView:cell.avatarImageView
-                                     atIndexPath:[self.collectionView indexPathForCell:cell]];
-}
-
-- (void)messagesCollectionViewCellDidTapMessageBubble:(JSQMessagesCollectionViewCell *)cell
-{
-    [self.collectionView.delegate collectionView:self.collectionView
-                  didTapMessageBubbleAtIndexPath:[self.collectionView indexPathForCell:cell]];
-}
-
-- (void)messagesCollectionViewCellDidTapCell:(JSQMessagesCollectionViewCell *)cell atPosition:(CGPoint)position
-{
-    [self.collectionView.delegate collectionView:self.collectionView
-                           didTapCellAtIndexPath:[self.collectionView indexPathForCell:cell]
-                                   touchLocation:position];
-}
 
 #pragma mark - Input toolbar delegate
 
