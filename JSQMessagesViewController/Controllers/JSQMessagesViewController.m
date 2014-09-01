@@ -469,6 +469,25 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     return NO;
 }
 
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    return (action == @selector(copy:));
+}
+
+- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    if (action == @selector(copy:)) {
+        [[UIPasteboard generalPasteboard] setString:cell.textView.text];
+        [cell resignFirstResponder];
+    }
+}
+
 #pragma mark - Collection view delegate flow layout
 
 - (CGSize)collectionView:(JSQMessagesCollectionView *)collectionView

@@ -136,4 +136,22 @@
                     touchLocation:position];
 }
 
+- (BOOL)shouldShowMenuForCell:(JSQMessagesCollectionViewCell *)cell
+{
+    NSIndexPath *indexPath = [self indexPathForCell:cell];
+    return [self.delegate collectionView:self shouldShowMenuForItemAtIndexPath:indexPath];
+}
+
+- (BOOL)canPerformAction:(SEL)action forCell:(JSQMessagesCollectionViewCell *)cell withSender:(id)sender
+{
+    NSIndexPath *indexPath = [self indexPathForCell:cell];
+    return [self.delegate collectionView:self canPerformAction:action forItemAtIndexPath:indexPath withSender:sender];
+}
+
+- (void)performAction:(SEL)action forCell:(UICollectionViewCell *)cell withSender:(id)sender
+{
+    NSIndexPath *indexPath = [self indexPathForCell:cell];
+    [self.delegate collectionView:self performAction:action forItemAtIndexPath:indexPath withSender:sender];
+}
+
 @end

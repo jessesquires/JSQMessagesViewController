@@ -59,6 +59,12 @@
  */
 - (void)messagesCollectionViewCellDidTapCell:(JSQMessagesCollectionViewCell *)cell atPosition:(CGPoint)position;
 
+- (BOOL)shouldShowMenuForCell:(JSQMessagesCollectionViewCell *)cell;
+
+- (BOOL)canPerformAction:(SEL)action forCell:(JSQMessagesCollectionViewCell *)cell withSender:(id)sender;
+
+- (void)performAction:(SEL)action forCell:(JSQMessagesCollectionViewCell *)cell withSender:(id)sender;
+
 @end
 
 
