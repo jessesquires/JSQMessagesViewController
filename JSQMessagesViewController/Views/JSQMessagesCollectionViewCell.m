@@ -25,6 +25,22 @@
 #import "UIView+JSQMessages.h"
 
 
+@interface ActionTarget : NSObject
+@property (weak, nonatomic) id<JSQMessagesCollectionViewCellDelegate> delegate;
+@property (weak, nonatomic) JSQMessagesCollectionViewCell *cell;
+
+@end
+
+@implementation ActionTarget
+
+- (id)performSelector:(SEL)action withObject:(id)object
+{
+    [_delegate performAction:action forCell:_cell withSender:object];
+    return nil;
+}
+@end
+
+
 @interface JSQMessagesCollectionViewCell ()
 
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellTopLabel;
@@ -342,25 +358,31 @@
     return [super becomeFirstResponder];
 }
 
-- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
+- (id)targetForAction:(SEL)action withSender:(id)sender
 {
-    return (action == @selector(copy:));
-}
-
-- (void)copy:(id)sender
-{
-    [[UIPasteboard generalPasteboard] setString:self.textView.text];
-    [self resignFirstResponder];
+    if ([self.delegate canPerformAction:action forCell:self withSender:(id)sender]) {
+        ActionTarget *a = [[ActionTarget alloc] init];
+        a.cell = self;
+        a.delegate = self.delegate;
+        return a;
+    }
+    return nil;
 }
 
 #pragma mark - Gesture recognizers
 
 - (void)jsq_handleLongPressGesture:(UILongPressGestureRecognizer *)longPress
 {
-    if (longPress.state != UIGestureRecognizerStateBegan || ![self becomeFirstResponder]) {
+    if (longPress.state != UIGestureRecognizerStateBegan) {
         return;
     }
-    
+    if (![self.delegate shouldShowMenuForCell:self]) {
+        return;
+    }
+    if (![self becomeFirstResponder]) {
+        return;
+    }
+
     UIMenuController *menu = [UIMenuController sharedMenuController];
     CGRect targetRect = [self convertRect:self.messageBubbleImageView.bounds fromView:self.messageBubbleImageView];
     
