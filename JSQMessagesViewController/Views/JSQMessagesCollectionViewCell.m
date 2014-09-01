@@ -321,11 +321,6 @@
 
 - (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap
 {
-    if ([UIMenuController sharedMenuController].isMenuVisible) {
-        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
-        return;
-    }
-    
     CGPoint touchPt = [tap locationInView:self];
     
     if (CGRectContainsPoint(self.avatarContainerView.frame, touchPt)) {
