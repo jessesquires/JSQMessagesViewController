@@ -632,25 +632,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [menu setMenuVisible:NO animated:NO];
     
     JSQMessagesCollectionViewCell *selectedCell = (JSQMessagesCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:self.selectedIndexPathForMenu];
-    CGRect selectedCellFrame = [self.collectionView convertRect:selectedCell.frame toView:self.view];
+    CGRect selectedCellMessageBubbleFrame = [selectedCell convertRect:selectedCell.messageBubbleContainerView.frame toView:self.view];
     
-    BOOL menuIsAboveCell = CGRectGetMinY(menu.menuFrame) < CGRectGetMinY(selectedCellFrame);
-    
-    CGFloat finalFrameY = CGRectGetMinY(selectedCellFrame);
-    
-    if (menuIsAboveCell) {
-        finalFrameY += CGRectGetHeight(selectedCell.messageBubbleTopLabel.frame) + CGRectGetHeight(selectedCell.cellTopLabel.frame);
-    }
-    else {
-        finalFrameY += CGRectGetHeight(selectedCell.cellBottomLabel.frame);
-    }
-    
-    CGRect finalFrame = CGRectMake(CGRectGetMinX(selectedCellFrame),
-                                   finalFrameY,
-                                   CGRectGetWidth(selectedCellFrame),
-                                   CGRectGetHeight(selectedCellFrame));
-    
-    [menu setTargetRect:finalFrame inView:self.view];
+    [menu setTargetRect:selectedCellMessageBubbleFrame inView:self.view];
     [menu setMenuVisible:YES animated:YES];
     
     self.selectedIndexPathForMenu = nil;
