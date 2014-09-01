@@ -112,13 +112,6 @@
 @property (weak, nonatomic) UIImageView *avatarImageView;
 
 /**
- *  Returns the underlying gesture recognizer for long press gestures in the cell.
- *  This gesture handles the copy action for the cell.
- *  Access this property when you need to override or more precisely control the long press gesture.
- */
-@property (weak, nonatomic, readonly) UILongPressGestureRecognizer *longPressGestureRecognizer;
-
-/**
  *  Returns the underlying gesture recognizer for tap gestures in the avatarImageView of the cell.
  *  This gesture handles the tap event for the avatarImageView and notifies the cell's delegate.
  */
