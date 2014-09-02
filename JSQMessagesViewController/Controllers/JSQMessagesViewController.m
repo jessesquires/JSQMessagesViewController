@@ -761,22 +761,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame
 {
-    /**
-     *  Keyboard frame is in UIWindow coordinates, so we have to do
-     *  all the math in that coordinate system, then translate them back
-     *  http://www.cocoanetics.com/2011/07/calculating-area-covered-by-keyboard/
-     */
-    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-
+    UIWindow *window = self.view.window;
+    
     CGRect collectionViewFrame = [window convertRect:self.collectionView.frame
                                             fromView:self.view];
-
+    
     CGRect coveredFrame = CGRectIntersection(collectionViewFrame, keyboardFrame);
 
     coveredFrame = [window convertRect:coveredFrame toView:self.view];
-
-    CGFloat heightFromBottom = coveredFrame.size.height;
-    heightFromBottom = MAX(0.0f, heightFromBottom);
+    
+    CGFloat heightFromBottom = CGRectGetHeight(coveredFrame);
     
     [self jsq_setToolbarBottomLayoutGuideConstant:heightFromBottom];
 }

@@ -227,13 +227,11 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     
     double animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
-    CGRect keyboardEndFrameConverted = keyboardEndFrame;
-    
     [UIView animateWithDuration:animationDuration
                           delay:0.0
                         options:animationCurveOption
                      animations:^{
-                         [self jsq_notifyKeyboardFrameNotificationForFrame:keyboardEndFrameConverted];
+                         [self jsq_notifyKeyboardFrameNotificationForFrame:keyboardEndFrame];
                      }
                      completion:^(BOOL finished) {
                          if (completion) {
@@ -274,9 +272,15 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                 return;
             }
             
-            //  do not convert frame to contextView coordinates here
-            //  KVO is triggered during panning (see below)
-            //  panning occurs in contextView coordinates already
+            /**
+             *  The math done in jsq_handlePanGestureRecognizer is 
+             *  for UIPeripheralHostView, which is rotated when in landscape.
+             *  Here we translate it back to UIWindow coordinates
+             */
+            if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+                newKeyboardFrame = CGRectMake(newKeyboardFrame.origin.y, newKeyboardFrame.origin.x, newKeyboardFrame.size.height, newKeyboardFrame.size.width);
+            }
+            
             [self jsq_notifyKeyboardFrameNotificationForFrame:newKeyboardFrame];
         }
     }
@@ -302,10 +306,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)jsq_handlePanGestureRecognizer:(UIPanGestureRecognizer *)pan
 {
-    CGFloat yOffset = self.contextView.frame.origin.y;
-
-    CGPoint touch = [pan locationInView:self.contextView];
-    touch = CGPointMake(touch.x, touch.y + yOffset);
+    CGPoint touchInWindow = [pan locationInView:nil];
 
     //  system keyboard is added to a new UIWindow, need to operate in window coordinates
     //  also, keyboard always slides from bottom of screen, not the bottom of a view
@@ -313,22 +314,25 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
         contextViewWindowHeight = CGRectGetWidth(self.contextView.window.frame);
     }
-    
+
     CGFloat keyboardViewHeight = CGRectGetHeight(self.keyboardView.frame);
     
-    CGFloat dragThresholdY = (contextViewWindowHeight - keyboardViewHeight - self.keyboardTriggerPoint.y - yOffset);
+    CGFloat dragThresholdY = (contextViewWindowHeight - keyboardViewHeight - self.keyboardTriggerPoint.y);
     
     CGRect newKeyboardViewFrame = self.keyboardView.frame;
     
-    BOOL userIsDraggingNearThresholdForDismissing = (touch.y > dragThresholdY);
+    BOOL userIsDraggingNearThresholdForDismissing = (touchInWindow.y > dragThresholdY);
     
     self.keyboardView.userInteractionEnabled = !userIsDraggingNearThresholdForDismissing;
     
     switch (pan.state) {
-        case UIGestureRecognizerStateChanged:
+        case UIGestureRecognizerStateChanged:   
         {
-            newKeyboardViewFrame.origin.y = touch.y + self.keyboardTriggerPoint.y;
-            
+            newKeyboardViewFrame.origin.y = touchInWindow.y + self.keyboardTriggerPoint.y;
+            if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+                newKeyboardViewFrame.origin.y = touchInWindow.x + self.keyboardTriggerPoint.y;
+            }
+
             //  bound frame between bottom of view and height of keyboard
             newKeyboardViewFrame.origin.y = MIN(newKeyboardViewFrame.origin.y, contextViewWindowHeight);
             newKeyboardViewFrame.origin.y = MAX(newKeyboardViewFrame.origin.y, contextViewWindowHeight - keyboardViewHeight);
@@ -336,7 +340,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
             if (CGRectGetMinY(newKeyboardViewFrame) == CGRectGetMinY(self.keyboardView.frame)) {
                 return;
             }
-            
+
             [UIView animateWithDuration:0.0
                                   delay:0.0
                                 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionNone
