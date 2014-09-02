@@ -231,6 +231,8 @@
 		88D1B0CB190606F100AFE162 /* typing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "typing@2x.png"; sourceTree = "<group>"; };
 		88D4ED7119B555E800C2DCF9 /* JSQDemoModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSQDemoModelData.h; path = JSQMessagesDemo/JSQDemoModelData.h; sourceTree = SOURCE_ROOT; };
 		88D4ED7219B555E800C2DCF9 /* JSQDemoModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSQDemoModelData.m; path = JSQMessagesDemo/JSQDemoModelData.m; sourceTree = SOURCE_ROOT; };
+		88F0417719B57E7F00DB70E9 /* JSQMessageBubbleImageDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSQMessageBubbleImageDataSource.h; sourceTree = "<group>"; };
+		88F0417819B57FA300DB70E9 /* JSQMessageAvatarImageDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSQMessageAvatarImageDataSource.h; sourceTree = "<group>"; };
 		88FFE06619B2E5CB0038C3FF /* JSQMessagesCollectionViewDelegateFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewDelegateFlowLayout.h; sourceTree = "<group>"; };
 		A0F1B1EFE54F44FEA6C4F786 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -382,6 +384,8 @@
 			children = (
 				8816A67918E9250400111919 /* JSQMessage.h */,
 				8816A67A18E9250400111919 /* JSQMessage.m */,
+				88F0417819B57FA300DB70E9 /* JSQMessageAvatarImageDataSource.h */,
+				88F0417719B57E7F00DB70E9 /* JSQMessageBubbleImageDataSource.h */,
 				8816A67B18E9250400111919 /* JSQMessageData.h */,
 				884F08CB19B2E713008DE64D /* JSQMessagesCollectionViewDataSource.h */,
 				88FFE06619B2E5CB0038C3FF /* JSQMessagesCollectionViewDelegateFlowLayout.h */,
