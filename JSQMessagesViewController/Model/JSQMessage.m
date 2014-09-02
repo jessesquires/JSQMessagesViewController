@@ -62,7 +62,7 @@
     if (self)
     {
         _sender = sender;
-        _date = [NSDate date];
+        _date = date;
         _image = image;
         _kind = JSQMessageLocalMediaKind;
     }
