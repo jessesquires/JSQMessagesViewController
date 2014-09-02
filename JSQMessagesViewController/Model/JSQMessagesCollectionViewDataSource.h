@@ -16,9 +16,6 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#ifndef JSQMessages_JSQMessagesCollectionViewDataSource_h
-#define JSQMessages_JSQMessagesCollectionViewDataSource_h
-
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -150,5 +147,3 @@
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
-
-#endif

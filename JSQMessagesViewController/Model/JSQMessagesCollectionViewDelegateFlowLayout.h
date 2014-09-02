@@ -16,9 +16,6 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#ifndef JSQMessages_JSQMessagesCollectionViewDelegateFlowLayout_h
-#define JSQMessages_JSQMessagesCollectionViewDelegateFlowLayout_h
-
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -123,5 +120,3 @@
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender;
 
 @end
-
-#endif
