@@ -144,4 +144,9 @@ forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoingMedia cellReuse
                     touchLocation:position];
 }
 
+-(void)messagesCollectionViewCellDidRequestCopy:(JSQMessagesCollectionViewCell *)cell
+{
+
+}
+
 @end
