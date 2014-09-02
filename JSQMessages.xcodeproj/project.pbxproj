@@ -95,6 +95,7 @@
 		88D1B0CD190606F100AFE162 /* typing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88D1B0CB190606F100AFE162 /* typing@2x.png */; };
 		88D4ED7319B555E800C2DCF9 /* JSQDemoModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D4ED7219B555E800C2DCF9 /* JSQDemoModelData.m */; };
 		88F0417B19B5838200DB70E9 /* JSQMessagesBubbleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F0417A19B5838200DB70E9 /* JSQMessagesBubbleImage.m */; };
+		88F0417D19B5866300DB70E9 /* JSQMessagesBubbleImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F0417C19B5866300DB70E9 /* JSQMessagesBubbleImageTests.m */; };
 		C78CEF093F584B85B4321C83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 343577012CC24261BE4B61A1 /* libPods.a */; };
 		D68A9FB68FC5463D9A5B23E0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 343577012CC24261BE4B61A1 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -236,6 +237,7 @@
 		88F0417819B57FA300DB70E9 /* JSQMessageAvatarImageDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSQMessageAvatarImageDataSource.h; sourceTree = "<group>"; };
 		88F0417919B5838200DB70E9 /* JSQMessagesBubbleImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesBubbleImage.h; sourceTree = "<group>"; };
 		88F0417A19B5838200DB70E9 /* JSQMessagesBubbleImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesBubbleImage.m; sourceTree = "<group>"; };
+		88F0417C19B5866300DB70E9 /* JSQMessagesBubbleImageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesBubbleImageTests.m; sourceTree = "<group>"; };
 		88FFE06619B2E5CB0038C3FF /* JSQMessagesCollectionViewDelegateFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewDelegateFlowLayout.h; sourceTree = "<group>"; };
 		A0F1B1EFE54F44FEA6C4F786 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -529,6 +531,7 @@
 		88BC4D42190D8D35002E5CC6 /* ModelTests */ = {
 			isa = PBXGroup;
 			children = (
+				88F0417C19B5866300DB70E9 /* JSQMessagesBubbleImageTests.m */,
 				88BC4D43190D8D35002E5CC6 /* JSQMessageTests.m */,
 			);
 			path = ModelTests;
@@ -817,6 +820,7 @@
 				88C28BE51910A19E004E90B1 /* JSQMessagesTypingIndicatorFooterViewTests.m in Sources */,
 				88CC8807190A2C7F006258A0 /* JSQMessagesUIColorTests.m in Sources */,
 				88BC4D4D190E25CF002E5CC6 /* JSQMessagesComposerTextViewTests.m in Sources */,
+				88F0417D19B5866300DB70E9 /* JSQMessagesBubbleImageTests.m in Sources */,
 				88C28BE11910A166004E90B1 /* JSQMessagesLoadEarlierHeaderViewTests.m in Sources */,
 				88BC4D49190DB480002E5CC6 /* JSQMessagesCollectionViewLayoutAttributesTests.m in Sources */,
 				88BC4D4B190E2429002E5CC6 /* JSQMessagesCollectionViewCellTests.m in Sources */,
