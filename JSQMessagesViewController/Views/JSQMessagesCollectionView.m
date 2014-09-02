@@ -123,4 +123,25 @@ forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoingMedia cellReuse
     }
 }
 
+#pragma mark - Messages collection view cell delegate
+
+- (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell
+{
+    [self.delegate collectionView:self
+            didTapAvatarImageView:cell.avatarImageView
+                      atIndexPath:[self indexPathForCell:cell]];
+}
+
+- (void)messagesCollectionViewCellDidTapMessageBubble:(JSQMessagesCollectionViewCell *)cell
+{
+    [self.delegate collectionView:self didTapMessageBubbleAtIndexPath:[self indexPathForCell:cell]];
+}
+
+- (void)messagesCollectionViewCellDidTapCell:(JSQMessagesCollectionViewCell *)cell atPosition:(CGPoint)position
+{
+    [self.delegate collectionView:self
+            didTapCellAtIndexPath:[self indexPathForCell:cell]
+                    touchLocation:position];
+}
+
 @end
