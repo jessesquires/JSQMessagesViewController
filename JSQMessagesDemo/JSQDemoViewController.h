@@ -18,8 +18,10 @@
 
 #import "JSQMessages.h"
 
-@class JSQDemoViewController;
 
+#import "JSQDemoModelData.h"
+
+@class JSQDemoViewController;
 
 @protocol JSQDemoViewControllerDelegate <NSObject>
 
@@ -34,16 +36,10 @@
 
 @property (weak, nonatomic) id<JSQDemoViewControllerDelegate> delegateModal;
 
-@property (strong, nonatomic) NSMutableArray *messages;
-@property (copy, nonatomic) NSDictionary *avatars;
-
-@property (strong, nonatomic) UIImageView *outgoingBubbleImageView;
-@property (strong, nonatomic) UIImageView *incomingBubbleImageView;
+@property (strong, nonatomic) JSQDemoModelData *demoData;
 
 - (void)receiveMessagePressed:(UIBarButtonItem *)sender;
 
 - (void)closePressed:(UIBarButtonItem *)sender;
-
-- (void)setupTestModel;
 
 @end

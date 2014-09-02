@@ -36,11 +36,22 @@
 @required
 
 /**
- *  Asks the data source for the message sender, that is, the user who is sending messages.
+ *  Asks the data source for the current sender's display name, that is, the current user who is sending messages.
  *
- *  @return An initialized string describing the sender. You must not return `nil` from this method.
+ *  @return An initialized string describing the current sender to display in a `JSQMessagesCollectionViewCell`.
+ *  
+ *  @warning You must not return `nil` from this method. This value does not need to be unique.
  */
-- (NSString *)sender;
+- (NSString *)senderDisplayName;
+
+/**
+ *  Asks the data source for the current sender's unique identifier, that is, the current user who is sending messages.
+ *
+ *  @return An initialized string identifier that uniquely identifies the current sender.
+ *
+ *  @warning You must not return `nil` from this method. This value must be unique.
+ */
+- (NSString *)senderId;
 
 /**
  *  Asks the data source for the message data that corresponds to the specified item at indexPath in the collectionView.

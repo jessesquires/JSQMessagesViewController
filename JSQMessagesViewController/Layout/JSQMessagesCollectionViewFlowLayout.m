@@ -436,9 +436,9 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 - (CGSize)jsq_avatarSizeForIndexPath:(NSIndexPath *)indexPath
 {
     id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
-    NSString *messageSender = [messageData sender];
+    NSString *messageSender = [messageData senderId];
    
-    if ([messageSender isEqualToString:[self.collectionView.dataSource sender]]) {
+    if ([messageSender isEqualToString:[self.collectionView.dataSource senderId]]) {
         return self.outgoingAvatarViewSize;
     }
     

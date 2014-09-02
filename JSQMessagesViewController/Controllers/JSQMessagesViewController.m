@@ -126,7 +126,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"New Message", @"Placeholder text for the message input text view");
     self.inputToolbar.contentView.textView.delegate = self;
     
-    self.sender = @"JSQDefaultSender";
+    self.senderId = @"JSQDefaultSender";
+    self.senderDisplayName = @"JSQDefaultSender";
     
     self.automaticallyScrollsToMostRecentMessage = YES;
     
@@ -161,7 +162,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     _toolbarHeightConstraint = nil;
     _toolbarBottomLayoutGuide = nil;
     
-    _sender = nil;
+    _senderId = nil;
+    _senderDisplayName = nil;
     _outgoingCellIdentifier = nil;
     _incomingCellIdentifier = nil;
     
@@ -286,8 +288,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)didPressSendButton:(UIButton *)button
            withMessageText:(NSString *)text
-                    sender:(NSString *)sender
-                      date:(NSDate *)date { }
+                  senderId:(NSString *)senderId
+         senderDisplayName:(NSString *)senderDisplayName
+                      date:(NSDate *)date
+{
+    NSAssert(NO, @"Error! required method not implemented in subclass. Need to implement %s", __PRETTY_FUNCTION__);
+}
 
 - (void)didPressAccessoryButton:(UIButton *)sender { }
 
@@ -387,18 +393,20 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
     NSParameterAssert(messageData != nil);
     
-    NSString *messageSender = [messageData sender];
-    NSParameterAssert(messageSender != nil);
+    NSString *messageSenderId = [messageData senderId];
+    NSParameterAssert(messageSenderId != nil);
     
-    BOOL isOutgoingMessage = [messageSender isEqualToString:self.sender];
-    
-    NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
-    JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    cell.delegate = collectionView;
+    NSString *messageSenderDisplayName = [messageData senderDisplayName];
+    NSParameterAssert(messageSenderDisplayName != nil);
     
     NSString *messageText = [messageData text];
     NSParameterAssert(messageText != nil);
     
+    BOOL isOutgoingMessage = [messageSenderId isEqualToString:self.senderId];
+    
+    NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
+    JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    cell.delegate = collectionView;
     cell.textView.text = messageText;
     cell.messageBubbleImageView = [collectionView.dataSource collectionView:collectionView bubbleImageViewForItemAtIndexPath:indexPath];
     cell.avatarImageView = [collectionView.dataSource collectionView:collectionView avatarImageViewForItemAtIndexPath:indexPath];
@@ -550,7 +558,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     else {
         [self didPressSendButton:sender
                  withMessageText:[self jsq_currentlyComposedMessageText]
-                          sender:self.sender
+                        senderId:self.senderId
+               senderDisplayName:self.senderDisplayName
                             date:[NSDate date]];
     }
 }
@@ -560,7 +569,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (toolbar.sendButtonOnRight) {
         [self didPressSendButton:sender
                  withMessageText:[self jsq_currentlyComposedMessageText]
-                          sender:self.sender
+                        senderId:self.senderId
+               senderDisplayName:self.senderDisplayName
                             date:[NSDate date]];
     }
     else {

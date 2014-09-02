@@ -19,82 +19,7 @@
 #import "JSQDemoViewController.h"
 
 
-static NSString * const kJSQDemoAvatarNameCook = @"Tim Cook";
-static NSString * const kJSQDemoAvatarNameJobs = @"Jobs";
-static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
-
-
 @implementation JSQDemoViewController
-
-#pragma mark - Demo setup
-
-- (void)setupTestModel
-{
-    /**
-     *  Load some fake messages for demo.
-     *
-     *  You should have a mutable array or orderedSet, or something.
-     */
-    self.messages = [[NSMutableArray alloc] initWithObjects:
-                     [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages: A messaging UI framework for iOS." sender:self.sender date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy." sender:kJSQDemoAvatarNameWoz date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com." sender:self.sender date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." sender:kJSQDemoAvatarNameJobs date:[NSDate date]],
-                     [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
-                     [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
-                     nil];
-    
-    /**
-     *  Create avatar images once.
-     *
-     *  Be sure to create your avatars one time and reuse them for good performance.
-     *
-     *  If you are not using avatars, ignore this.
-     */
-    CGFloat outgoingDiameter = self.collectionView.collectionViewLayout.outgoingAvatarViewSize.width;
-    
-    UIImage *jsqImage = [JSQMessagesAvatarFactory avatarWithUserInitials:@"JSQ"
-                                                         backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
-                                                               textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
-                                                                    font:[UIFont systemFontOfSize:14.0f]
-                                                                diameter:outgoingDiameter];
-    
-    CGFloat incomingDiameter = self.collectionView.collectionViewLayout.incomingAvatarViewSize.width;
-    
-    UIImage *cookImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_cook"]
-                                                          diameter:incomingDiameter];
-    
-    UIImage *jobsImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]
-                                                          diameter:incomingDiameter];
-    
-    UIImage *wozImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_woz"]
-                                                         diameter:incomingDiameter];
-    self.avatars = @{ self.sender : jsqImage,
-                      kJSQDemoAvatarNameCook : cookImage,
-                      kJSQDemoAvatarNameJobs : jobsImage,
-                      kJSQDemoAvatarNameWoz : wozImage };
-    
-    /**
-     *  Change to add more messages for testing
-     */
-    NSUInteger messagesToAdd = 0;
-    NSArray *copyOfMessages = [self.messages copy];
-    for (NSUInteger i = 0; i < messagesToAdd; i++) {
-        [self.messages addObjectsFromArray:copyOfMessages];
-    }
-    
-    /**
-     *  Change to YES to add a super long message for testing
-     *  You should see "END" twice
-     */
-    BOOL addREALLYLongMessage = NO;
-    if (addREALLYLongMessage) {
-        JSQMessage *reallyLongMessage = [JSQMessage messageWithText:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END" sender:self.sender];
-        [self.messages addObject:reallyLongMessage];
-    }
-}
-
-
 
 #pragma mark - View lifecycle
 
@@ -102,7 +27,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
  *  Override point for customization.
  *
  *  Customize your view.
- *  Look at the properties on `JSQMessagesViewController` to see what is possible.
+ *  Look at the properties on `JSQMessagesViewController` and `JSQMessagesCollectionView` to see what is possible.
  *
  *  Customize your layout.
  *  Look at the properties on `JSQMessagesCollectionViewFlowLayout` to see what is possible.
@@ -113,9 +38,11 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     
     self.title = @"JSQMessages";
     
-    self.sender = @"Jesse Squires";
+    self.senderId = kJSQDemoAvatarIdSquires;
     
-    [self setupTestModel];
+    self.senderDisplayName = kJSQDemoAvatarDisplayNameSquires;
+    
+    self.demoData = [[JSQDemoModelData alloc] init];
     
     /**
      *  Remove camera button since media messages are not yet implemented
@@ -125,18 +52,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  Or, you can set a custom `leftBarButtonItem` and a custom `rightBarButtonItem`
      */
     
-    /**
-     *  Create bubble images.
-     *
-     *  Be sure to create your avatars one time and reuse them for good performance.
-     *
-     */
-    self.outgoingBubbleImageView = [JSQMessagesBubbleImageFactory
-                                    outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
-    
-    self.incomingBubbleImageView = [JSQMessagesBubbleImageFactory
-                                    incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleGreenColor]];
-    
+        
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"typing"]
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
@@ -189,17 +105,23 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     [self scrollToBottomAnimated:YES];
     
     
-    JSQMessage *copyMessage = [[self.messages lastObject] copy];
+    JSQMessage *copyMessage = [[self.demoData.messages lastObject] copy];
     
     if (!copyMessage) {
-        copyMessage = [JSQMessage messageWithText:@"First received!" sender:kJSQDemoAvatarNameJobs];
+        copyMessage = [JSQMessage messageWithText:@"First received!"
+                                         senderId:kJSQDemoAvatarIdJobs
+                                senderDisplayName:kJSQDemoAvatarDisplayNameJobs];
     }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
-        [copyAvatars removeObject:self.sender];
-        copyMessage.sender = [copyAvatars objectAtIndex:arc4random_uniform((int)[copyAvatars count])];
+        NSMutableArray *userIds = [[self.demoData.users allKeys] mutableCopy];
+        [userIds removeObject:self.senderId];
+        NSString *userId = userIds[arc4random_uniform((int)[userIds count])];
+        
+        JSQMessage *newMessage = [JSQMessage messageWithText:copyMessage.text
+                                                    senderId:userId
+                                           senderDisplayName:self.demoData.users[userId]];
         
         /**
          *  This you should do upon receiving a message:
@@ -209,7 +131,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
          *  3. Call `finishReceivingMessage`
          */
         [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
-        [self.messages addObject:copyMessage];
+        [self.demoData.messages addObject:newMessage];
         [self finishReceivingMessage];
     });
 }
@@ -226,7 +148,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (void)didPressSendButton:(UIButton *)button
            withMessageText:(NSString *)text
-                    sender:(NSString *)sender
+                  senderId:(NSString *)senderId
+         senderDisplayName:(NSString *)senderDisplayName
                       date:(NSDate *)date
 {
     /**
@@ -238,8 +161,12 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      */
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
-    JSQMessage *message = [[JSQMessage alloc] initWithText:text sender:sender date:date];
-    [self.messages addObject:message];
+    JSQMessage *message = [[JSQMessage alloc] initWithText:text
+                                                  senderId:senderId
+                                         senderDisplayName:senderDisplayName
+                                                      date:date];
+    
+    [self.demoData.messages addObject:message];
     
     [self finishSendingMessage];
 }
@@ -258,7 +185,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.messages objectAtIndex:indexPath.item];
+    return [self.demoData.messages objectAtIndex:indexPath.item];
 }
 
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -273,15 +200,15 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  Otherwise, each cell would be referencing the same imageView and bubbles would disappear from cells
      */
     
-    JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
+    JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
     
-    if ([message.sender isEqualToString:self.sender]) {
-        return [[UIImageView alloc] initWithImage:self.outgoingBubbleImageView.image
-                                 highlightedImage:self.outgoingBubbleImageView.highlightedImage];
+    if ([message.senderId isEqualToString:self.senderId]) {
+        return [[UIImageView alloc] initWithImage:self.demoData.outgoingBubbleImageView.image
+                                 highlightedImage:self.demoData.outgoingBubbleImageView.highlightedImage];
     }
     
-    return [[UIImageView alloc] initWithImage:self.incomingBubbleImageView.image
-                             highlightedImage:self.incomingBubbleImageView.highlightedImage];
+    return [[UIImageView alloc] initWithImage:self.demoData.incomingBubbleImageView.image
+                             highlightedImage:self.demoData.incomingBubbleImageView.highlightedImage];
 }
 
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -307,9 +234,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *
      *  Override the defaults in `viewDidLoad`
      */
-    JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
+    JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
     
-    UIImage *avatarImage = [self.avatars objectForKey:message.sender];
+    UIImage *avatarImage = [self.demoData.avatars objectForKey:message.senderId];
     return [[UIImageView alloc] initWithImage:avatarImage];
 }
 
@@ -322,7 +249,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  Show a timestamp for every 3rd message
      */
     if (indexPath.item % 3 == 0) {
-        JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
+        JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
         return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
     }
     
@@ -331,18 +258,18 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
+    JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
     
     /**
      *  iOS7-style sender name labels
      */
-    if ([message.sender isEqualToString:self.sender]) {
+    if ([message.senderId isEqualToString:self.senderId]) {
         return nil;
     }
     
     if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.messages objectAtIndex:indexPath.item - 1];
-        if ([[previousMessage sender] isEqualToString:message.sender]) {
+        JSQMessage *previousMessage = [self.demoData.messages objectAtIndex:indexPath.item - 1];
+        if ([[previousMessage senderId] isEqualToString:message.senderId]) {
             return nil;
         }
     }
@@ -350,7 +277,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  Don't specify attributes to use the defaults.
      */
-    return [[NSAttributedString alloc] initWithString:message.sender];
+    return [[NSAttributedString alloc] initWithString:message.senderDisplayName];
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -362,7 +289,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self.messages count];
+    return [self.demoData.messages count];
 }
 
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -386,9 +313,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  Instead, override the properties you want on `self.collectionView.collectionViewLayout` from `viewDidLoad`
      */
     
-    JSQMessage *msg = [self.messages objectAtIndex:indexPath.item];
+    JSQMessage *msg = [self.demoData.messages objectAtIndex:indexPath.item];
     
-    if ([msg.sender isEqualToString:self.sender]) {
+    if ([msg.senderId isEqualToString:self.senderId]) {
         cell.textView.textColor = [UIColor blackColor];
     }
     else {
@@ -433,14 +360,14 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  iOS7-style sender name labels
      */
-    JSQMessage *currentMessage = [self.messages objectAtIndex:indexPath.item];
-    if ([[currentMessage sender] isEqualToString:self.sender]) {
+    JSQMessage *currentMessage = [self.demoData.messages objectAtIndex:indexPath.item];
+    if ([[currentMessage senderId] isEqualToString:self.senderId]) {
         return 0.0f;
     }
     
     if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.messages objectAtIndex:indexPath.item - 1];
-        if ([[previousMessage sender] isEqualToString:[currentMessage sender]]) {
+        JSQMessage *previousMessage = [self.demoData.messages objectAtIndex:indexPath.item - 1];
+        if ([[previousMessage senderId] isEqualToString:[currentMessage senderId]]) {
             return 0.0f;
         }
     }
