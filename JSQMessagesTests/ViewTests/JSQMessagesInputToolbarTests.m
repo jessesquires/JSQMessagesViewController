@@ -9,7 +9,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <OCMock/OCMock.h>
 
 #import "JSQMessagesViewController.h"
 #import "JSQMessagesInputToolbar.h"

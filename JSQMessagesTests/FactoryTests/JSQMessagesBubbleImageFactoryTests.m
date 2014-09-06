@@ -9,7 +9,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <OCMock/OCMock.h>
 
 #import "JSQMessagesBubbleImageFactory.h"
 
@@ -70,14 +69,14 @@
     
     XCTAssertNotNil(bubbleImage.messageBubbleImage, "Image should not be nil");
     XCTAssertEqual(bubbleImage.messageBubbleImage.scale, bubble.scale, @"Image scale should equal bubble image scale");
-    XCTAssertEqual(bubbleImage.messageBubbleImage.imageOrientation, bubble.imageOrientation, @"Image orientation should equal bubble image orientation");
+    XCTAssertEqual(bubbleImage.messageBubbleImage.imageOrientation, UIImageOrientationUpMirrored, @"Image orientation should be flipped");
     XCTAssertTrue(bubbleImage.messageBubbleImage.resizingMode == UIImageResizingModeStretch, @"Image should be stretchable");
     XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(bubbleImage.messageBubbleImage.capInsets, capInsets), @"Image capInsets should be equal to capInsets");
     
     
     XCTAssertNotNil(bubbleImage.messageBubbleHighlightedImage, @"Highlighted image should not be nil");
     XCTAssertEqual(bubbleImage.messageBubbleHighlightedImage.scale, bubble.scale, @"HighlightedImage scale should equal bubble image scale");
-    XCTAssertEqual(bubbleImage.messageBubbleHighlightedImage.imageOrientation, bubble.imageOrientation, @"HighlightedImage orientation should equal bubble image orientation");
+    XCTAssertEqual(bubbleImage.messageBubbleHighlightedImage.imageOrientation, UIImageOrientationUpMirrored, @"Image orientation should be flipped");
     XCTAssertTrue(bubbleImage.messageBubbleHighlightedImage.resizingMode == UIImageResizingModeStretch, @"HighlightedImage should be stretchable");
     XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(bubbleImage.messageBubbleHighlightedImage.capInsets, capInsets), @"HighlightedImage capInsets should be equal to capInsets");
 }
