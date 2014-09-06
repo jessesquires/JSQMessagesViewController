@@ -20,6 +20,8 @@
 #import <UIKit/UIKit.h>
 #import "JSQMessageBubbleImageDataSource.h"
 
+// TODO: documentation
+
 
 @interface JSQMessagesBubbleImage : NSObject <JSQMessageBubbleImageDataSource, NSCopying>
 

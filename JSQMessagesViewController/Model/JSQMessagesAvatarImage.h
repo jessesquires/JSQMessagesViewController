@@ -20,6 +20,8 @@
 #import <UIKit/UIKit.h>
 #import "JSQMessageAvatarImageDataSource.h"
 
+// TODO: documentation
+
 
 @interface JSQMessagesAvatarImage : NSObject <JSQMessageAvatarImageDataSource, NSCopying>
 

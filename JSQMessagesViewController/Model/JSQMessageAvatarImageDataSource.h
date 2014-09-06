@@ -19,6 +19,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+// TODO: documentation
+
 @protocol JSQMessageAvatarImageDataSource <NSObject>
 
 @required
