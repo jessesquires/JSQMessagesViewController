@@ -17,7 +17,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "JSQMessageBubbleImageDataSource.h"
+
 
 @interface JSQMessagesBubbleImage : NSObject <JSQMessageBubbleImageDataSource, NSCopying>
 
