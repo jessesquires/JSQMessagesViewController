@@ -19,11 +19,15 @@
 #import <Foundation/Foundation.h>
 
 /**
- *  The `JSQMessageData` protocol defines the common interface through 
- *  which `JSQMessagesViewController` and `JSQMessagesCollectionView` interacts with message model objects.
+ *  The `JSQMessageData` protocol defines the common interface through which 
+ *  a `JSQMessagesViewController` and `JSQMessagesCollectionView` interact with message model objects.
  *
  *  It declares the required and optional methods that a class must implement so that instances of that class 
  *  can be displayed properly within a `JSQMessagesCollectionViewCell`.
+ *
+ *  A concrete class that conforms to this protocol is provided in the library, called `JSQMessage`.
+ *
+ *  @see JSQMessage.
  */
 @protocol JSQMessageData <NSObject>
 

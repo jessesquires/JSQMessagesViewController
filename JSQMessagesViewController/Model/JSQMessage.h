@@ -21,7 +21,7 @@
 #import "JSQMessageData.h"
 
 /**
- *  A `JSQMessage` model object represents a single user message. An instance of `JSQMessage` is immutable.
+ *  A `JSQMessage` model object represents a single user message, and is immutable.
  *  This is a concrete class that implements the `JSQMessageData` protocol.
  *  It contains the message text, senderId, senderDisplayName, and the date that the message was sent.
  */
@@ -57,7 +57,7 @@
  *  @param senderId          The unique identifier for the user who sent the message. This value must not be `nil`.
  *  @param senderDisplayName The display name for the user who sent the message. This value must not be `nil`.
  *
- *  @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
+ *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
  */
 + (instancetype)messageWithText:(NSString *)text
                        senderId:(NSString *)senderId
@@ -71,7 +71,7 @@
  *  @param senderDisplayName The display name for the user who sent the message. This value must not be `nil`.
  *  @param date              The date that the message was sent. This value must not be `nil`.
  *
- *  @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
+ *  @return An initialized `JSQMessage` object if successful, `nil` otherwise..
  */
 - (instancetype)initWithText:(NSString *)text
                     senderId:(NSString *)senderId
