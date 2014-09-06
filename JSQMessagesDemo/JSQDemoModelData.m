@@ -103,16 +103,14 @@
         
         
         /**
-         *  Create bubble images.
+         *  Create message bubble images objects.
          *
-         *  Be sure to create your avatars one time and reuse them for good performance.
+         *  Be sure to create your bubble images one time and reuse them for good performance.
          *
          */
-        self.outgoingBubbleImageView = [JSQMessagesBubbleImageFactory
-                                        outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
+        self.outgoingBubbleImageData = [JSQMessagesBubbleImageFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
         
-        self.incomingBubbleImageView = [JSQMessagesBubbleImageFactory
-                                        incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleGreenColor]];
+        self.incomingBubbleImageData = [JSQMessagesBubbleImageFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
         
         /**
          *  Change to add more messages for testing

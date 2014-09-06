@@ -18,33 +18,35 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "JSQMessagesBubbleImage.h"
+
 
 /**
  *  `JSQMessagesBubbleImageFactory` is a factory that provides a means for creating and styling 
- *  message bubble image views to be displayed in a `JSQMessagesCollectionViewCell` of a `JSQMessagesCollectionView`.
+ *  `JSQMessagesBubbleImage` objects to be displayed in a `JSQMessagesCollectionViewCell` of a `JSQMessagesCollectionView`.
  */
 @interface JSQMessagesBubbleImageFactory : NSObject
 
 /**
- *  Creates an returns an image view object with the specified color for outgoing messages. 
- *  The `image` property of the image view is configured with a flat bubble image, masked to the given color. 
- *  The `highlightedImage` property is configured similarly, but with a darkened version of the given color.
+ *  Creates an returns a `JSQMessagesBubbleImage` object with the specified color for *outgoing* message image bubbles.
+ *  The `messageBubbleImage` property of the `JSQMessagesBubbleImage` is configured with a flat bubble image, masked to the given color.
+ *  The `messageBubbleHighlightedImage` property is configured similarly, but with a darkened version of the given color.
  *
  *  @param color The color of the bubble image in the image view. This value must not be `nil`.
  *
- *  @return An initialized image view object if created successfully, `nil` otherwise.
+ *  @return An initialized `JSQMessagesBubbleImage` object if created successfully, `nil` otherwise.
  */
-+ (UIImageView *)outgoingMessageBubbleImageViewWithColor:(UIColor *)color;
++ (JSQMessagesBubbleImage *)outgoingMessagesBubbleImageWithColor:(UIColor *)color;
 
 /**
- *  Creates an returns an image view object with the specified color for incoming messages. 
- *  The `image` property of the image view is configured with a flat bubble image, masked to the given color. 
- *  The `highlightedImage` property is configured similarly, but with a darkened version of the given color.
+ *  Creates an returns a `JSQMessagesBubbleImage` object with the specified color for *incoming* message image bubbles.
+ *  The `messageBubbleImage` property of the `JSQMessagesBubbleImage` is configured with a flat bubble image, masked to the given color.
+ *  The `messageBubbleHighlightedImage` property is configured similarly, but with a darkened version of the given color.
  *
  *  @param color The color of the bubble image in the image view. This value must not be `nil`.
  *
- *  @return An initialized image view object if created successfully, `nil` otherwise.
+ *  @return An initialized `JSQMessagesBubbleImage` object if created successfully, `nil` otherwise.
  */
-+ (UIImageView *)incomingMessageBubbleImageViewWithColor:(UIColor *)color;
++ (JSQMessagesBubbleImage *)incomingMessagesBubbleImageWithColor:(UIColor *)color;
 
 @end

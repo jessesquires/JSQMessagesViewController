@@ -100,7 +100,7 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     CGFloat indicatorMarginMaximumSpacing = collectionViewWidth - indicatorWidth - indicatorMarginMinimumSpacing;
     
     if (isIncoming) {
-        self.bubbleImageView.image = [JSQMessagesBubbleImageFactory incomingMessageBubbleImageViewWithColor:bubbleColor].image;
+        self.bubbleImageView.image = [JSQMessagesBubbleImageFactory incomingMessagesBubbleImageWithColor:bubbleColor].messageBubbleImage;
         
         self.bubbleImageViewLeftHorizontalConstraint.constant = bubbleMarginMinimumSpacing;
         self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMaximumSpacing;
@@ -109,7 +109,7 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
         self.typingIndicatorImageViewRightHorizontalConstraint.constant = indicatorMarginMaximumSpacing;
     }
     else {
-        self.bubbleImageView.image = [JSQMessagesBubbleImageFactory outgoingMessageBubbleImageViewWithColor:bubbleColor].image;
+        self.bubbleImageView.image = [JSQMessagesBubbleImageFactory outgoingMessagesBubbleImageWithColor:bubbleColor].messageBubbleImage;
         
         self.bubbleImageViewLeftHorizontalConstraint.constant = bubbleMarginMaximumSpacing;
         self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMinimumSpacing;

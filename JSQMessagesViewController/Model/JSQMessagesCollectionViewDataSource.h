@@ -21,6 +21,7 @@
 
 @class JSQMessagesCollectionView;
 @protocol JSQMessageData;
+@protocol JSQMessageBubbleImageDataSource;
 
 
 /**
@@ -56,31 +57,29 @@
  *  @param collectionView The object representing the collection view requesting this information.
  *  @param indexPath      The index path that specifies the location of the item.
  *
- *  @return A configured object that conforms to the `JSQMessageData` protocol. You must not return `nil` from this method.
+ *  @return An initialized object that conforms to the `JSQMessageData` protocol. You must not return `nil` from this method.
  */
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
- *  Asks the data source for the bubble image view that corresponds to the specified
- *  message data item at indexPath in the collectionView.
+ *  Asks the data source for the message bubble image data that corresponds to the specified message data item at indexPath in the collectionView.
  *
  *  @param collectionView The object representing the collection view requesting this information.
  *  @param indexPath      The index path that specifies the location of the item.
  *
- *  @return A configured imageView object. You may return `nil` from this method if you do not
+ *  @return An initialized object that conforms to the `JSQMessageBubbleImageDataSource` protocol. You may return `nil` from this method if you do not
  *  want the specified item to display a message bubble image.
  *
- *  @discussion It is recommended that you utilize `JSQMessagesBubbleImageFactory` to return valid imageViews.
- *  However, you may provide your own.
- *  If providing your own bubble image view, please ensure the following:
- *      1. The imageView object must contain valid values for its `image` and `highlightedImage` properties.
- *      2. The images provided in the imageView must be stretchable images.
- *  Note that providing your own bubble image views will require additional configuration of the collectionView layout object.
+ *  @discussion It is recommended that you utilize `JSQMessagesBubbleImageFactory` to return valid `JSQMessagesBubbleImage` objects.
+ *  However, you may provide your own data source object as long as it conforms to the `JSQMessageBubbleImageDataSource` protocol.
+ *  
+ *  @warning Note that providing your own bubble image data source objects may require additional 
+ *  configuration of the collectionView layout object, specifically regarding its `messageBubbleTextViewFrameInsets` and `messageBubbleTextViewTextContainerInsets`.
  *
  *  @see `JSQMessagesBubbleImageFactory`.
  *  @see `JSQMessagesCollectionViewFlowLayout`.
  */
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  *  Asks the data source for the avatar image view that corresponds to the specified

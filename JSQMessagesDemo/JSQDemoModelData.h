@@ -46,9 +46,9 @@ static const CGFloat kJSQDemoAvatarSize = 34.0f;
 
 @property (strong, nonatomic) NSDictionary *avatars;
 
-@property (strong, nonatomic) UIImageView *outgoingBubbleImageView;
+@property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleImageData;
 
-@property (strong, nonatomic) UIImageView *incomingBubbleImageView;
+@property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageData;
 
 @property (strong, nonatomic) NSDictionary *users;
 

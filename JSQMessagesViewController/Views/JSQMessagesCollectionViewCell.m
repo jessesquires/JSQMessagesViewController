@@ -31,9 +31,10 @@
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *messageBubbleTopLabel;
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellBottomLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *messageBubbleContainerView;
+@property (weak, nonatomic) IBOutlet UIImageView *messageBubbleImageView;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
-@property (weak, nonatomic) IBOutlet UIView *messageBubbleContainerView;
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewTopVerticalSpaceConstraint;
@@ -217,30 +218,6 @@
     
     self.messageBubbleContainerView.backgroundColor = backgroundColor;
     self.avatarContainerView.backgroundColor = backgroundColor;
-}
-
-- (void)setMessageBubbleImageView:(UIImageView *)messageBubbleImageView
-{
-    if (_messageBubbleImageView) {
-        [_messageBubbleImageView removeFromSuperview];
-    }
-    
-    if (!messageBubbleImageView) {
-        _messageBubbleImageView = nil;
-        return;
-    }
-    
-    messageBubbleImageView.frame = CGRectMake(0.0f,
-                                              0.0f,
-                                              CGRectGetWidth(self.messageBubbleContainerView.bounds),
-                                              CGRectGetHeight(self.messageBubbleContainerView.bounds));
-    
-    [messageBubbleImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.textView];
-    [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:messageBubbleImageView];
-    [self setNeedsUpdateConstraints];
-    
-    _messageBubbleImageView = messageBubbleImageView;
 }
 
 - (void)setAvatarImageView:(UIImageView *)avatarImageView

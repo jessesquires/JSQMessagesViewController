@@ -24,7 +24,7 @@
 
 @interface JSQMessagesBubbleImageFactory ()
 
-+ (UIImageView *)bubbleImageViewWithColor:(UIColor *)color flippedForIncoming:(BOOL)flippedForIncoming;
++ (JSQMessagesBubbleImage *)messagesBubbleImageWithColor:(UIColor *)color flippedForIncoming:(BOOL)flippedForIncoming;
 
 + (UIImage *)jsq_horizontallyFlippedImageFromImage:(UIImage *)image;
 
@@ -38,21 +38,21 @@
 
 #pragma mark - Public
 
-+ (UIImageView *)outgoingMessageBubbleImageViewWithColor:(UIColor *)color
++ (JSQMessagesBubbleImage *)outgoingMessagesBubbleImageWithColor:(UIColor *)color
 {
     NSParameterAssert(color != nil);
-    return [JSQMessagesBubbleImageFactory bubbleImageViewWithColor:color flippedForIncoming:NO];
+    return [JSQMessagesBubbleImageFactory messagesBubbleImageWithColor:color flippedForIncoming:NO];
 }
 
-+ (UIImageView *)incomingMessageBubbleImageViewWithColor:(UIColor *)color
++ (JSQMessagesBubbleImage *)incomingMessagesBubbleImageWithColor:(UIColor *)color
 {
     NSParameterAssert(color != nil);
-    return [JSQMessagesBubbleImageFactory bubbleImageViewWithColor:color flippedForIncoming:YES];
+    return [JSQMessagesBubbleImageFactory messagesBubbleImageWithColor:color flippedForIncoming:YES];
 }
 
 #pragma mark - Private
 
-+ (UIImageView *)bubbleImageViewWithColor:(UIColor *)color flippedForIncoming:(BOOL)flippedForIncoming
++ (JSQMessagesBubbleImage *)messagesBubbleImageWithColor:(UIColor *)color flippedForIncoming:(BOOL)flippedForIncoming
 {
     UIImage *bubble = [UIImage imageNamed:@"bubble_min"];
     
@@ -71,9 +71,7 @@
     normalBubble = [JSQMessagesBubbleImageFactory jsq_stretchableImageFromImage:normalBubble withCapInsets:capInsets];
     highlightedBubble = [JSQMessagesBubbleImageFactory jsq_stretchableImageFromImage:highlightedBubble withCapInsets:capInsets];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:normalBubble highlightedImage:highlightedBubble];
-    imageView.backgroundColor = [UIColor whiteColor];
-    return imageView;
+    return [[JSQMessagesBubbleImage alloc] initWithMessageBubbleImage:normalBubble highlightedImage:highlightedBubble];
 }
 
 + (UIImage *)jsq_horizontallyFlippedImageFromImage:(UIImage *)image

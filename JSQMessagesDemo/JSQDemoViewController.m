@@ -188,27 +188,22 @@
     return [self.demoData.messages objectAtIndex:indexPath.item];
 }
 
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+- (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
      *  You may return nil here if you do not want bubbles.
      *  In this case, you should set the background color of your collection view cell's textView.
-     */
-    
-    /**
-     *  Reuse created bubble images, but create new imageView to add to each cell
-     *  Otherwise, each cell would be referencing the same imageView and bubbles would disappear from cells
+     *
+     *  Otherwise, return your previously created bubble image data objects.
      */
     
     JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
     
     if ([message.senderId isEqualToString:self.senderId]) {
-        return [[UIImageView alloc] initWithImage:self.demoData.outgoingBubbleImageView.image
-                                 highlightedImage:self.demoData.outgoingBubbleImageView.highlightedImage];
+        return self.demoData.outgoingBubbleImageData;
     }
-    
-    return [[UIImageView alloc] initWithImage:self.demoData.incomingBubbleImageView.image
-                             highlightedImage:self.demoData.incomingBubbleImageView.highlightedImage];
+
+    return self.demoData.incomingBubbleImageData;
 }
 
 - (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath

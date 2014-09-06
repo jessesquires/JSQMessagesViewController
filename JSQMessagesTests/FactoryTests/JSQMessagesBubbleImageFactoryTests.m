@@ -39,24 +39,21 @@
     UIEdgeInsets capInsets = UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
     
     
-    UIImageView *imageView = [JSQMessagesBubbleImageFactory outgoingMessageBubbleImageViewWithColor:[UIColor lightGrayColor]];
-    XCTAssertNotNil(imageView, @"ImageView should not be nil");
-    XCTAssertEqualObjects(imageView.backgroundColor, [UIColor whiteColor], @"ImageView should have white background color");
-    XCTAssertTrue(CGSizeEqualToSize(imageView.frame.size, bubble.size), @"ImageView size should equal bubble size");
+    JSQMessagesBubbleImage *bubbleImage = [JSQMessagesBubbleImageFactory outgoingMessagesBubbleImageWithColor:[UIColor lightGrayColor]];
+    XCTAssertNotNil(bubbleImage, @"Bubble image should not be nil");
+    
+    XCTAssertNotNil(bubbleImage.messageBubbleImage, "Image should not be nil");
+    XCTAssertEqual(bubbleImage.messageBubbleImage.scale, bubble.scale, @"Image scale should equal bubble image scale");
+    XCTAssertEqual(bubbleImage.messageBubbleImage.imageOrientation, bubble.imageOrientation, @"Image orientation should equal bubble image orientation");
+    XCTAssertTrue(bubbleImage.messageBubbleImage.resizingMode == UIImageResizingModeStretch, @"Image should be stretchable");
+    XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(bubbleImage.messageBubbleImage.capInsets, capInsets), @"Image capInsets should be equal to capInsets");
     
     
-    XCTAssertNotNil(imageView.image, @"Image should not be nil");
-    XCTAssertEqual(imageView.image.scale, bubble.scale, @"Image scale should equal bubble image scale");
-    XCTAssertEqual(imageView.image.imageOrientation, bubble.imageOrientation, @"Image orientation should equal bubble image orientation");
-    XCTAssertTrue(imageView.image.resizingMode == UIImageResizingModeStretch, @"Image should be stretchable");
-    XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(imageView.image.capInsets, capInsets), @"Image capInsets should be equal to capInsets");
-    
-    
-    XCTAssertNotNil(imageView.highlightedImage, @"HighlightedImage should not be nil");
-    XCTAssertEqual(imageView.highlightedImage.scale, bubble.scale, @"HighlightedImage scale should equal bubble image scale");
-    XCTAssertEqual(imageView.highlightedImage.imageOrientation, bubble.imageOrientation, @"HighlightedImage orientation should equal bubble image orientation");
-    XCTAssertTrue(imageView.highlightedImage.resizingMode == UIImageResizingModeStretch, @"HighlightedImage should be stretchable");
-    XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(imageView.highlightedImage.capInsets, capInsets), @"HighlightedImage capInsets should be equal to capInsets");
+    XCTAssertNotNil(bubbleImage.messageBubbleHighlightedImage, @"Highlighted image should not be nil");
+    XCTAssertEqual(bubbleImage.messageBubbleHighlightedImage.scale, bubble.scale, @"HighlightedImage scale should equal bubble image scale");
+    XCTAssertEqual(bubbleImage.messageBubbleHighlightedImage.imageOrientation, bubble.imageOrientation, @"HighlightedImage orientation should equal bubble image orientation");
+    XCTAssertTrue(bubbleImage.messageBubbleHighlightedImage.resizingMode == UIImageResizingModeStretch, @"HighlightedImage should be stretchable");
+    XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(bubbleImage.messageBubbleHighlightedImage.capInsets, capInsets), @"HighlightedImage capInsets should be equal to capInsets");
 }
 
 - (void)testIncomingMessageBubbleImageView
@@ -68,24 +65,21 @@
     UIEdgeInsets capInsets = UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
     
     
-    UIImageView *imageView = [JSQMessagesBubbleImageFactory incomingMessageBubbleImageViewWithColor:[UIColor lightGrayColor]];
-    XCTAssertNotNil(imageView, @"ImageView should not be nil");
-    XCTAssertEqualObjects(imageView.backgroundColor, [UIColor whiteColor], @"ImageView should have white background color");
-    XCTAssertTrue(CGSizeEqualToSize(imageView.frame.size, bubble.size), @"ImageView size should equal bubble size");
+    JSQMessagesBubbleImage *bubbleImage = [JSQMessagesBubbleImageFactory incomingMessagesBubbleImageWithColor:[UIColor lightGrayColor]];
+    XCTAssertNotNil(bubbleImage, @"Bubble image should not be nil");
+    
+    XCTAssertNotNil(bubbleImage.messageBubbleImage, "Image should not be nil");
+    XCTAssertEqual(bubbleImage.messageBubbleImage.scale, bubble.scale, @"Image scale should equal bubble image scale");
+    XCTAssertEqual(bubbleImage.messageBubbleImage.imageOrientation, bubble.imageOrientation, @"Image orientation should equal bubble image orientation");
+    XCTAssertTrue(bubbleImage.messageBubbleImage.resizingMode == UIImageResizingModeStretch, @"Image should be stretchable");
+    XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(bubbleImage.messageBubbleImage.capInsets, capInsets), @"Image capInsets should be equal to capInsets");
     
     
-    XCTAssertNotNil(imageView.image, @"Image should not be nil");
-    XCTAssertEqual(imageView.image.scale, bubble.scale, @"Image scale should equal bubble image scale");
-    XCTAssertEqual(imageView.image.imageOrientation, UIImageOrientationUpMirrored, @"Image orientation should be flipped");
-    XCTAssertTrue(imageView.image.resizingMode == UIImageResizingModeStretch, @"Image should be stretchable");
-    XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(imageView.image.capInsets, capInsets), @"Image capInsets should be equal to capInsets");
-    
-    
-    XCTAssertNotNil(imageView.highlightedImage, @"HighlightedImage should not be nil");
-    XCTAssertEqual(imageView.highlightedImage.scale, bubble.scale, @"HighlightedImage scale should equal bubble image scale");
-    XCTAssertEqual(imageView.highlightedImage.imageOrientation, UIImageOrientationUpMirrored, @"HighlightedImage orientation should be flipped");
-    XCTAssertTrue(imageView.highlightedImage.resizingMode == UIImageResizingModeStretch, @"HighlightedImage should be stretchable");
-    XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(imageView.highlightedImage.capInsets, capInsets), @"HighlightedImage capInsets should be equal to capInsets");
+    XCTAssertNotNil(bubbleImage.messageBubbleHighlightedImage, @"Highlighted image should not be nil");
+    XCTAssertEqual(bubbleImage.messageBubbleHighlightedImage.scale, bubble.scale, @"HighlightedImage scale should equal bubble image scale");
+    XCTAssertEqual(bubbleImage.messageBubbleHighlightedImage.imageOrientation, bubble.imageOrientation, @"HighlightedImage orientation should equal bubble image orientation");
+    XCTAssertTrue(bubbleImage.messageBubbleHighlightedImage.resizingMode == UIImageResizingModeStretch, @"HighlightedImage should be stretchable");
+    XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(bubbleImage.messageBubbleHighlightedImage.capInsets, capInsets), @"HighlightedImage capInsets should be equal to capInsets");
 }
 
 @end
