@@ -51,7 +51,7 @@
 #import "JSQMessagesCollectionViewDelegateFlowLayout.h"
 
 //  Factories
-#import "JSQMessagesAvatarFactory.h"
+#import "JSQMessagesAvatarImageFactory.h"
 #import "JSQMessagesBubbleImageFactory.h"
 #import "JSQMessagesTimestampFormatter.h"
 #import "JSQMessagesToolbarButtonFactory.h"

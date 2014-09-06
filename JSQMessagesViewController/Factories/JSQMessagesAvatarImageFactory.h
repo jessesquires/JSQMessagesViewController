@@ -23,7 +23,7 @@
  *  `JSQMessagesAvatarFactory` is a factory that provides a means for creating and styling avatar images 
  *  to be displayed in a `JSQMessagesCollectionViewCell` of a `JSQMessagesCollectionView`.
  */
-@interface JSQMessagesAvatarFactory : NSObject
+@interface JSQMessagesAvatarImageFactory : NSObject
 
 /**
 *  Returns a copy of the image object associated with the specified originalImage that is 

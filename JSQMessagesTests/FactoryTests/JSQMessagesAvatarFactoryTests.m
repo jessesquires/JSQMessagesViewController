@@ -10,7 +10,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "JSQMessagesAvatarFactory.h"
+#import "JSQMessagesAvatarImageFactory.h"
 
 
 @interface JSQMessagesAvatarFactoryTests : XCTestCase
@@ -35,7 +35,7 @@
     XCTAssertNotNil(image, @"Image should not be nil");
     
     CGFloat diameter = 50.0f;
-    UIImage *avatar = [JSQMessagesAvatarFactory avatarWithImage:image diameter:diameter];
+    UIImage *avatar = [JSQMessagesAvatarImageFactory avatarWithImage:image diameter:diameter];
     XCTAssertNotNil(avatar, @"Avatar should not be nil");
     XCTAssertTrue(CGSizeEqualToSize(avatar.size, CGSizeMake(diameter, diameter)), @"Avatar size should be equal to diameter");
     XCTAssertEqual(avatar.scale, image.scale, @"Avatar scale should be equal to original image scale");
@@ -44,11 +44,11 @@
 - (void)testAvatarInitialsImage
 {
     CGFloat diameter = 50.0f;
-    UIImage *avatar = [JSQMessagesAvatarFactory avatarWithUserInitials:@"JSQ"
-                                                       backgroundColor:[UIColor lightGrayColor]
-                                                             textColor:[UIColor darkGrayColor]
-                                                                  font:[UIFont systemFontOfSize:13.0f]
-                                                              diameter:diameter];
+    UIImage *avatar = [JSQMessagesAvatarImageFactory avatarWithUserInitials:@"JSQ"
+                                                            backgroundColor:[UIColor lightGrayColor]
+                                                                  textColor:[UIColor darkGrayColor]
+                                                                       font:[UIFont systemFontOfSize:13.0f]
+                                                                   diameter:diameter];
     
     XCTAssertNotNil(avatar, @"Avatar should not be nil");
     XCTAssertTrue(CGSizeEqualToSize(avatar.size, CGSizeMake(diameter, diameter)), @"Avatar size should be equal to diameter");

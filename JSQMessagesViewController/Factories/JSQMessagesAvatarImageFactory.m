@@ -16,9 +16,9 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import "JSQMessagesAvatarFactory.h"
+#import "JSQMessagesAvatarImageFactory.h"
 
-@interface JSQMessagesAvatarFactory ()
+@interface JSQMessagesAvatarImageFactory ()
 
 + (UIImage *)jsq_circularImage:(UIImage *)image withDiamter:(NSUInteger)diameter;
 
@@ -26,7 +26,7 @@
 
 
 
-@implementation JSQMessagesAvatarFactory
+@implementation JSQMessagesAvatarImageFactory
 
 #pragma mark - Public
 
@@ -35,7 +35,7 @@
     NSParameterAssert(originalImage != nil);
     NSParameterAssert(diameter > 0.0f);
     
-    return [JSQMessagesAvatarFactory jsq_circularImage:originalImage withDiamter:diameter];
+    return [JSQMessagesAvatarImageFactory jsq_circularImage:originalImage withDiamter:diameter];
 }
 
 + (UIImage *)avatarWithUserInitials:(NSString *)userInitials
@@ -82,7 +82,7 @@
     CGContextRestoreGState(context);
     UIGraphicsEndImageContext();
     
-    return [JSQMessagesAvatarFactory jsq_circularImage:image withDiamter:diameter];
+    return [JSQMessagesAvatarImageFactory jsq_circularImage:image withDiamter:diameter];
 }
 
 #pragma mark - Private

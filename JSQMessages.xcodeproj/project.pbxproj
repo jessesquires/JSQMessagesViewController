@@ -31,7 +31,7 @@
 		8816A6A418E9250400111919 /* UIView+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 8816A66418E9250400111919 /* UIView+JSQMessages.m */; };
 		8816A6A518E9250400111919 /* JSQMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8816A66718E9250400111919 /* JSQMessagesViewController.m */; };
 		8816A6A618E9250400111919 /* JSQMessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8816A66818E9250400111919 /* JSQMessagesViewController.xib */; };
-		8816A6A718E9250400111919 /* JSQMessagesAvatarFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8816A66B18E9250400111919 /* JSQMessagesAvatarFactory.m */; };
+		8816A6A718E9250400111919 /* JSQMessagesAvatarImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8816A66B18E9250400111919 /* JSQMessagesAvatarImageFactory.m */; };
 		8816A6A818E9250400111919 /* JSQMessagesBubbleImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8816A66D18E9250400111919 /* JSQMessagesBubbleImageFactory.m */; };
 		8816A6A918E9250400111919 /* JSQMessagesTimestampFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8816A66F18E9250400111919 /* JSQMessagesTimestampFormatter.m */; };
 		8816A6AA18E9250400111919 /* JSQMessagesToolbarButtonFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8816A67118E9250400111919 /* JSQMessagesToolbarButtonFactory.m */; };
@@ -145,8 +145,8 @@
 		8816A66618E9250400111919 /* JSQMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesViewController.h; sourceTree = "<group>"; };
 		8816A66718E9250400111919 /* JSQMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesViewController.m; sourceTree = "<group>"; };
 		8816A66818E9250400111919 /* JSQMessagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesViewController.xib; sourceTree = "<group>"; };
-		8816A66A18E9250400111919 /* JSQMessagesAvatarFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesAvatarFactory.h; sourceTree = "<group>"; };
-		8816A66B18E9250400111919 /* JSQMessagesAvatarFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesAvatarFactory.m; sourceTree = "<group>"; };
+		8816A66A18E9250400111919 /* JSQMessagesAvatarImageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesAvatarImageFactory.h; sourceTree = "<group>"; };
+		8816A66B18E9250400111919 /* JSQMessagesAvatarImageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesAvatarImageFactory.m; sourceTree = "<group>"; };
 		8816A66C18E9250400111919 /* JSQMessagesBubbleImageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesBubbleImageFactory.h; sourceTree = "<group>"; };
 		8816A66D18E9250400111919 /* JSQMessagesBubbleImageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesBubbleImageFactory.m; sourceTree = "<group>"; };
 		8816A66E18E9250400111919 /* JSQMessagesTimestampFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesTimestampFormatter.h; sourceTree = "<group>"; };
@@ -364,8 +364,8 @@
 		8816A66918E9250400111919 /* Factories */ = {
 			isa = PBXGroup;
 			children = (
-				8816A66A18E9250400111919 /* JSQMessagesAvatarFactory.h */,
-				8816A66B18E9250400111919 /* JSQMessagesAvatarFactory.m */,
+				8816A66A18E9250400111919 /* JSQMessagesAvatarImageFactory.h */,
+				8816A66B18E9250400111919 /* JSQMessagesAvatarImageFactory.m */,
 				8816A66C18E9250400111919 /* JSQMessagesBubbleImageFactory.h */,
 				8816A66D18E9250400111919 /* JSQMessagesBubbleImageFactory.m */,
 				8816A66E18E9250400111919 /* JSQMessagesTimestampFormatter.h */,
@@ -813,7 +813,7 @@
 				8816A6B418E9250400111919 /* JSQMessagesComposerTextView.m in Sources */,
 				8816A6AA18E9250400111919 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				8816A6A418E9250400111919 /* UIView+JSQMessages.m in Sources */,
-				8816A6A718E9250400111919 /* JSQMessagesAvatarFactory.m in Sources */,
+				8816A6A718E9250400111919 /* JSQMessagesAvatarImageFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
