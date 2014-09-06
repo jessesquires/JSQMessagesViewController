@@ -32,14 +32,14 @@
 - (void)testInitInvalid
 {
     XCTAssertThrows([[JSQMessagesAvatarImage alloc] init], @"Invalid init should throw");
-    XCTAssertThrows([[JSQMessagesAvatarImage alloc] initWithPlaceholderImage:nil size:CGSizeMake(10, 10)], @"Invalid init should throw");
-    XCTAssertThrows([[JSQMessagesAvatarImage alloc] initWithPlaceholderImage:[UIImage imageNamed:@"demo_avatar_jobs"] size:CGSizeZero], @"Invalid init should throw");
+    XCTAssertThrows([JSQMessagesAvatarImage avatarImageWithPlaceholder:nil], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessagesAvatarImage alloc] initWithAvatarImage:nil highlightedImage:nil placeholderImage:nil], @"Invalid init should throw");
 }
 
 - (void)testInitValid
 {
     UIImage *mockImage = [UIImage imageNamed:@"demo_avatar_jobs"];
-    JSQMessagesAvatarImage *avatar = [[JSQMessagesAvatarImage alloc] initWithPlaceholderImage:mockImage size:CGSizeMake(30, 30)];
+    JSQMessagesAvatarImage *avatar = [JSQMessagesAvatarImage avatarImageWithPlaceholder:mockImage];
     XCTAssertNotNil(avatar, @"Valid init should succeed");
 }
 
@@ -48,8 +48,7 @@
     UIImage *mockImage = [UIImage imageNamed:@"demo_avatar_jobs"];
     JSQMessagesAvatarImage *avatar = [[JSQMessagesAvatarImage alloc] initWithAvatarImage:mockImage
                                                                         highlightedImage:mockImage
-                                                                        placeholderImage:mockImage
-                                                                                    size:CGSizeMake(34, 34)];
+                                                                        placeholderImage:mockImage];
     
     JSQMessagesAvatarImage *copy = [avatar copy];
     XCTAssertNotNil(copy, @"Copy should succeed");
@@ -71,14 +70,13 @@
     UIImage *mockImage = [UIImage imageNamed:@"demo_avatar_jobs"];
     UIImage *mockPlaceholderImage = [UIImage imageNamed:@"demo_avatar_cook"];
     
-    JSQMessagesAvatarImage *avatar = [[JSQMessagesAvatarImage alloc] initWithPlaceholderImage:mockPlaceholderImage
-                                                                                         size:CGSizeMake(34, 34)];
+    JSQMessagesAvatarImage *avatar = [JSQMessagesAvatarImage avatarImageWithPlaceholder:mockPlaceholderImage];
     
     XCTAssertNil(avatar.avatarImage);
-    XCTAssertEqualObjects(mockPlaceholderImage, [avatar currentDisplayImage], @"Should display placeholder image if avatar image is nil");
+    XCTAssertEqualObjects(mockPlaceholderImage, avatar.currentDisplayImage, @"Should display placeholder image if avatar image is nil");
     
     avatar.avatarImage = mockImage;
-    XCTAssertEqualObjects(mockImage, [avatar currentDisplayImage], @"Should display avatar image if available");
+    XCTAssertEqualObjects(mockImage, avatar.currentDisplayImage, @"Should display avatar image if available");
 }
 
 @end

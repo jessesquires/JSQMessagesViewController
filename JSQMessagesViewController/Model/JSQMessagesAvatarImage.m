@@ -22,28 +22,24 @@
 
 #pragma mark - Initialization
 
-- (instancetype)initWithPlaceholderImage:(UIImage *)image size:(CGSize)size
++ (instancetype)avatarImageWithPlaceholder:(UIImage *)placeholderImage
 {
-    return [self initWithAvatarImage:nil
-                    highlightedImage:nil
-                    placeholderImage:image
-                                size:size];
+    return [[JSQMessagesAvatarImage alloc] initWithAvatarImage:nil
+                                              highlightedImage:nil
+                                              placeholderImage:placeholderImage];
 }
 
 - (instancetype)initWithAvatarImage:(UIImage *)avatarImage
                    highlightedImage:(UIImage *)highlightedImage
                    placeholderImage:(UIImage *)placeholderImage
-                               size:(CGSize)size
 {
     NSParameterAssert(placeholderImage != nil);
-    NSParameterAssert(!CGSizeEqualToSize(size, CGSizeZero));
     
     self = [super init];
     if (self) {
         _avatarImage = avatarImage;
         _avatarHighlightedImage = highlightedImage;
         _avatarPlaceholderImage = placeholderImage;
-        _avatarImageSize = size;
     }
     return self;
 }
@@ -51,11 +47,11 @@
 - (id)init
 {
     NSAssert(NO, @"%s is not a valid initializer for %@. Use %@ instead.",
-             __PRETTY_FUNCTION__, [self class], NSStringFromSelector(@selector(initWithAvatarImage:highlightedImage:placeholderImage:size:)));
+             __PRETTY_FUNCTION__, [self class], NSStringFromSelector(@selector(initWithAvatarImage:highlightedImage:placeholderImage:)));
     return nil;
 }
 
-#pragma mark - Avatar image
+#pragma mark - Getters
 
 - (UIImage *)currentDisplayImage
 {
@@ -66,16 +62,13 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: avatarImage=%@, avatarImageSize=%@, avatarHighlightedImage=%@, avatarPlaceholderImage=%@>",
-            [self class], self.avatarImage, NSStringFromCGSize(self.avatarImageSize), self.avatarHighlightedImage, self.avatarPlaceholderImage];
+    return [NSString stringWithFormat:@"<%@: avatarImage=%@, avatarHighlightedImage=%@, avatarPlaceholderImage=%@>",
+            [self class], self.avatarImage, self.avatarHighlightedImage, self.avatarPlaceholderImage];
 }
 
 - (id)debugQuickLookObject
 {
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.avatarImageSize.width, self.avatarImageSize.height)];
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.image = [self currentDisplayImage];
-    return imageView;
+    return [[UIImageView alloc] initWithImage:[self currentDisplayImage]];
 }
 
 #pragma mark - NSCopying
@@ -84,8 +77,7 @@
 {
     return [[[self class] allocWithZone:zone] initWithAvatarImage:[UIImage imageWithCGImage:self.avatarImage.CGImage]
                                                  highlightedImage:[UIImage imageWithCGImage:self.avatarHighlightedImage.CGImage]
-                                                 placeholderImage:[UIImage imageWithCGImage:self.avatarPlaceholderImage.CGImage]
-                                                             size:self.avatarImageSize];
+                                                 placeholderImage:[UIImage imageWithCGImage:self.avatarPlaceholderImage.CGImage]];
 }
 
 @end
