@@ -80,16 +80,16 @@
                                                                   backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
                                                                         textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
                                                                              font:[UIFont systemFontOfSize:14.0f]
-                                                                         diameter:kJSQDemoAvatarSize];
+                                                                         diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
         UIImage *cookImage = [JSQMessagesAvatarImageFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_cook"]
-                                                                   diameter:kJSQDemoAvatarSize];
+                                                                   diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
         UIImage *jobsImage = [JSQMessagesAvatarImageFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]
-                                                                   diameter:kJSQDemoAvatarSize];
+                                                                   diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
         UIImage *wozImage = [JSQMessagesAvatarImageFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_woz"]
-                                                                  diameter:kJSQDemoAvatarSize];
+                                                                  diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
         self.avatars = @{ kJSQDemoAvatarIdSquires : jsqImage,
                           kJSQDemoAvatarIdCook : cookImage,

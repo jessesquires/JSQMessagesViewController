@@ -25,12 +25,19 @@
 
 @class JSQMessagesCollectionView;
 
+
 /**
  *  A constant that describes the default height for all label subviews in a `JSQMessagesCollectionViewCell`.
  *
  *  @see `JSQMessagesCollectionViewCell`.
  */
 FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault;
+
+/**
+ *  A constant that describes the default size for avatar images in a `JSQMessagesCollectionViewFlowLayout`.
+ */
+FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
+
 
 
 /**
@@ -148,6 +155,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
  *  The size of the avatar image view for incoming messages.
  *
  *  @discussion The default value is `(34.0f, 34.0f)`. Set to `CGSizeZero` to remove incoming avatars.
+ *  You may use `kJSQMessagesCollectionViewAvatarSizeDefault` to size your avatars to the default value.
  */
 @property (assign, nonatomic) CGSize incomingAvatarViewSize;
 
@@ -155,6 +163,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
  *  The size of the avatar image view for outgoing messages.
  *
  *  @discussion The default value is `(34.0f, 34.0f)`. Set to `CGSizeZero` to remove outgoing avatars.
+ *  You may use `kJSQMessagesCollectionViewAvatarSizeDefault` to size your avatars to the default value.
  */
 @property (assign, nonatomic) CGSize outgoingAvatarViewSize;
 
