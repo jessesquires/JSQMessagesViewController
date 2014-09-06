@@ -25,7 +25,7 @@
  *  It declares the required and optional methods that a class must implement so that instances of that class 
  *  can be displayed properly within a `JSQMessagesCollectionViewCell`.
  *
- *  A concrete class that conforms to this protocol is provided in the library, called `JSQMessage`.
+ *  A concrete class that conforms to this protocol is provided in the library. See `JSQMessage`.
  *
  *  @see JSQMessage.
  */
