@@ -13,11 +13,11 @@
 #import "JSQMessagesAvatarImageFactory.h"
 
 
-@interface JSQMessagesAvatarFactoryTests : XCTestCase
+@interface JSQMessagesAvatarImageFactoryTests : XCTestCase
 @end
 
 
-@implementation JSQMessagesAvatarFactoryTests
+@implementation JSQMessagesAvatarImageFactoryTests
 
 - (void)setUp
 {
