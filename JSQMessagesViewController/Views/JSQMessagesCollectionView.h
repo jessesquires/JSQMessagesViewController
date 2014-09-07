@@ -76,4 +76,7 @@
  */
 - (JSQMessagesLoadEarlierHeaderView *)dequeueLoadEarlierMessagesViewHeaderForIndexPath:(NSIndexPath *)indexPath;
 
+
+// TODO: refine headers and footers, move their configure properties here.
+
 @end
