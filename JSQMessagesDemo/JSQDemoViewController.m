@@ -206,7 +206,7 @@
     return self.demoData.incomingBubbleImageData;
 }
 
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+- (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
      *  Return `nil` here if you do not want avatars.
@@ -219,10 +219,9 @@
      */
     
     /**
-     *  Reuse created avatar images, but create new imageView to add to each cell
-     *  Otherwise, each cell would be referencing the same imageView and avatars would disappear from cells
+     *  Return your previously created avatar image data objects.
      *
-     *  Note: these images will be sized according to these values:
+     *  Note: these the avatars will be sized according to these values:
      *
      *  self.collectionView.collectionViewLayout.incomingAvatarViewSize
      *  self.collectionView.collectionViewLayout.outgoingAvatarViewSize
@@ -231,8 +230,7 @@
      */
     JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
     
-    UIImage *avatarImage = [self.demoData.avatars objectForKey:message.senderId];
-    return [[UIImageView alloc] initWithImage:avatarImage];
+    return [self.demoData.avatars objectForKey:message.senderId];
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath

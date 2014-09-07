@@ -76,20 +76,20 @@
          *  If you are not using avatars, ignore this.
          */
         
-        UIImage *jsqImage = [JSQMessagesAvatarImageFactory avatarWithUserInitials:@"JSQ"
-                                                                  backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
-                                                                        textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
-                                                                             font:[UIFont systemFontOfSize:14.0f]
-                                                                         diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        JSQMessagesAvatarImage *jsqImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:@"JSQ"
+                                                                                      backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
+                                                                                            textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
+                                                                                                 font:[UIFont systemFontOfSize:14.0f]
+                                                                                             diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
-        UIImage *cookImage = [JSQMessagesAvatarImageFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_cook"]
-                                                                   diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        JSQMessagesAvatarImage *cookImage = [JSQMessagesAvatarImage avatarWithImage:[JSQMessagesAvatarImageFactory circularAvatarImage:[UIImage imageNamed:@"demo_avatar_cook"]
+                                                                                                                          withDiameter:kJSQMessagesCollectionViewAvatarSizeDefault]];
         
-        UIImage *jobsImage = [JSQMessagesAvatarImageFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]
-                                                                   diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        JSQMessagesAvatarImage *jobsImage = [JSQMessagesAvatarImage avatarWithImage:[JSQMessagesAvatarImageFactory circularAvatarImage:[UIImage imageNamed:@"demo_avatar_jobs"]
+                                                                                                                          withDiameter:kJSQMessagesCollectionViewAvatarSizeDefault]];
         
-        UIImage *wozImage = [JSQMessagesAvatarImageFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_woz"]
-                                                                  diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        JSQMessagesAvatarImage *wozImage = [JSQMessagesAvatarImage avatarWithImage:[JSQMessagesAvatarImageFactory circularAvatarImage:[UIImage imageNamed:@"demo_avatar_woz"]
+                                                                                                                         withDiameter:kJSQMessagesCollectionViewAvatarSizeDefault]];
         
         self.avatars = @{ kJSQDemoAvatarIdSquires : jsqImage,
                           kJSQDemoAvatarIdCook : cookImage,
