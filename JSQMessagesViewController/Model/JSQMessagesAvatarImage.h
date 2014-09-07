@@ -53,6 +53,17 @@
 @property (nonatomic, readonly) UIImage *currentDisplayImage;
 
 /**
+ *  Initializes and returns an avatar image object having the specified image.
+ *
+ *  @param image The image for this avatar image. This image will be used for the all of the following
+ *  properties: avatarImage, avatarHighlightedImage, avatarPlaceholderImage;
+ *  This value must not be `nil`.
+ *
+ *  @return An initialized `JSQMessagesAvatarImage` object if successful, `nil` otherwise.
+ */
++ (instancetype)avatarWithImage:(UIImage *)image;
+
+/**
  *  Initializes and returns an avatar image object having the specified placeholder image.
  *
  *  @param placeholderImage The placeholder image for this avatar image. This value must not be `nil`.

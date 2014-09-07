@@ -41,6 +41,12 @@
     UIImage *mockImage = [UIImage imageNamed:@"demo_avatar_jobs"];
     JSQMessagesAvatarImage *avatar = [JSQMessagesAvatarImage avatarImageWithPlaceholder:mockImage];
     XCTAssertNotNil(avatar, @"Valid init should succeed");
+    
+    JSQMessagesAvatarImage *avatar2 = [JSQMessagesAvatarImage avatarWithImage:mockImage];
+    XCTAssertNotNil(avatar2, @"Valid init should succeed");
+    
+    XCTAssertEqualObjects(avatar2.avatarImage, avatar2.avatarHighlightedImage);
+    XCTAssertEqualObjects(avatar2.avatarHighlightedImage, avatar2.avatarPlaceholderImage);
 }
 
 - (void)testCopy

@@ -22,6 +22,15 @@
 
 #pragma mark - Initialization
 
++ (instancetype)avatarWithImage:(UIImage *)image
+{
+    NSParameterAssert(image != nil);
+    
+    return [[JSQMessagesAvatarImage alloc] initWithAvatarImage:image
+                                              highlightedImage:image
+                                              placeholderImage:image];
+}
+
 + (instancetype)avatarImageWithPlaceholder:(UIImage *)placeholderImage
 {
     return [[JSQMessagesAvatarImage alloc] initWithAvatarImage:nil
