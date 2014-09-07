@@ -22,6 +22,7 @@
 @class JSQMessagesCollectionView;
 @protocol JSQMessageData;
 @protocol JSQMessageBubbleImageDataSource;
+@protocol JSQMessageAvatarImageDataSource;
 
 
 /**
@@ -82,24 +83,21 @@
 - (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
- *  Asks the data source for the avatar image view that corresponds to the specified
- *  message data item at indexPath in the collectionView.
+ *  Asks the data source for the avatar image data that corresponds to the specified message data item at indexPath in the collectionView.
  *
  *  @param collectionView The object representing the collection view requesting this information.
  *  @param indexPath      The index path that specifies the location of the item.
  *
- *  @return A configured imageView object. You may return `nil` from this method if you do not want
+ *  @return A initialized object that conforms to the `JSQMessageAvatarImageDataSource` protocol. You may return `nil` from this method if you do not want
  *  the specified item to display an avatar.
  *
- *  @discussion It is recommended that you utilize `JSQMessagesAvatarFactory` to return a styled avatar image.
- *  However, you may provide your own.
- *  Note that the size of the imageView is ignored. To specify avatar image view sizes,
- *  set the appropriate properties on the collectionView's layout object.
+ *  @discussion It is recommended that you utilize `JSQMessagesAvatarImageFactory` to return valid `JSQMessagesAvatarImage` objects.
+ *  However, you may provide your own data source object as long as it conforms to the `JSQMessageAvatarImageDataSource` protocol.
  *
- *  @see `JSQMessagesAvatarFactory`.
+ *  @see `JSQMessagesAvatarImageFactory`.
  *  @see `JSQMessagesCollectionViewFlowLayout`.
  */
-- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @optional
 

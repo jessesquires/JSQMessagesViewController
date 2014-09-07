@@ -35,24 +35,40 @@
     XCTAssertNotNil(image, @"Image should not be nil");
     
     CGFloat diameter = 50.0f;
-    UIImage *avatar = [JSQMessagesAvatarImageFactory avatarWithImage:image diameter:diameter];
+    JSQMessagesAvatarImage *avatar = [JSQMessagesAvatarImageFactory avatarImageWithPlaceholder:image diameter:diameter];
+    
     XCTAssertNotNil(avatar, @"Avatar should not be nil");
-    XCTAssertTrue(CGSizeEqualToSize(avatar.size, CGSizeMake(diameter, diameter)), @"Avatar size should be equal to diameter");
-    XCTAssertEqual(avatar.scale, image.scale, @"Avatar scale should be equal to original image scale");
+    XCTAssertTrue(CGSizeEqualToSize(avatar.avatarPlaceholderImage.size, CGSizeMake(diameter, diameter)), @"Avatar size should be equal to diameter");
+    XCTAssertEqual(avatar.avatarPlaceholderImage.scale, [UIScreen mainScreen].scale, @"Avatar scale should be equal to screen scale");
+    
+    avatar.avatarImage = [JSQMessagesAvatarImageFactory circularAvatarImage:image withDiameter:diameter];
+    XCTAssertTrue(CGSizeEqualToSize(avatar.avatarImage.size, CGSizeMake(diameter, diameter)), @"Avatar size should be equal to diameter");
+    XCTAssertEqual(avatar.avatarImage.scale, [UIScreen mainScreen].scale, @"Avatar scale should be equal to screen scale");
+    
+    avatar.avatarHighlightedImage = [JSQMessagesAvatarImageFactory circularAvatarHighlightedImage:image withDiameter:diameter];
+    XCTAssertTrue(CGSizeEqualToSize(avatar.avatarHighlightedImage.size, CGSizeMake(diameter, diameter)), @"Avatar size should be equal to diameter");
+    XCTAssertEqual(avatar.avatarHighlightedImage.scale, [UIScreen mainScreen].scale, @"Avatar scale should be equal to screen scale");
+    
 }
 
 - (void)testAvatarInitialsImage
 {
     CGFloat diameter = 50.0f;
-    UIImage *avatar = [JSQMessagesAvatarImageFactory avatarWithUserInitials:@"JSQ"
-                                                            backgroundColor:[UIColor lightGrayColor]
-                                                                  textColor:[UIColor darkGrayColor]
-                                                                       font:[UIFont systemFontOfSize:13.0f]
-                                                                   diameter:diameter];
+    JSQMessagesAvatarImage *avatar = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:@"JSQ"
+                                                                                backgroundColor:[UIColor lightGrayColor]
+                                                                                      textColor:[UIColor darkGrayColor]
+                                                                                           font:[UIFont systemFontOfSize:13.0f]
+                                                                                       diameter:diameter];
     
     XCTAssertNotNil(avatar, @"Avatar should not be nil");
-    XCTAssertTrue(CGSizeEqualToSize(avatar.size, CGSizeMake(diameter, diameter)), @"Avatar size should be equal to diameter");
-    XCTAssertEqual(avatar.scale, [UIScreen mainScreen].scale, @"Avatar scale should be equal to screen scale");
+    XCTAssertTrue(CGSizeEqualToSize(avatar.avatarImage.size, CGSizeMake(diameter, diameter)), @"Avatar size should be equal to diameter");
+    XCTAssertEqual(avatar.avatarImage.scale, [UIScreen mainScreen].scale, @"Avatar scale should be equal to screen scale");
+    
+    XCTAssertTrue(CGSizeEqualToSize(avatar.avatarHighlightedImage.size, CGSizeMake(diameter, diameter)), @"Avatar size should be equal to diameter");
+    XCTAssertEqual(avatar.avatarHighlightedImage.scale, [UIScreen mainScreen].scale, @"Avatar scale should be equal to screen scale");
+    
+    XCTAssertTrue(CGSizeEqualToSize(avatar.avatarPlaceholderImage.size, CGSizeMake(diameter, diameter)), @"Avatar size should be equal to diameter");
+    XCTAssertEqual(avatar.avatarPlaceholderImage.scale, [UIScreen mainScreen].scale, @"Avatar scale should be equal to screen scale");
 }
 
 @end
