@@ -42,4 +42,6 @@
 
 - (void)closePressed:(UIBarButtonItem *)sender;
 
+// TODO: example of async avatar loading
+
 @end
