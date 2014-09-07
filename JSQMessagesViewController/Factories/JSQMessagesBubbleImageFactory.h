@@ -28,7 +28,7 @@
 @interface JSQMessagesBubbleImageFactory : NSObject
 
 /**
- *  Creates an returns a `JSQMessagesBubbleImage` object with the specified color for *outgoing* message image bubbles.
+ *  Creates and returns a `JSQMessagesBubbleImage` object with the specified color for *outgoing* message image bubbles.
  *  The `messageBubbleImage` property of the `JSQMessagesBubbleImage` is configured with a flat bubble image, masked to the given color.
  *  The `messageBubbleHighlightedImage` property is configured similarly, but with a darkened version of the given color.
  *
@@ -39,7 +39,7 @@
 + (JSQMessagesBubbleImage *)outgoingMessagesBubbleImageWithColor:(UIColor *)color;
 
 /**
- *  Creates an returns a `JSQMessagesBubbleImage` object with the specified color for *incoming* message image bubbles.
+ *  Creates and returns a `JSQMessagesBubbleImage` object with the specified color for *incoming* message image bubbles.
  *  The `messageBubbleImage` property of the `JSQMessagesBubbleImage` is configured with a flat bubble image, masked to the given color.
  *  The `messageBubbleHighlightedImage` property is configured similarly, but with a darkened version of the given color.
  *
