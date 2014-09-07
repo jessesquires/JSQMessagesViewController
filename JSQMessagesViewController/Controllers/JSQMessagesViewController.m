@@ -412,13 +412,17 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.textView.text = messageText;
     
     id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
-    cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
-    cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
+    if (bubbleImageDataSource != nil) {
+        cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
+        cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
+    }
     
     id<JSQMessageAvatarImageDataSource> avatarImageDataSource = [collectionView.dataSource collectionView:collectionView avatarImageDataForItemAtIndexPath:indexPath];
-    UIImage *avatarImage = [avatarImageDataSource avatarImage];
-    cell.avatarImageView.image = (avatarImage == nil) ? [avatarImageDataSource avatarPlaceholderImage] : avatarImage;
-    cell.avatarImageView.highlightedImage = [avatarImageDataSource avatarHighlightedImage];
+    if (avatarImageDataSource != nil) {
+        UIImage *avatarImage = [avatarImageDataSource avatarImage];
+        cell.avatarImageView.image = (avatarImage == nil) ? [avatarImageDataSource avatarPlaceholderImage] : avatarImage;
+        cell.avatarImageView.highlightedImage = [avatarImageDataSource avatarHighlightedImage];
+    }
     
     cell.cellTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellTopLabelAtIndexPath:indexPath];
     cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
