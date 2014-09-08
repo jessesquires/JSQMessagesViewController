@@ -56,9 +56,10 @@
     XCTAssertEqualObjects(vc.senderId, @"JSQDefaultSender", @"Property should be equal to default value");
     XCTAssertEqualObjects(vc.senderDisplayName, @"JSQDefaultSender", @"Property should be equal to default value");
     XCTAssertEqual(vc.automaticallyAdjustsScrollViewInsets, YES, @"Property should be equal to default value");
+
     XCTAssertEqualObjects(vc.incomingCellIdentifier, [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier], @"Property should be equal to default value");
     XCTAssertEqualObjects(vc.outgoingCellIdentifier, [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier], @"Property should be equal to default value");
-    XCTAssertEqualObjects(vc.typingIndicatorColor, [UIColor jsq_messageBubbleLightGrayColor], @"Property should be equal to default value");
+
     XCTAssertEqual(vc.showTypingIndicator, NO, @"Property should be equal to default value");
     XCTAssertEqual(vc.showLoadEarlierMessagesHeader, NO, @"Property should be equal to default value");
 }
