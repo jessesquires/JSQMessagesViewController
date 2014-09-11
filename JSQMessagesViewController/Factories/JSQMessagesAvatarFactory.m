@@ -91,7 +91,7 @@
 {
     CGRect frame = CGRectMake(0.0f, 0.0f, diameter, diameter);
     
-    UIGraphicsBeginImageContextWithOptions(frame.size, NO, image.scale);
+    UIGraphicsBeginImageContextWithOptions(frame.size, NO, [UIScreen mainScreen].scale);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     
