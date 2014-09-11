@@ -42,10 +42,15 @@
  */
 @property (copy, nonatomic) NSDate *date;
 
+/**
+ *  The status that the message was sent. This value must not be `nil`.
+ */
+@property (copy, nonatomic) NSString *status;
+
 #pragma mark - Initialization
 
 /**
- *  Initializes and returns a message object having the given text, sender, and current system date.
+ *  Initializes and returns a message object having the given text, sender, an empty status, and current system date.
  *
  *  @param text   The body text of the message.
  *  @param sender The name of the user who sent the message.
@@ -60,11 +65,13 @@
  *  @param text   The body text of the message.
  *  @param sender The name of the user who sent the message.
  *  @param date   The date that the message was sent.
+ *  @param status The status that the message was sent.
  *
  *  @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
  */
 - (instancetype)initWithText:(NSString *)text
                       sender:(NSString *)sender
+                      status:(NSString *)status
                         date:(NSDate *)date;
 
 /**
