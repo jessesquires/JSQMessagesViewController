@@ -50,6 +50,12 @@
  */
 - (NSDate *)date;
 
+/**
+ *  @return The status that the message was sent.
+ *  @warning You must not return `nil` from this method.
+ */
+- (NSString *)status;
+
 @end
 
 #endif
