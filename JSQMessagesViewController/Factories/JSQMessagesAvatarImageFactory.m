@@ -23,7 +23,9 @@
 
 @interface JSQMessagesAvatarImageFactory ()
 
-+ (UIImage *)jsq_circularImage:(UIImage *)image withDiamter:(NSUInteger)diameter;
++ (UIImage *)jsq_circularImage:(UIImage *)image
+                   withDiamter:(NSUInteger)diameter
+              highlightedColor:(UIColor *)highlightedColor;
 
 + (UIImage *)jsq_imageWitInitials:(NSString *)initials
                   backgroundColor:(UIColor *)backgroundColor
@@ -41,20 +43,35 @@
 
 + (JSQMessagesAvatarImage *)avatarImageWithPlaceholder:(UIImage *)placeholderImage diameter:(NSUInteger)diameter
 {
-    UIImage *circlePlaceholderImage = [JSQMessagesAvatarImageFactory jsq_circularImage:placeholderImage withDiamter:diameter];
+    UIImage *circlePlaceholderImage = [JSQMessagesAvatarImageFactory jsq_circularImage:placeholderImage
+                                                                           withDiamter:diameter
+                                                                      highlightedColor:nil];
     
     return [JSQMessagesAvatarImage avatarImageWithPlaceholder:circlePlaceholderImage];
 }
 
++ (JSQMessagesAvatarImage *)avatarImageWithImage:(UIImage *)image diameter:(NSUInteger)diameter
+{
+    UIImage *avatar = [JSQMessagesAvatarImageFactory circularAvatarImage:image withDiameter:diameter];
+    UIImage *highlightedAvatar = [JSQMessagesAvatarImageFactory circularAvatarHighlightedImage:image withDiameter:diameter];
+    
+    return [[JSQMessagesAvatarImage alloc] initWithAvatarImage:avatar
+                                              highlightedImage:highlightedAvatar
+                                              placeholderImage:avatar];
+}
+
 + (UIImage *)circularAvatarImage:(UIImage *)image withDiameter:(NSUInteger)diameter
 {
-    return [JSQMessagesAvatarImageFactory jsq_circularImage:image withDiamter:diameter];
+    return [JSQMessagesAvatarImageFactory jsq_circularImage:image
+                                                withDiamter:diameter
+                                           highlightedColor:nil];
 }
 
 + (UIImage *)circularAvatarHighlightedImage:(UIImage *)image withDiameter:(NSUInteger)diameter
 {
-    // TODO: highlighted avatar image
-    return [JSQMessagesAvatarImageFactory jsq_circularImage:image withDiamter:diameter];
+    return [JSQMessagesAvatarImageFactory jsq_circularImage:image
+                                                withDiamter:diameter
+                                           highlightedColor:[UIColor colorWithWhite:0.1f alpha:0.3f]];
 }
 
 + (JSQMessagesAvatarImage *)avatarImageWithUserInitials:(NSString *)userInitials
@@ -69,11 +86,9 @@
                                                                           font:font
                                                                       diameter:diameter];
     
-    UIImage *avatarHighlightedImage = [JSQMessagesAvatarImageFactory jsq_imageWitInitials:userInitials
-                                                                          backgroundColor:[backgroundColor jsq_colorByDarkeningColorWithValue:0.1f]
-                                                                                textColor:[textColor jsq_colorByDarkeningColorWithValue:0.1f]
-                                                                                     font:font
-                                                                                 diameter:diameter];
+    UIImage *avatarHighlightedImage = [JSQMessagesAvatarImageFactory jsq_circularImage:avatarImage
+                                                                           withDiamter:diameter
+                                                                      highlightedColor:[UIColor colorWithWhite:0.1f alpha:0.3f]];
     
     return [[JSQMessagesAvatarImage alloc] initWithAvatarImage:avatarImage
                                               highlightedImage:avatarHighlightedImage
@@ -125,10 +140,10 @@
     
     CGContextRestoreGState(context);
     UIGraphicsEndImageContext();
-    return [JSQMessagesAvatarImageFactory jsq_circularImage:image withDiamter:diameter];
+    return [JSQMessagesAvatarImageFactory jsq_circularImage:image withDiamter:diameter highlightedColor:nil];
 }
 
-+ (UIImage *)jsq_circularImage:(UIImage *)image withDiamter:(NSUInteger)diameter
++ (UIImage *)jsq_circularImage:(UIImage *)image withDiamter:(NSUInteger)diameter highlightedColor:(UIColor *)highlightedColor
 {
     NSParameterAssert(image != nil);
     NSParameterAssert(diameter > 0);
@@ -142,6 +157,11 @@
     UIBezierPath *imgPath = [UIBezierPath bezierPathWithOvalInRect:frame];
     [imgPath addClip];
     [image drawInRect:frame];
+    
+    if (highlightedColor != nil) {
+        CGContextSetFillColorWithColor(context, highlightedColor.CGColor);
+        CGContextFillEllipseInRect(context, frame);
+    }
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     

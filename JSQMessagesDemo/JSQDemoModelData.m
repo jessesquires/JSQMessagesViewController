@@ -82,14 +82,14 @@
                                                                                                  font:[UIFont systemFontOfSize:14.0f]
                                                                                              diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
-        JSQMessagesAvatarImage *cookImage = [JSQMessagesAvatarImage avatarWithImage:[JSQMessagesAvatarImageFactory circularAvatarImage:[UIImage imageNamed:@"demo_avatar_cook"]
-                                                                                                                          withDiameter:kJSQMessagesCollectionViewAvatarSizeDefault]];
+        JSQMessagesAvatarImage *cookImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"demo_avatar_cook"]
+                                                                                       diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
-        JSQMessagesAvatarImage *jobsImage = [JSQMessagesAvatarImage avatarWithImage:[JSQMessagesAvatarImageFactory circularAvatarImage:[UIImage imageNamed:@"demo_avatar_jobs"]
-                                                                                                                          withDiameter:kJSQMessagesCollectionViewAvatarSizeDefault]];
+        JSQMessagesAvatarImage *jobsImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]
+                                                                                       diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
-        JSQMessagesAvatarImage *wozImage = [JSQMessagesAvatarImage avatarWithImage:[JSQMessagesAvatarImageFactory circularAvatarImage:[UIImage imageNamed:@"demo_avatar_woz"]
-                                                                                                                         withDiameter:kJSQMessagesCollectionViewAvatarSizeDefault]];
+        JSQMessagesAvatarImage *wozImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"demo_avatar_woz"]
+                                                                                      diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
         self.avatars = @{ kJSQDemoAvatarIdSquires : jsqImage,
                           kJSQDemoAvatarIdCook : cookImage,
