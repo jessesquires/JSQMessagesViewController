@@ -38,6 +38,13 @@
 - (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell;
 
 /**
+ *  Tells the delegate that the user requested to copy this cell's contents.
+ *
+ *  @param cell The cell that received the tap touch event.
+ */
+- (void)messagesCollectionViewCellDidRequestCopy:(JSQMessagesCollectionViewCell *)cell;
+
+/**
  *  Tells the delegate that the message bubble of the cell has been tapped.
  *
  *  @param cell The cell that received the tap touch event.
@@ -99,6 +106,13 @@
  */
 @property (weak, nonatomic, readonly) UITextView *textView;
 
+
+/**
+ *  Returns the image view for displaying media in the cell.
+ */
+
+@property (weak, nonatomic) IBOutlet UIImageView *mediaImageView;
+
 /**
  *  Returns the message bubble container view of the cell. This view is the superview of
  *  the cell's textView and messageBubbleImageView.
@@ -136,6 +150,19 @@
  *  The default value is `nil`.
  */
 @property (weak, nonatomic) UIImageView *avatarImageView;
+
+/**
+ *  The accessory image view.
+ */
+@property (weak, nonatomic) IBOutlet UIImageView *accessoryImageView;
+@property (nonatomic) CGFloat accesoryImageSize;
+
+/**
+ *  Returns the underlying gesture recognizer for long press gestures in the cell.
+ *  This gesture handles the copy action for the cell.
+ *  Access this property when you need to override or more precisely control the long press gesture.
+ */
+@property (weak, nonatomic, readonly) UILongPressGestureRecognizer *longPressGestureRecognizer;
 
 /**
  *  Returns the underlying gesture recognizer for tap gestures in the avatarImageView of the cell.

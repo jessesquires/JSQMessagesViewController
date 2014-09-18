@@ -55,6 +55,7 @@
 @property (assign, nonatomic) CGSize avatarViewSize;
 
 @property (weak, nonatomic, readwrite) UITapGestureRecognizer *tapGestureRecognizer;
+@property (weak, nonatomic, readwrite) UITapGestureRecognizer *tapMediaGestureRecognizer;
 
 - (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap;
 
@@ -123,6 +124,8 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
     [self addGestureRecognizer:tap];
     self.tapGestureRecognizer = tap;
+    
+    [self setAccesoryImageSize:15.0];
 }
 
 - (void)dealloc
@@ -138,6 +141,9 @@
     
     [_tapGestureRecognizer removeTarget:nil action:NULL];
     _tapGestureRecognizer = nil;
+    
+    [_tapMediaGestureRecognizer removeTarget:nil action:NULL];
+    _tapMediaGestureRecognizer = nil;
 }
 
 #pragma mark - Collection view cell
@@ -247,7 +253,15 @@
                                               CGRectGetHeight(self.messageBubbleContainerView.bounds));
     
     [messageBubbleImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.textView];
+    
+    if (self.textView)
+    {
+        [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.textView];
+    }
+    else if (self.mediaImageView)
+    {
+        [self.messageBubbleContainerView insertSubview:messageBubbleImageView belowSubview:self.mediaImageView];
+    }
     [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:messageBubbleImageView];
     [self setNeedsUpdateConstraints];
     
@@ -300,6 +314,16 @@
     [self jsq_updateConstraint:self.textViewMarginHorizontalSpaceConstraint withConstant:textViewFrameInsets.left];
 }
 
+-(void)setAccesoryImageSize:(CGFloat)accesoryImageSize
+{
+    [self.accessoryImageView removeConstraints:self.accessoryImageView.constraints];
+    
+    NSLayoutConstraint *widhtConstraint = [NSLayoutConstraint constraintWithItem:self.accessoryImageView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1  constant:accesoryImageSize];
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.accessoryImageView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:self.accessoryImageView attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+    
+    [self.accessoryImageView addConstraints:@[widhtConstraint, heightConstraint]];
+}
+
 #pragma mark - Getters
 
 - (CGSize)avatarViewSize
@@ -326,6 +350,29 @@
     
     constraint.constant = constant;
     [self setNeedsUpdateConstraints];
+}
+
+#pragma mark - UIResponder
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (BOOL)becomeFirstResponder
+{
+    return [super becomeFirstResponder];
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+    return (action == @selector(copy:));
+}
+
+- (void)copy:(id)sender
+{
+    [self.delegate messagesCollectionViewCellDidRequestCopy:self];
+    [self resignFirstResponder];
 }
 
 #pragma mark - Gesture recognizers

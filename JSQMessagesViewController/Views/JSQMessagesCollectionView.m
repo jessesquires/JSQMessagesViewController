@@ -21,6 +21,8 @@
 #import "JSQMessagesCollectionViewFlowLayout.h"
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewCellIncomingMedia.h"
+#import "JSQMessagesCollectionViewCellOutgoingMedia.h"
 
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
@@ -52,6 +54,12 @@
     [self registerNib:[JSQMessagesCollectionViewCellOutgoing nib]
           forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
     
+    [self registerNib:[JSQMessagesCollectionViewCellIncomingMedia nib]
+forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncomingMedia cellReuseIdentifier]];
+    
+    [self registerNib:[JSQMessagesCollectionViewCellOutgoingMedia nib]
+forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoingMedia cellReuseIdentifier]];
+
     [self registerNib:[JSQMessagesTypingIndicatorFooterView nib]
           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
           withReuseIdentifier:[JSQMessagesTypingIndicatorFooterView footerReuseIdentifier]];
@@ -134,6 +142,11 @@
     [self.delegate collectionView:self
             didTapCellAtIndexPath:[self indexPathForCell:cell]
                     touchLocation:position];
+}
+
+-(void)messagesCollectionViewCellDidRequestCopy:(JSQMessagesCollectionViewCell *)cell
+{
+
 }
 
 @end

@@ -21,6 +21,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, JSQMessageKind) {
+    JSQMessageTextKind,
+    JSQMessageLocalMediaKind,
+    JSQMessageRemoteMediaKind,
+};
+
 /**
  *  The `JSQMessageData` protocol defines the common interface through 
  *  which `JSQMessagesViewController` and `JSQMessagesCollectionView` interacts with message model objects.
@@ -33,10 +39,10 @@
 @required
 
 /**
- *  @return The body text of the message. 
- *  @warning You must not return `nil` from this method.
+ *  @return The message kind.
+ *  @warning Must also conform to the optionals below.
  */
-- (NSString *)text;
+- (JSQMessageKind) kind;
 
 /**
  *  @return The name of the user who sent the message.
@@ -49,6 +55,23 @@
  *  @warning You must not return `nil` from this method.
  */
 - (NSDate *)date;
+
+@optional
+
+/**
+ *  @return The body text of the message.
+ */
+- (NSString *)text;
+
+/**
+ *  @return URL for the remote media on the message.
+ */
+- (NSURL *)url;
+
+/**
+ *  @return UIImage of the message.
+ */
+- (UIImage *)image;
 
 @end
 

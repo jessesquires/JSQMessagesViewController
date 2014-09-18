@@ -40,6 +40,55 @@
         _text = text;
         _sender = sender;
         _date = date;
+        _kind = JSQMessageTextKind;
+    }
+    return self;
+}
+
++ (instancetype)messageWithImage:(UIImage *)image sender:(NSString *)sender;
+{
+    return [[self alloc] initWithImage:image sender:sender date:[NSDate date]];
+}
+
+- (instancetype)initWithImage:(UIImage *)image
+                       sender:(NSString *)sender
+                         date:(NSDate *)date;
+{
+    NSParameterAssert(image != nil);
+    NSParameterAssert(sender != nil);
+    NSParameterAssert(date != nil);
+
+    self = [self init];
+    if (self)
+    {
+        _sender = sender;
+        _date = date;
+        _image = image;
+        _kind = JSQMessageLocalMediaKind;
+    }
+    return self;
+}
+
++ (instancetype)messageWithURL:(NSURL *)url sender:(NSString *)sender;
+{
+    return [[self alloc] initWithURL:url sender:sender date:[NSDate date]];
+}
+
+- (instancetype)initWithURL:(NSURL *)url
+                     sender:(NSString *)sender
+                       date:(NSDate *)date;
+{
+    NSParameterAssert(url != nil);
+    NSParameterAssert(sender != nil);
+    NSParameterAssert(date != nil);
+    
+    self = [self init];
+    if (self)
+    {
+        _sender = sender;
+        _date = [NSDate date];
+        _url = url;
+        _kind = JSQMessageRemoteMediaKind;
     }
     return self;
 }
@@ -51,6 +100,7 @@
         _text = @"";
         _sender = @"";
         _date = [NSDate date];
+        _kind = JSQMessageTextKind;
     }
     return self;
 }
@@ -88,7 +138,7 @@
 
 - (NSUInteger)hash
 {
-    return [self.text hash] ^ [self.sender hash] ^ [self.date hash];
+    return [self.text hash] ^ [self.sender hash] ^ [self.date hash] ^ [self.url hash] ^ [self.image hash] ^ [@(self.kind) hash];
 }
 
 - (NSString *)description
@@ -103,6 +153,9 @@
     self = [super init];
     if (self) {
         _text = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(text))];
+        _url = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(url))];
+        _image = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(image))];
+        _kind = [[aDecoder decodeObjectForKey:NSStringFromSelector(@selector(kind))] integerValue];
         _sender = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(sender))];
         _date = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(date))];
     }
@@ -112,6 +165,9 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:self.text forKey:NSStringFromSelector(@selector(text))];
+    [aCoder encodeObject:self.url forKey:NSStringFromSelector(@selector(url))];
+    [aCoder encodeObject:self.image forKey:NSStringFromSelector(@selector(image))];
+    [aCoder encodeObject:@(self.kind) forKey:NSStringFromSelector(@selector(kind))];
     [aCoder encodeObject:self.sender forKey:NSStringFromSelector(@selector(sender))];
     [aCoder encodeObject:self.date forKey:NSStringFromSelector(@selector(date))];
 }

@@ -27,6 +27,8 @@
 
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewCellIncomingMedia.h"
+#import "JSQMessagesCollectionViewCellOutgoingMedia.h"
 
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
@@ -39,7 +41,6 @@
 
 #import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
-
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
@@ -134,6 +135,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
     self.incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
     
+    self.outgoingMediaCellIdentifier = [JSQMessagesCollectionViewCellOutgoingMedia cellReuseIdentifier];
+    self.incomingMediaCellIdentifier = [JSQMessagesCollectionViewCellIncomingMedia cellReuseIdentifier];;
+
     self.typingIndicatorColor = [UIColor jsq_messageBubbleLightGrayColor];
     self.showTypingIndicator = NO;
     
@@ -371,6 +375,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     return nil;
 }
 
+-(UIImage *)collectionView:(JSQMessagesCollectionView *)collectionView accesoryViewForCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
 #pragma mark - Collection view data source
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -392,28 +401,55 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     NSParameterAssert(messageSender != nil);
     
     BOOL isOutgoingMessage = [messageSender isEqualToString:self.sender];
+    NSString *cellIdentifier;
     
-    NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
+    switch (messageData.kind) {
+        case JSQMessageTextKind:
+        {
+            cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
+        }
+            break;
+        case JSQMessageLocalMediaKind:
+        case JSQMessageRemoteMediaKind:
+        {
+            cellIdentifier = isOutgoingMessage ? self.outgoingMediaCellIdentifier : self.incomingMediaCellIdentifier;
+        }
+            break;
+    }
+    
+    /**
+     *  Common parameters
+     */
+    
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = collectionView;
-    
-    NSString *messageText = [messageData text];
-    NSParameterAssert(messageText != nil);
-    
-    cell.textView.text = messageText;
+
     cell.messageBubbleImageView = [collectionView.dataSource collectionView:collectionView bubbleImageViewForItemAtIndexPath:indexPath];
     cell.avatarImageView = [collectionView.dataSource collectionView:collectionView avatarImageViewForItemAtIndexPath:indexPath];
     cell.cellTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellTopLabelAtIndexPath:indexPath];
     cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
     cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellBottomLabelAtIndexPath:indexPath];
     
-    if (isOutgoingMessage) {
+    UIImage *accesoryImage = [collectionView.dataSource collectionView:collectionView accesoryViewForCellAtIndexPath:indexPath];
+    if (accesoryImage) {
+        [cell.accessoryImageView setImage:accesoryImage];
+    } else {
+        [cell.accessoryImageView setImage:nil];
+    }
+    
+    CGFloat bubbleTopLabelInset = 60.0f;
+
+    if (isOutgoingMessage)
+    {
+        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
         cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
                                                  CGRectGetMinY(cell.avatarImageView.bounds),
                                                  collectionView.collectionViewLayout.outgoingAvatarViewSize.width,
                                                  collectionView.collectionViewLayout.outgoingAvatarViewSize.height);
     }
-    else {
+    else
+    {
+        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
         cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
                                                  CGRectGetMinY(cell.avatarImageView.bounds),
                                                  collectionView.collectionViewLayout.incomingAvatarViewSize.width,
@@ -421,18 +457,40 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     
     cell.backgroundColor = [UIColor clearColor];
-    
-    CGFloat bubbleTopLabelInset = 60.0f;
-    
-    if (isOutgoingMessage) {
-        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
+
+    if (messageData.kind == JSQMessageTextKind)
+    {
+        NSString *messageText = [messageData text];
+        NSParameterAssert(messageText != nil);
+        
+        cell.textView.text = messageText;
+        cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
     }
-    else {
-        cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
+    else
+    {
+        JSQMessagesMediaHandler *mediaHandler;
+        
+        if (isOutgoingMessage)
+        {
+            JSQMessagesCollectionViewCellOutgoingMedia *mediaCell = (JSQMessagesCollectionViewCellOutgoingMedia *) cell;
+            mediaHandler = mediaCell.mediaHandler;
+        }
+        else
+        {
+            JSQMessagesCollectionViewCellIncomingMedia *mediaCell = (JSQMessagesCollectionViewCellIncomingMedia *) cell;
+            mediaHandler = mediaCell.mediaHandler;
+        }
+        
+        if (messageData.kind == JSQMessageLocalMediaKind)
+        {
+            [mediaHandler setMediaFromImage:messageData.image];
+        }
+        else if (messageData.kind == JSQMessageRemoteMediaKind)
+        {
+            [mediaHandler setMediaFromURL:messageData.url];
+        }
     }
-    
-    cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
-    
+
     return cell;
 }
 
@@ -542,6 +600,37 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
  didTapAvatarImageView:(UIImageView *)avatarImageView
            atIndexPath:(NSIndexPath *)indexPath { }
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+  didTapMediaImageView:(UIImageView *)mediaImageView
+           atIndexPath:(NSIndexPath *)indexPath { }
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCopyMessageAtIndexPath:(NSIndexPath *)indexPath;
+{
+    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+    
+    switch ([messageData kind]) {
+        case JSQMessageTextKind:
+        {
+            NSString *text = [messageData text];
+            [[UIPasteboard generalPasteboard] setString:text];
+        }
+            break;
+        case JSQMessageLocalMediaKind:
+        {
+            UIImage *image = [messageData image];
+            [[UIPasteboard generalPasteboard] setImage:image];
+        }
+            break;
+            
+        case JSQMessageRemoteMediaKind:
+        {
+            NSString *remoteURL = [[messageData url] absoluteString];
+            [[UIPasteboard generalPasteboard] setString:remoteURL];
+        }
+            break;
+    }
+}
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath { }
 
@@ -692,9 +781,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame
 {
-    CGFloat heightFromBottom = CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(keyboardFrame);
+    UIWindow *window = self.view.window;
     
-    heightFromBottom = MAX(0.0f, heightFromBottom);
+    CGRect collectionViewFrame = [window convertRect:self.collectionView.frame
+                                            fromView:self.view];
+    
+    CGRect coveredFrame = CGRectIntersection(collectionViewFrame, keyboardFrame);
+
+    coveredFrame = [window convertRect:coveredFrame toView:self.view];
+    
+    CGFloat heightFromBottom = CGRectGetHeight(coveredFrame);
     
     [self jsq_setToolbarBottomLayoutGuideConstant:heightFromBottom];
 }

@@ -106,6 +106,11 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     }
 }
 
+- (void) hideKeyboard;
+{
+    [self.contentView.textView resignFirstResponder];
+}
+
 #pragma mark - Key-value observing
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

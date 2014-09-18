@@ -26,6 +26,7 @@
 @class JSQMessagesTypingIndicatorFooterView;
 @class JSQMessagesLoadEarlierHeaderView;
 
+@protocol JSQMessageData;
 
 /**
  *  The `JSQMessagesCollectionView` class manages an ordered collection of message data items and presents

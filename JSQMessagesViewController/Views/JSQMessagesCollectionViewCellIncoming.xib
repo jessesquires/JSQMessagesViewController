@@ -75,12 +75,22 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sRr-sV-16f">
+                        <rect key="frame" x="290" y="77" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="2db-Jo-8SY"/>
+                            <constraint firstAttribute="width" constant="20" id="tdO-3I-Lce"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
                 <constraint firstItem="UPz-5x-c1T" firstAttribute="top" secondItem="Da1-09-wR4" secondAttribute="bottom" id="2FH-l9-EdC"/>
+                <constraint firstItem="sRr-sV-16f" firstAttribute="leading" secondItem="KYU-B8-cUW" secondAttribute="trailing" constant="10" id="4S0-XF-2H5"/>
                 <constraint firstItem="UPz-5x-c1T" firstAttribute="leading" secondItem="4lh-CK-yVn" secondAttribute="leading" id="54r-MX-MGW"/>
+                <constraint firstItem="sRr-sV-16f" firstAttribute="centerY" secondItem="KYU-B8-cUW" secondAttribute="centerY" id="Cfy-sq-qVd"/>
                 <constraint firstAttribute="trailing" secondItem="UPz-5x-c1T" secondAttribute="trailing" id="G3U-h0-DWS"/>
                 <constraint firstAttribute="trailing" secondItem="afj-rd-iNv" secondAttribute="trailing" id="Ka4-Dy-jCS"/>
                 <constraint firstItem="afj-rd-iNv" firstAttribute="leading" secondItem="4lh-CK-yVn" secondAttribute="leading" id="OnD-mZ-QtR"/>
@@ -98,6 +108,7 @@
             </constraints>
             <size key="customSize" width="317" height="245"/>
             <connections>
+                <outlet property="accessoryImageView" destination="sRr-sV-16f" id="noI-sv-Gdf"/>
                 <outlet property="avatarContainerView" destination="Da1-09-wR4" id="tpM-P4-qUR"/>
                 <outlet property="avatarContainerViewHeightConstraint" destination="tZk-AK-JFa" id="tPu-mC-ITh"/>
                 <outlet property="avatarContainerViewWidthConstraint" destination="YwX-fW-Me6" id="5PN-NL-hEP"/>

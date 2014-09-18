@@ -138,6 +138,17 @@
  */
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
 
+/**
+ *  Asks the data source for the UIImage to set as
+ *  an accesory view for the cell at a given indexPat
+ *
+ *  @param collectionView The object representing the collection view requesting this information.
+ *  @param indexPath      The index path that specifies the location of the item.
+ *
+ *  @return A 15x15 UIImage to set as the cell's accesoryView
+ */
+- (UIImage *) collectionView:(JSQMessagesCollectionView *)collectionView accesoryViewForCellAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
 
 #endif

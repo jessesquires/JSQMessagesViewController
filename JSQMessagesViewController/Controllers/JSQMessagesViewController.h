@@ -92,6 +92,9 @@
  */
 @property (copy, nonatomic) NSString *incomingCellIdentifier;
 
+@property (copy, nonatomic) NSString *outgoingMediaCellIdentifier;
+@property (copy, nonatomic) NSString *incomingMediaCellIdentifier;
+
 /**
  *  The color for the typing indicator for incoming messages.
  *

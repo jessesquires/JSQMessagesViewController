@@ -17,7 +17,7 @@
 //
 
 #import "JSQDemoViewController.h"
-
+#import "JSQImagePicker.h"
 
 static NSString * const kJSQDemoAvatarNameCook = @"Tim Cook";
 static NSString * const kJSQDemoAvatarNameJobs = @"Jobs";
@@ -42,8 +42,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                      [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." sender:kJSQDemoAvatarNameJobs date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
+                     [JSQMessage messageWithImage:[UIImage imageNamed:@"keepcalm"] sender:kJSQDemoAvatarNameCook],
                      nil];
-    
     /**
      *  Create avatar images once.
      *
@@ -137,6 +137,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     self.incomingBubbleImageView = [JSQMessagesBubbleImageFactory
                                     incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleGreenColor]];
     
+    self.picker = [JSQImagePicker new];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"typing"]
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
@@ -163,10 +165,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *  You must set this from `viewDidAppear:`
      *  Note: this feature is mostly stable, but still experimental
      */
-    self.collectionView.collectionViewLayout.springinessEnabled = YES;
+    self.collectionView.collectionViewLayout.springinessEnabled = NO;
 }
-
-
 
 #pragma mark - Actions
 
@@ -247,12 +247,23 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
     NSLog(@"Camera pressed!");
-    /**
-     *  Accessory button has no default functionality, yet.
-     */
+    
+    __weak __typeof(self) weakSelf = self;
+    
+    [self.inputToolbar hideKeyboard];
+    [self.picker pickImageFromViewController:self
+                                     handler:^(UIImage *image, NSError *error) {
+                                         
+                                         __typeof(self) strongSelf = weakSelf;
+
+                                         JSQMessage *copyMessage = [JSQMessage messageWithImage:image sender:strongSelf.sender];
+                                         [strongSelf.messages addObject:copyMessage];
+                                         [strongSelf finishReceivingMessage];
+                                     }
+                              dismissHandler:^{
+
+                              }];
 }
-
-
 
 #pragma mark - JSQMessages CollectionView DataSource
 
@@ -358,6 +369,16 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     return nil;
 }
 
+-(UIImage *)collectionView:(JSQMessagesCollectionView *)collectionView accesoryViewForCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.item == 0)
+    {
+        return [UIImage imageNamed:@"accesoryImage"];
+    }
+    else
+        return nil;
+}
+
 #pragma mark - UICollectionView DataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -370,7 +391,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     /**
      *  Override point for customizing cells
      */
-    JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    UICollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
     /**
      *  Configure almost *anything* on the cell
@@ -388,15 +409,20 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     
     JSQMessage *msg = [self.messages objectAtIndex:indexPath.item];
     
-    if ([msg.sender isEqualToString:self.sender]) {
-        cell.textView.textColor = [UIColor blackColor];
+    if (msg.kind == JSQMessageTextKind)
+    {
+        JSQMessagesCollectionViewCell *textCell = (JSQMessagesCollectionViewCell *) cell;
+        
+        if ([msg.sender isEqualToString:self.sender]) {
+            textCell.textView.textColor = [UIColor blackColor];
+        }
+        else {
+            textCell.textView.textColor = [UIColor whiteColor];
+        }
+        
+        textCell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : textCell.textView.textColor,
+                                              NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     }
-    else {
-        cell.textView.textColor = [UIColor whiteColor];
-    }
-    
-    cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
-                                          NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     
     return cell;
 }
