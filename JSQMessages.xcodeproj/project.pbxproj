@@ -618,9 +618,6 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Hexed Bits";
 				TargetAttributes = {
-					885D592818CBD13D00D77BB3 = {
-						DevelopmentTeam = 5VRJU68BZ5;
-					};
 					885D594C18CBD13D00D77BB3 = {
 						DevelopmentTeam = 5VRJU68BZ5;
 						TestTargetID = 885D592818CBD13D00D77BB3;
