@@ -144,16 +144,6 @@
 
 #pragma mark - Collection view cell
 
-//  TODO: remove when fixed
-//        hack for Xcode6 / iOS 8 rendering bug
-//        see issue #484
-//
-- (void)setBounds:(CGRect)bounds
-{
-    [super setBounds:bounds];
-    self.contentView.frame = bounds;
-}
-
 - (void)prepareForReuse
 {
     [super prepareForReuse];
