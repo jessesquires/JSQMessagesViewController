@@ -161,6 +161,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 34.0f;
 
 - (void)setMessageBubbleLeftRightMargin:(CGFloat)messageBubbleLeftRightMargin
 {
+    NSParameterAssert(messageBubbleLeftRightMargin >= 0.0f);
     _messageBubbleLeftRightMargin = messageBubbleLeftRightMargin;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
@@ -403,7 +404,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 34.0f;
     CGFloat textPadding = [self jsq_messageBubbleTextContainerInsetsTotal];
     CGFloat messageBubblePadding = remainingItemWidthForBubble - messageBubbleSize.width - textPadding;
     
-    layoutAttributes.messageBubbleLeftRightMargin = messageBubblePadding;
+    layoutAttributes.messageBubbleLeftRightMargin = MAX(messageBubblePadding, 0.0f);
     
     layoutAttributes.textViewFrameInsets = self.messageBubbleTextViewFrameInsets;
     

@@ -214,6 +214,17 @@
     self.messageBubbleImageView.highlighted = selected;
 }
 
+//  TODO: remove when fixed
+//        hack for Xcode6 / iOS 8 SDK rendering bug
+//        see issue #484
+//        https://github.com/jessesquires/JSQMessagesViewController/issues/484
+//
+- (void)setBounds:(CGRect)bounds
+{
+    [super setBounds:bounds];
+    self.contentView.frame = bounds;
+}
+
 #pragma mark - Setters
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor
