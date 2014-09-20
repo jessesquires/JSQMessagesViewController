@@ -80,7 +80,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
  *  The font used to display the body a text message in the message bubble of each 
  *  `JSQMessagesCollectionViewCell` in the collectionView. 
  *  
- *  @discussion The default value is the system font at size `15.0f`. This value must not be `nil`.
+ *  @discussion The default value is the preferred system font for `UIFontTextStyleBody`. This value must not be `nil`.
  */
 @property (strong, nonatomic) UIFont *messageBubbleFont;
 
@@ -120,7 +120,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
  *
  *  4. The bottom value insets the bottom of the frame.
  *
- *  @discussion The default value is `(0.0f, 0.0f, 0.0f, 6.0f)`.
+ *  @discussion The default value is `{0.0f, 0.0f, 0.0f, 6.0f}`.
  *
  *  @warning Adjusting this value is an advanced endeavour and not recommended. 
  *  You will only need to adjust this value should you choose to provide your own bubble image assets.
@@ -133,7 +133,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
  *  The inset of the text container's layout area within the text view's content area in each `JSQMessagesCollectionViewCell`. 
  *  The specified inset values should be positive.
  *
- *  @discussion The default value is `(10.0f, 8.0f, 10.0f, 8.0f)`.
+ *  @discussion The default value is `{7.0f, 14.0f, 7.0f, 14.0f}`.
  *
  *  @warning Adjusting this value is an advanced endeavour and not recommended. 
  *  You will only need to adjust this value should you choose to provide your own bubble image assets.
