@@ -96,7 +96,10 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
     [super encodeWithCoder:aCoder];
-    [aCoder encodeObject:self.media forKey:NSStringFromSelector(@selector(media))];
+    
+    if ([self.media conformsToProtocol:@protocol(NSCoding)]) {
+        [aCoder encodeObject:self.media forKey:NSStringFromSelector(@selector(media))];
+    }
 }
 
 #pragma mark - NSCopying

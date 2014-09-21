@@ -65,6 +65,8 @@
 		8897FBF918CBF967004F59C3 /* DemoMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8897FBF818CBF967004F59C3 /* DemoMessagesViewController.m */; };
 		88AB1EDE19CE78F500A0565F /* JSQTextMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 88AB1EDD19CE78F500A0565F /* JSQTextMessage.m */; };
 		88AB1EE119CE790E00A0565F /* JSQMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 88AB1EE019CE790E00A0565F /* JSQMediaMessage.m */; };
+		88AB1EE319CEB1F800A0565F /* JSQTextMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88AB1EE219CEB1F800A0565F /* JSQTextMessageTests.m */; };
+		88AB1EE519CEB21800A0565F /* JSQMediaMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88AB1EE419CEB21800A0565F /* JSQMediaMessageTests.m */; };
 		88ADC6FC18F0999000FE0266 /* JSQMessagesKeyboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88ADC6FB18F0999000FE0266 /* JSQMessagesKeyboardController.m */; };
 		88BC4D2F190C41ED002E5CC6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 885D592E18CBD13D00D77BB3 /* CoreGraphics.framework */; };
 		88BC4D30190C41F6002E5CC6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8897FBF318CBF1B3004F59C3 /* QuartzCore.framework */; };
@@ -208,6 +210,8 @@
 		88AB1EDD19CE78F500A0565F /* JSQTextMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQTextMessage.m; sourceTree = "<group>"; };
 		88AB1EDF19CE790E00A0565F /* JSQMediaMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMediaMessage.h; sourceTree = "<group>"; };
 		88AB1EE019CE790E00A0565F /* JSQMediaMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMediaMessage.m; sourceTree = "<group>"; };
+		88AB1EE219CEB1F800A0565F /* JSQTextMessageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQTextMessageTests.m; sourceTree = "<group>"; };
+		88AB1EE419CEB21800A0565F /* JSQMediaMessageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMediaMessageTests.m; sourceTree = "<group>"; };
 		88ADC6FA18F0999000FE0266 /* JSQMessagesKeyboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesKeyboardController.h; sourceTree = "<group>"; };
 		88ADC6FB18F0999000FE0266 /* JSQMessagesKeyboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesKeyboardController.m; sourceTree = "<group>"; };
 		88BC4D31190C6057002E5CC6 /* JSQMessagesLoadEarlierHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesLoadEarlierHeaderView.h; sourceTree = "<group>"; };
@@ -523,8 +527,8 @@
 				88CC8801190A2C7F006258A0 /* FactoryTests */,
 				88BC4D3B190D8CCD002E5CC6 /* LayoutTests */,
 				88BC4D42190D8D35002E5CC6 /* ModelTests */,
-				88BC4D44190D8D35002E5CC6 /* ViewTests */,
 				885D595518CBD13D00D77BB3 /* Supporting Files */,
+				88BC4D44190D8D35002E5CC6 /* ViewTests */,
 			);
 			path = JSQMessagesTests;
 			sourceTree = "<group>";
@@ -550,9 +554,11 @@
 		88BC4D42190D8D35002E5CC6 /* ModelTests */ = {
 			isa = PBXGroup;
 			children = (
+				88AB1EE419CEB21800A0565F /* JSQMediaMessageTests.m */,
 				88C000C119BB8DA70030B8EC /* JSQMessagesAvatarImageTests.m */,
 				88F0417C19B5866300DB70E9 /* JSQMessagesBubbleImageTests.m */,
 				88BC4D43190D8D35002E5CC6 /* JSQMessageTests.m */,
+				88AB1EE219CEB1F800A0565F /* JSQTextMessageTests.m */,
 			);
 			path = ModelTests;
 			sourceTree = "<group>";
@@ -834,8 +840,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				88CC880D190A2C7F006258A0 /* JSQMessagesTimestampFormatterTests.m in Sources */,
+				88AB1EE519CEB21800A0565F /* JSQMediaMessageTests.m in Sources */,
 				88BC4D3D190D8CCD002E5CC6 /* JSQMessagesCollectionViewFlowLayoutTests.m in Sources */,
 				88CC880B190A2C7F006258A0 /* JSQMessagesAvatarImageFactoryTests.m in Sources */,
+				88AB1EE319CEB1F800A0565F /* JSQTextMessageTests.m in Sources */,
 				88CC880A190A2C7F006258A0 /* JSQMessagesViewControllerTests.m in Sources */,
 				88CC880C190A2C7F006258A0 /* JSQMessagesBubbleImageFactoryTests.m in Sources */,
 				88C28BE51910A19E004E90B1 /* JSQMessagesTypingIndicatorFooterViewTests.m in Sources */,
