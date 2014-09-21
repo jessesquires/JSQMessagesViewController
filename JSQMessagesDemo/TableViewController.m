@@ -16,9 +16,9 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import "JSQTableViewController.h"
+#import "TableViewController.h"
 
-@implementation JSQTableViewController
+@implementation TableViewController
 
 #pragma mark - View lifecycle
 
@@ -95,7 +95,7 @@
                 break;
             case 1:
             {
-                JSQDemoViewController *vc = [JSQDemoViewController messagesViewController];
+                DemoMessagesViewController *vc = [DemoMessagesViewController messagesViewController];
                 [self.navigationController pushViewController:vc animated:YES];
             }
                 break;
@@ -108,7 +108,7 @@
                 break;
             case 1:
             {
-                JSQDemoViewController *vc = [JSQDemoViewController messagesViewController];
+                DemoMessagesViewController *vc = [DemoMessagesViewController messagesViewController];
                 vc.delegateModal = self;
                 UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
                 [self presentViewController:nc animated:YES completion:nil];
@@ -124,7 +124,7 @@
 {
     if ([segue.identifier isEqualToString:@"segueModalDemoVC"]) {
         UINavigationController *nc = segue.destinationViewController;
-        JSQDemoViewController *vc = (JSQDemoViewController *)nc.topViewController;
+        DemoMessagesViewController *vc = (DemoMessagesViewController *)nc.topViewController;
         vc.delegateModal = self;
     }
 }
@@ -133,7 +133,7 @@
 
 #pragma mark - Demo delegate
 
-- (void)didDismissJSQDemoViewController:(JSQDemoViewController *)vc
+- (void)didDismissJSQDemoViewController:(DemoMessagesViewController *)vc
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

@@ -16,10 +16,10 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import "JSQDemoViewController.h"
+#import "DemoMessagesViewController.h"
 
 
-@implementation JSQDemoViewController
+@implementation DemoMessagesViewController
 
 #pragma mark - View lifecycle
 
@@ -42,7 +42,7 @@
     
     self.senderDisplayName = kJSQDemoAvatarDisplayNameSquires;
     
-    self.demoData = [[JSQDemoModelData alloc] init];
+    self.demoData = [[DemoModelData alloc] init];
     
     /**
      *  Remove camera button since media messages are not yet implemented

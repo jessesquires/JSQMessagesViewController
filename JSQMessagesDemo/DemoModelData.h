@@ -38,7 +38,7 @@ static NSString * const kJSQDemoAvatarIdWoz = @"309-41802-93823";
 
 
 
-@interface JSQDemoModelData : NSObject
+@interface DemoModelData : NSObject
 
 @property (strong, nonatomic) NSMutableArray *messages;
 

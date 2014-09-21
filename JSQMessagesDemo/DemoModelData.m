@@ -16,7 +16,7 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import "JSQDemoModelData.h"
+#import "DemoModelData.h"
 
 /**
  *  This is for demo/testing purposes only.
@@ -24,7 +24,7 @@
  *  Do not actually do anything like this.
  */
 
-@implementation JSQDemoModelData
+@implementation DemoModelData
 
 - (instancetype)init
 {

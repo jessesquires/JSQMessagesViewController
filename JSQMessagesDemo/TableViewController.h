@@ -18,9 +18,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "JSQDemoViewController.h"
+#import "DemoMessagesViewController.h"
 
-@interface JSQTableViewController : UITableViewController <JSQDemoViewControllerDelegate>
+@interface TableViewController : UITableViewController <JSQDemoViewControllerDelegate>
 
 - (IBAction)unwindSegue:(UIStoryboardSegue *)sender;
 

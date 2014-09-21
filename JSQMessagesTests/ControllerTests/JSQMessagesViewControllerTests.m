@@ -12,7 +12,7 @@
 #import <OCMock/OCMock.h>
 
 #import "JSQMessagesViewController.h"
-#import "JSQDemoViewController.h"
+#import "DemoMessagesViewController.h"
 
 
 @interface JSQMessagesViewController ()
@@ -66,10 +66,10 @@
 
 - (void)testJSQMessagesViewControllerSubclassInitProgramatically
 {
-    JSQDemoViewController *demoVC = [JSQDemoViewController messagesViewController];
+    DemoMessagesViewController *demoVC = [DemoMessagesViewController messagesViewController];
     [demoVC view];
     XCTAssertNotNil(demoVC, @"View controller should not be nil");
-    XCTAssertTrue([demoVC isKindOfClass:[JSQDemoViewController class]], @"View controller should be kind of class: %@", [JSQDemoViewController class]);
+    XCTAssertTrue([demoVC isKindOfClass:[DemoMessagesViewController class]], @"View controller should be kind of class: %@", [DemoMessagesViewController class]);
     XCTAssertNotNil(demoVC.view, @"View should not be nil");
     XCTAssertNotNil(demoVC.collectionView, @"Collection view should not be nil");
     XCTAssertNotNil(demoVC.inputToolbar, @"Input toolbar should not be nil");
@@ -80,10 +80,10 @@
     UIStoryboard *mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     XCTAssertNotNil(mainSB, @"Storyboard should not be nil");
     
-    JSQDemoViewController *demoVC = [mainSB instantiateViewControllerWithIdentifier:@"DemoVC"];
+    DemoMessagesViewController *demoVC = [mainSB instantiateViewControllerWithIdentifier:@"DemoVC"];
     [demoVC view];
     XCTAssertNotNil(demoVC, @"View controller should not be nil");
-    XCTAssertTrue([demoVC isKindOfClass:[JSQDemoViewController class]], @"View controller should be kind of class: %@", [JSQDemoViewController class]);
+    XCTAssertTrue([demoVC isKindOfClass:[DemoMessagesViewController class]], @"View controller should be kind of class: %@", [DemoMessagesViewController class]);
     XCTAssertNotNil(demoVC.view, @"View should not be nil");
     XCTAssertNotNil(demoVC.collectionView, @"Collection view should not be nil");
     XCTAssertNotNil(demoVC.inputToolbar, @"Input toolbar should not be nil");

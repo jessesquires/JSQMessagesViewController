@@ -19,24 +19,24 @@
 #import "JSQMessages.h"
 
 
-#import "JSQDemoModelData.h"
+#import "DemoModelData.h"
 
-@class JSQDemoViewController;
+@class DemoMessagesViewController;
 
 @protocol JSQDemoViewControllerDelegate <NSObject>
 
-- (void)didDismissJSQDemoViewController:(JSQDemoViewController *)vc;
+- (void)didDismissJSQDemoViewController:(DemoMessagesViewController *)vc;
 
 @end
 
 
 
 
-@interface JSQDemoViewController : JSQMessagesViewController
+@interface DemoMessagesViewController : JSQMessagesViewController
 
 @property (weak, nonatomic) id<JSQDemoViewControllerDelegate> delegateModal;
 
-@property (strong, nonatomic) JSQDemoModelData *demoData;
+@property (strong, nonatomic) DemoModelData *demoData;
 
 - (void)receiveMessagePressed:(UIBarButtonItem *)sender;
 
