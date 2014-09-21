@@ -9,6 +9,11 @@
       "idiom" : "universal",
       "scale" : "2x",
       "filename" : "demo_avatar_jobs@2x.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x",
+      "filename" : "demo_avatar_jobs@3x.png"
     }
   ],
   "info" : {

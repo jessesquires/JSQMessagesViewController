@@ -7,16 +7,34 @@
       "scale" : "2x"
     },
     {
+      "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "Icon-87.png",
+      "scale" : "3x"
+    },
+    {
       "size" : "40x40",
       "idiom" : "iphone",
       "filename" : "Icon-Spotlight-iOS7@2x-1.png",
       "scale" : "2x"
     },
     {
+      "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "Icon-120-1.png",
+      "scale" : "3x"
+    },
+    {
       "size" : "60x60",
       "idiom" : "iphone",
       "filename" : "Icon-120.png",
       "scale" : "2x"
+    },
+    {
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "Icon-180.png",
+      "scale" : "3x"
     },
     {
       "size" : "29x29",
