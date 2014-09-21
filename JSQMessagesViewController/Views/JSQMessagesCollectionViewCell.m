@@ -137,6 +137,7 @@
     _messageBubbleTopLabel = nil;
     _cellBottomLabel = nil;
     _textView = nil;
+    _mediaView = nil;
     _messageBubbleImageView = nil;
     _avatarImageView = nil;
     
@@ -254,6 +255,33 @@
     [self jsq_updateConstraint:self.textViewBottomVerticalSpaceConstraint withConstant:textViewFrameInsets.bottom];
     [self jsq_updateConstraint:self.textViewAvatarHorizontalSpaceConstraint withConstant:textViewFrameInsets.right];
     [self jsq_updateConstraint:self.textViewMarginHorizontalSpaceConstraint withConstant:textViewFrameInsets.left];
+}
+
+- (void)setMediaView:(UIView *)mediaView
+{
+    if (mediaView == _mediaView) {
+        return;
+    }
+    
+    if (_mediaView) {
+        [_mediaView removeFromSuperview];
+        _mediaView = nil;
+    }
+    
+    [self.messageBubbleImageView removeFromSuperview];
+    self.messageBubbleImageView = nil;
+    
+    [self.textView removeFromSuperview];
+    self.textView = nil;
+    
+    mediaView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self.messageBubbleContainerView addSubview:mediaView];
+    [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:mediaView];
+    [self setNeedsUpdateConstraints];
+    _mediaView = mediaView;
+    
+    // TODO: mask media view as bubble
 }
 
 #pragma mark - Getters

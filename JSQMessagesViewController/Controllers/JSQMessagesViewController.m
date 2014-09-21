@@ -391,35 +391,50 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    NSParameterAssert(messageData != nil);
+    id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+    NSParameterAssert(messageItem != nil);
     
-    NSString *messageSenderId = [messageData senderId];
+    NSString *messageSenderId = [messageItem senderId];
     NSParameterAssert(messageSenderId != nil);
     
-    NSString *messageSenderDisplayName = [messageData senderDisplayName];
+    NSString *messageSenderDisplayName = [messageItem senderDisplayName];
     NSParameterAssert(messageSenderDisplayName != nil);
     
-    NSString *messageText = [messageData text];
-    NSParameterAssert(messageText != nil);
+    NSString *messageText = nil;
+    id<JSQMessageMediaData> messageMedia = nil;
+    
+    if ([messageItem respondsToSelector:@selector(text)]) {
+        messageText = [messageItem text];
+        NSParameterAssert(messageText != nil);
+    }
+    else if ([messageItem respondsToSelector:@selector(media)]) {
+        messageMedia = [messageItem media];
+        NSParameterAssert(messageMedia != nil);
+    }
     
     BOOL isOutgoingMessage = [messageSenderId isEqualToString:self.senderId];
     
     NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = collectionView;
-    cell.textView.text = messageText;
     
-    id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
-    if (bubbleImageDataSource != nil) {
-        cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
-        cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
+    if (messageText != nil) {
+        cell.textView.text = messageText;
+        
+        id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
+        if (bubbleImageDataSource != nil) {
+            cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
+            cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
+        }
+    }
+    else if (messageMedia != nil) {
+        cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
+        NSParameterAssert(cell.mediaView != nil);
     }
     
     id<JSQMessageAvatarImageDataSource> avatarImageDataSource = [collectionView.dataSource collectionView:collectionView avatarImageDataForItemAtIndexPath:indexPath];
     if (avatarImageDataSource != nil) {
-        UIImage *avatarImage = [avatarImageDataSource avatarImage];
-        cell.avatarImageView.image = (avatarImage == nil) ? [avatarImageDataSource avatarPlaceholderImage] : avatarImage;
+        cell.avatarImageView.image = [avatarImageDataSource avatarImage] ?: [avatarImageDataSource avatarPlaceholderImage];
         cell.avatarImageView.highlightedImage = [avatarImageDataSource avatarHighlightedImage];
     }
     
@@ -442,7 +457,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     cell.backgroundColor = [UIColor clearColor];
     
-    CGFloat bubbleTopLabelInset = (cell.avatarImageView != nil) ? 60.0f : 15.0f;
+    CGFloat bubbleTopLabelInset = (avatarImageDataSource != nil) ? 60.0f : 15.0f;
     
     if (isOutgoingMessage) {
         cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);

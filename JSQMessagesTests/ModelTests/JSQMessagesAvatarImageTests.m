@@ -71,18 +71,4 @@
     XCTAssertNotEqual(avatar.avatarPlaceholderImage, copy.avatarPlaceholderImage, @"Images should not be equal");
 }
 
-- (void)testCurrentDisplayImage
-{
-    UIImage *mockImage = [UIImage imageNamed:@"demo_avatar_jobs"];
-    UIImage *mockPlaceholderImage = [UIImage imageNamed:@"demo_avatar_cook"];
-    
-    JSQMessagesAvatarImage *avatar = [JSQMessagesAvatarImage avatarImageWithPlaceholder:mockPlaceholderImage];
-    
-    XCTAssertNil(avatar.avatarImage);
-    XCTAssertEqualObjects(mockPlaceholderImage, avatar.currentDisplayImage, @"Should display placeholder image if avatar image is nil");
-    
-    avatar.avatarImage = mockImage;
-    XCTAssertEqualObjects(mockImage, avatar.currentDisplayImage, @"Should display avatar image if available");
-}
-
 @end

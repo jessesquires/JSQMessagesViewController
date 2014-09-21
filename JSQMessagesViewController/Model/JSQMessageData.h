@@ -17,6 +17,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JSQMessageMediaData.h"
 
 /**
  *  The `JSQMessageData` protocol defines the common interface through which 
@@ -25,20 +26,13 @@
  *  It declares the required and optional methods that a class must implement so that instances of that class 
  *  can be displayed properly within a `JSQMessagesCollectionViewCell`.
  *
- *  A concrete class that conforms to this protocol is provided in the library. See `JSQMessage`.
+ *  Two concrete classes that conform to this protocol are provided in the library. See `JSQTextMessage` and `JSQMediaMessage`.
  *
- *  @see JSQMessage.
+ *  @see JSQMessage, JSQTextMessage, JSQMediaMessage.
  */
 @protocol JSQMessageData <NSObject>
 
 @required
-
-/**
- *  @return The body text of the message. 
- *
- *  @warning You must not return `nil` from this method.
- */
-- (NSString *)text;
 
 /**
  *  @return A string identifier that uniquely identifies the user who sent the message.
@@ -63,5 +57,21 @@
  *  @warning You must not return `nil` from this method.
  */
 - (NSDate *)date;
+
+@optional
+
+/**
+ *  @return The body text of the message.
+ *
+ *  @warning You must not return `nil` from this method.
+ */
+- (NSString *)text;
+
+/**
+ *  @return The media item of the message.
+ *  
+ *  @warning You must not return `nil` from this method.
+ */
+- (id<JSQMessageMediaData>)media;
 
 @end

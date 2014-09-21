@@ -96,11 +96,15 @@
 
 /**
  *  Returns the text view of the cell. This text view contains the message body text.
+ *
+ *  @discussion If mediaView returns a non-nil view, then this value will be `nil`.
  */
 @property (weak, nonatomic, readonly) UITextView *textView;
 
 /**
- *  Returns the bubble image view of the cell that is responsible for displaying message bubble images.
+ *  Returns the bubble image view of the cell that is responsible for displaying message bubble images. 
+ *
+ *  @discussion If mediaView returns a non-nil view, then this value will be `nil`.
  */
 @property (weak, nonatomic, readonly) UIImageView *messageBubbleImageView;
 
@@ -134,6 +138,11 @@
  *  Doing so could result in unexpected behavior.
  */
 @property (weak, nonatomic, readonly) UIView *avatarContainerView;
+
+/**
+ *  The media view of the cell. This view displays the contents of a media message.
+ */
+@property (weak, nonatomic) UIView *mediaView;
 
 /**
  *  Returns the underlying gesture recognizer for tap gestures in the avatarImageView of the cell.

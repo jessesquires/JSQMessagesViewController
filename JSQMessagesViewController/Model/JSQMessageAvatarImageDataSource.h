@@ -36,18 +36,20 @@
 
 /**
  *  @return The avatar image for a regular display state.
- *  You may return `nil` from this method while the image is being downloaded.
+ *  
+ *  @discussion You may return `nil` from this method while the image is being downloaded.
  */
 - (UIImage *)avatarImage;
 
 /**
  *  @return The avatar image for a highlighted display state. 
- *  You may return `nil` from this method if this does not apply.
+ *  
+ *  @discussion You may return `nil` from this method if this does not apply.
  */
 - (UIImage *)avatarHighlightedImage;
 
 /**
- *  @return A placeholder avatar image to be displayed if avatarImage is not yet available.
+ *  @return A placeholder avatar image to be displayed if avatarImage is not yet available, or `nil`.
  *  For example, if avatarImage needs to be downloaded, this placeholder image
  *  will be used until avatarImage is not `nil`.
  *

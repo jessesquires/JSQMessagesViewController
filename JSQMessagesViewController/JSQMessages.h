@@ -40,11 +40,14 @@
 
 //  Model
 #import "JSQMessage.h"
+#import "JSQTextMessage.h"
+#import "JSQMediaMessage.h"
 #import "JSQMessagesBubbleImage.h"
 #import "JSQMessagesAvatarImage.h"
 
 //  Protocols
 #import "JSQMessageData.h"
+#import "JSQMessageMediaData.h"
 #import "JSQMessageAvatarImageDataSource.h"
 #import "JSQMessageBubbleImageDataSource.h"
 #import "JSQMessagesCollectionViewDataSource.h"

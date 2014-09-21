@@ -45,14 +45,6 @@
 @property (nonatomic, strong, readonly) UIImage *avatarPlaceholderImage;
 
 /**
- *  Returns the current display image for the avatar image.
- *
- *  @discussion This property returns the value of avatarImage if it is not `nil`,
- *  otherwise it returns the value of avatarPlaceholderImage.
- */
-@property (nonatomic, readonly) UIImage *currentDisplayImage;
-
-/**
  *  Initializes and returns an avatar image object having the specified image.
  *
  *  @param image The image for this avatar image. This image will be used for the all of the following

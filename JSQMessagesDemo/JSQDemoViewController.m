@@ -105,12 +105,13 @@
     [self scrollToBottomAnimated:YES];
     
     
-    JSQMessage *copyMessage = [[self.demoData.messages lastObject] copy];
+    // TODO: handle media
+    JSQTextMessage *copyMessage = [[self.demoData.messages lastObject] copy];
     
     if (!copyMessage) {
-        copyMessage = [JSQMessage messageWithText:@"First received!"
-                                         senderId:kJSQDemoAvatarIdJobs
-                                senderDisplayName:kJSQDemoAvatarDisplayNameJobs];
+        copyMessage = [JSQTextMessage messageWithSenderId:kJSQDemoAvatarIdJobs
+                                              displayName:kJSQDemoAvatarDisplayNameJobs
+                                                     text:@"First received!"];
     }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -119,9 +120,9 @@
         [userIds removeObject:self.senderId];
         NSString *userId = userIds[arc4random_uniform((int)[userIds count])];
         
-        JSQMessage *newMessage = [JSQMessage messageWithText:copyMessage.text
-                                                    senderId:userId
-                                           senderDisplayName:self.demoData.users[userId]];
+        JSQTextMessage *newMessage = [JSQTextMessage messageWithSenderId:userId
+                                                             displayName:self.demoData.users[userId]
+                                                                    text:copyMessage.text];
         
         /**
          *  This you should do upon receiving a message:
@@ -161,10 +162,10 @@
      */
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
-    JSQMessage *message = [[JSQMessage alloc] initWithText:text
-                                                  senderId:senderId
-                                         senderDisplayName:senderDisplayName
-                                                      date:date];
+    JSQTextMessage *message = [[JSQTextMessage alloc] initWithSenderId:senderId
+                                                     senderDisplayName:senderDisplayName
+                                                                  date:date
+                                                                  text:text];
     
     [self.demoData.messages addObject:message];
     
@@ -308,15 +309,18 @@
     
     JSQMessage *msg = [self.demoData.messages objectAtIndex:indexPath.item];
     
-    if ([msg.senderId isEqualToString:self.senderId]) {
-        cell.textView.textColor = [UIColor blackColor];
+    if ([msg isKindOfClass:[JSQTextMessage class]]) {
+        
+        if ([msg.senderId isEqualToString:self.senderId]) {
+            cell.textView.textColor = [UIColor blackColor];
+        }
+        else {
+            cell.textView.textColor = [UIColor whiteColor];
+        }
+        
+        cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
+                                              NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     }
-    else {
-        cell.textView.textColor = [UIColor whiteColor];
-    }
-    
-    cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
-                                          NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     
     return cell;
 }

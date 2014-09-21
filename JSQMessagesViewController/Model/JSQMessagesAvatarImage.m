@@ -60,13 +60,6 @@
     return nil;
 }
 
-#pragma mark - Getters
-
-- (UIImage *)currentDisplayImage
-{
-    return (self.avatarImage == nil) ? self.avatarPlaceholderImage : self.avatarImage;
-}
-
 #pragma mark - NSObject
 
 - (NSString *)description
@@ -77,7 +70,7 @@
 
 - (id)debugQuickLookObject
 {
-    return [[UIImageView alloc] initWithImage:[self currentDisplayImage]];
+    return [[UIImageView alloc] initWithImage:self.avatarImage ?: self.avatarPlaceholderImage];
 }
 
 #pragma mark - NSCopying

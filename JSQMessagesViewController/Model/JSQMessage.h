@@ -21,16 +21,10 @@
 #import "JSQMessageData.h"
 
 /**
- *  A `JSQMessage` model object represents a single user message, and is immutable.
- *  This is a concrete class that implements the `JSQMessageData` protocol.
- *  It contains the message text, senderId, senderDisplayName, and the date that the message was sent.
+ *  The `JSQMessage` class is an abstract base class for message model objects that represent a single user message.
+ *  It contains the senderId, senderDisplayName, and the date that the message was sent.
  */
 @interface JSQMessage : NSObject <JSQMessageData, NSCoding, NSCopying>
-
-/**
- *  Returns the body text of the message.
- */
-@property (copy, nonatomic, readonly) NSString *text;
 
 /**
  *  Returns the string identifier that uniquely identifies the user who sent the message. 
@@ -50,32 +44,16 @@
 #pragma mark - Initialization
 
 /**
- *  Initializes and returns a message object having the given text, senderId, senderDisplayName, 
- *  and current system date.
+ *  Initializes and returns a message object having the given senderId, senderDisplayName, and date.
  *
- *  @param text              The body text of the message. This value must not be `nil`.
- *  @param senderId          The unique identifier for the user who sent the message. This value must not be `nil`.
- *  @param senderDisplayName The display name for the user who sent the message. This value must not be `nil`.
- *
- *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
- */
-+ (instancetype)messageWithText:(NSString *)text
-                       senderId:(NSString *)senderId
-              senderDisplayName:(NSString *)senderDisplayName;
-
-/**
- *  Initializes and returns a message object having the given text, senderId, senderDisplayName, and date.
- *
- *  @param text              The body text of the message. This value must not be `nil`.
  *  @param senderId          The unique identifier for the user who sent the message. This value must not be `nil`.
  *  @param senderDisplayName The display name for the user who sent the message. This value must not be `nil`.
  *  @param date              The date that the message was sent. This value must not be `nil`.
  *
- *  @return An initialized `JSQMessage` object if successful, `nil` otherwise..
+ *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
  */
-- (instancetype)initWithText:(NSString *)text
-                    senderId:(NSString *)senderId
-           senderDisplayName:(NSString *)senderDisplayName
-                        date:(NSDate *)date;
+- (instancetype)initWithSenderId:(NSString *)senderId
+               senderDisplayName:(NSString *)senderDisplayName
+                            date:(NSDate *)date;
 
 @end
