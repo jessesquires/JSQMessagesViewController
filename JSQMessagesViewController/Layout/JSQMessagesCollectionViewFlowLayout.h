@@ -89,7 +89,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
  *  This value specifies the horizontal spacing between the message bubble and 
  *  the edge of the collection view cell in which it is displayed.
  *
- *  @discussion The default value is `40.0f`. This value must be positive.
+ *  @discussion The default value is `40.0f` on iPhone and `240.0f` on iPad. This value must be positive.
  *  For *outgoing* messages, this value specifies the amount of spacing from the left most 
  *  edge of the collectionView to the left most edge of a message bubble within a cell.
  *

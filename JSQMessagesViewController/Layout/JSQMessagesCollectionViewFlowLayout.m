@@ -77,7 +77,14 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     _messageBubbleSizes = [NSMutableDictionary new];
     
     _messageBubbleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    _messageBubbleLeftRightMargin = 40.0f;
+    
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        _messageBubbleLeftRightMargin = 240.0f;
+    }
+    else {
+        _messageBubbleLeftRightMargin = 40.0f;
+    }
+    
     _messageBubbleTextViewFrameInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 6.0f);
     _messageBubbleTextViewTextContainerInsets = UIEdgeInsetsMake(7.0f, 14.0f, 7.0f, 14.0f);
     
