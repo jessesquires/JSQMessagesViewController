@@ -80,6 +80,11 @@
     return NSStringFromClass([self class]);
 }
 
++ (NSString *)mediaCellReuseIdentifier
+{
+    return [NSString stringWithFormat:@"%@_JSQMedia", NSStringFromClass([self class])];
+}
+
 #pragma mark - Initialization
 
 - (void)awakeFromNib
@@ -158,9 +163,6 @@
     self.textView.dataDetectorTypes = UIDataDetectorTypeNone;
     self.textView.text = nil;
     self.textView.attributedText = nil;
-    
-    [self.mediaView removeFromSuperview];
-    self.mediaView = nil;
 }
 
 - (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
@@ -271,6 +273,9 @@
         [_mediaView removeFromSuperview];
         _mediaView = nil;
     }
+    
+    [self.messageBubbleImageView removeFromSuperview];
+    [self.textView removeFromSuperview];
     
     mediaView.translatesAutoresizingMaskIntoConstraints = NO;
     

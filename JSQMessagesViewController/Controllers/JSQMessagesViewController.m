@@ -134,8 +134,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.automaticallyScrollsToMostRecentMessage = YES;
     
     self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
+    self.outgoingMediaCellIdentifier = [JSQMessagesCollectionViewCellOutgoing mediaCellReuseIdentifier];
+    
     self.incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
-
+    self.incomingMediaCellIdentifier = [JSQMessagesCollectionViewCellIncoming mediaCellReuseIdentifier];
+    
     self.showTypingIndicator = NO;
     
     self.showLoadEarlierMessagesHeader = NO;
@@ -413,12 +416,20 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     
     BOOL isOutgoingMessage = [messageSenderId isEqualToString:self.senderId];
+    BOOL isMediaMessage = (messageMedia != nil);
     
-    NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
+    NSString *cellIdentifier = nil;
+    if (isMediaMessage) {
+        cellIdentifier = isOutgoingMessage ? self.outgoingMediaCellIdentifier : self.incomingMediaCellIdentifier;
+    }
+    else {
+        cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
+    }
+    
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = collectionView;
     
-    if (messageText != nil) {
+    if (!isMediaMessage) {
         cell.textView.text = messageText;
         
         id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
@@ -427,7 +438,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
         }
     }
-    else if (messageMedia != nil) {
+    else {
         cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
         NSParameterAssert(cell.mediaView != nil);
     }

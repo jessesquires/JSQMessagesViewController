@@ -54,6 +54,12 @@
     [self registerNib:[JSQMessagesCollectionViewCellOutgoing nib]
           forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
     
+    [self registerNib:[JSQMessagesCollectionViewCellIncoming nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncoming mediaCellReuseIdentifier]];
+    
+    [self registerNib:[JSQMessagesCollectionViewCellOutgoing nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing mediaCellReuseIdentifier]];
+    
     [self registerNib:[JSQMessagesTypingIndicatorFooterView nib]
           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
           withReuseIdentifier:[JSQMessagesTypingIndicatorFooterView footerReuseIdentifier]];

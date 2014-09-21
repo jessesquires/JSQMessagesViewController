@@ -166,10 +166,17 @@
 + (UINib *)nib;
 
 /**
- *  Returns the default string used to identify a reusable cell.
+ *  Returns the default string used to identify a reusable cell for text message items.
  *
  *  @return The string used to identify a reusable cell.
  */
 + (NSString *)cellReuseIdentifier;
+
+/**
+ *  Returns the default string used to identify a reusable cell for media message items.
+ *
+ *  @return The string used to identify a reusable cell.
+ */
++ (NSString *)mediaCellReuseIdentifier;
 
 @end

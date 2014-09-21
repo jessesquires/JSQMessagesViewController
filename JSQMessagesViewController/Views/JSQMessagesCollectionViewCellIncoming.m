@@ -20,7 +20,7 @@
 
 @implementation JSQMessagesCollectionViewCellIncoming
 
-#pragma mark - Initialization
+#pragma mark - Overrides
 
 - (void)awakeFromNib
 {
