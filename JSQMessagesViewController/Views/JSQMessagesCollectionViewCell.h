@@ -63,11 +63,14 @@
 
 
 /**
- *  The `JSQMessagesCollectionViewCell` is an abstract class that presents the content for a single message data item
- *  when that item is within the collection view’s visible bounds. The layout and presentation 
- *  of cells is managed by the collection view and its corresponding layout object.
+ *  The `JSQMessagesCollectionViewCell` is an abstract base class that presents the content for 
+ *  a single message data item when that item is within the collection view’s visible bounds. 
+ *  The layout and presentation of cells is managed by the collection view and its corresponding layout object.
  *
  *  @warning This class is intended to be subclassed. You should not use it directly.
+ *
+ *  @see JSQMessagesCollectionViewCellIncoming.
+ *  @see JSQMessagesCollectionViewCellOutgoing.
  */
 @interface JSQMessagesCollectionViewCell : UICollectionViewCell
 
@@ -97,14 +100,14 @@
 /**
  *  Returns the text view of the cell. This text view contains the message body text.
  *
- *  @discussion If mediaView returns a non-nil view, then this value will be `nil`.
+ *  @warning If mediaView returns a non-nil view, then this value will be `nil`.
  */
 @property (weak, nonatomic, readonly) UITextView *textView;
 
 /**
  *  Returns the bubble image view of the cell that is responsible for displaying message bubble images. 
  *
- *  @discussion If mediaView returns a non-nil view, then this value will be `nil`.
+ *  @warning If mediaView returns a non-nil view, then this value will be `nil`.
  */
 @property (weak, nonatomic, readonly) UIImageView *messageBubbleImageView;
 
@@ -141,6 +144,8 @@
 
 /**
  *  The media view of the cell. This view displays the contents of a media message.
+ *
+ *  @warning If this value is non-nil, then textView and messageBubbleImageView will both be `nil`.
  */
 @property (weak, nonatomic) UIView *mediaView;
 

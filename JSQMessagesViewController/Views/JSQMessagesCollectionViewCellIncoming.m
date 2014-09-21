@@ -20,19 +20,6 @@
 
 @implementation JSQMessagesCollectionViewCellIncoming
 
-#pragma mark - Overrides
-
-+ (UINib *)nib
-{
-    return [UINib nibWithNibName:NSStringFromClass([JSQMessagesCollectionViewCellIncoming class])
-                          bundle:[NSBundle mainBundle]];
-}
-
-+ (NSString *)cellReuseIdentifier
-{
-    return NSStringFromClass([JSQMessagesCollectionViewCellIncoming class]);
-}
-
 #pragma mark - Initialization
 
 - (void)awakeFromNib

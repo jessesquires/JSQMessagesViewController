@@ -72,14 +72,12 @@
 
 + (UINib *)nib
 {
-    NSAssert(NO, @"ERROR: method must be overridden in subclasses: %s", __PRETTY_FUNCTION__);
-    return nil;
+    return [UINib nibWithNibName:NSStringFromClass([self class]) bundle:[NSBundle mainBundle]];
 }
 
 + (NSString *)cellReuseIdentifier
 {
-    NSAssert(NO, @"ERROR: method must be overridden in subclasses: %s", __PRETTY_FUNCTION__);
-    return nil;
+    return NSStringFromClass([self class]);
 }
 
 #pragma mark - Initialization
@@ -136,9 +134,11 @@
     _cellTopLabel = nil;
     _messageBubbleTopLabel = nil;
     _cellBottomLabel = nil;
+    
     _textView = nil;
-    _mediaView = nil;
     _messageBubbleImageView = nil;
+    _mediaView = nil;
+    
     _avatarImageView = nil;
     
     [_tapGestureRecognizer removeTarget:nil action:NULL];
@@ -154,9 +154,13 @@
     self.cellTopLabel.text = nil;
     self.messageBubbleTopLabel.text = nil;
     self.cellBottomLabel.text = nil;
+    
     self.textView.dataDetectorTypes = UIDataDetectorTypeNone;
     self.textView.text = nil;
     self.textView.attributedText = nil;
+    
+    [self.mediaView removeFromSuperview];
+    self.mediaView = nil;
 }
 
 - (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
@@ -267,12 +271,6 @@
         [_mediaView removeFromSuperview];
         _mediaView = nil;
     }
-    
-    [self.messageBubbleImageView removeFromSuperview];
-    self.messageBubbleImageView = nil;
-    
-    [self.textView removeFromSuperview];
-    self.textView = nil;
     
     mediaView.translatesAutoresizingMaskIntoConstraints = NO;
     
