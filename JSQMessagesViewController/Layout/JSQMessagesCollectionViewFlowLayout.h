@@ -154,7 +154,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
 /**
  *  The size of the avatar image view for incoming messages.
  *
- *  @discussion The default value is `(34.0f, 34.0f)`. Set to `CGSizeZero` to remove incoming avatars.
+ *  @discussion The default value is `(30.0f, 30.0f)`. Set to `CGSizeZero` to remove incoming avatars.
  *  You may use `kJSQMessagesCollectionViewAvatarSizeDefault` to size your avatars to the default value.
  */
 @property (assign, nonatomic) CGSize incomingAvatarViewSize;
@@ -162,7 +162,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
 /**
  *  The size of the avatar image view for outgoing messages.
  *
- *  @discussion The default value is `(34.0f, 34.0f)`. Set to `CGSizeZero` to remove outgoing avatars.
+ *  @discussion The default value is `(30.0f, 30.0f)`. Set to `CGSizeZero` to remove outgoing avatars.
  *  You may use `kJSQMessagesCollectionViewAvatarSizeDefault` to size your avatars to the default value.
  */
 @property (assign, nonatomic) CGSize outgoingAvatarViewSize;

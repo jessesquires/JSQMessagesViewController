@@ -208,7 +208,7 @@
 }
 
 //  TODO: remove when fixed
-//        hack for Xcode6 / iOS 8 SDK rendering bug
+//        hack for Xcode6 / iOS 8 SDK rendering bug that occurs on iOS 7.x
 //        see issue #484
 //        https://github.com/jessesquires/JSQMessagesViewController/issues/484
 //
@@ -280,8 +280,6 @@
     [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:mediaView];
     [self setNeedsUpdateConstraints];
     _mediaView = mediaView;
-    
-    // TODO: mask media view as bubble
 }
 
 #pragma mark - Getters
