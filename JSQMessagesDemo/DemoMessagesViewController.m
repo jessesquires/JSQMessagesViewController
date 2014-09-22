@@ -79,7 +79,7 @@
      *  You must set this from `viewDidAppear:`
      *  Note: this feature is mostly stable, but still experimental
      */
-//    self.collectionView.collectionViewLayout.springinessEnabled = YES;
+    self.collectionView.collectionViewLayout.springinessEnabled = YES;
 }
 
 
@@ -175,16 +175,21 @@
                                                                   text:text];
     
     [self.demoData.messages addObject:message];
-    
     [self finishSendingMessage];
 }
 
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
-    NSLog(@"Camera pressed!");
-    /**
-     *  Accessory button has no default functionality, yet.
-     */
+    // TODO: temporary send photo, make this better, add async loading demo
+    JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"goldengate"]];
+    JSQMediaMessage *mediaMessage = [JSQMediaMessage messageWithSenderId:kJSQDemoAvatarIdSquires
+                                                             displayName:kJSQDemoAvatarDisplayNameSquires
+                                                                   media:photoItem];
+    
+    [self.demoData.messages addObject:mediaMessage];
+    
+    [JSQSystemSoundPlayer jsq_playMessageSentSound];
+    [self finishSendingMessage];
 }
 
 
