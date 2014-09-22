@@ -516,8 +516,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - Collection view delegate
 
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    //  disable menu for media messages
+    id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+    if ([messageItem respondsToSelector:@selector(media)]) {
+        return NO;
+    }
+    
     self.selectedIndexPathForMenu = indexPath;
     
     //  textviews are selectable to allow data detectors

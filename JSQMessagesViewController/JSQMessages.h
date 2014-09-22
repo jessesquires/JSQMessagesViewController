@@ -42,6 +42,7 @@
 #import "JSQMessage.h"
 #import "JSQTextMessage.h"
 #import "JSQMediaMessage.h"
+#import "JSQPhotoMediaItem.h"
 #import "JSQMessagesBubbleImage.h"
 #import "JSQMessagesAvatarImage.h"
 

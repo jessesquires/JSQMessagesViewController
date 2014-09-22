@@ -79,7 +79,7 @@
      *  You must set this from `viewDidAppear:`
      *  Note: this feature is mostly stable, but still experimental
      */
-    self.collectionView.collectionViewLayout.springinessEnabled = YES;
+//    self.collectionView.collectionViewLayout.springinessEnabled = YES;
 }
 
 
@@ -104,9 +104,7 @@
      */
     [self scrollToBottomAnimated:YES];
     
-    
-    // TODO: handle media
-    JSQTextMessage *copyMessage = [[self.demoData.messages lastObject] copy];
+    JSQMessage *copyMessage = [[self.demoData.messages lastObject] copy];
     
     if (!copyMessage) {
         copyMessage = [JSQTextMessage messageWithSenderId:kJSQDemoAvatarIdJobs
@@ -120,9 +118,18 @@
         [userIds removeObject:self.senderId];
         NSString *userId = userIds[arc4random_uniform((int)[userIds count])];
         
-        JSQTextMessage *newMessage = [JSQTextMessage messageWithSenderId:userId
-                                                             displayName:self.demoData.users[userId]
-                                                                    text:copyMessage.text];
+        JSQMessage *newMessage = nil;
+        
+        if ([copyMessage isKindOfClass:[JSQTextMessage class]]) {
+            newMessage = [JSQTextMessage messageWithSenderId:userId
+                                                 displayName:self.demoData.users[userId]
+                                                        text:copyMessage.text];
+        }
+        else if ([copyMessage isKindOfClass:[JSQMediaMessage class]]) {
+            newMessage = [JSQMediaMessage messageWithSenderId:userId
+                                                  displayName:self.demoData.users[userId]
+                                                        media:copyMessage.media];
+        }
         
         /**
          *  This you should do upon receiving a message:

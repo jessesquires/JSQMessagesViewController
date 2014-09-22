@@ -59,27 +59,20 @@
                          [[JSQTextMessage alloc] initWithSenderId:kJSQDemoAvatarIdCook
                                                 senderDisplayName:kJSQDemoAvatarDisplayNameCook
                                                              date:[NSDate date]
-                                                             text:@"It is unit-tested, free, and open-source."],
+                                                             text:@"It is unit-tested, free, open-source, and documented."],
                          
                          [[JSQTextMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
                                                 senderDisplayName:kJSQDemoAvatarDisplayNameSquires
                                                              date:[NSDate date]
-                                                             text:@"Oh, and there's sweet documentation."],
+                                                             text:@"Now with media messages!"],
                          nil];
         
-//        JSQMessageMediaItem *mediaItem = [JSQMessageMediaItem new];
-//        mediaItem.mediaViewDisplaySize = CGSizeMake(50, 50);
-//        
-//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-//        view.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5];
-//        mediaItem.mediaView = view;
-//        
-//        JSQMessage *mediaMessage = [[JSQMessage alloc] initWithMedia:mediaItem
-//                                                            senderId:kJSQDemoAvatarIdSquires
-//                                                   senderDisplayName:kJSQDemoAvatarDisplayNameSquires
-//                                                                date:[NSDate date]];
-//        
-//        [self.messages addObject:mediaMessage];
+        JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"goldengate"]];
+        JSQMediaMessage *mediaMessage = [JSQMediaMessage messageWithSenderId:kJSQDemoAvatarIdSquires
+                                                                 displayName:kJSQDemoAvatarDisplayNameSquires
+                                                                       media:photoItem];
+        
+        [self.messages addObject:mediaMessage];
         
         /**
          *  Create avatar images once.
