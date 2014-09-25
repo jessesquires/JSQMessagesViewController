@@ -296,6 +296,7 @@
 - (void)finishSend
 {
     [self.messageInputView.textView setText:nil];
+    [self.messageInputView.textView.undoManager removeAllActions];
     [self textViewDidChange:self.messageInputView.textView];
     [self.tableView reloadData];
 }
