@@ -296,6 +296,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     UITextView *textView = self.inputToolbar.contentView.textView;
     textView.text = nil;
+    [textView.undoManager removeAllActions];
     
     [self.inputToolbar toggleSendButtonEnabled];
     
