@@ -386,14 +386,31 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     CGFloat horizontalInsetsTotal = horizontalContainerInsets + horizontalFrameInsets + spacingBetweenAvatarAndBubble;
     CGFloat maximumTextWidth = self.itemWidth - avatarSize.width - self.messageBubbleLeftRightMargin - horizontalInsetsTotal;
-    
-    CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
-                                                         options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-                                                      attributes:@{ NSFontAttributeName : self.messageBubbleFont }
-                                                         context:nil];
-    
+
+	CGRect stringRect = CGRectZero;
+	if ([messageData type] == JSQMessageTypeText) {
+		stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
+													  options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+												   attributes:@{ NSFontAttributeName : self.messageBubbleFont }
+													  context:nil];
+	} else if ([messageData type] == JSQMessageTypeImage) {
+		UIImage *image = [messageData image];
+		CGSize imageSize = [image size];
+		CGFloat ratio;
+		if (imageSize.width > imageSize.height) {
+			ratio = imageSize.height/imageSize.width;
+			stringRect.size.width = maximumTextWidth;
+			stringRect.size.height = maximumTextWidth * ratio;
+		} else {
+			//use cell's width for the height, or we may get extremely long cells
+			ratio = imageSize.width/imageSize.height;
+			stringRect.size.height = maximumTextWidth;
+			stringRect.size.width = maximumTextWidth * ratio;
+		}
+	}
+
     CGSize stringSize = CGRectIntegral(stringRect).size;
-    
+
     CGFloat verticalContainerInsets = self.messageBubbleTextViewTextContainerInsets.top + self.messageBubbleTextViewTextContainerInsets.bottom;
     CGFloat verticalFrameInsets = self.messageBubbleTextViewFrameInsets.top + self.messageBubbleTextViewFrameInsets.bottom;
     

@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellBottomLabel;
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @property (weak, nonatomic) IBOutlet UIView *messageBubbleContainerView;
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;

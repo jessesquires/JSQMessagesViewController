@@ -396,11 +396,18 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = collectionView;
-    
-    NSString *messageText = [messageData text];
-    NSParameterAssert(messageText != nil);
-    
-    cell.textView.text = messageText;
+
+	if ([messageData type] == JSQMessageTypeText) {
+		NSString *messageText = [messageData text];
+		NSParameterAssert(messageText != nil);
+
+		cell.textView.text = messageText;
+	} else if ([messageData type] == JSQMessageTypeImage) {
+		UIImage *messageImage = [messageData image];
+		NSParameterAssert(messageImage != nil);
+
+		cell.imageView.image = messageImage;
+	}
     cell.messageBubbleImageView = [collectionView.dataSource collectionView:collectionView bubbleImageViewForItemAtIndexPath:indexPath];
     cell.avatarImageView = [collectionView.dataSource collectionView:collectionView avatarImageViewForItemAtIndexPath:indexPath];
     cell.cellTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellTopLabelAtIndexPath:indexPath];
@@ -500,10 +507,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
-    if (action == @selector(copy:)) {
-        id<JSQMessageData> messageData = [self collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-        [[UIPasteboard generalPasteboard] setString:[messageData text]];
-    }
+	if (action == @selector(copy:)) {
+		id<JSQMessageData> messageData = [self collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+		if ([messageData type] == JSQMessageTypeText) {
+			[[UIPasteboard generalPasteboard] setString:[messageData text]];
+		} else if ([messageData type] == JSQMessageTypeImage) {
+			[[UIPasteboard generalPasteboard] setImage:[messageData image]];
+		}
+	}
 }
 
 #pragma mark - Collection view delegate flow layout

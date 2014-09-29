@@ -21,6 +21,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, JSQMessageType) {
+	JSQMessageTypeText,
+	JSQMessageTypeImage
+};
+
 /**
  *  The `JSQMessageData` protocol defines the common interface through 
  *  which `JSQMessagesViewController` and `JSQMessagesCollectionView` interacts with message model objects.
@@ -33,10 +38,21 @@
 @required
 
 /**
- *  @return The body text of the message. 
- *  @warning You must not return `nil` from this method.
+ *  @return The body type of the message.
+ */
+- (JSQMessageType)type;
+
+/**
+ *  @return The body text of the message.
+ *  @warning You must not return `nil` from this method if type == JSQMessageTypeText
  */
 - (NSString *)text;
+
+/**
+ *  @return The body image of the message.
+ *  @warning You must not return `nil` from this method if type == JSQMessageTypeImage
+ */
+- (UIImage *)image;
 
 /**
  *  @return The name of the user who sent the message.
