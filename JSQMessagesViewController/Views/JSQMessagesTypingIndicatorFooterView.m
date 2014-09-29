@@ -28,11 +28,9 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
 @interface JSQMessagesTypingIndicatorFooterView ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *bubbleImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubbleImageViewLeftHorizontalConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubbleImageViewRightHorizontalConstraint;
 
 @property (weak, nonatomic) IBOutlet UIImageView *typingIndicatorImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *typingIndicatorImageViewLeftHorizontalConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *typingIndicatorImageViewRightHorizontalConstraint;
 
 @end
@@ -90,32 +88,26 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     NSParameterAssert(messageBubbleColor != nil);
     NSParameterAssert(collectionView != nil);
     
-    CGFloat collectionViewWidth = CGRectGetWidth(collectionView.frame);
-    CGFloat bubbleWidth = CGRectGetWidth(self.bubbleImageView.frame);
-    CGFloat indicatorWidth = CGRectGetWidth(self.typingIndicatorImageView.frame);
-    
     CGFloat bubbleMarginMinimumSpacing = 6.0f;
     CGFloat indicatorMarginMinimumSpacing = 26.0f;
-    
-    CGFloat bubbleMarginMaximumSpacing = collectionViewWidth - bubbleWidth - bubbleMarginMinimumSpacing;
-    CGFloat indicatorMarginMaximumSpacing = collectionViewWidth - indicatorWidth - indicatorMarginMinimumSpacing;
-    
+
     if (shouldDisplayOnLeft) {
         self.bubbleImageView.image = [JSQMessagesBubbleImageFactory incomingMessagesBubbleImageWithColor:messageBubbleColor].messageBubbleImage;
         
-        self.bubbleImageViewLeftHorizontalConstraint.constant = bubbleMarginMinimumSpacing;
-        self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMaximumSpacing;
+        CGFloat collectionViewWidth = CGRectGetWidth(collectionView.frame);
+        CGFloat bubbleWidth = CGRectGetWidth(self.bubbleImageView.frame);
+        CGFloat indicatorWidth = CGRectGetWidth(self.typingIndicatorImageView.frame);
         
-        self.typingIndicatorImageViewLeftHorizontalConstraint.constant = indicatorMarginMinimumSpacing;
+        CGFloat bubbleMarginMaximumSpacing = collectionViewWidth - bubbleWidth - bubbleMarginMinimumSpacing;
+        CGFloat indicatorMarginMaximumSpacing = collectionViewWidth - indicatorWidth - indicatorMarginMinimumSpacing;
+        
+        self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMaximumSpacing;
         self.typingIndicatorImageViewRightHorizontalConstraint.constant = indicatorMarginMaximumSpacing;
     }
     else {
         self.bubbleImageView.image = [JSQMessagesBubbleImageFactory outgoingMessagesBubbleImageWithColor:messageBubbleColor].messageBubbleImage;
         
-        self.bubbleImageViewLeftHorizontalConstraint.constant = bubbleMarginMaximumSpacing;
         self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMinimumSpacing;
-        
-        self.typingIndicatorImageViewLeftHorizontalConstraint.constant = indicatorMarginMaximumSpacing;
         self.typingIndicatorImageViewRightHorizontalConstraint.constant = indicatorMarginMinimumSpacing;
     }
     

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -29,18 +30,12 @@
                 <constraint firstAttribute="trailing" secondItem="Vwf-dy-PS6" secondAttribute="trailing" constant="260" id="1Tm-qD-wIK"/>
                 <constraint firstAttribute="bottom" secondItem="Z1D-Tr-HPK" secondAttribute="bottom" constant="6" id="EVf-Sx-8mX"/>
                 <constraint firstAttribute="bottom" secondItem="Vwf-dy-PS6" secondAttribute="bottom" constant="6" id="Hik-Wl-aK2"/>
-                <constraint firstItem="Vwf-dy-PS6" firstAttribute="leading" secondItem="ajJ-uk-b04" secondAttribute="leading" constant="26" id="IWI-VE-aQY"/>
-                <constraint firstItem="Vwf-dy-PS6" firstAttribute="top" secondItem="ajJ-uk-b04" secondAttribute="top" constant="6" id="J3J-wd-G2Z"/>
                 <constraint firstAttribute="trailing" secondItem="Z1D-Tr-HPK" secondAttribute="trailing" constant="246" id="YMl-ej-UZl"/>
-                <constraint firstItem="Z1D-Tr-HPK" firstAttribute="leading" secondItem="ajJ-uk-b04" secondAttribute="leading" constant="6" id="dat-H8-s6q"/>
-                <constraint firstItem="Z1D-Tr-HPK" firstAttribute="top" secondItem="ajJ-uk-b04" secondAttribute="top" constant="6" id="oZq-Eq-mtj"/>
             </constraints>
             <connections>
                 <outlet property="bubbleImageView" destination="Z1D-Tr-HPK" id="WpE-rP-oYB"/>
-                <outlet property="bubbleImageViewLeftHorizontalConstraint" destination="dat-H8-s6q" id="fje-5G-u1M"/>
                 <outlet property="bubbleImageViewRightHorizontalConstraint" destination="YMl-ej-UZl" id="Thu-7D-dhU"/>
                 <outlet property="typingIndicatorImageView" destination="Vwf-dy-PS6" id="wQA-Pe-rx6"/>
-                <outlet property="typingIndicatorImageViewLeftHorizontalConstraint" destination="IWI-VE-aQY" id="tw1-D9-uay"/>
                 <outlet property="typingIndicatorImageViewRightHorizontalConstraint" destination="1Tm-qD-wIK" id="FUp-oC-c0I"/>
             </connections>
         </collectionReusableView>
