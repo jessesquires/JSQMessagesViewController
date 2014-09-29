@@ -318,8 +318,8 @@
 				88A25FEA19D8E18400924534 /* FactoryTests */,
 				88A25FEF19D8E18400924534 /* LayoutTests */,
 				88A25FF219D8E18400924534 /* ModelTests */,
-				88A25F1F19D8DEC500924534 /* Supporting Files */,
 				88A25FF819D8E18400924534 /* ViewTests */,
+				88A25F1F19D8DEC500924534 /* Supporting Files */,
 			);
 			path = JSQMessagesTests;
 			sourceTree = "<group>";

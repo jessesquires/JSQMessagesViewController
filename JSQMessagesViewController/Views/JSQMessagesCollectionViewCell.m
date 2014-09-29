@@ -278,6 +278,7 @@
     [self.textView removeFromSuperview];
     
     mediaView.translatesAutoresizingMaskIntoConstraints = NO;
+    mediaView.frame = self.messageBubbleContainerView.bounds;
     
     [self.messageBubbleContainerView addSubview:mediaView];
     [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:mediaView];
