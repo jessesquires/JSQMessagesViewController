@@ -27,7 +27,7 @@
 
 /**
  *  Creates and returns a new button that is styled as the default accessory button. 
- *  The button has a camera icon image and no text.
+ *  The button has a paper clip icon image and no text.
  *
  *  @return A newly created button.
  */

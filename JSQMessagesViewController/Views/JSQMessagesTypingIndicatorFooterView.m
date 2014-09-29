@@ -62,6 +62,7 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     self.backgroundColor = [UIColor clearColor];
     self.userInteractionEnabled = NO;
+    self.typingIndicatorImageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 - (void)dealloc
@@ -121,7 +122,6 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     [self setNeedsUpdateConstraints];
     
     self.typingIndicatorImageView.image = [[UIImage imageNamed:@"typing"] jsq_imageMaskedWithColor:ellipsisColor];
-    self.typingIndicatorImageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 @end
