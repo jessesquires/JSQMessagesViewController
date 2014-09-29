@@ -16,7 +16,8 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
+@import UIKit;
 
 /**
  *  The `JSQMessageMediaData` protocol defines the common interface through which

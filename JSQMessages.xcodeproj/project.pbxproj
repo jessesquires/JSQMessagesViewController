@@ -10,44 +10,7 @@
 	<string>46</string>
 	<key>objects</key>
 	<dict>
-		<key>17FAC932EF1147418FBBD9D1</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>343577012CC24261BE4B61A1</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>431679BCBC970B2C8DD763A1</key>
+		<key>0844AD596023C7658D39E241</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -56,46 +19,66 @@
 			<key>lastKnownFileType</key>
 			<string>text.xcconfig</string>
 			<key>name</key>
-			<string>Pods.debug.xcconfig</string>
+			<string>Pods-JSQMessagesTests.release.xcconfig</string>
 			<key>path</key>
-			<string>Pods/Target Support Files/Pods/Pods.debug.xcconfig</string>
+			<string>Pods/Target Support Files/Pods-JSQMessagesTests/Pods-JSQMessagesTests.release.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>44E73A4F192D0B5B00D1C86F</key>
+		<key>223FBACE0F24ADEF8B7F3F24</key>
 		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-JSQMessagesTests.debug.xcconfig</string>
 			<key>path</key>
-			<string>JSQMessagesCollectionViewFlowLayoutInvalidationContext.h</string>
+			<string>Pods/Target Support Files/Pods-JSQMessagesTests/Pods-JSQMessagesTests.debug.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>44E73A50192D0B5B00D1C86F</key>
+		<key>27B7FD1B722B36B26CB3460B</key>
 		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods.release.xcconfig</string>
 			<key>path</key>
-			<string>JSQMessagesCollectionViewFlowLayoutInvalidationContext.m</string>
+			<string>Pods/Target Support Files/Pods/Pods.release.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>44E73A51192D0B5B00D1C86F</key>
+		<key>2BBEF3CD91C31A49E5FF9E3C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FC5C727E4CCDA2B95A7BA30C</string>
+				<string>27B7FD1B722B36B26CB3460B</string>
+				<string>223FBACE0F24ADEF8B7F3F24</string>
+				<string>0844AD596023C7658D39E241</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>36CF33BD29CF36EB06D0CCFD</key>
 		<dict>
 			<key>fileRef</key>
-			<string>44E73A50192D0B5B00D1C86F</string>
+			<string>782026E9E518622532ED474D</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>5AF0226F94CF4DE999772A5D</key>
+		<key>3AF3068570D5C74873D84E30</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
@@ -125,7 +108,7 @@ fi
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
 		</dict>
-		<key>7FD13EFACBFC4055895E51E4</key>
+		<key>4CCCD7A86E86CB86C48E303C</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
@@ -149,1398 +132,82 @@ fi
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
 		</dict>
-		<key>8816A64618E9250400111919</key>
+		<key>636A8663AEEE5C37B65C515D</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>8816A67218E9250400111919</string>
-				<string>8816A64718E9250400111919</string>
-				<string>8816A65A18E9250400111919</string>
-				<string>8816A66518E9250400111919</string>
-				<string>8816A66918E9250400111919</string>
-				<string>8816A67318E9250400111919</string>
-				<string>8816A67818E9250400111919</string>
-				<string>8816A67C18E9250400111919</string>
+				<string>97E6750B77E8A7042BA0754B</string>
+				<string>782026E9E518622532ED474D</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
-			<key>path</key>
-			<string>JSQMessagesViewController</string>
+			<key>name</key>
+			<string>Frameworks</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>8816A64718E9250400111919</key>
+		<key>77CC17A895E6E12BC9CB549A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>97E6750B77E8A7042BA0754B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>782026E9E518622532ED474D</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods-JSQMessagesTests.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>88A25EF919D8DEC400924534</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>8816A64818E9250400111919</string>
-				<string>8816A65718E9250400111919</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Assets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A64818E9250400111919</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>8816A64918E9250400111919</string>
-				<string>8816A64A18E9250400111919</string>
-				<string>8816A64B18E9250400111919</string>
-				<string>8816A64C18E9250400111919</string>
-				<string>8816A64D18E9250400111919</string>
-				<string>8816A64E18E9250400111919</string>
-				<string>8816A64F18E9250400111919</string>
-				<string>8816A65018E9250400111919</string>
-				<string>8816A65118E9250400111919</string>
-				<string>8816A65218E9250400111919</string>
-				<string>8816A65318E9250400111919</string>
-				<string>8816A65418E9250400111919</string>
-				<string>8816A65518E9250400111919</string>
-				<string>8816A65618E9250400111919</string>
-				<string>88D1B0CA190606F100AFE162</string>
-				<string>88D1B0CB190606F100AFE162</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Images</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A64918E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>bubble.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A64A18E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>bubble@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A64B18E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>bubble_min.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A64C18E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>bubble_min@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A64D18E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>bubble_min_tailless.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A64E18E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>bubble_min_tailless@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A64F18E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>bubble_stroked.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65018E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>bubble_stroked@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65118E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>bubble_stroked_tailless.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65218E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>bubble_stroked_tailless@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65318E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>bubble_tailless.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65418E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>bubble_tailless@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65518E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>camera.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65618E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>camera@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65718E9250400111919</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>8816A65818E9250400111919</string>
-				<string>8816A65918E9250400111919</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Sounds</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65818E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>audio.aiff</string>
-			<key>path</key>
-			<string>message_received.aiff</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65918E9250400111919</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>audio.aiff</string>
-			<key>path</key>
-			<string>message_sent.aiff</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65A18E9250400111919</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>8816A65B18E9250400111919</string>
-				<string>8816A65C18E9250400111919</string>
-				<string>8816A65D18E9250400111919</string>
-				<string>8816A65E18E9250400111919</string>
-				<string>8816A65F18E9250400111919</string>
-				<string>8816A66018E9250400111919</string>
-				<string>8816A66118E9250400111919</string>
-				<string>8816A66218E9250400111919</string>
-				<string>8816A66318E9250400111919</string>
-				<string>8816A66418E9250400111919</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Categories</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65B18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQSystemSoundPlayer+JSQMessages.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65C18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQSystemSoundPlayer+JSQMessages.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65D18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>NSString+JSQMessages.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65E18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>NSString+JSQMessages.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A65F18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>UIColor+JSQMessages.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66018E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>UIColor+JSQMessages.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66118E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>UIImage+JSQMessages.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66218E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>UIImage+JSQMessages.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66318E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>UIView+JSQMessages.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66418E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>UIView+JSQMessages.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66518E9250400111919</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>88ADC6FA18F0999000FE0266</string>
-				<string>88ADC6FB18F0999000FE0266</string>
-				<string>8816A66618E9250400111919</string>
-				<string>8816A66718E9250400111919</string>
-				<string>8816A66818E9250400111919</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Controllers</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66618E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesViewController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66718E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesViewController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66818E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.xib</string>
-			<key>path</key>
-			<string>JSQMessagesViewController.xib</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66918E9250400111919</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>8816A66A18E9250400111919</string>
-				<string>8816A66B18E9250400111919</string>
-				<string>8816A66C18E9250400111919</string>
-				<string>8816A66D18E9250400111919</string>
-				<string>8816A66E18E9250400111919</string>
-				<string>8816A66F18E9250400111919</string>
-				<string>8816A67018E9250400111919</string>
-				<string>8816A67118E9250400111919</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Factories</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66A18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesAvatarImageFactory.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66B18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesAvatarImageFactory.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66C18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesBubbleImageFactory.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66D18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesBubbleImageFactory.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66E18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesTimestampFormatter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A66F18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesTimestampFormatter.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67018E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesToolbarButtonFactory.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67118E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesToolbarButtonFactory.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67218E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessages.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67318E9250400111919</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>8816A67418E9250400111919</string>
-				<string>8816A67518E9250400111919</string>
-				<string>44E73A4F192D0B5B00D1C86F</string>
-				<string>44E73A50192D0B5B00D1C86F</string>
-				<string>8816A67618E9250400111919</string>
-				<string>8816A67718E9250400111919</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Layout</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67418E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewFlowLayout.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67518E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewFlowLayout.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67618E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewLayoutAttributes.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67718E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewLayoutAttributes.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67818E9250400111919</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>88AB1EDF19CE790E00A0565F</string>
-				<string>88AB1EE019CE790E00A0565F</string>
-				<string>8816A67918E9250400111919</string>
-				<string>8816A67A18E9250400111919</string>
-				<string>88F0417819B57FA300DB70E9</string>
-				<string>88F0417719B57E7F00DB70E9</string>
-				<string>8816A67B18E9250400111919</string>
-				<string>88F7D42219C3B6C600C5F3F6</string>
-				<string>88C000BE19BB87C10030B8EC</string>
-				<string>88C000BF19BB87C10030B8EC</string>
-				<string>88F0417919B5838200DB70E9</string>
-				<string>88F0417A19B5838200DB70E9</string>
-				<string>884F08CB19B2E713008DE64D</string>
-				<string>88FFE06619B2E5CB0038C3FF</string>
-				<string>8826EB0019CF3EE3009A95F8</string>
-				<string>8826EB0119CF3EE3009A95F8</string>
-				<string>88AB1EDC19CE78F500A0565F</string>
-				<string>88AB1EDD19CE78F500A0565F</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Model</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67918E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessage.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67A18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessage.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67B18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessageData.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67C18E9250400111919</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>8816A67D18E9250400111919</string>
-				<string>8816A67E18E9250400111919</string>
-				<string>8816A67F18E9250400111919</string>
-				<string>8816A68018E9250400111919</string>
-				<string>8816A68118E9250400111919</string>
-				<string>8816A68218E9250400111919</string>
-				<string>8816A68318E9250400111919</string>
-				<string>8816A68418E9250400111919</string>
-				<string>8816A68518E9250400111919</string>
-				<string>8816A68618E9250400111919</string>
-				<string>8816A68718E9250400111919</string>
-				<string>8816A68818E9250400111919</string>
-				<string>8816A68918E9250400111919</string>
-				<string>8816A68A18E9250400111919</string>
-				<string>8816A68B18E9250400111919</string>
-				<string>8816A68C18E9250400111919</string>
-				<string>88BC4D31190C6057002E5CC6</string>
-				<string>88BC4D32190C6057002E5CC6</string>
-				<string>88BC4D34190C6086002E5CC6</string>
-				<string>8816A68D18E9250400111919</string>
-				<string>8816A68E18E9250400111919</string>
-				<string>8816A68F18E9250400111919</string>
-				<string>88D1B0C51906045A00AFE162</string>
-				<string>88D1B0C61906045A00AFE162</string>
-				<string>88D1B0C8190604AF00AFE162</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Views</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67D18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionView.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67E18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionView.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A67F18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewCell.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68018E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewCell.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68118E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewCellIncoming.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68218E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewCellIncoming.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68318E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.xib</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewCellIncoming.xib</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68418E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewCellOutgoing.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68518E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewCellOutgoing.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68618E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.xib</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewCellOutgoing.xib</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68718E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesComposerTextView.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68818E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesComposerTextView.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68918E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesInputToolbar.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68A18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesInputToolbar.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68B18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesLabel.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68C18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesLabel.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68D18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesToolbarContentView.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68E18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesToolbarContentView.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A68F18E9250400111919</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.xib</string>
-			<key>path</key>
-			<string>JSQMessagesToolbarContentView.xib</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8816A69018E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A64918E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A69118E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A64A18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A69218E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A64B18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A69318E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A64C18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A69418E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A64D18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A69518E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A64E18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A69618E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A64F18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A69718E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A65018E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A69818E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A65118E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A69918E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A65218E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A69A18E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A65318E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A69B18E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A65418E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A69C18E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A65518E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A69D18E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A65618E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A69E18E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A65818E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A69F18E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A65918E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6A018E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A65C18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6A118E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A65E18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6A218E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A66018E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6A318E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A66218E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6A418E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A66418E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6A518E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A66718E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6A618E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A66818E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6A718E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A66B18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6A818E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A66D18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6A918E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A66F18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6AA18E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A67118E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6AB18E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A67518E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6AC18E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A67718E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6AD18E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A67A18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6AE18E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A67E18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6AF18E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A68018E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6B018E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A68218E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6B118E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A68318E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6B218E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A68518E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6B318E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A68618E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6B418E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A68818E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6B518E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A68A18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6B618E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A68C18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6B718E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A68E18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8816A6B818E9250400111919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8816A68F18E9250400111919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8826EB0019CF3EE3009A95F8</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQPhotoMediaItem.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8826EB0119CF3EE3009A95F8</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQPhotoMediaItem.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8826EB0219CF3EE3009A95F8</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8826EB0119CF3EE3009A95F8</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>884F08CB19B2E713008DE64D</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewDataSource.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>885D592018CBD13D00D77BB3</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>8816A64618E9250400111919</string>
-				<string>885D593218CBD13D00D77BB3</string>
-				<string>885D595418CBD13D00D77BB3</string>
-				<string>885D592B18CBD13D00D77BB3</string>
-				<string>885D592A18CBD13D00D77BB3</string>
-				<string>D19E1D9A775A77FE2DAF2CA4</string>
+				<string>88A25F3E19D8E01A00924534</string>
+				<string>88A25F1E19D8DEC500924534</string>
+				<string>88A25F2B19D8DF2500924534</string>
+				<string>636A8663AEEE5C37B65C515D</string>
+				<string>2BBEF3CD91C31A49E5FF9E3C</string>
+				<string>88A25F0319D8DEC400924534</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>885D592118CBD13D00D77BB3</key>
+		<key>88A25EFA19D8DEC400924534</key>
 		<dict>
 			<key>attributes</key>
 			<dict>
-				<key>CLASSPREFIX</key>
-				<string>JSQ</string>
 				<key>LastUpgradeCheck</key>
-				<string>0510</string>
+				<string>0600</string>
 				<key>ORGANIZATIONNAME</key>
 				<string>Hexed Bits</string>
 				<key>TargetAttributes</key>
 				<dict>
-					<key>885D594C18CBD13D00D77BB3</key>
+					<key>88A25F0119D8DEC400924534</key>
 					<dict>
-						<key>DevelopmentTeam</key>
-						<string>5VRJU68BZ5</string>
+						<key>CreatedOnToolsVersion</key>
+						<string>6.0.1</string>
+					</dict>
+					<key>88A25F1A19D8DEC400924534</key>
+					<dict>
+						<key>CreatedOnToolsVersion</key>
+						<string>6.0.1</string>
 						<key>TestTargetID</key>
-						<string>885D592818CBD13D00D77BB3</string>
+						<string>88A25F0119D8DEC400924534</string>
 					</dict>
 				</dict>
 			</dict>
 			<key>buildConfigurationList</key>
-			<string>885D592418CBD13D00D77BB3</string>
+			<string>88A25EFD19D8DEC400924534</string>
 			<key>compatibilityVersion</key>
 			<string>Xcode 3.2</string>
 			<key>developmentRegion</key>
@@ -1555,9 +222,9 @@ fi
 				<string>Base</string>
 			</array>
 			<key>mainGroup</key>
-			<string>885D592018CBD13D00D77BB3</string>
+			<string>88A25EF919D8DEC400924534</string>
 			<key>productRefGroup</key>
-			<string>885D592A18CBD13D00D77BB3</string>
+			<string>88A25F0319D8DEC400924534</string>
 			<key>projectDirPath</key>
 			<string></string>
 			<key>projectReferences</key>
@@ -1566,16 +233,16 @@ fi
 			<string></string>
 			<key>targets</key>
 			<array>
-				<string>885D592818CBD13D00D77BB3</string>
-				<string>885D594C18CBD13D00D77BB3</string>
+				<string>88A25F0119D8DEC400924534</string>
+				<string>88A25F1A19D8DEC400924534</string>
 			</array>
 		</dict>
-		<key>885D592418CBD13D00D77BB3</key>
+		<key>88A25EFD19D8DEC400924534</key>
 		<dict>
 			<key>buildConfigurations</key>
 			<array>
-				<string>885D595C18CBD13D00D77BB3</string>
-				<string>885D595D18CBD13D00D77BB3</string>
+				<string>88A25F2319D8DEC500924534</string>
+				<string>88A25F2419D8DEC500924534</string>
 			</array>
 			<key>defaultConfigurationIsVisible</key>
 			<string>0</string>
@@ -1584,119 +251,115 @@ fi
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
-		<key>885D592518CBD13D00D77BB3</key>
+		<key>88A25EFE19D8DEC400924534</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>8816A6A218E9250400111919</string>
-				<string>8816A6A518E9250400111919</string>
-				<string>8816A6B718E9250400111919</string>
-				<string>88D4ED7319B555E800C2DCF9</string>
-				<string>88AB1EE119CE790E00A0565F</string>
-				<string>885D596A18CBD2A600D77BB3</string>
-				<string>8816A6AE18E9250400111919</string>
-				<string>8816A6AB18E9250400111919</string>
-				<string>8816A6B518E9250400111919</string>
-				<string>88BC4D33190C6057002E5CC6</string>
-				<string>8826EB0219CF3EE3009A95F8</string>
-				<string>8816A6A318E9250400111919</string>
-				<string>8816A6A918E9250400111919</string>
-				<string>88F0417B19B5838200DB70E9</string>
-				<string>8816A6B018E9250400111919</string>
-				<string>885D597318CBD2DC00D77BB3</string>
-				<string>8816A6A118E9250400111919</string>
-				<string>8816A6B218E9250400111919</string>
-				<string>88D1B0C71906045A00AFE162</string>
-				<string>88AB1EDE19CE78F500A0565F</string>
-				<string>44E73A51192D0B5B00D1C86F</string>
-				<string>8816A6AC18E9250400111919</string>
-				<string>8816A6A018E9250400111919</string>
-				<string>8816A6A818E9250400111919</string>
-				<string>8816A6AD18E9250400111919</string>
-				<string>8897FBF918CBF967004F59C3</string>
-				<string>8816A6AF18E9250400111919</string>
-				<string>885D596B18CBD2A600D77BB3</string>
-				<string>8816A6B618E9250400111919</string>
-				<string>88ADC6FC18F0999000FE0266</string>
-				<string>88C000C019BB87C10030B8EC</string>
-				<string>8816A6B418E9250400111919</string>
-				<string>8816A6AA18E9250400111919</string>
-				<string>8816A6A418E9250400111919</string>
-				<string>8816A6A718E9250400111919</string>
+				<string>88A25FCE19D8E01A00924534</string>
+				<string>88A25FD119D8E01A00924534</string>
+				<string>88A25FCB19D8E01A00924534</string>
+				<string>88A25FBB19D8E01A00924534</string>
+				<string>88A25FB919D8E01A00924534</string>
+				<string>88A25FCA19D8E01A00924534</string>
+				<string>88A25FD219D8E01A00924534</string>
+				<string>88A25FC619D8E01A00924534</string>
+				<string>88A25FD519D8E01A00924534</string>
+				<string>88A25FC119D8E01A00924534</string>
+				<string>88A25FC719D8E01A00924534</string>
+				<string>88A25FC519D8E01A00924534</string>
+				<string>88A25FD719D8E01A00924534</string>
+				<string>88A25FD319D8E01A00924534</string>
+				<string>88A25FC819D8E01A00924534</string>
+				<string>88A25FB819D8E01A00924534</string>
+				<string>88A25FBF19D8E01A00924534</string>
+				<string>88A25FE019D8E0C400924534</string>
+				<string>88A25F3C19D8DF2500924534</string>
+				<string>88A25F3719D8DF2500924534</string>
+				<string>88A25FB619D8E01A00924534</string>
+				<string>88A25FCC19D8E01A00924534</string>
+				<string>88A25FBE19D8E01A00924534</string>
+				<string>88A25FDF19D8E0C400924534</string>
+				<string>88A25FB719D8E01A00924534</string>
+				<string>88A25FBA19D8E01A00924534</string>
+				<string>88A25FC019D8E01A00924534</string>
+				<string>88A25FC919D8E01A00924534</string>
+				<string>88A25FC419D8E01A00924534</string>
+				<string>88A25FC219D8E01A00924534</string>
+				<string>88A25FE119D8E0C400924534</string>
+				<string>88A25FBD19D8E01A00924534</string>
+				<string>88A25FB519D8E01A00924534</string>
+				<string>88A25FD019D8E01A00924534</string>
+				<string>88A25FC319D8E01A00924534</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>885D592618CBD13D00D77BB3</key>
+		<key>88A25EFF19D8DEC400924534</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>8897FBF418CBF1B3004F59C3</string>
-				<string>885D592F18CBD13D00D77BB3</string>
-				<string>885D593118CBD13D00D77BB3</string>
-				<string>885D592D18CBD13D00D77BB3</string>
-				<string>C78CEF093F584B85B4321C83</string>
+				<string>77CC17A895E6E12BC9CB549A</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>885D592718CBD13D00D77BB3</key>
+		<key>88A25F0019D8DEC400924534</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>88D1B0CC190606F100AFE162</string>
-				<string>885D597718CBD43800D77BB3</string>
-				<string>8816A69E18E9250400111919</string>
-				<string>885D596918CBD2A600D77BB3</string>
-				<string>8816A6B318E9250400111919</string>
-				<string>8816A69418E9250400111919</string>
-				<string>8816A69D18E9250400111919</string>
-				<string>8816A69218E9250400111919</string>
-				<string>8816A69C18E9250400111919</string>
-				<string>8816A6B118E9250400111919</string>
-				<string>8816A69118E9250400111919</string>
-				<string>8816A69018E9250400111919</string>
-				<string>8816A69918E9250400111919</string>
-				<string>88BC4D35190C6086002E5CC6</string>
-				<string>8816A69B18E9250400111919</string>
-				<string>88D1B0C9190604AF00AFE162</string>
-				<string>8816A6B818E9250400111919</string>
-				<string>8816A69F18E9250400111919</string>
-				<string>8816A69518E9250400111919</string>
-				<string>8816A69A18E9250400111919</string>
-				<string>8816A69818E9250400111919</string>
-				<string>8816A69718E9250400111919</string>
-				<string>8816A6A618E9250400111919</string>
-				<string>8816A69618E9250400111919</string>
-				<string>8816A69318E9250400111919</string>
-				<string>88D1B0CD190606F100AFE162</string>
+				<string>88A25FB319D8E01A00924534</string>
+				<string>88A25FA919D8E01A00924534</string>
+				<string>88A25FCF19D8E01A00924534</string>
+				<string>88A25FA719D8E01A00924534</string>
+				<string>88A25FA319D8E01A00924534</string>
+				<string>88A25FAF19D8E01A00924534</string>
+				<string>88A25FA519D8E01A00924534</string>
+				<string>88A25FA619D8E01A00924534</string>
+				<string>88A25FAA19D8E01A00924534</string>
+				<string>88A25FCD19D8E01A00924534</string>
+				<string>88A25FD619D8E01A00924534</string>
+				<string>88A25F3A19D8DF2500924534</string>
+				<string>88A25FB119D8E01A00924534</string>
+				<string>88A25FBC19D8E01A00924534</string>
+				<string>88A25FAD19D8E01A00924534</string>
+				<string>88A25FA419D8E01A00924534</string>
+				<string>88A25FA819D8E01A00924534</string>
+				<string>88A25FAE19D8E01A00924534</string>
+				<string>88A25FB219D8E01A00924534</string>
+				<string>88A25FAB19D8E01A00924534</string>
+				<string>88A25FD819D8E01A00924534</string>
+				<string>88A25FB419D8E01A00924534</string>
+				<string>88A25FB019D8E01A00924534</string>
+				<string>88A25F3919D8DF2500924534</string>
+				<string>88A25FD419D8E01A00924534</string>
+				<string>88A25FAC19D8E01A00924534</string>
 			</array>
 			<key>isa</key>
 			<string>PBXResourcesBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>885D592818CBD13D00D77BB3</key>
+		<key>88A25F0119D8DEC400924534</key>
 		<dict>
 			<key>buildConfigurationList</key>
-			<string>885D595E18CBD13D00D77BB3</string>
+			<string>88A25F2519D8DEC500924534</string>
 			<key>buildPhases</key>
 			<array>
-				<string>5AF0226F94CF4DE999772A5D</string>
-				<string>885D592518CBD13D00D77BB3</string>
-				<string>885D592618CBD13D00D77BB3</string>
-				<string>885D592718CBD13D00D77BB3</string>
-				<string>7FD13EFACBFC4055895E51E4</string>
+				<string>3AF3068570D5C74873D84E30</string>
+				<string>88A25EFE19D8DEC400924534</string>
+				<string>88A25EFF19D8DEC400924534</string>
+				<string>88A25F0019D8DEC400924534</string>
+				<string>4CCCD7A86E86CB86C48E303C</string>
 			</array>
 			<key>buildRules</key>
 			<array/>
@@ -1709,11 +372,11 @@ fi
 			<key>productName</key>
 			<string>JSQMessages</string>
 			<key>productReference</key>
-			<string>885D592918CBD13D00D77BB3</string>
+			<string>88A25F0219D8DEC400924534</string>
 			<key>productType</key>
 			<string>com.apple.product-type.application</string>
 		</dict>
-		<key>885D592918CBD13D00D77BB3</key>
+		<key>88A25F0219D8DEC400924534</key>
 		<dict>
 			<key>explicitFileType</key>
 			<string>wrapper.application</string>
@@ -1726,12 +389,12 @@ fi
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>885D592A18CBD13D00D77BB3</key>
+		<key>88A25F0319D8DEC400924534</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>885D592918CBD13D00D77BB3</string>
-				<string>885D594D18CBD13D00D77BB3</string>
+				<string>88A25F0219D8DEC400924534</string>
+				<string>88A25F1B19D8DEC500924534</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -1740,210 +403,87 @@ fi
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>885D592B18CBD13D00D77BB3</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>885D592E18CBD13D00D77BB3</string>
-				<string>885D592C18CBD13D00D77BB3</string>
-				<string>343577012CC24261BE4B61A1</string>
-				<string>8897FBF318CBF1B3004F59C3</string>
-				<string>885D593018CBD13D00D77BB3</string>
-				<string>885D594E18CBD13D00D77BB3</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>885D592C18CBD13D00D77BB3</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>885D592D18CBD13D00D77BB3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>885D592C18CBD13D00D77BB3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>885D592E18CBD13D00D77BB3</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreGraphics.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/CoreGraphics.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>885D592F18CBD13D00D77BB3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>885D592E18CBD13D00D77BB3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>885D593018CBD13D00D77BB3</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>UIKit.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/UIKit.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>885D593118CBD13D00D77BB3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>885D593018CBD13D00D77BB3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>885D593218CBD13D00D77BB3</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>885D596518CBD2A600D77BB3</string>
-				<string>885D596618CBD2A600D77BB3</string>
-				<string>8897FBF718CBF967004F59C3</string>
-				<string>8897FBF818CBF967004F59C3</string>
-				<string>88D4ED7119B555E800C2DCF9</string>
-				<string>88D4ED7219B555E800C2DCF9</string>
-				<string>885D596418CBD2A600D77BB3</string>
-				<string>885D596C18CBD2BF00D77BB3</string>
-				<string>885D593318CBD13D00D77BB3</string>
-				<string>885D596718CBD2A600D77BB3</string>
-				<string>885D596818CBD2A600D77BB3</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>JSQMessagesDemo</string>
-			<key>path</key>
-			<string>JSQMessages</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>885D593318CBD13D00D77BB3</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>885D597418CBD2EB00D77BB3</string>
-				<string>885D596F18CBD2DC00D77BB3</string>
-				<string>885D597018CBD2DC00D77BB3</string>
-				<string>885D597118CBD2DC00D77BB3</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>885D594918CBD13D00D77BB3</key>
+		<key>88A25F1719D8DEC400924534</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>88CC880D190A2C7F006258A0</string>
-				<string>88AB1EE519CEB21800A0565F</string>
-				<string>88BC4D3D190D8CCD002E5CC6</string>
-				<string>88CC880B190A2C7F006258A0</string>
-				<string>88AB1EE319CEB1F800A0565F</string>
-				<string>88CC880A190A2C7F006258A0</string>
-				<string>88CC880C190A2C7F006258A0</string>
-				<string>88C28BE51910A19E004E90B1</string>
-				<string>88CC8807190A2C7F006258A0</string>
-				<string>88BC4D4D190E25CF002E5CC6</string>
-				<string>88F0417D19B5866300DB70E9</string>
-				<string>88C28BE11910A166004E90B1</string>
-				<string>88BC4D49190DB480002E5CC6</string>
-				<string>88C000C219BB8DA70030B8EC</string>
-				<string>88BC4D4B190E2429002E5CC6</string>
-				<string>88BC4D46190D8D35002E5CC6</string>
-				<string>88CC8809190A2C7F006258A0</string>
-				<string>88C28BDF1910A153004E90B1</string>
-				<string>88C28BE31910A180004E90B1</string>
-				<string>88CC880E190A2C7F006258A0</string>
-				<string>88BC4D47190D8D35002E5CC6</string>
-				<string>88CC8806190A2C7F006258A0</string>
-				<string>88CC8808190A2C7F006258A0</string>
-				<string>88BC4D37190D883A002E5CC6</string>
-				<string>88C28BDB1910A10B004E90B1</string>
+				<string>88A2600219D8E18400924534</string>
+				<string>88A2601819D8E18400924534</string>
+				<string>88A2601519D8E18400924534</string>
+				<string>88A2601719D8E18400924534</string>
+				<string>88A2601219D8E18400924534</string>
+				<string>88A2601619D8E18400924534</string>
+				<string>88A2600B19D8E18400924534</string>
+				<string>88A2601019D8E18400924534</string>
+				<string>88A2600D19D8E18400924534</string>
+				<string>88A2600719D8E18400924534</string>
+				<string>88A2600419D8E18400924534</string>
+				<string>88A2600F19D8E18400924534</string>
+				<string>88A2600E19D8E18400924534</string>
+				<string>88A2600919D8E18400924534</string>
+				<string>88A2601419D8E18400924534</string>
+				<string>88A2601319D8E18400924534</string>
+				<string>88A2600119D8E18400924534</string>
+				<string>88A2601119D8E18400924534</string>
+				<string>88A2600A19D8E18400924534</string>
+				<string>88A2601919D8E18400924534</string>
+				<string>88A2600319D8E18400924534</string>
+				<string>88A2600C19D8E18400924534</string>
+				<string>88A2600619D8E18400924534</string>
+				<string>88A2600519D8E18400924534</string>
+				<string>88A2600819D8E18400924534</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>885D594A18CBD13D00D77BB3</key>
+		<key>88A25F1819D8DEC400924534</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>88BC4D30190C41F6002E5CC6</string>
-				<string>88BC4D2F190C41ED002E5CC6</string>
-				<string>885D594F18CBD13D00D77BB3</string>
-				<string>885D595118CBD13D00D77BB3</string>
-				<string>885D595018CBD13D00D77BB3</string>
-				<string>D68A9FB68FC5463D9A5B23E0</string>
+				<string>94A4FA20C2FBD0D62614D5A8</string>
+				<string>36CF33BD29CF36EB06D0CCFD</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>885D594B18CBD13D00D77BB3</key>
+		<key>88A25F1919D8DEC400924534</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>885D595918CBD13D00D77BB3</string>
+				<string>88A2601B19D8E45600924534</string>
 			</array>
 			<key>isa</key>
 			<string>PBXResourcesBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>885D594C18CBD13D00D77BB3</key>
+		<key>88A25F1A19D8DEC400924534</key>
 		<dict>
 			<key>buildConfigurationList</key>
-			<string>885D596118CBD13D00D77BB3</string>
+			<string>88A25F2819D8DEC500924534</string>
 			<key>buildPhases</key>
 			<array>
-				<string>B8E405296CDE4D2F994679F1</string>
-				<string>885D594918CBD13D00D77BB3</string>
-				<string>885D594A18CBD13D00D77BB3</string>
-				<string>885D594B18CBD13D00D77BB3</string>
-				<string>17FAC932EF1147418FBBD9D1</string>
+				<string>F4044DAC71D69462CA8CAE98</string>
+				<string>88A25F1719D8DEC400924534</string>
+				<string>88A25F1819D8DEC400924534</string>
+				<string>88A25F1919D8DEC400924534</string>
+				<string>F6B484334A138916FC111868</string>
 			</array>
 			<key>buildRules</key>
 			<array/>
 			<key>dependencies</key>
 			<array>
-				<string>885D595318CBD13D00D77BB3</string>
+				<string>88A25F1D19D8DEC500924534</string>
 			</array>
 			<key>isa</key>
 			<string>PBXNativeTarget</string>
@@ -1952,11 +492,11 @@ fi
 			<key>productName</key>
 			<string>JSQMessagesTests</string>
 			<key>productReference</key>
-			<string>885D594D18CBD13D00D77BB3</string>
+			<string>88A25F1B19D8DEC500924534</string>
 			<key>productType</key>
 			<string>com.apple.product-type.bundle.unit-test</string>
 		</dict>
-		<key>885D594D18CBD13D00D77BB3</key>
+		<key>88A25F1B19D8DEC500924534</key>
 		<dict>
 			<key>explicitFileType</key>
 			<string>wrapper.cfbundle</string>
@@ -1969,73 +509,39 @@ fi
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>885D594E18CBD13D00D77BB3</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>XCTest.framework</string>
-			<key>path</key>
-			<string>Library/Frameworks/XCTest.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>885D594F18CBD13D00D77BB3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>885D594E18CBD13D00D77BB3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>885D595018CBD13D00D77BB3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>885D592C18CBD13D00D77BB3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>885D595118CBD13D00D77BB3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>885D593018CBD13D00D77BB3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>885D595218CBD13D00D77BB3</key>
+		<key>88A25F1C19D8DEC500924534</key>
 		<dict>
 			<key>containerPortal</key>
-			<string>885D592118CBD13D00D77BB3</string>
+			<string>88A25EFA19D8DEC400924534</string>
 			<key>isa</key>
 			<string>PBXContainerItemProxy</string>
 			<key>proxyType</key>
 			<string>1</string>
 			<key>remoteGlobalIDString</key>
-			<string>885D592818CBD13D00D77BB3</string>
+			<string>88A25F0119D8DEC400924534</string>
 			<key>remoteInfo</key>
 			<string>JSQMessages</string>
 		</dict>
-		<key>885D595318CBD13D00D77BB3</key>
+		<key>88A25F1D19D8DEC500924534</key>
 		<dict>
 			<key>isa</key>
 			<string>PBXTargetDependency</string>
 			<key>target</key>
-			<string>885D592818CBD13D00D77BB3</string>
+			<string>88A25F0119D8DEC400924534</string>
 			<key>targetProxy</key>
-			<string>885D595218CBD13D00D77BB3</string>
+			<string>88A25F1C19D8DEC500924534</string>
 		</dict>
-		<key>885D595418CBD13D00D77BB3</key>
+		<key>88A25F1E19D8DEC500924534</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>88CC87FA190A2C7F006258A0</string>
-				<string>88CC87FF190A2C7F006258A0</string>
-				<string>88CC8801190A2C7F006258A0</string>
-				<string>88BC4D3B190D8CCD002E5CC6</string>
-				<string>88BC4D42190D8D35002E5CC6</string>
-				<string>885D595518CBD13D00D77BB3</string>
-				<string>88BC4D44190D8D35002E5CC6</string>
+				<string>88A25FE219D8E18400924534</string>
+				<string>88A25FE719D8E18400924534</string>
+				<string>88A25FEA19D8E18400924534</string>
+				<string>88A25FEF19D8E18400924534</string>
+				<string>88A25FF219D8E18400924534</string>
+				<string>88A25F1F19D8DEC500924534</string>
+				<string>88A25FF819D8E18400924534</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -2044,12 +550,11 @@ fi
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>885D595518CBD13D00D77BB3</key>
+		<key>88A25F1F19D8DEC500924534</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>885D595618CBD13D00D77BB3</string>
-				<string>885D595718CBD13D00D77BB3</string>
+				<string>88A25F2019D8DEC500924534</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -2058,51 +563,18 @@ fi
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>885D595618CBD13D00D77BB3</key>
+		<key>88A25F2019D8DEC500924534</key>
 		<dict>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>text.plist.xml</string>
 			<key>path</key>
-			<string>JSQMessagesTests-Info.plist</string>
+			<string>Info.plist</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>885D595718CBD13D00D77BB3</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>885D595818CBD13D00D77BB3</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>885D595818CBD13D00D77BB3</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>en</string>
-			<key>path</key>
-			<string>en.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>885D595918CBD13D00D77BB3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>885D595718CBD13D00D77BB3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>885D595C18CBD13D00D77BB3</key>
+		<key>88A25F2319D8DEC500924534</key>
 		<dict>
 			<key>buildSettings</key>
 			<dict>
@@ -2130,14 +602,16 @@ fi
 				<string>YES</string>
 				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
 				<string>YES_ERROR</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
 				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
 				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
 				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
 				<string>iPhone Developer</string>
 				<key>COPY_PHASE_STRIP</key>
 				<string>NO</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
 				<key>GCC_C_LANGUAGE_STANDARD</key>
 				<string>gnu99</string>
 				<key>GCC_DYNAMIC_NO_PIC</key>
@@ -2158,17 +632,17 @@ fi
 				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
 				<string>YES</string>
 				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
+				<string>YES_AGGRESSIVE</string>
 				<key>GCC_WARN_UNUSED_FUNCTION</key>
 				<string>YES</string>
 				<key>GCC_WARN_UNUSED_VARIABLE</key>
 				<string>YES</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
 				<string>7.0</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
 				<key>ONLY_ACTIVE_ARCH</key>
 				<string>YES</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string>7FA14CF8-3607-48DE-B39B-0BC7F82589EE</string>
 				<key>SDKROOT</key>
 				<string>iphoneos</string>
 				<key>TARGETED_DEVICE_FAMILY</key>
@@ -2179,7 +653,7 @@ fi
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>885D595D18CBD13D00D77BB3</key>
+		<key>88A25F2419D8DEC500924534</key>
 		<dict>
 			<key>buildSettings</key>
 			<dict>
@@ -2207,16 +681,18 @@ fi
 				<string>YES</string>
 				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
 				<string>YES_ERROR</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
 				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
 				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
 				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
 				<string>iPhone Developer</string>
 				<key>COPY_PHASE_STRIP</key>
 				<string>YES</string>
 				<key>ENABLE_NS_ASSERTIONS</key>
 				<string>NO</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
 				<key>GCC_C_LANGUAGE_STANDARD</key>
 				<string>gnu99</string>
 				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
@@ -2226,15 +702,15 @@ fi
 				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
 				<string>YES</string>
 				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
+				<string>YES_AGGRESSIVE</string>
 				<key>GCC_WARN_UNUSED_FUNCTION</key>
 				<string>YES</string>
 				<key>GCC_WARN_UNUSED_VARIABLE</key>
 				<string>YES</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
 				<string>7.0</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string>7FA14CF8-3607-48DE-B39B-0BC7F82589EE</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
 				<key>SDKROOT</key>
 				<string>iphoneos</string>
 				<key>TARGETED_DEVICE_FAMILY</key>
@@ -2247,12 +723,12 @@ fi
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>885D595E18CBD13D00D77BB3</key>
+		<key>88A25F2519D8DEC500924534</key>
 		<dict>
 			<key>buildConfigurations</key>
 			<array>
-				<string>885D595F18CBD13D00D77BB3</string>
-				<string>885D596018CBD13D00D77BB3</string>
+				<string>88A25F2619D8DEC500924534</string>
+				<string>88A25F2719D8DEC500924534</string>
 			</array>
 			<key>defaultConfigurationIsVisible</key>
 			<string>0</string>
@@ -2261,80 +737,64 @@ fi
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
-		<key>885D595F18CBD13D00D77BB3</key>
+		<key>88A25F2619D8DEC500924534</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>431679BCBC970B2C8DD763A1</string>
+			<string>FC5C727E4CCDA2B95A7BA30C</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
 				<string>AppIcon</string>
 				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
 				<string>LaunchImage</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>JSQMessagesDemo/JSQMessages-Prefix.pch</string>
 				<key>INFOPLIST_FILE</key>
-				<string>$(SRCROOT)/JSQMessagesDemo/JSQMessages-Info.plist</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
+				<string>$(SRCROOT)/JSQMessagesDemo/Info.plist</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/Frameworks</string>
+				<key>OTHER_LDFLAGS</key>
+				<string>$(inherited)</string>
 				<key>PRODUCT_NAME</key>
 				<string>$(TARGET_NAME)</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string></string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
 			</dict>
 			<key>isa</key>
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>885D596018CBD13D00D77BB3</key>
+		<key>88A25F2719D8DEC500924534</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>DC25F4C067FAFD0E5CA97B09</string>
+			<string>27B7FD1B722B36B26CB3460B</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
 				<string>AppIcon</string>
 				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
 				<string>LaunchImage</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>JSQMessagesDemo/JSQMessages-Prefix.pch</string>
 				<key>INFOPLIST_FILE</key>
-				<string>$(SRCROOT)/JSQMessagesDemo/JSQMessages-Info.plist</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>NO</string>
+				<string>$(SRCROOT)/JSQMessagesDemo/Info.plist</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/Frameworks</string>
+				<key>OTHER_LDFLAGS</key>
+				<string>$(inherited)</string>
 				<key>PRODUCT_NAME</key>
 				<string>$(TARGET_NAME)</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string></string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
 			</dict>
 			<key>isa</key>
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>885D596118CBD13D00D77BB3</key>
+		<key>88A25F2819D8DEC500924534</key>
 		<dict>
 			<key>buildConfigurations</key>
 			<array>
-				<string>885D596218CBD13D00D77BB3</string>
-				<string>885D596318CBD13D00D77BB3</string>
+				<string>88A25F2919D8DEC500924534</string>
+				<string>88A25F2A19D8DEC500924534</string>
 			</array>
 			<key>defaultConfigurationIsVisible</key>
 			<string>0</string>
@@ -2343,186 +803,120 @@ fi
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
-		<key>885D596218CBD13D00D77BB3</key>
+		<key>88A25F2919D8DEC500924534</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>431679BCBC970B2C8DD763A1</string>
+			<string>223FBACE0F24ADEF8B7F3F24</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>BUNDLE_LOADER</key>
-				<string>$(BUILT_PRODUCTS_DIR)/JSQMessages.app/JSQMessages</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
+				<string>$(TEST_HOST)</string>
 				<key>FRAMEWORK_SEARCH_PATHS</key>
 				<array>
 					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
 					<string>$(inherited)</string>
-					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
 				</array>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>JSQMessagesDemo/JSQMessages-Prefix.pch</string>
 				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
 				<array>
 					<string>DEBUG=1</string>
 					<string>$(inherited)</string>
 				</array>
 				<key>INFOPLIST_FILE</key>
-				<string>JSQMessagesTests/JSQMessagesTests-Info.plist</string>
+				<string>JSQMessagesTests/Info.plist</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
 				<key>PRODUCT_NAME</key>
 				<string>$(TARGET_NAME)</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string></string>
 				<key>TEST_HOST</key>
-				<string>$(BUNDLE_LOADER)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>xctest</string>
+				<string>$(BUILT_PRODUCTS_DIR)/JSQMessages.app/JSQMessages</string>
 			</dict>
 			<key>isa</key>
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>885D596318CBD13D00D77BB3</key>
+		<key>88A25F2A19D8DEC500924534</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>DC25F4C067FAFD0E5CA97B09</string>
+			<string>0844AD596023C7658D39E241</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>BUNDLE_LOADER</key>
-				<string>$(BUILT_PRODUCTS_DIR)/JSQMessages.app/JSQMessages</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
+				<string>$(TEST_HOST)</string>
 				<key>FRAMEWORK_SEARCH_PATHS</key>
 				<array>
 					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
 					<string>$(inherited)</string>
-					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
 				</array>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>JSQMessagesDemo/JSQMessages-Prefix.pch</string>
 				<key>INFOPLIST_FILE</key>
-				<string>JSQMessagesTests/JSQMessagesTests-Info.plist</string>
+				<string>JSQMessagesTests/Info.plist</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
 				<key>PRODUCT_NAME</key>
 				<string>$(TARGET_NAME)</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string></string>
 				<key>TEST_HOST</key>
-				<string>$(BUNDLE_LOADER)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>xctest</string>
+				<string>$(BUILT_PRODUCTS_DIR)/JSQMessages.app/JSQMessages</string>
 			</dict>
 			<key>isa</key>
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>885D596418CBD2A600D77BB3</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>name</key>
-			<string>Images.xcassets</string>
-			<key>path</key>
-			<string>JSQMessagesDemo/Images.xcassets</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>885D596518CBD2A600D77BB3</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>AppDelegate.h</string>
-			<key>path</key>
-			<string>JSQMessagesDemo/AppDelegate.h</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>885D596618CBD2A600D77BB3</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>AppDelegate.m</string>
-			<key>path</key>
-			<string>JSQMessagesDemo/AppDelegate.m</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>885D596718CBD2A600D77BB3</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TableViewController.h</string>
-			<key>path</key>
-			<string>JSQMessagesDemo/TableViewController.h</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>885D596818CBD2A600D77BB3</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TableViewController.m</string>
-			<key>path</key>
-			<string>JSQMessagesDemo/TableViewController.m</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>885D596918CBD2A600D77BB3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>885D596418CBD2A600D77BB3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>885D596A18CBD2A600D77BB3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>885D596618CBD2A600D77BB3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>885D596B18CBD2A600D77BB3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>885D596818CBD2A600D77BB3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>885D596C18CBD2BF00D77BB3</key>
+		<key>88A25F2B19D8DF2500924534</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>885D596D18CBD2BF00D77BB3</string>
+				<string>88A25F2C19D8DF2500924534</string>
+				<string>88A25F2D19D8DF2500924534</string>
+				<string>88A25FD919D8E0C400924534</string>
+				<string>88A25FDA19D8E0C400924534</string>
+				<string>88A25FDB19D8E0C400924534</string>
+				<string>88A25FDC19D8E0C400924534</string>
+				<string>88A25F3219D8DF2500924534</string>
+				<string>88A2601A19D8E45600924534</string>
+				<string>88A25F3419D8DF2500924534</string>
+				<string>88A25F3019D8DF2500924534</string>
+				<string>88A25FDD19D8E0C400924534</string>
+				<string>88A25FDE19D8E0C400924534</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>JSQMessagesDemo</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F2C19D8DF2500924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>AppDelegate.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F2D19D8DF2500924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>AppDelegate.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F3019D8DF2500924534</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>88A25F3119D8DF2500924534</string>
 			</array>
 			<key>isa</key>
 			<string>PBXVariantGroup</string>
@@ -2531,7 +925,7 @@ fi
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>885D596D18CBD2BF00D77BB3</key>
+		<key>88A25F3119D8DF2500924534</key>
 		<dict>
 			<key>isa</key>
 			<string>PBXFileReference</string>
@@ -2540,41 +934,22 @@ fi
 			<key>name</key>
 			<string>Base</string>
 			<key>path</key>
-			<string>JSQMessagesDemo/Base.lproj/Main.storyboard</string>
+			<string>Base.lproj/Main.storyboard</string>
 			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>885D596F18CBD2DC00D77BB3</key>
+		<key>88A25F3219D8DF2500924534</key>
 		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>name</key>
-			<string>JSQMessages-Info.plist</string>
+			<string>folder.assetcatalog</string>
 			<key>path</key>
-			<string>JSQMessagesDemo/JSQMessages-Info.plist</string>
+			<string>Images.xcassets</string>
 			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>885D597018CBD2DC00D77BB3</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>JSQMessages-Prefix.pch</string>
-			<key>path</key>
-			<string>JSQMessagesDemo/JSQMessages-Prefix.pch</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>885D597118CBD2DC00D77BB3</key>
+		<key>88A25F3419D8DF2500924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -2582,74 +957,336 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>main.m</string>
 			<key>path</key>
-			<string>JSQMessagesDemo/main.m</string>
+			<string>main.m</string>
 			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>885D597318CBD2DC00D77BB3</key>
+		<key>88A25F3719D8DF2500924534</key>
 		<dict>
 			<key>fileRef</key>
-			<string>885D597118CBD2DC00D77BB3</string>
+			<string>88A25F2D19D8DF2500924534</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>885D597418CBD2EB00D77BB3</key>
+		<key>88A25F3919D8DF2500924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F3019D8DF2500924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25F3A19D8DF2500924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F3219D8DF2500924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25F3C19D8DF2500924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F3419D8DF2500924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25F3E19D8E01A00924534</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>885D597518CBD2EB00D77BB3</string>
+				<string>88A25F3F19D8E01A00924534</string>
+				<string>88A25F5419D8E01A00924534</string>
+				<string>88A25F5F19D8E01A00924534</string>
+				<string>88A25F6519D8E01A00924534</string>
+				<string>88A25F6E19D8E01A00924534</string>
+				<string>88A25F6F19D8E01A00924534</string>
+				<string>88A25F7619D8E01A00924534</string>
+				<string>88A25F8919D8E01A00924534</string>
 			</array>
 			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>InfoPlist.strings</string>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>JSQMessagesViewController</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>885D597518CBD2EB00D77BB3</key>
+		<key>88A25F3F19D8E01A00924534</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>88A25F4019D8E01A00924534</string>
+				<string>88A25F5119D8E01A00924534</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Assets</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F4019D8E01A00924534</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>88A25F4119D8E01A00924534</string>
+				<string>88A25F4219D8E01A00924534</string>
+				<string>88A25F4319D8E01A00924534</string>
+				<string>88A25F4419D8E01A00924534</string>
+				<string>88A25F4519D8E01A00924534</string>
+				<string>88A25F4619D8E01A00924534</string>
+				<string>88A25F4719D8E01A00924534</string>
+				<string>88A25F4819D8E01A00924534</string>
+				<string>88A25F4919D8E01A00924534</string>
+				<string>88A25F4A19D8E01A00924534</string>
+				<string>88A25F4B19D8E01A00924534</string>
+				<string>88A25F4C19D8E01A00924534</string>
+				<string>88A25F4D19D8E01A00924534</string>
+				<string>88A25F4E19D8E01A00924534</string>
+				<string>88A25F4F19D8E01A00924534</string>
+				<string>88A25F5019D8E01A00924534</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Images</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F4119D8E01A00924534</key>
 		<dict>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>en</string>
+			<string>image.png</string>
 			<key>path</key>
-			<string>JSQMessagesDemo/en.lproj/InfoPlist.strings</string>
+			<string>bubble.png</string>
 			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>885D597718CBD43800D77BB3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>885D596C18CBD2BF00D77BB3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8897FBF318CBF1B3004F59C3</key>
+		<key>88A25F4219D8E01A00924534</key>
 		<dict>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>QuartzCore.framework</string>
+			<string>image.png</string>
 			<key>path</key>
-			<string>System/Library/Frameworks/QuartzCore.framework</string>
+			<string>bubble@2x.png</string>
 			<key>sourceTree</key>
-			<string>SDKROOT</string>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>8897FBF418CBF1B3004F59C3</key>
+		<key>88A25F4319D8E01A00924534</key>
 		<dict>
-			<key>fileRef</key>
-			<string>8897FBF318CBF1B3004F59C3</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.png</string>
+			<key>path</key>
+			<string>bubble_min.png</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>8897FBF718CBF967004F59C3</key>
+		<key>88A25F4419D8E01A00924534</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.png</string>
+			<key>path</key>
+			<string>bubble_min@2x.png</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F4519D8E01A00924534</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.png</string>
+			<key>path</key>
+			<string>bubble_min_tailless.png</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F4619D8E01A00924534</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.png</string>
+			<key>path</key>
+			<string>bubble_min_tailless@2x.png</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F4719D8E01A00924534</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.png</string>
+			<key>path</key>
+			<string>bubble_stroked.png</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F4819D8E01A00924534</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.png</string>
+			<key>path</key>
+			<string>bubble_stroked@2x.png</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F4919D8E01A00924534</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.png</string>
+			<key>path</key>
+			<string>bubble_tailless.png</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F4A19D8E01A00924534</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.png</string>
+			<key>path</key>
+			<string>bubble_tailless@2x.png</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F4B19D8E01A00924534</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.png</string>
+			<key>path</key>
+			<string>camera.png</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F4C19D8E01A00924534</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.png</string>
+			<key>path</key>
+			<string>camera@2x.png</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F4D19D8E01A00924534</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.png</string>
+			<key>path</key>
+			<string>camera@3x.png</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F4E19D8E01A00924534</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.png</string>
+			<key>path</key>
+			<string>typing.png</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F4F19D8E01A00924534</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.png</string>
+			<key>path</key>
+			<string>typing@2x.png</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F5019D8E01A00924534</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.png</string>
+			<key>path</key>
+			<string>typing@3x.png</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F5119D8E01A00924534</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>88A25F5219D8E01A00924534</string>
+				<string>88A25F5319D8E01A00924534</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Sounds</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F5219D8E01A00924534</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>audio.aiff</string>
+			<key>path</key>
+			<string>message_received.aiff</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F5319D8E01A00924534</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>audio.aiff</string>
+			<key>path</key>
+			<string>message_sent.aiff</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F5419D8E01A00924534</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>88A25F5519D8E01A00924534</string>
+				<string>88A25F5619D8E01A00924534</string>
+				<string>88A25F5719D8E01A00924534</string>
+				<string>88A25F5819D8E01A00924534</string>
+				<string>88A25F5919D8E01A00924534</string>
+				<string>88A25F5A19D8E01A00924534</string>
+				<string>88A25F5B19D8E01A00924534</string>
+				<string>88A25F5C19D8E01A00924534</string>
+				<string>88A25F5D19D8E01A00924534</string>
+				<string>88A25F5E19D8E01A00924534</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Categories</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F5519D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -2657,14 +1294,12 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>DemoMessagesViewController.h</string>
 			<key>path</key>
-			<string>JSQMessagesDemo/DemoMessagesViewController.h</string>
+			<string>JSQSystemSoundPlayer+JSQMessages.h</string>
 			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>8897FBF818CBF967004F59C3</key>
+		<key>88A25F5619D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -2672,21 +1307,12 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>DemoMessagesViewController.m</string>
 			<key>path</key>
-			<string>JSQMessagesDemo/DemoMessagesViewController.m</string>
+			<string>JSQSystemSoundPlayer+JSQMessages.m</string>
 			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>8897FBF918CBF967004F59C3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8897FBF818CBF967004F59C3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88AB1EDC19CE78F500A0565F</key>
+		<key>88A25F5719D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -2695,11 +1321,11 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>path</key>
-			<string>JSQTextMessage.h</string>
+			<string>NSString+JSQMessages.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88AB1EDD19CE78F500A0565F</key>
+		<key>88A25F5819D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -2708,18 +1334,11 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>JSQTextMessage.m</string>
+			<string>NSString+JSQMessages.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88AB1EDE19CE78F500A0565F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88AB1EDD19CE78F500A0565F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88AB1EDF19CE790E00A0565F</key>
+		<key>88A25F5919D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -2728,11 +1347,11 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>path</key>
-			<string>JSQMediaMessage.h</string>
+			<string>UIColor+JSQMessages.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88AB1EE019CE790E00A0565F</key>
+		<key>88A25F5A19D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -2741,18 +1360,24 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>JSQMediaMessage.m</string>
+			<string>UIColor+JSQMessages.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88AB1EE119CE790E00A0565F</key>
+		<key>88A25F5B19D8E01A00924534</key>
 		<dict>
-			<key>fileRef</key>
-			<string>88AB1EE019CE790E00A0565F</string>
+			<key>fileEncoding</key>
+			<string>4</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>UIImage+JSQMessages.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88AB1EE219CEB1F800A0565F</key>
+		<key>88A25F5C19D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -2761,18 +1386,24 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>JSQTextMessageTests.m</string>
+			<string>UIImage+JSQMessages.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88AB1EE319CEB1F800A0565F</key>
+		<key>88A25F5D19D8E01A00924534</key>
 		<dict>
-			<key>fileRef</key>
-			<string>88AB1EE219CEB1F800A0565F</string>
+			<key>fileEncoding</key>
+			<string>4</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>UIView+JSQMessages.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88AB1EE419CEB21800A0565F</key>
+		<key>88A25F5E19D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -2781,18 +1412,28 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>JSQMediaMessageTests.m</string>
+			<string>UIView+JSQMessages.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88AB1EE519CEB21800A0565F</key>
+		<key>88A25F5F19D8E01A00924534</key>
 		<dict>
-			<key>fileRef</key>
-			<string>88AB1EE419CEB21800A0565F</string>
+			<key>children</key>
+			<array>
+				<string>88A25F6019D8E01A00924534</string>
+				<string>88A25F6119D8E01A00924534</string>
+				<string>88A25F6219D8E01A00924534</string>
+				<string>88A25F6319D8E01A00924534</string>
+				<string>88A25F6419D8E01A00924534</string>
+			</array>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Controllers</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88ADC6FA18F0999000FE0266</key>
+		<key>88A25F6019D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -2805,7 +1446,7 @@ fi
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88ADC6FB18F0999000FE0266</key>
+		<key>88A25F6119D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -2818,28 +1459,7 @@ fi
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88ADC6FC18F0999000FE0266</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88ADC6FB18F0999000FE0266</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88BC4D2F190C41ED002E5CC6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>885D592E18CBD13D00D77BB3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88BC4D30190C41F6002E5CC6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8897FBF318CBF1B3004F59C3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88BC4D31190C6057002E5CC6</key>
+		<key>88A25F6219D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -2848,11 +1468,11 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>path</key>
-			<string>JSQMessagesLoadEarlierHeaderView.h</string>
+			<string>JSQMessagesViewController.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88BC4D32190C6057002E5CC6</key>
+		<key>88A25F6319D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -2861,18 +1481,11 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>JSQMessagesLoadEarlierHeaderView.m</string>
+			<string>JSQMessagesViewController.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88BC4D33190C6057002E5CC6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88BC4D32190C6057002E5CC6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88BC4D34190C6086002E5CC6</key>
+		<key>88A25F6419D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -2881,211 +1494,31 @@ fi
 			<key>lastKnownFileType</key>
 			<string>file.xib</string>
 			<key>path</key>
-			<string>JSQMessagesLoadEarlierHeaderView.xib</string>
+			<string>JSQMessagesViewController.xib</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88BC4D35190C6086002E5CC6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88BC4D34190C6086002E5CC6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88BC4D36190D883A002E5CC6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesKeyboardControllerTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88BC4D37190D883A002E5CC6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88BC4D36190D883A002E5CC6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88BC4D3B190D8CCD002E5CC6</key>
+		<key>88A25F6519D8E01A00924534</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>88BC4D3C190D8CCD002E5CC6</string>
-				<string>88BC4D48190DB480002E5CC6</string>
+				<string>88A25F6619D8E01A00924534</string>
+				<string>88A25F6719D8E01A00924534</string>
+				<string>88A25F6819D8E01A00924534</string>
+				<string>88A25F6919D8E01A00924534</string>
+				<string>88A25F6A19D8E01A00924534</string>
+				<string>88A25F6B19D8E01A00924534</string>
+				<string>88A25F6C19D8E01A00924534</string>
+				<string>88A25F6D19D8E01A00924534</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
 			<key>path</key>
-			<string>LayoutTests</string>
+			<string>Factories</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88BC4D3C190D8CCD002E5CC6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewFlowLayoutTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88BC4D3D190D8CCD002E5CC6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88BC4D3C190D8CCD002E5CC6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88BC4D42190D8D35002E5CC6</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>88AB1EE419CEB21800A0565F</string>
-				<string>88C000C119BB8DA70030B8EC</string>
-				<string>88F0417C19B5866300DB70E9</string>
-				<string>88BC4D43190D8D35002E5CC6</string>
-				<string>88AB1EE219CEB1F800A0565F</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>ModelTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88BC4D43190D8D35002E5CC6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessageTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88BC4D44190D8D35002E5CC6</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>88BC4D4A190E2429002E5CC6</string>
-				<string>88BC4D45190D8D35002E5CC6</string>
-				<string>88BC4D4C190E25CF002E5CC6</string>
-				<string>88C28BDA1910A10B004E90B1</string>
-				<string>88C28BDE1910A153004E90B1</string>
-				<string>88C28BE01910A166004E90B1</string>
-				<string>88C28BE21910A180004E90B1</string>
-				<string>88C28BE41910A19E004E90B1</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>ViewTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88BC4D45190D8D35002E5CC6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88BC4D46190D8D35002E5CC6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88BC4D43190D8D35002E5CC6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88BC4D47190D8D35002E5CC6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88BC4D45190D8D35002E5CC6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88BC4D48190DB480002E5CC6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewLayoutAttributesTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88BC4D49190DB480002E5CC6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88BC4D48190DB480002E5CC6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88BC4D4A190E2429002E5CC6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesCollectionViewCellTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88BC4D4B190E2429002E5CC6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88BC4D4A190E2429002E5CC6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88BC4D4C190E25CF002E5CC6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>JSQMessagesComposerTextViewTests.m</string>
-			<key>path</key>
-			<string>JSQMessagesTests/ViewTests/JSQMessagesComposerTextViewTests.m</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>88BC4D4D190E25CF002E5CC6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88BC4D4C190E25CF002E5CC6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88C000BE19BB87C10030B8EC</key>
+		<key>88A25F6619D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -3094,11 +1527,11 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>path</key>
-			<string>JSQMessagesAvatarImage.h</string>
+			<string>JSQMessagesAvatarImageFactory.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88C000BF19BB87C10030B8EC</key>
+		<key>88A25F6719D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -3107,364 +1540,11 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>JSQMessagesAvatarImage.m</string>
+			<string>JSQMessagesAvatarImageFactory.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88C000C019BB87C10030B8EC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88C000BF19BB87C10030B8EC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88C000C119BB8DA70030B8EC</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesAvatarImageTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88C000C219BB8DA70030B8EC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88C000C119BB8DA70030B8EC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88C28BDA1910A10B004E90B1</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesInputToolbarTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88C28BDB1910A10B004E90B1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88C28BDA1910A10B004E90B1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88C28BDE1910A153004E90B1</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesLabelTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88C28BDF1910A153004E90B1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88C28BDE1910A153004E90B1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88C28BE01910A166004E90B1</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesLoadEarlierHeaderViewTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88C28BE11910A166004E90B1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88C28BE01910A166004E90B1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88C28BE21910A180004E90B1</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesToolbarContentViewTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88C28BE31910A180004E90B1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88C28BE21910A180004E90B1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88C28BE41910A19E004E90B1</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesTypingIndicatorFooterViewTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88C28BE51910A19E004E90B1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88C28BE41910A19E004E90B1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88CC87FA190A2C7F006258A0</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>88CC87FB190A2C7F006258A0</string>
-				<string>88CC87FC190A2C7F006258A0</string>
-				<string>88CC87FD190A2C7F006258A0</string>
-				<string>88CC87FE190A2C7F006258A0</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>CategoryTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88CC87FB190A2C7F006258A0</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesNSStringTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88CC87FC190A2C7F006258A0</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesUIColorTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88CC87FD190A2C7F006258A0</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesUIImageTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88CC87FE190A2C7F006258A0</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesUIViewTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88CC87FF190A2C7F006258A0</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>88CC8800190A2C7F006258A0</string>
-				<string>88BC4D36190D883A002E5CC6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>ControllerTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88CC8800190A2C7F006258A0</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesViewControllerTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88CC8801190A2C7F006258A0</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>88CC8802190A2C7F006258A0</string>
-				<string>88CC8803190A2C7F006258A0</string>
-				<string>88CC8804190A2C7F006258A0</string>
-				<string>88CC8805190A2C7F006258A0</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>FactoryTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88CC8802190A2C7F006258A0</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesAvatarImageFactoryTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88CC8803190A2C7F006258A0</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesBubbleImageFactoryTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88CC8804190A2C7F006258A0</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesTimestampFormatterTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88CC8805190A2C7F006258A0</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesToolbarButtonFactoryTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88CC8806190A2C7F006258A0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88CC87FB190A2C7F006258A0</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88CC8807190A2C7F006258A0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88CC87FC190A2C7F006258A0</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88CC8808190A2C7F006258A0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88CC87FD190A2C7F006258A0</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88CC8809190A2C7F006258A0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88CC87FE190A2C7F006258A0</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88CC880A190A2C7F006258A0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88CC8800190A2C7F006258A0</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88CC880B190A2C7F006258A0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88CC8802190A2C7F006258A0</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88CC880C190A2C7F006258A0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88CC8803190A2C7F006258A0</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88CC880D190A2C7F006258A0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88CC8804190A2C7F006258A0</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88CC880E190A2C7F006258A0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88CC8805190A2C7F006258A0</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88D1B0C51906045A00AFE162</key>
+		<key>88A25F6819D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -3473,11 +1553,11 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>path</key>
-			<string>JSQMessagesTypingIndicatorFooterView.h</string>
+			<string>JSQMessagesBubbleImageFactory.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88D1B0C61906045A00AFE162</key>
+		<key>88A25F6919D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -3486,74 +1566,11 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>JSQMessagesTypingIndicatorFooterView.m</string>
+			<string>JSQMessagesBubbleImageFactory.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88D1B0C71906045A00AFE162</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88D1B0C61906045A00AFE162</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88D1B0C8190604AF00AFE162</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.xib</string>
-			<key>path</key>
-			<string>JSQMessagesTypingIndicatorFooterView.xib</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88D1B0C9190604AF00AFE162</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88D1B0C8190604AF00AFE162</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88D1B0CA190606F100AFE162</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>typing.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88D1B0CB190606F100AFE162</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>image.png</string>
-			<key>path</key>
-			<string>typing@2x.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88D1B0CC190606F100AFE162</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88D1B0CA190606F100AFE162</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88D1B0CD190606F100AFE162</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88D1B0CB190606F100AFE162</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88D4ED7119B555E800C2DCF9</key>
+		<key>88A25F6A19D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -3561,14 +1578,12 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>DemoModelData.h</string>
 			<key>path</key>
-			<string>JSQMessagesDemo/DemoModelData.h</string>
+			<string>JSQMessagesTimestampFormatter.h</string>
 			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88D4ED7219B555E800C2DCF9</key>
+		<key>88A25F6B19D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -3576,33 +1591,232 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>DemoModelData.m</string>
 			<key>path</key>
-			<string>JSQMessagesDemo/DemoModelData.m</string>
+			<string>JSQMessagesTimestampFormatter.m</string>
 			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88D4ED7319B555E800C2DCF9</key>
+		<key>88A25F6C19D8E01A00924534</key>
 		<dict>
-			<key>fileRef</key>
-			<string>88D4ED7219B555E800C2DCF9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88F0417719B57E7F00DB70E9</key>
-		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>path</key>
-			<string>JSQMessageBubbleImageDataSource.h</string>
+			<string>JSQMessagesToolbarButtonFactory.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88F0417819B57FA300DB70E9</key>
+		<key>88A25F6D19D8E01A00924534</key>
 		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesToolbarButtonFactory.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F6E19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessages.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F6F19D8E01A00924534</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>88A25F7019D8E01A00924534</string>
+				<string>88A25F7119D8E01A00924534</string>
+				<string>88A25F7219D8E01A00924534</string>
+				<string>88A25F7319D8E01A00924534</string>
+				<string>88A25F7419D8E01A00924534</string>
+				<string>88A25F7519D8E01A00924534</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Layout</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F7019D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewFlowLayout.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F7119D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewFlowLayout.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F7219D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewFlowLayoutInvalidationContext.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F7319D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewFlowLayoutInvalidationContext.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F7419D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewLayoutAttributes.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F7519D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewLayoutAttributes.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F7619D8E01A00924534</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>88A25F7719D8E01A00924534</string>
+				<string>88A25F7819D8E01A00924534</string>
+				<string>88A25F7919D8E01A00924534</string>
+				<string>88A25F7A19D8E01A00924534</string>
+				<string>88A25F7B19D8E01A00924534</string>
+				<string>88A25F7C19D8E01A00924534</string>
+				<string>88A25F7D19D8E01A00924534</string>
+				<string>88A25F7E19D8E01A00924534</string>
+				<string>88A25F7F19D8E01A00924534</string>
+				<string>88A25F8019D8E01A00924534</string>
+				<string>88A25F8119D8E01A00924534</string>
+				<string>88A25F8219D8E01A00924534</string>
+				<string>88A25F8319D8E01A00924534</string>
+				<string>88A25F8419D8E01A00924534</string>
+				<string>88A25F8519D8E01A00924534</string>
+				<string>88A25F8619D8E01A00924534</string>
+				<string>88A25F8719D8E01A00924534</string>
+				<string>88A25F8819D8E01A00924534</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Model</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F7719D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMediaMessage.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F7819D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMediaMessage.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F7919D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessage.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F7A19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessage.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F7B19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
@@ -3612,7 +1826,7 @@ fi
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88F0417919B5838200DB70E9</key>
+		<key>88A25F7C19D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -3621,51 +1835,24 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>path</key>
-			<string>JSQMessagesBubbleImage.h</string>
+			<string>JSQMessageBubbleImageDataSource.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88F0417A19B5838200DB70E9</key>
+		<key>88A25F7D19D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
+			<string>sourcecode.c.h</string>
 			<key>path</key>
-			<string>JSQMessagesBubbleImage.m</string>
+			<string>JSQMessageData.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88F0417B19B5838200DB70E9</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88F0417A19B5838200DB70E9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88F0417C19B5866300DB70E9</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>JSQMessagesBubbleImageTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88F0417D19B5866300DB70E9</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88F0417C19B5866300DB70E9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88F7D42219C3B6C600C5F3F6</key>
+		<key>88A25F7E19D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -3678,7 +1865,72 @@ fi
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>88FFE06619B2E5CB0038C3FF</key>
+		<key>88A25F7F19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesAvatarImage.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F8019D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesAvatarImage.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F8119D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesBubbleImage.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F8219D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesBubbleImage.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F8319D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewDataSource.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F8419D8E01A00924534</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -3691,7 +1943,1535 @@ fi
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>B8E405296CDE4D2F994679F1</key>
+		<key>88A25F8519D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQPhotoMediaItem.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F8619D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQPhotoMediaItem.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F8719D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQTextMessage.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F8819D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQTextMessage.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F8919D8E01A00924534</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>88A25F8A19D8E01A00924534</string>
+				<string>88A25F8B19D8E01A00924534</string>
+				<string>88A25F8C19D8E01A00924534</string>
+				<string>88A25F8D19D8E01A00924534</string>
+				<string>88A25F8E19D8E01A00924534</string>
+				<string>88A25F8F19D8E01A00924534</string>
+				<string>88A25F9019D8E01A00924534</string>
+				<string>88A25F9119D8E01A00924534</string>
+				<string>88A25F9219D8E01A00924534</string>
+				<string>88A25F9319D8E01A00924534</string>
+				<string>88A25F9419D8E01A00924534</string>
+				<string>88A25F9519D8E01A00924534</string>
+				<string>88A25F9619D8E01A00924534</string>
+				<string>88A25F9719D8E01A00924534</string>
+				<string>88A25F9819D8E01A00924534</string>
+				<string>88A25F9919D8E01A00924534</string>
+				<string>88A25F9A19D8E01A00924534</string>
+				<string>88A25F9B19D8E01A00924534</string>
+				<string>88A25F9C19D8E01A00924534</string>
+				<string>88A25F9D19D8E01A00924534</string>
+				<string>88A25F9E19D8E01A00924534</string>
+				<string>88A25F9F19D8E01A00924534</string>
+				<string>88A25FA019D8E01A00924534</string>
+				<string>88A25FA119D8E01A00924534</string>
+				<string>88A25FA219D8E01A00924534</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Views</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F8A19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionView.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F8B19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionView.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F8C19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewCell.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F8D19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewCell.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F8E19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewCellIncoming.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F8F19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewCellIncoming.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9019D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewCellIncoming.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9119D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewCellOutgoing.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9219D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewCellOutgoing.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9319D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewCellOutgoing.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9419D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesComposerTextView.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9519D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesComposerTextView.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9619D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesInputToolbar.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9719D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesInputToolbar.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9819D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesLabel.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9919D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesLabel.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9A19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesLoadEarlierHeaderView.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9B19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesLoadEarlierHeaderView.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9C19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>JSQMessagesLoadEarlierHeaderView.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9D19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesToolbarContentView.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9E19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesToolbarContentView.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25F9F19D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>JSQMessagesToolbarContentView.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FA019D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>JSQMessagesTypingIndicatorFooterView.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FA119D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesTypingIndicatorFooterView.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FA219D8E01A00924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>JSQMessagesTypingIndicatorFooterView.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FA319D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F4119D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FA419D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F4219D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FA519D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F4319D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FA619D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F4419D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FA719D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F4519D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FA819D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F4619D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FA919D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F4719D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FAA19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F4819D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FAB19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F4919D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FAC19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F4A19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FAD19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F4B19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FAE19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F4C19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FAF19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F4D19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FB019D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F4E19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FB119D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F4F19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FB219D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F5019D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FB319D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F5219D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FB419D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F5319D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FB519D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F5619D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FB619D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F5819D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FB719D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F5A19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FB819D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F5C19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FB919D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F5E19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FBA19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F6119D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FBB19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F6319D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FBC19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F6419D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FBD19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F6719D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FBE19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F6919D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FBF19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F6B19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FC019D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F6D19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FC119D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F7119D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FC219D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F7319D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FC319D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F7519D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FC419D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F7819D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FC519D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F7A19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FC619D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F8019D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FC719D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F8219D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FC819D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F8619D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FC919D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F8819D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FCA19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F8B19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FCB19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F8D19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FCC19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F8F19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FCD19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F9019D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FCE19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F9219D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FCF19D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F9319D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FD019D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F9519D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FD119D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F9719D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FD219D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F9919D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FD319D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F9B19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FD419D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F9C19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FD519D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F9E19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FD619D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25F9F19D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FD719D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FA119D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FD819D8E01A00924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FA219D8E01A00924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FD919D8E0C400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>DemoMessagesViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FDA19D8E0C400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>DemoMessagesViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FDB19D8E0C400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>DemoModelData.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FDC19D8E0C400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>DemoModelData.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FDD19D8E0C400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TableViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FDE19D8E0C400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TableViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FDF19D8E0C400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FDA19D8E0C400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FE019D8E0C400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FDC19D8E0C400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FE119D8E0C400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FDE19D8E0C400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A25FE219D8E18400924534</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>88A25FE319D8E18400924534</string>
+				<string>88A25FE419D8E18400924534</string>
+				<string>88A25FE519D8E18400924534</string>
+				<string>88A25FE619D8E18400924534</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>CategoryTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FE319D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesNSStringTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FE419D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesUIColorTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FE519D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesUIImageTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FE619D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesUIViewTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FE719D8E18400924534</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>88A25FE819D8E18400924534</string>
+				<string>88A25FE919D8E18400924534</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>ControllerTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FE819D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesKeyboardControllerTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FE919D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesViewControllerTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FEA19D8E18400924534</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>88A25FEB19D8E18400924534</string>
+				<string>88A25FEC19D8E18400924534</string>
+				<string>88A25FED19D8E18400924534</string>
+				<string>88A25FEE19D8E18400924534</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>FactoryTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FEB19D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesAvatarImageFactoryTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FEC19D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesBubbleImageFactoryTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FED19D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesTimestampFormatterTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FEE19D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesToolbarButtonFactoryTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FEF19D8E18400924534</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>88A25FF019D8E18400924534</string>
+				<string>88A25FF119D8E18400924534</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>LayoutTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FF019D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewFlowLayoutTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FF119D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewLayoutAttributesTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FF219D8E18400924534</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>88A25FF319D8E18400924534</string>
+				<string>88A25FF419D8E18400924534</string>
+				<string>88A25FF519D8E18400924534</string>
+				<string>88A25FF619D8E18400924534</string>
+				<string>88A25FF719D8E18400924534</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>ModelTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FF319D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMediaMessageTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FF419D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesAvatarImageTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FF519D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesBubbleImageTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FF619D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessageTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FF719D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQTextMessageTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FF819D8E18400924534</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>88A25FF919D8E18400924534</string>
+				<string>88A25FFA19D8E18400924534</string>
+				<string>88A25FFB19D8E18400924534</string>
+				<string>88A25FFC19D8E18400924534</string>
+				<string>88A25FFD19D8E18400924534</string>
+				<string>88A25FFE19D8E18400924534</string>
+				<string>88A25FFF19D8E18400924534</string>
+				<string>88A2600019D8E18400924534</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>ViewTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FF919D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewCellTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FFA19D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesCollectionViewTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FFB19D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesComposerTextViewTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FFC19D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesInputToolbarTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FFD19D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesLabelTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FFE19D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesLoadEarlierHeaderViewTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A25FFF19D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesToolbarContentViewTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A2600019D8E18400924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>JSQMessagesTypingIndicatorFooterViewTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A2600119D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FE319D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2600219D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FE419D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2600319D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FE519D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2600419D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FE619D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2600519D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FE819D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2600619D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FE919D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2600719D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FEB19D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2600819D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FEC19D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2600919D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FED19D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2600A19D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FEE19D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2600B19D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FF019D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2600C19D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FF119D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2600D19D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FF319D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2600E19D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FF419D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2600F19D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FF519D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2601019D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FF619D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2601119D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FF719D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2601219D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FF919D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2601319D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FFA19D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2601419D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FFB19D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2601519D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FFC19D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2601619D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FFD19D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2601719D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FFE19D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2601819D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A25FFF19D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2601919D8E18400924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A2600019D8E18400924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88A2601A19D8E45600924534</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>88A2601B19D8E45600924534</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88A2601A19D8E45600924534</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>94A4FA20C2FBD0D62614D5A8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>97E6750B77E8A7042BA0754B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>97E6750B77E8A7042BA0754B</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>F4044DAC71D69462CA8CAE98</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
@@ -3721,35 +3501,31 @@ fi
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
 		</dict>
-		<key>C78CEF093F584B85B4321C83</key>
+		<key>F6B484334A138916FC111868</key>
 		<dict>
-			<key>fileRef</key>
-			<string>343577012CC24261BE4B61A1</string>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>D19E1D9A775A77FE2DAF2CA4</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>431679BCBC970B2C8DD763A1</string>
-				<string>DC25F4C067FAFD0E5CA97B09</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
+			<string>PBXShellScriptBuildPhase</string>
 			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-JSQMessagesTests/Pods-JSQMessagesTests-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
 		</dict>
-		<key>D68A9FB68FC5463D9A5B23E0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>343577012CC24261BE4B61A1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DC25F4C067FAFD0E5CA97B09</key>
+		<key>FC5C727E4CCDA2B95A7BA30C</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -3758,14 +3534,14 @@ fi
 			<key>lastKnownFileType</key>
 			<string>text.xcconfig</string>
 			<key>name</key>
-			<string>Pods.release.xcconfig</string>
+			<string>Pods.debug.xcconfig</string>
 			<key>path</key>
-			<string>Pods/Target Support Files/Pods/Pods.release.xcconfig</string>
+			<string>Pods/Target Support Files/Pods/Pods.debug.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>
-	<string>885D592118CBD13D00D77BB3</string>
+	<string>88A25EFA19D8DEC400924534</string>
 </dict>
 </plist>

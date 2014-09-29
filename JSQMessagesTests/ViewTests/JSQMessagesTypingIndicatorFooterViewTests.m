@@ -8,7 +8,7 @@
 //  http://opensource.org/licenses/MIT
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 #import "JSQMessagesTypingIndicatorFooterView.h"
 

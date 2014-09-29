@@ -16,7 +16,8 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import <UIKit/UIKit.h>
+@import Foundation;
+@import UIKit;
 
 #import "DemoMessagesViewController.h"
 
