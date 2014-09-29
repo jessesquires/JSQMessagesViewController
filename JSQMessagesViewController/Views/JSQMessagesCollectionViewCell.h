@@ -100,6 +100,11 @@
 @property (weak, nonatomic, readonly) UITextView *textView;
 
 /**
+ *  Returns the image view of the cell. This image view contains the message body image.
+ */
+@property (weak, nonatomic, readonly) UIImageView *imageView;
+
+/**
  *  Returns the message bubble container view of the cell. This view is the superview of
  *  the cell's textView and messageBubbleImageView.
  *

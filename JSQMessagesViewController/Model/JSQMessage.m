@@ -62,6 +62,14 @@
     _date = nil;
 }
 
+- (JSQMessageType)type {
+	return JSQMessageTypeText;
+}
+
+- (UIImage *)image {
+	return nil;
+}
+
 #pragma mark - JSQMessage
 
 - (BOOL)isEqualToMessage:(JSQMessage *)aMessage
