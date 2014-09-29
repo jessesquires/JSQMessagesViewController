@@ -95,7 +95,7 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     CGFloat indicatorWidth = CGRectGetWidth(self.typingIndicatorImageView.frame);
     
     CGFloat bubbleMarginMinimumSpacing = 6.0f;
-    CGFloat indicatorMarginMinimumSpacing = 24.0f;
+    CGFloat indicatorMarginMinimumSpacing = 26.0f;
     
     CGFloat bubbleMarginMaximumSpacing = collectionViewWidth - bubbleWidth - bubbleMarginMinimumSpacing;
     CGFloat indicatorMarginMaximumSpacing = collectionViewWidth - indicatorWidth - indicatorMarginMinimumSpacing;
