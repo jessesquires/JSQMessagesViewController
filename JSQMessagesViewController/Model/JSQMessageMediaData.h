@@ -26,12 +26,11 @@
  *  It declares the required and optional methods that a class must implement so that instances of that class
  *  can be displayed properly within a `JSQMessagesCollectionViewCell`.
  *
- *  TODO: mention concrete media items
- 
- //A concrete class that conforms to this protocol is provided in the library.
- 
+ *  This library provides a few concrete classes that conform to this protocol. You may use them as-is,
+ *  but they will likely require some modifications or extensions to conform to your particular data models.
+ *  These concrete media items are: `JSQPhotoMediaItem`.
  *
- *  @see TODO: list media item classes
+ *  @see JSQPhotoMediaItem.
  */
 @protocol JSQMessageMediaData <NSObject>
 
