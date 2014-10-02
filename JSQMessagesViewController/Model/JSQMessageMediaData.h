@@ -61,9 +61,11 @@
  *  this placeholder view will be used until mediaView is not `nil`.
  *
  *  @discussion If you do not need support for a placeholder view, then you may simply return the
- *  same value here as mediaView.
+ *  same value here as mediaView. Otherwise, consider using `JSQMessagesMediaPlaceholderView`.
  *
  *  @warning You must not return `nil` from this method.
+ *
+ *  @see JSQMessagesMediaPlaceholderView.
  */
 - (UIView *)mediaPlaceholderView;
 
