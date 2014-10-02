@@ -213,10 +213,11 @@
     self.messageBubbleImageView.highlighted = selected;
 }
 
-//  TODO: remove when fixed
-//        hack for Xcode6 / iOS 8 SDK rendering bug that occurs on iOS 7.x
-//        see issue #484
-//        https://github.com/jessesquires/JSQMessagesViewController/issues/484
+//  FIXME: radar 18326340
+//         remove when fixed
+//         hack for Xcode6 / iOS 8 SDK rendering bug that occurs on iOS 7.x
+//         see issue #484
+//         https://github.com/jessesquires/JSQMessagesViewController/issues/484
 //
 - (void)setBounds:(CGRect)bounds
 {

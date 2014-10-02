@@ -49,16 +49,13 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 - (void)jsq_didReceiveApplicationMemoryWarningNotification:(NSNotification *)notification;
 - (void)jsq_didReceiveDeviceOrientationDidChangeNotification:(NSNotification *)notification;
 
+- (CGSize)messageBubbleSizeForItemAtIndexPath:(NSIndexPath *)indexPath;
 - (void)jsq_configureMessageCellLayoutAttributes:(JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
-
 - (CGSize)jsq_avatarSizeForIndexPath:(NSIndexPath *)indexPath;
 
 - (UIAttachmentBehavior *)jsq_springBehaviorWithLayoutAttributesItem:(UICollectionViewLayoutAttributes *)item;
-
 - (void)jsq_addNewlyVisibleBehaviorsFromVisibleItems:(NSArray *)visibleItems;
-
 - (void)jsq_removeNoLongerVisibleBehaviorsFromVisibleItemsIndexPaths:(NSSet *)visibleItemsIndexPaths;
-
 - (void)jsq_adjustSpringBehavior:(UIAttachmentBehavior *)springBehavior forTouchLocation:(CGPoint)touchLocation;
 
 @end
