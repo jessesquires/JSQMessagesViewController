@@ -47,7 +47,6 @@
         return nil;
     }
     
-    // TODO: cache this?
     UIImageView *imgView = [[UIImageView alloc] initWithImage:self.image];
     imgView.contentMode = UIViewContentModeScaleAspectFill;
     imgView.clipsToBounds = YES;
@@ -62,7 +61,6 @@
 
 - (UIView *)mediaPlaceholderView
 {
-    // TODO: cache this?
     return [JSQMessagesMediaPlaceholderView viewWithActivityIndicator];
 }
 
