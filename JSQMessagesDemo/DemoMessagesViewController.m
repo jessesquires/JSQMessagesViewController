@@ -90,13 +90,15 @@
 - (void)receiveMessagePressed:(UIBarButtonItem *)sender
 {
     /**
+     *  DEMO ONLY
+     *
      *  The following is simply to simulate received messages for the demo.
      *  Do not actually do this.
      */
     
     
     /**
-     *  Set the typing indicator to be shown
+     *  Show the typing indicator to be shown
      */
     self.showTypingIndicator = !self.showTypingIndicator;
     
@@ -105,6 +107,9 @@
      */
     [self scrollToBottomAnimated:YES];
     
+    /**
+     *  Copy last sent message, this will be the new "received" message
+     */
     JSQMessage *copyMessage = [[self.demoData.messages lastObject] copy];
     
     if (!copyMessage) {
@@ -113,27 +118,53 @@
                                                      text:@"First received!"];
     }
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    /**
+     *  Allow typing indicator to show
+     */
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         NSMutableArray *userIds = [[self.demoData.users allKeys] mutableCopy];
         [userIds removeObject:self.senderId];
-        NSString *userId = userIds[arc4random_uniform((int)[userIds count])];
+        NSString *randomUserId = userIds[arc4random_uniform((int)[userIds count])];
         
         JSQMessage *newMessage = nil;
+        id<JSQMessageMediaData> newMediaData = nil;
+        id newMediaAttachment = nil;
         
         if ([copyMessage isKindOfClass:[JSQTextMessage class]]) {
-            newMessage = [JSQTextMessage messageWithSenderId:userId
-                                                 displayName:self.demoData.users[userId]
+            /**
+             *  Last message was a text message
+             */
+            newMessage = [JSQTextMessage messageWithSenderId:randomUserId
+                                                 displayName:self.demoData.users[randomUserId]
                                                         text:copyMessage.text];
         }
         else if ([copyMessage isKindOfClass:[JSQMediaMessage class]]) {
-            newMessage = [JSQMediaMessage messageWithSenderId:userId
-                                                  displayName:self.demoData.users[userId]
-                                                        media:copyMessage.media];
+            /**
+             *  Last message was a media message
+             */
+            id<JSQMessageMediaData> copyMediaData = copyMessage.media;
+            
+            if ([copyMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
+                JSQPhotoMediaItem *photoItem = [((JSQPhotoMediaItem *)copyMediaData) copy];
+                newMediaAttachment = [UIImage imageWithCGImage:photoItem.image.CGImage];
+                
+                /**
+                 *  Set image to nil to simulate "downloading" the image
+                 *  and show the placeholder view
+                 */
+                photoItem.image = nil;
+                
+                newMediaData = photoItem;
+            }
+            
+            newMessage = [JSQMediaMessage messageWithSenderId:randomUserId
+                                                  displayName:self.demoData.users[randomUserId]
+                                                        media:newMediaData];
         }
         
         /**
-         *  This you should do upon receiving a message:
+         *  Upon receiving a message, you should:
          *
          *  1. Play sound (optional)
          *  2. Add new id<JSQMessageData> object to your data source
@@ -142,6 +173,24 @@
         [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
         [self.demoData.messages addObject:newMessage];
         [self finishReceivingMessage];
+        
+        
+        if ([newMessage isKindOfClass:[JSQMediaMessage class]]) {
+            /**
+             *  Simulate "downloading" media
+             */
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                /**
+                 *  Media is "finished downloading"
+                 */
+                
+                if ([newMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
+                    ((JSQPhotoMediaItem *)newMediaData).image = newMediaAttachment;
+                    [self.collectionView reloadData];
+                }
+            });
+        }
+        
     });
 }
 
@@ -181,7 +230,7 @@
 
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
-    // TODO: temporary send photo, make this better, add async loading demo
+    // TODO: temporary send photo, make this better
     JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"goldengate"]];
     JSQMediaMessage *mediaMessage = [JSQMediaMessage messageWithSenderId:kJSQDemoAvatarIdSquires
                                                              displayName:kJSQDemoAvatarDisplayNameSquires
