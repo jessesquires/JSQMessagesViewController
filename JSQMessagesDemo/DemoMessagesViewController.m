@@ -57,7 +57,8 @@
     if (![NSUserDefaults incomingAvatarSetting]) {
         self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     }
-    else if (![NSUserDefaults outgoingAvatarSetting]) {
+    
+    if (![NSUserDefaults outgoingAvatarSetting]) {
         self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
     }
     

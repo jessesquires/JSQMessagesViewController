@@ -121,6 +121,39 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="2Th-gL-oAN">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Th-gL-oAN" id="OFq-Mz-mbl">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="baL-Tb-bTJ">
+                                                    <rect key="frame" x="263" y="6" width="51" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="49" id="SaV-RG-DVL"/>
+                                                        <constraint firstAttribute="height" constant="31" id="dXb-pb-etA"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="didTapSwitch:" destination="y7K-ZU-Xs9" eventType="valueChanged" id="w1H-5W-oip"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Empty view, no messages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DoU-SU-Nek">
+                                                    <rect key="frame" x="8" y="10" width="247" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="DoU-SU-Nek" firstAttribute="leading" secondItem="OFq-Mz-mbl" secondAttribute="leading" constant="8" id="A9k-hI-0BH"/>
+                                                <constraint firstAttribute="bottom" secondItem="baL-Tb-bTJ" secondAttribute="bottom" constant="6" id="Ff7-1T-EbZ"/>
+                                                <constraint firstItem="DoU-SU-Nek" firstAttribute="top" secondItem="OFq-Mz-mbl" secondAttribute="top" constant="10" id="Uji-LE-8IA"/>
+                                                <constraint firstAttribute="trailing" secondItem="baL-Tb-bTJ" secondAttribute="trailing" constant="8" id="dUp-7b-g3p"/>
+                                                <constraint firstItem="baL-Tb-bTJ" firstAttribute="leading" secondItem="DoU-SU-Nek" secondAttribute="trailing" constant="8" id="fxZ-zy-ksL"/>
+                                                <constraint firstAttribute="bottom" secondItem="DoU-SU-Nek" secondAttribute="bottom" constant="9" id="h0B-EX-3MW"/>
+                                                <constraint firstItem="baL-Tb-bTJ" firstAttribute="top" secondItem="OFq-Mz-mbl" secondAttribute="top" constant="6" id="v5e-xk-srk"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Avatars" id="ns0-OO-PGu">
@@ -238,6 +271,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="hrw-Dp-Tor"/>
                     <connections>
+                        <outlet property="emptySwitch" destination="baL-Tb-bTJ" id="qk7-dH-53U"/>
                         <outlet property="extraMessagesSwitch" destination="K7N-os-fuc" id="qlF-0W-3JO"/>
                         <outlet property="incomingAvatarsSwitch" destination="fLZ-NC-aPO" id="0ck-t9-Hwt"/>
                         <outlet property="longMessageSwitch" destination="hMq-Ee-EJK" id="Vs2-fX-Hys"/>

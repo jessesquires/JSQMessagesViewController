@@ -35,6 +35,7 @@
     
     self.extraMessagesSwitch.on = [NSUserDefaults extraMessagesSetting];
     self.longMessageSwitch.on = [NSUserDefaults longMessageSetting];
+    self.emptySwitch.on = [NSUserDefaults emptyMessagesSetting];
     
     self.incomingAvatarsSwitch.on = [NSUserDefaults incomingAvatarSetting];
     self.outgoingAvatarsSwitch.on = [NSUserDefaults outgoingAvatarSetting];
@@ -46,9 +47,13 @@
 {
     if (sender == self.extraMessagesSwitch) {
         [NSUserDefaults saveExtraMessagesSetting:sender.on];
+        
     }
     else if (sender == self.longMessageSwitch) {
         [NSUserDefaults saveLongMessageSetting:sender.on];
+    }
+    else if (sender == self.emptySwitch) {
+        [NSUserDefaults saveEmptyMessagesSetting:sender.on];
     }
     else if (sender == self.incomingAvatarsSwitch) {
         [NSUserDefaults saveIncomingAvatarSetting:sender.on];

@@ -26,6 +26,9 @@
 + (void)saveLongMessageSetting:(BOOL)value;
 + (BOOL)longMessageSetting;
 
++ (void)saveEmptyMessagesSetting:(BOOL)value;
++ (BOOL)emptyMessagesSetting;
+
 + (void)saveSpringinessSetting:(BOOL)value;
 + (BOOL)springinessSetting;
 
