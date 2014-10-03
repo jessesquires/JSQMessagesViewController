@@ -21,8 +21,8 @@ ul li {
 	list-style-type: none;
 	color: #F2F2F2;
 	display: inline-block;
-	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
 }
 
 .center { 
@@ -33,17 +33,31 @@ ul li {
 	text-align: center;
 }
 
-.header {
+header {
 	background-color: #2b2b2b;
 	color: #F2F2F2;
-	height: 54px;
-	margin-bottom: 40px;
-	padding-left: 20px;
+	height: 8rem;
+}
+
+h2 {
+	font-size: 20px;
+	padding-top: 1rem;
+}
+
+h3 {
+	font-size: 20px;
+	padding-bottom: 1rem;
+}
+
+h4 {
+	font-size: 24px;
+	text-align: center;
+	font-weight: bolder;
 }
 
 .chatbubble {
-	width: 48px;
-	height: 48px;
+	width: 54px;
+	height: 54px;
 	margin-top: -6px;
 	margin-right: 2px;
 }
@@ -51,7 +65,6 @@ ul li {
 .screenshots {
 	height: auto;
 	width: 750px;
-	padding-bottom: 20px;
 }
 
 .jumbotron {
@@ -60,20 +73,7 @@ ul li {
 }
 
 article {
-	padding: 40px;
-}
-
-#about {
-	padding-top: 50px;
-	padding-bottom: 50px;
-}
-
-#features h4,
-#about h4,
-#donate h4 {
-	font-size: 28px;
-	text-align: center;
-	font-weight: bolder;
+	padding: 3rem;
 	color: #F2F2F2;
 }
 
@@ -115,16 +115,15 @@ article {
 #donate .btn-default {
 	background: none;
 	color: #F2F2F2;
-}
-
-#donate ul li {
-	margin-left: 10px;
+	margin-top: 1.5rem;
+	margin-bottom: 2.5rem;
+	padding: 1rem;
 }
 
 footer {
-	background: #2F322B;
+	background: #2b2b2b;
 	color: #F2F2F2;
-	padding: 16px;
+	padding: 2rem;
 	text-align: center;
 }
 
@@ -132,6 +131,8 @@ footer {
 	color: #F2F2F2;
 	background-color: #383838;
 	border-color: #383838;
+	margin-bottom: 2rem;
+	text-align: center;
 }
 
 .btn-black:hover,

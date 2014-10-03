@@ -22,37 +22,43 @@
 	</head>
 
 <body>
-	<div class="header container col-sm-12">
+	<header class="container-fluid">
 		<div class="row">
-			<h4><img class="chatbubble" src="img/chat.png" alt="JSQMessages logo" title="JSQMessages"/>JSQMessagesViewController</h4>
-		</div>
-	</div>
-
-	<header>
-		<div class="jumbotron">
-			<div class="container">
-				<div class="row">
-					<img class="screenshots center img-responsive" src="img/screenshots.png" alt="Screenshots"/>
-				</div>
-				<div class="row">
-					<h4 class="text-center">An elegant messages UI library for iOS</h4>
-				</div>
-				<div class="row">
-					<div class="col-sm-12 col-sm-offset-0 col-md-8 col-md-offset-2">
-						<ul>
-							<li><a href="https://github.com/jessesquires/JSQMessagesViewController" target="_blank" class="btn btn-black btn-lg">GitHub Project</a></li>
-							<li><a href="http://cocoadocs.org/docsets/JSQMessagesViewController" target="_blank" class="btn btn-black btn-lg">Documentation</a></li>
-						</ul>
-						<br />
-						<ul>
-						<li><iframe src="http://ghbtns.com/github-btn.html?user=jessesquires&amp;repo=JSQMessagesViewController&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe></li>
-						<li><iframe src="http://ghbtns.com/github-btn.html?user=jessesquires&amp;repo=JSQMessagesViewController&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe></li>
-						</ul>
-					</div>
-				</div>
+			<div class="col-sm-12">
+				<h1 class="text-center hidden-xs"><img class="chatbubble" src="img/chat.png" alt="JSQMessages logo" title="JSQMessages"/>JSQMessagesViewController</h1>
+				<h2 class="text-center visible-xs-block">JSQMessagesViewController</h2>
 			</div>
 		</div>
 	</header>
+
+	<div class="jumbotron">
+		<div class="container">
+			<div class="row">
+				<img class="screenshots center img-responsive" src="img/screenshots.png" alt="Screenshots"/>
+			</div>
+			<div class="row">
+				<h3 class="text-center">An elegant messages UI library for iOS</h3>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-sm-4 col-lg-3 col-sm-offset-2 col-md-offset-2 col-lg-offset-3">
+					<li><a href="https://github.com/jessesquires/JSQMessagesViewController" target="_blank" class="btn btn-black btn-lg btn-block">GitHub Project</a></li>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-lg-3">
+					<a href="http://cocoadocs.org/docsets/JSQMessagesViewController" target="_blank" class="btn btn-black btn-lg btn-block">Documentation</a>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<ul>
+					<li><iframe src="http://ghbtns.com/github-btn.html?user=jessesquires&amp;repo=JSQMessagesViewController&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe></li>
+					<li><iframe src="http://ghbtns.com/github-btn.html?user=jessesquires&amp;repo=JSQMessagesViewController&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<article id="features">
 		<div class="container">
@@ -92,6 +98,7 @@
 
 	<article id="about">
 		<div class="container">
+
 			<div class="row">
 				<div class="col-sm-12 col-sm-offset-0 col-md-8 col-md-offset-2">
 					<h4>About</h4>
@@ -99,25 +106,36 @@
 					<p>As it turns out, messaging is something that iOS devs and users really want. Messaging of any kind has turned out to be an increasingly popular mobile app feature in all sorts of contexts and for all sorts of reasons. Thus, I am supporting this project in my free time and have added features way beyond what Hemoglobe ever needed.</p>
 				</div>
 			</div>
-			<div id="donate" class="row">
+			
+			<div id="donate">
 				<h4>Donate</h4>
-				<div class="col-sm-12 col-sm-offset-0 col-md-8 col-md-offset-2">
-					<ul>
-						<li><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&amp;subject=%241&amp;body=Thanks%20for%20developing%20JSQMessagesViewController!" class="btn btn-default btn-lg">Send $1</a></li>
-						<li><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&amp;subject=%245&amp;body=Thanks%20for%20developing%20JSQMessagesViewController!" class="btn btn-default btn-lg">Send $5</a></li>
-						<li><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&amp;subject=%2410&amp;body=Thanks%20for%20developing%20JSQMessagesViewController!" class="btn btn-default btn-lg">Send $10</a></li>
-						<li><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&amp;subject=%2425&amp;body=Thanks%20for%20developing%20JSQMessagesViewController!" class="btn btn-default btn-lg">Send $25</a></li>
-					</ul>
-					<br />
-					<small class="text-center">Donations made via <a href="https://square.com/cash" target="_blank">Square Cash</a>. Can't use Square Cash? You can also send donations via <a href="https://paypal.com" target="_blank">PayPal</a> to <a href="mailto:jesse.squires.developer@gmail.com" target="_blank">jesse.squires.developer[at]gmail[dot]com</a>.</small>
-					<br />
+				<div class="row">
+					<div class="col-xs-6 col-sm-3 col-md-2 col-md-offset-2">
+						<a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&amp;subject=%241&amp;body=Thanks%20for%20developing%20JSQMessagesViewController!" class="btn btn-default btn-lg btn-block">Send $1</a>
+					</div>
+					<div class="col-xs-6 col-sm-3 col-md-2">
+						<a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&amp;subject=%245&amp;body=Thanks%20for%20developing%20JSQMessagesViewController!" class="btn btn-default btn-lg btn-block">Send $5</a>
+					</div>
+					<div class="col-xs-6 col-sm-3 col-md-2">
+						<a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&amp;subject=%2410&amp;body=Thanks%20for%20developing%20JSQMessagesViewController!" class="btn btn-default btn-lg btn-block">Send $10</a>
+					</div>
+					<div class="col-xs-6 col-sm-3 col-md-2">
+						<a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&amp;subject=%2425&amp;body=Thanks%20for%20developing%20JSQMessagesViewController!" class="btn btn-default btn-lg btn-block">Send $25</a>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-sm-offset-3">
+						<small class="text-center">Donations made via <a href="https://square.com/cash" target="_blank">Square Cash</a>. Can't use Square Cash? You can also send donations via <a href="https://paypal.com" target="_blank">PayPal</a> to <a href="mailto:jesse.squires.developer@gmail.com" target="_blank">jesse.squires.developer[at]gmail[dot]com</a>.</small>
+					</div>
 				</div>
 			</div>
+
 		</div>
 	</article>
 
 	<footer>
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-12 col-sm-offset-0 ">
 					<div class="footer-copyright">
