@@ -38,11 +38,15 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == 2) {
+        return 1;
+    }
+    
     return 2;
 }
 
@@ -75,8 +79,27 @@
                 break;
         }
     }
+    else if (indexPath.section == 2) {
+        switch (indexPath.row) {
+            case 0:
+                cell.textLabel.text = @"Settings";
+                break;
+        }
+    }
     
     return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return @"Presentation";
+        case 2:
+            return @"Demo options";
+        default:
+            return nil;
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
@@ -113,6 +136,13 @@
                 UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
                 [self presentViewController:nc animated:YES completion:nil];
             }
+                break;
+        }
+    }
+    else if (indexPath.section == 2) {
+        switch (indexPath.row) {
+            case 0:
+                [self performSegueWithIdentifier:@"SegueToSettings" sender:self];
                 break;
         }
     }

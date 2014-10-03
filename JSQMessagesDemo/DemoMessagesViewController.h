@@ -16,10 +16,13 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
+
+// Import all the things
 #import "JSQMessages.h"
 
-
 #import "DemoModelData.h"
+#import "NSUserDefaults+DemoSettings.h"
+
 
 @class DemoMessagesViewController;
 
