@@ -29,4 +29,10 @@
 + (void)saveSpringinessSetting:(BOOL)value;
 + (BOOL)springinessSetting;
 
++ (void)saveOutgoingAvatarSetting:(BOOL)value;
++ (BOOL)outgoingAvatarSetting;
+
++ (void)saveIncomingAvatarSetting:(BOOL)value;
++ (BOOL)incomingAvatarSetting;
+
 @end

@@ -38,11 +38,28 @@
     
     self.title = @"JSQMessages";
     
+    /**
+     *  You MUST set your senderId and display name
+     */
     self.senderId = kJSQDemoAvatarIdSquires;
-    
     self.senderDisplayName = kJSQDemoAvatarDisplayNameSquires;
+
     
+    /**
+     *  Load up our fake data for the demo
+     */
     self.demoData = [[DemoModelData alloc] init];
+    
+    
+    /**
+     *  You can set custom avatar sizes
+     */
+    if (![NSUserDefaults incomingAvatarSetting]) {
+        self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
+    }
+    else if (![NSUserDefaults outgoingAvatarSetting]) {
+        self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+    }
     
     /**
      *  Remove camera button since media messages are not yet implemented
@@ -51,8 +68,6 @@
      *
      *  Or, you can set a custom `leftBarButtonItem` and a custom `rightBarButtonItem`
      */
-    
-        
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"typing"]
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
@@ -291,6 +306,18 @@
      *  Override the defaults in `viewDidLoad`
      */
     JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
+    
+    if ([message.senderId isEqualToString:self.senderId]) {
+        if (![NSUserDefaults outgoingAvatarSetting]) {
+            return nil;
+        }
+    }
+    else {
+        if (![NSUserDefaults incomingAvatarSetting]) {
+            return nil;
+        }
+    }
+    
     
     return [self.demoData.avatars objectForKey:message.senderId];
 }

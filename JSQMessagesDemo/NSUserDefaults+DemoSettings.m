@@ -21,6 +21,8 @@
 static NSString * const kSettingExtraMessages = @"kSettingExtraMessages";
 static NSString * const kSettingLongMessage = @"kSettingLongMessage";
 static NSString * const kSettingSpringiness = @"kSettingSpringiness";
+static NSString * const kSettingIncomingAvatar = @"kSettingIncomingAvatar";
+static NSString * const kSettingOutgoingAvatar = @"kSettingOutgoingAvatar";
 
 
 @implementation NSUserDefaults (DemoSettings)
@@ -53,6 +55,26 @@ static NSString * const kSettingSpringiness = @"kSettingSpringiness";
 + (BOOL)springinessSetting
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:kSettingSpringiness];
+}
+
++ (void)saveOutgoingAvatarSetting:(BOOL)value
+{
+    [[NSUserDefaults standardUserDefaults] setBool:value forKey:kSettingOutgoingAvatar];
+}
+
++ (BOOL)outgoingAvatarSetting
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kSettingOutgoingAvatar];
+}
+
++ (void)saveIncomingAvatarSetting:(BOOL)value
+{
+    [[NSUserDefaults standardUserDefaults] setBool:value forKey:kSettingIncomingAvatar];
+}
+
++ (BOOL)incomingAvatarSetting
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kSettingIncomingAvatar];
 }
 
 @end

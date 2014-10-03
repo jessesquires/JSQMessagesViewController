@@ -32,8 +32,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.extraMessagesSwitch.on = [NSUserDefaults extraMessagesSetting];
     self.longMessageSwitch.on = [NSUserDefaults longMessageSetting];
+    
+    self.incomingAvatarsSwitch.on = [NSUserDefaults incomingAvatarSetting];
+    self.outgoingAvatarsSwitch.on = [NSUserDefaults outgoingAvatarSetting];
+    
     self.springySwitch.on = [NSUserDefaults springinessSetting];
 }
 
@@ -44,6 +49,12 @@
     }
     else if (sender == self.longMessageSwitch) {
         [NSUserDefaults saveLongMessageSetting:sender.on];
+    }
+    else if (sender == self.incomingAvatarsSwitch) {
+        [NSUserDefaults saveIncomingAvatarSetting:sender.on];
+    }
+    else if (sender == self.outgoingAvatarsSwitch) {
+        [NSUserDefaults saveOutgoingAvatarSetting:sender.on];
     }
     else if (sender == self.springySwitch) {
         [NSUserDefaults saveSpringinessSetting:sender.on];

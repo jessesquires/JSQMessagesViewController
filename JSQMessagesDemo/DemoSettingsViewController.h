@@ -31,6 +31,10 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *longMessageSwitch;
 
+@property (weak, nonatomic) IBOutlet UISwitch *incomingAvatarsSwitch;
+
+@property (weak, nonatomic) IBOutlet UISwitch *outgoingAvatarsSwitch;
+
 @property (weak, nonatomic) IBOutlet UISwitch *springySwitch;
 
 @end
