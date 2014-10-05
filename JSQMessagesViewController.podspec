@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
 	s.platform				= :ios, '7.0'	
 	s.source_files			= 'JSQMessagesViewController/**/*.{h,m}'
 	s.resources				= 'JSQMessagesViewController/Assets/**/*.{png,aiff}', 'JSQMessagesViewController/**/*.{xib}'
-	s.frameworks			= 'QuartzCore', 'CoreGraphics'
+	s.frameworks			= 'QuartzCore', 'CoreGraphics', 'CoreLocation', 'MapKit'
 	s.requires_arc			= true
 
 	s.dependency 'JSQSystemSoundPlayer'

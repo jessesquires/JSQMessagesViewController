@@ -214,12 +214,16 @@
                 
                 if ([newMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
                     ((JSQPhotoMediaItem *)newMediaData).image = newMediaAttachment;
-                    [self.collectionView reloadData];
                 }
                 else if ([newMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
                     ((JSQLocationMediaItem *)newMediaData).location = newMediaAttachment;
-                    [self.collectionView reloadData];
                 }
+                
+                /**
+                 *  Reload the specific item, or simply call `reloadData`
+                 */
+                [self.collectionView reloadData];
+                
             });
         }
         
@@ -262,13 +266,30 @@
 
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
-    // TODO: temporary send photo, make this better
-    JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"goldengate"]];
-    JSQMediaMessage *mediaMessage = [JSQMediaMessage messageWithSenderId:kJSQDemoAvatarIdSquires
-                                                             displayName:kJSQDemoAvatarDisplayNameSquires
-                                                                   media:photoItem];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Media messages!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"Send photo", @"Send location", nil];
     
-    [self.demoData.messages addObject:mediaMessage];
+    [sheet showFromToolbar:self.inputToolbar];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        return;
+    }
+    
+    switch (buttonIndex) {
+        case 0:
+            [self.demoData addPhotoMediaMessage];
+            break;
+            
+        case 1:
+            [self.demoData addLocationMediaMessage];
+            break;
+    }
     
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     [self finishSendingMessage];
