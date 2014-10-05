@@ -266,7 +266,7 @@
 
 - (void)setMediaView:(UIView *)mediaView
 {
-    if (mediaView == _mediaView) {
+    if ([mediaView isEqual:_mediaView]) {
         return;
     }
     
