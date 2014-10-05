@@ -222,8 +222,8 @@
                 /**
                  *  Reload the specific item, or simply call `reloadData`
                  */
-                [self.collectionView reloadData];
-                
+                NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:self.demoData.messages.count - 1 inSection:0];
+                [self.collectionView reloadItemsAtIndexPaths:@[ lastIndexPath ]];
             });
         }
         
