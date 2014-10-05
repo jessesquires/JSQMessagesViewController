@@ -16,6 +16,15 @@
 		88078AA719D9034F005B4595 /* typing@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88078AA419D9034F005B4595 /* typing@3x.png */; };
 		88078AA819D9034F005B4595 /* typing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88078AA519D9034F005B4595 /* typing@2x.png */; };
 		88078AA919D9034F005B4595 /* typing.png in Resources */ = {isa = PBXBuildFile; fileRef = 88078AA619D9034F005B4595 /* typing.png */; };
+		88445B3119E0AE3F0014F889 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3019E0AE3F0014F889 /* UIKit.framework */; };
+		88445B3319E0AE450014F889 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3219E0AE450014F889 /* Foundation.framework */; };
+		88445B3519E0AE4A0014F889 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3419E0AE4A0014F889 /* CoreGraphics.framework */; };
+		88445B3719E0AE5C0014F889 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3619E0AE5C0014F889 /* QuartzCore.framework */; };
+		88445B3819E0C0A70014F889 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3019E0AE3F0014F889 /* UIKit.framework */; };
+		88445B3919E0C0AC0014F889 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3219E0AE450014F889 /* Foundation.framework */; };
+		88445B3B19E0C0B10014F889 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3A19E0C0B10014F889 /* XCTest.framework */; };
+		88445B3C19E0C0B80014F889 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3419E0AE4A0014F889 /* CoreGraphics.framework */; };
+		88445B3D19E0C0BE0014F889 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3619E0AE5C0014F889 /* QuartzCore.framework */; };
 		8885734A19DE540400E89D20 /* DemoSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8885734919DE540400E89D20 /* DemoSettingsViewController.m */; };
 		8885734D19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8885734C19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m */; };
 		88A25F3719D8DF2500924534 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A25F2D19D8DF2500924534 /* AppDelegate.m */; };
@@ -123,6 +132,11 @@
 		88078AA419D9034F005B4595 /* typing@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "typing@3x.png"; sourceTree = "<group>"; };
 		88078AA519D9034F005B4595 /* typing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "typing@2x.png"; sourceTree = "<group>"; };
 		88078AA619D9034F005B4595 /* typing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = typing.png; sourceTree = "<group>"; };
+		88445B3019E0AE3F0014F889 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		88445B3219E0AE450014F889 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		88445B3419E0AE4A0014F889 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		88445B3619E0AE5C0014F889 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		88445B3A19E0C0B10014F889 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = System/Library/Frameworks/XCTest.framework; sourceTree = SDKROOT; };
 		8885734819DE540400E89D20 /* DemoSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoSettingsViewController.h; sourceTree = "<group>"; };
 		8885734919DE540400E89D20 /* DemoSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoSettingsViewController.m; sourceTree = "<group>"; };
 		8885734B19DE55D000E89D20 /* NSUserDefaults+DemoSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+DemoSettings.h"; sourceTree = "<group>"; };
@@ -259,6 +273,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88445B3719E0AE5C0014F889 /* QuartzCore.framework in Frameworks */,
+				88445B3519E0AE4A0014F889 /* CoreGraphics.framework in Frameworks */,
+				88445B3319E0AE450014F889 /* Foundation.framework in Frameworks */,
+				88445B3119E0AE3F0014F889 /* UIKit.framework in Frameworks */,
 				77CC17A895E6E12BC9CB549A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +285,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88445B3D19E0C0BE0014F889 /* QuartzCore.framework in Frameworks */,
+				88445B3C19E0C0B80014F889 /* CoreGraphics.framework in Frameworks */,
+				88445B3B19E0C0B10014F889 /* XCTest.framework in Frameworks */,
+				88445B3919E0C0AC0014F889 /* Foundation.framework in Frameworks */,
+				88445B3819E0C0A70014F889 /* UIKit.framework in Frameworks */,
 				94A4FA20C2FBD0D62614D5A8 /* libPods.a in Frameworks */,
 				36CF33BD29CF36EB06D0CCFD /* libPods-JSQMessagesTests.a in Frameworks */,
 			);
@@ -289,8 +312,13 @@
 		636A8663AEEE5C37B65C515D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				97E6750B77E8A7042BA0754B /* libPods.a */,
+				88445B3419E0AE4A0014F889 /* CoreGraphics.framework */,
+				88445B3219E0AE450014F889 /* Foundation.framework */,
 				782026E9E518622532ED474D /* libPods-JSQMessagesTests.a */,
+				97E6750B77E8A7042BA0754B /* libPods.a */,
+				88445B3619E0AE5C0014F889 /* QuartzCore.framework */,
+				88445B3019E0AE3F0014F889 /* UIKit.framework */,
+				88445B3A19E0C0B10014F889 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -966,6 +994,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/JSQMessagesDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -980,6 +1009,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/JSQMessagesDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -993,6 +1023,7 @@
 			baseConfigurationReference = 223FBACE0F24ADEF8B7F3F24 /* Pods-JSQMessagesTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1013,6 +1044,7 @@
 			baseConfigurationReference = 0844AD596023C7658D39E241 /* Pods-JSQMessagesTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
