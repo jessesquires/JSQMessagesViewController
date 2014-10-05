@@ -29,7 +29,7 @@
 /**
  *  The image for the photo media item. The default value is `nil`.
  */
-@property (strong, nonatomic) UIImage *image;
+@property (copy, nonatomic) UIImage *image;
 
 /**
  *  Initializes and returns a photo media item object having the given image.

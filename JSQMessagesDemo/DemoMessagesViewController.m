@@ -144,7 +144,7 @@
         
         JSQMessage *newMessage = nil;
         id<JSQMessageMediaData> newMediaData = nil;
-        id newMediaAttachment = nil;
+        id newMediaAttachmentCopy = nil;
         
         if ([copyMessage isKindOfClass:[JSQTextMessage class]]) {
             /**
@@ -161,27 +161,27 @@
             id<JSQMessageMediaData> copyMediaData = copyMessage.media;
             
             if ([copyMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
-                JSQPhotoMediaItem *photoItem = [((JSQPhotoMediaItem *)copyMediaData) copy];
-                newMediaAttachment = [UIImage imageWithCGImage:photoItem.image.CGImage];
+                JSQPhotoMediaItem *photoItemCopy = [((JSQPhotoMediaItem *)copyMediaData) copy];
+                newMediaAttachmentCopy = [UIImage imageWithCGImage:photoItemCopy.image.CGImage];
                 
                 /**
                  *  Set image to nil to simulate "downloading" the image
                  *  and show the placeholder view
                  */
-                photoItem.image = nil;
+                photoItemCopy.image = nil;
                 
-                newMediaData = photoItem;
+                newMediaData = photoItemCopy;
             }
             else if ([copyMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
-                JSQLocationMediaItem *locationItem = [((JSQLocationMediaItem *)copyMediaData) copy];
-                newMediaAttachment = [locationItem.location copy];
+                JSQLocationMediaItem *locationItemCopy = [((JSQLocationMediaItem *)copyMediaData) copy];
+                newMediaAttachmentCopy = [locationItemCopy.location copy];
                 
                 /**
                  *  Set location to nil to simulate "downloading" the location data
                  */
-                locationItem.location = nil;
+                locationItemCopy.location = nil;
                 
-                newMediaData = locationItem;
+                newMediaData = locationItemCopy;
             }
             
             newMessage = [JSQMediaMessage messageWithSenderId:randomUserId
@@ -213,10 +213,10 @@
                  */
                 
                 if ([newMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
-                    ((JSQPhotoMediaItem *)newMediaData).image = newMediaAttachment;
+                    ((JSQPhotoMediaItem *)newMediaData).image = newMediaAttachmentCopy;
                 }
                 else if ([newMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
-                    ((JSQLocationMediaItem *)newMediaData).location = newMediaAttachment;
+                    ((JSQLocationMediaItem *)newMediaData).location = newMediaAttachmentCopy;
                 }
                 
                 /**

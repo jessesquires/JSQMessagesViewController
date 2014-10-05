@@ -21,6 +21,13 @@
 #import "JSQMessagesMediaPlaceholderView.h"
 
 
+@interface JSQPhotoMediaItem ()
+
+@property (strong, nonatomic) UIImageView *cachedImageView;
+
+@end
+
+
 @implementation JSQPhotoMediaItem
 
 #pragma mark - Initialization
@@ -29,7 +36,8 @@
 {
     self = [super init];
     if (self) {
-        _image = image;
+        _image = [UIImage imageWithCGImage:image.CGImage];
+        _cachedImageView = nil;
     }
     return self;
 }
@@ -37,6 +45,15 @@
 - (void)dealloc
 {
     _image = nil;
+    _cachedImageView = nil;
+}
+
+#pragma mark - Setters
+
+- (void)setImage:(UIImage *)image
+{
+    _image = [UIImage imageWithCGImage:image.CGImage];
+    _cachedImageView = nil;
 }
 
 #pragma mark - JSQMessageMediaData protocol
@@ -47,11 +64,17 @@
         return nil;
     }
     
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:self.image];
-    imgView.contentMode = UIViewContentModeScaleAspectFill;
-    imgView.clipsToBounds = YES;
-    imgView.layer.cornerRadius = 20.0f;
-    return imgView;
+    if (self.cachedImageView == nil) {
+        CGSize size = [self mediaViewDisplaySize];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:self.image];
+        imageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.clipsToBounds = YES;
+        imageView.layer.cornerRadius = 20.0f;
+        self.cachedImageView = imageView;
+    }
+    
+    return self.cachedImageView;
 }
 
 - (CGSize)mediaViewDisplaySize
