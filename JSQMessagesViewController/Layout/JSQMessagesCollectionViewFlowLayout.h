@@ -29,7 +29,7 @@
 /**
  *  A constant that describes the default height for all label subviews in a `JSQMessagesCollectionViewCell`.
  *
- *  @see `JSQMessagesCollectionViewCell`.
+ *  @see JSQMessagesCollectionViewCell.
  */
 FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault;
 
@@ -48,8 +48,8 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
  *  You can easily customize the layout via its properties or its delegate methods 
  *  defined in `JSQMessagesCollectionViewDelegateFlowLayout`.
  *
- *  @see `JSQMessagesCollectionViewDelegateFlowLayout`
- *  @see `JSQMessagesCollectionViewCell`
+ *  @see JSQMessagesCollectionViewDelegateFlowLayout.
+ *  @see JSQMessagesCollectionViewCell.
  */
 @interface JSQMessagesCollectionViewFlowLayout : UICollectionViewFlowLayout
 
@@ -108,8 +108,8 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
  *  @warning This value may not be exact when the layout object finishes laying out its items, due to the constraints it must satisfy. 
  *  This value should be considered more of a recommendation or suggestion to the layout, not an exact value.
  *
- *  @see `JSQMessagesCollectionViewCellIncoming`.
- *  @see `JSQMessagesCollectionViewCellOutgoing`.
+ *  @see JSQMessagesCollectionViewCellIncoming.
+ *  @see JSQMessagesCollectionViewCellOutgoing.
  */
 @property (assign, nonatomic) CGFloat messageBubbleLeftRightMargin;
 

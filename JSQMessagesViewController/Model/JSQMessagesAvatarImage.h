@@ -26,7 +26,7 @@
  *  This is a concrete class that implements the `JSQMessageAvatarImageDataSource` protocol.
  *  It contains a regular avatar image, a highlighted avatar image, and a placeholder avatar image.
  *
- *  @see `JSQMessagesAvatarImageFactory`.
+ *  @see JSQMessagesAvatarImageFactory.
  */
 @interface JSQMessagesAvatarImage : NSObject <JSQMessageAvatarImageDataSource, NSCopying>
 

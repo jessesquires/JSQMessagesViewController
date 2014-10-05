@@ -29,7 +29,9 @@
  *
  *  Two concrete classes that conform to this protocol are provided in the library. See `JSQTextMessage` and `JSQMediaMessage`.
  *
- *  @see JSQMessage, JSQTextMessage, JSQMediaMessage.
+ *  @see JSQMessage.
+ *  @see JSQTextMessage.
+ *  @see JSQMediaMessage.
  */
 @protocol JSQMessageData <NSObject>
 

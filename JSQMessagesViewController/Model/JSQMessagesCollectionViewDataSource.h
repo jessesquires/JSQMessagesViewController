@@ -77,8 +77,8 @@
  *  @warning Note that providing your own bubble image data source objects may require additional 
  *  configuration of the collectionView layout object, specifically regarding its `messageBubbleTextViewFrameInsets` and `messageBubbleTextViewTextContainerInsets`.
  *
- *  @see `JSQMessagesBubbleImageFactory`.
- *  @see `JSQMessagesCollectionViewFlowLayout`.
+ *  @see JSQMessagesBubbleImageFactory.
+ *  @see JSQMessagesCollectionViewFlowLayout.
  */
 - (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath;
 
@@ -94,8 +94,8 @@
  *  @discussion It is recommended that you utilize `JSQMessagesAvatarImageFactory` to return valid `JSQMessagesAvatarImage` objects.
  *  However, you may provide your own data source object as long as it conforms to the `JSQMessageAvatarImageDataSource` protocol.
  *
- *  @see `JSQMessagesAvatarImageFactory`.
- *  @see `JSQMessagesCollectionViewFlowLayout`.
+ *  @see JSQMessagesAvatarImageFactory.
+ *  @see JSQMessagesCollectionViewFlowLayout.
  */
 - (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath;
 
@@ -111,7 +111,7 @@
  *  @return A configured attributed string or `nil` if you do not want text displayed for the item at indexPath.
  *  Return an attributed string with `nil` attributes to use the default attributes.
  *
- *  @see `JSQMessagesCollectionViewCell`.
+ *  @see JSQMessagesCollectionViewCell.
  */
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath;
 
@@ -125,7 +125,7 @@
  *  @return A configured attributed string or `nil` if you do not want text displayed for the item at indexPath.
  *  Return an attributed string with `nil` attributes to use the default attributes.
  *
- *  @see `JSQMessagesCollectionViewCell`.
+ *  @see JSQMessagesCollectionViewCell.
  */
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath;
 
@@ -139,7 +139,7 @@
  *  @return A configured attributed string or `nil` if you do not want text displayed for the item at indexPath.
  *  Return an attributed string with `nil` attributes to use the default attributes.
  *
- *  @see `JSQMessagesCollectionViewCell`.
+ *  @see JSQMessagesCollectionViewCell.
  */
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
 

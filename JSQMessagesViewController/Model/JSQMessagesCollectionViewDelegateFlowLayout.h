@@ -43,7 +43,7 @@
  *
  *  @return The height of the `cellTopLabel` for the item at indexPath.
  *
- *  @see `JSQMessagesCollectionViewCell`.
+ *  @see JSQMessagesCollectionViewCell.
  */
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath;
@@ -57,7 +57,7 @@
  *
  *  @return The height of the `messageBubbleTopLabel` for the item at indexPath.
  *
- *  @see `JSQMessagesCollectionViewCell`.
+ *  @see JSQMessagesCollectionViewCell.
  */
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath;
@@ -71,7 +71,7 @@
  *
  *  @return The height of the `cellBottomLabel` for the item at indexPath.
  *
- *  @see `JSQMessagesCollectionViewCell`.
+ *  @see JSQMessagesCollectionViewCell.
  */
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
