@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "goldengate.jpg"
+      "filename" : "goldengate.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "goldengate@2x.jpg"
+      "filename" : "goldengate@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "goldengate@3x.jpg"
+      "filename" : "goldengate@3x.png"
     }
   ],
   "info" : {
