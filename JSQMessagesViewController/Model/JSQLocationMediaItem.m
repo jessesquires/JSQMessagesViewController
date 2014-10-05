@@ -21,6 +21,13 @@
 #import "JSQMessagesMediaPlaceholderView.h"
 
 
+@interface JSQLocationMediaItem ()
+
+@property (strong, nonatomic) MKMapView *cachedMapView;
+
+@end
+
+
 @implementation JSQLocationMediaItem
 
 #pragma mark - Initialization
@@ -30,6 +37,7 @@
     self = [super init];
     if (self) {
         _location = [location copy];
+        _cachedMapView = nil;
     }
     return self;
 }
@@ -37,6 +45,15 @@
 - (void)dealloc
 {
     _location = nil;
+    _cachedMapView = nil;
+}
+
+#pragma mark - Setters
+
+- (void)setLocation:(CLLocation *)location
+{
+    _location = [location copy];
+    _cachedMapView = nil;
 }
 
 #pragma mark - MKAnnotation
@@ -54,18 +71,22 @@
         return nil;
     }
     
-    MKMapView *mapView = [[MKMapView alloc] init];
-    mapView.centerCoordinate = self.location.coordinate;
-    mapView.layer.cornerRadius = 20.0f;
-    mapView.clipsToBounds = YES;
-    mapView.showsUserLocation = NO;
-    mapView.userInteractionEnabled = NO;
-    [mapView addAnnotation:self];
+    if (self.cachedMapView == nil) {
+        CGSize size = [self mediaViewDisplaySize];
+        MKMapView *mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, size.width, size.height)];
+        mapView.centerCoordinate = self.location.coordinate;
+        mapView.layer.cornerRadius = 20.0f;
+        mapView.clipsToBounds = YES;
+        mapView.showsUserLocation = NO;
+        mapView.userInteractionEnabled = NO;
+        [mapView addAnnotation:self];
+        
+        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.location.coordinate, 10, 10);
+        [mapView setRegion:[mapView regionThatFits:region] animated:NO];
+        self.cachedMapView = mapView;
+    }
     
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.location.coordinate, 10, 10);
-    [mapView setRegion:[mapView regionThatFits:region] animated:NO];
-    
-    return mapView;
+    return self.cachedMapView;
 }
 
 - (CGSize)mediaViewDisplaySize
