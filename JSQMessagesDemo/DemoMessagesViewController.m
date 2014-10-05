@@ -222,8 +222,7 @@
                 /**
                  *  Reload the specific item, or simply call `reloadData`
                  */
-                NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:self.demoData.messages.count - 1 inSection:0];
-                [self.collectionView reloadItemsAtIndexPaths:@[ lastIndexPath ]];
+                [self.collectionView reloadData];
             });
         }
         
@@ -266,7 +265,7 @@
 
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Media messages!"
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Media messages"
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
