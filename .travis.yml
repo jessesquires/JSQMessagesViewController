@@ -8,4 +8,4 @@ before_install:
 - brew install xctool
 
 script: 
-- xctool clean build test -workspace JSQMessages.xcworkspace -scheme JSQMessages -sdk iphonesimulator7.1 ONLY_ACTIVE_ARCH=NO
+- xctool clean build test -workspace JSQMessages.xcworkspace -scheme JSQMessages -sdk iphonesimulator8.0 ONLY_ACTIVE_ARCH=NO
