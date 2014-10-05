@@ -172,6 +172,17 @@
                 
                 newMediaData = photoItem;
             }
+            else if ([copyMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
+                JSQLocationMediaItem *locationItem = [((JSQLocationMediaItem *)copyMediaData) copy];
+                newMediaAttachment = [locationItem.location copy];
+                
+                /**
+                 *  Set location to nil to simulate "downloading" the location data
+                 */
+                locationItem.location = nil;
+                
+                newMediaData = locationItem;
+            }
             
             newMessage = [JSQMediaMessage messageWithSenderId:randomUserId
                                                   displayName:self.demoData.users[randomUserId]
@@ -196,11 +207,17 @@
              */
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 /**
-                 *  Media is "finished downloading"
+                 *  Media is "finished downloading", re-display visible cells
+                 *
+                 *  If media cell is not visible, the next time it is dequeued the view controller will display its new attachment data
                  */
                 
                 if ([newMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
                     ((JSQPhotoMediaItem *)newMediaData).image = newMediaAttachment;
+                    [self.collectionView reloadData];
+                }
+                else if ([newMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
+                    ((JSQLocationMediaItem *)newMediaData).location = newMediaAttachment;
                     [self.collectionView reloadData];
                 }
             });

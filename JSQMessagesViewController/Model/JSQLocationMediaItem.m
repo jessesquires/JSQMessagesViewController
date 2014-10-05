@@ -16,47 +16,61 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import "JSQPhotoMediaItem.h"
+#import "JSQLocationMediaItem.h"
 
 #import "JSQMessagesMediaPlaceholderView.h"
 
 
-@implementation JSQPhotoMediaItem
+@implementation JSQLocationMediaItem
 
 #pragma mark - Initialization
 
-- (instancetype)initWithImage:(UIImage *)image
+- (instancetype)initWithLocation:(CLLocation *)location
 {
     self = [super init];
     if (self) {
-        _image = image;
+        _location = [location copy];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    _image = nil;
+    _location = nil;
+}
+
+#pragma mark - MKAnnotation
+
+- (CLLocationCoordinate2D)coordinate
+{
+    return self.location.coordinate;
 }
 
 #pragma mark - JSQMessageMediaData protocol
 
 - (UIView *)mediaView
 {
-    if (self.image == nil) {
+    if (self.location == nil) {
         return nil;
     }
     
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:self.image];
-    imgView.contentMode = UIViewContentModeScaleAspectFill;
-    imgView.clipsToBounds = YES;
-    imgView.layer.cornerRadius = 20.0f;
-    return imgView;
+    MKMapView *mapView = [[MKMapView alloc] init];
+    mapView.centerCoordinate = self.location.coordinate;
+    mapView.layer.cornerRadius = 20.0f;
+    mapView.clipsToBounds = YES;
+    mapView.showsUserLocation = NO;
+    mapView.userInteractionEnabled = NO;
+    [mapView addAnnotation:self];
+    
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.location.coordinate, 10, 10);
+    [mapView setRegion:[mapView regionThatFits:region] animated:NO];
+    
+    return mapView;
 }
 
 - (CGSize)mediaViewDisplaySize
 {
-    return CGSizeMake(200.0f, 120.0f);
+    return CGSizeMake(210.0f, 150.0f);
 }
 
 - (UIView *)mediaPlaceholderView
@@ -76,19 +90,19 @@
         return NO;
     }
     
-    JSQPhotoMediaItem *photoItem = (JSQPhotoMediaItem *)object;
+    JSQLocationMediaItem *locationItem = (JSQLocationMediaItem *)object;
     
-    return [self.image isEqual:photoItem.image];
+    return [self.location isEqual:locationItem.location];
 }
 
 - (NSUInteger)hash
 {
-    return self.image.hash;
+    return self.location.hash;
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: image=%@>", [self class], self.image];
+    return [NSString stringWithFormat:@"<%@: location=%@>", [self class], self.location];
 }
 
 - (id)debugQuickLookObject
@@ -102,21 +116,21 @@
 {
     self = [super init];
     if (self) {
-        _image = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(image))];
+        _location = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(location))];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeObject:self.image forKey:NSStringFromSelector(@selector(image))];
+    [aCoder encodeObject:self.location forKey:NSStringFromSelector(@selector(location))];
 }
 
 #pragma mark - NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone
 {
-    return [[[self class] allocWithZone:zone] initWithImage:self.image];
+    return [[[self class] allocWithZone:zone] initWithLocation:self.location];
 }
 
 @end
