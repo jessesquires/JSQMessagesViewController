@@ -146,15 +146,7 @@
         id<JSQMessageMediaData> newMediaData = nil;
         id newMediaAttachmentCopy = nil;
         
-        if ([copyMessage isKindOfClass:[JSQTextMessage class]]) {
-            /**
-             *  Last message was a text message
-             */
-            newMessage = [JSQTextMessage messageWithSenderId:randomUserId
-                                                 displayName:self.demoData.users[randomUserId]
-                                                        text:copyMessage.text];
-        }
-        else if ([copyMessage isKindOfClass:[JSQMediaMessage class]]) {
+        if ([copyMessage isKindOfClass:[JSQMediaMessage class]]) {
             /**
              *  Last message was a media message
              */
@@ -187,6 +179,14 @@
             newMessage = [JSQMediaMessage messageWithSenderId:randomUserId
                                                   displayName:self.demoData.users[randomUserId]
                                                         media:newMediaData];
+        }
+        else {
+            /**
+             *  Last message was a text message
+             */
+            newMessage = [JSQTextMessage messageWithSenderId:randomUserId
+                                                 displayName:self.demoData.users[randomUserId]
+                                                        text:copyMessage.text];
         }
         
         /**
