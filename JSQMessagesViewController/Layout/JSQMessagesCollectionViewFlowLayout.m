@@ -145,6 +145,10 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 - (void)setSpringinessEnabled:(BOOL)springinessEnabled
 {
+    if (_springinessEnabled == springinessEnabled) {
+        return;
+    }
+    
     _springinessEnabled = springinessEnabled;
     
     if (!springinessEnabled) {
@@ -156,6 +160,10 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 - (void)setMessageBubbleFont:(UIFont *)messageBubbleFont
 {
+    if ([_messageBubbleFont isEqual:messageBubbleFont]) {
+        return;
+    }
+    
     NSParameterAssert(messageBubbleFont != nil);
     _messageBubbleFont = messageBubbleFont;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
@@ -164,24 +172,36 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 - (void)setMessageBubbleLeftRightMargin:(CGFloat)messageBubbleLeftRightMargin
 {
     NSParameterAssert(messageBubbleLeftRightMargin >= 0.0f);
-    _messageBubbleLeftRightMargin = messageBubbleLeftRightMargin;
+    _messageBubbleLeftRightMargin = ceilf(messageBubbleLeftRightMargin);
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
 - (void)setMessageBubbleTextViewTextContainerInsets:(UIEdgeInsets)messageBubbleTextContainerInsets
 {
+    if (UIEdgeInsetsEqualToEdgeInsets(_messageBubbleTextViewTextContainerInsets, messageBubbleTextContainerInsets)) {
+        return;
+    }
+    
     _messageBubbleTextViewTextContainerInsets = messageBubbleTextContainerInsets;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
 - (void)setIncomingAvatarViewSize:(CGSize)incomingAvatarViewSize
 {
+    if (CGSizeEqualToSize(_incomingAvatarViewSize, incomingAvatarViewSize)) {
+        return;
+    }
+    
     _incomingAvatarViewSize = incomingAvatarViewSize;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
 - (void)setOutgoingAvatarViewSize:(CGSize)outgoingAvatarViewSize
 {
+    if (CGSizeEqualToSize(_outgoingAvatarViewSize, outgoingAvatarViewSize)) {
+        return;
+    }
+    
     _outgoingAvatarViewSize = outgoingAvatarViewSize;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
@@ -237,6 +257,8 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     if (context.invalidateFlowLayoutAttributes
         || context.invalidateFlowLayoutDelegateMetrics) {
         [self.messageBubbleSizes removeAllObjects];
+        [self.dynamicAnimator removeAllBehaviors];
+        [self.visibleIndexPaths removeAllObjects];
     }
     
     [super invalidateLayoutWithContext:context];
