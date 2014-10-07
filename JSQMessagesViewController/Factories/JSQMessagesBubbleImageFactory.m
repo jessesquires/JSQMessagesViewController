@@ -41,20 +41,20 @@
 + (JSQMessagesBubbleImage *)outgoingMessagesBubbleImageWithColor:(UIColor *)color
 {
     NSParameterAssert(color != nil);
-    return [JSQMessagesBubbleImageFactory messagesBubbleImageWithColor:color flippedForIncoming:NO];
+    return [self messagesBubbleImageWithColor:color flippedForIncoming:NO];
 }
 
 + (JSQMessagesBubbleImage *)incomingMessagesBubbleImageWithColor:(UIColor *)color
 {
     NSParameterAssert(color != nil);
-    return [JSQMessagesBubbleImageFactory messagesBubbleImageWithColor:color flippedForIncoming:YES];
+    return [self messagesBubbleImageWithColor:color flippedForIncoming:YES];
 }
 
 #pragma mark - Private
 
 + (JSQMessagesBubbleImage *)messagesBubbleImageWithColor:(UIColor *)color flippedForIncoming:(BOOL)flippedForIncoming
 {
-    UIImage *bubble = [UIImage imageNamed:@"bubble_min"];
+    UIImage *bubble = [self baseImage];
     
     UIImage *normalBubble = [bubble jsq_imageMaskedWithColor:color];
     UIImage *highlightedBubble = [bubble jsq_imageMaskedWithColor:[color jsq_colorByDarkeningColorWithValue:0.12f]];
@@ -64,14 +64,23 @@
         highlightedBubble = [JSQMessagesBubbleImageFactory jsq_horizontallyFlippedImageFromImage:highlightedBubble];
     }
     
-    // make image stretchable from center point
-    CGPoint center = CGPointMake(bubble.size.width / 2.0f, bubble.size.height / 2.0f);
-    UIEdgeInsets capInsets = UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
+    UIEdgeInsets capInsets = [self baseImageInsetsForImage:bubble];
     
     normalBubble = [JSQMessagesBubbleImageFactory jsq_stretchableImageFromImage:normalBubble withCapInsets:capInsets];
     highlightedBubble = [JSQMessagesBubbleImageFactory jsq_stretchableImageFromImage:highlightedBubble withCapInsets:capInsets];
     
     return [[JSQMessagesBubbleImage alloc] initWithMessageBubbleImage:normalBubble highlightedImage:highlightedBubble];
+}
+
++ (UIImage *)baseImage {
+	return [UIImage imageNamed:@"bubble_min"];
+}
+
++ (UIEdgeInsets)baseImageInsetsForImage:(UIImage *)bubble {
+	// make image stretchable from center point
+	CGPoint center = CGPointMake(bubble.size.width / 2.0f, bubble.size.height / 2.0f);
+	UIEdgeInsets capInsets = UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
+	return capInsets;
 }
 
 + (UIImage *)jsq_horizontallyFlippedImageFromImage:(UIImage *)image
