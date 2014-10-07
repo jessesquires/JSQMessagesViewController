@@ -508,7 +508,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     //  disable menu for media messages
     id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    if ([messageItem respondsToSelector:@selector(media)]) {
+    if ([messageItem isMediaMessage]) {
         return NO;
     }
     
@@ -553,7 +553,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cellHeight += [self collectionView:collectionView layout:collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:indexPath];
     cellHeight += [self collectionView:collectionView layout:collectionViewLayout heightForCellBottomLabelAtIndexPath:indexPath];
     
-    return CGSizeMake(collectionViewLayout.itemWidth, cellHeight);
+    return CGSizeMake(collectionViewLayout.itemWidth, ceilf(cellHeight));
 }
 
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
