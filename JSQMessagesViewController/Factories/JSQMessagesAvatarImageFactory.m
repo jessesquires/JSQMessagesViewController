@@ -127,19 +127,23 @@
     CGFloat dx = frameMidPoint.x - textFrameMidPoint.x;
     CGFloat dy = frameMidPoint.y - textFrameMidPoint.y;
     CGPoint drawPoint = CGPointMake(dx, dy);
+    UIImage *image = nil;
     
     UIGraphicsBeginImageContextWithOptions(frame.size, NO, [UIScreen mainScreen].scale);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(context);
-    
-    CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
-    CGContextFillRect(context, frame);
-    [text drawAtPoint:drawPoint withAttributes:attributes];
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    
-    CGContextRestoreGState(context);
+    {
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSaveGState(context);
+        
+        CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
+        CGContextFillRect(context, frame);
+        [text drawAtPoint:drawPoint withAttributes:attributes];
+        
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        
+        CGContextRestoreGState(context);
+    }
     UIGraphicsEndImageContext();
+    
     return [JSQMessagesAvatarImageFactory jsq_circularImage:image withDiamter:diameter highlightedColor:nil];
 }
 
@@ -149,24 +153,28 @@
     NSParameterAssert(diameter > 0);
     
     CGRect frame = CGRectMake(0.0f, 0.0f, diameter, diameter);
+    UIImage *newImage = nil;
     
     UIGraphicsBeginImageContextWithOptions(frame.size, NO, [UIScreen mainScreen].scale);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(context);
-    
-    UIBezierPath *imgPath = [UIBezierPath bezierPathWithOvalInRect:frame];
-    [imgPath addClip];
-    [image drawInRect:frame];
-    
-    if (highlightedColor != nil) {
-        CGContextSetFillColorWithColor(context, highlightedColor.CGColor);
-        CGContextFillEllipseInRect(context, frame);
+    {
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSaveGState(context);
+        
+        UIBezierPath *imgPath = [UIBezierPath bezierPathWithOvalInRect:frame];
+        [imgPath addClip];
+        [image drawInRect:frame];
+        
+        if (highlightedColor != nil) {
+            CGContextSetFillColorWithColor(context, highlightedColor.CGColor);
+            CGContextFillEllipseInRect(context, frame);
+        }
+        
+        newImage = UIGraphicsGetImageFromCurrentImageContext();
+        
+        CGContextRestoreGState(context);
     }
-    
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    CGContextRestoreGState(context);
     UIGraphicsEndImageContext();
+    
     return newImage;
 }
 
