@@ -130,9 +130,7 @@
                                                          text:@"Now with media messages!"],
                      nil];
     
-    
     [self addPhotoMediaMessage];
-    [self addLocationMediaMessage];
     
     /**
      *  Setting to load extra messages for testing/demo
@@ -167,11 +165,13 @@
     [self.messages addObject:photoMessage];
 }
 
-- (void)addLocationMediaMessage
+- (void)addLocationMediaMessageCompletion:(JSQLocationMediaItemCompletionBlock)completion
 {
     CLLocation *ferryBuildingInSF = [[CLLocation alloc] initWithLatitude:37.795313 longitude:-122.393757];
     
-    JSQLocationMediaItem *locationItem = [[JSQLocationMediaItem alloc] initWithLocation:ferryBuildingInSF];
+    JSQLocationMediaItem *locationItem = [[JSQLocationMediaItem alloc] init];
+    [locationItem setLocation:ferryBuildingInSF withCompletionHandler:completion];
+    
     JSQMediaMessage *locationMessage = [JSQMediaMessage messageWithSenderId:kJSQDemoAvatarIdSquires
                                                                 displayName:kJSQDemoAvatarDisplayNameSquires
                                                                       media:locationItem];

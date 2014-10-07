@@ -210,19 +210,19 @@
                  *  Media is "finished downloading", re-display visible cells
                  *
                  *  If media cell is not visible, the next time it is dequeued the view controller will display its new attachment data
+                 *
+                 *  Reload the specific item, or simply call `reloadData`
                  */
                 
                 if ([newMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
                     ((JSQPhotoMediaItem *)newMediaData).image = newMediaAttachmentCopy;
+                    [self.collectionView reloadData];
                 }
                 else if ([newMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
-                    ((JSQLocationMediaItem *)newMediaData).location = newMediaAttachmentCopy;
+                    [((JSQLocationMediaItem *)newMediaData)setLocation:newMediaAttachmentCopy withCompletionHandler:^{
+                        [self.collectionView reloadData];
+                    }];
                 }
-                
-                /**
-                 *  Reload the specific item, or simply call `reloadData`
-                 */
-                [self.collectionView reloadData];
             });
         }
         
@@ -286,7 +286,13 @@
             break;
             
         case 1:
-            [self.demoData addLocationMediaMessage];
+        {
+            __weak UICollectionView *weakView = self.collectionView;
+            
+            [self.demoData addLocationMediaMessageCompletion:^{
+                [weakView reloadData];
+            }];
+        }
             break;
     }
     

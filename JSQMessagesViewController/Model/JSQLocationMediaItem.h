@@ -19,6 +19,12 @@
 @import CoreLocation;
 @import MapKit;
 
+/**
+ *  A completion handler block for a `JSQLocationMediaItem`. See `setLocation: withCompletionHandler:`.
+ */
+typedef void (^JSQLocationMediaItemCompletionBlock)(void);
+
+
 #import "JSQMessageMediaData.h"
 
 /**
@@ -30,7 +36,7 @@
 @interface JSQLocationMediaItem : NSObject <JSQMessageMediaData, MKAnnotation, NSCoding, NSCopying>
 
 /**
- *  The location for the location media item. The default value is `nil`.
+ *  The location for the media item. The default value is `nil`.
  */
 @property (copy, nonatomic) CLLocation *location;
 
@@ -42,14 +48,25 @@
 /**
  *  Initializes and returns a location media item object having the given location.
  *
- *  @param location The location for the location media item. This value may be `nil`.
+ *  @param location The location for the media item. This value may be `nil`.
  *
  *  @return An initialized `JSQLocationMediaItem` if successful, `nil` otherwise.
  *
  *  @discussion If the location data must be dowloaded from the network,
  *  you may initialize a `JSQLocationMediaItem` object with a `nil` location.
- *  Once the location data has been retrieved, you can then set the location property.
+ *  Once the location data has been retrieved, you can then set the location property
+ *  using `setLocation: withCompletionHandler:`
  */
 - (instancetype)initWithLocation:(CLLocation *)location;
+
+/**
+ *  Sets the specified location for the location media item and immediately begins creating
+ *  a map view snapshot image on a background thread. The specified block is executed upon completion
+ *  of creating the snapshot image and is executed on the app’s main thread.
+ *
+ *  @param location   The location for the media item.
+ *  @param completion The block to call after the map view snapshot for the given location has been created.
+ */
+- (void)setLocation:(CLLocation *)location withCompletionHandler:(JSQLocationMediaItemCompletionBlock)completion;
 
 @end
