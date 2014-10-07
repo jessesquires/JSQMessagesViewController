@@ -82,9 +82,10 @@
          *  Be sure to create your bubble images one time and reuse them for good performance.
          *
          */
-        self.outgoingBubbleImageData = [JSQMessagesBubbleImageFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
-        
-        self.incomingBubbleImageData = [JSQMessagesBubbleImageFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+		JSQMessagesBubbleImageFactory *factory = [[JSQMessagesBubbleImageFactory alloc] init];
+        self.outgoingBubbleImageData = [factory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
+
+        self.incomingBubbleImageData = [factory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
         
     }
     
