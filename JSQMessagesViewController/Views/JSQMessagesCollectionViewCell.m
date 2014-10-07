@@ -155,10 +155,6 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
-    
-    self.cellTopLabelHeightConstraint.constant = 0.0f;
-    self.messageBubbleTopLabelHeightConstraint.constant = 0.0f;
-    self.cellBottomLabelHeightConstraint.constant = 0.0f;
 
     self.cellTopLabel.text = nil;
     self.messageBubbleTopLabel.text = nil;
