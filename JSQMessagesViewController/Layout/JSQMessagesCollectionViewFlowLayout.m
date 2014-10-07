@@ -363,31 +363,32 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 {
     [super prepareForCollectionViewUpdates:updateItems];
     
-    if (self.springinessEnabled) {
-        [updateItems enumerateObjectsUsingBlock:^(UICollectionViewUpdateItem *updateItem, NSUInteger index, BOOL *stop) {
-            if (updateItem.updateAction == UICollectionUpdateActionInsert) {
-                
-                if ([self.dynamicAnimator layoutAttributesForCellAtIndexPath:updateItem.indexPathAfterUpdate]) {
-                    *stop = YES;
-                }
-                
-                CGSize size = self.collectionView.bounds.size;
-                JSQMessagesCollectionViewLayoutAttributes *attributes = [JSQMessagesCollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
-                
-                if (attributes.representedElementCategory == UICollectionElementCategoryCell) {
-                    [self jsq_configureMessageCellLayoutAttributes:attributes];
-                }
-                
-                attributes.frame = CGRectMake(0.0f,
-                                              size.height - size.width,
-                                              size.width,
-                                              size.width);
-                
+    [updateItems enumerateObjectsUsingBlock:^(UICollectionViewUpdateItem *updateItem, NSUInteger index, BOOL *stop) {
+        if (updateItem.updateAction == UICollectionUpdateActionInsert) {
+            
+            if (self.springinessEnabled && [self.dynamicAnimator layoutAttributesForCellAtIndexPath:updateItem.indexPathAfterUpdate]) {
+                *stop = YES;
+            }
+            
+            CGFloat collectionViewHeight = CGRectGetHeight(self.collectionView.bounds);
+            
+            JSQMessagesCollectionViewLayoutAttributes *attributes = [JSQMessagesCollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
+            
+            if (attributes.representedElementCategory == UICollectionElementCategoryCell) {
+                [self jsq_configureMessageCellLayoutAttributes:attributes];
+            }
+            
+            attributes.frame = CGRectMake(0.0f,
+                                          collectionViewHeight + CGRectGetHeight(attributes.frame),
+                                          CGRectGetWidth(attributes.frame),
+                                          CGRectGetHeight(attributes.frame));
+            
+            if (self.springinessEnabled) {
                 UIAttachmentBehavior *springBehaviour = [self jsq_springBehaviorWithLayoutAttributesItem:attributes];
                 [self.dynamicAnimator addBehavior:springBehaviour];
             }
-        }];
-    }
+        }
+    }];
 }
 
 #pragma mark - Message cell layout utilities
