@@ -39,7 +39,7 @@
 {
     NSParameterAssert(media != nil);
     
-    self = [super initWithSenderId:senderId senderDisplayName:senderDisplayName date:date];
+    self = [super initWithSenderId:senderId senderDisplayName:senderDisplayName date:date isMedia:YES];
     if (self) {
         _media = media;
     }
@@ -73,10 +73,9 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: senderId=%@, senderDisplayName=%@, date=%@, media=%@>",
-            [self class], self.senderId, self.senderDisplayName, self.date, self.media];
+    return [NSString stringWithFormat:@"<%@: senderId=%@, senderDisplayName=%@, date=%@, isMediaMessage=%@, media=%@>",
+            [self class], self.senderId, self.senderDisplayName, self.date, @(self.isMediaMessage), self.media];
 }
-
 - (id)debugQuickLookObject
 {
     return [self.media mediaView] ?: [self.media mediaPlaceholderView];

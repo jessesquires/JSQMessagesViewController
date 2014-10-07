@@ -39,7 +39,7 @@
 {
     NSParameterAssert(text != nil);
     
-    self = [super initWithSenderId:senderId senderDisplayName:senderDisplayName date:date];
+    self = [super initWithSenderId:senderId senderDisplayName:senderDisplayName date:date isMedia:NO];
     if (self) {
         _text = [text copy];
     }
@@ -73,8 +73,8 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: senderId=%@, senderDisplayName=%@, date=%@, text=%@>",
-            [self class], self.senderId, self.senderDisplayName, self.date, self.text];
+    return [NSString stringWithFormat:@"<%@: senderId=%@, senderDisplayName=%@, date=%@, isMediaMessage=%@, text=%@>",
+            [self class], self.senderId, self.senderDisplayName, self.date, @(self.isMediaMessage), self.text];
 }
 
 #pragma mark - NSCoding

@@ -401,20 +401,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     NSString *messageSenderId = [messageItem senderId];
     NSParameterAssert(messageSenderId != nil);
     
-    NSString *messageText = nil;
-    id<JSQMessageMediaData> messageMedia = nil;
-    
-    if ([messageItem respondsToSelector:@selector(text)]) {
-        messageText = [messageItem text];
-        NSParameterAssert(messageText != nil);
-    }
-    else if ([messageItem respondsToSelector:@selector(media)]) {
-        messageMedia = [messageItem media];
-        NSParameterAssert(messageMedia != nil);
-    }
-    
     BOOL isOutgoingMessage = [messageSenderId isEqualToString:self.senderId];
-    BOOL isMediaMessage = (messageMedia != nil);
+    BOOL isMediaMessage = [messageItem isMediaMessage];
     
     NSString *cellIdentifier = nil;
     if (isMediaMessage) {
@@ -428,7 +416,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.delegate = collectionView;
     
     if (!isMediaMessage) {
-        cell.textView.text = messageText;
+        cell.textView.text = [messageItem text];
+        NSParameterAssert(cell.textView.text != nil);
         
         id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
         if (bubbleImageDataSource != nil) {
@@ -437,6 +426,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         }
     }
     else {
+        id<JSQMessageMediaData> messageMedia = [messageItem media];
         cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
         NSParameterAssert(cell.mediaView != nil);
     }

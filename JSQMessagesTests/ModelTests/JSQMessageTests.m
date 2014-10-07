@@ -42,22 +42,22 @@
 
 - (void)testMessageInit
 {
-    JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId senderDisplayName:self.senderDisplayName date:self.date];
+    JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId senderDisplayName:self.senderDisplayName date:self.date isMedia:NO];
     XCTAssertNotNil(msg, @"Message should not be nil");
 }
 
 - (void)testMessageInvalidInit
 {
     XCTAssertThrows([[JSQMessage alloc] init], @"Invalid init should throw");
-    XCTAssertThrows([[JSQMessage alloc] initWithSenderId:nil senderDisplayName:nil date:nil], @"Invalid init should throw");
-    XCTAssertThrows([[JSQMessage alloc] initWithSenderId:self.senderId senderDisplayName:nil date:nil], @"Invalid init should throw");
-    XCTAssertThrows([[JSQMessage alloc] initWithSenderId:nil senderDisplayName:self.senderDisplayName date:nil], @"Invalid init should throw");
-    XCTAssertThrows([[JSQMessage alloc] initWithSenderId:nil senderDisplayName:nil date:self.date], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessage alloc] initWithSenderId:nil senderDisplayName:nil date:nil isMedia:NO], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessage alloc] initWithSenderId:self.senderId senderDisplayName:nil date:nil isMedia:YES], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessage alloc] initWithSenderId:nil senderDisplayName:self.senderDisplayName date:nil isMedia:NO], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessage alloc] initWithSenderId:nil senderDisplayName:nil date:self.date isMedia:YES], @"Invalid init should throw");
 }
 
 - (void)testMessageIsEqual
 {
-    JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId senderDisplayName:self.senderDisplayName date:self.date];
+    JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId senderDisplayName:self.senderDisplayName date:self.date isMedia:NO];
     JSQMessage *copy = [msg copy];
     
     XCTAssertEqualObjects(msg, copy, @"Copied messages should be equal");
@@ -69,7 +69,7 @@
 
 - (void)testMessageArchiving
 {
-    JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId senderDisplayName:self.senderDisplayName date:self.date];
+    JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId senderDisplayName:self.senderDisplayName date:self.date isMedia:YES];
     NSData *msgData = [NSKeyedArchiver archivedDataWithRootObject:msg];
     
     JSQMessage *unarchivedMsg = [NSKeyedUnarchiver unarchiveObjectWithData:msgData];

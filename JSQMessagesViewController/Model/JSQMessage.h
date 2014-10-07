@@ -41,6 +41,12 @@
  */
 @property (copy, nonatomic, readonly) NSDate *date;
 
+/**
+ *  Returns a boolean value specifying whether or not the message contains media.
+ *  The default value is `NO`, meaning that is message contains text, not media.
+ */
+@property (assign, nonatomic, readonly) BOOL isMediaMessage;
+
 #pragma mark - Initialization
 
 /**
@@ -49,11 +55,13 @@
  *  @param senderId          The unique identifier for the user who sent the message. This value must not be `nil`.
  *  @param senderDisplayName The display name for the user who sent the message. This value must not be `nil`.
  *  @param date              The date that the message was sent. This value must not be `nil`.
+ *  @param isMedia           A boolean value specifying whether or not the message contains media.
  *
  *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
  */
 - (instancetype)initWithSenderId:(NSString *)senderId
                senderDisplayName:(NSString *)senderDisplayName
-                            date:(NSDate *)date;
+                            date:(NSDate *)date
+                         isMedia:(BOOL)isMedia;
 
 @end
