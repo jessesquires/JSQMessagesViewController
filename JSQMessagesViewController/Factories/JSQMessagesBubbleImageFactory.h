@@ -28,8 +28,6 @@
  */
 @interface JSQMessagesBubbleImageFactory : NSObject
 
-
-
 /**
  *  Creates an instance of JSQMessagesBubbleImageFactory with the default images.
  *
