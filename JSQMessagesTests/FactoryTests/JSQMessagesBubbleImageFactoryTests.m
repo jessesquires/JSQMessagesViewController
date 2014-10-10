@@ -14,6 +14,9 @@
 
 
 @interface JSQMessagesBubbleImageFactoryTests : XCTestCase
+
+@property (strong, nonatomic) JSQMessagesBubbleImageFactory *factory;
+
 @end
 
 
@@ -22,10 +25,12 @@
 - (void)setUp
 {
     [super setUp];
+    self.factory = [[JSQMessagesBubbleImageFactory alloc] init];
 }
 
 - (void)tearDown
 {
+    self.factory = nil;
     [super tearDown];
 }
 
@@ -37,8 +42,7 @@
     CGPoint center = CGPointMake(bubble.size.width / 2.0f, bubble.size.height / 2.0f);
     UIEdgeInsets capInsets = UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
     
-	JSQMessagesBubbleImageFactory *factory = [[JSQMessagesBubbleImageFactory alloc] init];
-    JSQMessagesBubbleImage *bubbleImage = [factory outgoingMessagesBubbleImageWithColor:[UIColor lightGrayColor]];
+    JSQMessagesBubbleImage *bubbleImage = [self.factory outgoingMessagesBubbleImageWithColor:[UIColor lightGrayColor]];
     XCTAssertNotNil(bubbleImage, @"Bubble image should not be nil");
     
     XCTAssertNotNil(bubbleImage.messageBubbleImage, "Image should not be nil");
@@ -63,9 +67,7 @@
     CGPoint center = CGPointMake(bubble.size.width / 2.0f, bubble.size.height / 2.0f);
     UIEdgeInsets capInsets = UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
     
-    
-	JSQMessagesBubbleImageFactory *factory = [[JSQMessagesBubbleImageFactory alloc] init];
-    JSQMessagesBubbleImage *bubbleImage = [factory incomingMessagesBubbleImageWithColor:[UIColor lightGrayColor]];
+    JSQMessagesBubbleImage *bubbleImage = [self.factory incomingMessagesBubbleImageWithColor:[UIColor lightGrayColor]];
     XCTAssertNotNil(bubbleImage, @"Bubble image should not be nil");
     
     XCTAssertNotNil(bubbleImage.messageBubbleImage, "Image should not be nil");
@@ -81,7 +83,6 @@
     XCTAssertTrue(bubbleImage.messageBubbleHighlightedImage.resizingMode == UIImageResizingModeStretch, @"HighlightedImage should be stretchable");
     XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(bubbleImage.messageBubbleHighlightedImage.capInsets, capInsets), @"HighlightedImage capInsets should be equal to capInsets");
 }
-
 
 - (void)testCustomOutgoingMessageBubbleImageView
 {
@@ -106,7 +107,6 @@
     XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(bubbleImage.messageBubbleHighlightedImage.capInsets, capInsets), @"HighlightedImage capInsets should be equal to capInsets");
 }
 
-
 - (void)testCustomIncomingMessageBubbleImageView
 {
     UIImage *bubble = [UIImage imageNamed:@"clip"];
@@ -129,7 +129,5 @@
     XCTAssertTrue(bubbleImage.messageBubbleHighlightedImage.resizingMode == UIImageResizingModeStretch, @"HighlightedImage should be stretchable");
     XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(bubbleImage.messageBubbleHighlightedImage.capInsets, capInsets), @"HighlightedImage capInsets should be equal to capInsets");
 }
-
-
 
 @end

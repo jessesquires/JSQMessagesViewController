@@ -90,8 +90,9 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     
     CGFloat bubbleMarginMinimumSpacing = 6.0f;
     CGFloat indicatorMarginMinimumSpacing = 26.0f;
-
-	JSQMessagesBubbleImageFactory *bubbleImageFactory = [[JSQMessagesBubbleImageFactory alloc] init];
+    
+    JSQMessagesBubbleImageFactory *bubbleImageFactory = [[JSQMessagesBubbleImageFactory alloc] init];
+    
     if (shouldDisplayOnLeft) {
         self.bubbleImageView.image = [bubbleImageFactory incomingMessagesBubbleImageWithColor:messageBubbleColor].messageBubbleImage;
         

@@ -24,14 +24,16 @@
 
 @interface JSQMessagesBubbleImageFactory ()
 
-@property (nonatomic, readwrite, strong) UIImage *bubbleImage;
-@property (nonatomic, readwrite, assign) UIEdgeInsets capInsets;
+@property (strong, nonatomic, readonly) UIImage *bubbleImage;
+@property (assign, nonatomic, readonly) UIEdgeInsets capInsets;
 
-- (JSQMessagesBubbleImage *)messagesBubbleImageWithColor:(UIColor *)color flippedForIncoming:(BOOL)flippedForIncoming;
+- (UIEdgeInsets)jsq_centerPointEdgeInsetsForImageSize:(CGSize)bubbleImageSize;
 
-+ (UIImage *)jsq_horizontallyFlippedImageFromImage:(UIImage *)image;
+- (JSQMessagesBubbleImage *)jsq_messagesBubbleImageWithColor:(UIColor *)color flippedForIncoming:(BOOL)flippedForIncoming;
 
-+ (UIImage *)jsq_stretchableImageFromImage:(UIImage *)image withCapInsets:(UIEdgeInsets)capInsets;
+- (UIImage *)jsq_horizontallyFlippedImageFromImage:(UIImage *)image;
+
+- (UIImage *)jsq_stretchableImageFromImage:(UIImage *)image withCapInsets:(UIEdgeInsets)capInsets;
 
 @end
 
@@ -39,69 +41,83 @@
 
 @implementation JSQMessagesBubbleImageFactory
 
-@synthesize bubbleImage;
-@synthesize capInsets;
+#pragma mark - Initialization
 
-
-#pragma mark - Public
-
-- (instancetype)initWithBubbleImage:(UIImage *)image capInsets:(UIEdgeInsets)insets {
-	NSParameterAssert(image != nil);
+- (instancetype)initWithBubbleImage:(UIImage *)bubbleImage capInsets:(UIEdgeInsets)capInsets
+{
+	NSParameterAssert(bubbleImage != nil);
+    
 	self = [super init];
 	if (self) {
-		self.bubbleImage = image;
-		self.capInsets = insets;
+		_bubbleImage = bubbleImage;
+        
+        if (UIEdgeInsetsEqualToEdgeInsets(capInsets, UIEdgeInsetsZero)) {
+            _capInsets = [self jsq_centerPointEdgeInsetsForImageSize:bubbleImage.size];
+        }
+        else {
+            _capInsets = capInsets;
+        }
 	}
 	return self;
 }
 
-- (instancetype)init {
-	UIImage *bubble = [UIImage imageNamed:@"bubble_min"];
-	NSAssert(bubble != nil, @"Unable to load default image in %s. Please make sure default resources are included in your project.",
-			 __PRETTY_FUNCTION__);
-	CGPoint center = CGPointMake(bubble.size.width / 2.0f, bubble.size.height / 2.0f);
-	UIEdgeInsets insets = UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
-	return [self initWithBubbleImage:bubble capInsets:insets];
+- (instancetype)init
+{
+    return [self initWithBubbleImage:[UIImage jsq_bubbleCompactImage] capInsets:UIEdgeInsetsZero];
 }
+
+- (void)dealloc
+{
+    _bubbleImage = nil;
+}
+
+#pragma mark - Public
 
 - (JSQMessagesBubbleImage *)outgoingMessagesBubbleImageWithColor:(UIColor *)color
 {
-    NSParameterAssert(color != nil);
-    return [self messagesBubbleImageWithColor:color flippedForIncoming:NO];
+    return [self jsq_messagesBubbleImageWithColor:color flippedForIncoming:NO];
 }
 
 - (JSQMessagesBubbleImage *)incomingMessagesBubbleImageWithColor:(UIColor *)color
 {
-    NSParameterAssert(color != nil);
-    return [self messagesBubbleImageWithColor:color flippedForIncoming:YES];
+    return [self jsq_messagesBubbleImageWithColor:color flippedForIncoming:YES];
 }
 
 #pragma mark - Private
 
-- (JSQMessagesBubbleImage *)messagesBubbleImageWithColor:(UIColor *)color flippedForIncoming:(BOOL)flippedForIncoming
+- (UIEdgeInsets)jsq_centerPointEdgeInsetsForImageSize:(CGSize)bubbleImageSize
 {
+    // make image stretchable from center point
+    CGPoint center = CGPointMake(bubbleImageSize.width / 2.0f, bubbleImageSize.height / 2.0f);
+    return UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
+}
+
+- (JSQMessagesBubbleImage *)jsq_messagesBubbleImageWithColor:(UIColor *)color flippedForIncoming:(BOOL)flippedForIncoming
+{
+    NSParameterAssert(color != nil);
+    
     UIImage *normalBubble = [self.bubbleImage jsq_imageMaskedWithColor:color];
     UIImage *highlightedBubble = [self.bubbleImage jsq_imageMaskedWithColor:[color jsq_colorByDarkeningColorWithValue:0.12f]];
     
     if (flippedForIncoming) {
-        normalBubble = [JSQMessagesBubbleImageFactory jsq_horizontallyFlippedImageFromImage:normalBubble];
-        highlightedBubble = [JSQMessagesBubbleImageFactory jsq_horizontallyFlippedImageFromImage:highlightedBubble];
+        normalBubble = [self jsq_horizontallyFlippedImageFromImage:normalBubble];
+        highlightedBubble = [self jsq_horizontallyFlippedImageFromImage:highlightedBubble];
     }
     
-    normalBubble = [JSQMessagesBubbleImageFactory jsq_stretchableImageFromImage:normalBubble withCapInsets:self.capInsets];
-    highlightedBubble = [JSQMessagesBubbleImageFactory jsq_stretchableImageFromImage:highlightedBubble withCapInsets:self.capInsets];
+    normalBubble = [self jsq_stretchableImageFromImage:normalBubble withCapInsets:self.capInsets];
+    highlightedBubble = [self jsq_stretchableImageFromImage:highlightedBubble withCapInsets:self.capInsets];
     
     return [[JSQMessagesBubbleImage alloc] initWithMessageBubbleImage:normalBubble highlightedImage:highlightedBubble];
 }
 
-+ (UIImage *)jsq_horizontallyFlippedImageFromImage:(UIImage *)image
+- (UIImage *)jsq_horizontallyFlippedImageFromImage:(UIImage *)image
 {
     return [UIImage imageWithCGImage:image.CGImage
                                scale:image.scale
                          orientation:UIImageOrientationUpMirrored];
 }
 
-+ (UIImage *)jsq_stretchableImageFromImage:(UIImage *)image withCapInsets:(UIEdgeInsets)capInsets
+- (UIImage *)jsq_stretchableImageFromImage:(UIImage *)image withCapInsets:(UIEdgeInsets)capInsets
 {
     return [image resizableImageWithCapInsets:capInsets resizingMode:UIImageResizingModeStretch];
 }
