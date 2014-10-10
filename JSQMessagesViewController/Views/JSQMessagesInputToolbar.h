@@ -20,7 +20,8 @@
 @import UIKit;
 
 @class JSQMessagesInputToolbar;
-@class JSQMessagesToolbarContentView;
+
+#import "JSQMessagesToolbarContentView.h"
 
 /**
  *  A constant the specifies the default height for a `JSQMessagesInputToolbar`.

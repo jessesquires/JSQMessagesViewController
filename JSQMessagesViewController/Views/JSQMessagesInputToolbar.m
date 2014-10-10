@@ -18,7 +18,6 @@
 
 #import "JSQMessagesInputToolbar.h"
 
-#import "JSQMessagesToolbarContentView.h"
 #import "JSQMessagesComposerTextView.h"
 
 #import "JSQMessagesToolbarButtonFactory.h"
