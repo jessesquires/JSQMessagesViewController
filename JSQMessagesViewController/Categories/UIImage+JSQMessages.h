@@ -29,4 +29,36 @@
  */
 - (UIImage *)jsq_imageMaskedWithColor:(UIColor *)maskColor;
 
+/**
+ *  @return The regular message bubble image.
+ */
++ (UIImage *)jsq_bubbleRegularImage;
+
+/**
+ *  @return The regular message bubble image without a tail.
+ */
++ (UIImage *)jsq_bubbleRegularTaillessImage;
+
+/**
+ *  @return The regular message bubble image stroked, not filled.
+ */
++ (UIImage *)jsq_bubbleRegularStrokedImage;
+
+/**
+ *  @return The regular message bubble image stroked, not filled and without a tail.
+ */
++ (UIImage *)jsq_bubbleRegularStrokedTaillessImage;
+
+/**
+ *  @return The compact message bubble image. 
+ *
+ *  @disscussion This is the default bubble image used by `JSQMessagesBubbleImageFactory`.
+ */
++ (UIImage *)jsq_bubbleCompactImage;
+
+/**
+ *  @return The compact message bubble image without a tail.
+ */
++ (UIImage *)jsq_bubbleCompactTaillessImage;
+
 @end

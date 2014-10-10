@@ -45,4 +45,34 @@
     return newImage;
 }
 
++ (UIImage *)jsq_bubbleRegularImage
+{
+    return [UIImage imageNamed:@"bubble"];
+}
+
++ (UIImage *)jsq_bubbleRegularTaillessImage
+{
+    return [UIImage imageNamed:@"bubble_tailless"];
+}
+
++ (UIImage *)jsq_bubbleRegularStrokedImage
+{
+    return [UIImage imageNamed:@"bubble_stroked"];
+}
+
++ (UIImage *)jsq_bubbleRegularStrokedTaillessImage
+{
+    return [UIImage imageNamed:@"bubble_stroked"];
+}
+
++ (UIImage *)jsq_bubbleCompactImage
+{
+    return [UIImage imageNamed:@"bubble_min"];
+}
+
++ (UIImage *)jsq_bubbleCompactTaillessImage
+{
+    return [UIImage imageNamed:@"bubble_min"];
+}
+
 @end
