@@ -40,6 +40,7 @@
 
 #import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
+#import "UIDevice+JSQMessages.h"
 
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
@@ -235,7 +236,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self jsq_addActionToInteractivePopGestureRecognizer:YES];
     [self.keyboardController beginListeningForKeyboard];
     
-    if (self.snapshotView) {
+    if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
         [self.snapshotView removeFromSuperview];
     }
 }
@@ -757,20 +758,23 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStateBegan:
         {
-            if (self.snapshotView) {
+            if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
                 [self.snapshotView removeFromSuperview];
             }
             
             [self.keyboardController endListeningForKeyboard];
-            [self.inputToolbar.contentView.textView resignFirstResponder];
-            [UIView animateWithDuration:0.0
-                             animations:^{
-                                 [self jsq_setToolbarBottomLayoutGuideConstant:0.0f];
-                             }];
             
-            UIView *snapshot = [self.view snapshotViewAfterScreenUpdates:YES];
-            [self.view addSubview:snapshot];
-            self.snapshotView = snapshot;
+            if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
+                [self.inputToolbar.contentView.textView resignFirstResponder];
+                [UIView animateWithDuration:0.0
+                                 animations:^{
+                                     [self jsq_setToolbarBottomLayoutGuideConstant:0.0f];
+                                 }];
+                
+                UIView *snapshot = [self.view snapshotViewAfterScreenUpdates:YES];
+                [self.view addSubview:snapshot];
+                self.snapshotView = snapshot;
+            }
         }
             break;
         case UIGestureRecognizerStateChanged:
@@ -779,7 +783,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateFailed:
             [self.keyboardController beginListeningForKeyboard];
-            [self.snapshotView removeFromSuperview];
+            
+            if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
+                [self.snapshotView removeFromSuperview];
+            }
             break;
         default:
             break;
