@@ -273,7 +273,7 @@
     [self.messageBubbleImageView removeFromSuperview];
     [self.textView removeFromSuperview];
     
-    mediaView.translatesAutoresizingMaskIntoConstraints = NO;
+    [mediaView setTranslatesAutoresizingMaskIntoConstraints:NO];
     mediaView.frame = self.messageBubbleContainerView.bounds;
     
     [self.messageBubbleContainerView addSubview:mediaView];

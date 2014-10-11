@@ -31,6 +31,9 @@
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
 
+#import "UIImage+JSQMessages.h"
+
+
 const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
@@ -74,7 +77,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     self.sectionInset = UIEdgeInsetsMake(10.0f, 4.0f, 10.0f, 4.0f);
     self.minimumLineSpacing = 4.0f;
     
-    _bubbleImageAssetWidth = [UIImage imageNamed:@"bubble_min"].size.width;
+    _bubbleImageAssetWidth = [UIImage jsq_bubbleCompactImage].size.width;
     
     _messageBubbleSizes = [NSMutableDictionary new];
     
@@ -139,9 +142,13 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     _messageBubbleFont = nil;
     
+    [_messageBubbleSizes removeAllObjects];
     _messageBubbleSizes = nil;
     
+    [_dynamicAnimator removeAllBehaviors];
     _dynamicAnimator = nil;
+    
+    [_visibleIndexPaths removeAllObjects];
     _visibleIndexPaths = nil;
 }
 
