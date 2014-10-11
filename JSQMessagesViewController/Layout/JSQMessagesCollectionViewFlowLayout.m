@@ -219,7 +219,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 - (UIDynamicAnimator *)dynamicAnimator
 {
-    if (!_dynamicAnimator) {
+    if (self.springinessEnabled && !_dynamicAnimator) {
         _dynamicAnimator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
     }
     return _dynamicAnimator;
