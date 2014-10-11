@@ -62,13 +62,6 @@
         self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
     }
     
-    /**
-     *  Remove camera button since media messages are not yet implemented
-     *
-     *   self.inputToolbar.contentView.leftBarButtonItem = nil;
-     *
-     *  Or, you can set a custom `leftBarButtonItem` and a custom `rightBarButtonItem`
-     */
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"typing"]
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
