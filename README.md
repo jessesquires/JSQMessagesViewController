@@ -2,7 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/jessesquires/JSQMessagesViewController.svg)](http://travis-ci.org/jessesquires/JSQMessagesViewController) [![Version Status](http://img.shields.io/cocoapods/v/JSQMessagesViewController.png)][docsLink] [![license MIT](http://img.shields.io/badge/license-MIT-orange.png)][mitLink]
 
-### Update: 6.0-beta3 is out! See [#476](https://github.com/jessesquires/JSQMessagesViewController/issues/476) for details.
+### Update: 6.0-beta4 is out! See [#476](https://github.com/jessesquires/JSQMessagesViewController/issues/476) for details.
 
 ![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2][img2]
 
@@ -10,11 +10,11 @@
 
 ## Requirements
 
-* iOS 7.0+ 
+* iOS 7.0+
 * ARC
 * [JSQSystemSoundPlayer][playerLink]
 
-*Need support for iOS 6? [You shouldn't](http://www.macrumors.com/2014/07/14/apple-ios-7-adoption-90-percent/). But, there's a branch for that!* 
+*Need support for iOS 6? [You shouldn't](http://www.macrumors.com/2014/07/14/apple-ios-7-adoption-90-percent/). But, there's a branch for that!*
 ````
 git checkout iOS6_support_stable
 ````
@@ -29,7 +29,7 @@ pod 'JSQMessagesViewController'
 
 Otherwise, drag the `JSQMessagesViewController/` folder to your project. Install [`JSQSystemSoundPlayer`][playerLink] and add the `QuartzCore.framework`.
 
->**NOTE:** 
+>**NOTE:**
 >
 >This repo was formerly named `MessagesTableViewController`.
 >
@@ -72,7 +72,7 @@ Please follow these sweet [contribution guidelines](https://github.com/jessesqui
 
 ## Donate
 
-Support the development of this **free**, open-source library! 
+Support the development of this **free**, open-source library!
 
 >*Donations made via [Square Cash](https://square.com/cash)*
 
@@ -93,7 +93,7 @@ Created by [**@jesse_squires**](https://twitter.com/jesse_squires), a [programmi
 
 ## About
 
-I initially developed this library to use in [Hemoglobe](http://bit.ly/hmglb) for private messages between users. 
+I initially developed this library to use in [Hemoglobe](http://bit.ly/hmglb) for private messages between users.
 
 As it turns out, messaging is something that iOS devs and users really want. Messaging of any kind has turned out to be an increasingly popular mobile app feature in all sorts of contexts and for all sorts of reasons. Thus, I am supporting this project in my free time and have added features way beyond what Hemoglobe ever needed.
 
