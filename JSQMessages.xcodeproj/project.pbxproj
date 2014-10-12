@@ -34,6 +34,9 @@
 		8846441919EB15B2001EBA43 /* bubble_min_tailless@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8846441519EB15B2001EBA43 /* bubble_min_tailless@3x.png */; };
 		8846441A19EB15B2001EBA43 /* bubble_min@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8846441619EB15B2001EBA43 /* bubble_min@3x.png */; };
 		8846441B19EB15B2001EBA43 /* bubble_stroked_tailless@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8846441719EB15B2001EBA43 /* bubble_stroked_tailless@3x.png */; };
+		8846441F19EB17CF001EBA43 /* play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8846441C19EB17CF001EBA43 /* play@3x.png */; };
+		8846442019EB17CF001EBA43 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8846441D19EB17CF001EBA43 /* play@2x.png */; };
+		8846442119EB17CF001EBA43 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 8846441E19EB17CF001EBA43 /* play.png */; };
 		886FFD2E19E9A65D00EB8485 /* UIDevice+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 886FFD2D19E9A65D00EB8485 /* UIDevice+JSQMessages.m */; };
 		8885734A19DE540400E89D20 /* DemoSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8885734919DE540400E89D20 /* DemoSettingsViewController.m */; };
 		8885734D19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8885734C19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m */; };
@@ -157,6 +160,9 @@
 		8846441519EB15B2001EBA43 /* bubble_min_tailless@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_min_tailless@3x.png"; sourceTree = "<group>"; };
 		8846441619EB15B2001EBA43 /* bubble_min@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_min@3x.png"; sourceTree = "<group>"; };
 		8846441719EB15B2001EBA43 /* bubble_stroked_tailless@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_stroked_tailless@3x.png"; sourceTree = "<group>"; };
+		8846441C19EB17CF001EBA43 /* play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@3x.png"; sourceTree = "<group>"; };
+		8846441D19EB17CF001EBA43 /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
+		8846441E19EB17CF001EBA43 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		886FFD2C19E9A65D00EB8485 /* UIDevice+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+JSQMessages.h"; sourceTree = "<group>"; };
 		886FFD2D19E9A65D00EB8485 /* UIDevice+JSQMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+JSQMessages.m"; sourceTree = "<group>"; };
 		8885734819DE540400E89D20 /* DemoSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoSettingsViewController.h; sourceTree = "<group>"; };
@@ -463,6 +469,9 @@
 				88078A9E19D8FFEA005B4595 /* clip.png */,
 				88078A9F19D8FFEA005B4595 /* clip@2x.png */,
 				88078AA019D8FFEA005B4595 /* clip@3x.png */,
+				8846441E19EB17CF001EBA43 /* play.png */,
+				8846441D19EB17CF001EBA43 /* play@2x.png */,
+				8846441C19EB17CF001EBA43 /* play@3x.png */,
 				88078AA619D9034F005B4595 /* typing.png */,
 				88078AA519D9034F005B4595 /* typing@2x.png */,
 				88078AA419D9034F005B4595 /* typing@3x.png */,
@@ -760,6 +769,7 @@
 				88A25FCF19D8E01A00924534 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
 				88AE58ED19E77FBF0042B0DE /* bubble_stroked_tailless.png in Resources */,
 				88A25FA719D8E01A00924534 /* bubble_min_tailless.png in Resources */,
+				8846441F19EB17CF001EBA43 /* play@3x.png in Resources */,
 				88A25FA319D8E01A00924534 /* bubble.png in Resources */,
 				88A25FA519D8E01A00924534 /* bubble_min.png in Resources */,
 				8846441A19EB15B2001EBA43 /* bubble_min@3x.png in Resources */,
@@ -778,7 +788,9 @@
 				88A25F3919D8DF2500924534 /* Main.storyboard in Resources */,
 				88A25FD419D8E01A00924534 /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
 				88078AA819D9034F005B4595 /* typing@2x.png in Resources */,
+				8846442119EB17CF001EBA43 /* play.png in Resources */,
 				88AE58EF19E77FBF0042B0DE /* bubble_stroked.png in Resources */,
+				8846442019EB17CF001EBA43 /* play@2x.png in Resources */,
 				8846441819EB15B2001EBA43 /* bubble_stroked@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
