@@ -35,11 +35,6 @@
 + (UIImage *)jsq_bubbleRegularImage;
 
 /**
- *  @return The regular message bubble image without a tail.
- */
-+ (UIImage *)jsq_bubbleRegularTaillessImage;
-
-/**
  *  @return The regular message bubble image stroked, not filled.
  */
 + (UIImage *)jsq_bubbleRegularStrokedImage;

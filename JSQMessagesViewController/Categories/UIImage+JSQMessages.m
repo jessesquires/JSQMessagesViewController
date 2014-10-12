@@ -50,11 +50,6 @@
     return [UIImage imageNamed:@"bubble"];
 }
 
-+ (UIImage *)jsq_bubbleRegularTaillessImage
-{
-    return [UIImage imageNamed:@"bubble_tailless"];
-}
-
 + (UIImage *)jsq_bubbleRegularStrokedImage
 {
     return [UIImage imageNamed:@"bubble_stroked"];
