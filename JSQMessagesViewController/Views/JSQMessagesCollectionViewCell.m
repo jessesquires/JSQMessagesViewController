@@ -340,4 +340,15 @@
     }
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    CGPoint touchPt = [touch locationInView:self];
+    
+    if ([gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]]) {
+        return CGRectContainsPoint(self.messageBubbleContainerView.frame, touchPt);
+    }
+    
+    return YES;
+}
+
 @end
