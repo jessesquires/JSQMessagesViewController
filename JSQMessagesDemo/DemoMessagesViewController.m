@@ -168,6 +168,21 @@
                 
                 newMediaData = locationItemCopy;
             }
+            else if ([copyMediaData isKindOfClass:[JSQVideoMediaitem class]]) {
+                JSQVideoMediaitem *videoItemCopy = [((JSQVideoMediaitem *)copyMediaData) copy];
+                newMediaAttachmentCopy = [videoItemCopy.fileURL copy];
+                
+                /**
+                 *  Reset video item to simulate "downloading" the video
+                 */
+                videoItemCopy.fileURL = nil;
+                videoItemCopy.isReadyToPlay = NO;
+                
+                newMediaData = videoItemCopy;
+            }
+            else {
+                NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
+            }
             
             newMessage = [JSQMediaMessage messageWithSenderId:randomUserId
                                                   displayName:self.demoData.users[randomUserId]
@@ -216,6 +231,15 @@
                         [self.collectionView reloadData];
                     }];
                 }
+                else if ([newMediaData isKindOfClass:[JSQVideoMediaitem class]]) {
+                    ((JSQVideoMediaitem *)newMediaData).fileURL = newMediaAttachmentCopy;
+                    ((JSQVideoMediaitem *)newMediaData).isReadyToPlay = YES;
+                    [self.collectionView reloadData];
+                }
+                else {
+                    NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
+                }
+                
             });
         }
         
@@ -262,7 +286,7 @@
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Send photo", @"Send location", nil];
+                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", nil];
     
     [sheet showFromToolbar:self.inputToolbar];
 }
@@ -286,6 +310,10 @@
                 [weakView reloadData];
             }];
         }
+            break;
+            
+        case 2:
+            [self.demoData addVideoMediaMessage];
             break;
     }
     
