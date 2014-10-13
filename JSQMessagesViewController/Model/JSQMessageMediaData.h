@@ -28,10 +28,11 @@
  *
  *  This library provides a few concrete classes that conform to this protocol. You may use them as-is,
  *  but they will likely require some modifications or extensions to conform to your particular data models.
- *  These concrete media items are: `JSQPhotoMediaItem`, `JSQLocationMediaItem`.
+ *  These concrete media items are: `JSQPhotoMediaItem`, `JSQLocationMediaItem`, `JSQVideoMediaItem`.
  *
  *  @see JSQPhotoMediaItem.
  *  @see JSQLocationMediaItem.
+ *  @see JSQVideoMediaItem.
  */
 @protocol JSQMessageMediaData <NSObject>
 
