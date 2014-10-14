@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  http://www.hexedbits.com
 //
 //
 //  Documentation
@@ -22,9 +22,6 @@
 //
 
 #import "JSQMessagesKeyboardController.h"
-
-#import "UIDevice+JSQMessages.h"
-
 
 NSString * const JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame = @"JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame";
 NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeyboardDidChangeFrame = @"JSQMessagesKeyboardControllerUserInfoKeyKeyboardDidChangeFrame";
@@ -310,12 +307,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     //  system keyboard is added to a new UIWindow, need to operate in window coordinates
     //  also, keyboard always slides from bottom of screen, not the bottom of a view
     CGFloat contextViewWindowHeight = CGRectGetHeight(self.contextView.window.frame);
-    
-    if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
-        //  handle iOS 7 bug when rotating to landscape
-        if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-            contextViewWindowHeight = CGRectGetWidth(self.contextView.window.frame);
-        }
+    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        contextViewWindowHeight = CGRectGetWidth(self.contextView.window.frame);
     }
     
     CGFloat keyboardViewHeight = CGRectGetHeight(self.keyboardView.frame);

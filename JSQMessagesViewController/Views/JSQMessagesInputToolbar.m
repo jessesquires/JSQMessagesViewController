@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  http://www.hexedbits.com
 //
 //
 //  Documentation
@@ -18,6 +18,7 @@
 
 #import "JSQMessagesInputToolbar.h"
 
+#import "JSQMessagesToolbarContentView.h"
 #import "JSQMessagesComposerTextView.h"
 
 #import "JSQMessagesToolbarButtonFactory.h"

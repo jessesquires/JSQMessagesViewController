@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  http://www.hexedbits.com
 //
 //
 //  Documentation
@@ -23,8 +23,7 @@
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
 
 #import "JSQMessageData.h"
-#import "JSQMessageBubbleImageDataSource.h"
-#import "JSQMessageAvatarImageDataSource.h"
+#import "JSQMessage.h"
 
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
@@ -40,7 +39,6 @@
 
 #import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
-#import "UIDevice+JSQMessages.h"
 
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
@@ -129,17 +127,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.inputToolbar.contentView.textView.placeHolder = NSLocalizedString(@"New Message", @"Placeholder text for the message input text view");
     self.inputToolbar.contentView.textView.delegate = self;
     
-    self.senderId = @"JSQDefaultSender";
-    self.senderDisplayName = @"JSQDefaultSender";
+    self.sender = @"JSQDefaultSender";
     
     self.automaticallyScrollsToMostRecentMessage = YES;
     
     self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
-    self.outgoingMediaCellIdentifier = [JSQMessagesCollectionViewCellOutgoing mediaCellReuseIdentifier];
-    
     self.incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
-    self.incomingMediaCellIdentifier = [JSQMessagesCollectionViewCellIncoming mediaCellReuseIdentifier];
     
+    self.typingIndicatorColor = [UIColor jsq_messageBubbleLightGrayColor];
     self.showTypingIndicator = NO;
     
     self.showLoadEarlierMessagesHeader = NO;
@@ -167,8 +162,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     _toolbarHeightConstraint = nil;
     _toolbarBottomLayoutGuide = nil;
     
-    _senderId = nil;
-    _senderDisplayName = nil;
+    _sender = nil;
     _outgoingCellIdentifier = nil;
     _incomingCellIdentifier = nil;
     
@@ -236,7 +230,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self jsq_addActionToInteractivePopGestureRecognizer:YES];
     [self.keyboardController beginListeningForKeyboard];
     
-    if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
+    if (self.snapshotView) {
         [self.snapshotView removeFromSuperview];
     }
 }
@@ -293,12 +287,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)didPressSendButton:(UIButton *)button
            withMessageText:(NSString *)text
-                  senderId:(NSString *)senderId
-         senderDisplayName:(NSString *)senderDisplayName
-                      date:(NSDate *)date
-{
-    NSAssert(NO, @"Error! required method not implemented in subclass. Need to implement %s", __PRETTY_FUNCTION__);
-}
+                    sender:(NSString *)sender
+                      date:(NSDate *)date { }
 
 - (void)didPressAccessoryButton:(UIButton *)sender { }
 
@@ -306,7 +296,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     UITextView *textView = self.inputToolbar.contentView.textView;
     textView.text = nil;
-    [textView.undoManager removeAllActions];
     
     [self.inputToolbar toggleSendButtonEnabled];
     
@@ -355,13 +344,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     return nil;
 }
 
-- (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
     return nil;
 }
 
-- (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
     return nil;
@@ -396,66 +385,44 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    NSParameterAssert(messageItem != nil);
+    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+    NSParameterAssert(messageData != nil);
     
-    NSString *messageSenderId = [messageItem senderId];
-    NSParameterAssert(messageSenderId != nil);
+    NSString *messageSender = [messageData sender];
+    NSParameterAssert(messageSender != nil);
     
-    BOOL isOutgoingMessage = [messageSenderId isEqualToString:self.senderId];
-    BOOL isMediaMessage = [messageItem isMediaMessage];
+    BOOL isOutgoingMessage = [messageSender isEqualToString:self.sender];
     
-    NSString *cellIdentifier = nil;
-    if (isMediaMessage) {
-        cellIdentifier = isOutgoingMessage ? self.outgoingMediaCellIdentifier : self.incomingMediaCellIdentifier;
-    }
-    else {
-        cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
-    }
-    
+    NSString *cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = collectionView;
     
-    if (!isMediaMessage) {
-        cell.textView.text = [messageItem text];
-        NSParameterAssert(cell.textView.text != nil);
-        
-        id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
-        if (bubbleImageDataSource != nil) {
-            cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
-            cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
-        }
-    }
-    else {
-        id<JSQMessageMediaData> messageMedia = [messageItem media];
-        cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
-        NSParameterAssert(cell.mediaView != nil);
-    }
+    NSString *messageText = [messageData text];
+    NSParameterAssert(messageText != nil);
     
-    BOOL needsAvatar = YES;
-    if (isOutgoingMessage && CGSizeEqualToSize(collectionView.collectionViewLayout.outgoingAvatarViewSize, CGSizeZero)) {
-        needsAvatar = NO;
-    }
-    else if (!isOutgoingMessage && CGSizeEqualToSize(collectionView.collectionViewLayout.incomingAvatarViewSize, CGSizeZero)) {
-        needsAvatar = NO;
-    }
-    
-    id<JSQMessageAvatarImageDataSource> avatarImageDataSource = nil;
-    if (needsAvatar) {
-        avatarImageDataSource = [collectionView.dataSource collectionView:collectionView avatarImageDataForItemAtIndexPath:indexPath];
-        if (avatarImageDataSource != nil) {
-            cell.avatarImageView.image = [avatarImageDataSource avatarImage] ?: [avatarImageDataSource avatarPlaceholderImage];
-            cell.avatarImageView.highlightedImage = [avatarImageDataSource avatarHighlightedImage];
-        }
-    }
-    
+    cell.textView.text = messageText;
+    cell.messageBubbleImageView = [collectionView.dataSource collectionView:collectionView bubbleImageViewForItemAtIndexPath:indexPath];
+    cell.avatarImageView = [collectionView.dataSource collectionView:collectionView avatarImageViewForItemAtIndexPath:indexPath];
     cell.cellTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellTopLabelAtIndexPath:indexPath];
     cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
     cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellBottomLabelAtIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor whiteColor];
+    if (isOutgoingMessage) {
+        cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
+                                                 CGRectGetMinY(cell.avatarImageView.bounds),
+                                                 collectionView.collectionViewLayout.outgoingAvatarViewSize.width,
+                                                 collectionView.collectionViewLayout.outgoingAvatarViewSize.height);
+    }
+    else {
+        cell.avatarImageView.bounds = CGRectMake(CGRectGetMinX(cell.avatarImageView.bounds),
+                                                 CGRectGetMinY(cell.avatarImageView.bounds),
+                                                 collectionView.collectionViewLayout.incomingAvatarViewSize.width,
+                                                 collectionView.collectionViewLayout.incomingAvatarViewSize.height);
+    }
     
-    CGFloat bubbleTopLabelInset = (avatarImageDataSource != nil) ? 60.0f : 15.0f;
+    cell.backgroundColor = [UIColor clearColor];
+    
+    CGFloat bubbleTopLabelInset = (cell.avatarImageView != nil) ? 60.0f : 15.0f;
     
     if (isOutgoingMessage) {
         cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
@@ -474,7 +441,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                  atIndexPath:(NSIndexPath *)indexPath
 {
     if (self.showTypingIndicator && [kind isEqualToString:UICollectionElementKindSectionFooter]) {
-        return [collectionView dequeueTypingIndicatorFooterViewForIndexPath:indexPath];
+        return [collectionView dequeueTypingIndicatorFooterViewIncoming:YES
+                                                     withIndicatorColor:[self.typingIndicatorColor jsq_colorByDarkeningColorWithValue:0.3f]
+                                                            bubbleColor:self.typingIndicatorColor
+                                                           forIndexPath:indexPath];
     }
     else if (self.showLoadEarlierMessagesHeader && [kind isEqualToString:UICollectionElementKindSectionHeader]) {
         return [collectionView dequeueLoadEarlierMessagesViewHeaderForIndexPath:indexPath];
@@ -505,14 +475,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - Collection view delegate
 
-- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    //  disable menu for media messages
-    id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    if ([messageItem isMediaMessage]) {
-        return NO;
-    }
-    
     self.selectedIndexPathForMenu = indexPath;
     
     //  textviews are selectable to allow data detectors
@@ -554,7 +518,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cellHeight += [self collectionView:collectionView layout:collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:indexPath];
     cellHeight += [self collectionView:collectionView layout:collectionViewLayout heightForCellBottomLabelAtIndexPath:indexPath];
     
-    return CGSizeMake(collectionViewLayout.itemWidth, ceilf(cellHeight));
+    return CGSizeMake(collectionViewLayout.itemWidth, cellHeight);
 }
 
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
@@ -595,8 +559,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     else {
         [self didPressSendButton:sender
                  withMessageText:[self jsq_currentlyComposedMessageText]
-                        senderId:self.senderId
-               senderDisplayName:self.senderDisplayName
+                          sender:self.sender
                             date:[NSDate date]];
     }
 }
@@ -606,8 +569,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (toolbar.sendButtonOnRight) {
         [self didPressSendButton:sender
                  withMessageText:[self jsq_currentlyComposedMessageText]
-                        senderId:self.senderId
-               senderDisplayName:self.senderDisplayName
+                          sender:self.sender
                             date:[NSDate date]];
     }
     else {
@@ -758,23 +720,20 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStateBegan:
         {
-            if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
+            if (self.snapshotView) {
                 [self.snapshotView removeFromSuperview];
             }
             
             [self.keyboardController endListeningForKeyboard];
+            [self.inputToolbar.contentView.textView resignFirstResponder];
+            [UIView animateWithDuration:0.0
+                             animations:^{
+                                 [self jsq_setToolbarBottomLayoutGuideConstant:0.0f];
+                             }];
             
-            if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
-                [self.inputToolbar.contentView.textView resignFirstResponder];
-                [UIView animateWithDuration:0.0
-                                 animations:^{
-                                     [self jsq_setToolbarBottomLayoutGuideConstant:0.0f];
-                                 }];
-                
-                UIView *snapshot = [self.view snapshotViewAfterScreenUpdates:YES];
-                [self.view addSubview:snapshot];
-                self.snapshotView = snapshot;
-            }
+            UIView *snapshot = [self.view snapshotViewAfterScreenUpdates:YES];
+            [self.view addSubview:snapshot];
+            self.snapshotView = snapshot;
         }
             break;
         case UIGestureRecognizerStateChanged:
@@ -783,10 +742,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateFailed:
             [self.keyboardController beginListeningForKeyboard];
-            
-            if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
-                [self.snapshotView removeFromSuperview];
-            }
+            [self.snapshotView removeFromSuperview];
             break;
         default:
             break;

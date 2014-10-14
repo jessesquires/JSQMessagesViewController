@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  http://www.hexedbits.com
 //
 //
 //  Documentation
@@ -16,8 +16,11 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-@import Foundation;
-@import UIKit;
+#ifndef JSQMessages_JSQMessagesCollectionViewDelegateFlowLayout_h
+#define JSQMessages_JSQMessagesCollectionViewDelegateFlowLayout_h
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @class JSQMessagesCollectionView;
 @class JSQMessagesCollectionViewFlowLayout;
@@ -43,7 +46,7 @@
  *
  *  @return The height of the `cellTopLabel` for the item at indexPath.
  *
- *  @see JSQMessagesCollectionViewCell.
+ *  @see `JSQMessagesCollectionViewCell`.
  */
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath;
@@ -57,7 +60,7 @@
  *
  *  @return The height of the `messageBubbleTopLabel` for the item at indexPath.
  *
- *  @see JSQMessagesCollectionViewCell.
+ *  @see `JSQMessagesCollectionViewCell`.
  */
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath;
@@ -71,7 +74,7 @@
  *
  *  @return The height of the `cellBottomLabel` for the item at indexPath.
  *
- *  @see JSQMessagesCollectionViewCell.
+ *  @see `JSQMessagesCollectionViewCell`.
  */
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
@@ -120,3 +123,5 @@
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender;
 
 @end
+
+#endif

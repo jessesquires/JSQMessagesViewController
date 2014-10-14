@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  http://www.hexedbits.com
 //
 //
 //  MIT License
@@ -8,7 +8,8 @@
 //  http://opensource.org/licenses/MIT
 //
 
-@import XCTest;
+#import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
 
 #import "NSString+JSQMessages.h"
 

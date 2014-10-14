@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  http://www.hexedbits.com
 //
 //
 //  Documentation
@@ -21,23 +21,16 @@
 //  https://github.com/AshFurrow/ASHSpringyCollectionView
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 @class JSQMessagesCollectionView;
-
 
 /**
  *  A constant that describes the default height for all label subviews in a `JSQMessagesCollectionViewCell`.
  *
- *  @see JSQMessagesCollectionViewCell.
+ *  @see `JSQMessagesCollectionViewCell`.
  */
 FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault;
-
-/**
- *  A constant that describes the default size for avatar images in a `JSQMessagesCollectionViewFlowLayout`.
- */
-FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
-
 
 
 /**
@@ -48,8 +41,8 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
  *  You can easily customize the layout via its properties or its delegate methods 
  *  defined in `JSQMessagesCollectionViewDelegateFlowLayout`.
  *
- *  @see JSQMessagesCollectionViewDelegateFlowLayout.
- *  @see JSQMessagesCollectionViewCell.
+ *  @see `JSQMessagesCollectionViewDelegateFlowLayout`
+ *  @see `JSQMessagesCollectionViewCell`
  */
 @interface JSQMessagesCollectionViewFlowLayout : UICollectionViewFlowLayout
 
@@ -92,11 +85,9 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
 @property (strong, nonatomic) UIFont *messageBubbleFont;
 
 /**
- *  The horizontal spacing used to lay out the `messageBubbleContainerView` frame within each `JSQMessagesCollectionViewCell`.
- *  This container view holds the message bubble image and message contents of a cell.
- *
- *  This value specifies the horizontal spacing between the `messageBubbleContainerView` and
- *  the edge of the collection view cell in which it is displayed. That is, the edge that is opposite the avatar image.
+ *  The horizontal spacing used to lay out the text view frame within each `JSQMessagesCollectionViewCell`.
+ *  This value specifies the horizontal spacing between the message bubble and 
+ *  the edge of the collection view cell in which it is displayed.
  *
  *  @discussion The default value is `40.0f` on iPhone and `240.0f` on iPad. This value must be positive.
  *  For *outgoing* messages, this value specifies the amount of spacing from the left most 
@@ -108,13 +99,13 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
  *  @warning This value may not be exact when the layout object finishes laying out its items, due to the constraints it must satisfy. 
  *  This value should be considered more of a recommendation or suggestion to the layout, not an exact value.
  *
- *  @see JSQMessagesCollectionViewCellIncoming.
- *  @see JSQMessagesCollectionViewCellOutgoing.
+ *  @see `JSQMessagesCollectionViewCellIncoming`.
+ *  @see `JSQMessagesCollectionViewCellOutgoing`.
  */
 @property (assign, nonatomic) CGFloat messageBubbleLeftRightMargin;
 
 /**
- *  The inset of the frame of the text view within the `messageBubbleContainerView` of each `JSQMessagesCollectionViewCell`.
+ *  The inset of the frame of the text view within each `JSQMessagesCollectionViewCell`. 
  *  The inset values should be positive and are applied in the following ways:
  *  
  *  1. The right value insets the text view frame on the side adjacent to the avatar image 
@@ -154,16 +145,14 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
 /**
  *  The size of the avatar image view for incoming messages.
  *
- *  @discussion The default value is `(30.0f, 30.0f)`. Set to `CGSizeZero` to remove incoming avatars.
- *  You may use `kJSQMessagesCollectionViewAvatarSizeDefault` to size your avatars to the default value.
+ *  @discussion The default value is `(34.0f, 34.0f)`. Set to `CGSizeZero` to remove incoming avatars.
  */
 @property (assign, nonatomic) CGSize incomingAvatarViewSize;
 
 /**
  *  The size of the avatar image view for outgoing messages.
  *
- *  @discussion The default value is `(30.0f, 30.0f)`. Set to `CGSizeZero` to remove outgoing avatars.
- *  You may use `kJSQMessagesCollectionViewAvatarSizeDefault` to size your avatars to the default value.
+ *  @discussion The default value is `(34.0f, 34.0f)`. Set to `CGSizeZero` to remove outgoing avatars.
  */
 @property (assign, nonatomic) CGSize outgoingAvatarViewSize;
 

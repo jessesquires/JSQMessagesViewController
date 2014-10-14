@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  http://www.hexedbits.com
 //
 //
 //  Documentation
@@ -16,8 +16,8 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-@import Foundation;
-@import UIKit;
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  *  `JSQMessagesToolbarButtonFactory` is a factory that provides a means for creating the default
@@ -27,7 +27,7 @@
 
 /**
  *  Creates and returns a new button that is styled as the default accessory button. 
- *  The button has a paper clip icon image and no text.
+ *  The button has a camera icon image and no text.
  *
  *  @return A newly created button.
  */

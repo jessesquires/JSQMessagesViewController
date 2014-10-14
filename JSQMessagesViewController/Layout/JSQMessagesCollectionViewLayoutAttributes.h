@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  http://www.hexedbits.com
 //
 //
 //  Documentation
@@ -16,7 +16,7 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 /**
  *  A `JSQMessagesCollectionViewLayoutAttributes` is an object that manages the layout-related attributes
@@ -71,7 +71,7 @@
  *  The size of the `avatarImageView` of a `JSQMessagesCollectionViewCellIncoming`.
  *  The size values should be greater than or equal to `0.0`.
  *
- *  @see JSQMessagesCollectionViewCellIncoming.
+ *  @see `JSQMessagesCollectionViewCellIncoming`.
  */
 @property (assign, nonatomic) CGSize incomingAvatarViewSize;
 
@@ -87,7 +87,7 @@
  *  The height of the `cellTopLabel` of a `JSQMessagesCollectionViewCell`.
  *  This value should be greater than or equal to `0.0`.
  *
- *  @see JSQMessagesCollectionViewCell.
+ *  @see `JSQMessagesCollectionViewCell`.
  */
 @property (assign, nonatomic) CGFloat cellTopLabelHeight;
 
@@ -95,7 +95,7 @@
  *  The height of the `messageBubbleTopLabel` of a `JSQMessagesCollectionViewCell`.
  *  This value should be greater than or equal to `0.0`.
  *
- *  @see JSQMessagesCollectionViewCell.
+ *  @see `JSQMessagesCollectionViewCell`.
  */
 @property (assign, nonatomic) CGFloat messageBubbleTopLabelHeight;
 
@@ -103,7 +103,7 @@
  *  The height of the `cellBottomLabel` of a `JSQMessagesCollectionViewCell`.
  *  This value should be greater than or equal to `0.0`.
  *
- *  @see JSQMessagesCollectionViewCell.
+ *  @see `JSQMessagesCollectionViewCell`.
  */
 @property (assign, nonatomic) CGFloat cellBottomLabelHeight;
 

@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  http://www.hexedbits.com
 //
 //
 //  Documentation
@@ -26,26 +26,26 @@ static NSString * const kJSQMessageSentSoundName = @"message_sent";
 
 + (void)jsq_playMessageReceivedSound
 {
-    [[JSQSystemSoundPlayer sharedPlayer] playSoundWithFilename:kJSQMessageReceivedSoundName
-                                                 fileExtension:kJSQSystemSoundTypeAIFF];
+    [[JSQSystemSoundPlayer sharedPlayer] playSoundWithName:kJSQMessageReceivedSoundName
+                                                 extension:kJSQSystemSoundTypeAIFF];
 }
 
 + (void)jsq_playMessageReceivedAlert
 {
-    [[JSQSystemSoundPlayer sharedPlayer] playAlertSoundWithFilename:kJSQMessageReceivedSoundName
-                                                      fileExtension:kJSQSystemSoundTypeAIFF];
+    [[JSQSystemSoundPlayer sharedPlayer] playAlertSoundWithName:kJSQMessageReceivedSoundName
+                                                      extension:kJSQSystemSoundTypeAIFF];
 }
 
 + (void)jsq_playMessageSentSound
 {
-    [[JSQSystemSoundPlayer sharedPlayer] playSoundWithFilename:kJSQMessageSentSoundName
-                                                 fileExtension:kJSQSystemSoundTypeAIFF];
+    [[JSQSystemSoundPlayer sharedPlayer] playSoundWithName:kJSQMessageSentSoundName
+                                                 extension:kJSQSystemSoundTypeAIFF];
 }
 
 + (void)jsq_playMessageSentAlert
 {
-    [[JSQSystemSoundPlayer sharedPlayer] playAlertSoundWithFilename:kJSQMessageSentSoundName
-                                                      fileExtension:kJSQSystemSoundTypeAIFF];
+    [[JSQSystemSoundPlayer sharedPlayer] playAlertSoundWithName:kJSQMessageSentSoundName
+                                                      extension:kJSQSystemSoundTypeAIFF];
 }
 
 @end

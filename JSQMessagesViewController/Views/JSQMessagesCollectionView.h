@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  http://www.hexedbits.com
 //
 //
 //  Documentation
@@ -16,7 +16,7 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 #import "JSQMessagesCollectionViewFlowLayout.h"
 #import "JSQMessagesCollectionViewDelegateFlowLayout.h"
@@ -51,48 +51,26 @@
 @property (strong, nonatomic) JSQMessagesCollectionViewFlowLayout *collectionViewLayout;
 
 /**
- *  Specifies whether the typing indicator displays on the left or right side of the collection view
- *  when shown. That is, whether it displays for an "incoming" or "outgoing" message.
- *  The default value is `YES`, meaning that the typing indicator will display on the left side of the
- *  collection view for incoming messages.
+ *  Returns a `JSQMessagesTypingIndicatorFooterView` object configured with the specified parameters.
  *
- *  @discussion If your `JSQMessagesViewController` subclass displays messages for right-to-left
- *  languages, such as Arabic, set this property to `NO`.
- *
- */
-@property (assign, nonatomic) BOOL typingIndicatorDisplaysOnLeft;
-
-/**
- *  The color of the typing indicator message bubble. The default value is a light gray color.
- */
-@property (strong, nonatomic) UIColor *typingIndicatorMessageBubbleColor;
-
-/**
- *  The color of the typing indicator ellipsis. The default value is a dark gray color.
- */
-@property (strong, nonatomic) UIColor *typingIndicatorEllipsisColor;
-
-/**
- *  The color of the text in the load earlier messages header. The default value is a bright blue color.
- */
-@property (strong, nonatomic) UIColor *loadEarlierMessagesHeaderTextColor;
-
-/**
- *  Returns a `JSQMessagesTypingIndicatorFooterView` object for the specified index path
- *  that is configured using the collection view's properties:
- *  typingIndicatorDisplaysOnLeft, typingIndicatorMessageBubbleColor, typingIndicatorEllipsisColor.
- *
- *  @param indexPath The index path specifying the location of the supplementary view in the collection view. This value must not be `nil`.
+ *  @param isIncoming     Specifies whether the typing indicator should be displayed
+ *                        for an incoming message or outgoing message.
+ *  @param indicatorColor The color of the typing indicator ellipsis. This value must not be `nil`.
+ *  @param bubbleColor    The color of the message bubble. This value must not be `nil`.
+ *  @param indexPath      The index path specifying the location of the 
+ *                        supplementary view in the collection view. This value must not be `nil`.
  *
  *  @return A valid `JSQMessagesTypingIndicatorFooterView` object.
  */
-- (JSQMessagesTypingIndicatorFooterView *)dequeueTypingIndicatorFooterViewForIndexPath:(NSIndexPath *)indexPath;
-
+- (JSQMessagesTypingIndicatorFooterView *)dequeueTypingIndicatorFooterViewIncoming:(BOOL)isIncoming
+                                                                withIndicatorColor:(UIColor *)indicatorColor
+                                                                       bubbleColor:(UIColor *)bubbleColor
+                                                                      forIndexPath:(NSIndexPath *)indexPath;
 /**
- *  Returns a `JSQMessagesLoadEarlierHeaderView` object for the specified index path
- *  that is configured using the collection view's loadEarlierMessagesHeaderTextColor property.
+ *  Returns a `JSQMessagesLoadEarlierHeaderView` object for the specified index path.
  *
- *  @param indexPath The index path specifying the location of the supplementary view in the collection view. This value must not be `nil`.
+ *  @param indexPath The index path specifying the location of the
+ *                   supplementary view in the collection view. This value must not be `nil`.
  *
  *  @return A valid `JSQMessagesLoadEarlierHeaderView` object.
  */

@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  http://www.hexedbits.com
 //
 //
 //  Documentation
@@ -19,8 +19,8 @@
 #import "JSQMessagesCollectionViewCell.h"
 
 /**
- *  A `JSQMessagesCollectionViewCellIncoming` object is a concrete instance 
- *  of `JSQMessagesCollectionViewCell` that represents an incoming message data item.
+ *  A `JSQMessagesCollectionViewCellIncoming` object is a concrete instance of `JSQMessagesCollectionViewCell`
+ *  that represents an incoming message data item.
  */
 @interface JSQMessagesCollectionViewCellIncoming : JSQMessagesCollectionViewCell
 

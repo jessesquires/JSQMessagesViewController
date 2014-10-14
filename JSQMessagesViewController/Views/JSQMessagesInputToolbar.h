@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  http://www.hexedbits.com
 //
 //
 //  Documentation
@@ -16,12 +16,10 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-@import Foundation;
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 @class JSQMessagesInputToolbar;
-
-#import "JSQMessagesToolbarContentView.h"
+@class JSQMessagesToolbarContentView;
 
 /**
  *  A constant the specifies the default height for a `JSQMessagesInputToolbar`.
