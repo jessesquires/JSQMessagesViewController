@@ -21,7 +21,7 @@
 //  https://github.com/AshFurrow/ASHSpringyCollectionView
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 @class JSQMessagesCollectionView;
 

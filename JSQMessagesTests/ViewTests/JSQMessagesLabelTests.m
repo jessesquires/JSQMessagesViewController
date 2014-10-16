@@ -8,7 +8,7 @@
 //  http://opensource.org/licenses/MIT
 //
 
-@import XCTest;
+#import <XCTest/XCTest.h>
 
 #import "JSQMessagesLabel.h"
 

@@ -16,7 +16,7 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 /**
  *  A `JSQMessagesCollectionViewLayoutAttributes` is an object that manages the layout-related attributes

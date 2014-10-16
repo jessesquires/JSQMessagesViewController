@@ -16,8 +16,8 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-@import Foundation;
-@import UIKit;
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  *  A constant defining the default height of a `JSQMessagesTypingIndicatorFooterView`.

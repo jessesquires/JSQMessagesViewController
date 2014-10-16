@@ -16,8 +16,8 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-@import CoreLocation;
-@import MapKit;
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 /**
  *  A completion handler block for a `JSQLocationMediaItem`. See `setLocation: withCompletionHandler:`.

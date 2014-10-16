@@ -16,7 +16,7 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 /**
  *  An instance of `JSQMessagesComposerTextView` is a subclass of `UITextView` that is styled and used 

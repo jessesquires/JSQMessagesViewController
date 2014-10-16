@@ -16,8 +16,8 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-@import Foundation;
-@import UIKit;
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  *  `JSQMessagesToolbarButtonFactory` is a factory that provides a means for creating the default
