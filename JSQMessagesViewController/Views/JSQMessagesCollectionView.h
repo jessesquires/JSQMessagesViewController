@@ -98,4 +98,6 @@
  */
 - (JSQMessagesLoadEarlierHeaderView *)dequeueLoadEarlierMessagesViewHeaderForIndexPath:(NSIndexPath *)indexPath;
 
+@property (strong, nonatomic, readwrite) UIView* inputAccessoryView;
+
 @end

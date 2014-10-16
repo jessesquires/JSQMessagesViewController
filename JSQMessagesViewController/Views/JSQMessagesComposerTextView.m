@@ -35,8 +35,6 @@
 
 @end
 
-
-
 @implementation JSQMessagesComposerTextView
 
 #pragma mark - Initialization
@@ -48,14 +46,14 @@
     CGFloat cornerRadius = 6.0f;
     
     self.backgroundColor = [UIColor whiteColor];
-    self.layer.borderWidth = 0.5f;
+    self.layer.borderWidth = 1 / [UIScreen mainScreen].scale;
     self.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.layer.cornerRadius = cornerRadius;
     
     self.scrollIndicatorInsets = UIEdgeInsetsMake(cornerRadius, 0.0f, cornerRadius, 0.0f);
     
-    self.textContainerInset = UIEdgeInsetsMake(4.0f, 2.0f, 4.0f, 2.0f);
-    self.contentInset = UIEdgeInsetsMake(2.0f, 0.0f, 2.0f, 0.0f);
+    self.textContainerInset = UIEdgeInsetsMake(5.0f, 0.0f, 5.0f, 0.0f);
+    self.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
     
     self.scrollEnabled = YES;
     self.scrollsToTop = NO;
@@ -72,10 +70,10 @@
     self.returnKeyType = UIReturnKeyDefault;
     
     self.text = nil;
-    
+	
     _placeHolder = nil;
     _placeHolderTextColor = [UIColor lightGrayColor];
-    
+	
     [self jsq_addTextViewNotificationObservers];
 }
 

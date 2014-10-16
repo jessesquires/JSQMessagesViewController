@@ -150,4 +150,9 @@
                     touchLocation:position];
 }
 
+- (BOOL)canBecomeFirstResponder
+{
+	return YES;
+}
+
 @end
