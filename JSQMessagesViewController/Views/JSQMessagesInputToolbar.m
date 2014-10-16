@@ -71,6 +71,8 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     self.contentView.rightBarButtonItem = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
     
     [self toggleSendButtonEnabled];
+	
+	self.clipsToBounds = NO;
 }
 
 - (void)dealloc
