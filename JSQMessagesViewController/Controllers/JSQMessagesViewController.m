@@ -320,6 +320,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
 }
 
+- (BOOL)isMenuVisible
+{
+    // it's only our menu if selectedIndexPathForMenu is set
+    return self.selectedIndexPathForMenu && [[UIMenuController sharedMenuController] isMenuVisible];
+}
+
 - (void)finishReceivingMessage
 {
     self.showTypingIndicator = NO;
@@ -327,7 +333,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView reloadData];
     
-    if (self.automaticallyScrollsToMostRecentMessage) {
+    if (self.automaticallyScrollsToMostRecentMessage && ![self isMenuVisible]) {
         [self scrollToBottomAnimated:YES];
     }
 }
