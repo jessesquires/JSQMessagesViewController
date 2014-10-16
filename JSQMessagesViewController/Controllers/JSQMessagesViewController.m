@@ -85,6 +85,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)jsq_updateCollectionViewInsets;
 - (void)jsq_setCollectionViewInsetsTopValue:(CGFloat)top bottomValue:(CGFloat)bottom;
 
+- (BOOL)jsq_isMenuVisible;
+
 - (void)jsq_addObservers;
 - (void)jsq_removeObservers;
 
@@ -320,12 +322,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
 }
 
-- (BOOL)isMenuVisible
-{
-    // it's only our menu if selectedIndexPathForMenu is set
-    return self.selectedIndexPathForMenu && [[UIMenuController sharedMenuController] isMenuVisible];
-}
-
 - (void)finishReceivingMessage
 {
     self.showTypingIndicator = NO;
@@ -333,7 +329,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView reloadData];
     
-    if (self.automaticallyScrollsToMostRecentMessage && ![self isMenuVisible]) {
+    if (self.automaticallyScrollsToMostRecentMessage && ![self jsq_isMenuVisible]) {
         [self scrollToBottomAnimated:YES];
     }
 }
@@ -881,6 +877,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     UIEdgeInsets insets = UIEdgeInsetsMake(top, 0.0f, bottom, 0.0f);
     self.collectionView.contentInset = insets;
     self.collectionView.scrollIndicatorInsets = insets;
+}
+
+- (BOOL)jsq_isMenuVisible
+{
+    //  check if cell copy menu is showing
+    //  it is only our menu if `selectedIndexPathForMenu` is not `nil`
+    return self.selectedIndexPathForMenu != nil && [[UIMenuController sharedMenuController] isMenuVisible];
 }
 
 #pragma mark - Utilities
