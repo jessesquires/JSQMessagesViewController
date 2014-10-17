@@ -206,9 +206,22 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([JSQMessagesViewController class])
-                                  owner:self
-                                options:nil];
+    if (self.collectionView || self.inputToolbar ||
+        self.toolbarHeightConstraint || self.toolbarBottomLayoutGuide)
+    {
+        // it seems the developer is implementing his own interface
+        if (!self.collectionView || !self.inputToolbar ||
+            !self.toolbarHeightConstraint || !self.toolbarBottomLayoutGuide)
+        {
+            NSAssert(NO, @"Error! if you intend to implement your own interface you must connect: collectionView, inputToolbar, toolbarHeightConstraint, toolbarBottomLayoutGuide");
+        }
+    }
+    else
+    {
+        [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([JSQMessagesViewController class])
+                                      owner:self
+                                    options:nil];
+    }
     [self jsq_configureMessagesViewController];
     [self jsq_registerForNotifications:YES];
 }
@@ -730,7 +743,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame
 {
-    CGFloat heightFromBottom = CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(keyboardFrame);
+    CGFloat heightFromBottom = CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(keyboardFrame);
     
     heightFromBottom = MAX(0.0f, heightFromBottom);
     
@@ -867,7 +880,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)jsq_updateCollectionViewInsets
 {
     [self jsq_setCollectionViewInsetsTopValue:self.topLayoutGuide.length + self.topContentAdditionalInset
-                                  bottomValue:CGRectGetHeight(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame)];
+                                  bottomValue:CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame)];
 }
 
 - (void)jsq_setCollectionViewInsetsTopValue:(CGFloat)top bottomValue:(CGFloat)bottom
