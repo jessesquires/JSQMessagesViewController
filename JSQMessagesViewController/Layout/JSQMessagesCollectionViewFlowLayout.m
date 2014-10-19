@@ -462,6 +462,19 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     return finalSize;
 }
 
+- (CGSize)sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize messageBubbleSize = [self messageBubbleSizeForItemAtIndexPath:indexPath];
+    JSQMessagesCollectionViewLayoutAttributes *attributes = (JSQMessagesCollectionViewLayoutAttributes *)[self layoutAttributesForItemAtIndexPath:indexPath];
+    
+    CGFloat finalHeight = messageBubbleSize.height;
+    finalHeight += attributes.cellTopLabelHeight;
+    finalHeight += attributes.messageBubbleTopLabelHeight;
+    finalHeight += attributes.cellBottomLabelHeight;
+    
+    return CGSizeMake(self.itemWidth, ceilf(finalHeight));
+}
+
 - (void)jsq_configureMessageCellLayoutAttributes:(JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes
 {
     NSIndexPath *indexPath = layoutAttributes.indexPath;
