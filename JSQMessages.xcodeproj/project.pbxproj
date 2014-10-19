@@ -41,7 +41,6 @@
 		8846442719EB189E001EBA43 /* bubble_tailless@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8846442619EB189E001EBA43 /* bubble_tailless@3x.png */; };
 		8846442A19EB18A5001EBA43 /* bubble_tailless@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8846442819EB18A5001EBA43 /* bubble_tailless@2x.png */; };
 		8846442B19EB18A5001EBA43 /* bubble_tailless.png in Resources */ = {isa = PBXBuildFile; fileRef = 8846442919EB18A5001EBA43 /* bubble_tailless.png */; };
-		886C33FA19F43680006B4997 /* JSQVideoMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C33F919F43680006B4997 /* JSQVideoMediaItem.m */; };
 		886FFD2E19E9A65D00EB8485 /* UIDevice+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 886FFD2D19E9A65D00EB8485 /* UIDevice+JSQMessages.m */; };
 		8885734A19DE540400E89D20 /* DemoSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8885734919DE540400E89D20 /* DemoSettingsViewController.m */; };
 		8885734D19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8885734C19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m */; };
@@ -172,8 +171,6 @@
 		8846442619EB189E001EBA43 /* bubble_tailless@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_tailless@3x.png"; sourceTree = "<group>"; };
 		8846442819EB18A5001EBA43 /* bubble_tailless@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_tailless@2x.png"; sourceTree = "<group>"; };
 		8846442919EB18A5001EBA43 /* bubble_tailless.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_tailless.png; sourceTree = "<group>"; };
-		886C33F819F43680006B4997 /* JSQVideoMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQVideoMediaItem.h; sourceTree = "<group>"; };
-		886C33F919F43680006B4997 /* JSQVideoMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQVideoMediaItem.m; sourceTree = "<group>"; };
 		886FFD2C19E9A65D00EB8485 /* UIDevice+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+JSQMessages.h"; sourceTree = "<group>"; };
 		886FFD2D19E9A65D00EB8485 /* UIDevice+JSQMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+JSQMessages.m"; sourceTree = "<group>"; };
 		8885734819DE540400E89D20 /* DemoSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoSettingsViewController.h; sourceTree = "<group>"; };
@@ -585,8 +582,6 @@
 				88A25F8619D8E01A00924534 /* JSQPhotoMediaItem.m */,
 				88A25F8719D8E01A00924534 /* JSQTextMessage.h */,
 				88A25F8819D8E01A00924534 /* JSQTextMessage.m */,
-				886C33F819F43680006B4997 /* JSQVideoMediaItem.h */,
-				886C33F919F43680006B4997 /* JSQVideoMediaItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -924,7 +919,6 @@
 				88A25FBE19D8E01A00924534 /* JSQMessagesBubbleImageFactory.m in Sources */,
 				88A25FDF19D8E0C400924534 /* DemoMessagesViewController.m in Sources */,
 				88A25FB719D8E01A00924534 /* UIColor+JSQMessages.m in Sources */,
-				886C33FA19F43680006B4997 /* JSQVideoMediaItem.m in Sources */,
 				88A25FBA19D8E01A00924534 /* JSQMessagesKeyboardController.m in Sources */,
 				88A25FC019D8E01A00924534 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				88A25FC919D8E01A00924534 /* JSQTextMessage.m in Sources */,
