@@ -61,12 +61,26 @@ typedef void (^JSQLocationMediaItemCompletionBlock)(void);
 
 /**
  *  Sets the specified location for the location media item and immediately begins creating
- *  a map view snapshot image on a background thread. The specified block is executed upon completion
- *  of creating the snapshot image and is executed on the app’s main thread.
+ *  a map view snapshot image on a background thread. The map view zooms to a default region whose center point 
+ *  is the location coordinate and whose span is 10 meters for both the latitudinal and longitudinal meters.
+ *
+ *  The specified block is executed upon completion of creating the snapshot image and is executed on the app’s main thread.
  *
  *  @param location   The location for the media item.
  *  @param completion The block to call after the map view snapshot for the given location has been created.
  */
 - (void)setLocation:(CLLocation *)location withCompletionHandler:(JSQLocationMediaItemCompletionBlock)completion;
 
+/**
+ *  Sets the specified location for the location media item and immediately begins creating
+ *  a map view snapshot image on a background thread.
+ *
+ *  The specified block is executed upon completion of creating the snapshot image and is executed on the app’s main thread.
+ *
+ *  @param location   The location for the media item.
+ *  @param region     The map region that you want to capture.
+ *  @param completion The block to call after the map view snapshot for the given location has been created.
+ */
+- (void)setLocation:(CLLocation *)location
+             region:(MKCoordinateRegion)region withCompletionHandler:(JSQLocationMediaItemCompletionBlock)completion;
 @end

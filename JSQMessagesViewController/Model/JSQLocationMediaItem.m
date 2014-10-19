@@ -28,6 +28,7 @@
 @property (strong, nonatomic) UIImageView *cachedMapImageView;
 
 - (void)createMapViewSnapshotForLocation:(CLLocation *)location
+                        coordinateRegion:(MKCoordinateRegion)region
                    withCompletionHandler:(JSQLocationMediaItemCompletionBlock)completion;
 
 @end
@@ -64,21 +65,32 @@
 
 - (void)setLocation:(CLLocation *)location withCompletionHandler:(JSQLocationMediaItemCompletionBlock)completion
 {
+    [self setLocation:location region:MKCoordinateRegionMakeWithDistance(location.coordinate, 10.0, 10.0) withCompletionHandler:completion];
+}
+
+- (void)setLocation:(CLLocation *)location region:(MKCoordinateRegion)region withCompletionHandler:(JSQLocationMediaItemCompletionBlock)completion
+{
     _location = [location copy];
     _cachedMapSnapshotImage = nil;
     _cachedMapImageView = nil;
-    [self createMapViewSnapshotForLocation:_location withCompletionHandler:completion];
-}
-
-- (void)createMapViewSnapshotForLocation:(CLLocation *)location
-                   withCompletionHandler:(JSQLocationMediaItemCompletionBlock)completion
-{
-    if (location == nil) {
+    
+    if (_location == nil) {
         return;
     }
     
+    [self createMapViewSnapshotForLocation:_location
+                          coordinateRegion:region
+                     withCompletionHandler:completion];
+}
+
+- (void)createMapViewSnapshotForLocation:(CLLocation *)location
+                        coordinateRegion:(MKCoordinateRegion)region
+                   withCompletionHandler:(JSQLocationMediaItemCompletionBlock)completion
+{
+    NSParameterAssert(location != nil);
+    
     MKMapSnapshotOptions *options = [[MKMapSnapshotOptions alloc] init];
-    options.region = MKCoordinateRegionMakeWithDistance(location.coordinate, 10, 10);
+    options.region = region;
     options.size = [self mediaViewDisplaySize];
     options.scale = [UIScreen mainScreen].scale;
     
