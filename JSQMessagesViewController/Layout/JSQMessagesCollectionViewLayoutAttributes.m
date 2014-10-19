@@ -19,6 +19,15 @@
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 
 
+@interface JSQMessagesCollectionViewLayoutAttributes ()
+
+- (CGSize)jsq_correctedAvatarSizeFromSize:(CGSize)size;
+
+- (CGFloat)jsq_correctedLabelHeightForHeight:(CGFloat)height;
+
+@end
+
+
 @implementation JSQMessagesCollectionViewLayoutAttributes
 
 #pragma mark - Lifecycle
@@ -45,31 +54,51 @@
 - (void)setIncomingAvatarViewSize:(CGSize)incomingAvatarViewSize
 {
     NSParameterAssert(incomingAvatarViewSize.width >= 0.0f && incomingAvatarViewSize.height >= 0.0f);
-    _incomingAvatarViewSize = CGSizeMake(ceil(incomingAvatarViewSize.width), ceilf(incomingAvatarViewSize.height));
+    _incomingAvatarViewSize = [self jsq_correctedAvatarSizeFromSize:incomingAvatarViewSize];
 }
 
 - (void)setOutgoingAvatarViewSize:(CGSize)outgoingAvatarViewSize
 {
     NSParameterAssert(outgoingAvatarViewSize.width >= 0.0f && outgoingAvatarViewSize.height >= 0.0f);
-    _outgoingAvatarViewSize = CGSizeMake(ceil(outgoingAvatarViewSize.width), ceilf(outgoingAvatarViewSize.height));
+    _outgoingAvatarViewSize = [self jsq_correctedAvatarSizeFromSize:outgoingAvatarViewSize];
 }
 
 - (void)setCellTopLabelHeight:(CGFloat)cellTopLabelHeight
 {
     NSParameterAssert(cellTopLabelHeight >= 0.0f);
-    _cellTopLabelHeight = floorf(cellTopLabelHeight);
+    _cellTopLabelHeight = [self jsq_correctedLabelHeightForHeight:cellTopLabelHeight];
 }
 
 - (void)setMessageBubbleTopLabelHeight:(CGFloat)messageBubbleTopLabelHeight
 {
     NSParameterAssert(messageBubbleTopLabelHeight >= 0.0f);
-    _messageBubbleTopLabelHeight = floorf(messageBubbleTopLabelHeight);
+    _messageBubbleTopLabelHeight = [self jsq_correctedLabelHeightForHeight:messageBubbleTopLabelHeight];
 }
 
 - (void)setCellBottomLabelHeight:(CGFloat)cellBottomLabelHeight
 {
     NSParameterAssert(cellBottomLabelHeight >= 0.0f);
-    _cellBottomLabelHeight = floorf(cellBottomLabelHeight);
+    _cellBottomLabelHeight = [self jsq_correctedLabelHeightForHeight:cellBottomLabelHeight];
+}
+
+#pragma mark - Utilities
+
+- (CGSize)jsq_correctedAvatarSizeFromSize:(CGSize)size
+{
+    //  cap avatar sizes to a minimum of (1.0, 1.0)
+    //  layout constraints sometimes throw warnings when they equal 0.0
+    //  prevent this with a size that is too small to notice
+    CGFloat correctedWidth = MAX(ceilf(size.width), 1.0f);
+    CGFloat correctedHeight = MAX(ceilf(size.height), 1.0f);
+    return CGSizeMake(correctedWidth, correctedHeight);
+}
+
+- (CGFloat)jsq_correctedLabelHeightForHeight:(CGFloat)height
+{
+    //  cap label heights to a minimum of 1.0
+    //  layout constraints sometimes throw warnings when they equal 0.0
+    //  prevent this with a size that is too small to notice
+    return MAX(ceilf(height), 1.0f);
 }
 
 #pragma mark - NSObject
