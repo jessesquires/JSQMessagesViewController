@@ -16,21 +16,21 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import "JSQVideoMediaitem.h"
+#import "JSQVideoMediaItem.h"
 
 #import "JSQMessagesMediaPlaceholderView.h"
 
 #import "UIImage+JSQMessages.h"
 
 
-@interface JSQVideoMediaitem ()
+@interface JSQVideoMediaItem ()
 
 @property (strong, nonatomic) UIImageView *cachedVideoImageView;
 
 @end
 
 
-@implementation JSQVideoMediaitem
+@implementation JSQVideoMediaItem
 
 #pragma mark - Initialization
 
@@ -114,7 +114,7 @@
         return NO;
     }
     
-    JSQVideoMediaitem *videoItem = (JSQVideoMediaitem *)object;
+    JSQVideoMediaItem *videoItem = (JSQVideoMediaItem *)object;
     
     return [self.fileURL isEqual:videoItem.fileURL]
             && self.isReadyToPlay == videoItem.isReadyToPlay;

@@ -168,8 +168,8 @@
                 
                 newMediaData = locationItemCopy;
             }
-            else if ([copyMediaData isKindOfClass:[JSQVideoMediaitem class]]) {
-                JSQVideoMediaitem *videoItemCopy = [((JSQVideoMediaitem *)copyMediaData) copy];
+            else if ([copyMediaData isKindOfClass:[JSQVideoMediaItem class]]) {
+                JSQVideoMediaItem *videoItemCopy = [((JSQVideoMediaItem *)copyMediaData) copy];
                 newMediaAttachmentCopy = [videoItemCopy.fileURL copy];
                 
                 /**
@@ -231,9 +231,9 @@
                         [self.collectionView reloadData];
                     }];
                 }
-                else if ([newMediaData isKindOfClass:[JSQVideoMediaitem class]]) {
-                    ((JSQVideoMediaitem *)newMediaData).fileURL = newMediaAttachmentCopy;
-                    ((JSQVideoMediaitem *)newMediaData).isReadyToPlay = YES;
+                else if ([newMediaData isKindOfClass:[JSQVideoMediaItem class]]) {
+                    ((JSQVideoMediaItem *)newMediaData).fileURL = newMediaAttachmentCopy;
+                    ((JSQVideoMediaItem *)newMediaData).isReadyToPlay = YES;
                     [self.collectionView reloadData];
                 }
                 else {
