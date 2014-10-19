@@ -43,6 +43,7 @@
 		8846442B19EB18A5001EBA43 /* bubble_tailless.png in Resources */ = {isa = PBXBuildFile; fileRef = 8846442919EB18A5001EBA43 /* bubble_tailless.png */; };
 		886C33FD19F4371E006B4997 /* JSQVideoMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C33FC19F4371E006B4997 /* JSQVideoMediaItem.m */; };
 		886C33FF19F45E30006B4997 /* JSQMessagesViewController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 886C33FE19F45E30006B4997 /* JSQMessagesViewController.podspec */; };
+		886C340219F4813B006B4997 /* JSQMessages.strings in Resources */ = {isa = PBXBuildFile; fileRef = 886C340119F4813B006B4997 /* JSQMessages.strings */; };
 		886FFD2E19E9A65D00EB8485 /* UIDevice+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 886FFD2D19E9A65D00EB8485 /* UIDevice+JSQMessages.m */; };
 		8885734A19DE540400E89D20 /* DemoSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8885734919DE540400E89D20 /* DemoSettingsViewController.m */; };
 		8885734D19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8885734C19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m */; };
@@ -176,6 +177,7 @@
 		886C33FB19F4371E006B4997 /* JSQVideoMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQVideoMediaItem.h; sourceTree = "<group>"; };
 		886C33FC19F4371E006B4997 /* JSQVideoMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQVideoMediaItem.m; sourceTree = "<group>"; };
 		886C33FE19F45E30006B4997 /* JSQMessagesViewController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSQMessagesViewController.podspec; sourceTree = "<group>"; };
+		886C340119F4813B006B4997 /* JSQMessages.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = JSQMessages.strings; sourceTree = "<group>"; };
 		886FFD2C19E9A65D00EB8485 /* UIDevice+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+JSQMessages.h"; sourceTree = "<group>"; };
 		886FFD2D19E9A65D00EB8485 /* UIDevice+JSQMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+JSQMessages.m"; sourceTree = "<group>"; };
 		8885734819DE540400E89D20 /* DemoSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoSettingsViewController.h; sourceTree = "<group>"; };
@@ -372,6 +374,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		886C340019F4811D006B4997 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				886C340119F4813B006B4997 /* JSQMessages.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		88A25EF919D8DEC400924534 = {
 			isa = PBXGroup;
 			children = (
@@ -458,6 +468,7 @@
 			isa = PBXGroup;
 			children = (
 				88A25F4019D8E01A00924534 /* Images */,
+				886C340019F4811D006B4997 /* Resources */,
 				88A25F5119D8E01A00924534 /* Sounds */,
 			);
 			path = Assets;
@@ -816,6 +827,7 @@
 				8846442119EB17CF001EBA43 /* play.png in Resources */,
 				88AE58EF19E77FBF0042B0DE /* bubble_stroked.png in Resources */,
 				8846442019EB17CF001EBA43 /* play@2x.png in Resources */,
+				886C340219F4813B006B4997 /* JSQMessages.strings in Resources */,
 				8846441819EB15B2001EBA43 /* bubble_stroked@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
