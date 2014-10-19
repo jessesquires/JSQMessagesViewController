@@ -166,6 +166,7 @@
     self.textView.attributedText = nil;
     
     self.avatarImageView.image = nil;
+    self.avatarImageView.highlightedImage = nil;
 }
 
 - (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
