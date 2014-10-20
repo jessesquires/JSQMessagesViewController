@@ -115,7 +115,7 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     
     [self setNeedsUpdateConstraints];
     
-    self.typingIndicatorImageView.image = [[UIImage imageNamed:@"typing"] jsq_imageMaskedWithColor:ellipsisColor];
+    self.typingIndicatorImageView.image = [[UIImage jsq_defaultTypingIndicatorImage] jsq_imageMaskedWithColor:ellipsisColor];
 }
 
 @end

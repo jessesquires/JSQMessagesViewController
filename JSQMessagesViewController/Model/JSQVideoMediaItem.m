@@ -75,7 +75,7 @@
     
     if (self.cachedVideoImageView == nil) {
         CGSize size = [self mediaViewDisplaySize];
-        UIImage *playIcon = [[UIImage imageNamed:@"play"] jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
+        UIImage *playIcon = [[UIImage jsq_defaultPlayImage] jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:playIcon];
         imageView.backgroundColor = [UIColor blackColor];

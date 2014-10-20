@@ -12,6 +12,8 @@
 
 #import "JSQMessagesBubbleImage.h"
 
+#import "UIImage+JSQMessages.h"
+
 
 @interface JSQMessagesBubbleImageTests : XCTestCase
 
@@ -38,14 +40,14 @@
 
 - (void)testInitValid
 {
-    UIImage *mockImage = [UIImage imageNamed:@"bubble_min"];
+    UIImage *mockImage = [UIImage jsq_bubbleCompactImage];
     JSQMessagesBubbleImage *bubbleImage = [[JSQMessagesBubbleImage alloc] initWithMessageBubbleImage:mockImage highlightedImage:mockImage];
     XCTAssertNotNil(bubbleImage, @"Valid init should succeed");
 }
 
 - (void)testCopy
 {
-    UIImage *mockImage = [UIImage imageNamed:@"bubble_min"];
+    UIImage *mockImage = [UIImage jsq_bubbleCompactImage];
     JSQMessagesBubbleImage *bubbleImage = [[JSQMessagesBubbleImage alloc] initWithMessageBubbleImage:mockImage highlightedImage:mockImage];
     
     JSQMessagesBubbleImage *copy = [bubbleImage copy];

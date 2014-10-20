@@ -31,7 +31,7 @@
 
 - (void)testImageMasking
 {
-    UIImage *img = [UIImage imageNamed:@"bubble_min"];
+    UIImage *img = [UIImage jsq_bubbleCompactImage];
     XCTAssertNotNil(img, @"Image should not be nil");
     
     UIImage *imgMasked = [img jsq_imageMaskedWithColor:[UIColor whiteColor]];

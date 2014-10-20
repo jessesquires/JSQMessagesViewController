@@ -12,6 +12,8 @@
 
 #import "JSQMessagesBubbleImageFactory.h"
 
+#import "UIImage+JSQMessages.h"
+
 
 @interface JSQMessagesBubbleImageFactoryTests : XCTestCase
 
@@ -36,7 +38,7 @@
 
 - (void)testOutgoingMessageBubbleImageView
 {
-    UIImage *bubble = [UIImage imageNamed:@"bubble_min"];
+    UIImage *bubble = [UIImage jsq_bubbleCompactImage];
     XCTAssertNotNil(bubble, @"Bubble image should not be nil");
     
     CGPoint center = CGPointMake(bubble.size.width / 2.0f, bubble.size.height / 2.0f);
@@ -61,7 +63,7 @@
 
 - (void)testIncomingMessageBubbleImageView
 {
-    UIImage *bubble = [UIImage imageNamed:@"bubble_min"];
+    UIImage *bubble = [UIImage jsq_bubbleCompactImage];
     XCTAssertNotNil(bubble, @"Bubble image should not be nil");
     
     CGPoint center = CGPointMake(bubble.size.width / 2.0f, bubble.size.height / 2.0f);
@@ -86,7 +88,7 @@
 
 - (void)testCustomOutgoingMessageBubbleImageView
 {
-    UIImage *bubble = [UIImage imageNamed:@"clip"];
+    UIImage *bubble = [UIImage jsq_bubbleRegularStrokedTaillessImage];
     XCTAssertNotNil(bubble, @"Bubble image should not be nil");
     
     UIEdgeInsets capInsets = UIEdgeInsetsMake(1, 1, 1, 1);
@@ -109,7 +111,7 @@
 
 - (void)testCustomIncomingMessageBubbleImageView
 {
-    UIImage *bubble = [UIImage imageNamed:@"clip"];
+    UIImage *bubble = [UIImage jsq_bubbleRegularStrokedTaillessImage];
     XCTAssertNotNil(bubble, @"Bubble image should not be nil");
     
     UIEdgeInsets capInsets = UIEdgeInsetsMake(1, 1, 1, 1);

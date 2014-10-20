@@ -61,4 +61,19 @@
  */
 + (UIImage *)jsq_bubbleCompactTaillessImage;
 
+/**
+ *  @return The default input toolbar accessory image.
+ */
++ (UIImage *)jsq_defaultAccessoryImage;
+
+/**
+ *  @return The default typing indicator image.
+ */
++ (UIImage *)jsq_defaultTypingIndicatorImage;
+
+/**
+ *  @return The default play icon image.
+ */
++ (UIImage *)jsq_defaultPlayImage;
+
 @end

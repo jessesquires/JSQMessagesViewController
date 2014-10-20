@@ -26,19 +26,19 @@
 
 + (UIButton *)defaultAccessoryButtonItem
 {
-    UIImage *cameraImage = [UIImage imageNamed:@"clip"];
-    UIImage *cameraNormal = [cameraImage jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
-    UIImage *cameraHighlighted = [cameraImage jsq_imageMaskedWithColor:[UIColor darkGrayColor]];
+    UIImage *accessoryImage = [UIImage jsq_defaultAccessoryImage];
+    UIImage *normalImage = [accessoryImage jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
+    UIImage *highlightedImage = [accessoryImage jsq_imageMaskedWithColor:[UIColor darkGrayColor]];
     
-    UIButton *cameraButton = [[UIButton alloc] initWithFrame:CGRectZero];
-    [cameraButton setImage:cameraNormal forState:UIControlStateNormal];
-    [cameraButton setImage:cameraHighlighted forState:UIControlStateHighlighted];
+    UIButton *accessoryButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    [accessoryButton setImage:normalImage forState:UIControlStateNormal];
+    [accessoryButton setImage:highlightedImage forState:UIControlStateHighlighted];
     
-    cameraButton.contentMode = UIViewContentModeScaleAspectFit;
-    cameraButton.backgroundColor = [UIColor clearColor];
-    cameraButton.tintColor = [UIColor lightGrayColor];
+    accessoryButton.contentMode = UIViewContentModeScaleAspectFit;
+    accessoryButton.backgroundColor = [UIColor clearColor];
+    accessoryButton.tintColor = [UIColor lightGrayColor];
     
-    return cameraButton;
+    return accessoryButton;
 }
 
 + (UIButton *)defaultSendButtonItem

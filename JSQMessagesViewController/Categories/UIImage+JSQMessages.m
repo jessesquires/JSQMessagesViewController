@@ -47,32 +47,47 @@
 
 + (UIImage *)jsq_bubbleRegularImage
 {
-    return [UIImage imageNamed:@"bubble"];
+    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/Images/bubble"];
 }
 
 + (UIImage *)jsq_bubbleRegularTaillessImage
 {
-    return [UIImage imageNamed:@"bubble_tailless"];
+    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/bubble_tailless"];
 }
 
 + (UIImage *)jsq_bubbleRegularStrokedImage
 {
-    return [UIImage imageNamed:@"bubble_stroked"];
+    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/bubble_stroked"];
 }
 
 + (UIImage *)jsq_bubbleRegularStrokedTaillessImage
 {
-    return [UIImage imageNamed:@"bubble_stroked_tailless"];
+    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/bubble_stroked_tailless"];
 }
 
 + (UIImage *)jsq_bubbleCompactImage
 {
-    return [UIImage imageNamed:@"bubble_min"];
+    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/bubble_min"];
 }
 
 + (UIImage *)jsq_bubbleCompactTaillessImage
 {
-    return [UIImage imageNamed:@"bubble_min_tailless"];
+    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/bubble_min_tailless"];
+}
+
++ (UIImage *)jsq_defaultAccessoryImage
+{
+    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/clip"];
+}
+
++ (UIImage *)jsq_defaultTypingIndicatorImage
+{
+    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/typing"];
+}
+
++ (UIImage *)jsq_defaultPlayImage
+{
+    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/play"];
 }
 
 @end
