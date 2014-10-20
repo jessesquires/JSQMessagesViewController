@@ -208,9 +208,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([JSQMessagesViewController class])
-                                  owner:self
-                                options:nil];
+    
+    [[JSQMessagesViewController nib] instantiateWithOwner:self options:nil];
+
     [self jsq_configureMessagesViewController];
     [self jsq_registerForNotifications:YES];
 }

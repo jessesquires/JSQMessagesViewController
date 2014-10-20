@@ -171,10 +171,14 @@
 #pragma mark - Class methods
 
 /**
- *  Returns the `UINib` object initialized for `JSQMessagesViewController`.
+ *  Returns the `UINib` object initialized for a `JSQMessagesViewController`.
  *
  *  @return The initialized `UINib` object or `nil` if there were errors during initialization 
  *  or the nib file could not be located.
+ *
+ *  @discussion You may override this method to provide a customized nib. If you do,
+ *  you should also override `messagesViewController` to return your
+ *  view controller loaded from your custom nib.
  */
 + (UINib *)nib;
 
@@ -183,7 +187,7 @@
  *  
  *  @discussion This is the designated initializer for programmatic instantiation.
  *
- *  @return The initialized messages view controller if successful, otherwise `nil`.
+ *  @return An initialized `JSQMessagesViewController` object if successful, `nil` otherwise.
  */
 + (instancetype)messagesViewController;
 
