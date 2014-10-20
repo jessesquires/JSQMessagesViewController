@@ -179,6 +179,20 @@
 + (UINib *)nib;
 
 /**
+ *  Returns name of the `UINib` to load for `JSQMessagesViewController`.
+ *
+ *  @return An `NSString` representing he name of the `UINib` to load.
+ */
++ (NSString *)nibName;
+
+/**
+ *  Returns the `NSBundle` containing the `UINib` to load for `JSQMessagesViewController`.
+ *
+ *  @return An `NSBundle` to load the `UINib` from.
+ */
++ (NSBundle *)nibBundle;
+
+/**
  *  Creates and returns a new `JSQMessagesViewController` object.
  *  
  *  @discussion This is the designated initializer for programmatic instantiation.
