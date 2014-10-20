@@ -43,7 +43,7 @@
 		8846442B19EB18A5001EBA43 /* bubble_tailless.png in Resources */ = {isa = PBXBuildFile; fileRef = 8846442919EB18A5001EBA43 /* bubble_tailless.png */; };
 		886C33FD19F4371E006B4997 /* JSQVideoMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C33FC19F4371E006B4997 /* JSQVideoMediaItem.m */; };
 		886C33FF19F45E30006B4997 /* JSQMessagesViewController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 886C33FE19F45E30006B4997 /* JSQMessagesViewController.podspec */; };
-		886C340219F4813B006B4997 /* JSQMessages.strings in Resources */ = {isa = PBXBuildFile; fileRef = 886C340119F4813B006B4997 /* JSQMessages.strings */; };
+		886C340319F482AA006B4997 /* JSQMessages.strings in Resources */ = {isa = PBXBuildFile; fileRef = 886C340519F482AA006B4997 /* JSQMessages.strings */; };
 		886FFD2E19E9A65D00EB8485 /* UIDevice+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 886FFD2D19E9A65D00EB8485 /* UIDevice+JSQMessages.m */; };
 		8885734A19DE540400E89D20 /* DemoSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8885734919DE540400E89D20 /* DemoSettingsViewController.m */; };
 		8885734D19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8885734C19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m */; };
@@ -177,7 +177,21 @@
 		886C33FB19F4371E006B4997 /* JSQVideoMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQVideoMediaItem.h; sourceTree = "<group>"; };
 		886C33FC19F4371E006B4997 /* JSQVideoMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQVideoMediaItem.m; sourceTree = "<group>"; };
 		886C33FE19F45E30006B4997 /* JSQMessagesViewController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSQMessagesViewController.podspec; sourceTree = "<group>"; };
-		886C340119F4813B006B4997 /* JSQMessages.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = JSQMessages.strings; sourceTree = "<group>"; };
+		886C340419F482AA006B4997 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/JSQMessages.strings; sourceTree = "<group>"; };
+		886C340619F482CB006B4997 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/JSQMessages.strings; sourceTree = "<group>"; };
+		886C340719F48564006B4997 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/JSQMessages.strings; sourceTree = "<group>"; };
+		886C340819F4860E006B4997 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/JSQMessages.strings; sourceTree = "<group>"; };
+		886C340919F48614006B4997 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/JSQMessages.strings"; sourceTree = "<group>"; };
+		886C340A19F4861B006B4997 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/JSQMessages.strings"; sourceTree = "<group>"; };
+		886C340B19F4862A006B4997 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/JSQMessages.strings; sourceTree = "<group>"; };
+		886C340C19F48639006B4997 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/JSQMessages.strings; sourceTree = "<group>"; };
+		886C340D19F4865A006B4997 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/JSQMessages.strings; sourceTree = "<group>"; };
+		886C340E19F486E6006B4997 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/JSQMessages.strings; sourceTree = "<group>"; };
+		886C340F19F486F3006B4997 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/JSQMessages.strings; sourceTree = "<group>"; };
+		886C341019F486FB006B4997 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/JSQMessages.strings; sourceTree = "<group>"; };
+		886C341119F48709006B4997 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/JSQMessages.strings; sourceTree = "<group>"; };
+		886C341219F48712006B4997 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/JSQMessages.strings; sourceTree = "<group>"; };
+		886C341319F4886A006B4997 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/JSQMessages.strings; sourceTree = "<group>"; };
 		886FFD2C19E9A65D00EB8485 /* UIDevice+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+JSQMessages.h"; sourceTree = "<group>"; };
 		886FFD2D19E9A65D00EB8485 /* UIDevice+JSQMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+JSQMessages.m"; sourceTree = "<group>"; };
 		8885734819DE540400E89D20 /* DemoSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoSettingsViewController.h; sourceTree = "<group>"; };
@@ -377,7 +391,7 @@
 		886C340019F4811D006B4997 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				886C340119F4813B006B4997 /* JSQMessages.strings */,
+				886C340519F482AA006B4997 /* JSQMessages.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -773,6 +787,19 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
+				de,
+				"zh-Hans",
+				"zh-Hant",
+				ro,
+				ru,
+				pl,
+				pt,
+				fr,
+				it,
+				he,
+				nl,
+				tr,
 			);
 			mainGroup = 88A25EF919D8DEC400924534;
 			productRefGroup = 88A25F0319D8DEC400924534 /* Products */;
@@ -827,7 +854,7 @@
 				8846442119EB17CF001EBA43 /* play.png in Resources */,
 				88AE58EF19E77FBF0042B0DE /* bubble_stroked.png in Resources */,
 				8846442019EB17CF001EBA43 /* play@2x.png in Resources */,
-				886C340219F4813B006B4997 /* JSQMessages.strings in Resources */,
+				886C340319F482AA006B4997 /* JSQMessages.strings in Resources */,
 				8846441819EB15B2001EBA43 /* bubble_stroked@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -997,6 +1024,28 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		886C340519F482AA006B4997 /* JSQMessages.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				886C340419F482AA006B4997 /* en */,
+				886C340619F482CB006B4997 /* Base */,
+				886C340719F48564006B4997 /* es */,
+				886C340819F4860E006B4997 /* de */,
+				886C340919F48614006B4997 /* zh-Hans */,
+				886C340A19F4861B006B4997 /* zh-Hant */,
+				886C340B19F4862A006B4997 /* ro */,
+				886C340C19F48639006B4997 /* ru */,
+				886C340D19F4865A006B4997 /* pl */,
+				886C340E19F486E6006B4997 /* pt */,
+				886C340F19F486F3006B4997 /* fr */,
+				886C341019F486FB006B4997 /* it */,
+				886C341119F48709006B4997 /* he */,
+				886C341219F48712006B4997 /* nl */,
+				886C341319F4886A006B4997 /* tr */,
+			);
+			name = JSQMessages.strings;
+			sourceTree = "<group>";
+		};
 		88A25F3019D8DF2500924534 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

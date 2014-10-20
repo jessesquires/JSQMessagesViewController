@@ -16,4 +16,14 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
+//  ********************************
+//  Special thanks to the localization contributors!
+//
+//  https://github.com/jessesquires/JSQMessagesViewController/issues/237
+//  ********************************
 
+"Load Earlier Messages" = "Messages précedents";
+
+"Send" = "Envoi";
+
+"New Message" = "Nouveau message";
