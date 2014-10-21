@@ -2,7 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/jessesquires/JSQMessagesViewController.svg)](http://travis-ci.org/jessesquires/JSQMessagesViewController) [![Version Status](http://img.shields.io/cocoapods/v/JSQMessagesViewController.png)][docsLink] [![license MIT](http://img.shields.io/badge/license-MIT-orange.png)][mitLink]
 
-### Update: 6.0-beta5 is out! See [#476](https://github.com/jessesquires/JSQMessagesViewController/issues/476) for details.
+### Update: 6.0-beta6 is out! See [#476](https://github.com/jessesquires/JSQMessagesViewController/issues/476) for details.
 
 ![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2][img2]
 
