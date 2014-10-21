@@ -42,9 +42,12 @@
 #import "JSQMessage.h"
 #import "JSQTextMessage.h"
 #import "JSQMediaMessage.h"
+
+#import "JSQMediaItem.h"
 #import "JSQPhotoMediaItem.h"
 #import "JSQLocationMediaItem.h"
 #import "JSQVideoMediaItem.h"
+
 #import "JSQMessagesBubbleImage.h"
 #import "JSQMessagesAvatarImage.h"
 
@@ -59,6 +62,7 @@
 //  Factories
 #import "JSQMessagesAvatarImageFactory.h"
 #import "JSQMessagesBubbleImageFactory.h"
+#import "JSQMessagesMediaViewBubbleImageMasker.h"
 #import "JSQMessagesTimestampFormatter.h"
 #import "JSQMessagesToolbarButtonFactory.h"
 
