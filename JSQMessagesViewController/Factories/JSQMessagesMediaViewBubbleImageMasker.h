@@ -77,4 +77,14 @@
  */
 - (void)applyIncomingBubbleImageMaskToMediaView:(UIView *)mediaView;
 
+/**
+ *  A convenience method for applying a bubble image mask to the specified mediaView.
+ *  This method uses the default instance of `JSQMessagesBubbleImageFactory`.
+ *
+ *  @param mediaView  The media view to mask.
+ *  @param isOutgoing A boolean value specifiying whether or not the mask should be for an outgoing or incoming view.
+ *  Specify `YES` for outgoing and `NO` for incoming.
+ */
++ (void)applyBubbleImageMaskToMediaView:(UIView *)mediaView isOutgoing:(BOOL)isOutgoing;
+
 @end

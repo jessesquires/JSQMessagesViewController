@@ -62,6 +62,18 @@
     [self jsq_maskView:mediaView withImage:[bubbleImageData messageBubbleImage]];
 }
 
++ (void)applyBubbleImageMaskToMediaView:(UIView *)mediaView isOutgoing:(BOOL)isOutgoing
+{
+    JSQMessagesMediaViewBubbleImageMasker *masker = [[JSQMessagesMediaViewBubbleImageMasker alloc] init];
+    
+    if (isOutgoing) {
+        [masker applyOutgoingBubbleImageMaskToMediaView:mediaView];
+    }
+    else {
+        [masker applyIncomingBubbleImageMaskToMediaView:mediaView];
+    }
+}
+
 #pragma mark - Private
 
 - (void)jsq_maskView:(UIView *)view withImage:(UIImage *)image
