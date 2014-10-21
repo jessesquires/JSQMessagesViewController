@@ -26,8 +26,6 @@
 
 @property (strong, nonatomic) UIImageView *cachedImageView;
 
-@property (strong, nonatomic) UIView *cachedPlaceholderView;
-
 @end
 
 
@@ -37,12 +35,10 @@
 
 - (instancetype)initWithImage:(UIImage *)image
 {
-    self = [super init];
+    self = [super initWithMaskAsOutgoing:YES];
     if (self) {
         _image = [UIImage imageWithCGImage:image.CGImage];
-        _appliesMediaViewMaskAsOutgoing = YES;
         _cachedImageView = nil;
-        _cachedPlaceholderView = nil;
     }
     return self;
 }
@@ -51,7 +47,6 @@
 {
     _image = nil;
     _cachedImageView = nil;
-    _cachedPlaceholderView = nil;
 }
 
 #pragma mark - Setters
@@ -64,13 +59,8 @@
 
 - (void)setAppliesMediaViewMaskAsOutgoing:(BOOL)appliesMediaViewMaskAsOutgoing
 {
-    if (_appliesMediaViewMaskAsOutgoing == appliesMediaViewMaskAsOutgoing) {
-        return;
-    }
-    
-    _appliesMediaViewMaskAsOutgoing = appliesMediaViewMaskAsOutgoing;
+    [super setAppliesMediaViewMaskAsOutgoing:appliesMediaViewMaskAsOutgoing];
     _cachedImageView = nil;
-    _cachedPlaceholderView = nil;
 }
 
 #pragma mark - JSQMessageMediaData protocol
@@ -87,56 +77,29 @@
         imageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
-        [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView
-                                                                    isOutgoing:self.appliesMediaViewMaskAsOutgoing];
+        [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
         self.cachedImageView = imageView;
-        self.cachedPlaceholderView = nil;
     }
     
     return self.cachedImageView;
-}
-
-- (CGSize)mediaViewDisplaySize
-{
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        return CGSizeMake(300.0f, 180.0f);
-    }
-    return CGSizeMake(200.0f, 120.0f);
-}
-
-- (UIView *)mediaPlaceholderView
-{
-    if (self.cachedPlaceholderView == nil) {
-        UIView *view = [JSQMessagesMediaPlaceholderView viewWithActivityIndicator];
-        [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:view
-                                                                    isOutgoing:self.appliesMediaViewMaskAsOutgoing];
-        self.cachedPlaceholderView = view;
-    }
-    
-    return self.cachedPlaceholderView;
 }
 
 #pragma mark - NSObject
 
 - (BOOL)isEqual:(id)object
 {
-    if (self == object) {
-        return YES;
-    }
-    
-    if (![object isKindOfClass:[self class]]) {
+    if (![super isEqual:object]) {
         return NO;
     }
     
     JSQPhotoMediaItem *photoItem = (JSQPhotoMediaItem *)object;
     
-    return [self.image isEqual:photoItem.image]
-            && self.appliesMediaViewMaskAsOutgoing == photoItem.appliesMediaViewMaskAsOutgoing;
+    return [self.image isEqual:photoItem.image];
 }
 
 - (NSUInteger)hash
 {
-    return self.image.hash;
+    return [super hash] ^ self.image.hash;
 }
 
 - (NSString *)description
@@ -145,27 +108,21 @@
             [self class], self.image, @(self.appliesMediaViewMaskAsOutgoing)];
 }
 
-- (id)debugQuickLookObject
-{
-    return [self mediaView] ?: [self mediaPlaceholderView];
-}
-
 #pragma mark - NSCoding
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super init];
+    self = [super initWithCoder:aDecoder];
     if (self) {
         _image = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(image))];
-        _appliesMediaViewMaskAsOutgoing = [aDecoder decodeBoolForKey:NSStringFromSelector(@selector(appliesMediaViewMaskAsOutgoing))];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
+    [super encodeWithCoder:aCoder];
     [aCoder encodeObject:self.image forKey:NSStringFromSelector(@selector(image))];
-    [aCoder encodeBool:self.appliesMediaViewMaskAsOutgoing forKey:NSStringFromSelector(@selector(appliesMediaViewMaskAsOutgoing))];
 }
 
 #pragma mark - NSCopying

@@ -16,28 +16,20 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import "JSQMessageMediaData.h"
+#import "JSQMediaItem.h"
 
 /**
- *  The `JSQPhotoMediaItem` class is a concrete class that implements the `JSQMessageMediaData` protocol
+ *  The `JSQPhotoMediaItem` class is a concrete `JSQMediaItem` subclass that implements the `JSQMessageMediaData` protocol
  *  and represents a photo media message. An initialized `JSQPhotoMediaItem` object can be passed 
  *  to a `JSQMediaMessage` object during its initialization to construct a valid media message object.
  *  You may wish to subclass `JSQPhotoMediaItem` to provide additional functionality or behavior.
  */
-@interface JSQPhotoMediaItem : NSObject <JSQMessageMediaData, NSCoding, NSCopying>
+@interface JSQPhotoMediaItem : JSQMediaItem <JSQMessageMediaData, NSCoding, NSCopying>
 
 /**
  *  The image for the photo media item. The default value is `nil`.
  */
 @property (copy, nonatomic) UIImage *image;
-
-/**
- *  A boolean value indicating whether this media item should apply 
- *  an outgoing or incoming bubble image mask to its media views. 
- *  Specify `YES` for an outgoing mask, and `NO` for an incoming mask.
- *  The default value is `YES`.
- */
-@property (assign, nonatomic) BOOL appliesMediaViewMaskAsOutgoing;
 
 /**
  *  Initializes and returns a photo media item object having the given image.

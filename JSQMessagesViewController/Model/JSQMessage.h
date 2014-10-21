@@ -21,8 +21,13 @@
 #import "JSQMessageData.h"
 
 /**
- *  The `JSQMessage` class is an abstract base class for message model objects that represent a single user message.
- *  It contains the senderId, senderDisplayName, and the date that the message was sent.
+ *  The `JSQMessage` class is an abstract base class for message model objects that represents a single user message.
+ *  It contains the senderId, senderDisplayName, and the date that the message was sent. 
+ *
+ *  @warning This class is intended to be subclassed. You should not use it directly.
+ *  
+ *  @see JSQTextMessage.
+ *  @see JSQMediaMessage.
  */
 @interface JSQMessage : NSObject <JSQMessageData, NSCoding, NSCopying>
 
