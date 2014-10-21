@@ -16,15 +16,15 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import "JSQMessageMediaData.h"
+#import "JSQMediaItem.h"
 
 /**
- *  The `JSQVideoMediaItem` class is a concrete class that implements the `JSQMessageMediaData` protocol
+ *  The `JSQVideoMediaItem` class is a concrete `JSQMediaItem` subclass that implements the `JSQMessageMediaData` protocol
  *  and represents a video media message. An initialized `JSQVideoMediaItem` object can be passed
  *  to a `JSQMediaMessage` object during its initialization to construct a valid media message object.
  *  You may wish to subclass `JSQVideoMediaItem` to provide additional functionality or behavior.
  */
-@interface JSQVideoMediaItem : NSObject <JSQMessageMediaData, NSCoding, NSCopying>
+@interface JSQVideoMediaItem : JSQMediaItem <JSQMessageMediaData, NSCoding, NSCopying>
 
 /**
  *  The URL that identifies a video resource.

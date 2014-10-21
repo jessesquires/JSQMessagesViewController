@@ -99,7 +99,7 @@
 
 - (NSUInteger)hash
 {
-    return [super hash] ^ self.image.hash;
+    return self.image.hash;
 }
 
 - (NSString *)description

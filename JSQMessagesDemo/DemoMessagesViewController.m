@@ -174,6 +174,7 @@
             }
             else if ([copyMediaData isKindOfClass:[JSQVideoMediaItem class]]) {
                 JSQVideoMediaItem *videoItemCopy = [((JSQVideoMediaItem *)copyMediaData) copy];
+                videoItemCopy.appliesMediaViewMaskAsOutgoing = NO;
                 newMediaAttachmentCopy = [videoItemCopy.fileURL copy];
                 
                 /**
