@@ -62,7 +62,7 @@ typedef void (^JSQLocationMediaItemCompletionBlock)(void);
 /**
  *  Sets the specified location for the location media item and immediately begins creating
  *  a map view snapshot image on a background thread. The map view zooms to a default region whose center point 
- *  is the location coordinate and whose span is 10 meters for both the latitudinal and longitudinal meters.
+ *  is the location coordinate and whose span is 500 meters for both the latitudinal and longitudinal meters.
  *
  *  The specified block is executed upon completion of creating the snapshot image and is executed on the app’s main thread.
  *
