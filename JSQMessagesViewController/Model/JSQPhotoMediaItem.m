@@ -19,11 +19,14 @@
 #import "JSQPhotoMediaItem.h"
 
 #import "JSQMessagesMediaPlaceholderView.h"
+#import "JSQMessagesMediaViewBubbleImageMasker.h"
 
 
 @interface JSQPhotoMediaItem ()
 
 @property (strong, nonatomic) UIImageView *cachedImageView;
+
+@property (strong, nonatomic) UIView *cachedPlaceholderView;
 
 @end
 
@@ -37,7 +40,9 @@
     self = [super init];
     if (self) {
         _image = [UIImage imageWithCGImage:image.CGImage];
+        _appliesMediaViewMaskAsOutgoing = YES;
         _cachedImageView = nil;
+        _cachedPlaceholderView = nil;
     }
     return self;
 }
@@ -46,6 +51,7 @@
 {
     _image = nil;
     _cachedImageView = nil;
+    _cachedPlaceholderView = nil;
 }
 
 #pragma mark - Setters
@@ -54,6 +60,17 @@
 {
     _image = [UIImage imageWithCGImage:image.CGImage];
     _cachedImageView = nil;
+}
+
+- (void)setAppliesMediaViewMaskAsOutgoing:(BOOL)appliesMediaViewMaskAsOutgoing
+{
+    if (_appliesMediaViewMaskAsOutgoing == appliesMediaViewMaskAsOutgoing) {
+        return;
+    }
+    
+    _appliesMediaViewMaskAsOutgoing = appliesMediaViewMaskAsOutgoing;
+    _cachedImageView = nil;
+    _cachedPlaceholderView = nil;
 }
 
 #pragma mark - JSQMessageMediaData protocol
@@ -70,8 +87,10 @@
         imageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
-        imageView.layer.cornerRadius = 20.0f;
+        [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView
+                                                                    isOutgoing:self.appliesMediaViewMaskAsOutgoing];
         self.cachedImageView = imageView;
+        self.cachedPlaceholderView = nil;
     }
     
     return self.cachedImageView;
@@ -87,7 +106,14 @@
 
 - (UIView *)mediaPlaceholderView
 {
-    return [JSQMessagesMediaPlaceholderView viewWithActivityIndicator];
+    if (self.cachedPlaceholderView == nil) {
+        UIView *view = [JSQMessagesMediaPlaceholderView viewWithActivityIndicator];
+        [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:view
+                                                                    isOutgoing:self.appliesMediaViewMaskAsOutgoing];
+        self.cachedPlaceholderView = view;
+    }
+    
+    return self.cachedPlaceholderView;
 }
 
 #pragma mark - NSObject
@@ -104,7 +130,8 @@
     
     JSQPhotoMediaItem *photoItem = (JSQPhotoMediaItem *)object;
     
-    return [self.image isEqual:photoItem.image];
+    return [self.image isEqual:photoItem.image]
+            && self.appliesMediaViewMaskAsOutgoing == photoItem.appliesMediaViewMaskAsOutgoing;
 }
 
 - (NSUInteger)hash
@@ -114,7 +141,8 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: image=%@>", [self class], self.image];
+    return [NSString stringWithFormat:@"<%@: image=%@, appliesMediaViewMaskAsOutgoing=%@>",
+            [self class], self.image, @(self.appliesMediaViewMaskAsOutgoing)];
 }
 
 - (id)debugQuickLookObject
@@ -129,6 +157,7 @@
     self = [super init];
     if (self) {
         _image = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(image))];
+        _appliesMediaViewMaskAsOutgoing = [aDecoder decodeBoolForKey:NSStringFromSelector(@selector(appliesMediaViewMaskAsOutgoing))];
     }
     return self;
 }
@@ -136,13 +165,16 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:self.image forKey:NSStringFromSelector(@selector(image))];
+    [aCoder encodeBool:self.appliesMediaViewMaskAsOutgoing forKey:NSStringFromSelector(@selector(appliesMediaViewMaskAsOutgoing))];
 }
 
 #pragma mark - NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone
 {
-    return [[[self class] allocWithZone:zone] initWithImage:self.image];
+    JSQPhotoMediaItem *copy = [[[self class] allocWithZone:zone] initWithImage:self.image];
+    copy.appliesMediaViewMaskAsOutgoing = self.appliesMediaViewMaskAsOutgoing;
+    return copy;
 }
 
 @end

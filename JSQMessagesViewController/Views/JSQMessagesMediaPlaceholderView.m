@@ -93,8 +93,8 @@
     if (self) {
         self.backgroundColor = backgroundColor;
         self.userInteractionEnabled = NO;
-        self.layer.cornerRadius = 20.0f;
         self.clipsToBounds = YES;
+        self.contentMode = UIViewContentModeScaleAspectFill;
     }
     return self;
 }

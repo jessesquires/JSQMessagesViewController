@@ -32,6 +32,14 @@
 @property (copy, nonatomic) UIImage *image;
 
 /**
+ *  A boolean value indicating whether this media item should apply 
+ *  an outgoing or incoming bubble image mask to its media views. 
+ *  Specify `YES` for an outgoing mask, and `NO` for an incoming mask.
+ *  The default value is `YES`.
+ */
+@property (assign, nonatomic) BOOL appliesMediaViewMaskAsOutgoing;
+
+/**
  *  Initializes and returns a photo media item object having the given image.
  *
  *  @param image The image for the photo media item. This value may be `nil`.

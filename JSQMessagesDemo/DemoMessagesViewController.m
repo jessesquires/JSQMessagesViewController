@@ -149,6 +149,7 @@
             
             if ([copyMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
                 JSQPhotoMediaItem *photoItemCopy = [((JSQPhotoMediaItem *)copyMediaData) copy];
+                photoItemCopy.appliesMediaViewMaskAsOutgoing = NO;
                 newMediaAttachmentCopy = [UIImage imageWithCGImage:photoItemCopy.image.CGImage];
                 
                 /**
