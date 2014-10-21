@@ -45,49 +45,54 @@
     return newImage;
 }
 
++ (UIImage *)jsq_bubbleImageFromBundleWithName:(NSString *)name
+{
+    return [UIImage imageNamed:[NSString stringWithFormat:@"JSQMessagesAssets.bundle/Images/%@", name]];
+}
+
 + (UIImage *)jsq_bubbleRegularImage
 {
-    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/Images/bubble"];
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"bubble_regular"];
 }
 
 + (UIImage *)jsq_bubbleRegularTaillessImage
 {
-    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/bubble_tailless"];
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"bubble_tailless"];
 }
 
 + (UIImage *)jsq_bubbleRegularStrokedImage
 {
-    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/bubble_stroked"];
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"bubble_stroked"];
 }
 
 + (UIImage *)jsq_bubbleRegularStrokedTaillessImage
 {
-    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/bubble_stroked_tailless"];
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"bubble_stroked_tailless"];
 }
 
 + (UIImage *)jsq_bubbleCompactImage
 {
-    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/bubble_min"];
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"bubble_min"];
 }
 
 + (UIImage *)jsq_bubbleCompactTaillessImage
 {
-    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/bubble_min_tailless"];
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"bubble_min_tailless"];
 }
 
 + (UIImage *)jsq_defaultAccessoryImage
 {
-    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/clip"];
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"clip"];
 }
 
 + (UIImage *)jsq_defaultTypingIndicatorImage
 {
-    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/typing"];
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"typing"];
 }
 
 + (UIImage *)jsq_defaultPlayImage
 {
-    return [UIImage imageNamed:@"JSQMessagesAssets.bundle/Images/play"];
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"play"];
 }
 
 @end
