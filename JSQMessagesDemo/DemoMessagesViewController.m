@@ -162,6 +162,7 @@
             }
             else if ([copyMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
                 JSQLocationMediaItem *locationItemCopy = [((JSQLocationMediaItem *)copyMediaData) copy];
+                locationItemCopy.appliesMediaViewMaskAsOutgoing = NO;
                 newMediaAttachmentCopy = [locationItemCopy.location copy];
                 
                 /**

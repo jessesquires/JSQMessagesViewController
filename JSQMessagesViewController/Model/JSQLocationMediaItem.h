@@ -25,15 +25,15 @@
 typedef void (^JSQLocationMediaItemCompletionBlock)(void);
 
 
-#import "JSQMessageMediaData.h"
+#import "JSQMediaItem.h"
 
 /**
- *  The `JSQLocationMediaItem` class is a concrete class that implements the `JSQMessageMediaData` protocol
+ *  The `JSQLocationMediaItem` class is a concrete `JSQMediaItem` subclass that implements the `JSQMessageMediaData` protocol
  *  and represents a location media message. An initialized `JSQLocationMediaItem` object can be passed
  *  to a `JSQMediaMessage` object during its initialization to construct a valid media message object.
  *  You may wish to subclass `JSQLocationMediaItem` to provide additional functionality or behavior.
  */
-@interface JSQLocationMediaItem : NSObject <JSQMessageMediaData, MKAnnotation, NSCoding, NSCopying>
+@interface JSQLocationMediaItem : JSQMediaItem <JSQMessageMediaData, MKAnnotation, NSCoding, NSCopying>
 
 /**
  *  The location for the media item. The default value is `nil`.

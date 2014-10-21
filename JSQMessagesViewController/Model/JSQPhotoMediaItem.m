@@ -35,7 +35,7 @@
 
 - (instancetype)initWithImage:(UIImage *)image
 {
-    self = [super initWithMaskAsOutgoing:YES];
+    self = [super init];
     if (self) {
         _image = [UIImage imageWithCGImage:image.CGImage];
         _cachedImageView = nil;
