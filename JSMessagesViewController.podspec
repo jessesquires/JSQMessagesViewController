@@ -13,5 +13,5 @@ Pod::Spec.new do |s|
 	s.frameworks		= 'QuartzCore'
 	s.requires_arc		= true
 
-	s.dependency 'JSQSystemSoundPlayer'
+	s.dependency 'JSQSystemSoundPlayer', '1.5.2'
 end
