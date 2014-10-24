@@ -48,6 +48,11 @@
  */
 - (instancetype)initWithText:(NSString *)text
                       sender:(NSString *)sender
-                        date:(NSDate *)date;
+                        date:(NSDate *)date
+                      userID:(NSNumber *)userID;
+
+- (void)hideTimestampIfNeeded:(JSMessage *)otherMessage;
+
+- (void)updateIdentifierIfNeeded;
 
 @end
