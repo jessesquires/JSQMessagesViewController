@@ -8,6 +8,10 @@
 
 > More screenshots available at [CocoaControls](https://www.cocoacontrols.com/controls/jsqmessagesviewcontroller)
 
+## Features
+
+See the [website](http://www.jessesquires.com/JSQMessagesViewController/) for the list of features.
+
 ## Dependencies
 
 * [JSQSystemSoundPlayer][playerLink]
@@ -56,8 +60,11 @@ pod 'JSMessagesViewController', :git => 'https://github.com/jessesquires/JSQMess
 
 * **Model**
   * Your model objects should conform to the `JSQMessageData` protocol.
-  * However, you may use the provided `JSQMessage` class.
-
+  * Your media attachment model objects should conform to the `JSQMessageMediaData` protocol.
+  * However, you may use the provided classes:
+    * Model: `JSQTextMessage` and `JSQMediaMessage`
+    * Media attachments: `JSQPhotoMediaItem`, `JSQLocationMediaItem`, `JSQVideoMediaItem`
+ 
 * **View Controller**
   * Subclass `JSQMessagesViewController`.
   * Implement the required methods in the `JSQMessagesCollectionViewDataSource` protocol.
@@ -80,11 +87,11 @@ Support the development of this **free**, open-source library!
 
 >*Donations made via [Square Cash](https://square.com/cash)*
 
-><h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$1&body=Thanks for developing JSQMessagesViewController!">Send $1</a> <em>Just saying thanks!</em></h4>
-<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$5&body=Thanks for developing JSQMessagesViewController!">Send $5</a> <em>This control is great!</em></h4>
-<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$10&body=Thanks for developing JSQMessagesViewController!">Send $10</a> <em>This totally saved me time!</em></h4>
-<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$25&body=Thanks for developing JSQMessagesViewController!">Send $25</a> <em>I want new features!</em></h4>
-<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$50&body=Thanks for developing JSQMessagesViewController!">Send $50</a> <em>I love this project!</em></h4>
+><h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$5&body=Thanks for developing JSQMessagesViewController!">Send $5</a> <em>Just saying thanks. Here's a coffee!</em></h4>
+<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$10&body=Thanks for developing JSQMessagesViewController!">Send $10</a> <em>This library is great. Lunch is on me!</em></h4>
+<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$25&body=Thanks for developing JSQMessagesViewController!">Send $25</a> <em>This totally saved me time. Go get a nice dinner!</em></h4>
+<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$50&body=Thanks for developing JSQMessagesViewController!">Send $50</a> <em>I love this library. I want new features!</em></h4>
+<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$100&body=Thanks for developing JSQMessagesViewController!">Send $100</a> <em>I really want to support this project!</em></h4>
 >*You can also send donations via [PayPal](https://www.paypal.com) to jesse.squires.developer@gmail.com*
 
 ## Credits
