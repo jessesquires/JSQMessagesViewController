@@ -8,11 +8,15 @@
 
 > More screenshots available at [CocoaControls](https://www.cocoacontrols.com/controls/jsqmessagesviewcontroller)
 
+## Dependencies
+
+* [JSQSystemSoundPlayer][playerLink]
+ 
+
 ## Requirements
 
 * iOS 7.0+
 * ARC
-* [JSQSystemSoundPlayer][playerLink]
 
 *Need support for iOS 6? [You shouldn't](http://www.macrumors.com/2014/07/14/apple-ios-7-adoption-90-percent/). But, there's a branch for that!*
 ````
@@ -43,7 +47,7 @@ pod 'JSMessagesViewController', :git => 'https://github.com/jessesquires/JSQMess
 ## Getting Started
 
 ````
-#import <JSQMessagesViewController/JSQMessages.h>    // import all headers
+#import <JSQMessagesViewController/JSQMessages.h>    // import all the things
 ````
 
 * **Demo project**
@@ -102,6 +106,7 @@ Feel free to check out my work at [Hexed Bits](http://bit.ly/0x29A), or read [my
 ## Apps using this library
 
 * [Hemoglobe](http://bit.ly/hemoglobeapp)
+* [PocketSuite](https://itunes.apple.com/us/app/pocketsuite/id721795146)
 * [ClassDojo](https://itunes.apple.com/us/app/classdojo/id552602056)
 * [Schools App](https://itunes.apple.com/us/app/schools-app/id495845755)
 * [ChatSecure](https://chatsecure.org)
@@ -117,11 +122,11 @@ Feel free to check out my work at [Hexed Bits](http://bit.ly/0x29A), or read [my
 * [Quick Text Message](https://itunes.apple.com/us/app/quick-text-message-fast-sms/id583729997)
 * [Libraries for developers](https://itunes.apple.com/us/app/libraries-for-developers/id653427112)
 * [Buhz|Hyve](http://itunes.apple.com/us/app/buhz-hyve/id818568956)
-* [PocketSuite](https://itunes.apple.com/us/app/pocketsuite/id721795146)
 * [Ringring.io](https://github.com/ringring-io/ringring-ios)
 * [gDecide](https://itunes.apple.com/ca/app/gdecide/id716801285)
 * [AwesomeChat](https://github.com/relatedcode/AwesomeChat)
 * [ParseChat](https://github.com/relatedcode/ParseChat)
+* [Jib](http://jibapp.com)
 * *Your app here*
 
 ## License
