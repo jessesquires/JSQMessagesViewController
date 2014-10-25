@@ -18,8 +18,6 @@
 
 #import "JSQMessagesToolbarContentView.h"
 
-#import "JSQMessagesComposerTextView.h"
-
 #import "UIView+JSQMessages.h"
 
 const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 4.0f;
