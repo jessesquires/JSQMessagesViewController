@@ -203,6 +203,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.collectionView reloadData];
 }
 
+- (void)setTopContentAdditionalInset:(CGFloat)topContentAdditionalInset
+{
+    _topContentAdditionalInset = topContentAdditionalInset;
+    [self jsq_updateCollectionViewInsets];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
