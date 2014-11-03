@@ -93,8 +93,6 @@
     [super awakeFromNib];
     
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.messageBubbleContainerView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.avatarContainerView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     self.backgroundColor = [UIColor whiteColor];
     
