@@ -71,6 +71,11 @@
     return [self.text isEqualToString:textMessage.text];
 }
 
+- (NSUInteger)hash
+{
+    return [super hash] ^ self.text.hash;
+}
+
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"<%@: senderId=%@, senderDisplayName=%@, date=%@, isMediaMessage=%@, text=%@>",

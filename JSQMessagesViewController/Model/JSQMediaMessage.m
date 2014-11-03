@@ -71,11 +71,17 @@
     return [self.media isEqual:mediaMessage.media];
 }
 
+- (NSUInteger)hash
+{
+    return [super hash] ^ self.media.hash;
+}
+
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"<%@: senderId=%@, senderDisplayName=%@, date=%@, isMediaMessage=%@, media=%@>",
             [self class], self.senderId, self.senderDisplayName, self.date, @(self.isMediaMessage), self.media];
 }
+
 - (id)debugQuickLookObject
 {
     return [self.media mediaView] ?: [self.media mediaPlaceholderView];
