@@ -31,16 +31,12 @@
 @property (strong, nonatomic) UIFont *messageBubbleFont;
 
 /**
- *  The horizontal spacing between the message bubble and the edge of the collection 
- *  view cell in which it is displayed. This value should be greater than or equal to `0.0`.
+ *  The width of the `messageBubbleContainerView` of a `JSQMessagesCollectionViewCell`.
+ *  This value should be greater than `0.0`.
  *
- *  @discussion For *outgoing* messages, this value specifies the amount of spacing from the left most edge
- *  of the collection view cell to the left most edge of a message bubble with in the cell.
- *
- *  For *incoming* messages, this value specifies the amount of spacing from the right most edge 
- *  of the collection view cell to the right most edge of a message bubble with in the cell.
+ *  @see JSQMessagesCollectionViewCell.
  */
-@property (assign, nonatomic) CGFloat messageBubbleLeftRightMargin;
+@property (assign, nonatomic) CGFloat messageBubbleContainerViewWidth;
 
 /**
  *  The inset of the text container's layout area within the text view's content area in a `JSQMessagesCollectionViewCell`. 

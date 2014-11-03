@@ -39,6 +39,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleContainerWidthConstraint;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewTopVerticalSpaceConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewBottomVerticalSpaceConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewAvatarHorizontalSpaceConstraint;
@@ -50,8 +52,6 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightConstraint;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleLeftRightMarginConstraint;
 
 @property (assign, nonatomic) UIEdgeInsets textViewFrameInsets;
 
@@ -186,8 +186,8 @@
     
     self.textViewFrameInsets = customAttributes.textViewFrameInsets;
 
-    [self jsq_updateConstraint:self.messageBubbleLeftRightMarginConstraint
-                  withConstant:customAttributes.messageBubbleLeftRightMargin];
+    [self jsq_updateConstraint:self.messageBubbleContainerWidthConstraint
+                  withConstant:customAttributes.messageBubbleContainerViewWidth];
     
     [self jsq_updateConstraint:self.cellTopLabelHeightConstraint
                   withConstant:customAttributes.cellTopLabelHeight];

@@ -89,7 +89,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         _messageBubbleLeftRightMargin = 240.0f;
     }
     else {
-        _messageBubbleLeftRightMargin = 40.0f;
+        _messageBubbleLeftRightMargin = 50.0f;
     }
     
     _messageBubbleTextViewFrameInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 6.0f);
@@ -480,11 +480,8 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     NSIndexPath *indexPath = layoutAttributes.indexPath;
     
     CGSize messageBubbleSize = [self messageBubbleSizeForItemAtIndexPath:indexPath];
-    CGFloat remainingItemWidthForBubble = self.itemWidth - [self jsq_avatarSizeForIndexPath:indexPath].width;
     
-    CGFloat messageBubblePadding = remainingItemWidthForBubble - messageBubbleSize.width;
-    
-    layoutAttributes.messageBubbleLeftRightMargin = MAX(messageBubblePadding, 0.0f);
+    layoutAttributes.messageBubbleContainerViewWidth = messageBubbleSize.width;
     
     layoutAttributes.textViewFrameInsets = self.messageBubbleTextViewFrameInsets;
     
