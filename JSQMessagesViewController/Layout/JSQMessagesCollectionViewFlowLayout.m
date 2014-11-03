@@ -40,7 +40,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 @interface JSQMessagesCollectionViewFlowLayout ()
 
-@property (strong, nonatomic) NSMutableDictionary *messageBubbleSizes;
+@property (strong, nonatomic) NSCache *messageBubbleCache;
 
 @property (strong, nonatomic) UIDynamicAnimator *dynamicAnimator;
 @property (strong, nonatomic) NSMutableSet *visibleIndexPaths;
@@ -81,7 +81,9 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     _bubbleImageAssetWidth = [UIImage jsq_bubbleCompactImage].size.width;
     
-    _messageBubbleSizes = [NSMutableDictionary new];
+    _messageBubbleCache = [NSCache new];
+    _messageBubbleCache.name = @"JSQMessagesCollectionViewFlowLayout.messageBubbleCache";
+    _messageBubbleCache.countLimit = 100;
     
     _messageBubbleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     
@@ -144,8 +146,8 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     _messageBubbleFont = nil;
     
-    [_messageBubbleSizes removeAllObjects];
-    _messageBubbleSizes = nil;
+    [_messageBubbleCache removeAllObjects];
+    _messageBubbleCache = nil;
     
     [_dynamicAnimator removeAllBehaviors];
     _dynamicAnimator = nil;
@@ -266,7 +268,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     if (context.invalidateFlowLayoutAttributes
         || context.invalidateFlowLayoutDelegateMetrics) {
-        [self jsq_resetLayout];
+        [self jsq_resetDynamicAnimator];
     }
     
     [super invalidateLayoutWithContext:context];
@@ -399,7 +401,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 - (void)jsq_resetLayout
 {
-    [self.messageBubbleSizes removeAllObjects];
+    [self.messageBubbleCache removeAllObjects];
     [self jsq_resetDynamicAnimator];
 }
 
@@ -415,12 +417,13 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 - (CGSize)messageBubbleSizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSValue *cachedSize = [self.messageBubbleSizes objectForKey:indexPath];
-    if (cachedSize) {
+    id<JSQMessageData> messageItem = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
+    
+    NSValue *cachedSize = [self.messageBubbleCache objectForKey:@(messageItem.hash)];
+    if (cachedSize != nil) {
         return [cachedSize CGSizeValue];
     }
     
-    id<JSQMessageData> messageItem = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
     CGSize finalSize = CGSizeZero;
     
     if ([messageItem isMediaMessage]) {
@@ -457,7 +460,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         finalSize = CGSizeMake(finalWidth, stringSize.height + verticalInsets);
     }
     
-    [self.messageBubbleSizes setObject:[NSValue valueWithCGSize:finalSize] forKey:indexPath];
+    [self.messageBubbleCache setObject:[NSValue valueWithCGSize:finalSize] forKey:@(messageItem.hash)];
     
     return finalSize;
 }
