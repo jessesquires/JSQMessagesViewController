@@ -298,8 +298,8 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         NSMutableArray *attributesInRectCopy = [attributesInRect mutableCopy];
         NSArray *dynamicAttributes = [self.dynamicAnimator itemsInRect:rect];
         
-        // avoid duplicate attributes
-        // use dynamic animator attribute item instead of regular item, if it exists
+        //  avoid duplicate attributes
+        //  use dynamic animator attribute item instead of regular item, if it exists
         for (UICollectionViewLayoutAttributes *eachItem in attributesInRect) {
             
             for (UICollectionViewLayoutAttributes *eachDynamicItem in dynamicAttributes) {
