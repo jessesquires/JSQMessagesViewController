@@ -157,7 +157,7 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
-
+    
     self.cellTopLabel.text = nil;
     self.messageBubbleTopLabel.text = nil;
     self.cellBottomLabel.text = nil;
@@ -185,7 +185,7 @@
     }
     
     self.textViewFrameInsets = customAttributes.textViewFrameInsets;
-
+    
     [self jsq_updateConstraint:self.messageBubbleContainerWidthConstraint
                   withConstant:customAttributes.messageBubbleContainerViewWidth];
     
@@ -216,6 +216,21 @@
 {
     [super setSelected:selected];
     self.messageBubbleImageView.highlighted = selected;
+}
+
+//  FIXME: radar 18326340
+//         remove when fixed
+//         hack for Xcode6 / iOS 8 SDK rendering bug that occurs on iOS 7.x
+//         see issue #484
+//         https://github.com/jessesquires/JSQMessagesViewController/issues/484
+//
+- (void)setBounds:(CGRect)bounds
+{
+    [super setBounds:bounds];
+    
+    if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
+        self.contentView.frame = bounds;
+    }
 }
 
 #pragma mark - Setters
@@ -262,7 +277,7 @@
     if ([_mediaView isEqual:mediaView]) {
         return;
     }
-
+    
     [self.messageBubbleImageView removeFromSuperview];
     [self.textView removeFromSuperview];
     
