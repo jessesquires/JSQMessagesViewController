@@ -34,7 +34,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *messageBubbleContainerView;
 @property (weak, nonatomic) IBOutlet UIImageView *messageBubbleImageView;
-@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet JSQMessagesCellTextView *textView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
@@ -111,23 +111,6 @@
     
     self.cellBottomLabel.font = [UIFont systemFontOfSize:11.0f];
     self.cellBottomLabel.textColor = [UIColor lightGrayColor];
-    
-    self.textView.textColor = [UIColor whiteColor];
-    self.textView.editable = NO;
-    self.textView.selectable = YES;
-    self.textView.userInteractionEnabled = YES;
-    self.textView.dataDetectorTypes = UIDataDetectorTypeNone;
-    self.textView.showsHorizontalScrollIndicator = NO;
-    self.textView.showsVerticalScrollIndicator = NO;
-    self.textView.scrollEnabled = NO;
-    self.textView.backgroundColor = [UIColor clearColor];
-    self.textView.contentInset = UIEdgeInsetsZero;
-    self.textView.scrollIndicatorInsets = UIEdgeInsetsZero;
-    self.textView.contentOffset = CGPointZero;
-    self.textView.textContainerInset = UIEdgeInsetsZero;
-    self.textView.textContainer.lineFragmentPadding = 0;
-    self.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor],
-                                          NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
     [self addGestureRecognizer:tap];
