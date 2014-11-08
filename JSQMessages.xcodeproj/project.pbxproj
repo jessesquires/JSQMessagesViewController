@@ -12,7 +12,6 @@
 		88078A9D19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88078A9C19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m */; };
 		88324C3419F6301C00BC732D /* JSQMessagesMediaViewBubbleImageMaskerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88324C3319F6301C00BC732D /* JSQMessagesMediaViewBubbleImageMaskerTests.m */; };
 		883C11781A09FB100092A16D /* JSQMessagesCellTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 883C11771A09FB100092A16D /* JSQMessagesCellTextView.m */; };
-		8841B88519F4988800EA16B6 /* JSQMessages.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8841B88719F4988800EA16B6 /* JSQMessages.strings */; };
 		88445B3119E0AE3F0014F889 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3019E0AE3F0014F889 /* UIKit.framework */; };
 		88445B3319E0AE450014F889 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3219E0AE450014F889 /* Foundation.framework */; };
 		88445B3519E0AE4A0014F889 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3419E0AE4A0014F889 /* CoreGraphics.framework */; };
@@ -104,6 +103,7 @@
 		88A2601B19D8E45600924534 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88A2601A19D8E45600924534 /* Info.plist */; };
 		88A901B619F618B100F99777 /* JSQMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A901B519F618B100F99777 /* JSQMediaItem.m */; };
 		88C4583019F5F7A0008FD427 /* JSQMessagesMediaViewBubbleImageMasker.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C4582F19F5F7A0008FD427 /* JSQMessagesMediaViewBubbleImageMasker.m */; };
+		88E4D7131A0DBD6B000CC061 /* JSQMessages.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8841B88719F4988800EA16B6 /* JSQMessages.strings */; };
 		94A4FA20C2FBD0D62614D5A8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E6750B77E8A7042BA0754B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -735,11 +735,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88E4D7131A0DBD6B000CC061 /* JSQMessages.strings in Resources */,
 				886C33FF19F45E30006B4997 /* JSQMessagesViewController.podspec in Resources */,
 				8861666D19F492B70025B958 /* JSQMessagesAssets.bundle in Resources */,
 				88A25FCF19D8E01A00924534 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
 				88A25FCD19D8E01A00924534 /* JSQMessagesCollectionViewCellIncoming.xib in Resources */,
-				8841B88519F4988800EA16B6 /* JSQMessages.strings in Resources */,
 				88A25FD619D8E01A00924534 /* JSQMessagesToolbarContentView.xib in Resources */,
 				88A25F3A19D8DF2500924534 /* Images.xcassets in Resources */,
 				88A25FBC19D8E01A00924534 /* JSQMessagesViewController.xib in Resources */,

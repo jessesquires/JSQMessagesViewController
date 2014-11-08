@@ -58,6 +58,18 @@
     sendButton.backgroundColor = [UIColor clearColor];
     sendButton.tintColor = [UIColor jsq_messageBubbleBlueColor];
     
+    CGFloat maxHeight = 32.0f;
+    
+    CGRect sendTitleRect = [sendTitle boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, maxHeight)
+                                                   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                                attributes:@{ NSFontAttributeName : sendButton.titleLabel.font }
+                                                   context:nil];
+    
+    sendButton.frame = CGRectMake(0.0f,
+                                  0.0f,
+                                  CGRectGetWidth(CGRectIntegral(sendTitleRect)),
+                                  maxHeight);
+    
     return sendButton;
 }
 
