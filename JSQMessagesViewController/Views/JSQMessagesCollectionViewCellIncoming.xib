@@ -117,7 +117,7 @@
                 <outlet property="cellTopLabel" destination="afj-rd-iNv" id="bTd-4q-U7e"/>
                 <outlet property="cellTopLabelHeightConstraint" destination="fKS-MR-YPI" id="YWd-Rd-qSL"/>
                 <outlet property="messageBubbleContainerView" destination="btS-p8-B7Z" id="2sk-5p-NEd"/>
-                <outlet property="messageBubbleContainerWidthConstraint" destination="stE-iz-VHo" id="eyo-FU-FS4"/>
+                <outlet property="messageBubbleContainerWidthConstraint" destination="stE-iz-VHo" id="lle-iT-67d"/>
                 <outlet property="messageBubbleImageView" destination="OCS-Fu-acq" id="OuN-5t-30g"/>
                 <outlet property="messageBubbleTopLabel" destination="Ufa-bF-l1Y" id="VtH-te-blR"/>
                 <outlet property="messageBubbleTopLabelHeightConstraint" destination="fal-sy-hrK" id="kgv-NO-Gud"/>
