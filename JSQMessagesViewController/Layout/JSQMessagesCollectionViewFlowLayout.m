@@ -83,7 +83,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     _messageBubbleCache = [NSCache new];
     _messageBubbleCache.name = @"JSQMessagesCollectionViewFlowLayout.messageBubbleCache";
-    _messageBubbleCache.countLimit = 100;
+    _messageBubbleCache.countLimit = 200;
     
     _messageBubbleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     
@@ -221,6 +221,11 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
+- (void)setCacheLimit:(NSUInteger)cacheLimit
+{
+    self.messageBubbleCache.countLimit = cacheLimit;
+}
+
 #pragma mark - Getters
 
 - (CGFloat)itemWidth
@@ -242,6 +247,11 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         _visibleIndexPaths = [NSMutableSet new];
     }
     return _visibleIndexPaths;
+}
+
+- (NSUInteger)cacheLimit
+{
+    return self.messageBubbleCache.countLimit;
 }
 
 #pragma mark - Notifications

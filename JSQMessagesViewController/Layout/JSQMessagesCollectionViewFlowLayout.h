@@ -168,6 +168,13 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
 @property (assign, nonatomic) CGSize outgoingAvatarViewSize;
 
 /**
+ *  The maximum number of items that the layout should keep in its cache of layout information.
+ *
+ *  @discussion The default value is `200`. A limit of `0` means no limit. This is not a strict limit.
+ */
+@property (assign, nonatomic) NSUInteger cacheLimit;
+
+/**
  *  Computes and returns the size of the `messageBubbleImageView` property of a `JSQMessagesCollectionViewCell`
  *  at the specified indexPath. The returned size contains the required dimensions to display the entire message contents. 
  *  Note, this is *not* the entire cell, but only its message bubble.
