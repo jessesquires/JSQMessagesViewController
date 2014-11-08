@@ -30,7 +30,7 @@
     UIImage *normalImage = [accessoryImage jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
     UIImage *highlightedImage = [accessoryImage jsq_imageMaskedWithColor:[UIColor darkGrayColor]];
     
-    UIButton *accessoryButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    UIButton *accessoryButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, accessoryImage.size.width, 32.0f)];
     [accessoryButton setImage:normalImage forState:UIControlStateNormal];
     [accessoryButton setImage:highlightedImage forState:UIControlStateHighlighted];
     
