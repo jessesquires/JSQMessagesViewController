@@ -53,7 +53,7 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 
 ## Getting Started
 
-````
+````objective-c
 #import <JSQMessagesViewController/JSQMessages.h>    // import all the things
 ````
 
