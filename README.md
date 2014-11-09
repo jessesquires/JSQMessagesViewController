@@ -57,21 +57,35 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 #import <JSQMessagesViewController/JSQMessages.h>    // import all the things
 ````
 
-* **Demo project**
+* **Demo Project**
   * There's a fucking sweet demo project: `JSQMessages.xcworkspace`.
   * Run `pod install` first.
 
-* **Model**
-  * Your model objects should conform to the `JSQMessageData` protocol.
+* **Message Model**
+  * Your message model objects should conform to the `JSQMessageData` protocol.
+  * However, you may use the provided `JSQMessage` class.
+   
+* **Media Attachment Model**
   * Your media attachment model objects should conform to the `JSQMessageMediaData` protocol.
-  * However, you may use the provided classes:
-    * Model: `JSQMessage` for all message objects
-    * Media attachments: `JSQPhotoMediaItem`, `JSQLocationMediaItem`, `JSQVideoMediaItem`
- 
+  * However, you may use the provided classes: `JSQPhotoMediaItem`, `JSQLocationMediaItem`, `JSQVideoMediaItem`.
+  * Creating your own custom media items is easy! Simply follow the pattern used by the built-in media types.
+  * Also see `JSQMessagesMediaViewBubbleImageMasker` for masking your custom media views as message bubbles.
+
+* **Avatar Model**
+  * Your avatar model objects should conform to the `JSQMessageAvatarImageDataSource` protocol.
+  * However, you may use the provided `JSQMessagesAvatarImage` class.
+  * Also see `JSQMessagesAvatarImageFactory` for easily generating custom avatars.
+
+* **Message Bubble Model**
+  * Your message bubble model objects should conform to the `JSQMessageBubbleImageDataSource` protocol.
+  * However, you may use the provided `JSQMessagesBubbleImage` class.
+  * Also see `JSQMessagesBubbleImageFactory` and `UIImage+JSQMessages.h` for easily generating custom bubbles.
+
 * **View Controller**
   * Subclass `JSQMessagesViewController`.
   * Implement the required methods in the `JSQMessagesCollectionViewDataSource` protocol.
   * Implement the required methods in the `JSQMessagesCollectionViewDelegateFlowLayout` protocol.
+  * Set your `senderId` and `senderDisplayName`. These properties correspond to the methods found in `JSQMessageData` and determine which messages are incoming or outgoing.
 
 * **Customizing**
   * The demo project is well-commented. This should help you configure your view however you like.
