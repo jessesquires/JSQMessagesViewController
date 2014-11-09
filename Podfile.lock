@@ -1,5 +1,5 @@
 PODS:
-  - JSQSystemSoundPlayer (2.0.0)
+  - JSQSystemSoundPlayer (1.5.2)
   - OCMock (3.1.1)
 
 DEPENDENCIES:
@@ -7,7 +7,7 @@ DEPENDENCIES:
   - OCMock
 
 SPEC CHECKSUMS:
-  JSQSystemSoundPlayer: c98443b1cbb3b45db09d0d3d6c2355cf78294981
+  JSQSystemSoundPlayer: c24914bc96ff5365b5d28b59d7ecffd60d1c5587
   OCMock: f6cb8c162ab9d5620dddf411282c7b2c0ee78854
 
 COCOAPODS: 0.34.4

@@ -1035,6 +1035,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6c6ae73b-7f1c-4687-b035-19dfbfe01a55";
 			};
 			name = Debug;
 		};
@@ -1050,6 +1051,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6c6ae73b-7f1c-4687-b035-19dfbfe01a55";
 			};
 			name = Release;
 		};
