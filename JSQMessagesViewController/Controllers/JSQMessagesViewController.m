@@ -585,6 +585,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar didPressLeftBarButton:(UIButton *)sender
 {
     if (toolbar.sendButtonOnRight) {
+        [toolbar.contentView.textView resignFirstResponder];
         [self didPressAccessoryButton:sender];
     }
     else {
@@ -606,6 +607,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                             date:[NSDate date]];
     }
     else {
+        [toolbar.contentView.textView resignFirstResponder];
         [self didPressAccessoryButton:sender];
     }
 }
@@ -867,9 +869,20 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_setCollectionViewInsetsTopValue:(CGFloat)top bottomValue:(CGFloat)bottom
 {
+//    UIEdgeInsets insets = UIEdgeInsetsMake(top, 0.0f, bottom, 0.0f);
+//    self.collectionView.contentInset = insets;
+//    self.collectionView.scrollIndicatorInsets = insets;
+    
+    
     UIEdgeInsets insets = UIEdgeInsetsMake(top, 0.0f, bottom, 0.0f);
     self.collectionView.contentInset = insets;
     self.collectionView.scrollIndicatorInsets = insets;
+    
+    BOOL isChineseInputMethod = [self.textInputMode.primaryLanguage hasPrefix:@"zh"];
+    
+    if (self.automaticallyScrollsToMostRecentMessage && isChineseInputMethod) {
+        [self scrollToBottomAnimated:YES];
+    }
 }
 
 - (BOOL)jsq_isMenuVisible
