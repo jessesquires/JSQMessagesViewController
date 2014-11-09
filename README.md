@@ -88,7 +88,45 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
   * Set your `senderId` and `senderDisplayName`. These properties correspond to the methods found in `JSQMessageData` and determine which messages are incoming or outgoing.
 
 * **Customizing**
-  * The demo project is well-commented. This should help you configure your view however you like.
+  * The demo project is well-commented. Please use this as a guide.
+
+## Quick Tips and FAQs
+
+*Springy bubbles?*
+````objective-c
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.collectionView.collectionViewLayout.springinessEnabled = YES;
+}
+````
+
+*Remove avatars?*
+````objective-c
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
+    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+}
+
+- (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+````
+
+*Further customize your cells*
+````objective-c
+- (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    
+    // Customize all the things!
+    
+    return cell;
+}
+````
 
 ## Documentation
 
