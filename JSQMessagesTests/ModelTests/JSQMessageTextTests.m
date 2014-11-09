@@ -10,10 +10,10 @@
 
 #import <XCTest/XCTest.h>
 
-#import "JSQTextMessage.h"
+#import "JSQMessage.h"
 
 
-@interface JSQTextMessageTests : XCTestCase
+@interface JSQMessageTextTests : XCTestCase
 
 @property (strong, nonatomic) NSString *senderId;
 @property (strong, nonatomic) NSString *senderDisplayName;
@@ -23,14 +23,16 @@
 @end
 
 
-@implementation JSQTextMessageTests
+@implementation JSQMessageTextTests
 
 - (void)setUp
 {
     [super setUp];
+    
     self.senderId = @"324543-43556-212343";
     self.senderDisplayName = @"Jesse Squires";
     self.date = [NSDate date];
+    
     self.text = @"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque"
     @"laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi"
     @"architecto beatae vitae dicta sunt explicabo.";
@@ -45,28 +47,30 @@
     [super tearDown];
 }
 
+#pragma mark - Text messages
+
 - (void)testTextMessageInit
 {
-    JSQTextMessage *msg = [[JSQTextMessage alloc] initWithSenderId:self.senderId
-                                                 senderDisplayName:self.senderDisplayName
-                                                              date:self.date
-                                                              text:self.text];
+    JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId
+                                         senderDisplayName:self.senderDisplayName
+                                                      date:self.date
+                                                      text:self.text];
     XCTAssertNotNil(msg, @"Message should not be nil");
 }
 
-- (void)testMessageInvalidInit
+- (void)testTextMessageInvalidInit
 {
-    XCTAssertThrows([[JSQTextMessage alloc] init], @"Invalid init should throw");
-    XCTAssertThrows([[JSQTextMessage alloc] initWithSenderId:nil senderDisplayName:nil date:nil text:nil], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessage alloc] init], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessage alloc] initWithSenderId:nil senderDisplayName:nil date:nil text:nil], @"Invalid init should throw");
 }
 
-- (void)testMessageIsEqual
+- (void)testTextMessageIsEqual
 {
-    JSQTextMessage *msg = [[JSQTextMessage alloc] initWithSenderId:self.senderId
-                                                 senderDisplayName:self.senderDisplayName
-                                                              date:self.date
-                                                              text:self.text];
-    JSQTextMessage *copy = [msg copy];
+    JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId
+                                         senderDisplayName:self.senderDisplayName
+                                                      date:self.date
+                                                      text:self.text];
+    JSQMessage *copy = [msg copy];
     
     XCTAssertEqualObjects(msg, copy, @"Copied messages should be equal");
     XCTAssertEqual([msg hash], [copy hash], @"Copied messages hashes should be equal");
@@ -75,15 +79,15 @@
     XCTAssertEqualObjects(msg, msg, @"Messages should be equal to itself");
 }
 
-- (void)testMessageArchiving
+- (void)testTextMessageArchiving
 {
-    JSQTextMessage *msg = [[JSQTextMessage alloc] initWithSenderId:self.senderId
-                                                 senderDisplayName:self.senderDisplayName
-                                                              date:self.date
-                                                              text:self.text];
+    JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId
+                                         senderDisplayName:self.senderDisplayName
+                                                      date:self.date
+                                                      text:self.text];
     NSData *msgData = [NSKeyedArchiver archivedDataWithRootObject:msg];
     
-    JSQTextMessage *unarchivedMsg = [NSKeyedUnarchiver unarchiveObjectWithData:msgData];
+    JSQMessage *unarchivedMsg = [NSKeyedUnarchiver unarchiveObjectWithData:msgData];
     
     XCTAssertEqualObjects(msg, unarchivedMsg, @"Message should be equal");
 }

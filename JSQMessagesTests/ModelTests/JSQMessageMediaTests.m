@@ -12,7 +12,7 @@
 
 #import <OCMock/OCMock.h>
 
-#import "JSQMediaMessage.h"
+#import "JSQMessage.h"
 
 
 // Fake media object for testing
@@ -35,7 +35,7 @@
 
 
 
-@interface JSQMediaMessageTests : XCTestCase
+@interface JSQMessageMediaTests : XCTestCase
 
 @property (strong, nonatomic) NSString *senderId;
 @property (strong, nonatomic) NSString *senderDisplayName;
@@ -45,7 +45,7 @@
 @end
 
 
-@implementation JSQMediaMessageTests
+@implementation JSQMessageMediaTests
 
 - (void)setUp
 {
@@ -65,28 +65,28 @@
     [super tearDown];
 }
 
-- (void)testTextMessageInit
+- (void)testMediaMessageInit
 {
-    JSQMediaMessage *msg = [[JSQMediaMessage alloc] initWithSenderId:self.senderId
+    JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId
                                                    senderDisplayName:self.senderDisplayName
                                                                 date:self.date
                                                                media:self.mockMediaData];
     XCTAssertNotNil(msg, @"Message should not be nil");
 }
 
-- (void)testMessageInvalidInit
+- (void)testMediaMessageInvalidInit
 {
-    XCTAssertThrows([[JSQMediaMessage alloc] init], @"Invalid init should throw");
-    XCTAssertThrows([[JSQMediaMessage alloc] initWithSenderId:nil senderDisplayName:nil date:nil media:nil], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessage alloc] init], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessage alloc] initWithSenderId:nil senderDisplayName:nil date:nil media:nil], @"Invalid init should throw");
 }
 
-- (void)testMessageIsEqual
+- (void)testMediaMessageIsEqual
 {
-    JSQMediaMessage *msg = [[JSQMediaMessage alloc] initWithSenderId:self.senderId
+    JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId
                                                    senderDisplayName:self.senderDisplayName
                                                                 date:self.date
                                                                media:self.mockMediaData];
-    JSQMediaMessage *copy = [msg copy];
+    JSQMessage *copy = [msg copy];
     
     XCTAssertEqualObjects(msg, copy, @"Copied messages should be equal");
     XCTAssertEqual([msg hash], [copy hash], @"Copied messages hashes should be equal");
@@ -95,16 +95,16 @@
     XCTAssertEqualObjects(msg, msg, @"Messages should be equal to itself");
 }
 
-- (void)testMessageArchiving
+- (void)testMediaMessageArchiving
 {
-    JSQMediaMessage *msg = [[JSQMediaMessage alloc] initWithSenderId:self.senderId
+    JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId
                                                    senderDisplayName:self.senderDisplayName
                                                                 date:self.date
                                                                media:[FakeMedia new]];
     
     NSData *msgData = [NSKeyedArchiver archivedDataWithRootObject:msg];
     
-    JSQMediaMessage *unarchivedMsg = [NSKeyedUnarchiver unarchiveObjectWithData:msgData];
+    JSQMessage *unarchivedMsg = [NSKeyedUnarchiver unarchiveObjectWithData:msgData];
     
     XCTAssertEqualObjects(msg, unarchivedMsg, @"Message should be equal");
 }

@@ -43,7 +43,7 @@
      */
     self.senderId = kJSQDemoAvatarIdSquires;
     self.senderDisplayName = kJSQDemoAvatarDisplayNameSquires;
-
+    
     
     /**
      *  Load up our fake data for the demo
@@ -123,9 +123,9 @@
     JSQMessage *copyMessage = [[self.demoData.messages lastObject] copy];
     
     if (!copyMessage) {
-        copyMessage = [JSQTextMessage messageWithSenderId:kJSQDemoAvatarIdJobs
-                                              displayName:kJSQDemoAvatarDisplayNameJobs
-                                                     text:@"First received!"];
+        copyMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdJobs
+                                          displayName:kJSQDemoAvatarDisplayNameJobs
+                                                 text:@"First received!"];
     }
     
     /**
@@ -141,7 +141,7 @@
         id<JSQMessageMediaData> newMediaData = nil;
         id newMediaAttachmentCopy = nil;
         
-        if ([copyMessage isKindOfClass:[JSQMediaMessage class]]) {
+        if (copyMessage.isMediaMessage) {
             /**
              *  Last message was a media message
              */
@@ -189,17 +189,17 @@
                 NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
             }
             
-            newMessage = [JSQMediaMessage messageWithSenderId:randomUserId
-                                                  displayName:self.demoData.users[randomUserId]
-                                                        media:newMediaData];
+            newMessage = [JSQMessage messageWithSenderId:randomUserId
+                                             displayName:self.demoData.users[randomUserId]
+                                                   media:newMediaData];
         }
         else {
             /**
              *  Last message was a text message
              */
-            newMessage = [JSQTextMessage messageWithSenderId:randomUserId
-                                                 displayName:self.demoData.users[randomUserId]
-                                                        text:copyMessage.text];
+            newMessage = [JSQMessage messageWithSenderId:randomUserId
+                                             displayName:self.demoData.users[randomUserId]
+                                                    text:copyMessage.text];
         }
         
         /**
@@ -214,7 +214,7 @@
         [self finishReceivingMessage];
         
         
-        if ([newMessage isKindOfClass:[JSQMediaMessage class]]) {
+        if (newMessage.isMediaMessage) {
             /**
              *  Simulate "downloading" media
              */
@@ -276,10 +276,10 @@
      */
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
-    JSQTextMessage *message = [[JSQTextMessage alloc] initWithSenderId:senderId
-                                                     senderDisplayName:senderDisplayName
-                                                                  date:date
-                                                                  text:text];
+    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId
+                                             senderDisplayName:senderDisplayName
+                                                          date:date
+                                                          text:text];
     
     [self.demoData.messages addObject:message];
     [self finishSendingMessage];
@@ -349,7 +349,7 @@
     if ([message.senderId isEqualToString:self.senderId]) {
         return self.demoData.outgoingBubbleImageData;
     }
-
+    
     return self.demoData.incomingBubbleImageData;
 }
 
@@ -453,21 +453,21 @@
     
     /**
      *  Configure almost *anything* on the cell
-     *  
+     *
      *  Text colors, label text, label colors, etc.
      *
      *
      *  DO NOT set `cell.textView.font` !
      *  Instead, you need to set `self.collectionView.collectionViewLayout.messageBubbleFont` to the font you want in `viewDidLoad`
      *
-     *  
+     *
      *  DO NOT manipulate cell layout information!
      *  Instead, override the properties you want on `self.collectionView.collectionViewLayout` from `viewDidLoad`
      */
     
     JSQMessage *msg = [self.demoData.messages objectAtIndex:indexPath.item];
     
-    if ([msg isKindOfClass:[JSQTextMessage class]]) {
+    if (!msg.isMediaMessage) {
         
         if ([msg.senderId isEqualToString:self.senderId]) {
             cell.textView.textColor = [UIColor blackColor];
