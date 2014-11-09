@@ -2,8 +2,6 @@
 
 [![Build Status](https://secure.travis-ci.org/jessesquires/JSQMessagesViewController.svg)](http://travis-ci.org/jessesquires/JSQMessagesViewController) [![Version Status](http://img.shields.io/cocoapods/v/JSQMessagesViewController.png)][docsLink] [![license MIT](http://img.shields.io/badge/license-MIT-orange.png)][mitLink]
 
-### Update: 6.0-beta6 is out! See [#476](https://github.com/jessesquires/JSQMessagesViewController/issues/476) for details.
-
 ![Messages Screenshot 1][img1] &nbsp;&nbsp;&nbsp; ![Messages Screenshot 2][img2]
 
 > More screenshots available at [CocoaControls](https://www.cocoacontrols.com/controls/jsqmessagesviewcontroller)
@@ -31,22 +29,27 @@ git checkout iOS6_support_stable
 
 ## Installation
 
-````
-pod 'JSQMessagesViewController'
+````ruby
+# For latest release in cocoapods
+pod 'JSQMessagesViewController'  
+
+# Feeling adventurous? Get the latest on develop
+pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
+
+# For version 5.3.2
+pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController', :branch => 'version_5.3.2_patch'
+
+# For iOS 6 support
+pod 'JSMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'iOS6_support_stable'
 ````
 
-Otherwise, drag the `JSQMessagesViewController/` folder to your project. Install [`JSQSystemSoundPlayer`][playerLink] and add the `QuartzCore.framework`.
+Otherwise, drag the `JSQMessagesViewController/` folder to your project and install [`JSQSystemSoundPlayer`][playerLink].
 
 >**NOTE:**
 >
 >This repo was formerly named `MessagesTableViewController`.
 >
 >And this pod was formerly named `JSMessagesViewController`.
-
-For iOS 6.0 support:
-````
-pod 'JSMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'iOS6_support_stable'
-````
 
 ## Getting Started
 
@@ -62,7 +65,7 @@ pod 'JSMessagesViewController', :git => 'https://github.com/jessesquires/JSQMess
   * Your model objects should conform to the `JSQMessageData` protocol.
   * Your media attachment model objects should conform to the `JSQMessageMediaData` protocol.
   * However, you may use the provided classes:
-    * Model: `JSQTextMessage` and `JSQMediaMessage`
+    * Model: `JSQMessage` for all message objects
     * Media attachments: `JSQPhotoMediaItem`, `JSQLocationMediaItem`, `JSQVideoMediaItem`
  
 * **View Controller**
