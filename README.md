@@ -118,13 +118,14 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 }
 ````
 
-*Further customize your cells*
+*Customize your cells*
 ````objective-c
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
-    // Customize all the things!
+    // Customize the shit out of this cell
+    // See the docs for JSQMessagesCollectionViewCell
     
     return cell;
 }
