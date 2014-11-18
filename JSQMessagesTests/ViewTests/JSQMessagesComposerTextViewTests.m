@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.hexedbits.com
+//  http://www.jessesquires.com
 //
 //
 //  MIT License
@@ -9,7 +9,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <OCMock/OCMock.h>
 
 #import "JSQMessagesComposerTextView.h"
 
@@ -55,7 +54,7 @@
     XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(self.textView.scrollIndicatorInsets, UIEdgeInsetsMake(6.0f, 0.0f, 6.0f, 0.0f)), @"Property should be equal to default value");
     
     XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(self.textView.textContainerInset, UIEdgeInsetsMake(4.0f, 2.0f, 4.0f, 2.0f)), @"Property should be equal to default value");
-    XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(self.textView.contentInset, UIEdgeInsetsMake(2.0f, 0.0f, 2.0f, 0.0f)), @"Property should be equal to default value");
+    XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(self.textView.contentInset, UIEdgeInsetsMake(1.0f, 0.0f, 1.0f, 0.0f)), @"Property should be equal to default value");
     
     XCTAssertEqual(self.textView.scrollEnabled, YES, @"Property should be equal to default value");
     XCTAssertEqual(self.textView.scrollsToTop, NO, @"Property should be equal to default value");

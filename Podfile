@@ -1,6 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
 platform :ios, '7.0'
 
-pod 'JSQSystemSoundPlayer'
-pod 'OCMock'
+# ignore all warnings from all pods
+inhibit_all_warnings!
 
-link_with 'JSQMessages'
+pod 'JSQSystemSoundPlayer'
+
+target :JSQMessagesTests, :exclusive => true do
+    pod 'OCMock'
+end

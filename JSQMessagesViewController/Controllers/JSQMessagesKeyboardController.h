@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.hexedbits.com
+//  http://www.jessesquires.com
 //
 //
 //  Documentation
@@ -22,6 +22,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+@class JSQMessagesKeyboardController;
 
 /**
  *  Posted when the system keyboard frame changes.
@@ -51,9 +54,10 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
 /**
  *  Tells the delegate that the keyboard frame has changed.
  *
- *  @param keyboardFrame The new frame of the keyboard in the coordinate system of the `contextView`.
+ *  @param keyboardController The keyboard controller that is notifying the delegate.
+ *  @param keyboardFrame      The new frame of the keyboard in the coordinate system of the `contextView`.
  */
-- (void)keyboardDidChangeFrame:(CGRect)keyboardFrame;
+- (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame;
 
 @end
 
@@ -95,6 +99,16 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
  *  @discussion The x value of the point is not used.
  */
 @property (assign, nonatomic) CGPoint keyboardTriggerPoint;
+
+/**
+ *  Returns `YES` if the keyboard is currently visible, `NO` otherwise.
+ */
+@property (assign, nonatomic, readonly) BOOL keyboardIsVisible;
+
+/**
+ *  Returns the current frame of the keyboard if it is visible, otherwise `CGRectNull`.
+ */
+@property (assign, nonatomic, readonly) CGRect currentKeyboardFrame;
 
 /**
  *  Creates a new keyboard controller object with the specified textView, contextView, panGestureRecognizer, and delegate.

@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.hexedbits.com
+//  http://www.jessesquires.com
 //
 //
 //  Documentation
@@ -18,34 +18,34 @@
 
 #import "JSQSystemSoundPlayer+JSQMessages.h"
 
-static NSString * const kJSQMessageReceivedSoundName = @"message_received";
-static NSString * const kJSQMessageSentSoundName = @"message_sent";
+static NSString * const kJSQMessageReceivedSoundName = @"JSQMessagesAssets.bundle/Sounds/message_received";
+static NSString * const kJSQMessageSentSoundName = @"JSQMessagesAssets.bundle/Sounds/message_sent";
 
 
 @implementation JSQSystemSoundPlayer (JSQMessages)
 
 + (void)jsq_playMessageReceivedSound
 {
-    [[JSQSystemSoundPlayer sharedPlayer] playSoundWithName:kJSQMessageReceivedSoundName
-                                                 extension:kJSQSystemSoundTypeAIFF];
+    [[JSQSystemSoundPlayer sharedPlayer] playSoundWithFilename:kJSQMessageReceivedSoundName
+                                                 fileExtension:kJSQSystemSoundTypeAIFF];
 }
 
 + (void)jsq_playMessageReceivedAlert
 {
-    [[JSQSystemSoundPlayer sharedPlayer] playAlertSoundWithName:kJSQMessageReceivedSoundName
-                                                      extension:kJSQSystemSoundTypeAIFF];
+    [[JSQSystemSoundPlayer sharedPlayer] playAlertSoundWithFilename:kJSQMessageReceivedSoundName
+                                                      fileExtension:kJSQSystemSoundTypeAIFF];
 }
 
 + (void)jsq_playMessageSentSound
 {
-    [[JSQSystemSoundPlayer sharedPlayer] playSoundWithName:kJSQMessageSentSoundName
-                                                 extension:kJSQSystemSoundTypeAIFF];
+    [[JSQSystemSoundPlayer sharedPlayer] playSoundWithFilename:kJSQMessageSentSoundName
+                                                 fileExtension:kJSQSystemSoundTypeAIFF];
 }
 
 + (void)jsq_playMessageSentAlert
 {
-    [[JSQSystemSoundPlayer sharedPlayer] playAlertSoundWithName:kJSQMessageSentSoundName
-                                                      extension:kJSQSystemSoundTypeAIFF];
+    [[JSQSystemSoundPlayer sharedPlayer] playAlertSoundWithFilename:kJSQMessageSentSoundName
+                                                      fileExtension:kJSQSystemSoundTypeAIFF];
 }
 
 @end

@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.hexedbits.com
+//  http://www.jessesquires.com
 //
 //
 //  Documentation
@@ -55,6 +55,10 @@
 
 - (void)setTextInsets:(UIEdgeInsets)textInsets
 {
+    if (UIEdgeInsetsEqualToEdgeInsets(_textInsets, textInsets)) {
+        return;
+    }
+    
     _textInsets = textInsets;
     [self setNeedsDisplay];
 }

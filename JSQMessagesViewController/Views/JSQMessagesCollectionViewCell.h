@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.hexedbits.com
+//  http://www.jessesquires.com
 //
 //
 //  Documentation
@@ -19,6 +19,7 @@
 #import <UIKit/UIKit.h>
 
 #import "JSQMessagesLabel.h"
+#import "JSQMessagesCellTextView.h"
 
 @class JSQMessagesCollectionViewCell;
 
@@ -31,21 +32,46 @@
 @required
 
 /**
- *  Tells the delegate that the avatarImageView of a cell has been tapped.
+ *  Tells the delegate that the avatarImageView of the cell has been tapped.
  *
- *  @param cell The cell that received the tap.
+ *  @param cell The cell that received the tap touch event.
  */
 - (void)messagesCollectionViewCellDidTapAvatar:(JSQMessagesCollectionViewCell *)cell;
+
+/**
+ *  Tells the delegate that the message bubble of the cell has been tapped.
+ *
+ *  @param cell The cell that received the tap touch event.
+ */
+- (void)messagesCollectionViewCellDidTapMessageBubble:(JSQMessagesCollectionViewCell *)cell;
+
+/**
+ *  Tells the delegate that the cell has been tapped at the point specified by position.
+ *
+ *  @param cell The cell that received the tap touch event.
+ *  @param position The location of the received touch in the cell's coordinate system.
+ *
+ *  @discussion This method is *only* called if position is *not* within the bounds of the cell's
+ *  avatar image view or message bubble image view. In other words, this method is *not* called when the cell's
+ *  avatar or message bubble are tapped.
+ *
+ *  @see `messagesCollectionViewCellDidTapAvatar:`
+ *  @see `messagesCollectionViewCellDidTapMessageBubble:`
+ */
+- (void)messagesCollectionViewCellDidTapCell:(JSQMessagesCollectionViewCell *)cell atPosition:(CGPoint)position;
 
 @end
 
 
 /**
- *  The `JSQMessagesCollectionViewCell` is an abstract class that presents the content for a single message data item
- *  when that item is within the collection view’s visible bounds. The layout and presentation 
- *  of cells is managed by the collection view and its corresponding layout object.
+ *  The `JSQMessagesCollectionViewCell` is an abstract base class that presents the content for 
+ *  a single message data item when that item is within the collection view’s visible bounds. 
+ *  The layout and presentation of cells is managed by the collection view and its corresponding layout object.
  *
  *  @warning This class is intended to be subclassed. You should not use it directly.
+ *
+ *  @see JSQMessagesCollectionViewCellIncoming.
+ *  @see JSQMessagesCollectionViewCellOutgoing.
  */
 @interface JSQMessagesCollectionViewCell : UICollectionViewCell
 
@@ -74,27 +100,55 @@
 
 /**
  *  Returns the text view of the cell. This text view contains the message body text.
+ *
+ *  @warning If mediaView returns a non-nil view, then this value will be `nil`.
  */
-@property (weak, nonatomic, readonly) UITextView *textView;
+@property (weak, nonatomic, readonly) JSQMessagesCellTextView *textView;
 
 /**
- *  The bubble image view of the cell that is responsible for displaying bubble images.
- *  The default value is `nil`.
+ *  Returns the bubble image view of the cell that is responsible for displaying message bubble images. 
+ *
+ *  @warning If mediaView returns a non-nil view, then this value will be `nil`.
  */
-@property (weak, nonatomic) UIImageView *messageBubbleImageView;
+@property (weak, nonatomic, readonly) UIImageView *messageBubbleImageView;
 
 /**
- *  The avatar image view of the cell that is responsible for displaying avatar images.
- *  The default value is `nil`.
+ *  Returns the message bubble container view of the cell. This view is the superview of
+ *  the cell's textView and messageBubbleImageView.
+ *
+ *  @discussion You may customize the cell by adding custom views to this container view.
+ *  To do so, override `collectionView:cellForItemAtIndexPath:`
+ *
+ *  @warning You should not try to manipulate any properties of this view, for example adjusting
+ *  its frame, nor should you remove this view from the cell or remove any of its subviews. 
+ *  Doing so could result in unexpected behavior.
  */
-@property (weak, nonatomic) UIImageView *avatarImageView;
+@property (weak, nonatomic, readonly) UIView *messageBubbleContainerView;
 
 /**
- *  Returns the underlying gesture recognizer for long press gestures in the cell.
- *  This gesture handles the copy action for the cell.
- *  Access this property when you need to override or more precisely control the long press gesture.
+ *  Returns the avatar image view of the cell that is responsible for displaying avatar images.
  */
-@property (weak, nonatomic, readonly) UILongPressGestureRecognizer *longPressGestureRecognizer;
+@property (weak, nonatomic, readonly) UIImageView *avatarImageView;
+
+/**
+ *  Returns the avatar container view of the cell. This view is the superview of 
+ *  the cell's avatarImageView.
+ *
+ *  @discussion You may customize the cell by adding custom views to this container view.
+ *  To do so, override `collectionView:cellForItemAtIndexPath:`
+ *
+ *  @warning You should not try to manipulate any properties of this view, for example adjusting
+ *  its frame, nor should you remove this view from the cell or remove any of its subviews.
+ *  Doing so could result in unexpected behavior.
+ */
+@property (weak, nonatomic, readonly) UIView *avatarContainerView;
+
+/**
+ *  The media view of the cell. This view displays the contents of a media message.
+ *
+ *  @warning If this value is non-nil, then textView and messageBubbleImageView will both be `nil`.
+ */
+@property (weak, nonatomic) UIView *mediaView;
 
 /**
  *  Returns the underlying gesture recognizer for tap gestures in the avatarImageView of the cell.
@@ -113,10 +167,17 @@
 + (UINib *)nib;
 
 /**
- *  Returns the default string used to identify a reusable cell.
+ *  Returns the default string used to identify a reusable cell for text message items.
  *
  *  @return The string used to identify a reusable cell.
  */
 + (NSString *)cellReuseIdentifier;
+
+/**
+ *  Returns the default string used to identify a reusable cell for media message items.
+ *
+ *  @return The string used to identify a reusable cell.
+ */
++ (NSString *)mediaCellReuseIdentifier;
 
 @end

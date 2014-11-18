@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.hexedbits.com
+//  http://www.jessesquires.com
 //
 //
 //  Documentation
@@ -28,11 +28,9 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
 @interface JSQMessagesTypingIndicatorFooterView ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *bubbleImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubbleImageViewLeftHorizontalConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubbleImageViewRightHorizontalConstraint;
 
 @property (weak, nonatomic) IBOutlet UIImageView *typingIndicatorImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *typingIndicatorImageViewLeftHorizontalConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *typingIndicatorImageViewRightHorizontalConstraint;
 
 @end
@@ -60,7 +58,9 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
 {
     [super awakeFromNib];
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
+    self.userInteractionEnabled = NO;
+    self.typingIndicatorImageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 - (void)dealloc
@@ -79,49 +79,43 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
 
 #pragma mark - Typing indicator
 
-- (void)configureForIncoming:(BOOL)isIncoming
-              indicatorColor:(UIColor *)indicatorColor
-                 bubbleColor:(UIColor *)bubbleColor
-              collectionView:(UICollectionView *)collectionView
-
+- (void)configureWithEllipsisColor:(UIColor *)ellipsisColor
+                messageBubbleColor:(UIColor *)messageBubbleColor
+               shouldDisplayOnLeft:(BOOL)shouldDisplayOnLeft
+                 forCollectionView:(UICollectionView *)collectionView
 {
-    NSParameterAssert(indicatorColor != nil);
-    NSParameterAssert(bubbleColor != nil);
+    NSParameterAssert(ellipsisColor != nil);
+    NSParameterAssert(messageBubbleColor != nil);
     NSParameterAssert(collectionView != nil);
     
-    CGFloat collectionViewWidth = CGRectGetWidth(collectionView.frame);
-    CGFloat bubbleWidth = CGRectGetWidth(self.bubbleImageView.frame);
-    CGFloat indicatorWidth = CGRectGetWidth(self.typingIndicatorImageView.frame);
-    
     CGFloat bubbleMarginMinimumSpacing = 6.0f;
-    CGFloat indicatorMarginMinimumSpacing = 24.0f;
+    CGFloat indicatorMarginMinimumSpacing = 26.0f;
     
-    CGFloat bubbleMarginMaximumSpacing = collectionViewWidth - bubbleWidth - bubbleMarginMinimumSpacing;
-    CGFloat indicatorMarginMaximumSpacing = collectionViewWidth - indicatorWidth - indicatorMarginMinimumSpacing;
+    JSQMessagesBubbleImageFactory *bubbleImageFactory = [[JSQMessagesBubbleImageFactory alloc] init];
     
-    if (isIncoming) {
-        self.bubbleImageView.image = [JSQMessagesBubbleImageFactory incomingMessageBubbleImageViewWithColor:bubbleColor].image;
+    if (shouldDisplayOnLeft) {
+        self.bubbleImageView.image = [bubbleImageFactory incomingMessagesBubbleImageWithColor:messageBubbleColor].messageBubbleImage;
         
-        self.bubbleImageViewLeftHorizontalConstraint.constant = bubbleMarginMinimumSpacing;
+        CGFloat collectionViewWidth = CGRectGetWidth(collectionView.frame);
+        CGFloat bubbleWidth = CGRectGetWidth(self.bubbleImageView.frame);
+        CGFloat indicatorWidth = CGRectGetWidth(self.typingIndicatorImageView.frame);
+        
+        CGFloat bubbleMarginMaximumSpacing = collectionViewWidth - bubbleWidth - bubbleMarginMinimumSpacing;
+        CGFloat indicatorMarginMaximumSpacing = collectionViewWidth - indicatorWidth - indicatorMarginMinimumSpacing;
+        
         self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMaximumSpacing;
-        
-        self.typingIndicatorImageViewLeftHorizontalConstraint.constant = indicatorMarginMinimumSpacing;
         self.typingIndicatorImageViewRightHorizontalConstraint.constant = indicatorMarginMaximumSpacing;
     }
     else {
-        self.bubbleImageView.image = [JSQMessagesBubbleImageFactory outgoingMessageBubbleImageViewWithColor:bubbleColor].image;
+        self.bubbleImageView.image = [bubbleImageFactory outgoingMessagesBubbleImageWithColor:messageBubbleColor].messageBubbleImage;
         
-        self.bubbleImageViewLeftHorizontalConstraint.constant = bubbleMarginMaximumSpacing;
         self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMinimumSpacing;
-        
-        self.typingIndicatorImageViewLeftHorizontalConstraint.constant = indicatorMarginMaximumSpacing;
         self.typingIndicatorImageViewRightHorizontalConstraint.constant = indicatorMarginMinimumSpacing;
     }
     
     [self setNeedsUpdateConstraints];
     
-    self.typingIndicatorImageView.image = [[UIImage imageNamed:@"typing"] jsq_imageMaskedWithColor:indicatorColor];
-    self.typingIndicatorImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.typingIndicatorImageView.image = [[UIImage jsq_defaultTypingIndicatorImage] jsq_imageMaskedWithColor:ellipsisColor];
 }
 
 @end

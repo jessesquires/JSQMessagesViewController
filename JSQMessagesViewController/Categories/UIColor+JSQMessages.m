@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.hexedbits.com
+//  http://www.jessesquires.com
 //
 //
 //  Documentation
@@ -26,7 +26,7 @@
 {
     return [UIColor colorWithHue:130.0f / 360.0f
                       saturation:0.68f
-                      brightness:0.80f
+                      brightness:0.84f
                            alpha:1.0f];
 }
 
@@ -34,6 +34,14 @@
 {
     return [UIColor colorWithHue:210.0f / 360.0f
                       saturation:0.94f
+                      brightness:1.0f
+                           alpha:1.0f];
+}
+
++ (UIColor *)jsq_messageBubbleRedColor
+{
+    return [UIColor colorWithHue:0.0f / 360.0f
+                      saturation:0.79f
                       brightness:1.0f
                            alpha:1.0f];
 }

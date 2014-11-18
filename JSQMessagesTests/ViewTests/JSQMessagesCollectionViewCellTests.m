@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.hexedbits.com
+//  http://www.jessesquires.com
 //
 //
 //  MIT License
@@ -9,7 +9,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <OCMock/OCMock.h>
 
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
@@ -31,19 +30,24 @@
     [super tearDown];
 }
 
-- (void)testMessagesCollectionViewCellInit
+- (void)testMessagesIncomingCollectionViewCellInit
 {
     UINib *incomingCell = [JSQMessagesCollectionViewCellIncoming nib];
     XCTAssertNotNil(incomingCell, @"Nib should not be nil");
     
     NSString *incomingCellId = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
     XCTAssertNotNil(incomingCellId, @"Cell identifier should not be nil");
-    
+    XCTAssertEqualObjects(incomingCellId, NSStringFromClass([JSQMessagesCollectionViewCellIncoming class]));
+}
+
+- (void)testMessagesOutgoingCollectionViewCellInit
+{
     UINib *outgoingCell = [JSQMessagesCollectionViewCellOutgoing nib];
     XCTAssertNotNil(outgoingCell, @"Nib should not be nil");
     
     NSString *outgoingCellId = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
     XCTAssertNotNil(outgoingCellId, @"Cell identifier should not be nil");
+    XCTAssertEqualObjects(outgoingCellId, NSStringFromClass([JSQMessagesCollectionViewCellOutgoing class]));
 }
 
 @end

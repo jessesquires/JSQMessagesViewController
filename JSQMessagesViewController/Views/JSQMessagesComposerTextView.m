@@ -1,6 +1,6 @@
 //
 //  Created by Jesse Squires
-//  http://www.hexedbits.com
+//  http://www.jessesquires.com
 //
 //
 //  Documentation
@@ -55,7 +55,7 @@
     self.scrollIndicatorInsets = UIEdgeInsetsMake(cornerRadius, 0.0f, cornerRadius, 0.0f);
     
     self.textContainerInset = UIEdgeInsetsMake(4.0f, 2.0f, 4.0f, 2.0f);
-    self.contentInset = UIEdgeInsetsMake(2.0f, 0.0f, 2.0f, 0.0f);
+    self.contentInset = UIEdgeInsetsMake(1.0f, 0.0f, 1.0f, 0.0f);
     
     self.scrollEnabled = YES;
     self.scrollsToTop = NO;
@@ -63,7 +63,7 @@
     
     self.font = [UIFont systemFontOfSize:16.0f];
     self.textColor = [UIColor blackColor];
-    self.textAlignment = NSTextAlignmentLeft;
+    self.textAlignment = NSTextAlignmentNatural;
     
     self.contentMode = UIViewContentModeRedraw;
     self.dataDetectorTypes = UIDataDetectorTypeNone;
