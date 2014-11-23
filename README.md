@@ -92,7 +92,7 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 * **Customizing**
   * The demo project is well-commented. Please use this as a guide.
 
-## Quick Tips and FAQs
+## Quick Tips
 
 *Springy bubbles?*
 ````objective-c
@@ -130,6 +130,10 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
     return cell;
 }
 ````
+
+## Questions & Help
+
+There's [a label](https://github.com/jessesquires/JSQMessagesViewController/labels/questions%20&%20help) for that. Before asking a question, see if it has [already been answered](https://github.com/jessesquires/JSQMessagesViewController/issues?q=label%3A%22questions+%26+help%22+is%3Aclosed).
 
 ## Documentation
 
