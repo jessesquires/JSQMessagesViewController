@@ -156,6 +156,10 @@
  */
 @property (weak, nonatomic, readonly) UITapGestureRecognizer *tapGestureRecognizer;
 
+
+
+@property (weak, nonatomic, readonly) UIView *resendContainerView;
+
 #pragma mark - Class methods
 
 /**
