@@ -76,4 +76,9 @@
  */
 + (UIImage *)jsq_defaultPlayImage;
 
+/**
+ *  @return The default resend icon image.
+ */
++ (UIImage *)jsq_defaultResendImage;
+
 @end

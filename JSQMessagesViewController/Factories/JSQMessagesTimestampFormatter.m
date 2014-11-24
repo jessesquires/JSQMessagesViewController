@@ -123,7 +123,7 @@
         return nil;
     }
     
-    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [self.dateFormatter setDateStyle:NSDateFormatterFullStyle];
     [self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     return [self.dateFormatter stringFromDate:date];
 }

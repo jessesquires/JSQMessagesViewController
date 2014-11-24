@@ -95,4 +95,10 @@
     return [UIImage jsq_bubbleImageFromBundleWithName:@"play"];
 }
 
++ (UIImage *)jsq_defaultResendImage
+{
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"resend"];
+}
+
+
 @end
