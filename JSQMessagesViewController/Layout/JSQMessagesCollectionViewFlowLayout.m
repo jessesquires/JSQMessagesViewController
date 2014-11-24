@@ -281,6 +281,10 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         [self jsq_resetDynamicAnimator];
     }
     
+    if (context.emptyCache) {
+        [self jsq_resetLayout];
+    }
+    
     [super invalidateLayoutWithContext:context];
 }
 
