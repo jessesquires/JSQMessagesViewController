@@ -366,7 +366,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     
     [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:items - 1 inSection:0]
-                                atScrollPosition:UICollectionViewScrollPositionTop
+                                atScrollPosition:UICollectionViewScrollPositionBottom
                                         animated:animated];
 }
 
