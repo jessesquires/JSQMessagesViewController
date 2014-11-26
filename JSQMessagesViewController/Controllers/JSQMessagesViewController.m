@@ -365,8 +365,20 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         return;
     }
     
+    // if last object is huge, use UICollectionViewScrollPositionBottom for better appearance
+    // else use Top
+    NSInteger finalRow = MAX(0, [self.collectionView numberOfItemsInSection:0] - 1);
+    NSIndexPath *finalIndexPath = [NSIndexPath indexPathForItem:finalRow
+                                                      inSection:0];
+    CGSize finalCellSize = [self.collectionView.collectionViewLayout sizeForItemAtIndexPath:finalIndexPath];
+    
+    CGFloat maxHeight = CGRectGetHeight(self.collectionView.bounds) - self.collectionView.contentInset.top - CGRectGetHeight(self.inputToolbar.bounds);
+    
+    BOOL hugeCell = (maxHeight < finalCellSize.height);
+    UICollectionViewScrollPosition position = (hugeCell) ? UICollectionViewScrollPositionBottom : UICollectionViewScrollPositionTop;
+    
     [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:items - 1 inSection:0]
-                                atScrollPosition:UICollectionViewScrollPositionBottom
+                                atScrollPosition:position
                                         animated:animated];
 }
 
