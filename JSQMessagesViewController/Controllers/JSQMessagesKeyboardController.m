@@ -212,6 +212,11 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     
     [self jsq_handleKeyboardNotification:notification completion:^(BOOL finished) {
         [self.panGestureRecognizer removeTarget:self action:NULL];
+        
+        if ([self.delegate respondsToSelector:@selector(keyboardControllerDidReceiveKeyboardHideNotification:)]) {
+            [self.delegate keyboardControllerDidReceiveKeyboardHideNotification:self];
+        }
+        
     }];
 }
 
