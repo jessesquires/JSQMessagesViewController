@@ -72,6 +72,14 @@
 @property (assign, nonatomic) BOOL automaticallyScrollsToMostRecentMessage;
 
 /**
+ *  A boolean flag to disable the animation while scrolling to the latest message on entering the view
+ *  and later reset to allow scroll animation.
+ *
+ */
+
+@property (assign, nonatomic) BOOL disableScrollToBottomAnimationOnEntry;
+
+/**
  *  The collection view cell identifier to use for dequeuing outgoing message collection view cells 
  *  in the collectionView for text messages.
  *

@@ -136,6 +136,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     self.automaticallyScrollsToMostRecentMessage = YES;
     
+    self.disableScrollToBottomAnimationOnEntry=YES;
+    
     self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
     self.outgoingMediaCellIdentifier = [JSQMessagesCollectionViewCellOutgoing mediaCellReuseIdentifier];
     
@@ -337,7 +339,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.collectionView reloadData];
     
     if (self.automaticallyScrollsToMostRecentMessage && ![self jsq_isMenuVisible]) {
-        [self scrollToBottomAnimated:YES];
+        if(self.disableScrollToBottomAnimationOnEntry){
+            [self scrollToBottomAnimated:NO];
+            self.disableScrollToBottomAnimationOnEntry=NO;
+        }
+        else{
+            [self scrollToBottomAnimated:YES];
+        }
+
     }
 }
 
