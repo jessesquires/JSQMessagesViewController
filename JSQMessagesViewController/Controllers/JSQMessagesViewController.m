@@ -136,8 +136,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     self.automaticallyScrollsToMostRecentMessage = YES;
     
-    self.disableScrollToBottomAnimationOnEntry=YES;
-    
     self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
     self.outgoingMediaCellIdentifier = [JSQMessagesCollectionViewCellOutgoing mediaCellReuseIdentifier];
     
@@ -339,15 +337,42 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.collectionView reloadData];
     
     if (self.automaticallyScrollsToMostRecentMessage && ![self jsq_isMenuVisible]) {
-        if(self.disableScrollToBottomAnimationOnEntry){
-            [self scrollToBottomAnimated:NO];
-            self.disableScrollToBottomAnimationOnEntry=NO;
-        }
-        else{
-            [self scrollToBottomAnimated:YES];
-        }
-
+        [self scrollToBottomAnimated:YES];
     }
+}
+
+- (void)finishSendingMessageAnimated:(BOOL)animated{
+    
+    UITextView *textView = self.inputToolbar.contentView.textView;
+    textView.text = nil;
+    [textView.undoManager removeAllActions];
+    
+    [self.inputToolbar toggleSendButtonEnabled];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
+    
+    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+    [self.collectionView reloadData];
+    
+    if (self.automaticallyScrollsToMostRecentMessage) {
+        [self scrollToBottomAnimated:animated];
+    }
+
+    
+}
+
+- (void)finishReceivingMessageAnimated:(BOOL)animated{
+    
+    self.showTypingIndicator = NO;
+    
+    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+    [self.collectionView reloadData];
+    
+    if (self.automaticallyScrollsToMostRecentMessage && ![self jsq_isMenuVisible]) {
+        [self scrollToBottomAnimated:animated];
+    }
+
+    
 }
 
 - (void)scrollToBottomAnimated:(BOOL)animated
