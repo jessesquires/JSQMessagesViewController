@@ -197,6 +197,7 @@ Feel free to check out my work at [Hexed Bits](http://bit.ly/0x29A), or read [my
 * [ParseChat](https://github.com/relatedcode/ParseChat)
 * [Jib](http://jibapp.com)
 * [Onvolo](https://itunes.apple.com/us/app/onvolo/id869332351)
+* [EVCloudKitDao](https://github.com/evermeer/EVCloudKitDao)
 * *Your app here*
 
 ## License
