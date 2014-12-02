@@ -313,32 +313,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)finishSendingMessage
 {
-    UITextView *textView = self.inputToolbar.contentView.textView;
-    textView.text = nil;
-    [textView.undoManager removeAllActions];
-    
-    [self.inputToolbar toggleSendButtonEnabled];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
-    
-    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-    [self.collectionView reloadData];
-    
-    if (self.automaticallyScrollsToMostRecentMessage) {
-        [self scrollToBottomAnimated:YES];
-    }
+    [self finishSendingMessageAnimated:YES];
 }
 
 - (void)finishReceivingMessage
 {
-    self.showTypingIndicator = NO;
-    
-    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-    [self.collectionView reloadData];
-    
-    if (self.automaticallyScrollsToMostRecentMessage && ![self jsq_isMenuVisible]) {
-        [self scrollToBottomAnimated:YES];
-    }
+   [self finishReceivingMessageAnimated:YES];
 }
 
 - (void)finishSendingMessageAnimated:(BOOL)animated{

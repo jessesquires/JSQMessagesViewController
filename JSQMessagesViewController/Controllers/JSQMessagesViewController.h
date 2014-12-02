@@ -252,7 +252,6 @@
 
 /**
  *  The following two methods are to take control of the animation while scrolling to the latest message (enable/disable it) on 
- 
  *   entering the view.
  */
 
