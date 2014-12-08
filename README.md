@@ -59,8 +59,10 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 #import <JSQMessagesViewController/JSQMessages.h>    // import all the things
 ````
 
+>Read the [blog post](http://www.jessesquires.com/introducing-jsqmessagesvc-6-0/) about the 6.0 release!
+
 * **Demo Project**
-  * There's a fucking sweet demo project: `JSQMessages.xcworkspace`.
+  * There's a sweet demo project: `JSQMessages.xcworkspace`.
   * Run `pod install` first.
 
 * **Message Model**
