@@ -313,6 +313,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)finishSendingMessage
 {
+    [self finishSendingMessageAnimated:YES];
+}
+
+- (void)finishReceivingMessage
+{
+   [self finishReceivingMessageAnimated:YES];
+}
+
+- (void)finishSendingMessageAnimated:(BOOL)animated{
+    
     UITextView *textView = self.inputToolbar.contentView.textView;
     textView.text = nil;
     [textView.undoManager removeAllActions];
@@ -325,20 +335,24 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.collectionView reloadData];
     
     if (self.automaticallyScrollsToMostRecentMessage) {
-        [self scrollToBottomAnimated:YES];
+        [self scrollToBottomAnimated:animated];
     }
+
+    
 }
 
-- (void)finishReceivingMessage
-{
+- (void)finishReceivingMessageAnimated:(BOOL)animated{
+    
     self.showTypingIndicator = NO;
     
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView reloadData];
     
     if (self.automaticallyScrollsToMostRecentMessage && ![self jsq_isMenuVisible]) {
-        [self scrollToBottomAnimated:YES];
+        [self scrollToBottomAnimated:animated];
     }
+
+    
 }
 
 - (void)scrollToBottomAnimated:(BOOL)animated
