@@ -309,7 +309,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     NSAssert(NO, @"Error! required method not implemented in subclass. Need to implement %s", __PRETTY_FUNCTION__);
 }
 
-- (void)didPressAccessoryButton:(UIButton *)sender { }
+- (void)didPressAccessoryButton:(UIButton *)sender
+{
+    NSAssert(NO, @"Error! required method not implemented in subclass. Need to implement %s", __PRETTY_FUNCTION__);
+}
 
 - (void)finishSendingMessage
 {
