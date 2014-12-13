@@ -120,7 +120,7 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 }
 ````
 
-*Customize your cells*
+*Customize your cells?*
 ````objective-c
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -130,6 +130,28 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
     // See the docs for JSQMessagesCollectionViewCell
     
     return cell;
+}
+````
+
+*Customize your toolbar buttons?*
+````objective-c
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // This button will call the `didPressAccessoryButton:` selector on your JSQMessagesViewController subclass
+    self.inputToolbar.contentView.leftBarButtonItem = /* custom button or nil to remove */
+    
+    // This button will call the `didPressSendButton:` selector on your JSQMessagesViewController subclass
+    self.inputToolbar.contentView.rightBarButtonItem = /* custom button or nil to remove */
+    
+    // Swap buttons, move send button to the LEFT side and the attachment button to the RIGHT
+    // For RTL language support
+    self.inputToolbar.contentView.leftBarButtonItem = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
+    self.inputToolbar.contentView.rightBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
+    
+    // The library will call the correct selector for each button, based on this value
+    self.inputToolbar.sendButtonOnRight = NO;
 }
 ````
 
