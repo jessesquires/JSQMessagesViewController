@@ -68,6 +68,13 @@
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(receiveMessagePressed:)];
+    
+    /**
+     *  Customize your toolbar buttons
+     *
+     *  self.inputToolbar.contentView.leftBarButtonItem = custom button or nil to remove
+     *  self.inputToolbar.contentView.rightBarButtonItem = custom button or nil to remove
+     */
 }
 
 - (void)viewWillAppear:(BOOL)animated
