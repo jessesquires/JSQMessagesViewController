@@ -218,7 +218,7 @@
          */
         [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
         [self.demoData.messages addObject:newMessage];
-        [self finishReceivingMessage];
+        [self finishReceivingMessageAnimated:YES];
         
         
         if (newMessage.isMediaMessage) {
@@ -289,7 +289,8 @@
                                                           text:text];
     
     [self.demoData.messages addObject:message];
-    [self finishSendingMessage];
+    
+    [self finishSendingMessageAnimated:YES];
 }
 
 - (void)didPressAccessoryButton:(UIButton *)sender
@@ -330,7 +331,8 @@
     }
     
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
-    [self finishSendingMessage];
+    
+    [self finishSendingMessageAnimated:YES];
 }
 
 

@@ -316,12 +316,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self finishSendingMessageAnimated:YES];
 }
 
-- (void)finishReceivingMessage
-{
-   [self finishReceivingMessageAnimated:YES];
-}
-
-- (void)finishSendingMessageAnimated:(BOOL)animated{
+- (void)finishSendingMessageAnimated:(BOOL)animated {
     
     UITextView *textView = self.inputToolbar.contentView.textView;
     textView.text = nil;
@@ -337,11 +332,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (self.automaticallyScrollsToMostRecentMessage) {
         [self scrollToBottomAnimated:animated];
     }
-
-    
 }
 
-- (void)finishReceivingMessageAnimated:(BOOL)animated{
+- (void)finishReceivingMessage
+{
+    [self finishReceivingMessageAnimated:YES];
+}
+
+- (void)finishReceivingMessageAnimated:(BOOL)animated {
     
     self.showTypingIndicator = NO;
     
@@ -351,8 +349,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (self.automaticallyScrollsToMostRecentMessage && ![self jsq_isMenuVisible]) {
         [self scrollToBottomAnimated:animated];
     }
-
-    
 }
 
 - (void)scrollToBottomAnimated:(BOOL)animated
