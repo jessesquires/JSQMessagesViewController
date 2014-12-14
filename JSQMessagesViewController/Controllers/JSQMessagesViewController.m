@@ -261,7 +261,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [super viewDidDisappear:animated];
     [self jsq_removeObservers];
     [self.keyboardController endListeningForKeyboard];
-    [self jsq_setToolbarBottomLayoutGuideConstant:0.0f];
 }
 
 - (void)didReceiveMemoryWarning
@@ -289,13 +288,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-}
-
-#pragma mark - UIResponder
-
-- (BOOL)canBecomeFirstResponder
-{
-    return YES;
 }
 
 #pragma mark - Messages view controller

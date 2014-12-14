@@ -102,6 +102,16 @@
 
 
 
+#pragma mark - Testing
+
+- (void)pushMainViewController
+{
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *nc = [sb instantiateInitialViewController];
+    [self.navigationController pushViewController:nc.topViewController animated:YES];
+}
+
+
 #pragma mark - Actions
 
 - (void)receiveMessagePressed:(UIBarButtonItem *)sender
