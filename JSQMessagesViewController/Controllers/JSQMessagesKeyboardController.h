@@ -59,14 +59,12 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
  */
 - (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame;
 
-@optional
-
 /**
  *  Tells the delegate that the keyboard has been hidden.
  *
  *  @param keyboardController The keyboard controller that is notifying the delegate.
  */
-- (void)keyboardControllerDidReceiveKeyboardHideNotification:(JSQMessagesKeyboardController *)keyboardController;
+- (void)keyboardControllerKeyboardDidHide:(JSQMessagesKeyboardController *)keyboardController;
 
 @end
 

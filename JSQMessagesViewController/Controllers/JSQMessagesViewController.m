@@ -768,10 +768,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 }
 
-- (void)keyboardControllerDidReceiveKeyboardHideNotification:(JSQMessagesKeyboardController *)keyboardController {
-    
+- (void)keyboardControllerKeyboardDidHide:(JSQMessagesKeyboardController *)keyboardController
+{
     [self jsq_setToolbarBottomLayoutGuideConstant:0.0f];
-    
+    [self.inputToolbar.contentView.textView resignFirstResponder];
 }
 
 - (void)jsq_setToolbarBottomLayoutGuideConstant:(CGFloat)constant
