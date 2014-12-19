@@ -170,7 +170,7 @@
 
 - (NSUInteger)hash
 {
-    return self.location.hash;
+    return super.hash ^ self.location.hash;
 }
 
 - (NSString *)description

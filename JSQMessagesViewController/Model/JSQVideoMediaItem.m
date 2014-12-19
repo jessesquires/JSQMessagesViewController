@@ -112,7 +112,7 @@
 
 - (NSUInteger)hash
 {
-    return self.fileURL.hash;
+    return super.hash ^ self.fileURL.hash;
 }
 
 - (NSString *)description
