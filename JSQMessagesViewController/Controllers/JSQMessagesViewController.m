@@ -760,16 +760,23 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame
 {
+    if (![self.inputToolbar.contentView.textView isFirstResponder] && self.toolbarBottomLayoutGuide.constant == 0.0f) {
+        return;
+    }
+    
     CGFloat heightFromBottom = CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(keyboardFrame);
     
     heightFromBottom = MAX(0.0f, heightFromBottom);
     
     [self jsq_setToolbarBottomLayoutGuideConstant:heightFromBottom];
-
 }
 
 - (void)keyboardControllerKeyboardDidHide:(JSQMessagesKeyboardController *)keyboardController
 {
+    if (![self.inputToolbar.contentView.textView isFirstResponder]) {
+        return;
+    }
+    
     [self jsq_setToolbarBottomLayoutGuideConstant:0.0f];
     [self.inputToolbar.contentView.textView resignFirstResponder];
 }
