@@ -852,7 +852,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (BOOL)jsq_inputToolbarHasReachedMaximumHeight
 {
-    return (CGRectGetMinY(self.inputToolbar.frame) == self.topLayoutGuide.length);
+    return (CGRectGetMinY(self.inputToolbar.frame) == self.topLayoutGuide.length + self.topContentAdditionalInset);
 }
 
 - (void)jsq_adjustInputToolbarForComposerTextViewContentSizeChange:(CGFloat)dy
@@ -872,8 +872,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     CGFloat newToolbarOriginY = toolbarOriginY - dy;
     
     //  attempted to increase origin.Y above topLayoutGuide
-    if (newToolbarOriginY <= self.topLayoutGuide.length) {
-        dy = toolbarOriginY - self.topLayoutGuide.length;
+    if (newToolbarOriginY <= self.topLayoutGuide.length + self.topContentAdditionalInset) {
+        dy = toolbarOriginY - (self.topLayoutGuide.length + self.topContentAdditionalInset);
         [self jsq_scrollComposerTextViewToBottomAnimated:YES];
     }
     
