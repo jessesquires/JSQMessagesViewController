@@ -64,6 +64,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @property (strong, nonatomic) NSIndexPath *selectedIndexPathForMenu;
 
+@property (assign, nonatomic) BOOL lastCellDisplayed;
+
 - (void)jsq_configureMessagesViewController;
 
 - (NSString *)jsq_currentlyComposedMessageText;
@@ -514,6 +516,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSInteger messageCount = [self.collectionView numberOfItemsInSection:0] - 1;
+    //workaround fix indexPaths order
+    NSArray *sortedVisibleItems = [[[collectionView indexPathsForVisibleItems] valueForKey:@"item"] sortedArrayUsingSelector:@selector(compare:)];
+    self.lastCellDisplayed = messageCount == [sortedVisibleItems.lastObject integerValue];
+}
+
 - (UICollectionReusableView *)collectionView:(JSQMessagesCollectionView *)collectionView
            viewForSupplementaryElementOfKind:(NSString *)kind
                                  atIndexPath:(NSIndexPath *)indexPath
@@ -773,6 +782,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     heightFromBottom = MAX(0.0f, heightFromBottom);
     
     [self jsq_setToolbarBottomLayoutGuideConstant:heightFromBottom];
+    
+    if (self.automaticallyScrollsToMostRecentMessage && self.lastCellDisplayed) {
+        [self scrollToBottomAnimated:YES];
+    }
 }
 
 - (void)jsq_setToolbarBottomLayoutGuideConstant:(CGFloat)constant
@@ -782,10 +795,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.view layoutIfNeeded];
     
     [self jsq_updateCollectionViewInsets];
-    
-    if (self.automaticallyScrollsToMostRecentMessage) {
-        [self scrollToBottomAnimated:YES];
-    }
 }
 
 - (void)jsq_updateKeyboardTriggerPoint
