@@ -23,10 +23,13 @@
 
 #import "UIImage+JSQMessages.h"
 
+@import AVFoundation;
 
 @interface JSQVideoMediaItem ()
 
 @property (strong, nonatomic) UIImageView *cachedVideoImageView;
+
+@property (strong, nonatomic) UIImage *thumbnailImage;
 
 @end
 
@@ -50,6 +53,7 @@
 {
     _fileURL = nil;
     _cachedVideoImageView = nil;
+    _thumbnailImage = nil;
 }
 
 #pragma mark - Setters
@@ -58,19 +62,41 @@
 {
     _fileURL = [fileURL copy];
     _cachedVideoImageView = nil;
+    _thumbnailImage = nil;
 }
 
 - (void)setIsReadyToPlay:(BOOL)isReadyToPlay
 {
     _isReadyToPlay = isReadyToPlay;
     _cachedVideoImageView = nil;
+    _thumbnailImage = nil;
 }
 
 - (void)setAppliesMediaViewMaskAsOutgoing:(BOOL)appliesMediaViewMaskAsOutgoing
 {
     [super setAppliesMediaViewMaskAsOutgoing:appliesMediaViewMaskAsOutgoing];
     _cachedVideoImageView = nil;
+    _thumbnailImage = nil;
 }
+
+- (UIImage *)thumbnailImage{
+    if (_thumbnailImage) {
+        return _thumbnailImage;
+    }
+    AVURLAsset *avAsset =  [AVURLAsset URLAssetWithURL:_fileURL options:nil];
+    AVAssetImageGenerator *generate = [[AVAssetImageGenerator alloc] initWithAsset:avAsset];
+    generate.appliesPreferredTrackTransform = YES;
+    NSError *err = NULL;
+    CMTime time = CMTimeMake(1, 2);
+    CGImageRef oneRef = [generate copyCGImageAtTime:time actualTime:NULL error:&err];
+    UIImage *one = [[UIImage alloc] initWithCGImage:oneRef];
+    if (one) {
+        return one;
+    }
+    return nil;
+
+}
+
 
 #pragma mark - JSQMessageMediaData protocol
 
@@ -85,7 +111,13 @@
         UIImage *playIcon = [[UIImage jsq_defaultPlayImage] jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:playIcon];
-        imageView.backgroundColor = [UIColor blackColor];
+
+        if (self.thumbnailImage) {
+            imageView.backgroundColor = [UIColor colorWithPatternImage:self.thumbnailImage];
+        }else{
+            imageView.backgroundColor = [UIColor blackColor];
+        }
+
         imageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
         imageView.contentMode = UIViewContentModeCenter;
         imageView.clipsToBounds = YES;
