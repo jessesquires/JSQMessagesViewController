@@ -110,18 +110,20 @@
     if (self.cachedVideoImageView == nil) {
         CGSize size = [self mediaViewDisplaySize];
         UIImage *playIcon = [[UIImage jsq_defaultPlayImage] jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
-        
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:playIcon];
+        UIImageView *playIconView = [[UIImageView alloc] initWithImage:playIcon];
+        playIconView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
+        UIImageView *thumbnailView = [[UIImageView alloc] initWithFrame:playIconView.frame];
+        playIconView.contentMode = UIViewContentModeCenter;
+        playIconView.clipsToBounds = YES;
+        [thumbnailView addSubview:playIconView];
         if (self.thumbnailImage) {
-            imageView.backgroundColor = [UIColor colorWithPatternImage:self.thumbnailImage];
+            thumbnailView.image = _thumbnailImage;
+            thumbnailView.contentMode = UIViewContentModeScaleAspectFill;
         }else{
-            imageView.backgroundColor = [UIColor blackColor];
+            thumbnailView.backgroundColor = [UIColor blackColor];
         }
-        imageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
-        imageView.contentMode = UIViewContentModeCenter;
-        imageView.clipsToBounds = YES;
-        [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
-        self.cachedVideoImageView = imageView;
+        [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:thumbnailView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
+        self.cachedVideoImageView = thumbnailView;
     }
     
     return self.cachedVideoImageView;
