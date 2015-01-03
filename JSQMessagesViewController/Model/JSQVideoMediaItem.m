@@ -86,15 +86,16 @@
     AVURLAsset *avAsset =  [AVURLAsset URLAssetWithURL:_fileURL options:nil];
     AVAssetImageGenerator *generate = [[AVAssetImageGenerator alloc] initWithAsset:avAsset];
     generate.appliesPreferredTrackTransform = YES;
-    NSError *err = NULL;
-    CMTime time = CMTimeMake(1, 2);
-    CGImageRef oneRef = [generate copyCGImageAtTime:time actualTime:NULL error:&err];
-    UIImage *one = [[UIImage alloc] initWithCGImage:oneRef];
-    if (one) {
-        return one;
-    }
+    CMTime thumbTime = CMTimeMakeWithSeconds(1,2);
+    AVAssetImageGeneratorCompletionHandler handler = ^(CMTime requestedTime, CGImageRef im, CMTime actualTime, AVAssetImageGeneratorResult result, NSError *error){
+        if (result == AVAssetImageGeneratorSucceeded) {
+            _thumbnailImage = [UIImage imageWithCGImage:im];
+            _cachedVideoImageView = nil;
+        }
+    };
+    generate.maximumSize = [self mediaViewDisplaySize];
+    [generate generateCGImagesAsynchronouslyForTimes:[NSArray arrayWithObject:[NSValue valueWithCMTime:thumbTime]] completionHandler:handler];
     return nil;
-
 }
 
 
@@ -111,13 +112,11 @@
         UIImage *playIcon = [[UIImage jsq_defaultPlayImage] jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:playIcon];
-
         if (self.thumbnailImage) {
             imageView.backgroundColor = [UIColor colorWithPatternImage:self.thumbnailImage];
         }else{
             imageView.backgroundColor = [UIColor blackColor];
         }
-
         imageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
         imageView.contentMode = UIViewContentModeCenter;
         imageView.clipsToBounds = YES;
