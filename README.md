@@ -22,7 +22,7 @@ See the [website](http://www.jessesquires.com/JSQMessagesViewController/) for th
 * iOS 7.0+
 * ARC
 
-*Need support for iOS 6? [You shouldn't](http://www.macrumors.com/2014/12/09/ios-8-on-63-percent-of-ios-devices/). But, there's a branch for that!*
+*Need support for iOS 6? [You shouldn't](http://www.macrumors.com/2015/01/07/ios-8-68-percent/). But, there's a branch for that!*
 ````
 git checkout iOS6_support_stable
 ````
