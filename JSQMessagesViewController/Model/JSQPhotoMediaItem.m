@@ -37,7 +37,7 @@
 {
     self = [super init];
     if (self) {
-        _image = [UIImage imageWithCGImage:image.CGImage];
+        _image = [image copy];
         _cachedImageView = nil;
     }
     return self;
@@ -53,7 +53,7 @@
 
 - (void)setImage:(UIImage *)image
 {
-    _image = [UIImage imageWithCGImage:image.CGImage];
+    _image = [image copy];
     _cachedImageView = nil;
 }
 
