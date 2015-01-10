@@ -73,7 +73,7 @@
 
 + (UINib *)nib
 {
-    return [UINib nibWithNibName:NSStringFromClass([self class]) bundle:[NSBundle mainBundle]];
+    return [UINib nibWithNibName:NSStringFromClass([self class]) bundle:[NSBundle bundleForClass:[self class]]];
 }
 
 + (NSString *)cellReuseIdentifier

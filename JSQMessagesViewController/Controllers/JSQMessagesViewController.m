@@ -105,13 +105,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 + (UINib *)nib
 {
     return [UINib nibWithNibName:NSStringFromClass([JSQMessagesViewController class])
-                          bundle:[NSBundle mainBundle]];
+                          bundle:[NSBundle bundleForClass:[self class]]];
 }
 
 + (instancetype)messagesViewController
 {
     return [[[self class] alloc] initWithNibName:NSStringFromClass([JSQMessagesViewController class])
-                                          bundle:[NSBundle mainBundle]];
+                                          bundle:[NSBundle bundleForClass:[self class]]];
 }
 
 #pragma mark - Initialization

@@ -44,7 +44,7 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
 + (UINib *)nib
 {
     return [UINib nibWithNibName:NSStringFromClass([JSQMessagesTypingIndicatorFooterView class])
-                          bundle:[NSBundle mainBundle]];
+                          bundle:[NSBundle bundleForClass:[JSQMessagesTypingIndicatorFooterView class]]];
 }
 
 + (NSString *)footerReuseIdentifier
