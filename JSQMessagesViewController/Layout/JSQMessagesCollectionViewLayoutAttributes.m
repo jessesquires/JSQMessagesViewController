@@ -85,20 +85,12 @@
 
 - (CGSize)jsq_correctedAvatarSizeFromSize:(CGSize)size
 {
-    //  cap avatar sizes to a minimum of (1.0, 1.0)
-    //  layout constraints sometimes throw warnings when they equal 0.0
-    //  prevent this with a size that is too small to notice
-    CGFloat correctedWidth = MAX(ceilf(size.width), 1.0f);
-    CGFloat correctedHeight = MAX(ceilf(size.height), 1.0f);
-    return CGSizeMake(correctedWidth, correctedHeight);
+    return CGSizeMake(ceilf(size.width), ceilf(size.height));
 }
 
 - (CGFloat)jsq_correctedLabelHeightForHeight:(CGFloat)height
 {
-    //  cap label heights to a minimum of 1.0
-    //  layout constraints sometimes throw warnings when they equal 0.0
-    //  prevent this with a size that is too small to notice
-    return MAX(ceilf(height), 1.0f);
+    return ceilf(height);
 }
 
 #pragma mark - NSObject
