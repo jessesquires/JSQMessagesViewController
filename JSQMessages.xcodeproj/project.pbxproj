@@ -328,12 +328,12 @@
 		636A8663AEEE5C37B65C515D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				88445B4319E1B5110014F889 /* MapKit.framework */,
-				88445B4119E1B50B0014F889 /* CoreLocation.framework */,
 				88445B3419E0AE4A0014F889 /* CoreGraphics.framework */,
+				88445B4119E1B50B0014F889 /* CoreLocation.framework */,
 				88445B3219E0AE450014F889 /* Foundation.framework */,
 				782026E9E518622532ED474D /* libPods-JSQMessagesTests.a */,
 				97E6750B77E8A7042BA0754B /* libPods.a */,
+				88445B4319E1B5110014F889 /* MapKit.framework */,
 				88445B3619E0AE5C0014F889 /* QuartzCore.framework */,
 				88445B3019E0AE3F0014F889 /* UIKit.framework */,
 				88445B3A19E0C0B10014F889 /* XCTest.framework */,
