@@ -50,8 +50,11 @@
 
 + (UIImage *)jsq_bubbleImageFromBundleWithName:(NSString *)name
 {
-    return [UIImage imageNamed:[NSString stringWithFormat:@"JSQMessagesAssets.bundle/Images/%@", name]
-                      inBundle:[NSBundle bundleForClass:[JSQMessagesViewController class]] compatibleWithTraitCollection:nil];
+    NSString *imagePath = [[NSBundle bundleForClass:[JSQMessagesViewController class]]
+                           pathForResource:[NSString stringWithFormat:@"JSQMessagesAssets.bundle/Images/%@", name]
+                           ofType:@"png"];
+    
+    return [UIImage imageWithContentsOfFile:imagePath];
 }
 
 + (UIImage *)jsq_bubbleRegularImage
