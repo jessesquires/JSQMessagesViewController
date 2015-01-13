@@ -35,6 +35,14 @@
  */
 @property (strong, nonatomic) NSDate *date;
 
+@property (copy, nonatomic) NSNumber *identifier;
+
+@property (copy, nonatomic) NSNumber *userID;
+
+@property (assign, nonatomic) BOOL timestampHidden;
+
+@property (assign, nonatomic) BOOL isNew;
+
 #pragma mark - Initialization
 
 /**
@@ -48,6 +56,11 @@
  */
 - (instancetype)initWithText:(NSString *)text
                       sender:(NSString *)sender
-                        date:(NSDate *)date;
+                        date:(NSDate *)date
+                      userID:(NSNumber *)userID;
+
+- (void)hideTimestampIfNeeded:(JSMessage *)otherMessage;
+
+- (void)updateIdentifierIfNeeded;
 
 @end
