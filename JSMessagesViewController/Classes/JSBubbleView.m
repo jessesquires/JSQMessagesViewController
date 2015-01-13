@@ -217,7 +217,7 @@
     
     CGSize stringSize;
     
-    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_0) {
+    if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_7_0) {
         CGRect stringRect = [txt boundingRectWithSize:CGSizeMake(maxWidth, maxHeight)
                                               options:NSStringDrawingUsesLineFragmentOrigin
                                            attributes:@{ NSFontAttributeName : [[JSBubbleView appearance] font] }
