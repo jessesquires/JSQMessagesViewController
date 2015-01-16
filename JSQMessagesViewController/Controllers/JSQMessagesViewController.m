@@ -362,9 +362,23 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         return;
     }
     
-    NSInteger items = [self.collectionView numberOfItemsInSection:0];
+    // find the last non-empty section
+    NSInteger lastNonEmptySection = [self.collectionView numberOfSections] - 1;
+    while(lastNonEmptySection >= 0)
+    {
+        // if this section isn't empty, this is the last non-empty section
+        if([self.collectionView numberOfItemsInSection:lastNonEmptySection] > 0)
+        {
+            break;
+        }
+        
+        // haven't found it yet, so decrement the section index
+        lastNonEmptySection--;
+    }
     
-    if (items == 0) {
+    // if could not find a non-empty section, return
+    if(lastNonEmptySection < 0)
+    {
         return;
     }
     
@@ -383,8 +397,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     //  workaround for really long messages not scrolling
     //  if last message is too long, use scroll position bottom for better appearance, else use top
     //  possibly a UIKit bug, see #480 on GitHub
-    NSUInteger finalRow = MAX(0, [self.collectionView numberOfItemsInSection:0] - 1);
-    NSIndexPath *finalIndexPath = [NSIndexPath indexPathForItem:finalRow inSection:0];
+    NSUInteger finalRow = MAX(0, [self.collectionView numberOfItemsInSection:lastNonEmptySection] - 1);
+    NSIndexPath *finalIndexPath = [NSIndexPath indexPathForItem:finalRow inSection:lastNonEmptySection];
     CGSize finalCellSize = [self.collectionView.collectionViewLayout sizeForItemAtIndexPath:finalIndexPath];
     
     CGFloat maxHeightForVisibleMessage = CGRectGetHeight(self.collectionView.bounds) - self.collectionView.contentInset.top - CGRectGetHeight(self.inputToolbar.bounds);
