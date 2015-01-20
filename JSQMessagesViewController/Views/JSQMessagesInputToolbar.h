@@ -24,11 +24,6 @@
 #import "JSQMessagesToolbarContentView.h"
 
 /**
- *  A constant the specifies the default height for a `JSQMessagesInputToolbar`.
- */
-FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
-
-/**
  *  The `JSQMessagesInputToolbarDelegate` protocol defines methods for interacting with
  *  a `JSQMessagesInputToolbar` object.
  */
@@ -92,5 +87,10 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesInputToolbarHeightDefault;
  *  That is, the send button will be enabled if there is text in the `textView`, and disabled otherwise.
  */
 - (void)toggleSendButtonEnabled;
+
+/**
+ *	A CGFloat value specifies the default height for this toolbar.
+ */
+- (CGFloat)inputToolbarHeightDefault;
 
 @end
