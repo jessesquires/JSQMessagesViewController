@@ -147,6 +147,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.showLoadEarlierMessagesHeader = NO;
     
     self.topContentAdditionalInset = 0.0f;
+    self.maxToolbarHeight = 0.0f;
     
     [self jsq_updateCollectionViewInsets];
     
@@ -903,8 +904,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     if (self.toolbarHeightConstraint.constant < kJSQMessagesInputToolbarHeightDefault) {
         self.toolbarHeightConstraint.constant = kJSQMessagesInputToolbarHeightDefault;
+    } else if (_maxToolbarHeight > 0) {
+        if (self.toolbarHeightConstraint.constant > _maxToolbarHeight) {
+            self.toolbarHeightConstraint.constant = _maxToolbarHeight;
+        }
     }
-    
+
     [self.view setNeedsUpdateConstraints];
     [self.view layoutIfNeeded];
 }

@@ -168,6 +168,12 @@
  */
 @property (assign, nonatomic) CGFloat topContentAdditionalInset;
 
+/**
+* Sets the max height of the input toolbar.
+* Set to 0 to disable max height (default)
+*/
+@property (assign, nonatomic) CGFloat maxToolbarHeight;
+
 #pragma mark - Class methods
 
 /**
