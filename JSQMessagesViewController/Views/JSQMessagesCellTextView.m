@@ -25,27 +25,15 @@
     [super awakeFromNib];
     
     self.textColor = [UIColor whiteColor];
-    self.editable = NO;
-    self.selectable = YES;
+    [self setUserInteractionEnabled:YES];
     self.userInteractionEnabled = YES;
-    self.dataDetectorTypes = UIDataDetectorTypeNone;
-    self.showsHorizontalScrollIndicator = NO;
-    self.showsVerticalScrollIndicator = NO;
-    self.scrollEnabled = NO;
+    self.enabledTextCheckingTypes = UIDataDetectorTypeNone;
     self.backgroundColor = [UIColor clearColor];
-    self.contentInset = UIEdgeInsetsZero;
-    self.scrollIndicatorInsets = UIEdgeInsetsZero;
-    self.contentOffset = CGPointZero;
-    self.textContainerInset = UIEdgeInsetsZero;
-    self.textContainer.lineFragmentPadding = 0;
-    self.linkTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor],
+    self.textInsets = UIEdgeInsetsZero;
+    self.numberOfLines = 0;
+    self.activeLinkAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor],
                                  NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
-}
-
-- (void)setSelectedRange:(NSRange)selectedRange
-{
-    //  prevent selecting text
-    [super setSelectedRange:NSMakeRange(NSNotFound, 0)];
+    [self removeGestureRecognizer:super.longPressGestureRecognizer];
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
@@ -73,5 +61,32 @@
     
     return YES;
 }
+
+- (void)setTextColor:(UIColor *)textColor {
+    [super setTextColor:textColor];
+    // Resets the text with new attributes
+    self.text = self.text;
+}
+
+- (void)setLinkTextAttributes:(id)attributes {
+    self.linkAttributes = attributes;
+}
+
+- (UIEdgeInsets)textContainerInset {
+    return self.textInsets;
+}
+
+- (void)setTextContainerInset:(UIEdgeInsets)textInsets {
+    self.textInsets = textInsets;
+}
+
+- (BOOL) selectable {
+    return self.userInteractionEnabled;
+}
+
+- (void) setSelectable:(BOOL *) makeSelectable {
+    [self setUserInteractionEnabled:makeSelectable];
+}
+
 
 @end
