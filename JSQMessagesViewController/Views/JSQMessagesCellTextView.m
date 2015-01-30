@@ -64,8 +64,12 @@
 
 - (void)setTextColor:(UIColor *)textColor {
     [super setTextColor:textColor];
-    // Resets the text with new attributes
+    // Resets the ttt text with new attributes
     self.text = self.text;
+}
+
+- (NSDictionary *)linkTextAttributes {
+    return self.linkAttributes;
 }
 
 - (void)setLinkTextAttributes:(id)attributes {
@@ -84,8 +88,8 @@
     return self.userInteractionEnabled;
 }
 
-- (void) setSelectable:(BOOL *) makeSelectable {
-    [self setUserInteractionEnabled:makeSelectable];
+- (void) setSelectable:(BOOL) makeSelectable {
+    [self setUserInteractionEnabled: makeSelectable];
 }
 
 
