@@ -26,8 +26,8 @@
 
 @interface JSQMessagesCellTextView : TTTAttributedLabel
 
-@property (atomic, readwrite) NSDictionary* linkTextAttributes;
-@property (atomic, readwrite) BOOL selectable;
-@property (atomic, readwrite) UIEdgeInsets textContainerInset;
+@property (nonatomic) NSDictionary* linkTextAttributes;
+@property (nonatomic) BOOL selectable;
+@property (nonatomic) UIEdgeInsets textContainerInset;
 
 @end
