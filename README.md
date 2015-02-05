@@ -31,6 +31,8 @@ git checkout iOS6_support_stable
 
 ## Installation
 
+From [CocoaPods](http://cocoapods.org):
+
 ````ruby
 # For latest release in cocoapods
 pod 'JSQMessagesViewController'  
@@ -45,7 +47,10 @@ pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMes
 pod 'JSMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'iOS6_support_stable'
 ````
 
-Otherwise, drag the `JSQMessagesViewController/` folder to your project and install [`JSQSystemSoundPlayer`][playerLink].
+Without CocoaPods:
+
+1. *Why aren't you using CocoaPods?*
+2. Drag the `JSQMessagesViewController/` folder to your project and install [`JSQSystemSoundPlayer`][playerLink].
 
 >**NOTE:**
 >
