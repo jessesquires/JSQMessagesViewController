@@ -95,13 +95,22 @@
     NSString *relativeDate = [self relativeDateForDate:date];
     NSString *time = [self timeForDate:date];
     
-    NSMutableAttributedString *timestamp = [[NSMutableAttributedString alloc] initWithString:relativeDate
-                                                                                  attributes:self.dateTextAttributes];
+    NSMutableAttributedString *timestamp = nil;
     
-    [timestamp appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
-    
-    [timestamp appendAttributedString:[[NSAttributedString alloc] initWithString:time
-                                                                      attributes:self.timeTextAttributes]];
+    if ([relativeDate isEqualToString:time]) {
+        timestamp = [[NSMutableAttributedString alloc] initWithString:relativeDate
+                                                           attributes:self.timeTextAttributes];
+        
+    }else{
+        timestamp = [[NSMutableAttributedString alloc] initWithString:relativeDate
+                                                           attributes:self.dateTextAttributes];
+        
+        
+        [timestamp appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+        
+        [timestamp appendAttributedString:[[NSAttributedString alloc] initWithString:time
+                                                                          attributes:self.timeTextAttributes]];
+    }
     
     return [[NSAttributedString alloc] initWithAttributedString:timestamp];
 }
@@ -117,10 +126,43 @@
     return [self.dateFormatter stringFromDate:date];
 }
 
+- (NSInteger)yearForDate:(NSDate *)date
+{
+    return [[NSCalendar currentCalendar] components:(NSCalendarUnitYear)
+                                           fromDate:date].year;
+}
+
 - (NSString *)relativeDateForDate:(NSDate *)date
 {
     if (!date) {
         return nil;
+    }
+    
+    //Now
+    NSDateFormatter *dateFormatter = [self.dateFormatter copy];
+    [dateFormatter setDoesRelativeDateFormatting:NO];
+    [dateFormatter setDateFormat:@"yyyyMMdd"];
+    NSString *nowDateString = [dateFormatter stringFromDate:[NSDate date]];
+    
+    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+    NSDate *now = [dateFormatter dateFromString:[NSString stringWithFormat:@"%@235959",nowDateString]];
+    
+    NSTimeInterval timeInterval = abs([now timeIntervalSinceDate:date]);
+    
+    if (timeInterval < 24*60*60){
+        return [self timeForDate:date];
+    }else if (timeInterval >= 2*24*60*60 && timeInterval < 7*24*60*60){
+        [dateFormatter setDateFormat:@"EEEE"];
+        return [dateFormatter stringFromDate:date];
+    }else if (timeInterval >= 7*24*60*60 && timeInterval <= 365*24*60*60){
+        NSInteger year = [self yearForDate:now];
+        NSInteger dateYear = [self yearForDate:date];
+        if (year == dateYear) {
+            [dateFormatter setDateFormat:@"MM/dd"];
+        }else{
+            [dateFormatter setDateFormat:@"yy/MM/dd"];
+        }
+        return [dateFormatter stringFromDate:date];
     }
     
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
