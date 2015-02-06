@@ -19,9 +19,10 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import "JSQMessagesToolbarContentView.h"
+
 @class JSQMessagesInputToolbar;
 
-#import "JSQMessagesToolbarContentView.h"
 
 /**
  *  The `JSQMessagesInputToolbarDelegate` protocol defines methods for interacting with
@@ -83,14 +84,23 @@
 @property (assign, nonatomic) BOOL sendButtonOnRight;
 
 /**
+ *  Specifies the default height for the toolbar. The default value is `44.0f`. This value must be positive.
+ */
+@property (assign, nonatomic) CGFloat preferredDefaultHeight;
+
+/**
  *  Enables or disables the send button based on whether or not its `textView` has text.
  *  That is, the send button will be enabled if there is text in the `textView`, and disabled otherwise.
  */
 - (void)toggleSendButtonEnabled;
 
 /**
- *	A CGFloat value specifies the default height for this toolbar.
+ *  Loads the content view for the toolbar.
+ *
+ *  @discussion Override this method to provide a custom content view for the toolbar.
+ *
+ *  @return An initialized `JSQMessagesToolbarContentView` if successful, otherwise `nil`.
  */
-- (CGFloat)inputToolbarHeightDefault;
+- (JSQMessagesToolbarContentView *)loadToolbarContentView;
 
 @end

@@ -122,7 +122,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     self.jsq_isObserving = NO;
     
-    self.toolbarHeightConstraint.constant = [self.inputToolbar inputToolbarHeightDefault];
+    self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
@@ -905,8 +905,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     self.toolbarHeightConstraint.constant += dy;
     
-    if (self.toolbarHeightConstraint.constant < [self.inputToolbar inputToolbarHeightDefault]) {
-        self.toolbarHeightConstraint.constant = [self.inputToolbar inputToolbarHeightDefault];
+    if (self.toolbarHeightConstraint.constant < self.inputToolbar.preferredDefaultHeight) {
+        self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
     }
     
     [self.view setNeedsUpdateConstraints];
