@@ -57,10 +57,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     self.jsq_isObserving = NO;
     self.sendButtonOnRight = YES;
     
-    NSArray *nibViews = [[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([JSQMessagesToolbarContentView class])
-                                                                       owner:nil
-                                                                     options:nil];
-    JSQMessagesToolbarContentView *toolbarContentView = [nibViews firstObject];
+	JSQMessagesToolbarContentView *toolbarContentView = [self loadContentView];
     toolbarContentView.frame = self.frame;
     [self addSubview:toolbarContentView];
     [self jsq_pinAllEdgesOfSubview:toolbarContentView];
@@ -177,6 +174,19 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     @catch (NSException *__unused exception) { }
     
     _jsq_isObserving = NO;
+}
+
+#pragma mark - Subclassing
+
+- (CGFloat)inputToolbarHeightDefault {
+	return kJSQMessagesInputToolbarHeightDefault;
+}
+
+- (JSQMessagesToolbarContentView *)loadContentView {
+	NSArray *nibViews = [[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([JSQMessagesToolbarContentView class])
+																	   owner:nil
+																	 options:nil];
+	return	[nibViews firstObject];
 }
 
 @end
