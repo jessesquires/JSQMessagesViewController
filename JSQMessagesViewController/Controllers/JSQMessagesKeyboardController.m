@@ -360,6 +360,9 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
         {
             BOOL keyboardViewIsHidden = (CGRectGetMinY(self.keyboardView.frame) >= contextViewWindowHeight);
             if (keyboardViewIsHidden) {
+                [self jsq_setKeyboardViewHidden:YES];
+                [self jsq_removeKeyboardFrameObserver];
+                [self.textView resignFirstResponder];
                 return;
             }
             
