@@ -73,17 +73,18 @@
 
 + (UINib *)nib
 {
-    return [UINib nibWithNibName:NSStringFromClass([self class]) bundle:[NSBundle bundleForClass:[self class]]];
+    return [UINib nibWithNibName:NSStringFromClass([JSQMessagesCollectionViewCell class])
+                          bundle:[NSBundle bundleForClass:[JSQMessagesCollectionViewCell class]]];
 }
 
 + (NSString *)cellReuseIdentifier
 {
-    return NSStringFromClass([self class]);
+    return NSStringFromClass([JSQMessagesCollectionViewCell class]);
 }
 
 + (NSString *)mediaCellReuseIdentifier
 {
-    return [NSString stringWithFormat:@"%@_JSQMedia", NSStringFromClass([self class])];
+    return [NSString stringWithFormat:@"%@_JSQMedia", NSStringFromClass([JSQMessagesCollectionViewCell class])];
 }
 
 #pragma mark - Initialization
