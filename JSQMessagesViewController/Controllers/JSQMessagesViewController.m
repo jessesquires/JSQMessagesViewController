@@ -130,10 +130,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.inputToolbar.delegate = self;
     self.inputToolbar.contentView.textView.placeHolder = NSLocalizedStringFromTable(@"New Message", @"JSQMessages", @"Placeholder text for the message input text view");
     self.inputToolbar.contentView.textView.delegate = self;
-    
-    self.senderId = @"JSQDefaultSender";
-    self.senderDisplayName = @"JSQDefaultSender";
-    
+
     self.automaticallyScrollsToMostRecentMessage = YES;
     
     self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
@@ -223,6 +220,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    NSParameterAssert(self.senderId != nil);
+    NSParameterAssert(self.senderDisplayName != nil);
+    
     [super viewWillAppear:animated];
     [self.view layoutIfNeeded];
     [self.collectionView.collectionViewLayout invalidateLayout];
