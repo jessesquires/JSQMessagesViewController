@@ -231,6 +231,7 @@ Feel free to check out my work at [Hexed Bits](http://bit.ly/0x29A), or read [my
 * [Jib](http://jibapp.com)
 * [Onvolo](https://itunes.apple.com/us/app/onvolo/id869332351)
 * [EVCloudKitDao](https://github.com/evermeer/EVCloudKitDao)
+* [Fluky Chat](https://itunes.apple.com/us/app/fluky-chat-secure-anonymous/id958605886)
 * *Your app here*
 
 ## License
