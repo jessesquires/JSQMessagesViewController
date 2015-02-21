@@ -165,4 +165,17 @@
                     touchLocation:position];
 }
 
+- (void)messagesCollectionViewCell:(JSQMessagesCollectionViewCell *)cell didPerformAction:(SEL)action withSender:(id)sender
+{
+    NSIndexPath *indexPath = [self indexPathForCell:cell];
+    if (indexPath == nil) {
+        return;
+    }
+    
+    [self.delegate collectionView:self
+                    performAction:action
+               forItemAtIndexPath:indexPath
+                       withSender:sender];
+}
+
 @end

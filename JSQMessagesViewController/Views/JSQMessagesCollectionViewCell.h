@@ -60,6 +60,19 @@
  */
 - (void)messagesCollectionViewCellDidTapCell:(JSQMessagesCollectionViewCell *)cell atPosition:(CGPoint)position;
 
+/**
+ * Tells the delegate that an actions has been selected from the menu of this cell.
+ *
+ * @param cell The cell that displayed the menu.
+ * @param action The action that has been performed.
+ * @param sender The object that initiated the action.
+ * 
+ * @discussion This method is automatically called for any registered actions.
+ *
+ * @see `JSQMessagesCollectionViewCell`
+ */
+- (void)messagesCollectionViewCell:(JSQMessagesCollectionViewCell *)cell didPerformAction:(SEL)action withSender:(id)sender;
+
 @end
 
 
@@ -179,5 +192,13 @@
  *  @return The string used to identify a reusable cell.
  */
 + (NSString *)mediaCellReuseIdentifier;
+
+/**
+ * Registeres an action to be available in the cell's menu. 
+ *
+ * @discussion Non-Standard actions still need to be added to the `UIMenuController`
+ * manually.
+ */
++ (void)registerMenuAction:(SEL)action;
 
 @end

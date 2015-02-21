@@ -66,10 +66,20 @@
 @end
 
 
+static NSMutableArray *jsqMessagesCollectionViewCellActions = nil;
+
 
 @implementation JSQMessagesCollectionViewCell
 
 #pragma mark - Class methods
+
++ (void)initialize
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        jsqMessagesCollectionViewCellActions = [[NSMutableArray alloc] init];
+    });
+}
 
 + (UINib *)nib
 {
@@ -84,6 +94,11 @@
 + (NSString *)mediaCellReuseIdentifier
 {
     return [NSString stringWithFormat:@"%@_JSQMedia", NSStringFromClass([self class])];
+}
+
++ (void)registerMenuAction:(SEL)action
+{
+    [jsqMessagesCollectionViewCellActions addObject:NSStringFromSelector(action)];
 }
 
 #pragma mark - Initialization
@@ -213,6 +228,37 @@
     
     if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
         self.contentView.frame = bounds;
+    }
+}
+
+#pragma mark - Menu actions
+
+- (BOOL)respondsToSelector:(SEL)aSelector
+{
+    if ([jsqMessagesCollectionViewCellActions containsObject:NSStringFromSelector(aSelector)]) {
+        return YES;
+    } else {
+        return [super respondsToSelector:aSelector];
+    }
+}
+
+- (void)forwardInvocation:(NSInvocation *)anInvocation
+{
+    if ([jsqMessagesCollectionViewCellActions containsObject:NSStringFromSelector(anInvocation.selector)]) {
+        id sender;
+        [anInvocation getArgument:&sender atIndex:0];
+        [self.delegate messagesCollectionViewCell:self didPerformAction:anInvocation.selector withSender:sender];
+    } else {
+        [super forwardInvocation:anInvocation];
+    }
+}
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
+{
+    if ([jsqMessagesCollectionViewCellActions containsObject:NSStringFromSelector(aSelector)]) {
+        return [NSMethodSignature signatureWithObjCTypes: "v@:@"];
+    } else {
+        return [super methodSignatureForSelector:aSelector];
     }
 }
 
