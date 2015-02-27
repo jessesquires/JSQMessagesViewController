@@ -15,7 +15,6 @@ See the [website](http://www.jessesquires.com/JSQMessagesViewController/) for th
 ## Dependencies
 
 * [JSQSystemSoundPlayer][playerLink]
- 
 
 ## Requirements
 
@@ -23,8 +22,10 @@ See the [website](http://www.jessesquires.com/JSQMessagesViewController/) for th
 * ARC
 
 *Need support for iOS 6? [You shouldn't](http://www.macrumors.com/2015/01/07/ios-8-68-percent/). But, there's a branch for that!*
-````
-git checkout iOS6_support_stable
+**Note: This will not be around much longer!**
+
+````bash
+$ git checkout iOS6_support_stable
 ````
 
 *Note: the `iOS6_support_stable` branch does not include many of the latest hip and fancy features or fixes*
@@ -203,7 +204,7 @@ I initially developed this library to use in [Hemoglobe](http://bit.ly/hmglb) fo
 
 As it turns out, messaging is something that iOS devs and users really want. Messaging of any kind has turned out to be an increasingly popular mobile app feature in all sorts of contexts and for all sorts of reasons. Thus, I am supporting this project in my free time and have added features way beyond what Hemoglobe ever needed.
 
-Feel free to check out my work at [Hexed Bits](http://bit.ly/0x29A), or read [my blog](http://bit.ly/jsqsf).
+Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed Bits](http://bit.ly/0x29A).
 
 ## Apps using this library
 
@@ -232,6 +233,7 @@ Feel free to check out my work at [Hexed Bits](http://bit.ly/0x29A), or read [my
 * [Onvolo](https://itunes.apple.com/us/app/onvolo/id869332351)
 * [EVCloudKitDao](https://github.com/evermeer/EVCloudKitDao)
 * [Fluky Chat](https://itunes.apple.com/us/app/fluky-chat-secure-anonymous/id958605886)
+* [VillageUnity](https://itunes.apple.com/us/app/village-unity/id919972368)
 * *Your app here*
 
 ## License
