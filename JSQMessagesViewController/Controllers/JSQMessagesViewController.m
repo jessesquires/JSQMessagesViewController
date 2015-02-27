@@ -147,6 +147,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.showLoadEarlierMessagesHeader = NO;
     
     self.topContentAdditionalInset = 0.0f;
+
+	self.resignFirstResponderOnKeyboardDidHide = NO;
     
     [self jsq_updateCollectionViewInsets];
     
@@ -795,12 +797,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)keyboardControllerKeyboardDidHide:(JSQMessagesKeyboardController *)keyboardController
 {
-    if (![self.inputToolbar.contentView.textView isFirstResponder]) {
-        return;
-    }
-    
-    [self jsq_setToolbarBottomLayoutGuideConstant:0.0f];
-    [self.inputToolbar.contentView.textView resignFirstResponder];
+	if (self.resignFirstResponderOnKeyboardDidHide) {
+		if (![self.inputToolbar.contentView.textView isFirstResponder]) {
+			return;
+		}
+
+		[self jsq_setToolbarBottomLayoutGuideConstant:0.0f];
+		[self.inputToolbar.contentView.textView resignFirstResponder];
+	}
 }
 
 - (void)jsq_setToolbarBottomLayoutGuideConstant:(CGFloat)constant

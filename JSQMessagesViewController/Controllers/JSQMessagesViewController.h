@@ -168,6 +168,23 @@
  */
 @property (assign, nonatomic) CGFloat topContentAdditionalInset;
 
+/**
+ *  Specifies whether or not the inputToolbar should resignFirstResponder & snap to the bottom of the screen after the keyboard did hide animation.
+ *
+ *	@see https://github.com/jessesquires/JSQMessagesViewController/issues/763
+ *  @discussion Some projects require the inputToolbar to be snapped to the bottom after the keyboardDidHide animation completes.
+ *	However if the screen pushing the JSQMessagesViewController onto the UINavigationController stack was showing the keyboard
+ *	that previous screen will hide the keyboard on the transition.
+ *	When the JSQMessagesViewController comes on screen and becomes first responder, the previous screen's keyboardDidHide notification
+ *	is picked up by the JSQMessagesViewController, causes it to resignFirstResponder. In this way, the input toolbar is not initially the first responder.
+ *  Setting this property to `NO` will result in no action being taken when the keyboardControllerKeyboardDidHide message arrives.
+ *	Setting this property to `YES` will result in the inputToolbar resigningFirstResponder & pinning to the bottom of the view when the keyboardControllerKeyboardDidHide message arrives.
+ *	Under normal circumstances, `NO` is the right thing to do, because the keyboardController:keyboardDidChangeFrame: messages will take care of the inputToolbar's positioning.
+ *  The default value is `NO`.
+ */
+@property (assign, nonatomic) BOOL resignFirstResponderOnKeyboardDidHide;
+
+
 #pragma mark - Class methods
 
 /**
