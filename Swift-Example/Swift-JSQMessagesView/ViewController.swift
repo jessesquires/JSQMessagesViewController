@@ -19,6 +19,7 @@ class ViewController: JSQMessagesViewController, UIActionSheetDelegate {
     *   Grab the color from the provided jsq color factory.
     */
     var outgoingBubbleImageView = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
+
     
     var incomingBubbleImageView = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleGreenColor())
     
@@ -38,6 +39,7 @@ class ViewController: JSQMessagesViewController, UIActionSheetDelegate {
     */
     func SendMessage(text: String!, sender: String!) {
         let message = Message(text: text, sender: sender, imageUrl: senderImageUrl)
+        message.senderId()
         messages.append(message)
     }
     
@@ -92,6 +94,8 @@ class ViewController: JSQMessagesViewController, UIActionSheetDelegate {
         
         // The name of the sender
         senderDisplayName = (senderDisplayName != nil) ? senderDisplayName : "Anonymous"
+        senderId = senderDisplayName
+        
         
         // Here, we are hardcoding the URL for the avatar image of the sender.
         let profileImageUrl: NSString? = "https://pbs.twimg.com/profile_images/450268509319081985/Szabe27e.jpeg"

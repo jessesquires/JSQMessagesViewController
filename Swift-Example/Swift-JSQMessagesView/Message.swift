@@ -20,7 +20,7 @@ class Message : NSObject, JSQMessageData {
     }
     
     func senderId() -> String! {
-        return sender_
+       return sender_
     }
     
     func senderDisplayName() -> String! {
