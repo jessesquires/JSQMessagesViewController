@@ -194,7 +194,7 @@
 {
     NSString *htmlString = @"<!DOCTYPE html>"
     @"<html>"
-    @"<body>"
+    @"<body style=\"background-color:lightgrey\">"
     @"<p>This is a paragraph.</p>"
     @"<p><b>This is a paragraph.</b></p>"
     @"<p>This is a paragraph.</p>"

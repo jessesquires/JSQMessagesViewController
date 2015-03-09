@@ -73,6 +73,7 @@
     if (self.cachedWebView == nil) {
         CGSize size = [self mediaViewDisplaySize];
         UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, size.width, size.height)];
+        [_webView loadHTMLString:self.htmlString baseURL:nil];
         webView.contentMode = UIViewContentModeScaleAspectFill;
         webView.clipsToBounds = YES;
         [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:webView isOutgoing:self.appliesMediaViewMaskAsOutgoing];

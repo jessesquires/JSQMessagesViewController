@@ -201,6 +201,12 @@
                 videoItemCopy.isReadyToPlay = NO;
                 
                 newMediaData = videoItemCopy;
+            } else if ([copyMediaData isKindOfClass:[JSQHTMLMediaItem class]]) {
+                JSQHTMLMediaItem *htmlItemCopy = [((JSQHTMLMediaItem *)copyMediaData) copy];
+                htmlItemCopy.appliesMediaViewMaskAsOutgoing = NO;
+                newMediaAttachmentCopy = [htmlItemCopy.htmlString copy];
+                
+                newMediaData = htmlItemCopy;
             }
             else {
                 NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
@@ -256,6 +262,9 @@
                 else if ([newMediaData isKindOfClass:[JSQVideoMediaItem class]]) {
                     ((JSQVideoMediaItem *)newMediaData).fileURL = newMediaAttachmentCopy;
                     ((JSQVideoMediaItem *)newMediaData).isReadyToPlay = YES;
+                    [self.collectionView reloadData];
+                } else if ([newMediaData isKindOfClass:[JSQHTMLMediaItem class]]) {
+                    ((JSQHTMLMediaItem *)newMediaData).htmlString = newMediaAttachmentCopy;
                     [self.collectionView reloadData];
                 }
                 else {
