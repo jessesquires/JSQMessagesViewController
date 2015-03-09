@@ -45,6 +45,7 @@
 #import "JSQPhotoMediaItem.h"
 #import "JSQLocationMediaItem.h"
 #import "JSQVideoMediaItem.h"
+#import "JSQHTMLMediaItem.h"
 
 #import "JSQMessagesBubbleImage.h"
 #import "JSQMessagesAvatarImage.h"

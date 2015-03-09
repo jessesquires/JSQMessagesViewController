@@ -190,4 +190,21 @@
     [self.messages addObject:videoMessage];
 }
 
+- (void)addHTMLMediaMessage
+{
+    NSString *htmlString = @"<!DOCTYPE html>"
+    @"<html>"
+    @"<body>"
+    @"<p>This is a paragraph.</p>"
+    @"<p><b>This is a paragraph.</b></p>"
+    @"<p>This is a paragraph.</p>"
+    @"</body>"
+    @"</html>";
+    JSQHTMLMediaItem *htmlItem = [[JSQHTMLMediaItem alloc] initWithHTMLString:htmlString];
+    JSQMessage *htmlMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
+                                                  displayName:kJSQDemoAvatarDisplayNameSquires
+                                                        media:htmlItem];
+    [self.messages addObject:htmlMessage];
+}
+
 @end

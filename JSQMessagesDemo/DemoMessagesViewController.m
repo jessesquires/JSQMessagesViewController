@@ -309,7 +309,7 @@
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", nil];
+                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", @"Send html", nil];
     
     [sheet showFromToolbar:self.inputToolbar];
 }
@@ -337,6 +337,9 @@
             
         case 2:
             [self.demoData addVideoMediaMessage];
+            break;
+        case 3:
+            [self.demoData addHTMLMediaMessage];
             break;
     }
     
