@@ -70,6 +70,9 @@
  */
 @property (weak, nonatomic, readonly) JSQMessagesToolbarContentView *contentView;
 
+@property (assign, nonatomic) BOOL sendButtonEnabled;
+@property (strong, nonatomic) UIButton *sendButton;
+
 /**
  *  A boolean value indicating whether the send button is on the right side of the toolbar or not.
  *  

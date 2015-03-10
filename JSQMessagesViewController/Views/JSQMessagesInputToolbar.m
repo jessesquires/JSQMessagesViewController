@@ -54,6 +54,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
     self.jsq_isObserving = NO;
     self.sendButtonOnRight = YES;
+    self.sendButtonEnabled = YES;
 
     self.preferredDefaultHeight = 44.0f;
 
@@ -67,8 +68,8 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     [self jsq_addObservers];
 
     self.contentView.leftBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
-    self.contentView.rightBarButtonItem = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
 
+    self.contentView.rightBarButtonItem = self.sendButton = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
     [self toggleSendButtonEnabled];
 }
 
@@ -110,13 +111,13 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 - (void)toggleSendButtonEnabled
 {
-    BOOL hasText = [self.contentView.textView hasText];
-
+    BOOL enabled = [self.contentView.textView hasText] && self.sendButtonEnabled;
+    
     if (self.sendButtonOnRight) {
-        self.contentView.rightBarButtonItem.enabled = hasText;
+        self.contentView.rightBarButtonItem.enabled = enabled;
     }
     else {
-        self.contentView.leftBarButtonItem.enabled = hasText;
+        self.contentView.leftBarButtonItem.enabled = enabled;
     }
 }
 
