@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) UIWebView *cachedWebView;
 @property (assign, nonatomic) NSUInteger webViewLoadingCount;
+@property (nonatomic) CGFloat   webHeight;
 
 @end
 
@@ -28,6 +29,7 @@
         self.htmlString = [htmlString copy];
         _cachedWebView = nil;
         _webViewLoadingCount = 0;
+        _webHeight = 0.f;
     }
     return self;
 }
@@ -48,7 +50,7 @@
         CGSize size = [self mediaViewDisplaySize];
         _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, size.width, size.height)];
         _webView.delegate = self;
-        [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:_webView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
+        //[JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:_webView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
         self.cachedWebView = _webView;
     }
     [_webView loadHTMLString:htmlString baseURL:nil];
@@ -80,7 +82,8 @@
         [webView loadHTMLString:self.htmlString baseURL:nil];
         webView.contentMode = UIViewContentModeScaleAspectFill;
         webView.clipsToBounds = YES;
-        [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:webView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
+        webView.scrollView.scrollEnabled = NO;
+        //[JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:webView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
         self.cachedWebView = webView;
     }
     
@@ -140,14 +143,32 @@
         // finished loading
         
         NSString *output = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"foo\").offsetHeight;"];
-        NSLog(@"height: %@", output);
         CGSize size = [self mediaViewDisplaySize];
-        webView.frame = CGRectMake(0.0f, 0.0f, size.width, [output floatValue]);
+        self.webHeight = [output floatValue] + 20.f; //20 for some padding
+        webView.frame = CGRectMake(0.0f, 0.0f, size.width, self.webHeight);
         self.cachedWebView = webView;
+        
         if (self.reloadCallback) {
             self.reloadCallback();
         }
     };
+}
+
+- (CGSize)mediaViewDisplaySize
+{
+    if(self.webHeight <= 0.f) {
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+            return CGSizeMake(355.0f, 225.0f);
+        }
+        
+        return CGSizeMake(250.0f, 150.0f);
+    } else {
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+            return CGSizeMake(355.0f, self.webHeight);
+        }
+        return CGSizeMake(250.0f, self.webHeight);
+    }
+    
 }
 
 @end

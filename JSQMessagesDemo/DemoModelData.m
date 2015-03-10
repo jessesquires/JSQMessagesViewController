@@ -199,8 +199,8 @@
     @"<p>This is a paragraph that is extra long and is a test of the emergency broadcast system to ensure that we dont have any such emergencies that don't go unheard of and that is the end of my story good sir thank you very much, would you like to have a crumpet?</p>"
     @"</div>";
     JSQHTMLMediaItem *htmlItem = [[JSQHTMLMediaItem alloc] initWithHTMLString:htmlString];
-    JSQMessage *htmlMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
-                                                  displayName:kJSQDemoAvatarDisplayNameSquires
+    JSQMessage *htmlMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdWoz
+                                                  displayName:kJSQDemoAvatarDisplayNameWoz
                                                         media:htmlItem];
     [self.messages addObject:htmlMessage];
 }

@@ -487,6 +487,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         id<JSQMessageMediaData> messageMedia = [messageItem media];
         [messageMedia setReloadCallback:^{
             [self.collectionView reloadData];
+            //scroll to bottom
+            NSInteger section = [self numberOfSectionsInCollectionView:self.collectionView] - 1;
+            NSInteger item = [self collectionView:self.collectionView numberOfItemsInSection:section] - 1;
+            NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
+            [self.collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
         }];
         cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
         NSParameterAssert(cell.mediaView != nil);

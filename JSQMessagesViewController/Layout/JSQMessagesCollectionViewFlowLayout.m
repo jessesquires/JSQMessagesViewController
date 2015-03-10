@@ -433,10 +433,12 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 {
     id<JSQMessageData> messageItem = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
     
-    NSValue *cachedSize = [self.messageBubbleCache objectForKey:@(messageItem.hash)];
-    if (cachedSize != nil) {
-        return [cachedSize CGSizeValue];
-    }
+    //Moved size caching into non media messages for UIWebView async loading/resizing behavior
+    //TODO: maybe have an isWebViewMediaMessage and only disable size caching for that...or move the caching into the reloadCallback
+//    NSValue *cachedSize = [self.messageBubbleCache objectForKey:@(messageItem.hash)];
+//    if (cachedSize != nil) {
+//        return [cachedSize CGSizeValue];
+//    }
     
     CGSize finalSize = CGSizeZero;
     
@@ -444,6 +446,12 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         finalSize = [[messageItem media] mediaViewDisplaySize];
     }
     else {
+        //message bubble size caching for non-media messages
+        NSValue *cachedSize = [self.messageBubbleCache objectForKey:@(messageItem.hash)];
+        if (cachedSize != nil) {
+            return [cachedSize CGSizeValue];
+        }
+        
         CGSize avatarSize = [self jsq_avatarSizeForIndexPath:indexPath];
         
         //  from the cell xibs, there is a 2 point space between avatar and bubble
