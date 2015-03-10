@@ -192,14 +192,12 @@
 
 - (void)addHTMLMediaMessage
 {
-    NSString *htmlString = @"<!DOCTYPE html>"
-    @"<html>"
-    @"<body style=\"background-color:lightgrey\">"
+    NSString *htmlString =
+    @"<div id='foo' style='background: white'>"
     @"<p>This is a paragraph.</p>"
     @"<p><b>This is a paragraph.</b></p>"
-    @"<p>This is a paragraph.</p>"
-    @"</body>"
-    @"</html>";
+    @"<p>This is a paragraph that is extra long and is a test of the emergency broadcast system to ensure that we dont have any such emergencies that don't go unheard of and that is the end of my story good sir thank you very much, would you like to have a crumpet?</p>"
+    @"</div>";
     JSQHTMLMediaItem *htmlItem = [[JSQHTMLMediaItem alloc] initWithHTMLString:htmlString];
     JSQMessage *htmlMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
                                                   displayName:kJSQDemoAvatarDisplayNameSquires

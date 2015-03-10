@@ -9,9 +9,10 @@
 #import "JSQHTMLMediaItem.h"
 #import "JSQMessagesMediaViewBubbleImageMasker.h"
 
-@interface JSQHTMLMediaItem ()
+@interface JSQHTMLMediaItem () <UIWebViewDelegate>
 
 @property (strong, nonatomic) UIWebView *cachedWebView;
+@property (assign, nonatomic) NSUInteger webViewLoadingCount;
 
 @end
 
@@ -26,6 +27,7 @@
         _webView = nil;
         self.htmlString = [htmlString copy];
         _cachedWebView = nil;
+        _webViewLoadingCount = 0;
     }
     return self;
 }
@@ -45,6 +47,7 @@
     if (!_webView) {
         CGSize size = [self mediaViewDisplaySize];
         _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, size.width, size.height)];
+        _webView.delegate = self;
         [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:_webView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
         self.cachedWebView = _webView;
     }
@@ -73,6 +76,7 @@
     if (self.cachedWebView == nil) {
         CGSize size = [self mediaViewDisplaySize];
         UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, size.width, size.height)];
+        webView.delegate = self;
         [webView loadHTMLString:self.htmlString baseURL:nil];
         webView.contentMode = UIViewContentModeScaleAspectFill;
         webView.clipsToBounds = YES;
@@ -120,6 +124,30 @@
     JSQHTMLMediaItem *copy = [[[self class] allocWithZone:zone] initWithHTMLString:self.htmlString];
     copy.appliesMediaViewMaskAsOutgoing = self.appliesMediaViewMaskAsOutgoing;
     return copy;
+}
+
+#pragma mark - UIWebViewDelegate Methods
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    NSLog(@"web view started loading!");
+    _webViewLoadingCount++;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    NSLog(@"web view finished loading!");
+    _webViewLoadingCount--;
+    if (_webViewLoadingCount < 1) {
+        // finished loading
+        
+        NSString *output = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"foo\").offsetHeight;"];
+        NSLog(@"height: %@", output);
+        CGSize size = [self mediaViewDisplaySize];
+        webView.frame = CGRectMake(0.0f, 0.0f, size.width, [output floatValue]);
+        self.cachedWebView = webView;
+        if (self.reloadCallback) {
+            self.reloadCallback();
+        }
+    };
 }
 
 @end

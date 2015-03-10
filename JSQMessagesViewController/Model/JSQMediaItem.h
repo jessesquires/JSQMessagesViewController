@@ -40,6 +40,8 @@
  */
 @property (assign, nonatomic) BOOL appliesMediaViewMaskAsOutgoing;
 
+@property (copy, nonatomic) void (^reloadCallback)(void);
+
 /**
  *  Initializes and returns a media item with the specified value for maskAsOutgoing.
  *

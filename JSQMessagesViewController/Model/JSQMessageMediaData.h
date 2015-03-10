@@ -75,4 +75,8 @@
  */
 - (NSUInteger)hash;
 
+@optional
+
+- (void)setReloadCallback:(void (^)(void))callback;
+
 @end

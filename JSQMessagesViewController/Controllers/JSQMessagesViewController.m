@@ -485,6 +485,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     else {
         id<JSQMessageMediaData> messageMedia = [messageItem media];
+        [messageMedia setReloadCallback:^{
+            [self.collectionView reloadData];
+        }];
         cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
         NSParameterAssert(cell.mediaView != nil);
     }
