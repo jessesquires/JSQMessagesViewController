@@ -37,6 +37,10 @@
 
 @implementation JSQMessagesCollectionView
 
+@dynamic dataSource;
+@dynamic delegate;
+@dynamic collectionViewLayout;
+
 #pragma mark - Initialization
 
 - (void)jsq_configureCollectionView

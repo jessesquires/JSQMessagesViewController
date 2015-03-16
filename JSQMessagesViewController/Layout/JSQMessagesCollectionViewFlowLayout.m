@@ -71,6 +71,8 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 @implementation JSQMessagesCollectionViewFlowLayout
 
+@dynamic collectionView;
+
 #pragma mark - Initialization
 
 - (void)jsq_configureFlowLayout
@@ -590,7 +592,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     //  if touch is not (0,0) -- adjust item center "in flight"
     if (!CGPointEqualToPoint(CGPointZero, touchLocation)) {
-        CGFloat distanceFromTouch = fabsf(touchLocation.y - springBehavior.anchorPoint.y);
+        CGFloat distanceFromTouch = fabs(touchLocation.y - springBehavior.anchorPoint.y);
         CGFloat scrollResistance = distanceFromTouch / self.springResistanceFactor;
         
         if (self.latestDelta < 0.0f) {
