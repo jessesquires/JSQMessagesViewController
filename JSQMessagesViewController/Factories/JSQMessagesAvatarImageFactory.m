@@ -111,15 +111,13 @@
 
     CGRect frame = CGRectMake(0.0f, 0.0f, diameter, diameter);
 
-    NSString *text = [initials uppercaseStringWithLocale:[NSLocale currentLocale]];
-
     NSDictionary *attributes = @{ NSFontAttributeName : font,
                                   NSForegroundColorAttributeName : textColor };
 
-    CGRect textFrame = [text boundingRectWithSize:frame.size
-                                          options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-                                       attributes:attributes
-                                          context:nil];
+    CGRect textFrame = [initials boundingRectWithSize:frame.size
+                                              options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                           attributes:attributes
+                                              context:nil];
 
     CGPoint frameMidPoint = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
     CGPoint textFrameMidPoint = CGPointMake(CGRectGetMidX(textFrame), CGRectGetMidY(textFrame));
@@ -136,7 +134,7 @@
 
         CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
         CGContextFillRect(context, frame);
-        [text drawAtPoint:drawPoint withAttributes:attributes];
+        [initials drawAtPoint:drawPoint withAttributes:attributes];
 
         image = UIGraphicsGetImageFromCurrentImageContext();
 
