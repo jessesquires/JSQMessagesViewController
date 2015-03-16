@@ -257,10 +257,6 @@
 
 - (void)setMediaView:(UIView *)mediaView
 {
-    if ([_mediaView isEqual:mediaView]) {
-        return;
-    }
-    
     [self.messageBubbleImageView removeFromSuperview];
     [self.textView removeFromSuperview];
     
