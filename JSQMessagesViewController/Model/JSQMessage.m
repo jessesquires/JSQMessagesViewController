@@ -149,7 +149,7 @@
 
 - (NSUInteger)hash
 {
-    NSUInteger contentHash = self.isMediaMessage ? self.media.hash : self.text.hash;
+    NSUInteger contentHash = self.isMediaMessage ? [self.media mediaHash] : self.text.hash;
     return self.senderId.hash ^ self.date.hash ^ contentHash;
 }
 
