@@ -116,6 +116,11 @@
     _media = nil;
 }
 
+- (NSUInteger)messageHash
+{
+    return self.hash;
+}
+
 #pragma mark - NSObject
 
 - (BOOL)isEqual:(id)object
@@ -145,7 +150,6 @@
 - (NSUInteger)hash
 {
     NSUInteger contentHash = self.isMediaMessage ? self.media.hash : self.text.hash;
-    
     return self.senderId.hash ^ self.date.hash ^ contentHash;
 }
 

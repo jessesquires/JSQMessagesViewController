@@ -30,6 +30,8 @@
 
 - (BOOL)isEqual:(id)object { return YES; }
 
+- (NSUInteger)mediaHash { return arc4random_uniform(10000); } 
+
 @end
 
 
