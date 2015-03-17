@@ -237,6 +237,8 @@ Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed
 * [Fluky Chat](https://itunes.apple.com/us/app/fluky-chat-secure-anonymous/id958605886)
 * [VillageUnity](https://itunes.apple.com/us/app/village-unity/id919972368)
 * [Pine](https://itunes.apple.com/us/app/pine-innovation-product-life/id946589228)
+* [NotificationChat](https://github.com/relatedcode/NotificationChat)
+* [RealtimeChat](https://github.com/relatedcode/RealtimeChat)
 * *Your app here*
 
 ## License
