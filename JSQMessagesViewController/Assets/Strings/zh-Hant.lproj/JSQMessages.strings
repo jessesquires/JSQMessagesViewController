@@ -22,8 +22,8 @@
 //  https://github.com/jessesquires/JSQMessagesViewController/issues/237
 //  ********************************
 
-"Load Earlier Messages" = "載入之前的訊息";
+"load_earlier_messages" = "載入之前的訊息";
 
-"Send" = "傳送";
+"send" = "傳送";
 
-"New Message" = "新信息";
+"new_message" = "新信息";

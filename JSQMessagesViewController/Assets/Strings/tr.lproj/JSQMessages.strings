@@ -22,8 +22,8 @@
 //  https://github.com/jessesquires/JSQMessagesViewController/issues/237
 //  ********************************
 
-"Load Earlier Messages" = "Eski mesajları yükle";
+"load_earlier_messages" = "Eski mesajları yükle";
 
-"Send" = "Gönder";
+"send" = "Gönder";
 
-"New Message" = "Yeni Mesaj";
+"new_message" = "Yeni Mesaj";

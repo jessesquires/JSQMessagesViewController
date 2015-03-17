@@ -22,8 +22,8 @@
 //  https://github.com/jessesquires/JSQMessagesViewController/issues/237
 //  ********************************
 
-"Load Earlier Messages" = "Ältere Nachrichten laden";
+"load_earlier_messages" = "Ältere Nachrichten laden";
 
-"Send" = "Senden";
+"send" = "Senden";
 
-"New Message" = "Neue Nachricht";
+"new_message" = "Neue Nachricht";
