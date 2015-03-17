@@ -285,10 +285,14 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                 return;
             }
 
+            
+            // we should convert
+            CGRect keyboardEndFrameConverted = [self.contextView convertRect:newKeyboardFrame fromView:nil];
+            
             //  do not convert frame to contextView coordinates here
             //  KVO is triggered during panning (see below)
             //  panning occurs in contextView coordinates already
-            [self jsq_notifyKeyboardFrameNotificationForFrame:newKeyboardFrame];
+            [self jsq_notifyKeyboardFrameNotificationForFrame:keyboardEndFrameConverted];
         }
     }
 }
