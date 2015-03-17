@@ -41,6 +41,7 @@
 #import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
 #import "UIDevice+JSQMessages.h"
+#import "NSBundle+JSQMessages.h"
 
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
@@ -128,7 +129,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.collectionView.delegate = self;
 
     self.inputToolbar.delegate = self;
-    self.inputToolbar.contentView.textView.placeHolder = NSLocalizedStringFromTable(@"new_message", @"JSQMessages", @"Placeholder text for the message input text view");
+    self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
     self.inputToolbar.contentView.textView.delegate = self;
 
     self.automaticallyScrollsToMostRecentMessage = YES;

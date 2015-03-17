@@ -30,7 +30,8 @@
 		886C33FD19F4371E006B4997 /* JSQVideoMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C33FC19F4371E006B4997 /* JSQVideoMediaItem.m */; };
 		886C33FF19F45E30006B4997 /* JSQMessagesViewController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 886C33FE19F45E30006B4997 /* JSQMessagesViewController.podspec */; };
 		886FFD2E19E9A65D00EB8485 /* UIDevice+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 886FFD2D19E9A65D00EB8485 /* UIDevice+JSQMessages.m */; };
-		8873B6091AB7A67B006DF9AC /* JSQMessages.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8873B5F91AB7A67B006DF9AC /* JSQMessages.strings */; };
+		8873B60C1AB7B244006DF9AC /* NSBundle+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 8873B60B1AB7B244006DF9AC /* NSBundle+JSQMessages.m */; };
+		8873B60E1AB7B63E006DF9AC /* JSQMessagesNSBundleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8873B60D1AB7B63E006DF9AC /* JSQMessagesNSBundleTests.m */; };
 		8885734A19DE540400E89D20 /* DemoSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8885734919DE540400E89D20 /* DemoSettingsViewController.m */; };
 		8885734D19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8885734C19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m */; };
 		88A25F3719D8DF2500924534 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A25F2D19D8DF2500924534 /* AppDelegate.m */; };
@@ -142,21 +143,9 @@
 		886C33FE19F45E30006B4997 /* JSQMessagesViewController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSQMessagesViewController.podspec; sourceTree = "<group>"; };
 		886FFD2C19E9A65D00EB8485 /* UIDevice+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+JSQMessages.h"; sourceTree = "<group>"; };
 		886FFD2D19E9A65D00EB8485 /* UIDevice+JSQMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+JSQMessages.m"; sourceTree = "<group>"; };
-		8873B5FA1AB7A67B006DF9AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/JSQMessages.strings; sourceTree = "<group>"; };
-		8873B5FB1AB7A67B006DF9AC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/JSQMessages.strings; sourceTree = "<group>"; };
-		8873B5FC1AB7A67B006DF9AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/JSQMessages.strings; sourceTree = "<group>"; };
-		8873B5FD1AB7A67B006DF9AC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/JSQMessages.strings; sourceTree = "<group>"; };
-		8873B5FE1AB7A67B006DF9AC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/JSQMessages.strings; sourceTree = "<group>"; };
-		8873B5FF1AB7A67B006DF9AC /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/JSQMessages.strings; sourceTree = "<group>"; };
-		8873B6001AB7A67B006DF9AC /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/JSQMessages.strings; sourceTree = "<group>"; };
-		8873B6011AB7A67B006DF9AC /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/JSQMessages.strings; sourceTree = "<group>"; };
-		8873B6021AB7A67B006DF9AC /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/JSQMessages.strings; sourceTree = "<group>"; };
-		8873B6031AB7A67B006DF9AC /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/JSQMessages.strings; sourceTree = "<group>"; };
-		8873B6041AB7A67B006DF9AC /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/JSQMessages.strings; sourceTree = "<group>"; };
-		8873B6051AB7A67B006DF9AC /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/JSQMessages.strings; sourceTree = "<group>"; };
-		8873B6061AB7A67B006DF9AC /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/JSQMessages.strings; sourceTree = "<group>"; };
-		8873B6071AB7A67B006DF9AC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/JSQMessages.strings"; sourceTree = "<group>"; };
-		8873B6081AB7A67B006DF9AC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/JSQMessages.strings"; sourceTree = "<group>"; };
+		8873B60A1AB7B244006DF9AC /* NSBundle+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+JSQMessages.h"; sourceTree = "<group>"; };
+		8873B60B1AB7B244006DF9AC /* NSBundle+JSQMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+JSQMessages.m"; sourceTree = "<group>"; };
+		8873B60D1AB7B63E006DF9AC /* JSQMessagesNSBundleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesNSBundleTests.m; sourceTree = "<group>"; };
 		8885734819DE540400E89D20 /* DemoSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoSettingsViewController.h; sourceTree = "<group>"; };
 		8885734919DE540400E89D20 /* DemoSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoSettingsViewController.m; sourceTree = "<group>"; };
 		8885734B19DE55D000E89D20 /* NSUserDefaults+DemoSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+DemoSettings.h"; sourceTree = "<group>"; };
@@ -341,14 +330,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8873B5F81AB7A67B006DF9AC /* Strings */ = {
-			isa = PBXGroup;
-			children = (
-				8873B5F91AB7A67B006DF9AC /* JSQMessages.strings */,
-			);
-			path = Strings;
-			sourceTree = "<group>";
-		};
 		88A25EF919D8DEC400924534 = {
 			isa = PBXGroup;
 			children = (
@@ -435,7 +416,6 @@
 			isa = PBXGroup;
 			children = (
 				8861666C19F492B70025B958 /* JSQMessagesAssets.bundle */,
-				8873B5F81AB7A67B006DF9AC /* Strings */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -445,6 +425,8 @@
 			children = (
 				88A25F5519D8E01A00924534 /* JSQSystemSoundPlayer+JSQMessages.h */,
 				88A25F5619D8E01A00924534 /* JSQSystemSoundPlayer+JSQMessages.m */,
+				8873B60A1AB7B244006DF9AC /* NSBundle+JSQMessages.h */,
+				8873B60B1AB7B244006DF9AC /* NSBundle+JSQMessages.m */,
 				88A25F5719D8E01A00924534 /* NSString+JSQMessages.h */,
 				88A25F5819D8E01A00924534 /* NSString+JSQMessages.m */,
 				88A25F5919D8E01A00924534 /* UIColor+JSQMessages.h */,
@@ -567,6 +549,7 @@
 		88A25FE219D8E18400924534 /* CategoryTests */ = {
 			isa = PBXGroup;
 			children = (
+				8873B60D1AB7B63E006DF9AC /* JSQMessagesNSBundleTests.m */,
 				88A25FE319D8E18400924534 /* JSQMessagesNSStringTests.m */,
 				88A25FE419D8E18400924534 /* JSQMessagesUIColorTests.m */,
 				88A25FE519D8E18400924534 /* JSQMessagesUIImageTests.m */,
@@ -735,7 +718,6 @@
 				8861666D19F492B70025B958 /* JSQMessagesAssets.bundle in Resources */,
 				88A25FCF19D8E01A00924534 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
 				88A25FCD19D8E01A00924534 /* JSQMessagesCollectionViewCellIncoming.xib in Resources */,
-				8873B6091AB7A67B006DF9AC /* JSQMessages.strings in Resources */,
 				88A25FD619D8E01A00924534 /* JSQMessagesToolbarContentView.xib in Resources */,
 				88A25F3A19D8DF2500924534 /* Images.xcassets in Resources */,
 				88A25FBC19D8E01A00924534 /* JSQMessagesViewController.xib in Resources */,
@@ -863,6 +845,7 @@
 				88A25FE119D8E0C400924534 /* TableViewController.m in Sources */,
 				88A25FBD19D8E01A00924534 /* JSQMessagesAvatarImageFactory.m in Sources */,
 				88A25FB519D8E01A00924534 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
+				8873B60C1AB7B244006DF9AC /* NSBundle+JSQMessages.m in Sources */,
 				88A25FD019D8E01A00924534 /* JSQMessagesComposerTextView.m in Sources */,
 				88A25FC319D8E01A00924534 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
 			);
@@ -896,6 +879,7 @@
 				88A2601919D8E18400924534 /* JSQMessagesTypingIndicatorFooterViewTests.m in Sources */,
 				88A2600319D8E18400924534 /* JSQMessagesUIImageTests.m in Sources */,
 				88C00A4E1A44D4C600B004B3 /* JSQLocationMediaItemTests.m in Sources */,
+				8873B60E1AB7B63E006DF9AC /* JSQMessagesNSBundleTests.m in Sources */,
 				88A2600C19D8E18400924534 /* JSQMessagesCollectionViewLayoutAttributesTests.m in Sources */,
 				88A2600619D8E18400924534 /* JSQMessagesViewControllerTests.m in Sources */,
 				88A2600519D8E18400924534 /* JSQMessagesKeyboardControllerTests.m in Sources */,
@@ -914,28 +898,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		8873B5F91AB7A67B006DF9AC /* JSQMessages.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8873B5FA1AB7A67B006DF9AC /* Base */,
-				8873B5FB1AB7A67B006DF9AC /* de */,
-				8873B5FC1AB7A67B006DF9AC /* en */,
-				8873B5FD1AB7A67B006DF9AC /* es */,
-				8873B5FE1AB7A67B006DF9AC /* fr */,
-				8873B5FF1AB7A67B006DF9AC /* he */,
-				8873B6001AB7A67B006DF9AC /* it */,
-				8873B6011AB7A67B006DF9AC /* nl */,
-				8873B6021AB7A67B006DF9AC /* pl */,
-				8873B6031AB7A67B006DF9AC /* pt */,
-				8873B6041AB7A67B006DF9AC /* ro */,
-				8873B6051AB7A67B006DF9AC /* ru */,
-				8873B6061AB7A67B006DF9AC /* tr */,
-				8873B6071AB7A67B006DF9AC /* zh-Hans */,
-				8873B6081AB7A67B006DF9AC /* zh-Hant */,
-			);
-			name = JSQMessages.strings;
-			sourceTree = "<group>";
-		};
 		88A25F3019D8DF2500924534 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
