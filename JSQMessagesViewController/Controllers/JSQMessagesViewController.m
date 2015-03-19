@@ -147,7 +147,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.showLoadEarlierMessagesHeader = NO;
     
     self.topContentAdditionalInset = 0.0f;
-    self.maxToolbarHeight = 0.0f;
+    self.maximumInputToolbarHeight = NSNotFound;
     
     [self jsq_updateCollectionViewInsets];
     
@@ -390,6 +390,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     CGFloat maxHeightForVisibleMessage = CGRectGetHeight(self.collectionView.bounds) - self.collectionView.contentInset.top - CGRectGetHeight(self.inputToolbar.bounds);
     
+
     UICollectionViewScrollPosition scrollPosition = (finalCellSize.height > maxHeightForVisibleMessage) ? UICollectionViewScrollPositionBottom : UICollectionViewScrollPositionTop;
     
     [self.collectionView scrollToItemAtIndexPath:finalIndexPath
@@ -904,9 +905,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     if (self.toolbarHeightConstraint.constant < kJSQMessagesInputToolbarHeightDefault) {
         self.toolbarHeightConstraint.constant = kJSQMessagesInputToolbarHeightDefault;
-    } else if (_maxToolbarHeight > 0) {
-        if (self.toolbarHeightConstraint.constant > _maxToolbarHeight) {
-            self.toolbarHeightConstraint.constant = _maxToolbarHeight;
+    }
+    else if (self.maximumInputToolbarHeight != NSNotFound) {
+        if (self.toolbarHeightConstraint.constant > self.maximumInputToolbarHeight) {
+            self.toolbarHeightConstraint.constant = self.maximumInputToolbarHeight;
         }
     }
 

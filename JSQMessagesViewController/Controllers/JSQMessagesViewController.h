@@ -169,10 +169,11 @@
 @property (assign, nonatomic) CGFloat topContentAdditionalInset;
 
 /**
-* Sets the max height of the input toolbar.
-* Set to 0 to disable max height (default)
-*/
-@property (assign, nonatomic) CGFloat maxToolbarHeight;
+ * Specifies the maximum height of the input toolbar.
+ *
+ * The default value is `NSNotFound`, which specifies no maximum height
+ */
+@property (assign, nonatomic) NSUInteger maximumInputToolbarHeight;
 
 #pragma mark - Class methods
 
