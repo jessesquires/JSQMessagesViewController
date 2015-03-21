@@ -21,15 +21,6 @@ See the [website](http://www.jessesquires.com/JSQMessagesViewController/) for th
 * iOS 7.0+
 * ARC
 
-*Need support for iOS 6? [You shouldn't](http://www.macrumors.com/2015/01/07/ios-8-68-percent/). But, there's a branch for that!*
-**Note: This will not be around much longer!**
-
-````bash
-$ git checkout iOS6_support_stable
-````
-
-*Note: the `iOS6_support_stable` branch does not include many of the latest hip and fancy features or fixes*
-
 ## Installation
 
 From [CocoaPods](http://cocoapods.org):
@@ -43,9 +34,6 @@ pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMes
 
 # For version 5.3.2
 pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController', :branch => 'version_5.3.2_patch'
-
-# For iOS 6 support
-pod 'JSMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'iOS6_support_stable'
 ````
 
 Without CocoaPods:
@@ -166,9 +154,17 @@ Without CocoaPods:
 
 There's [a label](https://github.com/jessesquires/JSQMessagesViewController/labels/questions%20&%20help) for that. Before asking a question, see if it has [already been answered](https://github.com/jessesquires/JSQMessagesViewController/issues?q=label%3A%22questions+%26+help%22+is%3Aclosed).
 
-## Migrating from v5.x to v6.x
+>**NOTE:** Please try to avoid emailing me with questions. I prefer to keep questions and their answers open-source.
 
-If you are upgrading from v5.x to v6.x, see the [6.0 release notes](https://github.com/jessesquires/JSQMessagesViewController/releases/tag/6.0.0) for details about API changes.
+## Migrating between major versions
+
+### From 5.x to 6.x
+
+See the [6.0 release notes](https://github.com/jessesquires/JSQMessagesViewController/releases/tag/6.0.0) for details about API changes.
+
+### From 6.x to 7.x
+
+See the [7.0 release notes](https://github.com/jessesquires/JSQMessagesViewController/releases/tag/7.0.0) for details about API changes.
 
 ## Documentation
 
