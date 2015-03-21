@@ -158,11 +158,11 @@ There's [a label](https://github.com/jessesquires/JSQMessagesViewController/labe
 
 ## Migrating between major versions
 
-### From 5.x to 6.x
+##### From 5.x to 6.x
 
 See the [6.0 release notes](https://github.com/jessesquires/JSQMessagesViewController/releases/tag/6.0.0) for details about API changes.
 
-### From 6.x to 7.x
+##### From 6.x to 7.x
 
 See the [7.0 release notes](https://github.com/jessesquires/JSQMessagesViewController/releases/tag/7.0.0) for details about API changes.
 
