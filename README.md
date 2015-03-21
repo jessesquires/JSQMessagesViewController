@@ -215,6 +215,7 @@ Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed
 * [ClassDojo](https://itunes.apple.com/us/app/classdojo/id552602056)
 * [Schools App](https://itunes.apple.com/us/app/schools-app/id495845755)
 * [ChatSecure](https://chatsecure.org)
+* [Bryx 911](https://itunes.apple.com/us/app/bryx-911/id813078029)
 * [Kytt](https://itunes.apple.com/de/app/kytt-neue-leute-in-der-umgebung/id848959696)
 * [Spark Social](https://itunes.apple.com/us/app/spark-social/id823785892)
 * [Spabbit](https://itunes.apple.com/us/app/spabbit/id737363908)
