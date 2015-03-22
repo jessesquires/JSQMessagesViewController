@@ -46,9 +46,8 @@
 
 /**
  *  The display name of the current user who is sending messages.
- *  This value does not have to be unique.
  *
- *  @discussion This value must not be `nil`. The default value is `@"JSQDefaultSender"`.
+ *  @discussion This value does not have to be unique. This value must not be `nil`.
  */
 @property (copy, nonatomic) NSString *senderDisplayName;
 
@@ -57,8 +56,7 @@
  *  
  *  @discussion This property is used to determine if a message is incoming or outgoing.
  *  All message data objects returned by `collectionView:messageDataForItemAtIndexPath:` are
- *  checked against this identifier.
- *  This value must not be `nil`. The default value is `@"JSQDefaultSender"`.
+ *  checked against this identifier. This value must not be `nil`.
  */
 @property (copy, nonatomic) NSString *senderId;
 

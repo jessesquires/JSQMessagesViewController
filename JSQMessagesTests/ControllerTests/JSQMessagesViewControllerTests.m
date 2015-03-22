@@ -53,9 +53,7 @@
     XCTAssertNotNil(vc.view, @"View should not be nil");
     XCTAssertNotNil(vc.collectionView, @"Collection view should not be nil");
     XCTAssertNotNil(vc.inputToolbar, @"Input toolbar should not be nil");
- 
-    XCTAssertEqualObjects(vc.senderId, @"JSQDefaultSender", @"Property should be equal to default value");
-    XCTAssertEqualObjects(vc.senderDisplayName, @"JSQDefaultSender", @"Property should be equal to default value");
+    
     XCTAssertEqual(vc.automaticallyAdjustsScrollViewInsets, YES, @"Property should be equal to default value");
 
     XCTAssertEqualObjects(vc.incomingCellIdentifier, [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier], @"Property should be equal to default value");
