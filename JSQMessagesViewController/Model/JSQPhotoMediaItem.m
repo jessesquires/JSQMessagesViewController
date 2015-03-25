@@ -21,6 +21,7 @@
 #import "JSQMessagesMediaPlaceholderView.h"
 #import "JSQMessagesMediaViewBubbleImageMasker.h"
 
+#import <MobileCoreServices/UTCoreTypes.h>
 
 @interface JSQPhotoMediaItem ()
 
@@ -87,6 +88,13 @@
 - (NSUInteger)mediaHash
 {
     return self.hash;
+}
+
+- (NSDictionary *)copyableMediaItem {
+    NSData *imageData = UIImageJPEGRepresentation(self.image, 1);
+    NSDictionary *copyableData = @{ JSQPasteboardUTTypeKey: (NSString *)kUTTypeJPEG, JSQPasteboardDataKey: imageData };
+    
+    return copyableData;
 }
 
 #pragma mark - NSObject
