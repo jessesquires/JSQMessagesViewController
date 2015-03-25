@@ -12,6 +12,7 @@
 
 #import "JSQLocationMediaItem.h"
 
+#import <MobileCoreServices/UTCoreTypes.h>
 
 @interface JSQLocationMediaItemTests : XCTestCase
 
@@ -59,6 +60,20 @@
     }];
     
     XCTAssertNotNil([item mediaView], @"Media view should NOT be nil once item has media data");
+}
+
+- (void)testCopyableItemInMediaProtocol {
+    JSQLocationMediaItem *item = [[JSQLocationMediaItem alloc] initWithLocation:self.location];
+    XCTAssertNotNil(item);
+    XCTAssertNotNil([item copyableMediaItem]);
+    
+    NSDictionary *copyableMediaItem = [item copyableMediaItem];
+    XCTAssertNotNil(copyableMediaItem[JSQPasteboardUTTypeKey]);
+    XCTAssertEqualObjects((NSString *)kUTTypeURL, copyableMediaItem[JSQPasteboardUTTypeKey]);
+    
+    XCTAssertNotNil(copyableMediaItem[JSQPasteboardDataKey]);
+    NSURL *locationURL = [[NSURL alloc] initWithString:@"http://maps.google.com/maps?z=12&t=m&q=loc:37.795313+-122.393757"];
+    XCTAssertEqualObjects(locationURL, copyableMediaItem[JSQPasteboardDataKey]);
 }
 
 @end

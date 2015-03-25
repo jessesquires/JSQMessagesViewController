@@ -41,6 +41,8 @@
 #import "UIDevice+JSQMessages.h"
 #import "NSBundle+JSQMessages.h"
 
+#import <MobileCoreServices/UTCoreTypes.h>
+
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
@@ -572,6 +574,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     //  disable menu for media messages
     id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
     if ([messageItem isMediaMessage]) {
+        
+        if ([[messageItem media] respondsToSelector:@selector(copyableMediaItem)]) {
+            return YES;
+        }
+        
         return NO;
     }
 
@@ -599,8 +606,22 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
     if (action == @selector(copy:)) {
-        id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-        [[UIPasteboard generalPasteboard] setString:[messageData text]];
+
+        id<JSQMessageData> messageData = [self collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+        
+        if ([messageData isMediaMessage] && [[messageData media] respondsToSelector:@selector(copyableMediaItem)]) {
+            NSDictionary *copyableMediaItem = [[messageData media] copyableMediaItem];
+            NSString *pasteboardType = copyableMediaItem[JSQPasteboardUTTypeKey];
+            
+            // Use specific type when possible
+            if ([pasteboardType isEqualToString:(NSString *)kUTTypeURL]) {
+                [[UIPasteboard generalPasteboard] setURL:copyableMediaItem[JSQPasteboardDataKey]];
+            } else {
+                [[UIPasteboard generalPasteboard] setData:copyableMediaItem[JSQPasteboardDataKey] forPasteboardType:pasteboardType];
+            }
+        } else {
+            [[UIPasteboard generalPasteboard] setString:[messageData text]];
+        }
     }
     else if (action == @selector(delete:)) {
         [collectionView.dataSource collectionView:collectionView didDeleteMessageAtIndexPath:indexPath];

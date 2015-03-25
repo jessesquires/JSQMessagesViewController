@@ -21,6 +21,8 @@
 #import "JSQMessagesMediaPlaceholderView.h"
 #import "JSQMessagesMediaViewBubbleImageMasker.h"
 
+#import <MobileCoreServices/UTCoreTypes.h>
+
 
 @interface JSQLocationMediaItem ()
 
@@ -156,6 +158,15 @@
 - (NSUInteger)mediaHash
 {
     return self.hash;
+}
+
+- (NSDictionary *)copyableMediaItem {
+    // NSString *locationAsAppleMapsString = [NSString stringWithFormat:@"http://maps.apple.com/?ll=%f,%f", self.coordinate.latitude, self.coordinate.longitude];
+    NSString *locationAsGoogleMapsString = [NSString stringWithFormat:@"http://maps.google.com/maps?z=12&t=m&q=loc:%f+%f", self.coordinate.latitude, self.coordinate.longitude ];
+    NSURL *locationURL = [[NSURL alloc] initWithString:locationAsGoogleMapsString];
+    NSDictionary *copyableData = @{ JSQPasteboardUTTypeKey: (NSString *)kUTTypeURL, JSQPasteboardDataKey: locationURL };
+    
+    return copyableData;
 }
 
 #pragma mark - NSObject
