@@ -61,6 +61,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @property (strong, nonatomic) JSQMessagesKeyboardController *keyboardController;
 
+@property (assign, nonatomic) BOOL jsq_isRotating;
 @property (assign, nonatomic) BOOL jsq_isObserving;
 
 @property (strong, nonatomic) NSIndexPath *selectedIndexPathForMenu;
@@ -288,17 +289,31 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    self.jsq_isRotating = YES;
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    self.jsq_isRotating = NO;
     if (self.showTypingIndicator) {
         self.showTypingIndicator = NO;
         self.showTypingIndicator = YES;
         [self.collectionView reloadData];
     }
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    self.jsq_isRotating = YES;
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        self.jsq_isRotating = NO;
+    }];
 }
 
 #pragma mark - Messages view controller
@@ -722,6 +737,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_handleDidChangeStatusBarFrameNotification:(NSNotification *)notification
 {
+    if (self.jsq_isRotating) {
+        return;
+    }
+    
     if (self.keyboardController.keyboardIsVisible) {
         [self jsq_setToolbarBottomLayoutGuideConstant:CGRectGetHeight(self.keyboardController.currentKeyboardFrame)];
     }
