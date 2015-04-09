@@ -25,27 +25,18 @@
     [super awakeFromNib];
     
     self.textColor = [UIColor whiteColor];
-    self.editable = NO;
-    self.selectable = YES;
+    [self setUserInteractionEnabled:YES];
     self.userInteractionEnabled = YES;
-    self.dataDetectorTypes = UIDataDetectorTypeNone;
-    self.showsHorizontalScrollIndicator = NO;
-    self.showsVerticalScrollIndicator = NO;
-    self.scrollEnabled = NO;
+    self.enabledTextCheckingTypes = UIDataDetectorTypeNone;
     self.backgroundColor = [UIColor clearColor];
-    self.contentInset = UIEdgeInsetsZero;
-    self.scrollIndicatorInsets = UIEdgeInsetsZero;
-    self.contentOffset = CGPointZero;
-    self.textContainerInset = UIEdgeInsetsZero;
-    self.textContainer.lineFragmentPadding = 0;
-    self.linkTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor],
+    self.textInsets = UIEdgeInsetsZero;
+    self.numberOfLines = 0;
+    self.activeLinkAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor],
                                  NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
-}
-
-- (void)setSelectedRange:(NSRange)selectedRange
-{
-    //  prevent selecting text
-    [super setSelectedRange:NSMakeRange(NSNotFound, 0)];
+    [self removeGestureRecognizer:super.longPressGestureRecognizer];
+    _tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappingFired:)];
+    _tapGestureRecognizer.delegate = self;
+    [self addGestureRecognizer:_tapGestureRecognizer];
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
@@ -72,6 +63,89 @@
     }
     
     return YES;
+}
+
+- (void)setTextColor:(UIColor *)textColor {
+    [super setTextColor:textColor];
+    // Resets the ttt text with new attributes
+    self.text = self.text;
+}
+
+- (NSDictionary *)linkTextAttributes {
+    return self.linkAttributes;
+}
+
+- (void)setLinkTextAttributes:(id)attributes {
+    self.linkAttributes = attributes;
+}
+
+- (UIEdgeInsets)textContainerInset {
+    return self.textInsets;
+}
+
+- (void)setTextContainerInset:(UIEdgeInsets)textInsets {
+    self.textInsets = textInsets;
+}
+
+- (BOOL) selectable {
+    return self.userInteractionEnabled;
+}
+
+- (void) setSelectable:(BOOL) makeSelectable {
+    [self setUserInteractionEnabled: makeSelectable];
+}
+
+- (void) tappingFired:(UITapGestureRecognizer *)sender {
+    switch (sender.state) {
+        case UIGestureRecognizerStateEnded: {
+            CGPoint touchPoint = [sender locationInView:self];
+            NSTextCheckingResult *result = [self linkAtPoint:touchPoint];
+            if (result){
+                switch (result.resultType) {
+                    case NSTextCheckingTypeLink:
+                        if([self.delegate respondsToSelector:@selector(attributedLabel:didSelectLinkWithURL:)]) {
+                            [self.delegate attributedLabel:self didSelectLinkWithURL:result.URL];
+                            return;
+                        }
+                        break;
+                    case NSTextCheckingTypeAddress:
+                        if ([self.delegate respondsToSelector:@selector(attributedLabel:didSelectLinkWithAddress:)]) {
+                            [self.delegate attributedLabel:self didSelectLinkWithAddress:result.addressComponents];
+                            return;
+                        }
+                        break;
+                    case NSTextCheckingTypePhoneNumber:
+                        if ([self.delegate respondsToSelector:@selector(attributedLabel:didSelectLinkWithPhoneNumber:)]) {
+                            [self.delegate attributedLabel:self didSelectLinkWithPhoneNumber:result.phoneNumber];
+                            return;
+                        }
+                        break;
+                    case NSTextCheckingTypeDate:
+                        if (result.timeZone && [self.delegate respondsToSelector:@selector(attributedLabel:didSelectLinkWithDate:timeZone:duration:)]) {
+                            [self.delegate attributedLabel:self didSelectLinkWithDate:result.date timeZone:result.timeZone duration:result.duration];
+                            return;
+                        } else if ([self.delegate respondsToSelector:@selector(attributedLabel:didSelectLinkWithDate:)]) {
+                            [self.delegate attributedLabel:self didSelectLinkWithDate:result.date];
+                            return;
+                        }
+                        break;
+                    case NSTextCheckingTypeTransitInformation:
+                        if ([self.delegate respondsToSelector:@selector(attributedLabel:didSelectLinkWithTransitInformation:)]) {
+                            [self.delegate attributedLabel:self didSelectLinkWithTransitInformation:result.components];
+                            return;
+                        }
+                    default:
+                        break;
+                }
+                if ([self.delegate respondsToSelector:@selector(attributedLabel:didSelectLinkWithTextCheckingResult:)]){
+                    [self.delegate attributedLabel:self didSelectLinkWithTextCheckingResult:result];
+                }
+            }
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 @end
