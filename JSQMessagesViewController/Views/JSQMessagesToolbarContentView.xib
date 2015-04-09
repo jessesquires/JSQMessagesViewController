@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14D98g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -49,12 +49,18 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="leftBarButtonContainerView" destination="LEq-G7-jGt" id="F0V-4N-1Mo"/>
+                <outlet property="leftBarButtonContainerViewSpacingBottomConstraint" destination="oG2-YD-ZZI" id="553-SO-2gh"/>
+                <outlet property="leftBarButtonContainerViewSpacingLeftConstraint" destination="LAU-fo-GJJ" id="sus-H3-WsG"/>
+                <outlet property="leftBarButtonContainerViewSpacingRightConstraint" destination="owo-gB-gyR" id="Opt-ii-KHX"/>
                 <outlet property="leftBarButtonContainerViewWidthConstraint" destination="eMy-Af-wwH" id="FI9-F2-2bN"/>
-                <outlet property="leftHorizontalSpacingConstraint" destination="LAU-fo-GJJ" id="X2c-BI-0Q4"/>
                 <outlet property="rightBarButtonContainerView" destination="Myo-1S-Vg1" id="0SR-cw-EkD"/>
+                <outlet property="rightBarButtonContainerViewSpacingBottomConstraint" destination="EaS-Oq-Qp5" id="c41-e9-L5Q"/>
+                <outlet property="rightBarButtonContainerViewSpacingLeftConstraint" destination="7Ld-5r-Hp3" id="ddR-cQ-aZT"/>
+                <outlet property="rightBarButtonContainerViewSpacingRightConstraint" destination="ds6-61-GNv" id="ziT-ld-wUv"/>
                 <outlet property="rightBarButtonContainerViewWidthConstraint" destination="yde-S9-dHe" id="WGu-df-M3L"/>
-                <outlet property="rightHorizontalSpacingConstraint" destination="ds6-61-GNv" id="ZQh-8M-QFs"/>
                 <outlet property="textView" destination="dm4-NT-mvr" id="PFw-HO-oT8"/>
+                <outlet property="textViewSpacingBottomConstraint" destination="CCb-V7-yek" id="w5b-gH-Jcw"/>
+                <outlet property="textViewSpacingTopConstraint" destination="9Tz-Wq-xIf" id="J6V-ck-Mac"/>
             </connections>
             <point key="canvasLocation" x="268" y="548"/>
         </view>
