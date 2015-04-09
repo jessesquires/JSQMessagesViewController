@@ -131,13 +131,13 @@
 
 #pragma mark - UIWebViewDelegate Methods
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    NSLog(@"web view started loading!");
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
     _webViewLoadingCount++;
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    NSLog(@"web view finished loading!");
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
     _webViewLoadingCount--;
     if (_webViewLoadingCount < 1) {
         // finished loading
