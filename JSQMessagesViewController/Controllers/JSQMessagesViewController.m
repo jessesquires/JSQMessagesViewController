@@ -471,12 +471,21 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     if (!isMediaMessage) {
         cell.textView.text = [messageItem text];
-
+        cell.textView.delegate = self;
+        
         if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
             //  workaround for iOS 7 textView data detectors bug
             cell.textView.text = nil;
-            cell.textView.attributedText = [[NSAttributedString alloc] initWithString:[messageItem text]
-                                                                           attributes:@{ NSFontAttributeName : collectionView.collectionViewLayout.messageBubbleFont }];
+            NSMutableAttributedString *mutableAttributedString = cell.textView.attributedText.mutableCopy;
+            if (mutableAttributedString) {
+                [mutableAttributedString addAttribute:NSFontAttributeName
+                                                value:collectionView.collectionViewLayout.messageBubbleFont
+                                                range:NSMakeRange(0, [mutableAttributedString length])];
+            }
+            else {
+                cell.textView.attributedText = [[NSAttributedString alloc] initWithString:[messageItem text]
+                                                                               attributes:@{ NSFontAttributeName : collectionView.collectionViewLayout.messageBubbleFont }];
+            }
         }
 
         NSParameterAssert(cell.textView.text != nil);
@@ -719,6 +728,20 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
 
     [textView resignFirstResponder];
+}
+
+-(BOOL)      textView:(UITextView *) textView
+shouldInteractWithURL:(NSURL *) URL
+              inRange:(NSRange) characterRange
+{
+    if ([[URL scheme] isEqualToString:@"username"]) {
+        NSLog(@"Mention tapped!");
+    }
+    else if ([[URL scheme] isEqualToString:@"hashtag"]) {
+        NSLog(@"Hashtag tapped!");
+    }
+    
+    return YES;
 }
 
 #pragma mark - Notifications
