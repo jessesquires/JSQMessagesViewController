@@ -90,6 +90,11 @@
     return self.cachedWebView;
 }
 
+- (NSUInteger)mediaHash
+{
+    return self.hash;
+}
+
 #pragma mark - NSObject
 
 - (NSUInteger)hash
