@@ -30,6 +30,10 @@
 
 - (BOOL)isEqual:(id)object { return YES; }
 
+- (NSUInteger)hash { return 10000; }
+
+- (NSUInteger)mediaHash { return self.hash; }
+
 @end
 
 
@@ -40,7 +44,7 @@
 @property (strong, nonatomic) NSString *senderId;
 @property (strong, nonatomic) NSString *senderDisplayName;
 @property (strong, nonatomic) NSDate *date;
-@property (strong, nonatomic) id<JSQMessageMediaData> mockMediaData;
+@property (strong, nonatomic) id mockMediaData;
 
 @end
 
@@ -53,7 +57,9 @@
     self.senderId = @"324543-43556-212343";
     self.senderDisplayName = @"Jesse Squires";
     self.date = [NSDate date];
+    
     self.mockMediaData = [OCMockObject mockForProtocol:@protocol(JSQMessageMediaData)];
+    [[self.mockMediaData stub] mediaHash];
 }
 
 - (void)tearDown
