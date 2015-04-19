@@ -39,13 +39,6 @@
     self.title = @"JSQMessages";
     
     /**
-     *  You MUST set your senderId and display name
-     */
-    self.senderId = kJSQDemoAvatarIdSquires;
-    self.senderDisplayName = kJSQDemoAvatarDisplayNameSquires;
-    
-    
-    /**
      *  Load up our fake data for the demo
      */
     self.demoData = [[DemoModelData alloc] init];
@@ -348,6 +341,16 @@
 
 
 #pragma mark - JSQMessages CollectionView DataSource
+
+- (NSString *)senderDisplayName
+{
+    return kJSQDemoAvatarDisplayNameSquires;
+}
+
+- (NSString *)senderId
+{
+    return kJSQDemoAvatarIdSquires;
+}
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
