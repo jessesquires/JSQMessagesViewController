@@ -285,7 +285,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                 return;
             }
             
-            CGRect keyboardEndFrameConverted = [self.contextView convertRect:newKeyboardFrame fromView:nil];
+            CGRect keyboardEndFrameConverted = [self.contextView convertRect:newKeyboardFrame
+                                                                    fromView:self.keyboardView.superview];
             [self jsq_notifyKeyboardFrameNotificationForFrame:keyboardEndFrameConverted];
         }
     }
