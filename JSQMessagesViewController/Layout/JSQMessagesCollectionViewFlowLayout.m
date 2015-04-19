@@ -541,6 +541,11 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 - (UIAttachmentBehavior *)jsq_springBehaviorWithLayoutAttributesItem:(UICollectionViewLayoutAttributes *)item
 {
+    if (CGSizeEqualToSize(item.frame.size, CGSizeZero)) {
+        // adding a spring behavior with zero size will fail in in -prepareForCollectionViewUpdates:
+        return nil;
+    }
+    
     UIAttachmentBehavior *springBehavior = [[UIAttachmentBehavior alloc] initWithItem:item attachedToAnchor:item.center];
     springBehavior.length = 1.0f;
     springBehavior.damping = 1.0f;
