@@ -91,7 +91,7 @@ Without CocoaPods:
 
 ## Quick Tips
 
-*Springy bubbles?*
+##### *Springy bubbles?*
 ````objective-c
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -100,7 +100,7 @@ Without CocoaPods:
 }
 ````
 
-*Remove avatars?*
+##### *Remove avatars?*
 ````objective-c
 - (void)viewDidLoad
 {
@@ -115,7 +115,7 @@ Without CocoaPods:
 }
 ````
 
-*Customize your cells?*
+##### *Customize your cells?*
 ````objective-c
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -128,7 +128,7 @@ Without CocoaPods:
 }
 ````
 
-*Customize your toolbar buttons?*
+##### *Customize your toolbar buttons?*
 ````objective-c
 - (void)viewDidLoad
 {
