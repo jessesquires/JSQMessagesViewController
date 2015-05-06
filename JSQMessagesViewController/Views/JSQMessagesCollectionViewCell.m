@@ -26,6 +26,9 @@
 #import "UIDevice+JSQMessages.h"
 
 
+static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
+
+
 @interface JSQMessagesCollectionViewCell ()
 
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellTopLabel;
@@ -66,9 +69,6 @@
 @end
 
 
-static NSMutableArray *jsqMessagesCollectionViewCellActions = nil;
-
-
 @implementation JSQMessagesCollectionViewCell
 
 #pragma mark - Class methods
@@ -77,7 +77,7 @@ static NSMutableArray *jsqMessagesCollectionViewCellActions = nil;
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        jsqMessagesCollectionViewCellActions = [[NSMutableArray alloc] init];
+        jsqMessagesCollectionViewCellActions = [NSMutableSet new];
     });
 }
 
@@ -242,9 +242,9 @@ static NSMutableArray *jsqMessagesCollectionViewCellActions = nil;
 {
     if ([jsqMessagesCollectionViewCellActions containsObject:NSStringFromSelector(aSelector)]) {
         return YES;
-    } else {
-        return [super respondsToSelector:aSelector];
     }
+
+    return [super respondsToSelector:aSelector];
 }
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation
@@ -253,7 +253,8 @@ static NSMutableArray *jsqMessagesCollectionViewCellActions = nil;
         id sender;
         [anInvocation getArgument:&sender atIndex:0];
         [self.delegate messagesCollectionViewCell:self didPerformAction:anInvocation.selector withSender:sender];
-    } else {
+    }
+    else {
         [super forwardInvocation:anInvocation];
     }
 }
@@ -261,10 +262,10 @@ static NSMutableArray *jsqMessagesCollectionViewCellActions = nil;
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
 {
     if ([jsqMessagesCollectionViewCellActions containsObject:NSStringFromSelector(aSelector)]) {
-        return [NSMethodSignature signatureWithObjCTypes: "v@:@"];
-    } else {
-        return [super methodSignatureForSelector:aSelector];
+        return [NSMethodSignature signatureWithObjCTypes:"v@:@"];
     }
+
+    return [super methodSignatureForSelector:aSelector];
 }
 
 #pragma mark - Setters
@@ -381,7 +382,7 @@ static NSMutableArray *jsqMessagesCollectionViewCellActions = nil;
     if ([gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]]) {
         return CGRectContainsPoint(self.messageBubbleContainerView.frame, touchPt);
     }
-
+    
     return YES;
 }
 
