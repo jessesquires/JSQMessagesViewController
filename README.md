@@ -237,6 +237,7 @@ Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed
 * [Fluky Chat](https://itunes.apple.com/us/app/fluky-chat-secure-anonymous/id958605886)
 * [VillageUnity](https://itunes.apple.com/us/app/village-unity/id919972368)
 * [Pine](https://itunes.apple.com/us/app/pine-innovation-product-life/id946589228)
+* [Bazar](https://itunes.apple.com/ru/app/bazar-talk-about-everything/id885453058)
 * *Your app here*
 
 ## License
