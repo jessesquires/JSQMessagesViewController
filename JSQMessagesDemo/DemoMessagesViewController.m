@@ -36,6 +36,8 @@
 {
     [super viewDidLoad];
     
+    [JSQMessagesCollectionViewCell registerMenuAction:@selector(delete:)];
+    
     self.title = @"JSQMessages";
     
     /**
@@ -502,7 +504,25 @@
     return cell;
 }
 
+#pragma mark - UICollectionView Delegate
 
+- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if (action == @selector(delete:)) {
+        return YES;
+    }
+    
+    return [super collectionView:collectionView canPerformAction:action forItemAtIndexPath:indexPath withSender:sender];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if (action == @selector(delete:)) {
+        NSLog(@"delegate action %@", NSStringFromSelector(action));
+    } else {
+        [super collectionView:collectionView performAction:action forItemAtIndexPath:indexPath withSender:sender];
+    }
+}
 
 #pragma mark - JSQMessages collection view flow layout delegate
 
