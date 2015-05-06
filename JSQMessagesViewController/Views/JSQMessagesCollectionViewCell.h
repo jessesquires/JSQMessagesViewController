@@ -196,7 +196,8 @@
  *
  *  @param action The selector to register with the cell.
  *
- *  @discussion Non-Standard actions still need to be added to the `UIMenuController` manually.
+ *  @discussion Non-standard or non-system actions must be added to the `UIMenuController` manually.
+ *  You can do this by creating a new `UIMenuItem` and adding it via the controller's `menuItems` property.
  *
  *  @warning Note that all message cells share the all actions registered here.
  */

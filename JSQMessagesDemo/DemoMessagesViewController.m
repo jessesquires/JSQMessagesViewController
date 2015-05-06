@@ -70,9 +70,10 @@
                                                                              action:@selector(receiveMessagePressed:)];
 
     /**
-     *  Register custom menu actions for cells
+     *  Register custom menu actions for cells.
      */
-    [JSQMessagesCollectionViewCell registerMenuAction:@selector(delete:)];
+    [JSQMessagesCollectionViewCell registerMenuAction:@selector(customAction:)];
+    [UIMenuController sharedMenuController].menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action" action:@selector(customAction:)] ];
 
 
     /**
@@ -512,9 +513,11 @@
 
 #pragma mark - UICollectionView Delegate
 
+#pragma mark - Custom menu items
+
 - (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
-    if (action == @selector(delete:)) {
+    if (action == @selector(customAction:)) {
         return YES;
     }
 
@@ -523,12 +526,24 @@
 
 - (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
-    if (action == @selector(delete:)) {
-        NSLog(@"Did receive delegate action %@", NSStringFromSelector(action));
+    if (action == @selector(customAction:)) {
+        [self customAction:sender];
         return;
     }
 
     [super collectionView:collectionView performAction:action forItemAtIndexPath:indexPath withSender:sender];
+}
+
+- (void)customAction:(id)sender
+{
+    NSLog(@"Custom action received! Sender: %@", sender);
+
+    [[[UIAlertView alloc] initWithTitle:@"Custom Action"
+                               message:nil
+                              delegate:nil
+                     cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil]
+     show];
 }
 
 
