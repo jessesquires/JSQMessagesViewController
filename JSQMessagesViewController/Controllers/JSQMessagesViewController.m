@@ -170,8 +170,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     _toolbarHeightConstraint = nil;
     _toolbarBottomLayoutGuide = nil;
 
-    _senderId = nil;
-    _senderDisplayName = nil;
     _outgoingCellIdentifier = nil;
     _incomingCellIdentifier = nil;
 
@@ -224,9 +222,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSParameterAssert(self.senderId != nil);
-    NSParameterAssert(self.senderDisplayName != nil);
-
     [super viewWillAppear:animated];
     [self.view layoutIfNeeded];
     [self.collectionView.collectionViewLayout invalidateLayout];
@@ -402,6 +397,18 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - JSQMessages collection view data source
 
+- (NSString *)senderDisplayName
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
+    return nil;    
+}
+
+- (NSString *)senderId
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
+    return nil;
+}
+
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
@@ -455,7 +462,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     NSString *messageSenderId = [messageItem senderId];
     NSParameterAssert(messageSenderId != nil);
 
-    BOOL isOutgoingMessage = [messageSenderId isEqualToString:self.senderId];
+    BOOL isOutgoingMessage = [messageSenderId isEqualToString:[collectionView.dataSource senderId]];
     BOOL isMediaMessage = [messageItem isMediaMessage];
 
     NSString *cellIdentifier = nil;
@@ -659,8 +666,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     else {
         [self didPressSendButton:sender
                  withMessageText:[self jsq_currentlyComposedMessageText]
-                        senderId:self.senderId
-               senderDisplayName:self.senderDisplayName
+                        senderId:[self.collectionView.dataSource senderId]
+               senderDisplayName:[self.collectionView.dataSource senderDisplayName]
                             date:[NSDate date]];
     }
 }
@@ -670,8 +677,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (toolbar.sendButtonOnRight) {
         [self didPressSendButton:sender
                  withMessageText:[self jsq_currentlyComposedMessageText]
-                        senderId:self.senderId
-               senderDisplayName:self.senderDisplayName
+                        senderId:[self.collectionView.dataSource senderId]
+               senderDisplayName:[self.collectionView.dataSource senderDisplayName]
                             date:[NSDate date]];
     }
     else {

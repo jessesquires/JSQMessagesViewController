@@ -45,22 +45,6 @@
 @property (weak, nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
 
 /**
- *  The display name of the current user who is sending messages.
- *
- *  @discussion This value does not have to be unique. This value must not be `nil`.
- */
-@property (copy, nonatomic) NSString *senderDisplayName;
-
-/**
- *  The string identifier that uniquely identifies the current user sending messages.
- *  
- *  @discussion This property is used to determine if a message is incoming or outgoing.
- *  All message data objects returned by `collectionView:messageDataForItemAtIndexPath:` are
- *  checked against this identifier. This value must not be `nil`.
- */
-@property (copy, nonatomic) NSString *senderId;
-
-/**
  *  Specifies whether or not the view controller should automatically scroll to the most recent message 
  *  when the view appears and when sending, receiving, and composing a new message.
  *
