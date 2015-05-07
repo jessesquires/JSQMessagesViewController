@@ -26,6 +26,9 @@
 #import "UIDevice+JSQMessages.h"
 
 
+static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
+
+
 @interface JSQMessagesCollectionViewCell ()
 
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellTopLabel;
@@ -66,10 +69,17 @@
 @end
 
 
-
 @implementation JSQMessagesCollectionViewCell
 
 #pragma mark - Class methods
+
++ (void)initialize
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        jsqMessagesCollectionViewCellActions = [NSMutableSet new];
+    });
+}
 
 + (UINib *)nib
 {
@@ -84,6 +94,11 @@
 + (NSString *)mediaCellReuseIdentifier
 {
     return [NSString stringWithFormat:@"%@_JSQMedia", NSStringFromClass([self class])];
+}
+
++ (void)registerMenuAction:(SEL)action
+{
+    [jsqMessagesCollectionViewCellActions addObject:NSStringFromSelector(action)];
 }
 
 #pragma mark - Initialization
@@ -221,6 +236,38 @@
     }
 }
 
+#pragma mark - Menu actions
+
+- (BOOL)respondsToSelector:(SEL)aSelector
+{
+    if ([jsqMessagesCollectionViewCellActions containsObject:NSStringFromSelector(aSelector)]) {
+        return YES;
+    }
+
+    return [super respondsToSelector:aSelector];
+}
+
+- (void)forwardInvocation:(NSInvocation *)anInvocation
+{
+    if ([jsqMessagesCollectionViewCellActions containsObject:NSStringFromSelector(anInvocation.selector)]) {
+        id sender;
+        [anInvocation getArgument:&sender atIndex:0];
+        [self.delegate messagesCollectionViewCell:self didPerformAction:anInvocation.selector withSender:sender];
+    }
+    else {
+        [super forwardInvocation:anInvocation];
+    }
+}
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
+{
+    if ([jsqMessagesCollectionViewCellActions containsObject:NSStringFromSelector(aSelector)]) {
+        return [NSMethodSignature signatureWithObjCTypes:"v@:@"];
+    }
+
+    return [super methodSignatureForSelector:aSelector];
+}
+
 #pragma mark - Setters
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor
@@ -335,7 +382,7 @@
     if ([gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]]) {
         return CGRectContainsPoint(self.messageBubbleContainerView.frame, touchPt);
     }
-
+    
     return YES;
 }
 

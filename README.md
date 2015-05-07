@@ -91,7 +91,7 @@ Without CocoaPods:
 
 ## Quick Tips
 
-*Springy bubbles?*
+##### *Springy bubbles?*
 ````objective-c
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -100,7 +100,7 @@ Without CocoaPods:
 }
 ````
 
-*Remove avatars?*
+##### *Remove avatars?*
 ````objective-c
 - (void)viewDidLoad
 {
@@ -115,7 +115,7 @@ Without CocoaPods:
 }
 ````
 
-*Customize your cells?*
+##### *Customize your cells?*
 ````objective-c
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -128,7 +128,7 @@ Without CocoaPods:
 }
 ````
 
-*Customize your toolbar buttons?*
+##### *Customize your toolbar buttons?*
 ````objective-c
 - (void)viewDidLoad
 {
@@ -152,7 +152,7 @@ Without CocoaPods:
 
 ## Questions & Help
 
-There's [a label](https://github.com/jessesquires/JSQMessagesViewController/labels/questions%20&%20help) for that. Before asking a question, see if it has [already been answered](https://github.com/jessesquires/JSQMessagesViewController/issues?q=label%3A%22questions+%26+help%22+is%3Aclosed).
+There's [a label](https://github.com/jessesquires/JSQMessagesViewController/labels/questions%20&%20help) for that. Before asking a question, see if it has [already been answered](https://github.com/jessesquires/JSQMessagesViewController/issues?q=label%3A%22questions+%26+help%22+is%3Aclosed). **Please only ask questions that are _specific_ to this library.**
 
 >**NOTE:** Please try to avoid emailing me with questions. I prefer to keep questions and their answers open-source.
 
