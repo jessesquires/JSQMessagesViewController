@@ -236,6 +236,7 @@ Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed
 * [Pine](https://itunes.apple.com/us/app/pine-innovation-product-life/id946589228)
 * [NotificationChat](https://github.com/relatedcode/NotificationChat)
 * [RealtimeChat](https://github.com/relatedcode/RealtimeChat)
+* [Bazar](https://itunes.apple.com/ru/app/bazar-talk-about-everything/id885453058)
 * *Your app here*
 
 ## License
