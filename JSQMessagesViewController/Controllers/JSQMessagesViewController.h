@@ -21,6 +21,7 @@
 #import "JSQMessagesCollectionView.h"
 #import "JSQMessagesCollectionViewFlowLayout.h"
 #import "JSQMessagesInputToolbar.h"
+#import "JSQMessagesKeyboardController.h"
 
 /**
  *  The `JSQMessagesViewController` class is an abstract class that represents a view controller whose content consists of
@@ -43,6 +44,11 @@
  *  This view controller is the toolbar's delegate.
  */
 @property (weak, nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
+
+/**
+ *  Returns the keyboard controller object used to manage the software keyboard.
+ */
+@property (strong, nonatomic) JSQMessagesKeyboardController *keyboardController;
 
 /**
  *  The display name of the current user who is sending messages.
