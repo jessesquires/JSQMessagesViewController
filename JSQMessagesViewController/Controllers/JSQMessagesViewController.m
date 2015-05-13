@@ -141,8 +141,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.showLoadEarlierMessagesHeader = NO;
 
     self.topContentAdditionalInset = 0.0f;
-    self.maximumInputToolbarHeight = NSNotFound;
-    
+
     [self jsq_updateCollectionViewInsets];
 
     self.keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextView:self.inputToolbar.contentView.textView
@@ -159,7 +158,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     _collectionView.dataSource = nil;
     _collectionView.delegate = nil;
     _collectionView = nil;
-    
+
     _inputToolbar.contentView.textView.delegate = nil;
     _inputToolbar.delegate = nil;
     _inputToolbar = nil;
@@ -899,19 +898,19 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy
 {
-    CGFloat h = self.toolbarHeightConstraint.constant + dy;
-    if (h < self.inputToolbar.preferredDefaultHeight) {
-        h = self.inputToolbar.preferredDefaultHeight;
-    }
-    else if (self.maximumInputToolbarHeight != NSNotFound) {
-        if (h > self.maximumInputToolbarHeight) {
-            h = self.maximumInputToolbarHeight;
-        }
-    }
-    self.toolbarHeightConstraint.constant = h;
+    CGFloat proposedHeight = self.toolbarHeightConstraint.constant + dy;
 
-    [self.view setNeedsUpdateConstraints];
-    [self.view layoutIfNeeded];
+    CGFloat finalHeight = MAX(proposedHeight, self.inputToolbar.preferredDefaultHeight);
+
+    if (self.inputToolbar.maximumHeight != NSNotFound) {
+        finalHeight = MIN(finalHeight, self.inputToolbar.maximumHeight);
+    }
+
+    if (self.toolbarHeightConstraint.constant != finalHeight) {
+        self.toolbarHeightConstraint.constant = finalHeight;
+        [self.view setNeedsUpdateConstraints];
+        [self.view layoutIfNeeded];
+    }
 }
 
 - (void)jsq_scrollComposerTextViewToBottomAnimated:(BOOL)animated
@@ -1025,7 +1024,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (self.navigationController.interactivePopGestureRecognizer) {
         [self.navigationController.interactivePopGestureRecognizer removeTarget:nil
                                                                          action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
-
+        
         if (addAction) {
             [self.navigationController.interactivePopGestureRecognizer addTarget:self
                                                                           action:@selector(jsq_handleInteractivePopGestureRecognizer:)];

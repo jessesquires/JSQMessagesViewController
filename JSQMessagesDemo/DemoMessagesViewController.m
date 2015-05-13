@@ -82,6 +82,12 @@
      *  self.inputToolbar.contentView.leftBarButtonItem = custom button or nil to remove
      *  self.inputToolbar.contentView.rightBarButtonItem = custom button or nil to remove
      */
+
+    /**
+     *  Set a maximum height for the input toolbar
+     *
+     *  self.inputToolbar.maximumHeight = 150;
+     */
 }
 
 - (void)viewWillAppear:(BOOL)animated
