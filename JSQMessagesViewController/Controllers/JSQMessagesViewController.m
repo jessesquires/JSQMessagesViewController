@@ -141,7 +141,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.showLoadEarlierMessagesHeader = NO;
 
     self.topContentAdditionalInset = 0.0f;
-
+    self.maximumInputToolbarHeight = NSNotFound;
+    
     [self jsq_updateCollectionViewInsets];
 
     self.keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextView:self.inputToolbar.contentView.textView
@@ -902,6 +903,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     if (self.toolbarHeightConstraint.constant < self.inputToolbar.preferredDefaultHeight) {
         self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
+    }
+    else if (self.maximumInputToolbarHeight != NSNotFound) {
+        if (self.toolbarHeightConstraint.constant > self.maximumInputToolbarHeight) {
+            self.toolbarHeightConstraint.constant = self.maximumInputToolbarHeight;
+        }
     }
 
     [self.view setNeedsUpdateConstraints];
