@@ -367,6 +367,11 @@
     return [self.demoData.messages objectAtIndex:indexPath.item];
 }
 
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didDeleteMessageAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.demoData.messages removeObjectAtIndex:indexPath.item];
+}
+
 - (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /**

@@ -62,6 +62,8 @@
  */
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath;
 
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didDeleteMessageAtIndexPath:(NSIndexPath *)indexPath;
+
 /**
  *  Asks the data source for the message bubble image data that corresponds to the specified message data item at indexPath in the collectionView.
  *
