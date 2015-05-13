@@ -899,16 +899,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy
 {
-    self.toolbarHeightConstraint.constant += dy;
-
-    if (self.toolbarHeightConstraint.constant < self.inputToolbar.preferredDefaultHeight) {
-        self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
+    CGFloat h = self.toolbarHeightConstraint.constant + dy;
+    if (h < self.inputToolbar.preferredDefaultHeight) {
+        h = self.inputToolbar.preferredDefaultHeight;
     }
     else if (self.maximumInputToolbarHeight != NSNotFound) {
-        if (self.toolbarHeightConstraint.constant > self.maximumInputToolbarHeight) {
-            self.toolbarHeightConstraint.constant = self.maximumInputToolbarHeight;
+        if (h > self.maximumInputToolbarHeight) {
+            h = self.maximumInputToolbarHeight;
         }
     }
+    self.toolbarHeightConstraint.constant = h;
 
     [self.view setNeedsUpdateConstraints];
     [self.view layoutIfNeeded];
