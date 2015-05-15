@@ -22,7 +22,7 @@ See the [website](http://www.jessesquires.com/JSQMessagesViewController/) for th
 * iOS 7.0+
 * ARC
 
-*Need support for iOS 6? [You shouldn't](http://www.macrumors.com/2014/11/11/ios8-56-percent-adoption/). But, there's a branch for that!*
+*Need support for iOS 6? [You shouldn't](http://www.macrumors.com/2015/01/07/ios-8-68-percent/). But, there's a branch for that!*
 ````
 git checkout iOS6_support_stable
 ````
@@ -59,8 +59,10 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 #import <JSQMessagesViewController/JSQMessages.h>    // import all the things
 ````
 
+>Read the [blog post](http://www.jessesquires.com/introducing-jsqmessagesvc-6-0/) about the 6.0 release!
+
 * **Demo Project**
-  * There's a fucking sweet demo project: `JSQMessages.xcworkspace`.
+  * There's a sweet demo project: `JSQMessages.xcworkspace`.
   * Run `pod install` first.
 
 * **Message Model**
@@ -92,7 +94,7 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 * **Customizing**
   * The demo project is well-commented. Please use this as a guide.
 
-## Quick Tips and FAQs
+## Quick Tips
 
 *Springy bubbles?*
 ````objective-c
@@ -118,7 +120,7 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 }
 ````
 
-*Customize your cells*
+*Customize your cells?*
 ````objective-c
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -131,6 +133,36 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 }
 ````
 
+*Customize your toolbar buttons?*
+````objective-c
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // This button will call the `didPressAccessoryButton:` selector on your JSQMessagesViewController subclass
+    self.inputToolbar.contentView.leftBarButtonItem = /* custom button or nil to remove */
+    
+    // This button will call the `didPressSendButton:` selector on your JSQMessagesViewController subclass
+    self.inputToolbar.contentView.rightBarButtonItem = /* custom button or nil to remove */
+    
+    // Swap buttons, move send button to the LEFT side and the attachment button to the RIGHT
+    // For RTL language support
+    self.inputToolbar.contentView.leftBarButtonItem = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
+    self.inputToolbar.contentView.rightBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
+    
+    // The library will call the correct selector for each button, based on this value
+    self.inputToolbar.sendButtonOnRight = NO;
+}
+````
+
+## Questions & Help
+
+There's [a label](https://github.com/jessesquires/JSQMessagesViewController/labels/questions%20&%20help) for that. Before asking a question, see if it has [already been answered](https://github.com/jessesquires/JSQMessagesViewController/issues?q=label%3A%22questions+%26+help%22+is%3Aclosed).
+
+## Migrating from v5.x to v6.x
+
+If you are upgrading from v5.x to v6.x, see the [6.0 release notes](https://github.com/jessesquires/JSQMessagesViewController/releases/tag/6.0.0) for details about API changes.
+
 ## Documentation
 
 Read the fucking docs, [available here][docsLink] via [@CocoaDocs](https://twitter.com/CocoaDocs).
@@ -141,15 +173,15 @@ Please follow these sweet [contribution guidelines](https://github.com/jessesqui
 
 ## Donate
 
-Support the development of this **free**, open-source library!
+Support the development of this **free** *open-source* library!
 
 >*Donations made via [Square Cash](https://square.com/cash)*
 
-><h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$5&body=Thanks for developing JSQMessagesViewController!">Send $5</a> <em>Just saying thanks. Here's a coffee!</em></h4>
-<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$10&body=Thanks for developing JSQMessagesViewController!">Send $10</a> <em>This library is great. Lunch is on me!</em></h4>
-<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$25&body=Thanks for developing JSQMessagesViewController!">Send $25</a> <em>This totally saved me time. Go get a nice dinner!</em></h4>
-<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$50&body=Thanks for developing JSQMessagesViewController!">Send $50</a> <em>I love this library. I want new features!</em></h4>
-<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$100&body=Thanks for developing JSQMessagesViewController!">Send $100</a> <em>I really want to support this project!</em></h4>
+><h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$5&body=Thanks for developing JSQMessagesViewController!">Send $5</a> <em>Just saying thanks. Here's a coffee!</em> :coffee:</h4>
+<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$10&body=Thanks for developing JSQMessagesViewController!">Send $10</a> <em>This library is great. Lunch is on me!</em> :ramen:</h4>
+<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$25&body=Thanks for developing JSQMessagesViewController!">Send $25</a> <em>This totally saved me time. Go get a nice dinner!</em> :fork_and_knife:</h4>
+<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$50&body=Thanks for developing JSQMessagesViewController!">Send $50</a> <em>I love this library. I want new features!</em> :clap:</h4>
+<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$100&body=Thanks for developing JSQMessagesViewController!">Send $100</a> <em>I really want to support this project!</em> :tada:</h4>
 >*You can also send donations via [PayPal](https://www.paypal.com) to jesse.squires.developer@gmail.com*
 
 ## Credits
@@ -193,6 +225,7 @@ Feel free to check out my work at [Hexed Bits](http://bit.ly/0x29A), or read [my
 * [ParseChat](https://github.com/relatedcode/ParseChat)
 * [Jib](http://jibapp.com)
 * [Onvolo](https://itunes.apple.com/us/app/onvolo/id869332351)
+* [EVCloudKitDao](https://github.com/evermeer/EVCloudKitDao)
 * *Your app here*
 
 ## License

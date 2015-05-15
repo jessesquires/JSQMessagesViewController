@@ -138,14 +138,15 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)beginListeningForKeyboard
 {
-    self.textView.inputAccessoryView = [[UIView alloc] init];
+    if (self.textView.inputAccessoryView == nil) {
+        self.textView.inputAccessoryView = [[UIView alloc] init];
+    }
+    
     [self jsq_registerForNotifications];
 }
 
 - (void)endListeningForKeyboard
 {
-    self.textView.inputAccessoryView = nil;
-    
     [self jsq_unregisterForNotifications];
     
     [self jsq_setKeyboardViewHidden:NO];
@@ -212,6 +213,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     
     [self jsq_handleKeyboardNotification:notification completion:^(BOOL finished) {
         [self.panGestureRecognizer removeTarget:self action:NULL];
+        
+        [self.delegate keyboardControllerKeyboardDidHide:self];
     }];
 }
 

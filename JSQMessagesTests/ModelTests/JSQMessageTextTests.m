@@ -73,9 +73,9 @@
     JSQMessage *copy = [msg copy];
     
     XCTAssertEqualObjects(msg, copy, @"Copied messages should be equal");
+    
     XCTAssertEqual([msg hash], [copy hash], @"Copied messages hashes should be equal");
     
-    XCTAssertEqualObjects(msg, copy, @"Copied messages should be equal");
     XCTAssertEqualObjects(msg, msg, @"Messages should be equal to itself");
 }
 

@@ -68,9 +68,9 @@
 - (void)testMediaMessageInit
 {
     JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId
-                                                   senderDisplayName:self.senderDisplayName
-                                                                date:self.date
-                                                               media:self.mockMediaData];
+                                         senderDisplayName:self.senderDisplayName
+                                                      date:self.date
+                                                     media:self.mockMediaData];
     XCTAssertNotNil(msg, @"Message should not be nil");
 }
 
@@ -83,24 +83,24 @@
 - (void)testMediaMessageIsEqual
 {
     JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId
-                                                   senderDisplayName:self.senderDisplayName
-                                                                date:self.date
-                                                               media:self.mockMediaData];
+                                         senderDisplayName:self.senderDisplayName
+                                                      date:self.date
+                                                     media:self.mockMediaData];
     JSQMessage *copy = [msg copy];
     
     XCTAssertEqualObjects(msg, copy, @"Copied messages should be equal");
+    
     XCTAssertEqual([msg hash], [copy hash], @"Copied messages hashes should be equal");
     
-    XCTAssertEqualObjects(msg, copy, @"Copied messages should be equal");
     XCTAssertEqualObjects(msg, msg, @"Messages should be equal to itself");
 }
 
 - (void)testMediaMessageArchiving
 {
     JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId
-                                                   senderDisplayName:self.senderDisplayName
-                                                                date:self.date
-                                                               media:[FakeMedia new]];
+                                         senderDisplayName:self.senderDisplayName
+                                                      date:self.date
+                                                     media:[FakeMedia new]];
     
     NSData *msgData = [NSKeyedArchiver archivedDataWithRootObject:msg];
     

@@ -18,6 +18,9 @@
 
 #import "UIImage+JSQMessages.h"
 
+#import "JSQMessagesViewController.h"
+
+
 @implementation UIImage (JSQMessages)
 
 - (UIImage *)jsq_imageMaskedWithColor:(UIColor *)maskColor
@@ -47,7 +50,11 @@
 
 + (UIImage *)jsq_bubbleImageFromBundleWithName:(NSString *)name
 {
-    return [UIImage imageNamed:[NSString stringWithFormat:@"JSQMessagesAssets.bundle/Images/%@", name]];
+    NSString *imagePath = [[NSBundle bundleForClass:[JSQMessagesViewController class]]
+                           pathForResource:[NSString stringWithFormat:@"JSQMessagesAssets.bundle/Images/%@", name]
+                           ofType:@"png"];
+    
+    return [UIImage imageWithContentsOfFile:imagePath];
 }
 
 + (UIImage *)jsq_bubbleRegularImage

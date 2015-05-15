@@ -42,32 +42,60 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
 /**
  *  A custom button item displayed on the left of the toolbar content view.
  *
- *  @discussion The frame of this button is ignored. When you set this property, the button
- *  is fitted within a pre-defined default content view, whose height is determined by the
- *  height of the toolbar. You may specify a new width using `leftBarButtonItemWidth`.
+ *  @discussion The frame height of this button is ignored. When you set this property, the button
+ *  is fitted within a pre-defined default content view, the leftBarButtonContainerView,
+ *  whose height is determined by the height of the toolbar. However, the width of this button
+ *  will be preserved. You may specify a new width using `leftBarButtonItemWidth`.
+ *  If the frame of this button is equal to `CGRectZero` when set, then a default frame size will be used.
  *  Set this value to `nil` to remove the button.
  */
 @property (weak, nonatomic) UIButton *leftBarButtonItem;
 
 /**
  *  Specifies the width of the leftBarButtonItem.
+ *
+ *  @discussion This property modifies the width of the leftBarButtonContainerView.
  */
 @property (assign, nonatomic) CGFloat leftBarButtonItemWidth;
 
 /**
+ *  The container view for the leftBarButtonItem.
+ *
+ *  @discussion
+ *  You may use this property to add additional button items to the left side of the toolbar content view.
+ *  However, you will be completely responsible for responding to all touch events for these buttons
+ *  in your `JSQMessagesViewController` subclass.
+ */
+@property (weak, nonatomic, readonly) UIView *leftBarButtonContainerView;
+
+/**
  *  A custom button item displayed on the right of the toolbar content view.
  *
- *  @discussion The frame of this button is ignored. When you set this property, the button
- *  is fitted within a pre-defined default content view, whose height is determined by the
- *  height of the toolbar. You may specify a new width using `rightBarButtonItemWidth`.
+ *  @discussion The frame height of this button is ignored. When you set this property, the button
+ *  is fitted within a pre-defined default content view, the rightBarButtonContainerView,
+ *  whose height is determined by the height of the toolbar. However, the width of this button
+ *  will be preserved. You may specify a new width using `rightBarButtonItemWidth`.
+ *  If the frame of this button is equal to `CGRectZero` when set, then a default frame size will be used.
  *  Set this value to `nil` to remove the button.
  */
 @property (weak, nonatomic) UIButton *rightBarButtonItem;
 
 /**
  *  Specifies the width of the rightBarButtonItem.
+ *
+ *  @discussion This property modifies the width of the rightBarButtonContainerView.
  */
 @property (assign, nonatomic) CGFloat rightBarButtonItemWidth;
+
+/**
+ *  The container view for the rightBarButtonItem.
+ *
+ *  @discussion 
+ *  You may use this property to add additional button items to the right side of the toolbar content view.
+ *  However, you will be completely responsible for responding to all touch events for these buttons
+ *  in your `JSQMessagesViewController` subclass.
+ */
+@property (weak, nonatomic, readonly) UIView *rightBarButtonContainerView;
 
 #pragma mark - Class methods
 
