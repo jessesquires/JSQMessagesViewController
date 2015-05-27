@@ -1,0 +1,1 @@
+PODS_JSQSYSTEMSOUNDPLAYER_OTHER_LDFLAGS = -framework "AudioToolbox" -framework "Foundation" -framework "UIKit"
