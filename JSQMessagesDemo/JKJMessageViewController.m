@@ -10,13 +10,12 @@
 #import "JSQMessages.h"
 #import "JSQSystemSoundPlayer.h"
 #import "JSQSystemSoundPlayer+JSQMessages.h"
-#import "JKJMessageDataModel.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "DemoModelData.h"
 
 @interface JKJMessageViewController ()
 
-@property (nonatomic, strong)JKJMessageDataModel *dataModel;
+@property (nonatomic, strong)DemoModelData *dataModel;
 @property (nonatomic, strong)UIImageView *imgVForLoadImage;
 
 @end
@@ -38,7 +37,7 @@
     /**
      *  Load up our fake data for the demo
      */
-    self.dataModel = [[JKJMessageDataModel alloc] init];
+    self.dataModel = [[DemoModelData alloc] init];
     
     
     /**
@@ -134,7 +133,25 @@
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage *message = [self.dataModel.messages objectAtIndex:indexPath.item];
-    return self.dataModel.users[message.senderId];
+    
+    /**
+     *  iOS7-style sender name labels
+     */
+    if ([message.senderId isEqualToString:self.senderId]) {
+        return nil;
+    }
+    
+    if (indexPath.item - 1 > 0) {
+        JSQMessage *previousMessage = [self.dataModel.messages objectAtIndex:indexPath.item - 1];
+        if ([[previousMessage senderId] isEqualToString:message.senderId]) {
+            return nil;
+        }
+    }
+    
+    /**
+     *  Don't specify attributes to use the defaults.
+     */
+    return [[NSAttributedString alloc] initWithString:message.senderDisplayName];
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath

@@ -797,7 +797,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame
 {
-    NSLog(@"keyboardFrame:%f,%f,%f,%f",keyboardFrame.origin.x,keyboardFrame.origin.y,keyboardFrame.size.width,keyboardFrame.size.height);
     CGFloat heightFromBottom = CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(keyboardFrame);
 
     heightFromBottom = MAX(0.0f, heightFromBottom);
