@@ -23,6 +23,6 @@
 /**
  *  @return Whether or not the current device is running a version of iOS before 8.0.
  */
-+ (BOOL)jsq_isCurrentDeviceBeforeiOS8;
++ (BOOL)jsq_isCurrentDeviceAfteriOS7;
 
 @end

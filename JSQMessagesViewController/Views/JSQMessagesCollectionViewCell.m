@@ -231,7 +231,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 {
     [super setBounds:bounds];
 
-    if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
+    if ([UIDevice jsq_isCurrentDeviceAfteriOS7]) {
         self.contentView.frame = bounds;
     }
 }

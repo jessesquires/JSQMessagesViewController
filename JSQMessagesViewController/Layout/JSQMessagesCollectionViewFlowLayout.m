@@ -32,6 +32,7 @@
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
 
 #import "UIImage+JSQMessages.h"
+#import "CAIExpressionParser.h"
 
 
 const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
@@ -79,7 +80,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 {
     self.scrollDirection = UICollectionViewScrollDirectionVertical;
     self.sectionInset = UIEdgeInsetsMake(10.0f, 4.0f, 10.0f, 4.0f);
-    self.minimumLineSpacing = 4.0f;
+    self.minimumLineSpacing = 10.0f;
     
     _bubbleImageAssetWidth = [UIImage jsq_bubbleCompactImage].size.width;
     
@@ -87,7 +88,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     _messageBubbleCache.name = @"JSQMessagesCollectionViewFlowLayout.messageBubbleCache";
     _messageBubbleCache.countLimit = 200;
     
-    _messageBubbleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    _messageBubbleFont = [UIFont systemFontOfSize:20];
     
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         _messageBubbleLeftRightMargin = 240.0f;
@@ -460,6 +461,14 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
                                                              options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
                                                           attributes:@{ NSFontAttributeName : self.messageBubbleFont }
                                                              context:nil];
+        //兼容表情的代码计算高度
+        UILabel *label = [[UILabel alloc]init];
+        NSMutableAttributedString *mAtString = [CAIExpressionParser attributedString:[messageItem text]];
+        [mAtString addAttribute:NSFontAttributeName value:self.messageBubbleFont range:NSMakeRange(0, mAtString.length)];
+        [CAIExpressionParser updateExpressionSizeInAttributeString:mAtString];
+        label.attributedText = mAtString;
+        label.numberOfLines = 0;
+        stringRect = [label textRectForBounds:CGRectMake(0, 0, maximumTextWidth, CGFLOAT_MAX) limitedToNumberOfLines:0];
         
         CGSize stringSize = CGRectIntegral(stringRect).size;
         

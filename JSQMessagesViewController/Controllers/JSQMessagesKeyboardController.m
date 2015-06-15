@@ -24,6 +24,7 @@
 #import "JSQMessagesKeyboardController.h"
 
 #import "UIDevice+JSQMessages.h"
+#import "CAIExpressionKeyBoardView.h"
 
 
 NSString * const JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame = @"JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame";
@@ -40,6 +41,9 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 @property (assign, nonatomic) BOOL jsq_isObserving;
 
 @property (weak, nonatomic) UIView *keyboardView;
+
+@property (strong, nonatomic)CAIExpressionKeyBoardView *expressionKeyBoardView;
+@property (assign, nonatomic)BOOL expressionKeyBoardIsVisible;
 
 - (void)jsq_registerForNotifications;
 - (void)jsq_unregisterForNotifications;
@@ -69,7 +73,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 - (instancetype)initWithTextView:(UITextView *)textView
                      contextView:(UIView *)contextView
             panGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer
-                        delegate:(id<JSQMessagesKeyboardControllerDelegate>)delegate
+                        delegate:(id<JSQMessagesKeyboardControllerDelegate,CAIExpressionKeyBoardDelegate>)delegate
 
 {
     NSParameterAssert(textView != nil);
@@ -153,12 +157,38 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     self.keyboardView = nil;
 }
 
+- (void)showExpressionKeyBoard:(BOOL)show{
+    if (show) {
+        if (!self.expressionKeyBoardView) {
+            self.expressionKeyBoardView = [[CAIExpressionKeyBoardView alloc]initWithFrame:CGRectZero];
+            CGRect frame = self.expressionKeyBoardView.frame;
+            frame.origin.y = self.contextView.bounds.size.height - frame.size.height;
+            self.expressionKeyBoardView.frame = frame;
+            [self.contextView addSubview:self.expressionKeyBoardView];
+            self.expressionKeyBoardView.delegate = self.delegate;
+        }
+        self.expressionKeyBoardIsVisible = YES;
+        BOOL keyBoard = self.keyboardIsVisible;
+        [self.textView resignFirstResponder];
+        if (!keyBoard) {
+            [self jsq_notifyKeyboardFrameNotificationForFrame:CGRectMake(0, self.contextView.bounds.size.height, self.contextView.bounds.size.width, 0)];
+        }
+    }else{
+        [self.textView becomeFirstResponder];
+    }
+}
+
 #pragma mark - Notifications
 
 - (void)jsq_registerForNotifications
 {
     [self jsq_unregisterForNotifications];
 
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(jsq_didReceiveKeyboardWillShowNotification:)
+                                                name:UIKeyboardWillShowNotification
+                                              object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(jsq_didReceiveKeyboardDidShowNotification:)
                                                  name:UIKeyboardDidShowNotification
@@ -183,6 +213,14 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 - (void)jsq_unregisterForNotifications
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)jsq_didReceiveKeyboardWillShowNotification:(NSNotification *)notification{
+    if (self.expressionKeyBoardIsVisible) {
+        [self.expressionKeyBoardView removeFromSuperview];
+        self.expressionKeyBoardView = nil;
+        self.expressionKeyBoardIsVisible = NO;
+    }
 }
 
 - (void)jsq_didReceiveKeyboardDidShowNotification:(NSNotification *)notification
@@ -256,6 +294,12 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)jsq_notifyKeyboardFrameNotificationForFrame:(CGRect)frame
 {
+    if (self.expressionKeyBoardIsVisible) {
+        if (frame.origin.y>self.contextView.bounds.size.height-self.expressionKeyBoardView.bounds.size.height) {
+            frame.origin.y = self.contextView.bounds.size.height-self.expressionKeyBoardView.bounds.size.height;
+        }
+    }
+    
     [self.delegate keyboardController:self keyboardDidChangeFrame:frame];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame
@@ -318,7 +362,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     //  also, keyboard always slides from bottom of screen, not the bottom of a view
     CGFloat contextViewWindowHeight = CGRectGetHeight(self.contextView.window.frame);
 
-    if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
+    if ([UIDevice jsq_isCurrentDeviceAfteriOS7]) {
         //  handle iOS 7 bug when rotating to landscape
         if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
             contextViewWindowHeight = CGRectGetWidth(self.contextView.window.frame);

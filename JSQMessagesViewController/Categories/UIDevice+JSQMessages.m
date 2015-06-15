@@ -20,10 +20,11 @@
 
 @implementation UIDevice (JSQMessages)
 
-+ (BOOL)jsq_isCurrentDeviceBeforeiOS8
++ (BOOL)jsq_isCurrentDeviceAfteriOS7
 {
-    // iOS < 8.0
-    return [[UIDevice currentDevice].systemVersion compare:@"8.0" options:NSNumericSearch] == NSOrderedAscending;
+    // iOS > 7.0
+    return [[UIDevice currentDevice].systemVersion compare:@"7.0" options:NSNumericSearch] == NSOrderedSame ||
+            [[UIDevice currentDevice].systemVersion compare:@"7.0" options:NSNumericSearch] == NSOrderedDescending;
 }
 
 @end
