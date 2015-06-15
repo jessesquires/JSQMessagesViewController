@@ -23,6 +23,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "CAIExpressionKeyBoardView.h"
 
 @class JSQMessagesKeyboardController;
 
@@ -75,7 +76,7 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
 /**
  *  The object that acts as the delegate of the keyboard controller.
  */
-@property (weak, nonatomic) id<JSQMessagesKeyboardControllerDelegate> delegate;
+@property (weak, nonatomic) id<JSQMessagesKeyboardControllerDelegate,CAIExpressionKeyBoardDelegate> delegate;
 
 /**
  *  The text view in which the user is editing with the system keyboard.
@@ -134,5 +135,9 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
  *  Tells the keyboard controller that it should end listening for system keyboard notifications.
  */
 - (void)endListeningForKeyboard;
+
+//显示表情键盘
+- (void)showExpressionKeyBoard:(BOOL)show;
+@property (assign, nonatomic, readonly)BOOL expressionKeyBoardIsVisible;//当前是否正在显示表情键盘
 
 @end

@@ -41,13 +41,15 @@
 #import "UIDevice+JSQMessages.h"
 #import "NSBundle+JSQMessages.h"
 
+#import "CAIExpressionParser.h"
+
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
 
 
 @interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate,
-                                         JSQMessagesKeyboardControllerDelegate>
+                                         JSQMessagesKeyboardControllerDelegate,CAIExpressionKeyBoardDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
@@ -244,7 +246,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self jsq_addActionToInteractivePopGestureRecognizer:YES];
     [self.keyboardController beginListeningForKeyboard];
 
-    if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
+    if ([UIDevice jsq_isCurrentDeviceAfteriOS7]) {
         [self.snapshotView removeFromSuperview];
     }
 }
@@ -468,14 +470,15 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (!isMediaMessage) {
         cell.textView.text = [messageItem text];
 
-        if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
-            //  workaround for iOS 7 textView data detectors bug
+        if ([UIDevice jsq_isCurrentDeviceAfteriOS7]) {
             cell.textView.text = nil;
-            cell.textView.attributedText = [[NSAttributedString alloc] initWithString:[messageItem text]
-                                                                           attributes:@{ NSFontAttributeName : collectionView.collectionViewLayout.messageBubbleFont }];
+            NSMutableAttributedString *atString = [CAIExpressionParser attributedString:[messageItem text]];
+            UIFont *font = collectionView.collectionViewLayout.messageBubbleFont;
+            [atString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, atString.length)];
+            [CAIExpressionParser updateExpressionSizeInAttributeString:atString];
+            cell.textView.font = font;
+            cell.textView.attributedText = atString;
         }
-
-        NSParameterAssert(cell.textView.text != nil);
 
         id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
         if (bubbleImageDataSource != nil) {
@@ -518,7 +521,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
     cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellBottomLabelAtIndexPath:indexPath];
 
-    CGFloat bubbleTopLabelInset = (avatarImageDataSource != nil) ? 60.0f : 15.0f;
+    CGFloat bubbleTopLabelInset = (avatarImageDataSource != nil) ? 15.0f : 15.0f;
 
     if (isOutgoingMessage) {
         cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
@@ -681,7 +684,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.inputToolbar.contentView.textView.inputDelegate selectionWillChange:self.inputToolbar.contentView.textView];
     [self.inputToolbar.contentView.textView.inputDelegate selectionDidChange:self.inputToolbar.contentView.textView];
 
-    return [self.inputToolbar.contentView.textView.text jsq_stringByTrimingWhitespace];
+    //兼容表情
+    NSString *string = [CAIExpressionParser expressionStringFromAttributedString:self.inputToolbar.contentView.textView.attributedText];
+    
+    return [string jsq_stringByTrimingWhitespace];
 }
 
 #pragma mark - Text view delegate
@@ -791,10 +797,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame
 {
-    if (![self.inputToolbar.contentView.textView isFirstResponder] && self.toolbarBottomLayoutGuide.constant == 0.0f) {
-        return;
-    }
-
+    NSLog(@"keyboardFrame:%f,%f,%f,%f",keyboardFrame.origin.x,keyboardFrame.origin.y,keyboardFrame.size.width,keyboardFrame.size.height);
     CGFloat heightFromBottom = CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(keyboardFrame);
 
     heightFromBottom = MAX(0.0f, heightFromBottom);
@@ -823,13 +826,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStateBegan:
         {
-            if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
+            if ([UIDevice jsq_isCurrentDeviceAfteriOS7]) {
                 [self.snapshotView removeFromSuperview];
             }
 
             [self.keyboardController endListeningForKeyboard];
 
-            if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
+            if ([UIDevice jsq_isCurrentDeviceAfteriOS7]) {
                 [self.inputToolbar.contentView.textView resignFirstResponder];
                 [UIView animateWithDuration:0.0
                                  animations:^{
@@ -849,7 +852,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         case UIGestureRecognizerStateFailed:
             [self.keyboardController beginListeningForKeyboard];
 
-            if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
+            if ([UIDevice jsq_isCurrentDeviceAfteriOS7]) {
                 [self.snapshotView removeFromSuperview];
             }
             break;
@@ -930,6 +933,44 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                          textView.contentOffset = contentOffsetToShowLastLine;
                      }
                      completion:nil];
+}
+
+#pragma mark - CAIExpressionKeyBoardDelegate
+
+- (void)keyBoard:(CAIExpressionKeyBoardView*)keyBoard didSeleted:(NSString *)expressionName{
+    UITextView *textView = self.inputToolbar.contentView.textView;
+    if ([expressionName isEqualToString:@"delete"]) {
+        NSMutableAttributedString * str = [[NSMutableAttributedString alloc]initWithAttributedString:textView.attributedText];
+        NSRange range = textView.selectedRange;
+        if (range.length) {
+            [str deleteCharactersInRange:textView.selectedRange];
+            range.length = 0;
+        }else{
+            if (range.location>0) {
+                [str deleteCharactersInRange:NSMakeRange(range.location-1, 1)];
+                range.location = range.location-1;
+            }
+        }
+        textView.attributedText = str;
+        textView.selectedRange = range;
+    }else{
+        NSMutableAttributedString * str = [[NSMutableAttributedString alloc]initWithAttributedString:textView.attributedText];
+        if (textView.selectedRange.length) {
+            [str deleteCharactersInRange:textView.selectedRange];
+        }
+        [str insertAttributedString:[CAIExpressionParser attributedStringWithExpressionName:expressionName withDelegateDic:str] atIndex:textView.selectedRange.location];
+        NSRange range = textView.selectedRange;
+        [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, str.length)];
+        [CAIExpressionParser updateExpressionSizeInAttributeString:str];
+        textView.attributedText = str;
+        range.location = range.location+1;
+        range.length = 0;
+        textView.selectedRange = range;
+        [textView setNeedsDisplay];
+    }
+    if (textView.attributedText.length) {
+        [self.inputToolbar toggleSendButtonEnabled];
+    }
 }
 
 #pragma mark - Collection view utilities
