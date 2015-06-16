@@ -59,6 +59,13 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
 @property (assign, nonatomic) CGFloat leftBarButtonItemWidth;
 
 /**
+ *  Specifies the left constant of the `Leading` constraint of `leftBarButtonItem`
+ *
+ * @discussion Default value is 8.0f
+ */
+@property (assign, nonatomic) CGFloat leftBarButtonSpacing;
+
+/**
  *  The container view for the leftBarButtonItem.
  *
  *  @discussion
@@ -86,6 +93,13 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
  *  @discussion This property modifies the width of the rightBarButtonContainerView.
  */
 @property (assign, nonatomic) CGFloat rightBarButtonItemWidth;
+
+/**
+ *  Specifies the right constant of the `Trailing` constraint of `rightBarButtonItem`
+ *
+ * @discussion Default value is 8.0f
+ */
+@property (assign, nonatomic) CGFloat rightBarButtonSpacing;
 
 /**
  *  The container view for the rightBarButtonItem.
