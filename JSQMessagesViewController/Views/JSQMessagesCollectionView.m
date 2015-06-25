@@ -52,23 +52,23 @@
     self.alwaysBounceVertical = YES;
     self.bounces = YES;
     
-    [self registerNib:[JSQMessagesCollectionViewCellIncoming nib]
+    [self registerNib:[self nibForIncomingCell]
           forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]];
     
-    [self registerNib:[JSQMessagesCollectionViewCellOutgoing nib]
+    [self registerNib:[self nibForOutgoingCell]
           forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
     
-    [self registerNib:[JSQMessagesCollectionViewCellIncoming nib]
+    [self registerNib:[self nibForIncomingCell]
           forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncoming mediaCellReuseIdentifier]];
     
-    [self registerNib:[JSQMessagesCollectionViewCellOutgoing nib]
+    [self registerNib:[self nibForOutgoingCell]
           forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing mediaCellReuseIdentifier]];
     
-    [self registerNib:[JSQMessagesTypingIndicatorFooterView nib]
+    [self registerNib:[self nibForTypingIndicatorFooterView]
           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
           withReuseIdentifier:[JSQMessagesTypingIndicatorFooterView footerReuseIdentifier]];
     
-    [self registerNib:[JSQMessagesLoadEarlierHeaderView nib]
+    [self registerNib:[self nibForLoadEarlierHeaderView]
           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
           withReuseIdentifier:[JSQMessagesLoadEarlierHeaderView headerReuseIdentifier]];
 
@@ -180,6 +180,24 @@
                     performAction:action
                forItemAtIndexPath:indexPath
                        withSender:sender];
+}
+
+#pragma mark - Subclassing
+
+- (UINib *)nibForIncomingCell {
+	return [JSQMessagesCollectionViewCellIncoming nib];
+}
+
+- (UINib *)nibForOutgoingCell {
+	return [JSQMessagesCollectionViewCellOutgoing nib];
+}
+
+- (UINib *)nibForTypingIndicatorFooterView {
+	return [JSQMessagesTypingIndicatorFooterView nib];
+}
+
+- (UINib *)nibForLoadEarlierHeaderView {
+	return [JSQMessagesLoadEarlierHeaderView nib];
 }
 
 @end
