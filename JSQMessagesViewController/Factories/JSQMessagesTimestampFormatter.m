@@ -90,7 +90,7 @@
     NSString *relativeDate = [self relativeDateForDate:date];
     NSString *time = [self timeForDate:date];
     
-    return [NSString stringWithFormat:@"%@ %@", relativeDate, time];
+    return [NSString stringWithFormat:@"%@, %@", relativeDate, time];
 }
 
 - (NSAttributedString *)attributedTimestampForDate:(NSDate *)date
