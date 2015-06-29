@@ -31,7 +31,11 @@
     self.dataDetectorTypes = UIDataDetectorTypeNone;
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
-    self.scrollEnabled = NO;
+    
+    // This degraded scrolling performance, but it's still unclear as to why.
+    // With accurate layout scrolling will not be possible anyway.
+    // self.scrollEnabled = NO;
+    
     self.backgroundColor = [UIColor clearColor];
     self.contentInset = UIEdgeInsetsZero;
     self.scrollIndicatorInsets = UIEdgeInsetsZero;
