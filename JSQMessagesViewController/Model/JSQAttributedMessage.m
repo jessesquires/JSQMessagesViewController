@@ -1,9 +1,19 @@
 //
-//  JSQAttributedMessage.m
-//  JSQMessages
+//  Created by Jesse Squires
+//  http://www.jessesquires.com
 //
-//  Created by Flavio Negrão Torres on 29/06/15.
-//  Copyright (c) 2015 Hexed Bits. All rights reserved.
+//
+//  Documentation
+//  http://cocoadocs.org/docsets/JSQMessagesViewController
+//
+//
+//  GitHub
+//  https://github.com/jessesquires/JSQMessagesViewController
+//
+//
+//  License
+//  Copyright (c) 2014 Jesse Squires
+//  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
 #import "JSQAttributedMessage.h"
