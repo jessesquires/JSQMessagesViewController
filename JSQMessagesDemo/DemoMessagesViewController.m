@@ -499,7 +499,7 @@
     
     JSQMessage *msg = [self.demoData.messages objectAtIndex:indexPath.item];
     
-    if (!msg.isMediaMessage) {
+    if (!msg.isMediaMessage && ![msg isKindOfClass:[JSQAttributedMessage class]]) {
         
         if ([msg.senderId isEqualToString:self.senderId]) {
             cell.textView.textColor = [UIColor blackColor];

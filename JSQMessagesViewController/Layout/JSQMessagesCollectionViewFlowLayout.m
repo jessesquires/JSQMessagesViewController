@@ -24,6 +24,7 @@
 #import "JSQMessagesCollectionViewFlowLayout.h"
 
 #import "JSQMessageData.h"
+#import "JSQMessageAttributedData.h"
 
 #import "JSQMessagesCollectionView.h"
 #import "JSQMessagesCollectionViewCell.h"
@@ -456,10 +457,21 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         CGFloat horizontalInsetsTotal = horizontalContainerInsets + horizontalFrameInsets + spacingBetweenAvatarAndBubble;
         CGFloat maximumTextWidth = self.itemWidth - avatarSize.width - self.messageBubbleLeftRightMargin - horizontalInsetsTotal;
         
-        CGRect stringRect = [[messageItem text] boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
-                                                             options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-                                                          attributes:@{ NSFontAttributeName : self.messageBubbleFont }
-                                                             context:nil];
+        CGRect stringRect;
+        
+        if ([messageItem conformsToProtocol:@protocol(JSQMessageAttributedData)]) {
+            id <JSQMessageAttributedData> attributedMessageItem =  (id <JSQMessageAttributedData> )messageItem;
+            stringRect = [[attributedMessageItem  attributedText] boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
+                                                                               options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                                                               context:nil];
+            
+        } else {
+            
+            stringRect = [[messageItem text] boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
+                                                          options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                                       attributes:@{ NSFontAttributeName : self.messageBubbleFont }
+                                                          context:nil];
+        }
         
         CGSize stringSize = CGRectIntegral(stringRect).size;
         
