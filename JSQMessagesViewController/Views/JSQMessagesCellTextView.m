@@ -30,10 +30,10 @@
     self.editable = NO;
     self.selectable = YES;
     self.userInteractionEnabled = YES;
-    self.dataDetectorTypes = UIDataDetectorTypeNone;
+    self.dataDetectorTypes = UIDataDetectorTypeAll;
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
-    
+
     // This degraded scrolling performance, but it's still unclear as to why.
     // With accurate layout scrolling will not be possible anyway.
     // self.scrollEnabled = NO;
