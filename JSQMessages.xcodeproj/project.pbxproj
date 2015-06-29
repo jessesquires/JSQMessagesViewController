@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		36CF33BD29CF36EB06D0CCFD /* libPods-JSQMessagesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 782026E9E518622532ED474D /* libPods-JSQMessagesTests.a */; };
+		72890B021B41E7A90065EC7E /* JSQAttributedMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 72890B011B41E7A90065EC7E /* JSQAttributedMessage.m */; };
 		77CC17A895E6E12BC9CB549A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E6750B77E8A7042BA0754B /* libPods.a */; };
 		88078A9D19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88078A9C19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m */; };
 		88324C3419F6301C00BC732D /* JSQMessagesMediaViewBubbleImageMaskerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88324C3319F6301C00BC732D /* JSQMessagesMediaViewBubbleImageMaskerTests.m */; };
@@ -123,6 +124,9 @@
 		0844AD596023C7658D39E241 /* Pods-JSQMessagesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSQMessagesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JSQMessagesTests/Pods-JSQMessagesTests.release.xcconfig"; sourceTree = "<group>"; };
 		223FBACE0F24ADEF8B7F3F24 /* Pods-JSQMessagesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSQMessagesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JSQMessagesTests/Pods-JSQMessagesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		27B7FD1B722B36B26CB3460B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		72890B001B41E7A90065EC7E /* JSQAttributedMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQAttributedMessage.h; sourceTree = "<group>"; };
+		72890B011B41E7A90065EC7E /* JSQAttributedMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQAttributedMessage.m; sourceTree = "<group>"; };
+		72890B031B41E7F20065EC7E /* JSQMessageAttributedData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSQMessageAttributedData.h; sourceTree = "<group>"; };
 		782026E9E518622532ED474D /* libPods-JSQMessagesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JSQMessagesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88078A9B19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesMediaPlaceholderView.h; sourceTree = "<group>"; };
 		88078A9C19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesMediaPlaceholderView.m; sourceTree = "<group>"; };
@@ -493,6 +497,9 @@
 		88A25F7619D8E01A00924534 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				72890B031B41E7F20065EC7E /* JSQMessageAttributedData.h */,
+				72890B001B41E7A90065EC7E /* JSQAttributedMessage.h */,
+				72890B011B41E7A90065EC7E /* JSQAttributedMessage.m */,
 				88445B3E19E1B4470014F889 /* JSQLocationMediaItem.h */,
 				88445B3F19E1B4470014F889 /* JSQLocationMediaItem.m */,
 				88A901B419F618B100F99777 /* JSQMediaItem.h */,
@@ -816,6 +823,7 @@
 				88A25FCE19D8E01A00924534 /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
 				88A25FD119D8E01A00924534 /* JSQMessagesInputToolbar.m in Sources */,
 				88A25FCB19D8E01A00924534 /* JSQMessagesCollectionViewCell.m in Sources */,
+				72890B021B41E7A90065EC7E /* JSQAttributedMessage.m in Sources */,
 				88A25FBB19D8E01A00924534 /* JSQMessagesViewController.m in Sources */,
 				8885734D19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m in Sources */,
 				883C11781A09FB100092A16D /* JSQMessagesCellTextView.m in Sources */,
