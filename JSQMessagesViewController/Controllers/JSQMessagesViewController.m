@@ -233,6 +233,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
 
     [self jsq_updateKeyboardTriggerPoint];
+    [self.keyboardController beginListeningForKeyboard];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -240,7 +241,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [super viewDidAppear:animated];
     [self jsq_addObservers];
     [self jsq_addActionToInteractivePopGestureRecognizer:YES];
-    [self.keyboardController beginListeningForKeyboard];
 
     if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
         [self.snapshotView removeFromSuperview];
@@ -252,13 +252,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [super viewWillDisappear:animated];
     [self jsq_addActionToInteractivePopGestureRecognizer:NO];
     self.collectionView.collectionViewLayout.springinessEnabled = NO;
+    [self.keyboardController endListeningForKeyboard];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     [self jsq_removeObservers];
-    [self.keyboardController endListeningForKeyboard];
 }
 
 - (void)didReceiveMemoryWarning
