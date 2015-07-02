@@ -15,21 +15,15 @@ See the [website](http://www.jessesquires.com/JSQMessagesViewController/) for th
 ## Dependencies
 
 * [JSQSystemSoundPlayer][playerLink]
- 
 
 ## Requirements
 
 * iOS 7.0+
 * ARC
 
-*Need support for iOS 6? [You shouldn't](http://www.macrumors.com/2015/01/07/ios-8-68-percent/). But, there's a branch for that!*
-````
-git checkout iOS6_support_stable
-````
-
-*Note: the `iOS6_support_stable` branch does not include many of the latest hip and fancy features or fixes*
-
 ## Installation
+
+From [CocoaPods](http://cocoapods.org):
 
 ````ruby
 # For latest release in cocoapods
@@ -40,12 +34,12 @@ pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMes
 
 # For version 5.3.2
 pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController', :branch => 'version_5.3.2_patch'
-
-# For iOS 6 support
-pod 'JSMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'iOS6_support_stable'
 ````
 
-Otherwise, drag the `JSQMessagesViewController/` folder to your project and install [`JSQSystemSoundPlayer`][playerLink].
+Without CocoaPods:
+
+1. *Why aren't you using CocoaPods?*
+2. Drag the `JSQMessagesViewController/` folder to your project and install [`JSQSystemSoundPlayer`][playerLink].
 
 >**NOTE:**
 >
@@ -64,6 +58,7 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 * **Demo Project**
   * There's a sweet demo project: `JSQMessages.xcworkspace`.
   * Run `pod install` first.
+  * [Firebase](https://www.firebase.com) also has a sweet [demo project](https://github.com/firebase/ios-swift-chat-example), and it's in Swift!
 
 * **Message Model**
   * Your message model objects should conform to the `JSQMessageData` protocol.
@@ -96,7 +91,7 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 
 ## Quick Tips
 
-*Springy bubbles?*
+##### *Springy bubbles?*
 ````objective-c
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -105,7 +100,7 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 }
 ````
 
-*Remove avatars?*
+##### *Remove avatars?*
 ````objective-c
 - (void)viewDidLoad
 {
@@ -120,7 +115,7 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 }
 ````
 
-*Customize your cells?*
+##### *Customize your cells?*
 ````objective-c
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -133,7 +128,7 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 }
 ````
 
-*Customize your toolbar buttons?*
+##### *Customize your toolbar buttons?*
 ````objective-c
 - (void)viewDidLoad
 {
@@ -157,11 +152,19 @@ Otherwise, drag the `JSQMessagesViewController/` folder to your project and inst
 
 ## Questions & Help
 
-There's [a label](https://github.com/jessesquires/JSQMessagesViewController/labels/questions%20&%20help) for that. Before asking a question, see if it has [already been answered](https://github.com/jessesquires/JSQMessagesViewController/issues?q=label%3A%22questions+%26+help%22+is%3Aclosed).
+There's [a label](https://github.com/jessesquires/JSQMessagesViewController/labels/questions%20&%20help) for that. Before asking a question, see if it has [already been answered](https://github.com/jessesquires/JSQMessagesViewController/issues?q=label%3A%22questions+%26+help%22+is%3Aclosed). **Please only ask questions that are _specific_ to this library.**
 
-## Migrating from v5.x to v6.x
+>**NOTE:** Please try to avoid emailing me with questions. I prefer to keep questions and their answers open-source.
 
-If you are upgrading from v5.x to v6.x, see the [6.0 release notes](https://github.com/jessesquires/JSQMessagesViewController/releases/tag/6.0.0) for details about API changes.
+## Migrating between major versions
+
+##### From 5.x to 6.x
+
+See the [6.0 release notes](https://github.com/jessesquires/JSQMessagesViewController/releases/tag/6.0.0) for details about API changes.
+
+##### From 6.x to 7.x
+
+See the [7.0 release notes](https://github.com/jessesquires/JSQMessagesViewController/releases/tag/7.0.0) for details about API changes.
 
 ## Documentation
 
@@ -182,7 +185,7 @@ Support the development of this **free** *open-source* library!
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$25&body=Thanks for developing JSQMessagesViewController!">Send $25</a> <em>This totally saved me time. Go get a nice dinner!</em> :fork_and_knife:</h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$50&body=Thanks for developing JSQMessagesViewController!">Send $50</a> <em>I love this library. I want new features!</em> :clap:</h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$100&body=Thanks for developing JSQMessagesViewController!">Send $100</a> <em>I really want to support this project!</em> :tada:</h4>
->*You can also send donations via [PayPal](https://www.paypal.com) to jesse.squires.developer@gmail.com*
+>*You can also send donations via [PayPal](https://www.paypal.com). Message me on [twitter](https://twitter.com/jesse_squires).*
 
 ## Credits
 
@@ -198,15 +201,17 @@ I initially developed this library to use in [Hemoglobe](http://bit.ly/hmglb) fo
 
 As it turns out, messaging is something that iOS devs and users really want. Messaging of any kind has turned out to be an increasingly popular mobile app feature in all sorts of contexts and for all sorts of reasons. Thus, I am supporting this project in my free time and have added features way beyond what Hemoglobe ever needed.
 
-Feel free to check out my work at [Hexed Bits](http://bit.ly/0x29A), or read [my blog](http://bit.ly/jsqsf).
+Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed Bits](http://bit.ly/0x29A).
 
 ## Apps using this library
 
 * [Hemoglobe](http://bit.ly/hemoglobeapp)
 * [PocketSuite](https://itunes.apple.com/us/app/pocketsuite/id721795146)
+* [Signal](https://github.com/WhisperSystems/Signal-iOS)
 * [ClassDojo](https://itunes.apple.com/us/app/classdojo/id552602056)
 * [Schools App](https://itunes.apple.com/us/app/schools-app/id495845755)
 * [ChatSecure](https://chatsecure.org)
+* [Bryx 911](https://itunes.apple.com/us/app/bryx-911/id813078029)
 * [Kytt](https://itunes.apple.com/de/app/kytt-neue-leute-in-der-umgebung/id848959696)
 * [Spark Social](https://itunes.apple.com/us/app/spark-social/id823785892)
 * [Spabbit](https://itunes.apple.com/us/app/spabbit/id737363908)
@@ -226,13 +231,20 @@ Feel free to check out my work at [Hexed Bits](http://bit.ly/0x29A), or read [my
 * [Jib](http://jibapp.com)
 * [Onvolo](https://itunes.apple.com/us/app/onvolo/id869332351)
 * [EVCloudKitDao](https://github.com/evermeer/EVCloudKitDao)
+* [Fluky Chat](https://itunes.apple.com/us/app/fluky-chat-secure-anonymous/id958605886)
+* [VillageUnity](https://itunes.apple.com/us/app/village-unity/id919972368)
+* [Pine](https://itunes.apple.com/us/app/pine-innovation-product-life/id946589228)
+* [NotificationChat](https://github.com/relatedcode/NotificationChat)
+* [RealtimeChat](https://github.com/relatedcode/RealtimeChat)
+* [Bazar](https://itunes.apple.com/ru/app/bazar-talk-about-everything/id885453058)
+* [Roomie](https://itunes.apple.com/us/app/roomie-find-your-roomie/id962585201)
 * *Your app here*
 
 ## License
 
 `JSQMessagesViewController` is released under an [MIT License][mitLink]. See `LICENSE` for details.
 
->**Copyright &copy; 2014 Jesse Squires.**
+>**Copyright &copy; 2013-present Jesse Squires.**
 
 *Please provide attribution, it is greatly appreciated.*
 

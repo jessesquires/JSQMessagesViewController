@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="JRd-Be-psV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="JRd-Be-psV">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
         <!--Root View Controller-->
@@ -80,10 +80,9 @@
                                             <constraints>
                                                 <constraint firstItem="bSS-CD-nfD" firstAttribute="top" secondItem="qU9-o3-MWC" secondAttribute="top" constant="10" id="4Iw-W0-qZs"/>
                                                 <constraint firstAttribute="trailing" secondItem="K7N-os-fuc" secondAttribute="trailing" constant="8" id="Fex-nr-C1R"/>
-                                                <constraint firstAttribute="bottom" secondItem="K7N-os-fuc" secondAttribute="bottom" constant="6" id="IBG-gn-Fpk"/>
                                                 <constraint firstItem="bSS-CD-nfD" firstAttribute="leading" secondItem="qU9-o3-MWC" secondAttribute="leading" constant="8" id="N5B-E5-Pzk"/>
                                                 <constraint firstItem="K7N-os-fuc" firstAttribute="leading" secondItem="bSS-CD-nfD" secondAttribute="trailing" constant="8" id="O2Y-G9-d6n"/>
-                                                <constraint firstItem="K7N-os-fuc" firstAttribute="top" secondItem="qU9-o3-MWC" secondAttribute="top" constant="6" id="UbM-aE-caS"/>
+                                                <constraint firstAttribute="centerY" secondItem="K7N-os-fuc" secondAttribute="centerY" id="j7N-59-vRk"/>
                                                 <constraint firstAttribute="bottom" secondItem="bSS-CD-nfD" secondAttribute="bottom" constant="9" id="poL-wE-Eir"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -111,11 +110,10 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="hMq-Ee-EJK" secondAttribute="centerY" id="CcO-KD-31y"/>
                                                 <constraint firstItem="hMq-Ee-EJK" firstAttribute="leading" secondItem="YV3-GH-Yul" secondAttribute="trailing" constant="8" id="KFO-nO-4r4"/>
                                                 <constraint firstItem="YV3-GH-Yul" firstAttribute="top" secondItem="1Ho-Zz-KN0" secondAttribute="top" constant="10" id="Lgl-fY-a8c"/>
                                                 <constraint firstAttribute="bottom" secondItem="YV3-GH-Yul" secondAttribute="bottom" constant="9" id="NvL-b8-QDl"/>
-                                                <constraint firstAttribute="bottom" secondItem="hMq-Ee-EJK" secondAttribute="bottom" constant="6" id="aef-Rh-49d"/>
-                                                <constraint firstItem="hMq-Ee-EJK" firstAttribute="top" secondItem="1Ho-Zz-KN0" secondAttribute="top" constant="6" id="csX-us-yCd"/>
                                                 <constraint firstAttribute="trailing" secondItem="hMq-Ee-EJK" secondAttribute="trailing" constant="8" id="xDE-tf-5mB"/>
                                                 <constraint firstItem="YV3-GH-Yul" firstAttribute="leading" secondItem="1Ho-Zz-KN0" secondAttribute="leading" constant="8" id="xyR-oc-iUp"/>
                                             </constraints>
@@ -145,12 +143,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="DoU-SU-Nek" firstAttribute="leading" secondItem="OFq-Mz-mbl" secondAttribute="leading" constant="8" id="A9k-hI-0BH"/>
-                                                <constraint firstAttribute="bottom" secondItem="baL-Tb-bTJ" secondAttribute="bottom" constant="6" id="Ff7-1T-EbZ"/>
                                                 <constraint firstItem="DoU-SU-Nek" firstAttribute="top" secondItem="OFq-Mz-mbl" secondAttribute="top" constant="10" id="Uji-LE-8IA"/>
                                                 <constraint firstAttribute="trailing" secondItem="baL-Tb-bTJ" secondAttribute="trailing" constant="8" id="dUp-7b-g3p"/>
                                                 <constraint firstItem="baL-Tb-bTJ" firstAttribute="leading" secondItem="DoU-SU-Nek" secondAttribute="trailing" constant="8" id="fxZ-zy-ksL"/>
                                                 <constraint firstAttribute="bottom" secondItem="DoU-SU-Nek" secondAttribute="bottom" constant="9" id="h0B-EX-3MW"/>
-                                                <constraint firstItem="baL-Tb-bTJ" firstAttribute="top" secondItem="OFq-Mz-mbl" secondAttribute="top" constant="6" id="v5e-xk-srk"/>
+                                                <constraint firstAttribute="centerY" secondItem="baL-Tb-bTJ" secondAttribute="centerY" id="hx4-cn-W0h"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -181,13 +178,12 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="fLZ-NC-aPO" secondAttribute="centerY" id="17e-cC-bP4"/>
                                                 <constraint firstAttribute="bottom" secondItem="RUq-Pa-3nx" secondAttribute="bottom" constant="9" id="7Yt-uN-sOS"/>
                                                 <constraint firstItem="RUq-Pa-3nx" firstAttribute="top" secondItem="dk1-tc-gux" secondAttribute="top" constant="10" id="Aih-Lc-tq7"/>
                                                 <constraint firstItem="fLZ-NC-aPO" firstAttribute="leading" secondItem="RUq-Pa-3nx" secondAttribute="trailing" constant="8" id="Cfo-7m-Vyd"/>
                                                 <constraint firstAttribute="trailing" secondItem="fLZ-NC-aPO" secondAttribute="trailing" constant="8" id="Mgz-VG-tDn"/>
-                                                <constraint firstItem="fLZ-NC-aPO" firstAttribute="top" secondItem="dk1-tc-gux" secondAttribute="top" constant="6" id="S6i-he-vB9"/>
                                                 <constraint firstItem="RUq-Pa-3nx" firstAttribute="leading" secondItem="dk1-tc-gux" secondAttribute="leading" constant="8" id="mhd-oX-p53"/>
-                                                <constraint firstAttribute="bottom" secondItem="fLZ-NC-aPO" secondAttribute="bottom" constant="6" id="yyq-Sg-nJi"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -214,11 +210,10 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="LuM-mk-Zj6" secondAttribute="bottom" constant="6" id="1G7-8S-rYC"/>
+                                                <constraint firstAttribute="centerY" secondItem="LuM-mk-Zj6" secondAttribute="centerY" id="2oC-JM-LVI"/>
                                                 <constraint firstAttribute="bottom" secondItem="9Rr-S8-Uae" secondAttribute="bottom" constant="9" id="5xp-ez-tac"/>
                                                 <constraint firstItem="LuM-mk-Zj6" firstAttribute="leading" secondItem="9Rr-S8-Uae" secondAttribute="trailing" constant="8" id="C5c-2A-mli"/>
                                                 <constraint firstAttribute="trailing" secondItem="LuM-mk-Zj6" secondAttribute="trailing" constant="8" id="Lep-LY-D1h"/>
-                                                <constraint firstItem="LuM-mk-Zj6" firstAttribute="top" secondItem="zad-JQ-TRI" secondAttribute="top" constant="6" id="Y6a-JS-aLj"/>
                                                 <constraint firstItem="9Rr-S8-Uae" firstAttribute="leading" secondItem="zad-JQ-TRI" secondAttribute="leading" constant="8" id="Yao-VR-Is6"/>
                                                 <constraint firstItem="9Rr-S8-Uae" firstAttribute="top" secondItem="zad-JQ-TRI" secondAttribute="top" constant="10" id="Yiv-t6-Xj5"/>
                                             </constraints>
@@ -253,10 +248,9 @@
                                             <constraints>
                                                 <constraint firstItem="3d2-fZ-dx9" firstAttribute="leading" secondItem="btE-Mk-fSE" secondAttribute="leading" constant="8" id="6Cs-6l-Xzp"/>
                                                 <constraint firstItem="uXC-2j-cgi" firstAttribute="leading" secondItem="3d2-fZ-dx9" secondAttribute="trailing" constant="8" id="7Mq-HR-4nY"/>
-                                                <constraint firstItem="uXC-2j-cgi" firstAttribute="top" secondItem="btE-Mk-fSE" secondAttribute="top" constant="6" id="Ajq-5g-XKo"/>
                                                 <constraint firstAttribute="bottom" secondItem="3d2-fZ-dx9" secondAttribute="bottom" constant="9" id="EzH-aB-ePQ"/>
-                                                <constraint firstAttribute="bottom" secondItem="uXC-2j-cgi" secondAttribute="bottom" constant="6" id="RCb-Mi-FHX"/>
                                                 <constraint firstItem="3d2-fZ-dx9" firstAttribute="top" secondItem="btE-Mk-fSE" secondAttribute="top" constant="10" id="btF-q4-HJg"/>
+                                                <constraint firstAttribute="centerY" secondItem="uXC-2j-cgi" secondAttribute="centerY" id="zJf-Xj-C1X"/>
                                                 <constraint firstAttribute="trailing" secondItem="uXC-2j-cgi" secondAttribute="trailing" constant="8" id="zzu-aP-ZiL"/>
                                             </constraints>
                                         </tableViewCellContentView>

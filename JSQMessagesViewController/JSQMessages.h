@@ -70,5 +70,6 @@
 #import "UIColor+JSQMessages.h"
 #import "UIImage+JSQMessages.h"
 #import "UIView+JSQMessages.h"
+#import "NSBundle+JSQMessages.h"
 
 #endif

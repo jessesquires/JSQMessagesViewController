@@ -68,12 +68,25 @@
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(receiveMessagePressed:)];
-    
+
+    /**
+     *  Register custom menu actions for cells.
+     */
+    [JSQMessagesCollectionViewCell registerMenuAction:@selector(customAction:)];
+    [UIMenuController sharedMenuController].menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action" action:@selector(customAction:)] ];
+
+
     /**
      *  Customize your toolbar buttons
      *
      *  self.inputToolbar.contentView.leftBarButtonItem = custom button or nil to remove
      *  self.inputToolbar.contentView.rightBarButtonItem = custom button or nil to remove
+     */
+
+    /**
+     *  Set a maximum height for the input toolbar
+     *
+     *  self.inputToolbar.maximumHeight = 150;
      */
 }
 
@@ -500,6 +513,43 @@
     }
     
     return cell;
+}
+
+
+
+#pragma mark - UICollectionView Delegate
+
+#pragma mark - Custom menu items
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if (action == @selector(customAction:)) {
+        return YES;
+    }
+
+    return [super collectionView:collectionView canPerformAction:action forItemAtIndexPath:indexPath withSender:sender];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if (action == @selector(customAction:)) {
+        [self customAction:sender];
+        return;
+    }
+
+    [super collectionView:collectionView performAction:action forItemAtIndexPath:indexPath withSender:sender];
+}
+
+- (void)customAction:(id)sender
+{
+    NSLog(@"Custom action received! Sender: %@", sender);
+
+    [[[UIAlertView alloc] initWithTitle:@"Custom Action"
+                               message:nil
+                              delegate:nil
+                     cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil]
+     show];
 }
 
 
