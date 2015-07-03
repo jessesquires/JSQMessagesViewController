@@ -237,6 +237,7 @@ Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed
 * [NotificationChat](https://github.com/relatedcode/NotificationChat)
 * [RealtimeChat](https://github.com/relatedcode/RealtimeChat)
 * [Bazar](https://itunes.apple.com/ru/app/bazar-talk-about-everything/id885453058)
+* [Roomie](https://itunes.apple.com/us/app/roomie-find-your-roomie/id962585201)
 * *Your app here*
 
 ## License
