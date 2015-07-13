@@ -52,6 +52,12 @@
     _cachedVideoImageView = nil;
 }
 
+- (void)clearCachedMediaViews
+{
+    [super clearCachedMediaViews];
+    _cachedVideoImageView = nil;
+}
+
 #pragma mark - Setters
 
 - (void)setFileURL:(NSURL *)fileURL

@@ -91,7 +91,7 @@ Without CocoaPods:
 
 ## Quick Tips
 
-*Springy bubbles?*
+##### *Springy bubbles?*
 ````objective-c
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -100,7 +100,7 @@ Without CocoaPods:
 }
 ````
 
-*Remove avatars?*
+##### *Remove avatars?*
 ````objective-c
 - (void)viewDidLoad
 {
@@ -115,7 +115,7 @@ Without CocoaPods:
 }
 ````
 
-*Customize your cells?*
+##### *Customize your cells?*
 ````objective-c
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -128,7 +128,7 @@ Without CocoaPods:
 }
 ````
 
-*Customize your toolbar buttons?*
+##### *Customize your toolbar buttons?*
 ````objective-c
 - (void)viewDidLoad
 {
@@ -152,7 +152,7 @@ Without CocoaPods:
 
 ## Questions & Help
 
-There's [a label](https://github.com/jessesquires/JSQMessagesViewController/labels/questions%20&%20help) for that. Before asking a question, see if it has [already been answered](https://github.com/jessesquires/JSQMessagesViewController/issues?q=label%3A%22questions+%26+help%22+is%3Aclosed).
+There's [a label](https://github.com/jessesquires/JSQMessagesViewController/labels/questions%20&%20help) for that. Before asking a question, see if it has [already been answered](https://github.com/jessesquires/JSQMessagesViewController/issues?q=label%3A%22questions+%26+help%22+is%3Aclosed). **Please only ask questions that are _specific_ to this library.**
 
 >**NOTE:** Please try to avoid emailing me with questions. I prefer to keep questions and their answers open-source.
 
@@ -185,7 +185,7 @@ Support the development of this **free** *open-source* library!
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$25&body=Thanks for developing JSQMessagesViewController!">Send $25</a> <em>This totally saved me time. Go get a nice dinner!</em> :fork_and_knife:</h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$50&body=Thanks for developing JSQMessagesViewController!">Send $50</a> <em>I love this library. I want new features!</em> :clap:</h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$100&body=Thanks for developing JSQMessagesViewController!">Send $100</a> <em>I really want to support this project!</em> :tada:</h4>
->*You can also send donations via [PayPal](https://www.paypal.com) to jesse.squires.developer@gmail.com*
+>*You can also send donations via [PayPal](https://www.paypal.com). Message me on [twitter](https://twitter.com/jesse_squires).*
 
 ## Credits
 
@@ -236,13 +236,15 @@ Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed
 * [Pine](https://itunes.apple.com/us/app/pine-innovation-product-life/id946589228)
 * [NotificationChat](https://github.com/relatedcode/NotificationChat)
 * [RealtimeChat](https://github.com/relatedcode/RealtimeChat)
+* [Bazar](https://itunes.apple.com/ru/app/bazar-talk-about-everything/id885453058)
+* [Roomie](https://itunes.apple.com/us/app/roomie-find-your-roomie/id962585201)
 * *Your app here*
 
 ## License
 
 `JSQMessagesViewController` is released under an [MIT License][mitLink]. See `LICENSE` for details.
 
->**Copyright &copy; 2014 Jesse Squires.**
+>**Copyright &copy; 2013-present Jesse Squires.**
 
 *Please provide attribution, it is greatly appreciated.*
 

@@ -18,8 +18,6 @@
 
 #import "JSQMessagesViewController.h"
 
-#import "JSQMessagesKeyboardController.h"
-
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
 
 #import "JSQMessageData.h"
@@ -58,8 +56,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
 
 @property (weak, nonatomic) UIView *snapshotView;
-
-@property (strong, nonatomic) JSQMessagesKeyboardController *keyboardController;
 
 @property (assign, nonatomic) BOOL jsq_isObserving;
 
@@ -162,7 +158,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     _collectionView.dataSource = nil;
     _collectionView.delegate = nil;
     _collectionView = nil;
-    
+
     _inputToolbar.contentView.textView.delegate = nil;
     _inputToolbar.delegate = nil;
     _inputToolbar = nil;
@@ -616,7 +612,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
     if (action == @selector(copy:)) {
-        id<JSQMessageData> messageData = [self collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+        id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
         [[UIPasteboard generalPasteboard] setString:[messageData text]];
     }
 }
@@ -910,14 +906,19 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy
 {
-    self.toolbarHeightConstraint.constant += dy;
+    CGFloat proposedHeight = self.toolbarHeightConstraint.constant + dy;
 
-    if (self.toolbarHeightConstraint.constant < self.inputToolbar.preferredDefaultHeight) {
-        self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
+    CGFloat finalHeight = MAX(proposedHeight, self.inputToolbar.preferredDefaultHeight);
+
+    if (self.inputToolbar.maximumHeight != NSNotFound) {
+        finalHeight = MIN(finalHeight, self.inputToolbar.maximumHeight);
     }
 
-    [self.view setNeedsUpdateConstraints];
-    [self.view layoutIfNeeded];
+    if (self.toolbarHeightConstraint.constant != finalHeight) {
+        self.toolbarHeightConstraint.constant = finalHeight;
+        [self.view setNeedsUpdateConstraints];
+        [self.view layoutIfNeeded];
+    }
 }
 
 - (void)jsq_scrollComposerTextViewToBottomAnimated:(BOOL)animated
@@ -1031,7 +1032,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (self.navigationController.interactivePopGestureRecognizer) {
         [self.navigationController.interactivePopGestureRecognizer removeTarget:nil
                                                                          action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
-
+        
         if (addAction) {
             [self.navigationController.interactivePopGestureRecognizer addTarget:self
                                                                           action:@selector(jsq_handleInteractivePopGestureRecognizer:)];

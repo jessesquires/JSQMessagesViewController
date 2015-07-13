@@ -130,7 +130,6 @@
     UIGraphicsBeginImageContextWithOptions(frame.size, NO, [UIScreen mainScreen].scale);
     {
         CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextSaveGState(context);
 
         CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
         CGContextFillRect(context, frame);
@@ -138,7 +137,6 @@
 
         image = UIGraphicsGetImageFromCurrentImageContext();
 
-        CGContextRestoreGState(context);
     }
     UIGraphicsEndImageContext();
 
@@ -156,7 +154,6 @@
     UIGraphicsBeginImageContextWithOptions(frame.size, NO, [UIScreen mainScreen].scale);
     {
         CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextSaveGState(context);
 
         UIBezierPath *imgPath = [UIBezierPath bezierPathWithOvalInRect:frame];
         [imgPath addClip];
@@ -168,8 +165,7 @@
         }
 
         newImage = UIGraphicsGetImageFromCurrentImageContext();
-
-        CGContextRestoreGState(context);
+        
     }
     UIGraphicsEndImageContext();
     
