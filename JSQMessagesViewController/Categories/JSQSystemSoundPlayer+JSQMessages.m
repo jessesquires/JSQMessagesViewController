@@ -18,7 +18,7 @@
 
 #import "JSQSystemSoundPlayer+JSQMessages.h"
 
-#import "JSQMessagesViewController.h"
+#import "NSBundle+JSQMessages.h"
 
 
 static NSString * const kJSQMessageReceivedSoundName = @"message_received";
@@ -57,7 +57,7 @@ static NSString * const kJSQMessageSentSoundName = @"message_sent";
     NSString *originalPlayerBundleIdentifier = [JSQSystemSoundPlayer sharedPlayer].bundle.bundleIdentifier;
     
     //  search for sounds in this library's bundle
-    [JSQSystemSoundPlayer sharedPlayer].bundle = [NSBundle bundleForClass:[JSQMessagesViewController class]];
+    [JSQSystemSoundPlayer sharedPlayer].bundle = [NSBundle jsq_messagesBundle];
     
     NSString *fileName = [NSString stringWithFormat:@"JSQMessagesAssets.bundle/Sounds/%@", soundName];
     

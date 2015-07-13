@@ -45,6 +45,8 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 @implementation JSQMessagesInputToolbar
 
+@dynamic delegate;
+
 #pragma mark - Initialization
 
 - (void)awakeFromNib
@@ -57,6 +59,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     self.sendButtonEnabled = YES;
 
     self.preferredDefaultHeight = 44.0f;
+    self.maximumHeight = NSNotFound;
 
     JSQMessagesToolbarContentView *toolbarContentView = [self loadToolbarContentView];
     toolbarContentView.frame = self.frame;
