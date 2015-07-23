@@ -48,7 +48,8 @@
     XCTAssertNotNil(mainSB, @"Storyboard should not be nil");
 
     DemoMessagesViewController *demoVC = [mainSB instantiateViewControllerWithIdentifier:@"DemoVC"];
-    [demoVC view];
+    [demoVC beginAppearanceTransition:YES animated:NO];
+    [demoVC endAppearanceTransition];
 
     XCTAssertEqual(demoVC.inputToolbar.maximumHeight, NSNotFound, @"maximumInputToolbarHeight should equal default value");
 
