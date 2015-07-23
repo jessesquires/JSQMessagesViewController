@@ -23,6 +23,10 @@
 #import "JSQMessagesInputToolbar.h"
 #import "JSQMessagesKeyboardController.h"
 
+@protocol JSQMessagesViewControllerDelegate;
+
+@class JSQMessagesInputToolbar;
+
 /**
  *  The `JSQMessagesViewController` class is an abstract class that represents a view controller whose content consists of
  *  a `JSQMessagesCollectionView` and `JSQMessagesInputToolbar` and is specialized to display a messaging interface.
@@ -32,6 +36,8 @@
 @interface JSQMessagesViewController : UIViewController <JSQMessagesCollectionViewDataSource,
                                                          JSQMessagesCollectionViewDelegateFlowLayout,
                                                          UITextViewDelegate>
+
+@property (weak, nonatomic) id<JSQMessagesViewControllerDelegate> delegate;
 
 /**
  *  Returns the collection view object managed by this view controller.
@@ -166,10 +172,10 @@
 @property (assign, nonatomic) BOOL showLoadEarlierMessagesHeader;
 
 /**
- *  Specifies an additional inset amount to be added to the collectionView's contentInsets.top value.
- *
- *  @discussion Use this property to adjust the top content inset to account for a custom subview at the top of your view controller.
- */
+*  Specifies an additional inset amount to be added to the collectionView's contentInsets.top value.
+*
+*  @discussion Use this property to adjust the top content inset to account for a custom subview at the top of your view controller.
+*/
 @property (assign, nonatomic) CGFloat topContentAdditionalInset;
 
 #pragma mark - Class methods
@@ -267,5 +273,14 @@
  *  @param animated Pass `YES` if you want to animate scrolling, `NO` if it should be immediate.
  */
 - (void)scrollToBottomAnimated:(BOOL)animated;
+
+@end
+
+@protocol JSQMessagesViewControllerDelegate<NSObject>
+
+@optional
+
+- (BOOL)messagesViewControllerShouldBeginEditingTextView:(JSQMessagesViewController *)messagesViewController;
+- (void)messagesViewControllerDidEndEditingTextView:(JSQMessagesViewController *)messagesViewController;
 
 @end
