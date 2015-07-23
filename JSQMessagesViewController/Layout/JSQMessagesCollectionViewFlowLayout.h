@@ -97,6 +97,11 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
 @property (readonly, nonatomic) CGFloat itemWidth;
 
 /**
+ *  Returns the width of the text bubbles in the layout.
+ */
+@property (readonly, nonatomic) CGFloat textBubbleWidth;
+
+/**
  *  The font used to display the body a text message in the message bubble of each 
  *  `JSQMessagesCollectionViewCell` in the collectionView. 
  *  

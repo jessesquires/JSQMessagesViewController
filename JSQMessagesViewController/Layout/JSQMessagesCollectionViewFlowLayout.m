@@ -221,9 +221,14 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 #pragma mark - Getters
 
+- (CGFloat)textBubbleWidth
+{
+	return [self itemWidth];
+}
+
 - (CGFloat)itemWidth
 {
-    return CGRectGetWidth(self.collectionView.frame) - self.sectionInset.left - self.sectionInset.right;
+	return CGRectGetWidth(self.collectionView.frame) - self.sectionInset.left - self.sectionInset.right;
 }
 
 - (UIDynamicAnimator *)dynamicAnimator
