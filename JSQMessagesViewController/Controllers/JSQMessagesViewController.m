@@ -482,6 +482,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
             cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
         }
+        else {
+            cell.messageBubbleImageView.image = nil;
+            cell.messageBubbleImageView.highlightedImage = nil;
+        }
     }
     else {
         id<JSQMessageMediaData> messageMedia = [messageItem media];
