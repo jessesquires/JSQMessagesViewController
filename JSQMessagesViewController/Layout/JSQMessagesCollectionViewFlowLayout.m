@@ -46,6 +46,12 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 @property (assign, nonatomic) CGFloat latestDelta;
 
+<<<<<<< HEAD
+=======
+@property (assign, nonatomic, readonly) NSUInteger bubbleImageAssetWidth;
+@property (assign, nonatomic) NSUInteger rotationIndependentLayoutWidth;
+
+>>>>>>> create a property to control Rotation-Independent bubble width
 - (void)jsq_configureFlowLayout;
 
 - (void)jsq_didReceiveApplicationMemoryWarningNotification:(NSNotification *)notification;
@@ -97,6 +103,8 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     _springinessEnabled = NO;
     _springResistanceFactor = 1000;
+
+    _rotationIndependentLayout = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(jsq_didReceiveApplicationMemoryWarningNotification:)
@@ -150,10 +158,22 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 #pragma mark - Setters
 
+<<<<<<< HEAD
 - (void)setBubbleSizeCalculator:(id<JSQMessagesBubbleSizeCalculating>)bubbleSizeCalculator
 {
     NSParameterAssert(bubbleSizeCalculator != nil);
     _bubbleSizeCalculator = bubbleSizeCalculator;
+=======
+- (void)setRotationIndependentLayout:(BOOL)enabled
+{
+	if (_rotationIndependentLayout == enabled) {
+		return;
+	}
+
+	_rotationIndependentLayout = enabled;
+
+	[self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+>>>>>>> create a property to control Rotation-Independent bubble width
 }
 
 - (void)setSpringinessEnabled:(BOOL)springinessEnabled
@@ -221,9 +241,28 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 #pragma mark - Getters
 
+- (NSInteger)magixInsetAddition {
+	//  Creating a getter for this magix value because we are using it in a couple of places.
+	//
+	//  add extra 2 points of space, because `boundingRectWithSize:` is slightly off
+	//  not sure why. magix. (shrug) if you know, submit a PR
+	return 2;
+}
+
 - (CGFloat)textBubbleWidth
 {
-    return [self itemWidth];
+	if (self.rotationIndependentLayout) {
+		if (self.rotationIndependentLayoutWidth == 0) {
+			//  Adding the magix here because we're using it in messageBubbleSizeForItemAtIndexPath
+			NSInteger sectionInset = self.sectionInset.left + self.sectionInset.right + [self magixInsetAddition];
+			CGFloat width = CGRectGetWidth([(UICollectionView *)[self collectionView] bounds]) - sectionInset;
+			CGFloat height = CGRectGetHeight([(UICollectionView *)[self collectionView] bounds]) - sectionInset;
+			CGFloat minValue = (width<height)?width:height;
+			_rotationIndependentLayoutWidth = minValue;
+		}
+		return self.rotationIndependentLayoutWidth;
+	}
+	return [self itemWidth];
 }
 
 - (CGFloat)itemWidth
