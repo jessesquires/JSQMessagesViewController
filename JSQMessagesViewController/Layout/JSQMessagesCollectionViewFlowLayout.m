@@ -48,6 +48,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 @property (assign, nonatomic) CGFloat latestDelta;
 
 @property (assign, nonatomic, readonly) NSUInteger bubbleImageAssetWidth;
+@property (assign, nonatomic) NSUInteger rotationIndependentLayoutWidth;
 
 - (void)jsq_configureFlowLayout;
 
@@ -105,6 +106,8 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     _springinessEnabled = NO;
     _springResistanceFactor = 1000;
+
+    _rotationIndependentLayout = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(jsq_didReceiveApplicationMemoryWarningNotification:)
@@ -159,6 +162,17 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 }
 
 #pragma mark - Setters
+
+- (void)setRotationIndependentLayout:(BOOL)enabled
+{
+	if (_rotationIndependentLayout == enabled) {
+		return;
+	}
+
+	_rotationIndependentLayout = enabled;
+
+	[self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
 
 - (void)setSpringinessEnabled:(BOOL)springinessEnabled
 {
@@ -230,9 +244,28 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 #pragma mark - Getters
 
+- (NSInteger)magixInsetAddition {
+	//  Creating a getter for this magix value because we are using it in a couple of places.
+	//
+	//  add extra 2 points of space, because `boundingRectWithSize:` is slightly off
+	//  not sure why. magix. (shrug) if you know, submit a PR
+	return 2;
+}
+
 - (CGFloat)textBubbleWidth
 {
-    return [self itemWidth];
+	if (self.rotationIndependentLayout) {
+		if (self.rotationIndependentLayoutWidth == 0) {
+			//  Adding the magix here because we're using it in messageBubbleSizeForItemAtIndexPath
+			NSInteger sectionInset = self.sectionInset.left + self.sectionInset.right + [self magixInsetAddition];
+			CGFloat width = CGRectGetWidth([(UICollectionView *)[self collectionView] bounds]) - sectionInset;
+			CGFloat height = CGRectGetHeight([(UICollectionView *)[self collectionView] bounds]) - sectionInset;
+			CGFloat minValue = (width<height)?width:height;
+			_rotationIndependentLayoutWidth = minValue;
+		}
+		return self.rotationIndependentLayoutWidth;
+	}
+	return [self itemWidth];
 }
 
 - (CGFloat)itemWidth
@@ -473,10 +506,10 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         
         //  add extra 2 points of space, because `boundingRectWithSize:` is slightly off
         //  not sure why. magix. (shrug) if you know, submit a PR
-        CGFloat verticalInsets = verticalContainerInsets + verticalFrameInsets + 2.0f;
+        CGFloat verticalInsets = verticalContainerInsets + verticalFrameInsets + [self magixInsetAddition];
         
         //  same as above, an extra 2 points of magix
-        CGFloat finalWidth = MAX(stringSize.width + horizontalInsetsTotal, self.bubbleImageAssetWidth) + 2.0f;
+        CGFloat finalWidth = MAX(stringSize.width + horizontalInsetsTotal, self.bubbleImageAssetWidth) + [self magixInsetAddition];
         
         finalSize = CGSizeMake(finalWidth, stringSize.height + verticalInsets);
     }
