@@ -214,6 +214,12 @@
                 videoItemCopy.isReadyToPlay = NO;
                 
                 newMediaData = videoItemCopy;
+            } else if ([copyMediaData isKindOfClass:[JSQHTMLMediaItem class]]) {
+                JSQHTMLMediaItem *htmlItemCopy = [((JSQHTMLMediaItem *)copyMediaData) copy];
+                htmlItemCopy.appliesMediaViewMaskAsOutgoing = NO;
+                newMediaAttachmentCopy = [htmlItemCopy.htmlString copy];
+                
+                newMediaData = htmlItemCopy;
             }
             else {
                 NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
@@ -270,6 +276,9 @@
                     ((JSQVideoMediaItem *)newMediaData).fileURL = newMediaAttachmentCopy;
                     ((JSQVideoMediaItem *)newMediaData).isReadyToPlay = YES;
                     [self.collectionView reloadData];
+                } else if ([newMediaData isKindOfClass:[JSQHTMLMediaItem class]]) {
+                    ((JSQHTMLMediaItem *)newMediaData).htmlString = newMediaAttachmentCopy;
+                    [self.collectionView reloadData];
                 }
                 else {
                     NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
@@ -322,7 +331,7 @@
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", nil];
+                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", @"Send html", nil];
     
     [sheet showFromToolbar:self.inputToolbar];
 }
@@ -350,6 +359,9 @@
             
         case 2:
             [self.demoData addVideoMediaMessage];
+            break;
+        case 3:
+            [self.demoData addHTMLMediaMessage];
             break;
     }
     

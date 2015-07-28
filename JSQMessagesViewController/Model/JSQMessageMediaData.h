@@ -78,4 +78,8 @@
  */
 - (NSUInteger)mediaHash;
 
+@optional
+
+- (void)setReloadCallback:(void (^)(void))callback;
+
 @end

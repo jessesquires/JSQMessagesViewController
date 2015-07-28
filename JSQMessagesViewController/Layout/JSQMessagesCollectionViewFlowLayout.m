@@ -32,7 +32,7 @@
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
 
 #import "UIImage+JSQMessages.h"
-
+#import "JSQHTMLMediaItem.h"
 
 const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
@@ -435,9 +435,12 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 {
     id<JSQMessageData> messageItem = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
     
-    NSValue *cachedSize = [self.messageBubbleCache objectForKey:@([messageItem messageHash])];
-    if (cachedSize != nil) {
-        return [cachedSize CGSizeValue];
+    // Don't perform size caching for HTML media bubbles as they resize dynamically.
+    if (![messageItem.media isKindOfClass:[JSQHTMLMediaItem class]]) {
+        NSValue *cachedSize = [self.messageBubbleCache objectForKey:@([messageItem messageHash])];
+        if (cachedSize != nil) {
+            return [cachedSize CGSizeValue];
+        }
     }
     
     CGSize finalSize = CGSizeZero;
