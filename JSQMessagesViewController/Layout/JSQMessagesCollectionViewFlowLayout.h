@@ -89,9 +89,8 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
  *  length, resulting in a very different total scroll height, which means that when you rotate
  *  from landscape <-> portrait, a different portion of the conversation is visible.
  *
- *  @warning Though this feature is mostly stable, it is still considered an experimental feature.
  */
-@property (assign, nonatomic) BOOL rotationIndependentLayout;
+@property (assign, nonatomic) BOOL usesFixedWidthMessageBubbles;
 
 
 /**

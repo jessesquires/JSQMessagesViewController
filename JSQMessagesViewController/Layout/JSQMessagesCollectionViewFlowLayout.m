@@ -107,7 +107,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     _springinessEnabled = NO;
     _springResistanceFactor = 1000;
 
-    _rotationIndependentLayout = NO;
+    _usesFixedWidthMessageBubbles = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(jsq_didReceiveApplicationMemoryWarningNotification:)
@@ -163,13 +163,13 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 #pragma mark - Setters
 
-- (void)setRotationIndependentLayout:(BOOL)enabled
+- (void)setUsesFixedWidthMessageBubbles:(BOOL)enabled
 {
-	if (_rotationIndependentLayout == enabled) {
+	if (_usesFixedWidthMessageBubbles == enabled) {
 		return;
 	}
 
-	_rotationIndependentLayout = enabled;
+	_usesFixedWidthMessageBubbles = enabled;
 
 	[self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
@@ -254,7 +254,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 - (CGFloat)textBubbleWidth
 {
-	if (self.rotationIndependentLayout) {
+	if (self.usesFixedWidthMessageBubbles) {
 		if (self.rotationIndependentLayoutWidth == 0) {
 			//  Adding the magix here because we're using it in messageBubbleSizeForItemAtIndexPath
 			NSInteger sectionInset = self.sectionInset.left + self.sectionInset.right + [self magixInsetAddition];
