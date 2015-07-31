@@ -54,7 +54,7 @@
         [expectation fulfill];
     }];
     
-    [self waitForExpectationsWithTimeout:5 handler:^(NSError *error) {
+    [self waitForExpectationsWithTimeout:15 handler:^(NSError *error) {
         XCTAssertNil(error, @"Expectation should not error");
     }];
     
