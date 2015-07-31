@@ -59,8 +59,11 @@
 
 - (void)setImage:(UIImage *)image
 {
+    if (_image)
+        _cachedImageView = nil;
+    else
+        _cachedImageView.image = image;
     _image = [image copy];
-    _cachedImageView = nil;
 }
 
 - (void)setAppliesMediaViewMaskAsOutgoing:(BOOL)appliesMediaViewMaskAsOutgoing
