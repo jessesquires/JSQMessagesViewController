@@ -633,7 +633,7 @@
 
 #pragma mark - JSQMessagesComposerTextViewDelegate methods
 
-- (void)textView:(JSQMessagesComposerTextView *)textView didPasteWithSender:(id)sender {
+- (BOOL)textView:(JSQMessagesComposerTextView *)textView shouldPasteWithSender:(id)sender {
     if ([UIPasteboard generalPasteboard].image) {
         // If there's an image in the pasteboard, construct a media item with that image and `send` it.
         JSQPhotoMediaItem *item = [[JSQPhotoMediaItem alloc] initWithImage:[UIPasteboard generalPasteboard].image];
@@ -643,10 +643,9 @@
                                                              media:item];
         [self.demoData.messages addObject:message];
         [self finishSendingMessage];
-    } else {
-        // Otherwise, just paste normally.
-        [textView paste:sender];
+        return NO;
     }
+    return YES;
 }
 
 @end

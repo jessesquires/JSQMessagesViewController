@@ -25,7 +25,13 @@
  */
 @protocol JSQMessagesComposerTextViewDelegate <NSObject>
 @optional
-- (void)textView:(JSQMessagesComposerTextView *)textView didPasteWithSender:(id)sender;
+
+/**
+ * Specifies whether the textView should use the original implementation of pasting.
+ * If you want any custom pasting behavior, implement this delegate method and return `NO`
+ * when you want to handle pasting yourself.
+ */
+- (BOOL)textView:(JSQMessagesComposerTextView *)textView shouldPasteWithSender:(id)sender;
 @end
 
 /**
