@@ -635,6 +635,7 @@
 
 - (void)textView:(JSQMessagesComposerTextView *)textView didPasteWithSender:(id)sender {
     if ([UIPasteboard generalPasteboard].image) {
+        // If there's an image in the pasteboard, construct a media item with that image and `send` it.
         JSQPhotoMediaItem *item = [[JSQPhotoMediaItem alloc] initWithImage:[UIPasteboard generalPasteboard].image];
         JSQMessage *message = [[JSQMessage alloc] initWithSenderId:self.senderId
                                                  senderDisplayName:self.senderDisplayName
@@ -643,6 +644,7 @@
         [self.demoData.messages addObject:message];
         [self finishSendingMessage];
     } else {
+        // Otherwise, just paste normally.
         [textView paste:sender];
     }
 }
