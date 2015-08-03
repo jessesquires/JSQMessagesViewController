@@ -156,6 +156,15 @@
     [self setNeedsDisplay];
 }
 
+- (void)paste:(nullable id)sender
+{
+    if ([self.composerDelegate respondsToSelector:@selector(textView:didPasteWithSender:)]) {
+        [self.composerDelegate textView:self didPasteWithSender:sender];
+    } else {
+        [super paste:sender];
+    }
+}
+
 #pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect

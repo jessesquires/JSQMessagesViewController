@@ -18,6 +18,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class JSQMessagesComposerTextView;
+
+/**
+ * A delegate used to forward custom notifications from `JSQMessagesComposerTextView`.
+ */
+@protocol JSQMessagesComposerTextViewDelegate <NSObject>
+@optional
+- (void)textView:(JSQMessagesComposerTextView *)textView didPasteWithSender:(id)sender;
+@end
+
 /**
  *  An instance of `JSQMessagesComposerTextView` is a subclass of `UITextView` that is styled and used 
  *  for composing messages in a `JSQMessagesViewController`. It is a subview of a `JSQMessagesToolbarContentView`.
@@ -33,6 +43,11 @@
  *  The color of the place holder text. The default value is `[UIColor lightGrayColor]`.
  */
 @property (strong, nonatomic) UIColor *placeHolderTextColor;
+
+/**
+ * A delegate that conforms to `JSQMessagesComposerTextViewDelegate`. The default value is `nil`.
+ */
+@property (strong, nonatomic) id<JSQMessagesComposerTextViewDelegate> composerDelegate;
 
 /**
  *  Determines whether or not the text view contains text after trimming white space 
