@@ -3,7 +3,7 @@
 ### Open a new issue
 
 1. Read *all* of the [README](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/README.md) :speak_no_evil:
-* Search [open issues](https://github.com/jessesquires/JSQMessagesViewController/issues) *and* [closed issues](https://github.com/jessesquires/JSQMessagesViewController/issues?q=is%3Aissue+is%3Aclosed) to avoid opening a duplicate! :see_no_evil:
+* Search [open issues](https://github.com/jessesquires/JSQMessagesViewController/issues) *and* [closed issues](https://github.com/jessesquires/JSQMessagesViewController/issues?q=is%3Aissue+is%3Aclosed) to **avoid opening a duplicate issue!** :see_no_evil:
 * If your issue exists, please comment on its thread with your new information :hear_no_evil:
 * Otherwise, open a new issue with a good title and description :memo:
 * Provide **all** of the following information:
