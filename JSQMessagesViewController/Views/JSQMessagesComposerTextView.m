@@ -156,13 +156,9 @@
     [self setNeedsDisplay];
 }
 
-- (void)paste:(nullable id)sender
+- (void)paste:(id)sender
 {
-    if ([self.composerDelegate respondsToSelector:@selector(textView:shouldPasteWithSender:)]) {
-        if ([self.composerDelegate textView:self shouldPasteWithSender:sender]) {
-            [super paste:sender];
-        }
-    } else {
+    if (!self.pasteDelegate || [self.pasteDelegate composerTextView:self shouldPasteWithSender:sender]) {
         [super paste:sender];
     }
 }

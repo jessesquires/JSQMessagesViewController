@@ -23,15 +23,14 @@
 /**
  * A delegate used to forward custom notifications from `JSQMessagesComposerTextView`.
  */
-@protocol JSQMessagesComposerTextViewDelegate <NSObject>
-@optional
+@protocol JSQMessagesComposerTextViewPasteDelegate <NSObject>
 
 /**
- * Specifies whether the textView should use the original implementation of pasting.
+ * Asks the delegate whether or not the `textView` should use the original implementation of -[UITextView paste].
  * If you want any custom pasting behavior, implement this delegate method and return `NO`
  * when you want to handle pasting yourself.
  */
-- (BOOL)textView:(JSQMessagesComposerTextView *)textView shouldPasteWithSender:(id)sender;
+- (BOOL)composerTextView:(JSQMessagesComposerTextView *)textView shouldPasteWithSender:(id)sender;
 @end
 
 /**
@@ -53,7 +52,7 @@
 /**
  * A delegate that conforms to `JSQMessagesComposerTextViewDelegate`. The default value is `nil`.
  */
-@property (strong, nonatomic) id<JSQMessagesComposerTextViewDelegate> composerDelegate;
+@property (weak, nonatomic) id<JSQMessagesComposerTextViewPasteDelegate> pasteDelegate;
 
 /**
  *  Determines whether or not the text view contains text after trimming white space 

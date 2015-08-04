@@ -18,7 +18,7 @@
 
 #import "DemoMessagesViewController.h"
 
-@interface DemoMessagesViewController () <JSQMessagesComposerTextViewDelegate>
+@interface DemoMessagesViewController () <JSQMessagesComposerTextViewPasteDelegate>
 @end
 
 @implementation DemoMessagesViewController
@@ -46,7 +46,7 @@
     self.senderId = kJSQDemoAvatarIdSquires;
     self.senderDisplayName = kJSQDemoAvatarDisplayNameSquires;
     
-    self.inputToolbar.contentView.textView.composerDelegate = self;
+    self.inputToolbar.contentView.textView.pasteDelegate = self;
     
     /**
      *  Load up our fake data for the demo
@@ -631,9 +631,11 @@
     NSLog(@"Tapped cell at %@!", NSStringFromCGPoint(touchLocation));
 }
 
-#pragma mark - JSQMessagesComposerTextViewDelegate methods
+#pragma mark - JSQMessagesComposerTextViewPasteDelegate methods
 
-- (BOOL)textView:(JSQMessagesComposerTextView *)textView shouldPasteWithSender:(id)sender {
+
+- (BOOL)composerTextView:(JSQMessagesComposerTextView *)textView shouldPasteWithSender:(id)sender
+{
     if ([UIPasteboard generalPasteboard].image) {
         // If there's an image in the pasteboard, construct a media item with that image and `send` it.
         JSQPhotoMediaItem *item = [[JSQPhotoMediaItem alloc] initWithImage:[UIPasteboard generalPasteboard].image];
