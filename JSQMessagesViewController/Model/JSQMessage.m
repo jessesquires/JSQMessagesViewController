@@ -38,7 +38,7 @@
                         displayName:(NSString *)displayName
                                text:(NSString *)text
 {
-    return [[JSQMessage alloc] initWithSenderId:senderId
+    return [[self alloc] initWithSenderId:senderId
                               senderDisplayName:displayName
                                            date:[NSDate date]
                                            text:text];
@@ -62,7 +62,7 @@
                         displayName:(NSString *)displayName
                               media:(id<JSQMessageMediaData>)media
 {
-    return [[JSQMessage alloc] initWithSenderId:senderId
+    return [[self alloc] initWithSenderId:senderId
                               senderDisplayName:displayName
                                            date:[NSDate date]
                                           media:media];
