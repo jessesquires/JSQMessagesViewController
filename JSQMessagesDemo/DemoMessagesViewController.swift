@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
 
-class DemoMessagesViewController : JSQMessagesViewController <UIActionSheetDelegate> {
+class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDelegate {
     
     // var id<JSQDemoViewControllerDelegate> delegateModal;
-    var  demoData : DemoModelData
+    var  demoData : DemoModelData!
     
     
     // ----------------------------------------------------------------------
@@ -45,16 +46,16 @@ class DemoMessagesViewController : JSQMessagesViewController <UIActionSheetDeleg
         
         self.showLoadEarlierMessagesHeader     = true
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(jsq_defaultTypingIndicatorImage)
-                                                                 style: UIBarButtonItemStyleBordered
-                                                                target: self
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.jsq_defaultTypingIndicatorImage(),
+                                                                 style: UIBarButtonItemStyle.Bordered,
+                                                                target: self,
                                                                 action: Selector("receiveMessagePressed:") )
         
         /**
         *  Register custom menu actions for cells.
         */
         JSQMessagesCollectionViewCell.registerMenuAction( Selector("customAction:") )
-        UIMenuController.sharedMenuController().menuItems = [  UIMenuItem( title: "Custom Action", action: selector( "customAction:" ) ) ]
+        UIMenuController.sharedMenuController().menuItems = [  UIMenuItem( title: "Custom Action", action: Selector( "customAction:" ) ) ]
         
         
         /**
