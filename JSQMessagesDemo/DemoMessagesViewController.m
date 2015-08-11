@@ -38,18 +38,19 @@
     
     self.title = @"JSQMessages";
     
-    /**
-     *  You MUST set your senderId and display name
-     */
-    self.senderId           = kJSQDemoAvatarIdSquires;
-    self.senderDisplayName  = kJSQDemoAvatarDisplayNameSquires;
     
     
     /**
      *  Load up our fake data for the demo
      */
     self.demoData = [[DemoModelData alloc] init];
-    
+
+    /**
+     *  You MUST set your senderId and display name
+     */
+    self.senderId           = _demoData.kJSQDemoAvatarIdSquires;
+    self.senderDisplayName  = _demoData.kJSQDemoAvatarDisplayNameSquires;
+
     
     /**
      *  You can set custom avatar sizes
@@ -153,8 +154,8 @@
     JSQMessage *copyMessage = [[self.demoData.messages lastObject] copy];
     
     if (!copyMessage) {
-        copyMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdJobs
-                                          displayName:kJSQDemoAvatarDisplayNameJobs
+        copyMessage = [JSQMessage messageWithSenderId:_demoData.kJSQDemoAvatarIdJobs
+                                          displayName:_demoData.kJSQDemoAvatarDisplayNameJobs
                                                  text:@"First received!"];
     }
     
