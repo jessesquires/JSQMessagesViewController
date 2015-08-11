@@ -26,23 +26,23 @@ class DemoModelData : NSObject{
     var avatars  : Dictionary< String, JSQMessagesAvatarImage>
     var users    : Dictionary< String, String>
 
-    var outgoingBubbleImageData : JSQMessagesBubbleImage
-    var incomingBubbleImageData : JSQMessagesBubbleImage
+    var outgoingBubbleImageData : JSQMessagesBubbleImage!
+    var incomingBubbleImageData : JSQMessagesBubbleImage!
     
     // This value replace kJSQMessagesCollectionViewAvatarSizeDefault which lead to some trouble with swift type system
     let messagesCollectionViewAvatarSizeDefault = UInt(kJSQMessagesCollectionViewAvatarSizeDefault)
     
     
     override init() {
-        //self = super.init()
+        messages = [JSQMessage]()
+        avatars  = [String : JSQMessagesAvatarImage]()
+        users    = [String : String]()
+
         super.init()
         
         // "if (self)" skipped here. 
-        
-        if ( NSUserDefaults.emptyMessagesSetting() ) {
-            self.messages = [JSQMessage]()
-        }
-        else {
+
+        if (!NSUserDefaults.emptyMessagesSetting() ) {
             self.loadFakeMessages()
         }
         
