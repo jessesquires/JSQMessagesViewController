@@ -7,26 +7,113 @@
 //
 
 import Foundation
+import UIKit
 
 
-class DemoModelData {
+class DemoModelData : NSObject{
+    // Constants
+    let kJSQDemoAvatarDisplayNameSquires    = "Jesse Squires"
+    let kJSQDemoAvatarDisplayNameCook       = "Tim Cook"
+    let kJSQDemoAvatarDisplayNameJobs       = "Jobs"
+    let kJSQDemoAvatarDisplayNameWoz        = "Steve Wozniak"
+
+    let kJSQDemoAvatarIdSquires             = "053496-4509-289"
+    let kJSQDemoAvatarIdCook                = "468-768355-23123"
+    let kJSQDemoAvatarIdJobs                = "707-8956784-57"
+    let kJSQDemoAvatarIdWoz                 = "309-41802-93823"
+    
+    var messages : [JSQMessage]
+    var avatars  : Dictionary< String, JSQMessagesAvatarImage>
+    var users    : Dictionary< String, String>
+
+    var outgoingBubbleImageData : JSQMessagesBubbleImage
+    var incomingBubbleImageData : JSQMessagesBubbleImage
+    
+    // This value replace kJSQMessagesCollectionViewAvatarSizeDefault which lead to some trouble with swift type system
+    let messagesCollectionViewAvatarSizeDefault = UInt(kJSQMessagesCollectionViewAvatarSizeDefault)
+    
+    
     override init() {
-        self = super.init()
+        //self = super.init()
+        super.init()
         
         // "if (self)" skipped here. 
         
-        if (NSUserDefaults.emptyMessagesSetting) {
-            self.messages = []()
+        if ( NSUserDefaults.emptyMessagesSetting() ) {
+            self.messages = [JSQMessage]()
         }
         else {
             self.loadFakeMessages()
         }
         
+        self.create_avatars()
+        self.create_bubble_image_objects()
+        
     }
     
     
+    private func create_avatars() {
+        /**
+        *  Create avatar images once.
+        *
+        *  Be sure to create your avatars one time and reuse them for good performance.
+        *
+        *  If you are not using avatars, ignore this.
+        */
+        
+//        + (JSQMessagesAvatarImage *)avatarImageWithUserInitials:(NSString *)userInitials
+//        backgroundColor:(UIColor *)backgroundColor
+//        textColor:(UIColor *)textColor
+//        font:(UIFont *)font
+//        diameter:(NSUInteger)diameter;
+        
+        let jsqImage : JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials( "JSQ",
+                                                                                    backgroundColor: UIColor(white: 0.85, alpha:1.0),
+                                                                                          textColor: UIColor(white: 0.60, alpha:1.0),
+                                                                                               font: UIFont.systemFontOfSize(14.0),
+                                                                                           diameter: messagesCollectionViewAvatarSizeDefault
+                                                                                )
+        
+        let cookImage : JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage( UIImage(named: "demo_avatar_cook") , diameter:messagesCollectionViewAvatarSizeDefault )
+        let jobsImage : JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage( UIImage(named: "demo_avatar_jobs") , diameter:messagesCollectionViewAvatarSizeDefault )
+        let wozImage  : JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage( UIImage(named: "demo_avatar_woz" ) , diameter:messagesCollectionViewAvatarSizeDefault )
+//
+        
+        self.avatars = [ kJSQDemoAvatarIdSquires : jsqImage,
+                            kJSQDemoAvatarIdCook : cookImage,
+                            kJSQDemoAvatarIdJobs : jobsImage,
+                             kJSQDemoAvatarIdWoz : wozImage ]
+        
+        
+        self.users   = [    kJSQDemoAvatarIdJobs : kJSQDemoAvatarDisplayNameJobs,
+                            kJSQDemoAvatarIdCook : kJSQDemoAvatarDisplayNameCook,
+                             kJSQDemoAvatarIdWoz : kJSQDemoAvatarDisplayNameWoz,
+                         kJSQDemoAvatarIdSquires : kJSQDemoAvatarDisplayNameSquires ]
+        
+
+        
+        
+        
+    }
+    
+    
+    
+    private func create_bubble_image_objects() {
+        /**
+        *  Create message bubble images objects.
+        *
+        *  Be sure to create your bubble images one time and reuse them for good performance.
+        *
+        */
+        let bubbleFactory = JSQMessagesBubbleImageFactory()
+        
+        self.outgoingBubbleImageData = bubbleFactory.outgoingMessagesBubbleImageWithColor( UIColor.jsq_messageBubbleLightGrayColor() )
+        self.incomingBubbleImageData = bubbleFactory.incomingMessagesBubbleImageWithColor( UIColor.jsq_messageBubbleGreenColor()     )
+
+    }
+    
     // Load some fake messages for demo.
-    func loadFakeMessages() {
+    private func loadFakeMessages() {
         
         // Fake text messages
         messages = [
@@ -85,7 +172,7 @@ class DemoModelData {
         messages             += locationMessage
     }
     
-    func addVideoMediaMessage{
+    func addVideoMediaMessage() {
         // don't have a real video, just pretending
         let videoURL          = NSURL(string:"file://")
         let videoItem         = JSQVideoMediaItem(fileURL:videoURL, isReadyToPlay:YES)
