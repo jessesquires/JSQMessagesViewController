@@ -17,7 +17,19 @@ class DemoMessagesViewController : UITableViewController {
     @IBOutlet var outgoingAvatarsSwitch : UISwitch!
     @IBOutlet var springySwitch         : UISwitch!
 
+    // --------- View Lifecycle
+    override func viewDidLoad() {
+        self.extraMessagesSwitch.on   = NSUserDefaults.extraMessagesSetting()
+        self.longMessageSwitch.on     = NSUserDefaults.longMessageSetting()
+        self.emptySwitch.on           = NSUserDefaults.emptyMessagesSetting()
         
+        self.incomingAvatarsSwitch.on = NSUserDefaults.incomingAvatarSetting()
+        self.outgoingAvatarsSwitch.on = NSUserDefaults.outgoingAvatarSetting()
+        
+        self.springySwitch.on         = NSUserDefaults.springinessSetting()
+    }
+    
+    
     
     
     
