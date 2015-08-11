@@ -10,6 +10,7 @@
 		36CF33BD29CF36EB06D0CCFD /* libPods-JSQMessagesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 782026E9E518622532ED474D /* libPods-JSQMessagesTests.a */; };
 		649156371B79F8F700782005 /* DemoModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649156361B79F8F700782005 /* DemoModelData.swift */; };
 		64FB57241B7A9DC4006BC62A /* DemoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB57231B7A9DC4006BC62A /* DemoSettingsViewController.swift */; };
+		64FB57261B7AA5BB006BC62A /* DemoMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB57251B7AA5BB006BC62A /* DemoMessagesViewController.swift */; };
 		77CC17A895E6E12BC9CB549A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E6750B77E8A7042BA0754B /* libPods.a */; };
 		88078A9D19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88078A9C19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m */; };
 		88324C3419F6301C00BC732D /* JSQMessagesMediaViewBubbleImageMaskerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88324C3319F6301C00BC732D /* JSQMessagesMediaViewBubbleImageMaskerTests.m */; };
@@ -125,6 +126,7 @@
 		649156351B79F8F600782005 /* JSQMessages-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JSQMessages-Bridging-Header.h"; sourceTree = "<group>"; };
 		649156361B79F8F700782005 /* DemoModelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoModelData.swift; sourceTree = "<group>"; };
 		64FB57231B7A9DC4006BC62A /* DemoSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoSettingsViewController.swift; sourceTree = "<group>"; };
+		64FB57251B7AA5BB006BC62A /* DemoMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoMessagesViewController.swift; sourceTree = "<group>"; };
 		782026E9E518622532ED474D /* libPods-JSQMessagesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JSQMessagesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88078A9B19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesMediaPlaceholderView.h; sourceTree = "<group>"; };
 		88078A9C19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesMediaPlaceholderView.m; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				88A25F2D19D8DF2500924534 /* AppDelegate.m */,
 				88A25FD919D8E0C400924534 /* DemoMessagesViewController.h */,
 				88A25FDA19D8E0C400924534 /* DemoMessagesViewController.m */,
+				64FB57251B7AA5BB006BC62A /* DemoMessagesViewController.swift */,
 				88A25F3219D8DF2500924534 /* Images.xcassets */,
 				88A2601A19D8E45600924534 /* Info.plist */,
 				88A25F3419D8DF2500924534 /* main.m */,
@@ -845,6 +848,7 @@
 				8873B60C1AB7B244006DF9AC /* NSBundle+JSQMessages.m in Sources */,
 				88A25FD019D8E01A00924534 /* JSQMessagesComposerTextView.m in Sources */,
 				64FB57241B7A9DC4006BC62A /* DemoSettingsViewController.swift in Sources */,
+				64FB57261B7AA5BB006BC62A /* DemoMessagesViewController.swift in Sources */,
 				88A25FC319D8E01A00924534 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

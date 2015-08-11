@@ -1,5 +1,5 @@
 //
-//  DemoMessagesViewController.swift
+//  DemoSettingsViewController.swift
 //  JSQMessages
 //
 //  Created by Raphaël Bellec on 11/08/2015.
