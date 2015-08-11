@@ -135,22 +135,16 @@ class DemoModelData : NSObject{
          
             let reallyLongMessage : JSQMessage = JSQMessage(senderId: kJSQDemoAvatarIdSquires, senderDisplayName:kJSQDemoAvatarDisplayNameSquires, date: NSDate.distantPast() as! NSDate, text:long_text)
 
-            self.messages             += reallyLongMessage
+            messages.append(reallyLongMessage)
 
         }
     }
-    
-    
-    
-    
-    
-    // ------------------------------------------------------------------------------
     
     func addPhotoMediaMessage() {
         let photoItem         = JSQPhotoMediaItem( image: UIImage( named:"goldengate" )  )
         let photoMessage      = JSQMessage(     senderId: kJSQDemoAvatarIdSquires, displayName:kJSQDemoAvatarDisplayNameSquires, media:photoItem)
         
-        self.messages        += photoMessage
+        messages.append(photoMessage)
     }
     
     func addLocationMediaMessageCompletion(completion : JSQLocationMediaItemCompletionBlock)  {
@@ -159,8 +153,8 @@ class DemoModelData : NSObject{
         
         locationItem.setLocation(ferryBuildingInSF, withCompletionHandler:completion)
         
-        let locationMessage   = JSQMessage(senderId: kJSQDemoAvatarIdSquires, displayName:kJSQDemoAvatarDisplayNameSquires, media:locationItem)
-        self.messages        += locationMessage
+        let locationMessage : JSQMessage  = JSQMessage(senderId: kJSQDemoAvatarIdSquires, displayName:kJSQDemoAvatarDisplayNameSquires, media:locationItem)
+        messages.append(locationMessage)
     }
     
     func addVideoMediaMessage() {
@@ -168,13 +162,8 @@ class DemoModelData : NSObject{
         let videoURL          = NSURL(string:"file://")
         let videoItem         = JSQVideoMediaItem(fileURL: videoURL, isReadyToPlay:true)
         let videoMessage      = JSQMessage(      senderId: kJSQDemoAvatarIdSquires, displayName:kJSQDemoAvatarDisplayNameSquires, media:videoItem)
-        self.messages        += videoMessage
+        messages.append(videoMessage)
     }
 
     
-    
-    
-    
-    // ------------------------------------------------------------------------------
-
 }
