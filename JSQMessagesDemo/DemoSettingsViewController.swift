@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DemoMessagesViewController : UITableViewController {
+class DemoSettingsViewController : UITableViewController {
     
     @IBOutlet var extraMessagesSwitch   : UISwitch!
     @IBOutlet var longMessageSwitch     : UISwitch!
@@ -29,6 +29,30 @@ class DemoMessagesViewController : UITableViewController {
         self.springySwitch.on         = NSUserDefaults.springinessSetting()
     }
     
+    
+    @IBAction func didTapSwitch(sender : UISwitch  ){
+    
+        if (sender      == self.extraMessagesSwitch  ) {
+            NSUserDefaults.saveExtraMessagesSetting(sender.on)
+        }
+        else if (sender == self.longMessageSwitch    ) {
+            NSUserDefaults.saveLongMessageSetting(sender.on)
+        }
+        else if (sender == self.emptySwitch          ) {
+            NSUserDefaults.saveEmptyMessagesSetting(sender.on)
+        }
+        else if (sender == self.incomingAvatarsSwitch) {
+            NSUserDefaults.saveIncomingAvatarSetting(sender.on)
+        }
+        else if (sender == self.outgoingAvatarsSwitch) {
+            NSUserDefaults.saveOutgoingAvatarSetting(sender.on)
+        }
+        else if (sender == self.springySwitch        ) {
+            NSUserDefaults.saveSpringinessSetting(sender.on)
+        }
+        
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
     
     
     
