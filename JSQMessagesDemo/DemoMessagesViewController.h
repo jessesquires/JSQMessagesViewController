@@ -20,10 +20,10 @@
 // Import all the things
 #import "JSQMessages.h"
 
-#import "JSQMessages-Swift.h"
+
 #import "NSUserDefaults+DemoSettings.h"
 
-
+@class DemoModelData;
 @class DemoMessagesViewController;
 
 @protocol JSQDemoViewControllerDelegate <NSObject>
