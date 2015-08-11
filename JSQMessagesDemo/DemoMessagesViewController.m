@@ -41,8 +41,8 @@
     /**
      *  You MUST set your senderId and display name
      */
-    self.senderId = kJSQDemoAvatarIdSquires;
-    self.senderDisplayName = kJSQDemoAvatarDisplayNameSquires;
+    self.senderId           = kJSQDemoAvatarIdSquires;
+    self.senderDisplayName  = kJSQDemoAvatarDisplayNameSquires;
     
     
     /**
@@ -240,7 +240,7 @@
          *  3. Call `finishReceivingMessage`
          */
         [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
-        [self.demoData.messages addObject:newMessage];
+        [(NSMutableArray *) self.demoData.messages addObject:newMessage];
         [self finishReceivingMessageAnimated:YES];
         
         
@@ -311,7 +311,7 @@
                                                           date:date
                                                           text:text];
     
-    [self.demoData.messages addObject:message];
+    [(NSMutableArray *) self.demoData.messages addObject:message];
     
     [self finishSendingMessageAnimated:YES];
 }
