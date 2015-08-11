@@ -20,7 +20,7 @@
 // Import all the things
 #import "JSQMessages.h"
 
-#import "DemoModelData.h"
+#import "JSQMessages-Swift.h"
 #import "NSUserDefaults+DemoSettings.h"
 
 
