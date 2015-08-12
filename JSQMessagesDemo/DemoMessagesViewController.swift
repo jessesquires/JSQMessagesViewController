@@ -175,7 +175,8 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
                     let copyMediaData : JSQMessageMediaData = copyMessage.media;
                     
                     if (       copyMediaData is JSQPhotoMediaItem ) {
-                        let photoItemCopy : JSQPhotoMediaItem           = (copyMediaData as! JSQPhotoMediaItem).copy() as! JSQPhotoMediaItem
+                        // TODO: clean these casts !
+                        let photoItemCopy : JSQPhotoMediaItem           = (copyMediaData as! JSQPhotoMediaItem).copy()    as! JSQPhotoMediaItem
                         photoItemCopy.appliesMediaViewMaskAsOutgoing    = false
                         newMediaAttachmentCopy                          = UIImage( CGImage: photoItemCopy.image.CGImage )
                         
@@ -188,7 +189,7 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
                         newMediaData = photoItemCopy
                     }
                     else if ( copyMediaData is JSQLocationMediaItem ) {
-                        let locationItemCopy : JSQLocationMediaItem?    = (copyMediaData as JSQLocationMediaItem).copy()
+                        let locationItemCopy : JSQLocationMediaItem     = (copyMediaData as! JSQLocationMediaItem).copy() as! JSQLocationMediaItem
                         locationItemCopy.appliesMediaViewMaskAsOutgoing = false
                         newMediaAttachmentCopy                          = locationItemCopy.location.copy()
                         
@@ -199,7 +200,7 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
                         newMediaData                                    = locationItemCopy
                     }
                     else if ( copyMediaData is JSQVideoMediaItem    ) {
-                        let videoItemCopy : JSQVideoMediaItem           = (copyMediaData as JSQVideoMediaItem).copy()
+                        let videoItemCopy : JSQVideoMediaItem           = (copyMediaData as! JSQVideoMediaItem).copy()    as! JSQVideoMediaItem
                         videoItemCopy.appliesMediaViewMaskAsOutgoing    = false
                         newMediaAttachmentCopy                          = videoItemCopy.fileURL.copy()
                         
@@ -212,7 +213,7 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
                         newMediaData                                    = videoItemCopy
                     }
                     else {
-                        NSLog("%s error: unrecognized media item", __PRETTY_FUNCTION__)
+                        NSLog("%s error: unrecognized media item, line :%s", __FUNCTION__, __LINE__)
                     }
                     
                     newMessage = JSQMessage( senderId: randomUserId,   displayName: userDisplayedName,    media: newMediaData)
@@ -235,15 +236,16 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
                 *  3. Call `finishReceivingMessage`
                 */
                 JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
-                self.demoData.messages.addObject(newMessage)
+                self.demoData.messages.append(newMessage!)              // Error if newMessage is nil.
                 self.finishReceivingMessageAnimated(true)
                 
-                //-------- TODO: From here
-                if (newMessage.isMediaMessage) {
+                //-------- Use swift 2. Note : nil chek here is useless if the case is not handled for above "newMessage!"
+                if let msg = newMessage where msg.isMediaMessage {
                     /**
                     *  Simulate "downloading" media
                     */
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
+                    let fake_downloading_delay = 2.0
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( fake_downloading_delay * Double(NSEC_PER_SEC) )), dispatch_get_main_queue()) {
                         /**
                         *  Media is "finished downloading", re-display visible cells
                         *
@@ -252,23 +254,23 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
                         *  Reload the specific item, or simply call `reloadData`
                         */
                         
-                        if (      newMediaData.isKindOfClass( JSQPhotoMediaItem.   class() )  ) {
-                            let photoMediaItem           = newMediaData as JSQPhotoMediaItem
-                            photoMediaItem.image         = newMediaAttachmentCopy
+                        if        newMediaData is JSQPhotoMediaItem     {
+                            let photoMediaItem           = newMediaData as! JSQPhotoMediaItem
+                            photoMediaItem.image         = newMediaAttachmentCopy  as! UIImage
                             self.collectionView.reloadData()
                         }
-                        else if ( newMediaData.isKindOfClass( JSQLocationMediaItem.class() )  ) {
-                            let locationMediatItem       = newMediaData as JSQLocationMediaItem
-                            locationMediatItem.setLocation( newMediaAttachmentCopy, withCompletionHandler:{ self.collectionView.reloadData() } )
+                        else if   newMediaData is JSQLocationMediaItem  {
+                            let locationMediatItem       = newMediaData as! JSQLocationMediaItem
+                            locationMediatItem.setLocation( newMediaAttachmentCopy as! CLLocation , withCompletionHandler:{ self.collectionView.reloadData() } )
                         }
-                        else if ( newMediaData.isKindOfClass( JSQVideoMediaItem.   class() )  ) {
-                            let videoMediaItem           = newMediaData as JSQVideoMediaItem
-                            videoMediaItem.fileURL       = newMediaAttachmentCopy
+                        else if   newMediaData is JSQVideoMediaItem     {
+                            let videoMediaItem           = newMediaData as! JSQVideoMediaItem
+                            videoMediaItem.fileURL       = newMediaAttachmentCopy  as! NSURL
                             videoMediaItem.isReadyToPlay = true
                             self.collectionView.reloadData()
                         }
                         else {
-                            NSLog("%s error: unrecognized media item", __PRETTY_FUNCTION__)
+                            NSLog("%s error: unrecognized media item, line :%s", __FUNCTION__, __LINE__)
                         }
                         
                     }
