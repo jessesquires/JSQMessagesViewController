@@ -104,7 +104,7 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
 
     func pushMainViewController() {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let nc = sb.instantiateInitialViewController()
+        let nc = sb.instantiateInitialViewController() as! UINavigationController
         self.navigationController?.pushViewController(nc.topViewController, animated: true)
     }
 
@@ -135,10 +135,13 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
         /**
         *  Copy last sent message, this will be the new "received" message
         */
-        var copyMessage : JSQMessage = self.demoData?.messages.last().copy()
-        
-        // TODO: change with swift2
-        if (copyMessage == nil) {
+//        let msgArray                   = self.demoData.messages
+        let lastMessage  : JSQMessage? = self.demoData.messages.last
+        var copyMessage  : JSQMessage
+
+        if let lastMessageOk  =  lastMessage {
+            copyMessage = lastMessageOk.copy() as! JSQMessage
+        } else {
             copyMessage = JSQMessage(senderId: demoData?.kJSQDemoAvatarIdJobs,
                                   displayName: demoData?.kJSQDemoAvatarDisplayNameJobs,
                                          text: "First received!")
@@ -147,7 +150,7 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
         /**
         *  Allow typing indicator to show
         */
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (1.0 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
             
             var userIds                 = self.demoData.users.allKeys
             userIds.removeObject(self.senderId)
