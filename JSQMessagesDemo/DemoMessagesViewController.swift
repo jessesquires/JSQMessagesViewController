@@ -168,14 +168,14 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
                 var newMediaAttachmentCopy  : AnyObject?
                 
                 // TODO: use a switch case to match class here.
-                if ( copyMessage.isMediaMessage() ) {
+                if ( copyMessage.isMediaMessage ) {
                     /**
                     *  Last message was a media message
                     */
                     let copyMediaData : JSQMessageMediaData = copyMessage.media;
                     
-                    if ( copyMediaData.isKindOfClass( JSQPhotoMediaItem.class() ) ) {
-                        let photoItemCopy : JSQPhotoMediaItem           = (copyMediaData as JSQPhotoMediaItem).copy()
+                    if (       copyMediaData is JSQPhotoMediaItem ) {
+                        let photoItemCopy : JSQPhotoMediaItem           = (copyMediaData as! JSQPhotoMediaItem).copy() as! JSQPhotoMediaItem
                         photoItemCopy.appliesMediaViewMaskAsOutgoing    = false
                         newMediaAttachmentCopy                          = UIImage( CGImage: photoItemCopy.image.CGImage )
                         
@@ -187,7 +187,7 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
                         
                         newMediaData = photoItemCopy
                     }
-                    else if ( copyMediaData.isKindOfClass( JSQLocationMediaItem.class() ) ) {
+                    else if ( copyMediaData is JSQLocationMediaItem ) {
                         let locationItemCopy : JSQLocationMediaItem?    = (copyMediaData as JSQLocationMediaItem).copy()
                         locationItemCopy.appliesMediaViewMaskAsOutgoing = false
                         newMediaAttachmentCopy                          = locationItemCopy.location.copy()
@@ -198,7 +198,7 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
                         locationItemCopy.location                       = nil
                         newMediaData                                    = locationItemCopy
                     }
-                    else if ( copyMediaData.isKindOfClass( JSQVideoMediaItem.class(   ) ) ) {
+                    else if ( copyMediaData is JSQVideoMediaItem    ) {
                         let videoItemCopy : JSQVideoMediaItem           = (copyMediaData as JSQVideoMediaItem).copy()
                         videoItemCopy.appliesMediaViewMaskAsOutgoing    = false
                         newMediaAttachmentCopy                          = videoItemCopy.fileURL.copy()
