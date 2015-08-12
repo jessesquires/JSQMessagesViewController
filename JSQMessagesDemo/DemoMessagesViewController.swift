@@ -150,126 +150,130 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
         /**
         *  Allow typing indicator to show
         */
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (1.0 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
-            
-            var userIds                 = self.demoData.users.allKeys
-            userIds.removeObject(self.senderId)
-            
-            let randomUserId            = userIds[ arc4random_uniform((int)userIds.count()) ];
-            let userDisplayedName       = self.demoData.users[randomUserId]
-            
-            
-            var newMessage              : JSQMessage?
-            var newMediaData            : JSQMessageMediaData?
-            var newMediaAttachmentCopy  : AnyObject?
-            
-            // TODO: use a switch case to match class here.
-            if ( copyMessage.isMediaMessage() ) {
-                /**
-                *  Last message was a media message
-                */
-                let copyMediaData : JSQMessageMediaData = copyMessage.media;
+        let delayInSeconds = 1.5
+        
+        dispatch_after( dispatch_time( DISPATCH_TIME_NOW, Int64( delayInSeconds * Double(NSEC_PER_SEC) )  )   ,
+                        dispatch_get_main_queue() )
+            {
                 
-                if ( copyMediaData.isKindOfClass( JSQPhotoMediaItem.class() ) ) {
-                    let photoItemCopy : JSQPhotoMediaItem           = (copyMediaData as JSQPhotoMediaItem).copy()
-                    photoItemCopy.appliesMediaViewMaskAsOutgoing    = false
-                    newMediaAttachmentCopy                          = UIImage( CGImage: photoItemCopy.image.CGImage )
-                    
-                    /**
-                    *  Set image to nil to simulate "downloading" the image
-                    *  and show the placeholder view
-                    */
-                    photoItemCopy.image = nil
-                    
-                    newMediaData = photoItemCopy
-                }
-                else if ( copyMediaData.isKindOfClass( JSQLocationMediaItem.class() ) ) {
-                    let locationItemCopy : JSQLocationMediaItem?    = (copyMediaData as JSQLocationMediaItem).copy()
-                    locationItemCopy.appliesMediaViewMaskAsOutgoing = false
-                    newMediaAttachmentCopy                          = locationItemCopy.location.copy()
-                    
-                    /**
-                    *  Set location to nil to simulate "downloading" the location data
-                    */
-                    locationItemCopy.location                       = nil
-                    newMediaData                                    = locationItemCopy
-                }
-                else if ( copyMediaData.isKindOfClass( JSQVideoMediaItem.class(   ) ) ) {
-                    let videoItemCopy : JSQVideoMediaItem           = (copyMediaData as JSQVideoMediaItem).copy()
-                    videoItemCopy.appliesMediaViewMaskAsOutgoing    = false
-                    newMediaAttachmentCopy                          = videoItemCopy.fileURL.copy()
-                    
-                    /**
-                    *  Reset video item to simulate "downloading" the video
-                    */
-                    videoItemCopy.fileURL                           = nil
-                    videoItemCopy.isReadyToPlay                     = false
-                    
-                    newMediaData                                    = videoItemCopy
-                }
-                else {
-                    NSLog("%s error: unrecognized media item", __PRETTY_FUNCTION__)
-                }
+                // Remove the current user from Array of possible recipients of the message.
+                var otherUserIds            = self.demoData.users.keys.array.filter( {$0 != self.senderId;} )
+                let randomUserIndex         = Int(arc4random_uniform(UInt32(otherUserIds.count)))
+                let randomUserId            = otherUserIds[ randomUserIndex ]
+                let userDisplayedName       = self.demoData.users[randomUserId]
                 
-                newMessage = JSQMessage( senderId: randomUserId,   displayName: userDisplayedName,    media: newMediaData)
                 
-            }
-            else {
-                /**
-                *  Last message was a text message
-                */
-                newMessage = JSQMessage( senderId: randomUserId,   displayName:userDisplayedName,      text: copyMessage.text)
-            }
-            
-            
-            
-            /**
-            *  Upon receiving a message, you should:
-            *
-            *  1. Play sound (optional)
-            *  2. Add new id<JSQMessageData> object to your data source
-            *  3. Call `finishReceivingMessage`
-            */
-            JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
-            self.demoData.messages.addObject(newMessage)
-            self.finishReceivingMessageAnimated(true)
-            
-            //-------- TODO: From here
-            if (newMessage.isMediaMessage) {
-                /**
-                *  Simulate "downloading" media
-                */
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
+                var newMessage              : JSQMessage?
+                var newMediaData            : JSQMessageMediaData?
+                var newMediaAttachmentCopy  : AnyObject?
+                
+                // TODO: use a switch case to match class here.
+                if ( copyMessage.isMediaMessage() ) {
                     /**
-                    *  Media is "finished downloading", re-display visible cells
-                    *
-                    *  If media cell is not visible, the next time it is dequeued the view controller will display its new attachment data
-                    *
-                    *  Reload the specific item, or simply call `reloadData`
+                    *  Last message was a media message
                     */
+                    let copyMediaData : JSQMessageMediaData = copyMessage.media;
                     
-                    if (      newMediaData.isKindOfClass( JSQPhotoMediaItem.   class() )  ) {
-                        let photoMediaItem           = newMediaData as JSQPhotoMediaItem
-                        photoMediaItem.image         = newMediaAttachmentCopy
-                        self.collectionView.reloadData()
+                    if ( copyMediaData.isKindOfClass( JSQPhotoMediaItem.class() ) ) {
+                        let photoItemCopy : JSQPhotoMediaItem           = (copyMediaData as JSQPhotoMediaItem).copy()
+                        photoItemCopy.appliesMediaViewMaskAsOutgoing    = false
+                        newMediaAttachmentCopy                          = UIImage( CGImage: photoItemCopy.image.CGImage )
+                        
+                        /**
+                        *  Set image to nil to simulate "downloading" the image
+                        *  and show the placeholder view
+                        */
+                        photoItemCopy.image = nil
+                        
+                        newMediaData = photoItemCopy
                     }
-                    else if ( newMediaData.isKindOfClass( JSQLocationMediaItem.class() )  ) {
-                        let locationMediatItem       = newMediaData as JSQLocationMediaItem
-                        locationMediatItem.setLocation( newMediaAttachmentCopy, withCompletionHandler:{ self.collectionView.reloadData() } )
+                    else if ( copyMediaData.isKindOfClass( JSQLocationMediaItem.class() ) ) {
+                        let locationItemCopy : JSQLocationMediaItem?    = (copyMediaData as JSQLocationMediaItem).copy()
+                        locationItemCopy.appliesMediaViewMaskAsOutgoing = false
+                        newMediaAttachmentCopy                          = locationItemCopy.location.copy()
+                        
+                        /**
+                        *  Set location to nil to simulate "downloading" the location data
+                        */
+                        locationItemCopy.location                       = nil
+                        newMediaData                                    = locationItemCopy
                     }
-                    else if ( newMediaData.isKindOfClass( JSQVideoMediaItem.   class() )  ) {
-                        let videoMediaItem           = newMediaData as JSQVideoMediaItem
-                        videoMediaItem.fileURL       = newMediaAttachmentCopy
-                        videoMediaItem.isReadyToPlay = true
-                        self.collectionView.reloadData()
+                    else if ( copyMediaData.isKindOfClass( JSQVideoMediaItem.class(   ) ) ) {
+                        let videoItemCopy : JSQVideoMediaItem           = (copyMediaData as JSQVideoMediaItem).copy()
+                        videoItemCopy.appliesMediaViewMaskAsOutgoing    = false
+                        newMediaAttachmentCopy                          = videoItemCopy.fileURL.copy()
+                        
+                        /**
+                        *  Reset video item to simulate "downloading" the video
+                        */
+                        videoItemCopy.fileURL                           = nil
+                        videoItemCopy.isReadyToPlay                     = false
+                        
+                        newMediaData                                    = videoItemCopy
                     }
                     else {
                         NSLog("%s error: unrecognized media item", __PRETTY_FUNCTION__)
                     }
                     
+                    newMessage = JSQMessage( senderId: randomUserId,   displayName: userDisplayedName,    media: newMediaData)
+                    
                 }
-            }
-            
+                else {
+                    /**
+                    *  Last message was a text message
+                    */
+                    newMessage = JSQMessage( senderId: randomUserId,   displayName:userDisplayedName,      text: copyMessage.text)
+                }
+                
+                
+                
+                /**
+                *  Upon receiving a message, you should:
+                *
+                *  1. Play sound (optional)
+                *  2. Add new id<JSQMessageData> object to your data source
+                *  3. Call `finishReceivingMessage`
+                */
+                JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+                self.demoData.messages.addObject(newMessage)
+                self.finishReceivingMessageAnimated(true)
+                
+                //-------- TODO: From here
+                if (newMessage.isMediaMessage) {
+                    /**
+                    *  Simulate "downloading" media
+                    */
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
+                        /**
+                        *  Media is "finished downloading", re-display visible cells
+                        *
+                        *  If media cell is not visible, the next time it is dequeued the view controller will display its new attachment data
+                        *
+                        *  Reload the specific item, or simply call `reloadData`
+                        */
+                        
+                        if (      newMediaData.isKindOfClass( JSQPhotoMediaItem.   class() )  ) {
+                            let photoMediaItem           = newMediaData as JSQPhotoMediaItem
+                            photoMediaItem.image         = newMediaAttachmentCopy
+                            self.collectionView.reloadData()
+                        }
+                        else if ( newMediaData.isKindOfClass( JSQLocationMediaItem.class() )  ) {
+                            let locationMediatItem       = newMediaData as JSQLocationMediaItem
+                            locationMediatItem.setLocation( newMediaAttachmentCopy, withCompletionHandler:{ self.collectionView.reloadData() } )
+                        }
+                        else if ( newMediaData.isKindOfClass( JSQVideoMediaItem.   class() )  ) {
+                            let videoMediaItem           = newMediaData as JSQVideoMediaItem
+                            videoMediaItem.fileURL       = newMediaAttachmentCopy
+                            videoMediaItem.isReadyToPlay = true
+                            self.collectionView.reloadData()
+                        }
+                        else {
+                            NSLog("%s error: unrecognized media item", __PRETTY_FUNCTION__)
+                        }
+                        
+                    }
+                }
+                
         }
     }
     
