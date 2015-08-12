@@ -10,10 +10,16 @@ import Foundation
 import UIKit
 
 
+
+protocol JSQDemoViewControllerDelegate {
+    func didDismissJSQDemoViewController( vc : DemoMessagesViewController )
+}
+
+
 class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDelegate {
     
-    // var id<JSQDemoViewControllerDelegate> delegateModal;
-    var  demoData : DemoModelData!
+    var  delegateModal  : JSQDemoViewControllerDelegate?
+    var  demoData       : DemoModelData!
     
     
     // ----------------------------------------------------------------------
@@ -71,5 +77,26 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
         *  self.inputToolbar.maximumHeight = 150;
         */
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Delegate not use here. TODO: see swift 2.0 ways as soon as available.
+        if let delegate = self.delegateModal {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Stop, target: self, action: Selector("closePressed:"))
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        /**
+        *  Enable/disable springy bubbles, default is NO.
+        *  You must set this from `viewDidAppear:`
+        *  Note: this feature is mostly stable, but still experimental
+        */
+        self.collectionView.collectionViewLayout.springinessEnabled = NSUserDefaults.springinessSetting()
+    }
+
     
 }
