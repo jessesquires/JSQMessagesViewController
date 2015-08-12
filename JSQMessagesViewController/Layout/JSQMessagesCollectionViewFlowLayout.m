@@ -95,7 +95,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     else {
         _messageBubbleLeftRightMargin = 50.0f;
     }
-    
+    _messageBubbleExtraVerticalSpace = 2.0f;
     _messageBubbleTextViewFrameInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 6.0f);
     _messageBubbleTextViewTextContainerInsets = UIEdgeInsetsMake(7.0f, 14.0f, 7.0f, 14.0f);
     
@@ -466,12 +466,12 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         CGFloat verticalContainerInsets = self.messageBubbleTextViewTextContainerInsets.top + self.messageBubbleTextViewTextContainerInsets.bottom;
         CGFloat verticalFrameInsets = self.messageBubbleTextViewFrameInsets.top + self.messageBubbleTextViewFrameInsets.bottom;
         
-        //  add extra 2 points of space, because `boundingRectWithSize:` is slightly off
+        //  add extra space, because `boundingRectWithSize:` is slightly off
         //  not sure why. magix. (shrug) if you know, submit a PR
-        CGFloat verticalInsets = verticalContainerInsets + verticalFrameInsets + 2.0f;
+        CGFloat verticalInsets = verticalContainerInsets + verticalFrameInsets + self.messageBubbleExtraVerticalSpace;
         
-        //  same as above, an extra 2 points of magix
-        CGFloat finalWidth = MAX(stringSize.width + horizontalInsetsTotal, self.bubbleImageAssetWidth) + 2.0f;
+        //  same as above, an extra magix extra space
+        CGFloat finalWidth = MAX(stringSize.width + horizontalInsetsTotal, self.bubbleImageAssetWidth) + self.messageBubbleExtraVerticalSpace;
         
         finalSize = CGSizeMake(finalWidth, stringSize.height + verticalInsets);
     }

@@ -119,6 +119,19 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
 @property (assign, nonatomic) CGFloat messageBubbleLeftRightMargin;
 
 /**
+ *  Add extra points of vertical space to calculation of messageBubbleSize,
+ *  because `boundingRectWithSize:` is slightly off. not sure why. magix. (shrug) if you know, submit a PR
+ *  This value is exposed because the right choice could depend on your choice of messageBubble font. If you
+ *  find that your chat text is for example magically cut off or has too much space, adjust this value
+ *  until you find the right visual fit
+ *
+ *  @discussion Default value is 2.0f.
+ *
+ *  @warning Adjusting this value is an advanced endeavour and not recommended.
+ */
+@property (assign, nonatomic) CGFloat messageBubbleExtraVerticalSpace;
+
+/**
  *  The inset of the frame of the text view within the `messageBubbleContainerView` of each `JSQMessagesCollectionViewCell`.
  *  The inset values should be positive and are applied in the following ways:
  *  
