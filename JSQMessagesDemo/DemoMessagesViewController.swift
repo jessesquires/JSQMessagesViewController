@@ -285,9 +285,41 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
 
     
     
+    // ----------------------------------------------------------------------
+    // MARK: - JSQMessagesViewController method overrides
+    // ----------------------------------------------------------------------
     
+    override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
     
+        /**
+        *  Sending a message. Your implementation of this method should do *at least* the following:
+        *
+        *  1. Play sound (optional)
+        *  2. Add new id<JSQMessageData> object to your data source
+        *  3. Call `finishSendingMessage`
+        */
+        JSQSystemSoundPlayer.jsq_playMessageSentSound()
+        
+        let message : JSQMessage = JSQMessage(    senderId: senderId         ,
+                                        senderDisplayName: senderDisplayName,
+                                                     date: date             ,
+                                                     text: text)
+        self.demoData.messages.append(message)
+        
+        self.finishSendingMessageAnimated(true)
+    }
     
+    override func didPressAccessoryButton( sender : UIButton ) {
+        let  sheet : UIActionSheet = UIActionSheet(title: "Media messages"  ,
+                                                delegate: self              ,
+                                       cancelButtonTitle: "Cancel"          ,
+                                  destructiveButtonTitle: nil               ,
+                                       otherButtonTitles: "Send photo", "Send location", "Send video")
+        
+        
+        sheet.showFromToolbar(self.inputToolbar)
+    }
+
     
     
     
