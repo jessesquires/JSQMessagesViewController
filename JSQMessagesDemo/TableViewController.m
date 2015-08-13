@@ -17,6 +17,8 @@
 //
 
 #import "TableViewController.h"
+#import "JSQMessages-Swift.h"
+
 
 @implementation TableViewController
 

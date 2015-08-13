@@ -11,9 +11,6 @@ import UIKit
 
 
 
-protocol JSQDemoViewControllerDelegate {
-    func didDismissJSQDemoViewController( vc : DemoMessagesViewController )
-}
 
 
 class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDelegate {

@@ -4,4 +4,4 @@
 
 #import "JSQMessages.h"
 #import "NSUserDefaults+DemoSettings.h"
-
+#import "JSQDemoViewControllerDelegate.h"
