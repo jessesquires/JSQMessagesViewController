@@ -21,7 +21,7 @@
 @class JSQMessagesComposerTextView;
 
 /**
- *  A delegate object used to notify the receiver paste events from a JSQMessagesComposerTextView.
+ *  A delegate object used to notify the receiver of paste events from a JSQMessagesComposerTextView.
  */
 @protocol JSQMessagesComposerTextViewPasteDelegate <NSObject>
 
