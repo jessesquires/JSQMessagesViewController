@@ -18,9 +18,6 @@
 
 #import "DemoMessagesViewController.h"
 
-@interface DemoMessagesViewController () <JSQMessagesComposerTextViewPasteDelegate>
-@end
-
 @implementation DemoMessagesViewController
 
 #pragma mark - View lifecycle

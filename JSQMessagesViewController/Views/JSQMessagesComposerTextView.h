@@ -21,16 +21,18 @@
 @class JSQMessagesComposerTextView;
 
 /**
- * A delegate used to forward custom notifications from `JSQMessagesComposerTextView`.
+ *  A delegate object used to notify the receiver paste events from a JSQMessagesComposerTextView.
  */
 @protocol JSQMessagesComposerTextViewPasteDelegate <NSObject>
 
 /**
- * Asks the delegate whether or not the `textView` should use the original implementation of -[UITextView paste].
- * If you want any custom pasting behavior, implement this delegate method and return `NO`
- * when you want to handle pasting yourself.
+ *  Asks the delegate whether or not the `textView` should use the original implementation of `-[UITextView paste]`.
+ *
+ *  @discussion Use this delegate method to implement custom pasting behavior. You should return NO when you want
+ *  to handle pasting. Return YES to defer functionality to the textView.
  */
 - (BOOL)composerTextView:(JSQMessagesComposerTextView *)textView shouldPasteWithSender:(id)sender;
+
 @end
 
 /**
@@ -50,7 +52,7 @@
 @property (strong, nonatomic) UIColor *placeHolderTextColor;
 
 /**
- * A delegate that conforms to `JSQMessagesComposerTextViewDelegate`. The default value is `nil`.
+ *  The object that acts as the paste delegate of the text view.
  */
 @property (weak, nonatomic) id<JSQMessagesComposerTextViewPasteDelegate> pasteDelegate;
 
