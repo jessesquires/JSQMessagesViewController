@@ -101,6 +101,7 @@
 		88A2601919D8E18400924534 /* JSQMessagesTypingIndicatorFooterViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A2600019D8E18400924534 /* JSQMessagesTypingIndicatorFooterViewTests.m */; };
 		88A2601B19D8E45600924534 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88A2601A19D8E45600924534 /* Info.plist */; };
 		88A901B619F618B100F99777 /* JSQMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A901B519F618B100F99777 /* JSQMediaItem.m */; };
+		88B5C41F1B7C422900EC79D4 /* JSQMessagesBubblesSizeCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B5C41E1B7C422900EC79D4 /* JSQMessagesBubblesSizeCalculator.m */; };
 		88C00A4E1A44D4C600B004B3 /* JSQLocationMediaItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C00A4D1A44D4C600B004B3 /* JSQLocationMediaItemTests.m */; };
 		88C00A501A44D4D800B004B3 /* JSQPhotoMediaItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C00A4F1A44D4D800B004B3 /* JSQPhotoMediaItemTests.m */; };
 		88C00A521A44D4E500B004B3 /* JSQVideoMediaItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C00A511A44D4E500B004B3 /* JSQVideoMediaItemTests.m */; };
@@ -260,6 +261,9 @@
 		88A2601A19D8E45600924534 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88A901B419F618B100F99777 /* JSQMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMediaItem.h; sourceTree = "<group>"; };
 		88A901B519F618B100F99777 /* JSQMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMediaItem.m; sourceTree = "<group>"; };
+		88B5C41D1B7C422900EC79D4 /* JSQMessagesBubblesSizeCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesBubblesSizeCalculator.h; sourceTree = "<group>"; };
+		88B5C41E1B7C422900EC79D4 /* JSQMessagesBubblesSizeCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesBubblesSizeCalculator.m; sourceTree = "<group>"; };
+		88B5C4201B7C424700EC79D4 /* JSQMessagesBubbleSizeCalculating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesBubbleSizeCalculating.h; sourceTree = "<group>"; };
 		88C00A4D1A44D4C600B004B3 /* JSQLocationMediaItemTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQLocationMediaItemTests.m; sourceTree = "<group>"; };
 		88C00A4F1A44D4D800B004B3 /* JSQPhotoMediaItemTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQPhotoMediaItemTests.m; sourceTree = "<group>"; };
 		88C00A511A44D4E500B004B3 /* JSQVideoMediaItemTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQVideoMediaItemTests.m; sourceTree = "<group>"; };
@@ -473,6 +477,9 @@
 		88A25F6F19D8E01A00924534 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
+				88B5C4201B7C424700EC79D4 /* JSQMessagesBubbleSizeCalculating.h */,
+				88B5C41D1B7C422900EC79D4 /* JSQMessagesBubblesSizeCalculator.h */,
+				88B5C41E1B7C422900EC79D4 /* JSQMessagesBubblesSizeCalculator.m */,
 				88A25F7019D8E01A00924534 /* JSQMessagesCollectionViewFlowLayout.h */,
 				88A25F7119D8E01A00924534 /* JSQMessagesCollectionViewFlowLayout.m */,
 				88A25F7219D8E01A00924534 /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.h */,
@@ -832,6 +839,7 @@
 				88A25F3C19D8DF2500924534 /* main.m in Sources */,
 				88A25F3719D8DF2500924534 /* AppDelegate.m in Sources */,
 				886FFD2E19E9A65D00EB8485 /* UIDevice+JSQMessages.m in Sources */,
+				88B5C41F1B7C422900EC79D4 /* JSQMessagesBubblesSizeCalculator.m in Sources */,
 				88A25FB619D8E01A00924534 /* NSString+JSQMessages.m in Sources */,
 				88A901B619F618B100F99777 /* JSQMediaItem.m in Sources */,
 				88A25FCC19D8E01A00924534 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
