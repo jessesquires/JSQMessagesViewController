@@ -144,10 +144,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     [self jsq_updateCollectionViewInsets];
 
-    self.keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextView:self.inputToolbar.contentView.textView
-                                                                          contextView:self.view
-                                                                 panGestureRecognizer:self.collectionView.panGestureRecognizer
-                                                                             delegate:self];
+    // Don't set keyboardController if client creates custom content view via -loadToolbarContentView
+    if (self.inputToolbar.contentView.textView != nil) {
+        self.keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextView:self.inputToolbar.contentView.textView
+                                                                              contextView:self.view
+                                                                     panGestureRecognizer:self.collectionView.panGestureRecognizer
+                                                                                 delegate:self];
+    }
 }
 
 - (void)dealloc
