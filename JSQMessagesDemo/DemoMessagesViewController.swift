@@ -511,8 +511,117 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
     }
     
     // ----------------------------------------------------------------------
-    // MARK: - UICollectionView DataSource
+    // MARK: - UICollectionView Delegate
     // ----------------------------------------------------------------------
+    
+    
+    // ----------------------------------------------------------------------
+    // MARK: - Custom menu items
+    // ----------------------------------------------------------------------
+    
+    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject!) -> Bool {
+        if action == Selector("customAction:") {
+            return true
+        }
+        return super.collectionView(collectionView, canPerformAction:action, forItemAtIndexPath:indexPath, withSender:sender)
+    }
+    
+    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject!) {
+        if action == Selector("customAction:") {
+            self.customAction(sender)
+            return
+        }
+        
+        super.collectionView(collectionView, performAction:action, forItemAtIndexPath:indexPath, withSender:sender)
+    }
+    
+    func customAction(sender : AnyObject) {
+    
+        // TODO: NSLog("Custom action received! Sender: %@", sender)
+        let  alertView = UIAlertView(  title: "Custom Action",
+                                     message:nil,
+                                    delegate:nil,
+                           cancelButtonTitle:"OK")
+        
+        alertView.show()
+    }
+    
+    // ----------------------------------------------------------------------
+    // MARK: - JSQMessages collection view flow layout delegate
+    // ----------------------------------------------------------------------
+    
+    // ----------------------------------------------------------------------
+    // MARK: - Adjusting cell label heights
+    // ----------------------------------------------------------------------
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        
+        /**
+        *  Each label in a cell has a `height` delegate method that corresponds to its text dataSource method
+        */
+        
+        /**
+        *  This logic should be consistent with what you return from `attributedTextForCellTopLabelAtIndexPath:`
+        *  The other label height delegate methods should follow similarly
+        *
+        *  Show a timestamp for every 3rd message
+        */
+        if (indexPath.item % 3 == 0) {
+            return kJSQMessagesCollectionViewCellLabelHeightDefault
+        }
+        
+        return 0.0
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        
+        /**
+        *  iOS7-style sender name labels
+        */
+        
+        let currentMessage : JSQMessage = self.demoData.messages[indexPath.item]
+        if currentMessage.senderId == self.senderId {
+            return 0.0
+        }
+        
+        if indexPath.item - 1 > 0 {
+            let previousMessage : JSQMessage = self.demoData.messages[indexPath.item - 1]
+            if previousMessage.senderId == currentMessage.senderId {
+                return 0.0
+            }
+        }
+        
+        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        return 0.0
+    }
+    
+    
+    // ----------------------------------------------------------------------
+    // MARK: - Responding to collection view tap events
+    // ----------------------------------------------------------------------
+    
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, header headerView: JSQMessagesLoadEarlierHeaderView!, didTapLoadEarlierMessagesButton sender: UIButton!) {
+        NSLog("Load earlier messages!")
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, didTapAvatarImageView avatarImageView: UIImageView!, atIndexPath indexPath: NSIndexPath!) {
+        NSLog("Tapped avatar!")
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath!) {
+        NSLog("Tapped message bubble!")
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, didTapCellAtIndexPath indexPath: NSIndexPath!, touchLocation: CGPoint) {
+        NSLog("Tapped cell at %@!", NSStringFromCGPoint(touchLocation))
+    }
+    
+    
+    
     
     
 }
