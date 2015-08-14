@@ -78,7 +78,7 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Delegate not use here. TODO: see swift 2.0 ways as soon as available.
+        // Delegate var created but not used here. TODO: see swift 2.0 ways as soon as available.
         if let delegate = self.delegateModal {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Stop, target: self, action: Selector("closePressed:"))
         }
@@ -577,7 +577,7 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
         */
         
         let currentMessage : JSQMessage = self.demoData.messages[indexPath.item]
-        if currentMessage.senderId == self.senderId {
+        if  currentMessage.senderId == self.senderId {
             return 0.0
         }
         
