@@ -121,6 +121,12 @@
                   CGPoint coordinatePoint = [snapshot pointForCoordinate:location.coordinate];
                   UIImage *image = snapshot.image;
                   
+                  CGPoint pinCenterOffset = pin.centerOffset;
+                  coordinatePoint.x -= pin.bounds.size.width / 2.0;
+                  coordinatePoint.y -= pin.bounds.size.height / 2.0;
+                  coordinatePoint.x += pinCenterOffset.x;
+                  coordinatePoint.y += pinCenterOffset.y;
+                  
                   UIGraphicsBeginImageContextWithOptions(image.size, YES, image.scale);
                   {
                       [image drawAtPoint:CGPointZero];
