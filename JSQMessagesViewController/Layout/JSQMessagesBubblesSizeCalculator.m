@@ -32,6 +32,10 @@
 
 @property (assign, nonatomic, readonly) NSUInteger minimumBubbleWidth;
 
+@property (assign, nonatomic, readonly) BOOL usesFixedWidthMessageBubbles;
+
+@property (assign, nonatomic) NSInteger rotationIndependentLayoutWidth;
+
 @end
 
 
@@ -39,7 +43,7 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithCache:(NSCache *)cache minimumBubbleWidth:(NSUInteger)minimumBubbleWidth
+- (instancetype)initWithCache:(NSCache *)cache minimumBubbleWidth:(NSUInteger)minimumBubbleWidth usesFixedWidthMessageBubbles:(BOOL)fixedWidthMessageBubbles
 {
     NSParameterAssert(cache != nil);
     NSParameterAssert(minimumBubbleWidth > 0);
@@ -48,6 +52,7 @@
     if (self) {
         _cache = cache;
         _minimumBubbleWidth = minimumBubbleWidth;
+        _usesFixedWidthMessageBubbles = fixedWidthMessageBubbles;
     }
     return self;
 }
@@ -57,8 +62,10 @@
     NSCache *cache = [NSCache new];
     cache.name = @"JSQMessagesBubblesSizeCalculator.cache";
     cache.countLimit = 200;
-    return [self initWithCache:cache
-            minimumBubbleWidth:[UIImage jsq_bubbleCompactImage].size.width];
+	return [self initWithCache:cache
+			minimumBubbleWidth:[UIImage jsq_bubbleCompactImage].size.width
+  usesFixedWidthMessageBubbles:NO
+			];
 }
 
 #pragma mark - NSObject
@@ -99,7 +106,7 @@
         CGFloat horizontalFrameInsets = layout.messageBubbleTextViewFrameInsets.left + layout.messageBubbleTextViewFrameInsets.right;
 
         CGFloat horizontalInsetsTotal = horizontalContainerInsets + horizontalFrameInsets + spacingBetweenAvatarAndBubble;
-        CGFloat maximumTextWidth = layout.itemWidth - avatarSize.width - layout.messageBubbleLeftRightMargin - horizontalInsetsTotal;
+        CGFloat maximumTextWidth = [self textBubbleWidth:layout] - avatarSize.width - layout.messageBubbleLeftRightMargin - horizontalInsetsTotal;
 
         CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
                                                              options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
@@ -113,10 +120,10 @@
 
         //  add extra 2 points of space, because `boundingRectWithSize:` is slightly off
         //  not sure why. magix. (shrug) if you know, submit a PR
-        CGFloat verticalInsets = verticalContainerInsets + verticalFrameInsets + 2.0f;
+        CGFloat verticalInsets = verticalContainerInsets + verticalFrameInsets + [self magixInsetAddition];
 
         //  same as above, an extra 2 points of magix
-        CGFloat finalWidth = MAX(stringSize.width + horizontalInsetsTotal, self.minimumBubbleWidth) + 2.0f;
+        CGFloat finalWidth = MAX(stringSize.width + horizontalInsetsTotal, self.minimumBubbleWidth) + [self magixInsetAddition];
 
         finalSize = CGSizeMake(finalWidth, stringSize.height + verticalInsets);
     }
@@ -136,6 +143,30 @@
     }
     
     return layout.incomingAvatarViewSize;
+}
+
+- (NSInteger)magixInsetAddition {
+    //  Creating a getter for this magix value because we are using it in a couple of places.
+    //
+    //  add extra 2 points of space, because `boundingRectWithSize:` is slightly off
+    //  not sure why. magix. (shrug) if you know, submit a PR
+    return 2;
+}
+
+- (CGFloat)textBubbleWidth:(JSQMessagesCollectionViewFlowLayout *)layout
+{
+    if (_usesFixedWidthMessageBubbles) {
+        if (_rotationIndependentLayoutWidth == 0) {
+            //  Adding the magix here because we're using it in messageBubbleSizeForItemAtIndexPath
+            NSInteger sectionInset = layout.sectionInset.left + layout.sectionInset.right + [self magixInsetAddition];
+            CGFloat width = CGRectGetWidth([(UICollectionView *)[layout collectionView] bounds]) - sectionInset;
+            CGFloat height = CGRectGetHeight([(UICollectionView *)[layout collectionView] bounds]) - sectionInset;
+            CGFloat minValue = (width<height)?width:height;
+            _rotationIndependentLayoutWidth = minValue;
+        }
+        return _rotationIndependentLayoutWidth;
+    }
+    return layout.itemWidth;
 }
 
 @end
