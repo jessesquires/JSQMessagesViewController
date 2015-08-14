@@ -324,14 +324,14 @@ class DemoMessagesViewController : JSQMessagesViewController, UIActionSheetDeleg
         }
         
         switch (buttonIndex) {
-        case 0:
+        case 1:
             self.demoData.addPhotoMediaMessage()
             
-        case 1:
+        case 2:
             weak var weakView : UICollectionView? = self.collectionView
             self.demoData.addLocationMediaMessageCompletion( { weakView?.reloadData() } )
             
-        case 2:
+        case 3:
             self.demoData.addVideoMediaMessage()
             
         default:
