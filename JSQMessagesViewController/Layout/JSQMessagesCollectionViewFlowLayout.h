@@ -23,6 +23,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "JSQMessagesBubbleSizeCalculating.h"
+
 @class JSQMessagesCollectionView;
 
 
@@ -62,6 +64,12 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
 #pragma clang diagnostic ignored "-Wincompatible-property-type"
 @property (readonly, nonatomic) JSQMessagesCollectionView *collectionView;
 #pragma clang diagnostic pop
+
+/**
+ *  The object that the layout uses to calculate bubble sizes.
+ *  The default value is an instance of `JSQMessagesBubblesSizeCalculator`.
+ */
+@property (strong, nonatomic) id<JSQMessagesBubbleSizeCalculating> bubbleSizeCalculator;
 
 /**
  *  Specifies whether or not the layout should enable spring behavior dynamics for its items using `UIDynamics`.
@@ -181,12 +189,15 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
 
 /**
  *  Computes and returns the size of the `messageBubbleImageView` property of a `JSQMessagesCollectionViewCell`
- *  at the specified indexPath. The returned size contains the required dimensions to display the entire message contents. 
- *  Note, this is *not* the entire cell, but only its message bubble.
+ *  at the specified indexPath.
  *
  *  @param indexPath The index path of the item to be displayed.
  *
  *  @return The size of the message bubble for the item displayed at indexPath.
+ *
+ *  @discussion The layout uses its `bubbleSizeCalculator` object to perform this computation.
+ *  The returned size contains the required dimensions to display the entire message contents.
+ *  Note, this is *not* the entire cell, but only its message bubble.
  */
 - (CGSize)messageBubbleSizeForItemAtIndexPath:(NSIndexPath *)indexPath;
 
