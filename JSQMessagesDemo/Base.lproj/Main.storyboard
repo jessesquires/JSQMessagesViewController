@@ -295,7 +295,7 @@
         <!--Demo Messages View Controller-->
         <scene sceneID="gOX-cv-CuN">
             <objects>
-                <viewController storyboardIdentifier="DemoVC" id="JdJ-0X-ZL8" customClass="DemoMessagesViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DemoVC" id="JdJ-0X-ZL8" customClass="DemoMessagesViewController" customModule="JSQMessages" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TE8-r2-pE8"/>
                         <viewControllerLayoutGuide type="bottom" id="H2n-HB-Ssl"/>
