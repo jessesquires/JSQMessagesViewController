@@ -73,8 +73,13 @@
      *  Register custom menu actions for cells.
      */
     [JSQMessagesCollectionViewCell registerMenuAction:@selector(customAction:)];
-    [UIMenuController sharedMenuController].menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action" action:@selector(customAction:)] ];
+    [UIMenuController sharedMenuController].menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action"
+                                                                                      action:@selector(customAction:)] ];
 
+    /**
+     *  OPT-IN: allow cells to be deleted
+     */
+    [JSQMessagesCollectionViewCell registerMenuAction:@selector(delete:)];
 
     /**
      *  Customize your toolbar buttons

@@ -136,7 +136,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
     self.incomingMediaCellIdentifier = [JSQMessagesCollectionViewCellIncoming mediaCellReuseIdentifier];
 
-    [JSQMessagesCollectionViewCell registerMenuAction:@selector(delete:)];
+    // NOTE: let this behavior be opt-in for now
+    // [JSQMessagesCollectionViewCell registerMenuAction:@selector(delete:)];
 
     self.showTypingIndicator = NO;
 
@@ -616,18 +617,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         [[UIPasteboard generalPasteboard] setString:[messageData text]];
     }
     else if (action == @selector(delete:)) {
-        NSLog(@"DELETE = %@", indexPath);
-        
         [collectionView.dataSource collectionView:collectionView didDeleteMessageAtIndexPath:indexPath];
 
-        [collectionView performBatchUpdates:^{
-            [collectionView deleteItemsAtIndexPaths:@[indexPath]];
-
-        } completion:^(BOOL finished) {
-            [collectionView.collectionViewLayout invalidateLayout];
-            [collectionView reloadItemsAtIndexPaths:@[indexPath]];
-        }];
-
+        [collectionView deleteItemsAtIndexPaths:@[indexPath]];
+        [collectionView.collectionViewLayout invalidateLayout];
     }
 }
 
