@@ -18,7 +18,6 @@
 
 #import "DemoMessagesViewController.h"
 
-
 @implementation DemoMessagesViewController
 
 #pragma mark - View lifecycle
@@ -44,6 +43,7 @@
     self.senderId = kJSQDemoAvatarIdSquires;
     self.senderDisplayName = kJSQDemoAvatarDisplayNameSquires;
     
+    self.inputToolbar.contentView.textView.pasteDelegate = self;
     
     /**
      *  Load up our fake data for the demo
@@ -626,6 +626,25 @@
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation
 {
     NSLog(@"Tapped cell at %@!", NSStringFromCGPoint(touchLocation));
+}
+
+#pragma mark - JSQMessagesComposerTextViewPasteDelegate methods
+
+
+- (BOOL)composerTextView:(JSQMessagesComposerTextView *)textView shouldPasteWithSender:(id)sender
+{
+    if ([UIPasteboard generalPasteboard].image) {
+        // If there's an image in the pasteboard, construct a media item with that image and `send` it.
+        JSQPhotoMediaItem *item = [[JSQPhotoMediaItem alloc] initWithImage:[UIPasteboard generalPasteboard].image];
+        JSQMessage *message = [[JSQMessage alloc] initWithSenderId:self.senderId
+                                                 senderDisplayName:self.senderDisplayName
+                                                              date:[NSDate date]
+                                                             media:item];
+        [self.demoData.messages addObject:message];
+        [self finishSendingMessage];
+        return NO;
+    }
+    return YES;
 }
 
 @end
