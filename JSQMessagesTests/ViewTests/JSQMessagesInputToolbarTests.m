@@ -12,8 +12,9 @@
 
 #import "JSQMessagesViewController.h"
 #import "JSQMessagesInputToolbar.h"
-#import "DemoMessagesViewController.h"
+#import "JSQMessages-Swift.h"
 
+@class DemoMessagesViewController;
 
 @interface JSQMessagesInputToolbarTests : XCTestCase
 @end

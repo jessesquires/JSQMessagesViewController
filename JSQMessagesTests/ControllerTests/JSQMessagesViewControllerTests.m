@@ -13,7 +13,8 @@
 #import <OCMock/OCMock.h>
 
 #import "JSQMessagesViewController.h"
-#import "DemoMessagesViewController.h"
+
+#import "JSQMessages-Swift.h"
 
 
 @interface JSQMessagesViewController ()
