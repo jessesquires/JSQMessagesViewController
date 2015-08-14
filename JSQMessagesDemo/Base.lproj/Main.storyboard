@@ -329,7 +329,7 @@
         <!--Demo Messages View Controller-->
         <scene sceneID="Rr5-W8-Xyh">
             <objects>
-                <viewController id="2Qx-iu-03V" customClass="DemoMessagesViewController" sceneMemberID="viewController">
+                <viewController id="2Qx-iu-03V" customClass="DemoMessagesViewController" customModule="JSQMessages" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hTc-sT-can"/>
                         <viewControllerLayoutGuide type="bottom" id="BPF-eU-3uQ"/>
