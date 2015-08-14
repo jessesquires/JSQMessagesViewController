@@ -46,6 +46,9 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 @property (assign, nonatomic) CGFloat latestDelta;
 
+@property (assign, nonatomic, readonly) NSUInteger bubbleImageAssetWidth;
+@property (assign, nonatomic) NSUInteger rotationIndependentLayoutWidth;
+
 - (void)jsq_configureFlowLayout;
 
 - (void)jsq_didReceiveApplicationMemoryWarningNotification:(NSNotification *)notification;
@@ -97,6 +100,8 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     _springinessEnabled = NO;
     _springResistanceFactor = 1000;
+
+    _usesFixedWidthMessageBubbles = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(jsq_didReceiveApplicationMemoryWarningNotification:)
@@ -154,6 +159,17 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 {
     NSParameterAssert(bubbleSizeCalculator != nil);
     _bubbleSizeCalculator = bubbleSizeCalculator;
+}
+
+- (void)setUsesFixedWidthMessageBubbles:(BOOL)enabled
+{
+	if (_usesFixedWidthMessageBubbles == enabled) {
+		return;
+	}
+
+	_usesFixedWidthMessageBubbles = enabled;
+
+	[self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
 - (void)setSpringinessEnabled:(BOOL)springinessEnabled
@@ -220,6 +236,30 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 }
 
 #pragma mark - Getters
+
+- (NSInteger)magixInsetAddition {
+	//  Creating a getter for this magix value because we are using it in a couple of places.
+	//
+	//  add extra 2 points of space, because `boundingRectWithSize:` is slightly off
+	//  not sure why. magix. (shrug) if you know, submit a PR
+	return 2;
+}
+
+- (CGFloat)textBubbleWidth
+{
+	if (self.usesFixedWidthMessageBubbles) {
+		if (self.rotationIndependentLayoutWidth == 0) {
+			//  Adding the magix here because we're using it in messageBubbleSizeForItemAtIndexPath
+			NSInteger sectionInset = self.sectionInset.left + self.sectionInset.right + [self magixInsetAddition];
+			CGFloat width = CGRectGetWidth([(UICollectionView *)[self collectionView] bounds]) - sectionInset;
+			CGFloat height = CGRectGetHeight([(UICollectionView *)[self collectionView] bounds]) - sectionInset;
+			CGFloat minValue = (width<height)?width:height;
+			_rotationIndependentLayoutWidth = minValue;
+		}
+		return self.rotationIndependentLayoutWidth;
+	}
+	return [self itemWidth];
+}
 
 - (CGFloat)itemWidth
 {

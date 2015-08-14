@@ -99,7 +99,7 @@
         CGFloat horizontalFrameInsets = layout.messageBubbleTextViewFrameInsets.left + layout.messageBubbleTextViewFrameInsets.right;
 
         CGFloat horizontalInsetsTotal = horizontalContainerInsets + horizontalFrameInsets + spacingBetweenAvatarAndBubble;
-        CGFloat maximumTextWidth = layout.itemWidth - avatarSize.width - layout.messageBubbleLeftRightMargin - horizontalInsetsTotal;
+        CGFloat maximumTextWidth = layout.textBubbleWidth - avatarSize.width - layout.messageBubbleLeftRightMargin - horizontalInsetsTotal;
 
         CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
                                                              options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)

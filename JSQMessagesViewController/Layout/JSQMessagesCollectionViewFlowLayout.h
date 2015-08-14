@@ -83,6 +83,25 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
 @property (assign, nonatomic) BOOL springinessEnabled;
 
 /**
+ *  Specifies whether or not the layout should use the same width for bubbles in landscape & portrait.
+ *
+ *  @discussion The default value is `NO`, which makes the layout different in portrait vs landscape.
+ *  Set to `YES` if you want chat bubbles to use the portrait width in landscape.
+ *
+ *  When the set to `YES`, there will be a large gap between bubbles down the center.
+ *  However, this has the benefit of making the total scroll height of the layout the same, which means
+ *  that when you rotate from landscape <-> portrait, the same area of the conversation is on screen.
+ *  This is the behavior you can see in the iOS Messages app.
+ *
+ *  When the value it set to `NO` text bubbles change width/height significantly, depending upon bubble-text
+ *  length, resulting in a very different total scroll height, which means that when you rotate
+ *  from landscape <-> portrait, a different portion of the conversation is visible.
+ *
+ */
+@property (assign, nonatomic) BOOL usesFixedWidthMessageBubbles;
+
+
+/**
  *  Specifies the degree of resistence for the "springiness" of items in the layout. 
  *  This property has no effect if `springinessEnabled` is set to `NO`.
  *
@@ -95,6 +114,11 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
  *  Returns the width of items in the layout.
  */
 @property (readonly, nonatomic) CGFloat itemWidth;
+
+/**
+ *  Returns the width of the text bubbles in the layout.
+ */
+@property (readonly, nonatomic) CGFloat textBubbleWidth;
 
 /**
  *  The font used to display the body a text message in the message bubble of each 
