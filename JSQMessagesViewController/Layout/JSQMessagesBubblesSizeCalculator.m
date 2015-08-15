@@ -32,7 +32,7 @@
 
 @property (assign, nonatomic, readonly) NSUInteger minimumBubbleWidth;
 
-@property (assign, nonatomic, readonly) BOOL usesFixedWidthMessageBubbles;
+@property (assign, nonatomic, readonly) BOOL usesFixedWidthBubbles;
 
 @property (assign, nonatomic) NSInteger rotationIndependentLayoutWidth;
 
@@ -43,16 +43,18 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithCache:(NSCache *)cache minimumBubbleWidth:(NSUInteger)minimumBubbleWidth usesFixedWidthMessageBubbles:(BOOL)fixedWidthMessageBubbles
+- (instancetype)initWithCache:(NSCache *)cache
+           minimumBubbleWidth:(NSUInteger)minimumBubbleWidth
+        usesFixedWidthBubbles:(BOOL)fixedWidthBubbles
 {
     NSParameterAssert(cache != nil);
     NSParameterAssert(minimumBubbleWidth > 0);
-
+    
     self = [super init];
     if (self) {
         _cache = cache;
         _minimumBubbleWidth = minimumBubbleWidth;
-        _usesFixedWidthMessageBubbles = fixedWidthMessageBubbles;
+        _usesFixedWidthBubbles = fixedWidthBubbles;
     }
     return self;
 }
@@ -62,10 +64,9 @@
     NSCache *cache = [NSCache new];
     cache.name = @"JSQMessagesBubblesSizeCalculator.cache";
     cache.countLimit = 200;
-	return [self initWithCache:cache
-			minimumBubbleWidth:[UIImage jsq_bubbleCompactImage].size.width
-  usesFixedWidthMessageBubbles:NO
-			];
+    return [self initWithCache:cache
+            minimumBubbleWidth:[UIImage jsq_bubbleCompactImage].size.width
+         usesFixedWidthBubbles:NO];
 }
 
 #pragma mark - NSObject
@@ -153,18 +154,18 @@
     return 2;
 }
 
-- (CGFloat)textBubbleWidth:(JSQMessagesCollectionViewFlowLayout *)layout
+- (CGFloat)textBubbleWidthForLayout:(JSQMessagesCollectionViewFlowLayout *)layout
 {
-    if (_usesFixedWidthMessageBubbles) {
-        if (_rotationIndependentLayoutWidth == 0) {
+    if (self.usesFixedWidthBubbles) {
+        if (self.rotationIndependentLayoutWidth == 0) {
             //  Adding the magix here because we're using it in messageBubbleSizeForItemAtIndexPath
             NSInteger sectionInset = layout.sectionInset.left + layout.sectionInset.right + [self magixInsetAddition];
-            CGFloat width = CGRectGetWidth([(UICollectionView *)[layout collectionView] bounds]) - sectionInset;
-            CGFloat height = CGRectGetHeight([(UICollectionView *)[layout collectionView] bounds]) - sectionInset;
-            CGFloat minValue = (width<height)?width:height;
+            CGFloat width = CGRectGetWidth(layout.collectionView.bounds) - sectionInset;
+            CGFloat height = CGRectGetHeight(layout.collectionView.bounds) - sectionInset;
+            CGFloat minValue = MIN(width,height);
             _rotationIndependentLayoutWidth = minValue;
         }
-        return _rotationIndependentLayoutWidth;
+        return self.rotationIndependentLayoutWidth;
     }
     return layout.itemWidth;
 }
