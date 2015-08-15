@@ -11,6 +11,26 @@ body {
 	background-color: #F2F2F2;
 }
 
+a {
+   color: #37AE4A;
+}
+
+a:link {
+   color: #37AE4A;
+}
+
+a:hover {
+   color: #F2F2F2;
+}
+
+a.btn {
+   color: #F2F2F2;
+}
+
+a:link.btn {
+   color: #F2F2F2;
+}
+
 ul {
 	-webkit-padding-start: 0px !important;
 	-webkit-margin-before: 0px !important;
@@ -25,10 +45,10 @@ ul li {
 	margin-bottom: 0.5rem;
 }
 
-.center { 
-	float: none; 
-	margin-left: auto; 
-	margin-right: auto; 
+.center {
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
 	display: block;
 	text-align: center;
 }
