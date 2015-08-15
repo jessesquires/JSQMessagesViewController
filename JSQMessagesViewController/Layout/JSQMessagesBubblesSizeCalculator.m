@@ -45,7 +45,7 @@
 
 - (instancetype)initWithCache:(NSCache *)cache
            minimumBubbleWidth:(NSUInteger)minimumBubbleWidth
-        usesFixedWidthBubbles:(BOOL)fixedWidthBubbles
+        usesFixedWidthBubbles:(BOOL)usesFixedWidthBubbles
 {
     NSParameterAssert(cache != nil);
     NSParameterAssert(minimumBubbleWidth > 0);
@@ -54,7 +54,7 @@
     if (self) {
         _cache = cache;
         _minimumBubbleWidth = minimumBubbleWidth;
-        _usesFixedWidthBubbles = fixedWidthBubbles;
+        _usesFixedWidthBubbles = usesFixedWidthBubbles;
     }
     return self;
 }

@@ -37,6 +37,6 @@
  */
 - (instancetype)initWithCache:(NSCache *)cache
 		   minimumBubbleWidth:(NSUInteger)minimumBubbleWidth
-		usesFixedWidthBubbles:(BOOL)fixedWidthBubbles NS_DESIGNATED_INITIALIZER;
+		usesFixedWidthBubbles:(BOOL)usesFixedWidthBubbles NS_DESIGNATED_INITIALIZER;
 
 @end
