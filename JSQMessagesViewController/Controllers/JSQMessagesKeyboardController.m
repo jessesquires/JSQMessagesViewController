@@ -312,7 +312,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)jsq_handlePanGestureRecognizer:(UIPanGestureRecognizer *)pan
 {
-    CGPoint touch = [pan locationInView:self.contextView];
+    CGPoint touch = [pan locationInView:self.contextView.window];
 
     //  system keyboard is added to a new UIWindow, need to operate in window coordinates
     //  also, keyboard always slides from bottom of screen, not the bottom of a view
