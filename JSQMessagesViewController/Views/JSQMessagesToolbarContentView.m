@@ -156,12 +156,12 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
     [self setNeedsUpdateConstraints];
 }
 
-- (void)setRightBarButtonSpacing:(CGFloat)rightBarButtonSpacing{
-    self.rightHorizontalSpacingConstraint.constant = rightBarButtonSpacing;
+- (void)setRightContentPadding:(CGFloat)rightContentPadding{
+    self.rightHorizontalSpacingConstraint.constant = rightContentPadding;
 }
 
-- (void)setLeftBarButtonSpacing:(CGFloat)leftBarButtonSpacing{
-    self.leftHorizontalSpacingConstraint.constant = leftBarButtonSpacing;
+- (void)setLeftContentPadding:(CGFloat)leftContentPadding{
+    self.leftHorizontalSpacingConstraint.constant = leftContentPadding;
 }
 
 #pragma mark - Getters
@@ -176,12 +176,12 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
     return self.rightBarButtonContainerViewWidthConstraint.constant;
 }
 
-- (CGFloat)rightBarButtonSpacing
+- (CGFloat)rightContentPadding
 {
     return self.rightHorizontalSpacingConstraint.constant;
 }
 
-- (CGFloat)leftBarButtonSpacing
+- (CGFloat)leftContentPadding
 {
     return self.leftHorizontalSpacingConstraint.constant;
 }
