@@ -44,8 +44,14 @@
 
 - (void)setSelectedRange:(NSRange)selectedRange
 {
-    //  prevent selecting text
+    //  attempt to prevent selecting text
     [super setSelectedRange:NSMakeRange(NSNotFound, 0)];
+}
+
+- (NSRange)selectedRange
+{
+    //  attempt to prevent selecting text
+    return NSMakeRange(NSNotFound, NSNotFound);
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
