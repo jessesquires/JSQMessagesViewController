@@ -496,14 +496,14 @@
     if (!msg.isMediaMessage) {
         
         if ([msg.senderId isEqualToString:self.senderId]) {
-            cell.textView.textColor = [UIColor blackColor];
+            cell.textLabel.textColor = [UIColor blackColor];
         }
         else {
-            cell.textView.textColor = [UIColor whiteColor];
+            cell.textLabel.textColor = [UIColor whiteColor];
         }
-        
-        cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
-                                              NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
+
+        cell.textLabel.linkAttributes = @{ NSForegroundColorAttributeName : cell.textLabel.textColor,
+                NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     }
     
     return cell;

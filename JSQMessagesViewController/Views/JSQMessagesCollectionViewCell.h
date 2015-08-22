@@ -20,6 +20,7 @@
 
 #import "JSQMessagesLabel.h"
 #import "JSQMessagesCellTextView.h"
+#import "JSQMessagesCellLabel.h"
 
 @class JSQMessagesCollectionViewCell;
 
@@ -111,11 +112,11 @@
 @property (weak, nonatomic, readonly) JSQMessagesLabel *cellBottomLabel;
 
 /**
- *  Returns the text view of the cell. This text view contains the message body text.
+ *  Returns the text label of the cell. This text label contains the message body text.
  *
  *  @warning If mediaView returns a non-nil view, then this value will be `nil`.
  */
-@property (weak, nonatomic, readonly) JSQMessagesCellTextView *textView;
+@property (weak, nonatomic, readonly) JSQMessagesCellLabel *textLabel;
 
 /**
  *  Returns the bubble image view of the cell that is responsible for displaying message bubble images.

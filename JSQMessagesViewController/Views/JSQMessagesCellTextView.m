@@ -42,11 +42,6 @@
     self.textContainer.lineFragmentPadding = 0;
     self.linkTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor],
                                  NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
-
-    [self addObserver:self
-           forKeyPath:@"text"
-              options:NSKeyValueObservingOptionNew
-              context:nil];
 }
 
 - (void)setSelectedRange:(NSRange)selectedRange
@@ -80,19 +75,6 @@
     
     return YES;
 }
-
-
--(void) observeValueForKeyPath:(NSString *) keyPath
-                      ofObject:(id) object
-                        change:(NSDictionary *) change
-                       context:(void *) context
-{
-    if ([keyPath isEqualToString:@"text"]) {
-        [self highlightMentions];
-        [self highlightHashTags];
-    }
-}
-
 
 -(void) highlightMentions
 {
@@ -163,12 +145,6 @@
 
         self.attributedText = attributedString;
     }
-}
-
--(void)dealloc
-{
-    [self removeObserver:self
-              forKeyPath:@"text"];
 }
 
 @end

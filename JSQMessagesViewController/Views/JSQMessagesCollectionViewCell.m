@@ -25,7 +25,6 @@
 #import "UIView+JSQMessages.h"
 #import "UIDevice+JSQMessages.h"
 
-
 static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
 
@@ -37,7 +36,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
 @property (weak, nonatomic) IBOutlet UIView *messageBubbleContainerView;
 @property (weak, nonatomic) IBOutlet UIImageView *messageBubbleImageView;
-@property (weak, nonatomic) IBOutlet JSQMessagesCellTextView *textView;
+@property (weak, nonatomic) IBOutlet JSQMessagesCellLabel *textLabel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
@@ -132,24 +131,6 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     self.tapGestureRecognizer = tap;
 }
 
-- (void)dealloc
-{
-    _delegate = nil;
-
-    _cellTopLabel = nil;
-    _messageBubbleTopLabel = nil;
-    _cellBottomLabel = nil;
-
-    _textView = nil;
-    _messageBubbleImageView = nil;
-    _mediaView = nil;
-
-    _avatarImageView = nil;
-
-    [_tapGestureRecognizer removeTarget:nil action:NULL];
-    _tapGestureRecognizer = nil;
-}
-
 #pragma mark - Collection view cell
 
 - (void)prepareForReuse
@@ -160,9 +141,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     self.messageBubbleTopLabel.text = nil;
     self.cellBottomLabel.text = nil;
 
-    self.textView.dataDetectorTypes = UIDataDetectorTypeNone;
-    self.textView.text = nil;
-    self.textView.attributedText = nil;
+    self.textLabel.text = nil;
 
     self.avatarImageView.image = nil;
     self.avatarImageView.highlightedImage = nil;
@@ -179,12 +158,12 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
     JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
 
-    if (self.textView.font != customAttributes.messageBubbleFont) {
-        self.textView.font = customAttributes.messageBubbleFont;
+    if (self.textLabel.font != customAttributes.messageBubbleFont) {
+        self.textLabel.font = customAttributes.messageBubbleFont;
     }
 
-    if (!UIEdgeInsetsEqualToEdgeInsets(self.textView.textContainerInset, customAttributes.textViewTextContainerInsets)) {
-        self.textView.textContainerInset = customAttributes.textViewTextContainerInsets;
+    if (!UIEdgeInsetsEqualToEdgeInsets(self.textLabel.textInsets, customAttributes.textViewTextContainerInsets)) {
+        self.textLabel.textInsets = customAttributes.textViewTextContainerInsets;
     }
 
     self.textViewFrameInsets = customAttributes.textViewFrameInsets;
@@ -310,7 +289,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 - (void)setMediaView:(UIView *)mediaView
 {
     [self.messageBubbleImageView removeFromSuperview];
-    [self.textView removeFromSuperview];
+    [self.textLabel removeFromSuperview];
 
     [mediaView setTranslatesAutoresizingMaskIntoConstraints:NO];
     mediaView.frame = self.messageBubbleContainerView.bounds;

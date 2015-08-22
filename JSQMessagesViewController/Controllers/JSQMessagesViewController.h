@@ -30,7 +30,7 @@
  */
 @interface JSQMessagesViewController : UIViewController <JSQMessagesCollectionViewDataSource,
                                                          JSQMessagesCollectionViewDelegateFlowLayout,
-                                                         UITextViewDelegate>
+                                                         TTTAttributedLabelDelegate>
 
 /**
  *  Returns the collection view object managed by this view controller. 

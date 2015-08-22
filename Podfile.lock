@@ -1,13 +1,16 @@
 PODS:
   - JSQSystemSoundPlayer (2.0.1)
   - OCMock (3.1.2)
+  - TTTAttributedLabel (1.13.4)
 
 DEPENDENCIES:
   - JSQSystemSoundPlayer (~> 2.0)
   - OCMock
+  - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
+  TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
 
-COCOAPODS: 0.37.0
+COCOAPODS: 0.38.2
