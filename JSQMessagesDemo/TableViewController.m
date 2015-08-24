@@ -43,6 +43,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == 0) {
+        return 3;
+    }
     if (section == 2) {
         return 1;
     }
@@ -66,6 +69,9 @@
                 break;
             case 1:
                 cell.textLabel.text = @"Push programmatically";
+                break;
+            case 2:
+                cell.textLabel.text = @"Push 2-levels programmatically";
                 break;
         }
     }
@@ -122,6 +128,14 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
                 break;
+            case 2:
+            {
+                UIViewController *blank = [[UIViewController alloc] init];
+                [self.navigationController pushViewController:blank animated:NO];
+                [self.navigationController.view setBackgroundColor:[UIColor whiteColor]];
+                DemoMessagesViewController *vc = [DemoMessagesViewController messagesViewController];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }
     }
     else if (indexPath.section == 1) {
