@@ -1040,15 +1040,15 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_addActionToInteractivePopGestureRecognizer:(BOOL)addAction
 {
-    if (_currentInteractivePopGestureRecognizer) {
-        [_currentInteractivePopGestureRecognizer removeTarget:nil
+    if (self.currentInteractivePopGestureRecognizer) {
+        [self.currentInteractivePopGestureRecognizer removeTarget:nil
                                                        action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
-        _currentInteractivePopGestureRecognizer = nil;
+        self.currentInteractivePopGestureRecognizer = nil;
     }
     if (addAction) {
         [self.navigationController.interactivePopGestureRecognizer addTarget:self
                                                                       action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
-        _currentInteractivePopGestureRecognizer = self.navigationController.interactivePopGestureRecognizer;
+        self.currentInteractivePopGestureRecognizer = self.navigationController.interactivePopGestureRecognizer;
     }
 }
 
