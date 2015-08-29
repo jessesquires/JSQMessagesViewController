@@ -125,10 +125,12 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
     self.cellBottomLabel.font = [UIFont systemFontOfSize:11.0f];
     self.cellBottomLabel.textColor = [UIColor lightGrayColor];
+    self.textLabel.enabledTextCheckingTypes = NSTextCheckingAllTypes;
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
     [self addGestureRecognizer:tap];
     self.tapGestureRecognizer = tap;
+    self.tapGestureRecognizer.cancelsTouchesInView = NO;
 }
 
 #pragma mark - Collection view cell

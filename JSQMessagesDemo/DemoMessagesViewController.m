@@ -491,7 +491,7 @@
      *  Instead, override the properties you want on `self.collectionView.collectionViewLayout` from `viewDidLoad`
      */
     
-    JSQMessage *msg = [self.demoData.messages objectAtIndex:indexPath.item];
+    JSQMessage *msg = self.demoData.messages[indexPath.item];
     
     if (!msg.isMediaMessage) {
         
@@ -502,8 +502,17 @@
             cell.textLabel.textColor = [UIColor whiteColor];
         }
 
-        cell.textLabel.linkAttributes = @{ NSForegroundColorAttributeName : cell.textLabel.textColor,
+        cell.textLabel.linkAttributes = @{ (id)kCTForegroundColorAttributeName: [UIColor yellowColor],
                 NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
+
+        cell.textLabel.activeLinkAttributes = @{ (id)kCTForegroundColorAttributeName : [UIColor grayColor],
+                (id)kCTUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid),
+                NSBackgroundColorAttributeName: [UIColor colorWithRed:52.f/255.f
+                                                                green:152.f/255.f
+                                                                 blue:219.f/255.f
+                                                                alpha:0.3f]};
+        cell.textLabel.text = msg.text;
+        cell.textLabel.delegate = self;
     }
     
     return cell;
@@ -620,6 +629,11 @@
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation
 {
     NSLog(@"Tapped cell at %@!", NSStringFromCGPoint(touchLocation));
+}
+
+-(void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result
+{
+    NSLog(@"Attributed link tapped");
 }
 
 @end
