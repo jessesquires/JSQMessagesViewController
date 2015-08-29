@@ -16,7 +16,7 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import "JSQMessagesViewController.h"
+#import "JSQMessagesViewController+Private.h"
 
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
 
@@ -60,8 +60,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 @property (assign, nonatomic) BOOL jsq_isObserving;
 
 @property (strong, nonatomic) NSIndexPath *selectedIndexPathForMenu;
-
-- (void)jsq_configureMessagesViewController;
 
 - (NSString *)jsq_currentlyComposedMessageText;
 
@@ -119,14 +117,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     self.jsq_isObserving = NO;
 
-    self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
 
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
 
-    self.inputToolbar.delegate = self;
-    self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
-    self.inputToolbar.contentView.textView.delegate = self;
+	[self jsq_configureMessagesInputToolbar];
 
     self.automaticallyScrollsToMostRecentMessage = YES;
 
@@ -154,6 +149,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                                                      panGestureRecognizer:self.collectionView.panGestureRecognizer
                                                                                  delegate:self];
     }
+}
+
+- (void)jsq_configureMessagesInputToolbar
+{
+	self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
+	self.inputToolbar.delegate = self;
+	self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
+	self.inputToolbar.contentView.textView.delegate = self;
 }
 
 - (void)dealloc
