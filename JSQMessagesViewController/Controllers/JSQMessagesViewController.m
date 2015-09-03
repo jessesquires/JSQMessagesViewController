@@ -260,13 +260,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [self jsq_addActionToInteractivePopGestureRecognizer:NO];
     self.collectionView.collectionViewLayout.springinessEnabled = NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [self jsq_addActionToInteractivePopGestureRecognizer:NO];
     [self jsq_removeObservers];
     [self.keyboardController endListeningForKeyboard];
 }
@@ -774,8 +774,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         return;
     }
 
-    NSLog(@"PATH = %@", self.selectedIndexPathForMenu);
-
     //  per comment above in 'shouldShowMenuForItemAtIndexPath:'
     //  re-enable 'selectable', thus re-enabling data detectors if present
     JSQMessagesCollectionViewCell *selectedCell = (JSQMessagesCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:self.selectedIndexPathForMenu];
@@ -1040,11 +1038,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_addActionToInteractivePopGestureRecognizer:(BOOL)addAction
 {
-    if (self.currentInteractivePopGestureRecognizer) {
+    if (self.currentInteractivePopGestureRecognizer != nil) {
         [self.currentInteractivePopGestureRecognizer removeTarget:nil
-                                                       action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
+                                                           action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
         self.currentInteractivePopGestureRecognizer = nil;
     }
+
     if (addAction) {
         [self.navigationController.interactivePopGestureRecognizer addTarget:self
                                                                       action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
