@@ -61,6 +61,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @property (strong, nonatomic) NSIndexPath *selectedIndexPathForMenu;
 
+@property (weak, nonatomic) UIGestureRecognizer *currentInteractivePopGestureRecognizer;
+
 - (void)jsq_configureMessagesViewController;
 
 - (NSString *)jsq_currentlyComposedMessageText;
@@ -258,13 +260,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self jsq_addActionToInteractivePopGestureRecognizer:NO];
     self.collectionView.collectionViewLayout.springinessEnabled = NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    [self jsq_addActionToInteractivePopGestureRecognizer:NO];
     [self jsq_removeObservers];
     [self.keyboardController endListeningForKeyboard];
 }
@@ -1038,14 +1040,15 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_addActionToInteractivePopGestureRecognizer:(BOOL)addAction
 {
-    if (self.navigationController.interactivePopGestureRecognizer) {
-        [self.navigationController.interactivePopGestureRecognizer removeTarget:nil
-                                                                         action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
-        
-        if (addAction) {
-            [self.navigationController.interactivePopGestureRecognizer addTarget:self
-                                                                          action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
-        }
+    if (self.currentInteractivePopGestureRecognizer) {
+        [self.currentInteractivePopGestureRecognizer removeTarget:nil
+                                                       action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
+        self.currentInteractivePopGestureRecognizer = nil;
+    }
+    if (addAction) {
+        [self.navigationController.interactivePopGestureRecognizer addTarget:self
+                                                                      action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
+        self.currentInteractivePopGestureRecognizer = self.navigationController.interactivePopGestureRecognizer;
     }
 }
 
