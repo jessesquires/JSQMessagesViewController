@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2014 Erik Doernenburg and contributors
+ *  Copyright (c) 2014-2015 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -25,10 +25,13 @@
 
 - (instancetype)initWithTestCase:(id)aTestCase file:(NSString *)aFile line:(NSUInteger)aLine
 {
-    self = [super init];
-    testCase = aTestCase;
-    file = [aFile retain];
-    line = aLine;
+    if ((self = [super init]))
+    {
+        testCase = aTestCase;
+        file = [aFile retain];
+        line = aLine;
+    }
+    
     return self;
 }
 

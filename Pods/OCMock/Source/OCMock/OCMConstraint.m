@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2007-2014 Erik Doernenburg and contributors
+ *  Copyright (c) 2007-2015 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -134,8 +134,11 @@
 
 - (instancetype)initWithConstraintBlock:(BOOL (^)(id))aBlock
 {
-	self = [super init];
-	block = [aBlock copy];
+    if ((self = [super init]))
+    {
+        block = [aBlock copy];
+    }
+	
 	return self;
 }
 
@@ -146,7 +149,7 @@
 
 - (BOOL)evaluate:(id)value 
 {
-	return block(value);
+    return block ? block(value) : NO;
 }
 
 

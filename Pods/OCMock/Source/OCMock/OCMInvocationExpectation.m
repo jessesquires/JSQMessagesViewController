@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2014 Erik Doernenburg and contributors
+ *  Copyright (c) 2014-2015 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -37,19 +37,20 @@
     return isSatisfied;
 }
 
-- (BOOL)handleInvocation:(NSInvocation *)anInvocation
+- (void)handleInvocation:(NSInvocation *)anInvocation
 {
-    BOOL result = [super handleInvocation:anInvocation];
-    if(result)
+   [super handleInvocation:anInvocation];
+
+    if(matchAndReject)
     {
-        isSatisfied = !matchAndReject;
-        if(matchAndReject)
-        {
-            [NSException raise:NSInternalInconsistencyException format:@"%@: explicitly disallowed method invoked: %@",
-                    [self description], [anInvocation invocationDescription]];
-        }
+        isSatisfied = NO;
+        [NSException raise:NSInternalInconsistencyException format:@"%@: explicitly disallowed method invoked: %@",
+                [self description], [anInvocation invocationDescription]];
     }
-    return result;
+    else
+    {
+        isSatisfied = YES;
+    }
 }
 
 @end

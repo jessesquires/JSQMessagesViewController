@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2014 Erik Doernenburg and contributors
+ *  Copyright (c) 2014-2015 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -25,8 +25,11 @@
 
 - (id)init
 {
-    self = [super init];
-    invocationMatcher = [[OCMInvocationMatcher alloc] init];
+    if ((self = [super init]))
+    {
+        invocationMatcher = [[OCMInvocationMatcher alloc] init];
+    }
+    
     return self;
 }
 
@@ -36,5 +39,10 @@
     [mockObject verifyInvocation:invocationMatcher atLocation:self.location];
 }
 
+- (void)dealloc
+{
+	[_location release];
+	[super dealloc];
+}
 
 @end
