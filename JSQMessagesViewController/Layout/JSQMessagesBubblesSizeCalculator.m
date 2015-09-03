@@ -36,6 +36,11 @@
 
 @property (assign, nonatomic) NSInteger rotationIndependentLayoutWidth;
 
+//  Creating a getter for this magix value because we are using it in a couple of places.
+//  add extra 2 points of space, because `boundingRectWithSize:` is slightly off
+//  not sure why. magix. (shrug) if you know, submit a PR
+@property (nonatomic, readonly) NSInteger additionalInset;
+
 @end
 
 
@@ -46,6 +51,7 @@
 - (instancetype)initWithCache:(NSCache *)cache
            minimumBubbleWidth:(NSUInteger)minimumBubbleWidth
         usesFixedWidthBubbles:(BOOL)usesFixedWidthBubbles
+              additionalInset:(NSInteger)additionalInset
 {
     NSParameterAssert(cache != nil);
     NSParameterAssert(minimumBubbleWidth > 0);
@@ -55,6 +61,7 @@
         _cache = cache;
         _minimumBubbleWidth = minimumBubbleWidth;
         _usesFixedWidthBubbles = usesFixedWidthBubbles;
+        _additionalInset = additionalInset;
     }
     return self;
 }
@@ -66,7 +73,8 @@
     cache.countLimit = 200;
     return [self initWithCache:cache
             minimumBubbleWidth:[UIImage jsq_bubbleCompactImage].size.width
-         usesFixedWidthBubbles:NO];
+         usesFixedWidthBubbles:NO
+            additionalInset:2];
 }
 
 #pragma mark - NSObject
@@ -121,10 +129,10 @@
 
         //  add extra 2 points of space, because `boundingRectWithSize:` is slightly off
         //  not sure why. magix. (shrug) if you know, submit a PR
-        CGFloat verticalInsets = verticalContainerInsets + verticalFrameInsets + [self magixInsetAddition];
+        CGFloat verticalInsets = verticalContainerInsets + verticalFrameInsets + [self additionalInset];
 
         //  same as above, an extra 2 points of magix
-        CGFloat finalWidth = MAX(stringSize.width + horizontalInsetsTotal, self.minimumBubbleWidth) + [self magixInsetAddition];
+        CGFloat finalWidth = MAX(stringSize.width + horizontalInsetsTotal, self.minimumBubbleWidth) + [self additionalInset];
 
         finalSize = CGSizeMake(finalWidth, stringSize.height + verticalInsets);
     }
@@ -146,20 +154,12 @@
     return layout.incomingAvatarViewSize;
 }
 
-- (NSInteger)magixInsetAddition {
-    //  Creating a getter for this magix value because we are using it in a couple of places.
-    //
-    //  add extra 2 points of space, because `boundingRectWithSize:` is slightly off
-    //  not sure why. magix. (shrug) if you know, submit a PR
-    return 2;
-}
-
 - (CGFloat)textBubbleWidthForLayout:(JSQMessagesCollectionViewFlowLayout *)layout
 {
     if (self.usesFixedWidthBubbles) {
         if (self.rotationIndependentLayoutWidth == 0) {
             //  Adding the magix here because we're using it in messageBubbleSizeForItemAtIndexPath
-            NSInteger sectionInset = layout.sectionInset.left + layout.sectionInset.right + [self magixInsetAddition];
+            NSInteger sectionInset = layout.sectionInset.left + layout.sectionInset.right + [self additionalInset];
             CGFloat width = CGRectGetWidth(layout.collectionView.bounds) - sectionInset;
             CGFloat height = CGRectGetHeight(layout.collectionView.bounds) - sectionInset;
             CGFloat minValue = MIN(width,height);
