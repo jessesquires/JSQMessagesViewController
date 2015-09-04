@@ -55,7 +55,7 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    
+
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
 
     self.leftHorizontalSpacingConstraint.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
@@ -156,12 +156,16 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
     [self setNeedsUpdateConstraints];
 }
 
-- (void)setRightContentPadding:(CGFloat)rightContentPadding{
+- (void)setRightContentPadding:(CGFloat)rightContentPadding
+{
     self.rightHorizontalSpacingConstraint.constant = rightContentPadding;
+    [self setNeedsUpdateConstraints];
 }
 
-- (void)setLeftContentPadding:(CGFloat)leftContentPadding{
+- (void)setLeftContentPadding:(CGFloat)leftContentPadding
+{
     self.leftHorizontalSpacingConstraint.constant = leftContentPadding;
+    [self setNeedsUpdateConstraints];
 }
 
 #pragma mark - Getters
