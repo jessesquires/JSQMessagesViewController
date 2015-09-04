@@ -73,7 +73,7 @@
     cache.countLimit = 200;
     return [self initWithCache:cache
             minimumBubbleWidth:[UIImage jsq_bubbleCompactImage].size.width
-         usesFixedWidthBubbles:YES];
+         usesFixedWidthBubbles:NO];
 }
 
 #pragma mark - NSObject
