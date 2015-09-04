@@ -156,6 +156,14 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
     [self setNeedsUpdateConstraints];
 }
 
+- (void)setRightContentPadding:(CGFloat)rightContentPadding{
+    self.rightHorizontalSpacingConstraint.constant = rightContentPadding;
+}
+
+- (void)setLeftContentPadding:(CGFloat)leftContentPadding{
+    self.leftHorizontalSpacingConstraint.constant = leftContentPadding;
+}
+
 #pragma mark - Getters
 
 - (CGFloat)leftBarButtonItemWidth
@@ -166,6 +174,16 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
 - (CGFloat)rightBarButtonItemWidth
 {
     return self.rightBarButtonContainerViewWidthConstraint.constant;
+}
+
+- (CGFloat)rightContentPadding
+{
+    return self.rightHorizontalSpacingConstraint.constant;
+}
+
+- (CGFloat)leftContentPadding
+{
+    return self.leftHorizontalSpacingConstraint.constant;
 }
 
 #pragma mark - UIView overrides
