@@ -34,12 +34,9 @@
 
 @property (assign, nonatomic, readonly) BOOL usesFixedWidthBubbles;
 
-@property (assign, nonatomic) NSInteger rotationIndependentLayoutWidth;
+@property (assign, nonatomic, readonly) NSInteger additionalInset;
 
-//  Creating a getter for this magix value because we are using it in a couple of places.
-//  add extra 2 points of space, because `boundingRectWithSize:` is slightly off
-//  not sure why. magix. (shrug) if you know, submit a PR
-@property (nonatomic, readonly) NSInteger additionalInset;
+@property (assign, nonatomic) CGFloat layoutWidthForFixedWidthBubbles;
 
 @end
 
@@ -51,17 +48,20 @@
 - (instancetype)initWithCache:(NSCache *)cache
            minimumBubbleWidth:(NSUInteger)minimumBubbleWidth
         usesFixedWidthBubbles:(BOOL)usesFixedWidthBubbles
-              additionalInset:(NSInteger)additionalInset
 {
     NSParameterAssert(cache != nil);
     NSParameterAssert(minimumBubbleWidth > 0);
-    
+
     self = [super init];
     if (self) {
         _cache = cache;
         _minimumBubbleWidth = minimumBubbleWidth;
         _usesFixedWidthBubbles = usesFixedWidthBubbles;
-        _additionalInset = additionalInset;
+        _layoutWidthForFixedWidthBubbles = 0.0f;
+
+        // this extra inset value is needed because `boundingRectWithSize:` is slightly off
+        // see comment below
+        _additionalInset = 2;
     }
     return self;
 }
@@ -73,16 +73,15 @@
     cache.countLimit = 200;
     return [self initWithCache:cache
             minimumBubbleWidth:[UIImage jsq_bubbleCompactImage].size.width
-         usesFixedWidthBubbles:NO
-            additionalInset:2];
+         usesFixedWidthBubbles:YES];
 }
 
 #pragma mark - NSObject
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: cache=%@, minimumBubbleWidth=%@>",
-            [self class], self.cache, @(self.minimumBubbleWidth)];
+    return [NSString stringWithFormat:@"<%@: cache=%@, minimumBubbleWidth=%@ usesFixedWidthBubbles=%@>",
+            [self class], self.cache, @(self.minimumBubbleWidth), @(self.usesFixedWidthBubbles)];
 }
 
 #pragma mark - JSQMessagesBubbleSizeCalculating
@@ -127,12 +126,12 @@
         CGFloat verticalContainerInsets = layout.messageBubbleTextViewTextContainerInsets.top + layout.messageBubbleTextViewTextContainerInsets.bottom;
         CGFloat verticalFrameInsets = layout.messageBubbleTextViewFrameInsets.top + layout.messageBubbleTextViewFrameInsets.bottom;
 
-        //  add extra 2 points of space, because `boundingRectWithSize:` is slightly off
+        //  add extra 2 points of space (`self.additionalInset`), because `boundingRectWithSize:` is slightly off
         //  not sure why. magix. (shrug) if you know, submit a PR
-        CGFloat verticalInsets = verticalContainerInsets + verticalFrameInsets + [self additionalInset];
+        CGFloat verticalInsets = verticalContainerInsets + verticalFrameInsets + self.additionalInset;
 
         //  same as above, an extra 2 points of magix
-        CGFloat finalWidth = MAX(stringSize.width + horizontalInsetsTotal, self.minimumBubbleWidth) + [self additionalInset];
+        CGFloat finalWidth = MAX(stringSize.width + horizontalInsetsTotal, self.minimumBubbleWidth) + self.additionalInset;
 
         finalSize = CGSizeMake(finalWidth, stringSize.height + verticalInsets);
     }
@@ -150,24 +149,31 @@
     if ([messageSender isEqualToString:[layout.collectionView.dataSource senderId]]) {
         return layout.outgoingAvatarViewSize;
     }
-    
+
     return layout.incomingAvatarViewSize;
 }
 
 - (CGFloat)textBubbleWidthForLayout:(JSQMessagesCollectionViewFlowLayout *)layout
 {
     if (self.usesFixedWidthBubbles) {
-        if (self.rotationIndependentLayoutWidth == 0) {
-            //  Adding the magix here because we're using it in messageBubbleSizeForItemAtIndexPath
-            NSInteger sectionInset = layout.sectionInset.left + layout.sectionInset.right + [self additionalInset];
-            CGFloat width = CGRectGetWidth(layout.collectionView.bounds) - sectionInset;
-            CGFloat height = CGRectGetHeight(layout.collectionView.bounds) - sectionInset;
-            CGFloat minValue = MIN(width,height);
-            _rotationIndependentLayoutWidth = minValue;
-        }
-        return self.rotationIndependentLayoutWidth;
+        return [self widthForFixedWidthBubblesWithLayout:layout];
     }
+
     return layout.itemWidth;
+}
+
+- (CGFloat)widthForFixedWidthBubblesWithLayout:(JSQMessagesCollectionViewFlowLayout *)layout {
+    if (self.layoutWidthForFixedWidthBubbles > 0.0f) {
+        return self.layoutWidthForFixedWidthBubbles;
+    }
+
+    // also need to add `self.additionalInset` here, see comment above
+    NSInteger horizontalInsets = layout.sectionInset.left + layout.sectionInset.right + self.additionalInset;
+    CGFloat width = CGRectGetWidth(layout.collectionView.bounds) - horizontalInsets;
+    CGFloat height = CGRectGetHeight(layout.collectionView.bounds) - horizontalInsets;
+    self.layoutWidthForFixedWidthBubbles = MIN(width, height);
+    
+    return self.layoutWidthForFixedWidthBubbles;
 }
 
 @end
