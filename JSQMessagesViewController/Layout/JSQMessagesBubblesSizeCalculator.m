@@ -32,6 +32,15 @@
 
 @property (assign, nonatomic, readonly) NSUInteger minimumBubbleWidth;
 
+@property (assign, nonatomic, readonly) BOOL usesFixedWidthBubbles;
+
+@property (assign, nonatomic) NSInteger rotationIndependentLayoutWidth;
+
+//  Creating a getter for this magix value because we are using it in a couple of places.
+//  add extra 2 points of space, because `boundingRectWithSize:` is slightly off
+//  not sure why. magix. (shrug) if you know, submit a PR
+@property (nonatomic, readonly) NSInteger additionalInset;
+
 @end
 
 
@@ -39,15 +48,20 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithCache:(NSCache *)cache minimumBubbleWidth:(NSUInteger)minimumBubbleWidth
+- (instancetype)initWithCache:(NSCache *)cache
+           minimumBubbleWidth:(NSUInteger)minimumBubbleWidth
+        usesFixedWidthBubbles:(BOOL)usesFixedWidthBubbles
+              additionalInset:(NSInteger)additionalInset
 {
     NSParameterAssert(cache != nil);
     NSParameterAssert(minimumBubbleWidth > 0);
-
+    
     self = [super init];
     if (self) {
         _cache = cache;
         _minimumBubbleWidth = minimumBubbleWidth;
+        _usesFixedWidthBubbles = usesFixedWidthBubbles;
+        _additionalInset = additionalInset;
     }
     return self;
 }
@@ -58,7 +72,9 @@
     cache.name = @"JSQMessagesBubblesSizeCalculator.cache";
     cache.countLimit = 200;
     return [self initWithCache:cache
-            minimumBubbleWidth:[UIImage jsq_bubbleCompactImage].size.width];
+            minimumBubbleWidth:[UIImage jsq_bubbleCompactImage].size.width
+         usesFixedWidthBubbles:NO
+            additionalInset:2];
 }
 
 #pragma mark - NSObject
@@ -99,7 +115,7 @@
         CGFloat horizontalFrameInsets = layout.messageBubbleTextViewFrameInsets.left + layout.messageBubbleTextViewFrameInsets.right;
 
         CGFloat horizontalInsetsTotal = horizontalContainerInsets + horizontalFrameInsets + spacingBetweenAvatarAndBubble;
-        CGFloat maximumTextWidth = layout.itemWidth - avatarSize.width - layout.messageBubbleLeftRightMargin - horizontalInsetsTotal;
+        CGFloat maximumTextWidth = [self textBubbleWidthForLayout:layout] - avatarSize.width - layout.messageBubbleLeftRightMargin - horizontalInsetsTotal;
 
         CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
                                                              options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
@@ -113,10 +129,10 @@
 
         //  add extra 2 points of space, because `boundingRectWithSize:` is slightly off
         //  not sure why. magix. (shrug) if you know, submit a PR
-        CGFloat verticalInsets = verticalContainerInsets + verticalFrameInsets + 2.0f;
+        CGFloat verticalInsets = verticalContainerInsets + verticalFrameInsets + [self additionalInset];
 
         //  same as above, an extra 2 points of magix
-        CGFloat finalWidth = MAX(stringSize.width + horizontalInsetsTotal, self.minimumBubbleWidth) + 2.0f;
+        CGFloat finalWidth = MAX(stringSize.width + horizontalInsetsTotal, self.minimumBubbleWidth) + [self additionalInset];
 
         finalSize = CGSizeMake(finalWidth, stringSize.height + verticalInsets);
     }
@@ -136,6 +152,22 @@
     }
     
     return layout.incomingAvatarViewSize;
+}
+
+- (CGFloat)textBubbleWidthForLayout:(JSQMessagesCollectionViewFlowLayout *)layout
+{
+    if (self.usesFixedWidthBubbles) {
+        if (self.rotationIndependentLayoutWidth == 0) {
+            //  Adding the magix here because we're using it in messageBubbleSizeForItemAtIndexPath
+            NSInteger sectionInset = layout.sectionInset.left + layout.sectionInset.right + [self additionalInset];
+            CGFloat width = CGRectGetWidth(layout.collectionView.bounds) - sectionInset;
+            CGFloat height = CGRectGetHeight(layout.collectionView.bounds) - sectionInset;
+            CGFloat minValue = MIN(width,height);
+            _rotationIndependentLayoutWidth = minValue;
+        }
+        return self.rotationIndependentLayoutWidth;
+    }
+    return layout.itemWidth;
 }
 
 @end
