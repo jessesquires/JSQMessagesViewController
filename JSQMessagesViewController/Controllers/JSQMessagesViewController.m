@@ -63,7 +63,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @property (weak, nonatomic) UIGestureRecognizer *currentInteractivePopGestureRecognizer;
 
-@property (assign, nonatomic) BOOL interactivePopGestureFirstResponderState;
+@property (assign, nonatomic) BOOL textViewWasFirstResponderDuringInteractivePop;
 
 - (void)jsq_configureMessagesViewController;
 
@@ -846,7 +846,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                 [self.snapshotView removeFromSuperview];
             }
 
-            _interactivePopGestureFirstResponderState = [[[[self inputToolbar] contentView] textView] isFirstResponder];
+            self.textViewWasFirstResponderDuringInteractivePop = [self.inputToolbar.contentView.textView isFirstResponder];
 
             [self.keyboardController endListeningForKeyboard];
 
@@ -869,8 +869,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateFailed:
             [self.keyboardController beginListeningForKeyboard];
-            if (_interactivePopGestureFirstResponderState) {
-                [[[[self inputToolbar] contentView] textView] becomeFirstResponder];
+            if (self.textViewWasFirstResponderDuringInteractivePop) {
+                [self.inputToolbar.contentView.textView becomeFirstResponder];
             }
 
             if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
