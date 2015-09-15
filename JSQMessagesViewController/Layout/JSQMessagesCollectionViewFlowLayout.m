@@ -87,7 +87,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     else {
         _messageBubbleLeftRightMargin = 50.0f;
     }
-    _messageBubbleTailWidth = 5.0f; // width of the default bubble's tail
+    _messageBubbleTopLabelInset = 5.0f;
     
     _messageBubbleTextViewFrameInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 6.0f);
     _messageBubbleTextViewTextContainerInsets = UIEdgeInsetsMake(7.0f, 14.0f, 7.0f, 14.0f);
@@ -220,12 +220,12 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
-- (void)setMessageBubbleTailWidth:(CGFloat)messageBubbleTailWidth {
-    if (_messageBubbleTailWidth == messageBubbleTailWidth) {
+- (void)setMessageBubbleTopLabelInset:(CGFloat)messageBubbleTopLabelInset {
+    if (_messageBubbleTopLabelInset == messageBubbleTopLabelInset) {
         return;
     }
     
-    _messageBubbleTailWidth = messageBubbleTailWidth;
+    _messageBubbleTopLabelInset = messageBubbleTopLabelInset;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 

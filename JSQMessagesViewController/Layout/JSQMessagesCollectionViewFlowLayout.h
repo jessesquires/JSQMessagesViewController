@@ -165,8 +165,9 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
 @property (assign, nonatomic) UIEdgeInsets messageBubbleTextViewTextContainerInsets;
 
 /**
- *  The width of the message bubble image tail, as it projects past the body of the message bubble.
- *  It is used to align the messageBubbleTopLabel with the messageBubble.
+ *  The inset of the message bubble top label. This is used to align the label 
+ *  with the body of the message bubble in cases where it has a "tail" 
+ *  projecting out to either side.
  *  The specified value should be positive.
  *
  *  @discussion The default value is 5.0f.
@@ -174,7 +175,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
  *  @warning Adjusting this value is an advanced endeavour and not recommended.
  *  You will only need to adjust this value should you choose to provide your own bubble image assets.
  */
-@property (assign, nonatomic) CGFloat messageBubbleTailWidth;
+@property (assign, nonatomic) CGFloat messageBubbleTopLabelInset;
 
 /**
  *  The size of the avatar image view for incoming messages.

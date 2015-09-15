@@ -529,7 +529,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
     cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellBottomLabelAtIndexPath:indexPath];
 
-    CGFloat bubbleTopLabelInset = collectionView.collectionViewLayout.messageBubbleTailWidth;
+    CGFloat bubbleTopLabelInset = collectionView.collectionViewLayout.messageBubbleTopLabelInset;
     if (needsAvatar) {
         bubbleTopLabelInset += (isOutgoingMessage ? collectionView.collectionViewLayout.incomingAvatarViewSize.width :  collectionView.collectionViewLayout.outgoingAvatarViewSize.width);
     }
