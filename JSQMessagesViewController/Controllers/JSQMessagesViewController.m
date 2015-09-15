@@ -63,6 +63,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @property (weak, nonatomic) UIGestureRecognizer *currentInteractivePopGestureRecognizer;
 
+@property (assign, nonatomic) BOOL textViewWasFirstResponderDuringInteractivePop;
+
 - (void)jsq_configureMessagesViewController;
 
 - (NSString *)jsq_currentlyComposedMessageText;
@@ -260,13 +262,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self jsq_addActionToInteractivePopGestureRecognizer:NO];
     self.collectionView.collectionViewLayout.springinessEnabled = NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    [self jsq_addActionToInteractivePopGestureRecognizer:NO];
     [self jsq_removeObservers];
     [self.keyboardController endListeningForKeyboard];
 }
@@ -844,6 +846,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                 [self.snapshotView removeFromSuperview];
             }
 
+            self.textViewWasFirstResponderDuringInteractivePop = [self.inputToolbar.contentView.textView isFirstResponder];
+
             [self.keyboardController endListeningForKeyboard];
 
             if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
@@ -865,6 +869,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateFailed:
             [self.keyboardController beginListeningForKeyboard];
+            if (self.textViewWasFirstResponderDuringInteractivePop) {
+                [self.inputToolbar.contentView.textView becomeFirstResponder];
+            }
 
             if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
                 [self.snapshotView removeFromSuperview];
