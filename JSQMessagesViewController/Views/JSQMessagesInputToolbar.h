@@ -64,10 +64,14 @@
  */
 @property (weak, nonatomic) id<JSQMessagesInputToolbarDelegate> delegate;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  Returns the content view of the toolbar. This view contains all subviews of the toolbar.
  */
 @property (weak, nonatomic, readonly) JSQMessagesToolbarContentView *contentView;
+
+NS_ASSUME_NONNULL_END
 
 /**
  *  A boolean value indicating whether the send button is on the right side of the toolbar or not.

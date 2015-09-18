@@ -33,6 +33,8 @@
                                                          JSQMessagesCollectionViewDelegateFlowLayout,
                                                          UITextViewDelegate>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  Returns the collection view object managed by this view controller.
  *  This view controller is the collection view's data source and delegate.
@@ -44,6 +46,8 @@
  *  This view controller is the toolbar's delegate.
  */
 @property (weak, nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
+
+NS_ASSUME_NONNULL_END
 
 /**
  *  Returns the keyboard controller object used to manage the software keyboard.
