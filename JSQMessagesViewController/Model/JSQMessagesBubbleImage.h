@@ -48,11 +48,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param image            The regular message bubble image. This value must not be `nil`.
  *  @param highlightedImage The highlighted message bubble image. This value must not be `nil`.
  *
- *  @return An initialized `JSQMessagesBubbleImage` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessagesBubbleImage` object.
  *
  *  @see JSQMessagesBubbleImageFactory.
  */
-- (nullable instancetype)initWithMessageBubbleImage:(UIImage *)image highlightedImage:(UIImage *)highlightedImage;
+- (instancetype)initWithMessageBubbleImage:(UIImage *)image highlightedImage:(UIImage *)highlightedImage;
 
 @end
 

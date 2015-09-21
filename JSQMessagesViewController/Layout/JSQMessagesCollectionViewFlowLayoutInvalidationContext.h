@@ -40,8 +40,8 @@
  *  `JSQMessagesViewController` subclass, you should use this method to instantiate a new invalidation 
  *  context and pass this object to `invalidateLayoutWithContext:`.
  *
- *  @return An initialized invalidation context object if successful, otherwise `nil`.
+ *  @return An initialized invalidation context object.
  */
-+ (nullable instancetype)context;
++ (instancetype)context;
 
 @end

@@ -54,18 +54,18 @@ NS_ASSUME_NONNULL_BEGIN
  *  properties: avatarImage, avatarHighlightedImage, avatarPlaceholderImage;
  *  This value must not be `nil`.
  *
- *  @return An initialized `JSQMessagesAvatarImage` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessagesAvatarImage` object.
  */
-+ (nullable instancetype)avatarWithImage:(UIImage *)image;
++ (instancetype)avatarWithImage:(UIImage *)image;
 
 /**
  *  Initializes and returns an avatar image object having the specified placeholder image.
  *
  *  @param placeholderImage The placeholder image for this avatar image. This value must not be `nil`.
  *
- *  @return An initialized `JSQMessagesAvatarImage` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessagesAvatarImage` object.
  */
-+ (nullable instancetype)avatarImageWithPlaceholder:(UIImage *)placeholderImage;
++ (instancetype)avatarImageWithPlaceholder:(UIImage *)placeholderImage;
 
 /**
  *  Initializes and returns an avatar image object having the specified regular, highlighed, and placeholder images.
@@ -74,11 +74,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param highlightedImage The avatar image for a highlighted display state.
  *  @param placeholderImage The placeholder image for this avatar image. This value must not be `nil`.
  *
- *  @return An initialized `JSQMessagesAvatarImage` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessagesAvatarImage` object.
  */
-- (nullable instancetype)initWithAvatarImage:(nullable UIImage *)avatarImage
-                            highlightedImage:(nullable UIImage *)highlightedImage
-                            placeholderImage:(UIImage *)placeholderImage;
+- (instancetype)initWithAvatarImage:(nullable UIImage *)avatarImage
+                   highlightedImage:(nullable UIImage *)highlightedImage
+                   placeholderImage:(UIImage *)placeholderImage;
 
 @end
 

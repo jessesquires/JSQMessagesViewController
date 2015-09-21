@@ -194,9 +194,9 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @discussion This is the designated initializer for programmatic instantiation.
  *
- *  @return An initialized `JSQMessagesViewController` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessagesViewController` object.
  */
-+ (nullable instancetype)messagesViewController;
++ (instancetype)messagesViewController;
 
 #pragma mark - Messages view controller
 

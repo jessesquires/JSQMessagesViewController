@@ -78,11 +78,11 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `NO`.
  *
- *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessage` object.
  */
-+ (nullable instancetype)messageWithSenderId:(NSString *)senderId
-                                 displayName:(NSString *)displayName
-                                        text:(NSString *)text;
++ (instancetype)messageWithSenderId:(NSString *)senderId
+                        displayName:(NSString *)displayName
+                               text:(NSString *)text;
 
 /**
  *  Initializes and returns a message object having the given senderId, senderDisplayName, date, and text.
@@ -94,12 +94,12 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `NO`.
  *
- *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessage` object.
  */
-- (nullable instancetype)initWithSenderId:(NSString *)senderId
-                        senderDisplayName:(NSString *)senderDisplayName
-                                     date:(NSDate *)date
-                                     text:(NSString *)text;
+- (instancetype)initWithSenderId:(NSString *)senderId
+               senderDisplayName:(NSString *)senderDisplayName
+                            date:(NSDate *)date
+                            text:(NSString *)text;
 /**
  *  Initializes and returns a message object having the given senderId, displayName, media,
  *  and current system date.
@@ -110,11 +110,11 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `YES`.
  *
- *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessage` object.
  */
-+ (nullable instancetype)messageWithSenderId:(NSString *)senderId
-                                 displayName:(NSString *)displayName
-                                       media:(id<JSQMessageMediaData>)media;
++ (instancetype)messageWithSenderId:(NSString *)senderId
+                        displayName:(NSString *)displayName
+                              media:(id<JSQMessageMediaData>)media;
 
 /**
  *  Initializes and returns a message object having the given senderId, displayName, date, and media.
@@ -126,12 +126,12 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `YES`.
  *
- *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessage` object.
  */
-- (nullable instancetype)initWithSenderId:(NSString *)senderId
-                        senderDisplayName:(NSString *)senderDisplayName
-                                     date:(NSDate *)date
-                                    media:(id<JSQMessageMediaData>)media;
+- (instancetype)initWithSenderId:(NSString *)senderId
+               senderDisplayName:(NSString *)senderDisplayName
+                            date:(NSDate *)date
+                           media:(id<JSQMessageMediaData>)media;
 
 @end
 
