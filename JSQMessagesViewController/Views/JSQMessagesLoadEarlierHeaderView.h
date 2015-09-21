@@ -59,7 +59,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesLoadEarlierHeaderViewHeight;
 /**
  *  Returns the load button of the header view.
  */
-@property (weak, nonatomic, readonly) UIButton *loadButton;
+@property (nonatomic, readonly) UIButton *loadButton;
 
 #pragma mark - Class methods
 

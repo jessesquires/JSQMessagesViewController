@@ -31,30 +31,30 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
 @interface JSQMessagesCollectionViewCell ()
 
-@property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellTopLabel;
-@property (weak, nonatomic) IBOutlet JSQMessagesLabel *messageBubbleTopLabel;
-@property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellBottomLabel;
+@property (nonatomic) IBOutlet JSQMessagesLabel *cellTopLabel;
+@property (nonatomic) IBOutlet JSQMessagesLabel *messageBubbleTopLabel;
+@property (nonatomic) IBOutlet JSQMessagesLabel *cellBottomLabel;
 
-@property (weak, nonatomic) IBOutlet UIView *messageBubbleContainerView;
-@property (weak, nonatomic) IBOutlet UIImageView *messageBubbleImageView;
-@property (weak, nonatomic) IBOutlet JSQMessagesCellTextView *textView;
+@property (nonatomic) IBOutlet UIView *messageBubbleContainerView;
+@property (nonatomic) IBOutlet UIImageView *messageBubbleImageView;
+@property (nonatomic) IBOutlet JSQMessagesCellTextView *textView;
 
-@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
-@property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
+@property (nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (nonatomic) IBOutlet UIView *avatarContainerView;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleContainerWidthConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *messageBubbleContainerWidthConstraint;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewTopVerticalSpaceConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewBottomVerticalSpaceConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewAvatarHorizontalSpaceConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewMarginHorizontalSpaceConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *textViewTopVerticalSpaceConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *textViewBottomVerticalSpaceConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *textViewAvatarHorizontalSpaceConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *textViewMarginHorizontalSpaceConstraint;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellTopLabelHeightConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleTopLabelHeightConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBottomLabelHeightConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *cellTopLabelHeightConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *messageBubbleTopLabelHeightConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *cellBottomLabelHeightConstraint;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidthConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidthConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightConstraint;
 
 @property (assign, nonatomic) UIEdgeInsets textViewFrameInsets;
 

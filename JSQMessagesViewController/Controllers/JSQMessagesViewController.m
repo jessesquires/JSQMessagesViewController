@@ -49,11 +49,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 @interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate,
                                          JSQMessagesKeyboardControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
-@property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
+@property (nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
+@property (nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
+@property (nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
 
 @property (weak, nonatomic) UIView *snapshotView;
 

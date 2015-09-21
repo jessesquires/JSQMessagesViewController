@@ -34,12 +34,12 @@
 /**
  *  Returns the activity indicator view for this placeholder view, or `nil` if it does not exist.
  */
-@property (nonatomic, weak, readonly) UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, readonly) UIActivityIndicatorView *activityIndicatorView;
 
 /**
  *  Returns the image view for this placeholder view, or `nil` if it does not exist.
  */
-@property (nonatomic, weak, readonly) UIImageView *imageView;
+@property (nonatomic, readonly) UIImageView *imageView;
 
 /**
  *  Creates a media placeholder view object with a light gray background and
