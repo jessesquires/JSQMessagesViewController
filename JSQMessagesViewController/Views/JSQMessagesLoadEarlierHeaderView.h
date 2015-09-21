@@ -18,6 +18,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class JSQMessagesLoadEarlierHeaderView;
 
 /**
@@ -69,7 +71,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesLoadEarlierHeaderViewHeight;
  *  @return The initialized `UINib` object or `nil` if there were errors during
  *  initialization or the nib file could not be located.
  */
-+ (UINib *)nib;
++ (nullable UINib *)nib;
 
 /**
  *  Returns the default string used to identify the reusable header view.
@@ -79,3 +81,5 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesLoadEarlierHeaderViewHeight;
 + (NSString *)headerReuseIdentifier;
 
 @end
+
+NS_ASSUME_NONNULL_END

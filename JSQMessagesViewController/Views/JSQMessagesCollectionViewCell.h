@@ -21,6 +21,8 @@
 #import "JSQMessagesLabel.h"
 #import "JSQMessagesCellTextView.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class JSQMessagesCollectionViewCell;
 
 /**
@@ -115,14 +117,14 @@
  *
  *  @warning If mediaView returns a non-nil view, then this value will be `nil`.
  */
-@property (nonatomic, readonly) JSQMessagesCellTextView *textView;
+@property (nullable, nonatomic, readonly) JSQMessagesCellTextView *textView;
 
 /**
  *  Returns the bubble image view of the cell that is responsible for displaying message bubble images.
  *
  *  @warning If mediaView returns a non-nil view, then this value will be `nil`.
  */
-@property (nonatomic, readonly) UIImageView *messageBubbleImageView;
+@property (nullable, nonatomic, readonly) UIImageView *messageBubbleImageView;
 
 /**
  *  Returns the message bubble container view of the cell. This view is the superview of
@@ -159,7 +161,7 @@
  *
  *  @warning If this value is non-nil, then textView and messageBubbleImageView will both be `nil`.
  */
-@property (nonatomic) UIView *mediaView;
+@property (nullable, nonatomic) UIView *mediaView;
 
 /**
  *  Returns the underlying gesture recognizer for tap gestures in the avatarImageView of the cell.
@@ -175,7 +177,7 @@
  *  @return The initialized `UINib` object or `nil` if there were errors during
  *  initialization or the nib file could not be located.
  */
-+ (UINib *)nib;
++ (nullable UINib *)nib;
 
 /**
  *  Returns the default string used to identify a reusable cell for text message items.
@@ -204,3 +206,5 @@
 + (void)registerMenuAction:(SEL)action;
 
 @end
+
+NS_ASSUME_NONNULL_END

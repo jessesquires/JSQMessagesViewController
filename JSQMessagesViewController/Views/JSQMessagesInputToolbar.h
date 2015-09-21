@@ -21,6 +21,8 @@
 
 #import "JSQMessagesToolbarContentView.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class JSQMessagesInputToolbar;
 
 
@@ -105,6 +107,8 @@
  *
  *  @return An initialized `JSQMessagesToolbarContentView` if successful, otherwise `nil`.
  */
-- (JSQMessagesToolbarContentView *)loadToolbarContentView;
+- (nullable JSQMessagesToolbarContentView *)loadToolbarContentView;
 
 @end
+
+NS_ASSUME_NONNULL_END
