@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2010-2014 Erik Doernenburg and contributors
+ *  Copyright (c) 2010-2015 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -21,8 +21,11 @@
 
 -(id)initWithCallBlock:(void (^)(NSInvocation *))theBlock 
 {
-	self = [super init];
-	block = [theBlock copy];
+    if ((self = [super init]))
+    {
+        block = [theBlock copy];
+    }
+    
 	return self;
 }
 

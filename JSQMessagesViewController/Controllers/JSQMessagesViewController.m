@@ -63,6 +63,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @property (weak, nonatomic) UIGestureRecognizer *currentInteractivePopGestureRecognizer;
 
+@property (assign, nonatomic) BOOL textViewWasFirstResponderDuringInteractivePop;
+
 - (void)jsq_configureMessagesViewController;
 
 - (NSString *)jsq_currentlyComposedMessageText;
@@ -774,8 +776,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         return;
     }
 
-    NSLog(@"PATH = %@", self.selectedIndexPathForMenu);
-
     //  per comment above in 'shouldShowMenuForItemAtIndexPath:'
     //  re-enable 'selectable', thus re-enabling data detectors if present
     JSQMessagesCollectionViewCell *selectedCell = (JSQMessagesCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:self.selectedIndexPathForMenu];
@@ -846,6 +846,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                 [self.snapshotView removeFromSuperview];
             }
 
+            self.textViewWasFirstResponderDuringInteractivePop = [self.inputToolbar.contentView.textView isFirstResponder];
+
             [self.keyboardController endListeningForKeyboard];
 
             if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
@@ -867,6 +869,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateFailed:
             [self.keyboardController beginListeningForKeyboard];
+            if (self.textViewWasFirstResponderDuringInteractivePop) {
+                [self.inputToolbar.contentView.textView becomeFirstResponder];
+            }
 
             if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
                 [self.snapshotView removeFromSuperview];
@@ -1040,11 +1045,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_addActionToInteractivePopGestureRecognizer:(BOOL)addAction
 {
-    if (self.currentInteractivePopGestureRecognizer) {
+    if (self.currentInteractivePopGestureRecognizer != nil) {
         [self.currentInteractivePopGestureRecognizer removeTarget:nil
-                                                       action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
+                                                           action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
         self.currentInteractivePopGestureRecognizer = nil;
     }
+
     if (addAction) {
         [self.navigationController.interactivePopGestureRecognizer addTarget:self
                                                                       action:@selector(jsq_handleInteractivePopGestureRecognizer:)];

@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2014 Erik Doernenburg and contributors
+ *  Copyright (c) 2014-2015 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -43,12 +43,11 @@
 }
 
 
-- (BOOL)handleInvocation:(NSInvocation *)anInvocation
+- (void)handleInvocation:(NSInvocation *)anInvocation
 {
-    if(![self matchesInvocation:anInvocation])
-        return NO;
+//    if(![self matchesInvocation:anInvocation])
+//        return NO;
     [invocationActions makeObjectsPerformSelector:@selector(handleInvocation:) withObject:anInvocation];
-    return YES;
 }
 
 @end

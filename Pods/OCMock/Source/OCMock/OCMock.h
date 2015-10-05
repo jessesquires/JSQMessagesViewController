@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2004-2014 Erik Doernenburg and contributors
+ *  Copyright (c) 2004-2015 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -79,6 +79,7 @@
 ({ \
     _Pragma("clang diagnostic push") \
     _Pragma("clang diagnostic ignored \"-Wunused-value\"") \
+    _Pragma("clang diagnostic ignored \"-Wunused-getter-return-value\"") \
     macro \
     _Pragma("clang diagnostic pop") \
 })

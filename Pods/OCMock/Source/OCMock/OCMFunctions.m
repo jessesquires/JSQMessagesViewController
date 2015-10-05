@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2014 Erik Doernenburg and contributors
+ *  Copyright (c) 2014-2015 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -103,7 +103,7 @@ static BOOL OCMEqualTypesAllowingOpaqueStructsInternal(const char *type1, const 
             BOOL type1Opaque = (type1Equals == NULL || (type1End < type1Equals) || type1Equals[1] == endChar);
             BOOL type2Opaque = (type2Equals == NULL || (type2End < type2Equals) || type2Equals[1] == endChar);
             const char *type1NameEnd = (type1Equals == NULL || (type1End < type1Equals)) ? type1End : type1Equals;
-            const char *type2NameEnd = (type1Equals == NULL || (type2End < type2Equals)) ? type2End : type2Equals;
+            const char *type2NameEnd = (type2Equals == NULL || (type2End < type2Equals)) ? type2End : type2Equals;
             intptr_t type1NameLen = type1NameEnd - type1;
             intptr_t type2NameLen = type2NameEnd - type2;
 
@@ -189,8 +189,8 @@ Class OCMGetIsa(id object)
 
 #pragma mark  Alias for renaming real methods
 
-NSString *OCMRealMethodAliasPrefix = @"ocmock_replaced_";
-const char *OCMRealMethodAliasPrefixCString = "ocmock_replaced_";
+static NSString *const OCMRealMethodAliasPrefix = @"ocmock_replaced_";
+static const char *const OCMRealMethodAliasPrefixCString = "ocmock_replaced_";
 
 BOOL OCMIsAliasSelector(SEL selector)
 {
@@ -217,7 +217,7 @@ SEL OCMOriginalSelectorForAlias(SEL selector)
 
 #pragma mark  Wrappers around associative references
 
-NSString *OCMClassMethodMockObjectKey = @"OCMClassMethodMockObjectKey";
+static NSString *const OCMClassMethodMockObjectKey = @"OCMClassMethodMockObjectKey";
 
 void OCMSetAssociatedMockForClass(OCClassMockObject *mock, Class aClass)
 {
@@ -238,7 +238,7 @@ OCClassMockObject *OCMGetAssociatedMockForClass(Class aClass, BOOL includeSuperc
     return mock;
 }
 
-NSString *OCMPartialMockObjectKey = @"OCMPartialMockObjectKey";
+static NSString *const OCMPartialMockObjectKey = @"OCMPartialMockObjectKey";
 
 void OCMSetAssociatedMockForObject(OCClassMockObject *mock, id anObject)
 {

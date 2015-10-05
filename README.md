@@ -1,6 +1,6 @@
 ![JSQMessagesViewController banner](https://raw.githubusercontent.com/jessesquires/JSQMessagesViewController/develop/Assets/jsq_messages_banner.png)
 
-[![Build Status](https://secure.travis-ci.org/jessesquires/JSQMessagesViewController.svg)](http://travis-ci.org/jessesquires/JSQMessagesViewController) [![Version Status](http://img.shields.io/cocoapods/v/JSQMessagesViewController.png)][docsLink] [![license MIT](http://img.shields.io/badge/license-MIT-orange.png)][mitLink]
+[![Build Status](https://secure.travis-ci.org/jessesquires/JSQMessagesViewController.svg)](http://travis-ci.org/jessesquires/JSQMessagesViewController) [![Version Status](https://img.shields.io/cocoapods/v/JSQMessagesViewController.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/JSQMessagesViewController.svg)][mitLink] [![codecov.io](https://img.shields.io/codecov/c/github/jessesquires/JSQMessagesViewController.svg)](http://codecov.io/github/jessesquires/JSQMessagesViewController) [![Platform](https://img.shields.io/cocoapods/p/JSQMessagesViewController.svg)][docsLink]
 
 ![Screenshot0][img0] &nbsp;&nbsp; ![Screenshot1][img1] &nbsp;&nbsp; 
 
@@ -238,6 +238,7 @@ Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed
 * [RealtimeChat](https://github.com/relatedcode/RealtimeChat)
 * [Bazar](https://itunes.apple.com/ru/app/bazar-talk-about-everything/id885453058)
 * [Roomie](https://itunes.apple.com/us/app/roomie-find-your-roomie/id962585201)
+* [PimpMyCall](https://itunes.apple.com/us/app/pimp-my-call/id990167537)
 * *Your app here*
 
 ## License
@@ -249,6 +250,7 @@ Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed
 *Please provide attribution, it is greatly appreciated.*
 
 [docsLink]:http://cocoadocs.org/docsets/JSQMessagesViewController
+[podLink]:https://cocoapods.org/pods/JSQMessagesViewController
 [mitLink]:http://opensource.org/licenses/MIT
 [playerLink]:https://github.com/jessesquires/JSQSystemSoundPlayer
 

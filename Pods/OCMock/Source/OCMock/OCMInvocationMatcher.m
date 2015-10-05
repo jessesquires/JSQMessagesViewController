@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2014 Erik Doernenburg and contributors
+ *  Copyright (c) 2014-2015 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -30,6 +30,12 @@
 
 
 @implementation OCMInvocationMatcher
+
+- (void)dealloc
+{
+    [recordedInvocation release];
+    [super dealloc];
+}
 
 - (void)setInvocation:(NSInvocation *)anInvocation
 {
@@ -89,8 +95,8 @@
         return NO;
 
     NSMethodSignature *signature = [recordedInvocation methodSignature];
-    int n = (int)[signature numberOfArguments];
-    for(int i = 2; i < n; i++)
+    NSUInteger n = [signature numberOfArguments];
+    for(NSUInteger i = 2; i < n; i++)
     {
         if(ignoreNonObjectArgs && strcmp([signature getArgumentTypeAtIndex:i], @encode(id)))
         {
@@ -141,4 +147,5 @@
     }
     return YES;
 }
+
 @end

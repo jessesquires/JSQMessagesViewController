@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2014 Erik Doernenburg and contributors
+ *  Copyright (c) 2014-2015 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -24,7 +24,7 @@
 
 @implementation OCMMacroState
 
-OCMMacroState *globalState;
+static OCMMacroState *globalState;
 
 #pragma mark  Methods to begin/end macros
 
@@ -79,8 +79,11 @@ OCMMacroState *globalState;
 
 - (id)initWithRecorder:(OCMRecorder *)aRecorder
 {
-    self = [super init];
-    recorder = [aRecorder retain];
+    if ((self = [super init]))
+    {
+        recorder = [aRecorder retain];
+    }
+    
     return self;
 }
 
