@@ -528,6 +528,15 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
 
     cell.cellTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellTopLabelAtIndexPath:indexPath];
+    // If celltoplabel text is nil, hide it and the backgroundview!
+    if (cell.cellTopLabel.attributedText == nil) {
+        cell.cellTopLabel.hidden = true;
+        cell.cellTopLabelBackgroundView.hidden = true;
+    } else {
+        cell.cellTopLabel.hidden = false;
+        cell.cellTopLabelBackgroundView.hidden = false;
+    }
+    
     cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
     cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellBottomLabelAtIndexPath:indexPath];
 

@@ -32,6 +32,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 @interface JSQMessagesCollectionViewCell ()
 
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellTopLabel;
+@property (weak, nonatomic) IBOutlet UIView *cellTopLabelBackgroundView;
+
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *messageBubbleTopLabel;
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellBottomLabel;
 
@@ -120,6 +122,12 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     self.cellTopLabel.textAlignment = NSTextAlignmentCenter;
     self.cellTopLabel.font = [UIFont boldSystemFontOfSize:12.0f];
     self.cellTopLabel.textColor = [UIColor lightGrayColor];
+    // White background color
+    self.cellTopLabel.backgroundColor = [UIColor whiteColor];
+    // Gray, rounded corners
+    self.cellTopLabel.layer.cornerRadius = self.cellTopLabel.frame.size.height / 2;
+    self.cellTopLabel.layer.borderColor = [[[UIColor lightGrayColor] colorWithAlphaComponent: 0.5] CGColor];
+    self.cellTopLabel.layer.borderWidth = 1.0f;
 
     self.messageBubbleTopLabel.font = [UIFont systemFontOfSize:12.0f];
     self.messageBubbleTopLabel.textColor = [UIColor lightGrayColor];
@@ -274,7 +282,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 {
     [super setBackgroundColor:backgroundColor];
 
-    self.cellTopLabel.backgroundColor = backgroundColor;
+    //self.cellTopLabel.backgroundColor = backgroundColor;
     self.messageBubbleTopLabel.backgroundColor = backgroundColor;
     self.cellBottomLabel.backgroundColor = backgroundColor;
 

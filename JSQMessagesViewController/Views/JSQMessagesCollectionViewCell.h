@@ -103,6 +103,7 @@
  *  This label is most commonly used to display the message sender.
  */
 @property (weak, nonatomic, readonly) JSQMessagesLabel *messageBubbleTopLabel;
+@property (weak, nonatomic, readonly) UIView *cellTopLabelBackgroundView;
 
 /**
  *  Returns the label that is pinned to the bottom of the cell.
