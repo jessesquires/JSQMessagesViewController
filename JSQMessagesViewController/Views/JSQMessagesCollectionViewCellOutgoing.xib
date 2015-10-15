@@ -23,7 +23,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JzY-eq-ZcU" userLabel="Cell top label backgroundview">
-                        <rect key="frame" x="20" y="10" width="280" height="1"/>
+                        <rect key="frame" x="20" y="20" width="280" height="1"/>
                         <animations/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -31,7 +31,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cell top label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxM-YD-sVG" userLabel="Cell top label" customClass="JSQMessagesLabel">
-                        <rect key="frame" x="119" y="0.0" width="82" height="20"/>
+                        <rect key="frame" x="119" y="10" width="82" height="20"/>
                         <animations/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -123,7 +123,7 @@
                 <constraint firstAttribute="trailing" secondItem="7Uc-dI-YDD" secondAttribute="trailing" id="1v4-5s-XmK"/>
                 <constraint firstItem="2zh-vR-QJW" firstAttribute="top" secondItem="p52-YN-yLu" secondAttribute="bottom" id="3Wx-g0-fTc"/>
                 <constraint firstAttribute="trailing" secondItem="JzY-eq-ZcU" secondAttribute="trailing" constant="20" id="3l4-9m-1zy"/>
-                <constraint firstItem="jxM-YD-sVG" firstAttribute="top" secondItem="23f-xH-rkY" secondAttribute="top" id="HYT-Tw-whz"/>
+                <constraint firstItem="jxM-YD-sVG" firstAttribute="top" secondItem="23f-xH-rkY" secondAttribute="top" constant="10" id="HYT-Tw-whz"/>
                 <constraint firstAttribute="trailing" secondItem="X89-B1-aAd" secondAttribute="trailing" id="KLt-Ix-wDa"/>
                 <constraint firstItem="7Uc-dI-YDD" firstAttribute="top" secondItem="2zh-vR-QJW" secondAttribute="bottom" id="Ngq-ew-t2K"/>
                 <constraint firstItem="Is8-vX-RY4" firstAttribute="top" secondItem="23f-xH-rkY" secondAttribute="top" id="XX0-vb-JxY"/>
@@ -135,7 +135,7 @@
                 <constraint firstItem="p52-YN-yLu" firstAttribute="leading" secondItem="23f-xH-rkY" secondAttribute="leading" id="tTj-Mp-0va"/>
                 <constraint firstItem="jxM-YD-sVG" firstAttribute="centerX" secondItem="23f-xH-rkY" secondAttribute="centerX" id="uwf-N0-MdD"/>
                 <constraint firstItem="X89-B1-aAd" firstAttribute="leading" secondItem="2zh-vR-QJW" secondAttribute="trailing" constant="2" identifier="avatarChatBubble" id="vMz-Yi-B0w"/>
-                <constraint firstItem="JzY-eq-ZcU" firstAttribute="top" secondItem="23f-xH-rkY" secondAttribute="top" constant="10" id="wtW-VT-dUW"/>
+                <constraint firstItem="JzY-eq-ZcU" firstAttribute="top" secondItem="23f-xH-rkY" secondAttribute="top" constant="20" id="wtW-VT-dUW"/>
             </constraints>
             <size key="customSize" width="317" height="245"/>
             <connections>
