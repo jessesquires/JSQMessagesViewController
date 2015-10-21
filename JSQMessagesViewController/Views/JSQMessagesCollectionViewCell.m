@@ -251,8 +251,23 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
 - (BOOL)respondsToSelector:(SEL)aSelector
 {
+    // Custom selectors
     if ([jsqMessagesCollectionViewCellActions containsObject:NSStringFromSelector(aSelector)]) {
-        // Edit and delete actions should only be available to outgoing cells (the messages of the current user)
+        
+        // Media view? Show only option for delete!
+        if (self.mediaView != nil) {
+            if ([NSStringFromSelector(aSelector) isEqualToString:@"delete:"]) {
+                if ([self isKindOfClass:[JSQMessagesCollectionViewCellOutgoing class]]) {
+                    return YES;
+                } else {
+                    return NO;
+                }
+            } else {
+                return NO;
+            }
+        }
+        
+        // Normal message? Show delete and edit only for own messages
         if ([NSStringFromSelector(aSelector) isEqualToString:@"delete:"] || [NSStringFromSelector(aSelector) isEqualToString:@"edit:"]) {
             if ([self isKindOfClass:[JSQMessagesCollectionViewCellOutgoing class]]) {
                 return YES;
@@ -260,9 +275,15 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
                 return NO;
             }
         }
-        return YES;
     }
-
+    
+    
+    if (self.mediaView != nil) {
+        // Don't show default options
+        return NO;
+    }
+    
+    // Show default options
     return [super respondsToSelector:aSelector];
 }
 
