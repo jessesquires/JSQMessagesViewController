@@ -252,6 +252,14 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 - (BOOL)respondsToSelector:(SEL)aSelector
 {
     if ([jsqMessagesCollectionViewCellActions containsObject:NSStringFromSelector(aSelector)]) {
+        // Edit and delete actions should only be available to outgoing cells (the messages of the current user)
+        if ([NSStringFromSelector(aSelector) isEqualToString:@"delete:"] || [NSStringFromSelector(aSelector) isEqualToString:@"edit:"]) {
+            if ([self isKindOfClass:[JSQMessagesCollectionViewCellOutgoing class]]) {
+                return YES;
+            } else {
+                return NO;
+            }
+        }
         return YES;
     }
 
