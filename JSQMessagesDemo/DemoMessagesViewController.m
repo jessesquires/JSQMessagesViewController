@@ -22,6 +22,10 @@
 
 #pragma mark - View lifecycle
 
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 /**
  *  Override point for customization.
  *
@@ -75,10 +79,7 @@
     [JSQMessagesCollectionViewCell registerMenuAction:@selector(customAction:)];
     [UIMenuController sharedMenuController].menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action"
                                                                                       action:@selector(customAction:)] ];
-
-	[[UIMenuController sharedMenuController] setTargetRect:CGRectMake(0, 0, CGRectGetWidth(self.collectionView.frame), CGRectGetHeight(self.collectionView.frame)) inView:self.collectionView];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handle_menuWillShow:) name:UIMenuControllerWillShowMenuNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handle_menuWillHide:) name:UIMenuControllerWillHideMenuNotification object:nil];
 	
 	
@@ -101,14 +102,7 @@
      */
 }
 
-
-- (void)handle_menuWillShow:(NSNotification *)notification {
-	NSLog(@" ======= ---11 %@", notification.object);
-	[[UIMenuController sharedMenuController] setTargetRect:CGRectMake(0, 0, CGRectGetWidth(self.collectionView.frame), CGRectGetHeight(self.collectionView.frame)) inView:self.collectionView];
-}
-
 - (void)handle_menuWillHide:(NSNotification *)notification {
-	NSLog(@" ======= ---22 %@", notification.object);
 	[UIMenuController sharedMenuController].menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action"
 																					  action:@selector(customAction:)] ];
 }
