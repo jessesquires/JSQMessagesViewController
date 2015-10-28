@@ -407,6 +407,62 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                         animated:animated];
 }
 
+// For edit mode!
+- (void)toggleEditMode:(BOOL)enabled
+{
+//    CGFloat heightChange = 0.0;
+//    
+//    if (enabled) {
+//        self.inputToolbar.contentView.editModeTitleBarHeightConstraint.constant = 30.0;
+//        heightChange = 30;
+//    } else {
+//        self.inputToolbar.contentView.editModeTitleBarHeightConstraint.constant = 0.0;
+//        heightChange = -30;
+//    }
+  
+    self.inputToolbar.contentView.textView.placeHolder = @"";
+    
+    // Update layout after changing constraints (with animation)
+    if (enabled) {
+        [UIView animateWithDuration:0.1 animations:^{
+            self.inputToolbar.contentView.rightBarButtonItem.alpha = 0.0;
+            self.inputToolbar.contentView.leftBarButtonItem.alpha = 0.0;
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.2 animations:^{
+            self.inputToolbar.contentView.rightBarButtonItemWidth = 0.0;
+            self.inputToolbar.contentView.leftBarButtonItemWidth = 0.0;
+                self.inputToolbar.contentView.editModeTitleBarHeightConstraint.constant = 30.0;
+                [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:30.0];
+                [self jsq_updateCollectionViewInsets];
+                [self.inputToolbar.contentView layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.2 animations:^{
+                    self.inputToolbar.contentView.textView.placeHolder = @"...";
+                }];
+            }];
+        }];
+    } else {
+        [UIView animateWithDuration:0.2 animations:^{
+                self.inputToolbar.contentView.editModeTitleBarHeightConstraint.constant = 0.0;
+                [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:-30];
+                [self jsq_updateCollectionViewInsets];
+                self.inputToolbar.contentView.rightBarButtonItemWidth = 50.0;
+                self.inputToolbar.contentView.leftBarButtonItemWidth = 25.0;
+                [self.inputToolbar.contentView layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.1 animations:^{
+                self.inputToolbar.contentView.rightBarButtonItem.alpha = 1.0;
+                self.inputToolbar.contentView.leftBarButtonItem.alpha = 1.0;
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.2 animations:^{
+                    self.inputToolbar.contentView.textView.placeHolder = @"New Message";
+                }];
+            }];
+        }];
+
+    }
+}
+
 #pragma mark - JSQMessages collection view data source
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath

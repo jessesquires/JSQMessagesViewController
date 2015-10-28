@@ -268,4 +268,7 @@
  */
 - (void)scrollToBottomAnimated:(BOOL)animated;
 
+// FOR EDIT MODE
+- (void)toggleEditMode:(BOOL)enabled;
+
 @end

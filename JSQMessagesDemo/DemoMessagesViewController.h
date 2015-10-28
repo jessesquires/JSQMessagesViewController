@@ -41,6 +41,8 @@
 
 @property (strong, nonatomic) DemoModelData *demoData;
 
+@property (assign, nonatomic) BOOL editModeEnabled;
+
 - (void)receiveMessagePressed:(UIBarButtonItem *)sender;
 
 - (void)closePressed:(UIBarButtonItem *)sender;
