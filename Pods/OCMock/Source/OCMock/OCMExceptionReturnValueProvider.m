@@ -19,9 +19,12 @@
 
 @implementation OCMExceptionReturnValueProvider
 
+NSString *OCMStubbedException = @"OCMStubbedException";
+
+
 - (void)handleInvocation:(NSInvocation *)anInvocation
 {
-	@throw returnValue;
+	[[NSException exceptionWithName:OCMStubbedException reason:@"Exception stubbed in test." userInfo:@{ @"exception": returnValue }] raise];
 }
 
 @end

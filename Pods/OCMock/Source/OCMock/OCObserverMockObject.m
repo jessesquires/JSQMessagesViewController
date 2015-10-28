@@ -17,7 +17,7 @@
 #import "OCObserverMockObject.h"
 #import "OCMObserverRecorder.h"
 #import "OCMLocation.h"
-#import "OCMFunctions.h"
+#import "OCMFunctionsPrivate.h"
 
 
 @implementation OCObserverMockObject

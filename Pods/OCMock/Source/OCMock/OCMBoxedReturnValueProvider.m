@@ -15,7 +15,7 @@
  */
 
 #import "OCMBoxedReturnValueProvider.h"
-#import "OCMFunctions.h"
+#import "OCMFunctionsPrivate.h"
 #import "NSValue+OCMAdditions.h"
 
 @implementation OCMBoxedReturnValueProvider

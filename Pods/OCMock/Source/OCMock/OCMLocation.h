@@ -15,6 +15,8 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "OCMFunctions.h"
+
 
 @interface OCMLocation : NSObject
 {
@@ -33,4 +35,4 @@
 
 @end
 
-extern OCMLocation *OCMMakeLocation(id testCase, const char *file, int line);
+OCMOCK_EXTERN OCMLocation *OCMMakeLocation(id testCase, const char *file, int line);

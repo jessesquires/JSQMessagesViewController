@@ -17,7 +17,7 @@
 #import <objc/runtime.h>
 #import "OCPartialMockObject.h"
 #import "OCMRealObjectForwarder.h"
-#import "OCMFunctions.h"
+#import "OCMFunctionsPrivate.h"
 
 
 @implementation OCMRealObjectForwarder

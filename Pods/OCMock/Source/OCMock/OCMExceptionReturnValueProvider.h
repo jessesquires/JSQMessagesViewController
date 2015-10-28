@@ -16,6 +16,8 @@
 
 #import "OCMReturnValueProvider.h"
 
+extern NSString *OCMStubbedException;
+
 @interface OCMExceptionReturnValueProvider : OCMReturnValueProvider 
 {
 }
