@@ -254,9 +254,9 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     // Custom selectors
     if ([jsqMessagesCollectionViewCellActions containsObject:NSStringFromSelector(aSelector)]) {
         
-        // Media view? Show only option for delete!
+        // Media view? Show only option for delete and resend!
         if (self.mediaView != nil) {
-            if ([NSStringFromSelector(aSelector) isEqualToString:@"delete:"]) {
+            if ([NSStringFromSelector(aSelector) isEqualToString:@"delete:"] || [NSStringFromSelector(aSelector) isEqualToString:@"resendMessage:"]) {
                 if ([self isKindOfClass:[JSQMessagesCollectionViewCellOutgoing class]]) {
                     return YES;
                 } else {
@@ -267,8 +267,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
             }
         }
         
-        // Normal message? Show delete and edit only for own messages
-        if ([NSStringFromSelector(aSelector) isEqualToString:@"delete:"] || [NSStringFromSelector(aSelector) isEqualToString:@"edit:"]) {
+        // Normal message? Show delete, edit and resend options only for own messages
+        if ([NSStringFromSelector(aSelector) isEqualToString:@"delete:"] || [NSStringFromSelector(aSelector) isEqualToString:@"edit:"] || [NSStringFromSelector(aSelector) isEqualToString:@"resendMessage:"]) {
             if ([self isKindOfClass:[JSQMessagesCollectionViewCellOutgoing class]]) {
                 return YES;
             } else {
