@@ -432,6 +432,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             self.inputToolbar.contentView.rightBarButtonItemWidth = 0.0;
             self.inputToolbar.contentView.leftBarButtonItemWidth = 0.0;
                 self.inputToolbar.contentView.editModeTitleBarHeightConstraint.constant = 30.0;
+                self.inputToolbar.contentView.editModeTopTextViewConstraint.constant = 37.0;
                 [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:30.0];
                 [self jsq_updateCollectionViewInsets];
                 [self.inputToolbar.contentView layoutIfNeeded];
@@ -444,6 +445,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     } else {
         [UIView animateWithDuration:0.2 animations:^{
                 self.inputToolbar.contentView.editModeTitleBarHeightConstraint.constant = 0.0;
+            self.inputToolbar.contentView.editModeTopTextViewConstraint.constant = 7.0;
                 [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:-30];
                 [self jsq_updateCollectionViewInsets];
                 self.inputToolbar.contentView.rightBarButtonItemWidth = 50.0;
