@@ -54,18 +54,33 @@
     return NSMakeRange(NSNotFound, NSNotFound);
 }
 
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
-{
-    //  ignore double-tap to prevent copy/define/etc. menu from showing
-    if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
-        UITapGestureRecognizer *tap = (UITapGestureRecognizer *)gestureRecognizer;
-        if (tap.numberOfTapsRequired == 2) {
-            self.selectedTextRange = nil;
-            return NO;
+//- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+//{
+//    //  ignore double-tap to prevent copy/define/etc. menu from showing
+//    if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+//        UITapGestureRecognizer *tap = (UITapGestureRecognizer *)gestureRecognizer;
+//        if (tap.numberOfTapsRequired == 2) {
+//            self.selectedTextRange = nil;
+//            return NO;
+//        }
+//    }
+//    
+//    return YES;
+//}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    
+    if(self.editable == NO){
+        if ([gestureRecognizer isKindOfClass: [UITapGestureRecognizer class] ] && [(UITapGestureRecognizer*) gestureRecognizer numberOfTapsRequired] == 2) {
+            if([gestureRecognizer isMemberOfClass:[UITapGestureRecognizer class]]){
+                return YES;
+            }
+            else{
+                return NO;
+            }
         }
     }
-    
-    return YES;
+    return [super gestureRecognizerShouldBegin:gestureRecognizer];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
