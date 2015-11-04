@@ -60,6 +60,7 @@
     if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
         UITapGestureRecognizer *tap = (UITapGestureRecognizer *)gestureRecognizer;
         if (tap.numberOfTapsRequired == 2) {
+            self.selectedTextRange = nil;
             return NO;
         }
     }
@@ -79,5 +80,14 @@
     
     return YES;
 }
+
+- (void)addGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer {
+    if([gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]] && gestureRecognizer.delaysTouchesEnded)
+    {
+        [super addGestureRecognizer:gestureRecognizer];
+    }
+}
+
+
 
 @end
