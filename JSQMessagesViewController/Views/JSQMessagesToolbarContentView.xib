@@ -30,10 +30,10 @@
                     </constraints>
                 </view>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j9M-XO-O00">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kng-BA-QPb">
-                            <rect key="frame" x="8" y="0.0" width="50" height="30"/>
+                            <rect key="frame" x="8" y="0.0" width="50" height="0.0"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                             <state key="normal" title="Cancel">
@@ -41,7 +41,7 @@
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOQ-Yl-ayt">
-                            <rect key="frame" x="277" y="0.0" width="35" height="30"/>
+                            <rect key="frame" x="277" y="0.0" width="35" height="0.0"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                             <state key="normal" title="Save">
@@ -49,7 +49,7 @@
                             </state>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hav-RR-5iY">
-                            <rect key="frame" x="109" y="0.0" width="103" height="30"/>
+                            <rect key="frame" x="109" y="0.0" width="103" height="0.0"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -64,7 +64,7 @@
                         <constraint firstAttribute="bottom" secondItem="KOQ-Yl-ayt" secondAttribute="bottom" id="Kpo-cy-nSA"/>
                         <constraint firstAttribute="trailing" secondItem="KOQ-Yl-ayt" secondAttribute="trailing" constant="8" id="Kv7-46-7gU"/>
                         <constraint firstItem="KOQ-Yl-ayt" firstAttribute="top" secondItem="j9M-XO-O00" secondAttribute="top" id="PNh-fU-XYL"/>
-                        <constraint firstAttribute="height" constant="30" id="fcw-b2-Ik0"/>
+                        <constraint firstAttribute="height" id="fcw-b2-Ik0"/>
                         <constraint firstItem="hav-RR-5iY" firstAttribute="centerX" secondItem="j9M-XO-O00" secondAttribute="centerX" id="gtC-En-Ej9"/>
                         <constraint firstItem="Kng-BA-QPb" firstAttribute="top" secondItem="j9M-XO-O00" secondAttribute="top" id="k64-yS-aiF"/>
                         <constraint firstAttribute="bottom" secondItem="Kng-BA-QPb" secondAttribute="bottom" id="rkF-uk-ynZ"/>
@@ -72,7 +72,7 @@
                     </constraints>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dm4-NT-mvr" customClass="JSQMessagesComposerTextView">
-                    <rect key="frame" x="50" y="37" width="204" height="31"/>
+                    <rect key="frame" x="50" y="7" width="204" height="61"/>
                     <animations/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
