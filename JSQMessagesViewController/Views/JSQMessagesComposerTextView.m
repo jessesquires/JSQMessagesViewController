@@ -163,6 +163,20 @@
     }
 }
 
+-(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    // Check for gestures to prevent
+    if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+        // Check for tap
+        if (((UITapGestureRecognizer *)gestureRecognizer).numberOfTapsRequired == 1) {
+            self.selectedTextRange = nil;
+            return NO;
+        }
+    }
+    
+    // Always anything that makes it here
+    return YES;
+}
+
 #pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect
