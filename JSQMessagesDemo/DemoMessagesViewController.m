@@ -137,10 +137,14 @@
 {
 
     if (!self.editModeEnabled) {
-        [self toggleEditMode:true];
+        [self toggleEditMode:true withCompletionBlock:^{
+            //
+        }];
         self.editModeEnabled = true;
     } else {
-        [self toggleEditMode:false];
+        [self toggleEditMode:false withCompletionBlock:^{
+            //
+        }];
         self.editModeEnabled = false;
     }
     

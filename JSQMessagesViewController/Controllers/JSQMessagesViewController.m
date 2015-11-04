@@ -408,18 +408,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 }
 
 // For edit mode!
-- (void)toggleEditMode:(BOOL)enabled
+- (void)toggleEditMode:(BOOL)enabled withCompletionBlock:(void (^)())completionBlock
 {
-//    CGFloat heightChange = 0.0;
-//    
-//    if (enabled) {
-//        self.inputToolbar.contentView.editModeTitleBarHeightConstraint.constant = 30.0;
-//        heightChange = 30;
-//    } else {
-//        self.inputToolbar.contentView.editModeTitleBarHeightConstraint.constant = 0.0;
-//        heightChange = -30;
-//    }
-  
+    
     self.inputToolbar.contentView.textView.placeHolder = @"";
     
     // Update layout after changing constraints (with animation)
@@ -429,39 +420,50 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             self.inputToolbar.contentView.leftBarButtonItem.alpha = 0.0;
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.2 animations:^{
-            self.inputToolbar.contentView.rightBarButtonItemWidth = 0.0;
-            self.inputToolbar.contentView.leftBarButtonItemWidth = 0.0;
+                
+                self.inputToolbar.contentView.leftBarButtonContainerViewWidthConstraint.constant = 0.0;
+                self.inputToolbar.contentView.rightBarButtonContainerViewWidthConstraint.constant = 0.0;
+                
                 self.inputToolbar.contentView.editModeTitleBarHeightConstraint.constant = 30.0;
-                self.inputToolbar.contentView.editModeTopTextViewConstraint.constant = 37.0;
-                [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:30.0];
+                //self.toolbarHeightConstraint.constant = self.inputToolbar.contentView.textView.frame.size.height + 100;
+                // Trigger textViewContentSizeChange to get the input toolbar resized properly by height of edit mode toolbar
+                [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:30];
                 [self jsq_updateCollectionViewInsets];
                 [self.inputToolbar.contentView layoutIfNeeded];
+                
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.2 animations:^{
                     self.inputToolbar.contentView.textView.placeHolder = @"...";
+                }completion:^(BOOL finished){
+                    //                    NSRange range = NSMakeRange(self.inputToolbar.contentView.textView.text.length - 1, 1);
+                    //                    [self.inputToolbar.contentView.textView scrollRangeToVisible:range];
+                    completionBlock();
                 }];
             }];
         }];
     } else {
         [UIView animateWithDuration:0.2 animations:^{
-                self.inputToolbar.contentView.editModeTitleBarHeightConstraint.constant = 0.0;
-            self.inputToolbar.contentView.editModeTopTextViewConstraint.constant = 7.0;
-                [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:-30];
-                [self jsq_updateCollectionViewInsets];
-                self.inputToolbar.contentView.rightBarButtonItemWidth = 50.0;
-                self.inputToolbar.contentView.leftBarButtonItemWidth = 25.0;
-                [self.inputToolbar.contentView layoutIfNeeded];
-        } completion:^(BOOL finished) {
+            self.inputToolbar.contentView.leftBarButtonContainerViewWidthConstraint.constant = 25.0;
+            self.inputToolbar.contentView.rightBarButtonContainerViewWidthConstraint.constant = 50.0;
             [UIView animateWithDuration:0.1 animations:^{
-                self.inputToolbar.contentView.rightBarButtonItem.alpha = 1.0;
-                self.inputToolbar.contentView.leftBarButtonItem.alpha = 1.0;
+                self.inputToolbar.contentView.editModeTitleBarHeightConstraint.constant = 0.0;
+                // Get the current height of the textView and calculate difference to normal height
+                CGFloat sizeChange = self.inputToolbar.frame.size.height - 44;
+                [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:-sizeChange];
+                [self jsq_updateCollectionViewInsets];
+                [self.inputToolbar.contentView layoutIfNeeded];
+                
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.2 animations:^{
+                    self.inputToolbar.contentView.rightBarButtonItem.alpha = 1.0;
+                    self.inputToolbar.contentView.leftBarButtonItem.alpha = 1.0;
                     self.inputToolbar.contentView.textView.placeHolder = @"New Message";
+                    completionBlock();
                 }];
             }];
+            
         }];
-
+        
     }
 }
 
