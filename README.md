@@ -1,6 +1,6 @@
 ![JSQMessagesViewController banner](https://raw.githubusercontent.com/jessesquires/JSQMessagesViewController/develop/Assets/jsq_messages_banner.png)
 
-[![Build Status](https://secure.travis-ci.org/jessesquires/JSQMessagesViewController.svg)](http://travis-ci.org/jessesquires/JSQMessagesViewController) [![Version Status](https://img.shields.io/cocoapods/v/JSQMessagesViewController.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/JSQMessagesViewController.svg)][mitLink] [![codecov.io](https://img.shields.io/codecov/c/github/jessesquires/JSQMessagesViewController.svg)](http://codecov.io/github/jessesquires/JSQMessagesViewController) [![Platform](https://img.shields.io/cocoapods/p/JSQMessagesViewController.svg)][docsLink]
+[![Build Status](https://secure.travis-ci.org/jessesquires/JSQMessagesViewController.svg)](https://travis-ci.org/jessesquires/JSQMessagesViewController) [![Version Status](https://img.shields.io/cocoapods/v/JSQMessagesViewController.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/JSQMessagesViewController.svg)][mitLink] [![codecov.io](https://img.shields.io/codecov/c/github/jessesquires/JSQMessagesViewController.svg)](https://codecov.io/github/jessesquires/JSQMessagesViewController) [![Platform](https://img.shields.io/cocoapods/p/JSQMessagesViewController.svg)][docsLink]
 
 ![Screenshot0][img0] &nbsp;&nbsp; ![Screenshot1][img1] &nbsp;&nbsp; 
 
@@ -23,7 +23,7 @@ See the [website](http://www.jessesquires.com/JSQMessagesViewController/) for th
 
 ## Installation
 
-From [CocoaPods](http://cocoapods.org):
+From [CocoaPods](https://cocoapods.org/):
 
 ````ruby
 # For latest release in cocoapods
@@ -178,21 +178,21 @@ Please follow these fucking sweet [contribution guidelines](https://github.com/j
 
 Support the development of this **free** *open-source* library!
 
->*Donations made via [Square Cash](https://square.com/cash)*
+>*Donations made via [Square Cash](https://cash.me/)*
 
 ><h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$5&body=Thanks for developing JSQMessagesViewController!">Send $5</a> <em>Just saying thanks. Here's a coffee!</em> :coffee:</h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$10&body=Thanks for developing JSQMessagesViewController!">Send $10</a> <em>This library is great. Lunch is on me!</em> :ramen:</h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$25&body=Thanks for developing JSQMessagesViewController!">Send $25</a> <em>This totally saved me time. Go get a nice dinner!</em> :fork_and_knife:</h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$50&body=Thanks for developing JSQMessagesViewController!">Send $50</a> <em>I love this library. I want new features!</em> :clap:</h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$100&body=Thanks for developing JSQMessagesViewController!">Send $100</a> <em>I really want to support this project!</em> :tada:</h4>
->*You can also send donations via [PayPal](https://www.paypal.com). Message me on [twitter](https://twitter.com/jesse_squires).*
+>*You can also send donations via [PayPal](https://www.paypal.com/home). Message me on [twitter](https://twitter.com/jesse_squires).*
 
 ## Credits
 
 Created by [**@jesse_squires**](https://twitter.com/jesse_squires), a [programming-motherfucker](http://programming-motherfucker.com).
 
 * Assets extracted using [**@0xced**](https://github.com/0xced) / [iOS-Artwork-Extractor](https://github.com/0xced/iOS-Artwork-Extractor).
-* Originally inspired by [**@soffes**](http://github.com/soffes) / [SSMessagingViewController](https://github.com/soffes/ssmessagesviewcontroller).
+* Originally inspired by [**@soffes**](https://github.com/soffes) / [SSMessagingViewController](https://github.com/soffes/ssmessagesviewcontroller).
 * Many thanks to [**the contributors**](https://github.com/jessesquires/JSQMessagesViewController/graphs/contributors) of this project.
 
 ## About
@@ -223,10 +223,10 @@ Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed
 * [vCinity](https://itunes.apple.com/us/app/vcinity-chat-without-internet/id875395391)
 * [Quick Text Message](https://itunes.apple.com/us/app/quick-text-message-fast-sms/id583729997)
 * [Libraries for developers](https://itunes.apple.com/us/app/libraries-for-developers/id653427112)
-* [Buhz|Hyve](http://itunes.apple.com/us/app/buhz-hyve/id818568956)
+* [Buhz|Hyve](https://itunes.apple.com/us/app/buhz-hyve/id818568956)
 * [Ringring.io](https://github.com/ringring-io/ringring-ios)
 * [gDecide](https://itunes.apple.com/ca/app/gdecide/id716801285)
-* [AwesomeChat](https://github.com/relatedcode/AwesomeChat)
+* [AwesomeChat](https://github.com/relatedcode/RealtimeChat)
 * [ParseChat](https://github.com/relatedcode/ParseChat)
 * [Jib](http://jibapp.com)
 * [Onvolo](https://itunes.apple.com/us/app/onvolo/id869332351)
@@ -234,7 +234,7 @@ Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed
 * [Fluky Chat](https://itunes.apple.com/us/app/fluky-chat-secure-anonymous/id958605886)
 * [VillageUnity](https://itunes.apple.com/us/app/village-unity/id919972368)
 * [Pine](https://itunes.apple.com/us/app/pine-innovation-product-life/id946589228)
-* [NotificationChat](https://github.com/relatedcode/NotificationChat)
+* [NotificationChat](https://github.com/relatedcode/EncryptedChat)
 * [RealtimeChat](https://github.com/relatedcode/RealtimeChat)
 * [Bazar](https://itunes.apple.com/ru/app/bazar-talk-about-everything/id885453058)
 * [Roomie](https://itunes.apple.com/us/app/roomie-find-your-roomie/id962585201)
@@ -249,7 +249,7 @@ Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed
 
 *Please provide attribution, it is greatly appreciated.*
 
-[docsLink]:http://cocoadocs.org/docsets/JSQMessagesViewController
+[docsLink]:http://cocoadocs.org/docsets/JSQMessagesViewController/
 [podLink]:https://cocoapods.org/pods/JSQMessagesViewController
 [mitLink]:http://opensource.org/licenses/MIT
 [playerLink]:https://github.com/jessesquires/JSQSystemSoundPlayer
