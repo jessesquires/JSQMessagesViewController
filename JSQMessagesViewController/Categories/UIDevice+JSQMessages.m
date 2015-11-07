@@ -26,4 +26,10 @@
     return [[UIDevice currentDevice].systemVersion compare:@"8.0" options:NSNumericSearch] == NSOrderedAscending;
 }
 
++ (BOOL)jsq_isCurrentDeviceAfteriOS9
+{
+    // iOS > 9.0
+    return [[UIDevice currentDevice].systemVersion compare:@"9.0" options:NSNumericSearch] == NSOrderedDescending;
+}
+
 @end
