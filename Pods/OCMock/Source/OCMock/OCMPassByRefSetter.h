@@ -14,15 +14,13 @@
  *  under the License.
  */
 
-#import <Foundation/Foundation.h>
+#import "OCMArgAction.h"
 
-@interface OCMPassByRefSetter : NSObject 
+@interface OCMPassByRefSetter : OCMArgAction
 {
 	id value;
 }
 
 - (id)initWithValue:(id)value;
-
-- (id)value;
 
 @end

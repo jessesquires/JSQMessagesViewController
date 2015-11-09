@@ -18,6 +18,8 @@
 
 @interface NSInvocation(OCMAdditions)
 
++ (NSInvocation *)invocationForBlock:(id)block withArguments:(NSArray *)arguments;
+
 - (BOOL)hasCharPointerArgument;
 
 - (id)getArgumentAtIndexAsObject:(NSInteger)argIndex;

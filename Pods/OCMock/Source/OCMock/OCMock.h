@@ -22,6 +22,7 @@
 #import <OCMock/OCMLocation.h>
 #import <OCMock/OCMMacroState.h>
 #import <OCMock/NSNotificationCenter+OCMAdditions.h>
+#import <OCMock/OCMFunctions.h>
 
 
 #define OCMClassMock(cls) [OCMockObject niceMockForClass:cls]

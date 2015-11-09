@@ -15,7 +15,7 @@
  */
 
 #import <objc/runtime.h>
-#import "OCMFunctions.h"
+#import "OCMFunctionsPrivate.h"
 #import "OCMLocation.h"
 #import "OCClassMockObject.h"
 #import "OCPartialMockObject.h"
@@ -65,6 +65,26 @@ const char *OCMTypeWithoutQualifiers(const char *objCType)
     return objCType;
 }
 
+CFNumberType OCMNumberTypeForObjCType(const char *objcType)
+{
+    switch (objcType[0])
+    {
+        case 'c': return kCFNumberCharType;
+        case 'C': return kCFNumberCharType;
+        case 'B': return kCFNumberCharType;
+        case 's': return kCFNumberShortType;
+        case 'S': return kCFNumberShortType;
+        case 'i': return kCFNumberIntType;
+        case 'I': return kCFNumberIntType;
+        case 'l': return kCFNumberLongType;
+        case 'L': return kCFNumberLongType;
+        case 'q': return kCFNumberLongLongType;
+        case 'Q': return kCFNumberLongLongType;
+        case 'f': return kCFNumberFloatType;
+        case 'd': return kCFNumberDoubleType;
+        default:  return 0;
+    }
+}
 
 /*
  * Sometimes an external type is an opaque struct (which will have an @encode of "{structName}"
@@ -133,6 +153,9 @@ static BOOL OCMEqualTypesAllowingOpaqueStructsInternal(const char *type1, const 
                 return NO;
             return OCMEqualTypesAllowingOpaqueStructs(type1 + 1, type2 + 1);
 
+        case '?':
+            return type2[0] == '?';
+
         case '\0':
             return type2[0] == '\0';
 
@@ -171,19 +194,6 @@ Class OCMCreateSubclass(Class class, void *ref)
     Class subclass = objc_allocateClassPair(class, className, 0);
     objc_registerClassPair(subclass);
     return subclass;
-}
-
-
-#pragma mark  Directly manipulating the isa pointer (look away)
-
-void OCMSetIsa(id object, Class class)
-{
-    *((Class *)object) = class;
-}
-
-Class OCMGetIsa(id object)
-{
-    return *((Class *)object);
 }
 
 

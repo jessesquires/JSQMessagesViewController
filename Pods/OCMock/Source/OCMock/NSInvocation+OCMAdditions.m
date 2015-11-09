@@ -15,10 +15,80 @@
  */
 
 #import "NSInvocation+OCMAdditions.h"
-#import "OCMFunctions.h"
+#import "OCMFunctionsPrivate.h"
+#import "NSMethodSignature+OCMAdditions.h"
 
 
 @implementation NSInvocation(OCMAdditions)
+
++ (NSInvocation *)invocationForBlock:(id)block withArguments:(NSArray *)arguments
+{
+	NSMethodSignature *sig = [NSMethodSignature signatureForBlock:block];
+	NSInvocation *inv = [self invocationWithMethodSignature:sig];
+
+	NSUInteger numArgsRequired = sig.numberOfArguments - 1;
+	if((arguments != nil) && ([arguments count] != numArgsRequired))
+		[NSException raise:NSInvalidArgumentException format:@"Specified too few arguments for block; expected %lu arguments.", (unsigned long) numArgsRequired];
+
+	for(NSUInteger i = 0, j = 1; i < numArgsRequired; ++i, ++j)
+	{
+		id arg = [arguments objectAtIndex:i];
+		char const *typeEncoding = [sig getArgumentTypeAtIndex:j];
+
+		if((arg == nil) || [arg isKindOfClass:[NSNull class]])
+		{
+			if(typeEncoding[0] == '^')
+			{
+				void *nullPtr = NULL;
+				[inv setArgument:&nullPtr atIndex:j];
+			}
+			else if(typeEncoding[0] == '@')
+			{
+				id nilObj =  nil;
+				[inv setArgument:&nilObj atIndex:j];
+			}
+			else if(OCMNumberTypeForObjCType(typeEncoding))
+			{
+				NSUInteger zero = 0;
+				[inv setArgument:&zero atIndex:j];
+			}
+			else
+			{
+				[NSException raise:NSInvalidArgumentException format:@"Unable to create default value for type %s. All arguments must be specified for this block.", typeEncoding];
+			}
+		}
+		else if (typeEncoding[0] == '@')
+		{
+			[inv setArgument:&arg atIndex:j];
+		}
+		else
+		{
+			if(![arg isKindOfClass:[NSValue class]])
+				[NSException raise:NSInvalidArgumentException format:@"Argument at index %lu should be boxed in NSValue.", (long unsigned)i];
+
+			char const *valEncoding = [arg objCType];
+
+			/// @note Here we allow any data pointer to be passed as a void pointer and
+			/// any numberical types to be passed as arguments to the block.
+			BOOL takesVoidPtr = !strcmp(typeEncoding, "^v") && valEncoding[0] == '^';
+			BOOL takesNumber = OCMNumberTypeForObjCType(typeEncoding) && OCMNumberTypeForObjCType(valEncoding);
+
+			if(!takesVoidPtr && !takesNumber && !OCMEqualTypesAllowingOpaqueStructs(typeEncoding, valEncoding))
+				[NSException raise:NSInvalidArgumentException format:@"Argument type mismatch; Block requires %s but argument provided is %s", typeEncoding, valEncoding];
+
+			NSUInteger argSize;
+			NSGetSizeAndAlignment(typeEncoding, &argSize, NULL);
+			void *argBuffer = malloc(argSize);
+			[arg getValue:argBuffer];
+			[inv setArgument:argBuffer atIndex:j];
+			free(argBuffer);
+		}
+	}
+
+	return inv;
+
+}
+
 
 - (BOOL)hasCharPointerArgument
 {

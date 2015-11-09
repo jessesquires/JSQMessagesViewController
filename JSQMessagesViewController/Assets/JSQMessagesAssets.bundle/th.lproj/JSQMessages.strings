@@ -22,8 +22,8 @@
 //  https://github.com/jessesquires/JSQMessagesViewController/issues/237
 //  ********************************
 
-"load_earlier_messages" = "Messages précedents";
+"load_earlier_messages" = "โหลดข้อความก่อนหน้า";
 
-"send" = "Envoyer";
+"send" = "ส่ง";
 
-"new_message" = "Nouveau message";
+"new_message" = "ข้อความใหม่";

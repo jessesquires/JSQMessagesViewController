@@ -19,7 +19,7 @@
 #import "OCPartialMockObject.h"
 #import "NSMethodSignature+OCMAdditions.h"
 #import "NSObject+OCMAdditions.h"
-#import "OCMFunctions.h"
+#import "OCMFunctionsPrivate.h"
 #import "OCMInvocationStub.h"
 
 
