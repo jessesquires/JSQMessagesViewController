@@ -1,12 +1,32 @@
-osx_image: xcode7
+osx_image: xcode7.1
 
 language: objective-c
 
+env:
+   global:
+   - LANG=en_US.UTF-8
+
+   matrix:
+   - DESTINATION="OS=8.1,name=iPhone 4s" SDK=iphonesimulator9.1
+   - DESTINATION="OS=8.2,name=iPhone 5" SDK=iphonesimulator9.1
+   - DESTINATION="OS=8.3,name=iPhone 5s" SDK=iphonesimulator9.1
+   - DESTINATION="OS=8.4,name=iPhone 6" SDK=iphonesimulator9.1
+   - DESTINATION="OS=9.1,name=iPhone 6 Plus" SDK=iphonesimulator9.1
+   - DESTINATION="OS=9.1,name=iPhone 6s" SDK=iphonesimulator9.1
+   - DESTINATION="OS=9.1,name=iPhone 6s Plus" SDK=iphonesimulator9.1
+
+   - DESTINATION="OS=8.1,name=iPad 2" SDK=iphonesimulator9.1
+   - DESTINATION="OS=8.4,name=iPad Retina" SDK=iphonesimulator9.1
+   - DESTINATION="OS=9.1,name=iPad Air" SDK=iphonesimulator9.1
+
 before_install:
-- export LANG=en_US.UTF-8
+- brew update
 - gem install cocoapods
 
 script:
+
+- xctool clean build test -workspace JSQMessages.xcworkspace -scheme JSQMessages -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO
+
 - xcodebuild clean build test -workspace JSQMessages.xcworkspace -scheme JSQMessages -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
 
 after_success:
