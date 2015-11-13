@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,6 +13,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z1D-Tr-HPK" userLabel="Bubble Image View">
                     <rect key="frame" x="6" y="6" width="68" height="34"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="365-TI-0fL"/>
                         <constraint firstAttribute="width" constant="68" id="nS4-br-DxL"/>
@@ -19,12 +21,14 @@
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vwf-dy-PS6" userLabel="Ellipsis Image View">
                     <rect key="frame" x="26" y="6" width="34" height="34"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="34" id="CMT-z0-hca"/>
                         <constraint firstAttribute="height" constant="34" id="j0C-FV-2gV"/>
                     </constraints>
                 </imageView>
             </subviews>
+            <animations/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Vwf-dy-PS6" secondAttribute="trailing" constant="260" id="1Tm-qD-wIK"/>
                 <constraint firstAttribute="bottom" secondItem="Z1D-Tr-HPK" secondAttribute="bottom" constant="6" id="EVf-Sx-8mX"/>
@@ -39,9 +43,4 @@
             </connections>
         </collectionReusableView>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>
