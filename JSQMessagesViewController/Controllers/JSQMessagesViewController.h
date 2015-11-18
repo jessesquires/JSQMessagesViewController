@@ -75,6 +75,15 @@
  */
 @property (assign, nonatomic) BOOL automaticallyScrollsToMostRecentMessage;
 
+
+/**
+ *  Specifies whether behave upside-down
+ *
+ *  @discussion The default value is `NO`.
+ */
+@property (assign, nonatomic) BOOL inverted;
+
+
 /**
  *  The collection view cell identifier to use for dequeuing outgoing message collection view cells 
  *  in the collectionView for text messages.

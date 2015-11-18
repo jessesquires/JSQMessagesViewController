@@ -68,8 +68,18 @@
           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
           withReuseIdentifier:[JSQMessagesTypingIndicatorFooterView footerReuseIdentifier]];
     
+    // For inverted mode
+    [self registerNib:[JSQMessagesTypingIndicatorFooterView nib]
+          forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+          withReuseIdentifier:[JSQMessagesTypingIndicatorFooterView footerReuseIdentifier]];
+    
     [self registerNib:[JSQMessagesLoadEarlierHeaderView nib]
           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+          withReuseIdentifier:[JSQMessagesLoadEarlierHeaderView headerReuseIdentifier]];
+
+    // For inverted mode
+    [self registerNib:[JSQMessagesLoadEarlierHeaderView nib]
+          forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
           withReuseIdentifier:[JSQMessagesLoadEarlierHeaderView headerReuseIdentifier]];
 
     _typingIndicatorDisplaysOnLeft = YES;
@@ -98,7 +108,8 @@
 
 - (JSQMessagesTypingIndicatorFooterView *)dequeueTypingIndicatorFooterViewForIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessagesTypingIndicatorFooterView *footerView = [super dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+    NSString *kind = CGAffineTransformIsIdentity(self.transform) ? UICollectionElementKindSectionFooter : UICollectionElementKindSectionHeader;
+    JSQMessagesTypingIndicatorFooterView *footerView = [super dequeueReusableSupplementaryViewOfKind:kind
                                                                                  withReuseIdentifier:[JSQMessagesTypingIndicatorFooterView footerReuseIdentifier]
                                                                                         forIndexPath:indexPath];
 
@@ -106,7 +117,7 @@
                         messageBubbleColor:self.typingIndicatorMessageBubbleColor
                        shouldDisplayOnLeft:self.typingIndicatorDisplaysOnLeft
                          forCollectionView:self];
-
+    footerView.transform = self.transform;
     return footerView;
 }
 
@@ -114,12 +125,14 @@
 
 - (JSQMessagesLoadEarlierHeaderView *)dequeueLoadEarlierMessagesViewHeaderForIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessagesLoadEarlierHeaderView *headerView = [super dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+    NSString *kind = CGAffineTransformIsIdentity(self.transform) ? UICollectionElementKindSectionHeader : UICollectionElementKindSectionFooter;
+    JSQMessagesLoadEarlierHeaderView *headerView = [super dequeueReusableSupplementaryViewOfKind:kind
                                                                              withReuseIdentifier:[JSQMessagesLoadEarlierHeaderView headerReuseIdentifier]
                                                                                     forIndexPath:indexPath];
 
     headerView.loadButton.tintColor = self.loadEarlierMessagesHeaderTextColor;
     headerView.delegate = self;
+    headerView.transform = self.transform;
 
     return headerView;
 }

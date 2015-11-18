@@ -20,6 +20,11 @@
 
 #import "NSUserDefaults+DemoSettings.h"
 
+@interface DemoModelData()
+
+@property (strong, nonatomic) NSMutableArray* messages;
+
+@end
 
 /**
  *  This is for demo/testing purposes only.
@@ -189,5 +194,29 @@
                                                          media:videoItem];
     [self.messages addObject:videoMessage];
 }
+
+- (NSInteger)count {
+    return self.messages.count;
+}
+
+- (void)addMessage:(JSQMessage *)message {
+    [self.messages addObject:message];
+}
+
+- (JSQMessage*)messageAtIndex:(NSUInteger)index {
+    NSUInteger indexOfMessage = !self.inverted ? index : (self.messages.count - index -1);
+    return [self.messages objectAtIndex:indexOfMessage];
+}
+
+- (JSQMessage*)lastMessage {
+    return [self.messages lastObject];
+}
+
+- (void)removeMessageAtIndex:(NSUInteger)index {
+    NSUInteger indexOfDelete = !self.inverted ? index : (self.messages.count - index -1);
+    [self.messages removeObjectAtIndex:indexOfDelete];
+}
+
+
 
 @end

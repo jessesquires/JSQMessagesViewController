@@ -38,4 +38,7 @@
 + (void)saveIncomingAvatarSetting:(BOOL)value;
 + (BOOL)incomingAvatarSetting;
 
++ (void)saveInvertedModeSetting:(BOOL)value;
++ (BOOL)invertedModeSetting;
+
 @end

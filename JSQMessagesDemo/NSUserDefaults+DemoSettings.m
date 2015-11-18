@@ -24,6 +24,7 @@ static NSString * const kSettingEmptyMessages = @"kSettingEmptyMessages";
 static NSString * const kSettingSpringiness = @"kSettingSpringiness";
 static NSString * const kSettingIncomingAvatar = @"kSettingIncomingAvatar";
 static NSString * const kSettingOutgoingAvatar = @"kSettingOutgoingAvatar";
+static NSString * const kSettingInvertedMode = @"kSettingInvertedMode";
 
 
 @implementation NSUserDefaults (DemoSettings)
@@ -88,4 +89,13 @@ static NSString * const kSettingOutgoingAvatar = @"kSettingOutgoingAvatar";
     return [[NSUserDefaults standardUserDefaults] boolForKey:kSettingIncomingAvatar];
 }
 
++ (void)saveInvertedModeSetting:(BOOL)value
+{
+    [[NSUserDefaults standardUserDefaults] setBool:value forKey:kSettingInvertedMode];
+}
+
++ (BOOL)invertedModeSetting
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kSettingInvertedMode];
+}
 @end

@@ -64,6 +64,9 @@
     else if (sender == self.springySwitch) {
         [NSUserDefaults saveSpringinessSetting:sender.on];
     }
+    else if (sender == self.invertedSwitch) {
+        [NSUserDefaults saveInvertedModeSetting:sender.on];
+    }
     
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
