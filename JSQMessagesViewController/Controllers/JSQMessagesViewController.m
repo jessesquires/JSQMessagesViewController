@@ -833,6 +833,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     [self jsq_setToolbarBottomLayoutGuideConstant:heightFromBottom];
 
+    
     if (self.automaticallyScrollsToMostRecentMessage) {
         [self scrollToBottomAnimated:YES];
     }
