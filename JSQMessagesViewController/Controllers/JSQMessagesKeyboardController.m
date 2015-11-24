@@ -145,6 +145,21 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     [self jsq_registerForNotifications];
 }
 
+-(UIView*)getKeyboardInputView {
+    if([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
+        for(UIWindow* window in [[UIApplication sharedApplication] windows])
+            if([window isKindOfClass:NSClassFromString(@"UIRemoteKeyboardWindow")])
+                for(UIView* subView in window.subviews)
+                    if([subView isKindOfClass:NSClassFromString(@"UIInputSetHostView")])
+                        for(UIView* subsubView in subView.subviews)
+                            if([subsubView isKindOfClass:NSClassFromString(@"UIInputSetHostView")])
+                                return subsubView;
+    } else {
+        return self.textView.superview;
+    }
+    return nil;
+}
+
 - (void)endListeningForKeyboard
 {
     [self jsq_unregisterForNotifications];
@@ -187,9 +202,9 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)jsq_didReceiveKeyboardDidShowNotification:(NSNotification *)notification
 {
-    self.keyboardView = self.textView.inputAccessoryView.superview;
+    self.keyboardView = [self getKeyboardInputView];
     [self jsq_setKeyboardViewHidden:NO];
-
+    
     [self jsq_handleKeyboardNotification:notification completion:^(BOOL finished) {
         [self.panGestureRecognizer addTarget:self action:@selector(jsq_handlePanGestureRecognizer:)];
     }];
