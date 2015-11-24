@@ -1,5 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
+use_frameworks!
 platform :ios, '7.0'
 
 # ignore all warnings from all pods
