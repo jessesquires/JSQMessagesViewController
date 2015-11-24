@@ -20,7 +20,7 @@ env:
    - DESTINATION="OS=9.1,name=iPad Air" SDK=iphonesimulator9.1
 
 before_install:
-- brew update
+- brew update || brew update
 - gem install cocoapods
 
 script:
