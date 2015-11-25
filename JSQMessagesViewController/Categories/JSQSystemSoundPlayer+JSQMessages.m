@@ -62,10 +62,14 @@ static NSString * const kJSQMessageSentSoundName = @"message_sent";
     NSString *fileName = [NSString stringWithFormat:@"JSQMessagesAssets.bundle/Sounds/%@", soundName];
     
     if (asAlert) {
-        [[JSQSystemSoundPlayer sharedPlayer] playAlertSoundWithFilename:fileName fileExtension:kJSQSystemSoundTypeAIFF];
+        [[JSQSystemSoundPlayer sharedPlayer] playAlertSoundWithFilename:fileName fileExtension:kJSQSystemSoundTypeAIFF completion:^{
+            
+        }];
     }
     else {
-        [[JSQSystemSoundPlayer sharedPlayer] playSoundWithFilename:fileName fileExtension:kJSQSystemSoundTypeAIFF];
+        [[JSQSystemSoundPlayer sharedPlayer] playSoundWithFilename:fileName fileExtension:kJSQSystemSoundTypeAIFF completion:^{
+            
+        }];
     }
     
     //  restore original bundle
