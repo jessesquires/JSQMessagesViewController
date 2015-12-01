@@ -199,6 +199,10 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     }
 
     self.textViewFrameInsets = customAttributes.textViewFrameInsets;
+    
+    // UGLY HACK TO FIX CONSTRAINT WARNINGS!
+    // 15000 - some big number ==> temporary cell height
+    [self.contentView setBounds:CGRectMake(0, 0, CGRectGetWidth(self.contentView.frame), 15000)];
 
     [self jsq_updateConstraint:self.messageBubbleContainerWidthConstraint
                   withConstant:customAttributes.messageBubbleContainerViewWidth];
