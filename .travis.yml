@@ -41,11 +41,11 @@ script:
 
 # Build for reporting test coverage
 - if [ $COVERAGE == "YES" ]; then
-      xcodebuild clean build test -workspace JSQMessages.xcworkspace -scheme JSQMessages -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
+      xcodebuild clean build test -workspace JSQMessages.xcworkspace -scheme JSQMessages -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c;
   fi
 
 after_success:
 
 - if [ $COVERAGE == "YES" ]; then
-      bash <(curl -s https://codecov.io/bash)
+      bash <(curl -s https://codecov.io/bash);
   fi
