@@ -18,7 +18,7 @@ env:
    - DESTINATION="OS=8.1,name=iPad 2"   SDK="$IOS_SDK"  SCHEME="$IOS_SCHEME"  RUN_TESTS="NO"  BUILD_EXAMPLE="NO"  POD_LINT="NO"   COVERAGE="NO"
    - DESTINATION="OS=9.0,name=iPad Air" SDK="$IOS_SDK"  SCHEME="$IOS_SCHEME"  RUN_TESTS="NO"  BUILD_EXAMPLE="NO"  POD_LINT="NO"   COVERAGE="NO"
 
-   - DESTINATION="OS=9.1,name=iPhone 6s"  SDK="$IOS_SDK" SCHEME="$IOS_SCHEME"  RUN_TESTS="NO" BUILD_EXAMPLE="NO"  POD_LINT="YES"  COVERAGE="YES"
+   - DESTINATION="OS=9.1,name=iPhone 6s"  SDK="$IOS_SDK" SCHEME="$IOS_SCHEME"  RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="YES"  COVERAGE="YES"
 
 before_install:
 - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
@@ -38,7 +38,7 @@ script:
 
 # Build for reporting test coverage
 - if [ $COVERAGE == "YES" ]; then
-      xcodebuild test -workspace JSQMessages.xcworkspace -scheme JSQMessages -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c;
+      xcodebuild test -workspace JSQMessages.xcworkspace -scheme JSQMessages -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES;
   fi
 
 after_success:
