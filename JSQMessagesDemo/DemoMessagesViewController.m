@@ -323,6 +323,8 @@
 
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
+    [self.inputToolbar.contentView.textView resignFirstResponder];
+
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Media messages"
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
@@ -335,6 +337,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == actionSheet.cancelButtonIndex) {
+        [self.inputToolbar.contentView.textView becomeFirstResponder];
         return;
     }
     
