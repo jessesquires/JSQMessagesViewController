@@ -178,13 +178,13 @@ Please follow these fucking sweet [contribution guidelines](https://github.com/j
 
 Support the development of this **free** *open-source* library!
 
->*Donations made via [Square Cash](https://cash.me/$jsq)*
+>*Donations made via [Square Cash](https://cash.me/).*
 
-><h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$5&body=Thanks for developing JSQMessagesViewController!">Send $5</a> <em>Just saying thanks. Here's a coffee!</em> :coffee:</h4>
-<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$10&body=Thanks for developing JSQMessagesViewController!">Send $10</a> <em>This library is great. Lunch is on me!</em> :ramen:</h4>
-<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$25&body=Thanks for developing JSQMessagesViewController!">Send $25</a> <em>This totally saved me time. Go get a nice dinner!</em> :fork_and_knife:</h4>
-<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$50&body=Thanks for developing JSQMessagesViewController!">Send $50</a> <em>I love this library. I want new features!</em> :clap:</h4>
-<h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$100&body=Thanks for developing JSQMessagesViewController!">Send $100</a> <em>I really want to support this project!</em> :tada:</h4>
+><h4><a href="https://cash.me/$jsq/5">Send $5</a> <em>Just saying thanks. Here's a coffee!</em> :coffee:</h4>
+<h4><a href="https://cash.me/$jsq/10">Send $10</a> <em>This library is great. Lunch is on me!</em> :ramen:</h4>
+<h4><a href="https://cash.me/$jsq/25">Send $25</a> <em>This totally saved me time. Go get a nice dinner!</em> :fork_and_knife:</h4>
+<h4><a href="https://cash.me/$jsq/50">Send $50</a> <em>I love this library. I want new features!</em> :clap:</h4>
+<h4><a href="https://cash.me/$jsq/100">Send $100</a> <em>I really want to support this project!</em> :tada:</h4>
 >*You can also send donations via [PayPal](https://www.paypal.com/home). Message me on [twitter](https://twitter.com/jesse_squires).*
 
 ## Credits
