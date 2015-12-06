@@ -178,7 +178,7 @@ Please follow these fucking sweet [contribution guidelines](https://github.com/j
 
 Support the development of this **free** *open-source* library!
 
->*Donations made via [Square Cash](https://cash.me/)*
+>*Donations made via [Square Cash](https://cash.me/$jsq)*
 
 ><h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$5&body=Thanks for developing JSQMessagesViewController!">Send $5</a> <em>Just saying thanks. Here's a coffee!</em> :coffee:</h4>
 <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$10&body=Thanks for developing JSQMessagesViewController!">Send $10</a> <em>This library is great. Lunch is on me!</em> :ramen:</h4>
