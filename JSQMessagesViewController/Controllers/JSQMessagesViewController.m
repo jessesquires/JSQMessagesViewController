@@ -65,6 +65,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @property (assign, nonatomic) BOOL textViewWasFirstResponderDuringInteractivePop;
 
+@property (strong, nonatomic) NSDataDetector *dataDetector;
+
 - (void)jsq_configureMessagesViewController;
 
 - (NSString *)jsq_currentlyComposedMessageText;
@@ -100,6 +102,19 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 
 @implementation JSQMessagesViewController
+
+- (NSDataDetector *)dataDetector {
+    if (!_dataDetector) {
+        _dataDetector =  [NSDataDetector dataDetectorWithTypes:
+                                                    NSTextCheckingTypeAddress |
+                                                    NSTextCheckingTypePhoneNumber |
+                                                    NSTextCheckingTypeDate |
+                                                    NSTextCheckingTypeAddress |
+                                                    NSTextCheckingTypeLink
+                                                         error:nil];
+    }
+    return _dataDetector;
+}
 
 #pragma mark - Class methods
 
@@ -779,7 +794,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     //  per comment above in 'shouldShowMenuForItemAtIndexPath:'
     //  re-enable 'selectable', thus re-enabling data detectors if present
     JSQMessagesCollectionViewCell *selectedCell = (JSQMessagesCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:self.selectedIndexPathForMenu];
-    selectedCell.textView.selectable = YES;
+    if (selectedCell.textView && selectedCell.textView.text && selectedCell.textView.text.length) {
+        NSString *string = selectedCell.textView.text;
+        [self.dataDetector enumerateMatchesInString:string
+                                   options:kNilOptions
+                                     range:NSMakeRange(0, [string length])
+                                usingBlock:
+         ^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+             selectedCell.textView.selectable = YES;
+         }];
+    }
     self.selectedIndexPathForMenu = nil;
 }
 
