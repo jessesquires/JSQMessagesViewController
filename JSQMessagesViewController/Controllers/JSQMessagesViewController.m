@@ -304,8 +304,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     if (self.showTypingIndicator) {
-        self.showTypingIndicator = NO;
-        self.showTypingIndicator = YES;
         [self.collectionView reloadData];
     }
 }
