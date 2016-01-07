@@ -22,6 +22,8 @@
 
 #import "UIImage+JSQMessages.h"
 
+#import "AMTumblrHud.h"
+
 const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
 
 
@@ -30,8 +32,10 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
 @property (weak, nonatomic) IBOutlet UIImageView *bubbleImageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubbleImageViewRightHorizontalConstraint;
 
-@property (weak, nonatomic) IBOutlet UIImageView *typingIndicatorImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *typingIndicatorImageViewRightHorizontalConstraint;
+@property (weak, nonatomic) IBOutlet UIView *typingIndicatorView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *typingIndicatorViewRightHorizontalConstraint;
+
+@property AMTumblrHud *tumblrHUD;
 
 @end
 
@@ -60,13 +64,14 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     self.backgroundColor = [UIColor clearColor];
     self.userInteractionEnabled = NO;
-    self.typingIndicatorImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.typingIndicatorView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 - (void)dealloc
 {
     _bubbleImageView = nil;
-    _typingIndicatorImageView = nil;
+    _typingIndicatorView = nil;
+    _tumblrHUD = nil;
 }
 
 #pragma mark - Reusable view
@@ -98,24 +103,30 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
         
         CGFloat collectionViewWidth = CGRectGetWidth(collectionView.frame);
         CGFloat bubbleWidth = CGRectGetWidth(self.bubbleImageView.frame);
-        CGFloat indicatorWidth = CGRectGetWidth(self.typingIndicatorImageView.frame);
+        CGFloat indicatorWidth = CGRectGetWidth(self.typingIndicatorView.frame);
         
         CGFloat bubbleMarginMaximumSpacing = collectionViewWidth - bubbleWidth - bubbleMarginMinimumSpacing;
         CGFloat indicatorMarginMaximumSpacing = collectionViewWidth - indicatorWidth - indicatorMarginMinimumSpacing;
         
         self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMaximumSpacing;
-        self.typingIndicatorImageViewRightHorizontalConstraint.constant = indicatorMarginMaximumSpacing;
+        self.typingIndicatorViewRightHorizontalConstraint.constant = indicatorMarginMaximumSpacing;
     }
     else {
         self.bubbleImageView.image = [bubbleImageFactory outgoingMessagesBubbleImageWithColor:messageBubbleColor].messageBubbleImage;
         
         self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMinimumSpacing;
-        self.typingIndicatorImageViewRightHorizontalConstraint.constant = indicatorMarginMinimumSpacing;
+        self.typingIndicatorViewRightHorizontalConstraint.constant = indicatorMarginMinimumSpacing;
     }
     
     [self setNeedsUpdateConstraints];
     
-    self.typingIndicatorImageView.image = [[UIImage jsq_defaultTypingIndicatorImage] jsq_imageMaskedWithColor:ellipsisColor];
+    self.tumblrHUD = [[AMTumblrHud alloc] initWithFrame:CGRectMake(0, 12, 40, 13)];
+    self.tumblrHUD.hudColor = [UIColor grayColor];
+    [self.typingIndicatorView addSubview:self.tumblrHUD];
+    
+    [self.tumblrHUD showAnimated:YES];
+    
+    
 }
 
 @end
