@@ -209,6 +209,7 @@ Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed
 
 * [Hemoglobe](http://bit.ly/hemoglobeapp)
 * [PocketSuite](https://itunes.apple.com/us/app/pocketsuite/id721795146)
+* [FireChat](https://itunes.apple.com/us/app/firechat/id719829352)
 * [Signal](https://github.com/WhisperSystems/Signal-iOS)
 * [ClassDojo](https://itunes.apple.com/us/app/classdojo/id552602056)
 * [Schools App](https://itunes.apple.com/us/app/schools-app/id495845755)
