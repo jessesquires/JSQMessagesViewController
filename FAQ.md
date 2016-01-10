@@ -1,6 +1,8 @@
 # FAQ
 
-*Frequently asked questions for JSQMessagesViewController*
+*Frequently asked questions for JSQMessagesViewController.* 
+
+Contributions are welcome! Please submit a [pull request](https://github.com/jessesquires/JSQMessagesViewController/compare).
 
 ------------------------------------
 
@@ -41,6 +43,9 @@ Is the library compatible with `UITabBarController` and `UITabBar`? Yes and no. 
 ````
 
 #### *Customize your cells?*
+
+Also see [previous issues](https://github.com/jessesquires/JSQMessagesViewController/issues?utf8=✓&q=%5BCustomize+cells%5D+in%3Atitle+).
+
 ````objective-c
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
