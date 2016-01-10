@@ -19,6 +19,9 @@ Is the library compatible with `UITabBarController` and `UITabBar`? Yes and no. 
 ````
 
 #### *Springy bubbles?*
+
+:warning: Note: this feature is still experimental.
+
 ````objective-c
 - (void)viewDidAppear:(BOOL)animated
 {
