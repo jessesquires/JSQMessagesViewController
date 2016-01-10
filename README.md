@@ -23,29 +23,18 @@ See the [website](http://www.jessesquires.com/JSQMessagesViewController/) for th
 
 ## Installation
 
-From [CocoaPods](https://cocoapods.org/):
+### [CocoaPods](https://cocoapods.org/) (recommended)
 
 ````ruby
 # For latest release in cocoapods
 pod 'JSQMessagesViewController'  
 
-# Feeling adventurous? Get the latest on develop
+# Latest on develop
 pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
 
 # For version 5.3.2
 pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController', :branch => 'version_5.3.2_patch'
 ````
-
-Without CocoaPods:
-
-1. *Why aren't you using CocoaPods?*
-2. Drag the `JSQMessagesViewController/` folder to your project and install [`JSQSystemSoundPlayer`][playerLink].
-
->**NOTE:**
->
->This repo was formerly named `MessagesTableViewController`.
->
->And this pod was formerly named `JSMessagesViewController`.
 
 ## Getting Started
 
@@ -89,82 +78,14 @@ Without CocoaPods:
 * **Customizing**
   * The demo project is well-commented. Please use this as a guide.
 
-## Quick Tips
-
-##### *Springy bubbles?*
-````objective-c
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    self.collectionView.collectionViewLayout.springinessEnabled = YES;
-}
-````
-
-##### *Remove avatars?*
-````objective-c
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
-    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
-}
-
-- (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return nil;
-}
-````
-
-##### *Customize your cells?*
-````objective-c
-- (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
-    
-    // Customize the shit out of this cell
-    // See the docs for JSQMessagesCollectionViewCell
-    
-    return cell;
-}
-````
-
-##### *Customize your toolbar buttons?*
-````objective-c
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    // This button will call the `didPressAccessoryButton:` selector on your JSQMessagesViewController subclass
-    self.inputToolbar.contentView.leftBarButtonItem = /* custom button or nil to remove */
-    
-    // This button will call the `didPressSendButton:` selector on your JSQMessagesViewController subclass
-    self.inputToolbar.contentView.rightBarButtonItem = /* custom button or nil to remove */
-    
-    // Swap buttons, move send button to the LEFT side and the attachment button to the RIGHT
-    // For RTL language support
-    self.inputToolbar.contentView.leftBarButtonItem = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
-    self.inputToolbar.contentView.rightBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
-    
-    // The library will call the correct selector for each button, based on this value
-    self.inputToolbar.sendButtonOnRight = NO;
-}
-````
-
 ## Questions & Help
 
-There's [a label](https://github.com/jessesquires/JSQMessagesViewController/issues?utf8=✓&q=label%3A%22questions+%26+help%22+) for that. Before asking a question, see if it has [already been answered](https://github.com/jessesquires/JSQMessagesViewController/issues?q=label%3A%22questions+%26+help%22+is%3Aclosed). There's also a tag on [StackOverflow](http://stackoverflow.com/questions/tagged/jsqmessagesviewcontroller), which is often the more appropriate place for questions and help. **Please only ask questions that are _specific_ to this library.**
-
->**NOTE:** Please try to avoid emailing me with questions. I prefer to keep questions and their answers open-source.
-
-## Migrating between major versions
-
-##### From 5.x to 6.x
-
-See the [6.0 release notes](https://github.com/jessesquires/JSQMessagesViewController/releases/tag/6.0.0) for details about API changes.
-
-##### From 6.x to 7.x
-
-See the [7.0 release notes](https://github.com/jessesquires/JSQMessagesViewController/releases/tag/7.0.0) for details about API changes.
+* Review the [FAQ](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/FAQ.md).
+* Search issues for previous and current [questions](https://github.com/jessesquires/JSQMessagesViewController/issues?utf8=✓&q=label%3A%22questions+%26+help%22+). *Do not open duplicates.*
+* See the [StackOverflow tag](http://stackoverflow.com/questions/tagged/jsqmessagesviewcontroller), which is often the appropriate place for questions and help.
+* See the [Migration Guide](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/MIGRATION.md) for migrating between major versions of the library.
+* **Only ask questions that are _specific_ to this library.**
+* **Please avoid emailing questions.** I prefer to keep questions and their answers open-source.
 
 ## Documentation
 
