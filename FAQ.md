@@ -4,7 +4,19 @@
 
 ------------------------------------
 
-##### *Springy bubbles?*
+#### Using `UITabBar` ?
+
+Is the library compatible with `UITabBarController` and `UITabBar`? Yes and no. For the history on this issue, see [#179](https://github.com/jessesquires/JSQMessagesViewController/issues/179) and [#94](https://github.com/jessesquires/JSQMessagesViewController/issues/94). This seems to be the best workaround:
+
+````objective-c
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+}
+````
+
+#### *Springy bubbles?*
 ````objective-c
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -13,7 +25,7 @@
 }
 ````
 
-##### *Remove avatars?*
+#### *Remove avatars?*
 ````objective-c
 - (void)viewDidLoad
 {
@@ -28,7 +40,7 @@
 }
 ````
 
-##### *Customize your cells?*
+#### *Customize your cells?*
 ````objective-c
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -41,7 +53,7 @@
 }
 ````
 
-##### *Customize your toolbar buttons?*
+#### *Customize your toolbar buttons?*
 ````objective-c
 - (void)viewDidLoad
 {
