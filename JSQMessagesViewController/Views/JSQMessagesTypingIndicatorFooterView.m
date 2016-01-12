@@ -63,12 +63,6 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     self.typingIndicatorImageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
-- (void)dealloc
-{
-    _bubbleImageView = nil;
-    _typingIndicatorImageView = nil;
-}
-
 #pragma mark - Reusable view
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor

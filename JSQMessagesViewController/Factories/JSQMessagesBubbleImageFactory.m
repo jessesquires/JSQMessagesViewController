@@ -27,14 +27,6 @@
 @property (strong, nonatomic, readonly) UIImage *bubbleImage;
 @property (assign, nonatomic, readonly) UIEdgeInsets capInsets;
 
-- (UIEdgeInsets)jsq_centerPointEdgeInsetsForImageSize:(CGSize)bubbleImageSize;
-
-- (JSQMessagesBubbleImage *)jsq_messagesBubbleImageWithColor:(UIColor *)color flippedForIncoming:(BOOL)flippedForIncoming;
-
-- (UIImage *)jsq_horizontallyFlippedImageFromImage:(UIImage *)image;
-
-- (UIImage *)jsq_stretchableImageFromImage:(UIImage *)image withCapInsets:(UIEdgeInsets)capInsets;
-
 @end
 
 
@@ -64,11 +56,6 @@
 - (instancetype)init
 {
     return [self initWithBubbleImage:[UIImage jsq_bubbleCompactImage] capInsets:UIEdgeInsetsZero];
-}
-
-- (void)dealloc
-{
-    _bubbleImage = nil;
 }
 
 #pragma mark - Public

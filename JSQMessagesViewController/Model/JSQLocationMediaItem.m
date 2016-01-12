@@ -28,10 +28,6 @@
 
 @property (strong, nonatomic) UIImageView *cachedMapImageView;
 
-- (void)createMapViewSnapshotForLocation:(CLLocation *)location
-                        coordinateRegion:(MKCoordinateRegion)region
-                   withCompletionHandler:(JSQLocationMediaItemCompletionBlock)completion;
-
 @end
 
 
@@ -46,13 +42,6 @@
         [self setLocation:location withCompletionHandler:nil];
     }
     return self;
-}
-
-- (void)dealloc
-{
-    _location = nil;
-    _cachedMapSnapshotImage = nil;
-    _cachedMapImageView = nil;
 }
 
 - (void)clearCachedMediaViews

@@ -52,4 +52,9 @@
  */
 - (instancetype)initWithMessageBubbleImage:(UIImage *)image highlightedImage:(UIImage *)highlightedImage;
 
+/**
+ Not a valid initializer.
+ */
+- (id)init NS_UNAVAILABLE;
+
 @end

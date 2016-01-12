@@ -10,8 +10,6 @@
 
 #import <XCTest/XCTest.h>
 
-#import <OCMock/OCMock.h>
-
 #import "JSQMessagesViewController.h"
 #import "DemoMessagesViewController.h"
 
@@ -101,21 +99,6 @@
     XCTAssertNotNil(demoVC.view, @"View should not be nil");
     XCTAssertNotNil(demoVC.collectionView, @"Collection view should not be nil");
     XCTAssertNotNil(demoVC.inputToolbar, @"Input toolbar should not be nil");
-}
-
-- (void)testViewConfiguration
-{
-    JSQMessagesViewController *vc = [JSQMessagesViewController messagesViewController];
-    vc.senderId = @"senderId";
-    vc.senderDisplayName = @"senderDisplayName";
-
-    id mockVC = [OCMockObject partialMockForObject:vc];
-    [[mockVC expect] jsq_configureMessagesViewController];
-
-    [vc beginAppearanceTransition:YES animated:NO];
-    [vc endAppearanceTransition];
-
-    [mockVC verify];
 }
 
 @end
