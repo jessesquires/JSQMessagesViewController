@@ -6,6 +6,8 @@ Contributions are welcome! Please submit a [pull request](https://github.com/jes
 
 ------------------------------------
 
+## For 7.x.x
+
 #### Using `UITabBar` ?
 
 Is the library compatible with `UITabBarController` and `UITabBar`? Yes and no. For the history on this issue, see [#179](https://github.com/jessesquires/JSQMessagesViewController/issues/179) and [#94](https://github.com/jessesquires/JSQMessagesViewController/issues/94). This seems to be the best workaround:
@@ -47,7 +49,7 @@ Is the library compatible with `UITabBarController` and `UITabBar`? Yes and no. 
 
 #### *Need customize your collection view cells?*
 
-There are 2 approaches to this. Which one you choose depends on your needs.
+There are 2 approaches to this, which one you choose depends on your needs.
 
 1. Customize appearance and behavior of existing cells. (Easy)
 2. Provide your own completely custom cell prototypes. (Hard)
@@ -69,6 +71,20 @@ If you only need to make minor changes to the existing cells (colors, data detec
     return cell;
 }
 ````
+
+##### (2) Providing your own cell prototypes
+
+This approach is more involved, but gives you greater flexibility. If you need to add or modify subviews of the cell, use this approach. ([docs](http://cocoadocs.org/docsets/JSQMessagesViewController/7.2.0/Classes/JSQMessagesViewController.html))
+
+1. You need to provide your own cell subclasses, similar to the library's `JSQMessagesCollectionViewCell`, `JSQMessagesCollectionViewCellIncoming`, `JSQMessagesCollectionViewCellOutgoing`.
+2. On your `JSQMessagesViewController` subclass, set the following properties according to your classes:
+    - `outgoingCellIdentifier`
+    - `outgoingMediaCellIdentifier`
+    - `incomingCellIdentifier`
+    - `incomingMediaCellIdentifier`
+3. Register your cell classes/nibs with the collection view and the identifiers above
+4. Override `-collectionView: cellForItemAtIndexPath:`. Do not call `super`. Since you are providing your own cells, calling `super` will perform a bunch of unnecessary work.
+5. (Optional) For your model objects, implement `JSQMessageData` or subclass `JSQMessage` and extend to your needs.
 
 #### *Customize your toolbar buttons?*
 ````objective-c
