@@ -73,9 +73,14 @@
       "scale" : "2x"
     },
     {
+<<<<<<< HEAD
       "size" : "83.5x83.5",
       "idiom" : "ipad",
       "filename" : "icon167.png",
+=======
+      "idiom" : "ipad",
+      "size" : "83.5x83.5",
+>>>>>>> 2393ea6... wtf
       "scale" : "2x"
     }
   ],
