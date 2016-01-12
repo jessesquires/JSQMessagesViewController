@@ -65,36 +65,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @property (assign, nonatomic) BOOL textViewWasFirstResponderDuringInteractivePop;
 
-- (void)jsq_configureMessagesViewController;
-
-- (NSString *)jsq_currentlyComposedMessageText;
-
-- (void)jsq_handleDidChangeStatusBarFrameNotification:(NSNotification *)notification;
-- (void)jsq_didReceiveMenuWillShowNotification:(NSNotification *)notification;
-- (void)jsq_didReceiveMenuWillHideNotification:(NSNotification *)notification;
-
-- (void)jsq_updateKeyboardTriggerPoint;
-- (void)jsq_setToolbarBottomLayoutGuideConstant:(CGFloat)constant;
-
-- (void)jsq_handleInteractivePopGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer;
-
-- (BOOL)jsq_inputToolbarHasReachedMaximumHeight;
-- (void)jsq_adjustInputToolbarForComposerTextViewContentSizeChange:(CGFloat)dy;
-- (void)jsq_adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy;
-- (void)jsq_scrollComposerTextViewToBottomAnimated:(BOOL)animated;
-
-- (void)jsq_updateCollectionViewInsets;
-- (void)jsq_setCollectionViewInsetsTopValue:(CGFloat)top bottomValue:(CGFloat)bottom;
-
-- (BOOL)jsq_isMenuVisible;
-
-- (void)jsq_addObservers;
-- (void)jsq_removeObservers;
-
-- (void)jsq_registerForNotifications:(BOOL)registerForNotifications;
-
-- (void)jsq_addActionToInteractivePopGestureRecognizer:(BOOL)addAction;
-
 @end
 
 
@@ -167,19 +137,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     _collectionView.dataSource = nil;
     _collectionView.delegate = nil;
-    _collectionView = nil;
 
     _inputToolbar.contentView.textView.delegate = nil;
     _inputToolbar.delegate = nil;
-    _inputToolbar = nil;
-
-    _toolbarHeightConstraint = nil;
-    _toolbarBottomLayoutGuide = nil;
-
-    _senderId = nil;
-    _senderDisplayName = nil;
-    _outgoingCellIdentifier = nil;
-    _incomingCellIdentifier = nil;
 
     [_keyboardController endListeningForKeyboard];
     _keyboardController = nil;

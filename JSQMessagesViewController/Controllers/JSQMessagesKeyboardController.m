@@ -41,23 +41,6 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 @property (weak, nonatomic) UIView *keyboardView;
 
-- (void)jsq_registerForNotifications;
-- (void)jsq_unregisterForNotifications;
-
-- (void)jsq_didReceiveKeyboardDidShowNotification:(NSNotification *)notification;
-- (void)jsq_didReceiveKeyboardWillChangeFrameNotification:(NSNotification *)notification;
-- (void)jsq_didReceiveKeyboardDidChangeFrameNotification:(NSNotification *)notification;
-- (void)jsq_didReceiveKeyboardDidHideNotification:(NSNotification *)notification;
-- (void)jsq_handleKeyboardNotification:(NSNotification *)notification completion:(JSQAnimationCompletionBlock)completion;
-
-- (void)jsq_setKeyboardViewHidden:(BOOL)hidden;
-- (void)jsq_notifyKeyboardFrameNotificationForFrame:(CGRect)frame;
-- (void)jsq_resetKeyboardAndTextView;
-
-- (void)jsq_removeKeyboardFrameObserver;
-
-- (void)jsq_handlePanGestureRecognizer:(UIPanGestureRecognizer *)pan;
-
 @end
 
 
@@ -91,11 +74,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 {
     [self jsq_removeKeyboardFrameObserver];
     [self jsq_unregisterForNotifications];
-    _textView = nil;
-    _contextView = nil;
     _panGestureRecognizer = nil;
     _delegate = nil;
-    _keyboardView = nil;
 }
 
 #pragma mark - Setters

@@ -19,17 +19,6 @@
 #import "JSQMessage.h"
 
 
-@interface JSQMessage ()
-
-- (instancetype)initWithSenderId:(NSString *)senderId
-               senderDisplayName:(NSString *)senderDisplayName
-                            date:(NSDate *)date
-                         isMedia:(BOOL)isMedia;
-
-@end
-
-
-
 @implementation JSQMessage
 
 #pragma mark - Initialization
@@ -99,21 +88,6 @@
         _isMediaMessage = isMedia;
     }
     return self;
-}
-
-- (id)init
-{
-    NSAssert(NO, @"%s is not a valid initializer for %@.", __PRETTY_FUNCTION__, [self class]);
-    return nil;
-}
-
-- (void)dealloc
-{
-    _senderId = nil;
-    _senderDisplayName = nil;
-    _date = nil;
-    _text = nil;
-    _media = nil;
 }
 
 - (NSUInteger)messageHash
