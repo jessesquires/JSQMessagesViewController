@@ -18,24 +18,7 @@
 
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 
-
-@interface JSQMessagesCollectionViewLayoutAttributes ()
-
-- (CGSize)jsq_correctedAvatarSizeFromSize:(CGSize)size;
-
-- (CGFloat)jsq_correctedLabelHeightForHeight:(CGFloat)height;
-
-@end
-
-
 @implementation JSQMessagesCollectionViewLayoutAttributes
-
-#pragma mark - Lifecycle
-
-- (void)dealloc
-{
-    _messageBubbleFont = nil;
-}
 
 #pragma mark - Setters
 
