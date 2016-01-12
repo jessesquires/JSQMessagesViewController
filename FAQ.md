@@ -45,9 +45,18 @@ Is the library compatible with `UITabBarController` and `UITabBar`? Yes and no. 
 }
 ````
 
-#### *Customize your cells?*
+#### *Need customize your collection view cells?*
 
-Also see [previous issues](https://github.com/jessesquires/JSQMessagesViewController/issues?utf8=✓&q=%5BCustomize+cells%5D+in%3Atitle+).
+There are 2 approaches to this. Which one you choose depends on your needs.
+
+1. Customize appearance and behavior of existing cells. (Easy)
+2. Provide your own completely custom cell prototypes. (Hard)
+
+> Also see [previous issues](https://github.com/jessesquires/JSQMessagesViewController/issues?utf8=✓&q=%5BCustomize+cells%5D+in%3Atitle+).
+
+##### (1) Customizing existing cells
+
+If you only need to make minor changes to the existing cells (colors, data detectors, etc.), then you simply need to override the following method. You have access to all properties on the cell. ([docs](http://cocoadocs.org/docsets/JSQMessagesViewController/7.2.0/Classes/JSQMessagesCollectionViewCell.html))
 
 ````objective-c
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
