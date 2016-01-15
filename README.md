@@ -89,11 +89,11 @@ pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMes
 
 ## Documentation
 
-Read the fucking docs, [available here][docsLink] via [@CocoaDocs](https://twitter.com/CocoaDocs).
+Read the docs, [available here][docsLink] via [@CocoaDocs](https://twitter.com/CocoaDocs).
 
 ## Contribute
 
-Please follow these fucking sweet [contribution guidelines](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/CONTRIBUTING.md).
+Please follow these sweet [contribution guidelines](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/CONTRIBUTING.md).
 
 ## Donate
 
