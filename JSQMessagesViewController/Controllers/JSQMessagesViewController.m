@@ -639,7 +639,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
  didTapCellAtIndexPath:(NSIndexPath *)indexPath
-         touchLocation:(CGPoint)touchLocation { }
+         touchLocation:(CGPoint)touchLocation { 
+            [self.inputToolbar.contentView.textView resignFirstResponder];
+         }
 
 #pragma mark - Input toolbar delegate
 
