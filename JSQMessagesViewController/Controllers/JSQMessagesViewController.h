@@ -268,4 +268,29 @@
  */
 - (void)scrollToBottomAnimated:(BOOL)animated;
 
+/**
+ Call to super required.
+ */
+- (void)viewDidLoad NS_REQUIRES_SUPER;
+
+/**
+ Call to super required.
+ */
+- (void)viewWillAppear:(BOOL)animated NS_REQUIRES_SUPER;
+
+/**
+ Call to super required.
+ */
+- (void)viewDidAppear:(BOOL)animated NS_REQUIRES_SUPER;
+
+/**
+ Call to super required.
+ */
+- (void)viewWillDisappear:(BOOL)animated NS_REQUIRES_SUPER;
+
+/**
+ Call to super required.
+ */
+- (void)viewDidDisappear:(BOOL)animated NS_REQUIRES_SUPER;
+
 @end
