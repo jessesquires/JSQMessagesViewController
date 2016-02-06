@@ -115,17 +115,9 @@ Maintained by [**@jesse_squires**](https://twitter.com/jesse_squires) and [**@ha
 * Originally inspired by [**@soffes**](https://github.com/soffes) / [SSMessagingViewController](https://github.com/soffes/ssmessagesviewcontroller).
 * Many thanks to [**the contributors**](https://github.com/jessesquires/JSQMessagesViewController/graphs/contributors) of this project.
 
-## About
-
-I initially developed this library to use in [Hemoglobe](http://bit.ly/hmglb) for private messages between users.
-
-As it turns out, messaging is something that iOS devs and users really want. Messaging of any kind has turned out to be an increasingly popular mobile app feature in all sorts of contexts and for all sorts of reasons. Thus, I am supporting this project in my free time and have added features way beyond what Hemoglobe ever needed.
-
-Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed Bits](http://bit.ly/0x29A).
-
 ## Apps using this library
 
-According to [CocoaPods stats](https://cocoapods.org/pods/JSQMessagesViewController), over **4,000 apps** are using `JSQMessagesViewController`. [Here are the ones](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/apps_using_this_library.md) that we know about. Please submit a pull request to add your app! :smile:
+According to [CocoaPods stats](https://cocoapods.org/pods/JSQMessagesViewController), over **5,500 apps** are using `JSQMessagesViewController`. [Here are the ones](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/apps_using_this_library.md) that we know about. Please submit a pull request to add your app! :smile:
 
 ## License
 
