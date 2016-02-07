@@ -95,7 +95,11 @@
                               atIndexPath:(NSIndexPath *)indexPath
                                withLayout:(JSQMessagesCollectionViewFlowLayout *)layout
 {
-    NSValue *cachedSize = [self.cache objectForKey:@([messageData messageHash])];
+    // Key for the size to be cached should include both message hash and current item width.
+    // In the push to navigation scenario, the itemWidth starts with 312, and later becomes 406
+    // on iPhone 6.
+    NSString *cacheKey = [NSString stringWithFormat:@"%lu_%ld", (unsigned long)[messageData messageHash], (long)layout.itemWidth];
+    NSValue *cachedSize = [self.cache objectForKey:cacheKey];
     if (cachedSize != nil) {
         return [cachedSize CGSizeValue];
     }
@@ -136,7 +140,7 @@
         finalSize = CGSizeMake(finalWidth, stringSize.height + verticalInsets);
     }
 
-    [self.cache setObject:[NSValue valueWithCGSize:finalSize] forKey:@([messageData messageHash])];
+    [self.cache setObject:[NSValue valueWithCGSize:finalSize] forKey:cacheKey];
 
     return finalSize;
 }

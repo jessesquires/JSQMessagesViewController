@@ -97,6 +97,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
+    
+    if (self.inverted) {
+        self.collectionView.transform = CGAffineTransformMake(1, 0, 0, -1, 0, 0);
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 
     self.inputToolbar.delegate = self;
     self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
@@ -319,7 +324,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
 
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-    [self.collectionView reloadData];
+    if (!self.inverted)
+        [self.collectionView reloadData];
+    else
+        [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
 
     if (self.automaticallyScrollsToMostRecentMessage) {
         [self scrollToBottomAnimated:animated];
@@ -370,7 +378,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     //  workaround for really long messages not scrolling
     //  if last message is too long, use scroll position bottom for better appearance, else use top
     //  possibly a UIKit bug, see #480 on GitHub
-    NSUInteger finalRow = MAX(0, [self.collectionView numberOfItemsInSection:0] - 1);
+    NSUInteger finalRow = !self.inverted ? MAX(0, [self.collectionView numberOfItemsInSection:0] - 1) : 0;
     NSIndexPath *finalIndexPath = [NSIndexPath indexPathForItem:finalRow inSection:0];
     CGSize finalCellSize = [self.collectionView.collectionViewLayout sizeForItemAtIndexPath:finalIndexPath];
 
@@ -381,6 +389,17 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.collectionView scrollToItemAtIndexPath:finalIndexPath
                                 atScrollPosition:scrollPosition
                                         animated:animated];
+}
+
+// override UIScrollViewDelegate method for 'scrollToTop' triggered by tapping on status bar
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
+    if (!self.inverted)
+        return YES;
+    
+    // should scroll to the earliest in inverted mode
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self.collectionView numberOfItemsInSection:0] -1  inSection:0];
+    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+    return NO;
 }
 
 #pragma mark - JSQMessages collection view data source
@@ -455,6 +474,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
 
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+
+    // Keep cell the same transform as collectionView's
+    cell.contentView.transform = collectionView.transform;
+    
     cell.delegate = collectionView;
 
     if (!isMediaMessage) {
@@ -530,11 +553,23 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
            viewForSupplementaryElementOfKind:(NSString *)kind
                                  atIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.showTypingIndicator && [kind isEqualToString:UICollectionElementKindSectionFooter]) {
-        return [collectionView dequeueTypingIndicatorFooterViewForIndexPath:indexPath];
-    }
-    else if (self.showLoadEarlierMessagesHeader && [kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        return [collectionView dequeueLoadEarlierMessagesViewHeaderForIndexPath:indexPath];
+    if (!self.inverted) {
+        if (self.showTypingIndicator && [kind isEqualToString:UICollectionElementKindSectionFooter]) {
+            return [collectionView dequeueTypingIndicatorFooterViewForIndexPath:indexPath];
+        }
+        else if (self.showLoadEarlierMessagesHeader && [kind isEqualToString:UICollectionElementKindSectionHeader]) {
+            return [collectionView dequeueLoadEarlierMessagesViewHeaderForIndexPath:indexPath];
+        }
+    } else {
+        if (self.showTypingIndicator && [kind isEqualToString:UICollectionElementKindSectionHeader]) {
+            JSQMessagesTypingIndicatorFooterView *footerView = [collectionView dequeueTypingIndicatorFooterViewForIndexPath:indexPath];
+            footerView.transform = collectionView.transform;
+            return footerView;
+        } else if (self.showLoadEarlierMessagesHeader && [kind isEqualToString:UICollectionElementKindSectionFooter]) {
+            JSQMessagesLoadEarlierHeaderView *loadEarlierView = [collectionView dequeueLoadEarlierMessagesViewHeaderForIndexPath:indexPath];
+            loadEarlierView.transform = collectionView.transform;
+            return loadEarlierView;
+        }
     }
 
     return nil;
@@ -543,21 +578,21 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-    if (!self.showTypingIndicator) {
-        return CGSizeZero;
-    }
-
-    return CGSizeMake([collectionViewLayout itemWidth], kJSQMessagesTypingIndicatorFooterViewHeight);
+    return !self.inverted ? [self sizeOfTypingIndicator:collectionViewLayout] : [self sizeOfLoadEarlierHeader:collectionViewLayout];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    if (!self.showLoadEarlierMessagesHeader) {
-        return CGSizeZero;
-    }
+    return !self.inverted ? [self sizeOfLoadEarlierHeader:collectionViewLayout] : [self sizeOfTypingIndicator:collectionViewLayout];
+}
 
-    return CGSizeMake([collectionViewLayout itemWidth], kJSQMessagesLoadEarlierHeaderViewHeight);
+- (CGSize)sizeOfTypingIndicator:(JSQMessagesCollectionViewFlowLayout*)collectionViewLayout {
+    return self.showTypingIndicator ? CGSizeMake([collectionViewLayout itemWidth], kJSQMessagesTypingIndicatorFooterViewHeight) : CGSizeZero;
+}
+
+- (CGSize)sizeOfLoadEarlierHeader:(JSQMessagesCollectionViewFlowLayout*)collectionViewLayout {
+    return self.showLoadEarlierMessagesHeader ? CGSizeMake([collectionViewLayout itemWidth], kJSQMessagesLoadEarlierHeaderViewHeight) : CGSizeZero;
 }
 
 #pragma mark - Collection view delegate
@@ -937,8 +972,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_updateCollectionViewInsets
 {
-    [self jsq_setCollectionViewInsetsTopValue:self.topLayoutGuide.length + self.topContentAdditionalInset
-                                  bottomValue:CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame)];
+    CGFloat newTop = !self.inverted ? self.topLayoutGuide.length + self.topContentAdditionalInset : CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame);
+    CGFloat newBottom = !self.inverted ? CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame) : CGRectGetMaxY(self.navigationController.navigationBar.frame);
+    [self jsq_setCollectionViewInsetsTopValue:newTop bottomValue:newBottom];
 }
 
 - (void)jsq_setCollectionViewInsetsTopValue:(CGFloat)top bottomValue:(CGFloat)bottom

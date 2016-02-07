@@ -42,7 +42,7 @@ static NSString * const kJSQDemoAvatarIdWoz = @"309-41802-93823";
 
 @interface DemoModelData : NSObject
 
-@property (strong, nonatomic) NSMutableArray *messages;
+@property (assign, nonatomic) BOOL inverted;
 
 @property (strong, nonatomic) NSDictionary *avatars;
 
@@ -57,5 +57,15 @@ static NSString * const kJSQDemoAvatarIdWoz = @"309-41802-93823";
 - (void)addLocationMediaMessageCompletion:(JSQLocationMediaItemCompletionBlock)completion;
 
 - (void)addVideoMediaMessage;
+
+- (void)addMessage:(JSQMessage*)message;
+
+- (JSQMessage*)messageAtIndex:(NSUInteger)index;
+
+- (JSQMessage*)lastMessage;
+
+- (void)removeMessageAtIndex:(NSUInteger)index;
+
+- (NSInteger)count;
 
 @end
