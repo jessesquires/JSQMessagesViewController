@@ -39,4 +39,5 @@ These are the (known) apps that use JSQMessagesViewController. Submit a [pull re
 * [Bazar](https://itunes.apple.com/ru/app/bazar-talk-about-everything/id885453058)
 * [Roomie](https://itunes.apple.com/us/app/roomie-find-your-roomie/id962585201)
 * [PimpMyCall](https://itunes.apple.com/us/app/pimp-my-call/id990167537)
+* [Yellow Partner](https://itunes.apple.com/us/app/yellow-partner/id1062994361?ls=1&mt=8)
 * *Your app here, submit a [pull request](https://github.com/jessesquires/JSQMessagesViewController/compare)!*

@@ -1,3 +1,7 @@
+>### :warning: Call for Contributors!
+>
+>Want push access? We're looking for dedicated core contributors to help maintain JSQMessages! Please [get in touch](https://twitter.com/jesse_squires) if you are interested!
+
 ![JSQMessagesViewController banner](https://raw.githubusercontent.com/jessesquires/JSQMessagesViewController/develop/Assets/jsq_messages_banner.png)
 
 [![Build Status](https://secure.travis-ci.org/jessesquires/JSQMessagesViewController.svg)](https://travis-ci.org/jessesquires/JSQMessagesViewController) [![Version Status](https://img.shields.io/cocoapods/v/JSQMessagesViewController.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/JSQMessagesViewController.svg)][mitLink] [![codecov.io](https://img.shields.io/codecov/c/github/jessesquires/JSQMessagesViewController.svg)](https://codecov.io/github/jessesquires/JSQMessagesViewController) [![Platform](https://img.shields.io/cocoapods/p/JSQMessagesViewController.svg)][docsLink]
@@ -89,24 +93,17 @@ pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMes
 
 ## Documentation
 
-Read the fucking docs, [available here][docsLink] via [@CocoaDocs](https://twitter.com/CocoaDocs).
+Read the docs, [available here][docsLink] via [@CocoaDocs](https://twitter.com/CocoaDocs).
 
 ## Contribute
 
-Please follow these fucking sweet [contribution guidelines](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/CONTRIBUTING.md).
+Please follow these sweet [contribution guidelines](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/CONTRIBUTING.md).
 
 ## Donate
 
-Support the development of this **free** *open-source* library!
+Support the development of this **free** library!
 
->*Donations made via [Square Cash](https://cash.me/).*
-
-><h4><a href="https://cash.me/$jsq/5">Send $5</a> <em>Just saying thanks. Here's a coffee!</em> :coffee:</h4>
-<h4><a href="https://cash.me/$jsq/10">Send $10</a> <em>This library is great. Lunch is on me!</em> :ramen:</h4>
-<h4><a href="https://cash.me/$jsq/25">Send $25</a> <em>This totally saved me time. Go get a nice dinner!</em> :fork_and_knife:</h4>
-<h4><a href="https://cash.me/$jsq/50">Send $50</a> <em>I love this library. I want new features!</em> :clap:</h4>
-<h4><a href="https://cash.me/$jsq/100">Send $100</a> <em>I really want to support this project!</em> :tada:</h4>
->*You can also send donations via [PayPal](https://www.paypal.com/home). Message me on [twitter](https://twitter.com/jesse_squires).*
+**[Send cash now](https://cash.me/$jsq),** via [Square Cash](https://cash.me/).
 
 ## Credits
 
@@ -118,17 +115,9 @@ Maintained by [**@jesse_squires**](https://twitter.com/jesse_squires) and [**@ha
 * Originally inspired by [**@soffes**](https://github.com/soffes) / [SSMessagingViewController](https://github.com/soffes/ssmessagesviewcontroller).
 * Many thanks to [**the contributors**](https://github.com/jessesquires/JSQMessagesViewController/graphs/contributors) of this project.
 
-## About
-
-I initially developed this library to use in [Hemoglobe](http://bit.ly/hmglb) for private messages between users.
-
-As it turns out, messaging is something that iOS devs and users really want. Messaging of any kind has turned out to be an increasingly popular mobile app feature in all sorts of contexts and for all sorts of reasons. Thus, I am supporting this project in my free time and have added features way beyond what Hemoglobe ever needed.
-
-Feel free to read [my blog](http://bit.ly/jsqsf) and check out my work at [Hexed Bits](http://bit.ly/0x29A).
-
 ## Apps using this library
 
-According to [CocoaPods stats](https://cocoapods.org/pods/JSQMessagesViewController), over **4,000 apps** are using `JSQMessagesViewController`. [Here are the ones](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/apps_using_this_library.md) that we know about. Please submit a pull request to add your app! :smile:
+According to [CocoaPods stats](https://cocoapods.org/pods/JSQMessagesViewController), over **5,500 apps** are using `JSQMessagesViewController`. [Here are the ones](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/apps_using_this_library.md) that we know about. Please submit a pull request to add your app! :smile:
 
 ## License
 
