@@ -4,6 +4,7 @@ platform :ios, '7.0'
 
 # ignore all warnings from all pods
 inhibit_all_warnings!
+use_frameworks!
 
 pod 'JSQSystemSoundPlayer', '~> 2.0'
 
