@@ -383,6 +383,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                         animated:animated];
 }
 
+- (BOOL)isOutgoingMessage:(id<JSQMessageData>)messageItem
+{
+    NSString *messageSenderId = [messageItem senderId];
+    NSParameterAssert(messageSenderId != nil);
+    
+    return [messageSenderId isEqualToString:self.senderId];
+}
+
 #pragma mark - JSQMessages collection view data source
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -439,11 +447,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
     NSParameterAssert(messageItem != nil);
-
-    NSString *messageSenderId = [messageItem senderId];
-    NSParameterAssert(messageSenderId != nil);
-
-    BOOL isOutgoingMessage = [messageSenderId isEqualToString:self.senderId];
+    
+    BOOL isOutgoingMessage = [self isOutgoingMessage:messageItem];
     BOOL isMediaMessage = [messageItem isMediaMessage];
 
     NSString *cellIdentifier = nil;
