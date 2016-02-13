@@ -75,17 +75,12 @@
 }
 
 - (void)testCopyableItemInMediaProtocol {
-//    JSQPhotoMediaItem *item = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]];
-//    XCTAssertNotNil(item);
-//    XCTAssertNotNil([item copyableMediaItem]);
-//    
-//    NSDictionary *copyableMediaItem = [item copyableMediaItem];
-//    XCTAssertNotNil(copyableMediaItem[JSQPasteboardUTTypeKey]);
-//    XCTAssertEqualObjects((NSString *)kUTTypeJPEG, copyableMediaItem[JSQPasteboardUTTypeKey]);
-//    
-//    XCTAssertNotNil(copyableMediaItem[JSQPasteboardDataKey]);
-//    UIImage *itemImage = [[UIImage alloc] initWithData:copyableMediaItem[JSQPasteboardDataKey]];
-//    XCTAssertNotNil(itemImage);
+    JSQPhotoMediaItem *item = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]];
+    XCTAssertNotNil(item);
+    XCTAssertEqual([item copyableDataType], (NSString *)kUTTypeJPEG);
+    
+    UIImage *itemImage = [[UIImage alloc] initWithData:[item copyableData]];
+    XCTAssertNotNil(itemImage);
 }
 
 @end
