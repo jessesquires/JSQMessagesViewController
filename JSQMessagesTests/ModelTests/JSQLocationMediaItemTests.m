@@ -63,17 +63,17 @@
 }
 
 - (void)testCopyableItemInMediaProtocol {
-    JSQLocationMediaItem *item = [[JSQLocationMediaItem alloc] initWithLocation:self.location];
-    XCTAssertNotNil(item);
-    XCTAssertNotNil([item copyableMediaItem]);
-    
-    NSDictionary *copyableMediaItem = [item copyableMediaItem];
-    XCTAssertNotNil(copyableMediaItem[JSQPasteboardUTTypeKey]);
-    XCTAssertEqualObjects((NSString *)kUTTypeURL, copyableMediaItem[JSQPasteboardUTTypeKey]);
-    
-    XCTAssertNotNil(copyableMediaItem[JSQPasteboardDataKey]);
-    NSURL *locationURL = [[NSURL alloc] initWithString:@"http://maps.google.com/maps?z=12&t=m&q=loc:37.795313+-122.393757"];
-    XCTAssertEqualObjects(locationURL, copyableMediaItem[JSQPasteboardDataKey]);
+//    JSQLocationMediaItem *item = [[JSQLocationMediaItem alloc] initWithLocation:self.location];
+//    XCTAssertNotNil(item);
+//    XCTAssertNotNil([item copyableMediaItem]);
+//    
+//    NSDictionary *copyableMediaItem = [item copyableMediaItem];
+//    XCTAssertNotNil(copyableMediaItem[JSQPasteboardUTTypeKey]);
+//    XCTAssertEqualObjects((NSString *)kUTTypeURL, copyableMediaItem[JSQPasteboardUTTypeKey]);
+//    
+//    XCTAssertNotNil(copyableMediaItem[JSQPasteboardDataKey]);
+//    NSURL *locationURL = [[NSURL alloc] initWithString:@"http://maps.google.com/maps?z=12&t=m&q=loc:37.795313+-122.393757"];
+//    XCTAssertEqualObjects(locationURL, copyableMediaItem[JSQPasteboardDataKey]);
 }
 
 @end

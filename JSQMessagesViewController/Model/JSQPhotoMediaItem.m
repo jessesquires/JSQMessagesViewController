@@ -90,11 +90,14 @@
     return self.hash;
 }
 
-- (NSDictionary *)copyableMediaItem {
-    NSData *imageData = UIImageJPEGRepresentation(self.image, 1);
-    NSDictionary *copyableData = @{ JSQPasteboardUTTypeKey: (NSString *)kUTTypeJPEG, JSQPasteboardDataKey: imageData };
-    
-    return copyableData;
+- (NSString *)copyableDataType
+{
+    return (NSString *)kUTTypeJPEG;
+}
+
+- (id)copyableData
+{
+    return UIImageJPEGRepresentation(self.image, 1);
 }
 
 #pragma mark - NSObject

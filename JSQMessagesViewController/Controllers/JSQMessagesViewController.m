@@ -575,7 +575,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
     if ([messageItem isMediaMessage]) {
         
-        if ([[messageItem media] respondsToSelector:@selector(copyableMediaItem)]) {
+        if ([[messageItem media] respondsToSelector:@selector(copyableDataType)]) {
             return YES;
         }
         
@@ -608,19 +608,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (action == @selector(copy:)) {
 
         id<JSQMessageData> messageData = [self collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-        
-        if ([messageData isMediaMessage] && [[messageData media] respondsToSelector:@selector(copyableMediaItem)]) {
-            NSDictionary *copyableMediaItem = [[messageData media] copyableMediaItem];
-            NSString *pasteboardType = copyableMediaItem[JSQPasteboardUTTypeKey];
-            
-            // Use specific type when possible
-            if ([pasteboardType isEqualToString:(NSString *)kUTTypeURL]) {
-                [[UIPasteboard generalPasteboard] setURL:copyableMediaItem[JSQPasteboardDataKey]];
-            } else {
-                [[UIPasteboard generalPasteboard] setData:copyableMediaItem[JSQPasteboardDataKey] forPasteboardType:pasteboardType];
+    
+        if ([messageData isMediaMessage]) {
+            id<JSQMessageMediaData> mediaData = [messageData media];
+            if ([messageData respondsToSelector:@selector(copyableDataType)]) {
+                [[UIPasteboard generalPasteboard] setValue:[mediaData copyableData]
+                                         forPasteboardType:[mediaData copyableDataType]];
             }
-        } else {
-            [[UIPasteboard generalPasteboard] setString:[messageData text]];
         }
     }
     else if (action == @selector(delete:)) {

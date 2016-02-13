@@ -36,18 +36,6 @@
  */
 @protocol JSQMessageMediaData <NSObject>
 
-/**
- *  A constant that is the UTType key for the dictionary of UIPasteboard copyable data in a 
- *  `JSQMessageMediaData` compliant protocol object with the optional copyableMediaItem method implemented.
- */
-FOUNDATION_EXPORT NSString * const JSQPasteboardUTTypeKey;
-
-/**
- *  A constant that is the data key for the dictionary of UIPasteboard copyable data in a 
- * `JSQMessageMediaData` compliant protocol object with the optional copyableMediaItem method implemented.
- */
-FOUNDATION_EXPORT NSString * const JSQPasteboardDataKey;
-
 @required
 
 /**
@@ -92,15 +80,7 @@ FOUNDATION_EXPORT NSString * const JSQPasteboardDataKey;
 
 @optional
 
-/**
- *  @return An `NSDictionary` with two keys representing the UTType and data 
- *  (NSString, NSArray, NSURL, NSData, etc...) of this media object.
- *
- *  @discussion Implementing this optional method allows for the media object to be copyable 
- *  onto the UIPasteboard for use in other applications.
- *
- *  @warning You should not return `nil` from this method, instead, do not override it.
- */
-- (NSDictionary *)copyableMediaItem;
+- (NSString *)copyableDataType;
+- (id)copyableData;
 
 @end
