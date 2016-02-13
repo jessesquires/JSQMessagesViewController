@@ -615,6 +615,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                 [[UIPasteboard generalPasteboard] setValue:[mediaData copyableData]
                                          forPasteboardType:[mediaData copyableDataType]];
             }
+        } else {
+            [[UIPasteboard generalPasteboard] setString:[messageData text]];
         }
     }
     else if (action == @selector(delete:)) {
