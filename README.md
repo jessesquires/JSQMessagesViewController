@@ -46,8 +46,11 @@ pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMes
 #import <JSQMessagesViewController/JSQMessages.h>    // import all the things
 ````
 
->Read the [blog post](http://www.jessesquires.com/introducing-jsqmessagesvc-6-0/) about the 6.0 release!
+> Read the [blog post](http://www.jessesquires.com/introducing-jsqmessagesvc-6-0/) about the 6.0 release!
 
+* **Tutorials**
+  * Ray Wenderlich has a [great tutorial](http://www.raywenderlich.com/122148/firebase-tutorial-real-time-chat), written by [David East](https://twitter.com/_davideast). (For 7.x releases)
+  
 * **Demo Project**
   * There's a sweet demo project: `JSQMessages.xcworkspace`.
   * Run `pod install` first.
