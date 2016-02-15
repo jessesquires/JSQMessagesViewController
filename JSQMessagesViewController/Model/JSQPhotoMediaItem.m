@@ -90,12 +90,12 @@
     return self.hash;
 }
 
-- (NSString *)copyableDataType
+- (NSString *)mediaDataType
 {
     return (NSString *)kUTTypeJPEG;
 }
 
-- (id)copyableData
+- (id)mediaData
 {
     return UIImageJPEGRepresentation(self.image, 1);
 }

@@ -66,10 +66,10 @@
     JSQLocationMediaItem *item = [[JSQLocationMediaItem alloc] initWithLocation:self.location];
     XCTAssertNotNil(item);
     
-    XCTAssertEqualObjects((NSString *)kUTTypeURL, [item copyableDataType]);
+    XCTAssertEqualObjects((NSString *)kUTTypeURL, [item mediaDataType]);
     
     NSURL *locationURL = [[NSURL alloc] initWithString:@"http://maps.google.com/maps?z=12&t=m&q=loc:37.795313+-122.393757"];
-    XCTAssertEqualObjects(locationURL, [item copyableData]);
+    XCTAssertEqualObjects(locationURL, [item mediaData]);
 }
 
 @end

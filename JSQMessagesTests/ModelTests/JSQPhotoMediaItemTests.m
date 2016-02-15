@@ -77,9 +77,9 @@
 - (void)testCopyableItemInMediaProtocol {
     JSQPhotoMediaItem *item = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]];
     XCTAssertNotNil(item);
-    XCTAssertEqual([item copyableDataType], (NSString *)kUTTypeJPEG);
+    XCTAssertEqual([item mediaDataType], (NSString *)kUTTypeJPEG);
     
-    UIImage *itemImage = [[UIImage alloc] initWithData:[item copyableData]];
+    UIImage *itemImage = [[UIImage alloc] initWithData:[item mediaData]];
     XCTAssertNotNil(itemImage);
 }
 

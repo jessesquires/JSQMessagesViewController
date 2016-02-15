@@ -575,7 +575,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
     if ([messageItem isMediaMessage]) {
         
-        if ([[messageItem media] respondsToSelector:@selector(copyableDataType)]) {
+        if ([[messageItem media] respondsToSelector:@selector(mediaDataType)]) {
             return YES;
         }
         
@@ -611,9 +611,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
         if ([messageData isMediaMessage]) {
             id<JSQMessageMediaData> mediaData = [messageData media];
-            if ([messageData respondsToSelector:@selector(copyableDataType)]) {
-                [[UIPasteboard generalPasteboard] setValue:[mediaData copyableData]
-                                         forPasteboardType:[mediaData copyableDataType]];
+            if ([messageData respondsToSelector:@selector(mediaDataType)]) {
+                [[UIPasteboard generalPasteboard] setValue:[mediaData mediaData]
+                                         forPasteboardType:[mediaData mediaDataType]];
             }
         } else {
             [[UIPasteboard generalPasteboard] setString:[messageData text]];

@@ -160,12 +160,12 @@
     return self.hash;
 }
 
-- (NSString *)copyableDataType
+- (NSString *)mediaDataType
 {
     return (NSString *)kUTTypeURL;
 }
 
-- (id)copyableData
+- (id)mediaData
 {
     NSString *locationAsGoogleMapsString = [NSString stringWithFormat:@"http://maps.google.com/maps?z=12&t=m&q=loc:%f+%f", self.coordinate.latitude, self.coordinate.longitude ];
     NSURL *locationURL = [[NSURL alloc] initWithString:locationAsGoogleMapsString];
