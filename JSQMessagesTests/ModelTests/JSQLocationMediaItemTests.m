@@ -67,8 +67,8 @@
     XCTAssertNotNil(item);
     
     XCTAssertEqualObjects((NSString *)kUTTypeURL, [item mediaDataType]);
-    
-    NSURL *locationURL = [[NSURL alloc] initWithString:@"http://maps.google.com/maps?z=12&t=m&q=loc:37.795313+-122.393757"];
+
+    NSURL *locationURL = [[NSURL alloc] initWithString:@"http://maps.apple.com/?ll=37.795313,-122.393757&z=18&q=%20"];
     XCTAssertEqualObjects(locationURL, [item mediaData]);
 }
 
