@@ -167,7 +167,7 @@
 
 - (id)mediaData
 {
-    NSString *locationAsGoogleMapsString = [NSString stringWithFormat:@"http://maps.google.com/maps?z=12&t=m&q=loc:%f+%f", self.coordinate.latitude, self.coordinate.longitude ];
+    NSString *locationAsGoogleMapsString = [NSString stringWithFormat:@"http://maps.apple.com/?ll=%f,%f&z=18&q=%%20", self.coordinate.latitude, self.coordinate.longitude ];
     NSURL *locationURL = [[NSURL alloc] initWithString:locationAsGoogleMapsString];
     return locationURL;
 }
