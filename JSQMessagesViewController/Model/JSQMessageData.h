@@ -81,6 +81,8 @@
  */
 - (NSUInteger)messageHash;
 
+@optional
+
 /**
  *  @return The body text of the message.
  *
