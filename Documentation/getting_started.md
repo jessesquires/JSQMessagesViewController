@@ -1,6 +1,6 @@
 # Getting Started
 
-*Getting started guide for JSQMessagesViewController?*
+*Getting started guide for JSQMessagesViewController*
 
 -----------------------------
 
