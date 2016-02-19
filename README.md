@@ -2,7 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/jessesquires/JSQMessagesViewController.svg)](https://travis-ci.org/jessesquires/JSQMessagesViewController) [![Version Status](https://img.shields.io/cocoapods/v/JSQMessagesViewController.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/JSQMessagesViewController.svg)][mitLink] [![codecov.io](https://img.shields.io/codecov/c/github/jessesquires/JSQMessagesViewController.svg)](https://codecov.io/github/jessesquires/JSQMessagesViewController) [![Platform](https://img.shields.io/cocoapods/p/JSQMessagesViewController.svg)][docsLink]
 
-![Screenshot0][img0] &nbsp;&nbsp; ![Screenshot1][img1] &nbsp;&nbsp; 
+![Screenshot0][img0] &nbsp;&nbsp; ![Screenshot1][img1] &nbsp;&nbsp;
 
 ![Screenshot2][img2] &nbsp;&nbsp; ![Screenshot3][img3]
 
@@ -27,7 +27,7 @@ See the [website](http://www.jessesquires.com/JSQMessagesViewController/) for th
 
 ````ruby
 # For latest release in cocoapods
-pod 'JSQMessagesViewController'  
+pod 'JSQMessagesViewController'
 
 # Latest on develop
 pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
@@ -43,9 +43,9 @@ pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMes
 ````
 
 * **Tutorials and blogs**
-  * Read the [blog post](http://www.jessesquires.com/introducing-jsqmessagesvc-6-0/) about the 6.0 release! 
+  * Read the [blog post](http://www.jessesquires.com/introducing-jsqmessagesvc-6-0/) about the 6.0 release!
   * Ray Wenderlich has a [great tutorial](http://www.raywenderlich.com/122148/firebase-tutorial-real-time-chat), written by [David East](https://twitter.com/_davideast). (For 7.x releases)
-  
+
 * **Demo Project**
   * There's a sweet demo project: `JSQMessages.xcworkspace`.
   * Run `pod install` first.
@@ -54,7 +54,7 @@ pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMes
 * **Message Model**
   * Your message model objects should conform to the `JSQMessageData` protocol.
   * However, you may use the provided `JSQMessage` class.
-   
+
 * **Media Attachment Model**
   * Your media attachment model objects should conform to the `JSQMessageMediaData` protocol.
   * However, you may use the provided classes: `JSQPhotoMediaItem`, `JSQLocationMediaItem`, `JSQVideoMediaItem`.
@@ -82,10 +82,10 @@ pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMes
 
 ## Questions & Help
 
-* Review the [FAQ](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/documentation/faq.md).
+* Review the [FAQ](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/faq.md).
 * Search issues for previous and current [questions](https://github.com/jessesquires/JSQMessagesViewController/issues?utf8=✓&q=label%3A%22questions+%26+help%22+). *Do not open duplicates.*
 * See the [StackOverflow tag](http://stackoverflow.com/questions/tagged/jsqmessagesviewcontroller), which is often the appropriate place for questions and help.
-* See the [Migration Guide](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/documentation/migration.md) for migrating between major versions of the library.
+* See the [Migration Guide](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/migration.md) for migrating between major versions of the library.
 * **Only ask questions that are _specific_ to this library.**
 * **Please avoid emailing questions.** I prefer to keep questions and their answers open-source.
 
@@ -113,7 +113,7 @@ Created and maintained by [**@jesse_squires**](https://twitter.com/jesse_squires
 
 ## Apps using this library
 
-According to [CocoaPods stats](https://cocoapods.org/pods/JSQMessagesViewController), over **6,000 apps** are using `JSQMessagesViewController`. [Here are the ones](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/documentation/apps_using_this_library.md) that we know about. Please submit a pull request to add your app! :smile:
+According to [CocoaPods stats](https://cocoapods.org/pods/JSQMessagesViewController), over **6,000 apps** are using `JSQMessagesViewController`. [Here are the ones](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/apps_using_this_library.md) that we know about. Please submit a pull request to add your app! :smile:
 
 ## License
 
