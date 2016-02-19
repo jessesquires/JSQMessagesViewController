@@ -10,6 +10,10 @@ This guide is intended to bring new core contributors up-to-speed on the project
 
 > TODO
 
+## Pushing code
+
+> TODO
+
 ## Managing issues
 
 > TODO
@@ -22,7 +26,6 @@ This guide is intended to bring new core contributors up-to-speed on the project
 
 > TODO
 
-## Pushing code
+## Managing documentation
 
 > TODO
-
