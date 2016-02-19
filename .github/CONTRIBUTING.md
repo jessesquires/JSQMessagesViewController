@@ -2,7 +2,7 @@
 
 ### Open a new issue
 
-1. Read *all* of the [README](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/README.md) :speak_no_evil:
+1. Read *all* of the [`README`](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/README.md) :speak_no_evil:
 * Search [open issues](https://github.com/jessesquires/JSQMessagesViewController/issues) *and* [closed issues](https://github.com/jessesquires/JSQMessagesViewController/issues?q=is%3Aissue+is%3Aclosed) to **avoid opening a duplicate issue!** :see_no_evil:
 * If your issue exists, please comment on its thread with your new information :hear_no_evil:
 * Otherwise, open a new issue with a good title and description :memo:
@@ -22,7 +22,7 @@ See the [Questions & Help](https://github.com/jessesquires/JSQMessagesViewContro
 
 ### General guidelines
 
-Please also read through these sweet [contribution guidelines](https://github.com/jessesquires/HowToContribute).
+Please also read through these more general [contribution guidelines](https://github.com/jessesquires/HowToContribute).
 
 ### Did you read all of this?
 
