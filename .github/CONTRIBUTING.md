@@ -18,7 +18,7 @@
 
 ### Questions?
 
-See the [Quick Tips](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/README.md#quick-tips), [Questions & Help](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/README.md#questions--help), and [Documentation](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/README.md#documentation) sections in the README.
+See the [Questions & Help](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/README.md#questions--help), and [Documentation](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/README.md#documentation) sections in the `README`.
 
 ### General guidelines
 
