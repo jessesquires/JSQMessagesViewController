@@ -6,3 +6,23 @@ This guide is intended to bring new core contributors up-to-speed on the project
 
 -------------------------
 
+## Introduction
+
+> TODO
+
+## Managing issues
+
+> TODO
+
+## Managing pull requests
+
+> TODO
+
+## Managing releases
+
+> TODO
+
+## Pushing code
+
+> TODO
+
