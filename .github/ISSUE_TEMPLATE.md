@@ -39,3 +39,23 @@
 #### Screenshots or videos?
 
 *Can you provide screenshots, GIFs, or videos showing the issue?*
+
+## Questions and help
+
+*If this is a question, please provide the following information. Otherwise, you can delete this section.*
+
+#### Guidelines
+
+* [StackOverflow](http://stackoverflow.com/questions/tagged/jsqmessagesviewcontroller) is often the most appropriate place for questions and help.
+* **Only ask questions that are _specific_ to this library.**
+
+#### Checklist
+
+- [ ] I have reviewed the [FAQ](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/faq.md).
+- [ ] I have searched issues for already asked [questions](https://github.com/jessesquires/JSQMessagesViewController/issues?utf8=✓&q=label%3A%22questions+%26+help%22+). 
+- [ ] I have reviewed [Migration Guide](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/migration.md) for migrating between major versions.
+- [ ] **This is not a duplicate.**
+
+#### My question
+
+>...
