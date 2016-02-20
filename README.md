@@ -44,7 +44,7 @@ See the [Getting Started](https://github.com/jessesquires/JSQMessagesViewControl
 
 * Review the [FAQ](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/faq.md).
 * Search issues for previous and current [questions](https://github.com/jessesquires/JSQMessagesViewController/issues?utf8=✓&q=label%3A%22questions+%26+help%22+). *Do not open duplicates.*
-* See the [StackOverflow tag](http://stackoverflow.com/questions/tagged/jsqmessagesviewcontroller), which is often the appropriate place for questions and help.
+* [StackOverflow](http://stackoverflow.com/questions/tagged/jsqmessagesviewcontroller) is often the most appropriate place for questions and help. We have our own tag, `jsqmessagesviewcontroller`.
 * See the [Migration Guide](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/migration.md) for migrating between major versions of the library.
 * **Only ask questions that are _specific_ to this library.**
 * **Please avoid emailing questions.** I prefer to keep questions and their answers open-source.
@@ -53,7 +53,7 @@ See the [Getting Started](https://github.com/jessesquires/JSQMessagesViewControl
 
 Read the docs, [available here][docsLink] via [@CocoaDocs](https://twitter.com/CocoaDocs).
 
-## Contribute
+## Contributing
 
 Please follow these sweet [contribution guidelines](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/.github/CONTRIBUTING.md).
 
@@ -69,7 +69,7 @@ Support the development of this **free** library! **[Send cash](https://cash.me/
 
 ## Apps using this library
 
-According to [CocoaPods stats](https://cocoapods.org/pods/JSQMessagesViewController), over **6,000 apps** are using `JSQMessagesViewController`. [Here are the ones](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/apps_using_this_library.md) that we know about. Please submit a pull request to add your app! :smile:
+According to [CocoaPods stats](https://cocoapods.org/pods/JSQMessagesViewController), over **6,000 apps** are using `JSQMessagesViewController`. [Here are the ones](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/apps_using_this_library.md) that we know about. Please submit a [pull request](https://github.com/jessesquires/JSQMessagesViewController/compare) to add your app! :smile:
 
 ## License
 
