@@ -20,10 +20,6 @@
 - Link to a project that exhibits the issue (if possible):
 - List any related issues:
 
-#### Crash log
-
->...
-
 #### Expected behavior
 
 > ...
@@ -36,9 +32,17 @@
 
 > ...
 
+#### Crash log?
+
+*Can you provide a crash log?*
+
+>...
+
 #### Screenshots or videos?
 
 *Can you provide screenshots, GIFs, or videos showing the issue?*
+
+> ...
 
 ## Questions and help
 
@@ -59,3 +63,19 @@
 #### My question
 
 >...
+
+## Feature request
+
+*If this is a feature request, please provide the following information. Otherwise, you can delete this section.*
+
+*Have an idea for a new feature? Great! Describe it in detail here.*
+
+- [ ] There are no [existing requests](https://github.com/jessesquires/JSQMessagesViewController/issues?utf8=✓&q=is%3Aissue+label%3A%22feature+request%22+) for this feature.
+
+#### My feature request
+
+- Why should it be included in the library?
+- What problems does it solve?
+- Please provide design/implementation details if you can:
+
+> ...
