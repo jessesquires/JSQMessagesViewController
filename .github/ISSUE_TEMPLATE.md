@@ -76,6 +76,6 @@
 
 - Why should it be included in the library?
 - What problems does it solve?
-- Please provide design/implementation details if you can:
+- Please provide design/implementation details, if possible.
 
 > ...
