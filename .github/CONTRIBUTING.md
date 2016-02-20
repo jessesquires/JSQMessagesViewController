@@ -10,6 +10,7 @@
   - Library version(s) :octocat:
   - iOS version(s) :iphone:
   - Devices/Simulators affected :iphone:
+  - Expected behavior vs actual behavior
   - Complete steps to reproduce the issue :warning:
   - Link to a project that exhibits the issue, if possible fork the repo and modify the provided demo project :construction:
   - Screenshots/GIFs/Videos showing the issue, if applicable :camera:
@@ -30,6 +31,8 @@ You even followed the links? Congratulations! You deserve a high-five. :tada:
 
 ![img](http://media.giphy.com/media/LdnaND03GRE9q/giphy.gif)
 
-To prove to me how awesome you are, put these emoji at the beginning of your issue:
+### New issue checklist
 
-:muscle::sunglasses::facepunch:
+Now show me how awesome you are! :smile: When opening your new issue and filling out the checklist, you'll be asked for confirmation. Confirm that you've read this with these emoji: :muscle::sunglasses::facepunch:
+
+> - [x] I have reviewed the contributing guidelines. Confirmation: :muscle::sunglasses::facepunch:
