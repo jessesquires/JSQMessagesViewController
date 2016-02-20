@@ -65,11 +65,9 @@ Support the development of this **free** library!
 
 ## Credits
 
-Created and maintained by [**@jesse_squires**](https://twitter.com/jesse_squires).
-
-* Assets extracted using [**@0xced**](https://github.com/0xced) / [iOS-Artwork-Extractor](https://github.com/0xced/iOS-Artwork-Extractor).
-* Originally inspired by [**@soffes**](https://github.com/soffes) / [SSMessagingViewController](https://github.com/soffes/ssmessagesviewcontroller).
+* Created and maintained by [**@jesse_squires**](https://twitter.com/jesse_squires).
 * Many thanks to [**the contributors**](https://github.com/jessesquires/JSQMessagesViewController/graphs/contributors) of this project.
+* iOS assets extracted using [**@0xced**](https://github.com/0xced) / [iOS-Artwork-Extractor](https://github.com/0xced/iOS-Artwork-Extractor).
 
 ## Apps using this library
 
