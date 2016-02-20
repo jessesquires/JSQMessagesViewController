@@ -1,5 +1,9 @@
 # Contributing to JSQMessagesViewController
 
+## Code of Conduct
+
+Please read our [Code of Conduct](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/.github/CONDUCT.md). Intolerance, disrespect, and any of form of negativity will not be tolerated.
+
 ## Opening a new issue
 
 1. Read *all* of the [`README`](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/README.md) :speak_no_evil:
