@@ -59,9 +59,7 @@ Please follow these sweet [contribution guidelines](https://github.com/jessesqui
 
 ## Donate
 
-Support the development of this **free** library!
-
-**[Send cash now](https://cash.me/$jsq),** via [Square Cash](https://cash.me/).
+Support the development of this **free** library! **[Send cash](https://cash.me/$jsq)** via [Square Cash](https://cash.me/).
 
 ## Credits
 
