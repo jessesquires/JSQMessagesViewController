@@ -28,6 +28,14 @@ Remember, *your time* is *your time* — there is absolutely no pressure on you 
 
 > **Note:** the rest of this document applies to both **contributors** and **core contributors**, but there are some details that would require having push access.
 
+## Project leads and code owners
+
+Leads: 
+- [@jessesquires](https://github.com/jessesquires)
+
+Owners: 
+- [@jessesquires](https://github.com/jessesquires)
+
 ## Pushing code
 
 > ...
