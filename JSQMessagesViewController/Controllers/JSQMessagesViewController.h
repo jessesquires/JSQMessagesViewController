@@ -268,4 +268,38 @@
  */
 - (void)scrollToBottomAnimated:(BOOL)animated;
 
+/**
+ * Used to decide if a message is incoming or outgoing.
+ *
+ * @discussion The default implementation of this method compares the `senderId` of the message to the
+ * value of the `senderId` property and returns `YES` if they are equal. Subclasses can override
+ * this method to specialize the decision logic.
+ */
+- (BOOL)isOutgoingMessage:(id<JSQMessageData>)messageItem;
+
+/**
+ Call to super required.
+ */
+- (void)viewDidLoad NS_REQUIRES_SUPER;
+
+/**
+ Call to super required.
+ */
+- (void)viewWillAppear:(BOOL)animated NS_REQUIRES_SUPER;
+
+/**
+ Call to super required.
+ */
+- (void)viewDidAppear:(BOOL)animated NS_REQUIRES_SUPER;
+
+/**
+ Call to super required.
+ */
+- (void)viewWillDisappear:(BOOL)animated NS_REQUIRES_SUPER;
+
+/**
+ Call to super required.
+ */
+- (void)viewDidDisappear:(BOOL)animated NS_REQUIRES_SUPER;
+
 @end

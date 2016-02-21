@@ -78,4 +78,9 @@
                    highlightedImage:(UIImage *)highlightedImage
                    placeholderImage:(UIImage *)placeholderImage;
 
+/**
+ Not a valid initializer.
+ */
+- (id)init NS_UNAVAILABLE;
+
 @end
