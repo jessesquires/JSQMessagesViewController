@@ -28,9 +28,9 @@ Remember, *your time* is *your time* — there is absolutely no pressure on you 
 
 > **Note:** the rest of this document applies to both **contributors** and **core contributors**, but there are some details that would require having push access.
 
-## Community
+## Core team
 
-## Project lead
+### Project lead
 
 Jesse Squires ([**@jessesquires**](https://github.com/jessesquires)) serves as the lead for `JSQMessagesViewController`.
 
@@ -45,7 +45,7 @@ Responsibilities include:
 
 As core contributors grow and take on more repsonsibility, they can become a lead.
 
-## Core contributors
+### Core contributors
 
 Core contributors have push access and are responsible for:
 
@@ -67,18 +67,22 @@ Always merge work to `develop` unless otherwise specified. The project lead will
 
 For now, Jesse ([**@jessesquires**](https://github.com/jessesquires)) should provide the final approval for *all* pull requests. However, as core contributors grow and establish themselves in the project, they can take on this responsibility as well.
 
-## Managing issues
+## Project managment
+
+
+
+### Managing issues
 
 > TODO
 
-## Managing pull requests
+### Managing pull requests
 
 > TODO
 
-## Managing releases
+### Managing releases
 
 > TODO
 
-## Managing documentation
+### Managing documentation
 
 > TODO
