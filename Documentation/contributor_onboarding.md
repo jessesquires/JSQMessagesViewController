@@ -81,7 +81,7 @@ When first responding to a newly opened issue or pull request, *always* thank th
 
 Then continue on with the rest of your comment. There will be times where we simply cannot accept a patch for various reasons. In this case, kindly explain why it is not the right approach for the library, thank them for their time and effort, and encourage them to keep contributing.
 
-In any situation, when in doubt, tag the project in a comment to get feedback.
+In any situation, when in doubt, tag the project lead in a comment to get feedback.
 
 ### Development
 
@@ -116,6 +116,6 @@ Issues and pull requests included in the next milestone release should be the hi
 
 ### Managing documentation
 
-Having high quality documentation and 100% coverage has a significant on the project's success. 
+Having high quality documentation and 100% coverage has a significant impact on the project's success. 
 
 Always add new docs for new public APIs and keep them up-to-date. Use existing docs and Apple's docs for Cocoa as guidelines for writing great documentation.
