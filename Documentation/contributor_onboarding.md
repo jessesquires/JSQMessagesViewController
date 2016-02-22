@@ -69,6 +69,8 @@ For now, Jesse ([**@jessesquires**](https://github.com/jessesquires)) should pro
 
 ## Project managment
 
+### General guidelines
+
 Above all, abide by our [code of conduct](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/.github/CONDUCT.md) at all times. Be welcoming, kind, and inclusive.
 
 Often, users do not follow our [contributing guidelines](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/.github/CONTRIBUTING.md), fail to complete the [issue template](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/.github/ISSUE_TEMPLATE.md), or fail to complete the [pull request template](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/.github/PULL_REQUEST_TEMPLATE.md). This is frustrating, but the best response is to kindly remind and encourage them to follow the correct procedures next time.
@@ -81,19 +83,41 @@ Then continue on with the rest of your comment. There will be times where we sim
 
 In any situation, when in doubt, tag the project in a comment to get feedback.
 
+### Development
+
+All work for minor and patch releases should happen on `develop`. For example, release 7.x.x.
+
+All work for major releases should happen on a release branch. For example, `release_8.0`.
+
+The project lead will manage the `master` branch.
+
+For core contributors, always assign issues or pull requests to the appropriate team member. If you are working on an issue, assign it to yourself. If you would like someone to review a pull request, assign it to them.
+
 ### Managing issues
 
-Issues are ruthlessly organized and prioritized. Always add the appropriate label(s) — there may be more than one.
-> TODO
+- Always add the appropriate label(s). There may be more than one.
+- Assign to a release milestone, if applicable.
+- Ask for more information from the user, if needed.
+- Verify bugs. Leave comments on your findings as necessary.
+- If it's a duplicate, label and close.
+- Follow the general guidelines above.
 
 ### Managing pull requests
 
-> TODO
+- Review the code for correctness, performance, style, etc. Leave comments as needed.
+- Always add the appropriate label(s). There may be more than one.
+- Assign to a release milestone, if applicable.
+- Follow the general guidelines above.
+- If you think it's ready to go, tag the project lead to get the final :+1:
 
 ### Managing releases
 
-> TODO
+All releases are organized using [milestones](https://github.com/jessesquires/JSQMessagesViewController/milestones). Use these to prioritize work and figure out what's next.
+
+Issues and pull requests included in the next milestone release should be the highest priorty. Once a milestone is 100% complete, the project lead will merge `develop` or other release branches into `master`. The project lead will close the milestone, tag the release, and submit to CocoaPods.
 
 ### Managing documentation
 
-> TODO
+Having high quality documentation and 100% coverage has a significant on the project's success. 
+
+Always add new docs for new public APIs and keep them up-to-date. Use existing docs and Apple's Cocoa as guidelines for writing great documentation.
