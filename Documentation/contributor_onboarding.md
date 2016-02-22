@@ -85,11 +85,9 @@ In any situation, when in doubt, tag the project in a comment to get feedback.
 
 ### Development
 
-All work for minor and patch releases should happen on `develop`. For example, release 7.x.x.
-
-All work for major releases should happen on a release branch. For example, `release_8.0`.
-
-The project lead will manage the `master` branch.
+- All work for minor and patch releases should happen on `develop`. For example, release 7.x.x.
+- All work for major releases should happen on a release branch. For example, `release_8.0`.
+- The project lead will manage the `master` branch.
 
 For core contributors, always assign issues or pull requests to the appropriate team member. If you are working on an issue, assign it to yourself. If you would like someone to review a pull request, assign it to them.
 
@@ -120,4 +118,4 @@ Issues and pull requests included in the next milestone release should be the hi
 
 Having high quality documentation and 100% coverage has a significant on the project's success. 
 
-Always add new docs for new public APIs and keep them up-to-date. Use existing docs and Apple's Cocoa as guidelines for writing great documentation.
+Always add new docs for new public APIs and keep them up-to-date. Use existing docs and Apple's docs for Cocoa as guidelines for writing great documentation.
