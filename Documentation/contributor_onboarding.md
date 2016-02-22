@@ -69,10 +69,21 @@ For now, Jesse ([**@jessesquires**](https://github.com/jessesquires)) should pro
 
 ## Project managment
 
+Above all, abide by our [code of conduct](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/.github/CONDUCT.md) at all times. Be welcoming, kind, and inclusive.
 
+Often, users do not follow our [contributing guidelines](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/.github/CONTRIBUTING.md), fail to complete the [issue template](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/.github/ISSUE_TEMPLATE.md), or fail to complete the [pull request template](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/.github/PULL_REQUEST_TEMPLATE.md). This is frustrating, but the best response is to kindly remind and encourage them to follow the correct procedures next time.
+
+When first responding to a newly opened issue or pull request, *always* thank the contributor and add some sweet emoji. Any positive emoji will work. (:+1:, :smile:, :sunglasses:, etc.) Choose your favorite.
+
+> Thanks **@jessesquires**! :smile_cat:
+
+Then continue on with the rest of your comment. There will be times where we simply cannot accept a patch for various reasons. In this case, kindly explain why it is not the right approach for the library, thank them for their time and effort, and encourage them to keep contributing.
+
+In any situation, when in doubt, tag the project in a comment to get feedback.
 
 ### Managing issues
 
+Issues are ruthlessly organized and prioritized. Always add the appropriate label(s) — there may be more than one.
 > TODO
 
 ### Managing pull requests
