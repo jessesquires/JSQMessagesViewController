@@ -28,12 +28,15 @@ Remember, *your time* is *your time* — there is absolutely no pressure on you 
 
 > **Note:** the rest of this document applies to both **contributors** and **core contributors**, but there are some details that would require having push access.
 
-## Project leads
+## Community
+
+## Project lead
 
 Jesse Squires ([**@jessesquires**](https://github.com/jessesquires)) serves as the lead for `JSQMessagesViewController`.
 
 Responsibilities include:
 - Managing releases and CocoaPods distributions
+- Merging code into `master`
 - Overall guidance on design, architecture, and implementation
 - Strategic direction for the library
 - Onboarding new core contributors
@@ -49,6 +52,7 @@ Core contributors have push access and are responsible for:
 - Bug fixes
 - New features
 - Triaging issues (managing, organizing)
+- Reviewing pull requests
 - Answering questions from the community on [issues](https://github.com/jessesquires/JSQMessagesViewController/issues?utf8=✓&q=is%3Aissue+label%3A%22questions+%26+help%22+) and [StackOverflow](http://stackoverflow.com/questions/tagged/jsqmessagesviewcontroller)
 - Documentation
 
@@ -57,7 +61,11 @@ Current core contributors:
 
 ## Pushing code
 
-Although you have permissions to push code directly to `develop` or `master` as a **core contributor**, we ask that you *always* submit a pull request for code changes. After a code review and approval, you may merge your diff.
+Although you have permissions to push code directly to `develop` as a core contributor, we ask that you *always* submit a pull request for code changes. After a code review and approval, you may merge your diff. For minor changes, like formatting or typos, pushing directly to `develop` is acceptable. 
+
+Always merge work to `develop` unless otherwise specified. The project lead will manage the `master` branch.
+
+For now, Jesse ([**@jessesquires**](https://github.com/jessesquires)) should provide the final approval for *all* pull requests. However, as core contributors grow and establish themselves in the project, they can take on this responsibility as well.
 
 ## Managing issues
 
