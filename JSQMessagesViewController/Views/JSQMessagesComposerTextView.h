@@ -18,6 +18,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class JSQMessagesComposerTextView;
 
 /**
@@ -45,7 +47,7 @@
 /**
  *  The text to be displayed when the text view is empty. The default value is `nil`.
  */
-@property (copy, nonatomic) NSString *placeHolder;
+@property (nullable, copy, nonatomic) NSString *placeHolder;
 
 /**
  *  The color of the place holder text. The default value is `[UIColor lightGrayColor]`.
@@ -66,3 +68,5 @@
 - (BOOL)hasText;
 
 @end
+
+NS_ASSUME_NONNULL_END

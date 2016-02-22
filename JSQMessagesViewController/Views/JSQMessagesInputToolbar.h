@@ -21,6 +21,8 @@
 
 #import "JSQMessagesToolbarContentView.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class JSQMessagesInputToolbar;
 
 
@@ -67,7 +69,7 @@
 /**
  *  Returns the content view of the toolbar. This view contains all subviews of the toolbar.
  */
-@property (weak, nonatomic, readonly) JSQMessagesToolbarContentView *contentView;
+@property (nonatomic, readonly) JSQMessagesToolbarContentView *contentView;
 
 /**
  *  A boolean value indicating whether the send button is on the right side of the toolbar or not.
@@ -105,6 +107,8 @@
  *
  *  @return An initialized `JSQMessagesToolbarContentView` if successful, otherwise `nil`.
  */
-- (JSQMessagesToolbarContentView *)loadToolbarContentView;
+- (nullable JSQMessagesToolbarContentView *)loadToolbarContentView;
 
 @end
+
+NS_ASSUME_NONNULL_END

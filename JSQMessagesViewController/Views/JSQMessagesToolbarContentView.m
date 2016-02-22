@@ -25,16 +25,16 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
 
 @interface JSQMessagesToolbarContentView ()
 
-@property (weak, nonatomic) IBOutlet JSQMessagesComposerTextView *textView;
+@property (nonatomic) IBOutlet JSQMessagesComposerTextView *textView;
 
-@property (weak, nonatomic) IBOutlet UIView *leftBarButtonContainerView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftBarButtonContainerViewWidthConstraint;
+@property (nonatomic) IBOutlet UIView *leftBarButtonContainerView;
+@property (nonatomic) IBOutlet NSLayoutConstraint *leftBarButtonContainerViewWidthConstraint;
 
-@property (weak, nonatomic) IBOutlet UIView *rightBarButtonContainerView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightBarButtonContainerViewWidthConstraint;
+@property (nonatomic) IBOutlet UIView *rightBarButtonContainerView;
+@property (nonatomic) IBOutlet NSLayoutConstraint *rightBarButtonContainerViewWidthConstraint;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftHorizontalSpacingConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightHorizontalSpacingConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *leftHorizontalSpacingConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *rightHorizontalSpacingConstraint;
 
 @end
 

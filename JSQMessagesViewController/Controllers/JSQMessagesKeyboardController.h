@@ -24,6 +24,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class JSQMessagesKeyboardController;
 
 /**
@@ -123,7 +125,7 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
 - (instancetype)initWithTextView:(UITextView *)textView
                      contextView:(UIView *)contextView
             panGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer
-                        delegate:(id<JSQMessagesKeyboardControllerDelegate>)delegate;
+                        delegate:(nullable id<JSQMessagesKeyboardControllerDelegate>)delegate;
 
 /**
  *  Tells the keyboard controller that it should begin listening for system keyboard notifications.
@@ -136,3 +138,5 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
 - (void)endListeningForKeyboard;
 
 @end
+
+NS_ASSUME_NONNULL_END

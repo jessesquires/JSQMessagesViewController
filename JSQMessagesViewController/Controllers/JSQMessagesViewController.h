@@ -23,6 +23,8 @@
 #import "JSQMessagesInputToolbar.h"
 #import "JSQMessagesKeyboardController.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `JSQMessagesViewController` class is an abstract class that represents a view controller whose content consists of
  *  a `JSQMessagesCollectionView` and `JSQMessagesInputToolbar` and is specialized to display a messaging interface.
@@ -33,17 +35,18 @@
                                                          JSQMessagesCollectionViewDelegateFlowLayout,
                                                          UITextViewDelegate>
 
+
 /**
  *  Returns the collection view object managed by this view controller.
  *  This view controller is the collection view's data source and delegate.
  */
-@property (weak, nonatomic, readonly) JSQMessagesCollectionView *collectionView;
+@property (nonatomic, readonly) JSQMessagesCollectionView *collectionView;
 
 /**
  *  Returns the input toolbar view object managed by this view controller.
  *  This view controller is the toolbar's delegate.
  */
-@property (weak, nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
+@property (nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
 
 /**
  *  Returns the keyboard controller object used to manage the software keyboard.
@@ -184,14 +187,14 @@
  *  you should also override `messagesViewController` to return your
  *  view controller loaded from your custom nib.
  */
-+ (UINib *)nib;
++ (nullable UINib *)nib;
 
 /**
  *  Creates and returns a new `JSQMessagesViewController` object.
  *
  *  @discussion This is the designated initializer for programmatic instantiation.
  *
- *  @return An initialized `JSQMessagesViewController` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessagesViewController` object.
  */
 + (instancetype)messagesViewController;
 
@@ -303,3 +306,5 @@
 - (void)viewDidDisappear:(BOOL)animated NS_REQUIRES_SUPER;
 
 @end
+
+NS_ASSUME_NONNULL_END

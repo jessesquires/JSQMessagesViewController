@@ -25,6 +25,8 @@
 
 #import "JSQMessagesBubbleSizeCalculating.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class JSQMessagesCollectionView;
 
 
@@ -211,3 +213,5 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
 - (CGSize)sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
+
+NS_ASSUME_NONNULL_END

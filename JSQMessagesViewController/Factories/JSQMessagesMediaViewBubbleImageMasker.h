@@ -19,6 +19,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class JSQMessagesBubbleImageFactory;
 
 /**
@@ -88,3 +90,5 @@
 + (void)applyBubbleImageMaskToMediaView:(UIView *)mediaView isOutgoing:(BOOL)isOutgoing;
 
 @end
+
+NS_ASSUME_NONNULL_END
