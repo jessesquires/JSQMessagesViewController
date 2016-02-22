@@ -28,17 +28,36 @@ Remember, *your time* is *your time* — there is absolutely no pressure on you 
 
 > **Note:** the rest of this document applies to both **contributors** and **core contributors**, but there are some details that would require having push access.
 
-## Project leads and code owners
+## Project leads
 
-Leads: 
-- [@jessesquires](https://github.com/jessesquires)
+Jesse Squires ([**@jessesquires**](https://github.com/jessesquires)) serves as the lead for `JSQMessagesViewController`.
 
-Owners: 
-- [@jessesquires](https://github.com/jessesquires)
+Responsibilities include:
+- Managing releases and CocoaPods distributions
+- Overall guidance on design, architecture, and implementation
+- Strategic direction for the library
+- Onboarding new core contributors
+- Everything under **Core Contributors** :smile:
+- Anything not covered by **Core Contributors** :smile:
+
+As core contributors grow and take on more repsonsibility, they can become a lead.
+
+## Core contributors
+
+Core contributors have push access and are responsible for:
+
+- Bug fixes
+- New features
+- Triaging issues (managing, organizing)
+- Answering questions from the community on [issues](https://github.com/jessesquires/JSQMessagesViewController/issues?utf8=✓&q=is%3Aissue+label%3A%22questions+%26+help%22+) and [StackOverflow](http://stackoverflow.com/questions/tagged/jsqmessagesviewcontroller)
+- Documentation
+
+Current core contributors:
+- Harlan Haskans ([**@harlanhaskins**](https://github.com/harlanhaskins))
 
 ## Pushing code
 
-> ...
+Although you have permissions to push code directly to `develop` or `master` as a **core contributor**, we ask that you *always* submit a pull request for code changes. After a code review and approval, you may merge your diff.
 
 ## Managing issues
 
