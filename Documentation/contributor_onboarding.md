@@ -100,6 +100,14 @@ For core contributors, always assign issues or pull requests to the appropriate 
 - If it's a duplicate, label and close.
 - Follow the general guidelines above.
 
+##### Special labels
+
+- [`needs review`](https://github.com/jessesquires/JSQMessagesViewController/issues?q=is%3Aissue+label%3A%22needs+review%22): These issues need to be triaged and confirmed. They are typically bugs or pull requests, but do not have to be. Once verified, `needs review` should be removed and any other appropriate labels should be added.
+- [`new release roadmap`](https://github.com/jessesquires/JSQMessagesViewController/issues?utf8=✓&q=is%3Aissue+label%3A%22new+release+roadmap%22+): For communicating new releases to the community.
+- [`in-progress`](https://github.com/jessesquires/JSQMessagesViewController/issues?q=is%3Aissue+label%3Ain-progress): Specifies a task that is currently being worked on. Remove this label after closing a task.
+- [`duplicate`](https://github.com/jessesquires/JSQMessagesViewController/issues?utf8=✓&q=label%3Aduplicate+): For duplicate isses. When closing an issue as a duplicate be sure to leave a comment with the original issue number. *"Closing as duplicate of #6."*
+- [`questions & help`](https://github.com/jessesquires/JSQMessagesViewController/issues?q=is%3Aissue+label%3A%22questions+%26+help%22): For community questions and help. Note that we are trying to refer questions to [StackOverflow](http://stackoverflow.com/questions/tagged/jsqmessagesviewcontroller) instead.
+
 ### Managing pull requests
 
 - Review the code for correctness, performance, style, etc. Leave comments as needed.
