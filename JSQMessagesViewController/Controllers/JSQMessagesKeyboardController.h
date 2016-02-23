@@ -110,11 +110,10 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
  */
 @property (assign, nonatomic, readonly) CGRect currentKeyboardFrame;
 
-
 /**
- *  Not a valid initializer. Use initWithTextView:contextView:panGestureRecognizer:delegate to init a new keyboard controller.
+ *  Not a valid initializer.
  */
-- (instancetype)init NS_UNAVAILABLE;
+- (id)init NS_UNAVAILABLE;
 
 /**
  *  Creates a new keyboard controller object with the specified textView, contextView, panGestureRecognizer, and delegate.
