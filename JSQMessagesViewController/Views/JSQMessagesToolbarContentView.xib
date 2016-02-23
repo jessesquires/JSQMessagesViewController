@@ -18,6 +18,10 @@
                         <constraint firstAttribute="width" constant="34" id="eMy-Af-wwH"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f58-kl-aXZ" userLabel="Line View">
+                    <rect key="frame" x="42" y="0.0" width="1" height="50"/>
+                    <color key="backgroundColor" red="0.88627451660000001" green="0.88627451660000001" blue="0.88627451660000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wjI-rT-vRn" userLabel="Enclosure View">
                     <rect key="frame" x="46" y="6" width="266" height="32"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
