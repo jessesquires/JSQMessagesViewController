@@ -132,7 +132,7 @@
                            media:(id<JSQMessageMediaData>)media;
 
 /**
- Not a valid initializer.
+ *  Not a valid initializer.
  */
 - (id)init NS_UNAVAILABLE;
 
