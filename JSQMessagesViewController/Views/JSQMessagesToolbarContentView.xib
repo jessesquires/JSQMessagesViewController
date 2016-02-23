@@ -40,6 +40,10 @@
                         <constraint firstAttribute="width" constant="50" id="yde-S9-dHe"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QcH-9B-HCd" userLabel="Bottom Line View">
+                    <rect key="frame" x="0.0" y="49" width="320" height="1"/>
+                    <color key="backgroundColor" red="0.88627451658248901" green="0.88627451658248901" blue="0.88627451658248901" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
