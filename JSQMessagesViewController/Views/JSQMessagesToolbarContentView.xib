@@ -23,7 +23,7 @@
                     <color key="backgroundColor" red="0.88627451660000001" green="0.88627451660000001" blue="0.88627451660000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wjI-rT-vRn" userLabel="Enclosure View">
-                    <rect key="frame" x="46" y="9" width="266" height="32"/>
+                    <rect key="frame" x="46" y="9" width="262" height="32"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dm4-NT-mvr" customClass="JSQMessagesComposerTextView">
@@ -49,7 +49,7 @@
                 <constraint firstAttribute="bottom" secondItem="Myo-1S-Vg1" secondAttribute="bottom" constant="9" id="EaS-Oq-Qp5"/>
                 <constraint firstItem="wjI-rT-vRn" firstAttribute="leading" secondItem="LEq-G7-jGt" secondAttribute="trailing" constant="4" id="JGq-TG-Wt2"/>
                 <constraint firstItem="LEq-G7-jGt" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="8" id="LAU-fo-GJJ"/>
-                <constraint firstItem="wjI-rT-vRn" firstAttribute="trailing" secondItem="Myo-1S-Vg1" secondAttribute="trailing" id="LKP-eC-8uT"/>
+                <constraint firstItem="wjI-rT-vRn" firstAttribute="trailing" secondItem="Myo-1S-Vg1" secondAttribute="trailing" constant="-4" id="LKP-eC-8uT"/>
                 <constraint firstItem="wjI-rT-vRn" firstAttribute="bottom" secondItem="dm4-NT-mvr" secondAttribute="bottom" constant="1" id="d8G-9E-cFx"/>
                 <constraint firstAttribute="trailing" secondItem="Myo-1S-Vg1" secondAttribute="trailing" constant="8" id="ds6-61-GNv"/>
                 <constraint firstAttribute="bottom" secondItem="LEq-G7-jGt" secondAttribute="bottom" constant="9" id="oG2-YD-ZZI"/>
