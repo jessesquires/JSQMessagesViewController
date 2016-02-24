@@ -25,6 +25,8 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
 
 @interface JSQMessagesToolbarContentView ()
 
+@property (weak, nonatomic) IBOutlet UIView *enclosureView;
+
 @property (weak, nonatomic) IBOutlet JSQMessagesComposerTextView *textView;
 
 @property (weak, nonatomic) IBOutlet UIView *leftBarButtonContainerView;
@@ -62,6 +64,9 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
     self.rightHorizontalSpacingConstraint.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
 
     self.backgroundColor = [UIColor clearColor];
+
+    self.enclosureView.layer.borderWidth = 0.5f;
+    self.enclosureView.layer.borderColor = [UIColor colorWithRed:226.0/255.0 green:226.0/255.0 blue:226.0/255.0 alpha:1].CGColor;
 }
 
 #pragma mark - Setters
