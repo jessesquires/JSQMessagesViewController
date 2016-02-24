@@ -18,9 +18,12 @@
                         <constraint firstAttribute="width" constant="34" id="eMy-Af-wwH"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f58-kl-aXZ" userLabel="Line View">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f58-kl-aXZ" userLabel="Vertical Line View">
                     <rect key="frame" x="43" y="0.0" width="1" height="50"/>
                     <color key="backgroundColor" red="0.88627451660000001" green="0.88627451660000001" blue="0.88627451660000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="Z4E-be-OAX"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wjI-rT-vRn" userLabel="Enclosure View">
                     <rect key="frame" x="46" y="9" width="262" height="32"/>
@@ -40,22 +43,31 @@
                         <constraint firstAttribute="width" constant="50" id="yde-S9-dHe"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QcH-9B-HCd" userLabel="Bottom Line View">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QcH-9B-HCd" userLabel="Bottom Line View">
                     <rect key="frame" x="0.0" y="49" width="320" height="1"/>
                     <color key="backgroundColor" red="0.88627451658248901" green="0.88627451658248901" blue="0.88627451658248901" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="KPV-ns-JdT"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Myo-1S-Vg1" firstAttribute="leading" secondItem="dm4-NT-mvr" secondAttribute="trailing" constant="8" id="7Ld-5r-Hp3"/>
                 <constraint firstItem="dm4-NT-mvr" firstAttribute="top" secondItem="1" secondAttribute="top" constant="10" id="9Tz-Wq-xIf"/>
+                <constraint firstAttribute="bottom" secondItem="f58-kl-aXZ" secondAttribute="bottom" id="AaN-fH-EeQ"/>
                 <constraint firstAttribute="bottom" secondItem="dm4-NT-mvr" secondAttribute="bottom" constant="10" id="CCb-V7-yek"/>
                 <constraint firstAttribute="bottom" secondItem="Myo-1S-Vg1" secondAttribute="bottom" constant="9" id="EaS-Oq-Qp5"/>
+                <constraint firstAttribute="bottom" secondItem="QcH-9B-HCd" secondAttribute="bottom" id="Hro-E8-eFz"/>
+                <constraint firstItem="QcH-9B-HCd" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="J5K-AD-RlK"/>
                 <constraint firstItem="wjI-rT-vRn" firstAttribute="leading" secondItem="LEq-G7-jGt" secondAttribute="trailing" constant="4" id="JGq-TG-Wt2"/>
+                <constraint firstAttribute="trailing" secondItem="QcH-9B-HCd" secondAttribute="trailing" id="K2r-l3-TJa"/>
                 <constraint firstItem="LEq-G7-jGt" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="8" id="LAU-fo-GJJ"/>
                 <constraint firstItem="wjI-rT-vRn" firstAttribute="trailing" secondItem="Myo-1S-Vg1" secondAttribute="trailing" constant="-4" id="LKP-eC-8uT"/>
                 <constraint firstItem="wjI-rT-vRn" firstAttribute="bottom" secondItem="dm4-NT-mvr" secondAttribute="bottom" constant="1" id="d8G-9E-cFx"/>
                 <constraint firstAttribute="trailing" secondItem="Myo-1S-Vg1" secondAttribute="trailing" constant="8" id="ds6-61-GNv"/>
+                <constraint firstItem="f58-kl-aXZ" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="43" id="gsi-Jw-Syb"/>
+                <constraint firstItem="f58-kl-aXZ" firstAttribute="top" secondItem="1" secondAttribute="top" id="itq-4Q-jXW"/>
                 <constraint firstAttribute="bottom" secondItem="LEq-G7-jGt" secondAttribute="bottom" constant="9" id="oG2-YD-ZZI"/>
                 <constraint firstItem="wjI-rT-vRn" firstAttribute="top" secondItem="dm4-NT-mvr" secondAttribute="top" constant="-1" id="ols-VP-0Pk"/>
                 <constraint firstItem="dm4-NT-mvr" firstAttribute="leading" secondItem="LEq-G7-jGt" secondAttribute="trailing" constant="8" id="owo-gB-gyR"/>
