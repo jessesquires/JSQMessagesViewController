@@ -1,6 +1,6 @@
 # Apps using this library
 
-These are the (known) apps that use JSQMessagesViewController. Submit a [pull request](https://github.com/jessesquires/JSQMessagesViewController/compare) to join the list! :smile:
+These are the (known) apps that use `JSQMessagesViewController`. Submit a [pull request](https://github.com/jessesquires/JSQMessagesViewController/compare) to join the list! :smile:
 
 -----------------
 
