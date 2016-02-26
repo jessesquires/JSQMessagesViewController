@@ -88,7 +88,7 @@
  *
  *  @param date The date to format.
  *
- *  @return A formatted string representation of the day, month, and year components of date.
+ *  @return A formatted string representation of the day, month, and year components of date. the date is recently week will return the weekday.
  */
 - (NSString *)relativeDateForDate:(NSDate *)date;
 

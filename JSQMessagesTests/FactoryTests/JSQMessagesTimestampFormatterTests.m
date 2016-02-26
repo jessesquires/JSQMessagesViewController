@@ -98,7 +98,15 @@
     
     NSString *relativeDateString = [[JSQMessagesTimestampFormatter sharedFormatter] relativeDateForDate:date];
     
-    XCTAssertEqualObjects(relativeDateString, @"Today", @"Relative date string shoudl return expected value");
+    NSString *timeDateString = [[JSQMessagesTimestampFormatter sharedFormatter] timeForDate:date];
+    
+    XCTAssertEqualObjects(relativeDateString,timeDateString, @"Relative date string shoudl return expected value");
+    
+    NSDate *yesterday = [NSDate dateWithTimeIntervalSince1970:[[NSDate date] timeIntervalSince1970]-24*3600];
+    
+    relativeDateString = [[JSQMessagesTimestampFormatter sharedFormatter] relativeDateForDate:yesterday];
+    
+    XCTAssertEqualObjects(relativeDateString,@"Yesterday", @"Relative date string shoudl return expected value");
 }
 
 @end
