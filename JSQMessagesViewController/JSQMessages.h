@@ -19,7 +19,7 @@
 #ifndef JSQMessages_JSQMessages_h
 #define JSQMessages_JSQMessages_h
 
-#import "JSQMessagesViewController.h"
+#import "JSQMessagesViewController.h" 
 
 //  Views
 #import "JSQMessagesCollectionView.h"
