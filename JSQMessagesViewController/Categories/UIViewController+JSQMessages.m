@@ -16,12 +16,8 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
+#import "UIViewController+JSQMessages.h"
 #import <objc/runtime.h>
-#import <UIKit/UIKit.h>
-
-@interface UIViewController (JSQMessages)
-
-@end
 
 @implementation UIViewController (JSQMessages)
 
