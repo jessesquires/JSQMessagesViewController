@@ -1,0 +1,6 @@
+framework module Pods_MacmeSwiftChatUITests {
+  umbrella header "Pods-MacmeSwiftChatUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
