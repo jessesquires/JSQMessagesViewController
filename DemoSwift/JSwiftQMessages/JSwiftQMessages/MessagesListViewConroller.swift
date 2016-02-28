@@ -17,6 +17,8 @@ class MessagesListViewController: UIViewController, UITableViewDataSource, UITab
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.conversations = getConversation()
+        self.tableView?.reloadData()
 //        fetchSMSConversations {
 //            self.conversations = $0
 //            self.tableView?.reloadData()

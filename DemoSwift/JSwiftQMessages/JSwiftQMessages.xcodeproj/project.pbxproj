@@ -20,6 +20,7 @@
 		F8AA88271C83ABA600A9A2B7 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AA88261C83ABA600A9A2B7 /* Conversation.swift */; };
 		F8AA88291C83AE0900A9A2B7 /* MessagesListViewConroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AA88281C83AE0900A9A2B7 /* MessagesListViewConroller.swift */; };
 		F8AA882B1C83AF2600A9A2B7 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AA882A1C83AF2600A9A2B7 /* ChatTableViewCell.swift */; };
+		F8AA882D1C83B37300A9A2B7 /* DemoConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AA882C1C83B37300A9A2B7 /* DemoConversation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		F8AA88261C83ABA600A9A2B7 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		F8AA88281C83AE0900A9A2B7 /* MessagesListViewConroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesListViewConroller.swift; sourceTree = "<group>"; };
 		F8AA882A1C83AF2600A9A2B7 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		F8AA882C1C83B37300A9A2B7 /* DemoConversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoConversation.swift; sourceTree = "<group>"; };
 		FBF2FBD1AA47063746AE6316 /* Pods-JSwiftQMessages.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSwiftQMessages.release.xcconfig"; path = "Pods/Target Support Files/Pods-JSwiftQMessages/Pods-JSwiftQMessages.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,6 +154,7 @@
 				F8AA87FA1C83A7DD00A9A2B7 /* Assets.xcassets */,
 				F8AA87FC1C83A7DD00A9A2B7 /* LaunchScreen.storyboard */,
 				F8AA88211C83A90F00A9A2B7 /* SupportingFiles */,
+				F8AA882C1C83B37300A9A2B7 /* DemoConversation.swift */,
 			);
 			path = JSwiftQMessages;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				F8AA88271C83ABA600A9A2B7 /* Conversation.swift in Sources */,
 				F8AA87F41C83A7DD00A9A2B7 /* AppDelegate.swift in Sources */,
 				F8AA882B1C83AF2600A9A2B7 /* ChatTableViewCell.swift in Sources */,
+				F8AA882D1C83B37300A9A2B7 /* DemoConversation.swift in Sources */,
 				F8AA88251C83AAC200A9A2B7 /* ConversationViewController.swift in Sources */,
 				F8AA88291C83AE0900A9A2B7 /* MessagesListViewConroller.swift in Sources */,
 			);

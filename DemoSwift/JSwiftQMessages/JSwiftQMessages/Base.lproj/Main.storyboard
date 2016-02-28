@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XCe-Vc-obG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AQT-K1-a2E">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -10,7 +10,7 @@
         <!--MessagesViewList-->
         <scene sceneID="0hW-CK-qrG">
             <objects>
-                <viewController restorationIdentifier="MessageingList" storyboardIdentifier="MessageingList" title="Messages" id="AQT-K1-a2E" userLabel="MessagesViewList" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MessageingList" storyboardIdentifier="MessageingList" title="Messages" id="AQT-K1-a2E" userLabel="MessagesViewList" customClass="MessagesListViewController" customModule="JSwiftQMessages" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gbV-eB-QP4"/>
                         <viewControllerLayoutGuide type="bottom" id="Ycq-I1-79U"/>
@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="60" id="Vfk-Uy-H5d" customClass="SmsTableViewCell" customModule="JSwiftQMessages" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="60" id="Vfk-Uy-H5d" customClass="ChatTableViewCell" customModule="JSwiftQMessages" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vfk-Uy-H5d" id="1bW-L4-B03">
@@ -33,7 +33,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="AOa-Rz-4t9">
                                                     <rect key="frame" x="8" y="8" width="551" height="43"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNR-bt-Gvk" customClass="AvatarView" customModule="WeaveCommons">
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNR-bt-Gvk">
                                                             <rect key="frame" x="0.0" y="7" width="30" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="gNR-bt-Gvk" secondAttribute="height" multiplier="1:1" id="S1N-UQ-Weu"/>
@@ -69,9 +69,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="avatarView" destination="gNR-bt-Gvk" id="c7w-rU-9eg"/>
-                                            <outlet property="nameLabel" destination="y7a-gF-Jbs" id="A70-KN-qWg"/>
-                                            <outlet property="recentTextLabel" destination="Quw-NQ-Sav" id="TKg-7Q-VNF"/>
+                                            <outlet property="nameLabel" destination="y7a-gF-Jbs" id="2ua-hu-hYI"/>
+                                            <outlet property="recentTextLabel" destination="Quw-NQ-Sav" id="7qp-Ik-zzQ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -90,18 +89,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Messages" id="WL3-pB-yYL">
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="jWZ-mh-PPx">
-                            <connections>
-                                <action selector="addButtonPressed:" destination="AQT-K1-a2E" id="FVS-mF-g9x"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="jWZ-mh-PPx"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="composeBarButtonItem" destination="jWZ-mh-PPx" id="xy3-em-b6P"/>
-                        <outlet property="tableView" destination="tAZ-jB-8c4" id="I2N-Wq-wX3"/>
-                        <segue destination="XCe-Vc-obG" kind="show" id="B86-bD-P0x"/>
+                        <segue destination="XCe-Vc-obG" kind="show" identifier="ConversationSegue" id="B86-bD-P0x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DPB-KA-na9" userLabel="First Responder" sceneMemberID="firstResponder"/>
