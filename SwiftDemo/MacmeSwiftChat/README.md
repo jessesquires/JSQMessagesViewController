@@ -6,4 +6,4 @@
 
 [gifLink]
 
-[gifLink]:ReaddeAssests/DataDetectors.gif
+[gifLink]:https://github.com/MacMeDan/JSQMessagesViewController/blob/SwiftExampleAndAwesomeDocumentation/SwiftDemo/MacmeSwiftChat/ReadmeAssets/DataDetectors.gif
