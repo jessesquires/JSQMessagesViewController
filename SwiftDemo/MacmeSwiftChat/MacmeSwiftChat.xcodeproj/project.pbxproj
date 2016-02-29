@@ -20,6 +20,7 @@
 		F81C19841C83BCD6005E3F6C /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81C19831C83BCD6005E3F6C /* ConversationTableViewCell.swift */; };
 		F81C19861C83BCFB005E3F6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F81C19851C83BCFB005E3F6C /* Main.storyboard */; };
 		F81C19881C83BD81005E3F6C /* DemoConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81C19871C83BD81005E3F6C /* DemoConversation.swift */; };
+		F81C198A1C840809005E3F6C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F81C19891C840809005E3F6C /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		F81C19831C83BCD6005E3F6C /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		F81C19851C83BCFB005E3F6C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F81C19871C83BD81005E3F6C /* DemoConversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoConversation.swift; sourceTree = "<group>"; };
+		F81C19891C840809005E3F6C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 				F81C19871C83BD81005E3F6C /* DemoConversation.swift */,
 				F81C197F1C83BBA1005E3F6C /* ChatViewController.swift */,
 				F81C19811C83BC91005E3F6C /* ConversationsListViewController.swift */,
+				F81C19891C840809005E3F6C /* README.md */,
 				F81C19851C83BCFB005E3F6C /* Main.storyboard */,
 				F81C19831C83BCD6005E3F6C /* ConversationTableViewCell.swift */,
 				F81C197D1C83BB6A005E3F6C /* Conversation.swift */,
@@ -438,6 +441,7 @@
 				F81C197E1C83BB6A005E3F6C /* Conversation.swift in Sources */,
 				F81C19821C83BC91005E3F6C /* ConversationsListViewController.swift in Sources */,
 				F81C19801C83BBA1005E3F6C /* ChatViewController.swift in Sources */,
+				F81C198A1C840809005E3F6C /* README.md in Sources */,
 				F81C19881C83BD81005E3F6C /* DemoConversation.swift in Sources */,
 				F81C19501C83BB1F005E3F6C /* AppDelegate.swift in Sources */,
 				F81C19841C83BCD6005E3F6C /* ConversationTableViewCell.swift in Sources */,

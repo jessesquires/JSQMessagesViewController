@@ -19,35 +19,38 @@ class ChatViewController: JSQMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.inputToolbar?.contentView?.leftBarButtonItem = nil
-        
+        // This is how you remove Avatars from the messagesView
         collectionView?.collectionViewLayout.incomingAvatarViewSize = .zero
         collectionView?.collectionViewLayout.outgoingAvatarViewSize = .zero
+        
+        // This is a beta feature that mostly works but to make things more stable I have diabled it.
         collectionView?.collectionViewLayout.springinessEnabled = false
-        senderId = "1"
+        
+        //Set the SenderId  to the current User
+        //
+        // For this Demo we will use Woz's ID
+        //
+        // Anywhere that AvatarIDWoz is used you should replace with you currentUserVariable
+        senderId = AvatarIdWoz
         senderDisplayName = conversation?.firstName ?? conversation?.preferredName ?? conversation?.lastName ?? ""
         automaticallyScrollsToMostRecentMessage = true
         
         if let phoneNumber = conversation?.smsNumber {
-            //            fetchSMSMessagesForNumber(phoneNumber, completion: { (messages) in
-            //                self.messages = messages.reverse()
-            //                self.collectionView?.reloadData()
-            //                self.scrollToBottomAnimated(false)
-            //            })
+            self.messages = makeConversation()
+            self.collectionView?.reloadData()
+            self.collectionView?.layoutIfNeeded()
         }
     }
     
     override func didPressSendButton(button: UIButton?, withMessageText text: String?, senderId: String?, senderDisplayName: String?, date: NSDate?) {
-        guard let 📞＃ = conversation?.smsNumber, 📝 = text else {
-            return
-        }
         
-        //        let newMessage = Message(text: text, senderId: senderId, senderDisplayName: senderDisplayName, isOutBound: 1)
+        // This is where you would impliment your method for saving the message to your backend.
         //
-        //        sendSMS(toPhoneNumber: 📞＃, withMessage: 📝, success: {
-        //            self.messages.append(newMessage)
-        //            self.finishSendingMessage()
-        //            }, failure: nil)
-        
+        // For this Demo I will just add it to the messages list localy
+        //
+        self.messages.append(JSQMessage(senderId: AvatarIdWoz, displayName: DisplayNameWoz, text: text))
+        self.finishSendingMessageAnimated(true)
+        self.collectionView?.reloadData()
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -59,7 +62,7 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView?, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource? {
-        return messages[indexPath.item].senderId == "1" ? outgoingBubble : incomingBubble
+        return messages[indexPath.item].senderId == AvatarIdWoz ? outgoingBubble : incomingBubble
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource? {
@@ -69,7 +72,7 @@ class ChatViewController: JSQMessagesViewController {
     override func collectionView(collectionView: JSQMessagesCollectionView?, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
         let message = messages[indexPath.item]
         switch message.senderId {
-        case "1":
+        case AvatarIdWoz:
             return nil
         default:
             guard let senderDisplayName = message.senderDisplayName else {
@@ -82,7 +85,7 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView?, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout?, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        return messages[indexPath.item].senderId == "1" ? 0 : kJSQMessagesCollectionViewCellLabelHeightDefault
+        return messages[indexPath.item].senderId == AvatarIdWoz ? 0 : kJSQMessagesCollectionViewCellLabelHeightDefault
     }
     
 }

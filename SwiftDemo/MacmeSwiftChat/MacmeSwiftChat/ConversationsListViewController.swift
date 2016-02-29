@@ -10,7 +10,6 @@ import UIKit
 
 class ConversationsListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var composeBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView?
     
     var conversations = [Conversation]()
@@ -19,40 +18,6 @@ class ConversationsListViewController: UIViewController, UITableViewDataSource, 
         super.viewWillAppear(animated)
         self.conversations = getConversation()
         self.tableView?.reloadData()
-        //        fetchSMSConversations {
-        //            self.conversations = $0
-        //            self.tableView?.reloadData()
-        //        }
-    }
-    
-    lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        return refreshControl
-    }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //        addMenuButton()
-        //        setColors()
-        //        composeBarButtonItem.tintColor = AppColors.contrastColor
-        tableView?.addSubview(refreshControl)
-        
-    }
-    
-    func refresh(refreshControl: UIRefreshControl) {
-        updateConversations()
-    }
-    
-    func updateConversations() {
-        //        fetchSMSConversations { conversations in
-        //            self.conversations = conversations
-        //            self.tableView?.reloadData()
-        //            self.refreshControl.endRefreshing()
-        //            self.tableView?.sendSubviewToBack(self.refreshControl)
-        //        }
-        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,8 +31,8 @@ class ConversationsListViewController: UIViewController, UITableViewDataSource, 
         }
         
         //        cell.avatarView.setup(conversation.patientId)
-        cell.nameLabel.text = "Name"
-        //        cell.nameLabel.text = fullNameFromFirstName(conversation.firstName, lastName: conversation.lastName) ?? formatPhoneNumber(conversation.smsNumber)
+        cell.nameLabel.text = "Chat with The Guys"
+     
         cell.recentTextLabel.text = conversation.latestMessage
         
         if !conversation.isRead {
