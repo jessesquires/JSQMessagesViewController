@@ -4,6 +4,5 @@
 
 ##DataDetector support by default
 
-[gifLink]
 
 ![gifLink](https://github.com/MacMeDan/JSQMessagesViewController/blob/SwiftExampleAndAwesomeDocumentation/SwiftDemo/MacmeSwiftChat/ReadmeAssets/DataDetectors.gif)
