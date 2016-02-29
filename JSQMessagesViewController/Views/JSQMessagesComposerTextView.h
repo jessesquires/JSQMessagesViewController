@@ -58,6 +58,11 @@
 @property (weak, nonatomic) id<JSQMessagesComposerTextViewPasteDelegate> pasteDelegate;
 
 /**
+ *  Limiting the number of characters for UITextView
+ */
+@property (nonatomic) NSUInteger limitNumberOfCharacters;
+
+/**
  *  Determines whether or not the text view contains text after trimming white space 
  *  from the front and back of its string.
  *

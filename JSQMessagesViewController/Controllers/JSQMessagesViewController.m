@@ -751,6 +751,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [textView resignFirstResponder];
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    return !self.inputToolbar.contentView.textView.limitNumberOfCharacters ? : textView.text.length + (text.length - range.length) <= self.inputToolbar.contentView.textView.limitNumberOfCharacters;
+}
+
 #pragma mark - Notifications
 
 - (void)jsq_handleDidChangeStatusBarFrameNotification:(NSNotification *)notification
