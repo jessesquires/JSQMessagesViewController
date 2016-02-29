@@ -39,11 +39,6 @@ class ChatViewController: JSQMessagesViewController {
             self.messages = makeConversation()
             self.collectionView?.reloadData()
             self.collectionView?.layoutIfNeeded()
-            //            fetchSMSMessagesForNumber(phoneNumber, completion: { (messages) in
-            //                self.messages = messages.reverse()
-            //                self.collectionView?.reloadData()
-            //                self.scrollToBottomAnimated(false)
-            //            })
         }
     }
     
@@ -54,6 +49,7 @@ class ChatViewController: JSQMessagesViewController {
         // For this Demo I will just add it to the messages list localy
         //
         self.messages.append(JSQMessage(senderId: AvatarIdWoz, displayName: DisplayNameWoz, text: text))
+        self.finishSendingMessageAnimated(true)
         self.collectionView?.reloadData()
     }
     
