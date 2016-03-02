@@ -27,5 +27,5 @@ Data Detectors are a default Feature
 
 ##Cell Customization
 
-Check out the documentation on how to custom [collection view cells](https://github.com/MacMeDan/JSQMessagesViewController/blob/SwiftExampleAndAwesomeDocumentation/)
+Check out the documentation on how to custom [collection view cells](https://github.com/MacMeDan/JSQMessagesViewController/wiki/Swift-Custom-Collection-View-Cells)
 
