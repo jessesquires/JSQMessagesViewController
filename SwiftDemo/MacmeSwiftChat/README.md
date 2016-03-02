@@ -27,14 +27,5 @@ Data Detectors are a default Feature
 
 ##Cell Customization
 
-If you dont want the labels to be where apple likes to put them you can easily create your own cell and use that as your message view.
+Check out the documentation on how to custom [collection view cells](https://github.com/MacMeDan/JSQMessagesViewController/blob/SwiftExampleAndAwesomeDocumentation/)
 
-`
-override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView?.dequeueReusableCellWithReuseIdentifier("[YOURCUSTOMCELLIDENTIFYER]", forIndexPath: indexPath)
-
-        //Configure your cell here
-
-    return cell
-}
-`
