@@ -197,7 +197,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
     [self.view layoutIfNeeded];
     [self.collectionView.collectionViewLayout invalidateLayout];
-
+  
     if (self.automaticallyScrollsToMostRecentMessage) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self scrollToBottomAnimated:NO];
