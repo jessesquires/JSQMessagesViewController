@@ -1,5 +1,6 @@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ##Goals:Impliment JSQMessages in Swift
 
 ##DataDetector support by default
@@ -8,13 +9,18 @@
 
 ![gifLink]:https://github.com/MacMeDan/JSQMessagesViewController/blob/SwiftExampleAndAwesomeDocumentation/SwiftDemo/MacmeSwiftChat/ReadmeAssets/DataDetectors.gif
 =======
+=======
+>>>>>>> b7c121b4cfce63147fdd05f2136d905e8544c750
 ## JSQMessagesViewController in a Swift Project
 
 ## Requirements
 
 * iOS 8.0+
 * Xcode 7.2+
+<<<<<<< HEAD
 >>>>>>> 5ae27e4... adding example code and customization.
+=======
+>>>>>>> b7c121b4cfce63147fdd05f2136d905e8544c750
 
 ##Communication
 
@@ -38,6 +44,7 @@ Data Detectors are a default Feature
 ##Cell Customization
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Check out the documentation on how to custom [collection view cells](https://github.com/MacMeDan/JSQMessagesViewController/wiki/Swift-Custom-Collection-View-Cells)
 
 
@@ -55,3 +62,7 @@ override func collectionView(collectionView: UICollectionView, cellForItemAtInde
 }
 `
 >>>>>>> 5ae27e4... adding example code and customization.
+=======
+Check out the documentation on how to custom [collection view cells](https://github.com/MacMeDan/JSQMessagesViewController/wiki/Swift-Custom-Collection-View-Cells)
+
+>>>>>>> b7c121b4cfce63147fdd05f2136d905e8544c750
