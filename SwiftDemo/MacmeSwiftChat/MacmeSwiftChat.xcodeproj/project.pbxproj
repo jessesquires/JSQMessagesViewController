@@ -253,6 +253,7 @@
 				TargetAttributes = {
 					F81C194B1C83BB1F005E3F6C = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 23A3RV3GPB;
 					};
 					F81C195F1C83BB1F005E3F6C = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -568,7 +569,9 @@
 			baseConfigurationReference = EB1DA74511B1E6EC0BB8C164 /* Pods-MacmeSwiftChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MacmeSwiftChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MacMeDan.MacmeSwiftChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -580,7 +583,9 @@
 			baseConfigurationReference = 813B07F55322E71C3439FDCD /* Pods-MacmeSwiftChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MacmeSwiftChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MacMeDan.MacmeSwiftChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
