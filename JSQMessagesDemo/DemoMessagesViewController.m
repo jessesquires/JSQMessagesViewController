@@ -93,6 +93,11 @@
      *
      *  self.inputToolbar.maximumHeight = 150;
      */
+
+    /**
+     * Set new messages delegate
+     */
+    self.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -115,7 +120,7 @@
      *  You must set this from `viewDidAppear:`
      *  Note: this feature is mostly stable, but still experimental
      */
-    self.collectionView.collectionViewLayout.springinessEnabled = [NSUserDefaults springinessSetting];
+//    self.collectionView.collectionViewLayout.springinessEnabled = [NSUserDefaults springinessSetting];
 }
 
 
@@ -150,7 +155,7 @@
     /**
      *  Scroll to actually view the indicator
      */
-    [self scrollToBottomAnimated:YES];
+//    [self scrollToBottomAnimated:YES];
     
     /**
      *  Copy last sent message, this will be the new "received" message
@@ -658,6 +663,16 @@
         return NO;
     }
     return YES;
+}
+
+#pragma mark - JSQMessagesViewControllerNewMessagesDelegate methods
+
+- (BOOL)shouldScrollToNewlyReceivedMessageAtIndexPath:(NSIndexPath *)indexPath {
+    return self.isLastCellVisible;
+}
+
+- (BOOL)shouldScrollToLastMessageAtStartup {
+    return true;
 }
 
 @end

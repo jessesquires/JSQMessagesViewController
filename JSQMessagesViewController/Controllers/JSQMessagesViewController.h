@@ -24,6 +24,30 @@
 #import "JSQMessagesKeyboardController.h"
 
 /**
+ * The `JSQMessagesViewControllerScrollerDelegate` protocol enables users to respond to events caused
+ * by new messages arriving.
+ */
+@protocol JSQMessagesViewControllerScrollerDelegate <NSObject>
+
+@optional
+/**
+ *  Is called when new messages arrive, and asks the delegate whether we should
+ *  scroll to these or not.
+ *
+ *  @param indexPath The indexPath of the item to scroll to
+ *
+ *  @discussion If this method is not implemented we will default to TRUE.
+ */
+- (BOOL)shouldScrollToNewlyReceivedMessageAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ * Is called on startup, before the view appears, and asks the delegate
+ * whether we should scroll to the bottom or not.
+ */
+- (BOOL)shouldScrollToLastMessageAtStartup;
+@end
+
+/**
  *  The `JSQMessagesViewController` class is an abstract class that represents a view controller whose content consists of
  *  a `JSQMessagesCollectionView` and `JSQMessagesInputToolbar` and is specialized to display a messaging interface.
  *
@@ -51,6 +75,10 @@
 @property (strong, nonatomic) JSQMessagesKeyboardController *keyboardController;
 
 /**
+ *  The delegate for handling new message events
+ */
+@property (strong, nonatomic) id<JSQMessagesViewControllerScrollerDelegate> delegate;
+/**
  *  The display name of the current user who is sending messages.
  *
  *  @discussion This value does not have to be unique. This value must not be `nil`.
@@ -65,15 +93,6 @@
  *  checked against this identifier. This value must not be `nil`.
  */
 @property (copy, nonatomic) NSString *senderId;
-
-/**
- *  Specifies whether or not the view controller should automatically scroll to the most recent message
- *  when the view appears and when sending, receiving, and composing a new message.
- *
- *  @discussion The default value is `YES`, which allows the view controller to scroll automatically to the most recent message.
- *  Set to `NO` if you want to manage scrolling yourself.
- */
-@property (assign, nonatomic) BOOL automaticallyScrollsToMostRecentMessage;
 
 /**
  *  The collection view cell identifier to use for dequeuing outgoing message collection view cells 
@@ -171,6 +190,14 @@
  *  @discussion Use this property to adjust the top content inset to account for a custom subview at the top of your view controller.
  */
 @property (assign, nonatomic) CGFloat topContentAdditionalInset;
+
+/**
+ *  Specifies whether the last data item is visible or not.
+ *  This property is updated when the view finish scrolling.
+ *
+ *  If you are at the last visible item when a new message arrives, this one will be true.
+ */
+@property (readonly) BOOL isLastCellVisible;
 
 #pragma mark - Class methods
 
