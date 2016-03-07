@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -18,25 +18,44 @@
                         <constraint firstAttribute="width" constant="68" id="nS4-br-DxL"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vwf-dy-PS6" userLabel="Ellipsis Image View">
-                    <rect key="frame" x="26" y="6" width="34" height="34"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5aZ-BT-PbP" customClass="JSQMessagesTypingIndicatorCircleView">
+                    <rect key="frame" x="21" y="19" width="9" height="9"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="34" id="CMT-z0-hca"/>
-                        <constraint firstAttribute="height" constant="34" id="j0C-FV-2gV"/>
+                        <constraint firstAttribute="height" constant="9" id="5Y9-dJ-dWe"/>
+                        <constraint firstAttribute="width" constant="9" id="M2b-xh-H6o"/>
                     </constraints>
-                </imageView>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MLD-IF-Um9" customClass="JSQMessagesTypingIndicatorCircleView">
+                    <rect key="frame" x="36" y="19" width="9" height="9"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mVq-Jz-hS2" customClass="JSQMessagesTypingIndicatorCircleView">
+                    <rect key="frame" x="51" y="19" width="9" height="9"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Vwf-dy-PS6" secondAttribute="trailing" constant="260" id="1Tm-qD-wIK"/>
+                <constraint firstItem="mVq-Jz-hS2" firstAttribute="width" secondItem="5aZ-BT-PbP" secondAttribute="width" id="7Uv-8g-jaC"/>
                 <constraint firstAttribute="bottom" secondItem="Z1D-Tr-HPK" secondAttribute="bottom" constant="6" id="EVf-Sx-8mX"/>
-                <constraint firstAttribute="bottom" secondItem="Vwf-dy-PS6" secondAttribute="bottom" constant="6" id="Hik-Wl-aK2"/>
+                <constraint firstItem="5aZ-BT-PbP" firstAttribute="centerY" secondItem="ajJ-uk-b04" secondAttribute="centerY" id="Nw6-Vg-Wlz"/>
+                <constraint firstItem="mVq-Jz-hS2" firstAttribute="leading" secondItem="MLD-IF-Um9" secondAttribute="trailing" constant="6" id="O5a-oi-B9M"/>
+                <constraint firstItem="mVq-Jz-hS2" firstAttribute="height" secondItem="5aZ-BT-PbP" secondAttribute="height" id="PIO-7q-khN"/>
+                <constraint firstItem="mVq-Jz-hS2" firstAttribute="centerY" secondItem="ajJ-uk-b04" secondAttribute="centerY" id="Tex-tX-HbU"/>
+                <constraint firstItem="MLD-IF-Um9" firstAttribute="leading" secondItem="5aZ-BT-PbP" secondAttribute="trailing" constant="6" id="VNN-ZC-I5l"/>
+                <constraint firstItem="MLD-IF-Um9" firstAttribute="height" secondItem="5aZ-BT-PbP" secondAttribute="height" id="W22-Li-EUK"/>
                 <constraint firstAttribute="trailing" secondItem="Z1D-Tr-HPK" secondAttribute="trailing" constant="246" id="YMl-ej-UZl"/>
+                <constraint firstItem="MLD-IF-Um9" firstAttribute="centerY" secondItem="ajJ-uk-b04" secondAttribute="centerY" id="mUL-rD-2ip"/>
+                <constraint firstItem="MLD-IF-Um9" firstAttribute="width" secondItem="5aZ-BT-PbP" secondAttribute="width" id="pd0-zt-Tqc"/>
+                <constraint firstAttribute="trailing" secondItem="5aZ-BT-PbP" secondAttribute="trailing" constant="290" id="ubK-cK-G4Q"/>
             </constraints>
             <connections>
                 <outlet property="bubbleImageView" destination="Z1D-Tr-HPK" id="WpE-rP-oYB"/>
                 <outlet property="bubbleImageViewRightHorizontalConstraint" destination="YMl-ej-UZl" id="Thu-7D-dhU"/>
-                <outlet property="typingIndicatorImageView" destination="Vwf-dy-PS6" id="wQA-Pe-rx6"/>
-                <outlet property="typingIndicatorImageViewRightHorizontalConstraint" destination="1Tm-qD-wIK" id="FUp-oC-c0I"/>
+                <outlet property="typingIndicatorImageViewRightHorizontalConstraint" destination="ubK-cK-G4Q" id="Lxe-32-37r"/>
+                <outlet property="typingIndicatorView1" destination="5aZ-BT-PbP" id="D5n-Vr-qcy"/>
+                <outlet property="typingIndicatorView2" destination="MLD-IF-Um9" id="4Ie-H1-NQ3"/>
+                <outlet property="typingIndicatorView3" destination="mVq-Jz-hS2" id="tFs-RE-tAr"/>
             </connections>
         </collectionReusableView>
     </objects>

@@ -93,6 +93,11 @@
      *
      *  self.inputToolbar.maximumHeight = 150;
      */
+    
+    /**
+     *  Set whether you want the typing indicator to be animated
+     */
+    self.animatedTypingIndicator = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated

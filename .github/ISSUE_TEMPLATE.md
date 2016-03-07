@@ -41,8 +41,6 @@
 
 > ...
 
-</details>
-
 ## Question
 <!-- If this is a question, please provide the following information. Otherwise, you can delete this section. -->
 

@@ -63,6 +63,7 @@
     XCTAssertEqualObjects(vc.outgoingCellIdentifier, [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier], @"Property should be equal to default value");
 
     XCTAssertEqual(vc.showTypingIndicator, NO, @"Property should be equal to default value");
+    XCTAssertEqual(vc.animatedTypingIndicator, NO, @"Property should be equal to default value");
     XCTAssertEqual(vc.showLoadEarlierMessagesHeader, NO, @"Property should be equal to default value");
 }
 

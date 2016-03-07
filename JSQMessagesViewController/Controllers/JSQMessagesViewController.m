@@ -112,6 +112,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     // [JSQMessagesCollectionViewCell registerMenuAction:@selector(delete:)];
 
     self.showTypingIndicator = NO;
+    self.animatedTypingIndicator = NO;
 
     self.showLoadEarlierMessagesHeader = NO;
 
@@ -154,6 +155,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     _showTypingIndicator = showTypingIndicator;
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView.collectionViewLayout invalidateLayout];
+}
+
+- (void) setAnimatedTypingIndicator:(BOOL)animatedTypingIndicator
+{
+    if (_animatedTypingIndicator == animatedTypingIndicator) {
+        return;
+    }
+    
+    _animatedTypingIndicator = animatedTypingIndicator;
+    [self.collectionView setTypingIndicatorAnimated:_animatedTypingIndicator];
 }
 
 - (void)setShowLoadEarlierMessagesHeader:(BOOL)showLoadEarlierMessagesHeader
