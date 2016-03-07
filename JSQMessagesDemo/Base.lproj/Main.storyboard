@@ -301,7 +301,7 @@
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="y7K-ZU-Xs9" id="4gP-Ip-VMs"/>
-                            <outlet property="delegate" destination="y7K-ZU-Xs9" id="RdT-hW-mFp"/>
+                            <outlet property="scrollingDelegate" destination="y7K-ZU-Xs9" id="RdT-hW-mFp"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="hrw-Dp-Tor"/>
