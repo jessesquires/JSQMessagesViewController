@@ -7,12 +7,7 @@
 - [ ] I have reviewed the [FAQ](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/faq.md).
 - [ ] I have searched [existing issues](https://github.com/jessesquires/JSQMessagesViewController/issues?q=is%3Aissue+sort%3Acreated-desc) and **this is not a duplicate**.
 
-
-<details>
-<summary><strong>Bug report</strong></summary>
-<!-- If this is a bug report, please provide the following information. Otherwise, you can delete this section. -->
-
-#### General information
+### General information
 
 - Library version(s):
 - iOS version(s):
@@ -20,6 +15,9 @@
 - Reproducible in the demo project (Y/N): 
 - Link to a project that exhibits the issue (if possible):
 - List any related issues:
+
+## Bug report
+<!-- If this is a bug report, please provide the following information. Otherwise, you can delete this section. -->
 
 #### Expected behavior
 
@@ -29,43 +27,32 @@
 
 > ...
 
-#### Steps to reproduce the behavior
+#### Steps to reproduce
 
 > ...
 
 #### Crash log?
-
-*Can you provide a crash log?*
+<!-- Can you provide a crash log? -->
 
 >...
 
 #### Screenshots or videos?
-
-*Can you provide screenshots, GIFs, or videos showing the issue?*
+<!-- Can you provide screenshots, GIFs, or videos showing the issue? -->
 
 > ...
 
 </details>
 
-<details>
-<summary><strong>Question/Help</strong></summary>
+## Question
 <!-- If this is a question, please provide the following information. Otherwise, you can delete this section. -->
-
-#### My question
 
 >...
 
-</details>
-
-<details>
-<summary><strong>Feature Request</strong></summary>
+## Feature Request
 <!-- If this is a feature request, please provide the following information. Otherwise, you can delete this section. -->
-
-#### My feature request
 
 - Why should it be included in the library?
 - What problems does it solve?
 - Please provide design/implementation details, if possible.
 
 > ...
-</details>
