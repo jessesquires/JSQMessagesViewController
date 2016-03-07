@@ -120,7 +120,7 @@
      *  You must set this from `viewDidAppear:`
      *  Note: this feature is mostly stable, but still experimental
      */
-//    self.collectionView.collectionViewLayout.springinessEnabled = [NSUserDefaults springinessSetting];
+    self.collectionView.collectionViewLayout.springinessEnabled = [NSUserDefaults springinessSetting];
 }
 
 
