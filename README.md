@@ -12,6 +12,12 @@
 
 See the [website](http://www.jessesquires.com/JSQMessagesViewController/) for the list of features.
 
+## Design Goals
+
+- Closely mimic the [iOS Messages](http://www.apple.com/ios/messages/) style and behavior
+- [SOLID](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) design
+- Easy customization and extension for clients
+
 ## Dependencies
 
 * [JSQSystemSoundPlayer][playerLink]
