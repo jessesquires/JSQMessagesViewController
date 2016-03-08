@@ -24,15 +24,19 @@
 #import "JSQMessagesKeyboardController.h"
 
 /**
- * The `JSQMessagesViewControllerScrollingDelegate` protocol enables users to respond to events caused
+ * The `JSQMessagesViewControllerScrollerDelegate` protocol enables users to respond to events caused
  * by new messages arriving.
  */
-@protocol JSQMessagesViewControllerScrollingDelegate <NSObject>
+@protocol JSQMessagesViewControllerScrollerDelegate <NSObject>
 
+@optional
 /**
- *  Asks the delegate whether the view controller should scroll to newly received messages, or not.
+ *  Is called when new messages arrive, and asks the delegate whether we should
+ *  scroll to these or not.
  *
- *  @param indexPath The indexPath of the new item
+ *  @param indexPath The indexPath of the item to scroll to
+ *
+ *  @discussion If this method is not implemented we will default to TRUE.
  */
 - (BOOL)shouldScrollToNewlyReceivedMessageAtIndexPath:(NSIndexPath *)indexPath;
 
@@ -71,9 +75,9 @@
 @property (strong, nonatomic) JSQMessagesKeyboardController *keyboardController;
 
 /**
- *  The delegate for handling scrolling events
+ *  The delegate for handling new message events
  */
-@property (strong, nonatomic) id<JSQMessagesViewControllerScrollingDelegate> scrollingDelegate;
+@property (strong, nonatomic) id<JSQMessagesViewControllerScrollerDelegate> delegate;
 /**
  *  The display name of the current user who is sending messages.
  *

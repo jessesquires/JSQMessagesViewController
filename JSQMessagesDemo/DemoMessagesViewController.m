@@ -97,7 +97,7 @@
     /**
      * Set new messages delegate
      */
-    self.scrollingDelegate = self;
+    self.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
