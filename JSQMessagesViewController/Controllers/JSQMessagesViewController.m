@@ -45,8 +45,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 
 @interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate,
-                                         JSQMessagesKeyboardControllerDelegate,
-                                         UIScrollViewDelegate>
+                                         JSQMessagesKeyboardControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
@@ -101,6 +100,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
     self.inputToolbar.contentView.textView.delegate = self;
 
+    self.automaticallyScrollsToMostRecentMessage = YES;
+
     self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
     self.outgoingMediaCellIdentifier = [JSQMessagesCollectionViewCellOutgoing mediaCellReuseIdentifier];
 
@@ -125,8 +126,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                                                      panGestureRecognizer:self.collectionView.panGestureRecognizer
                                                                                  delegate:self];
     }
-
-    _isLastCellVisible = false;
 }
 
 - (void)dealloc
@@ -175,30 +174,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self jsq_updateCollectionViewInsets];
 }
 
-- (void)setIsLastCellVisible {
-    long finalRow = MAX(0, [self.collectionView numberOfItemsInSection:0] - 1);
-
-    if ([[self.collectionView indexPathsForVisibleItems] count] == 0) {
-        _isLastCellVisible = finalRow == 0;
-        return;
-    }
-
-    // Calculate the CGRect for the last item in the view
-    NSIndexPath *finalRowIndexPath = [NSIndexPath indexPathForRow:finalRow inSection:0];
-    UICollectionViewLayoutAttributes *theAttributes = [_collectionView layoutAttributesForItemAtIndexPath:finalRowIndexPath];
-    CGRect cellRect = [_collectionView convertRect:theAttributes.frame toView:_collectionView.superview];
-
-    // Calculate the CGRect for the visible part of the screen for drawing items
-    CGRect visibleRect = CGRectMake(_collectionView.bounds.origin.x,
-            _collectionView.bounds.origin.y,
-            _collectionView.bounds.size.width,
-            _collectionView.bounds.size.height - _collectionView.contentInset.bottom);
-    visibleRect = [_collectionView convertRect:visibleRect toView:_collectionView.superview];
-
-    // Finally check if the @cellRect is contained within the @visibleRect
-    _isLastCellVisible = CGRectContainsRect(visibleRect, cellRect);
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -221,7 +196,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.view layoutIfNeeded];
     [self.collectionView.collectionViewLayout invalidateLayout];
 
-    if ([self shouldScrollOnStartup]) {
+    if (self.automaticallyScrollsToMostRecentMessage) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self scrollToBottomAnimated:NO];
             [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
@@ -345,7 +320,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView reloadData];
 
-    if ([self shouldScroll]) {
+    if (self.automaticallyScrollsToMostRecentMessage) {
         [self scrollToBottomAnimated:animated];
     }
 }
@@ -362,7 +337,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView reloadData];
 
-    if ([self shouldScroll] && ![self jsq_isMenuVisible]) {
+    if (self.automaticallyScrollsToMostRecentMessage && ![self jsq_isMenuVisible]) {
         [self scrollToBottomAnimated:animated];
     }
 }
@@ -382,8 +357,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     CGFloat collectionViewContentHeight = [self.collectionView.collectionViewLayout collectionViewContentSize].height;
     BOOL isContentTooSmall = (collectionViewContentHeight < CGRectGetHeight(self.collectionView.bounds));
 
-    _isLastCellVisible = true;
-
     if (isContentTooSmall) {
         //  workaround for the first few messages not scrolling
         //  when the collection view content size is too small, `scrollToItemAtIndexPath:` doesn't work properly
@@ -396,7 +369,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     //  workaround for really long messages not scrolling
     //  if last message is too long, use scroll position bottom for better appearance, else use top
     //  possibly a UIKit bug, see #480 on GitHub
-    NSInteger finalRow = MAX(0, [self.collectionView numberOfItemsInSection:0] - 1);
+    NSUInteger finalRow = MAX(0, [self.collectionView numberOfItemsInSection:0] - 1);
     NSIndexPath *finalIndexPath = [NSIndexPath indexPathForItem:finalRow inSection:0];
     CGSize finalCellSize = [self.collectionView.collectionViewLayout sizeForItemAtIndexPath:finalIndexPath];
 
@@ -721,7 +694,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     [textView becomeFirstResponder];
 
-    if ([self shouldScroll]) {
+    if (self.automaticallyScrollsToMostRecentMessage) {
         [self scrollToBottomAnimated:YES];
     }
 }
@@ -807,7 +780,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
             [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:dy];
             [self jsq_updateCollectionViewInsets];
-            if ([self shouldScroll]) {
+            if (self.automaticallyScrollsToMostRecentMessage) {
                 [self scrollToBottomAnimated:NO];
             }
         }
@@ -988,33 +961,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - Utilities
 
-/**
- * Determines whether we should scroll to the end or not.
- *
- * Returns true as default.
- */
-- (boolean_t)shouldScroll {
-    if (_delegate != nil) {
-        NSUInteger finalRow = MAX(0, [self.collectionView numberOfItemsInSection:0] - 1);
-        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:finalRow inSection:0];
-        if ([_delegate respondsToSelector:@selector(shouldScrollToNewlyReceivedMessageAtIndexPath:)]) {
-            return [_delegate shouldScrollToNewlyReceivedMessageAtIndexPath:indexPath];
-        }
-    }
-
-    return true;
-}
-
-- (boolean_t)shouldScrollOnStartup {
-    if (_delegate != nil) {
-        if ([_delegate respondsToSelector:@selector(shouldScrollToLastMessageAtStartup)]) {
-            return [_delegate shouldScrollToLastMessageAtStartup];
-        }
-    }
-
-    return true;
-}
-
 - (void)jsq_addObservers
 {
     if (self.jsq_isObserving) {
@@ -1091,21 +1037,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                                                       action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
         self.currentInteractivePopGestureRecognizer = self.navigationController.interactivePopGestureRecognizer;
     }
-}
-
-#pragma mark - UIScrollView delegate methods
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [self setIsLastCellVisible];
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    [self setIsLastCellVisible];
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if (!decelerate)
-        [self setIsLastCellVisible];
 }
 
 @end
