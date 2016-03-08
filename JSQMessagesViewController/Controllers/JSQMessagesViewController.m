@@ -178,7 +178,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 }
 
 - (void)setIsLastCellVisible {
-    long finalRow = MAX(0, [self.collectionView numberOfItemsInSection:0] - 1);
+    NSInteger finalRow = MAX(0, [self.collectionView numberOfItemsInSection:0] - 1);
 
     if ([[self.collectionView indexPathsForVisibleItems] count] == 0) {
         _isLastCellVisible = finalRow == 0;
@@ -187,15 +187,15 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     // Calculate the CGRect for the last item in the view
     NSIndexPath *finalRowIndexPath = [NSIndexPath indexPathForRow:finalRow inSection:0];
-    UICollectionViewLayoutAttributes *theAttributes = [_collectionView layoutAttributesForItemAtIndexPath:finalRowIndexPath];
-    CGRect cellRect = [_collectionView convertRect:theAttributes.frame toView:_collectionView.superview];
+    UICollectionViewLayoutAttributes *theAttributes = [self.collectionView layoutAttributesForItemAtIndexPath:finalRowIndexPath];
+    CGRect cellRect = [self.collectionView convertRect:theAttributes.frame toView:self.collectionView.superview];
 
     // Calculate the CGRect for the visible part of the screen for drawing items
     CGRect visibleRect = CGRectMake(_collectionView.bounds.origin.x,
-            _collectionView.bounds.origin.y,
-            _collectionView.bounds.size.width,
-            _collectionView.bounds.size.height - _collectionView.contentInset.bottom);
-    visibleRect = [_collectionView convertRect:visibleRect toView:_collectionView.superview];
+            self.collectionView.bounds.origin.y,
+            self.collectionView.bounds.size.width,
+            self.collectionView.bounds.size.height - self.collectionView.contentInset.bottom);
+    visibleRect = [self.collectionView convertRect:visibleRect toView:self.collectionView.superview];
 
     // Finally check if the @cellRect is contained within the @visibleRect
     _isLastCellVisible = CGRectContainsRect(visibleRect, cellRect);
@@ -994,26 +994,22 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
  *
  * Returns true as default.
  */
-- (boolean_t)shouldScroll {
-    if (_delegate != nil) {
-        NSUInteger finalRow = MAX(0, [self.collectionView numberOfItemsInSection:0] - 1);
-        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:finalRow inSection:0];
-        if ([_delegate respondsToSelector:@selector(shouldScrollToNewlyReceivedMessageAtIndexPath:)]) {
-            return [_delegate shouldScrollToNewlyReceivedMessageAtIndexPath:indexPath];
-        }
+- (BOOL)shouldScroll {
+    if (_scrollingDelegate == nil) {
+        return true;
     }
 
-    return true;
+    NSUInteger finalRow = MAX(0, [self.collectionView numberOfItemsInSection:0] - 1);
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:finalRow inSection:0];
+    return [_scrollingDelegate shouldScrollToNewlyReceivedMessageAtIndexPath:indexPath];
 }
 
-- (boolean_t)shouldScrollOnStartup {
-    if (_delegate != nil) {
-        if ([_delegate respondsToSelector:@selector(shouldScrollToLastMessageAtStartup)]) {
-            return [_delegate shouldScrollToLastMessageAtStartup];
-        }
+- (BOOL)shouldScrollOnStartup {
+    if (_scrollingDelegate == nil) {
+        return true;
     }
 
-    return true;
+    return [_scrollingDelegate shouldScrollToLastMessageAtStartup];
 }
 
 - (void)jsq_addObservers
