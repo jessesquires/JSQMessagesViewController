@@ -10,11 +10,10 @@
 - Library version(s):
 - iOS version(s):
 - Devices/Simulators affected:
-- Reproducible in the demo project? (Y/N): 
-- List any related issues:
+- Reproducible in the demo project? (Yes/No): 
+- Related issues:
 
 ## Bug report
-<!-- If this is a bug report, please provide the following information. Otherwise, you can delete this section. -->
 
 #### Expected behavior
 
@@ -32,12 +31,6 @@
 
 >...
 
-## Question
-<!-- If this is a question, please provide the following information. Otherwise, you can delete this section. -->
-
->...
-
-## Feature Request
-<!-- If this is a feature request, please provide the following information. Otherwise, you can delete this section. -->
+## Question or Feature Request
 
 > ...
