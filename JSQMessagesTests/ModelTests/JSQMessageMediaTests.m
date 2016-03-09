@@ -10,7 +10,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import <OCMock/OCMock.h>
+//#import <OCMock/OCMock.h>
 
 #import "JSQMessage.h"
 
@@ -44,7 +44,7 @@
 @property (strong, nonatomic) NSString *senderId;
 @property (strong, nonatomic) NSString *senderDisplayName;
 @property (strong, nonatomic) NSDate *date;
-@property (strong, nonatomic) id mockMediaData;
+@property (strong, nonatomic) FakeMedia *fakeMediaData;
 
 @end
 
@@ -57,9 +57,7 @@
     self.senderId = @"324543-43556-212343";
     self.senderDisplayName = @"Jesse Squires";
     self.date = [NSDate date];
-    
-    self.mockMediaData = [OCMockObject mockForProtocol:@protocol(JSQMessageMediaData)];
-    [[self.mockMediaData stub] mediaHash];
+    self.fakeMediaData = [FakeMedia new];
 }
 
 - (void)tearDown
@@ -67,7 +65,7 @@
     self.senderId = nil;
     self.senderDisplayName = nil;
     self.date = nil;
-    self.mockMediaData = nil;
+    self.fakeMediaData = nil;
     [super tearDown];
 }
 
@@ -76,13 +74,12 @@
     JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId
                                          senderDisplayName:self.senderDisplayName
                                                       date:self.date
-                                                     media:self.mockMediaData];
+                                                     media:self.fakeMediaData];
     XCTAssertNotNil(msg, @"Message should not be nil");
 }
 
 - (void)testMediaMessageInvalidInit
 {
-    XCTAssertThrows([[JSQMessage alloc] init], @"Invalid init should throw");
     XCTAssertThrows([[JSQMessage alloc] initWithSenderId:nil senderDisplayName:nil date:nil media:nil], @"Invalid init should throw");
 }
 
@@ -91,7 +88,7 @@
     JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId
                                          senderDisplayName:self.senderDisplayName
                                                       date:self.date
-                                                     media:self.mockMediaData];
+                                                     media:self.fakeMediaData];
     JSQMessage *copy = [msg copy];
     
     XCTAssertEqualObjects(msg, copy, @"Copied messages should be equal");
