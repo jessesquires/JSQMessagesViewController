@@ -63,6 +63,9 @@
 
     _backgroundColor = [UIColor jsq_messageBubbleLightGrayColor];
     _tintColor = [UIButton buttonWithType:UIButtonTypeSystem].tintColor;
+    
+    _audioCategory = @"AVAudioSessionCategoryPlayback";
+    _audioCategoryOptions = AVAudioSessionCategoryOptionDuckOthers | AVAudioSessionCategoryOptionDefaultToSpeaker | AVAudioSessionCategoryOptionAllowBluetooth;
 }
 
 - (void)dealloc
@@ -144,6 +147,21 @@
 }
 
 - (void)onPlayButton:(id)sender {
+    
+    NSString * category = [AVAudioSession sharedInstance].category;
+    AVAudioSessionCategoryOptions options = [AVAudioSession sharedInstance].categoryOptions;
+    
+    if (category != self.audioCategory || options != self.audioCategoryOptions) {
+        NSError * error;
+        [[AVAudioSession sharedInstance] setCategory:self.audioCategory withOptions:self.audioCategoryOptions error:&error];
+        if (self.delegate) {
+            if (error && [self.delegate respondsToSelector:@selector(audioMediaItem:didNotChangeCategory:)]) {
+                [self.delegate audioMediaItem:self didNotChangeCategory:error];
+            } else if ([self.delegate respondsToSelector:@selector(audioMediaItem:didChangeOriginalAudioCategory:originalOptions:)]) {
+                [self.delegate audioMediaItem:self didChangeOriginalAudioCategory:category originalOptions:options];
+            }
+        }
+    }
     
     if (_audioPlayer.playing) {
         [_progressTimer invalidate];
@@ -327,7 +345,7 @@
                 [self class], self.audioURL, @(self.isReadyToPlay), @(self.appliesMediaViewMaskAsOutgoing)];
     } else {
         return [NSString stringWithFormat:@"<%@: audioData=%ld bytes, isReadyToPlay=%@, appliesMediaViewMaskAsOutgoing=%@>",
-                [self class], [self.audioData length],
+                [self class], (unsigned long)[self.audioData length],
                 @(self.isReadyToPlay), @(self.appliesMediaViewMaskAsOutgoing)];
     }
 }

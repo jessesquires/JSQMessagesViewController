@@ -6,6 +6,18 @@
 
 #import "AVFoundation/AVFoundation.h"
 
+@class JSQAudioMediaItem;
+@protocol JSQAudioMediaItemDelegate <NSObject>
+@optional
+
+/* didChangeOriginalAudioCategory is called if JSQAudioMediaItem changes the sound category or categoryOptions */
+- (void)audioMediaItem:(JSQAudioMediaItem*)audioMediaItem didChangeOriginalAudioCategory:(NSString *)category originalOptions:(AVAudioSessionCategoryOptions)options;
+
+/* didNotChangeCategory is called if JSQAudioMediaItem fails to change the category or categoryOptions */
+- (void)audioMediaItem:(JSQAudioMediaItem*)audioMediaItem didNotChangeCategory:(NSError*)error;
+
+@end
+
 /**
  *  The `JSQAudioMediaItem` class is a concrete `JSQMediaItem` subclass that implements the `JSQMessageMediaData` protocol
  *  and represents a video media message. An initialized `JSQAudioMediaItem` object can be passed
@@ -13,6 +25,11 @@
  *  You may wish to subclass `JSQAudioMediaItem` to provide additional functionality or behavior.
  */
 @interface JSQAudioMediaItem : JSQMediaItem <JSQMessageMediaData, AVAudioPlayerDelegate, NSCoding, NSCopying>
+
+/**
+ *  delegate used for notification of audio events
+ */
+@property (nonatomic, weak) id<JSQAudioMediaItemDelegate> delegate;
 
 /**
  *  The URL that identifies a video resource.
@@ -67,9 +84,14 @@
 @property (nonatomic) CGFloat controlPadding;
 
 /**
- * CGFloat used to determine the height (thickness) of the progress bar
+ * Audio Category set prior to playback. Original value
  */
-@property (nonatomic) CGFloat progressHeight;
+@property (nonatomic) NSString * audioCategory;
+
+/**
+ * Audio Category options set prior to playback 
+ */
+@property (nonatomic) AVAudioSessionCategoryOptions audioCategoryOptions;
 
 /**
  *  Initializes and returns an audio media item having the given audioURL.
