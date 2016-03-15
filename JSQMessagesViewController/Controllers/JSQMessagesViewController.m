@@ -753,8 +753,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    if (self.inputToolbar.contentView.textView.limitNumberOfCharacters && textView.text.length + (text.length - range.length) > self.inputToolbar.contentView.textView.limitNumberOfCharacters) {
-        NSString *result = [[textView.text stringByReplacingCharactersInRange:range withString:text] substringToIndex:self.inputToolbar.contentView.textView.limitNumberOfCharacters];
+    if (self.inputToolbar.contentView.textView.limitNumberOfCharacters && textView.text.length + (text.length - range.length) > self.inputToolbar.contentView.textView.limitNumberOfCharacters - 1) {
+        NSString *result = [[textView.text stringByReplacingCharactersInRange:range withString:text] substringToIndex:self.inputToolbar.contentView.textView.limitNumberOfCharacters - 1];
         textView.text = result;
         return false;
     }
