@@ -68,7 +68,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 
 
-@implementation JSQMessagesViewController
+@implementation JSQMessagesViewController {
+    BOOL isScrollingToBottom;
+}
 
 #pragma mark - Class methods
 
@@ -127,6 +129,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
 
     _isLastCellVisible = false;
+    isScrollingToBottom = false;
 }
 
 - (void)dealloc
@@ -177,6 +180,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)setIsLastCellVisible {
     NSInteger finalRow = MAX(0, [self.collectionView numberOfItemsInSection:0] - 1);
+
+    if (isScrollingToBottom && _isLastCellVisible) {
+        return;
+    }
 
     if ([[self.collectionView indexPathsForVisibleItems] count] == 0) {
         _isLastCellVisible = finalRow == 0;
@@ -383,6 +390,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     BOOL isContentTooSmall = (collectionViewContentHeight < CGRectGetHeight(self.collectionView.bounds));
 
     _isLastCellVisible = true;
+    isScrollingToBottom = true;
 
     if (isContentTooSmall) {
         //  workaround for the first few messages not scrolling
@@ -998,6 +1006,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         return true;
     }
 
+    if (isScrollingToBottom && _isLastCellVisible) {
+        return true;
+    }
+
     NSUInteger finalRow = MAX(0, [self.collectionView numberOfItemsInSection:0] - 1);
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:finalRow inSection:0];
     return [_scrollingDelegate shouldScrollToNewlyReceivedMessageAtIndexPath:indexPath];
@@ -1093,15 +1105,19 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     [self setIsLastCellVisible];
+    isScrollingToBottom = false;
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     [self setIsLastCellVisible];
+    isScrollingToBottom = false;
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if (!decelerate)
+    if (!decelerate) {
         [self setIsLastCellVisible];
+        isScrollingToBottom = false;
+    }
 }
 
 @end
