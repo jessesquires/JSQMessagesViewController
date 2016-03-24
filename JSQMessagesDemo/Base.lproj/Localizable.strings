@@ -1,0 +1,32 @@
+//
+//  Created by Jesse Squires
+//  http://www.jessesquires.com
+//
+//
+//  Documentation
+//  http://cocoadocs.org/docsets/JSQMessagesViewController
+//
+//
+//  GitHub
+//  https://github.com/jessesquires/JSQMessagesViewController
+//
+//
+//  License
+//  Copyright (c) 2014 Jesse Squires
+//  Released under an MIT license: http://opensource.org/licenses/MIT
+//
+
+"Media messages" = "Media messages";
+"Cancel" = "Cancel";
+"Send photo" = "Send photo";
+"Send location" = "Send location";
+"Send video" = "Send video";
+"Custom Action" = "Custom Action";
+"OK" = "OK";
+
+"Welcome to JSQMessages: A messaging UI framework for iOS." = "Welcome to JSQMessages: A messaging UI framework for iOS.";
+"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy." = "It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy.";
+"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com." = "It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com.";
+"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." = "JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better.";
+"It is unit-tested, free, open-source, and documented." = "It is unit-tested, free, open-source, and documented.";
+"Now with media messages!" = "Now with media messages!";
