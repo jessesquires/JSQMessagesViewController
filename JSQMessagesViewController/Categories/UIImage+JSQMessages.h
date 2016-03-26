@@ -76,4 +76,21 @@
  */
 + (UIImage *)jsq_defaultPlayImage;
 
+/**
+ *  @return The default pause icon image.
+ */
++ (UIImage *)jsq_defaultPauseImage;
+
+/**
+ *  @return A resized thumbnail for the supplied image
+ */
+- (UIImage *)jsq_thumbnailImage:(NSInteger)thumbnailSize croppedSquare:(BOOL)cropped;
+
+/**
+ *  @return A resized image
+ */
+- (UIImage *)jsq_resizeImageWithContentMode:(UIViewContentMode)contentMode
+                                     bounds:(CGSize)bounds
+                       interpolationQuality:(CGInterpolationQuality)quality;
+
 @end

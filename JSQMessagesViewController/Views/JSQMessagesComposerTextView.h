@@ -26,11 +26,19 @@
 @protocol JSQMessagesComposerTextViewPasteDelegate <NSObject>
 
 /**
- *  Asks the delegate whether or not the `textView` should use the original implementation of `-[UITextView paste]`.
+ *  Asks the delegate whether or not the `textView` can perform an action using the supplied sender.
  *
- *  @discussion Use this delegate method to implement custom pasting behavior. 
- *  You should return `NO` when you want to handle pasting. 
- *  Return `YES` to defer functionality to the `textView`.
+ *  @discussion Use this delegate method to enable actions not provided by a default `UITextView`. 
+ *  For example, enable the `Paste` menu for images or other non-string values.
+ *  Return `YES` to enable an action or `NO` to defer to the superclass implementation
+ */
+- (BOOL)composerTextView:(JSQMessagesComposerTextView *)textView canPerformAction:(SEL)action withSender:(id)sender;
+
+/**
+ *  Asks the delegate whether or not the `textView` should perform the paste: action
+ *
+ *  @discussion Use this delegate method to implement custom pasting behavior.
+ *  Return `NO` if you paste the data yourself or wish to block the superclass implementation.
  */
 - (BOOL)composerTextView:(JSQMessagesComposerTextView *)textView shouldPasteWithSender:(id)sender;
 

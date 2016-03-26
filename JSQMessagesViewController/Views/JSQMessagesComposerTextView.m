@@ -21,7 +21,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "NSString+JSQMessages.h"
-
+#import "NSAttributedString+JSQMessages.h"
 
 @implementation JSQMessagesComposerTextView
 
@@ -89,7 +89,10 @@
 
 - (BOOL)hasText
 {
-    return ([[self.text jsq_stringByTrimingWhitespace] length] > 0);
+    NSInteger length = [[[self.attributedText string] jsq_stringByTrimingWhitespace] length];
+    if (!length)
+        length = [[self.text jsq_stringByTrimingWhitespace] length];
+    return (length > 0);
 }
 
 #pragma mark - Setters
@@ -138,6 +141,14 @@
 {
     [super setTextAlignment:textAlignment];
     [self setNeedsDisplay];
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+    if (!self.pasteDelegate || ![self.pasteDelegate composerTextView:self canPerformAction:action withSender:sender]) {
+        return [super canPerformAction:action withSender:sender];
+    }
+    return YES;
 }
 
 - (void)paste:(id)sender

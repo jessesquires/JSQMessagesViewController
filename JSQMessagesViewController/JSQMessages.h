@@ -27,6 +27,7 @@
 #import "JSQMessagesCollectionViewCellOutgoing.h"
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
+#import "JSQMessagesTextAttachment.h"
 
 //  Layout
 #import "JSQMessagesBubbleSizeCalculating.h"
@@ -34,6 +35,7 @@
 #import "JSQMessagesCollectionViewFlowLayout.h"
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
+#import "JSQAudioMediaViewAttributes.h"
 
 //  Toolbar
 #import "JSQMessagesComposerTextView.h"
@@ -44,6 +46,7 @@
 #import "JSQMessage.h"
 
 #import "JSQMediaItem.h"
+#import "JSQAudioMediaItem.h"
 #import "JSQPhotoMediaItem.h"
 #import "JSQLocationMediaItem.h"
 #import "JSQVideoMediaItem.h"
@@ -73,5 +76,6 @@
 #import "UIImage+JSQMessages.h"
 #import "UIView+JSQMessages.h"
 #import "NSBundle+JSQMessages.h"
+#import "NSAttributedString+JSQMessages.h"
 
 #endif
