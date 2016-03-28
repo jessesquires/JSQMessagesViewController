@@ -62,7 +62,7 @@
 
 - (void)testMediaDataProtocol
 {
-    JSQAudioMediaItem *item = [[JSQAudioMediaItem alloc] initWithData:nil];
+    JSQAudioMediaItem *item = [[JSQAudioMediaItem alloc] init];
     
     XCTAssertTrue(!CGSizeEqualToSize([item mediaViewDisplaySize], CGSizeZero));
     XCTAssertNotNil([item mediaPlaceholderView]);

@@ -162,8 +162,6 @@
     NSString * sample = [[NSBundle mainBundle] pathForResource:@"jsq_messages_sample" ofType:@"m4a"];
     NSData * audioData = [NSData dataWithContentsOfFile:sample];
     JSQAudioMediaItem *audioItem = [[JSQAudioMediaItem alloc] initWithData:audioData];
-//    NSURL * audioURL = [NSURL fileURLWithPath:sample];
-//    JSQAudioMediaItem *audioItem = [[JSQAudioMediaItem alloc] initWithURL:audioURL isReadyToPlay:YES];
     JSQMessage *audioMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
                                                    displayName:kJSQDemoAvatarDisplayNameSquires
                                                          media:audioItem];
