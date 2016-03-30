@@ -83,6 +83,46 @@
     return nil;
 }
 
++ (void)addLabelView:(UIView *)labelView toMediaView:(UIView *)mediaView blurredBackground:(BOOL)blurred
+{
+    CGRect effectFrame = mediaView.bounds;
+    effectFrame.origin.y = effectFrame.size.height - labelView.frame.size.height;
+    effectFrame.size.height = labelView.frame.size.height;
+    
+    // add effect to an effect view
+    UIBlurEffect * blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+    UIVisualEffectView * effectView = [[UIVisualEffectView alloc]initWithEffect:blur];
+    effectView.frame = effectFrame;
+    [effectView addSubview:labelView];
+    
+    // add the effect view to the image view
+    [mediaView addSubview:effectView];
+}
+
++ (void)addLabelText:(NSString*)labelText toMediaView:(UIView *)mediaView font:(UIFont*)font insets:(UIEdgeInsets)insets
+{
+    UIEdgeInsets internalInsets = UIEdgeInsetsMake(4, 8, 8, 6);
+    if (! UIEdgeInsetsEqualToEdgeInsets(insets, UIEdgeInsetsZero))
+        internalInsets = insets;
+    
+    CGRect labelFrame = mediaView.bounds;
+    labelFrame.size.height = 24;
+    UITextView * labelView = [[UITextView alloc] initWithFrame:labelFrame];
+    labelView.textContainerInset = internalInsets;
+    labelView.backgroundColor = [UIColor clearColor];
+    labelView.textColor = [UIColor blackColor];
+    labelView.text = labelText;
+    if (font) {
+        labelView.font = font;
+    }
+    
+    CGSize textSize = [labelView.text sizeWithAttributes:@{NSFontAttributeName:[labelView font]}];
+    labelFrame.size.height = textSize.height + internalInsets.top + internalInsets.bottom;
+    labelView.frame = labelFrame;
+    
+    [self addLabelView:labelView toMediaView:mediaView blurredBackground:YES];
+}
+
 - (CGSize)mediaViewDisplaySize
 {
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {

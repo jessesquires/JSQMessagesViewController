@@ -41,6 +41,16 @@
 @property (assign, nonatomic) BOOL appliesMediaViewMaskAsOutgoing;
 
 /**
+ *  A string value that is applied as a label at the bottom of the media view
+ */
+@property (strong, nonatomic) NSString * mediaLabelText;
+
+/**
+ *  A custom view that is added as a subview at the bottom of the media view
+ */
+@property (strong, nonatomic) UIView * mediaLabelView;
+
+/**
  *  Initializes and returns a media item with the specified value for maskAsOutgoing.
  *
  *  @param maskAsOutgoing A boolean value indicating whether this media item should apply
@@ -54,5 +64,9 @@
  *  Clears any media view or media placeholder view that the item has cached.
  */
 - (void)clearCachedMediaViews;
+
++ (void)addLabelView:(UIView *)labelView toMediaView:(UIView *)mediaView blurredBackground:(BOOL)blurred;
+
++ (void)addLabelText:(NSString*)labelText toMediaView:(UIView *)mediaView font:(UIFont*)font insets:(UIEdgeInsets)insets;
 
 @end
