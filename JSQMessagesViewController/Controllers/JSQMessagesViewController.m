@@ -415,6 +415,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.collectionView scrollToItemAtIndexPath:finalIndexPath
                                 atScrollPosition:scrollPosition
                                         animated:animated];
+    isScrollingToBottom=animated;
 }
 
 - (BOOL)isOutgoingMessage:(id<JSQMessageData>)messageItem
