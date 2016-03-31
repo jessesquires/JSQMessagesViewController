@@ -81,10 +81,12 @@
         self.cachedImageView = imageView;
     }
     
-    if (self.mediaLabelText) {
-        [[self class] addLabelText:self.mediaLabelText toMediaView:self.cachedImageView font:[UIFont systemFontOfSize:16] insets:UIEdgeInsetsZero];
-    } else if (self.mediaLabelView) {
-        [[self class] addLabelView:self.mediaLabelView toMediaView:self.cachedImageView blurredBackground:YES];
+    if (self.mediaLabelFactory) {
+        if (self.mediaLabelText) {
+            [self.mediaLabelFactory addLabel:self.mediaLabelText mediaView:self.cachedImageView];
+        } else if (self.mediaLabelView) {
+            [self.mediaLabelFactory addCustomView:self.mediaLabelView mediaView:self.cachedImageView];
+        }
     }
     
     return self.cachedImageView;

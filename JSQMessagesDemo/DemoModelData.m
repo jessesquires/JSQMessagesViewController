@@ -20,6 +20,11 @@
 
 #import "NSUserDefaults+DemoSettings.h"
 
+@interface DemoModelData()
+
+@property (retain, nonatomic) JSQMessagesMediaItemLabelFactory * labelFactory;
+
+@end
 
 /**
  *  This is for demo/testing purposes only.
@@ -33,7 +38,9 @@
 {
     self = [super init];
     if (self) {
-        
+
+        self.labelFactory = [[JSQMessagesMediaItemLabelFactory alloc] init];
+
         if ([NSUserDefaults emptyMessagesSetting]) {
             self.messages = [NSMutableArray new];
         }
@@ -160,6 +167,7 @@
 {
     JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"goldengate"]];
     photoItem.mediaLabelText = @"goldengate.png";
+    photoItem.mediaLabelFactory = self.labelFactory;
     JSQMessage *photoMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
                                                    displayName:kJSQDemoAvatarDisplayNameSquires
                                                          media:photoItem];

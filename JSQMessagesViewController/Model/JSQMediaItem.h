@@ -17,6 +17,7 @@
 //
 
 #import "JSQMessageMediaData.h"
+#import "JSQMessagesMediaItemLabelFactory.h"
 
 /**
  *  The `JSQMediaItem` class is an abstract base class for media item model objects that represents
@@ -41,12 +42,19 @@
 @property (assign, nonatomic) BOOL appliesMediaViewMaskAsOutgoing;
 
 /**
- *  A string value that is applied as a label at the bottom of the media view
+ *  A label factory object that is used to render label text or a label view
+ *  Defaults to `nil`
+ */
+@property (assign, nonatomic) JSQMessagesMediaItemLabelFactory * mediaLabelFactory;
+
+/**
+ *  A string value that is transformed to a UITextView and applied to the
+ *  mediaView by the mediaLabelFactory object
  */
 @property (strong, nonatomic) NSString * mediaLabelText;
 
 /**
- *  A custom view that is added as a subview at the bottom of the media view
+ *  A custom view that is applied to the mediaView by the mediaLabelFactory object
  */
 @property (strong, nonatomic) UIView * mediaLabelView;
 
@@ -64,9 +72,5 @@
  *  Clears any media view or media placeholder view that the item has cached.
  */
 - (void)clearCachedMediaViews;
-
-+ (void)addLabelView:(UIView *)labelView toMediaView:(UIView *)mediaView blurredBackground:(BOOL)blurred;
-
-+ (void)addLabelText:(NSString*)labelText toMediaView:(UIView *)mediaView font:(UIFont*)font insets:(UIEdgeInsets)insets;
 
 @end
