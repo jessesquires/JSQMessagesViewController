@@ -59,6 +59,12 @@ See the [Getting Started](https://github.com/jessesquires/JSQMessagesViewControl
 
 Read the docs, [available here][docsLink] via [@CocoaDocs](https://twitter.com/CocoaDocs).
 
+## Core team
+
+- Jesse Squries ([**@jesse_squires**](https://twitter.com/jesse_squires))
+- Harlan Haskans ([**@harlanhaskins**](https://github.com/harlanhaskins))
+- Eli Burke ([**@eliburke**](https://github.com/eliburke))
+
 ## Contributing
 
 Please follow these sweet [contribution guidelines](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/.github/CONTRIBUTING.md).
@@ -75,7 +81,7 @@ Support the development of this **free** library! **[Send cash](https://cash.me/
 
 ## Apps using this library
 
-According to [CocoaPods stats](https://cocoapods.org/pods/JSQMessagesViewController), over **6,000 apps** are using `JSQMessagesViewController`. [Here are the ones](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/apps_using_this_library.md) that we know about. Please submit a [pull request](https://github.com/jessesquires/JSQMessagesViewController/compare) to add your app! :smile:
+According to [CocoaPods stats](https://cocoapods.org/pods/JSQMessagesViewController), over **8,000 apps** are using `JSQMessagesViewController`. [Here are the ones](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/apps_using_this_library.md) that we know about. Please submit a [pull request](https://github.com/jessesquires/JSQMessagesViewController/compare) to add your app! :smile:
 
 ## License
 
