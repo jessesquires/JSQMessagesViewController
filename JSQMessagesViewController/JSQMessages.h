@@ -34,6 +34,7 @@
 #import "JSQMessagesCollectionViewFlowLayout.h"
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
+#import "JSQAudioMediaViewAttributes.h"
 
 //  Toolbar
 #import "JSQMessagesComposerTextView.h"

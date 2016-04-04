@@ -1,13 +1,27 @@
 //
-//  JSQAudioMediaItem.h
+//  Created by Jesse Squires
+//  http://www.jessesquires.com
+//
+//
+//  Documentation
+//  http://cocoadocs.org/docsets/JSQMessagesViewController
+//
+//
+//  GitHub
+//  https://github.com/jessesquires/JSQMessagesViewController
+//
+//
+//  License
+//  Copyright (c) 2014 Jesse Squires
+//  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
 #import "JSQMediaItem.h"
+#import "JSQAudioMediaViewAttributes.h"
 
-#import "AVFoundation/AVFoundation.h"
+#import <AVFoundation/AVFoundation.h>
 
 @class JSQAudioMediaItem;
-@class JSQAudioMediaViewConfiguration;
 
 @protocol JSQAudioMediaItemDelegate <NSObject>
 
@@ -29,14 +43,14 @@
 /**
  *  The delegate object for audio event notifications
  */
-@property (nonatomic, weak) id<JSQAudioMediaItemDelegate> delegate;
+@property (nonatomic, weak, nullable) id<JSQAudioMediaItemDelegate> delegate;
 
 /**
- * The configuration object for the audio media view.
+ * View attributes controlling the appearance of the audio media view
  *
  * @discussion Default values are used if this is `nil`.
  */
-@property (nonatomic, strong, nonnull) JSQAudioMediaViewConfiguration *audioViewConfiguration;
+@property (nonatomic, strong, nonnull) JSQAudioMediaViewAttributes *audioViewAttributes;
 
 /**
  *  An NSData object that contains an audio resource.
@@ -59,7 +73,7 @@
  *
  *  @discussion You must set `audioData` to enable the play button.
  */
-- (nullable instancetype)initWithAudioViewConfiguration:(nonnull JSQAudioMediaViewConfiguration*)config;
+- (nullable instancetype)initWithAudioViewAttributes:(nonnull JSQAudioMediaViewAttributes*)attributes;
 
 /**
  *  Initializes and returns an audio media item having the given audioData.
@@ -86,8 +100,7 @@
  *  you may initialize a `JSQVideoMediaItem` with a `nil` audioData.
  *  Once the audio is available you can set the `audioData` property.
  */
-- (nullable instancetype)initWithData:(nullable NSData *)audioData audioViewConfiguration:(nonnull JSQAudioMediaViewConfiguration*)config NS_DESIGNATED_INITIALIZER;
-
+- (nullable instancetype)initWithData:(nullable NSData *)audioData audioViewAttributes:(nonnull JSQAudioMediaViewAttributes*)attributes NS_DESIGNATED_INITIALIZER;
 
 /**
  *  Set or update the data object in an audio media item
@@ -95,59 +108,5 @@
  *  @param audioURL       A File URL containing the location of the audio data.
  */
 - (void)setAudioDataWithUrl:(nonnull NSURL *)audioURL;
-
-@end
-
-@interface JSQAudioMediaViewConfiguration : NSObject
-
-/**
- *  A UIImage to be used for the play button. A default value will be used if not set.
- */
-@property (strong, nonatomic, nonnull) UIImage * playButtonImage;
-
-/**
- *  A UIImage to be used for the pause button. A default value will be used if not set.
- */
-@property (strong, nonatomic, nonnull) UIImage * pauseButtonImage;
-
-/**
- *  A UIFont to be used for the elapsed time label. A system font will be used if not set.
- */
-@property (strong, nonatomic, nonnull) UIFont * labelFont;
-
-/**
- *  Show fractions of a second (for audio files with a duration < 1 minute)
- */
-@property (nonatomic) BOOL showFractionalSeconds;
-
-/**
- *  A UIColor to be used for the player's background.
- */
-@property (strong, nonatomic, nonnull) UIColor * backgroundColor;
-
-/**
- *  A UIColor to be used for the player's tint.
- */
-@property (strong, nonatomic, nonnull) UIColor * tintColor;
-
-/**
- * UIEdgeInsets used to determine padding around the play/pause button and timer label
- */
-@property (nonatomic) UIEdgeInsets controlInsets;
-
-/**
- * CGFloat used to determine padding between the button, progress bar, and label
- */
-@property (nonatomic) CGFloat controlPadding;
-
-/**
- * Audio Category set prior to playback
- */
-@property (nonatomic, nonnull) NSString * audioCategory;
-
-/**
- * Audio Category options set prior to playback
- */
-@property (nonatomic) AVAudioSessionCategoryOptions audioCategoryOptions;
 
 @end
