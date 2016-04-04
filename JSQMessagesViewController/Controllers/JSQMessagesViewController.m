@@ -348,9 +348,19 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         return;
     }
 
-    NSInteger items = [self.collectionView numberOfItemsInSection:0];
+    NSIndexPath *lastCell = [NSIndexPath indexPathForItem:([self.collectionView numberOfItemsInSection:0] - 1) inSection:0];
+    [self scrollToIndexPath:lastCell animated:animated];
+}
 
-    if (items == 0) {
+
+- (void)scrollToIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated
+{
+    if ([self.collectionView numberOfSections] <= indexPath.section) {
+        return;
+    }
+    
+    NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:indexPath.section];
+    if (numberOfItems == 0) {
         return;
     }
 
@@ -365,19 +375,18 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                         animated:animated];
         return;
     }
+    
+    NSInteger item = MAX(MIN(indexPath.item, numberOfItems - 1), 0);
+    indexPath = [NSIndexPath indexPathForItem:item inSection:0];
 
     //  workaround for really long messages not scrolling
     //  if last message is too long, use scroll position bottom for better appearance, else use top
     //  possibly a UIKit bug, see #480 on GitHub
-    NSUInteger finalRow = MAX(0, [self.collectionView numberOfItemsInSection:0] - 1);
-    NSIndexPath *finalIndexPath = [NSIndexPath indexPathForItem:finalRow inSection:0];
-    CGSize finalCellSize = [self.collectionView.collectionViewLayout sizeForItemAtIndexPath:finalIndexPath];
-
+    CGSize cellSize = [self.collectionView.collectionViewLayout sizeForItemAtIndexPath:indexPath];
     CGFloat maxHeightForVisibleMessage = CGRectGetHeight(self.collectionView.bounds) - self.collectionView.contentInset.top - CGRectGetHeight(self.inputToolbar.bounds);
-
-    UICollectionViewScrollPosition scrollPosition = (finalCellSize.height > maxHeightForVisibleMessage) ? UICollectionViewScrollPositionBottom : UICollectionViewScrollPositionTop;
-
-    [self.collectionView scrollToItemAtIndexPath:finalIndexPath
+    UICollectionViewScrollPosition scrollPosition = (cellSize.height > maxHeightForVisibleMessage) ? UICollectionViewScrollPositionBottom : UICollectionViewScrollPositionTop;
+    
+    [self.collectionView scrollToItemAtIndexPath:indexPath
                                 atScrollPosition:scrollPosition
                                         animated:animated];
 }
