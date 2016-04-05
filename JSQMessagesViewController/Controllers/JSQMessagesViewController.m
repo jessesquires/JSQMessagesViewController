@@ -39,6 +39,8 @@
 #import "UIDevice+JSQMessages.h"
 #import "NSBundle+JSQMessages.h"
 
+#import <MobileCoreServices/UTCoreTypes.h>
+
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
@@ -112,6 +114,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     // [JSQMessagesCollectionViewCell registerMenuAction:@selector(delete:)];
 
     self.showTypingIndicator = NO;
+    self.animatedTypingIndicator = NO;
 
     self.showLoadEarlierMessagesHeader = NO;
 
@@ -154,6 +157,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     _showTypingIndicator = showTypingIndicator;
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView.collectionViewLayout invalidateLayout];
+}
+
+- (void) setAnimatedTypingIndicator:(BOOL)animatedTypingIndicator
+{
+    if (_animatedTypingIndicator == animatedTypingIndicator) {
+        return;
+    }
+    
+    _animatedTypingIndicator = animatedTypingIndicator;
+    [self.collectionView setTypingIndicatorAnimated:_animatedTypingIndicator];
 }
 
 - (void)setShowLoadEarlierMessagesHeader:(BOOL)showLoadEarlierMessagesHeader
@@ -571,6 +584,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     //  disable menu for media messages
     id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
     if ([messageItem isMediaMessage]) {
+        
+        if ([[messageItem media] respondsToSelector:@selector(mediaDataType)]) {
+            return YES;
+        }
+        
         return NO;
     }
 
@@ -598,8 +616,18 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
     if (action == @selector(copy:)) {
-        id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-        [[UIPasteboard generalPasteboard] setString:[messageData text]];
+
+        id<JSQMessageData> messageData = [self collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+    
+        if ([messageData isMediaMessage]) {
+            id<JSQMessageMediaData> mediaData = [messageData media];
+            if ([messageData respondsToSelector:@selector(mediaDataType)]) {
+                [[UIPasteboard generalPasteboard] setValue:[mediaData mediaData]
+                                         forPasteboardType:[mediaData mediaDataType]];
+            }
+        } else {
+            [[UIPasteboard generalPasteboard] setString:[messageData text]];
+        }
     }
     else if (action == @selector(delete:)) {
         [collectionView.dataSource collectionView:collectionView didDeleteMessageAtIndexPath:indexPath];

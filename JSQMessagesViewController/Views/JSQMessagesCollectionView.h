@@ -73,6 +73,11 @@
 @property (strong, nonatomic) UIColor *typingIndicatorEllipsisColor;
 
 /**
+ *  Whether or not the typing indicator is animated.
+ */
+@property (nonatomic, assign) BOOL typingIndicatorAnimated;
+
+/**
  *  The color of the text in the load earlier messages header. The default value is a bright blue color.
  */
 @property (strong, nonatomic) UIColor *loadEarlierMessagesHeaderTextColor;

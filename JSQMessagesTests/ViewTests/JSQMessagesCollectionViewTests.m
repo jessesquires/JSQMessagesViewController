@@ -41,6 +41,7 @@
     XCTAssertEqualObjects(view.backgroundColor, [UIColor whiteColor], @"Property should be equal to default value");
     XCTAssertEqual(view.keyboardDismissMode, UIScrollViewKeyboardDismissModeNone, @"Property should be equal to default value");
     XCTAssertEqual(view.alwaysBounceVertical, YES, @"Property should be equal to default value");
+    XCTAssertEqual(view.typingIndicatorAnimated, NO, @"Property should be equal to default value");
     XCTAssertEqual(view.bounces, YES, @"Property should be equal to default value");
 }
 

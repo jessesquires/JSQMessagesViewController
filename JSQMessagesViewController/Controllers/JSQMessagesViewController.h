@@ -157,6 +157,17 @@
 @property (assign, nonatomic) BOOL showTypingIndicator;
 
 /**
+ *  Specifies whether the typing indicator (if shown per above property) is animated.
+ *  The animation is similar to the iMessage typing indicator animation, sequentially
+ *  darkening the dots
+ *
+ *  @discussion This property should be set correctly prior to the first visible instance
+ *  of the typing indicator as the animation loop will continue throughout the life-cycle
+ *  of the typing indicator
+ */
+@property (assign, nonatomic) BOOL animatedTypingIndicator;
+
+/**
  *  Specifies whether or not the view controller should show the "load earlier messages" header view.
  *
  *  @discussion Setting this property to `YES` will show the header view immediately.
