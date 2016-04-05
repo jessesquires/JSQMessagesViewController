@@ -46,7 +46,6 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
 
     self.jsq_isObserving = NO;
     self.sendButtonOnRight = YES;
