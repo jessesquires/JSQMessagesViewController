@@ -81,6 +81,14 @@
         self.cachedImageView = imageView;
     }
     
+    if (self.mediaLabelFactory) {
+        if (self.mediaLabelText) {
+            [self.mediaLabelFactory addLabel:self.mediaLabelText mediaView:self.cachedImageView];
+        } else if (self.mediaLabelView) {
+            [self.mediaLabelFactory addCustomView:self.mediaLabelView mediaView:self.cachedImageView];
+        }
+    }
+    
     return self.cachedImageView;
 }
 

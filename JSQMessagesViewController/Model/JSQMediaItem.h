@@ -17,6 +17,7 @@
 //
 
 #import "JSQMessageMediaData.h"
+#import "JSQMessagesMediaItemLabelFactory.h"
 
 /**
  *  The `JSQMediaItem` class is an abstract base class for media item model objects that represents
@@ -39,6 +40,23 @@
  *  The default value is `YES`.
  */
 @property (assign, nonatomic) BOOL appliesMediaViewMaskAsOutgoing;
+
+/**
+ *  A label factory object that is used to render label text or a label view
+ *  Defaults to `nil`
+ */
+@property (assign, nonatomic) JSQMessagesMediaItemLabelFactory * mediaLabelFactory;
+
+/**
+ *  A string value that is transformed to a UITextView and applied to the
+ *  mediaView by the mediaLabelFactory object
+ */
+@property (strong, nonatomic) NSString * mediaLabelText;
+
+/**
+ *  A custom view that is applied to the mediaView by the mediaLabelFactory object
+ */
+@property (strong, nonatomic) UIView * mediaLabelView;
 
 /**
  *  Initializes and returns a media item with the specified value for maskAsOutgoing.
