@@ -56,6 +56,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight;
  *
  *  @param ellipsisColor       The color of the typing indicator ellipsis. This value must not be `nil`.
  *  @param messageBubbleColor  The color of the typing indicator message bubble. This value must not be `nil`.
+ *  @param animated            Specifies whether the typing indicator is animated
  *  @param shouldDisplayOnLeft Specifies whether the typing indicator displays on the left or right side of the collection view when displayed.
  *  @param collectionView      The collection view in which the footer view will appear. This value must not be `nil`.
  */
@@ -65,7 +66,4 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight;
                shouldDisplayOnLeft:(BOOL)shouldDisplayOnLeft
                  forCollectionView:(UICollectionView *)collectionView;
 
-@end
-
-@interface JSQMessagesTypingIndicatorCircleView : UIView
 @end
