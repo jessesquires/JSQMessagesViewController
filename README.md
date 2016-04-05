@@ -61,7 +61,7 @@ Read the docs, [available here][docsLink] via [@CocoaDocs](https://twitter.com/C
 
 ## Core team
 
-- Jesse Squries ([**@jesse_squires**](https://twitter.com/jesse_squires))
+- Jesse Squires ([**@jesse_squires**](https://twitter.com/jesse_squires))
 - Harlan Haskans ([**@harlanhaskins**](https://github.com/harlanhaskins))
 - Eli Burke ([**@eliburke**](https://github.com/eliburke))
 
