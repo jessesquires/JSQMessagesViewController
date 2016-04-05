@@ -131,6 +131,7 @@
                      nil];
     
     [self addPhotoMediaMessage];
+    [self addAudioMediaMessage];
     
     /**
      *  Setting to load extra messages for testing/demo
@@ -154,6 +155,17 @@
         
         [self.messages addObject:reallyLongMessage];
     }
+}
+
+- (void)addAudioMediaMessage
+{
+    NSString * sample = [[NSBundle mainBundle] pathForResource:@"jsq_messages_sample" ofType:@"m4a"];
+    NSData * audioData = [NSData dataWithContentsOfFile:sample];
+    JSQAudioMediaItem *audioItem = [[JSQAudioMediaItem alloc] initWithData:audioData];
+    JSQMessage *audioMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
+                                                   displayName:kJSQDemoAvatarDisplayNameSquires
+                                                         media:audioItem];
+    [self.messages addObject:audioMessage];
 }
 
 - (void)addPhotoMediaMessage
