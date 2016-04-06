@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
 	s.license = 'MIT'
 	s.platform = :ios, '7.0'
 
-	s.author = { 'Jesse Squires' => 'jesse.squires.developer@gmail.com' }
+	s.author = 'Jesse Squires'
 	s.social_media_url = 'https://twitter.com/jesse_squires'
 
 	s.screenshots = ['https://raw.githubusercontent.com/jessesquires/JSQMessagesViewController/develop/Screenshots/screenshot0.png',
