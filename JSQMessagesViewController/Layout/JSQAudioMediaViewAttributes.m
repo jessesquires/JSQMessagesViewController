@@ -23,32 +23,56 @@
 
 @implementation JSQAudioMediaViewAttributes
 
-- (instancetype)init
-{
+- (instancetype)initWithPlayButtonImage:(UIImage *)playButtonImage
+                       pauseButtonImage:(UIImage *)pauseButtonImage
+                              labelFont:(UIFont *)labelFont
+                  showFractionalSecodns:(BOOL)showFractionalSeconds
+                        backgroundColor:(UIColor *)backgroundColor
+                              tintColor:(UIColor *)tintColor
+                          controlInsets:(UIEdgeInsets)controlInsets
+                         controlPadding:(CGFloat)controlPadding
+                          audioCategory:(NSString *)audioCategory
+                   audioCategoryOptions:(AVAudioSessionCategoryOptions)audioCategoryOptions {
+    NSParameterAssert(playButtonImage != nil);
+    NSParameterAssert(pauseButtonImage != nil);
+    NSParameterAssert(labelFont != nil);
+    NSParameterAssert(backgroundColor != nil);
+    NSParameterAssert(tintColor != nil);
+    NSParameterAssert(audioCategory != nil);
+
     self = [super init];
     if (self) {
-        _controlPadding = 6;
-        
-        _controlInsets = UIEdgeInsetsMake(6, 6, 6, 18);
-        
-        _labelFont = [UIFont systemFontOfSize:12];
-        
-        _showFractionalSeconds = NO;
-        
-        _backgroundColor = [UIColor jsq_messageBubbleLightGrayColor];
-        
-        _tintColor = [UIButton buttonWithType:UIButtonTypeSystem].tintColor;
-        
-        _playButtonImage = [[UIImage jsq_defaultPlayImage] jsq_imageMaskedWithColor:_tintColor];
-        
-        _pauseButtonImage = [[UIImage jsq_defaultPauseImage] jsq_imageMaskedWithColor:_tintColor];
-        
-        _audioCategory = @"AVAudioSessionCategoryPlayback";
-        
-        _audioCategoryOptions = AVAudioSessionCategoryOptionDuckOthers | AVAudioSessionCategoryOptionDefaultToSpeaker | AVAudioSessionCategoryOptionAllowBluetooth;
+        _playButtonImage = playButtonImage;
+        _pauseButtonImage = pauseButtonImage;
+        _labelFont = labelFont;
+        _showFractionalSeconds = showFractionalSeconds;
+        _backgroundColor = backgroundColor;
+        _tintColor = tintColor;
+        _controlInsets = controlInsets;
+        _controlPadding = controlPadding;
+        _audioCategory = audioCategory;
+        _audioCategoryOptions = audioCategoryOptions;
     }
-    
     return self;
+}
+
+- (instancetype)init
+{
+    UIColor *tintColor = [UIColor jsq_messageBubbleBlueColor];
+    AVAudioSessionCategoryOptions options = AVAudioSessionCategoryOptionDuckOthers
+    | AVAudioSessionCategoryOptionDefaultToSpeaker
+    | AVAudioSessionCategoryOptionAllowBluetooth;
+
+    return [self initWithPlayButtonImage:[[UIImage jsq_defaultPlayImage] jsq_imageMaskedWithColor:tintColor]
+                        pauseButtonImage:[[UIImage jsq_defaultPauseImage] jsq_imageMaskedWithColor:tintColor]
+                               labelFont:[UIFont systemFontOfSize:12]
+                   showFractionalSecodns:NO
+                         backgroundColor:[UIColor jsq_messageBubbleLightGrayColor]
+                               tintColor:tintColor
+                           controlInsets:UIEdgeInsetsMake(6, 6, 6, 18)
+                          controlPadding:6
+                           audioCategory:@"AVAudioSessionCategoryPlayback"
+                    audioCategoryOptions:options];
 }
 
 @end
