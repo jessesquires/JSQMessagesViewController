@@ -20,61 +20,98 @@
 #import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+/**
+ An instance of `JSQAudioMediaViewAttributes` specifies the appearance configuration of a `JSQAudioMediaItem`.
+ Use this class to customize the appearance of `JSQAudioMediaItem`.
+ */
 @interface JSQAudioMediaViewAttributes : NSObject
 
 /**
- *  A UIImage to be used for the play button. A default value will be used if not set.
+ *  The image for the play button. The default is a play icon.
  */
-@property (strong, nonatomic, nonnull) UIImage *playButtonImage;
+@property (nonatomic, strong, readonly) UIImage *playButtonImage;
 
 /**
- *  A UIImage to be used for the pause button. A default value will be used if not set.
+ *  The image for the pause button. The default is a pause icon.
  */
-@property (strong, nonatomic, nonnull) UIImage *pauseButtonImage;
+@property (nonatomic, strong, readonly) UIImage *pauseButtonImage;
 
 /**
- *  A UIFont to be used for the elapsed time label. A system font will be used if not set.
+ *  The font for the elapsed time label. The default is a system font.
  */
 @property (strong, nonatomic, nonnull) UIFont *labelFont;
 
 /**
- *  Show fractions of a second (for audio files with a duration < 1 minute)
+ *  Specifies whether to show fractions of a second for audio files with a duration of less than 1 minute.
  */
-@property (nonatomic) BOOL showFractionalSeconds;
+@property (nonatomic, assign, readonly) BOOL showFractionalSeconds;
 
 /**
- *  A UIColor to be used for the player's background.
+ *  The background color for the player.
  */
-@property (strong, nonatomic, nonnull) UIColor *backgroundColor;
+@property (nonatomic, strong, readonly) UIColor *backgroundColor;
 
 /**
- *  A UIColor to be used for the player's tint.
+ *  The tint color for the player.
  */
-@property (strong, nonatomic, nonnull) UIColor *tintColor;
+@property (nonatomic, strong, readonly) UIColor *tintColor;
 
 /**
- * UIEdgeInsets used to determine padding around the play/pause button and timer label
+ *  Insets that sepcify the padding around the play/pause button and time label.
  */
-@property (nonatomic) UIEdgeInsets controlInsets;
+@property (nonatomic, assign, readonly) UIEdgeInsets controlInsets;
 
 /**
- * CGFloat used to determine padding between the button, progress bar, and label
+ *  Specifies the padding between the button, progress bar, and label.
  */
-@property (nonatomic) CGFloat controlPadding;
+@property (nonatomic, assign, readonly) CGFloat controlPadding;
 
 /**
- * Audio Category set prior to playback
+ *  Specifies the audio category set prior to playback.
  */
-@property (nonatomic, nonnull) NSString *audioCategory;
+@property (nonatomic, copy, readonly) NSString *audioCategory;
 
 /**
- * Audio Category options set prior to playback
+ *  Specifies the audio category options set prior to playback.
  */
 @property (nonatomic) AVAudioSessionCategoryOptions audioCategoryOptions;
 
 /**
- *  Returns a default JSQAudioMediaViewAttributes object to set the appearance of JSQAudioMediaItem
+ Initializes and returns a `JSQAudioMediaViewAttributes` instance having the specified attributes.
+
+ @param playButtonImage        The image for the play button.
+ @param pauseButtonImage      The image for the pause button.
+ @param labelFont             The font for the elapsed time label.
+ @param showFractionalSeconds Specifies whether to show fractions of a second for audio files with a duration of less than 1 minute.
+ @param backgroundColor       The background color for the player.
+ @param tintColor             The tint color for the player.
+ @param controlInsets         Insets that sepcify the padding around the play/pause button and time label.
+ @param controlPadding        Specifies the padding between the button, progress bar, and label.
+ @param audioCategory         Specifies the audio category set prior to playback.
+ @param audioCategoryOptions  Specifies the audio category options set prior to playback.
+
+ @return A new `JSQAudioMediaViewAttributes` instance
  */
-- (nullable instancetype)init;
+- (instancetype)initWithPlayButtonImage:(UIImage *)playButtonImage
+                       pauseButtonImage:(UIImage *)pauseButtonImage
+                              labelFont:(UIFont *)labelFont
+                  showFractionalSecodns:(BOOL)showFractionalSeconds
+                        backgroundColor:(UIColor *)backgroundColor
+                              tintColor:(UIColor *)tintColor
+                          controlInsets:(UIEdgeInsets)controlInsets
+                         controlPadding:(CGFloat)controlPadding
+                          audioCategory:(NSString *)audioCategory
+                   audioCategoryOptions:(AVAudioSessionCategoryOptions)audioCategoryOptions NS_DESIGNATED_INITIALIZER;
+
+/**
+ Initializes and returns a default `JSQAudioMediaViewAttributes` instance.
+
+ @return A new `JSQAudioMediaViewAttributes` instance
+ */
+- (instancetype)init;
 
 @end
+
+NS_ASSUME_NONNULL_END
