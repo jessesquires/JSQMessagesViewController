@@ -360,7 +360,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     
     NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:indexPath.section];
-
     if (numberOfItems == 0) {
         return;
     }
