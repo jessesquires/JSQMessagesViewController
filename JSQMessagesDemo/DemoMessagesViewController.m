@@ -17,6 +17,7 @@
 //
 
 #import "DemoMessagesViewController.h"
+#import "JSQCustomMediaItem.h"
 
 @implementation DemoMessagesViewController
 
@@ -220,6 +221,12 @@
                 
                 newMediaData = videoItemCopy;
             }
+            else if ([copyMediaData isKindOfClass:[JSQCustomMediaItem class]]) {
+                JSQCustomMediaItem *customItemCopy = [((JSQCustomMediaItem *)copyMediaData) copy];
+                customItemCopy.appliesMediaViewMaskAsOutgoing = NO;
+
+                newMediaData = customItemCopy;
+            }
             else {
                 NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
             }
@@ -329,7 +336,7 @@
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", nil];
+                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", @"Send html", nil];
     
     [sheet showFromToolbar:self.inputToolbar];
 }
@@ -358,6 +365,9 @@
             
         case 2:
             [self.demoData addVideoMediaMessage];
+            break;
+        case 3:
+            [self.demoData addHTMLMediaMessage];
             break;
     }
     
@@ -524,7 +534,15 @@
         cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
                                               NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     }
-    
+    else if ([msg.media isKindOfClass:[JSQCustomMediaItem class]]) {
+        if ([msg.senderId isEqualToString:self.senderId]) {
+            ((JSQCustomMediaItem *)msg.media).preferredTextColor = [UIColor blackColor];
+        }
+        else {
+            ((JSQCustomMediaItem *)msg.media).preferredTextColor = [UIColor whiteColor];
+        }
+    }
+
     return cell;
 }
 
