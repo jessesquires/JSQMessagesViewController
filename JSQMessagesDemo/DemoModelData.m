@@ -17,6 +17,9 @@
 //
 
 #import "DemoModelData.h"
+#import "JSQCustomMediaView.h"
+#import "JSQHTMLMessageView.h"
+#import "UIView+JSQMessages.h"
 
 #import "NSUserDefaults+DemoSettings.h"
 
@@ -132,7 +135,9 @@
     
     [self addPhotoMediaMessage];
     [self addAudioMediaMessage];
-    
+    [self addHTMLMediaMessage];
+    [self addCustomButtonMessage];
+
     /**
      *  Setting to load extra messages for testing/demo
      */
@@ -200,6 +205,68 @@
                                                    displayName:kJSQDemoAvatarDisplayNameSquires
                                                          media:videoItem];
     [self.messages addObject:videoMessage];
+}
+
+- (void)addHTMLMediaMessage
+{
+    NSString *htmlString =
+    @"<html><body><div>"
+    @"<p>You can even compose messages using HTML.</p>"
+    @"<p>Sometimes it's <span style=\"text-decoration: line-through\">much</span> <i>easier</i> than attributed text.</p>"
+    @"</div></body></html>";
+
+    JSQHTMLMessageView *htmlView = [[JSQHTMLMessageView alloc] init];
+    [htmlView.webView loadHTMLString:htmlString baseURL:nil];
+
+    [self.messages addObject:[htmlView generateMessageWithSenderId:kJSQDemoAvatarIdSquires displayName:kJSQDemoAvatarDisplayNameSquires]];
+}
+
+- (void)addCustomButtonMessage {
+    JSQCustomMediaView *view = [[JSQCustomMediaView alloc] initWithFrame:CGRectMake(0, 0, 250, 80)];
+
+    UILabel *label = [[UILabel alloc] init];
+    [view addSubview:label];
+
+    label.textAlignment = NSTextAlignmentCenter;
+    label.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [view jsq_pinSubview:label toEdge:NSLayoutAttributeTop];
+    [view jsq_pinSubview:label toEdge:NSLayoutAttributeLeft];
+    [view jsq_pinSubview:label toEdge:NSLayoutAttributeRight];
+
+
+    label.text = @"You rock. Want to be friends?";
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.translatesAutoresizingMaskIntoConstraints = NO;
+
+    button.backgroundColor = [UIColor whiteColor];
+    [button setTitle:@"Yes!" forState:UIControlStateNormal];
+    [button setTitleColor:button.tintColor forState:UIControlStateNormal];
+    button.layer.cornerRadius = 3;
+    button.layer.masksToBounds = YES;
+    [view addSubview:button];
+
+    NSLayoutConstraint *xCenterConstraint = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
+    [view addConstraint:xCenterConstraint];
+
+    [view addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:@"H:[button(==200)]"
+                                            options: 0
+                                            metrics:nil
+                                              views:@{@"button" : button}]];
+
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[label(==30)][button(==35)]"
+                                                                 options:0
+                                                                 metrics:nil
+                                                                   views:NSDictionaryOfVariableBindings(label, button)]];
+
+    view.textPropertiesChangedBlock = ^(JSQCustomMediaView *aView) {
+        label.textColor = aView.preferredTextColor;
+        label.font = aView.preferredFont;
+        button.titleLabel.font = aView.preferredFont;
+    };
+
+    [self.messages addObject:[view generateMessageWithSenderId:kJSQDemoAvatarIdCook displayName:kJSQDemoAvatarDisplayNameCook]];
 }
 
 @end

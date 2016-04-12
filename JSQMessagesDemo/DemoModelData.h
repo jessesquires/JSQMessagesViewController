@@ -60,4 +60,8 @@ static NSString * const kJSQDemoAvatarIdWoz = @"309-41802-93823";
 
 - (void)addAudioMediaMessage;
 
+- (void)addHTMLMediaMessage;
+
+- (void)addCustomButtonMessage;
+
 @end

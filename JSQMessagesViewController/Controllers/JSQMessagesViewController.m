@@ -38,6 +38,7 @@
 #import "UIColor+JSQMessages.h"
 #import "UIDevice+JSQMessages.h"
 #import "NSBundle+JSQMessages.h"
+#import "JSQCustomMediaItem.h"
 
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
@@ -45,7 +46,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 
 @interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate,
-                                         JSQMessagesKeyboardControllerDelegate>
+                                         JSQMessagesKeyboardControllerDelegate,
+                                         JSQCustomMediaItemDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
@@ -488,6 +490,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     else {
         id<JSQMessageMediaData> messageMedia = [messageItem media];
+
+        if ([messageMedia isKindOfClass:[JSQCustomMediaItem class]]) {
+            id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
+            cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
+            cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
+            ((JSQCustomMediaItem *)messageMedia).delegate = self;
+        }
+
         cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
         NSParameterAssert(cell.mediaView != nil);
     }
@@ -724,6 +734,17 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
 
     [textView resignFirstResponder];
+}
+
+#pragma mark -Custom media item delegate
+
+- (void)customMediaItem:(JSQCustomMediaItem *)mediaItem customViewSizeChanged:(CGSize)newSize {
+    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+    [self.collectionView reloadData];
+
+    if (self.automaticallyScrollsToMostRecentMessage) {
+        [self scrollToBottomAnimated:YES];
+    }
 }
 
 #pragma mark - Notifications
