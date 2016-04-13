@@ -220,6 +220,18 @@
                 
                 newMediaData = videoItemCopy;
             }
+            else if ([copyMediaData isKindOfClass:[JSQAudioMediaItem class]]) {
+                JSQAudioMediaItem *audioItemCopy = [((JSQAudioMediaItem *)copyMediaData) copy];
+                audioItemCopy.appliesMediaViewMaskAsOutgoing = NO;
+                newMediaAttachmentCopy = [audioItemCopy.audioData copy];
+                
+                /**
+                 *  Reset audio item to simulate "downloading" the audio
+                 */
+                audioItemCopy.audioData = nil;
+                
+                newMediaData = audioItemCopy;
+            }
             else {
                 NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
             }
@@ -274,6 +286,10 @@
                 else if ([newMediaData isKindOfClass:[JSQVideoMediaItem class]]) {
                     ((JSQVideoMediaItem *)newMediaData).fileURL = newMediaAttachmentCopy;
                     ((JSQVideoMediaItem *)newMediaData).isReadyToPlay = YES;
+                    [self.collectionView reloadData];
+                }
+                else if ([newMediaData isKindOfClass:[JSQAudioMediaItem class]]) {
+                    ((JSQAudioMediaItem *)newMediaData).audioData = newMediaAttachmentCopy;
                     [self.collectionView reloadData];
                 }
                 else {
