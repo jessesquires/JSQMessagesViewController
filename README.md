@@ -59,13 +59,21 @@ See the [Getting Started](https://github.com/jessesquires/JSQMessagesViewControl
 
 Read the docs, [available here][docsLink] via [@CocoaDocs](https://twitter.com/CocoaDocs).
 
+## Core team
+
+- Jesse Squires ([**@jesse_squires**](https://twitter.com/jesse_squires))
+- Harlan Haskans ([**@harlanhaskins**](https://github.com/harlanhaskins))
+- Eli Burke ([**@eliburke**](https://github.com/eliburke))
+
 ## Contributing
 
 Please follow these sweet [contribution guidelines](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/.github/CONTRIBUTING.md).
 
+> **Interested in becoming a core contributor with push access? See our [onboarding guide](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/contributor_onboarding.md) for details.**
+
 ## Donate
 
-Support the development of this **free** library! **[Send cash](https://cash.me/$jsq)** via [Square Cash](https://cash.me/).
+Support the development of this **free** library! **[Donate](https://cash.me/$jsq)** via [Square Cash](https://cash.me/).
 
 ## Credits
 
@@ -75,7 +83,7 @@ Support the development of this **free** library! **[Send cash](https://cash.me/
 
 ## Apps using this library
 
-According to [CocoaPods stats](https://cocoapods.org/pods/JSQMessagesViewController), over **6,000 apps** are using `JSQMessagesViewController`. [Here are the ones](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/apps_using_this_library.md) that we know about. Please submit a [pull request](https://github.com/jessesquires/JSQMessagesViewController/compare) to add your app! :smile:
+According to [CocoaPods stats](https://cocoapods.org/pods/JSQMessagesViewController), over **9,000 apps** are using `JSQMessagesViewController`. [Here are the ones](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/apps_using_this_library.md) that we know about. Please submit a [pull request](https://github.com/jessesquires/JSQMessagesViewController/compare) to add your app! :smile:
 
 ## License
 

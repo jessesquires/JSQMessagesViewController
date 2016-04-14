@@ -220,6 +220,18 @@
                 
                 newMediaData = videoItemCopy;
             }
+            else if ([copyMediaData isKindOfClass:[JSQAudioMediaItem class]]) {
+                JSQAudioMediaItem *audioItemCopy = [((JSQAudioMediaItem *)copyMediaData) copy];
+                audioItemCopy.appliesMediaViewMaskAsOutgoing = NO;
+                newMediaAttachmentCopy = [audioItemCopy.audioData copy];
+                
+                /**
+                 *  Reset audio item to simulate "downloading" the audio
+                 */
+                audioItemCopy.audioData = nil;
+                
+                newMediaData = audioItemCopy;
+            }
             else {
                 NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
             }
@@ -276,6 +288,10 @@
                     ((JSQVideoMediaItem *)newMediaData).isReadyToPlay = YES;
                     [self.collectionView reloadData];
                 }
+                else if ([newMediaData isKindOfClass:[JSQAudioMediaItem class]]) {
+                    ((JSQAudioMediaItem *)newMediaData).audioData = newMediaAttachmentCopy;
+                    [self.collectionView reloadData];
+                }
                 else {
                     NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
                 }
@@ -329,7 +345,7 @@
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", nil];
+                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", @"Send audio", nil];
     
     [sheet showFromToolbar:self.inputToolbar];
 }
@@ -358,6 +374,10 @@
             
         case 2:
             [self.demoData addVideoMediaMessage];
+            break;
+            
+        case 3:
+            [self.demoData addAudioMediaMessage];
             break;
     }
     
