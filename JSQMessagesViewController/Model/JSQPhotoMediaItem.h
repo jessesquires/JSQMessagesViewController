@@ -19,6 +19,20 @@
 #import "JSQMediaItem.h"
 
 /**
+ *  `JSQPhotoMediaImageAspect is used to control how mediaViewDisplaySize is used to
+ *  determine the framing of an image. It can force an image into a particular form
+ *  factor, or be used to auto-detect an appropriate aspect ratio
+ */
+typedef NS_ENUM(int, JSQPhotoMediaImageAspect) {
+    JSQPhotoMediaImageAspectDefault = 0,
+    JSQPhotoMediaImageAspectAutomatic,
+    JSQPhotoMediaImageAspectSmallSquare,
+    JSQPhotoMediaImageAspectLargeSquare,
+    JSQPhotoMediaImageAspectPortrait,
+    JSQPhotoMediaImageAspectLandscape
+};
+
+/**
  *  The `JSQPhotoMediaItem` class is a concrete `JSQMediaItem` subclass that implements the `JSQMessageMediaData` protocol
  *  and represents a photo media message. An initialized `JSQPhotoMediaItem` object can be passed 
  *  to a `JSQMediaMessage` object during its initialization to construct a valid media message object.
@@ -30,6 +44,12 @@
  *  The image for the photo media item. The default value is `nil`.
  */
 @property (copy, nonatomic) UIImage *image;
+
+/**
+ *  Control the image aspect (appearance) by modifying mediaViewDisplaySize
+ *  Default value is JSQPhotoMediaImageOrientationDefault, inheriting JSQMediaItem
+ */
+@property (nonatomic) JSQPhotoMediaImageAspect imageAspect;
 
 /**
  *  Initializes and returns a photo media item object having the given image.

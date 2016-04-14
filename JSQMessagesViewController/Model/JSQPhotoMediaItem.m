@@ -39,6 +39,7 @@
     if (self) {
         _image = [image copy];
         _cachedImageView = nil;
+        _imageAspect = JSQPhotoMediaImageAspectDefault;
     }
     return self;
 }
@@ -64,6 +65,37 @@
 }
 
 #pragma mark - JSQMessageMediaData protocol
+
+- (CGSize)mediaViewDisplaySize {
+    CGSize thumbnailSize = [super mediaViewDisplaySize];
+    if (self.imageAspect == JSQPhotoMediaImageAspectDefault) {
+        return thumbnailSize;
+    }
+    
+    CGFloat longestSide = fmax(thumbnailSize.width, thumbnailSize.height);
+    CGFloat smallestSide = fmin(thumbnailSize.width, thumbnailSize.height);
+    
+    if (self.imageAspect == JSQPhotoMediaImageAspectSmallSquare) {
+        thumbnailSize = CGSizeMake(smallestSide, smallestSide);
+    } else if (self.imageAspect == JSQPhotoMediaImageAspectLargeSquare) {
+        thumbnailSize = CGSizeMake(longestSide, longestSide);
+    } else if (self.imageAspect == JSQPhotoMediaImageAspectPortrait) {
+        thumbnailSize = CGSizeMake(smallestSide, longestSide);
+    } else if (self.imageAspect == JSQPhotoMediaImageAspectLandscape) {
+        thumbnailSize = CGSizeMake(longestSide, smallestSide);
+    } else if (self.imageAspect == JSQPhotoMediaImageAspectAutomatic) {
+        if (self.image.size.height > 0 && self.image.size.width > 0) {
+            CGFloat aspect = self.image.size.width / self.image.size.height;
+            if (self.image.size.width > self.image.size.height) {
+                thumbnailSize = CGSizeMake(thumbnailSize.width, thumbnailSize.width / aspect);
+            } else {
+                thumbnailSize = CGSizeMake(thumbnailSize.height * aspect, thumbnailSize.height);
+            }
+        }
+    }
+    
+    return thumbnailSize;
+}
 
 - (UIView *)mediaView
 {
