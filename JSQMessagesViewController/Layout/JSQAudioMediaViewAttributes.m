@@ -75,4 +75,40 @@
                     audioCategoryOptions:options];
 }
 
+- (void)setPlayButtonImage:(UIImage *)playButtonImage
+{
+    NSParameterAssert(playButtonImage != nil);
+    _playButtonImage = playButtonImage;
+}
+
+- (void)setPauseButtonImage:(UIImage *)pauseButtonImage
+{
+    NSParameterAssert(pauseButtonImage != nil);
+    _pauseButtonImage = pauseButtonImage;
+}
+
+- (void)setLabelFont:(UIFont *)labelFont
+{
+    NSParameterAssert(labelFont != nil);
+    _labelFont = labelFont;
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor
+{
+    NSParameterAssert(backgroundColor != nil);
+    _backgroundColor = backgroundColor;
+}
+
+- (void)setTintColor:(UIColor *)tintColor
+{
+    NSParameterAssert(tintColor != nil);
+    _tintColor = tintColor;
+}
+
+- (void)setAudioCategory:(NSString *)audioCategory
+{
+    NSParameterAssert(audioCategory != nil);
+    _audioCategory = audioCategory;
+}
+
 @end
