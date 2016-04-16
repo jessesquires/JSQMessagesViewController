@@ -73,6 +73,26 @@
 @property (strong, nonatomic) UIColor *typingIndicatorEllipsisColor;
 
 /**
+ *  The image to be used as an avatar on a user's typing indicator. If not set, no avatar image will be shown. Setting this image will hide the typing indicator message bubble and ellipsis image.
+ */
+@property (strong, nonatomic) UIImage *typingIndicatorAvatarImage;
+
+/**
+ *  The string to indicate that a user is typing. If not set, a generic message will be shown. Setting this string will hide the typing indicator message bubble and ellipsis image.
+ */
+@property (copy, nonatomic) NSString *typingIndicatorMessage;
+
+/**
+ *  The text color to use in displaying the string stored in `typingIndicatorMessage`. The default value is a light gray color. Setting this value will hide the typing indicator message bubble and ellipsis image.
+ */
+@property (strong, nonatomic) UIColor *typingIndicatorTextColor;
+
+/**
+ *  The font to use in displaying the string stored in `typingIndicatorMessage`. The default value is an italic system font at 11pt. Setting this value will hide the typing indicator message bubble and ellipsis image.
+ */
+@property (strong, nonatomic) UIFont *typingIndicatorTextFont;
+
+/**
  *  The color of the text in the load earlier messages header. The default value is a bright blue color.
  */
 @property (strong, nonatomic) UIColor *loadEarlierMessagesHeaderTextColor;

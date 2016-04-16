@@ -23,7 +23,7 @@
 #import "UIImage+JSQMessages.h"
 
 const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
-
+const CGFloat kJSQMessagesTypingIndicatorBubbleMarginMinimumSpacing = 6.0f;
 
 @interface JSQMessagesTypingIndicatorFooterView ()
 
@@ -32,6 +32,12 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
 
 @property (weak, nonatomic) IBOutlet UIImageView *typingIndicatorImageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *typingIndicatorImageViewRightHorizontalConstraint;
+
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (weak, nonatomic) IBOutlet UILabel *typingIndicatorLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarImageViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarImageViewToTypingIndicatorLabelHorizontalConstraint;
+
 
 @end
 
@@ -81,8 +87,7 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     NSParameterAssert(ellipsisColor != nil);
     NSParameterAssert(messageBubbleColor != nil);
     NSParameterAssert(collectionView != nil);
-    
-    CGFloat bubbleMarginMinimumSpacing = 6.0f;
+
     CGFloat indicatorMarginMinimumSpacing = 26.0f;
     
     JSQMessagesBubbleImageFactory *bubbleImageFactory = [[JSQMessagesBubbleImageFactory alloc] init];
@@ -94,7 +99,7 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
         CGFloat bubbleWidth = CGRectGetWidth(self.bubbleImageView.frame);
         CGFloat indicatorWidth = CGRectGetWidth(self.typingIndicatorImageView.frame);
         
-        CGFloat bubbleMarginMaximumSpacing = collectionViewWidth - bubbleWidth - bubbleMarginMinimumSpacing;
+        CGFloat bubbleMarginMaximumSpacing = collectionViewWidth - bubbleWidth - kJSQMessagesTypingIndicatorBubbleMarginMinimumSpacing;
         CGFloat indicatorMarginMaximumSpacing = collectionViewWidth - indicatorWidth - indicatorMarginMinimumSpacing;
         
         self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMaximumSpacing;
@@ -103,13 +108,43 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     else {
         self.bubbleImageView.image = [bubbleImageFactory outgoingMessagesBubbleImageWithColor:messageBubbleColor].messageBubbleImage;
         
-        self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMinimumSpacing;
+        self.bubbleImageViewRightHorizontalConstraint.constant = kJSQMessagesTypingIndicatorBubbleMarginMinimumSpacing;
         self.typingIndicatorImageViewRightHorizontalConstraint.constant = indicatorMarginMinimumSpacing;
     }
     
     [self setNeedsUpdateConstraints];
     
     self.typingIndicatorImageView.image = [[UIImage jsq_defaultTypingIndicatorImage] jsq_imageMaskedWithColor:ellipsisColor];
+}
+
+- (void)configureWithAvatarImage:(UIImage *)avatarImage
+                         message:(NSString *)message
+                       textColor:(UIColor *)textColor
+                            font:(UIFont *)font;
+{
+    NSParameterAssert(avatarImage || message || textColor || font);
+    
+    self.typingIndicatorLabel.hidden = NO;
+    
+    if (avatarImage) {
+        self.avatarImageView.image = avatarImage;
+        self.avatarImageView.layer.cornerRadius = self.avatarImageView.layer.bounds.size.width / 2;
+    } else {
+        self.avatarImageViewWidthConstraint.constant = 0;
+        self.avatarImageViewToTypingIndicatorLabelHorizontalConstraint.constant = 0;
+    }
+    if (message) {
+        self.typingIndicatorLabel.text = message;
+    }
+    if (textColor) {
+        self.typingIndicatorLabel.textColor = textColor;
+    }
+    if (font) {
+        self.typingIndicatorLabel.font = font;
+    }
+    
+    self.typingIndicatorImageView.image = nil;
+    self.bubbleImageView.image = nil;
 }
 
 @end

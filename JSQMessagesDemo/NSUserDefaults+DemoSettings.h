@@ -38,4 +38,7 @@
 + (void)saveIncomingAvatarSetting:(BOOL)value;
 + (BOOL)incomingAvatarSetting;
 
++ (void)saveTypingIndicatorStyleSettingAsAvatar:(BOOL)value;
++ (BOOL)typingIndicatorStyleSettingIsAvatar;
+
 @end
