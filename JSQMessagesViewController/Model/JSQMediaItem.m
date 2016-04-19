@@ -44,19 +44,35 @@
     if (self) {
         _appliesMediaViewMaskAsOutgoing = maskAsOutgoing;
         _cachedPlaceholderView = nil;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didReceiveMemoryWarningNotification:)
+                                                     name:UIApplicationDidReceiveMemoryWarningNotification
+                                                   object:nil];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    _cachedPlaceholderView = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setAppliesMediaViewMaskAsOutgoing:(BOOL)appliesMediaViewMaskAsOutgoing
 {
     _appliesMediaViewMaskAsOutgoing = appliesMediaViewMaskAsOutgoing;
     _cachedPlaceholderView = nil;
+}
+
+- (void)clearCachedMediaViews
+{
+    _cachedPlaceholderView = nil;
+}
+
+#pragma mark - Notifications
+
+- (void)didReceiveMemoryWarningNotification:(NSNotification *)notification
+{
+    [self clearCachedMediaViews];
 }
 
 #pragma mark - JSQMessageMediaData protocol

@@ -46,7 +46,7 @@
 - (void)jsq_configureCollectionView
 {
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
+
     self.backgroundColor = [UIColor whiteColor];
     self.keyboardDismissMode = UIScrollViewKeyboardDismissModeNone;
     self.alwaysBounceVertical = YES;
@@ -141,7 +141,7 @@
     if (indexPath == nil) {
         return;
     }
-    
+
     [self.delegate collectionView:self
             didTapAvatarImageView:cell.avatarImageView
                       atIndexPath:indexPath];
@@ -153,7 +153,7 @@
     if (indexPath == nil) {
         return;
     }
-    
+
     [self.delegate collectionView:self didTapMessageBubbleAtIndexPath:indexPath];
 }
 
@@ -163,10 +163,23 @@
     if (indexPath == nil) {
         return;
     }
-    
+
     [self.delegate collectionView:self
             didTapCellAtIndexPath:indexPath
                     touchLocation:position];
+}
+
+- (void)messagesCollectionViewCell:(JSQMessagesCollectionViewCell *)cell didPerformAction:(SEL)action withSender:(id)sender
+{
+    NSIndexPath *indexPath = [self indexPathForCell:cell];
+    if (indexPath == nil) {
+        return;
+    }
+
+    [self.delegate collectionView:self
+                    performAction:action
+               forItemAtIndexPath:indexPath
+                       withSender:sender];
 }
 
 @end

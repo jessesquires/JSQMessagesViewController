@@ -21,22 +21,6 @@
 #import "UIColor+JSQMessages.h"
 
 
-@interface JSQMessagesAvatarImageFactory ()
-
-+ (UIImage *)jsq_circularImage:(UIImage *)image
-                  withDiameter:(NSUInteger)diameter
-              highlightedColor:(UIColor *)highlightedColor;
-
-+ (UIImage *)jsq_imageWitInitials:(NSString *)initials
-                  backgroundColor:(UIColor *)backgroundColor
-                        textColor:(UIColor *)textColor
-                             font:(UIFont *)font
-                         diameter:(NSUInteger)diameter;
-
-@end
-
-
-
 @implementation JSQMessagesAvatarImageFactory
 
 #pragma mark - Public
@@ -130,7 +114,6 @@
     UIGraphicsBeginImageContextWithOptions(frame.size, NO, [UIScreen mainScreen].scale);
     {
         CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextSaveGState(context);
 
         CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
         CGContextFillRect(context, frame);
@@ -138,7 +121,6 @@
 
         image = UIGraphicsGetImageFromCurrentImageContext();
 
-        CGContextRestoreGState(context);
     }
     UIGraphicsEndImageContext();
 
@@ -156,7 +138,6 @@
     UIGraphicsBeginImageContextWithOptions(frame.size, NO, [UIScreen mainScreen].scale);
     {
         CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextSaveGState(context);
 
         UIBezierPath *imgPath = [UIBezierPath bezierPathWithOvalInRect:frame];
         [imgPath addClip];
@@ -168,8 +149,7 @@
         }
 
         newImage = UIGraphicsGetImageFromCurrentImageContext();
-
-        CGContextRestoreGState(context);
+        
     }
     UIGraphicsEndImageContext();
     
