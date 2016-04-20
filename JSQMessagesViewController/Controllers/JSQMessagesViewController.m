@@ -98,6 +98,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     self.inputToolbar.delegate = self;
     self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
+    
+    self.inputToolbar.contentView.textView.accessibilityLabel = [NSBundle jsq_localizedStringForKey:@"new_message"];
+    
     self.inputToolbar.contentView.textView.delegate = self;
 
     self.automaticallyScrollsToMostRecentMessage = YES;
@@ -340,6 +343,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (self.automaticallyScrollsToMostRecentMessage && ![self jsq_isMenuVisible]) {
         [self scrollToBottomAnimated:animated];
     }
+    
+    UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, [NSBundle jsq_localizedStringForKey:@"new_message_received_accessibility_announcement"]);
 }
 
 - (void)scrollToBottomAnimated:(BOOL)animated
@@ -535,8 +540,26 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.backgroundColor = [UIColor clearColor];
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
     cell.layer.shouldRasterize = YES;
+    
+    
+    [self collectionView:collectionView accessibilityForCell:cell atIndexPath:indexPath forMessage:messageItem];
 
     return cell;
+}
+
+
+// Setup accessibility for messages
+- (void) collectionView:(JSQMessagesCollectionView *)collectionView accessibilityForCell:(JSQMessagesCollectionViewCell*)cell atIndexPath: (NSIndexPath *)indexPath forMessage : (id<JSQMessageData>) messageItem
+{
+    
+    BOOL isMediaMessage = [messageItem isMediaMessage];
+    cell.isAccessibilityElement = YES;
+    if (!isMediaMessage) {
+        cell.accessibilityLabel = [NSString stringWithFormat: [NSBundle jsq_localizedStringForKey:@"text_message_accessibility_label"], [messageItem senderDisplayName], [messageItem text]];
+    } else {
+        cell.accessibilityLabel = [NSString stringWithFormat:[NSBundle jsq_localizedStringForKey:@"media_message_accessibility_label"],[messageItem senderDisplayName]] ;
+    }
+
 }
 
 - (UICollectionReusableView *)collectionView:(JSQMessagesCollectionView *)collectionView

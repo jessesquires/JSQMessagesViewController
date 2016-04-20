@@ -27,3 +27,11 @@
 "send" = "Senden";
 
 "new_message" = "Neue Nachricht";
+
+"text_message_accessibility_label" = "%@: %@";
+
+"media_message_accessibility_label" = "%@: media Nachricht";
+
+"accessory_button_accessibility_label" = "Aktien media";
+
+"new_message_received_accessibility_announcement" = "Neue Nachricht empfangen";
