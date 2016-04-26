@@ -172,6 +172,14 @@
  */
 @property (assign, nonatomic) CGFloat topContentAdditionalInset;
 
+
+/**
+ *  Specifies an additional inset amount to be added to the collectionView's contentInsets.bottom value.
+ *
+ *  @discussion Use this property to adjust the bottom content inset to account for a custom subview from the bottom of your view controller.
+ */
+@property (assign, nonatomic) CGFloat bottomContentAdditionalInset;
+
 #pragma mark - Class methods
 
 /**

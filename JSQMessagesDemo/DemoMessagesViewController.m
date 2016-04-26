@@ -37,6 +37,8 @@
     
     self.title = @"JSQMessages";
     
+    self.topContentAdditionalInset = 0; // change this to give the collection view extra space on top
+    self.bottomContentAdditionalInset = 0; // change this to give the collection view extra space on the bottom
     /**
      *  You MUST set your senderId and display name
      */
