@@ -1,0 +1,12 @@
+comment:
+  layout: header, changes, diff
+coverage:
+  ignore:
+  - JSQMessagesDemo/
+  - Pods/
+  - JSQMessagesTests/
+  status:
+    patch: false
+    project:
+      default:
+        target: auto
