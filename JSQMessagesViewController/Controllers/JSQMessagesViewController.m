@@ -491,13 +491,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     else {
         cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
     }
-
+    
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = collectionView;
-
+    
     if (!isMediaMessage) {
-        cell.textView.text = [messageItem text];
-
+        cell.textView.attributedText = [messageItem attributedTextWithFont:collectionView.collectionViewLayout.messageBubbleFont];
+        
         if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
             //  workaround for iOS 7 textView data detectors bug
             cell.textView.text = nil;

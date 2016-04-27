@@ -90,9 +90,11 @@
  */
 - (NSString *)text;
 
+- (NSAttributedString *)attributedTextWithFont:(UIFont *)font;
+
 /**
  *  @return The media item of the message.
- *  
+ *
  *  @warning You must not return `nil` from this method.
  */
 - (id<JSQMessageMediaData>)media;
