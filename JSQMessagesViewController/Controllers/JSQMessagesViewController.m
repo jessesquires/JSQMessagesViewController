@@ -496,7 +496,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.delegate = collectionView;
     
     if (!isMediaMessage) {
-        cell.textView.attributedText = [messageItem attributedTextWithFont:collectionView.collectionViewLayout.messageBubbleFont];
+        cell.textView.text = [messageItem text];
+//        cell.textView.attributedText = [messageItem attributedTextWithFont:collectionView.collectionViewLayout.messageBubbleFont];
         
         if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
             //  workaround for iOS 7 textView data detectors bug
