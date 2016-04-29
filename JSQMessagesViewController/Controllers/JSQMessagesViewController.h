@@ -278,6 +278,14 @@
 - (BOOL)isOutgoingMessage:(id<JSQMessageData>)messageItem;
 
 /**
+ * Scrolls the collection view so that the cell at the specified indexPath is completely visible above the `inputToolbar`.
+ *
+ * @param indexPath The indexPath for the cell that will be visible.
+ * @param animated Pass `YES` if you want to animate scrolling, `NO` otherwise.
+ */
+- (void)scrollToIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
+
+/**
  Call to super required.
  */
 - (void)viewDidLoad NS_REQUIRES_SUPER;
