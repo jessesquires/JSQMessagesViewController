@@ -100,4 +100,9 @@
     return [UIImage jsq_bubbleImageFromBundleWithName:@"play"];
 }
 
++ (UIImage *)jsq_defaultPauseImage
+{
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"pause"];
+}
+
 @end

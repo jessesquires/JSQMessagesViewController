@@ -54,7 +54,7 @@ There are 2 approaches to this, which one you choose depends on your needs.
 1. Customize appearance and behavior of existing cells. (Easy)
 2. Provide your own completely custom cell prototypes. (Hard)
 
-> Also see [previous issues](https://github.com/jessesquires/JSQMessagesViewController/issues?utf8=✓&q=%5BCustomize+cells%5D+in%3Atitle+).
+> Also see [previous issues](https://github.com/jessesquires/JSQMessagesViewController/issues?utf8=✓&q=custom+cell+in%3Atitle).
 
 ##### (1) Customizing existing cells
 
