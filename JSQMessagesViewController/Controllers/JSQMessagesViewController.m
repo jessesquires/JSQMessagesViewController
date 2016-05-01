@@ -45,7 +45,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 
 @interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate,
-                                         JSQMessagesKeyboardControllerDelegate>
+JSQMessagesKeyboardControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
@@ -98,9 +98,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     self.inputToolbar.delegate = self;
     self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
-    
+
     self.inputToolbar.contentView.textView.accessibilityLabel = [NSBundle jsq_localizedStringForKey:@"new_message"];
-    
+
     self.inputToolbar.contentView.textView.delegate = self;
 
     self.automaticallyScrollsToMostRecentMessage = YES;
@@ -349,7 +349,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (self.automaticallyScrollsToMostRecentMessage && ![self jsq_isMenuVisible]) {
         [self scrollToBottomAnimated:animated];
     }
-    
+
     UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, [NSBundle jsq_localizedStringForKey:@"new_message_received_accessibility_announcement"]);
 }
 
@@ -369,7 +369,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if ([self.collectionView numberOfSections] <= indexPath.section) {
         return;
     }
-    
+
     NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:indexPath.section];
     if (numberOfItems == 0) {
         return;
@@ -386,7 +386,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                         animated:animated];
         return;
     }
-    
+
     NSInteger item = MAX(MIN(indexPath.item, numberOfItems - 1), 0);
     indexPath = [NSIndexPath indexPathForItem:item inSection:0];
 
@@ -396,7 +396,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     CGSize cellSize = [self.collectionView.collectionViewLayout sizeForItemAtIndexPath:indexPath];
     CGFloat maxHeightForVisibleMessage = CGRectGetHeight(self.collectionView.bounds) - self.collectionView.contentInset.top - CGRectGetHeight(self.inputToolbar.bounds);
     UICollectionViewScrollPosition scrollPosition = (cellSize.height > maxHeightForVisibleMessage) ? UICollectionViewScrollPositionBottom : UICollectionViewScrollPositionTop;
-    
+
     [self.collectionView scrollToItemAtIndexPath:indexPath
                                 atScrollPosition:scrollPosition
                                         animated:animated];
@@ -406,7 +406,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     NSString *messageSenderId = [messageItem senderId];
     NSParameterAssert(messageSenderId != nil);
-    
+
     return [messageSenderId isEqualToString:self.senderId];
 }
 
@@ -466,7 +466,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
     NSParameterAssert(messageItem != nil);
-    
+
     BOOL isOutgoingMessage = [self isOutgoingMessage:messageItem];
     BOOL isMediaMessage = [messageItem isMediaMessage];
 
@@ -546,26 +546,27 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.backgroundColor = [UIColor clearColor];
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
     cell.layer.shouldRasterize = YES;
-    
-    
-    [self collectionView:collectionView accessibilityForCell:cell atIndexPath:indexPath forMessage:messageItem];
+    [self collectionView:collectionView accessibilityForCell:cell indexPath:indexPath message:messageItem];
 
     return cell;
 }
 
-
-// Setup accessibility for messages
-- (void) collectionView:(JSQMessagesCollectionView *)collectionView accessibilityForCell:(JSQMessagesCollectionViewCell*)cell atIndexPath: (NSIndexPath *)indexPath forMessage : (id<JSQMessageData>) messageItem
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+  accessibilityForCell:(JSQMessagesCollectionViewCell*)cell
+             indexPath:(NSIndexPath *)indexPath
+               message:(id<JSQMessageData>)messageItem
 {
-    
-    BOOL isMediaMessage = [messageItem isMediaMessage];
+    const BOOL isMediaMessage = [messageItem isMediaMessage];
     cell.isAccessibilityElement = YES;
     if (!isMediaMessage) {
-        cell.accessibilityLabel = [NSString stringWithFormat: [NSBundle jsq_localizedStringForKey:@"text_message_accessibility_label"], [messageItem senderDisplayName], [messageItem text]];
-    } else {
-        cell.accessibilityLabel = [NSString stringWithFormat:[NSBundle jsq_localizedStringForKey:@"media_message_accessibility_label"],[messageItem senderDisplayName]] ;
+        cell.accessibilityLabel = [NSString stringWithFormat:[NSBundle jsq_localizedStringForKey:@"text_message_accessibility_label"],
+                                   [messageItem senderDisplayName],
+                                   [messageItem text]];
     }
-
+    else {
+        cell.accessibilityLabel = [NSString stringWithFormat:[NSBundle jsq_localizedStringForKey:@"media_message_accessibility_label"],
+                                   [messageItem senderDisplayName]];
+    }
 }
 
 - (UICollectionReusableView *)collectionView:(JSQMessagesCollectionView *)collectionView
@@ -1069,7 +1070,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                                            action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
         self.currentInteractivePopGestureRecognizer = nil;
     }
-
+    
     if (addAction) {
         [self.navigationController.interactivePopGestureRecognizer addTarget:self
                                                                       action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
