@@ -70,11 +70,10 @@
                                                                              action:@selector(receiveMessagePressed:)];
 
     /**
-     *  Register custom menu actions for cells.
+     *  Register custom menu actions for cells. Override 
+     *  collectionView:didReceiveMenuWillShowNotification:indexPath to display them on a per-cell basis
      */
     [JSQMessagesCollectionViewCell registerMenuAction:@selector(customAction:)];
-    [UIMenuController sharedMenuController].menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action"
-                                                                                      action:@selector(customAction:)] ];
 
     /**
      *  OPT-IN: allow cells to be deleted
@@ -548,7 +547,13 @@
     return cell;
 }
 
-
+- (void)collectionView:(UICollectionView *)collectionView didReceiveMenuWillShowNotification:(NSNotification *)notification forIndexPath:(NSIndexPath *)indexPath {
+    /**
+     *  Display custom menu actions for cells.
+     */
+    UIMenuController *menu = [notification object];
+    menu.menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action" action:@selector(customAction:)] ];
+}
 
 #pragma mark - UICollectionView Delegate
 

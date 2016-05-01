@@ -152,4 +152,13 @@
  */
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
 
+/**
+ *  Notifies the data source that a menu will be shown for the item at indexPath.
+ *
+ *  @param collectionView The collection view requesting this information.
+ *  @param notification   NSNotification containing the UIMenuController object.
+ *  @param indexPath      The index path that specifies the location of the item.
+ */
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didReceiveMenuWillShowNotification:(NSNotification *)notification forIndexPath:(NSIndexPath *)indexPath;
+
 @end

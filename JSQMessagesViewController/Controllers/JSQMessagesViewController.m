@@ -444,6 +444,11 @@ JSQMessagesKeyboardControllerDelegate>
     return nil;
 }
 
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didReceiveMenuWillShowNotification:(NSNotification *)notification forIndexPath:(NSIndexPath *)indexPath
+{
+    return;
+}
+
 #pragma mark - Collection view data source
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -764,13 +769,16 @@ JSQMessagesKeyboardControllerDelegate>
     if (!self.selectedIndexPathForMenu) {
         return;
     }
-
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIMenuControllerWillShowMenuNotification
                                                   object:nil];
 
     UIMenuController *menu = [notification object];
     [menu setMenuVisible:NO animated:NO];
+
+    NSArray * currentMenuItems = menu.menuItems;
+    [self collectionView:self.collectionView didReceiveMenuWillShowNotification:notification forIndexPath:self.selectedIndexPathForMenu];
 
     JSQMessagesCollectionViewCell *selectedCell = (JSQMessagesCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:self.selectedIndexPathForMenu];
     CGRect selectedCellMessageBubbleFrame = [selectedCell convertRect:selectedCell.messageBubbleContainerView.frame toView:self.view];
@@ -782,6 +790,7 @@ JSQMessagesKeyboardControllerDelegate>
                                              selector:@selector(jsq_didReceiveMenuWillShowNotification:)
                                                  name:UIMenuControllerWillShowMenuNotification
                                                object:nil];
+    menu.menuItems = currentMenuItems;
 }
 
 - (void)jsq_didReceiveMenuWillHideNotification:(NSNotification *)notification
