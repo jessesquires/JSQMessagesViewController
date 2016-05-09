@@ -22,16 +22,16 @@
 //  https://github.com/jessesquires/JSQMessagesViewController/issues/237
 //  ********************************
 
-"load_earlier_messages" = "Load Earlier Messages";
+"load_earlier_messages" = "Last tidligere beskjeder";
 
 "send" = "Send";
 
-"new_message" = "New Message";
+"new_message" = "Ny melding";
 
 "text_message_accessibility_label" = "%@: %@";
 
-"media_message_accessibility_label" = "%@: media message";
+"media_message_accessibility_label" = "%@: mediamelding";
 
-"accessory_button_accessibility_label" = "Share media";
+"accessory_button_accessibility_label" = "Del media";
 
-"new_message_received_accessibility_announcement" = "New message received";
+"new_message_received_accessibility_announcement" = "Ny melding mottatt";
