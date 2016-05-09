@@ -23,16 +23,9 @@
 
 #import "UIImage+JSQMessages.h"
 
-
-@interface JSQVideoMediaItem ()
-
-@property (strong, nonatomic) UIImageView *cachedVideoImageView;
-
-@end
-
-
 @implementation JSQVideoMediaItem
 
+@synthesize cachedMediaView = _cachedMediaView;
 #pragma mark - Initialization
 
 - (instancetype)initWithFileURL:(NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay
@@ -41,15 +34,8 @@
     if (self) {
         _fileURL = [fileURL copy];
         _isReadyToPlay = isReadyToPlay;
-        _cachedVideoImageView = nil;
     }
     return self;
-}
-
-- (void)clearCachedMediaViews
-{
-    [super clearCachedMediaViews];
-    _cachedVideoImageView = nil;
 }
 
 #pragma mark - Setters
@@ -57,31 +43,25 @@
 - (void)setFileURL:(NSURL *)fileURL
 {
     _fileURL = [fileURL copy];
-    _cachedVideoImageView = nil;
+    _cachedMediaView = nil;
 }
 
 - (void)setIsReadyToPlay:(BOOL)isReadyToPlay
 {
     _isReadyToPlay = isReadyToPlay;
-    _cachedVideoImageView = nil;
-}
-
-- (void)setAppliesMediaViewMaskAsOutgoing:(BOOL)appliesMediaViewMaskAsOutgoing
-{
-    [super setAppliesMediaViewMaskAsOutgoing:appliesMediaViewMaskAsOutgoing];
-    _cachedVideoImageView = nil;
+    _cachedMediaView = nil;
 }
 
 #pragma mark - JSQMessageMediaData protocol
 
-- (UIView *)mediaView
+- (UIView *)mediaViewWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout
 {
     if (self.fileURL == nil || !self.isReadyToPlay) {
         return nil;
     }
     
-    if (self.cachedVideoImageView == nil) {
-        CGSize size = [self mediaViewDisplaySize];
+    if (self.cachedMediaView == nil) {
+        CGSize size = [self mediaViewDisplaySizeWithMessageData:messageData layout:layout];
         UIImage *playIcon = [[UIImage jsq_defaultPlayImage] jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:playIcon];
@@ -90,10 +70,10 @@
         imageView.contentMode = UIViewContentModeCenter;
         imageView.clipsToBounds = YES;
         [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
-        self.cachedVideoImageView = imageView;
+        self.cachedMediaView = imageView;
     }
     
-    return self.cachedVideoImageView;
+    return self.cachedMediaView;
 }
 
 - (NSUInteger)mediaHash

@@ -21,9 +21,20 @@
 
 @implementation FakeMedia
 
-- (UIView *)mediaView { return [UIView new]; }
-- (UIView *)mediaPlaceholderView { return [self mediaView]; }
-- (CGSize)mediaViewDisplaySize { return CGSizeMake(50, 50); }
+- (UIView *)mediaViewWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout
+{
+    return [UIView new];
+}
+
+- (UIView *)mediaPlaceholderViewWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout
+{
+    return [self mediaViewWithMessageData:messageData layout:layout];
+}
+
+- (CGSize)mediaViewDisplaySizeWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout
+{
+    return CGSizeMake(50, 50);
+}
 
 - (void)encodeWithCoder:(NSCoder *)aCoder { }
 - (id)initWithCoder:(NSCoder *)aDecoder { return [self init]; }

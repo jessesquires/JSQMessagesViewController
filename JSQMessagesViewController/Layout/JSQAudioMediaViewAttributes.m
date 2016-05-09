@@ -26,7 +26,7 @@
 - (instancetype)initWithPlayButtonImage:(UIImage *)playButtonImage
                        pauseButtonImage:(UIImage *)pauseButtonImage
                               labelFont:(UIFont *)labelFont
-                  showFractionalSecodns:(BOOL)showFractionalSeconds
+                  showFractionalSeconds:(BOOL)showFractionalSeconds
                         backgroundColor:(UIColor *)backgroundColor
                               tintColor:(UIColor *)tintColor
                           controlInsets:(UIEdgeInsets)controlInsets
@@ -66,7 +66,7 @@
     return [self initWithPlayButtonImage:[[UIImage jsq_defaultPlayImage] jsq_imageMaskedWithColor:tintColor]
                         pauseButtonImage:[[UIImage jsq_defaultPauseImage] jsq_imageMaskedWithColor:tintColor]
                                labelFont:[UIFont systemFontOfSize:12]
-                   showFractionalSecodns:NO
+                   showFractionalSeconds:NO
                          backgroundColor:[UIColor jsq_messageBubbleLightGrayColor]
                                tintColor:tintColor
                            controlInsets:UIEdgeInsetsMake(6, 6, 6, 18)

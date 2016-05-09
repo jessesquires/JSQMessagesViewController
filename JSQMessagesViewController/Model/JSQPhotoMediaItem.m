@@ -21,16 +21,9 @@
 #import "JSQMessagesMediaPlaceholderView.h"
 #import "JSQMessagesMediaViewBubbleImageMasker.h"
 
-
-@interface JSQPhotoMediaItem ()
-
-@property (strong, nonatomic) UIImageView *cachedImageView;
-
-@end
-
-
 @implementation JSQPhotoMediaItem
 
+@synthesize cachedMediaView = _cachedMediaView;
 #pragma mark - Initialization
 
 - (instancetype)initWithImage:(UIImage *)image
@@ -38,15 +31,8 @@
     self = [super init];
     if (self) {
         _image = [image copy];
-        _cachedImageView = nil;
     }
     return self;
-}
-
-- (void)clearCachedMediaViews
-{
-    [super clearCachedMediaViews];
-    _cachedImageView = nil;
 }
 
 #pragma mark - Setters
@@ -54,34 +40,43 @@
 - (void)setImage:(UIImage *)image
 {
     _image = [image copy];
-    _cachedImageView = nil;
-}
-
-- (void)setAppliesMediaViewMaskAsOutgoing:(BOOL)appliesMediaViewMaskAsOutgoing
-{
-    [super setAppliesMediaViewMaskAsOutgoing:appliesMediaViewMaskAsOutgoing];
-    _cachedImageView = nil;
+    _cachedMediaView = nil;
 }
 
 #pragma mark - JSQMessageMediaData protocol
 
-- (UIView *)mediaView
+- (CGSize)mediaViewDisplaySizeWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout{
+    CGSize proposedSize = [super mediaViewDisplaySizeWithMessageData:messageData layout:layout];
+    
+    if (self.image) {
+        if (self.image.size.width < proposedSize.width) {
+            return self.image.size;
+        } else {
+            CGFloat ratio = proposedSize.width/self.image.size.width;
+            return CGSizeMake(proposedSize.width, self.image.size.height*ratio);
+        }
+    } else {
+        return proposedSize;
+    }
+}
+
+- (UIView *)mediaViewWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout
 {
     if (self.image == nil) {
         return nil;
     }
     
-    if (self.cachedImageView == nil) {
-        CGSize size = [self mediaViewDisplaySize];
+    if (self.cachedMediaView == nil) {
+        CGSize size = [self mediaViewDisplaySizeWithMessageData:messageData layout:layout];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:self.image];
         imageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
         [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
-        self.cachedImageView = imageView;
+        self.cachedMediaView = imageView;
     }
     
-    return self.cachedImageView;
+    return self.cachedMediaView;
 }
 
 - (NSUInteger)mediaHash

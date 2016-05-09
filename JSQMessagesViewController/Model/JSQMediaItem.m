@@ -20,14 +20,7 @@
 
 #import "JSQMessagesMediaPlaceholderView.h"
 #import "JSQMessagesMediaViewBubbleImageMasker.h"
-
-
-@interface JSQMediaItem ()
-
-@property (strong, nonatomic) UIView *cachedPlaceholderView;
-
-@end
-
+#import "JSQMessagesCollectionView.h"
 
 @implementation JSQMediaItem
 
@@ -44,6 +37,7 @@
     if (self) {
         _appliesMediaViewMaskAsOutgoing = maskAsOutgoing;
         _cachedPlaceholderView = nil;
+        _cachedMediaView = nil;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveMemoryWarningNotification:)
                                                      name:UIApplicationDidReceiveMemoryWarningNotification
@@ -61,11 +55,13 @@
 {
     _appliesMediaViewMaskAsOutgoing = appliesMediaViewMaskAsOutgoing;
     _cachedPlaceholderView = nil;
+    _cachedMediaView = nil;
 }
 
 - (void)clearCachedMediaViews
 {
     _cachedPlaceholderView = nil;
+    _cachedMediaView = nil;
 }
 
 #pragma mark - Notifications
@@ -77,25 +73,31 @@
 
 #pragma mark - JSQMessageMediaData protocol
 
-- (UIView *)mediaView
+- (UIView *)mediaViewWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout
 {
     NSAssert(NO, @"Error! required method not implemented in subclass. Need to implement %s", __PRETTY_FUNCTION__);
     return nil;
 }
 
-- (CGSize)mediaViewDisplaySize
+- (CGSize)mediaViewDisplaySizeWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout
 {
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        return CGSizeMake(315.0f, 225.0f);
+    CGSize avatarSize = CGSizeZero;
+    if ([[messageData senderId] isEqualToString:[layout.collectionView.dataSource senderId]]) {
+        avatarSize = layout.outgoingAvatarViewSize;
+    } else {
+        avatarSize = layout.incomingAvatarViewSize;
     }
+    CGFloat spacingBetweenAvatarAndBubble = 2.0f;
     
-    return CGSizeMake(210.0f, 150.0f);
+    CGFloat maximumItemWidth = layout.itemWidth - avatarSize.width - layout.messageBubbleLeftRightMargin - spacingBetweenAvatarAndBubble;
+    
+    return CGSizeMake(maximumItemWidth, maximumItemWidth*0.7);
 }
 
-- (UIView *)mediaPlaceholderView
+- (UIView *)mediaPlaceholderViewWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout
 {
     if (self.cachedPlaceholderView == nil) {
-        CGSize size = [self mediaViewDisplaySize];
+        CGSize size = [self mediaViewDisplaySizeWithMessageData:messageData layout:layout];
         UIView *view = [JSQMessagesMediaPlaceholderView viewWithActivityIndicator];
         view.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
         [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:view isOutgoing:self.appliesMediaViewMaskAsOutgoing];
@@ -140,7 +142,7 @@
 
 - (id)debugQuickLookObject
 {
-    return [self mediaView] ?: [self mediaPlaceholderView];
+    return self.cachedMediaView ?: self.cachedPlaceholderView;
 }
 
 #pragma mark - NSCoding

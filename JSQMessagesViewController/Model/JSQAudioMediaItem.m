@@ -27,8 +27,6 @@
 
 @interface JSQAudioMediaItem ()
 
-@property (strong, nonatomic) UIView *cachedMediaView;
-
 @property (strong, nonatomic) UIButton *playButton;
 
 @property (strong, nonatomic) UIProgressView *progressView;
@@ -50,7 +48,6 @@
 
     self = [super init];
     if (self) {
-        _cachedMediaView = nil;
         _audioData = [audioData copy];
         _audioViewAttributes = audioViewAttributes;
     }
@@ -88,7 +85,6 @@
     _progressLabel = nil;
     [self stopProgressTimer];
 
-    _cachedMediaView = nil;
     [super clearCachedMediaViews];
 }
 
@@ -104,12 +100,6 @@
 {
     _audioData = [NSData dataWithContentsOfURL:audioURL];
     [self clearCachedMediaViews];
-}
-
-- (void)setAppliesMediaViewMaskAsOutgoing:(BOOL)appliesMediaViewMaskAsOutgoing
-{
-    [super setAppliesMediaViewMaskAsOutgoing:appliesMediaViewMaskAsOutgoing];
-    _cachedMediaView = nil;
 }
 
 #pragma mark - Private
@@ -216,15 +206,16 @@
 
 #pragma mark - JSQMessageMediaData protocol
 
-- (CGSize)mediaViewDisplaySize
+- (CGSize)mediaViewDisplaySizeWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout
 {
-    return CGSizeMake(160.0f,
+    CGSize proposedSize = [super mediaViewDisplaySizeWithMessageData:messageData layout:layout];
+    return CGSizeMake(proposedSize.width,
                       self.audioViewAttributes.controlInsets.top +
                       self.audioViewAttributes.controlInsets.bottom +
                       self.audioViewAttributes.playButtonImage.size.height);
 }
 
-- (UIView *)mediaView
+- (UIView *)mediaViewWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout
 {
     if (self.audioData && self.cachedMediaView == nil) {
         if (self.audioData) {
@@ -233,7 +224,7 @@
         }
 
         // create container view for the various controls
-        CGSize size = [self mediaViewDisplaySize];
+        CGSize size = [self mediaViewDisplaySizeWithMessageData:messageData layout:layout];
         UIView * playView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, size.width, size.height)];
         playView.backgroundColor = self.audioViewAttributes.backgroundColor;
         playView.contentMode = UIViewContentModeCenter;

@@ -18,6 +18,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "JSQMessagesCollectionViewFlowLayout.h"
+
+@protocol JSQMessageData;
 
 /**
  *  The `JSQMessageMediaData` protocol defines the common interface through which
@@ -39,13 +42,19 @@
 @required
 
 /**
+ *  @param messageData Message for media data
+ *  @param layout Collection layout in which view will be displayed. Use it for size calculation
+ *
  *  @return An initialized `UIView` object that represents the data for this media object.
  *
  *  @discussion You may return `nil` from this method while the media data is being downloaded.
  */
-- (UIView *)mediaView;
+- (UIView *)mediaViewWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout;
 
 /**
+ *  @param messageData Message for media data
+ *  @param layout Collection layout in which view will be displayed. Use it for size calculation
+ *
  *  @return The frame size for the mediaView when displayed in a `JSQMessagesCollectionViewCell`. 
  *
  *  @discussion You should return an appropriate size value to be set for the mediaView's frame
@@ -54,9 +63,12 @@
  *
  *  @warning You must return a size with non-zero, positive width and height values.
  */
-- (CGSize)mediaViewDisplaySize;
+- (CGSize)mediaViewDisplaySizeWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout;
 
 /**
+ *  @param messageData Message for media data
+ *  @param layout Collection layout in which view will be displayed. Use it for size calculation
+ *
  *  @return A placeholder media view to be displayed if mediaView is not yet available, or `nil`.
  *  For example, if mediaView will be constructed based on media data that must be downloaded,
  *  this placeholder view will be used until mediaView is not `nil`.
@@ -68,7 +80,7 @@
  *
  *  @see JSQMessagesMediaPlaceholderView.
  */
-- (UIView *)mediaPlaceholderView;
+- (UIView *)mediaPlaceholderViewWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout;
 
 /**
  *  @return An integer that can be used as a table address in a hash table structure.

@@ -25,14 +25,14 @@
 @interface JSQLocationMediaItem ()
 
 @property (strong, nonatomic) UIImage *cachedMapSnapshotImage;
-
-@property (strong, nonatomic) UIImageView *cachedMapImageView;
+@property (assign, nonatomic) CGSize viewSize;
 
 @end
 
 
 @implementation JSQLocationMediaItem
 
+@synthesize cachedMediaView = _cachedMediaView;
 #pragma mark - Initialization
 
 - (instancetype)initWithLocation:(CLLocation *)location
@@ -42,12 +42,6 @@
         [self setLocation:location withCompletionHandler:nil];
     }
     return self;
-}
-
-- (void)clearCachedMediaViews
-{
-    [super clearCachedMediaViews];
-    _cachedMapImageView = nil;
 }
 
 #pragma mark - Setters
@@ -61,7 +55,6 @@
 {
     [super setAppliesMediaViewMaskAsOutgoing:appliesMediaViewMaskAsOutgoing];
     _cachedMapSnapshotImage = nil;
-    _cachedMapImageView = nil;
 }
 
 #pragma mark - Map snapshot
@@ -75,7 +68,7 @@
 {
     _location = [location copy];
     _cachedMapSnapshotImage = nil;
-    _cachedMapImageView = nil;
+    _cachedMediaView = nil;
     
     if (_location == nil) {
         return;
@@ -94,8 +87,9 @@
     
     MKMapSnapshotOptions *options = [[MKMapSnapshotOptions alloc] init];
     options.region = region;
-    options.size = [self mediaViewDisplaySize];
-    options.scale = [UIScreen mainScreen].scale;
+    if (!CGSizeEqualToSize(self.viewSize, CGSizeZero)) {
+        options.size = self.viewSize;
+    }
     
     MKMapSnapshotter *snapShotter = [[MKMapSnapshotter alloc] initWithOptions:options];
     
@@ -136,21 +130,29 @@
 
 #pragma mark - JSQMessageMediaData protocol
 
-- (UIView *)mediaView
+- (CGSize)mediaViewDisplaySizeWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout{
+    self.viewSize = [super mediaViewDisplaySizeWithMessageData:messageData layout:layout];
+    
+    return self.viewSize;
+}
+
+- (UIView *)mediaViewWithMessageData:(id<JSQMessageData>)messageData layout:(JSQMessagesCollectionViewFlowLayout *)layout
 {
     if (self.location == nil || self.cachedMapSnapshotImage == nil) {
         return nil;
     }
     
-    if (self.cachedMapImageView == nil) {
+    if (self.cachedMediaView == nil) {
+        CGSize size = [self mediaViewDisplaySizeWithMessageData:messageData layout:layout];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:self.cachedMapSnapshotImage];
+        imageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
         [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
-        self.cachedMapImageView = imageView;
+        self.cachedMediaView = imageView;
     }
     
-    return self.cachedMapImageView;
+    return self.cachedMediaView;
 }
 
 - (NSUInteger)mediaHash
@@ -168,12 +170,13 @@
     
     JSQLocationMediaItem *locationItem = (JSQLocationMediaItem *)object;
     
-    return [self.location isEqual:locationItem.location];
+    
+    return [self.location distanceFromLocation:locationItem.location] == 0;
 }
 
 - (NSUInteger)hash
 {
-    return super.hash ^ self.location.hash;
+    return super.hash ^ [NSNumber numberWithFloat:self.location.coordinate.latitude].hash ^ [NSNumber numberWithFloat:self.location.coordinate.longitude].hash;
 }
 
 - (NSString *)description

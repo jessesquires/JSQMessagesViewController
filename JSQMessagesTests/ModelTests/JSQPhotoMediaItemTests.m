@@ -11,7 +11,8 @@
 #import <XCTest/XCTest.h>
 
 #import "JSQPhotoMediaItem.h"
-
+#import "JSQMessage.h"
+#import "JSQMessagesCollectionView.h"
 
 @interface JSQPhotoMediaItemTests : XCTestCase
 
@@ -64,13 +65,28 @@
 {
     JSQPhotoMediaItem *item = [[JSQPhotoMediaItem alloc] initWithImage:nil];
     
-    XCTAssertTrue(!CGSizeEqualToSize([item mediaViewDisplaySize], CGSizeZero));
-    XCTAssertNotNil([item mediaPlaceholderView]);
-    XCTAssertNil([item mediaView], @"Media view should be nil if image is nil");
+    NSString *senderId = @"324543-43556-212343";
+    NSString *senderDisplayName = @"Jesse Squires";
+    NSDate *date = [NSDate date];
+    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:senderDisplayName date:date media:item];
+    JSQMessagesCollectionViewFlowLayout *layout = [[JSQMessagesCollectionViewFlowLayout alloc] init];
+    JSQMessagesCollectionView *collectionView = [[JSQMessagesCollectionView alloc] initWithFrame:CGRectMake(0, 0, 500, 500) collectionViewLayout:layout];
+    
+    XCTAssertNotNil(collectionView.collectionViewLayout);
+    XCTAssertTrue(!CGSizeEqualToSize([item mediaViewDisplaySizeWithMessageData:message layout:layout], CGSizeZero));
+    XCTAssertNotNil([item mediaPlaceholderViewWithMessageData:message layout:layout]);
+    XCTAssertNil([item mediaViewWithMessageData:message layout:layout], @"Media view should be nil if image is nil");
     
     item.image = [UIImage imageNamed:@"demo_avatar_jobs"];
     
-    XCTAssertNotNil([item mediaView], @"Media view should NOT be nil once item has media data");
+    XCTAssertNotNil([item mediaViewWithMessageData:message layout:layout], @"Media view should NOT be nil once item has media data");
+}
+
+- (void)testPhotoItemDescription
+{
+    JSQPhotoMediaItem *item = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage new]];
+    XCTAssertTrue([item.description containsString:@"image"]);
+    XCTAssertTrue([item.description containsString:@"appliesMediaViewMaskAsOutgoing"]);
 }
 
 @end
