@@ -493,7 +493,7 @@ JSQMessagesKeyboardControllerDelegate>
     }
     else {
         id<JSQMessageMediaData> messageMedia = [messageItem media];
-        cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
+        cell.mediaView = [messageMedia mediaViewWithMessageData:messageItem layout:self.collectionView.collectionViewLayout] ?: [messageMedia mediaPlaceholderViewWithMessageData:messageItem layout:self.collectionView.collectionViewLayout];
         NSParameterAssert(cell.mediaView != nil);
     }
 

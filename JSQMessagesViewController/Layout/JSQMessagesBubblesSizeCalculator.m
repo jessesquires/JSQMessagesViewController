@@ -103,7 +103,7 @@
     CGSize finalSize = CGSizeZero;
 
     if ([messageData isMediaMessage]) {
-        finalSize = [[messageData media] mediaViewDisplaySize];
+        finalSize = [[messageData media] mediaViewDisplaySizeWithMessageData:messageData layout:layout];
     }
     else {
         CGSize avatarSize = [self jsq_avatarSizeForMessageData:messageData withLayout:layout];

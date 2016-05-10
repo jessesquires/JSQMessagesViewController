@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithPlayButtonImage:(UIImage *)playButtonImage
                        pauseButtonImage:(UIImage *)pauseButtonImage
                               labelFont:(UIFont *)labelFont
-                  showFractionalSecodns:(BOOL)showFractionalSeconds
+                  showFractionalSeconds:(BOOL)showFractionalSeconds
                         backgroundColor:(UIColor *)backgroundColor
                               tintColor:(UIColor *)tintColor
                           controlInsets:(UIEdgeInsets)controlInsets

@@ -17,6 +17,7 @@
 //
 
 #import "JSQMessageMediaData.h"
+#import "JSQMessageData.h"
 
 /**
  *  The `JSQMediaItem` class is an abstract base class for media item model objects that represents
@@ -31,6 +32,16 @@
  *  @see JSQVideoMediaItem.
  */
 @interface JSQMediaItem : NSObject <JSQMessageMediaData, NSCoding, NSCopying>
+
+/**
+ *  Cached view for placeholder
+ */
+@property (strong, nonatomic) UIView *cachedPlaceholderView;
+
+/**
+ *  Cached media view
+ */
+@property (strong, nonatomic) UIView *cachedMediaView;
 
 /**
  *  A boolean value indicating whether this media item should apply
