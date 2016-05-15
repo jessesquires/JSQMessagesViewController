@@ -76,4 +76,9 @@
  */
 + (UIImage *)jsq_defaultPlayImage;
 
+/**
+ *  @return The default pause icon image.
+ */
++ (UIImage *)jsq_defaultPauseImage;
+
 @end

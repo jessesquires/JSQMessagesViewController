@@ -1,12 +1,12 @@
 language: objective-c
-osx_image: xcode7.1
+osx_image: xcode7.3
 
 env:
    global:
    - LANG=en_US.UTF-8
    - WORKSPACE="JSQMessages.xcworkspace"
    - IOS_SCHEME="JSQMessages"
-   - IOS_SDK=iphonesimulator9.1
+   - IOS_SDK=iphonesimulator9.3
 
    matrix:
    - DESTINATION="OS=8.1,name=iPhone 5"      SDK="$IOS_SDK" SCHEME="$IOS_SCHEME"  RUN_TESTS="YES"  BUILD_EXAMPLE="NO"  POD_LINT="NO"   COVERAGE="NO"
@@ -14,6 +14,10 @@ env:
 
 before_install:
 - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+
+# skip pod install on travis-ci
+# since we check-in the pods folder, etc. this isn't needed
+install: true
 
 script:
 

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		54271E3B1C90469100294290 /* jsq_messages_sample.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 54271E3A1C90469100294290 /* jsq_messages_sample.m4a */; };
+		54271E3E1C905B9200294290 /* JSQAudioMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 54271E3D1C905B9200294290 /* JSQAudioMediaItem.m */; };
+		54271E401C905D1600294290 /* JSQAudioMediaItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54271E3F1C905D1600294290 /* JSQAudioMediaItemTests.m */; };
+		544A32211CB2EE380084BFC0 /* JSQAudioMediaViewAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 544A32201CB2EE380084BFC0 /* JSQAudioMediaViewAttributes.m */; };
 		88078A9D19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88078A9C19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m */; };
 		88324C3419F6301C00BC732D /* JSQMessagesMediaViewBubbleImageMaskerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88324C3319F6301C00BC732D /* JSQMessagesMediaViewBubbleImageMaskerTests.m */; };
 		883C11781A09FB100092A16D /* JSQMessagesCellTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 883C11771A09FB100092A16D /* JSQMessagesCellTextView.m */; };
@@ -123,6 +127,12 @@
 		0B4D05069814EB50FB0F4229 /* Pods-JSQMessagesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSQMessagesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JSQMessagesTests/Pods-JSQMessagesTests.release.xcconfig"; sourceTree = "<group>"; };
 		1D4D3B82D90888BCEAF890D3 /* Pods-JSQMessagesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSQMessagesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JSQMessagesTests/Pods-JSQMessagesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3BA6237809BE0D008CFE3697 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		54271E3A1C90469100294290 /* jsq_messages_sample.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = jsq_messages_sample.m4a; sourceTree = "<group>"; };
+		54271E3C1C905B9200294290 /* JSQAudioMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQAudioMediaItem.h; sourceTree = "<group>"; };
+		54271E3D1C905B9200294290 /* JSQAudioMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQAudioMediaItem.m; sourceTree = "<group>"; };
+		54271E3F1C905D1600294290 /* JSQAudioMediaItemTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQAudioMediaItemTests.m; sourceTree = "<group>"; };
+		544A321F1CB2EE380084BFC0 /* JSQAudioMediaViewAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQAudioMediaViewAttributes.h; sourceTree = "<group>"; };
+		544A32201CB2EE380084BFC0 /* JSQAudioMediaViewAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQAudioMediaViewAttributes.m; sourceTree = "<group>"; };
 		88078A9B19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesMediaPlaceholderView.h; sourceTree = "<group>"; };
 		88078A9C19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesMediaPlaceholderView.m; sourceTree = "<group>"; };
 		88324C3319F6301C00BC732D /* JSQMessagesMediaViewBubbleImageMaskerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesMediaViewBubbleImageMaskerTests.m; sourceTree = "<group>"; };
@@ -381,6 +391,7 @@
 		88A25F2B19D8DF2500924534 /* JSQMessagesDemo */ = {
 			isa = PBXGroup;
 			children = (
+				54271E3A1C90469100294290 /* jsq_messages_sample.m4a */,
 				88A25F2C19D8DF2500924534 /* AppDelegate.h */,
 				88A25F2D19D8DF2500924534 /* AppDelegate.m */,
 				88A25FD919D8E0C400924534 /* DemoMessagesViewController.h */,
@@ -477,6 +488,8 @@
 		88A25F6F19D8E01A00924534 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
+				544A321F1CB2EE380084BFC0 /* JSQAudioMediaViewAttributes.h */,
+				544A32201CB2EE380084BFC0 /* JSQAudioMediaViewAttributes.m */,
 				88B5C4201B7C424700EC79D4 /* JSQMessagesBubbleSizeCalculating.h */,
 				88B5C41D1B7C422900EC79D4 /* JSQMessagesBubblesSizeCalculator.h */,
 				88B5C41E1B7C422900EC79D4 /* JSQMessagesBubblesSizeCalculator.m */,
@@ -493,6 +506,8 @@
 		88A25F7619D8E01A00924534 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				54271E3C1C905B9200294290 /* JSQAudioMediaItem.h */,
+				54271E3D1C905B9200294290 /* JSQAudioMediaItem.m */,
 				88445B3E19E1B4470014F889 /* JSQLocationMediaItem.h */,
 				88445B3F19E1B4470014F889 /* JSQLocationMediaItem.m */,
 				88A901B419F618B100F99777 /* JSQMediaItem.h */,
@@ -598,6 +613,7 @@
 		88A25FF219D8E18400924534 /* ModelTests */ = {
 			isa = PBXGroup;
 			children = (
+				54271E3F1C905D1600294290 /* JSQAudioMediaItemTests.m */,
 				88C00A4D1A44D4C600B004B3 /* JSQLocationMediaItemTests.m */,
 				88A25FF319D8E18400924534 /* JSQMessageMediaTests.m */,
 				88A25FF419D8E18400924534 /* JSQMessagesAvatarImageTests.m */,
@@ -729,6 +745,7 @@
 				88A25FCD19D8E01A00924534 /* JSQMessagesCollectionViewCellIncoming.xib in Resources */,
 				88A25FD619D8E01A00924534 /* JSQMessagesToolbarContentView.xib in Resources */,
 				88A25F3A19D8DF2500924534 /* Images.xcassets in Resources */,
+				54271E3B1C90469100294290 /* jsq_messages_sample.m4a in Resources */,
 				88A25FBC19D8E01A00924534 /* JSQMessagesViewController.xib in Resources */,
 				88A25FD819D8E01A00924534 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				88A25F3919D8DF2500924534 /* Main.storyboard in Resources */,
@@ -850,6 +867,7 @@
 				88A25FCB19D8E01A00924534 /* JSQMessagesCollectionViewCell.m in Sources */,
 				88A25FBB19D8E01A00924534 /* JSQMessagesViewController.m in Sources */,
 				8885734D19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m in Sources */,
+				544A32211CB2EE380084BFC0 /* JSQAudioMediaViewAttributes.m in Sources */,
 				883C11781A09FB100092A16D /* JSQMessagesCellTextView.m in Sources */,
 				88A25FB919D8E01A00924534 /* UIView+JSQMessages.m in Sources */,
 				88A25FCA19D8E01A00924534 /* JSQMessagesCollectionView.m in Sources */,
@@ -870,6 +888,7 @@
 				88A25FE019D8E0C400924534 /* DemoModelData.m in Sources */,
 				88A25F3C19D8DF2500924534 /* main.m in Sources */,
 				88A25F3719D8DF2500924534 /* AppDelegate.m in Sources */,
+				54271E3E1C905B9200294290 /* JSQAudioMediaItem.m in Sources */,
 				886FFD2E19E9A65D00EB8485 /* UIDevice+JSQMessages.m in Sources */,
 				88B5C41F1B7C422900EC79D4 /* JSQMessagesBubblesSizeCalculator.m in Sources */,
 				88A25FB619D8E01A00924534 /* NSString+JSQMessages.m in Sources */,
@@ -900,6 +919,7 @@
 				88C00A521A44D4E500B004B3 /* JSQVideoMediaItemTests.m in Sources */,
 				88A2601519D8E18400924534 /* JSQMessagesInputToolbarTests.m in Sources */,
 				88A2601719D8E18400924534 /* JSQMessagesLoadEarlierHeaderViewTests.m in Sources */,
+				54271E401C905D1600294290 /* JSQAudioMediaItemTests.m in Sources */,
 				88A2601219D8E18400924534 /* JSQMessagesCollectionViewCellTests.m in Sources */,
 				88A2601619D8E18400924534 /* JSQMessagesLabelTests.m in Sources */,
 				88A2600B19D8E18400924534 /* JSQMessagesCollectionViewFlowLayoutTests.m in Sources */,
