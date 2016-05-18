@@ -38,7 +38,7 @@
 #import "UIColor+JSQMessages.h"
 #import "UIDevice+JSQMessages.h"
 #import "NSBundle+JSQMessages.h"
-
+#import "NSAttributedString+JSQMessages.h"
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
@@ -714,7 +714,10 @@ JSQMessagesKeyboardControllerDelegate>
     [self.inputToolbar.contentView.textView.inputDelegate selectionWillChange:self.inputToolbar.contentView.textView];
     [self.inputToolbar.contentView.textView.inputDelegate selectionDidChange:self.inputToolbar.contentView.textView];
 
-    return [self.inputToolbar.contentView.textView.text jsq_stringByTrimingWhitespace];
+    NSString * text = [self.inputToolbar.contentView.textView.attributedText stringWithoutAttachments];
+    if (! [text length])
+        text = self.inputToolbar.contentView.textView.text;
+    return [text jsq_stringByTrimingWhitespace];
 }
 
 #pragma mark - Text view delegate

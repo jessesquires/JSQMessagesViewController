@@ -27,6 +27,7 @@
 #import "JSQMessagesCollectionViewCellOutgoing.h"
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
+#import "JSQMessagesTextAttachment.h"
 
 //  Layout
 #import "JSQMessagesBubbleSizeCalculating.h"
@@ -77,5 +78,6 @@
 #import "UIImage+JSQMessages.h"
 #import "UIView+JSQMessages.h"
 #import "NSBundle+JSQMessages.h"
+#import "NSAttributedString+JSQMessages.h"
 
 #endif

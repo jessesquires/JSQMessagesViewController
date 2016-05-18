@@ -327,12 +327,31 @@
      */
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
-    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId
-                                             senderDisplayName:senderDisplayName
-                                                          date:date
-                                                          text:text];
-    
-    [self.demoData.messages addObject:message];
+    if ([text length]) {
+        JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId
+                                                 senderDisplayName:senderDisplayName
+                                                              date:date
+                                                              text:text];
+        [self.demoData.messages addObject:message];
+    }
+
+    // loop across the text attachments, attempt to reconstitute an image, and send each one
+    NSArray * attachments = [self.inputToolbar.contentView.textView.attributedText allAttachments];
+    for (JSQMessagesTextAttachment * attachment in attachments) {
+        if ([attachment isKindOfClass:[JSQMessagesTextAttachment class]]) {
+            UIImage * image = [UIImage imageWithData:attachment.attachmentData];
+            if (image) {
+                JSQPhotoMediaItem *item = [[JSQPhotoMediaItem alloc] initWithImage:[UIPasteboard generalPasteboard].image];
+                
+                JSQMessage * message = [[JSQMessage alloc] initWithSenderId:self.senderId
+                                                          senderDisplayName:self.senderDisplayName
+                                                                       date:[NSDate date]
+                                                                      media:item];
+                
+                [self.demoData.messages addObject:message];
+            }
+        }
+    }
     
     [self finishSendingMessageAnimated:YES];
 }
@@ -663,20 +682,51 @@
 
 #pragma mark - JSQMessagesComposerTextViewPasteDelegate methods
 
-
-- (BOOL)composerTextView:(JSQMessagesComposerTextView *)textView shouldPasteWithSender:(id)sender
+- (BOOL)composerTextView:(JSQMessagesComposerTextView *)textView canPerformAction:(SEL)action withSender:(id)sender
 {
+    if (action == @selector(paste:) && [UIPasteboard generalPasteboard].image)
+        return YES;
+    return NO;
+}
+
+- (BOOL)composerTextView:(JSQMessagesComposerTextView *)textView shouldPasteWithSender:(id)sender {
+    
     if ([UIPasteboard generalPasteboard].image) {
-        // If there's an image in the pasteboard, construct a media item with that image and `send` it.
-        JSQPhotoMediaItem *item = [[JSQPhotoMediaItem alloc] initWithImage:[UIPasteboard generalPasteboard].image];
-        JSQMessage *message = [[JSQMessage alloc] initWithSenderId:self.senderId
-                                                 senderDisplayName:self.senderDisplayName
-                                                              date:[NSDate date]
-                                                             media:item];
-        [self.demoData.messages addObject:message];
-        [self finishSendingMessage];
+        
+        // create an attachment with an image thumbnail and the data from the original image
+        // set the image last, otherwise the attachment view doesn't show the thumbnail image
+        JSQMessagesTextAttachment * attachment = [[JSQMessagesTextAttachment alloc] init];
+        NSString * dataType = (NSString *) [UIPasteboard generalPasteboard].pasteboardTypes.firstObject;
+        attachment.image = [[UIPasteboard generalPasteboard].image jsq_thumbnailImage:96 croppedSquare:NO];
+        attachment.attachmentData = [[UIPasteboard generalPasteboard] dataForPasteboardType:dataType];
+        attachment.attachmentType = dataType;
+        NSAttributedString * attachmentStr = [NSAttributedString attributedStringWithAttachment:attachment];
+        
+        // capture the existing attributes for font and text color; attachments create paragraph breaks
+        NSDictionary * textAttrs;
+        if ([self.inputToolbar.contentView.textView.attributedText length]) {
+            textAttrs = [self.inputToolbar.contentView.textView.attributedText attributesAtIndex:0 effectiveRange:nil];
+        } else {
+            textAttrs = @{NSFontAttributeName : self.inputToolbar.contentView.textView.font,
+                          NSForegroundColorAttributeName : self.inputToolbar.contentView.textView.textColor };
+            NSMutableAttributedString * attrStr = [[NSMutableAttributedString alloc] initWithString:@""
+                                                                                         attributes:textAttrs];
+            self.inputToolbar.contentView.textView.attributedText = attrStr;
+        }
+        
+        NSMutableAttributedString * currentInput = [self.inputToolbar.contentView.textView.attributedText mutableCopy];
+        NSRange range = [self.inputToolbar.contentView.textView selectedRange];
+        if (range.length) {
+            [currentInput replaceCharactersInRange:range withAttributedString:attachmentStr];
+        } else {
+            [currentInput insertAttributedString:attachmentStr atIndex:range.location];
+        }
+        [currentInput addAttributes:textAttrs range:NSMakeRange(0, [currentInput length])];
+        self.inputToolbar.contentView.textView.attributedText = currentInput;
+        [self.inputToolbar toggleSendButtonEnabled];
         return NO;
     }
+
     return YES;
 }
 
