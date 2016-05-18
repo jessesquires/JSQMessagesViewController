@@ -41,4 +41,5 @@ These are the (known) apps that use `JSQMessagesViewController`. Submit a [pull 
 * [PimpMyCall](https://itunes.apple.com/us/app/pimp-my-call/id990167537)
 * [Yellow Partner](https://itunes.apple.com/us/app/yellow-partner/id1062994361?ls=1&mt=8)
 * [Radiate](https://itunes.apple.com/us/app/radiate/id939284774?mt=8)
+* [Criptext](https://itunes.apple.com/us/app/criptext-secure-messenger/id848647361?mt=8)
 * *Your app here, submit a [pull request](https://github.com/jessesquires/JSQMessagesViewController/compare)!*
