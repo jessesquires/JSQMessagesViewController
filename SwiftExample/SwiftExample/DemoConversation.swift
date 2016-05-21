@@ -39,7 +39,3 @@ func makeConversation()->[JSQMessage]{
     conversation = [message, message2,message3, message4, message5]
     return conversation
 }
-
-func getConversation()->[Conversation]{
-    return [convo]
-}
