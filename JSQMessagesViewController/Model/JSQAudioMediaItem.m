@@ -240,10 +240,18 @@
         playView.clipsToBounds = YES;
 
         // create the play button
-        CGRect buttonFrame = CGRectMake(self.audioViewAttributes.controlInsets.left,
-                                        self.audioViewAttributes.controlInsets.top,
-                                        self.audioViewAttributes.playButtonImage.size.width,
-                                        self.audioViewAttributes.playButtonImage.size.height);
+        CGRect buttonFrame;
+        if (!self.appliesMediaViewMaskAsOutgoing) {
+            buttonFrame = CGRectMake(self.audioViewAttributes.controlInsets.left + 5,
+                                     self.audioViewAttributes.controlInsets.top,
+                                     self.audioViewAttributes.playButtonImage.size.width,
+                                     self.audioViewAttributes.playButtonImage.size.height);
+        }
+        else
+            buttonFrame = CGRectMake(self.audioViewAttributes.controlInsets.left,
+                                     self.audioViewAttributes.controlInsets.top,
+                                     self.audioViewAttributes.playButtonImage.size.width,
+                                     self.audioViewAttributes.playButtonImage.size.height);
         self.playButton = [[UIButton alloc] initWithFrame:buttonFrame];
         [self.playButton setImage:self.audioViewAttributes.playButtonImage forState:UIControlStateNormal];
         [self.playButton setImage:self.audioViewAttributes.pauseButtonImage forState:UIControlStateSelected];
