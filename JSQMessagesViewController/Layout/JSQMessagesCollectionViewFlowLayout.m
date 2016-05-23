@@ -37,6 +37,7 @@
 
 const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
+NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
 
 
 @interface JSQMessagesCollectionViewFlowLayout ()
@@ -55,6 +56,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 @dynamic collectionView;
 
 @synthesize bubbleSizeCalculator = _bubbleSizeCalculator;
+
 
 #pragma mark - Initialization
 
@@ -79,6 +81,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     CGSize defaultAvatarSize = CGSizeMake(kJSQMessagesCollectionViewAvatarSizeDefault, kJSQMessagesCollectionViewAvatarSizeDefault);
     _incomingAvatarViewSize = defaultAvatarSize;
     _outgoingAvatarViewSize = defaultAvatarSize;
+
     
     _springinessEnabled = NO;
     _springResistanceFactor = 1000;
@@ -195,12 +198,29 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
+
+-(void)setEditing:(BOOL)editing
+{
+    if(_editing == editing) {
+        return;
+    }
+    
+    _editing = editing;
+    JSQMessagesCollectionViewFlowLayoutInvalidationContext * context = [JSQMessagesCollectionViewFlowLayoutInvalidationContext context];
+    context.invalidateFlowLayoutDelegateMetrics = NO;
+
+    [self invalidateLayoutWithContext:context];
+}
+
+
 #pragma mark - Getters
 
 - (CGFloat)itemWidth
 {
     return CGRectGetWidth(self.collectionView.frame) - self.sectionInset.left - self.sectionInset.right;
 }
+
+
 
 - (UIDynamicAnimator *)dynamicAnimator
 {
@@ -305,16 +325,29 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         attributesInRect = attributesInRectCopy;
     }
     
+    NSMutableArray * editingAttributesinRect = nil;
+    if(self.editing) {
+        editingAttributesinRect = [NSMutableArray array];
+    }
+    
     [attributesInRect enumerateObjectsUsingBlock:^(JSQMessagesCollectionViewLayoutAttributes *attributesItem, NSUInteger idx, BOOL *stop) {
         if (attributesItem.representedElementCategory == UICollectionElementCategoryCell) {
             [self jsq_configureMessageCellLayoutAttributes:attributesItem];
+            if(self.editing) {
+                [editingAttributesinRect addObject:[self jsq_createEditingOverlayAttributesForCellAttributes:attributesItem]];
+            }
         }
         else {
             attributesItem.zIndex = -1;
         }
     }];
     
-    return attributesInRect;
+    if(editingAttributesinRect.count>0) {
+        return [attributesInRect arrayByAddingObjectsFromArray:editingAttributesinRect];
+    }
+    else {
+        return attributesInRect;
+    }
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -327,6 +360,18 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     return customAttributes;
 }
+
+-(UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
+{
+    if([elementKind isEqualToString:kJSQCollectionElementKindEditOverlay]) {
+        JSQMessagesCollectionViewLayoutAttributes * itemAttributes = (JSQMessagesCollectionViewLayoutAttributes*)[self layoutAttributesForItemAtIndexPath:indexPath];
+        return [self jsq_createEditingOverlayAttributesForCellAttributes:itemAttributes];
+    }
+    else {
+        return [super layoutAttributesForSupplementaryViewOfKind:elementKind atIndexPath:indexPath];
+    }
+}
+
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
 {
@@ -432,6 +477,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     CGSize messageBubbleSize = [self messageBubbleSizeForItemAtIndexPath:indexPath];
     
     layoutAttributes.messageBubbleContainerViewWidth = messageBubbleSize.width;
+    layoutAttributes.messageBubbleContainerViewHeight = messageBubbleSize.height;
     
     layoutAttributes.textViewFrameInsets = self.messageBubbleTextViewFrameInsets;
     
@@ -454,7 +500,43 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     layoutAttributes.cellBottomLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
                                                                                    layout:self
                                                       heightForCellBottomLabelAtIndexPath:indexPath];
+    
+    if(self.editing) {
+        CGFloat offset = [self.collectionView.delegate collectionView:self.collectionView
+                                                               layout:self
+                                      editingOffsetForCellAtIndexPath:indexPath];
+        layoutAttributes.frame = CGRectOffset(layoutAttributes.frame, offset, 0);
+    }
 }
+
+-(JSQMessagesCollectionViewLayoutAttributes*) jsq_createEditingOverlayAttributesForCellAttributes:(JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes
+{
+    JSQMessagesCollectionViewLayoutAttributes * attributes = [[[self class] layoutAttributesClass] layoutAttributesForSupplementaryViewOfKind:kJSQCollectionElementKindEditOverlay
+                                                                                                                                withIndexPath:layoutAttributes.indexPath];
+    
+    attributes.zIndex = layoutAttributes.zIndex+1;
+    
+    CGFloat offset = [self.collectionView.delegate collectionView:self.collectionView
+                                                           layout:self
+                                  editingOffsetForCellAtIndexPath:layoutAttributes.indexPath];
+    attributes.frame = CGRectOffset(layoutAttributes.frame, -offset, 0);
+    
+    
+    attributes.messageBubbleContainerViewWidth  = layoutAttributes.messageBubbleContainerViewWidth;
+    attributes.messageBubbleContainerViewHeight = layoutAttributes.messageBubbleContainerViewHeight;
+    attributes.textViewFrameInsets              = layoutAttributes.textViewFrameInsets;
+    attributes.textViewTextContainerInsets      = layoutAttributes.textViewTextContainerInsets;
+    attributes.messageBubbleFont                = layoutAttributes.messageBubbleFont;
+    attributes.incomingAvatarViewSize           = layoutAttributes.incomingAvatarViewSize;
+    attributes.outgoingAvatarViewSize           = layoutAttributes.outgoingAvatarViewSize;
+    attributes.cellTopLabelHeight               = layoutAttributes.cellTopLabelHeight;
+    attributes.messageBubbleTopLabelHeight      = layoutAttributes.messageBubbleTopLabelHeight;
+    attributes.cellBottomLabelHeight            = layoutAttributes.cellBottomLabelHeight;
+    
+    
+    return attributes;
+}
+
 
 #pragma mark - Spring behavior utilities
 

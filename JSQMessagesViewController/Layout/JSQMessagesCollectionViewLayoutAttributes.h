@@ -39,6 +39,14 @@
 @property (assign, nonatomic) CGFloat messageBubbleContainerViewWidth;
 
 /**
+ *  The height of the `messageBubbleContainerView` of a `JSQMessagesCollectionViewCell`.
+ *  This value should be greater than `0.0`.
+ *
+ *  @see JSQMessagesCollectionViewCell.
+ */
+@property (assign, nonatomic) CGFloat messageBubbleContainerViewHeight;
+
+/**
  *  The inset of the text container's layout area within the text view's content area in a `JSQMessagesCollectionViewCell`. 
  *  The specified inset values should be greater than or equal to `0.0`.
  */
@@ -102,5 +110,6 @@
  *  @see JSQMessagesCollectionViewCell.
  */
 @property (assign, nonatomic) CGFloat cellBottomLabelHeight;
+
 
 @end

@@ -156,6 +156,19 @@
  */
 @property (assign, nonatomic) BOOL showTypingIndicator;
 
+
+/**
+ *  Turn editing mode on/off
+ *  Switching mode off will clean up 'editingIndexPaths'
+ */
+@property (assign, nonatomic) BOOL editing;
+
+/**
+ *  Selected index paths for editing mode.
+ */
+@property (nonatomic, strong) NSArray<NSIndexPath*> *editingIndexPaths;
+
+
 /**
  *  Specifies whether or not the view controller should show the "load earlier messages" header view.
  *
@@ -276,6 +289,15 @@
  * this method to specialize the decision logic.
  */
 - (BOOL)isOutgoingMessage:(id<JSQMessageData>)messageItem;
+
+
+/**
+ *  Called after 'editing' set to NO
+ *
+ *  @param indexPaths array of index paths, selected during editing session
+ */
+-(void) finishedEditingWithIndexPaths:(NSArray<NSIndexPath*>*)indexPaths;
+
 
 /**
  * Scrolls the collection view so that the cell at the specified indexPath is completely visible above the `inputToolbar`.

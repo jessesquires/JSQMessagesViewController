@@ -23,7 +23,7 @@
 @class JSQMessagesCollectionViewFlowLayout;
 @class JSQMessagesCollectionViewCell;
 @class JSQMessagesLoadEarlierHeaderView;
-
+@class JSQMessagesEditCollectionOverlayView;
 
 /**
 *  The `JSQMessagesCollectionViewDelegateFlowLayout` protocol defines methods that allow you to
@@ -77,6 +77,18 @@
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
+ *  TODO:
+ *
+ *  @param collectionView       <#collectionView description#>
+ *  @param collectionViewLayout <#collectionViewLayout description#>
+ *  @param indexPath            <#indexPath description#>
+ *
+ *  @return <#return value description#>
+ */
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout editingOffsetForCellAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
  *  Notifies the delegate that the avatar image view at the specified indexPath did receive a tap event.
  *
  *  @param collectionView  The collection view object that is notifying the delegate of the tap event.
@@ -118,5 +130,16 @@
  */
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender;
+
+/**
+ *  TODO: add description
+ *
+ *  @param collectionView <#collectionView description#>
+ *  @param indexPath      <#indexPath description#>
+ *  @param selected       <#selected description#>
+ */
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView editingOverlayAtIndexPath:(NSIndexPath*)indexPath
+        becomeSelected:(BOOL)selected;
+
 
 @end

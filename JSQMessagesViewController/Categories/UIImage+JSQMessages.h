@@ -81,4 +81,15 @@
  */
 + (UIImage *)jsq_defaultPauseImage;
 
+/**
+ *  @return The default edit mode active icon image.
+ */
++ (UIImage *)jsq_defaultEditingActiveImage;
+
+/**
+ *  @return The default edit mode inactive icon image.
+ */
++ (UIImage *)jsq_defaultEditingInactiveImage;
+
+
 @end

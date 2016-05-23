@@ -33,6 +33,7 @@
 #import "JSQMessagesToolbarContentView.h"
 #import "JSQMessagesInputToolbar.h"
 #import "JSQMessagesComposerTextView.h"
+#import "JSQMessagesEditCollectionOverlayView.h"
 
 #import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
@@ -63,6 +64,8 @@ JSQMessagesKeyboardControllerDelegate>
 
 @property (assign, nonatomic) BOOL textViewWasFirstResponderDuringInteractivePop;
 
+@property (nonatomic, strong) NSMutableSet<NSIndexPath*> * selectedEditingIndexPaths;
+
 @end
 
 
@@ -89,6 +92,7 @@ JSQMessagesKeyboardControllerDelegate>
 {
     self.view.backgroundColor = [UIColor whiteColor];
 
+    self.selectedEditingIndexPaths = [NSMutableSet set];
     self.jsq_isObserving = NO;
 
     self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
@@ -158,6 +162,35 @@ JSQMessagesKeyboardControllerDelegate>
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
+
+-(void)setEditing:(BOOL)editing
+{
+    if (_editing == editing) {
+        return;
+    }
+    
+    BOOL finishing = _editing && !editing;
+    
+    
+    _editing = editing;
+    self.collectionView.collectionViewLayout.editing = editing;
+    
+    if(finishing) {
+        [self finishedEditingWithIndexPaths:self.editingIndexPaths];
+        [self.selectedEditingIndexPaths removeAllObjects];
+    }
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+        [self.collectionView layoutIfNeeded];
+    }];
+}
+
+-(NSArray<NSIndexPath *> *)editingIndexPaths
+{
+    return self.selectedEditingIndexPaths.allObjects;
+}
+
 
 - (void)setShowLoadEarlierMessagesHeader:(BOOL)showLoadEarlierMessagesHeader
 {
@@ -404,6 +437,11 @@ JSQMessagesKeyboardControllerDelegate>
     return [messageSenderId isEqualToString:self.senderId];
 }
 
+-(void) finishedEditingWithIndexPaths:(NSArray<NSIndexPath*>*)indexPaths
+{
+    //optionally implement in subclass
+}
+
 #pragma mark - JSQMessages collection view data source
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -573,6 +611,15 @@ JSQMessagesKeyboardControllerDelegate>
     else if (self.showLoadEarlierMessagesHeader && [kind isEqualToString:UICollectionElementKindSectionHeader]) {
         return [collectionView dequeueLoadEarlierMessagesViewHeaderForIndexPath:indexPath];
     }
+    else if ([kind isEqualToString:kJSQCollectionElementKindEditOverlay]) {
+        JSQMessagesEditCollectionOverlayView * view = [collectionView dequeueEditingOverlayViewForIndexPath:indexPath];
+        
+        id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];        
+        [view configureDisplayingOnLeft:![self isOutgoingMessage:messageItem]
+                               isActive:[self.selectedEditingIndexPaths containsObject:indexPath]
+                      forCollectionView:collectionView];
+        return view;
+    }
 
     return nil;
 }
@@ -668,6 +715,20 @@ JSQMessagesKeyboardControllerDelegate>
     return 0.0f;
 }
 
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout editingOffsetForCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+    
+    if ([self isOutgoingMessage:messageItem]) {
+        return -50.0f;
+    }
+    else {
+        return 50.0f;
+    }
+}
+
+
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
  didTapAvatarImageView:(UIImageView *)avatarImageView
            atIndexPath:(NSIndexPath *)indexPath { }
@@ -677,6 +738,17 @@ JSQMessagesKeyboardControllerDelegate>
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
  didTapCellAtIndexPath:(NSIndexPath *)indexPath
          touchLocation:(CGPoint)touchLocation { }
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView editingOverlayAtIndexPath:(NSIndexPath*)indexPath
+        becomeSelected:(BOOL)selected
+{
+    if(selected) {
+        [self.selectedEditingIndexPaths addObject:indexPath];
+    }
+    else {
+        [self.selectedEditingIndexPaths removeObject:indexPath];
+    }
+}
 
 #pragma mark - Input toolbar delegate
 

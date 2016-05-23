@@ -24,11 +24,13 @@
 
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
+#import "JSQMessagesEditCollectionOverlayView.h"
 
 #import "UIColor+JSQMessages.h"
 
 
-@interface JSQMessagesCollectionView () <JSQMessagesLoadEarlierHeaderViewDelegate>
+@interface JSQMessagesCollectionView ()
+<JSQMessagesLoadEarlierHeaderViewDelegate, JSQMessagesEditCollectionOverlayViewDelegate>
 
 - (void)jsq_configureCollectionView;
 
@@ -71,7 +73,12 @@
     [self registerNib:[JSQMessagesLoadEarlierHeaderView nib]
           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
           withReuseIdentifier:[JSQMessagesLoadEarlierHeaderView headerReuseIdentifier]];
+    
+    [self registerNib:[JSQMessagesEditCollectionOverlayView nib]
+          forSupplementaryViewOfKind:kJSQCollectionElementKindEditOverlay
+          withReuseIdentifier:[JSQMessagesEditCollectionOverlayView editingReuseIdentifier]];
 
+    
     _typingIndicatorDisplaysOnLeft = YES;
     _typingIndicatorMessageBubbleColor = [UIColor jsq_messageBubbleLightGrayColor];
     _typingIndicatorEllipsisColor = [_typingIndicatorMessageBubbleColor jsq_colorByDarkeningColorWithValue:0.3f];
@@ -92,6 +99,18 @@
 {
     [super awakeFromNib];
     [self jsq_configureCollectionView];
+}
+
+#pragma mark - editing overlay view
+- (JSQMessagesEditCollectionOverlayView *)dequeueEditingOverlayViewForIndexPath:(NSIndexPath *)indexPath
+{
+    JSQMessagesEditCollectionOverlayView *editingView = [super dequeueReusableSupplementaryViewOfKind:kJSQCollectionElementKindEditOverlay
+                                                                                  withReuseIdentifier:[JSQMessagesEditCollectionOverlayView editingReuseIdentifier]
+                                                                                         forIndexPath:indexPath];
+    editingView.delegate = self;
+    editingView.indexPath = indexPath;
+    
+    return editingView;
 }
 
 #pragma mark - Typing indicator
@@ -180,6 +199,17 @@
                     performAction:action
                forItemAtIndexPath:indexPath
                        withSender:sender];
+}
+
+#pragma mark - Editing overlay view delegate
+
+- (void)editOverlayView:(JSQMessagesEditCollectionOverlayView *)overlayView activated:(BOOL)activated
+{
+    NSIndexPath *indexPath = overlayView.indexPath;
+    if (indexPath == nil) {
+        return;
+    }
+    [self.delegate collectionView:self editingOverlayAtIndexPath:indexPath becomeSelected:activated];
 }
 
 @end
