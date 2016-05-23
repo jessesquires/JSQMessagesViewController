@@ -35,6 +35,7 @@
     JSQMessagesCollectionViewLayoutAttributes *attrs = [JSQMessagesCollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     attrs.messageBubbleFont = [UIFont systemFontOfSize:15.0f];
     attrs.messageBubbleContainerViewWidth = 40.0f;
+    attrs.messageBubbleContainerViewHeight = 40.0f;
     attrs.textViewTextContainerInsets = UIEdgeInsetsMake(10.0f, 8.0f, 10.0f, 8.0f);
     attrs.textViewFrameInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 6.0f);
     attrs.incomingAvatarViewSize = CGSizeMake(34.0f, 34.0f);
