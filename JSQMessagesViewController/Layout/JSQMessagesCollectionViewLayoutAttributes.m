@@ -108,6 +108,7 @@
             || !CGSizeEqualToSize(layoutAttributes.incomingAvatarViewSize, self.incomingAvatarViewSize)
             || !CGSizeEqualToSize(layoutAttributes.outgoingAvatarViewSize, self.outgoingAvatarViewSize)
             || (int)layoutAttributes.messageBubbleContainerViewWidth != (int)self.messageBubbleContainerViewWidth
+            || (int)layoutAttributes.messageBubbleContainerViewHeight != (int)self.messageBubbleContainerViewHeight
             || (int)layoutAttributes.cellTopLabelHeight != (int)self.cellTopLabelHeight
             || (int)layoutAttributes.messageBubbleTopLabelHeight != (int)self.messageBubbleTopLabelHeight
             || (int)layoutAttributes.cellBottomLabelHeight != (int)self.cellBottomLabelHeight) {
@@ -135,6 +136,7 @@
     
     copy.messageBubbleFont = self.messageBubbleFont;
     copy.messageBubbleContainerViewWidth = self.messageBubbleContainerViewWidth;
+    copy.messageBubbleContainerViewHeight = self.messageBubbleContainerViewHeight;
     copy.textViewFrameInsets = self.textViewFrameInsets;
     copy.textViewTextContainerInsets = self.textViewTextContainerInsets;
     copy.incomingAvatarViewSize = self.incomingAvatarViewSize;
