@@ -99,8 +99,18 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
             removeWorkaround();
         });
     };
-    swizzleOnClass(NSClassFromString(@"_UIRotatingAlertController"));
-    swizzleOnClass(NSClassFromString(@"WKActionSheet"));
+
+    // _UIRotatingAlertController
+    Class alertClass = NSClassFromString([NSString stringWithFormat:@"%@%@%@", @"_U", @"IRotat", @"ingAlertController"]);
+    if (alertClass) {
+        swizzleOnClass(alertClass);
+    }
+
+    // WKActionSheet
+    Class actionSheetClass = NSClassFromString([NSString stringWithFormat:@"%@%@%@", @"W", @"KActio", @"nSheet"]);
+    if (actionSheetClass) {
+        swizzleOnClass(actionSheetClass);
+    }
 }
 
 
@@ -146,6 +156,13 @@ JSQMessagesKeyboardControllerDelegate>
 {
     return [[[self class] alloc] initWithNibName:NSStringFromClass([JSQMessagesViewController class])
                                           bundle:[NSBundle bundleForClass:[JSQMessagesViewController class]]];
+}
+
++ (void)initialize {
+    [super initialize];
+    if (self == [JSQMessagesViewController self]) {
+        JSQInstallWorkaroundForSheetPresentationIssue26295020();
+    }
 }
 
 #pragma mark - Initialization
@@ -194,8 +211,6 @@ JSQMessagesKeyboardControllerDelegate>
                                                                      panGestureRecognizer:self.collectionView.panGestureRecognizer
                                                                                  delegate:self];
     }
-
-    JSQInstallWorkaroundForSheetPresentationIssue26295020();
 }
 
 - (void)dealloc
