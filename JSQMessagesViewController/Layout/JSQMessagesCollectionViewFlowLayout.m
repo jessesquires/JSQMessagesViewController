@@ -301,7 +301,7 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    NSArray *attributesInRect = [super layoutAttributesForElementsInRect:rect];
+    NSArray *attributesInRect = [[super layoutAttributesForElementsInRect:rect] copy];
     
     if (self.springinessEnabled) {
         NSMutableArray *attributesInRectCopy = [attributesInRect mutableCopy];
@@ -322,7 +322,7 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
             }
         }
         
-        attributesInRect = attributesInRectCopy;
+        attributesInRect = [attributesInRectCopy copy];
     }
     
     NSMutableArray * editingAttributesinRect = nil;
