@@ -39,6 +39,71 @@
 #import "UIDevice+JSQMessages.h"
 #import "NSBundle+JSQMessages.h"
 
+#import <objc/runtime.h>
+
+
+// Fixes rdar://26295020
+// See issue #1247 and Peter Steinberger's comment:
+// https://github.com/jessesquires/JSQMessagesViewController/issues/1247#issuecomment-219386199
+// Gist with workaround: https://gist.github.com/steipete/b00fc02aa9f1c66c11d0f996b1ba1265
+// Forgive me
+static IMP JSQReplaceMethodWithBlock(Class c, SEL origSEL, id block) {
+    NSCParameterAssert(block);
+
+    // get original method
+    Method origMethod = class_getInstanceMethod(c, origSEL);
+    NSCParameterAssert(origMethod);
+
+    // convert block to IMP trampoline and replace method implementation
+    IMP newIMP = imp_implementationWithBlock(block);
+
+    // Try adding the method if not yet in the current class
+    if (!class_addMethod(c, origSEL, newIMP, method_getTypeEncoding(origMethod))) {
+        return method_setImplementation(origMethod, newIMP);
+    } else {
+        return method_getImplementation(origMethod);
+    }
+}
+
+static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
+    __block void (^removeWorkaround)(void) = ^{};
+    const void (^installWorkaround)(void) = ^{
+        const SEL presentSEL = @selector(presentViewController:animated:completion:);
+        __block IMP origIMP = JSQReplaceMethodWithBlock(UIViewController.class, presentSEL, ^(UIViewController *self, id vC, BOOL animated, id completion) {
+            UIViewController *targetVC = self;
+            while (targetVC.presentedViewController) {
+                targetVC = targetVC.presentedViewController;
+            }
+            ((void (*)(id, SEL, id, BOOL, id))origIMP)(targetVC, presentSEL, vC, animated, completion);
+        });
+        removeWorkaround = ^{
+            Method origMethod = class_getInstanceMethod(UIViewController.class, presentSEL);
+            NSCParameterAssert(origMethod);
+            class_replaceMethod(UIViewController.class,
+                                presentSEL,
+                                origIMP,
+                                method_getTypeEncoding(origMethod));
+        };
+    };
+
+    const SEL presentSheetSEL = NSSelectorFromString(@"presentSheetFromRect:");
+    const void (^swizzleOnClass)(Class k) = ^(Class klass) {
+        const __block IMP origIMP = JSQReplaceMethodWithBlock(klass, presentSheetSEL, ^(id self, CGRect rect) {
+            // Before calling the original implementation, we swizzle the presentation logic on UIViewController
+            installWorkaround();
+            // UIKit later presents the sheet on [view.window rootViewController];
+            // See https://github.com/WebKit/webkit/blob/1aceb9ed7a42d0a5ed11558c72bcd57068b642e7/Source/WebKit2/UIProcess/ios/WKActionSheet.mm#L102
+            // Our workaround forwards this to the topmost presentedViewController instead.
+            ((void (*)(id, SEL, CGRect))origIMP)(self, presentSheetSEL, rect);
+            // Cleaning up again - this workaround would swallow bugs if we let it be there.
+            removeWorkaround();
+        });
+    };
+    swizzleOnClass(NSClassFromString(@"_UIRotatingAlertController"));
+    swizzleOnClass(NSClassFromString(@"WKActionSheet"));
+}
+
+
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
@@ -129,6 +194,8 @@ JSQMessagesKeyboardControllerDelegate>
                                                                      panGestureRecognizer:self.collectionView.panGestureRecognizer
                                                                                  delegate:self];
     }
+
+    JSQInstallWorkaroundForSheetPresentationIssue26295020();
 }
 
 - (void)dealloc
