@@ -25,4 +25,9 @@
  */
 + (BOOL)jsq_isCurrentDeviceBeforeiOS8;
 
+/**
+ *  @return Whether or not the current device is running a version of iOS after 9.0.
+ */
++ (BOOL)jsq_isCurrentDeviceAfteriOS9;
+
 @end
