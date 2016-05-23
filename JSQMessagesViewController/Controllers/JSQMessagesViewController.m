@@ -291,7 +291,7 @@ JSQMessagesKeyboardControllerDelegate>
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    
+
     if (!self.inputToolbar.contentView.textView.isFirstResponder) {
         [self jsq_setToolbarBottomLayoutGuideConstant:self.bottomLayoutGuide.length];
     }
@@ -830,7 +830,7 @@ JSQMessagesKeyboardControllerDelegate>
     }
 }
 
-- (void)jsq_didReceiveMenuWillShowNotification:(NSNotification *)notification
+- (void)didReceiveMenuWillShowNotification:(NSNotification *)notification
 {
     if (!self.selectedIndexPathForMenu) {
         return;
@@ -850,12 +850,12 @@ JSQMessagesKeyboardControllerDelegate>
     [menu setMenuVisible:YES animated:YES];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(jsq_didReceiveMenuWillShowNotification:)
+                                             selector:@selector(didReceiveMenuWillShowNotification:)
                                                  name:UIMenuControllerWillShowMenuNotification
                                                object:nil];
 }
 
-- (void)jsq_didReceiveMenuWillHideNotification:(NSNotification *)notification
+- (void)didReceiveMenuWillHideNotification:(NSNotification *)notification
 {
     if (!self.selectedIndexPathForMenu) {
         return;
@@ -1104,12 +1104,12 @@ JSQMessagesKeyboardControllerDelegate>
                                                    object:nil];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(jsq_didReceiveMenuWillShowNotification:)
+                                                 selector:@selector(didReceiveMenuWillShowNotification:)
                                                      name:UIMenuControllerWillShowMenuNotification
                                                    object:nil];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(jsq_didReceiveMenuWillHideNotification:)
+                                                 selector:@selector(didReceiveMenuWillHideNotification:)
                                                      name:UIMenuControllerWillHideMenuNotification
                                                    object:nil];
     }

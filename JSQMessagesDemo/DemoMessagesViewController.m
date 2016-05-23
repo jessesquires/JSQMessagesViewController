@@ -22,10 +22,6 @@
 
 #pragma mark - View lifecycle
 
-- (void)dealloc {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 /**
  *  Override point for customization.
  *
@@ -77,11 +73,7 @@
      *  Register custom menu actions for cells.
      */
     [JSQMessagesCollectionViewCell registerMenuAction:@selector(customAction:)];
-    [UIMenuController sharedMenuController].menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action"
-                                                                                      action:@selector(customAction:)] ];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handle_menuWillHide:) name:UIMenuControllerWillHideMenuNotification object:nil];
-	
+
 	
     /**
      *  OPT-IN: allow cells to be deleted
@@ -100,11 +92,6 @@
      *
      *  self.inputToolbar.maximumHeight = 150;
      */
-}
-
-- (void)handle_menuWillHide:(NSNotification *)notification {
-	[UIMenuController sharedMenuController].menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action"
-																					  action:@selector(customAction:)] ];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -128,6 +115,19 @@
      *  Note: this feature is mostly stable, but still experimental
      */
     self.collectionView.collectionViewLayout.springinessEnabled = [NSUserDefaults springinessSetting];
+}
+
+
+
+#pragma mark - Custom menu actions for cells
+
+- (void)didReceiveMenuWillShowNotification:(NSNotification *)notification
+{
+    /**
+     *  Display custom menu actions for cells.
+     */
+    UIMenuController *menu = [notification object];
+    menu.menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action" action:@selector(customAction:)] ];
 }
 
 
