@@ -311,11 +311,6 @@ JSQMessagesKeyboardControllerDelegate>
     [self.keyboardController endListeningForKeyboard];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    NSLog(@"MEMORY WARNING: %s", __PRETTY_FUNCTION__);
-}
 
 #pragma mark - View rotation
 
