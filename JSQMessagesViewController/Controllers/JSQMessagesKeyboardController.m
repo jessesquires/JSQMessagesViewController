@@ -167,11 +167,11 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)jsq_didReceiveKeyboardDidShowNotification:(NSNotification *)notification
 {
-    UIView *keyboardViewProxy = nil;
+    UIView *keyboardViewProxy = self.textView.inputAccessoryView.superview;
     if ([UIDevice jsq_isCurrentDeviceAfteriOS9]) {
         NSPredicate *windowPredicate = [NSPredicate predicateWithFormat:@"self isMemberOfClass: %@", NSClassFromString(@"UIRemoteKeyboardWindow")];
-        UIWindow *keyboardWindow = [[[UIApplication sharedApplication].windows filteredArrayUsingPredicate:windowPredicate] firstObject];
-        
+        UIWindow *keyboardWindow = [[UIApplication sharedApplication].windows filteredArrayUsingPredicate:windowPredicate].firstObject;
+
         for (UIView *subview in keyboardWindow.subviews) {
             for (UIView *hostview in subview.subviews) {
                 if ([hostview isMemberOfClass:NSClassFromString(@"UIInputSetHostView")]) {
@@ -180,11 +180,9 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                 }
             }
         }
-    } else {
-        keyboardViewProxy = self.textView.inputAccessoryView.superview;
+        self.keyboardView = keyboardViewProxy;
     }
 
-    self.keyboardView = keyboardViewProxy;
     [self jsq_setKeyboardViewHidden:NO];
 
     [self jsq_handleKeyboardNotification:notification completion:^(BOOL finished) {
@@ -281,7 +279,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
             if (CGRectEqualToRect(newKeyboardFrame, oldKeyboardFrame) || CGRectIsNull(newKeyboardFrame)) {
                 return;
             }
-            
+
             CGRect keyboardEndFrameConverted = [self.contextView convertRect:newKeyboardFrame
                                                                     fromView:self.keyboardView.superview];
             [self jsq_notifyKeyboardFrameNotificationForFrame:keyboardEndFrameConverted];
@@ -386,7 +384,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                              }];
         }
             break;
-
+            
         default:
             break;
     }
