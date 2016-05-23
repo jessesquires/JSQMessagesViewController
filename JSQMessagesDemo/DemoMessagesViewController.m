@@ -22,6 +22,10 @@
 
 #pragma mark - View lifecycle
 
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 /**
  *  Override point for customization.
  *
@@ -75,7 +79,10 @@
     [JSQMessagesCollectionViewCell registerMenuAction:@selector(customAction:)];
     [UIMenuController sharedMenuController].menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action"
                                                                                       action:@selector(customAction:)] ];
-
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handle_menuWillHide:) name:UIMenuControllerWillHideMenuNotification object:nil];
+	
+	
     /**
      *  OPT-IN: allow cells to be deleted
      */
@@ -93,6 +100,11 @@
      *
      *  self.inputToolbar.maximumHeight = 150;
      */
+}
+
+- (void)handle_menuWillHide:(NSNotification *)notification {
+	[UIMenuController sharedMenuController].menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action"
+																					  action:@selector(customAction:)] ];
 }
 
 - (void)viewWillAppear:(BOOL)animated
