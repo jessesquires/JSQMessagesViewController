@@ -62,6 +62,11 @@
         self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
     }
     
+    if ([NSUserDefaults typingIndicatorStyleSettingIsAvatar]) {
+        self.collectionView.typingIndicatorAvatarImage = [UIImage imageNamed:@"demo_avatar_cook"];
+        self.collectionView.typingIndicatorMessage = @"Steve is typing…";
+    }
+    
     self.showLoadEarlierMessagesHeader = YES;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage jsq_defaultTypingIndicatorImage]
@@ -559,8 +564,6 @@
     
     return cell;
 }
-
-
 
 #pragma mark - UICollectionView Delegate
 

@@ -64,4 +64,17 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight;
                shouldDisplayOnLeft:(BOOL)shouldDisplayOnLeft
                  forCollectionView:(UICollectionView *)collectionView;
 
+/**
+ *  Configures the receiver with the specified attributes for the given collection view.
+ *  Call this method after dequeuing the footer view.
+ *
+ *  @param avatarImage       The avatar image to display in the typing indicator. Setting this value to `nil` hides the avatar image view.
+ *  @param textColor         The color of the typing indicator text. This value defaults to `UIColor.lightGrayColor()`.
+ *  @param font              The font used to display the typing indicator test. This value defaults to `UIFont.italicSystemFontOfSize(11)`.
+ */
+- (void)configureWithAvatarImage:(UIImage *)avatarImage
+                         message:(NSString *)message
+                       textColor:(UIColor *)textColor
+                            font:(UIFont *)font;
+
 @end

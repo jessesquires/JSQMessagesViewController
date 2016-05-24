@@ -24,6 +24,7 @@ static NSString * const kSettingEmptyMessages = @"kSettingEmptyMessages";
 static NSString * const kSettingSpringiness = @"kSettingSpringiness";
 static NSString * const kSettingIncomingAvatar = @"kSettingIncomingAvatar";
 static NSString * const kSettingOutgoingAvatar = @"kSettingOutgoingAvatar";
+static NSString * const kSettingTypingIndicatorStyleIsAvatar = @"kSettingTypingIndicatorStyleIsAvatar";
 
 
 @implementation NSUserDefaults (DemoSettings)
@@ -86,6 +87,16 @@ static NSString * const kSettingOutgoingAvatar = @"kSettingOutgoingAvatar";
 + (BOOL)incomingAvatarSetting
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:kSettingIncomingAvatar];
+}
+
++ (void)saveTypingIndicatorStyleSettingAsAvatar:(BOOL)value
+{
+     [[NSUserDefaults standardUserDefaults] setBool:value forKey:kSettingTypingIndicatorStyleIsAvatar];
+}
+
++ (BOOL)typingIndicatorStyleSettingIsAvatar
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kSettingTypingIndicatorStyleIsAvatar];
 }
 
 @end

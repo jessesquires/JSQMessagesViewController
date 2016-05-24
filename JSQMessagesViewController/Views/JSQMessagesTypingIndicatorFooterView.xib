@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -25,18 +26,39 @@
                         <constraint firstAttribute="height" constant="34" id="j0C-FV-2gV"/>
                     </constraints>
                 </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cgQ-al-ksn" userLabel="Avatar Image View">
+                    <rect key="frame" x="6" y="20" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="cgQ-al-ksn" secondAttribute="height" multiplier="1:1" id="XzC-Xd-wyc"/>
+                        <constraint firstAttribute="width" constant="20" id="t0b-rs-iux"/>
+                    </constraints>
+                </imageView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="typing…" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQ6-hL-x5B">
+                    <rect key="frame" x="31" y="23" width="46" height="14"/>
+                    <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Vwf-dy-PS6" secondAttribute="trailing" constant="260" id="1Tm-qD-wIK"/>
                 <constraint firstAttribute="bottom" secondItem="Z1D-Tr-HPK" secondAttribute="bottom" constant="6" id="EVf-Sx-8mX"/>
                 <constraint firstAttribute="bottom" secondItem="Vwf-dy-PS6" secondAttribute="bottom" constant="6" id="Hik-Wl-aK2"/>
+                <constraint firstAttribute="bottom" secondItem="cgQ-al-ksn" secondAttribute="bottom" constant="6" id="KUs-CX-Muj"/>
+                <constraint firstItem="hQ6-hL-x5B" firstAttribute="leading" secondItem="cgQ-al-ksn" secondAttribute="trailing" constant="5" id="Lcx-6l-UMz"/>
                 <constraint firstAttribute="trailing" secondItem="Z1D-Tr-HPK" secondAttribute="trailing" constant="246" id="YMl-ej-UZl"/>
+                <constraint firstItem="hQ6-hL-x5B" firstAttribute="centerY" secondItem="cgQ-al-ksn" secondAttribute="centerY" id="lEB-Yt-L66"/>
+                <constraint firstItem="cgQ-al-ksn" firstAttribute="leading" secondItem="ajJ-uk-b04" secondAttribute="leading" constant="6" id="qMt-5s-aKq"/>
             </constraints>
             <connections>
+                <outlet property="avatarImageView" destination="cgQ-al-ksn" id="RSk-9a-w8z"/>
+                <outlet property="avatarImageViewToTypingIndicatorLabelHorizontalConstraint" destination="Lcx-6l-UMz" id="5Gw-A2-72p"/>
+                <outlet property="avatarImageViewWidthConstraint" destination="t0b-rs-iux" id="S6U-Tf-BRm"/>
                 <outlet property="bubbleImageView" destination="Z1D-Tr-HPK" id="WpE-rP-oYB"/>
                 <outlet property="bubbleImageViewRightHorizontalConstraint" destination="YMl-ej-UZl" id="Thu-7D-dhU"/>
                 <outlet property="typingIndicatorImageView" destination="Vwf-dy-PS6" id="wQA-Pe-rx6"/>
                 <outlet property="typingIndicatorImageViewRightHorizontalConstraint" destination="1Tm-qD-wIK" id="FUp-oC-c0I"/>
+                <outlet property="typingIndicatorLabel" destination="hQ6-hL-x5B" id="KFw-HQ-lt7"/>
             </connections>
         </collectionReusableView>
     </objects>
