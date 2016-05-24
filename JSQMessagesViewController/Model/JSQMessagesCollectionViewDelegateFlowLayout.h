@@ -77,18 +77,6 @@
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
- *  TODO:
- *
- *  @param collectionView       <#collectionView description#>
- *  @param collectionViewLayout <#collectionViewLayout description#>
- *  @param indexPath            <#indexPath description#>
- *
- *  @return <#return value description#>
- */
-- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
-                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout editingOffsetForCellAtIndexPath:(NSIndexPath *)indexPath;
-
-/**
  *  Notifies the delegate that the avatar image view at the specified indexPath did receive a tap event.
  *
  *  @param collectionView  The collection view object that is notifying the delegate of the tap event.
@@ -131,12 +119,37 @@
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender;
 
+
 /**
- *  TODO: add description
+ *  Ask delegate, if item at target index path is editable
  *
- *  @param collectionView <#collectionView description#>
- *  @param indexPath      <#indexPath description#>
- *  @param selected       <#selected description#>
+ *  @param collectionView       The collection view object displaying the flow layout.
+ *  @param collectionViewLayout The layout object requesting the information.
+ *  @param indexPath            The index path of the item.
+ *
+ *  @return YES if item is ediatble, NO otherwise
+ */
+- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView
+                layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout shouldEditItemAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  Asks delegate for offset for editble item at 'indexPath'
+ *
+ *  @param collectionView       The collection view object displaying the flow layout.
+ *  @param collectionViewLayout The layout object requesting the information.
+ *  @param indexPath            The index path of the item.
+ *
+ *  @return Offset for editable item at 'indexPath'
+ */
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout editingOffsetForCellAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  Notify delegate, that selection changed on ediable item
+ *
+ *  @param collectionView       The collection view object displaying the flow layout.
+ *  @param collectionViewLayout The layout object requesting the information.
+ *  @param indexPath            The index path of the item.
  */
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView editingOverlayAtIndexPath:(NSIndexPath*)indexPath
         becomeSelected:(BOOL)selected;

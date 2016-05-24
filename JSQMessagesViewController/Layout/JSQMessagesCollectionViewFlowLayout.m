@@ -44,6 +44,7 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
 
 @property (strong, nonatomic) UIDynamicAnimator *dynamicAnimator;
 @property (strong, nonatomic) NSMutableSet *visibleIndexPaths;
+@property (strong, nonatomic) NSMutableSet *editableIndexPaths;
 
 @property (assign, nonatomic) CGFloat latestDelta;
 
@@ -146,6 +147,7 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
     if (!springinessEnabled) {
         [_dynamicAnimator removeAllBehaviors];
         [_visibleIndexPaths removeAllObjects];
+        [_editableIndexPaths removeAllObjects];
     }
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
@@ -238,6 +240,14 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
     return _visibleIndexPaths;
 }
 
+-(NSMutableSet *)editableIndexPaths
+{
+    if (!_editableIndexPaths) {
+        _editableIndexPaths = [NSMutableSet new];
+    }
+    return _editableIndexPaths;
+}
+
 - (id<JSQMessagesBubbleSizeCalculating>)bubbleSizeCalculator
 {
     if (_bubbleSizeCalculator == nil) {
@@ -297,12 +307,14 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
         
         [self jsq_addNewlyVisibleBehaviorsFromVisibleItems:visibleItems];
     }
+    
+    [self.editableIndexPaths removeAllObjects];
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
     NSArray *attributesInRect = [[super layoutAttributesForElementsInRect:rect] copy];
-    
+    [self.editableIndexPaths removeAllObjects];
     if (self.springinessEnabled) {
         NSMutableArray *attributesInRectCopy = [attributesInRect mutableCopy];
         NSArray *dynamicAttributes = [self.dynamicAnimator itemsInRect:rect];
@@ -332,10 +344,22 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
     
     [attributesInRect enumerateObjectsUsingBlock:^(JSQMessagesCollectionViewLayoutAttributes *attributesItem, NSUInteger idx, BOOL *stop) {
         if (attributesItem.representedElementCategory == UICollectionElementCategoryCell) {
-            [self jsq_configureMessageCellLayoutAttributes:attributesItem];
+            
+            BOOL canEdit = NO;
             if(self.editing) {
+                if([self.collectionView.delegate respondsToSelector:@selector(collectionView:layout:shouldEditItemAtIndexPath:)]) {
+                    if([self.collectionView.delegate collectionView:self.collectionView layout:self shouldEditItemAtIndexPath:attributesItem.indexPath]) {
+                        [self.editableIndexPaths addObject:attributesItem.indexPath];
+                        canEdit = YES;
+                    }
+                }
+            }
+            
+            [self jsq_configureMessageCellLayoutAttributes:attributesItem];
+            if(canEdit) {
                 [editingAttributesinRect addObject:[self jsq_createEditingOverlayAttributesForCellAttributes:attributesItem]];
             }
+            
         }
         else {
             attributesItem.zIndex = -1;
@@ -371,6 +395,26 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
         return [super layoutAttributesForSupplementaryViewOfKind:elementKind atIndexPath:indexPath];
     }
 }
+
+//- (nullable UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath;
+//- (nullable UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath *)itemIndexPath;
+//- (nullable UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingSupplementaryElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)elementIndexPath;
+//- (nullable UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingDecorationElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)decorationIndexPath;
+//- (nullable UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingDecorationElementOfKind:(NSString *)element
+
+
+- (nullable UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingSupplementaryElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)elementIndexPath
+{
+    if([elementKind isEqualToString:kJSQCollectionElementKindEditOverlay]) {
+        JSQMessagesCollectionViewLayoutAttributes * itemAttributes = (JSQMessagesCollectionViewLayoutAttributes*)[self finalLayoutAttributesForDisappearingItemAtIndexPath:elementIndexPath];
+        if(itemAttributes) return [self jsq_createEditingOverlayAttributesForCellAttributes:itemAttributes];
+        else return nil;
+    }
+    else {
+        return [super finalLayoutAttributesForDisappearingSupplementaryElementOfKind:elementKind atIndexPath:elementIndexPath];
+    }
+}
+
 
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
@@ -435,6 +479,7 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
 {
     [self.bubbleSizeCalculator prepareForResettingLayout:self];
     [self jsq_resetDynamicAnimator];
+    [self.editableIndexPaths removeAllObjects];
 }
 
 - (void)jsq_resetDynamicAnimator
@@ -501,7 +546,7 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
                                                                                    layout:self
                                                       heightForCellBottomLabelAtIndexPath:indexPath];
     
-    if(self.editing) {
+    if(self.editing && [self.editableIndexPaths containsObject:layoutAttributes.indexPath]) {
         CGFloat offset = [self.collectionView.delegate collectionView:self.collectionView
                                                                layout:self
                                       editingOffsetForCellAtIndexPath:indexPath];
@@ -518,7 +563,7 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
     
     CGFloat offset = [self.collectionView.delegate collectionView:self.collectionView
                                                            layout:self
-                                  editingOffsetForCellAtIndexPath:layoutAttributes.indexPath];
+                                  editingOffsetForCellAtIndexPath:attributes.indexPath];
     attributes.frame = CGRectOffset(layoutAttributes.frame, -offset, 0);
     
     

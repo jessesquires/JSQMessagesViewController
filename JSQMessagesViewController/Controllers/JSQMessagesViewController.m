@@ -684,9 +684,7 @@ JSQMessagesKeyboardControllerDelegate>
     }
     else if ([kind isEqualToString:kJSQCollectionElementKindEditOverlay]) {
         JSQMessagesEditCollectionOverlayView * view = [collectionView dequeueEditingOverlayViewForIndexPath:indexPath];
-        
-        id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];        
-        [view configureDisplayingOnLeft:![self isOutgoingMessage:messageItem]
+        [view configureDisplayingOnLeft:YES
                                isActive:[self.selectedEditingIndexPaths containsObject:indexPath]
                       forCollectionView:collectionView];
         return view;
@@ -786,18 +784,7 @@ JSQMessagesKeyboardControllerDelegate>
     return 0.0f;
 }
 
-- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
-                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout editingOffsetForCellAtIndexPath:(NSIndexPath *)indexPath
-{
-    id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    
-    if ([self isOutgoingMessage:messageItem]) {
-        return -50.0f;
-    }
-    else {
-        return 50.0f;
-    }
-}
+
 
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
@@ -810,6 +797,8 @@ JSQMessagesKeyboardControllerDelegate>
  didTapCellAtIndexPath:(NSIndexPath *)indexPath
          touchLocation:(CGPoint)touchLocation { }
 
+#pragma mark - bulk edit mode support
+
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView editingOverlayAtIndexPath:(NSIndexPath*)indexPath
         becomeSelected:(BOOL)selected
 {
@@ -820,6 +809,22 @@ JSQMessagesKeyboardControllerDelegate>
         [self.selectedEditingIndexPaths removeObject:indexPath];
     }
 }
+
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout editingOffsetForCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+    //outgoing messages aren't offsetted
+    if([self isOutgoingMessage:messageData]) return 0.0;
+    return 50.0f;
+}
+
+- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView
+                layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout shouldEditItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
 
 #pragma mark - Input toolbar delegate
 
