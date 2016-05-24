@@ -103,7 +103,7 @@
     
     [snapShotter startWithQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
               completionHandler:^(MKMapSnapshot *snapshot, NSError *error) {
-                  if (error) {
+                  if (snapshot == nil) {
                       NSLog(@"%s Error creating map snapshot: %@", __PRETTY_FUNCTION__, error);
                       return;
                   }

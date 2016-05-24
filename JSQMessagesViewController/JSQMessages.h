@@ -53,6 +53,8 @@
 #import "JSQMessagesBubbleImage.h"
 #import "JSQMessagesAvatarImage.h"
 
+#import "JSQAudioMediaViewAttributes.h"
+
 //  Protocols
 #import "JSQMessageData.h"
 #import "JSQMessageMediaData.h"

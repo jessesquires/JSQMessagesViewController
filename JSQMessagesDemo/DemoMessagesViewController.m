@@ -73,9 +73,8 @@
      *  Register custom menu actions for cells.
      */
     [JSQMessagesCollectionViewCell registerMenuAction:@selector(customAction:)];
-    [UIMenuController sharedMenuController].menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action"
-                                                                                      action:@selector(customAction:)] ];
 
+	
     /**
      *  OPT-IN: allow cells to be deleted
      */
@@ -116,6 +115,19 @@
      *  Note: this feature is mostly stable, but still experimental
      */
     self.collectionView.collectionViewLayout.springinessEnabled = [NSUserDefaults springinessSetting];
+}
+
+
+
+#pragma mark - Custom menu actions for cells
+
+- (void)didReceiveMenuWillShowNotification:(NSNotification *)notification
+{
+    /**
+     *  Display custom menu actions for cells.
+     */
+    UIMenuController *menu = [notification object];
+    menu.menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action" action:@selector(customAction:)] ];
 }
 
 

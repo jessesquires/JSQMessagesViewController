@@ -27,3 +27,11 @@
 "send" = "Enviar";
 
 "new_message" = "Nuevo mensaje";
+
+"text_message_accessibility_label" = "%@: %@";
+
+"media_message_accessibility_label" = "%@: imagen";
+
+"accessory_button_accessibility_label" = "Intercambio de archivos";
+
+"new_message_received_accessibility_announcement" = "mensaje recibido";
