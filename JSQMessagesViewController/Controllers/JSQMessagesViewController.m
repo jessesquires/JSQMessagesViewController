@@ -132,6 +132,8 @@ JSQMessagesKeyboardControllerDelegate>
 
 @property (assign, nonatomic) BOOL jsq_isObserving;
 
+@property (nonatomic) CGFloat jsq_collectionViewFrameWidth;
+
 @property (strong, nonatomic) NSIndexPath *selectedIndexPathForMenu;
 
 @property (weak, nonatomic) UIGestureRecognizer *currentInteractivePopGestureRecognizer;
@@ -267,6 +269,8 @@ JSQMessagesKeyboardControllerDelegate>
 
     [[[self class] nib] instantiateWithOwner:self options:nil];
 
+    self.jsq_collectionViewFrameWidth = CGRectGetWidth(self.collectionView.frame);
+
     [self jsq_configureMessagesViewController];
     [self jsq_registerForNotifications:YES];
 }
@@ -310,6 +314,12 @@ JSQMessagesKeyboardControllerDelegate>
     if (!self.inputToolbar.contentView.textView.isFirstResponder) {
         [self jsq_setToolbarBottomLayoutGuideConstant:self.bottomLayoutGuide.length];
     }
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self jsq_resetLayoutAndCaches];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -370,9 +380,15 @@ JSQMessagesKeyboardControllerDelegate>
 
 - (void)jsq_resetLayoutAndCaches
 {
-    JSQMessagesCollectionViewFlowLayoutInvalidationContext *context = [JSQMessagesCollectionViewFlowLayoutInvalidationContext context];
-    context.invalidateFlowLayoutMessagesCache = YES;
-    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:context];
+    if (CGRectGetWidth(self.collectionView.frame) != self.jsq_collectionViewFrameWidth) {
+
+        self.jsq_collectionViewFrameWidth = CGRectGetWidth(self.collectionView.frame);
+
+        // invalidate layout
+        JSQMessagesCollectionViewFlowLayoutInvalidationContext *context = [JSQMessagesCollectionViewFlowLayoutInvalidationContext context];
+        context.invalidateFlowLayoutMessagesCache = YES;
+        [self.collectionView.collectionViewLayout invalidateLayoutWithContext:context];
+    }
 }
 
 #pragma mark - Messages view controller
