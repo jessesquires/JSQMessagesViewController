@@ -352,7 +352,7 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)[super layoutAttributesForItemAtIndexPath:indexPath];
+    JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)[[super layoutAttributesForItemAtIndexPath:indexPath] copy];
     
     if (customAttributes.representedElementCategory == UICollectionElementCategoryCell) {
         [self jsq_configureMessageCellLayoutAttributes:customAttributes];

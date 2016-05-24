@@ -4,6 +4,13 @@ The changelog for `JSQMessagesViewController`. Also see the [releases](https://g
 
 --------------------------------------
 
+7.3.0
+-----
+
+- [Milestone](https://github.com/jessesquires/JSQMessagesViewController/issues?q=milestone%3A7.3.0+is%3Aclosed)
+- [GitHub release notes](https://github.com/jessesquires/JSQMessagesViewController/releases/tag/7.3.0)
+
+
 7.2.0
 -----
 
