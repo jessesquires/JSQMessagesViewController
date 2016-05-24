@@ -45,11 +45,11 @@
     _messageBubbleContainerViewWidth = ceilf(messageBubbleContainerViewWidth);
 }
 
--(void)setMessageBubbleContainerViewHeight:(CGFloat)messageBubbleContainerViewHeight
-{
-    NSParameterAssert(messageBubbleContainerViewHeight > 0.0f);
-    _messageBubbleContainerViewHeight = ceilf(messageBubbleContainerViewHeight);
-}
+//-(void)setMessageBubbleContainerViewHeight:(CGFloat)messageBubbleContainerViewHeight
+//{
+//    NSParameterAssert(messageBubbleContainerViewHeight > 0.0f);
+//    _messageBubbleContainerViewHeight = ceilf(messageBubbleContainerViewHeight);
+//}
 
 - (void)setIncomingAvatarViewSize:(CGSize)incomingAvatarViewSize
 {

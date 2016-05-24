@@ -46,6 +46,10 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
 @property (strong, nonatomic) NSMutableSet *visibleIndexPaths;
 @property (strong, nonatomic) NSMutableSet *editableIndexPaths;
 
+//used in prepareForUpdate
+@property (strong, nonatomic) NSMutableSet *editableIndexPathsToRemove;
+@property (strong, nonatomic) NSMutableSet *editableIndexPathsToInsert;
+
 @property (assign, nonatomic) CGFloat latestDelta;
 
 @end
@@ -248,6 +252,22 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
     return _editableIndexPaths;
 }
 
+-(NSMutableSet *)editableIndexPathsToRemove
+{
+    if (!_editableIndexPathsToRemove) {
+        _editableIndexPathsToRemove = [NSMutableSet new];
+    }
+    return _editableIndexPathsToRemove;
+}
+
+-(NSMutableSet *)editableIndexPathsToInsert
+{
+    if (!_editableIndexPathsToInsert) {
+        _editableIndexPathsToInsert = [NSMutableSet new];
+    }
+    return _editableIndexPathsToInsert;
+}
+
 - (id<JSQMessagesBubbleSizeCalculating>)bubbleSizeCalculator
 {
     if (_bubbleSizeCalculator == nil) {
@@ -309,6 +329,8 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
     }
     
     [self.editableIndexPaths removeAllObjects];
+    [self.editableIndexPathsToInsert removeAllObjects];
+    [self.editableIndexPathsToRemove removeAllObjects];
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
@@ -396,26 +418,6 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
     }
 }
 
-//- (nullable UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath;
-//- (nullable UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath *)itemIndexPath;
-//- (nullable UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingSupplementaryElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)elementIndexPath;
-//- (nullable UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingDecorationElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)decorationIndexPath;
-//- (nullable UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingDecorationElementOfKind:(NSString *)element
-
-
-- (nullable UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingSupplementaryElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)elementIndexPath
-{
-    if([elementKind isEqualToString:kJSQCollectionElementKindEditOverlay]) {
-        JSQMessagesCollectionViewLayoutAttributes * itemAttributes = (JSQMessagesCollectionViewLayoutAttributes*)[self finalLayoutAttributesForDisappearingItemAtIndexPath:elementIndexPath];
-        if(itemAttributes) return [self jsq_createEditingOverlayAttributesForCellAttributes:itemAttributes];
-        else return nil;
-    }
-    else {
-        return [super finalLayoutAttributesForDisappearingSupplementaryElementOfKind:elementKind atIndexPath:elementIndexPath];
-    }
-}
-
-
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
 {
@@ -444,6 +446,7 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
 - (void)prepareForCollectionViewUpdates:(NSArray *)updateItems
 {
     [super prepareForCollectionViewUpdates:updateItems];
+
     
     [updateItems enumerateObjectsUsingBlock:^(UICollectionViewUpdateItem *updateItem, NSUInteger index, BOOL *stop) {
         if (updateItem.updateAction == UICollectionUpdateActionInsert) {
@@ -471,7 +474,78 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
             }
         }
     }];
+    
+    if(self.editing) {
+        [self prepareForCollectionViewUpdatesInEditMode:updateItems];
+    }
 }
+
+-(NSArray<NSIndexPath *> *)indexPathsToDeleteForSupplementaryViewOfKind:(NSString *)elementKind
+{
+    if(![elementKind isEqualToString:kJSQCollectionElementKindEditOverlay]) {
+        return [super indexPathsToDeleteForSupplementaryViewOfKind:elementKind];
+    }
+    
+    return self.editableIndexPathsToRemove.allObjects;
+}
+
+-(NSArray<NSIndexPath *> *)indexPathsToInsertForSupplementaryViewOfKind:(NSString *)elementKind
+{
+    if(![elementKind isEqualToString:kJSQCollectionElementKindEditOverlay]) {
+        return [super indexPathsToInsertForSupplementaryViewOfKind:elementKind];
+    }
+    
+    return self.editableIndexPathsToInsert.allObjects;
+}
+
+-(void)finalizeCollectionViewUpdates
+{
+    [super finalizeCollectionViewUpdates];
+    
+//    [self.editableIndexPathsToRemove enumerateObjectsUsingBlock:^(NSIndexPath*  _Nonnull indexPath, BOOL * _Nonnull stop) {
+//        [self.editableIndexPaths removeObject:indexPath];
+//    }];
+//    
+//    [self.editableIndexPathsToInsert enumerateObjectsUsingBlock:^(NSIndexPath*  _Nonnull indexPath, BOOL * _Nonnull stop) {
+//        [self.editableIndexPaths addObject:indexPath];
+//    }];
+//    
+    
+    [self.editableIndexPathsToInsert removeAllObjects];
+    [self.editableIndexPathsToRemove removeAllObjects];
+}
+
+
+- (void)prepareForCollectionViewUpdatesInEditMode:(NSArray *)updateItems{
+    
+    [updateItems enumerateObjectsUsingBlock:^(UICollectionViewUpdateItem *updateItem, NSUInteger index, BOOL *stop) {
+        if (updateItem.updateAction == UICollectionUpdateActionInsert) {
+            
+            JSQMessagesCollectionViewLayoutAttributes *attributes = [JSQMessagesCollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
+            
+            if (attributes.representedElementCategory == UICollectionElementCategoryCell) {
+                
+                if([self.collectionView.delegate respondsToSelector:@selector(collectionView:layout:shouldEditItemAtIndexPath:)]) {
+                    if([self.collectionView.delegate collectionView:self.collectionView layout:self shouldEditItemAtIndexPath:updateItem.indexPathAfterUpdate]) {
+                        [self.editableIndexPathsToInsert addObject:updateItem.indexPathAfterUpdate];
+                    }
+                }
+            }
+        }
+        else if(updateItem.updateAction == UICollectionUpdateActionDelete) {
+            
+            [self.editableIndexPathsToRemove addObject:updateItem.indexPathBeforeUpdate];
+        }
+        else if(updateItem.updateAction == UICollectionUpdateActionMove) {
+            if([self.editableIndexPaths containsObject:updateItem.indexPathBeforeUpdate]) {
+                [self.editableIndexPaths addObject:updateItem.indexPathAfterUpdate];
+                [self.editableIndexPaths removeObject:updateItem.indexPathBeforeUpdate];
+            }
+        }
+    }];
+}
+
+
 
 #pragma mark - Invalidation utilities
 
@@ -556,8 +630,9 @@ NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
 
 -(JSQMessagesCollectionViewLayoutAttributes*) jsq_createEditingOverlayAttributesForCellAttributes:(JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes
 {
-    JSQMessagesCollectionViewLayoutAttributes * attributes = [[[self class] layoutAttributesClass] layoutAttributesForSupplementaryViewOfKind:kJSQCollectionElementKindEditOverlay
-                                                                                                                                withIndexPath:layoutAttributes.indexPath];
+    JSQMessagesCollectionViewLayoutAttributes * attributes = [[[self class] layoutAttributesClass]
+                                                              layoutAttributesForSupplementaryViewOfKind:kJSQCollectionElementKindEditOverlay
+                                                              withIndexPath:layoutAttributes.indexPath];
     
     attributes.zIndex = layoutAttributes.zIndex+1;
     
