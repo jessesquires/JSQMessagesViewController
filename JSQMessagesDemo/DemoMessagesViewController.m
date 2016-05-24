@@ -64,11 +64,16 @@
     
     self.showLoadEarlierMessagesHeader = YES;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage jsq_defaultTypingIndicatorImage]
+    UIBarButtonItem * receiveItem =
+    [[UIBarButtonItem alloc] initWithImage:[UIImage jsq_defaultTypingIndicatorImage]
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(receiveMessagePressed:)];
 
+    UIBarButtonItem * editItem =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEditingMode:)];
+    
+    self.navigationItem.rightBarButtonItems = @[editItem, receiveItem];
+    
     /**
      *  Register custom menu actions for cells.
      */
@@ -319,6 +324,11 @@
     [self.delegateModal didDismissJSQDemoViewController:self];
 }
 
+
+-(void) toggleEditingMode:(UIBarButtonItem *)sender
+{
+    self.editing = !self.editing;
+}
 
 
 
@@ -672,6 +682,13 @@
 {
     NSLog(@"Tapped cell at %@!", NSStringFromCGPoint(touchLocation));
 }
+
+#pragma mark - editing
+-(void) finishedEditingWithIndexPaths:(NSArray<NSIndexPath*>*)indexPaths
+{
+    NSLog(@"finished editing with index paths to remove: %@",indexPaths);
+}
+
 
 #pragma mark - JSQMessagesComposerTextViewPasteDelegate methods
 

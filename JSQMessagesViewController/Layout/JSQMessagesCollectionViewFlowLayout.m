@@ -37,12 +37,18 @@
 
 const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
+NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
 
 
 @interface JSQMessagesCollectionViewFlowLayout ()
 
 @property (strong, nonatomic) UIDynamicAnimator *dynamicAnimator;
 @property (strong, nonatomic) NSMutableSet *visibleIndexPaths;
+@property (strong, nonatomic) NSMutableSet *editableIndexPaths;
+
+//used in prepareForUpdate
+@property (strong, nonatomic) NSMutableSet *editableIndexPathsToRemove;
+@property (strong, nonatomic) NSMutableSet *editableIndexPathsToInsert;
 
 @property (assign, nonatomic) CGFloat latestDelta;
 
@@ -55,6 +61,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 @dynamic collectionView;
 
 @synthesize bubbleSizeCalculator = _bubbleSizeCalculator;
+
 
 #pragma mark - Initialization
 
@@ -79,6 +86,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     CGSize defaultAvatarSize = CGSizeMake(kJSQMessagesCollectionViewAvatarSizeDefault, kJSQMessagesCollectionViewAvatarSizeDefault);
     _incomingAvatarViewSize = defaultAvatarSize;
     _outgoingAvatarViewSize = defaultAvatarSize;
+
     
     _springinessEnabled = NO;
     _springResistanceFactor = 1000;
@@ -143,6 +151,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     if (!springinessEnabled) {
         [_dynamicAnimator removeAllBehaviors];
         [_visibleIndexPaths removeAllObjects];
+        [_editableIndexPaths removeAllObjects];
     }
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
@@ -195,12 +204,29 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
+
+-(void)setEditing:(BOOL)editing
+{
+    if(_editing == editing) {
+        return;
+    }
+    
+    _editing = editing;
+    JSQMessagesCollectionViewFlowLayoutInvalidationContext * context = [JSQMessagesCollectionViewFlowLayoutInvalidationContext context];
+    context.invalidateFlowLayoutDelegateMetrics = NO;
+
+    [self invalidateLayoutWithContext:context];
+}
+
+
 #pragma mark - Getters
 
 - (CGFloat)itemWidth
 {
     return CGRectGetWidth(self.collectionView.frame) - self.sectionInset.left - self.sectionInset.right;
 }
+
+
 
 - (UIDynamicAnimator *)dynamicAnimator
 {
@@ -216,6 +242,30 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         _visibleIndexPaths = [NSMutableSet new];
     }
     return _visibleIndexPaths;
+}
+
+-(NSMutableSet *)editableIndexPaths
+{
+    if (!_editableIndexPaths) {
+        _editableIndexPaths = [NSMutableSet new];
+    }
+    return _editableIndexPaths;
+}
+
+-(NSMutableSet *)editableIndexPathsToRemove
+{
+    if (!_editableIndexPathsToRemove) {
+        _editableIndexPathsToRemove = [NSMutableSet new];
+    }
+    return _editableIndexPathsToRemove;
+}
+
+-(NSMutableSet *)editableIndexPathsToInsert
+{
+    if (!_editableIndexPathsToInsert) {
+        _editableIndexPathsToInsert = [NSMutableSet new];
+    }
+    return _editableIndexPathsToInsert;
 }
 
 - (id<JSQMessagesBubbleSizeCalculating>)bubbleSizeCalculator
@@ -277,12 +327,16 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         
         [self jsq_addNewlyVisibleBehaviorsFromVisibleItems:visibleItems];
     }
+    
+    [self.editableIndexPaths removeAllObjects];
+    [self.editableIndexPathsToInsert removeAllObjects];
+    [self.editableIndexPathsToRemove removeAllObjects];
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
     NSArray *attributesInRect = [[super layoutAttributesForElementsInRect:rect] copy];
-    
+    [self.editableIndexPaths removeAllObjects];
     if (self.springinessEnabled) {
         NSMutableArray *attributesInRectCopy = [attributesInRect mutableCopy];
         NSArray *dynamicAttributes = [self.dynamicAnimator itemsInRect:rect];
@@ -305,16 +359,41 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         attributesInRect = [attributesInRectCopy copy];
     }
     
+    NSMutableArray * editingAttributesinRect = nil;
+    if(self.editing) {
+        editingAttributesinRect = [NSMutableArray array];
+    }
+    
     [attributesInRect enumerateObjectsUsingBlock:^(JSQMessagesCollectionViewLayoutAttributes *attributesItem, NSUInteger idx, BOOL *stop) {
         if (attributesItem.representedElementCategory == UICollectionElementCategoryCell) {
+            
+            BOOL canEdit = NO;
+            if(self.editing) {
+                if([self.collectionView.delegate respondsToSelector:@selector(collectionView:layout:shouldEditItemAtIndexPath:)]) {
+                    if([self.collectionView.delegate collectionView:self.collectionView layout:self shouldEditItemAtIndexPath:attributesItem.indexPath]) {
+                        [self.editableIndexPaths addObject:attributesItem.indexPath];
+                        canEdit = YES;
+                    }
+                }
+            }
+            
             [self jsq_configureMessageCellLayoutAttributes:attributesItem];
+            if(canEdit) {
+                [editingAttributesinRect addObject:[self jsq_createEditingOverlayAttributesForCellAttributes:attributesItem]];
+            }
+            
         }
         else {
             attributesItem.zIndex = -1;
         }
     }];
     
-    return attributesInRect;
+    if(editingAttributesinRect.count>0) {
+        return [attributesInRect arrayByAddingObjectsFromArray:editingAttributesinRect];
+    }
+    else {
+        return attributesInRect;
+    }
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -327,6 +406,18 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     return customAttributes;
 }
+
+-(UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
+{
+    if([elementKind isEqualToString:kJSQCollectionElementKindEditOverlay]) {
+        JSQMessagesCollectionViewLayoutAttributes * itemAttributes = (JSQMessagesCollectionViewLayoutAttributes*)[self layoutAttributesForItemAtIndexPath:indexPath];
+        return [self jsq_createEditingOverlayAttributesForCellAttributes:itemAttributes];
+    }
+    else {
+        return [super layoutAttributesForSupplementaryViewOfKind:elementKind atIndexPath:indexPath];
+    }
+}
+
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
 {
@@ -355,6 +446,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 - (void)prepareForCollectionViewUpdates:(NSArray *)updateItems
 {
     [super prepareForCollectionViewUpdates:updateItems];
+
     
     [updateItems enumerateObjectsUsingBlock:^(UICollectionViewUpdateItem *updateItem, NSUInteger index, BOOL *stop) {
         if (updateItem.updateAction == UICollectionUpdateActionInsert) {
@@ -382,7 +474,78 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
             }
         }
     }];
+    
+    if(self.editing) {
+        [self prepareForCollectionViewUpdatesInEditMode:updateItems];
+    }
 }
+
+-(NSArray<NSIndexPath *> *)indexPathsToDeleteForSupplementaryViewOfKind:(NSString *)elementKind
+{
+    if(![elementKind isEqualToString:kJSQCollectionElementKindEditOverlay]) {
+        return [super indexPathsToDeleteForSupplementaryViewOfKind:elementKind];
+    }
+    
+    return self.editableIndexPathsToRemove.allObjects;
+}
+
+-(NSArray<NSIndexPath *> *)indexPathsToInsertForSupplementaryViewOfKind:(NSString *)elementKind
+{
+    if(![elementKind isEqualToString:kJSQCollectionElementKindEditOverlay]) {
+        return [super indexPathsToInsertForSupplementaryViewOfKind:elementKind];
+    }
+    
+    return self.editableIndexPathsToInsert.allObjects;
+}
+
+-(void)finalizeCollectionViewUpdates
+{
+    [super finalizeCollectionViewUpdates];
+    
+//    [self.editableIndexPathsToRemove enumerateObjectsUsingBlock:^(NSIndexPath*  _Nonnull indexPath, BOOL * _Nonnull stop) {
+//        [self.editableIndexPaths removeObject:indexPath];
+//    }];
+//    
+//    [self.editableIndexPathsToInsert enumerateObjectsUsingBlock:^(NSIndexPath*  _Nonnull indexPath, BOOL * _Nonnull stop) {
+//        [self.editableIndexPaths addObject:indexPath];
+//    }];
+//    
+    
+    [self.editableIndexPathsToInsert removeAllObjects];
+    [self.editableIndexPathsToRemove removeAllObjects];
+}
+
+
+- (void)prepareForCollectionViewUpdatesInEditMode:(NSArray *)updateItems{
+    
+    [updateItems enumerateObjectsUsingBlock:^(UICollectionViewUpdateItem *updateItem, NSUInteger index, BOOL *stop) {
+        if (updateItem.updateAction == UICollectionUpdateActionInsert) {
+            
+            JSQMessagesCollectionViewLayoutAttributes *attributes = [JSQMessagesCollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
+            
+            if (attributes.representedElementCategory == UICollectionElementCategoryCell) {
+                
+                if([self.collectionView.delegate respondsToSelector:@selector(collectionView:layout:shouldEditItemAtIndexPath:)]) {
+                    if([self.collectionView.delegate collectionView:self.collectionView layout:self shouldEditItemAtIndexPath:updateItem.indexPathAfterUpdate]) {
+                        [self.editableIndexPathsToInsert addObject:updateItem.indexPathAfterUpdate];
+                    }
+                }
+            }
+        }
+        else if(updateItem.updateAction == UICollectionUpdateActionDelete) {
+            
+            [self.editableIndexPathsToRemove addObject:updateItem.indexPathBeforeUpdate];
+        }
+        else if(updateItem.updateAction == UICollectionUpdateActionMove) {
+            if([self.editableIndexPaths containsObject:updateItem.indexPathBeforeUpdate]) {
+                [self.editableIndexPaths addObject:updateItem.indexPathAfterUpdate];
+                [self.editableIndexPaths removeObject:updateItem.indexPathBeforeUpdate];
+            }
+        }
+    }];
+}
+
+
 
 #pragma mark - Invalidation utilities
 
@@ -390,6 +553,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 {
     [self.bubbleSizeCalculator prepareForResettingLayout:self];
     [self jsq_resetDynamicAnimator];
+    [self.editableIndexPaths removeAllObjects];
 }
 
 - (void)jsq_resetDynamicAnimator
@@ -432,6 +596,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     CGSize messageBubbleSize = [self messageBubbleSizeForItemAtIndexPath:indexPath];
     
     layoutAttributes.messageBubbleContainerViewWidth = messageBubbleSize.width;
+    layoutAttributes.messageBubbleContainerViewHeight = messageBubbleSize.height;
     
     layoutAttributes.textViewFrameInsets = self.messageBubbleTextViewFrameInsets;
     
@@ -454,7 +619,44 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     layoutAttributes.cellBottomLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
                                                                                    layout:self
                                                       heightForCellBottomLabelAtIndexPath:indexPath];
+    
+    if(self.editing && [self.editableIndexPaths containsObject:layoutAttributes.indexPath]) {
+        CGFloat offset = [self.collectionView.delegate collectionView:self.collectionView
+                                                               layout:self
+                                      editingOffsetForCellAtIndexPath:indexPath];
+        layoutAttributes.frame = CGRectOffset(layoutAttributes.frame, offset, 0);
+    }
 }
+
+-(JSQMessagesCollectionViewLayoutAttributes*) jsq_createEditingOverlayAttributesForCellAttributes:(JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes
+{
+    JSQMessagesCollectionViewLayoutAttributes * attributes = [[[self class] layoutAttributesClass]
+                                                              layoutAttributesForSupplementaryViewOfKind:kJSQCollectionElementKindEditOverlay
+                                                              withIndexPath:layoutAttributes.indexPath];
+    
+    attributes.zIndex = layoutAttributes.zIndex+1;
+    
+    CGFloat offset = [self.collectionView.delegate collectionView:self.collectionView
+                                                           layout:self
+                                  editingOffsetForCellAtIndexPath:attributes.indexPath];
+    attributes.frame = CGRectOffset(layoutAttributes.frame, -offset, 0);
+    
+    
+    attributes.messageBubbleContainerViewWidth  = layoutAttributes.messageBubbleContainerViewWidth;
+    attributes.messageBubbleContainerViewHeight = layoutAttributes.messageBubbleContainerViewHeight;
+    attributes.textViewFrameInsets              = layoutAttributes.textViewFrameInsets;
+    attributes.textViewTextContainerInsets      = layoutAttributes.textViewTextContainerInsets;
+    attributes.messageBubbleFont                = layoutAttributes.messageBubbleFont;
+    attributes.incomingAvatarViewSize           = layoutAttributes.incomingAvatarViewSize;
+    attributes.outgoingAvatarViewSize           = layoutAttributes.outgoingAvatarViewSize;
+    attributes.cellTopLabelHeight               = layoutAttributes.cellTopLabelHeight;
+    attributes.messageBubbleTopLabelHeight      = layoutAttributes.messageBubbleTopLabelHeight;
+    attributes.cellBottomLabelHeight            = layoutAttributes.cellBottomLabelHeight;
+    
+    
+    return attributes;
+}
+
 
 #pragma mark - Spring behavior utilities
 
