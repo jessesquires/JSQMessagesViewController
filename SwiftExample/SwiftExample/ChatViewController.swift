@@ -11,13 +11,33 @@ import JSQMessagesViewController
 
 class ChatViewController: JSQMessagesViewController {
     var messages = [JSQMessage]()
-    
+    let defaults = NSUserDefaults.standardUserDefaults()
     var conversation: Conversation?
-    let incomingBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
-    let outgoingBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.lightGrayColor())
+    var incomingBubble: JSQMessagesBubbleImage?
+    var outgoingBubble: JSQMessagesBubbleImage?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //
+        // Override point:
+        //
+        // Here is an exaple of how you can cusomize the bubble appearence for incoming and outgoing messages.
+        // Based on the Settigns of the user we will display two differnent type of bubbles.
+        //
+        
+        if defaults.boolForKey(taillessSettingKey) {
+            // Bubbles with tails
+            incomingBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
+            outgoingBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.lightGrayColor())
+        }
+        else {
+            // Make taillessBubbles
+            incomingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero).incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
+            outgoingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero).outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
+        }
+        
+        
         self.inputToolbar?.contentView?.leftBarButtonItem = nil
         
         
@@ -35,11 +55,12 @@ class ChatViewController: JSQMessagesViewController {
         senderDisplayName = conversation?.firstName ?? conversation?.preferredName ?? conversation?.lastName ?? ""
         automaticallyScrollsToMostRecentMessage = true
         
-        if (conversation?.smsNumber) != nil {
-            self.messages = makeConversation()
-            self.collectionView?.reloadData()
-            self.collectionView?.layoutIfNeeded()
-        }
+        //Get Messages
+        self.messages = makeConversation()
+        self.collectionView?.reloadData()
+        self.collectionView?.layoutIfNeeded()
+        
+        
     }
     
     override func didPressSendButton(button: UIButton?, withMessageText text: String?, senderId: String?, senderDisplayName: String?, date: NSDate?) {
@@ -72,6 +93,7 @@ class ChatViewController: JSQMessagesViewController {
     override func collectionView(collectionView: JSQMessagesCollectionView?, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
         let message = messages[indexPath.item]
         switch message.senderId {
+        //Here we are displaying everyones name above their message except for the "Senders"
         case AvatarIdWoz:
             return nil
         default:
