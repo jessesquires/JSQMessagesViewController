@@ -948,7 +948,6 @@ JSQMessagesKeyboardControllerDelegate>
 
 - (void)jsq_updateKeyboardTriggerPoint
 {
-    self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
     self.keyboardController.keyboardTriggerPoint = CGPointMake(0.0f, CGRectGetHeight(self.inputToolbar.bounds));
 }
 
