@@ -353,11 +353,11 @@
 {
     [self.inputToolbar.contentView.textView resignFirstResponder];
 
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Media messages"
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Media messages", nil)
                                                        delegate:self
-                                              cancelButtonTitle:@"Cancel"
+                                              cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", @"Send audio", nil];
+                                              otherButtonTitles:NSLocalizedString(@"Send photo", nil), NSLocalizedString(@"Send location", nil), NSLocalizedString(@"Send video", nil), NSLocalizedString(@"Send audio", nil), nil];
     
     [sheet showFromToolbar:self.inputToolbar];
 }
@@ -589,10 +589,10 @@
 {
     NSLog(@"Custom action received! Sender: %@", sender);
 
-    [[[UIAlertView alloc] initWithTitle:@"Custom Action"
-                               message:nil
-                              delegate:nil
-                     cancelButtonTitle:@"OK"
+    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Custom Action", nil)
+                                message:nil
+                               delegate:nil
+                      cancelButtonTitle:NSLocalizedString(@"OK", nil)
                       otherButtonTitles:nil]
      show];
 }
