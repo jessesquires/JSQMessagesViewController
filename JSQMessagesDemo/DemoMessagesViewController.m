@@ -97,6 +97,10 @@
                                                                                               target:self
                                                                                               action:@selector(closePressed:)];
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(preferredContentSizeChanged:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -111,7 +115,17 @@
     self.collectionView.collectionViewLayout.springinessEnabled = [NSUserDefaults springinessSetting];
 }
 
+- (void)preferredContentSizeChanged:(NSNotification *)notification
+{
+    [self.collectionView layoutSubviews];
+}
 
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 #pragma mark - Custom menu actions for cells
 

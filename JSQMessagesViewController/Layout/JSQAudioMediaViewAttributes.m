@@ -65,7 +65,7 @@
 
     return [self initWithPlayButtonImage:[[UIImage jsq_defaultPlayImage] jsq_imageMaskedWithColor:tintColor]
                         pauseButtonImage:[[UIImage jsq_defaultPauseImage] jsq_imageMaskedWithColor:tintColor]
-                               labelFont:[UIFont systemFontOfSize:12]
+                               labelFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]
                    showFractionalSecodns:NO
                          backgroundColor:[UIColor jsq_messageBubbleLightGrayColor]
                                tintColor:tintColor
