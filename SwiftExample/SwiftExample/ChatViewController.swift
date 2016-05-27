@@ -16,7 +16,6 @@ class ChatViewController: JSQMessagesViewController {
     var incomingBubble: JSQMessagesBubbleImage?
     var outgoingBubble: JSQMessagesBubbleImage?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //
@@ -40,10 +39,10 @@ class ChatViewController: JSQMessagesViewController {
         
         self.inputToolbar?.contentView?.leftBarButtonItem = nil
         
-        
+        configureAvatars()
         // This is how you remove Avatars from the messagesView
-        collectionView?.collectionViewLayout.incomingAvatarViewSize = .zero
-        collectionView?.collectionViewLayout.outgoingAvatarViewSize = .zero
+        
+        
         
         // This is a beta feature that mostly works but to make things more stable I have diabled it.
         collectionView?.collectionViewLayout.springinessEnabled = false
@@ -51,7 +50,7 @@ class ChatViewController: JSQMessagesViewController {
         //Set the SenderId  to the current User
         // For this Demo we will use Woz's ID
         // Anywhere that AvatarIDWoz is used you should replace with you currentUserVariable
-        senderId = AvatarIdWoz
+        senderId = User.Wazniak.rawValue
         senderDisplayName = conversation?.firstName ?? conversation?.preferredName ?? conversation?.lastName ?? ""
         automaticallyScrollsToMostRecentMessage = true
         
@@ -59,7 +58,6 @@ class ChatViewController: JSQMessagesViewController {
         self.messages = makeConversation()
         self.collectionView?.reloadData()
         self.collectionView?.layoutIfNeeded()
-        
         
     }
     
@@ -69,7 +67,7 @@ class ChatViewController: JSQMessagesViewController {
         //
         // For this Demo I will just add it to the messages list localy
         //
-        self.messages.append(JSQMessage(senderId: AvatarIdWoz, displayName: DisplayNameWoz, text: text))
+        self.messages.append(JSQMessage(senderId: User.Wazniak.rawValue, displayName: getName(User.Wazniak), text: text))
         self.finishSendingMessageAnimated(true)
         self.collectionView?.reloadData()
     }
@@ -83,18 +81,14 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView?, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource? {
-        return messages[indexPath.item].senderId == AvatarIdWoz ? outgoingBubble : incomingBubble
-    }
-    
-    override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource? {
-        return nil
+        return messages[indexPath.item].senderId == User.Wazniak.rawValue ? outgoingBubble : incomingBubble
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView?, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
         let message = messages[indexPath.item]
         switch message.senderId {
         //Here we are displaying everyones name above their message except for the "Senders"
-        case AvatarIdWoz:
+        case User.Wazniak.rawValue:
             return nil
         default:
             guard let senderDisplayName = message.senderDisplayName else {
@@ -107,7 +101,24 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView?, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout?, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        return messages[indexPath.item].senderId == AvatarIdWoz ? 0 : kJSQMessagesCollectionViewCellLabelHeightDefault
+        return messages[indexPath.item].senderId == User.Wazniak.rawValue ? 0 : kJSQMessagesCollectionViewCellLabelHeightDefault
     }
     
+    // MARK: Avatar View
+    //
+    // Check Settings to display or hide Avatar views
+    func configureAvatars() {
+        if defaults.boolForKey(removeAvatarsKey) {
+            collectionView?.collectionViewLayout.incomingAvatarViewSize = .zero
+            collectionView?.collectionViewLayout.outgoingAvatarViewSize = .zero
+        } else {
+            collectionView?.collectionViewLayout.incomingAvatarViewSize = CGSize(width: kJSQMessagesCollectionViewAvatarSizeDefault, height: kJSQMessagesCollectionViewAvatarSizeDefault)
+            collectionView?.collectionViewLayout.outgoingAvatarViewSize = CGSize(width: kJSQMessagesCollectionViewAvatarSizeDefault, height: kJSQMessagesCollectionViewAvatarSizeDefault)
+        }
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource? {
+        let message = self.messages[indexPath.row]
+        return getAvatar(message.senderId)
+    }
 }
