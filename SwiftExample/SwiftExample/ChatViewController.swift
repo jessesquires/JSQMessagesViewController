@@ -19,27 +19,10 @@ class ChatViewController: JSQMessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
-        // Override point:
-        //
-        // Here is an exaple of how you can cusomize the bubble appearence for incoming and outgoing messages.
-        // Based on the Settigns of the user we will display two differnent type of bubbles.
-        //
         
-        if defaults.boolForKey(taillessSettingKey) {
-            // Bubbles with tails
-            incomingBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
-            outgoingBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.lightGrayColor())
-        }
-        else {
-            // Make taillessBubbles
-            incomingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero).incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
-            outgoingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero).outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
-        }
-        
+        bubbleConfigureation()
         
         self.inputToolbar?.contentView?.leftBarButtonItem = nil
-        
         
         // This is how you remove Avatars from the messagesView
         collectionView?.collectionViewLayout.incomingAvatarViewSize = .zero
@@ -60,7 +43,27 @@ class ChatViewController: JSQMessagesViewController {
         self.collectionView?.reloadData()
         self.collectionView?.layoutIfNeeded()
         
+    }
+    
+    func bubbleConfigureation() {
+        //
+        // Override point:
+        //
+        // Here is where we cusomize the bubble
+        // appearence for incoming and outgoing bubbles
+        // based on the `Settings` that the user defines
+        //
         
+        if defaults.boolForKey(taillessSettingKey) {
+            // Bubbles with tails
+            incomingBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
+            outgoingBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.lightGrayColor())
+        }
+        else {
+            // Make taillessBubbles
+            incomingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero).incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
+            outgoingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero).outgoingMessagesBubbleImageWithColor(UIColor.lightGrayColor())
+        }
     }
     
     override func didPressSendButton(button: UIButton?, withMessageText text: String?, senderId: String?, senderDisplayName: String?, date: NSDate?) {
@@ -107,6 +110,19 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView?, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout?, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        // Override point:
+        //
+        // Here we check for what our setting is for displaying the senderDisplayName
+        // if we dont want to display it we just return a height of 0.
+        // Then we check to see if (The current user)
+        // sent the message if so we return 0, because we know our own name,
+        // other wise we return the defualt height.
+        //
+        
+        if defaults.boolForKey(senderDisplayNameKey) {
+            return 0
+        }
+        
         return messages[indexPath.item].senderId == AvatarIdWoz ? 0 : kJSQMessagesCollectionViewCellLabelHeightDefault
     }
     

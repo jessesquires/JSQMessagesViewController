@@ -123,6 +123,34 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" editingAccessoryType="checkmark" id="UDO-Vw-di4">
+                                        <rect key="frame" x="0.0" y="108" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UDO-Vw-di4" id="479-hg-Ykg">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Remove Sender Display Name " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9y-mW-9zH">
+                                                    <rect key="frame" x="15" y="11" width="235" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oeo-VV-aVh">
+                                                    <rect key="frame" x="519" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="SenderDisplayNameTapped:" destination="Z1H-Xa-vkf" eventType="valueChanged" id="psj-Nm-h3H"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="oeo-VV-aVh" secondAttribute="trailing" constant="24" id="8dR-r1-tzM"/>
+                                                <constraint firstItem="oeo-VV-aVh" firstAttribute="centerY" secondItem="479-hg-Ykg" secondAttribute="centerY" id="96t-5k-hMh"/>
+                                                <constraint firstItem="X9y-mW-9zH" firstAttribute="leading" secondItem="479-hg-Ykg" secondAttribute="leadingMargin" constant="10" id="GyP-ek-PSb"/>
+                                                <constraint firstItem="X9y-mW-9zH" firstAttribute="centerY" secondItem="479-hg-Ykg" secondAttribute="centerY" id="fI4-aP-pev"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -133,6 +161,7 @@
                     </tableView>
                     <connections>
                         <outlet property="RemoveBubbleTailsSwitch" destination="Y7a-LK-zZg" id="Fj7-Xq-rRv"/>
+                        <outlet property="SenderDisplayNameSwitch" destination="oeo-VV-aVh" id="tFg-5i-m8G"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZcH-RU-6HG" userLabel="First Responder" sceneMemberID="firstResponder"/>
