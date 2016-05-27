@@ -47,7 +47,7 @@
     self.scrollsToTop = NO;
     self.userInteractionEnabled = YES;
 
-    self.font = [UIFont systemFontOfSize:16.0f];
+    self.font = [UIFont preferredFontForTextStyle:UIFontTextStyleTitle3];
     self.textColor = [UIColor blackColor];
     self.textAlignment = NSTextAlignmentNatural;
 
