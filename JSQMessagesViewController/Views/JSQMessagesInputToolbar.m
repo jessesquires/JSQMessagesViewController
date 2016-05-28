@@ -50,6 +50,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
     self.jsq_isObserving = NO;
     self.sendButtonOnRight = YES;
+    self.sendButtonEnabled = YES;
 
     self.preferredDefaultHeight = 44.0f;
     self.maximumHeight = NSNotFound;
@@ -66,7 +67,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     self.contentView.leftBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
     self.contentView.rightBarButtonItem = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
 
-    [self toggleSendButtonEnabled];
+    [self updateSendButtonEnabledState];
 }
 
 - (JSQMessagesToolbarContentView *)loadToolbarContentView
@@ -90,6 +91,12 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     _preferredDefaultHeight = preferredDefaultHeight;
 }
 
+- (void)setSendButtonEnabled:(BOOL)sendButtonEnabled
+{
+    _sendButtonEnabled = sendButtonEnabled;
+    [self updateSendButtonEnabledState];
+}
+
 #pragma mark - Actions
 
 - (void)jsq_leftBarButtonPressed:(UIButton *)sender
@@ -104,15 +111,15 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 #pragma mark - Input toolbar
 
-- (void)toggleSendButtonEnabled
+- (void)updateSendButtonEnabledState
 {
-    BOOL hasText = [self.contentView.textView hasText];
+    BOOL enabled = [self.contentView.textView hasText] && self.sendButtonEnabled;
 
     if (self.sendButtonOnRight) {
-        self.contentView.rightBarButtonItem.enabled = hasText;
+        self.contentView.rightBarButtonItem.enabled = enabled;
     }
     else {
-        self.contentView.leftBarButtonItem.enabled = hasText;
+        self.contentView.leftBarButtonItem.enabled = enabled;
     }
 }
 
@@ -144,7 +151,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                                               forControlEvents:UIControlEventTouchUpInside];
             }
 
-            [self toggleSendButtonEnabled];
+            [self updateSendButtonEnabledState];
         }
     }
 }

@@ -403,7 +403,7 @@ JSQMessagesKeyboardControllerDelegate>
     textView.text = nil;
     [textView.undoManager removeAllActions];
 
-    [self.inputToolbar toggleSendButtonEnabled];
+    [self.inputToolbar updateSendButtonEnabledState];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
 
@@ -840,7 +840,7 @@ JSQMessagesKeyboardControllerDelegate>
         return;
     }
 
-    [self.inputToolbar toggleSendButtonEnabled];
+    [self.inputToolbar updateSendButtonEnabledState];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
