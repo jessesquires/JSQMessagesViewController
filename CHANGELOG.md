@@ -11,7 +11,7 @@ This release closes the [8.0.0 milestone](https://github.com/jessesquires/JSQMes
 
 ### Breaking changes
 
-> TBD
+- Removed `JSQMessagesKeyboardController` and implemented a proper `inputAccessoryView`. (#1063, #1529) Thanks @LeoNatan and @kirualex!
 
 ### Enhancements
 
@@ -19,13 +19,13 @@ This release closes the [8.0.0 milestone](https://github.com/jessesquires/JSQMes
 
 ### Fixes
 
-> TBD
-
+- Fixed a number of issues regarding keyboard handling (#1063, #1529, #799, #941, #1299)
 
 7.3.1
 -----
 
-> TBD
+- [Milestone](https://github.com/jessesquires/JSQMessagesViewController/issues?q=milestone%3A7.3.1+is%3Aclosed)
+- [GitHub release notes](https://github.com/jessesquires/JSQMessagesViewController/releases/tag/7.3.1)
 
 7.3.0
 -----
