@@ -46,8 +46,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-
+    self.backgroundColor = [UIColor whiteColor];
     self.jsq_isObserving = NO;
     self.sendButtonOnRight = YES;
 
