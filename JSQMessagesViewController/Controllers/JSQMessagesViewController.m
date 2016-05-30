@@ -303,15 +303,6 @@ JSQMessagesKeyboardControllerDelegate>
     }
 }
 
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-
-    if (!self.inputToolbar.contentView.textView.isFirstResponder) {
-        [self jsq_setToolbarBottomLayoutGuideConstant:self.bottomLayoutGuide.length];
-    }
-}
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -910,13 +901,13 @@ JSQMessagesKeyboardControllerDelegate>
 
 - (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame
 {
-    if (![self.inputToolbar.contentView.textView isFirstResponder] && self.toolbarBottomLayoutGuide.constant == self.bottomLayoutGuide.length) {
+    if (![self.inputToolbar.contentView.textView isFirstResponder] && self.toolbarBottomLayoutGuide.constant == 0.0) {
         return;
     }
 
     CGFloat heightFromBottom = CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(keyboardFrame);
 
-    heightFromBottom = MAX(self.bottomLayoutGuide.length, heightFromBottom);
+    heightFromBottom = MAX(0.0, heightFromBottom);
 
     [self jsq_setToolbarBottomLayoutGuideConstant:heightFromBottom];
 }
@@ -954,7 +945,7 @@ JSQMessagesKeyboardControllerDelegate>
                 [self.inputToolbar.contentView.textView resignFirstResponder];
                 [UIView animateWithDuration:0.0
                                  animations:^{
-                                     [self jsq_setToolbarBottomLayoutGuideConstant:self.bottomLayoutGuide.length];
+                                     [self jsq_setToolbarBottomLayoutGuideConstant:0.0];
                                  }];
 
                 UIView *snapshot = [self.view snapshotViewAfterScreenUpdates:YES];
