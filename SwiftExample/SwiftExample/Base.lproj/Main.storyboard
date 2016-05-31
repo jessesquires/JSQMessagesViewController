@@ -56,8 +56,8 @@
                                     </segue>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgk-HT-Yve">
-                                <rect key="frame" x="210" y="184" width="182" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgk-HT-Yve">
+                                <rect key="frame" x="209" y="184" width="182" height="30"/>
                                 <state key="normal" title="See example Conversation">
                                     <color key="titleColor" red="0.0" green="0.3245242585" blue="0.68404402480000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
