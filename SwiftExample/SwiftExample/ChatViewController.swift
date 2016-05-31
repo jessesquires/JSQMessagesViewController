@@ -83,15 +83,10 @@ class ChatViewController: JSQMessagesViewController {
         
         let photoButton = UIAlertAction(title: "Send photo", style: .Default) { (action) in
             /**
-             *  Add fake photo into conversation messages
+             *  Create fake photo
              */
             let photoItem = JSQPhotoMediaItem(image: UIImage(named: "goldengate"))
-            let photoMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: photoItem)
-            
-            self.messages.append(photoMessage)
-            
-            JSQSystemSoundPlayer.jsq_playMessageSentSound()
-            self.finishSendingMessageAnimated(true)
+            self.addMedia(photoItem)
         }
         
         let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
@@ -100,6 +95,14 @@ class ChatViewController: JSQMessagesViewController {
         sheet.addAction(cancelButton)
         
         self.presentViewController(sheet, animated: true, completion: nil)
+    }
+    
+    func addMedia(media:JSQMediaItem) {
+        let message = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: media)
+        self.messages.append(message)
+        
+        JSQSystemSoundPlayer.jsq_playMessageSentSound()
+        self.finishSendingMessageAnimated(true)
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
