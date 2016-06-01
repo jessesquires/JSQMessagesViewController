@@ -4,6 +4,35 @@ The changelog for `JSQMessagesViewController`. Also see the [releases](https://g
 
 --------------------------------------
 
+8.0.0
+-----
+
+This release closes the [8.0.0 milestone](https://github.com/jessesquires/JSQMessagesViewController/milestones/8.0.0).
+
+### Breaking changes
+
+- Removed `JSQMessagesKeyboardController` and implemented a proper `inputAccessoryView`. (#1063, #1529) Thanks @LeoNatan and @kirualex!
+
+### Enhancements
+
+> TBD
+
+### Fixes
+
+- Fixed a number of issues regarding keyboard handling (#1063, #1529, #799, #941, #1299)
+
+7.3.1
+-----
+
+- [Milestone](https://github.com/jessesquires/JSQMessagesViewController/issues?q=milestone%3A7.3.1+is%3Aclosed)
+- [GitHub release notes](https://github.com/jessesquires/JSQMessagesViewController/releases/tag/7.3.1)
+
+7.3.0
+-----
+
+- [Milestone](https://github.com/jessesquires/JSQMessagesViewController/issues?q=milestone%3A7.3.1+is%3Aclosed)
+- [GitHub release notes](https://github.com/jessesquires/JSQMessagesViewController/releases/tag/7.3.1)
+
 7.3.0
 -----
 
