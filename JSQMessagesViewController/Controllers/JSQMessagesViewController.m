@@ -120,7 +120,6 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (strong, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
 
 @property (strong, nonatomic) NSIndexPath *selectedIndexPathForMenu;
@@ -157,8 +156,6 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 {
     self.view.backgroundColor = [UIColor whiteColor];
 
-    self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
-
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
 
@@ -166,7 +163,6 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
     self.inputToolbar.contentView.textView.accessibilityLabel = [NSBundle jsq_localizedStringForKey:@"new_message"];
     self.inputToolbar.contentView.textView.delegate = self;
-    [self.inputToolbar removeFromSuperview];
 
     self.automaticallyScrollsToMostRecentMessage = YES;
 
@@ -245,10 +241,6 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
-    [self.view layoutIfNeeded];
-    [self.collectionView.collectionViewLayout invalidateLayout];
-
     if (self.automaticallyScrollsToMostRecentMessage) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self scrollToBottomAnimated:NO];
@@ -260,6 +252,15 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    
+    if (!self.inputToolbar.contentView.textView.isFirstResponder) {
+        self.toolbarBottomLayoutGuide.constant = self.collectionView.contentInset.bottom - self.inputToolbar.preferredDefaultHeight;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -767,18 +768,6 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     return [self.inputToolbar.contentView.textView.text jsq_stringByTrimingWhitespace];
 }
 
-#pragma mark - Input
-
-- (UIView *)inputAccessoryView
-{
-    return self.inputToolbar;
-}
-
-- (BOOL)canBecomeFirstResponder
-{
-    return YES;
-}
-
 #pragma mark - Text view delegate
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
@@ -857,7 +846,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 - (void)jsq_updateCollectionViewInsets
 {
     [self jsq_setCollectionViewInsetsTopValue:self.topLayoutGuide.length + self.topContentAdditionalInset
-                                  bottomValue:CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame)];
+                                  bottomValue:self.inputToolbar.preferredDefaultHeight + self.bottomLayoutGuide.length];
 }
 
 - (void)jsq_setCollectionViewInsetsTopValue:(CGFloat)top bottomValue:(CGFloat)bottom
@@ -923,13 +912,21 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     NSInteger animationCurveOption = (animationCurve << 16);
 
     double animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-
+    CGFloat kbOverlap = CGRectGetMaxY(self.collectionView.frame) - (keyboardEndFrame.origin.y);
+    CGFloat minBottom = self.bottomLayoutGuide.length;
+    if (kbOverlap < minBottom) {
+        kbOverlap = minBottom;
+    }
+    
+    self.toolbarBottomLayoutGuide.constant = kbOverlap;
+    CGFloat collectionBottomInset = self.toolbarBottomLayoutGuide.constant + self.inputToolbar.preferredDefaultHeight;
     [UIView animateWithDuration:animationDuration
                           delay:0.0
-                        options:animationCurveOption
+                        options:animationCurveOption | UIViewAnimationOptionLayoutSubviews
                      animations:^{
+                         [self.view layoutIfNeeded];
                          [self jsq_setCollectionViewInsetsTopValue:self.collectionView.contentInset.top
-                                                       bottomValue:CGRectGetHeight(keyboardEndFrame)];
+                                                       bottomValue:collectionBottomInset];
                      }
                      completion:nil];
 }
