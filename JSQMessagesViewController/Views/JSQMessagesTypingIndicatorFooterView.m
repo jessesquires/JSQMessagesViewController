@@ -71,15 +71,6 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
 }
 
 #pragma mark - Typing indicator
-// For backward compability
-- (void)configureWithEllipsisColor:(UIColor *)ellipsisColor
-                messageBubbleColor:(UIColor *)messageBubbleColor
-               shouldDisplayOnLeft:(BOOL)shouldDisplayOnLeft
-                 forCollectionView:(UICollectionView *)collectionView
-{
-    [self configureWithEllipsisColor:ellipsisColor messageBubbleColor:messageBubbleColor animated:NO shouldDisplayOnLeft:shouldDisplayOnLeft forCollectionView:collectionView];
-}
-
 - (void)configureWithEllipsisColor:(UIColor *)ellipsisColor
                 messageBubbleColor:(UIColor *)messageBubbleColor
                           animated:(BOOL)animated
