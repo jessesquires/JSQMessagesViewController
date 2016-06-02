@@ -1,17 +1,29 @@
 //
-//  JSQMessagesTypingView.m
-//  JSQMessages
+//  Created by Jesse Squires
+//  http://www.jessesquires.com
 //
-//  Created by Radek Cieciwa on 30.05.2016.
-//  Copyright © 2016 Hexed Bits. All rights reserved.
+//
+//  Documentation
+//  http://cocoadocs.org/docsets/JSQMessagesViewController
+//
+//
+//  GitHub
+//  https://github.com/jessesquires/JSQMessagesViewController
+//
+//
+//  License
+//  Copyright (c) 2014 Jesse Squires
+//  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
 #import "JSQMessagesTypingView.h"
 
 @interface JSQMessagesTypingView()
-@property(nonatomic, readonly) NSArray *colors;
-@property(nonatomic, readonly) CAKeyframeAnimation *fillColorAnimation;
-@property(nonatomic) CAShapeLayer *dot;
+
+@property (strong, nonatomic, readonly) NSArray *colors;
+@property (strong, nonatomic, readonly) CAKeyframeAnimation *fillColorAnimation;
+@property (strong, nonatomic) CAShapeLayer *dot;
+
 @end
 
 @implementation JSQMessagesTypingView
