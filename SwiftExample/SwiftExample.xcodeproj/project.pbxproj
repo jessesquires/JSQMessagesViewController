@@ -420,7 +420,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AD543A7F7DF54B0939725BC9 /* Pods-SwiftExample.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconSwift;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SwiftExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MacMeDan.SwiftExample;
@@ -432,7 +432,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 172CACF9AF57CFF29818FFA1 /* Pods-SwiftExample.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconSwift;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SwiftExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MacMeDan.SwiftExample;
