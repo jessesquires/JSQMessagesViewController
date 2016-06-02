@@ -113,7 +113,7 @@ class ChatViewController: JSQMessagesViewController {
                 
                 newMediaData = photoItemCopy
             default:
-                assertionFailure("Error: unrecognized media item")
+                assertionFailure("Error: This Media type was not recognised")
             }
             
             newMessage = JSQMessage(senderId: AvatarIdJobs, displayName: DisplayNameJobs, media: newMediaData)
@@ -156,7 +156,7 @@ class ChatViewController: JSQMessagesViewController {
                     (newMediaData as! JSQPhotoMediaItem).image = newMediaAttachmentCopy as! UIImage
                     self.collectionView.reloadData()
                 default:
-                    assertionFailure("Error: unrecognized media item")
+                    assertionFailure("Error: This Media type was not recognised")
                 }
             }
         }
