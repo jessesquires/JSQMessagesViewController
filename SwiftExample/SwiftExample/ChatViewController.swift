@@ -22,8 +22,6 @@ class ChatViewController: JSQMessagesViewController {
         
         bubbleConfigureation()
         
-        self.inputToolbar?.contentView?.leftBarButtonItem = nil
-        
         // This is how you remove Avatars from the messagesView
         collectionView?.collectionViewLayout.incomingAvatarViewSize = .zero
         collectionView?.collectionViewLayout.outgoingAvatarViewSize = .zero
@@ -66,15 +64,50 @@ class ChatViewController: JSQMessagesViewController {
         }
     }
     
+    
+    // MARK: JSQMessagesViewController method overrides
     override func didPressSendButton(button: UIButton?, withMessageText text: String?, senderId: String?, senderDisplayName: String?, date: NSDate?) {
+        /**
+         *  Sending a message. Your implementation of this method should do *at least* the following:
+         *
+         *  1. Play sound (optional)
+         *  2. Add new id<JSQMessageData> object to your data source
+         *  3. Call `finishSendingMessage`
+         */
+        JSQSystemSoundPlayer.jsq_playMessageSentSound()
         
-        // This is where you would impliment your method for saving the message to your backend.
-        //
-        // For this Demo I will just add it to the messages list localy
-        //
-        self.messages.append(JSQMessage(senderId: AvatarIdWoz, displayName: DisplayNameWoz, text: text))
+        let message = JSQMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
+        self.messages.append(message)
         self.finishSendingMessageAnimated(true)
-        self.collectionView?.reloadData()
+    }
+    
+    override func didPressAccessoryButton(sender: UIButton!) {
+        self.inputToolbar.contentView.textView.resignFirstResponder()
+        
+        let sheet = UIAlertController(title: "Media messages", message: nil, preferredStyle: .ActionSheet)
+        
+        let photoButton = UIAlertAction(title: "Send photo", style: .Default) { (action) in
+            /**
+             *  Create fake photo
+             */
+            let photoItem = JSQPhotoMediaItem(image: UIImage(named: "goldengate"))
+            self.addMedia(photoItem)
+        }
+        
+        let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        
+        sheet.addAction(photoButton)
+        sheet.addAction(cancelButton)
+        
+        self.presentViewController(sheet, animated: true, completion: nil)
+    }
+    
+    func addMedia(media:JSQMediaItem) {
+        let message = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: media)
+        self.messages.append(message)
+        
+        JSQSystemSoundPlayer.jsq_playMessageSentSound()
+        self.finishSendingMessageAnimated(true)
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
