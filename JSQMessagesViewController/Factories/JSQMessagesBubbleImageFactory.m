@@ -35,7 +35,7 @@
 
 #pragma mark - Initialization
 
-- (instancetype)initWithBubbleImage:(UIImage *)bubbleImage capInsets:(UIEdgeInsets)capInsets
+- (instancetype)initWithBubbleImage:(UIImage *)bubbleImage capInsets:(UIEdgeInsets)capInsets layoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection
 {
 	NSParameterAssert(bubbleImage != nil);
     
@@ -49,14 +49,15 @@
         else {
             _capInsets = capInsets;
         }
+        
+        _isRightToLeftLanguage = (UIUserInterfaceLayoutDirectionRightToLeft == layoutDirection);
 	}
 	return self;
 }
 
 - (instancetype)init
 {
-  _isRightToLeftLanguage = [UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft;
-  return [self initWithBubbleImage:[UIImage jsq_bubbleCompactImage] capInsets:UIEdgeInsetsZero];
+  return [self initWithBubbleImage:[UIImage jsq_bubbleCompactImage] capInsets:UIEdgeInsetsZero layoutDirection:[UIApplication sharedApplication].userInterfaceLayoutDirection];
 }
 
 #pragma mark - Public

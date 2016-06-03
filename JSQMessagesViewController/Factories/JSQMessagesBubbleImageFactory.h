@@ -21,11 +21,18 @@
 
 #import "JSQMessagesBubbleImage.h"
 
+
 /**
  *  `JSQMessagesBubbleImageFactory` is a factory that provides a means for creating and styling 
  *  `JSQMessagesBubbleImage` objects to be displayed in a `JSQMessagesCollectionViewCell` of a `JSQMessagesCollectionView`.
  */
 @interface JSQMessagesBubbleImageFactory : NSObject
+
+
+/**
+ *  Property for the layout direction of text by default uses ShareedApplication.userInterfaceLayoutDirection()
+ */
+@property (nonatomic)UIUserInterfaceLayoutDirection *layoutDirection;
 
 /**
  *  Creates and returns a new instance of `JSQMessagesBubbleImageFactory` that uses the
@@ -49,7 +56,8 @@
  *
  *  @return An initialized `JSQMessagesBubbleImageFactory` object if created successfully, `nil` otherwise.
  */
-- (instancetype)initWithBubbleImage:(UIImage *)bubbleImage capInsets:(UIEdgeInsets)capInsets;
+
+- (instancetype)initWithBubbleImage:(UIImage *)bubbleImage capInsets:(UIEdgeInsets)capInsets layoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection;
 
 /**
  *  Creates and returns a `JSQMessagesBubbleImage` object with the specified color for *outgoing* message image bubbles.
