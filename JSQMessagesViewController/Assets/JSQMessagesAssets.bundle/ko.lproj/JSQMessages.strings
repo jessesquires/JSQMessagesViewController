@@ -16,14 +16,14 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import "UIDevice+JSQMessages.h"
+//  ********************************
+//  Special thanks to the localization contributors!
+//
+//  https://github.com/jessesquires/JSQMessagesViewController/issues/237
+//  ********************************
 
-@implementation UIDevice (JSQMessages)
+"load_earlier_messages" = "이전 메시지 불러오기";
 
-+ (BOOL)jsq_isCurrentDeviceBeforeiOS8
-{
-    // iOS < 8.0
-    return [[UIDevice currentDevice].systemVersion compare:@"8.0.0" options:NSNumericSearch] == NSOrderedAscending;
-}
+"send" = "전송";
 
-@end
+"new_message" = "새로운 메시지";

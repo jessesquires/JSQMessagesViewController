@@ -78,4 +78,24 @@
  */
 - (NSUInteger)mediaHash;
 
+@optional
+
+/**
+ *  @return String which identifies type of the data returned by `mediaData` method.
+ *
+ *  @discussion If implemented, you must not return `nil` from this, as well as `copyableData`, method.
+ *  This type is frequently, but not necessarily, a UTI (Uniform Type Identifier). It identifies a 
+ *  representation of the data on the pasteboard. Apps can define their own types for custom data,
+ *  however, in this case, only those apps that know of the type could understand the data written to the pasteboard.
+ */
+- (NSString *)mediaDataType;
+
+/**
+ *  @return Data object of class corresponding to type returned by `mediaDataType`.
+ *
+ *  @discussion You should return an object that is of a class type appropriate to the representation type,
+ *  which typically is a UTI.
+ */
+- (id)mediaData;
+
 @end

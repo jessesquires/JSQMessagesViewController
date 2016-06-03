@@ -21,16 +21,14 @@
 #import "JSQMessagesMediaPlaceholderView.h"
 #import "JSQMessagesMediaViewBubbleImageMasker.h"
 
+#import <MobileCoreServices/UTCoreTypes.h>
+
 
 @interface JSQLocationMediaItem ()
 
 @property (strong, nonatomic) UIImage *cachedMapSnapshotImage;
 
 @property (strong, nonatomic) UIImageView *cachedMapImageView;
-
-- (void)createMapViewSnapshotForLocation:(CLLocation *)location
-                        coordinateRegion:(MKCoordinateRegion)region
-                   withCompletionHandler:(JSQLocationMediaItemCompletionBlock)completion;
 
 @end
 
@@ -48,10 +46,9 @@
     return self;
 }
 
-- (void)dealloc
+- (void)clearCachedMediaViews
 {
-    _location = nil;
-    _cachedMapSnapshotImage = nil;
+    [super clearCachedMediaViews];
     _cachedMapImageView = nil;
 }
 
@@ -106,7 +103,7 @@
     
     [snapShotter startWithQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
               completionHandler:^(MKMapSnapshot *snapshot, NSError *error) {
-                  if (error) {
+                  if (snapshot == nil) {
                       NSLog(@"%s Error creating map snapshot: %@", __PRETTY_FUNCTION__, error);
                       return;
                   }
@@ -114,6 +111,9 @@
                   MKAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:nil];
                   CGPoint coordinatePoint = [snapshot pointForCoordinate:location.coordinate];
                   UIImage *image = snapshot.image;
+                  
+                  coordinatePoint.x += pin.centerOffset.x - (CGRectGetWidth(pin.bounds) / 2.0);
+                  coordinatePoint.y += pin.centerOffset.y - (CGRectGetHeight(pin.bounds) / 2.0);
                   
                   UIGraphicsBeginImageContextWithOptions(image.size, YES, image.scale);
                   {
@@ -159,6 +159,19 @@
 {
     return self.hash;
 }
+
+- (NSString *)mediaDataType
+{
+    return (NSString *)kUTTypeURL;
+}
+
+- (id)mediaData
+{
+    NSString *locationAsGoogleMapsString = [NSString stringWithFormat:@"http://maps.apple.com/?ll=%f,%f&z=18&q=%%20", self.coordinate.latitude, self.coordinate.longitude ];
+    NSURL *locationURL = [[NSURL alloc] initWithString:locationAsGoogleMapsString];
+    return locationURL;
+}
+
 
 #pragma mark - NSObject
 

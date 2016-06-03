@@ -41,7 +41,7 @@
 
 /**
  *  The object that acts as the delegate of the collection view. 
- *  The delegate must adpot the `JSQMessagesCollectionViewDelegateFlowLayout` protocol.
+ *  The delegate must adopt the `JSQMessagesCollectionViewDelegateFlowLayout` protocol.
  */
 @property (weak, nonatomic) id<JSQMessagesCollectionViewDelegateFlowLayout> delegate;
 

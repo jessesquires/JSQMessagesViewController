@@ -60,12 +60,24 @@
  */
 - (void)messagesCollectionViewCellDidTapCell:(JSQMessagesCollectionViewCell *)cell atPosition:(CGPoint)position;
 
+/**
+ *  Tells the delegate that an actions has been selected from the menu of this cell.
+ *  This method is automatically called for any registered actions.
+ *
+ *  @param cell The cell that displayed the menu.
+ *  @param action The action that has been performed.
+ *  @param sender The object that initiated the action.
+ *
+ *  @see `JSQMessagesCollectionViewCell`
+ */
+- (void)messagesCollectionViewCell:(JSQMessagesCollectionViewCell *)cell didPerformAction:(SEL)action withSender:(id)sender;
+
 @end
 
 
 /**
- *  The `JSQMessagesCollectionViewCell` is an abstract base class that presents the content for 
- *  a single message data item when that item is within the collection view’s visible bounds. 
+ *  The `JSQMessagesCollectionViewCell` is an abstract base class that presents the content for
+ *  a single message data item when that item is within the collection view’s visible bounds.
  *  The layout and presentation of cells is managed by the collection view and its corresponding layout object.
  *
  *  @warning This class is intended to be subclassed. You should not use it directly.
@@ -106,7 +118,7 @@
 @property (weak, nonatomic, readonly) JSQMessagesCellTextView *textView;
 
 /**
- *  Returns the bubble image view of the cell that is responsible for displaying message bubble images. 
+ *  Returns the bubble image view of the cell that is responsible for displaying message bubble images.
  *
  *  @warning If mediaView returns a non-nil view, then this value will be `nil`.
  */
@@ -120,7 +132,7 @@
  *  To do so, override `collectionView:cellForItemAtIndexPath:`
  *
  *  @warning You should not try to manipulate any properties of this view, for example adjusting
- *  its frame, nor should you remove this view from the cell or remove any of its subviews. 
+ *  its frame, nor should you remove this view from the cell or remove any of its subviews.
  *  Doing so could result in unexpected behavior.
  */
 @property (weak, nonatomic, readonly) UIView *messageBubbleContainerView;
@@ -131,8 +143,7 @@
 @property (weak, nonatomic, readonly) UIImageView *avatarImageView;
 
 /**
- *  Returns the avatar container view of the cell. This view is the superview of 
- *  the cell's avatarImageView.
+ *  Returns the avatar container view of the cell. This view is the superview of the cell's avatarImageView.
  *
  *  @discussion You may customize the cell by adding custom views to this container view.
  *  To do so, override `collectionView:cellForItemAtIndexPath:`
@@ -161,7 +172,7 @@
 /**
  *  Returns the `UINib` object initialized for the cell.
  *
- *  @return The initialized `UINib` object or `nil` if there were errors during 
+ *  @return The initialized `UINib` object or `nil` if there were errors during
  *  initialization or the nib file could not be located.
  */
 + (UINib *)nib;
@@ -179,5 +190,17 @@
  *  @return The string used to identify a reusable cell.
  */
 + (NSString *)mediaCellReuseIdentifier;
+
+/**
+ *  Registers an action to be available in the cell's menu.
+ *
+ *  @param action The selector to register with the cell.
+ *
+ *  @discussion Non-standard or non-system actions must be added to the `UIMenuController` manually.
+ *  You can do this by creating a new `UIMenuItem` and adding it via the controller's `menuItems` property.
+ *
+ *  @warning Note that all message cells share the all actions registered here.
+ */
++ (void)registerMenuAction:(SEL)action;
 
 @end

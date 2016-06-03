@@ -16,13 +16,14 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import <UIKit/UIKit.h>
+//  ********************************
+//  Special thanks to the localization contributors!
+//
+//  https://github.com/jessesquires/JSQMessagesViewController/issues/237
+//  ********************************
 
-@interface UIDevice (JSQMessages)
+"load_earlier_messages" = "Muat Pesan Sebelumnya";
 
-/**
- *  @return Whether or not the current device is running a version of iOS before 8.0.
- */
-+ (BOOL)jsq_isCurrentDeviceBeforeiOS8;
+"send" = "Kirim";
 
-@end
+"new_message" = "Pesan Baru";

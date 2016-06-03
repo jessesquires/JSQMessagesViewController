@@ -33,22 +33,22 @@
                                                          UITextViewDelegate>
 
 /**
- *  Returns the collection view object managed by this view controller. 
+ *  Returns the collection view object managed by this view controller.
  *  This view controller is the collection view's data source and delegate.
  */
 @property (weak, nonatomic, readonly) JSQMessagesCollectionView *collectionView;
 
 /**
- *  Returns the input toolbar view object managed by this view controller. 
+ *  Returns the input toolbar view object managed by this view controller.
  *  This view controller is the toolbar's delegate.
  */
-@property (weak, nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
+@property (strong, nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
 
 /**
- *  Specifies whether or not the view controller should automatically scroll to the most recent message 
+ *  Specifies whether or not the view controller should automatically scroll to the most recent message
  *  when the view appears and when sending, receiving, and composing a new message.
  *
- *  @discussion The default value is `YES`, which allows the view controller to scroll automatically to the most recent message. 
+ *  @discussion The default value is `YES`, which allows the view controller to scroll automatically to the most recent message.
  *  Set to `NO` if you want to manage scrolling yourself.
  */
 @property (assign, nonatomic) BOOL automaticallyScrollsToMostRecentMessage;
@@ -60,7 +60,7 @@
  *  @discussion This cell identifier is used for outgoing text message data items.
  *  The default value is the string returned by `[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]`.
  *  This value must not be `nil`.
- *  
+ *
  *  @see JSQMessagesCollectionViewCellOutgoing.
  *
  *  @warning Overriding this property's default value is *not* recommended. 
@@ -72,7 +72,7 @@
 @property (copy, nonatomic) NSString *outgoingCellIdentifier;
 
 /**
- *  The collection view cell identifier to use for dequeuing outgoing message collection view cells 
+ *  The collection view cell identifier to use for dequeuing outgoing message collection view cells
  *  in the collectionView for media messages.
  *
  *  @discussion This cell identifier is used for outgoing media message data items.
@@ -155,7 +155,7 @@
 /**
  *  Returns the `UINib` object initialized for a `JSQMessagesViewController`.
  *
- *  @return The initialized `UINib` object or `nil` if there were errors during initialization 
+ *  @return The initialized `UINib` object or `nil` if there were errors during initialization
  *  or the nib file could not be located.
  *
  *  @discussion You may override this method to provide a customized nib. If you do,
@@ -166,7 +166,7 @@
 
 /**
  *  Creates and returns a new `JSQMessagesViewController` object.
- *  
+ *
  *  @discussion This is the designated initializer for programmatic instantiation.
  *
  *  @return An initialized `JSQMessagesViewController` object if successful, `nil` otherwise.
@@ -245,5 +245,61 @@
  *  @param animated Pass `YES` if you want to animate scrolling, `NO` if it should be immediate.
  */
 - (void)scrollToBottomAnimated:(BOOL)animated;
+
+/**
+ * Used to decide if a message is incoming or outgoing.
+ *
+ * @discussion The default implementation of this method compares the `senderId` of the message to the
+ * value of the `senderId` property and returns `YES` if they are equal. Subclasses can override
+ * this method to specialize the decision logic.
+ */
+- (BOOL)isOutgoingMessage:(id<JSQMessageData>)messageItem;
+
+/**
+ * Scrolls the collection view so that the cell at the specified indexPath is completely visible above the `inputToolbar`.
+ *
+ * @param indexPath The indexPath for the cell that will be visible.
+ * @param animated Pass `YES` if you want to animate scrolling, `NO` otherwise.
+ */
+- (void)scrollToIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
+
+/**
+ Call to super required.
+ */
+- (void)viewDidLoad NS_REQUIRES_SUPER;
+
+/**
+ Call to super required.
+ */
+- (void)viewWillAppear:(BOOL)animated NS_REQUIRES_SUPER;
+
+/**
+ Call to super required.
+ */
+- (void)viewDidAppear:(BOOL)animated NS_REQUIRES_SUPER;
+
+/**
+ Call to super required.
+ */
+- (void)viewWillDisappear:(BOOL)animated NS_REQUIRES_SUPER;
+
+/**
+ Call to super required.
+ */
+- (void)viewDidDisappear:(BOOL)animated NS_REQUIRES_SUPER;
+
+/**
+ Called when `UIMenuControllerWillShowMenuNotification` is posted.
+
+ @param notification The posted notification.
+ */
+- (void)didReceiveMenuWillShowNotification:(NSNotification *)notification;
+
+/**
+ Called when `UIMenuControllerWillHideMenuNotification` is posted.
+
+ @param notification The posted notification.
+ */
+- (void)didReceiveMenuWillHideNotification:(NSNotification *)notification;
 
 @end

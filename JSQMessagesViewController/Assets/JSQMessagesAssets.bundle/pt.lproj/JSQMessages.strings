@@ -22,7 +22,7 @@
 //  https://github.com/jessesquires/JSQMessagesViewController/issues/237
 //  ********************************
 
-"load_earlier_messages" = "Carregar mensagens anteriore";
+"load_earlier_messages" = "Carregar mensagens anteriores";
 
 "send" = "Enviar";
 
