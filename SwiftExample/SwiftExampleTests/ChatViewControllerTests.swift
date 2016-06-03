@@ -63,4 +63,56 @@ class ChatViewControllerTests: XCTestCase {
         XCTAssert(newMessage.media is JSQPhotoMediaItem)
         
     }
+    
+    /**
+     * Test when the messages array is empty, it should add a new incoming text message
+     * Test when the messages array last message is a text message, it should add a new incoming text message
+     */
+    func testSimulatedIncomingTextMessage() {
+        self.chatViewController.messages = []
+        self.chatViewController.collectionView.reloadData()
+        
+        // trigger action
+        let rightBarButton = self.chatViewController.navigationItem.rightBarButtonItem!
+        rightBarButton.target!.performSelector(rightBarButton.action, withObject: rightBarButton)
+        
+        let lastMessage = self.chatViewController.messages.last!
+        
+        XCTAssert(!lastMessage.isMediaMessage)
+        XCTAssert(lastMessage.senderId != self.chatViewController.senderId)
+        XCTAssert(lastMessage.senderDisplayName != self.chatViewController.senderDisplayName)
+        
+        // triger action
+        rightBarButton.target!.performSelector(rightBarButton.action, withObject: rightBarButton)
+        
+        let newMessage = self.chatViewController.messages.last!
+        
+        XCTAssert(newMessage != lastMessage)
+        XCTAssert(!newMessage.isMediaMessage)
+        XCTAssert(newMessage.senderId != self.chatViewController.senderId)
+        XCTAssert(newMessage.senderDisplayName != self.chatViewController.senderDisplayName)
+    }
+    
+    /**
+     * Simulate that last message is an image and test message received functionality
+     */
+    func testSimulatedIncomingImage() {
+        
+        // add image
+        let photoItem = JSQPhotoMediaItem(image: UIImage(named: "goldengate"))
+        self.chatViewController.addMedia(photoItem)
+        
+        let lastMessage = self.chatViewController.messages.last!
+        
+        // trigger action
+        let rightBarButton = self.chatViewController.navigationItem.rightBarButtonItem!
+        rightBarButton.target!.performSelector(rightBarButton.action, withObject: rightBarButton)
+        
+        let newMessage = self.chatViewController.messages.last!
+        
+        XCTAssert(newMessage != lastMessage)
+        XCTAssert(newMessage.media is JSQPhotoMediaItem)
+        XCTAssert(newMessage.senderId != self.chatViewController.senderId)
+        XCTAssert(newMessage.senderDisplayName != self.chatViewController.senderDisplayName)
+    }
 }
