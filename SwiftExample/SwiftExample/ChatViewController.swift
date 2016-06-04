@@ -112,6 +112,17 @@ class ChatViewController: JSQMessagesViewController {
                 photoItemCopy.image = nil;
                 
                 newMediaData = photoItemCopy
+            case is JSQLocationMediaItem:
+                let locationItemCopy = (copyMediaData as! JSQLocationMediaItem).copy() as! JSQLocationMediaItem
+                locationItemCopy.appliesMediaViewMaskAsOutgoing = false
+                newMediaAttachmentCopy = locationItemCopy.location.copy()
+                
+                /**
+                 *  Set location to nil to simulate "downloading" the location data
+                 */
+                locationItemCopy.location = nil;
+                
+                newMediaData = locationItemCopy;
             default:
                 assertionFailure("Error: This Media type was not recognised")
             }
@@ -155,6 +166,10 @@ class ChatViewController: JSQMessagesViewController {
                 case is JSQPhotoMediaItem:
                     (newMediaData as! JSQPhotoMediaItem).image = newMediaAttachmentCopy as! UIImage
                     self.collectionView.reloadData()
+                case is JSQLocationMediaItem:
+                    (newMediaData as! JSQLocationMediaItem).setLocation(newMediaAttachmentCopy as! CLLocation, withCompletionHandler: {
+                        self.collectionView.reloadData()
+                    })
                 default:
                     assertionFailure("Error: This Media type was not recognised")
                 }
@@ -183,7 +198,7 @@ class ChatViewController: JSQMessagesViewController {
         
         let sheet = UIAlertController(title: "Media messages", message: nil, preferredStyle: .ActionSheet)
         
-        let photoButton = UIAlertAction(title: "Send photo", style: .Default) { (action) in
+        let photoAction = UIAlertAction(title: "Send photo", style: .Default) { (action) in
             /**
              *  Create fake photo
              */
@@ -191,12 +206,33 @@ class ChatViewController: JSQMessagesViewController {
             self.addMedia(photoItem)
         }
         
-        let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let locationAction = UIAlertAction(title: "Send location", style: .Default) { (action) in
+            /**
+             *  Add fake location
+             */
+            let locationItem = self.buildLocationItem()
+            
+            self.addMedia(locationItem)
+        }
         
-        sheet.addAction(photoButton)
-        sheet.addAction(cancelButton)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        
+        sheet.addAction(photoAction)
+        sheet.addAction(locationAction)
+        sheet.addAction(cancelAction)
         
         self.presentViewController(sheet, animated: true, completion: nil)
+    }
+    
+    func buildLocationItem() -> JSQLocationMediaItem {
+        let ferryBuildingInSF = CLLocation(latitude: 37.795313, longitude: -122.393757)
+        
+        let locationItem = JSQLocationMediaItem()
+        locationItem.setLocation(ferryBuildingInSF) {
+            self.collectionView.reloadData()
+        }
+        
+        return locationItem
     }
     
     func addMedia(media:JSQMediaItem) {
