@@ -5,10 +5,6 @@ coverage:
   precision: 2
   round: nearest
   range: "60...100"
-  ignore:
-  - JSQMessagesDemo/*
-  - Pods/*
-  - JSQMessagesTests/*
 
 status:
   project:
@@ -25,7 +21,14 @@ status:
         branches:
         - master
         - develop
-        
+
+flags:
+  default:
+    ignore: 
+    - JSQMessagesDemo/.*
+    - Pods/.*
+    - JSQMessagesTests/.*
+      
 comment:
   layout: "header, diff, changes, sunburst, uncovered"
   branches: 
