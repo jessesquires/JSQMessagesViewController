@@ -5,33 +5,29 @@ coverage:
   precision: 2
   round: nearest
   range: "60...100"
+  ignore:
+    - JSQMessagesDemo/*
+    - Pods/*
+    - JSQMessagesTests/*
 
-status:
-  project:
-    default:
-      target: auto
-      threshold: 2.0
-      branches: 
-      - master
-      - develop
-
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 2.0
+        branches:
+          - master
+          - develop
     patch:
       default:
         target: auto
         branches:
-        - master
-        - develop
+          - master
+          - develop
 
-flags:
-  default:
-    ignore: 
-    - JSQMessagesDemo/.*
-    - Pods/.*
-    - JSQMessagesTests/.*
-      
 comment:
-  layout: "header, diff, changes, sunburst, uncovered"
-  branches: 
-  - master
-  - develop
+  layout: header, diff, changes, sunburst, uncovered
   behavior: default
+  branches:
+    - master
+    - develop
