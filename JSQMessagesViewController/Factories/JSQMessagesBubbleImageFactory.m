@@ -25,37 +25,42 @@
 @interface JSQMessagesBubbleImageFactory ()
 
 @property (strong, nonatomic, readonly) UIImage *bubbleImage;
+
 @property (assign, nonatomic, readonly) UIEdgeInsets capInsets;
-@property (assign, nonatomic) BOOL isRightToLeftLanguage;
+
+@property (assign, nonatomic, readonly) BOOL isRightToLeftLanguage;
+
 @end
+
 
 @implementation JSQMessagesBubbleImageFactory
 
 #pragma mark - Initialization
 
-- (instancetype)initWithBubbleImage:(UIImage *)bubbleImage capInsets:(UIEdgeInsets)capInsets layoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection
+- (instancetype)initWithBubbleImage:(UIImage *)bubbleImage
+                          capInsets:(UIEdgeInsets)capInsets
+                    layoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection
 {
-	NSParameterAssert(bubbleImage != nil);
-    
-	self = [super init];
-	if (self) {
-		_bubbleImage = bubbleImage;
-        
+    NSParameterAssert(bubbleImage != nil);
+
+    self = [super init];
+    if (self) {
+        _bubbleImage = bubbleImage;
+        _capInsets = capInsets;
+        _layoutDirection = layoutDirection;
+
         if (UIEdgeInsetsEqualToEdgeInsets(capInsets, UIEdgeInsetsZero)) {
             _capInsets = [self jsq_centerPointEdgeInsetsForImageSize:bubbleImage.size];
         }
-        else
-        {
-            _capInsets = capInsets;
-        }
-        _layoutDirection = layoutDirection;
     }
-	return self;
+    return self;
 }
 
 - (instancetype)init
 {
-  return [self initWithBubbleImage:[UIImage jsq_bubbleCompactImage] capInsets:UIEdgeInsetsZero layoutDirection:[UIApplication sharedApplication].userInterfaceLayoutDirection];
+    return [self initWithBubbleImage:[UIImage jsq_bubbleCompactImage]
+                           capInsets:UIEdgeInsetsZero
+                     layoutDirection:[UIApplication sharedApplication].userInterfaceLayoutDirection];
 }
 
 #pragma mark - Public
@@ -70,12 +75,12 @@
     return [self jsq_messagesBubbleImageWithColor:color flippedForIncoming:YES ^ self.isRightToLeftLanguage];
 }
 
+#pragma mark - Private
+
 - (BOOL)isRightToLeftLanguage
 {
     return (self.layoutDirection == UIUserInterfaceLayoutDirectionRightToLeft);
 }
-
-#pragma mark - Private
 
 - (UIEdgeInsets)jsq_centerPointEdgeInsetsForImageSize:(CGSize)bubbleImageSize
 {
@@ -87,18 +92,18 @@
 - (JSQMessagesBubbleImage *)jsq_messagesBubbleImageWithColor:(UIColor *)color flippedForIncoming:(BOOL)flippedForIncoming
 {
     NSParameterAssert(color != nil);
-    
+
     UIImage *normalBubble = [self.bubbleImage jsq_imageMaskedWithColor:color];
     UIImage *highlightedBubble = [self.bubbleImage jsq_imageMaskedWithColor:[color jsq_colorByDarkeningColorWithValue:0.12f]];
-    
+
     if (flippedForIncoming) {
         normalBubble = [self jsq_horizontallyFlippedImageFromImage:normalBubble];
         highlightedBubble = [self jsq_horizontallyFlippedImageFromImage:highlightedBubble];
     }
-    
+
     normalBubble = [self jsq_stretchableImageFromImage:normalBubble withCapInsets:self.capInsets];
     highlightedBubble = [self jsq_stretchableImageFromImage:highlightedBubble withCapInsets:self.capInsets];
-    
+
     return [[JSQMessagesBubbleImage alloc] initWithMessageBubbleImage:normalBubble highlightedImage:highlightedBubble];
 }
 

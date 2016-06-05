@@ -27,22 +27,15 @@
  */
 @interface JSQMessagesBubbleImageFactory : NSObject
 
-
 /**
  * Specifies the layout direction of the message bubble. The default value is initialized
- * from [UIApplication sharedApplication].
+ * from `[UIApplication sharedApplication]`.
  */
-@property (nonatomic, assign)UIUserInterfaceLayoutDirection layoutDirection;
-
-/**
- *
- * Helper method to determine if it is a right to left language.
- */
-@property (assign, nonatomic, readonly) BOOL isRightToLeftLanguage;
+@property (nonatomic, assign) UIUserInterfaceLayoutDirection layoutDirection;
 
 /**
  *  Creates and returns a new instance of `JSQMessagesBubbleImageFactory` that uses the
- *  default bubble image assets and cap insets.
+ *  default bubble image assets, cap insets, and layout direction.
  *
  *  @return An initialized `JSQMessagesBubbleImageFactory` object if created successfully, `nil` otherwise.
  */
@@ -63,7 +56,9 @@
  *  @return An initialized `JSQMessagesBubbleImageFactory` object if created successfully, `nil` otherwise.
  */
 
-- (instancetype)initWithBubbleImage:(UIImage *)bubbleImage capInsets:(UIEdgeInsets)capInsets layoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection;
+- (instancetype)initWithBubbleImage:(UIImage *)bubbleImage
+                          capInsets:(UIEdgeInsets)capInsets
+                    layoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection;
 
 /**
  *  Creates and returns a `JSQMessagesBubbleImage` object with the specified color for *outgoing* message image bubbles.
