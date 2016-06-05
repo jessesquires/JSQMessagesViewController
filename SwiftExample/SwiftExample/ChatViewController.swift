@@ -41,6 +41,9 @@ class ChatViewController: JSQMessagesViewController {
         collectionView?.collectionViewLayout.incomingAvatarViewSize = .zero
         collectionView?.collectionViewLayout.outgoingAvatarViewSize = .zero
         
+        // Show Button to simulate incoming messages
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.jsq_defaultTypingIndicatorImage(), style: .Plain, target: self, action: #selector(receiveMessagePressed))
+        
         // This is a beta feature that mostly works but to make things more stable I have diabled it.
         collectionView?.collectionViewLayout.springinessEnabled = false
         
@@ -55,10 +58,109 @@ class ChatViewController: JSQMessagesViewController {
         self.messages = makeConversation()
         self.collectionView?.reloadData()
         self.collectionView?.layoutIfNeeded()
-        
-        
     }
     
+    func receiveMessagePressed(sender: UIBarButtonItem) {
+        /**
+         *  DEMO ONLY
+         *
+         *  The following is simply to simulate received messages for the demo.
+         *  Do not actually do this.
+         */
+        
+        
+        /**
+         *  Show the typing indicator to be shown
+         */
+        self.showTypingIndicator = !self.showTypingIndicator
+        
+        /**
+         *  Scroll to actually view the indicator
+         */
+        self.scrollToBottomAnimated(true)
+        
+        /**
+         *  Copy last sent message, this will be the new "received" message
+         */
+        var copyMessage = self.messages.last?.copy()
+        
+        if (copyMessage == nil) {
+            copyMessage = JSQMessage(senderId: AvatarIdJobs, displayName: DisplayNameJobs, text: "First received!")
+        }
+            
+        var newMessage:JSQMessage?
+        var newMediaData:JSQMessageMediaData?
+        var newMediaAttachmentCopy:AnyObject?
+        
+        if copyMessage!.isMediaMessage() {
+            /**
+             *  Last message was a media message
+             */
+            let copyMediaData = copyMessage!.media
+            
+            switch copyMediaData {
+            case is JSQPhotoMediaItem:
+                let photoItemCopy = (copyMediaData as! JSQPhotoMediaItem).copy() as! JSQPhotoMediaItem
+                photoItemCopy.appliesMediaViewMaskAsOutgoing = false
+                
+                newMediaAttachmentCopy = UIImage(CGImage: photoItemCopy.image.CGImage!)
+                
+                /**
+                 *  Set image to nil to simulate "downloading" the image
+                 *  and show the placeholder view5017
+                 */
+                photoItemCopy.image = nil;
+                
+                newMediaData = photoItemCopy
+            default:
+                assertionFailure("Error: This Media type was not recognised")
+            }
+            
+            newMessage = JSQMessage(senderId: AvatarIdJobs, displayName: DisplayNameJobs, media: newMediaData)
+        }
+        else {
+            /**
+             *  Last message was a text message
+             */
+            
+            newMessage = JSQMessage(senderId: AvatarIdJobs, displayName: DisplayNameJobs, text: copyMessage!.text)
+        }
+        
+        /**
+         *  Upon receiving a message, you should:
+         *
+         *  1. Play sound (optional)
+         *  2. Add new JSQMessageData object to your data source
+         *  3. Call `finishReceivingMessage`
+         */
+        
+        JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+        self.messages.append(newMessage!)
+        self.finishReceivingMessageAnimated(true)
+        
+        if newMessage!.isMediaMessage {
+            /**
+             *  Simulate "downloading" media
+             */
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                /**
+                 *  Media is "finished downloading", re-display visible cells
+                 *
+                 *  If media cell is not visible, the next time it is dequeued the view controller will display its new attachment data
+                 *
+                 *  Reload the specific item, or simply call `reloadData`
+                 */
+                
+                switch newMediaData {
+                case is JSQPhotoMediaItem:
+                    (newMediaData as! JSQPhotoMediaItem).image = newMediaAttachmentCopy as! UIImage
+                    self.collectionView.reloadData()
+                default:
+                    assertionFailure("Error: This Media type was not recognised")
+                }
+            }
+        }
+    }
     
     // MARK: JSQMessagesViewController method overrides
     override func didPressSendButton(button: UIButton?, withMessageText text: String?, senderId: String?, senderDisplayName: String?, date: NSDate?) {
