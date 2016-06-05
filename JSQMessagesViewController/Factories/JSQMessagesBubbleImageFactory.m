@@ -29,13 +29,11 @@
 @property (assign, nonatomic) BOOL isRightToLeftLanguage;
 @end
 
-
-
 @implementation JSQMessagesBubbleImageFactory
 
 #pragma mark - Initialization
 
-- (instancetype)initWithBubbleImage:(UIImage *)bubbleImage capInsets:(UIEdgeInsets)capInsets
+- (instancetype)initWithBubbleImage:(UIImage *)bubbleImage capInsets:(UIEdgeInsets)capInsets layoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection
 {
 	NSParameterAssert(bubbleImage != nil);
     
@@ -46,17 +44,18 @@
         if (UIEdgeInsetsEqualToEdgeInsets(capInsets, UIEdgeInsetsZero)) {
             _capInsets = [self jsq_centerPointEdgeInsetsForImageSize:bubbleImage.size];
         }
-        else {
+        else
+        {
             _capInsets = capInsets;
         }
-	}
+        _layoutDirection = layoutDirection;
+    }
 	return self;
 }
 
 - (instancetype)init
 {
-  _isRightToLeftLanguage = [UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft;
-  return [self initWithBubbleImage:[UIImage jsq_bubbleCompactImage] capInsets:UIEdgeInsetsZero];
+  return [self initWithBubbleImage:[UIImage jsq_bubbleCompactImage] capInsets:UIEdgeInsetsZero layoutDirection:[UIApplication sharedApplication].userInterfaceLayoutDirection];
 }
 
 #pragma mark - Public
@@ -69,6 +68,11 @@
 - (JSQMessagesBubbleImage *)incomingMessagesBubbleImageWithColor:(UIColor *)color
 {
     return [self jsq_messagesBubbleImageWithColor:color flippedForIncoming:YES ^ self.isRightToLeftLanguage];
+}
+
+- (BOOL)isRightToLeftLanguage
+{
+    return (self.layoutDirection == UIUserInterfaceLayoutDirectionRightToLeft);
 }
 
 #pragma mark - Private
