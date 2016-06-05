@@ -136,13 +136,12 @@
     XCTAssertNotNil(bubbleImage, @"Bubble image should not be nil");
     XCTAssertNotNil(bubbleImage.messageBubbleImage, "Image should not be nil");
     XCTAssertEqual(bubbleImage.messageBubbleImage.scale, bubble.scale, @"Image scale should equal bubble image scale");
-    XCTAssertNotEqual(bubbleImage.messageBubbleImage.imageOrientation, bubble.imageOrientation, @"Image orientation should not equal bubble image orientation");
+    XCTAssertEqual(bubbleImage.messageBubbleImage.imageOrientation, bubble.imageOrientation, @"Image orientation should not equal bubble image orientation");
     XCTAssertTrue(bubbleImage.messageBubbleImage.resizingMode == UIImageResizingModeStretch, @"Image should be stretchable");
     XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(bubbleImage.messageBubbleImage.capInsets, capInsets), @"Image capInsets should be equal to capInsets");
     XCTAssertFalse(bubbleImage.messageBubbleImage.flipsForRightToLeftLayoutDirection, @"Not the right direction");
     XCTAssertNotNil(bubbleImage.messageBubbleHighlightedImage, @"Highlighted image should not be nil");
     XCTAssertEqual(bubbleImage.messageBubbleHighlightedImage.scale, bubble.scale, @"HighlightedImage scale should equal bubble image scale");
-    XCTAssertNotEqual(bubbleImage.messageBubbleHighlightedImage.imageOrientation, bubble.imageOrientation, @"HighlightedImage orientation should be the same bubble image orientation");
     XCTAssertTrue(bubbleImage.messageBubbleHighlightedImage.resizingMode == UIImageResizingModeStretch, @"HighlightedImage should be stretchable");
     XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(bubbleImage.messageBubbleHighlightedImage.capInsets, capInsets), @"HighlightedImage capInsets should be equal to capInsets");
 }
@@ -180,7 +179,7 @@
     
     XCTAssertNotNil(bubbleImage.messageBubbleImage, "Image should not be nil");
     XCTAssertEqual(bubbleImage.messageBubbleImage.scale, bubble.scale, @"Image scale should equal bubble image scale");
-    XCTAssertNotEqual(bubbleImage.messageBubbleImage.imageOrientation, UIImageOrientationUpMirrored, @"Image orientation should be flipped");
+    XCTAssertEqual(bubbleImage.messageBubbleImage.imageOrientation, UIImageOrientationUpMirrored, @"Image orientation should be flipped");
     XCTAssertTrue(bubbleImage.messageBubbleImage.resizingMode == UIImageResizingModeStretch, @"Image should be stretchable");
     XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(bubbleImage.messageBubbleImage.capInsets, capInsets), @"Image capInsets should be equal to capInsets");
     

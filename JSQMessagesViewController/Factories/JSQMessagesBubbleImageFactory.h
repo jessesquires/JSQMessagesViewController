@@ -21,7 +21,6 @@
 
 #import "JSQMessagesBubbleImage.h"
 
-
 /**
  *  `JSQMessagesBubbleImageFactory` is a factory that provides a means for creating and styling 
  *  `JSQMessagesBubbleImage` objects to be displayed in a `JSQMessagesCollectionViewCell` of a `JSQMessagesCollectionView`.
@@ -30,9 +29,16 @@
 
 
 /**
- *  Property for the layout direction of text by default uses ShareedApplication.userInterfaceLayoutDirection()
+ * Specifies the layout direction of the message bubble. The default value is initialized
+ * from [UIApplication sharedApplication].
  */
-@property (nonatomic)UIUserInterfaceLayoutDirection *layoutDirection;
+@property (nonatomic, assign)UIUserInterfaceLayoutDirection layoutDirection;
+
+/**
+ *
+ *
+ */
+@property (assign, readonly) BOOL isRightToLeftLanguage;
 
 /**
  *  Creates and returns a new instance of `JSQMessagesBubbleImageFactory` that uses the
