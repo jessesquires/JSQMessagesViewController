@@ -26,9 +26,8 @@
 
 @property (strong, nonatomic, readonly) UIImage *bubbleImage;
 @property (assign, nonatomic, readonly) UIEdgeInsets capInsets;
+@property (assign, nonatomic) BOOL isRightToLeftLanguage;
 @end
-
-
 
 @implementation JSQMessagesBubbleImageFactory
 
@@ -45,14 +44,12 @@
         if (UIEdgeInsetsEqualToEdgeInsets(capInsets, UIEdgeInsetsZero)) {
             _capInsets = [self jsq_centerPointEdgeInsetsForImageSize:bubbleImage.size];
         }
-     
-        else {
+        else
+        {
             _capInsets = capInsets;
         }
-        
         _layoutDirection = layoutDirection;
-        
-	}
+    }
 	return self;
 }
 
@@ -65,7 +62,6 @@
 
 - (JSQMessagesBubbleImage *)outgoingMessagesBubbleImageWithColor:(UIColor *)color
 {
-  
     return [self jsq_messagesBubbleImageWithColor:color flippedForIncoming:NO ^ self.isRightToLeftLanguage];
 }
 
@@ -74,12 +70,9 @@
     return [self jsq_messagesBubbleImageWithColor:color flippedForIncoming:YES ^ self.isRightToLeftLanguage];
 }
 
-- (BOOL)isRightToLeftLanguage:(UIUserInterfaceLayoutDirection)layoutDirection {
-    if (layoutDirection == UIUserInterfaceLayoutDirectionRightToLeft) {
-        return true;
-    } else {
-    return false;
-    }
+- (BOOL)isRightToLeftLanguage
+{
+    return (self.layoutDirection == UIUserInterfaceLayoutDirectionRightToLeft);
 }
 
 #pragma mark - Private

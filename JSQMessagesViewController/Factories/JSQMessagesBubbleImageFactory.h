@@ -36,9 +36,9 @@
 
 /**
  *
- *
+ * Helper method to determine if it is a right to left language.
  */
-@property (assign, readonly) BOOL isRightToLeftLanguage;
+@property (assign, nonatomic, readonly) BOOL isRightToLeftLanguage;
 
 /**
  *  Creates and returns a new instance of `JSQMessagesBubbleImageFactory` that uses the
