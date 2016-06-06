@@ -4,9 +4,13 @@
 
 ------------------------
 
-## Announcement
+## :warning: Announcement :warning:
 
 Development on version `8.0` of the library is underway. Learn more at [#1216](https://github.com/jessesquires/JSQMessagesViewController/issues/1216) and [#1336](https://github.com/jessesquires/JSQMessagesViewController/issues/1336).
+
+Submit work for `v8.0` to the [`develop`](https://github.com/jessesquires/JSQMessagesViewController/tree/develop) branch.
+
+Submit fixes for `v7.3.x` to the [`release_7.3`](https://github.com/jessesquires/JSQMessagesViewController/tree/release_7.3) branch.
 
 ------------------------
 
