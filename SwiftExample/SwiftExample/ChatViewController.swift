@@ -34,7 +34,7 @@ class ChatViewController: JSQMessagesViewController {
         else {
             // Make taillessBubbles
             incomingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero).incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
-            outgoingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero).outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
+            outgoingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero).outgoingMessagesBubbleImageWithColor(UIColor.lightGrayColor())
         }
         
         // This is how you remove Avatars from the messagesView
@@ -53,9 +53,7 @@ class ChatViewController: JSQMessagesViewController {
         senderId = AvatarIdWoz
         senderDisplayName = conversation?.firstName ?? conversation?.preferredName ?? conversation?.lastName ?? ""
         automaticallyScrollsToMostRecentMessage = true
-        
-        //Get Messages
-        self.messages = makeConversation()
+
         self.collectionView?.reloadData()
         self.collectionView?.layoutIfNeeded()
     }
