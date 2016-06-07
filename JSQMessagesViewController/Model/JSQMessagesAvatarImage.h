@@ -21,6 +21,7 @@
 
 #import "JSQMessageAvatarImageDataSource.h"
 
+NS_ASSUME_NONNULL_BEGIN
 /**
  *  A `JSQMessagesAvatarImage` model object represents an avatar image.
  *  This is a concrete class that implements the `JSQMessageAvatarImageDataSource` protocol.
@@ -33,12 +34,12 @@
 /**
  *  The avatar image for a regular display state.
  */
-@property (nonatomic, strong) UIImage *avatarImage;
+@property (nonatomic, strong, nullable) UIImage *avatarImage;
 
 /**
  *  The avatar image for a highlighted display state.
  */
-@property (nonatomic, strong) UIImage *avatarHighlightedImage;
+@property (nonatomic, strong, nullable) UIImage *avatarHighlightedImage;
 
 /**
  *  Returns the placeholder image for an avatar to display if avatarImage is `nil`.
@@ -54,7 +55,7 @@
  *
  *  @return An initialized `JSQMessagesAvatarImage` object if successful, `nil` otherwise.
  */
-+ (instancetype)avatarWithImage:(UIImage *)image;
++ (nullable instancetype)avatarWithImage:(UIImage *)image;
 
 /**
  *  Initializes and returns an avatar image object having the specified placeholder image.
@@ -63,7 +64,7 @@
  *
  *  @return An initialized `JSQMessagesAvatarImage` object if successful, `nil` otherwise.
  */
-+ (instancetype)avatarImageWithPlaceholder:(UIImage *)placeholderImage;
++ (nullable instancetype)avatarImageWithPlaceholder:(UIImage *)placeholderImage;
 
 /**
  *  Initializes and returns an avatar image object having the specified regular, highlighed, and placeholder images.
@@ -74,9 +75,9 @@
  *
  *  @return An initialized `JSQMessagesAvatarImage` object if successful, `nil` otherwise.
  */
-- (instancetype)initWithAvatarImage:(UIImage *)avatarImage
-                   highlightedImage:(UIImage *)highlightedImage
-                   placeholderImage:(UIImage *)placeholderImage NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithAvatarImage:(nullable UIImage *)avatarImage
+                            highlightedImage:(nullable UIImage *)highlightedImage
+                            placeholderImage:(UIImage *)placeholderImage NS_DESIGNATED_INITIALIZER;
 
 /**
  *  Not a valid initializer.
@@ -84,3 +85,4 @@
 - (id)init NS_UNAVAILABLE;
 
 @end
+NS_ASSUME_NONNULL_END

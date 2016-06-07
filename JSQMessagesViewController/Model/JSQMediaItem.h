@@ -48,7 +48,7 @@
  *
  *  @return An initialized `JSQMediaItem` object if successful, `nil` otherwise.
  */
-- (instancetype)initWithMaskAsOutgoing:(BOOL)maskAsOutgoing;
+- (nullable instancetype)initWithMaskAsOutgoing:(BOOL)maskAsOutgoing;
 
 /**
  *  Clears any media view or media placeholder view that the item has cached.

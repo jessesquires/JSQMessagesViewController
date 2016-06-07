@@ -26,7 +26,7 @@
 @class JSQMessagesTypingIndicatorFooterView;
 @class JSQMessagesLoadEarlierHeaderView;
 
-
+NS_ASSUME_NONNULL_BEGIN
 /**
  *  The `JSQMessagesCollectionView` class manages an ordered collection of message data items and presents
  *  them using a specialized layout for messages.
@@ -37,13 +37,13 @@
  *  The object that provides the data for the collection view.
  *  The data source must adopt the `JSQMessagesCollectionViewDataSource` protocol.
  */
-@property (weak, nonatomic) id<JSQMessagesCollectionViewDataSource> dataSource;
+@property (weak, nonatomic, nullable) id<JSQMessagesCollectionViewDataSource> dataSource;
 
 /**
  *  The object that acts as the delegate of the collection view. 
  *  The delegate must adopt the `JSQMessagesCollectionViewDelegateFlowLayout` protocol.
  */
-@property (weak, nonatomic) id<JSQMessagesCollectionViewDelegateFlowLayout> delegate;
+@property (weak, nonatomic, nullable) id<JSQMessagesCollectionViewDelegateFlowLayout> delegate;
 
 /**
  *  The layout used to organize the collection view’s items.
@@ -99,3 +99,4 @@
 - (JSQMessagesLoadEarlierHeaderView *)dequeueLoadEarlierMessagesViewHeaderForIndexPath:(NSIndexPath *)indexPath;
 
 @end
+NS_ASSUME_NONNULL_END

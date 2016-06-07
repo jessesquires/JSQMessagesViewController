@@ -21,6 +21,7 @@
 
 #import "JSQMessageBubbleImageDataSource.h"
 
+NS_ASSUME_NONNULL_BEGIN
 /**
  *  A `JSQMessagesBubbleImage` model object represents a message bubble image, and is immutable. 
  *  This is a concrete class that implements the `JSQMessageBubbleImageDataSource` protocol.
@@ -50,7 +51,7 @@
  *
  *  @see JSQMessagesBubbleImageFactory.
  */
-- (instancetype)initWithMessageBubbleImage:(UIImage *)image highlightedImage:(UIImage *)highlightedImage NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithMessageBubbleImage:(UIImage *)image highlightedImage:(UIImage *)highlightedImage NS_DESIGNATED_INITIALIZER;
 
 /**
  *  Not a valid initializer.
@@ -58,3 +59,4 @@
 - (id)init NS_UNAVAILABLE;
 
 @end
+NS_ASSUME_NONNULL_END

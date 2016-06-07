@@ -36,8 +36,8 @@
  *
  *  @return An initialized `JSQMessagesBubblesSizeCalculator` object if successful, `nil` otherwise.
  */
-- (instancetype)initWithCache:(NSCache *)cache
-           minimumBubbleWidth:(NSUInteger)minimumBubbleWidth
-        usesFixedWidthBubbles:(BOOL)usesFixedWidthBubbles NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCache:(nonnull NSCache *)cache
+                    minimumBubbleWidth:(NSUInteger)minimumBubbleWidth
+                 usesFixedWidthBubbles:(BOOL)usesFixedWidthBubbles NS_DESIGNATED_INITIALIZER;
 
 @end

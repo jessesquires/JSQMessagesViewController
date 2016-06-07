@@ -20,6 +20,7 @@
 
 #import "JSQMessageData.h"
 
+NS_ASSUME_NONNULL_BEGIN
 /**
  *  The `JSQMessage` class is a concrete class for message model objects that represents a single user message.
  *  The message can be a text message or media message, depending on how it is initialized.
@@ -55,13 +56,13 @@
  *  Returns the body text of the message, or `nil` if the message is a media message.
  *  That is, if `isMediaMessage` is equal to `YES` then this value will be `nil`.
  */
-@property (copy, nonatomic, readonly) NSString *text;
+@property (copy, nonatomic, readonly, nullable) NSString *text;     // expected-warning due to JSQMessageData does not allow text to be nil but here
 
 /**
  *  Returns the media item attachment of the message, or `nil` if the message is not a media message.
  *  That is, if `isMediaMessage` is equal to `NO` then this value will be `nil`.
  */
-@property (copy, nonatomic, readonly) id<JSQMessageMediaData> media;
+@property (copy, nonatomic, readonly, nullable) id<JSQMessageMediaData> media;      // expected-warning due to JSQMessageData does not allow text to be nil buthere
 
 
 #pragma mark - Initialization
@@ -78,9 +79,9 @@
  *
  *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
  */
-+ (instancetype)messageWithSenderId:(NSString *)senderId
-                        displayName:(NSString *)displayName
-                               text:(NSString *)text;
++ (nullable instancetype)messageWithSenderId:(NSString *)senderId
+                                 displayName:(NSString *)displayName
+                                        text:(NSString *)text;
 
 /**
  *  Initializes and returns a message object having the given senderId, senderDisplayName, date, and text.
@@ -94,10 +95,10 @@
  *
  *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
  */
-- (instancetype)initWithSenderId:(NSString *)senderId
-               senderDisplayName:(NSString *)senderDisplayName
-                            date:(NSDate *)date
-                            text:(NSString *)text;
+- (nullable instancetype)initWithSenderId:(NSString *)senderId
+                        senderDisplayName:(NSString *)senderDisplayName
+                                     date:(NSDate *)date
+                                     text:(NSString *)text;
 /**
  *  Initializes and returns a message object having the given senderId, displayName, media,
  *  and current system date.
@@ -110,9 +111,9 @@
  *
  *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
  */
-+ (instancetype)messageWithSenderId:(NSString *)senderId
-                        displayName:(NSString *)displayName
-                              media:(id<JSQMessageMediaData>)media;
++ (nullable instancetype)messageWithSenderId:(NSString *)senderId
+                                 displayName:(NSString *)displayName
+                                       media:(id<JSQMessageMediaData>)media;
 
 /**
  *  Initializes and returns a message object having the given senderId, displayName, date, and media.
@@ -126,10 +127,10 @@
  *
  *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
  */
-- (instancetype)initWithSenderId:(NSString *)senderId
-               senderDisplayName:(NSString *)senderDisplayName
-                            date:(NSDate *)date
-                           media:(id<JSQMessageMediaData>)media;
+- (nullable instancetype)initWithSenderId:(NSString *)senderId
+                        senderDisplayName:(NSString *)senderDisplayName
+                                     date:(NSDate *)date
+                                    media:(id<JSQMessageMediaData>)media;
 
 /**
  *  Not a valid initializer.
@@ -137,3 +138,4 @@
 - (id)init NS_UNAVAILABLE;
 
 @end
+NS_ASSUME_NONNULL_END

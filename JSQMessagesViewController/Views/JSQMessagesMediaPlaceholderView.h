@@ -19,6 +19,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  A `JSQMessagesMediaPlaceholderView` object represents a loading or placeholder
  *  view for media message objects whose media attachments are not yet available. 
@@ -34,12 +36,12 @@
 /**
  *  Returns the activity indicator view for this placeholder view, or `nil` if it does not exist.
  */
-@property (nonatomic, weak, readonly) UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, weak, readonly, nullable) UIActivityIndicatorView *activityIndicatorView;
 
 /**
  *  Returns the image view for this placeholder view, or `nil` if it does not exist.
  */
-@property (nonatomic, weak, readonly) UIImageView *imageView;
+@property (nonatomic, weak, readonly, nullable) UIImageView *imageView;
 
 /**
  *  Creates a media placeholder view object with a light gray background and
@@ -50,7 +52,7 @@
  *
  *  @return An initialized `JSQMessagesMediaPlaceholderView` object if successful, `nil` otherwise.
  */
-+ (instancetype)viewWithActivityIndicator;
++ (nullable instancetype)viewWithActivityIndicator;
 
 /**
  *  Creates a media placeholder view object with a light gray background and
@@ -61,7 +63,7 @@
  *
  *  @return An initialized `JSQMessagesMediaPlaceholderView` object if successful, `nil` otherwise.
  */
-+ (instancetype)viewWithAttachmentIcon;
++ (nullable instancetype)viewWithAttachmentIcon;
 
 /**
  *  Creates a media placeholder view having the given frame, backgroundColor, and activityIndicatorView.
@@ -72,9 +74,9 @@
  *
  *  @return An initialized `JSQMessagesMediaPlaceholderView` object if successful, `nil` otherwise.
  */
-- (instancetype)initWithFrame:(CGRect)frame
-              backgroundColor:(UIColor *)backgroundColor
-        activityIndicatorView:(UIActivityIndicatorView *)activityIndicatorView;
+- (nullable instancetype)initWithFrame:(CGRect)frame
+                       backgroundColor:(UIColor *)backgroundColor
+                 activityIndicatorView:(UIActivityIndicatorView *)activityIndicatorView;
 
 /**
  *  Creates a media placeholder view having the given frame, backgroundColor, and imageView.
@@ -85,8 +87,9 @@
  *
  *  @return An initialized `JSQMessagesMediaPlaceholderView` object if successful, `nil` otherwise.
  */
-- (instancetype)initWithFrame:(CGRect)frame
-              backgroundColor:(UIColor *)backgroundColor
-                    imageView:(UIImageView *)imageView;
+- (nullable instancetype)initWithFrame:(CGRect)frame
+                       backgroundColor:(UIColor *)backgroundColor
+                             imageView:(UIImageView *)imageView;
 
 @end
+NS_ASSUME_NONNULL_END

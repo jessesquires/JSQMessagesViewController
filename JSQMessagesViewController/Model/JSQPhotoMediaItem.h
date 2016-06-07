@@ -29,7 +29,7 @@
 /**
  *  The image for the photo media item. The default value is `nil`.
  */
-@property (copy, nonatomic) UIImage *image;
+@property (copy, nonatomic, nullable) UIImage *image;
 
 /**
  *  Initializes and returns a photo media item object having the given image.
@@ -42,6 +42,6 @@
  *  you may initialize a `JSQPhotoMediaItem` object with a `nil` image. 
  *  Once the image has been retrieved, you can then set the image property.
  */
-- (instancetype)initWithImage:(UIImage *)image;
+- (nullable instancetype)initWithImage:(nullable UIImage *)image;
 
 @end

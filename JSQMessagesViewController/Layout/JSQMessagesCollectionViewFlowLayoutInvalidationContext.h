@@ -42,6 +42,6 @@
  *
  *  @return An initialized invalidation context object if successful, otherwise `nil`.
  */
-+ (instancetype)context;
++ (nullable instancetype)context;
 
 @end

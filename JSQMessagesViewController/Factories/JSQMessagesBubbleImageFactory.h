@@ -21,6 +21,7 @@
 
 #import "JSQMessagesBubbleImage.h"
 
+NS_ASSUME_NONNULL_BEGIN
 /**
  *  `JSQMessagesBubbleImageFactory` is a factory that provides a means for creating and styling 
  *  `JSQMessagesBubbleImage` objects to be displayed in a `JSQMessagesCollectionViewCell` of a `JSQMessagesCollectionView`.
@@ -39,7 +40,7 @@
  *
  *  @return An initialized `JSQMessagesBubbleImageFactory` object if created successfully, `nil` otherwise.
  */
-- (instancetype)init;
+- (nullable instancetype)init;
 
 /**
  *  Creates and returns a new instance of `JSQMessagesBubbleImageFactory` having the specified
@@ -56,9 +57,9 @@
  *  @return An initialized `JSQMessagesBubbleImageFactory` object if created successfully, `nil` otherwise.
  */
 
-- (instancetype)initWithBubbleImage:(UIImage *)bubbleImage
-                          capInsets:(UIEdgeInsets)capInsets
-                    layoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection;
+- (nullable instancetype)initWithBubbleImage:(UIImage *)bubbleImage
+                                   capInsets:(UIEdgeInsets)capInsets
+                             layoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection;
 
 /**
  *  Creates and returns a `JSQMessagesBubbleImage` object with the specified color for *outgoing* message image bubbles.
@@ -69,7 +70,7 @@
  *
  *  @return An initialized `JSQMessagesBubbleImage` object if created successfully, `nil` otherwise.
  */
-- (JSQMessagesBubbleImage *)outgoingMessagesBubbleImageWithColor:(UIColor *)color;
+- (nullable JSQMessagesBubbleImage *)outgoingMessagesBubbleImageWithColor:(UIColor *)color;
 
 /**
  *  Creates and returns a `JSQMessagesBubbleImage` object with the specified color for *incoming* message image bubbles.
@@ -80,6 +81,7 @@
  *
  *  @return An initialized `JSQMessagesBubbleImage` object if created successfully, `nil` otherwise.
  */
-- (JSQMessagesBubbleImage *)incomingMessagesBubbleImageWithColor:(UIColor *)color;
+- (nullable JSQMessagesBubbleImage *)incomingMessagesBubbleImageWithColor:(UIColor *)color;
 
 @end
+NS_ASSUME_NONNULL_END

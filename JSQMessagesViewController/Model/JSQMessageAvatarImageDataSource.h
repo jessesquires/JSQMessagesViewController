@@ -39,14 +39,14 @@
  *  
  *  @discussion You may return `nil` from this method while the image is being downloaded.
  */
-- (UIImage *)avatarImage;
+- (nullable UIImage *)avatarImage;
 
 /**
  *  @return The avatar image for a highlighted display state. 
  *  
  *  @discussion You may return `nil` from this method if this does not apply.
  */
-- (UIImage *)avatarHighlightedImage;
+- (nullable UIImage *)avatarHighlightedImage;
 
 /**
  *  @return A placeholder avatar image to be displayed if avatarImage is not yet available, or `nil`.
@@ -58,6 +58,6 @@
  *
  *  @warning You must not return `nil` from this method.
  */
-- (UIImage *)avatarPlaceholderImage;
+- (nonnull UIImage *)avatarPlaceholderImage;
 
 @end

@@ -37,7 +37,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
 /**
  *  Returns the text view in which the user composes a message.
  */
-@property (weak, nonatomic, readonly) JSQMessagesComposerTextView *textView;
+@property (weak, nonatomic, readonly, nullable) JSQMessagesComposerTextView *textView;
 
 /**
  *  A custom button item displayed on the left of the toolbar content view.
@@ -49,7 +49,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
  *  If the frame of this button is equal to `CGRectZero` when set, then a default frame size will be used.
  *  Set this value to `nil` to remove the button.
  */
-@property (weak, nonatomic) UIButton *leftBarButtonItem;
+@property (weak, nonatomic, nullable) UIButton *leftBarButtonItem;
 
 /**
  *  Specifies the width of the leftBarButtonItem.
@@ -73,7 +73,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
  *  However, you will be completely responsible for responding to all touch events for these buttons
  *  in your `JSQMessagesViewController` subclass.
  */
-@property (weak, nonatomic, readonly) UIView *leftBarButtonContainerView;
+@property (weak, nonatomic, readonly, nullable) UIView *leftBarButtonContainerView;
 
 /**
  *  A custom button item displayed on the right of the toolbar content view.
@@ -85,7 +85,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
  *  If the frame of this button is equal to `CGRectZero` when set, then a default frame size will be used.
  *  Set this value to `nil` to remove the button.
  */
-@property (weak, nonatomic) UIButton *rightBarButtonItem;
+@property (weak, nonatomic, nullable) UIButton *rightBarButtonItem;
 
 /**
  *  Specifies the width of the rightBarButtonItem.
@@ -109,7 +109,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
  *  However, you will be completely responsible for responding to all touch events for these buttons
  *  in your `JSQMessagesViewController` subclass.
  */
-@property (weak, nonatomic, readonly) UIView *rightBarButtonContainerView;
+@property (weak, nonatomic, readonly, nullable) UIView *rightBarButtonContainerView;
 
 #pragma mark - Class methods
 
@@ -119,6 +119,6 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
  *  @return The initialized `UINib` object or `nil` if there were errors during
  *  initialization or the nib file could not be located.
  */
-+ (UINib *)nib;
++ (nullable UINib *)nib;
 
 @end
