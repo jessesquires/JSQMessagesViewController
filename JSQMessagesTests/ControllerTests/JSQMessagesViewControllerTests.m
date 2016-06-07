@@ -42,9 +42,6 @@
 
 - (void)testJSQMessagesViewControllerInit
 {
-    UINib *nib = [JSQMessagesViewController nib];
-    XCTAssertNotNil(nib, @"Nib should not be nil");
-    
     JSQMessagesViewController *vc = [JSQMessagesViewController messagesViewController];
 
     [vc beginAppearanceTransition:YES animated:NO];
@@ -72,7 +69,7 @@
     [demoVC endAppearanceTransition];
 
     XCTAssertNotNil(demoVC, @"View controller should not be nil");
-    XCTAssertTrue([demoVC isKindOfClass:[DemoMessagesViewController class]], @"View controller should be kind of class: %@", [DemoMessagesViewController class]);
+    XCTAssertTrue([demoVC isKindOfClass:[JSQMessagesViewController class]], @"View controller should be kind of class: %@", [JSQMessagesViewController class]);
     XCTAssertNotNil(demoVC.view, @"View should not be nil");
     XCTAssertNotNil(demoVC.collectionView, @"Collection view should not be nil");
     XCTAssertNotNil(demoVC.inputToolbar, @"Input toolbar should not be nil");
