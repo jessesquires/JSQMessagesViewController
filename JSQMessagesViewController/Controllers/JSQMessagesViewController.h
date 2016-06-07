@@ -172,6 +172,8 @@
  */
 @property (assign, nonatomic) CGFloat topContentAdditionalInset;
 
+@property (assign, nonatomic) CGFloat bottomContentAdditionalInset;
+
 #pragma mark - Class methods
 
 /**
