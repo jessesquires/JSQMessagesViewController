@@ -95,6 +95,12 @@
      *
      *  self.inputToolbar.maximumHeight = 150;
      */
+    
+    /**
+     *  Set top and bottom padding from the input toolbar
+     *
+     *  self.additionalContentInset = UIEdgeInsetsMake(30.0f, 0.0f, 20.0f, 0.0f);
+     */
 }
 
 - (void)viewWillAppear:(BOOL)animated

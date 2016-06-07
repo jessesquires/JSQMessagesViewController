@@ -146,11 +146,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) BOOL showLoadEarlierMessagesHeader;
 
 /**
- *  Specifies an additional inset amount to be added to the collectionView's contentInsets.top value.
+ *  Specifies an additional inset amount to be added to the collectionView's additionalContentInset value.
  *
- *  @discussion Use this property to adjust the top content inset to account for a custom subview at the top of your view controller.
+ *  @discussion Use this property to adjust the top, left, bottom or right content inset to account for a custom subview at the top of your view controller.
  */
-@property (assign, nonatomic) CGFloat topContentAdditionalInset;
+@property (assign, nonatomic) UIEdgeInsets additionalContentInset;
 
 #pragma mark - Class methods
 
