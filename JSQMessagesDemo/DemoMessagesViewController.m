@@ -262,7 +262,9 @@
          *  2. Add new id<JSQMessageData> object to your data source
          *  3. Call `finishReceivingMessage`
          */
-        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+
+        // [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+
         [self.demoData.messages addObject:newMessage];
         [self finishReceivingMessageAnimated:YES];
         
@@ -331,7 +333,8 @@
      *  2. Add new id<JSQMessageData> object to your data source
      *  3. Call `finishSendingMessage`
      */
-    [JSQSystemSoundPlayer jsq_playMessageSentSound];
+
+    // [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
     JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId
                                              senderDisplayName:senderDisplayName
@@ -387,7 +390,7 @@
             break;
     }
     
-    [JSQSystemSoundPlayer jsq_playMessageSentSound];
+    // [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
     [self finishSendingMessageAnimated:YES];
 }
