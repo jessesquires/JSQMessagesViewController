@@ -30,6 +30,11 @@
 
 @implementation JSQMessagesToolbarButtonFactory
 
+- (instancetype)init
+{
+    return [self initWithFont:[UIFont boldSystemFontOfSize:17.0]];
+}
+
 - (instancetype)initWithFont:(UIFont *)font
 {
     NSParameterAssert(font != nil);
@@ -55,7 +60,7 @@
     accessoryButton.contentMode = UIViewContentModeScaleAspectFit;
     accessoryButton.backgroundColor = [UIColor clearColor];
     accessoryButton.tintColor = [UIColor lightGrayColor];
-    accessoryButton.titleLabel.font = self.buttonFont != nil ? self.buttonFont : [UIFont boldSystemFontOfSize:17.0];
+    accessoryButton.titleLabel.font = self.buttonFont;
     
     accessoryButton.accessibilityLabel = [NSBundle jsq_localizedStringForKey:@"accessory_button_accessibility_label"];
 
@@ -72,7 +77,7 @@
     [sendButton setTitleColor:[[UIColor jsq_messageBubbleBlueColor] jsq_colorByDarkeningColorWithValue:0.1f] forState:UIControlStateHighlighted];
     [sendButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
 
-    sendButton.titleLabel.font = self.buttonFont != nil ? self.buttonFont : [UIFont boldSystemFontOfSize:17.0];
+    sendButton.titleLabel.font = self.buttonFont;
     sendButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     sendButton.titleLabel.minimumScaleFactor = 0.85f;
     sendButton.contentMode = UIViewContentModeCenter;

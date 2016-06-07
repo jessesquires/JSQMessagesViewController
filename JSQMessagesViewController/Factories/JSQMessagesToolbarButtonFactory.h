@@ -26,8 +26,16 @@
 @interface JSQMessagesToolbarButtonFactory : NSObject
 
 /**
- *  Creates and returns a new instance of `JSQMessagesToolbarButtonFactory` that use provided font for producing
- *  buttons.
+ *  Creates and returns a new instance of JSQMessagesToolbarButtonFactory that uses
+ *  the default font for creating buttons.
+ *
+ *  @return An initialized `JSQMessagesToolbarButtonFactory` object if created successfully, `nil` otherwise.
+ */
+- (instancetype)init;
+
+/**
+ *  Creates and returns a new instance of JSQMessagesToolbarButtonFactory that uses 
+ *  the specified font for creating buttons.
  *
  *  @param A font that will be used for the buttons produced by the factory.
  *
