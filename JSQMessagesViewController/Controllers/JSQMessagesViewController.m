@@ -184,6 +184,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     self.showLoadEarlierMessagesHeader = NO;
 
     self.topContentAdditionalInset = 0.0f;
+    self.bottomContentAdditionalInset = 0.0f;
 
     [self jsq_updateCollectionViewInsets];
 }
@@ -227,6 +228,12 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 - (void)setTopContentAdditionalInset:(CGFloat)topContentAdditionalInset
 {
     _topContentAdditionalInset = topContentAdditionalInset;
+    [self jsq_updateCollectionViewInsets];
+}
+
+- (void)setBottomContentAdditionalInset:(CGFloat)bottomContentAdditionalInset
+{
+    _bottomContentAdditionalInset = bottomContentAdditionalInset;
     [self jsq_updateCollectionViewInsets];
 }
 
@@ -860,7 +867,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 - (void)jsq_updateCollectionViewInsets
 {
     [self jsq_setCollectionViewInsetsTopValue:self.topLayoutGuide.length + self.topContentAdditionalInset
-                                  bottomValue:CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame)];
+                                  bottomValue:CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame) + self.bottomContentAdditionalInset];
 }
 
 - (void)jsq_setCollectionViewInsetsTopValue:(CGFloat)top bottomValue:(CGFloat)bottom
