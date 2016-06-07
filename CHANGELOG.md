@@ -15,7 +15,7 @@ This release closes the [8.0.0 milestone](https://github.com/jessesquires/JSQMes
 
 ### Enhancements
 
-- Animated typing indicator (#1382)
+- Animated typing indicator. Typing indicator now animates like iMessage. (#1382) Thanks @radekcieciwa!
 
 ### Fixes
 
