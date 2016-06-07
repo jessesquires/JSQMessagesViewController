@@ -104,6 +104,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
 
     [footerView configureWithEllipsisColor:self.typingIndicatorEllipsisColor
                         messageBubbleColor:self.typingIndicatorMessageBubbleColor
+                                  animated:YES
                        shouldDisplayOnLeft:self.typingIndicatorDisplaysOnLeft
                          forCollectionView:self];
 

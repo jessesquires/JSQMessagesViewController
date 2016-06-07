@@ -11,15 +11,16 @@ This release closes the [8.0.0 milestone](https://github.com/jessesquires/JSQMes
 
 ### Breaking changes
 
+- Removed `JSQSystemSoundPlayer` as a dependency, see #1649 for reasoning. You can easily still include this in your project by adding `pod 'JSQSystemSoundPlayer'` to your Podfile. You can find out the latest on `JSQSystemSoundPlayer` [here](https://github.com/jessesquires/JSQSystemSoundPlayer).
 - Removed `JSQMessagesKeyboardController` and implemented a proper `inputAccessoryView`. (#1063, #1529) Thanks @LeoNatan and @kirualex!
 
 ### Enhancements
 
-> TBD
+- Animated typing indicator. Typing indicator now animates like iMessage. (#1382) Thanks @radekcieciwa!
 
 ### Fixes
 
-- Fixed a number of issues regarding keyboard handling (#1063, #1529, #799, #941, #1299)
+- Fixed a number of issues regarding keyboard handling. Keyboard handling is now much more stable. (#1063, #1529, #799, #941, #1299, #558, #557)
 
 7.3.2
 -----

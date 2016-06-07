@@ -26,12 +26,30 @@
 @interface JSQMessagesToolbarButtonFactory : NSObject
 
 /**
+ *  Creates and returns a new instance of `JSQMessagesToolbarButtonFactory` that uses
+ *  the default font for creating buttons.
+ *
+ *  @return An initialized `JSQMessagesToolbarButtonFactory` object if created successfully, `nil` otherwise.
+ */
+- (instancetype)init;
+
+/**
+ *  Creates and returns a new instance of `JSQMessagesToolbarButtonFactory` that uses
+ *  the specified font for creating buttons.
+ *
+ *  @param A font that will be used for the buttons produced by the factory.
+ *
+ *  @return An initialized `JSQMessagesToolbarButtonFactory` object if created successfully, `nil` otherwise.
+ */
+- (instancetype)initWithFont:(UIFont *)font;
+
+/**
  *  Creates and returns a new button that is styled as the default accessory button. 
  *  The button has a paper clip icon image and no text.
  *
  *  @return A newly created button.
  */
-+ (UIButton *)defaultAccessoryButtonItem;
+- (UIButton *)defaultAccessoryButtonItem;
 
 /**
  *  Creates and returns a new button that is styled as the default send button. 
@@ -39,6 +57,6 @@
  *
  *  @return A newly created button.
  */
-+ (UIButton *)defaultSendButtonItem;
+- (UIButton *)defaultSendButtonItem;
 
 @end
