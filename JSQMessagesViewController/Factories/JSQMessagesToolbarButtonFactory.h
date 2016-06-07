@@ -41,7 +41,7 @@
  *
  *  @return An initialized `JSQMessagesToolbarButtonFactory` object if created successfully, `nil` otherwise.
  */
-- (instancetype)initWithFont:(UIFont *)font;
+- (instancetype)initWithFont:(UIFont *)font NS_DESIGNATED_INITIALIZER;
 
 /**
  *  Creates and returns a new button that is styled as the default accessory button. 
