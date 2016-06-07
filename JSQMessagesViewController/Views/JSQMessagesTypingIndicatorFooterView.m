@@ -71,6 +71,7 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
 }
 
 #pragma mark - Typing indicator
+
 - (void)configureWithEllipsisColor:(UIColor *)ellipsisColor
                 messageBubbleColor:(UIColor *)messageBubbleColor
                           animated:(BOOL)animated
@@ -80,18 +81,18 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     NSParameterAssert(ellipsisColor != nil);
     NSParameterAssert(messageBubbleColor != nil);
     NSParameterAssert(collectionView != nil);
-    
+
     CGFloat bubbleMarginMinimumSpacing = 6.0f;
-    
+
     JSQMessagesBubbleImageFactory *bubbleImageFactory = [[JSQMessagesBubbleImageFactory alloc] init];
-    
+
     if (shouldDisplayOnLeft) {
         self.bubbleImageView.image = [bubbleImageFactory incomingMessagesBubbleImageWithColor:messageBubbleColor].messageBubbleImage;
-        
+
         CGFloat collectionViewWidth = CGRectGetWidth(collectionView.frame);
         CGFloat bubbleWidth = CGRectGetWidth(self.bubbleImageView.frame);
         CGFloat bubbleMarginMaximumSpacing = collectionViewWidth - bubbleWidth - bubbleMarginMinimumSpacing;
-        
+
         self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMaximumSpacing;
         self.typingIndicatorToBubbleImageAlignConstraint.constant = 0;
     }
@@ -100,26 +101,25 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
         self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMinimumSpacing;
         self.typingIndicatorToBubbleImageAlignConstraint.constant = 6;
     }
-    
+
     [self setNeedsUpdateConstraints];
-    
+
     self.typingView.dotsColor = ellipsisColor;
     self.typingView.animateToColor = [ellipsisColor jsq_colorByDarkeningColorWithValue:0.2f];
     self.typingView.animated = animated;
     self.typingView.animationDuration = 1.33;
-    
+
     if (animated) {
-        CAAnimation *pulseAnimation = [JSQMessagesTypingIndicatorFooterView pulseAnimation];
+        CAAnimation *pulseAnimation = [self pulseAnimation];
         pulseAnimation.duration = self.typingView.animationDuration * 2;
         [self.bubbleImageView.layer addAnimation:pulseAnimation forKey:@"pulsing"];
     }
 }
 
-+ (CAKeyframeAnimation *)pulseAnimation
+- (CAKeyframeAnimation *)pulseAnimation
 {
     CAKeyframeAnimation *pulseAnimation = [CAKeyframeAnimation animation];
     pulseAnimation.keyPath = @"transform";
-    
     pulseAnimation.values = @[
                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)],
                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.03, 0.97, 1.0)],
@@ -127,9 +127,8 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.97, 1.03, 1.0)],
                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]
                               ];
-    
     pulseAnimation.keyTimes = @[ @0, @(1/4.0), @(1/2.0), @(3/4.0), @1 ];
-    pulseAnimation.repeatCount = LONG_MAX;
+    pulseAnimation.repeatCount = NSIntegerMax;
     pulseAnimation.autoreverses = YES;
     return pulseAnimation;
 }
