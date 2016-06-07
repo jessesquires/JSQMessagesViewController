@@ -83,7 +83,7 @@ class ChatViewController: JSQMessagesViewController {
         var copyMessage = self.messages.last?.copy()
         
         if (copyMessage == nil) {
-            copyMessage = JSQMessage(senderId: AvatarIdJobs, displayName: DisplayNameJobs, text: "First received!")
+            copyMessage = JSQMessage(senderId: User.Jobs.rawValue, displayName: User.Jobs.rawValue, text: "First received!")
         }
             
         var newMessage:JSQMessage?
@@ -114,14 +114,14 @@ class ChatViewController: JSQMessagesViewController {
                 assertionFailure("Error: This Media type was not recognised")
             }
             
-            newMessage = JSQMessage(senderId: AvatarIdJobs, displayName: DisplayNameJobs, media: newMediaData)
+            newMessage = JSQMessage(senderId: User.Jobs.rawValue, displayName: User.Jobs.rawValue, media: newMediaData)
         }
         else {
             /**
              *  Last message was a text message
              */
             
-            newMessage = JSQMessage(senderId: AvatarIdJobs, displayName: DisplayNameJobs, text: copyMessage!.text)
+            newMessage = JSQMessage(senderId: User.Jobs.rawValue, displayName: User.Jobs.rawValue, text: copyMessage!.text)
         }
         
         /**

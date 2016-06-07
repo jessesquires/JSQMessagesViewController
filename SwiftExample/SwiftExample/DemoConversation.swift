@@ -36,14 +36,14 @@ func getName(user: User) -> String{
 // Create Avatars Once for performance
 //
 // Create an avatar with Image
-let LeonardImage = JSQMessagesAvatarImageFactory.circularAvatarImage(UIImage(named:"NiceSelfi.png"), withDiameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
-let AvatarLeonard = JSQMessagesAvatarImageFactory.avatarImageWithImage(LeonardImage, diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+
+let AvatarLeonard = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("DL", backgroundColor: UIColor.jsq_messageBubbleGreenColor(), textColor: UIColor.whiteColor(), font: UIFont.systemFontOfSize(12), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
 
 // Create avatar with Initals and no Image
 let AvatarCook = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("TC", backgroundColor: UIColor.grayColor(), textColor: UIColor.whiteColor(), font: UIFont.systemFontOfSize(12), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
 
 // Create avatar with Placeholder Image
-let AvatarJobs = JSQMessagesAvatarImageFactory.avatarImageWithPlaceholder(UIImage(named: "Jobs"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+let AvatarJobs = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("SJ", backgroundColor: UIColor.jsq_messageBubbleGreenColor(), textColor: UIColor.whiteColor(), font: UIFont.systemFontOfSize(12), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
 
 let AvatarWaz = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("SW", backgroundColor: UIColor.jsq_messageBubbleGreenColor(), textColor: UIColor.whiteColor(), font: UIFont.systemFontOfSize(12), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
 
