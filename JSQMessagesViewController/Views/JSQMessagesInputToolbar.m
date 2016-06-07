@@ -46,8 +46,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-
+    self.backgroundColor = [UIColor whiteColor];
     self.jsq_isObserving = NO;
     self.sendButtonOnRight = YES;
 
@@ -63,8 +62,9 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
     [self jsq_addObservers];
 
-    self.contentView.leftBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
-    self.contentView.rightBarButtonItem = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
+    JSQMessagesToolbarButtonFactory *toolbarButtonFactory = [[JSQMessagesToolbarButtonFactory alloc] initWithFont:[UIFont boldSystemFontOfSize:17.0]];
+    self.contentView.leftBarButtonItem = [toolbarButtonFactory defaultAccessoryButtonItem];
+    self.contentView.rightBarButtonItem = [toolbarButtonFactory defaultSendButtonItem];
 
     [self toggleSendButtonEnabled];
 }

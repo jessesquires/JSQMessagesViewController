@@ -10,3 +10,7 @@ pod 'JSQMessagesViewController'
 
 end
 
+target 'SwiftExampleTests' do
+pod 'JSQMessagesViewController'
+
+end

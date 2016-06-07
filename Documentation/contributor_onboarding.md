@@ -59,6 +59,7 @@ Core contributors have push access and are responsible for:
 Current core contributors:
 - Harlan Haskans ([**@harlanhaskins**](https://github.com/harlanhaskins))
 - Eli Burke ([**@eliburke**](https://github.com/eliburke))
+- Sebastian Ludwig ([**@sebastianludwig**](https://github.com/sebastianludwig))
 
 ## Pushing code
 
