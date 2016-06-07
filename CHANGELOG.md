@@ -15,7 +15,7 @@ This release closes the [8.0.0 milestone](https://github.com/jessesquires/JSQMes
 
 ### Enhancements
 
-> TBD
+- Animated typing indicator (#1382)
 
 ### Fixes
 
