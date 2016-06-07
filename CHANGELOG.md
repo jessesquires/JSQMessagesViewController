@@ -19,7 +19,7 @@ This release closes the [8.0.0 milestone](https://github.com/jessesquires/JSQMes
 
 ### Fixes
 
-- Fixed a number of issues regarding keyboard handling (#1063, #1529, #799, #941, #1299)
+- Fixed a number of issues regarding keyboard handling. Keyboard handling is now much more stable. (#1063, #1529, #799, #941, #1299, #558, #557)
 
 7.3.2
 -----
