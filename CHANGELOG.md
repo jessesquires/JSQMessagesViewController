@@ -14,6 +14,7 @@ This release closes the [8.0.0 milestone](https://github.com/jessesquires/JSQMes
 - Removed `JSQSystemSoundPlayer` as a dependency, see #1649 for reasoning. You can easily still include this in your project by adding `pod 'JSQSystemSoundPlayer'` to your Podfile. You can find out the latest on `JSQSystemSoundPlayer` [here](https://github.com/jessesquires/JSQSystemSoundPlayer).
 - Removed `JSQMessagesKeyboardController` and implemented a proper `inputAccessoryView`. (#1063, #1529) Thanks @LeoNatan and @kirualex!
 - `JSQMessagesToolbarButtonFactory` is now an instance, not just class methods. (#1651, #866) Thanks @burntheroad!
+- `JSQMessagesAvatarImageFactory` is now an instance, not just class methods. (#1659, #1657) Thanks @burntheroad!
 
 ### Enhancements
 
