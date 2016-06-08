@@ -917,11 +917,11 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     NSDictionary *userInfo = [notification userInfo];
 
     CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-
-    if (CGRectIsNull(keyboardEndFrame)) {
+    
+    if (CGRectIsNull(keyboardEndFrame) || self.view.frame.size.height - keyboardEndFrame.origin.y - keyboardEndFrame.size.height < 0) {
         return;
     }
-
+        
     UIViewAnimationCurve animationCurve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
     NSInteger animationCurveOption = (animationCurve << 16);
 
