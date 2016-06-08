@@ -12,6 +12,7 @@
 
 #import "JSQPhotoMediaItem.h"
 
+#import <MobileCoreServices/UTCoreTypes.h>
 
 @interface JSQPhotoMediaItemTests : XCTestCase
 
@@ -71,6 +72,15 @@
     item.image = [UIImage imageNamed:@"demo_avatar_jobs"];
     
     XCTAssertNotNil([item mediaView], @"Media view should NOT be nil once item has media data");
+}
+
+- (void)testCopyableItemInMediaProtocol {
+    JSQPhotoMediaItem *item = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]];
+    XCTAssertNotNil(item);
+    XCTAssertEqual([item mediaDataType], (NSString *)kUTTypeJPEG);
+    
+    UIImage *itemImage = [[UIImage alloc] initWithData:[item mediaData]];
+    XCTAssertNotNil(itemImage);
 }
 
 @end

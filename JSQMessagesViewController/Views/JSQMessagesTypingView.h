@@ -18,11 +18,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIDevice (JSQMessages)
+// TODO: write documentation
+//
+// https://github.com/jessesquires/JSQMessagesViewController/issues/1647
+//
 
-/**
- *  @return Whether or not the current device is running a version of iOS before 8.0.
- */
-+ (BOOL)jsq_isCurrentDeviceBeforeiOS8;
+@interface JSQMessagesTypingView : UIView
+
+@property (strong, nonatomic) UIColor *dotsColor;
+
+@property (strong, nonatomic) UIColor *animateToColor;
+
+@property (assign, nonatomic) CGFloat animationDuration;
+
+@property (assign, nonatomic) BOOL animated;
 
 @end

@@ -21,6 +21,8 @@
 #import "JSQMessagesMediaPlaceholderView.h"
 #import "JSQMessagesMediaViewBubbleImageMasker.h"
 
+#import <MobileCoreServices/UTCoreTypes.h>
+
 
 @interface JSQLocationMediaItem ()
 
@@ -101,7 +103,7 @@
     
     [snapShotter startWithQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
               completionHandler:^(MKMapSnapshot *snapshot, NSError *error) {
-                  if (error) {
+                  if (snapshot == nil) {
                       NSLog(@"%s Error creating map snapshot: %@", __PRETTY_FUNCTION__, error);
                       return;
                   }
@@ -157,6 +159,19 @@
 {
     return self.hash;
 }
+
+- (NSString *)mediaDataType
+{
+    return (NSString *)kUTTypeURL;
+}
+
+- (id)mediaData
+{
+    NSString *locationAsGoogleMapsString = [NSString stringWithFormat:@"http://maps.apple.com/?ll=%f,%f&z=18&q=%%20", self.coordinate.latitude, self.coordinate.longitude ];
+    NSURL *locationURL = [[NSURL alloc] initWithString:locationAsGoogleMapsString];
+    return locationURL;
+}
+
 
 #pragma mark - NSObject
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -18,25 +18,26 @@
                         <constraint firstAttribute="width" constant="68" id="nS4-br-DxL"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vwf-dy-PS6" userLabel="Ellipsis Image View">
-                    <rect key="frame" x="26" y="6" width="34" height="34"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gSx-P5-ULe" customClass="JSQMessagesTypingView">
+                    <rect key="frame" x="12" y="6" width="62" height="34"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="34" id="CMT-z0-hca"/>
-                        <constraint firstAttribute="height" constant="34" id="j0C-FV-2gV"/>
+                        <constraint firstAttribute="height" constant="34" id="M2g-O5-nOL"/>
+                        <constraint firstAttribute="width" constant="62" id="snD-jR-C34"/>
                     </constraints>
-                </imageView>
+                </view>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Vwf-dy-PS6" secondAttribute="trailing" constant="260" id="1Tm-qD-wIK"/>
+                <constraint firstAttribute="bottom" secondItem="gSx-P5-ULe" secondAttribute="bottom" constant="6" id="CNa-bS-iKZ"/>
                 <constraint firstAttribute="bottom" secondItem="Z1D-Tr-HPK" secondAttribute="bottom" constant="6" id="EVf-Sx-8mX"/>
-                <constraint firstAttribute="bottom" secondItem="Vwf-dy-PS6" secondAttribute="bottom" constant="6" id="Hik-Wl-aK2"/>
                 <constraint firstAttribute="trailing" secondItem="Z1D-Tr-HPK" secondAttribute="trailing" constant="246" id="YMl-ej-UZl"/>
+                <constraint firstItem="gSx-P5-ULe" firstAttribute="trailing" secondItem="Z1D-Tr-HPK" secondAttribute="trailing" id="ugi-H9-2rc"/>
             </constraints>
             <connections>
                 <outlet property="bubbleImageView" destination="Z1D-Tr-HPK" id="WpE-rP-oYB"/>
                 <outlet property="bubbleImageViewRightHorizontalConstraint" destination="YMl-ej-UZl" id="Thu-7D-dhU"/>
-                <outlet property="typingIndicatorImageView" destination="Vwf-dy-PS6" id="wQA-Pe-rx6"/>
-                <outlet property="typingIndicatorImageViewRightHorizontalConstraint" destination="1Tm-qD-wIK" id="FUp-oC-c0I"/>
+                <outlet property="typingIndicatorToBubbleImageAlignConstraint" destination="ugi-H9-2rc" id="VLk-0E-ugD"/>
+                <outlet property="typingView" destination="gSx-P5-ULe" id="GG0-ER-t6L"/>
             </connections>
         </collectionReusableView>
     </objects>

@@ -16,8 +16,11 @@
 
 * **Demo Project**
   * There's a sweet demo project: `JSQMessages.xcworkspace`.
-  * Run `pod install` first.
+    * Run `pod install` first.
+  * Swift Example can be found in the SwiftExample folder just open the `SwiftExample.xcworkspace`.
+    * Run `pod install` first.
   * [Firebase](https://www.firebase.com) also has a sweet [demo project](https://github.com/firebase/ios-swift-chat-example), and it's in Swift!
+  
 
 * **Message Model**
   * Your message model objects should conform to the `JSQMessageData` protocol.
