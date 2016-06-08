@@ -19,6 +19,8 @@
 #import "JSQMessagesAvatarImageFactory.h"
 
 #import "UIColor+JSQMessages.h"
+
+// TODO: define kJSQMessagesCollectionViewAvatarSizeDefault elsewhere so we can remove this import
 #import "JSQMessagesCollectionViewFlowLayout.h"
 
 @interface JSQMessagesAvatarImageFactory ()
