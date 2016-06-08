@@ -232,6 +232,22 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     return [super respondsToSelector:aSelector];
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    // do nothing
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    // do nothing
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    // do nothing
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    // do nothing
+}
+
 - (void)forwardInvocation:(NSInvocation *)anInvocation
 {
     if ([jsqMessagesCollectionViewCellActions containsObject:NSStringFromSelector(anInvocation.selector)]) {
