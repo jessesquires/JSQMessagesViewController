@@ -49,20 +49,18 @@
          *
          *  If you are not using avatars, ignore this.
          */
-        JSQMessagesAvatarImage *jsqImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:@"JSQ"
-                                                                                      backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
-                                                                                            textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
-                                                                                                 font:[UIFont systemFontOfSize:14.0f]
-                                                                                             diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        JSQMessagesAvatarImageFactory *avatarFactory = [[JSQMessagesAvatarImageFactory alloc] initWithDiameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
-        JSQMessagesAvatarImage *cookImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"demo_avatar_cook"]
-                                                                                       diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        JSQMessagesAvatarImage *jsqImage = [avatarFactory avatarImageWithUserInitials:@"JSQ"
+                                                                      backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
+                                                                            textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
+                                                                                 font:[UIFont systemFontOfSize:14.0f]];
         
-        JSQMessagesAvatarImage *jobsImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]
-                                                                                       diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        JSQMessagesAvatarImage *cookImage = [avatarFactory avatarImageWithImage:[UIImage imageNamed:@"demo_avatar_cook"]];
         
-        JSQMessagesAvatarImage *wozImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"demo_avatar_woz"]
-                                                                                      diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        JSQMessagesAvatarImage *jobsImage = [avatarFactory avatarImageWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]];
+        
+        JSQMessagesAvatarImage *wozImage = [avatarFactory avatarImageWithImage:[UIImage imageNamed:@"demo_avatar_woz"]];
         
         self.avatars = @{ kJSQDemoAvatarIdSquires : jsqImage,
                           kJSQDemoAvatarIdCook : cookImage,
