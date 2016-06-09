@@ -32,8 +32,13 @@
 @property (nonatomic, strong) NSURL *fileURL;
 
 /**
+ *  The UIImage that creates video thumbnail.
+ */
+@property (nonatomic, strong) UIImage * thumbnail;
+
+/**
  *  A boolean value that specifies whether or not the video is ready to be played.
- * 
+ *
  *  @discussion When set to `YES`, the video is ready. When set to `NO` it is not ready.
  */
 @property (nonatomic, assign) BOOL isReadyToPlay;
@@ -51,6 +56,6 @@
  *  isReadyToPlay. Once the video has been saved to disk, or is ready to stream, you can
  *  set the fileURL property or isReadyToPlay property, respectively.
  */
-- (instancetype)initWithFileURL:(NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay;
+- (instancetype)initWithFileURL:(NSURL *)fileURL withThumbnail:(UIImage*)thumbnail isReadyToPlay:(BOOL)isReadyToPlay;
 
 @end
