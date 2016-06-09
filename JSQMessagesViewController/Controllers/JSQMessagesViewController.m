@@ -379,6 +379,26 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, [NSBundle jsq_localizedStringForKey:@"new_message_received_accessibility_announcement"]);
 }
 
+- (void)cancelReceivingMessage
+{
+    CGRect visibleRect = (CGRect){.origin = self.collectionView.contentOffset, .size = self.collectionView.bounds.size};
+    CGFloat visibleRectBottom = CGRectGetMaxY(visibleRect);
+    BOOL isTypingIndicatorVisible = self.collectionView.contentSize.height - visibleRectBottom <= 0;
+
+    if (isTypingIndicatorVisible && [self.collectionView numberOfItemsInSection:0] > 0) {
+        NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:[self.collectionView numberOfItemsInSection:0] - 1
+                                                        inSection:0];
+        [self.collectionView scrollToItemAtIndexPath:lastIndexPath
+                                    atScrollPosition:UICollectionViewScrollPositionBottom
+                                            animated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.showTypingIndicator = NO;
+        });
+    } else {
+        self.showTypingIndicator = NO;
+    }
+}
+
 - (void)scrollToBottomAnimated:(BOOL)animated
 {
     if ([self.collectionView numberOfSections] == 0) {

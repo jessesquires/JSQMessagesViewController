@@ -240,6 +240,11 @@
 - (void)finishReceivingMessageAnimated:(BOOL)animated;
 
 /**
+ *  Cancels the "receiving" of a message by hiding the typing indicator.
+ */
+- (void)cancelReceivingMessage;
+
+/**
  *  Scrolls the collection view such that the bottom most cell is completely visible, above the `inputToolbar`.
  *
  *  @param animated Pass `YES` if you want to animate scrolling, `NO` if it should be immediate.
