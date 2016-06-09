@@ -27,6 +27,7 @@
 @class JSQMessagesLoadEarlierHeaderView;
 
 NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `JSQMessagesCollectionView` class manages an ordered collection of message data items and presents
  *  them using a specialized layout for messages.
@@ -99,4 +100,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (JSQMessagesLoadEarlierHeaderView *)dequeueLoadEarlierMessagesViewHeaderForIndexPath:(NSIndexPath *)indexPath;
 
 @end
+
 NS_ASSUME_NONNULL_END

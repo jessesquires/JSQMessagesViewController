@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Returns the content view of the toolbar. This view contains all subviews of the toolbar.
  */
-@property (weak, nonatomic, readonly, nullable) JSQMessagesToolbarContentView *contentView;
+@property (weak, nonatomic, readonly) JSQMessagesToolbarContentView *contentView;
 
 /**
  *  A boolean value indicating whether the send button is on the right side of the toolbar or not.
@@ -104,9 +104,10 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @discussion Override this method to provide a custom content view for the toolbar.
  *
- *  @return An initialized `JSQMessagesToolbarContentView` if successful, otherwise `nil`.
+ *  @return An initialized `JSQMessagesToolbarContentView`.
  */
-- (nullable JSQMessagesToolbarContentView *)loadToolbarContentView;
+- (JSQMessagesToolbarContentView *)loadToolbarContentView;
 
 @end
+
 NS_ASSUME_NONNULL_END

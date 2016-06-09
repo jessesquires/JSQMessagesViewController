@@ -52,14 +52,14 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param location The location for the media item. This value may be `nil`.
  *
- *  @return An initialized `JSQLocationMediaItem` if successful, `nil` otherwise.
+ *  @return An initialized `JSQLocationMediaItem`.
  *
  *  @discussion If the location data must be dowloaded from the network,
  *  you may initialize a `JSQLocationMediaItem` object with a `nil` location.
  *  Once the location data has been retrieved, you can then set the location property
  *  using `setLocation: withCompletionHandler:`
  */
-- (nullable instancetype)initWithLocation:(nullable CLLocation *)location;
+- (instancetype)initWithLocation:(nullable CLLocation *)location;
 
 /**
  *  Sets the specified location for the location media item and immediately begins creating
@@ -86,4 +86,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setLocation:(nullable CLLocation *)location
              region:(MKCoordinateRegion)region withCompletionHandler:(nullable JSQLocationMediaItemCompletionBlock)completion;
 @end
+
 NS_ASSUME_NONNULL_END

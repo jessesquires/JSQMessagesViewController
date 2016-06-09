@@ -19,6 +19,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `JSQMessageAvatarImageDataSource` protocol defines the common interface through which
  *  a `JSQMessagesViewController` and `JSQMessagesCollectionView` interact with avatar image model objects.
@@ -58,6 +60,8 @@
  *
  *  @warning You must not return `nil` from this method.
  */
-- (nonnull UIImage *)avatarPlaceholderImage;
+- (UIImage *)avatarPlaceholderImage;
 
 @end
+
+NS_ASSUME_NONNULL_END

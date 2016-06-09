@@ -20,6 +20,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  `JSQMessagesToolbarButtonFactory` is a factory that provides a means for creating the default
  *  toolbar button items to be displayed in the content view of a `JSQMessagesInputToolbar`.
@@ -30,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Creates and returns a new instance of `JSQMessagesToolbarButtonFactory` that uses
  *  the default font for creating buttons.
  *
- *  @return An initialized `JSQMessagesToolbarButtonFactory` object if created successfully, `nil` otherwise.
+ *  @return An initialized `JSQMessagesToolbarButtonFactory` object.
  */
 - (instancetype)init;
 
@@ -40,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param A font that will be used for the buttons produced by the factory.
  *
- *  @return An initialized `JSQMessagesToolbarButtonFactory` object if created successfully, `nil` otherwise.
+ *  @return An initialized `JSQMessagesToolbarButtonFactory` object.
  */
 - (instancetype)initWithFont:(UIFont *)font NS_DESIGNATED_INITIALIZER;
 
@@ -61,4 +62,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIButton *)defaultSendButtonItem;
 
 @end
+
 NS_ASSUME_NONNULL_END

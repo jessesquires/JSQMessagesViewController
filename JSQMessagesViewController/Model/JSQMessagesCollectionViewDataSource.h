@@ -25,6 +25,7 @@
 @protocol JSQMessageAvatarImageDataSource;
 
 NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  An object that adopts the `JSQMessagesCollectionViewDataSource` protocol is responsible for providing the data and views
  *  required by a `JSQMessagesCollectionView`. The data source object represents your app’s messaging data model
@@ -153,4 +154,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
+
 NS_ASSUME_NONNULL_END

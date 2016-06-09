@@ -23,6 +23,7 @@
 #import "JSQMessagesInputToolbar.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `JSQMessagesViewController` class is an abstract class that represents a view controller whose content consists of
  *  a `JSQMessagesCollectionView` and `JSQMessagesInputToolbar` and is specialized to display a messaging interface.
@@ -156,23 +157,22 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Returns the `UINib` object initialized for a `JSQMessagesViewController`.
  *
- *  @return The initialized `UINib` object or `nil` if there were errors during initialization
- *  or the nib file could not be located.
+ *  @return The initialized `UINib` object.
  *
  *  @discussion You may override this method to provide a customized nib. If you do,
  *  you should also override `messagesViewController` to return your
  *  view controller loaded from your custom nib.
  */
-+ (nullable UINib *)nib;
++ (UINib *)nib;
 
 /**
  *  Creates and returns a new `JSQMessagesViewController` object.
  *
  *  @discussion This is the designated initializer for programmatic instantiation.
  *
- *  @return An initialized `JSQMessagesViewController` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessagesViewController` object.
  */
-+ (nullable instancetype)messagesViewController;
++ (instancetype)messagesViewController;
 
 #pragma mark - Messages view controller
 
@@ -304,4 +304,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)didReceiveMenuWillHideNotification:(NSNotification *)notification;
 
 @end
+
 NS_ASSUME_NONNULL_END

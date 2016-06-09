@@ -18,11 +18,15 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSString (JSQMessages)
 
 /**
  *  @return A copy of the receiver with all leading and trailing whitespace removed.
  */
-- (nonnull NSString *)jsq_stringByTrimingWhitespace;
+- (NSString *)jsq_stringByTrimingWhitespace;
 
 @end
+
+NS_ASSUME_NONNULL_END
