@@ -24,6 +24,8 @@
  */
 FOUNDATION_EXPORT const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `JSQMessagesTypingIndicatorFooterView` class implements a reusable view that can be placed
  *  at the bottom of a `JSQMessagesCollectionView`. This view represents a typing indicator 
@@ -36,8 +38,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight;
 /**
  *  Returns the `UINib` object initialized for the collection reusable view.
  *
- *  @return The initialized `UINib` object or `nil` if there were errors during
- *  initialization or the nib file could not be located.
+ *  @return The initialized `UINib` object.
  */
 + (UINib *)nib;
 
@@ -66,3 +67,5 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight;
                shouldDisplayOnLeft:(BOOL)shouldDisplayOnLeft
                  forCollectionView:(UICollectionView *)collectionView;
 @end
+
+NS_ASSUME_NONNULL_END
