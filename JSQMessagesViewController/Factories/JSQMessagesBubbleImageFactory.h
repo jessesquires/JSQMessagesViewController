@@ -21,6 +21,8 @@
 
 #import "JSQMessagesBubbleImage.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  `JSQMessagesBubbleImageFactory` is a factory that provides a means for creating and styling 
  *  `JSQMessagesBubbleImage` objects to be displayed in a `JSQMessagesCollectionViewCell` of a `JSQMessagesCollectionView`.
@@ -37,7 +39,7 @@
  *  Creates and returns a new instance of `JSQMessagesBubbleImageFactory` that uses the
  *  default bubble image assets, cap insets, and layout direction.
  *
- *  @return An initialized `JSQMessagesBubbleImageFactory` object if created successfully, `nil` otherwise.
+ *  @return An initialized `JSQMessagesBubbleImageFactory` object.
  */
 - (instancetype)init;
 
@@ -53,7 +55,7 @@
  *  @param capInsets   The values to use for the cap insets that define the unstretchable regions of the image.
  *  Specify `UIEdgeInsetsZero` to have the factory create insets that allow the image to stretch from its center point.
  *
- *  @return An initialized `JSQMessagesBubbleImageFactory` object if created successfully, `nil` otherwise.
+ *  @return An initialized `JSQMessagesBubbleImageFactory`.
  */
 
 - (instancetype)initWithBubbleImage:(UIImage *)bubbleImage
@@ -67,7 +69,7 @@
  *
  *  @param color The color of the bubble image in the image view. This value must not be `nil`.
  *
- *  @return An initialized `JSQMessagesBubbleImage` object if created successfully, `nil` otherwise.
+ *  @return An initialized `JSQMessagesBubbleImage` object.
  */
 - (JSQMessagesBubbleImage *)outgoingMessagesBubbleImageWithColor:(UIColor *)color;
 
@@ -78,8 +80,10 @@
  *
  *  @param color The color of the bubble image in the image view. This value must not be `nil`.
  *
- *  @return An initialized `JSQMessagesBubbleImage` object if created successfully, `nil` otherwise.
+ *  @return An initialized `JSQMessagesBubbleImage` object.
  */
 - (JSQMessagesBubbleImage *)incomingMessagesBubbleImageWithColor:(UIColor *)color;
 
 @end
+
+NS_ASSUME_NONNULL_END

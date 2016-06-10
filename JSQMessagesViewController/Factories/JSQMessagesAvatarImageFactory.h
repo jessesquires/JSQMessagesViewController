@@ -21,6 +21,8 @@
 
 #import "JSQMessagesAvatarImage.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  `JSQMessagesAvatarImageFactory` is a factory that provides a means for creating and styling
  *  `JSQMessagesAvatarImage` objects to be displayed in a `JSQMessagesCollectionViewCell` of a `JSQMessagesCollectionView`.
@@ -31,7 +33,7 @@
  *  Creates and returns a new instance of `JSQMessagesAvatarImageFactory` that uses
  *  the default diameter for creating avatars.
  *
- *  @return An initialized `JSQMessagesAvatarImageFactory` object if created successfully, `nil` otherwise.
+ *  @return An initialized `JSQMessagesAvatarImageFactory` object.
  */
 - (instancetype)init;
 
@@ -41,7 +43,7 @@
  *
  *  @param diameter An integer value specifying the diameter size of the image in points. This value must be greater than `0`.
  *
- *  @return An initialized `JSQMessagesAvatarImageFactory` object if created successfully, `nil` otherwise.
+ *  @return An initialized `JSQMessagesAvatarImageFactory` object.
  */
 - (instancetype)initWithDiameter:(NSUInteger)diameter NS_DESIGNATED_INITIALIZER;
 
@@ -51,7 +53,7 @@
 *
 *  @param placeholderImage An image object that represents a placeholder avatar image. This value must not be `nil`.
 *
-*  @return An initialized `JSQMessagesAvatarImage` object if created successfully, `nil` otherwise.
+*  @return An initialized `JSQMessagesAvatarImage` object.
 */
 - (JSQMessagesAvatarImage *)avatarImageWithPlaceholder:(UIImage *)placeholderImage;
 
@@ -63,7 +65,7 @@
  *
  *  @param image    An image object that represents an avatar image. This value must not be `nil`.
  *
- *  @return An initialized `JSQMessagesAvatarImage` object if created successfully, `nil` otherwise.
+ *  @return An initialized `JSQMessagesAvatarImage` object.
  */
 - (JSQMessagesAvatarImage *)avatarImageWithImage:(UIImage *)image;
 
@@ -72,7 +74,7 @@
  *
  *  @param image    The image to crop. This value must not be `nil`.
  *
- *  @return A new image object if successful, `nil` otherwise.
+ *  @return A new image object.
  */
 - (UIImage *)circularAvatarImage:(UIImage *)image;
 
@@ -82,7 +84,7 @@
  *
  *  @param image    The image to crop. This value must not be `nil`.
  *
- *  @return A new image object if successful, `nil` otherwise.
+ *  @return A new image object.
  */
 - (UIImage *)circularAvatarHighlightedImage:(UIImage *)image;
 
@@ -95,7 +97,7 @@
  *  @param textColor       The color of the text of the userInitials. This value must not be `nil`.
  *  @param font            The font applied to userInitials. This value must not be `nil`.
  *
- *  @return An initialized `JSQMessagesAvatarImage` object if created successfully, `nil` otherwise.
+ *  @return An initialized `JSQMessagesAvatarImage` object.
  *
  *  @discussion This method does not attempt to detect or correct incompatible parameters. 
  *  That is to say, you are responsible for providing a font size and diameter that make sense.
@@ -109,3 +111,5 @@
                                                    font:(UIFont *)font;
 
 @end
+
+NS_ASSUME_NONNULL_END
