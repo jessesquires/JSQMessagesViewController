@@ -19,6 +19,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `JSQMessageMediaData` protocol defines the common interface through which
  *  a `JSQMessagesViewController` and `JSQMessagesCollectionView` interact with media message model objects.
@@ -43,7 +45,7 @@
  *
  *  @discussion You may return `nil` from this method while the media data is being downloaded.
  */
-- (UIView *)mediaView;
+- (nullable UIView *)mediaView;
 
 /**
  *  @return The frame size for the mediaView when displayed in a `JSQMessagesCollectionViewCell`. 
@@ -99,3 +101,5 @@
 - (id)mediaData;
 
 @end
+
+NS_ASSUME_NONNULL_END

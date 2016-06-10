@@ -64,6 +64,22 @@ class ChatViewControllerTests: XCTestCase {
         
     }
     
+    func testSendLocation() {
+        let senderId = self.chatViewController.senderId
+        let senderDisplayName = self.chatViewController.senderDisplayName
+        
+        let locationItem = self.chatViewController.buildLocationItem()
+        
+        self.chatViewController.addMedia(locationItem)
+        
+        let newMessage = self.chatViewController.messages.last!
+        
+        XCTAssert(newMessage.senderId == senderId)
+        XCTAssert(newMessage.senderDisplayName == senderDisplayName)
+        XCTAssert(newMessage.media is JSQLocationMediaItem)
+        
+    }
+    
     /**
      * Test when the messages array is empty, it should add a new incoming text message
      * Test when the messages array last message is a text message, it should add a new incoming text message
@@ -112,6 +128,29 @@ class ChatViewControllerTests: XCTestCase {
         
         XCTAssert(newMessage != lastMessage)
         XCTAssert(newMessage.media is JSQPhotoMediaItem)
+        XCTAssert(newMessage.senderId != self.chatViewController.senderId)
+        XCTAssert(newMessage.senderDisplayName != self.chatViewController.senderDisplayName)
+    }
+    
+    /**
+     * Simulate that last message is a location and test message received functionality
+     */
+    func testSimulatedIncomingLocation() {
+        
+        // add location
+        let locationItem = self.chatViewController.buildLocationItem()
+        self.chatViewController.addMedia(locationItem)
+        
+        let lastMessage = self.chatViewController.messages.last!
+        
+        // trigger action
+        let rightBarButton = self.chatViewController.navigationItem.rightBarButtonItem!
+        rightBarButton.target!.performSelector(rightBarButton.action, withObject: rightBarButton)
+        
+        let newMessage = self.chatViewController.messages.last!
+        
+        XCTAssert(newMessage != lastMessage)
+        XCTAssert(newMessage.media is JSQLocationMediaItem)
         XCTAssert(newMessage.senderId != self.chatViewController.senderId)
         XCTAssert(newMessage.senderDisplayName != self.chatViewController.senderDisplayName)
     }

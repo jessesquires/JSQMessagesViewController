@@ -4,20 +4,28 @@ osx_image: xcode7.3
 env:
    global:
    - LANG=en_US.UTF-8
+
    - WORKSPACE="JSQMessages.xcworkspace"
    - IOS_SCHEME="JSQMessages"
    - IOS_SDK=iphonesimulator9.3
 
    matrix:
-   - DESTINATION="OS=8.1,name=iPhone 5"      SDK="$IOS_SDK" SCHEME="$IOS_SCHEME"  RUN_TESTS="YES"  BUILD_EXAMPLE="NO"  POD_LINT="NO"   COVERAGE="NO"
-   - DESTINATION="OS=9.0,name=iPhone 6 Plus" SDK="$IOS_SDK" SCHEME="$IOS_SCHEME"  RUN_TESTS="NO"   BUILD_EXAMPLE="NO"  POD_LINT="YES"  COVERAGE="YES"
+   - DESTINATION="OS=8.1,name=iPhone 4s"     SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES"  BUILD_EXAMPLE="YES" POD_LINT="NO"  RUN_UI_TESTS="NO"
+   - DESTINATION="OS=8.2,name=iPhone 5"      SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES"  BUILD_EXAMPLE="NO"  POD_LINT="NO"  RUN_UI_TESTS="NO"
+   - DESTINATION="OS=8.3,name=iPhone 5s"     SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES"  BUILD_EXAMPLE="NO"  POD_LINT="NO"  RUN_UI_TESTS="NO"
+   - DESTINATION="OS=8.4,name=iPhone 6"      SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES"  BUILD_EXAMPLE="NO"  POD_LINT="NO"  RUN_UI_TESTS="NO"
 
-before_install:
-- gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+   - DESTINATION="OS=9.0,name=iPhone 5s"      SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO" RUN_UI_TESTS="NO"
+   - DESTINATION="OS=9.1,name=iPhone 6s"      SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO" RUN_UI_TESTS="NO"
+   - DESTINATION="OS=9.2,name=iPhone 6 Plus"  SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO" RUN_UI_TESTS="NO"
+   - DESTINATION="OS=9.3,name=iPhone 6s Plus" SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO" RUN_UI_TESTS="NO"
 
-# skip pod install on travis-ci
-# since we check-in the pods folder, etc. this isn't needed
-install: true
+   - DESTINATION="OS=8.1,name=iPad 2"       SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO" RUN_UI_TESTS="NO"
+   - DESTINATION="OS=8.4,name=iPad 2"       SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO" RUN_UI_TESTS="NO"
+   - DESTINATION="OS=9.0,name=iPad Retina"  SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO" RUN_UI_TESTS="NO"
+   - DESTINATION="OS=9.1,name=iPad Air"     SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO" RUN_UI_TESTS="NO"
+   - DESTINATION="OS=9.2,name=iPad Air 2"   SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO" RUN_UI_TESTS="NO"
+   - DESTINATION="OS=9.3,name=iPad Pro"     SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO" RUN_UI_TESTS="NO"
 
 script:
 
@@ -26,19 +34,28 @@ script:
    pod lib lint;
   fi
 
+# TODO: enable after project re-organization
+# - if [ $BUILD_EXAMPLE == "YES" ]; then
+#       xcodebuild clean build -project Example/Example.xcodeproj -scheme Example -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO | xcpretty -c;
+#   fi
+
+
 - if [ $RUN_TESTS == "YES" ]; then
       xcodebuild clean build test -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO | xcpretty -c;
   else
       xcodebuild clean build -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO | xcpretty -c;
   fi
 
+# TODO: enable after project re-organization
+# - if [ $RUN_UI_TESTS == "YES" ]; then
+#       xcodebuild test -project Example/Example.xcodeproj -scheme Example -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO | xcpretty -c;
+#   fi
+
+
 # Build for reporting test coverage
-- if [ $COVERAGE == "YES" ]; then
-      xcodebuild clean build test -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES;
+- if [ $RUN_TESTS == "YES" ]; then
+      xcodebuild test -workspace JSQMessages.xcworkspace -scheme JSQMessages -sdk iphonesimulator GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES;
   fi
 
 after_success:
-
-- if [ $COVERAGE == "YES" ]; then
-      bash <(curl -s https://codecov.io/bash);
-  fi
+- bash <(curl -s https://codecov.io/bash);
