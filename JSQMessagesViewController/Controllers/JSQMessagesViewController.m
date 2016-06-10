@@ -916,7 +916,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 {
     NSDictionary *userInfo = [notification userInfo];
 
-    CGRect keyboardBeginFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    CGRect keyboardBeginFrame = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
     if (CGRectIsNull(keyboardEndFrame)) {
@@ -927,7 +927,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     NSInteger animationCurveOption = (animationCurve << 16);
 
     double animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    float offset = keyboardBeginFrame.origin.y - keyboardEndFrame.origin.y + self.inputToolbar.frame.size.height;
+    CGFloat offset = CGRectGetMinY(keyboardBeginFrame) - CGRectGetMinY(keyboardEndFrame) + CGRectGetHeight(self.inputToolbar.frame);
     [UIView animateWithDuration:animationDuration
                           delay:0.0
                         options:animationCurveOption
