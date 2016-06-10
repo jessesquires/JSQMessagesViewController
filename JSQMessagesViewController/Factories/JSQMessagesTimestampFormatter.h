@@ -19,6 +19,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  An instance of `JSQMessagesTimestampFormatter` is a singleton object that provides an efficient means 
  *  for creating attributed and non-attributed string representations of `NSDate` objects. 
@@ -93,3 +95,5 @@
 - (NSString *)relativeDateForDate:(NSDate *)date;
 
 @end
+
+NS_ASSUME_NONNULL_END

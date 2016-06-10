@@ -20,6 +20,8 @@
 
 #import "JSQMessageData.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `JSQMessage` class is a concrete class for message model objects that represents a single user message.
  *  The message can be a text message or media message, depending on how it is initialized.
@@ -55,13 +57,13 @@
  *  Returns the body text of the message, or `nil` if the message is a media message.
  *  That is, if `isMediaMessage` is equal to `YES` then this value will be `nil`.
  */
-@property (copy, nonatomic, readonly) NSString *text;
+@property (copy, nonatomic, readonly, null_unspecified) NSString *text;
 
 /**
  *  Returns the media item attachment of the message, or `nil` if the message is not a media message.
  *  That is, if `isMediaMessage` is equal to `NO` then this value will be `nil`.
  */
-@property (copy, nonatomic, readonly) id<JSQMessageMediaData> media;
+@property (copy, nonatomic, readonly, null_unspecified) id<JSQMessageMediaData> media;
 
 
 #pragma mark - Initialization
@@ -76,7 +78,7 @@
  *
  *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `NO`.
  *
- *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessage` object.
  */
 + (instancetype)messageWithSenderId:(NSString *)senderId
                         displayName:(NSString *)displayName
@@ -92,7 +94,7 @@
  *
  *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `NO`.
  *
- *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessage` object.
  */
 - (instancetype)initWithSenderId:(NSString *)senderId
                senderDisplayName:(NSString *)senderDisplayName
@@ -108,7 +110,7 @@
  *
  *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `YES`.
  *
- *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessage` object.
  */
 + (instancetype)messageWithSenderId:(NSString *)senderId
                         displayName:(NSString *)displayName
@@ -124,7 +126,7 @@
  *
  *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `YES`.
  *
- *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessage` object.
  */
 - (instancetype)initWithSenderId:(NSString *)senderId
                senderDisplayName:(NSString *)senderDisplayName
@@ -137,3 +139,5 @@
 - (id)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

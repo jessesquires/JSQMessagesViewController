@@ -20,6 +20,8 @@
 
 #import "JSQMessagesBubbleSizeCalculating.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  An instance of `JSQMessagesBubblesSizeCalculator` is responsible for calculating
  *  message bubble sizes for an instance of `JSQMessagesCollectionViewFlowLayout`.
@@ -34,10 +36,12 @@
  *  @param usesFixedWidthBubbles Specifies whether or not to use fixed-width bubbles.
  *  If `NO` (the default), then bubbles will resize when rotating to landscape.
  *
- *  @return An initialized `JSQMessagesBubblesSizeCalculator` object if successful, `nil` otherwise.
+ *  @return An initialized `JSQMessagesBubblesSizeCalculator`.
  */
-- (instancetype)initWithCache:(NSCache *)cache
-           minimumBubbleWidth:(NSUInteger)minimumBubbleWidth
-        usesFixedWidthBubbles:(BOOL)usesFixedWidthBubbles NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCache:(nonnull NSCache *)cache
+                    minimumBubbleWidth:(NSUInteger)minimumBubbleWidth
+                 usesFixedWidthBubbles:(BOOL)usesFixedWidthBubbles NS_DESIGNATED_INITIALIZER;
 
 @end
+
+NS_ASSUME_NONNULL_END
