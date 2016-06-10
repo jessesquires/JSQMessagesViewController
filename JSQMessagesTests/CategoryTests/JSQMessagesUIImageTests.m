@@ -33,8 +33,6 @@
     XCTAssertTrue(CGSizeEqualToSize(img.size, imgMasked.size), @"Image sizes should be equal");
     
     XCTAssertEqual(img.scale, imgMasked.scale, @"Image scales should be equal");
-    
-    XCTAssertThrows([img jsq_imageMaskedWithColor:nil], @"Should throw when passing nil color");
 }
 
 - (void)testImageAssets
