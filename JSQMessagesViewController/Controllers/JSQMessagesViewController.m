@@ -932,7 +932,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
                         options:animationCurveOption
                      animations:^{
                          [self jsq_setCollectionViewInsetsTopValue:self.collectionView.contentInset.top
-                                                       bottomValue:CGRectGetHeight(keyboardEndFrame)];
+                                                       bottomValue:CGRectGetHeight(keyboardEndFrame) + self.collectionView.contentInset.bottom];
                      }
                      completion:nil];
 }
