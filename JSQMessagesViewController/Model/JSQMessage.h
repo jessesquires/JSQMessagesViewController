@@ -57,13 +57,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  Returns the body text of the message, or `nil` if the message is a media message.
  *  That is, if `isMediaMessage` is equal to `YES` then this value will be `nil`.
  */
-@property (copy, nonatomic, readonly, nullable) NSString *text;     // expected-warning due to JSQMessageData does not allow text to be nil but here
+@property (copy, nonatomic, readonly, null_unspecified) NSString *text;
 
 /**
  *  Returns the media item attachment of the message, or `nil` if the message is not a media message.
  *  That is, if `isMediaMessage` is equal to `NO` then this value will be `nil`.
  */
-@property (copy, nonatomic, readonly, nullable) id<JSQMessageMediaData> media;      // expected-warning due to JSQMessageData does not allow text to be nil buthere
+@property (copy, nonatomic, readonly, null_unspecified) id<JSQMessageMediaData> media;
 
 
 #pragma mark - Initialization
