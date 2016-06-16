@@ -22,21 +22,6 @@
 
 @implementation JSQMessagesBubbleImageTests
 
-- (void)setUp
-{
-    [super setUp];
-}
-
-- (void)tearDown
-{
-    [super tearDown];
-}
-
-- (void)testInitInvalid
-{
-    XCTAssertThrows([[JSQMessagesBubbleImage alloc] initWithMessageBubbleImage:nil highlightedImage:nil], @"Invalid init should throw");
-}
-
 - (void)testInitValid
 {
     UIImage *mockImage = [UIImage jsq_bubbleCompactImage];

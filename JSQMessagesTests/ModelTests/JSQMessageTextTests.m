@@ -58,11 +58,6 @@
     XCTAssertNotNil(msg, @"Message should not be nil");
 }
 
-- (void)testTextMessageInvalidInit
-{
-    XCTAssertThrows([[JSQMessage alloc] initWithSenderId:nil senderDisplayName:nil date:nil text:nil], @"Invalid init should throw");
-}
-
 - (void)testTextMessageIsEqual
 {
     JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId
