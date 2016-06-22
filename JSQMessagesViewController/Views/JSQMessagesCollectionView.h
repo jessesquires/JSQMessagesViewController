@@ -105,4 +105,21 @@
  */
 - (JSQMessagesEditCollectionOverlayView *)dequeueEditingOverlayViewForIndexPath:(NSIndexPath *)indexPath;
 
+/**
+ *  Invoked by JSQCollectionViewlayout to give JSQCollectionView a chance to remove selected item (bulk edit mode)
+ *
+ *  @param indexPath Disappearing item index path
+ */
+-(void) layoutWillDeleteItemAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *   Invoked by JSQCollectionViewlayout to give JSQCollectionView a chance to change selected item values(bulk edit mode)
+ *
+ *  @param indexPath    index path before update
+ *  @param newIndexPath index path after update
+ */
+-(void) layoutWillMoveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)newIndexPath;
+
+
+
 @end

@@ -212,4 +212,24 @@
     [self.delegate collectionView:self editingOverlayAtIndexPath:indexPath becomeSelected:activated];
 }
 
+-(void) layoutWillDeleteItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath == nil) {
+        return;
+    }
+    
+    [self.delegate collectionView:self editingOverlayAtIndexPath:indexPath becomeSelected:NO];
+}
+
+-(void) layoutWillMoveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)newIndexPath
+{
+    if (indexPath == nil || newIndexPath == nil) {
+        return;
+    }
+    //this won't cover 100% of cases (like when user rearranging selected items)
+    [self.delegate collectionView:self editingOverlayAtIndexPath:indexPath becomeSelected:NO];
+    [self.delegate collectionView:self editingOverlayAtIndexPath:newIndexPath becomeSelected:YES];
+}
+
+
 @end
