@@ -5,12 +5,10 @@
 
 target 'SwiftExample' do
 
-pod 'JSQMessagesViewController'
-
+pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
 
 end
 
 target 'SwiftExampleTests' do
-pod 'JSQMessagesViewController'
-
+pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
 end
