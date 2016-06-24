@@ -34,7 +34,7 @@ class ChatViewController: JSQMessagesViewController {
         else {
             // Make taillessBubbles
             incomingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero, layoutDirection: UIApplication.sharedApplication().userInterfaceLayoutDirection).incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
-            outgoingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero, layoutDirection: UIApplication.sharedApplication().userInterfaceLayoutDirection).outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
+            outgoingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero, layoutDirection: UIApplication.sharedApplication().userInterfaceLayoutDirection).outgoingMessagesBubbleImageWithColor(UIColor.lightGrayColor())
         }
         
         // This is how you remove Avatars from the messagesView
@@ -51,8 +51,11 @@ class ChatViewController: JSQMessagesViewController {
         
         //Get Messages
         self.messages = makeConversation()
-        self.collectionView?.reloadData()
-        self.collectionView?.layoutIfNeeded()
+        self.collectionView?.setNeedsLayout()
+        self.collectionView?.layoutSubviews()
+        
+        
+       
     }
     
     func receiveMessagePressed(sender: UIBarButtonItem) {
@@ -77,21 +80,17 @@ class ChatViewController: JSQMessagesViewController {
         /**
          *  Copy last sent message, this will be the new "received" message
          */
-        var copyMessage = self.messages.last?.copy()
-        
-        if (copyMessage == nil) {
-            copyMessage = JSQMessage(senderId: AvatarIdJobs, displayName: DisplayNameJobs, text: "First received!")
-        }
+        let copyMessage = self.messages.last?.copy() ?? JSQMessage(senderId: AvatarIdJobs, displayName: DisplayNameJobs, text: "First received!")
             
         var newMessage:JSQMessage!
         var newMediaData:JSQMessageMediaData!
         var newMediaAttachmentCopy:AnyObject?
         
-        if copyMessage!.isMediaMessage() {
+        if copyMessage.isMediaMessage() {
             /**
              *  Last message was a media message
              */
-            let copyMediaData = copyMessage!.media
+            let copyMediaData = copyMessage.media
             
             switch copyMediaData {
             case is JSQPhotoMediaItem:
@@ -107,6 +106,7 @@ class ChatViewController: JSQMessagesViewController {
                 photoItemCopy.image = nil;
                 
                 newMediaData = photoItemCopy
+                
             case is JSQLocationMediaItem:
                 let locationItemCopy = (copyMediaData as! JSQLocationMediaItem).copy() as! JSQLocationMediaItem
                 locationItemCopy.appliesMediaViewMaskAsOutgoing = false
@@ -129,7 +129,7 @@ class ChatViewController: JSQMessagesViewController {
              *  Last message was a text message
              */
             
-            newMessage = JSQMessage(senderId: AvatarIdJobs, displayName: DisplayNameJobs, text: copyMessage!.text)
+            newMessage = JSQMessage(senderId: AvatarIdJobs, displayName: DisplayNameJobs, text: copyMessage.text)
         }
         
         /**
