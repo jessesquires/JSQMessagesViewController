@@ -27,10 +27,10 @@ class ChatViewControllerTests: XCTestCase {
     
     func testSendButtonAction() {
 
-        let button = self.chatViewController.inputToolbar.sendButtonOnRight ? self.chatViewController.inputToolbar.contentView.rightBarButtonItem : self.chatViewController.inputToolbar.contentView.leftBarButtonItem
+        let button = self.chatViewController.inputToolbar.sendButtonOnRight ? self.chatViewController.inputToolbar.contentView!.rightBarButtonItem! : self.chatViewController.inputToolbar.contentView!.leftBarButtonItem!
         let text = "Testing text"
-        let senderId = self.chatViewController.senderId
-        let senderDisplayName = self.chatViewController.senderDisplayName
+        let senderId = self.chatViewController.senderId()
+        let senderDisplayName = self.chatViewController.senderDisplayName()
         let date = NSDate()
         
         let originalCount = self.chatViewController.messages.count
@@ -50,8 +50,8 @@ class ChatViewControllerTests: XCTestCase {
     }
     
     func testSendImage() {
-        let senderId = self.chatViewController.senderId
-        let senderDisplayName = self.chatViewController.senderDisplayName
+        let senderId = self.chatViewController.senderId()
+        let senderDisplayName = self.chatViewController.senderDisplayName()
         
         let photoItem = JSQPhotoMediaItem(image: UIImage(named: "goldengate"))
         self.chatViewController.addMedia(photoItem)
@@ -65,8 +65,8 @@ class ChatViewControllerTests: XCTestCase {
     }
     
     func testSendLocation() {
-        let senderId = self.chatViewController.senderId
-        let senderDisplayName = self.chatViewController.senderDisplayName
+        let senderId = self.chatViewController.senderId()
+        let senderDisplayName = self.chatViewController.senderDisplayName()
         
         let locationItem = self.chatViewController.buildLocationItem()
         
@@ -86,7 +86,7 @@ class ChatViewControllerTests: XCTestCase {
      */
     func testSimulatedIncomingTextMessage() {
         self.chatViewController.messages = []
-        self.chatViewController.collectionView.reloadData()
+        self.chatViewController.collectionView!.reloadData()
         
         // trigger action
         let rightBarButton = self.chatViewController.navigationItem.rightBarButtonItem!
@@ -95,8 +95,8 @@ class ChatViewControllerTests: XCTestCase {
         let lastMessage = self.chatViewController.messages.last!
         
         XCTAssert(!lastMessage.isMediaMessage)
-        XCTAssert(lastMessage.senderId != self.chatViewController.senderId)
-        XCTAssert(lastMessage.senderDisplayName != self.chatViewController.senderDisplayName)
+        XCTAssert(lastMessage.senderId != self.chatViewController.senderId())
+        XCTAssert(lastMessage.senderDisplayName != self.chatViewController.senderDisplayName())
         
         // triger action
         rightBarButton.target!.performSelector(rightBarButton.action, withObject: rightBarButton)
@@ -105,8 +105,8 @@ class ChatViewControllerTests: XCTestCase {
         
         XCTAssert(newMessage != lastMessage)
         XCTAssert(!newMessage.isMediaMessage)
-        XCTAssert(newMessage.senderId != self.chatViewController.senderId)
-        XCTAssert(newMessage.senderDisplayName != self.chatViewController.senderDisplayName)
+        XCTAssert(newMessage.senderId != self.chatViewController.senderId())
+        XCTAssert(newMessage.senderDisplayName != self.chatViewController.senderDisplayName())
     }
     
     /**
@@ -128,8 +128,8 @@ class ChatViewControllerTests: XCTestCase {
         
         XCTAssert(newMessage != lastMessage)
         XCTAssert(newMessage.media is JSQPhotoMediaItem)
-        XCTAssert(newMessage.senderId != self.chatViewController.senderId)
-        XCTAssert(newMessage.senderDisplayName != self.chatViewController.senderDisplayName)
+        XCTAssert(newMessage.senderId != self.chatViewController.senderId())
+        XCTAssert(newMessage.senderDisplayName != self.chatViewController.senderDisplayName())
     }
     
     /**
@@ -151,7 +151,7 @@ class ChatViewControllerTests: XCTestCase {
         
         XCTAssert(newMessage != lastMessage)
         XCTAssert(newMessage.media is JSQLocationMediaItem)
-        XCTAssert(newMessage.senderId != self.chatViewController.senderId)
-        XCTAssert(newMessage.senderDisplayName != self.chatViewController.senderDisplayName)
+        XCTAssert(newMessage.senderId != self.chatViewController.senderId())
+        XCTAssert(newMessage.senderDisplayName != self.chatViewController.senderDisplayName())
     }
 }
