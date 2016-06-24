@@ -50,8 +50,10 @@ let AvatarWaz = JSQMessagesAvatarImageFactory().avatarImageWithUserInitials("SW"
 let AvatarSquires = JSQMessagesAvatarImageFactory().avatarImageWithUserInitials("JSQ", backgroundColor: UIColor.grayColor(), textColor: UIColor.whiteColor(), font: UIFont.systemFontOfSize(12))
 
 // Helper Method for getting an avatar for a specific User.
-func getAvatar(id: User) -> JSQMessagesAvatarImage{
-    switch id {
+func getAvatar(id: String) -> JSQMessagesAvatarImage{
+    let user = User(rawValue: id)!
+        
+    switch user {
     case .Leonard:
         return AvatarLeonard
     case .Squires:

@@ -18,14 +18,14 @@ let defaults = NSUserDefaults.standardUserDefaults()
 
 class SettingsTableViewController: UITableViewController {
     
-    @IBOutlet weak var RemoveBubbleTailsSwitch: UISwitch!
+    @IBOutlet weak var removeBubbleTailsSwitch: UISwitch!
     @IBOutlet weak var removeAvatarsSwitch: UISwitch!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         removeAvatarsSwitch.on = defaults.boolForKey(removeAvatarsKey)
-        RemoveBubbleTailsSwitch.on = defaults.boolForKey(taillessSettingKey)
+        removeBubbleTailsSwitch.on = defaults.boolForKey(taillessSettingKey)
     }
     
     @IBAction func taillessSettingTapped(sender: UISwitch) {
