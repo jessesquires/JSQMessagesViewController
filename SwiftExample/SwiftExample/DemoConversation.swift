@@ -37,33 +37,31 @@ func getName(user: User) -> String{
 //
 // Create an avatar with Image
 
-let AvatarLeonard = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("DL", backgroundColor: UIColor.jsq_messageBubbleGreenColor(), textColor: UIColor.whiteColor(), font: UIFont.systemFontOfSize(12), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
 
+let AvatarLeonard = JSQMessagesAvatarImageFactory().avatarImageWithUserInitials("DL", backgroundColor: UIColor.jsq_messageBubbleGreenColor(), textColor: UIColor.whiteColor(), font: UIFont.systemFontOfSize(12))
 // Create avatar with Initals and no Image
-let AvatarCook = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("TC", backgroundColor: UIColor.grayColor(), textColor: UIColor.whiteColor(), font: UIFont.systemFontOfSize(12), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+let AvatarCook = JSQMessagesAvatarImageFactory().avatarImageWithUserInitials("TC", backgroundColor: UIColor.grayColor(), textColor: UIColor.whiteColor(), font: UIFont.systemFontOfSize(12))
 
 // Create avatar with Placeholder Image
-let AvatarJobs = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("SJ", backgroundColor: UIColor.jsq_messageBubbleGreenColor(), textColor: UIColor.whiteColor(), font: UIFont.systemFontOfSize(12), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+let AvatarJobs = JSQMessagesAvatarImageFactory().avatarImageWithUserInitials("SJ", backgroundColor: UIColor.jsq_messageBubbleGreenColor(), textColor: UIColor.whiteColor(), font: UIFont.systemFontOfSize(12))
 
-let AvatarWaz = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("SW", backgroundColor: UIColor.jsq_messageBubbleGreenColor(), textColor: UIColor.whiteColor(), font: UIFont.systemFontOfSize(12), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+let AvatarWaz = JSQMessagesAvatarImageFactory().avatarImageWithUserInitials("SW", backgroundColor: UIColor.jsq_messageBubbleGreenColor(), textColor: UIColor.whiteColor(), font: UIFont.systemFontOfSize(12))
 
-let AvatarSquires = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("JSQ", backgroundColor: UIColor.grayColor(), textColor: UIColor.whiteColor(), font: UIFont.systemFontOfSize(12), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+let AvatarSquires = JSQMessagesAvatarImageFactory().avatarImageWithUserInitials("JSQ", backgroundColor: UIColor.grayColor(), textColor: UIColor.whiteColor(), font: UIFont.systemFontOfSize(12))
 
 // Helper Method for getting an avatar for a specific User.
-func getAvatar(id: String) -> JSQMessagesAvatarImage{
+func getAvatar(id: User) -> JSQMessagesAvatarImage{
     switch id {
-    case "053496-4509-288":
+    case .Leonard:
         return AvatarLeonard
-    case "053496-4509-289":
+    case .Squires:
         return AvatarSquires
-    case "468-768355-23123":
+    case .Cook:
         return AvatarCook
-    case "309-41802-93823":
+    case .Wazniak:
         return AvatarWaz
-    case "707-8956784-57":
+    case .Jobs:
         return AvatarJobs
-    default:
-        return JSQMessagesAvatarImage()
     }
 }
 
