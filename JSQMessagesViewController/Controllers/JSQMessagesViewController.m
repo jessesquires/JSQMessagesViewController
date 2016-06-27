@@ -916,23 +916,24 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 {
     NSDictionary *userInfo = [notification userInfo];
 
+    CGRect keyboardBeginFrame = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
     if (CGRectIsNull(keyboardEndFrame)) {
         return;
     }
-
+    
     UIViewAnimationCurve animationCurve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
     NSInteger animationCurveOption = (animationCurve << 16);
 
     double animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-
+    CGFloat offset = CGRectGetMinY(keyboardBeginFrame) - CGRectGetMinY(keyboardEndFrame) + CGRectGetHeight(self.inputToolbar.frame);
     [UIView animateWithDuration:animationDuration
                           delay:0.0
                         options:animationCurveOption
                      animations:^{
                          [self jsq_setCollectionViewInsetsTopValue:self.collectionView.contentInset.top
-                                                       bottomValue:CGRectGetHeight(keyboardEndFrame)];
+                                                       bottomValue:offset];
                      }
                      completion:nil];
 }
