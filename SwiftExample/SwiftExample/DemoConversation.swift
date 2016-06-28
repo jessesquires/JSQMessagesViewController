@@ -35,11 +35,18 @@ let message3 = JSQMessage(senderId: AvatarIdWoz, displayName: DisplayNameWoz, te
 let message4 = JSQMessage(senderId: AvatarIdJobs, displayName: DisplayNameJobs, text: "JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better.")
 let message5 = JSQMessage(senderId: AvatarIDLeonard, displayName: DisplayNameLeonard, text: "It is unit-tested, free, open-source, and documented.")
 
-func makeConversation()->[JSQMessage]{
+
+let message6 = JSQMessage(senderId: AvatarIDLeonard, displayName: DisplayNameLeonard, text: "This is incredible")
+let message7 = JSQMessage(senderId: AvatarIdWoz, displayName: DisplayNameLeonard, text: "I would have to agree")
+let message8 = JSQMessage(senderId: AvatarIDLeonard, displayName: DisplayNameLeonard, text: "It is unit-tested, free, open-source, and documented like a boss.")
+let message9 = JSQMessage(senderId: AvatarIdWoz, displayName: DisplayNameLeonard, text: "You guys need an award for this, I'll talk to my people at Apple. 💯 💯 💯")
+
+func makeGroupConversation()->[JSQMessage] {
     conversation = [message, message2,message3, message4, message5]
     return conversation
 }
 
-func getConversation()->[Conversation]{
-    return [convo]
+func makeNormalConversation() -> [JSQMessage] {
+    conversation = [message6, message7, message8, message9]
+    return conversation
 }

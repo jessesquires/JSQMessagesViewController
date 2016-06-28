@@ -1,0 +1,16 @@
+PODS:
+  - JSQMessagesViewController (7.3.3)
+
+DEPENDENCIES:
+  - JSQMessagesViewController (from `../`)
+
+EXTERNAL SOURCES:
+  JSQMessagesViewController:
+    :path: ../
+
+SPEC CHECKSUMS:
+  JSQMessagesViewController: 43b75075b0aae2fc5457aacb0829433064712e5b
+
+PODFILE CHECKSUM: b51479be92e08cc1504a6937b0ded5693c7d1bd9
+
+COCOAPODS: 1.0.0
