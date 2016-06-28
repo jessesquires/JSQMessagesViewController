@@ -34,12 +34,17 @@ class ChatViewController: JSQMessagesViewController {
         else {
             // Make taillessBubbles
             incomingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero, layoutDirection: UIApplication.sharedApplication().userInterfaceLayoutDirection).incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
-            outgoingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero, layoutDirection: UIApplication.sharedApplication().userInterfaceLayoutDirection).outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
+            outgoingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero, layoutDirection: UIApplication.sharedApplication().userInterfaceLayoutDirection).outgoingMessagesBubbleImageWithColor(UIColor.lightGrayColor())
         }
         
         // This is how you remove Avatars from the messagesView
-        collectionView?.collectionViewLayout.incomingAvatarViewSize = .zero
-        collectionView?.collectionViewLayout.outgoingAvatarViewSize = .zero
+        if defaults.boolForKey(removeAvatarsKey) {
+            collectionView?.collectionViewLayout.incomingAvatarViewSize = .zero
+            collectionView?.collectionViewLayout.outgoingAvatarViewSize = .zero
+        } else {
+            collectionView?.collectionViewLayout.incomingAvatarViewSize = CGSize(width: kJSQMessagesCollectionViewAvatarSizeDefault, height:kJSQMessagesCollectionViewAvatarSizeDefault )
+            collectionView?.collectionViewLayout.outgoingAvatarViewSize = CGSize(width: kJSQMessagesCollectionViewAvatarSizeDefault, height:kJSQMessagesCollectionViewAvatarSizeDefault )
+        }
         
         // Show Button to simulate incoming messages
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.jsq_defaultTypingIndicatorImage(), style: .Plain, target: self, action: #selector(receiveMessagePressed))
@@ -78,7 +83,7 @@ class ChatViewController: JSQMessagesViewController {
         var copyMessage = self.messages.last?.copy()
         
         if (copyMessage == nil) {
-            copyMessage = JSQMessage(senderId: AvatarIdJobs, displayName: DisplayNameJobs, text: "First received!")
+            copyMessage = JSQMessage(senderId: User.Jobs.rawValue, displayName: getName(User.Jobs), text: "First received!")
         }
             
         var newMessage:JSQMessage!
@@ -120,14 +125,14 @@ class ChatViewController: JSQMessagesViewController {
                 assertionFailure("Error: This Media type was not recognised")
             }
             
-            newMessage = JSQMessage(senderId: AvatarIdJobs, displayName: DisplayNameJobs, media: newMediaData)
+            newMessage = JSQMessage(senderId: User.Jobs.rawValue, displayName: getName(User.Jobs), media: newMediaData)
         }
         else {
             /**
              *  Last message was a text message
              */
             
-            newMessage = JSQMessage(senderId: AvatarIdJobs, displayName: DisplayNameJobs, text: copyMessage!.text)
+            newMessage = JSQMessage(senderId: User.Jobs.rawValue, displayName: getName(User.Jobs), text: copyMessage!.text)
         }
         
         /**
@@ -239,11 +244,11 @@ class ChatViewController: JSQMessagesViewController {
     //MARK: JSQMessages CollectionView DataSource
     
     override func senderId() -> String {
-        return AvatarIdWoz
+        return User.Wazniak.rawValue
     }
     
     override func senderDisplayName() -> String {
-        return DisplayNameWoz
+        return getName(User.Wazniak)
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -260,7 +265,8 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath) -> JSQMessageAvatarImageDataSource? {
-        return nil
+        let message = messages[indexPath.item]
+        return getAvatar(message.senderId)
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath) -> NSAttributedString? {
@@ -275,7 +281,7 @@ class ChatViewController: JSQMessagesViewController {
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return messages[indexPath.item].senderId == AvatarIdWoz ? 0 : kJSQMessagesCollectionViewCellLabelHeightDefault
+        return messages[indexPath.item].senderId == User.Wazniak.rawValue ? 0 : kJSQMessagesCollectionViewCellLabelHeightDefault
     }
     
 }
