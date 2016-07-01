@@ -48,9 +48,7 @@ class ChatViewController: JSQMessagesViewController {
         collectionView?.collectionViewLayout.springinessEnabled = false
         
         automaticallyScrollsToMostRecentMessage = true
-        
-        //Get Messages
-        self.messages = makeConversation()
+
         self.collectionView?.reloadData()
         self.collectionView?.layoutIfNeeded()
     }
