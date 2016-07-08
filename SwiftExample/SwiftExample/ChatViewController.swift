@@ -125,6 +125,18 @@ class ChatViewController: JSQMessagesViewController {
                 locationItemCopy.location = nil;
                 
                 newMediaData = locationItemCopy;
+            case is JSQVideoMediaItem:
+                let videoItemCopy = (copyMediaData as! JSQVideoMediaItem).copy() as! JSQVideoMediaItem
+                videoItemCopy.appliesMediaViewMaskAsOutgoing = false
+                newMediaAttachmentCopy = videoItemCopy.fileURL!.copy()
+                
+                /**
+                 *  Reset video item to simulate "downloading" the video
+                 */
+                videoItemCopy.fileURL = nil;
+                videoItemCopy.isReadyToPlay = false;
+                
+                newMediaData = videoItemCopy;
             default:
                 assertionFailure("Error: This Media type was not recognised")
             }
@@ -171,6 +183,10 @@ class ChatViewController: JSQMessagesViewController {
                     (newMediaData as! JSQLocationMediaItem).setLocation(newMediaAttachmentCopy as? CLLocation, withCompletionHandler: {
                         self.collectionView!.reloadData()
                     })
+                case is JSQVideoMediaItem:
+                    (newMediaData as! JSQVideoMediaItem).fileURL = newMediaAttachmentCopy as? NSURL
+                    (newMediaData as! JSQVideoMediaItem).isReadyToPlay = true
+                    self.collectionView!.reloadData()
                 default:
                     assertionFailure("Error: This Media type was not recognised")
                 }
@@ -215,13 +231,31 @@ class ChatViewController: JSQMessagesViewController {
             self.addMedia(locationItem)
         }
         
+        let videoAction = UIAlertAction(title: "Send video", style: .Default) { (action) in
+            /**
+             *  Add fake video
+             */
+            let videoItem = self.buildVideoItem()
+            
+            self.addMedia(videoItem)
+        }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         
         sheet.addAction(photoAction)
         sheet.addAction(locationAction)
+        sheet.addAction(videoAction)
         sheet.addAction(cancelAction)
         
         self.presentViewController(sheet, animated: true, completion: nil)
+    }
+    
+    func buildVideoItem() -> JSQVideoMediaItem {
+        let videoURL = NSURL(fileURLWithPath: "file://")
+        
+        let videoItem = JSQVideoMediaItem(fileURL: videoURL, isReadyToPlay: true)
+        
+        return videoItem
     }
     
     func buildLocationItem() -> JSQLocationMediaItem {
