@@ -80,6 +80,22 @@ class ChatViewControllerTests: XCTestCase {
         
     }
     
+    func testSendVideo() {
+        let senderId = self.chatViewController.senderId()
+        let senderDisplayName = self.chatViewController.senderDisplayName()
+        
+        let videoItem = self.chatViewController.buildVideoItem()
+        
+        self.chatViewController.addMedia(videoItem)
+        
+        let newMessage = self.chatViewController.messages.last!
+        
+        XCTAssert(newMessage.senderId == senderId)
+        XCTAssert(newMessage.senderDisplayName == senderDisplayName)
+        XCTAssert(newMessage.media is JSQVideoMediaItem)
+        
+    }
+    
     /**
      * Test when the messages array is empty, it should add a new incoming text message
      * Test when the messages array last message is a text message, it should add a new incoming text message
