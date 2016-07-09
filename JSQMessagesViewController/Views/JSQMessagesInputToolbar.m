@@ -43,30 +43,32 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 #pragma mark - Initialization
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    self.backgroundColor = [UIColor whiteColor];
-    self.jsq_isObserving = NO;
-    self.sendButtonOnRight = YES;
-
-    self.preferredDefaultHeight = 44.0f;
-    self.maximumHeight = NSNotFound;
-
-    JSQMessagesToolbarContentView *toolbarContentView = [self loadToolbarContentView];
-    toolbarContentView.frame = self.frame;
-    [self addSubview:toolbarContentView];
-    [self jsq_pinAllEdgesOfSubview:toolbarContentView];
-    [self setNeedsUpdateConstraints];
-    _contentView = toolbarContentView;
-
-    [self jsq_addObservers];
-
-    JSQMessagesToolbarButtonFactory *toolbarButtonFactory = [[JSQMessagesToolbarButtonFactory alloc] initWithFont:[UIFont boldSystemFontOfSize:17.0]];
-    self.contentView.leftBarButtonItem = [toolbarButtonFactory defaultAccessoryButtonItem];
-    self.contentView.rightBarButtonItem = [toolbarButtonFactory defaultSendButtonItem];
-
-    [self toggleSendButtonEnabled];
+- (instancetype)init
+{    
+    if (self = [super init]) {
+        self.backgroundColor = [UIColor whiteColor];
+        _jsq_isObserving = NO;
+        _sendButtonOnRight = YES;
+        
+        _preferredDefaultHeight = 44.0f;
+        _maximumHeight = NSNotFound;
+        
+        JSQMessagesToolbarContentView *toolbarContentView = [self loadToolbarContentView];
+        toolbarContentView.frame = self.frame;
+        [self addSubview:toolbarContentView];
+        [self jsq_pinAllEdgesOfSubview:toolbarContentView];
+        [self setNeedsUpdateConstraints];
+        _contentView = toolbarContentView;
+        
+        [self jsq_addObservers];
+        
+        JSQMessagesToolbarButtonFactory *toolbarButtonFactory = [[JSQMessagesToolbarButtonFactory alloc] initWithFont:[UIFont boldSystemFontOfSize:17.0]];
+        _contentView.leftBarButtonItem = [toolbarButtonFactory defaultAccessoryButtonItem];
+        _contentView.rightBarButtonItem = [toolbarButtonFactory defaultSendButtonItem];
+        
+        [self toggleSendButtonEnabled];
+    }
+    return self;
 }
 
 - (JSQMessagesToolbarContentView *)loadToolbarContentView

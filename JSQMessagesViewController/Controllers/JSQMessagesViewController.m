@@ -117,11 +117,8 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 
 @interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate>
 
-@property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
-@property (strong, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
+@property (strong, nonatomic) JSQMessagesCollectionView *collectionView;
+@property (strong, nonatomic) JSQMessagesInputToolbar *inputToolbar;
 
 @property (strong, nonatomic) NSIndexPath *selectedIndexPathForMenu;
 
@@ -132,16 +129,9 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 
 #pragma mark - Class methods
 
-+ (UINib *)nib
-{
-    return [UINib nibWithNibName:NSStringFromClass([JSQMessagesViewController class])
-                          bundle:[NSBundle bundleForClass:[JSQMessagesViewController class]]];
-}
-
 + (instancetype)messagesViewController
 {
-    return [[[self class] alloc] initWithNibName:NSStringFromClass([JSQMessagesViewController class])
-                                          bundle:[NSBundle bundleForClass:[JSQMessagesViewController class]]];
+    return [[JSQMessagesViewController alloc] init];
 }
 
 + (void)initialize {
@@ -157,16 +147,18 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 {
     self.view.backgroundColor = [UIColor whiteColor];
 
-    self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
-
+    CGRect mainBounds = [UIScreen mainScreen].bounds;
+    self.collectionView = [[JSQMessagesCollectionView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(mainBounds), CGRectGetHeight(mainBounds))
+                                                      collectionViewLayout:[[JSQMessagesCollectionViewFlowLayout alloc] init]];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
+    [self.view addSubview:self.collectionView];
 
+    self.inputToolbar = [[JSQMessagesInputToolbar alloc] init];
     self.inputToolbar.delegate = self;
     self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
     self.inputToolbar.contentView.textView.accessibilityLabel = [NSBundle jsq_localizedStringForKey:@"new_message"];
     self.inputToolbar.contentView.textView.delegate = self;
-    [self.inputToolbar removeFromSuperview];
 
     self.automaticallyScrollsToMostRecentMessage = YES;
 
@@ -236,8 +228,6 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 {
     [super viewDidLoad];
 
-    [[[self class] nib] instantiateWithOwner:self options:nil];
-
     [self jsq_configureMessagesViewController];
     [self jsq_registerForNotifications:YES];
 }
@@ -245,9 +235,6 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
-    [self.view layoutIfNeeded];
-    [self.collectionView.collectionViewLayout invalidateLayout];
 
     if (self.automaticallyScrollsToMostRecentMessage) {
         dispatch_async(dispatch_get_main_queue(), ^{
