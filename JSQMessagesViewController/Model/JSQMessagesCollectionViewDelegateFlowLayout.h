@@ -24,6 +24,7 @@
 @class JSQMessagesCollectionViewCell;
 @class JSQMessagesLoadEarlierHeaderView;
 
+NS_ASSUME_NONNULL_BEGIN
 
 /**
 *  The `JSQMessagesCollectionViewDelegateFlowLayout` protocol defines methods that allow you to
@@ -120,3 +121,5 @@
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender;
 
 @end
+
+NS_ASSUME_NONNULL_END

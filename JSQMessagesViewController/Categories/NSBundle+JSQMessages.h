@@ -18,6 +18,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSBundle (JSQMessages)
 
 /**
@@ -37,6 +39,8 @@
  *
  *  @return A localized version of the string designated by key in the JSQMessages table.
  */
-+ (NSString *)jsq_localizedStringForKey:(NSString *)key;
++ (nullable NSString *)jsq_localizedStringForKey:(NSString *)key;
 
 @end
+
+NS_ASSUME_NONNULL_END

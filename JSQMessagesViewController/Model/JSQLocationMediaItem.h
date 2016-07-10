@@ -27,6 +27,8 @@ typedef void (^JSQLocationMediaItemCompletionBlock)(void);
 
 #import "JSQMediaItem.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `JSQLocationMediaItem` class is a concrete `JSQMediaItem` subclass that implements the `JSQMessageMediaData` protocol
  *  and represents a location media message. An initialized `JSQLocationMediaItem` object can be passed
@@ -38,7 +40,7 @@ typedef void (^JSQLocationMediaItemCompletionBlock)(void);
 /**
  *  The location for the media item. The default value is `nil`.
  */
-@property (copy, nonatomic) CLLocation *location;
+@property (copy, nonatomic, nullable) CLLocation *location;
 
 /**
  *  The coordinate of the location property.
@@ -50,14 +52,14 @@ typedef void (^JSQLocationMediaItemCompletionBlock)(void);
  *
  *  @param location The location for the media item. This value may be `nil`.
  *
- *  @return An initialized `JSQLocationMediaItem` if successful, `nil` otherwise.
+ *  @return An initialized `JSQLocationMediaItem`.
  *
  *  @discussion If the location data must be dowloaded from the network,
  *  you may initialize a `JSQLocationMediaItem` object with a `nil` location.
  *  Once the location data has been retrieved, you can then set the location property
  *  using `setLocation: withCompletionHandler:`
  */
-- (instancetype)initWithLocation:(CLLocation *)location;
+- (instancetype)initWithLocation:(nullable CLLocation *)location;
 
 /**
  *  Sets the specified location for the location media item and immediately begins creating
@@ -69,7 +71,7 @@ typedef void (^JSQLocationMediaItemCompletionBlock)(void);
  *  @param location   The location for the media item.
  *  @param completion The block to call after the map view snapshot for the given location has been created.
  */
-- (void)setLocation:(CLLocation *)location withCompletionHandler:(JSQLocationMediaItemCompletionBlock)completion;
+- (void)setLocation:(nullable CLLocation *)location withCompletionHandler:(nullable JSQLocationMediaItemCompletionBlock)completion;
 
 /**
  *  Sets the specified location for the location media item and immediately begins creating
@@ -81,6 +83,8 @@ typedef void (^JSQLocationMediaItemCompletionBlock)(void);
  *  @param region     The map region that you want to capture.
  *  @param completion The block to call after the map view snapshot for the given location has been created.
  */
-- (void)setLocation:(CLLocation *)location
-             region:(MKCoordinateRegion)region withCompletionHandler:(JSQLocationMediaItemCompletionBlock)completion;
+- (void)setLocation:(nullable CLLocation *)location
+             region:(MKCoordinateRegion)region withCompletionHandler:(nullable JSQLocationMediaItemCompletionBlock)completion;
 @end
+
+NS_ASSUME_NONNULL_END
