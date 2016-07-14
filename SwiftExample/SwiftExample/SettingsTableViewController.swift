@@ -9,23 +9,23 @@
 import UIKit
 
 //MARK: SettingKeys
-let taillessSettingKey      = "taillessSetting"
-let senderDisplayNameKey    = "senderDisplayName"
-let avatarSettingKey = "avatarSetting"
+let taillessSettingKey              = "taillessSetting"
+let removeSenderDisplayNameKey      = "senderDisplayName"
+let avatarSettingKey                = "avatarSetting"
 
 let defaults = NSUserDefaults.standardUserDefaults()
 
 class SettingsTableViewController: UITableViewController {
     
-    @IBOutlet weak var RemoveBubbleTailsSwitch: UISwitch!
-    @IBOutlet weak var SenderDisplayNameSwitch: UISwitch!
+    @IBOutlet weak var removeBubbleTailsSwitch: UISwitch!
+    @IBOutlet weak var senderDisplayNameSwitch: UISwitch!
     @IBOutlet weak var removeAvatarSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set the Switch to the currents settings
-        RemoveBubbleTailsSwitch.on = defaults.boolForKey(taillessSettingKey)
-        SenderDisplayNameSwitch.on = defaults.boolForKey(senderDisplayNameKey)
+        removeBubbleTailsSwitch.on = defaults.boolForKey(taillessSettingKey)
+        senderDisplayNameSwitch.on = defaults.boolForKey(removeSenderDisplayNameKey)
         removeAvatarSwitch.on = defaults.boolForKey(avatarSettingKey)
     }
     
@@ -33,8 +33,8 @@ class SettingsTableViewController: UITableViewController {
         defaults.setBool(sender.on, forKey: taillessSettingKey)
     }
     
-    @IBAction func SenderDisplayNameTapped(sender: UISwitch) {
-        defaults.setBool(sender.on, forKey: senderDisplayNameKey)
+    @IBAction func senderDisplayNameTapped(sender: AnyObject) {
+        defaults.setBool(sender.on, forKey: removeSenderDisplayNameKey)
     }
     
     @IBAction func avatarSettingTapped(sender: UISwitch) {

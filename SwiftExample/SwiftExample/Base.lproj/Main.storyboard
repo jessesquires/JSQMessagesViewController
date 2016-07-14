@@ -196,24 +196,52 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Remove Avatars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qab-34-9Bw">
-                                                    <rect key="frame" x="127" y="11" width="123" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40k-4x-RzM">
                                                     <rect key="frame" x="519" y="6" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="avatarSettingTapped:" destination="Z1H-Xa-vkf" eventType="valueChanged" id="pEC-6k-SWb"/>
                                                     </connections>
                                                 </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove Avatars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qab-34-9Bw">
+                                                    <rect key="frame" x="18" y="11" width="123" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="40k-4x-RzM" firstAttribute="centerY" secondItem="Fhj-7E-tlJ" secondAttribute="centerY" id="0by-IZ-iGO"/>
                                                 <constraint firstItem="Qab-34-9Bw" firstAttribute="centerY" secondItem="Fhj-7E-tlJ" secondAttribute="centerY" id="2jc-Mf-dbT"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="40k-4x-RzM" secondAttribute="trailing" constant="24" id="JtC-a5-m0w"/>
                                                 <constraint firstItem="Qab-34-9Bw" firstAttribute="leading" secondItem="Fhj-7E-tlJ" secondAttribute="leadingMargin" constant="10" id="rbp-vb-J3B"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" editingAccessoryType="checkmark" id="yud-yj-G8u">
+                                        <rect key="frame" x="0.0" y="152" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yud-yj-G8u" id="4n4-Pu-EqB">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VTM-dI-d1V">
+                                                    <rect key="frame" x="519" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="senderDisplayNameTapped:" destination="Z1H-Xa-vkf" eventType="valueChanged" id="40f-nX-3U3"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove Sender Display Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzy-SS-bbA">
+                                                    <rect key="frame" x="18" y="11" width="230" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="wzy-SS-bbA" firstAttribute="centerY" secondItem="4n4-Pu-EqB" secondAttribute="centerY" id="DZK-2E-ZE6"/>
+                                                <constraint firstItem="wzy-SS-bbA" firstAttribute="leading" secondItem="4n4-Pu-EqB" secondAttribute="leadingMargin" constant="10" id="VLR-AZ-ZpI"/>
+                                                <constraint firstItem="VTM-dI-d1V" firstAttribute="centerY" secondItem="4n4-Pu-EqB" secondAttribute="centerY" id="nWq-9V-k71"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="VTM-dI-d1V" secondAttribute="trailing" constant="24" id="yRy-XG-X4g"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -228,6 +256,7 @@
                     <connections>
                         <outlet property="RemoveBubbleTailsSwitch" destination="Y7a-LK-zZg" id="Fj7-Xq-rRv"/>
                         <outlet property="removeAvatarSwitch" destination="40k-4x-RzM" id="Q8U-hQ-meg"/>
+                        <outlet property="senderDisplayNameSwitch" destination="VTM-dI-d1V" id="rpu-Ks-BJ9"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZcH-RU-6HG" userLabel="First Responder" sceneMemberID="firstResponder"/>
