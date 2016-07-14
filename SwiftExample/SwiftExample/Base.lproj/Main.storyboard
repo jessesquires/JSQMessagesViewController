@@ -189,31 +189,31 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" editingAccessoryType="checkmark" id="UDO-Vw-di4">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" editingAccessoryType="checkmark" id="t98-iy-zhi">
                                         <rect key="frame" x="0.0" y="108" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UDO-Vw-di4" id="479-hg-Ykg">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t98-iy-zhi" id="Fhj-7E-tlJ">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Remove Sender Display Name " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9y-mW-9zH">
-                                                    <rect key="frame" x="15" y="11" width="235" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Remove Avatars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qab-34-9Bw">
+                                                    <rect key="frame" x="127" y="11" width="123" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oeo-VV-aVh">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40k-4x-RzM">
                                                     <rect key="frame" x="519" y="6" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="SenderDisplayNameTapped:" destination="Z1H-Xa-vkf" eventType="valueChanged" id="psj-Nm-h3H"/>
+                                                        <action selector="avatarSettingTapped:" destination="Z1H-Xa-vkf" eventType="valueChanged" id="pEC-6k-SWb"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="oeo-VV-aVh" secondAttribute="trailing" constant="24" id="8dR-r1-tzM"/>
-                                                <constraint firstItem="oeo-VV-aVh" firstAttribute="centerY" secondItem="479-hg-Ykg" secondAttribute="centerY" id="96t-5k-hMh"/>
-                                                <constraint firstItem="X9y-mW-9zH" firstAttribute="leading" secondItem="479-hg-Ykg" secondAttribute="leadingMargin" constant="10" id="GyP-ek-PSb"/>
-                                                <constraint firstItem="X9y-mW-9zH" firstAttribute="centerY" secondItem="479-hg-Ykg" secondAttribute="centerY" id="fI4-aP-pev"/>
+                                                <constraint firstItem="40k-4x-RzM" firstAttribute="centerY" secondItem="Fhj-7E-tlJ" secondAttribute="centerY" id="0by-IZ-iGO"/>
+                                                <constraint firstItem="Qab-34-9Bw" firstAttribute="centerY" secondItem="Fhj-7E-tlJ" secondAttribute="centerY" id="2jc-Mf-dbT"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="40k-4x-RzM" secondAttribute="trailing" constant="24" id="JtC-a5-m0w"/>
+                                                <constraint firstItem="Qab-34-9Bw" firstAttribute="leading" secondItem="Fhj-7E-tlJ" secondAttribute="leadingMargin" constant="10" id="rbp-vb-J3B"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -227,12 +227,12 @@
                     </tableView>
                     <connections>
                         <outlet property="RemoveBubbleTailsSwitch" destination="Y7a-LK-zZg" id="Fj7-Xq-rRv"/>
-                        <outlet property="SenderDisplayNameSwitch" destination="oeo-VV-aVh" id="tFg-5i-m8G"/>
+                        <outlet property="removeAvatarSwitch" destination="40k-4x-RzM" id="Q8U-hQ-meg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZcH-RU-6HG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2467" y="-52"/>
+            <point key="canvasLocation" x="2714" y="-125"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iNh-4O-Dep">
