@@ -402,14 +402,18 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     }
 
     CGFloat collectionViewContentHeight = [self.collectionView.collectionViewLayout collectionViewContentSize].height;
-    BOOL isContentTooSmall = (collectionViewContentHeight < CGRectGetHeight(self.collectionView.bounds));
-
+    CGFloat collectionViewHeight = CGRectGetHeight(self.collectionView.bounds);
+    BOOL isContentTooSmall = (collectionViewContentHeight < collectionViewHeight + 10.f);
+    
     if (isContentTooSmall) {
         //  workaround for the first few messages not scrolling
         //  when the collection view content size is too small, `scrollToItemAtIndexPath:` doesn't work properly
         //  this seems to be a UIKit bug, see #256 on GitHub
-        [self.collectionView scrollRectToVisible:CGRectMake(0.0, collectionViewContentHeight - 1.0f, 1.0f, 1.0f)
-                                        animated:animated];
+        
+        CGFloat contentWindowHeight = collectionViewHeight - self.collectionView.contentInset.top - self.collectionView.contentInset.bottom;
+        CGFloat offsetHeight = MAX(0.f, collectionViewContentHeight - contentWindowHeight) - self.collectionView.contentInset.top;
+        [self.collectionView setContentOffset:CGPointMake(0.f, offsetHeight) animated:YES];
+        
         return;
     }
 
