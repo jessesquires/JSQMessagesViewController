@@ -319,7 +319,7 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func senderDisplayName() -> String {
-        return self.senderDisplayName()
+        return getName(User.Wazniak)
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
