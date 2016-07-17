@@ -102,12 +102,22 @@ let message7 = JSQMessage(senderId: AvatarIdWoz, displayName: getName(User.Wazni
 let message8 = JSQMessage(senderId: AvatarIDLeonard, displayName: getName(User.Leonard), text: "It is unit-tested, free, open-source, and documented like a boss.")
 let message9 = JSQMessage(senderId: AvatarIdWoz, displayName: getName(User.Wazniak), text: "You guys need an award for this, I'll talk to my people at Apple. 💯 💯 💯")
 
+// photo message
+let photoItem = JSQPhotoMediaItem(image: UIImage(named: "goldengate"))
+let photoMessage = JSQMessage(senderId: AvatarIdWoz, displayName: getName(User.Wazniak), media: photoItem)
+
+// audio mesage
+let sample = NSBundle.mainBundle().pathForResource("jsq_messages_sample", ofType: "m4a")
+let audioData = NSData(contentsOfFile: sample!)
+let audioItem = JSQAudioMediaItem(data: audioData)
+let audioMessage = JSQMessage(senderId: AvatarIdWoz, displayName: getName(User.Wazniak), media: audioItem)
+
 func makeGroupConversation()->[JSQMessage] {
-    conversation = [message, message2,message3, message4, message5]
+    conversation = [message, message2,message3, message4, message5, photoMessage, audioMessage]
     return conversation
 }
 
 func makeNormalConversation() -> [JSQMessage] {
-    conversation = [message6, message7, message8, message9]
+    conversation = [message6, message7, message8, message9, photoMessage, audioMessage]
     return conversation
 }

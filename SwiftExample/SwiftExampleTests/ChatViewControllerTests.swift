@@ -96,6 +96,21 @@ class ChatViewControllerTests: XCTestCase {
         
     }
     
+    func testSendAudio() {
+        let senderId = self.chatViewController.senderId()
+        let senderDisplayName = self.chatViewController.senderDisplayName()
+        
+        let audioItem = self.chatViewController.buildAudioItem()
+        
+        self.chatViewController.addMedia(audioItem)
+        
+        let newMessage = self.chatViewController.messages.last!
+        
+        XCTAssert(newMessage.senderId == senderId)
+        XCTAssert(newMessage.senderDisplayName == senderDisplayName)
+        XCTAssert(newMessage.media is JSQAudioMediaItem)
+    }
+    
     /**
      * Test when the messages array is empty, it should add a new incoming text message
      * Test when the messages array last message is a text message, it should add a new incoming text message

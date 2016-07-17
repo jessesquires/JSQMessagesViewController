@@ -137,6 +137,17 @@ class ChatViewController: JSQMessagesViewController {
                 videoItemCopy.isReadyToPlay = false;
                 
                 newMediaData = videoItemCopy;
+            case is JSQAudioMediaItem:
+                let audioItemCopy = (copyMediaData as! JSQAudioMediaItem).copy() as! JSQAudioMediaItem
+                audioItemCopy.appliesMediaViewMaskAsOutgoing = false
+                newMediaAttachmentCopy = audioItemCopy.audioData!.copy()
+                
+                /**
+                 *  Reset audio item to simulate "downloading" the audio
+                 */
+                audioItemCopy.audioData = nil;
+                
+                newMediaData = audioItemCopy;
             default:
                 assertionFailure("Error: This Media type was not recognised")
             }
@@ -186,6 +197,9 @@ class ChatViewController: JSQMessagesViewController {
                 case is JSQVideoMediaItem:
                     (newMediaData as! JSQVideoMediaItem).fileURL = newMediaAttachmentCopy as? NSURL
                     (newMediaData as! JSQVideoMediaItem).isReadyToPlay = true
+                    self.collectionView!.reloadData()
+                case is JSQAudioMediaItem:
+                    (newMediaData as! JSQAudioMediaItem).audioData = newMediaAttachmentCopy as? NSData
                     self.collectionView!.reloadData()
                 default:
                     assertionFailure("Error: This Media type was not recognised")
@@ -240,11 +254,21 @@ class ChatViewController: JSQMessagesViewController {
             self.addMedia(videoItem)
         }
         
+        let audioAction = UIAlertAction(title: "Send audio", style: .Default) { (action) in
+            /**
+             *  Add fake audio
+             */
+            let audioItem = self.buildAudioItem()
+            
+            self.addMedia(audioItem)
+        }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         
         sheet.addAction(photoAction)
         sheet.addAction(locationAction)
         sheet.addAction(videoAction)
+        sheet.addAction(audioAction)
         sheet.addAction(cancelAction)
         
         self.presentViewController(sheet, animated: true, completion: nil)
@@ -256,6 +280,15 @@ class ChatViewController: JSQMessagesViewController {
         let videoItem = JSQVideoMediaItem(fileURL: videoURL, isReadyToPlay: true)
         
         return videoItem
+    }
+    
+    func buildAudioItem() -> JSQAudioMediaItem {
+        let sample = NSBundle.mainBundle().pathForResource("jsq_messages_sample", ofType: "m4a")
+        let audioData = NSData(contentsOfFile: sample!)
+        
+        let audioItem = JSQAudioMediaItem(data: audioData)
+        
+        return audioItem
     }
     
     func buildLocationItem() -> JSQLocationMediaItem {
