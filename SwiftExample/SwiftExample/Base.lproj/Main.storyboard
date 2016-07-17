@@ -177,7 +177,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y7a-LK-zZg">
                                                     <rect key="frame" x="519" y="6" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="taillessSettingTapped:" destination="Z1H-Xa-vkf" eventType="valueChanged" id="mEp-rT-9DT"/>
+                                                        <action selector="taillessSettingTapped:" destination="Z1H-Xa-vkf" eventType="valueChanged" id="hRj-Wt-7Ec"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -254,8 +254,8 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="RemoveBubbleTailsSwitch" destination="Y7a-LK-zZg" id="Fj7-Xq-rRv"/>
                         <outlet property="removeAvatarSwitch" destination="40k-4x-RzM" id="Q8U-hQ-meg"/>
+                        <outlet property="removeBubbleTailsSwitch" destination="Y7a-LK-zZg" id="cWb-NS-lvk"/>
                         <outlet property="senderDisplayNameSwitch" destination="VTM-dI-d1V" id="rpu-Ks-BJ9"/>
                     </connections>
                 </tableViewController>

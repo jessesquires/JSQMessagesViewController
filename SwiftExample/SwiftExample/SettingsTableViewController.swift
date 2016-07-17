@@ -17,6 +17,7 @@ let defaults = NSUserDefaults.standardUserDefaults()
 
 class SettingsTableViewController: UITableViewController {
     
+    
     @IBOutlet weak var removeBubbleTailsSwitch: UISwitch!
     @IBOutlet weak var senderDisplayNameSwitch: UISwitch!
     @IBOutlet weak var removeAvatarSwitch: UISwitch!
@@ -25,6 +26,7 @@ class SettingsTableViewController: UITableViewController {
         super.viewDidLoad()
         // Set the Switch to the currents settings
         removeBubbleTailsSwitch.on = defaults.boolForKey(taillessSettingKey)
+        
         senderDisplayNameSwitch.on = defaults.boolForKey(removeSenderDisplayNameKey)
         removeAvatarSwitch.on = defaults.boolForKey(avatarSettingKey)
     }
