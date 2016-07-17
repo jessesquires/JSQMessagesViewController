@@ -12,14 +12,11 @@ import JSQMessagesViewController
 @testable import SwiftExample
 
 class ChatViewControllerTests: XCTestCase {
-    
-    var chatViewController: ChatViewController!
+    let changeSetting = NSUserDefaults.standardUserDefaults().setBool
+    var chatViewController: ChatViewController = ChatViewController()
     
     override func setUp() {
         super.setUp()
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        self.chatViewController = storyboard.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController
         
         //load the view
         XCTAssertNotNil(self.chatViewController.view)

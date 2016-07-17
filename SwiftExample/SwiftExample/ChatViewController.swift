@@ -20,6 +20,8 @@ class ChatViewController: JSQMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupBackButton()
+        
         /**
          *  Override point:
          *
@@ -61,6 +63,17 @@ class ChatViewController: JSQMessagesViewController {
 
         self.collectionView?.reloadData()
         self.collectionView?.layoutIfNeeded()
+    }
+    
+    // Mark: Navigation
+    
+    func setupBackButton() {
+        let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    func backButtonTapped() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func receiveMessagePressed(sender: UIBarButtonItem) {

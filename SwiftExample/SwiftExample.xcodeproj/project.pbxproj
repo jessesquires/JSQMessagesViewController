@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2D4E760C6D52AC095DEF0A67 /* Pods_SwiftExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A0DC4B7792ACC2835F9E2C4 /* Pods_SwiftExample.framework */; };
 		373D56281D07404000D028A0 /* ConversationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D56271D07404000D028A0 /* ConversationTableViewController.swift */; };
+		37700C071D39853400207337 /* initalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37700C061D39853400207337 /* initalTableViewController.swift */; };
 		41AF84C51CFCA73B006ED473 /* ChatViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF84C41CFCA73B006ED473 /* ChatViewControllerTests.swift */; };
 		41AF84E51CFCFE17006ED473 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41AF84E41CFCFE17006ED473 /* Images.xcassets */; };
 		872F10EC240969CC9051FF5B /* Pods_SwiftExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4403B1A26FE3CFF614F3F725 /* Pods_SwiftExampleTests.framework */; };
@@ -17,7 +18,6 @@
 		F80276D31CE38FEB00063D88 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80276D21CE38FEB00063D88 /* Conversation.swift */; };
 		F80276D51CE3915700063D88 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80276D41CE3915700063D88 /* ChatViewController.swift */; };
 		F82D09C31CDFBB4900DD74CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D09C21CDFBB4900DD74CF /* AppDelegate.swift */; };
-		F82D09C81CDFBB4900DD74CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F82D09C61CDFBB4900DD74CF /* Main.storyboard */; };
 		F82D09CD1CDFBB4900DD74CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F82D09CB1CDFBB4900DD74CF /* LaunchScreen.storyboard */; };
 		F82E19211CF0F2BE0069B211 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82E19201CF0F2BE0069B211 /* SettingsTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -35,6 +35,7 @@
 /* Begin PBXFileReference section */
 		2A0DC4B7792ACC2835F9E2C4 /* Pods_SwiftExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		373D56271D07404000D028A0 /* ConversationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationTableViewController.swift; sourceTree = "<group>"; };
+		37700C061D39853400207337 /* initalTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = initalTableViewController.swift; sourceTree = "<group>"; };
 		3D5DE46B5737B20C9B95257C /* Pods-SwiftExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftExample/Pods-SwiftExample.debug.xcconfig"; sourceTree = "<group>"; };
 		41AF84C41CFCA73B006ED473 /* ChatViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewControllerTests.swift; sourceTree = "<group>"; };
 		41AF84E41CFCFE17006ED473 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../../JSQMessagesDemo/Images.xcassets; sourceTree = "<group>"; };
@@ -48,7 +49,6 @@
 		F80276D41CE3915700063D88 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		F82D09BF1CDFBB4900DD74CF /* SwiftExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F82D09C21CDFBB4900DD74CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F82D09C71CDFBB4900DD74CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F82D09CC1CDFBB4900DD74CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F82D09CE1CDFBB4900DD74CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F82E19201CF0F2BE0069B211 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -122,10 +122,10 @@
 				F82D09C21CDFBB4900DD74CF /* AppDelegate.swift */,
 				F80276D01CE38FA600063D88 /* DemoConversation.swift */,
 				F80276D41CE3915700063D88 /* ChatViewController.swift */,
+				37700C061D39853400207337 /* initalTableViewController.swift */,
 				373D56271D07404000D028A0 /* ConversationTableViewController.swift */,
 				F80276D21CE38FEB00063D88 /* Conversation.swift */,
 				F82E19201CF0F2BE0069B211 /* SettingsTableViewController.swift */,
-				F82D09C61CDFBB4900DD74CF /* Main.storyboard */,
 				41AF84E41CFCFE17006ED473 /* Images.xcassets */,
 				F82D09CB1CDFBB4900DD74CF /* LaunchScreen.storyboard */,
 				A0844FA01D38367C00D0EB83 /* jsq_messages_sample.m4a */,
@@ -233,7 +233,6 @@
 				F82D09CD1CDFBB4900DD74CF /* LaunchScreen.storyboard in Resources */,
 				A0844FA11D38367C00D0EB83 /* jsq_messages_sample.m4a in Resources */,
 				41AF84E51CFCFE17006ED473 /* Images.xcassets in Resources */,
-				F82D09C81CDFBB4900DD74CF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +345,7 @@
 			files = (
 				F80276D31CE38FEB00063D88 /* Conversation.swift in Sources */,
 				373D56281D07404000D028A0 /* ConversationTableViewController.swift in Sources */,
+				37700C071D39853400207337 /* initalTableViewController.swift in Sources */,
 				F80276D11CE38FA600063D88 /* DemoConversation.swift in Sources */,
 				F80276D51CE3915700063D88 /* ChatViewController.swift in Sources */,
 				F82D09C31CDFBB4900DD74CF /* AppDelegate.swift in Sources */,
@@ -372,14 +372,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F82D09C61CDFBB4900DD74CF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F82D09C71CDFBB4900DD74CF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F82D09CB1CDFBB4900DD74CF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
