@@ -29,8 +29,7 @@ class initalTableViewController: UITableViewController {
     
     private func setupView() {
         self.navigationItem.title = "JSQ implimented in Swift"
-        let newTableview = UITableView(frame: tableView.frame, style: .Grouped)
-        self.tableView = newTableview
+        self.tableView = UITableView(frame: tableView.frame, style: .Grouped)
     }
     
     func prepareTable() {
@@ -117,7 +116,9 @@ class initalTableViewController: UITableViewController {
         case 1:
             switch indexPath.row {
             case 0:
-                self.presentViewController(SettingsTableViewController(), animated: true, completion: nil)
+                
+                let settingsView =  UINavigationController(rootViewController: SettingsTableViewController())
+                self.presentViewController(settingsView, animated: true, completion: nil)
             default:
                 return
             }

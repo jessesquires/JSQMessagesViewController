@@ -64,10 +64,14 @@ class ChatViewController: JSQMessagesViewController {
         self.collectionView?.reloadData()
         self.collectionView?.layoutIfNeeded()
     }
+    
+    // Mark: Navigation
+    
     func setupBackButton() {
         let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem = backButton
     }
+    
     func backButtonTapped() {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -328,7 +332,7 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func senderDisplayName() -> String {
-        return self.senderDisplayName()
+        return getName(User.Wazniak)
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
