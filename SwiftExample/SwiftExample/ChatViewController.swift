@@ -20,6 +20,8 @@ class ChatViewController: JSQMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupBackButton()
+        
         /**
          *  Override point:
          *
@@ -357,6 +359,17 @@ class ChatViewController: JSQMessagesViewController {
 
     override func collectionView(collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return messages[indexPath.item].senderId == AvatarIdWoz && defaults.boolForKey(removeSenderDisplayNameKey) ? 0 : kJSQMessagesCollectionViewCellLabelHeightDefault
+    }
+    
+    // Mark: Navigation
+    
+    func setupBackButton() {
+        let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(backButtonTapped))
+        self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    func backButtonTapped() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
 }

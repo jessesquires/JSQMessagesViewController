@@ -23,6 +23,7 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackButton()
         // Set the Switch to the currents settings
         removeBubbleTailsSwitch.on = defaults.boolForKey(taillessSettingKey)
         senderDisplayNameSwitch.on = defaults.boolForKey(removeSenderDisplayNameKey)
@@ -41,4 +42,12 @@ class SettingsTableViewController: UITableViewController {
         defaults.setBool(sender.on, forKey: avatarSettingKey)
     }
     
+    func setupBackButton() {
+        let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(backButtonTapped))
+        self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    func backButtonTapped() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }
