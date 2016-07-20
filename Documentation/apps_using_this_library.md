@@ -43,4 +43,6 @@ These are the (known) apps that use `JSQMessagesViewController`. Submit a [pull 
 * [Radiate](https://itunes.apple.com/us/app/radiate/id939284774?mt=8)
 * [Criptext](https://itunes.apple.com/us/app/criptext-secure-messenger/id848647361?mt=8)
 * [Chaty](https://github.com/LunarFlash/Chaty)
+* [SnipSnap](http://go.snipsnap.it/messageui-scout)
+* [BubbleMe](https://itunes.apple.com/us/app/bubbleme/id1125325038)
 * *Your app here, submit a [pull request](https://github.com/jessesquires/JSQMessagesViewController/compare)!*
