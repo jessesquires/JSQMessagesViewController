@@ -8,6 +8,9 @@
 /* Class = "UILabel"; text = "Outgoing avatars"; ObjectID = "9Rr-S8-Uae"; */
 "9Rr-S8-Uae.text" = "אווטאר בהודעות יוצאות";
 
+/* Class = "UILabel"; text = "Accessory button for media messages"; ObjectID = "Cae-FY-b5Q"; */
+"Cae-FY-b5Q.text" = "Accessory button for media messages";
+
 /* Class = "UILabel"; text = "Empty view, no messages"; ObjectID = "DoU-SU-Nek"; */
 "DoU-SU-Nek.text" = "מסך רייק ללא הודעות";
 

@@ -58,8 +58,10 @@
     XCTAssertNotNil([UIImage jsq_defaultAccessoryImage]);
     
     XCTAssertNotNil([UIImage jsq_defaultTypingIndicatorImage]);
-    
+
     XCTAssertNotNil([UIImage jsq_defaultPlayImage]);
+
+    XCTAssertNotNil([UIImage jsq_shareActionImage]);
 }
 
 @end

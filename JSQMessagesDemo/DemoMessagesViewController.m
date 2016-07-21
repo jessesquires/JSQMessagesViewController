@@ -17,6 +17,10 @@
 //
 
 #import "DemoMessagesViewController.h"
+#import "JSQMessagesViewAccessoryButtonDelegate.h"
+
+@interface DemoMessagesViewController () <JSQMessagesViewAccessoryButtonDelegate>
+@end
 
 @implementation DemoMessagesViewController
 
@@ -44,7 +48,12 @@
      */
     self.demoData = [[DemoModelData alloc] init];
     
-    
+
+    /**
+     *  Set up message accessory button delegate and configuration
+     */
+    self.collectionView.accessoryDelegate = self;
+
     /**
      *  You can set custom avatar sizes
      */
@@ -563,10 +572,16 @@
         cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
                                               NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     }
+
+    cell.accessoryButton.hidden = ![self shouldShowAccessoryButtonForMessage:msg];
     
     return cell;
 }
 
+- (BOOL)shouldShowAccessoryButtonForMessage:(id<JSQMessageData>)message
+{
+    return ([message isMediaMessage] && [NSUserDefaults accessoryButtonForMediaMessages]);
+}
 
 
 #pragma mark - UICollectionView Delegate
@@ -682,7 +697,6 @@
 
 #pragma mark - JSQMessagesComposerTextViewPasteDelegate methods
 
-
 - (BOOL)composerTextView:(JSQMessagesComposerTextView *)textView shouldPasteWithSender:(id)sender
 {
     if ([UIPasteboard generalPasteboard].image) {
@@ -697,6 +711,13 @@
         return NO;
     }
     return YES;
+}
+
+#pragma mark - JSQMessagesViewAccessoryDelegate methods
+
+- (void)messageView:(JSQMessagesCollectionView *)view didTapAccessoryButtonAtIndexPath:(NSIndexPath *)path
+{
+    NSLog(@"Tapped accessory button!");
 }
 
 @end

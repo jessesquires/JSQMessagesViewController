@@ -23,6 +23,7 @@
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 
 #import "UIView+JSQMessages.h"
+#import "UIImage+JSQMessages.h"
 
 
 static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
@@ -40,6 +41,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
+
+@property (weak, nonatomic) IBOutlet UIButton *accessoryButton;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleContainerWidthConstraint;
 
@@ -129,9 +132,18 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     self.cellBottomLabel.textColor = [UIColor lightGrayColor];
     self.cellBottomLabel.numberOfLines = 0;
 
+    [self configureAccessoryButton];
+
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
     [self addGestureRecognizer:tap];
     self.tapGestureRecognizer = tap;
+}
+
+- (void)configureAccessoryButton
+{
+    UIColor *tintColor = [UIColor lightGrayColor];
+    UIImage *shareActionImage = [[UIImage jsq_shareActionImage] jsq_imageMaskedWithColor:tintColor];
+    [self setAccessoryButtonImage:shareActionImage];
 }
 
 - (void)dealloc
@@ -168,6 +180,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
     self.avatarImageView.image = nil;
     self.avatarImageView.highlightedImage = nil;
+    
+    self.accessoryButton.hidden = YES;
 }
 
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
@@ -337,6 +351,11 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     });
 }
 
+- (void)setAccessoryButtonImage:(UIImage *)image
+{
+    [self.accessoryButton setImage:image forState:UIControlStateNormal];
+}
+
 #pragma mark - Getters
 
 - (CGSize)avatarViewSize
@@ -364,7 +383,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     constraint.constant = constant;
 }
 
-#pragma mark - Gesture recognizers
+#pragma mark - User interaction handlers
 
 - (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap
 {
@@ -390,6 +409,11 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     }
     
     return NO;
+}
+
+- (IBAction)didTapAccessoryButton:(UIButton *)accessoryButton
+{
+    [self.delegate messagesCollectionViewCellDidTapAccessoryButton:self];
 }
 
 @end
