@@ -30,15 +30,8 @@
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
 
-#import "JSQMessagesToolbarContentView.h"
-#import "JSQMessagesInputToolbar.h"
-#import "JSQMessagesComposerTextView.h"
-
 #import "NSString+JSQMessages.h"
-#import "UIColor+JSQMessages.h"
 #import "NSBundle+JSQMessages.h"
-
-#import <MobileCoreServices/UTCoreTypes.h>
 
 #import <objc/runtime.h>
 

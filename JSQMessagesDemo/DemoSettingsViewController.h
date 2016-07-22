@@ -39,4 +39,6 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *springySwitch;
 
+@property (weak, nonatomic) IBOutlet UISwitch *accessoryButtonSwitch;
+
 @end
