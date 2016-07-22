@@ -383,7 +383,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     constraint.constant = constant;
 }
 
-#pragma mark - User interaction handlers
+#pragma mark - Gesture recognizers
 
 - (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap
 {
