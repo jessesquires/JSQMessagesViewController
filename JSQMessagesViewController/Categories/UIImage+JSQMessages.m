@@ -107,6 +107,6 @@
 
 + (UIImage *)jsq_shareActionImage
 {
-    return [UIImage jsq_bubbleImageFromBundleWithName:@"UIButtonBarActionSmall"];
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"share"];
 }
 @end
