@@ -233,6 +233,12 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 
     [self jsq_configureMessagesViewController];
     [self jsq_registerForNotifications:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(preferredContentSizeChanged:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -846,6 +852,12 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     JSQMessagesCollectionViewCell *selectedCell = (JSQMessagesCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:self.selectedIndexPathForMenu];
     selectedCell.textView.selectable = YES;
     self.selectedIndexPathForMenu = nil;
+}
+
+- (void)preferredContentSizeChanged:(NSNotification *)notification
+{
+    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView setNeedsLayout];
 }
 
 #pragma mark - Collection view utilities

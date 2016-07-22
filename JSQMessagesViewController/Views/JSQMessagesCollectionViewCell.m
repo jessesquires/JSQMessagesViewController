@@ -103,6 +103,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     [jsqMessagesCollectionViewCellActions addObject:NSStringFromSelector(action)];
 }
 
+
 #pragma mark - Initialization
 
 - (void)awakeFromNib
@@ -112,28 +113,33 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
 
     self.backgroundColor = [UIColor whiteColor];
-
-    self.cellTopLabelHeightConstraint.constant = 0.0f;
-    self.messageBubbleTopLabelHeightConstraint.constant = 0.0f;
-    self.cellBottomLabelHeightConstraint.constant = 0.0f;
-
     self.avatarViewSize = CGSizeZero;
-
+    
+    UIFont *topLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     self.cellTopLabel.textAlignment = NSTextAlignmentCenter;
-    self.cellTopLabel.font = [UIFont boldSystemFontOfSize:12.0f];
+    self.cellTopLabel.font = topLabelFont;
     self.cellTopLabel.textColor = [UIColor lightGrayColor];
     self.cellTopLabel.numberOfLines = 0;
-
-    self.messageBubbleTopLabel.font = [UIFont systemFontOfSize:12.0f];
+    
+    UIFont *messageBubbleTopLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+    self.messageBubbleTopLabel.font = messageBubbleTopLabelFont;
     self.messageBubbleTopLabel.textColor = [UIColor lightGrayColor];
     self.messageBubbleTopLabel.numberOfLines = 0;
-
-    self.cellBottomLabel.font = [UIFont systemFontOfSize:11.0f];
+    
+    UIFont *bottomLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
+    self.cellBottomLabel.font = bottomLabelFont;
     self.cellBottomLabel.textColor = [UIColor lightGrayColor];
     self.cellBottomLabel.numberOfLines = 0;
 
     [self configureAccessoryButton];
 
+    self.cellTopLabelHeightConstraint.constant = [UIFont preferredFontForTextStyle:(UIFontTextStyleCaption1)].pointSize;
+    self.messageBubbleTopLabelHeightConstraint.constant = [UIFont preferredFontForTextStyle:(UIFontTextStyleCaption1)].pointSize;
+    self.cellBottomLabelHeightConstraint.constant = [UIFont preferredFontForTextStyle:(UIFontTextStyleCaption2)].pointSize;
+    self.cellTopLabelHeightConstraint.constant = topLabelFont.pointSize;
+    self.messageBubbleTopLabelHeightConstraint.constant = messageBubbleTopLabelFont.pointSize;
+    self.cellBottomLabelHeightConstraint.constant = bottomLabelFont.pointSize;
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
     [self addGestureRecognizer:tap];
     self.tapGestureRecognizer = tap;
