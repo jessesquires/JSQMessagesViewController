@@ -106,10 +106,6 @@
                                                                                               target:self
                                                                                               action:@selector(closePressed:)];
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(preferredContentSizeChanged:)
-                                                 name:UIContentSizeCategoryDidChangeNotification
-                                               object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -124,10 +120,7 @@
     self.collectionView.collectionViewLayout.springinessEnabled = [NSUserDefaults springinessSetting];
 }
 
-- (void)preferredContentSizeChanged:(NSNotification *)notification
-{
-    [self.collectionView layoutSubviews];
-}
+
 
 
 -(void) viewWillDisappear:(BOOL)animated

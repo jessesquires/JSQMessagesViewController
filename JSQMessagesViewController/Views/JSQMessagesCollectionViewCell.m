@@ -113,21 +113,21 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
 
     self.backgroundColor = [UIColor whiteColor];
-
-    
-
     self.avatarViewSize = CGSizeZero;
-
+    
+    UIFont *topLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     self.cellTopLabel.textAlignment = NSTextAlignmentCenter;
-    self.cellTopLabel.font = [UIFont preferredFontForTextStyle:(UIFontTextStyleCaption1)];
+    self.cellTopLabel.font = topLabelFont;
     self.cellTopLabel.textColor = [UIColor lightGrayColor];
     self.cellTopLabel.numberOfLines = 0;
-
-    self.messageBubbleTopLabel.font = [UIFont preferredFontForTextStyle:(UIFontTextStyleCaption1)];
+    
+    UIFont *messageBubbleTopLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+    self.messageBubbleTopLabel.font = messageBubbleTopLabelFont;
     self.messageBubbleTopLabel.textColor = [UIColor lightGrayColor];
     self.messageBubbleTopLabel.numberOfLines = 0;
-
-    self.cellBottomLabel.font = [UIFont preferredFontForTextStyle:(UIFontTextStyleCaption2)];
+    
+    UIFont *bottomLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
+    self.cellBottomLabel.font = bottomLabelFont;
     self.cellBottomLabel.textColor = [UIColor lightGrayColor];
     self.cellBottomLabel.numberOfLines = 0;
 
@@ -136,6 +136,9 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     self.cellTopLabelHeightConstraint.constant = [UIFont preferredFontForTextStyle:(UIFontTextStyleCaption1)].pointSize;
     self.messageBubbleTopLabelHeightConstraint.constant = [UIFont preferredFontForTextStyle:(UIFontTextStyleCaption1)].pointSize;
     self.cellBottomLabelHeightConstraint.constant = [UIFont preferredFontForTextStyle:(UIFontTextStyleCaption2)].pointSize;
+    self.cellTopLabelHeightConstraint.constant = topLabelFont.pointSize;
+    self.messageBubbleTopLabelHeightConstraint.constant = messageBubbleTopLabelFont.pointSize;
+    self.cellBottomLabelHeightConstraint.constant = bottomLabelFont.pointSize;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
     [self addGestureRecognizer:tap];
