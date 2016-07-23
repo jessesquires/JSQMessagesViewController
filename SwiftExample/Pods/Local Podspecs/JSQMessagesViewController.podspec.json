@@ -1,6 +1,6 @@
 {
   "name": "JSQMessagesViewController",
-  "version": "7.3.3",
+  "version": "7.3.4",
   "summary": "An elegant messages UI library for iOS.",
   "homepage": "http://jessesquires.github.io/JSQMessagesViewController",
   "license": "MIT",
@@ -17,7 +17,7 @@
   ],
   "source": {
     "git": "https://github.com/jessesquires/JSQMessagesViewController.git",
-    "tag": "7.3.3"
+    "tag": "7.3.4"
   },
   "source_files": "JSQMessagesViewController/**/*.{h,m}",
   "resources": [

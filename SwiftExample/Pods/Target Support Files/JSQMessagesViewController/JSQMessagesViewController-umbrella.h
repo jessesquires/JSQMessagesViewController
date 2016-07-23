@@ -30,6 +30,7 @@
 #import "JSQMessagesBubbleImage.h"
 #import "JSQMessagesCollectionViewDataSource.h"
 #import "JSQMessagesCollectionViewDelegateFlowLayout.h"
+#import "JSQMessagesViewAccessoryButtonDelegate.h"
 #import "JSQPhotoMediaItem.h"
 #import "JSQVideoMediaItem.h"
 #import "JSQMessagesCellTextView.h"
