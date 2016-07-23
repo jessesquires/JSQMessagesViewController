@@ -233,12 +233,6 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 
     [self jsq_configureMessagesViewController];
     [self jsq_registerForNotifications:YES];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(preferredContentSizeChanged:)
-                                                 name:UIContentSizeCategoryDidChangeNotification
-                                               object:nil];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -420,9 +414,9 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     //  possibly a UIKit bug, see #480 on GitHub
     CGSize cellSize = [self.collectionView.collectionViewLayout sizeForItemAtIndexPath:indexPath];
     CGFloat maxHeightForVisibleMessage = CGRectGetHeight(self.collectionView.bounds)
-                                         - self.collectionView.contentInset.top
-                                         - self.collectionView.contentInset.bottom
-                                         - CGRectGetHeight(self.inputToolbar.bounds);
+    - self.collectionView.contentInset.top
+    - self.collectionView.contentInset.bottom
+    - CGRectGetHeight(self.inputToolbar.bounds);
     UICollectionViewScrollPosition scrollPosition = (cellSize.height > maxHeightForVisibleMessage) ? UICollectionViewScrollPositionBottom : UICollectionViewScrollPositionTop;
 
     [self.collectionView scrollToItemAtIndexPath:indexPath
@@ -886,34 +880,44 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 
 - (void)jsq_registerForNotifications:(BOOL)registerForNotifications
 {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     if (registerForNotifications) {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(jsq_didReceiveKeyboardWillChangeFrameNotification:)
-                                                     name:UIKeyboardWillChangeFrameNotification
-                                                   object:nil];
+        [center addObserver:self
+                   selector:@selector(jsq_didReceiveKeyboardWillChangeFrameNotification:)
+                       name:UIKeyboardWillChangeFrameNotification
+                     object:nil];
 
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(didReceiveMenuWillShowNotification:)
-                                                     name:UIMenuControllerWillShowMenuNotification
-                                                   object:nil];
+        [center addObserver:self
+                   selector:@selector(didReceiveMenuWillShowNotification:)
+                       name:UIMenuControllerWillShowMenuNotification
+                     object:nil];
 
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(didReceiveMenuWillHideNotification:)
-                                                     name:UIMenuControllerWillHideMenuNotification
-                                                   object:nil];
+        [center addObserver:self
+                   selector:@selector(didReceiveMenuWillHideNotification:)
+                       name:UIMenuControllerWillHideMenuNotification
+                     object:nil];
+
+        [center addObserver:self
+                   selector:@selector(preferredContentSizeChanged:)
+                       name:UIContentSizeCategoryDidChangeNotification
+                     object:nil];
     }
     else {
-        [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                        name:UIKeyboardWillChangeFrameNotification
-                                                      object:nil];
+        [center removeObserver:self
+                          name:UIKeyboardWillChangeFrameNotification
+                        object:nil];
 
-        [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                        name:UIMenuControllerWillShowMenuNotification
-                                                      object:nil];
+        [center removeObserver:self
+                          name:UIMenuControllerWillShowMenuNotification
+                        object:nil];
 
-        [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                        name:UIMenuControllerWillHideMenuNotification
-                                                      object:nil];
+        [center removeObserver:self
+                          name:UIMenuControllerWillHideMenuNotification
+                        object:nil];
+
+        [center removeObserver:self
+                          name:UIContentSizeCategoryDidChangeNotification
+                        object:nil];
     }
 }
 

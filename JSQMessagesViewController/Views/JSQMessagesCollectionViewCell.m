@@ -133,9 +133,6 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
     [self configureAccessoryButton];
 
-    self.cellTopLabelHeightConstraint.constant = [UIFont preferredFontForTextStyle:(UIFontTextStyleCaption1)].pointSize;
-    self.messageBubbleTopLabelHeightConstraint.constant = [UIFont preferredFontForTextStyle:(UIFontTextStyleCaption1)].pointSize;
-    self.cellBottomLabelHeightConstraint.constant = [UIFont preferredFontForTextStyle:(UIFontTextStyleCaption2)].pointSize;
     self.cellTopLabelHeightConstraint.constant = topLabelFont.pointSize;
     self.messageBubbleTopLabelHeightConstraint.constant = messageBubbleTopLabelFont.pointSize;
     self.cellBottomLabelHeightConstraint.constant = bottomLabelFont.pointSize;
