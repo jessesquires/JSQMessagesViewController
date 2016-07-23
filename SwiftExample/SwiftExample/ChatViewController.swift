@@ -31,7 +31,7 @@ class ChatViewController: JSQMessagesViewController {
          *
          */
         
-        if defaults.boolForKey(taillessSettingKey) {
+        if defaults.boolForKey(Setting.removeBubbleTails.rawValue) {
             // Make taillessBubbles
             incomingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero, layoutDirection: UIApplication.sharedApplication().userInterfaceLayoutDirection).incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
             outgoingBubble = JSQMessagesBubbleImageFactory(bubbleImage: UIImage.jsq_bubbleCompactTaillessImage(), capInsets: UIEdgeInsetsZero, layoutDirection: UIApplication.sharedApplication().userInterfaceLayoutDirection).outgoingMessagesBubbleImageWithColor(UIColor.lightGrayColor())
@@ -46,7 +46,7 @@ class ChatViewController: JSQMessagesViewController {
          *  Example on showing or removing Avatars based on user settings.
          */
         
-        if defaults.boolForKey(avatarSettingKey) {
+        if defaults.boolForKey(Setting.removeAvatar.rawValue) {
             collectionView?.collectionViewLayout.incomingAvatarViewSize = .zero
             collectionView?.collectionViewLayout.outgoingAvatarViewSize = .zero
         } else {
@@ -359,7 +359,7 @@ class ChatViewController: JSQMessagesViewController {
         /**
          *  Example on showing or removing senderDisplayName based on user settings.
          */
-        if message.senderId == self.senderId() && defaults.boolForKey(removeSenderDisplayNameKey) {
+        if message.senderId == self.senderId() && defaults.boolForKey(Setting.removeSenderDisplayName.rawValue) {
             return nil
         }
 
@@ -367,7 +367,7 @@ class ChatViewController: JSQMessagesViewController {
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return messages[indexPath.item].senderId == AvatarIdWoz && defaults.boolForKey(removeSenderDisplayNameKey) ? 0 : kJSQMessagesCollectionViewCellLabelHeightDefault
+        return messages[indexPath.item].senderId == AvatarIdWoz && defaults.boolForKey(Setting.removeSenderDisplayName.rawValue) ? 0 : kJSQMessagesCollectionViewCellLabelHeightDefault
     }
     
 }

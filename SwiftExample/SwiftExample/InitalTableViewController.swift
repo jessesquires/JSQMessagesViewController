@@ -116,7 +116,7 @@ class InitalTableViewController: UITableViewController {
         case 1:
             switch indexPath.row {
             case 0:
-                self.presentViewController(SettingsTableViewController(), animated: true, completion: nil)
+                self.presentViewController(UINavigationController(rootViewController: SettingsTableViewController()), animated: true, completion: nil)
             default:
                 return
             }
@@ -124,6 +124,7 @@ class InitalTableViewController: UITableViewController {
             return
         }
     }
+    
 
     
 }

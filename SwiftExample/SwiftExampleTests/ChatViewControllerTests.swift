@@ -13,20 +13,27 @@ import JSQMessagesViewController
 
 class ChatViewControllerTests: XCTestCase {
     
-    var chatViewController: ChatViewController!
+    let changeSetting = NSUserDefaults.standardUserDefaults().setBool
+    let chatViewController = ChatViewController()
     
     override func setUp() {
         super.setUp()
+        let chatViewController = ChatViewController()
+        chatViewController.messages = makeNormalConversation()
         
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        self.chatViewController = storyboard.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController
-        
-        //load the view
-        XCTAssertNotNil(self.chatViewController.view)
+        // This ensures that ViewDidLoad() has been called
+        let _ = chatViewController.view
+       
+    }
+    override func tearDown() {
+        super.tearDown()
+        changeSetting(false, forKey: Setting.removeAvatar.rawValue)
+        changeSetting(false, forKey: Setting.removeSenderDisplayName.rawValue)
+        changeSetting(false, forKey: Setting.removeBubbleTails.rawValue)
     }
     
     func testSendButtonAction() {
-
+        let _ = chatViewController.view
         let button = self.chatViewController.inputToolbar.sendButtonOnRight ? self.chatViewController.inputToolbar.contentView!.rightBarButtonItem! : self.chatViewController.inputToolbar.contentView!.leftBarButtonItem!
         let text = "Testing text"
         let senderId = self.chatViewController.senderId()
@@ -117,6 +124,7 @@ class ChatViewControllerTests: XCTestCase {
      */
     func testSimulatedIncomingTextMessage() {
         self.chatViewController.messages = []
+        let _ = chatViewController.view
         self.chatViewController.collectionView!.reloadData()
         
         // trigger action
@@ -148,7 +156,7 @@ class ChatViewControllerTests: XCTestCase {
         // add image
         let photoItem = JSQPhotoMediaItem(image: UIImage(named: "goldengate"))
         self.chatViewController.addMedia(photoItem)
-        
+        let _ = chatViewController.view
         let lastMessage = self.chatViewController.messages.last!
         
         // trigger action
@@ -171,7 +179,7 @@ class ChatViewControllerTests: XCTestCase {
         // add location
         let locationItem = self.chatViewController.buildLocationItem()
         self.chatViewController.addMedia(locationItem)
-        
+        let _ = chatViewController.view
         let lastMessage = self.chatViewController.messages.last!
         
         // trigger action
@@ -185,4 +193,36 @@ class ChatViewControllerTests: XCTestCase {
         XCTAssert(newMessage.senderId != self.chatViewController.senderId())
         XCTAssert(newMessage.senderDisplayName != self.chatViewController.senderDisplayName())
     }
+    
+    func testRemoveAvatarSetting() {
+        changeSetting(true, forKey: Setting.removeAvatar.rawValue)
+        let _ = chatViewController.view
+        
+        XCTAssertEqual(chatViewController.collectionView?.collectionViewLayout.incomingAvatarViewSize, .zero, "Incoming Avatar should be hidden")
+        XCTAssertEqual(chatViewController.collectionView?.collectionViewLayout.outgoingAvatarViewSize, .zero, "Outgoing Avatar should be hidden")
+    }
+    
+    func testSenderDisplayNameDefaultSetting() {
+        changeSetting(false, forKey: Setting.removeSenderDisplayName.rawValue)
+        let _ = chatViewController.view
+        
+        let button = self.chatViewController.inputToolbar.sendButtonOnRight ? self.chatViewController.inputToolbar.contentView!.rightBarButtonItem! : self.chatViewController.inputToolbar.contentView!.leftBarButtonItem!
+        self.chatViewController.didPressSendButton(button, withMessageText: "Testing Text", senderId: chatViewController.senderId(), senderDisplayName: chatViewController.senderDisplayName(), date: NSDate())
+        
+        let senderDisplayName = chatViewController.collectionView(self.chatViewController.collectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath: NSIndexPath(forItem: self.chatViewController.messages.count - 1, inSection: 0))
+        XCTAssertNotNil(senderDisplayName, "Sender Display should not be nil")
+
+    }
+    
+    func testRemoveSenderDisplayNameSetting() {
+        changeSetting(true, forKey: Setting.removeSenderDisplayName.rawValue)
+        let _ = chatViewController.view
+        
+        let button = self.chatViewController.inputToolbar.sendButtonOnRight ? self.chatViewController.inputToolbar.contentView!.rightBarButtonItem! : self.chatViewController.inputToolbar.contentView!.leftBarButtonItem!
+        self.chatViewController.didPressSendButton(button, withMessageText: "Testing Text", senderId: chatViewController.senderId(), senderDisplayName: chatViewController.senderDisplayName(), date: NSDate())
+        
+        XCTAssertNil(chatViewController.collectionView(self.chatViewController.collectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath: NSIndexPath(forItem: self.chatViewController.messages.count - 1, inSection: 0)), "Sender Display should be nil")
+        
+    }
+    
 }
