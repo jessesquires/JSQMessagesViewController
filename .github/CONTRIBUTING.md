@@ -2,7 +2,7 @@
 
 ## Code of Conduct
 
-Please read our [Code of Conduct](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/.github/CONDUCT.md). Intolerance, disrespect, and any of form of negativity will not be tolerated.
+Please read our [Code of Conduct](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/.github/CONDUCT.md). Intolerance, disrespect, harassment, and any of form of negativity will not be tolerated.
 
 ## Opening a new issue
 
