@@ -49,7 +49,7 @@ class InitalTableViewController: UITableViewController {
         case 0:
             switch indexPath.row {
             case 0:
-                cell.textLabel?.text = "Conversation between two"
+                cell.textLabel?.text = "Conversation between two people"
                 break
             case 1:
                 cell.textLabel?.text = "Group Conversation"
