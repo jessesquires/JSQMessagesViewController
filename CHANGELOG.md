@@ -20,10 +20,13 @@ This release closes the [8.0.0 milestone](https://github.com/jessesquires/JSQMes
 
 - Better Swift inter-op. Implemented Objective-C nullability. (#1654) Thanks @Lucashuang0802!
 - Animated typing indicator. Typing indicator now animates like iMessage. (#1382) Thanks @radekcieciwa!
+- Dynamic text support. (#497, #1747) Thanks @MacMeDan!
+- Message cells now have a customizable accessory view. (#1519, #1719) Thanks @adubr!
 
 ### Fixes
 
 - Fixed a number of issues regarding keyboard handling. Keyboard handling is now much more stable. (#1063, #1529, #799, #941, #1299, #558, #557)
+- Fixed potential crash with media cells. (#1377, #1741) Thanks @Lucashuang0802!
 
 7.3.4
 -----
