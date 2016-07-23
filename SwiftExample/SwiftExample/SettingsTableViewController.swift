@@ -8,37 +8,66 @@
 
 import UIKit
 
-//MARK: SettingKeys
-let taillessSettingKey              = "taillessSetting"
-let removeSenderDisplayNameKey      = "senderDisplayName"
-let avatarSettingKey                = "avatarSetting"
+let cellReuseIdentifier = "settingsCell"
+
+public enum Setting: String{
+    case removeBubbleTails = "Remove message bubble tails"
+    case removeSenderDisplayName = "Remove sender Display Name"
+    case removeAvatar = "Remove Avatars"
+}
 
 let defaults = NSUserDefaults.standardUserDefaults()
-
+var rows = [Setting]()
 class SettingsTableViewController: UITableViewController {
     
-    @IBOutlet weak var removeBubbleTailsSwitch: UISwitch!
-    @IBOutlet weak var senderDisplayNameSwitch: UISwitch!
-    @IBOutlet weak var removeAvatarSwitch: UISwitch!
-    
+    //MARK: - View lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackButton()
+        rows = [.removeAvatar, .removeBubbleTails, .removeSenderDisplayName]
         // Set the Switch to the currents settings
-        removeBubbleTailsSwitch.on = defaults.boolForKey(taillessSettingKey)
-        senderDisplayNameSwitch.on = defaults.boolForKey(removeSenderDisplayNameKey)
-        removeAvatarSwitch.on = defaults.boolForKey(avatarSettingKey)
+        self.title = "Settings"
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
     }
     
-    @IBAction func taillessSettingTapped(sender: UISwitch) {
-        defaults.setBool(sender.on, forKey: taillessSettingKey)
+        // MARK: - Table view data source
+
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) else {
+            return UITableViewCell()
+        }
+        let row = rows[indexPath.row]
+        let settingSwitch = UISwitch()
+        settingSwitch.tag = indexPath.row
+        settingSwitch.on = defaults.boolForKey(row.rawValue) ?? false
+        settingSwitch.addTarget(self, action: #selector(switchValueChanged), forControlEvents: .ValueChanged)
+        
+        cell.accessoryView = settingSwitch
+        cell.textLabel?.text = row.rawValue
+        
+        return cell
+    }
+    func switchValueChanged(sender: UISwitch) {
+        defaults.setBool(sender.on, forKey: rows[sender.tag].rawValue)
     }
     
-    @IBAction func senderDisplayNameTapped(sender: AnyObject) {
-        defaults.setBool(sender.on, forKey: removeSenderDisplayNameKey)
+    func setupBackButton() {
+        let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = backButton
+    }
+    func backButtonTapped() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    //Mark: - Table view delegate
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
     
-    @IBAction func avatarSettingTapped(sender: UISwitch) {
-        defaults.setBool(sender.on, forKey: avatarSettingKey)
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
     }
-    
 }
