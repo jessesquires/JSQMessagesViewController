@@ -650,6 +650,13 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     //  temporarily disable 'selectable' to prevent this issue
     JSQMessagesCollectionViewCell *selectedCell = (JSQMessagesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     selectedCell.textView.selectable = NO;
+    
+    //  it will reset the font and fontcolor when selectable is NO
+    //  however, the actual font and fontcolor in textView do not get changed
+    //  in order to preserve link colors, we need to re-assign the font and fontcolor when selectable is NO
+    //  see GitHub issues #1675 and #1759
+    selectedCell.textView.textColor = selectedCell.textView.textColor;
+    selectedCell.textView.font = selectedCell.textView.font;
 
     return YES;
 }
