@@ -401,7 +401,24 @@ class ChatViewController: JSQMessagesViewController {
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return messages[indexPath.item].senderId == AvatarIdWoz && defaults.boolForKey(Setting.removeSenderDisplayName.rawValue) ? 0 : kJSQMessagesCollectionViewCellLabelHeightDefault
+        
+        /**
+         *  iOS7-style sender name labels
+         */
+        let currentMessage = self.messages[indexPath.item]
+        
+        if currentMessage.senderId == self.senderId() {
+            return 0.0
+        }
+        
+        if indexPath.item - 1 > 0 {
+            let previousMessage = self.messages[indexPath.item - 1]
+            if previousMessage.senderId == currentMessage.senderId {
+                return 0.0
+            }
+        }
+        
+        return kJSQMessagesCollectionViewCellLabelHeightDefault;
     }
     
 }
