@@ -374,8 +374,13 @@ class ChatViewController: JSQMessagesViewController {
         //Mark: Removing Sender Display Name
         /**
          *  Example on showing or removing senderDisplayName based on user settings.
+         *  This logic should be consistent with what you return from `heightForCellTopLabelAtIndexPath:`
          */
-        if message.senderId == self.senderId() && defaults.boolForKey(Setting.removeSenderDisplayName.rawValue) {
+        if defaults.boolForKey(Setting.removeSenderDisplayName.rawValue) {
+            return nil
+        }
+        
+        if message.senderId == self.senderId() {
             return nil
         }
 
@@ -401,6 +406,14 @@ class ChatViewController: JSQMessagesViewController {
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        /**
+         *  Example on showing or removing senderDisplayName based on user settings.
+         *  This logic should be consistent with what you return from `attributedTextForCellTopLabelAtIndexPath:`
+         */
+        if defaults.boolForKey(Setting.removeSenderDisplayName.rawValue) {
+            return 0.0
+        }
         
         /**
          *  iOS7-style sender name labels
