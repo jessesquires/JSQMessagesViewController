@@ -126,13 +126,13 @@
 
 - (void)didReceiveMenuWillShowNotification:(NSNotification *)notification
 {
-    [super didReceiveMenuWillShowNotification:notification];
-
     /**
      *  Display custom menu actions for cells.
      */
     UIMenuController *menu = [notification object];
     menu.menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action" action:@selector(customAction:)] ];
+    
+    [super didReceiveMenuWillShowNotification:notification];
 }
 
 
