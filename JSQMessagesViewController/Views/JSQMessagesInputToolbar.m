@@ -49,7 +49,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     self.backgroundColor = [UIColor whiteColor];
     self.jsq_isObserving = NO;
     self.sendButtonOnRight = YES;
-    self.sendButtonEnabled = YES;
+    self.enablesSendButtonAutomatically = YES;
 
     self.preferredDefaultHeight = 44.0f;
     self.maximumHeight = NSNotFound;
@@ -68,6 +68,11 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     self.contentView.rightBarButtonItem = [toolbarButtonFactory defaultSendButtonItem];
 
     [self updateSendButtonEnabledState];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textViewTextDidChangeNotification:)
+                                                 name:UITextViewTextDidChangeNotification
+                                               object:_contentView.textView];
 }
 
 - (JSQMessagesToolbarContentView *)loadToolbarContentView
@@ -81,6 +86,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 - (void)dealloc
 {
     [self jsq_removeObservers];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Setters
@@ -91,9 +97,9 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     _preferredDefaultHeight = preferredDefaultHeight;
 }
 
-- (void)setSendButtonEnabled:(BOOL)sendButtonEnabled
+- (void)setEnablesSendButtonAutomatically:(BOOL)enablesSendButtonAutomatically
 {
-    _sendButtonEnabled = sendButtonEnabled;
+    _enablesSendButtonAutomatically = enablesSendButtonAutomatically;
     [self updateSendButtonEnabledState];
 }
 
@@ -113,14 +119,24 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 - (void)updateSendButtonEnabledState
 {
-    BOOL enabled = [self.contentView.textView hasText] && self.sendButtonEnabled;
+    if (!self.enablesSendButtonAutomatically) {
+        return;
+    }
 
+    BOOL enabled = [self.contentView.textView hasText];
     if (self.sendButtonOnRight) {
         self.contentView.rightBarButtonItem.enabled = enabled;
     }
     else {
         self.contentView.leftBarButtonItem.enabled = enabled;
     }
+}
+
+#pragma mark - Notifications
+
+- (void)textViewTextDidChangeNotification:(NSNotification *)notification
+{
+    [self updateSendButtonEnabledState];
 }
 
 #pragma mark - Key-value observing

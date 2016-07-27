@@ -340,8 +340,6 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     textView.text = nil;
     [textView.undoManager removeAllActions];
 
-    [self.inputToolbar updateSendButtonEnabledState];
-
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
 
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
@@ -801,8 +799,6 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     if (textView != self.inputToolbar.contentView.textView) {
         return;
     }
-
-    [self.inputToolbar updateSendButtonEnabledState];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView

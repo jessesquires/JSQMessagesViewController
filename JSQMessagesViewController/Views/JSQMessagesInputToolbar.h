@@ -84,15 +84,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) BOOL sendButtonOnRight;
 
 /**
- *  Specify if the send button might be enabled.
+ *  Specify if the send button should be enabled automatically when the `textView` contains text.
+ *  The default value is `YES`.
  *
- *  @discussion Normally the send button will be enabled if the `textView` contains text. This
- *  property overrides this behaviour, for example to disable the send button, if the internet
- *  connection is lost.
- *
- *  @see `updateSendButtonEnabledState`.
+ *  @discussion If `YES`, the send button will be enabled if the `textView` contains text. Otherwise,
+ *  you are responsible for determining when to enable/disable the send button.
  */
-@property (assign, nonatomic) BOOL sendButtonEnabled;
+@property (assign, nonatomic) BOOL enablesSendButtonAutomatically;
 
 /**
  *  Specifies the default (minimum) height for the toolbar. The default value is `44.0f`. This value must be positive.
@@ -103,12 +101,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  Specifies the maximum height for the toolbar. The default value is `NSNotFound`, which specifies no maximum height.
  */
 @property (assign, nonatomic) NSUInteger maximumHeight;
-
-/**
- *  Enables or disables the send button based on whether or not its `textView` has text.
- *  That is, the send button will be enabled if there is text in the `textView`, and disabled otherwise.
- */
-- (void)updateSendButtonEnabledState;
 
 /**
  *  Loads the content view for the toolbar.
