@@ -22,6 +22,7 @@ This release closes the [8.0.0 milestone](https://github.com/jessesquires/JSQMes
 - Animated typing indicator. Typing indicator now animates like iMessage. (#1382) Thanks @radekcieciwa!
 - Dynamic text support. (#497, #1747) Thanks @MacMeDan!
 - Message cells now have a customizable accessory view. (#1519, #1719) Thanks @adubr!
+- Send button now can be turned on/off manually. (#1575 #1609) Thanks @sebastianludwig!
 
 ### Fixes
 
