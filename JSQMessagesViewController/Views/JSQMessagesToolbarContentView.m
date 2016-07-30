@@ -57,6 +57,9 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
     [super awakeFromNib];
 
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.accessibilityIdentifier = NSStringFromClass([self class]);
+    self.accessibilityLabel = NSStringFromClass([self class]);
+    self.isAccessibilityElement = YES;
 
     self.leftHorizontalSpacingConstraint.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
     self.rightHorizontalSpacingConstraint.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;

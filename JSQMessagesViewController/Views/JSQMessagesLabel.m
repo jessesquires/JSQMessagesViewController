@@ -25,6 +25,9 @@
 - (void)jsq_configureLabel
 {
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.accessibilityIdentifier = NSStringFromClass([self class]);
+    self.accessibilityLabel = NSStringFromClass([self class]);
+    self.isAccessibilityElement = YES;
     self.textInsets = UIEdgeInsetsZero;
 }
 

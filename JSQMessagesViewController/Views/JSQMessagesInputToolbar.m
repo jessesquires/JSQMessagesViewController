@@ -46,6 +46,11 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    self.accessibilityIdentifier = NSStringFromClass([self class]);
+    self.accessibilityLabel = NSStringFromClass([self class]);
+    self.isAccessibilityElement = YES;
+    
     self.backgroundColor = [UIColor whiteColor];
     self.jsq_isObserving = NO;
     self.sendButtonLocation = JSQMessagesInputSendButtonLocationRight;

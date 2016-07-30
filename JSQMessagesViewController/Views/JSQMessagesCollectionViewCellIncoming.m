@@ -25,6 +25,9 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    self.accessibilityIdentifier = NSStringFromClass([self class]);
+    self.accessibilityLabel = NSStringFromClass([self class]);
+    self.isAccessibilityElement = YES;
     self.messageBubbleTopLabel.textAlignment = NSTextAlignmentLeft;
     self.cellBottomLabel.textAlignment = NSTextAlignmentLeft;
 }
