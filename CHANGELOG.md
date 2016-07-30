@@ -24,6 +24,8 @@ This release closes the [8.0.0 milestone](https://github.com/jessesquires/JSQMes
 - Dynamic text support. (#497, #1747) Thanks @MacMeDan!
 - Message cells now have a customizable accessory view. (#1519, #1719) Thanks @adubr!
 - Send button now can be turned on/off manually. (#1575 #1609) Thanks @sebastianludwig!
+- Video bubble now can have a custom thumbnail. (#628 #709 #1408) Thanks @weekwood @benjaminhallock!
+- A new class `JSQMessagesVideoThumbnailFactory` now can generate thumbnail image from `AVURLAsset`. (#709) Thanks weekwood !
 
 ### Fixes
 
