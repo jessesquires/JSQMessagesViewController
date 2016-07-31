@@ -93,7 +93,6 @@
                             <constraint firstAttribute="width" constant="24" placeholder="YES" id="J3j-ZO-4ds"/>
                             <constraint firstAttribute="height" constant="24" placeholder="YES" id="SWo-od-s3h"/>
                         </constraints>
-                        <state key="normal" image="share.png"/>
                         <connections>
                             <action selector="didTapAccessoryButton:" destination="23f-xH-rkY" eventType="touchUpInside" id="Hxk-1U-a8W"/>
                         </connections>
@@ -144,7 +143,4 @@
             <point key="canvasLocation" x="596" y="176"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="share.png" width="16" height="22"/>
-    </resources>
 </document>
