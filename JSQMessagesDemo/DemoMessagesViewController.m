@@ -68,7 +68,7 @@
     self.showLoadEarlierMessagesHeader = YES;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage jsq_defaultTypingIndicatorImage]
-                                                                              style:UIBarButtonItemStyleBordered
+                                                                              style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(receiveMessagePressed:)];
 
