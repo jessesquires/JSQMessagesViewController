@@ -15,6 +15,7 @@ This release closes the [8.0.0 milestone](https://github.com/jessesquires/JSQMes
 - Removed `JSQMessagesKeyboardController` and implemented a proper `inputAccessoryView`. (#1063, #1529) Thanks @LeoNatan and @kirualex!
 - `JSQMessagesToolbarButtonFactory` is now an instance, not just class methods. (#1651, #866) Thanks @burntheroad!
 - `JSQMessagesAvatarImageFactory` is now an instance, not just class methods. (#1659, #1657) Thanks @burntheroad!
+- `JSQMessagesInputToolbar` now provides more control over the placement of the send button. (#840) Thanks @davidchiles!
 
 ### Enhancements
 
