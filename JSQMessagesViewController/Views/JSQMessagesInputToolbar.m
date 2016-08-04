@@ -49,8 +49,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     self.backgroundColor = [UIColor whiteColor];
     self.jsq_isObserving = NO;
     self.sendButtonLocation = JSQMessagesInputSendButtonLocationRight;
-	self.enablesSendButtonAutomatically = YES;
-
+    self.enablesSendButtonAutomatically = YES;
 
     self.preferredDefaultHeight = 44.0f;
     self.maximumHeight = NSNotFound;
@@ -123,7 +122,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     if (!self.enablesSendButtonAutomatically) {
         return;
     }
-    
+
     BOOL enabled = [self.contentView.textView hasText];
     switch (self.sendButtonLocation) {
         case JSQMessagesInputSendButtonLocationRight:
