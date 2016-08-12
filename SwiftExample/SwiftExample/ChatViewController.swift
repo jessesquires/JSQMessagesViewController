@@ -66,7 +66,7 @@ class ChatViewController: JSQMessagesViewController {
 
     override func viewDidLayoutSubviews() {
         if let navigationBarRect = self.navigationController?.navigationBar.frame {
-        let y = navigationBarRect.size.height + navigationBarRect.origin.y;
+            let y = navigationBarRect.size.height + navigationBarRect.origin.y
             self.collectionView?.contentInset = UIEdgeInsetsMake( y, 0, 0, 0)
         }
     }
