@@ -58,9 +58,6 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
 {
     [super awakeFromNib];
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-    self.accessibilityIdentifier = NSStringFromClass([self class]);
-    self.accessibilityLabel = NSStringFromClass([self class]);
-    self.isAccessibilityElement = YES;
     self.backgroundColor = [UIColor clearColor];
     self.userInteractionEnabled = NO;
 }

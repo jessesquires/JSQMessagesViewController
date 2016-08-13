@@ -54,10 +54,6 @@
     _animationDuration = 1.33;
     _dotsColor = [UIColor lightGrayColor];
     _animateToColor = [UIColor grayColor];
-    
-    self.accessibilityIdentifier = NSStringFromClass([self class]);
-    self.accessibilityLabel = NSStringFromClass([self class]);
-    self.isAccessibilityElement = YES;
 
     // Center points of dots on x axis are [2/7, 1/2, 5/7] of total view width.
     // Size od dot is aprox ~7.125 times smaller than view width.

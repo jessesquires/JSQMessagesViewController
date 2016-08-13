@@ -95,10 +95,6 @@
         self.userInteractionEnabled = NO;
         self.clipsToBounds = YES;
         self.contentMode = UIViewContentModeScaleAspectFill;
-        
-        self.accessibilityIdentifier = NSStringFromClass([self class]);
-        self.accessibilityLabel = NSStringFromClass([self class]);
-        self.isAccessibilityElement = YES;
     }
     return self;
 }

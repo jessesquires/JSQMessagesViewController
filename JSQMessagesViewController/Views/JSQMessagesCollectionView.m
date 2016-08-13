@@ -47,9 +47,6 @@
 - (void)jsq_configureCollectionView
 {
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-    self.accessibilityIdentifier = NSStringFromClass([self class]);
-    self.accessibilityLabel = NSStringFromClass([self class]);
-    self.isAccessibilityElement = YES;
 
     self.backgroundColor = [UIColor whiteColor];
     self.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
