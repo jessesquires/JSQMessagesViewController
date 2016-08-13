@@ -46,6 +46,11 @@
 @property (weak, nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
 
 /**
+ *  Returns the input toolbar height constraint.
+ */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightConstraint;
+
+/**
  *  Returns the keyboard controller object used to manage the software keyboard.
  */
 @property (strong, nonatomic) JSQMessagesKeyboardController *keyboardController;
@@ -316,12 +321,5 @@
  @param notification The posted notification.
  */
 - (void)didReceiveMenuWillShowNotification:(NSNotification *)notification;
-
-/**
- Changes the height constraint
-
- @param height The new height.
- */
-- (void)changeToolbarHeight:(CGFloat)height;
 
 @end

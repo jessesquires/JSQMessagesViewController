@@ -125,7 +125,6 @@ JSQMessagesKeyboardControllerDelegate>
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
 
 @property (weak, nonatomic) UIView *snapshotView;
@@ -1151,12 +1150,4 @@ JSQMessagesKeyboardControllerDelegate>
         self.currentInteractivePopGestureRecognizer = self.navigationController.interactivePopGestureRecognizer;
     }
 }
-
-- (void)changeToolbarHeight:(CGFloat)height
-{
-    if (self.toolbarHeightConstraint.constant != height) {
-        self.toolbarHeightConstraint.constant = height;
-    }
-}
-
 @end
