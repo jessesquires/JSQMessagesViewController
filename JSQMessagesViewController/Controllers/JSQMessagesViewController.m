@@ -1152,4 +1152,11 @@ JSQMessagesKeyboardControllerDelegate>
     }
 }
 
+- (void)changeToolbarHeight:(CGFloat)height
+{
+    if (self.toolbarHeightConstraint.constant != height) {
+        self.toolbarHeightConstraint.constant = height;
+    }
+}
+
 @end

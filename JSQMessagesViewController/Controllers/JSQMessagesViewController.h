@@ -318,10 +318,10 @@
 - (void)didReceiveMenuWillShowNotification:(NSNotification *)notification;
 
 /**
- Called when `UIMenuControllerWillHideMenuNotification` is posted.
+ Changes the height constraint
 
- @param notification The posted notification.
+ @param height The new height.
  */
-- (void)didReceiveMenuWillHideNotification:(NSNotification *)notification;
+- (void)changeToolbarHeight:(CGFloat)height;
 
 @end
