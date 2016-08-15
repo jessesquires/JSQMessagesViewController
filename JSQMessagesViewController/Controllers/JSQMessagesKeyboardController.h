@@ -111,6 +111,11 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
 @property (assign, nonatomic, readonly) CGRect currentKeyboardFrame;
 
 /**
+ *  This allows us to enable or disable the pan gesture from the outside.
+ */
+@property (assign, nonatomic) BOOL handlePanGesture;
+
+/**
  *  Not a valid initializer.
  */
 - (id)init NS_UNAVAILABLE;
@@ -139,5 +144,6 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
  *  Tells the keyboard controller that it should end listening for system keyboard notifications.
  */
 - (void)endListeningForKeyboard;
+
 
 @end
