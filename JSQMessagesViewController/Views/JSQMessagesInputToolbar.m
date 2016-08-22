@@ -63,7 +63,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
     [self jsq_addObservers];
 
-    JSQMessagesToolbarButtonFactory *toolbarButtonFactory = [[JSQMessagesToolbarButtonFactory alloc] initWithFont:[UIFont boldSystemFontOfSize:17.0]];
+    JSQMessagesToolbarButtonFactory *toolbarButtonFactory = [[JSQMessagesToolbarButtonFactory alloc] initWithFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
     self.contentView.leftBarButtonItem = [toolbarButtonFactory defaultAccessoryButtonItem];
     self.contentView.rightBarButtonItem = [toolbarButtonFactory defaultSendButtonItem];
 

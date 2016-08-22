@@ -32,7 +32,7 @@
 
 - (instancetype)init
 {
-    return [self initWithFont:[UIFont boldSystemFontOfSize:17.0]];
+    return [self initWithFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
 }
 
 - (instancetype)initWithFont:(UIFont *)font
