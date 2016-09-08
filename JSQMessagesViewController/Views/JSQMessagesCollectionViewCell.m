@@ -112,6 +112,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
 
+    self.isAccessibilityElement = YES;
+    
     self.backgroundColor = [UIColor whiteColor];
     self.avatarViewSize = CGSizeZero;
     
