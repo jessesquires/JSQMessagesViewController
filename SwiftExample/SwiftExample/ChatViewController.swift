@@ -338,16 +338,16 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView, messageDataForItemAt indexPath: IndexPath) -> JSQMessageData {
-        return messages[(indexPath as NSIndexPath).item]
+        return messages[indexPath.item]
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView, messageBubbleImageDataForItemAt indexPath: IndexPath) -> JSQMessageBubbleImageDataSource {
         
-        return messages[(indexPath as NSIndexPath).item].senderId == self.senderId() ? outgoingBubble : incomingBubble
+        return messages[indexPath.item].senderId == self.senderId() ? outgoingBubble : incomingBubble
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView, avatarImageDataForItemAt indexPath: IndexPath) -> JSQMessageAvatarImageDataSource? {
-        let message = messages[(indexPath as NSIndexPath).item]
+        let message = messages[indexPath.item]
         return getAvatar(message.senderId)
     }
     
@@ -358,8 +358,8 @@ class ChatViewController: JSQMessagesViewController {
          *
          *  Show a timestamp for every 3rd message
          */
-        if ((indexPath as NSIndexPath).item % 3 == 0) {
-            let message = self.messages[(indexPath as NSIndexPath).item]
+        if (indexPath.item % 3 == 0) {
+            let message = self.messages[indexPath.item]
             
             return JSQMessagesTimestampFormatter.shared().attributedTimestamp(for: message.date)
         }
@@ -368,7 +368,7 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath) -> NSAttributedString? {
-        let message = messages[(indexPath as NSIndexPath).item]
+        let message = messages[indexPath.item]
         
         // Displaying names above messages
         //Mark: Removing Sender Display Name
@@ -398,7 +398,7 @@ class ChatViewController: JSQMessagesViewController {
          *
          *  Show a timestamp for every 3rd message
          */
-        if (indexPath as NSIndexPath).item % 3 == 0 {
+        if indexPath.item % 3 == 0 {
             return kJSQMessagesCollectionViewCellLabelHeightDefault
         }
         
@@ -418,14 +418,14 @@ class ChatViewController: JSQMessagesViewController {
         /**
          *  iOS7-style sender name labels
          */
-        let currentMessage = self.messages[(indexPath as NSIndexPath).item]
+        let currentMessage = self.messages[indexPath.item]
         
         if currentMessage.senderId == self.senderId() {
             return 0.0
         }
         
-        if (indexPath as NSIndexPath).item - 1 > 0 {
-            let previousMessage = self.messages[(indexPath as NSIndexPath).item - 1]
+        if indexPath.item - 1 > 0 {
+            let previousMessage = self.messages[indexPath.item - 1]
             if previousMessage.senderId == currentMessage.senderId {
                 return 0.0
             }

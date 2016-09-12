@@ -38,9 +38,9 @@ class SettingsTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
             return UITableViewCell()
         }
-        let row = rows[(indexPath as NSIndexPath).row]
+        let row = rows[indexPath.row]
         let settingSwitch = UISwitch()
-        settingSwitch.tag = (indexPath as NSIndexPath).row
+        settingSwitch.tag = indexPath.row
         settingSwitch.isOn = defaults.bool(forKey: row.rawValue) 
         settingSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         

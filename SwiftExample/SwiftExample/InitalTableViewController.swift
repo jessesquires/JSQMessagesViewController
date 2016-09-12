@@ -45,9 +45,9 @@ class InitalTableViewController: UITableViewController {
             return UITableViewCell()
         }
         
-        switch (indexPath as NSIndexPath).section {
+        switch indexPath.section {
         case 0:
-            switch (indexPath as NSIndexPath).row {
+            switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Conversation between two people"
                 break
@@ -58,7 +58,7 @@ class InitalTableViewController: UITableViewController {
                 break
             }
         case 1:
-            switch (indexPath as NSIndexPath).row {
+            switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Settings"
                 break
@@ -97,9 +97,9 @@ class InitalTableViewController: UITableViewController {
     //Mark: - Table view delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch (indexPath as NSIndexPath).section {
+        switch indexPath.section {
         case 0:
-            switch (indexPath as NSIndexPath).row {
+            switch indexPath.row {
             case 0:
                 let chatView = ChatViewController()
                 chatView.messages = makeNormalConversation()
@@ -114,7 +114,7 @@ class InitalTableViewController: UITableViewController {
                 return
             }
         case 1:
-            switch (indexPath as NSIndexPath).row {
+            switch indexPath.row {
             case 0:
                 self.present(UINavigationController(rootViewController: SettingsTableViewController()), animated: true, completion: nil)
             default:
