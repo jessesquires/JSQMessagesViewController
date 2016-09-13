@@ -86,6 +86,8 @@ This approach is more involved, but gives you greater flexibility. If you need t
 4. Override `-collectionView: cellForItemAtIndexPath:`. Do not call `super`. Since you are providing your own cells, calling `super` will perform a bunch of unnecessary work.
 5. (Optional) For your model objects, implement `JSQMessageData` or subclass `JSQMessage` and extend to your needs.
 
+For more detailed instructions on creating custom cells, see [this comment](https://github.com/jessesquires/JSQMessagesViewController/issues/1739#issuecomment-246489889)
+
 #### *Customize your toolbar buttons?*
 ````objective-c
 - (void)viewDidLoad
