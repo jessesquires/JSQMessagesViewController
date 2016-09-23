@@ -23,7 +23,7 @@
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 
 #import "UIView+JSQMessages.h"
-#import "UIDevice+JSQMessages.h"
+#import "UIImage+JSQMessages.h"
 
 
 static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
@@ -41,6 +41,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
+
+@property (weak, nonatomic) IBOutlet UIButton *accessoryButton;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleContainerWidthConstraint;
 
@@ -101,6 +103,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     [jsqMessagesCollectionViewCellActions addObject:NSStringFromSelector(action)];
 }
 
+
 #pragma mark - Initialization
 
 - (void)awakeFromNib
@@ -109,27 +112,43 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
 
+    self.isAccessibilityElement = YES;
+    
     self.backgroundColor = [UIColor whiteColor];
-
-    self.cellTopLabelHeightConstraint.constant = 0.0f;
-    self.messageBubbleTopLabelHeightConstraint.constant = 0.0f;
-    self.cellBottomLabelHeightConstraint.constant = 0.0f;
-
     self.avatarViewSize = CGSizeZero;
-
+    
+    UIFont *topLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     self.cellTopLabel.textAlignment = NSTextAlignmentCenter;
-    self.cellTopLabel.font = [UIFont boldSystemFontOfSize:12.0f];
+    self.cellTopLabel.font = topLabelFont;
     self.cellTopLabel.textColor = [UIColor lightGrayColor];
-
-    self.messageBubbleTopLabel.font = [UIFont systemFontOfSize:12.0f];
+    self.cellTopLabel.numberOfLines = 0;
+    
+    UIFont *messageBubbleTopLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+    self.messageBubbleTopLabel.font = messageBubbleTopLabelFont;
     self.messageBubbleTopLabel.textColor = [UIColor lightGrayColor];
-
-    self.cellBottomLabel.font = [UIFont systemFontOfSize:11.0f];
+    self.messageBubbleTopLabel.numberOfLines = 0;
+    
+    UIFont *bottomLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
+    self.cellBottomLabel.font = bottomLabelFont;
     self.cellBottomLabel.textColor = [UIColor lightGrayColor];
+    self.cellBottomLabel.numberOfLines = 0;
 
+    [self configureAccessoryButton];
+
+    self.cellTopLabelHeightConstraint.constant = topLabelFont.pointSize;
+    self.messageBubbleTopLabelHeightConstraint.constant = messageBubbleTopLabelFont.pointSize;
+    self.cellBottomLabelHeightConstraint.constant = bottomLabelFont.pointSize;
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
     [self addGestureRecognizer:tap];
     self.tapGestureRecognizer = tap;
+}
+
+- (void)configureAccessoryButton
+{
+    UIColor *tintColor = [UIColor lightGrayColor];
+    UIImage *shareActionImage = [[UIImage jsq_shareActionImage] jsq_imageMaskedWithColor:tintColor];
+    [self.accessoryButton setImage:shareActionImage forState:UIControlStateNormal];
 }
 
 - (void)dealloc
@@ -166,6 +185,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
     self.avatarImageView.image = nil;
     self.avatarImageView.highlightedImage = nil;
+    
+    self.accessoryButton.hidden = YES;
 }
 
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
@@ -223,20 +244,6 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     self.messageBubbleImageView.highlighted = selected;
 }
 
-//  FIXME: radar 18326340
-//         remove when fixed
-//         hack for Xcode6 / iOS 8 SDK rendering bug that occurs on iOS 7.x
-//         see issue #484
-//         https://github.com/jessesquires/JSQMessagesViewController/issues/484
-//
-- (void)setBounds:(CGRect)bounds
-{
-    [super setBounds:bounds];
-
-    if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
-        self.contentView.frame = bounds;
-    }
-}
 
 #pragma mark - Menu actions
 
@@ -249,7 +256,20 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     return [super respondsToSelector:aSelector];
 }
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    // do nothing
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    // do nothing
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    // do nothing
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    // do nothing
 }
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation
@@ -328,11 +348,11 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     //  we may have dequeued a cell with a media view and add this one on top
     //  thus, remove any additional subviews hidden behind the new media view
     dispatch_async(dispatch_get_main_queue(), ^{
-        for (NSUInteger i = 0; i < self.messageBubbleContainerView.subviews.count; i++) {
-            if (self.messageBubbleContainerView.subviews[i] != _mediaView) {
-                [self.messageBubbleContainerView.subviews[i] removeFromSuperview];
+        [self.messageBubbleContainerView.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger index, BOOL *stop) {
+            if (subview != _mediaView) {
+                [subview removeFromSuperview];
             }
-        }
+        }];
     });
 }
 
@@ -389,6 +409,11 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     }
     
     return NO;
+}
+
+- (IBAction)didTapAccessoryButton:(UIButton *)accessoryButton
+{
+    [self.delegate messagesCollectionViewCellDidTapAccessoryButton:self];
 }
 
 @end

@@ -1,0 +1,42 @@
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "2qz-Z2-GmT"; */
+"2qz-Z2-GmT.text" = "כותרת";
+
+/* Class = "UILabel"; text = "Springy bubbles"; ObjectID = "3d2-fZ-dx9"; */
+"3d2-fZ-dx9.text" = "Springy bubbles";
+
+/* Class = "UILabel"; text = "Outgoing avatars"; ObjectID = "9Rr-S8-Uae"; */
+"9Rr-S8-Uae.text" = "אווטאר בהודעות יוצאות";
+
+/* Class = "UILabel"; text = "Accessory button for media messages"; ObjectID = "Cae-FY-b5Q"; */
+"Cae-FY-b5Q.text" = "Accessory button for media messages";
+
+/* Class = "UILabel"; text = "Empty view, no messages"; ObjectID = "DoU-SU-Nek"; */
+"DoU-SU-Nek.text" = "מסך רייק ללא הודעות";
+
+/* Class = "UILabel"; text = "Incoming avatars"; ObjectID = "RUq-Pa-3nx"; */
+"RUq-Pa-3nx.text" = "אווטאר בהודעות נכנסות";
+
+/* Class = "UILabel"; text = "Load really long message"; ObjectID = "YV3-GH-Yul"; */
+"YV3-GH-Yul.text" = "טען הודעה ארוכה מאוד";
+
+/* Class = "UILabel"; text = "Load extra messages"; ObjectID = "bSS-CD-nfD"; */
+"bSS-CD-nfD.text" = "טען הודעות נוספות";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "hrw-Dp-Tor"; */
+"hrw-Dp-Tor.title" = "הגדרות";
+
+/* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "irr-Pn-9x5"; */
+"irr-Pn-9x5.title" = "Root View Controller";
+
+/* Class = "UITableViewSection"; headerTitle = "Avatars"; ObjectID = "ns0-OO-PGu"; */
+"ns0-OO-PGu.headerTitle" = "אווטאר";
+
+/* Class = "UITableViewSection"; footerTitle = "NOTE: This feature is experimental"; ObjectID = "o5m-OT-1Iw"; */
+"o5m-OT-1Iw.footerTitle" = "שים לב: פיצ'ר זו היינו ניסיוני";
+
+/* Class = "UITableViewSection"; headerTitle = "Dynamic Behaviors"; ObjectID = "o5m-OT-1Iw"; */
+"o5m-OT-1Iw.headerTitle" = "Dynamic Behaviors";
+
+/* Class = "UITableViewSection"; headerTitle = "Messages"; ObjectID = "ygb-Dp-o4r"; */
+"ygb-Dp-o4r.headerTitle" = "הודעות";

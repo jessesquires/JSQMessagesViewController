@@ -62,6 +62,7 @@
 #import "JSQMessageBubbleImageDataSource.h"
 #import "JSQMessagesCollectionViewDataSource.h"
 #import "JSQMessagesCollectionViewDelegateFlowLayout.h"
+#import "JSQMessagesViewAccessoryButtonDelegate.h"
 
 //  Factories
 #import "JSQMessagesAvatarImageFactory.h"
@@ -71,7 +72,6 @@
 #import "JSQMessagesToolbarButtonFactory.h"
 
 //  Categories
-#import "JSQSystemSoundPlayer+JSQMessages.h"
 #import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
 #import "UIImage+JSQMessages.h"

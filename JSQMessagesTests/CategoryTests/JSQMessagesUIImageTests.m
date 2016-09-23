@@ -33,8 +33,6 @@
     XCTAssertTrue(CGSizeEqualToSize(img.size, imgMasked.size), @"Image sizes should be equal");
     
     XCTAssertEqual(img.scale, imgMasked.scale, @"Image scales should be equal");
-    
-    XCTAssertThrows([img jsq_imageMaskedWithColor:nil], @"Should throw when passing nil color");
 }
 
 - (void)testImageAssets
@@ -60,8 +58,10 @@
     XCTAssertNotNil([UIImage jsq_defaultAccessoryImage]);
     
     XCTAssertNotNil([UIImage jsq_defaultTypingIndicatorImage]);
-    
+
     XCTAssertNotNil([UIImage jsq_defaultPlayImage]);
+
+    XCTAssertNotNil([UIImage jsq_shareActionImage]);
 }
 
 @end

@@ -22,6 +22,13 @@
 
 #import "NSString+JSQMessages.h"
 
+@interface JSQMessagesComposerTextView ()
+
+@property (nonatomic, weak) NSLayoutConstraint *heightConstraint;
+@property (nonatomic, weak) NSLayoutConstraint *minHeightConstraint;
+@property (nonatomic, weak) NSLayoutConstraint *maxHeightConstraint;
+
+@end
 
 @implementation JSQMessagesComposerTextView
 
@@ -47,7 +54,7 @@
     self.scrollsToTop = NO;
     self.userInteractionEnabled = YES;
 
-    self.font = [UIFont systemFontOfSize:16.0f];
+    self.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     self.textColor = [UIColor blackColor];
     self.textAlignment = NSTextAlignmentNatural;
 
@@ -61,6 +68,8 @@
 
     _placeHolder = nil;
     _placeHolderTextColor = [UIColor lightGrayColor];
+
+    [self associateConstraints];
 
     [self jsq_addTextViewNotificationObservers];
 }
@@ -83,6 +92,52 @@
 - (void)dealloc
 {
     [self jsq_removeTextViewNotificationObservers];
+}
+
+// TODO: we should just set these from the xib
+- (void)associateConstraints
+{
+    // iterate through all text view's constraints and identify
+    // height, max height and min height constraints.
+
+    for (NSLayoutConstraint *constraint in self.constraints) {
+        if (constraint.firstAttribute == NSLayoutAttributeHeight) {
+
+            if (constraint.relation == NSLayoutRelationEqual) {
+                self.heightConstraint = constraint;
+            }
+
+            else if (constraint.relation == NSLayoutRelationLessThanOrEqual) {
+                self.maxHeightConstraint = constraint;
+            }
+
+            else if (constraint.relation == NSLayoutRelationGreaterThanOrEqual) {
+                self.minHeightConstraint = constraint;
+            }
+        }
+    }
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+
+    // calculate size needed for the text to be visible without scrolling
+    CGSize sizeThatFits = [self sizeThatFits:self.frame.size];
+    float newHeight = sizeThatFits.height;
+
+    // if there is any minimal height constraint set, make sure we consider that
+    if (self.maxHeightConstraint) {
+        newHeight = MIN(newHeight, self.maxHeightConstraint.constant);
+    }
+
+    // if there is any maximal height constraint set, make sure we consider that
+    if (self.minHeightConstraint) {
+        newHeight = MAX(newHeight, self.minHeightConstraint.constant);
+    }
+
+    // update the height constraint
+    self.heightConstraint.constant = newHeight;
 }
 
 #pragma mark - Composer text view
@@ -115,6 +170,16 @@
 }
 
 #pragma mark - UITextView overrides
+
+
+- (void)setBounds:(CGRect)bounds
+{
+    [super setBounds:bounds];
+
+    if (self.contentSize.height <= self.bounds.size.height + 1){
+        self.contentOffset = CGPointZero; // Fix wrong contentOfset
+    }
+}
 
 - (void)setText:(NSString *)text
 {
@@ -230,4 +295,5 @@
     [UIMenuController sharedMenuController].menuItems = nil;
     return [super canPerformAction:action withSender:sender];
 }
+
 @end

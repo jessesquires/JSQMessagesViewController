@@ -18,6 +18,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  A `JSQMessagesCollectionViewLayoutAttributes` is an object that manages the layout-related attributes
  *  for a given `JSQMessagesCollectionViewCell` in a `JSQMessagesCollectionView`.
@@ -104,3 +106,5 @@
 @property (assign, nonatomic) CGFloat cellBottomLabelHeight;
 
 @end
+
+NS_ASSUME_NONNULL_END
