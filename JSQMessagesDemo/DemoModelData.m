@@ -135,9 +135,12 @@
      *  Setting to load extra messages for testing/demo
      */
     if ([NSUserDefaults extraMessagesSetting]) {
-        NSArray *copyOfMessages = [self.messages copy];
-        for (NSUInteger i = 0; i < 4; i++) {
-            [self.messages addObjectsFromArray:copyOfMessages];
+        NSArray *copyOfMessages = [NSKeyedUnarchiver unarchiveObjectWithData:
+            [NSKeyedArchiver archivedDataWithRootObject:self.messages]];
+        [self.messages addObjectsFromArray:copyOfMessages];
+        for (NSUInteger i = 0; i < 3; i++) {
+            [self.messages addObjectsFromArray:[NSKeyedUnarchiver unarchiveObjectWithData:
+                [NSKeyedArchiver archivedDataWithRootObject:copyOfMessages]]];
         }
     }
     
