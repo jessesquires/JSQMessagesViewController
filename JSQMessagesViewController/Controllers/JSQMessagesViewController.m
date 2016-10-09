@@ -297,13 +297,6 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     }
 }
 
-- (void)jsq_resetLayoutAndCaches
-{
-    JSQMessagesCollectionViewFlowLayoutInvalidationContext *context = [JSQMessagesCollectionViewFlowLayoutInvalidationContext context];
-    context.invalidateFlowLayoutMessagesCache = YES;
-    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:context];
-}
-
 #pragma mark - Messages view controller
 
 - (void)didPressSendButton:(UIButton *)button
