@@ -39,7 +39,7 @@
 
 
 @implementation JSQMessagesCollectionView {
-    CGRect previousFrame;
+    CGSize previousSize;
 }
 
 @dynamic dataSource;
@@ -82,7 +82,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
     _typingIndicatorEllipsisColor = [_typingIndicatorMessageBubbleColor jsq_colorByDarkeningColorWithValue:0.3f];
 
     _loadEarlierMessagesHeaderTextColor = [UIColor jsq_messageBubbleBlueColor];
-    previousFrame = self.frame;
+    previousSize = self.frame.size;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout
@@ -103,11 +103,11 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
 #pragma mark - Overrides
 
 - (void)layoutSubviews {
-    if (!CGRectEqualToRect(previousFrame, self.frame)) {
+    if (!CGSizeEqualToSize(previousSize, self.frame.size)) {
         JSQMessagesCollectionViewFlowLayoutInvalidationContext *context = [JSQMessagesCollectionViewFlowLayoutInvalidationContext context];
         context.invalidateFlowLayoutMessagesCache = YES;
         [self.collectionViewLayout invalidateLayoutWithContext:context];
-        previousFrame = self.frame;
+        previousSize = self.frame.size;
     }
     [super layoutSubviews];
 }
