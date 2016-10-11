@@ -98,6 +98,11 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
             // Cleaning up again - this workaround would swallow bugs if we let it be there.
             removeWorkaround();
         });
+        // Reference the variable to eliminate a false static analysis issue
+        if(origIMP)
+        {
+            
+        }
     };
 
     // _UIRotatingAlertController
@@ -986,16 +991,25 @@ JSQMessagesKeyboardControllerDelegate>
 - (void)jsq_adjustInputToolbarForComposerTextViewContentSizeChange:(CGFloat)dy
 {
     BOOL contentSizeIsIncreasing = (dy > 0);
+    BOOL reachedMaximumHeight = NO;
 
-    if ([self jsq_inputToolbarHasReachedMaximumHeight]) {
-        BOOL contentOffsetIsPositive = (self.inputToolbar.contentView.textView.contentOffset.y > 0);
+    UITextView *textView = self.inputToolbar.contentView.textView;
+    if ([self jsq_inputToolbarHasReachedMaximumHeight] || self.inputToolbar.atMaximumHeight) {
+        BOOL contentOffsetIsPositive = (textView.contentOffset.y > 0);
+        reachedMaximumHeight = YES;
 
         if (contentSizeIsIncreasing || contentOffsetIsPositive) {
-            [self jsq_scrollComposerTextViewToBottomAnimated:YES];
             return;
         }
     }
 
+    if (dy < 0 && reachedMaximumHeight)  // Need to decrease size of textView, but, account for partial size change
+    {
+        CGFloat newViewFrameHeight = textView.bounds.size.height + dy;
+        if (textView.contentSize.height + textView.contentInset.top + textView.contentInset.bottom + textView.contentOffset.y > newViewFrameHeight) {
+            dy = (textView.contentSize.height + textView.contentInset.top + textView.contentInset.bottom + textView.contentOffset.y) - textView.bounds.size.height;
+        }
+    }
     CGFloat toolbarOriginY = CGRectGetMinY(self.inputToolbar.frame);
     CGFloat newToolbarOriginY = toolbarOriginY - dy;
 
@@ -1008,10 +1022,6 @@ JSQMessagesKeyboardControllerDelegate>
     [self jsq_adjustInputToolbarHeightConstraintByDelta:dy];
 
     [self jsq_updateKeyboardTriggerPoint];
-
-    if (dy < 0) {
-        [self jsq_scrollComposerTextViewToBottomAnimated:NO];
-    }
 }
 
 - (void)jsq_adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy
