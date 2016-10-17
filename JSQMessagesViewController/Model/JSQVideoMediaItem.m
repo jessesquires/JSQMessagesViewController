@@ -23,10 +23,13 @@
 
 #import "UIImage+JSQMessages.h"
 
+@import AVFoundation;
 
 @interface JSQVideoMediaItem ()
 
 @property (strong, nonatomic) UIImageView *cachedVideoImageView;
+
+@property (strong, nonatomic) UIImage *thumbnailImage;
 
 @end
 
@@ -50,6 +53,7 @@
 {
     [super clearCachedMediaViews];
     _cachedVideoImageView = nil;
+    _thumbnailImage = nil;
 }
 
 #pragma mark - Setters
@@ -58,19 +62,42 @@
 {
     _fileURL = [fileURL copy];
     _cachedVideoImageView = nil;
+    _thumbnailImage = nil;
 }
 
 - (void)setIsReadyToPlay:(BOOL)isReadyToPlay
 {
     _isReadyToPlay = isReadyToPlay;
     _cachedVideoImageView = nil;
+    _thumbnailImage = nil;
 }
 
 - (void)setAppliesMediaViewMaskAsOutgoing:(BOOL)appliesMediaViewMaskAsOutgoing
 {
     [super setAppliesMediaViewMaskAsOutgoing:appliesMediaViewMaskAsOutgoing];
     _cachedVideoImageView = nil;
+    _thumbnailImage = nil;
 }
+
+- (UIImage *)thumbnailImage{
+    if (_thumbnailImage) {
+        return _thumbnailImage;
+    }
+    AVURLAsset *avAsset =  [AVURLAsset URLAssetWithURL:_fileURL options:nil];
+    AVAssetImageGenerator *generate = [[AVAssetImageGenerator alloc] initWithAsset:avAsset];
+    generate.appliesPreferredTrackTransform = YES;
+    CMTime thumbTime = CMTimeMakeWithSeconds(1,2);
+    AVAssetImageGeneratorCompletionHandler handler = ^(CMTime requestedTime, CGImageRef im, CMTime actualTime, AVAssetImageGeneratorResult result, NSError *error){
+        if (result == AVAssetImageGeneratorSucceeded) {
+            _thumbnailImage = [UIImage imageWithCGImage:im];
+            _cachedVideoImageView = nil;
+        }
+    };
+    generate.maximumSize = [self mediaViewDisplaySize];
+    [generate generateCGImagesAsynchronouslyForTimes:[NSArray arrayWithObject:[NSValue valueWithCMTime:thumbTime]] completionHandler:handler];
+    return nil;
+}
+
 
 #pragma mark - JSQMessageMediaData protocol
 
@@ -83,14 +110,20 @@
     if (self.cachedVideoImageView == nil) {
         CGSize size = [self mediaViewDisplaySize];
         UIImage *playIcon = [[UIImage jsq_defaultPlayImage] jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
-        
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:playIcon];
-        imageView.backgroundColor = [UIColor blackColor];
-        imageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
-        imageView.contentMode = UIViewContentModeCenter;
-        imageView.clipsToBounds = YES;
-        [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
-        self.cachedVideoImageView = imageView;
+        UIImageView *playIconView = [[UIImageView alloc] initWithImage:playIcon];
+        playIconView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
+        UIImageView *thumbnailView = [[UIImageView alloc] initWithFrame:playIconView.frame];
+        playIconView.contentMode = UIViewContentModeCenter;
+        playIconView.clipsToBounds = YES;
+        [thumbnailView addSubview:playIconView];
+        if (self.thumbnailImage) {
+            thumbnailView.image = _thumbnailImage;
+            thumbnailView.contentMode = UIViewContentModeScaleAspectFill;
+        }else{
+            thumbnailView.backgroundColor = [UIColor blackColor];
+        }
+        [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:thumbnailView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
+        self.cachedVideoImageView = thumbnailView;
     }
     
     return self.cachedVideoImageView;
