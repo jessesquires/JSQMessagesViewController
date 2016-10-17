@@ -23,7 +23,9 @@ This release closes the [8.0.0 milestone](https://github.com/jessesquires/JSQMes
 - Animated typing indicator. Typing indicator now animates like iMessage. (#1382) Thanks @radekcieciwa!
 - Dynamic text support. (#497, #1747) Thanks @MacMeDan!
 - Message cells now have a customizable accessory view. (#1519, #1719) Thanks @adubr!
-- Send button now can be turned on/off manually. (#1575 #1609) Thanks @sebastianludwig!
+- Send button now can be turned on/off manually. (#1575, #1609) Thanks @sebastianludwig!
+- Video message items now have a custom thumbnail option. (#628, #709, #1408, #1823) Thanks @weekwood, @benjaminhallock!
+- A new class `JSQMessagesVideoThumbnailFactory` now can generate thumbnail images from `AVURLAsset`. (#709, #1823) Thanks @weekwood, @Lucashuang0802!
 
 ### Fixes
 

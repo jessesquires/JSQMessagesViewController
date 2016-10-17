@@ -200,4 +200,16 @@
     [self.messages addObject:videoMessage];
 }
 
+- (void)addVideoMediaMessageWithThumbnail
+{
+    // don't have a real video, just pretending
+    NSURL *videoURL = [NSURL URLWithString:@"file://"];
+    
+    JSQVideoMediaItem *videoItem = [[JSQVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:YES thumbnailImage:[UIImage imageNamed:@"goldengate"]];
+    JSQMessage *videoMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
+                                                   displayName:kJSQDemoAvatarDisplayNameSquires
+                                                         media:videoItem];
+    [self.messages addObject:videoMessage];
+}
+
 @end
