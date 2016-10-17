@@ -19,6 +19,6 @@ class SettingsTests: XCTestCase {
     
     func testSettingsView() {
         let _ = settingsView.view
-        XCTAssertEqual(settingsView.tableView.numberOfRowsInSection(0), 3)
+        XCTAssertEqual(settingsView.tableView.numberOfRows(inSection: 0), 3)
     }
 }
