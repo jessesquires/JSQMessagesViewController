@@ -239,7 +239,6 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 {
     [super viewWillAppear:animated];
     self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
-    [self.view setNeedsLayout];
     [self.collectionView.collectionViewLayout invalidateLayout];
 
     if (self.automaticallyScrollsToMostRecentMessage) {
