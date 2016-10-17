@@ -192,8 +192,8 @@
 {
     // don't have a real video, just pretending
     NSURL *videoURL = [NSURL URLWithString:@"file://"];
-    
-    JSQVideoMediaItem *videoItem = [[JSQVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:YES];
+
+    JSQVideoMediaItem *videoItem = [[JSQVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:YES image:[UIImage imageNamed:@"goldengate"]];
     JSQMessage *videoMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
                                                    displayName:kJSQDemoAvatarDisplayNameSquires
                                                          media:videoItem];
