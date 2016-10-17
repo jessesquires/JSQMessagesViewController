@@ -85,9 +85,9 @@ class InitalTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
-        case 2:
+        case 0:
             return "Copyright © 2015\nJesse Squires\nMIT License"
-        case 3:
+        case 1:
             return "Thanks to all the contributers and MacMeDan for this swift example."
         default:
             return nil
@@ -125,6 +125,6 @@ class InitalTableViewController: UITableViewController {
         }
     }
     
-
+    
     
 }
