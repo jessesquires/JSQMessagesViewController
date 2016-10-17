@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode7.3
+osx_image: xcode8
 
 env:
    global:
@@ -7,7 +7,7 @@ env:
 
    - WORKSPACE="JSQMessages.xcworkspace"
    - IOS_SCHEME="JSQMessages"
-   - IOS_SDK=iphonesimulator9.3
+   - IOS_SDK=iphonesimulator10.0
 
    matrix:
    - DESTINATION="OS=8.1,name=iPhone 4s"     SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES"  BUILD_EXAMPLE="YES" POD_LINT="NO"  RUN_UI_TESTS="NO"
@@ -27,6 +27,7 @@ env:
    - DESTINATION="OS=9.2,name=iPad Air 2"   SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO" RUN_UI_TESTS="NO"
    - DESTINATION="OS=9.3,name=iPad Pro"     SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO" RUN_UI_TESTS="NO"
 
+   - DESTINATION="OS=10.0,name=iPhone SE"   SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO" RUN_UI_TESTS="NO"
 script:
 
 - if [ $POD_LINT == "YES" ]; then
