@@ -17,17 +17,17 @@ class InitalTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "JSQMessagesViewControler in Swift"
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     }
     
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch (section) {
         case 0:
@@ -39,9 +39,9 @@ class InitalTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) else {
             return UITableViewCell()
         }
         
@@ -71,7 +71,7 @@ class InitalTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         switch section {
         case 0:
@@ -83,7 +83,7 @@ class InitalTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 2:
             return "Copyright © 2015\nJesse Squires\nMIT License"
@@ -96,7 +96,7 @@ class InitalTableViewController: UITableViewController {
     
     //Mark: - Table view delegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
@@ -104,19 +104,19 @@ class InitalTableViewController: UITableViewController {
                 let chatView = ChatViewController()
                 chatView.messages = makeNormalConversation()
                 let chatNavigationController = UINavigationController(rootViewController: chatView)
-                presentViewController(chatNavigationController, animated: true, completion: nil)
+                present(chatNavigationController, animated: true, completion: nil)
             case 1:
                 let chatView = ChatViewController()
                 chatView.messages = makeGroupConversation()
                 let chatNavigationController = UINavigationController(rootViewController: chatView)
-                presentViewController(chatNavigationController, animated: true, completion: nil)
+                present(chatNavigationController, animated: true, completion: nil)
             default:
                 return
             }
         case 1:
             switch indexPath.row {
             case 0:
-                self.presentViewController(UINavigationController(rootViewController: SettingsTableViewController()), animated: true, completion: nil)
+                self.present(UINavigationController(rootViewController: SettingsTableViewController()), animated: true, completion: nil)
             default:
                 return
             }
