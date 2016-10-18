@@ -680,7 +680,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 
         if ([messageData isMediaMessage]) {
             id<JSQMessageMediaData> mediaData = [messageData media];
-            if ([messageData respondsToSelector:@selector(mediaDataType)]) {
+            if ([messageData conformsToProtocol:@protocol(JSQMessageData)]) {
                 [[UIPasteboard generalPasteboard] setValue:[mediaData mediaData]
                                          forPasteboardType:[mediaData mediaDataType]];
             }
