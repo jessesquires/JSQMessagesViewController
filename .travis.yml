@@ -20,7 +20,8 @@ env:
    - DESTINATION="OS=9.2,name=iPhone 6s Plus" SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO" RUN_UI_TESTS="NO"
    - DESTINATION="OS=9.3,name=iPad Air 2"     SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO" RUN_UI_TESTS="NO"
    
-   - DESTINATION="OS=10.0,name=iPhone 7"   SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO" RUN_UI_TESTS="NO"
+   - DESTINATION="OS=10.0,name=iPhone 6s"   SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO" RUN_UI_TESTS="NO"
+ 
 script:
 
 - if [ $POD_LINT == "YES" ]; then
@@ -47,9 +48,9 @@ script:
 
 
 # Build for reporting test coverage
-- if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild test -workspace JSQMessages.xcworkspace -scheme JSQMessages -sdk iphonesimulator GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES;
-  fi
+#- if [ $RUN_TESTS == "YES" ]; then
+#      xcodebuild test -workspace JSQMessages.xcworkspace -scheme JSQMessages -sdk iphonesimulator GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES;
+#  fi
 
 after_success:
 - bash <(curl -s https://codecov.io/bash);
