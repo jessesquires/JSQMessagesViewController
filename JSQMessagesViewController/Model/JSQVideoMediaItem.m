@@ -86,19 +86,19 @@
     if (self.fileURL == nil || !self.isReadyToPlay) {
         return nil;
     }
-    
+
     if (self.cachedVideoImageView == nil) {
         CGSize size = [self mediaViewDisplaySize];
         UIImage *playIcon = [[UIImage jsq_defaultPlayImage] jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
-        
+
         UIImageView *imageView = [[UIImageView alloc] initWithImage:playIcon];
         imageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
         imageView.contentMode = UIViewContentModeCenter;
         imageView.clipsToBounds = YES;
         [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
-        
-        if (_thumbnailImage) {
-            UIImageView *thumbnailImageView = [[UIImageView alloc] initWithImage:_thumbnailImage];
+
+        if (self.thumbnailImage) {
+            UIImageView *thumbnailImageView = [[UIImageView alloc] initWithImage:self.thumbnailImage];
             thumbnailImageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
             thumbnailImageView.contentMode = UIViewContentModeCenter;
             thumbnailImageView.clipsToBounds = YES;
@@ -112,7 +112,7 @@
             self.cachedVideoImageView = imageView;
         }
     }
-    
+
     return self.cachedVideoImageView;
 }
 
@@ -128,11 +128,11 @@
     if (![super isEqual:object]) {
         return NO;
     }
-    
+
     JSQVideoMediaItem *videoItem = (JSQVideoMediaItem *)object;
-    
+
     return [self.fileURL isEqual:videoItem.fileURL]
-            && self.isReadyToPlay == videoItem.isReadyToPlay;
+    && self.isReadyToPlay == videoItem.isReadyToPlay;
 }
 
 - (NSUInteger)hash
@@ -164,7 +164,7 @@
     [super encodeWithCoder:aCoder];
     [aCoder encodeObject:self.fileURL forKey:NSStringFromSelector(@selector(fileURL))];
     [aCoder encodeBool:self.isReadyToPlay forKey:NSStringFromSelector(@selector(isReadyToPlay))];
-    [aCoder encodeBool:self.thumbnailImage forKey:NSStringFromSelector(@selector(thumbnailImage))];
+    [aCoder encodeObject:self.thumbnailImage forKey:NSStringFromSelector(@selector(thumbnailImage))];
 }
 
 #pragma mark - NSCopying
