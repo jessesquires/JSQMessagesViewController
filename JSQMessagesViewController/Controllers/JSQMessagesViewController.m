@@ -18,21 +18,6 @@
 
 #import "JSQMessagesViewController.h"
 
-#import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
-
-#import "JSQMessageData.h"
-#import "JSQMessageBubbleImageDataSource.h"
-#import "JSQMessageAvatarImageDataSource.h"
-
-#import "JSQMessagesCollectionViewCellIncoming.h"
-#import "JSQMessagesCollectionViewCellOutgoing.h"
-
-#import "JSQMessagesTypingIndicatorFooterView.h"
-#import "JSQMessagesLoadEarlierHeaderView.h"
-
-#import "NSString+JSQMessages.h"
-#import "NSBundle+JSQMessages.h"
-
 #import <objc/runtime.h>
 
 
@@ -283,22 +268,6 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     return UIInterfaceOrientationMaskAll;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    if (self.showTypingIndicator) {
-        self.showTypingIndicator = NO;
-        self.showTypingIndicator = YES;
-        [self.collectionView reloadData];
-    }
-}
-
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self jsq_resetLayoutAndCaches];
@@ -307,6 +276,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
     [self jsq_resetLayoutAndCaches];
+    [self jsq_resetTypingIndicatorIfNeeded];
 }
 
 - (void)jsq_resetLayoutAndCaches
@@ -314,6 +284,14 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     JSQMessagesCollectionViewFlowLayoutInvalidationContext *context = [JSQMessagesCollectionViewFlowLayoutInvalidationContext context];
     context.invalidateFlowLayoutMessagesCache = YES;
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:context];
+}
+
+- (void)jsq_resetTypingIndicatorIfNeeded {
+    if (self.showTypingIndicator) {
+        self.showTypingIndicator = NO;
+        self.showTypingIndicator = YES;
+        [self.collectionView reloadData];
+    }
 }
 
 #pragma mark - Messages view controller
