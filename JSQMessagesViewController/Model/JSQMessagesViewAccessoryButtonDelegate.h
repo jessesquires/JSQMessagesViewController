@@ -11,7 +11,7 @@
 //
 //
 //  License
-//  Copyright (c) 2014 Jesse Squires
+//  Copyright © 2014-present Jesse Squires
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
