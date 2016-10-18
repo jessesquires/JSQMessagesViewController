@@ -34,13 +34,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) NSURL *fileURL;
 
 /**
- *  Adding an image to mask behind the video.
+ *  The thumbnail image to display for the video.
  */
 @property (nonatomic, strong, nullable) UIImage *thumbnailImage;
 
 /**
  *  A boolean value that specifies whether or not the video is ready to be played.
- * 
+ *
  *  @discussion When set to `YES`, the video is ready. When set to `NO` it is not ready.
  */
 @property (nonatomic, assign) BOOL isReadyToPlay;
@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param fileURL          The URL that identifies the video resource.
  *  @param isReadyToPlay    A boolean value that specifies if the video is ready to play.
- *  @param thumbnailImage   The background thumbnail for the video.
+ *  @param thumbnailImage   The background thumbnail image for the video.
  *
  *  @return An initialized `JSQVideoMediaItem` if successful, `nil` otherwise.
  *
@@ -75,7 +75,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  set the fileURL property or isReadyToPlay property, respectively. The background thumbnail
  *  is optional.
  */
-- (instancetype)initWithFileURL:(NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay thumbnailImage:(nullable UIImage *)thumbnailImage;
+- (instancetype)initWithFileURL:(NSURL *)fileURL
+                  isReadyToPlay:(BOOL)isReadyToPlay
+                 thumbnailImage:(nullable UIImage *)thumbnailImage;
 
 @end
 

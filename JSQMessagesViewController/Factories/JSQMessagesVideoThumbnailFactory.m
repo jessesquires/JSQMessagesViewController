@@ -1,9 +1,19 @@
 //
-//  JSQMessagesVideoThumbnailFactory.m
-//  JSQMessages
+//  Created by Jesse Squires
+//  http://www.jessesquires.com
 //
-//  Created by Xi Huang on 8/22/16.
-//  Copyright © 2016 Hexed Bits. All rights reserved.
+//
+//  Documentation
+//  http://cocoadocs.org/docsets/JSQMessagesViewController
+//
+//
+//  GitHub
+//  https://github.com/jessesquires/JSQMessagesViewController
+//
+//
+//  License
+//  Copyright (c) 2014 Jesse Squires
+//  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
 #import "JSQVideoMediaItem.h"
@@ -15,39 +25,40 @@
 
 @implementation JSQMessagesVideoThumbnailFactory
 
-+ (void)customThumbnailWithVideoMediaAsset:(AVURLAsset *)videoMediaAsset
-                     withCompletionHandler:(JSQMessagesVideoThumbnailCompletionBlock)completion {
-    
-    [JSQMessagesVideoThumbnailFactory customThumbnailWithVideoMediaAsset:videoMediaAsset
-                                                                    time:CMTimeMakeWithSeconds(1, 2)
-                                                   withCompletionHandler:completion];
+- (void)thumbnailWithVideoMediaAsset:(AVURLAsset *)asset
+                          completion:(JSQMessagesVideoThumbnailCompletionBlock)completion
+{
+    NSParameterAssert(asset != nil);
+    NSParameterAssert(completion != nil);
+    [self thumbnailWithVideoMediaAsset:asset
+                                  time:CMTimeMakeWithSeconds(1, 2)
+                            completion:completion];
 }
 
-+ (void)customThumbnailWithVideoMediaAsset:(AVURLAsset *)videoMediaAsset
-                                      time:(CMTime)time
-                     withCompletionHandler:(JSQMessagesVideoThumbnailCompletionBlock)completion {
-    
-    NSParameterAssert(videoMediaAsset != nil);
-    
-    AVAssetImageGenerator *generate = [[AVAssetImageGenerator alloc] initWithAsset:videoMediaAsset];
+- (void)thumbnailWithVideoMediaAsset:(AVURLAsset *)asset
+                                time:(CMTime)time
+                          completion:(JSQMessagesVideoThumbnailCompletionBlock)completion
+{
+    NSParameterAssert(asset != nil);
+    NSParameterAssert(completion != nil);
+
+    AVAssetImageGenerator *generate = [[AVAssetImageGenerator alloc] initWithAsset:asset];
     generate.appliesPreferredTrackTransform = YES;
-    
+
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         generate.maximumSize = CGSizeMake(315.0f, 225.0f);
     }
     else {
         generate.maximumSize = CGSizeMake(210.0f, 150.0f);
     }
-    [generate generateCGImagesAsynchronouslyForTimes:[NSArray arrayWithObject:[NSValue valueWithCMTime:time]]
-                                   completionHandler:^(CMTime requestedTime, CGImageRef im, CMTime actualTime, AVAssetImageGeneratorResult result, NSError *error){
-                                       
+
+    NSArray *times = [NSArray arrayWithObject:[NSValue valueWithCMTime:time]];
+    [generate generateCGImagesAsynchronouslyForTimes:times
+                                   completionHandler:^(CMTime requestedTime, CGImageRef im, CMTime actualTime, AVAssetImageGeneratorResult result, NSError *error) {
+
+                                       UIImage *image = (result == AVAssetImageGeneratorSucceeded) ? [UIImage imageWithCGImage:im] : nil;
                                        if (completion) {
-                                           if (result == AVAssetImageGeneratorSucceeded) {
-                                               completion([UIImage imageWithCGImage:im], nil);
-                                           }
-                                           else {
-                                               completion(nil, error);
-                                           }
+                                           completion(image, error);
                                        }
                                    }];
 }
