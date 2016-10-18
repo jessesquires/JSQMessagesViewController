@@ -5,7 +5,7 @@
 - [ ] I have reviewed the [contributing guidelines](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/.github/CONTRIBUTING.md). Confirmation: ____
 - [ ] I have searched [existing issues](https://github.com/jessesquires/JSQMessagesViewController/issues?q=is%3Aissue+sort%3Acreated-desc) and **this is not a duplicate**.
 
-### General information
+## General information
 
 - Library version(s):
 - iOS version(s):
@@ -13,16 +13,4 @@
 - Reproducible in the demo project? (Yes/No): 
 - Related issues:
 
-## Bug report
-
-### Expected behavior
-
-
-### Actual behavior
-
-
-### Steps to reproduce
-
-
-### Crash log? Screenshots? Videos? Sample project?
-
+## What happened?
