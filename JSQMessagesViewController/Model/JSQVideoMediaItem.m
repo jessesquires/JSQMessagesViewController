@@ -164,7 +164,7 @@
     [super encodeWithCoder:aCoder];
     [aCoder encodeObject:self.fileURL forKey:NSStringFromSelector(@selector(fileURL))];
     [aCoder encodeBool:self.isReadyToPlay forKey:NSStringFromSelector(@selector(isReadyToPlay))];
-    [aCoder encodeBool:self.thumbnailImage forKey:NSStringFromSelector(@selector(thumbnailImage))];
+    [aCoder encodeObject:self.thumbnailImage forKey:NSStringFromSelector(@selector(thumbnailImage))];
 }
 
 #pragma mark - NSCopying
