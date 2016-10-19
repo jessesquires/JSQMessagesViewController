@@ -23,7 +23,7 @@ env:
    - DESTINATION="OS=10.0,name=iPhone 6s"   SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO" RUN_UI_TESTS="NO"
 
 before_install:
-gem install cocoapods --pre
+   - gem install cocoapods --pre
 
 script:
 - if [ $POD_LINT == "YES" ]; then
