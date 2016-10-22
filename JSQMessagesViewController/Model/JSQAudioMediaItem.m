@@ -20,6 +20,7 @@
 
 #import "JSQMessagesMediaPlaceholderView.h"
 #import "JSQMessagesMediaViewBubbleImageMasker.h"
+#import "JSQWeakTimerTarget.h"
 
 #import "UIImage+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
@@ -116,11 +117,9 @@
 
 - (void)startProgressTimer
 {
-    self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
-                                                          target:self
-                                                        selector:@selector(updateProgressTimer:)
-                                                        userInfo:nil
-                                                         repeats:YES];
+    JSQWeakTimerTarget *target = [[JSQWeakTimerTarget alloc] initWithTarget:self selector:@selector(updateProgressTimer:)];
+    self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:target selector:NSSelectorFromString(@"timerDidFire:") userInfo:nil repeats:YES];
+
 }
 
 - (void)stopProgressTimer
