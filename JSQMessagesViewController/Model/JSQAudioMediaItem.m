@@ -117,8 +117,11 @@
 
 - (void)startProgressTimer
 {
-    JSQWeakTimerTarget *target = [[JSQWeakTimerTarget alloc] initWithTarget:self selector:@selector(updateProgressTimer:)];
-    self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:target selector:NSSelectorFromString(@"timerDidFire:") userInfo:nil repeats:YES];
+    JSQWeakTimerTarget *target = [[JSQWeakTimerTarget alloc] initWithTarget:self
+                                                                   selector:@selector(updateProgressTimer:)];
+    self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:target
+                                                        selector:NSSelectorFromString(@"timerDidFire:")
+                                                        userInfo:nil repeats:YES];
 
 }
 
