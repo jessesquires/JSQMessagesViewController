@@ -46,4 +46,5 @@ These are the (known) apps that use `JSQMessagesViewController`. Submit a [pull 
 * [SnipSnap](http://go.snipsnap.it/messageui-scout)
 * [BubbleMe](https://itunes.apple.com/us/app/bubbleme/id1125325038)
 * [Social-Go](https://github.com/kingreza/Social-Go)
+* [multipeer-chat](https://github.com/J4awesome/multipeer-chat)
 * *Your app here, submit a [pull request](https://github.com/jessesquires/JSQMessagesViewController/compare)!*
