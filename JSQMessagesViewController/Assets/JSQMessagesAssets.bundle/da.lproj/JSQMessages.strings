@@ -1,0 +1,37 @@
+//
+//  Created by Jesse Squires
+//  http://www.jessesquires.com
+//
+//
+//  Documentation
+//  http://cocoadocs.org/docsets/JSQMessagesViewController
+//
+//
+//  GitHub
+//  https://github.com/jessesquires/JSQMessagesViewController
+//
+//
+//  License
+//  Copyright (c) 2014 Jesse Squires
+//  Released under an MIT license: http://opensource.org/licenses/MIT
+//
+
+//  ********************************
+//  Special thanks to the localization contributors!
+//
+//  https://github.com/jessesquires/JSQMessagesViewController/issues/237
+//  ********************************
+
+"load_earlier_messages" = "Indlæs tidligere beskeder";
+
+"send" = "Send";
+
+"new_message" = "Ny besked";
+
+"text_message_accessibility_label" = "%@: %@";
+
+"media_message_accessibility_label" = "%@: mediebesked";
+
+"accessory_button_accessibility_label" = "Del medie";
+
+"new_message_received_accessibility_announcement" = "Ny besked modtaget";
