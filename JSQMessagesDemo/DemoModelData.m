@@ -202,4 +202,22 @@
     [self.messages addObject:videoMessage];
 }
 
+- (void)addContactMediaMessage
+{
+    
+    CNMutableContact *contact = [[CNMutableContact alloc] init];
+    
+    contact.givenName = @"Bary";
+    contact.familyName = @"Levy";
+    CNLabeledValue *homePhone = [CNLabeledValue labeledValueWithLabel:CNLabelHome value:[CNPhoneNumber phoneNumberWithStringValue:@"972-3-7396874"]];
+    
+    contact.phoneNumbers = @[homePhone];
+    
+    JSQContactItem *contactItem = [[JSQContactItem alloc] initWithContact:contact];
+    JSQMessage *contactMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
+                                                     displayName:kJSQDemoAvatarDisplayNameSquires
+                                                           media:contactItem];
+    [self.messages addObject:contactMessage];
+}
+
 @end

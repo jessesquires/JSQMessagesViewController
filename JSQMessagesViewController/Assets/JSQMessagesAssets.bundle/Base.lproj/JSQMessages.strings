@@ -35,3 +35,5 @@
 "accessory_button_accessibility_label" = "Share media";
 
 "new_message_received_accessibility_announcement" = "New message received";
+
+"Send Contact" = "Send Contact"

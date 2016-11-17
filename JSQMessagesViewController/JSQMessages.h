@@ -49,7 +49,7 @@
 #import "JSQPhotoMediaItem.h"
 #import "JSQLocationMediaItem.h"
 #import "JSQVideoMediaItem.h"
-
+#import "JSQContactItem.h"
 #import "JSQMessagesBubbleImage.h"
 #import "JSQMessagesAvatarImage.h"
 
