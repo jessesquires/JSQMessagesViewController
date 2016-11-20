@@ -46,6 +46,12 @@
 @property (weak, nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
 
 /**
+ *  Returns the Auto-layout constraint for the input toolbar's height.
+ *  This is exposed here so that you can configure the input toolbar's height from the outside.
+ */
+@property (weak, nonatomic, readonly) NSLayoutConstraint *toolbarHeightConstraint;
+
+/**
  *  Returns the keyboard controller object used to manage the software keyboard.
  */
 @property (strong, nonatomic) JSQMessagesKeyboardController *keyboardController;
