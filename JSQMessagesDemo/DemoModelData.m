@@ -132,6 +132,7 @@
     
     [self addPhotoMediaMessage];
     [self addAudioMediaMessage];
+    [self addContactMediaMessage];
     
     /**
      *  Setting to load extra messages for testing/demo

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,14 +16,15 @@
             <rect key="frame" x="0.0" y="0.0" width="250" height="74"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="contact_place_holder" translatesAutoresizingMaskIntoConstraints="NO" id="byB-Dy-6F6">
+                <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contact_place_holder" translatesAutoresizingMaskIntoConstraints="NO" id="byB-Dy-6F6">
                     <rect key="frame" x="15" y="14" width="46" height="46"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="46" id="lFy-yE-hrs"/>
+                    </constraints>
                 </imageView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="MainText" translatesAutoresizingMaskIntoConstraints="NO" id="BsI-lc-LIZ">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="MainText" translatesAutoresizingMaskIntoConstraints="NO" id="BsI-lc-LIZ">
                     <rect key="frame" x="69" y="21" width="173" height="31"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -32,6 +34,15 @@
             <accessibility key="accessibilityConfiguration" identifier="JSQMessagesContactView">
                 <bool key="isElement" value="YES"/>
             </accessibility>
+            <constraints>
+                <constraint firstItem="BsI-lc-LIZ" firstAttribute="leading" secondItem="byB-Dy-6F6" secondAttribute="trailing" constant="8" symbolic="YES" id="ECk-G9-NBL"/>
+                <constraint firstItem="byB-Dy-6F6" firstAttribute="centerY" secondItem="BsI-lc-LIZ" secondAttribute="centerY" id="OBJ-9n-EeB"/>
+                <constraint firstItem="BsI-lc-LIZ" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="a21-TF-t7l"/>
+                <constraint firstItem="byB-Dy-6F6" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="a8f-yw-SxT"/>
+                <constraint firstItem="BsI-lc-LIZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="21" id="arg-OD-ea8"/>
+                <constraint firstItem="byB-Dy-6F6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="k7I-84-yoO"/>
+                <constraint firstItem="byB-Dy-6F6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="14" id="vLA-8b-HTD"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="contactImage" destination="byB-Dy-6F6" id="b6w-xr-3dN"/>
