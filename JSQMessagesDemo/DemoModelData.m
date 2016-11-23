@@ -193,6 +193,7 @@
 
 - (void)addVideoMediaMessage
 {
+    
     // don't have a real video, just pretending
     NSURL *videoURL = [NSURL URLWithString:@"file://"];
     
