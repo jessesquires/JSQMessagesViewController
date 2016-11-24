@@ -18,6 +18,9 @@
 
 #import "DemoMessagesViewController.h"
 #import "JSQMessagesViewAccessoryButtonDelegate.h"
+#import "JSQContactMediaItem.h"
+#import <MediaPlayer/MediaPlayer.h>
+#import <ContactsUI/ContactsUI.h>
 
 @interface DemoMessagesViewController () <JSQMessagesViewAccessoryButtonDelegate>
 @end
@@ -249,6 +252,13 @@
                 
                 newMediaData = audioItemCopy;
             }
+            else if ([copyMediaData isKindOfClass:[JSQContactMediaItem class]]) {
+                JSQContactMediaItem *contactItemCopy = [((JSQContactMediaItem *)copyMediaData) copy];
+                contactItemCopy.appliesMediaViewMaskAsOutgoing = NO;
+                newMediaAttachmentCopy = [contactItemCopy.contact copy];
+                
+                newMediaData = contactItemCopy;
+            }
             else {
                 NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
             }
@@ -365,7 +375,7 @@
                                                        delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:NSLocalizedString(@"Send photo", nil), NSLocalizedString(@"Send location", nil), NSLocalizedString(@"Send video", nil), NSLocalizedString(@"Send video thumbnail", nil), NSLocalizedString(@"Send audio", nil), nil];
+                                              otherButtonTitles:NSLocalizedString(@"Send photo", nil), NSLocalizedString(@"Send location", nil), NSLocalizedString(@"Send video", nil), NSLocalizedString(@"Send video thumbnail", nil), NSLocalizedString(@"Send audio", nil), NSLocalizedString(@"Send Contact", nil), nil];
     
     [sheet showFromToolbar:self.inputToolbar];
 }
@@ -403,6 +413,10 @@
         case 4:
             [self.demoData addAudioMediaMessage];
             break;
+        case 5:
+            [self.demoData addContactMediaMessage];
+            break;
+
     }
     
     // [JSQSystemSoundPlayer jsq_playMessageSentSound];
@@ -692,6 +706,37 @@
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"Tapped message bubble!");
+    
+    
+    id<JSQMessageData> m = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+    
+    if ([m.media isKindOfClass:[JSQPhotoMediaItem class]])
+    {
+        NSLog(@"Tapped photo bubble!");
+//        JSQPhotoMediaItem* ms = (JSQPhotoMediaItem*)m.media;
+    }
+    else if ([m.media isKindOfClass:[JSQLocationMediaItem class]])
+    {
+        //        JSQLocationMediaItem* ms = (JSQLocationMediaItem*)m.media;
+        NSLog(@"Tapped Location bubble!");
+        
+    }
+    else if ([m.media isKindOfClass:[JSQVideoMediaItem class]])
+    {
+        //        JSQVideoMediaItem* ms = (JSQVideoMediaItem*)m.media;
+        NSLog(@"Tapped Video bubble!");
+        
+    }
+    else if ([m.media isKindOfClass:[JSQContactMediaItem class]])
+    {
+        //        JSQContactItem* ms = (JSQContactItem*)m.media;
+        NSLog(@"Tapped Contact bubble!");
+        
+    }
+    else {
+        NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
+    }
+
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation
