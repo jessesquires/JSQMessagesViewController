@@ -20,23 +20,6 @@
 
 @implementation JSQMessagesAvatarImageTests
 
-- (void)setUp
-{
-    [super setUp];
-}
-
-- (void)tearDown
-{
-    [super tearDown];
-}
-
-- (void)testInitInvalid
-{
-    XCTAssertThrows([[JSQMessagesAvatarImage alloc] init], @"Invalid init should throw");
-    XCTAssertThrows([JSQMessagesAvatarImage avatarImageWithPlaceholder:nil], @"Invalid init should throw");
-    XCTAssertThrows([[JSQMessagesAvatarImage alloc] initWithAvatarImage:nil highlightedImage:nil placeholderImage:nil], @"Invalid init should throw");
-}
-
 - (void)testInitValid
 {
     UIImage *mockImage = [UIImage imageNamed:@"demo_avatar_jobs"];

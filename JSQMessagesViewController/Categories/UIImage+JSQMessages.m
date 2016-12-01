@@ -100,4 +100,13 @@
     return [UIImage jsq_bubbleImageFromBundleWithName:@"play"];
 }
 
++ (UIImage *)jsq_defaultPauseImage
+{
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"pause"];
+}
+
++ (UIImage *)jsq_shareActionImage
+{
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"share"];
+}
 @end

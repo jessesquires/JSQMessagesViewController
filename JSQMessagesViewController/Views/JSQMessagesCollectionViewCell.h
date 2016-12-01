@@ -23,6 +23,8 @@
 
 @class JSQMessagesCollectionViewCell;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `JSQMessagesCollectionViewCellDelegate` protocol defines methods that allow you to manage
  *  additional interactions within the collection view cell.
@@ -72,6 +74,13 @@
  */
 - (void)messagesCollectionViewCell:(JSQMessagesCollectionViewCell *)cell didPerformAction:(SEL)action withSender:(id)sender;
 
+/**
+ *  Tells the delegate that the accessory button of the cell has been tapped.
+ *
+ *  @param cell The cell that the accessory button belongs to.
+ */
+- (void)messagesCollectionViewCellDidTapAccessoryButton:(JSQMessagesCollectionViewCell *)cell;
+
 @end
 
 
@@ -90,39 +99,39 @@
 /**
  *  The object that acts as the delegate for the cell.
  */
-@property (weak, nonatomic) id<JSQMessagesCollectionViewCellDelegate> delegate;
+@property (weak, nonatomic, nullable) id<JSQMessagesCollectionViewCellDelegate> delegate;
 
 /**
  *  Returns the label that is pinned to the top of the cell.
  *  This label is most commonly used to display message timestamps.
  */
-@property (weak, nonatomic, readonly) JSQMessagesLabel *cellTopLabel;
+@property (weak, nonatomic, readonly, nullable) JSQMessagesLabel *cellTopLabel;
 
 /**
  *  Returns the label that is pinned just above the messageBubbleImageView, and below the cellTopLabel.
  *  This label is most commonly used to display the message sender.
  */
-@property (weak, nonatomic, readonly) JSQMessagesLabel *messageBubbleTopLabel;
+@property (weak, nonatomic, readonly, nullable) JSQMessagesLabel *messageBubbleTopLabel;
 
 /**
  *  Returns the label that is pinned to the bottom of the cell.
  *  This label is most commonly used to display message delivery status.
  */
-@property (weak, nonatomic, readonly) JSQMessagesLabel *cellBottomLabel;
+@property (weak, nonatomic, readonly, nullable) JSQMessagesLabel *cellBottomLabel;
 
 /**
  *  Returns the text view of the cell. This text view contains the message body text.
  *
  *  @warning If mediaView returns a non-nil view, then this value will be `nil`.
  */
-@property (weak, nonatomic, readonly) JSQMessagesCellTextView *textView;
+@property (weak, nonatomic, readonly, nullable) JSQMessagesCellTextView *textView;
 
 /**
  *  Returns the bubble image view of the cell that is responsible for displaying message bubble images.
  *
  *  @warning If mediaView returns a non-nil view, then this value will be `nil`.
  */
-@property (weak, nonatomic, readonly) UIImageView *messageBubbleImageView;
+@property (weak, nonatomic, readonly, nullable) UIImageView *messageBubbleImageView;
 
 /**
  *  Returns the message bubble container view of the cell. This view is the superview of
@@ -135,12 +144,12 @@
  *  its frame, nor should you remove this view from the cell or remove any of its subviews.
  *  Doing so could result in unexpected behavior.
  */
-@property (weak, nonatomic, readonly) UIView *messageBubbleContainerView;
+@property (weak, nonatomic, readonly, nullable) UIView *messageBubbleContainerView;
 
 /**
  *  Returns the avatar image view of the cell that is responsible for displaying avatar images.
  */
-@property (weak, nonatomic, readonly) UIImageView *avatarImageView;
+@property (weak, nonatomic, readonly, nullable) UIImageView *avatarImageView;
 
 /**
  *  Returns the avatar container view of the cell. This view is the superview of the cell's avatarImageView.
@@ -152,28 +161,32 @@
  *  its frame, nor should you remove this view from the cell or remove any of its subviews.
  *  Doing so could result in unexpected behavior.
  */
-@property (weak, nonatomic, readonly) UIView *avatarContainerView;
+@property (weak, nonatomic, readonly, nullable) UIView *avatarContainerView;
+
+/**
+ *  Returns the accessory button of the cell.
+ */
+@property (weak, nonatomic, readonly, nullable) UIButton *accessoryButton;
 
 /**
  *  The media view of the cell. This view displays the contents of a media message.
  *
  *  @warning If this value is non-nil, then textView and messageBubbleImageView will both be `nil`.
  */
-@property (weak, nonatomic) UIView *mediaView;
+@property (weak, nonatomic, nullable) UIView *mediaView;
 
 /**
  *  Returns the underlying gesture recognizer for tap gestures in the avatarImageView of the cell.
  *  This gesture handles the tap event for the avatarImageView and notifies the cell's delegate.
  */
-@property (weak, nonatomic, readonly) UITapGestureRecognizer *tapGestureRecognizer;
+@property (weak, nonatomic, readonly, nullable) UITapGestureRecognizer *tapGestureRecognizer;
 
 #pragma mark - Class methods
 
 /**
  *  Returns the `UINib` object initialized for the cell.
  *
- *  @return The initialized `UINib` object or `nil` if there were errors during
- *  initialization or the nib file could not be located.
+ *  @return The initialized `UINib` object.
  */
 + (UINib *)nib;
 
@@ -204,3 +217,5 @@
 + (void)registerMenuAction:(SEL)action;
 
 @end
+
+NS_ASSUME_NONNULL_END

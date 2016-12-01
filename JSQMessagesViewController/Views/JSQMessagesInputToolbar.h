@@ -23,6 +23,14 @@
 
 @class JSQMessagesInputToolbar;
 
+NS_ASSUME_NONNULL_BEGIN
+
+typedef NS_ENUM(NSUInteger, JSQMessagesInputSendButtonLocation) {
+    JSQMessagesInputSendButtonLocationNone,
+    JSQMessagesInputSendButtonLocationRight,
+    JSQMessagesInputSendButtonLocationLeft
+};
+
 
 /**
  *  The `JSQMessagesInputToolbarDelegate` protocol defines methods for interacting with
@@ -62,25 +70,34 @@
 /**
  *  The object that acts as the delegate of the toolbar.
  */
-@property (weak, nonatomic) id<JSQMessagesInputToolbarDelegate> delegate;
+@property (weak, nonatomic, nullable) id<JSQMessagesInputToolbarDelegate> delegate;
 
 /**
  *  Returns the content view of the toolbar. This view contains all subviews of the toolbar.
  */
-@property (weak, nonatomic, readonly) JSQMessagesToolbarContentView *contentView;
+@property (weak, nonatomic, readonly, nullable) JSQMessagesToolbarContentView *contentView;
 
 /**
- *  A boolean value indicating whether the send button is on the right side of the toolbar or not.
+ *  Indicates the location of the send button in the toolbar.
  *
- *  @discussion The default value is `YES`, which indicates that the send button is the right-most subview of
- *  the toolbar's `contentView`. Set to `NO` to specify that the send button is on the left. This
+ *  @discussion The default value is `JSQMessagesInputSendButtonLocationRight`, which indicates that the send button is the right-most subview of
+ *  the toolbar's `contentView`. Set to `JSQMessagesInputSendButtonLocationLeft` to specify that the send button is on the left. Set to 'JSQMessagesInputSendButtonLocationNone' if there is no send button or if you want to take control of the send button actions. This
  *  property is used to determine which touch events correspond to which actions.
  *
  *  @warning Note, this property *does not* change the positions of buttons in the toolbar's content view.
- *  It only specifies whether the `rightBarButtonItem `or the `leftBarButtonItem` is the send button.
+ *  It only specifies whether the `rightBarButtonItem` or the `leftBarButtonItem` is the send button or there is no send button.
  *  The other button then acts as the accessory button.
  */
-@property (assign, nonatomic) BOOL sendButtonOnRight;
+@property (assign, nonatomic) JSQMessagesInputSendButtonLocation sendButtonLocation;
+
+/**
+ *  Specify if the send button should be enabled automatically when the `textView` contains text.
+ *  The default value is `YES`.
+ *
+ *  @discussion If `YES`, the send button will be enabled if the `textView` contains text. Otherwise,
+ *  you are responsible for determining when to enable/disable the send button.
+ */
+@property (assign, nonatomic) BOOL enablesSendButtonAutomatically;
 
 /**
  *  Specifies the default (minimum) height for the toolbar. The default value is `44.0f`. This value must be positive.
@@ -93,18 +110,14 @@
 @property (assign, nonatomic) NSUInteger maximumHeight;
 
 /**
- *  Enables or disables the send button based on whether or not its `textView` has text.
- *  That is, the send button will be enabled if there is text in the `textView`, and disabled otherwise.
- */
-- (void)toggleSendButtonEnabled;
-
-/**
  *  Loads the content view for the toolbar.
  *
  *  @discussion Override this method to provide a custom content view for the toolbar.
  *
- *  @return An initialized `JSQMessagesToolbarContentView` if successful, otherwise `nil`.
+ *  @return An initialized `JSQMessagesToolbarContentView`.
  */
 - (JSQMessagesToolbarContentView *)loadToolbarContentView;
 
 @end
+
+NS_ASSUME_NONNULL_END

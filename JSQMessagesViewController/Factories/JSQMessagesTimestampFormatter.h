@@ -19,6 +19,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  An instance of `JSQMessagesTimestampFormatter` is a singleton object that provides an efficient means 
  *  for creating attributed and non-attributed string representations of `NSDate` objects. 
@@ -33,13 +35,13 @@
 
 /**
  *  The text attributes to apply to the day, month, and year components of the string representation of a given date. 
- *  The default value is a dictionary containing attributes that specify centered, light gray text and the bold system font at size `12.0f`.
+ *  The default value is a dictionary containing attributes that specify centered, light gray text and `UIFontTextStyleBody` font.
  */
 @property (copy, nonatomic) NSDictionary *dateTextAttributes;
 
 /**
  *  The text attributes to apply to the minute and hour componenents of the string representation of a given date. 
- *  The default value is a dictionary containing attributes that specify centered, light gray text and the system font at size `12.0f`.
+ *  The default value is a dictionary containing attributes that specify centered, light gray text and `UIFontTextStyleBody` font.
  */
 @property (copy, nonatomic) NSDictionary *timeTextAttributes;
 
@@ -93,3 +95,5 @@
 - (NSString *)relativeDateForDate:(NSDate *)date;
 
 @end
+
+NS_ASSUME_NONNULL_END

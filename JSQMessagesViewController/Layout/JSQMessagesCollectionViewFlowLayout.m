@@ -46,21 +46,6 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 @property (assign, nonatomic) CGFloat latestDelta;
 
-- (void)jsq_configureFlowLayout;
-
-- (void)jsq_didReceiveApplicationMemoryWarningNotification:(NSNotification *)notification;
-- (void)jsq_didReceiveDeviceOrientationDidChangeNotification:(NSNotification *)notification;
-
-- (void)jsq_resetLayout;
-- (void)jsq_resetDynamicAnimator;
-
-- (void)jsq_configureMessageCellLayoutAttributes:(JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
-
-- (UIAttachmentBehavior *)jsq_springBehaviorWithLayoutAttributesItem:(UICollectionViewLayoutAttributes *)item;
-- (void)jsq_addNewlyVisibleBehaviorsFromVisibleItems:(NSArray *)visibleItems;
-- (void)jsq_removeNoLongerVisibleBehaviorsFromVisibleItemsIndexPaths:(NSSet *)visibleItemsIndexPaths;
-- (void)jsq_adjustSpringBehavior:(UIAttachmentBehavior *)springBehavior forTouchLocation:(CGPoint)touchLocation;
-
 @end
 
 
@@ -137,15 +122,6 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    _messageBubbleFont = nil;
-    _bubbleSizeCalculator = nil;
-    
-    [_dynamicAnimator removeAllBehaviors];
-    _dynamicAnimator = nil;
-    
-    [_visibleIndexPaths removeAllObjects];
-    _visibleIndexPaths = nil;
 }
 
 #pragma mark - Setters
@@ -294,7 +270,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         CGFloat padding = -100.0f;
         CGRect visibleRect = CGRectInset(self.collectionView.bounds, padding, padding);
         
-        NSArray *visibleItems = [super layoutAttributesForElementsInRect:visibleRect];
+        NSArray *visibleItems = [[NSArray alloc] initWithArray:[super layoutAttributesForElementsInRect:visibleRect] copyItems:YES];
         NSSet *visibleItemsIndexPaths = [NSSet setWithArray:[visibleItems valueForKey:NSStringFromSelector(@selector(indexPath))]];
         
         [self jsq_removeNoLongerVisibleBehaviorsFromVisibleItemsIndexPaths:visibleItemsIndexPaths];
@@ -305,7 +281,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    NSArray *attributesInRect = [super layoutAttributesForElementsInRect:rect];
+    NSArray *attributesInRect = [[NSArray alloc] initWithArray:[super layoutAttributesForElementsInRect:rect] copyItems:YES];
     
     if (self.springinessEnabled) {
         NSMutableArray *attributesInRectCopy = [attributesInRect mutableCopy];
@@ -326,7 +302,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
             }
         }
         
-        attributesInRect = attributesInRectCopy;
+        attributesInRect = [attributesInRectCopy copy];
     }
     
     [attributesInRect enumerateObjectsUsingBlock:^(JSQMessagesCollectionViewLayoutAttributes *attributesItem, NSUInteger idx, BOOL *stop) {
@@ -343,7 +319,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)[super layoutAttributesForItemAtIndexPath:indexPath];
+    JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)[[super layoutAttributesForItemAtIndexPath:indexPath] copy];
     
     if (customAttributes.representedElementCategory == UICollectionElementCategoryCell) {
         [self jsq_configureMessageCellLayoutAttributes:customAttributes];

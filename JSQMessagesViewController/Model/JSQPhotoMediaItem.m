@@ -21,6 +21,7 @@
 #import "JSQMessagesMediaPlaceholderView.h"
 #import "JSQMessagesMediaViewBubbleImageMasker.h"
 
+#import <MobileCoreServices/UTCoreTypes.h>
 
 @interface JSQPhotoMediaItem ()
 
@@ -41,12 +42,6 @@
         _cachedImageView = nil;
     }
     return self;
-}
-
-- (void)dealloc
-{
-    _image = nil;
-    _cachedImageView = nil;
 }
 
 - (void)clearCachedMediaViews
@@ -93,6 +88,16 @@
 - (NSUInteger)mediaHash
 {
     return self.hash;
+}
+
+- (NSString *)mediaDataType
+{
+    return (NSString *)kUTTypeJPEG;
+}
+
+- (id)mediaData
+{
+    return UIImageJPEGRepresentation(self.image, 1);
 }
 
 #pragma mark - NSObject

@@ -1,0 +1,40 @@
+//
+//  Created by Jesse Squires
+//  http://www.jessesquires.com
+//
+//
+//  Documentation
+//  http://cocoadocs.org/docsets/JSQMessagesViewController
+//
+//
+//  GitHub
+//  https://github.com/jessesquires/JSQMessagesViewController
+//
+//
+//  License
+//  Copyright (c) 2014 Jesse Squires
+//  Released under an MIT license: http://opensource.org/licenses/MIT
+//
+
+"Media messages" = "הודעות מדיה";
+"Cancel" = "ביטול";
+"Send photo" = "שלח תמונה";
+"Send location" = "שלח מיקום";
+"Send video" = "שלח וידאו";
+"Custom Action" = "פעולה מותאמת אישית";
+"OK" = "אוקי";
+
+"Welcome to JSQMessages: A messaging UI framework for iOS." = "ברוכים הבאים ל JSQMessages ספריית UI צא׳ט עבור מכשירי iOS";
+"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy." = "זה פשוט, אלגנטי, וקל לשימוש. ישנן הגדרות ברירת מחדל מאוד סולידיות ,איך ניתן להגדיר אותן אישית כמו משוגע.";
+"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com." = "יש לו אפילו זיהוי טקסט, אתה יכול להתקשר אלי. מספר הטלפון שלי הוא: 123-456-7890. ואתר האינטרנט שלי  הוא: www.hexedbits.com";
+"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." = "הספריה JSQMessagesViewController היא כמעט זהה לאפליקציית ההודעות של מכשיר ה iOS. ואולי טובה יותר.";
+"It is unit-tested, free, open-source, and documented." = "ישנן בדיקות יחידה, זה חינם, זה קוד-פתוח ויש אחלה דקומנטציה";
+"Now with media messages!" = "וישנה גם תמיכה בהודעות מדיה";
+
+
+
+
+
+
+
+

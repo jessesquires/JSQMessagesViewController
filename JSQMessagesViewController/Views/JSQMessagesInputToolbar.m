@@ -33,12 +33,6 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 @property (assign, nonatomic) BOOL jsq_isObserving;
 
-- (void)jsq_leftBarButtonPressed:(UIButton *)sender;
-- (void)jsq_rightBarButtonPressed:(UIButton *)sender;
-
-- (void)jsq_addObservers;
-- (void)jsq_removeObservers;
-
 @end
 
 
@@ -52,10 +46,10 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-
+    self.backgroundColor = [UIColor whiteColor];
     self.jsq_isObserving = NO;
-    self.sendButtonOnRight = YES;
+    self.sendButtonLocation = JSQMessagesInputSendButtonLocationRight;
+    self.enablesSendButtonAutomatically = YES;
 
     self.preferredDefaultHeight = 44.0f;
     self.maximumHeight = NSNotFound;
@@ -69,10 +63,16 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
     [self jsq_addObservers];
 
-    self.contentView.leftBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
-    self.contentView.rightBarButtonItem = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
+    JSQMessagesToolbarButtonFactory *toolbarButtonFactory = [[JSQMessagesToolbarButtonFactory alloc] initWithFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
+    self.contentView.leftBarButtonItem = [toolbarButtonFactory defaultAccessoryButtonItem];
+    self.contentView.rightBarButtonItem = [toolbarButtonFactory defaultSendButtonItem];
 
-    [self toggleSendButtonEnabled];
+    [self updateSendButtonEnabledState];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textViewTextDidChangeNotification:)
+                                                 name:UITextViewTextDidChangeNotification
+                                               object:_contentView.textView];
 }
 
 - (JSQMessagesToolbarContentView *)loadToolbarContentView
@@ -86,7 +86,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 - (void)dealloc
 {
     [self jsq_removeObservers];
-    _contentView = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Setters
@@ -95,6 +95,12 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 {
     NSParameterAssert(preferredDefaultHeight > 0.0f);
     _preferredDefaultHeight = preferredDefaultHeight;
+}
+
+- (void)setEnablesSendButtonAutomatically:(BOOL)enablesSendButtonAutomatically
+{
+    _enablesSendButtonAutomatically = enablesSendButtonAutomatically;
+    [self updateSendButtonEnabledState];
 }
 
 #pragma mark - Actions
@@ -111,16 +117,30 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 #pragma mark - Input toolbar
 
-- (void)toggleSendButtonEnabled
+- (void)updateSendButtonEnabledState
 {
-    BOOL hasText = [self.contentView.textView hasText];
+    if (!self.enablesSendButtonAutomatically) {
+        return;
+    }
 
-    if (self.sendButtonOnRight) {
-        self.contentView.rightBarButtonItem.enabled = hasText;
+    BOOL enabled = [self.contentView.textView hasText];
+    switch (self.sendButtonLocation) {
+        case JSQMessagesInputSendButtonLocationRight:
+            self.contentView.rightBarButtonItem.enabled = enabled;
+            break;
+        case JSQMessagesInputSendButtonLocationLeft:
+            self.contentView.leftBarButtonItem.enabled = enabled;
+            break;
+        default:
+            break;
     }
-    else {
-        self.contentView.leftBarButtonItem.enabled = hasText;
-    }
+}
+
+#pragma mark - Notifications
+
+- (void)textViewTextDidChangeNotification:(NSNotification *)notification
+{
+    [self updateSendButtonEnabledState];
 }
 
 #pragma mark - Key-value observing
@@ -151,7 +171,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                                               forControlEvents:UIControlEventTouchUpInside];
             }
 
-            [self toggleSendButtonEnabled];
+            [self updateSendButtonEnabledState];
         }
     }
 }

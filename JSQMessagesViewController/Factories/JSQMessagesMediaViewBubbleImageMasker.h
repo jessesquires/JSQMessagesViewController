@@ -21,6 +21,8 @@
 
 @class JSQMessagesBubbleImageFactory;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  An instance of `JSQMessagesMediaViewBubbleImageMasker` is an object that masks
  *  media views for a `JSQMessageMediaData` object. Given a view, it will mask the view
@@ -42,7 +44,7 @@
  *  that uses a default instance of `JSQMessagesBubbleImageFactory`. The masker uses the `JSQMessagesBubbleImage`
  *  objects returned by the factory to mask media views.
  *
- *  @return An initialized `JSQMessagesMediaViewBubbleImageMasker` object if created successfully, `nil` otherwise.
+ *  @return An initialized `JSQMessagesMediaViewBubbleImageMasker` object.
  *
  *  @see JSQMessagesBubbleImageFactory.
  *  @see JSQMessagesBubbleImage.
@@ -56,12 +58,12 @@
  *
  *  @param bubbleImageFactory An initialized `JSQMessagesBubbleImageFactory` object to use for masking media views. This value must not be `nil`.
  *
- *  @return An initialized `JSQMessagesMediaViewBubbleImageMasker` object if created successfully, `nil` otherwise.
+ *  @return An initialized `JSQMessagesMediaViewBubbleImageMasker` object.
  *
  *  @see JSQMessagesBubbleImageFactory.
  *  @see JSQMessagesBubbleImage.
  */
-- (instancetype)initWithBubbleImageFactory:(JSQMessagesBubbleImageFactory *)bubbleImageFactory;
+- (instancetype)initWithBubbleImageFactory:(JSQMessagesBubbleImageFactory *)bubbleImageFactory NS_DESIGNATED_INITIALIZER;
 
 /**
  *  Applies an outgoing bubble image mask to the specified mediaView.
@@ -88,3 +90,5 @@
 + (void)applyBubbleImageMaskToMediaView:(UIView *)mediaView isOutgoing:(BOOL)isOutgoing;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,0 +1,19 @@
+/*
+ Localization provided by MasihTak under MIT license
+ The Mac OS X and iOS localization experts.
+ https://masihtak.com
+ */
+
+"accessory_button_accessibility_label" = "اشتراک رسانه";
+
+"load_earlier_messages" = "بارگذاری پیام های قبلی";
+
+"media_message_accessibility_label" = "%@: پیام رسانه ای";
+
+"new_message" = "پیام جدید";
+
+"new_message_received_accessibility_announcement" = "پیام جدید دریافت شد";
+
+"send" = "ارسال";
+
+"text_message_accessibility_label" = "%@: %@";
