@@ -27,6 +27,10 @@ before_install:
    - gem install cocoapods --pre
 
 script:
+- set -e
+- xcodebuild -version
+- xcodebuild -showsdks
+  
 - if [ $POD_LINT == "YES" ]; then
    pod lib lint;
   fi
