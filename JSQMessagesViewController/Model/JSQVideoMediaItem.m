@@ -79,6 +79,11 @@
     _cachedVideoImageView = nil;
 }
 
+- (void)setThumbnailImage:(UIImage *)thumbnailImage {
+    _thumbnailImage = thumbnailImage;
+    _cachedVideoImageView = nil;
+}
+
 #pragma mark - JSQMessageMediaData protocol
 
 - (UIView *)mediaView
