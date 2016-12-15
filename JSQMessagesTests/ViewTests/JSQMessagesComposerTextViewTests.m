@@ -65,6 +65,20 @@
     XCTAssertEqual(self.textView.keyboardAppearance, UIKeyboardAppearanceDefault, @"Property should be equal to default value");
     XCTAssertEqual(self.textView.keyboardType, UIKeyboardTypeDefault, @"Property should be equal to default value");
     XCTAssertEqual(self.textView.returnKeyType, UIReturnKeyDefault, @"Property should be equal to default value");
+    
+    XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(self.textView.placeHolderInsets, UIEdgeInsetsMake(5.0, 7.0, 5.0, 7.0)), @"Property should be equal to default value");
+}
+
+- (void)testComposerTextViewPlaceholderInsets
+{
+    // New insets to draw the placeholder
+    UIEdgeInsets placeholderInsets = UIEdgeInsetsMake(2.0, 4.0, 2.0, 0.0);
+    
+    // Set the new insets into the contentView
+    self.textView.placeHolderInsets = placeholderInsets;
+    
+    // Validate if placeholderInsets setter worked. We may validate the draw...
+    XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(self.textView.placeHolderInsets, placeholderInsets), @"Property placeholderInsets should have changed to (2.0, 4.0, 2.0, 0.0)");
 }
 
 @end
