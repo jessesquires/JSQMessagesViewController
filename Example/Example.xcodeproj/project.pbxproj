@@ -13,8 +13,8 @@
 		886A09771E10489B0091CC16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 886A096F1E10489B0091CC16 /* Main.storyboard */; };
 		886A09781E10489B0091CC16 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886A09711E10489B0091CC16 /* InboxViewController.swift */; };
 		886A097A1E10489B0091CC16 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886A09731E10489B0091CC16 /* SettingsViewController.swift */; };
-		88D91BA31DB6832F007A79F4 /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D91BA21DB6832F007A79F4 /* ExampleTests.swift */; };
-		88D91BAE1DB6832F007A79F4 /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D91BAD1DB6832F007A79F4 /* ExampleUITests.swift */; };
+		886A097E1E1052FA0091CC16 /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886A097C1E1052FA0091CC16 /* ExampleTests.swift */; };
+		886A09831E1053A00091CC16 /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886A09811E1053A00091CC16 /* ExampleUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,13 +42,13 @@
 		886A09711E10489B0091CC16 /* InboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
 		886A09721E10489B0091CC16 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		886A09731E10489B0091CC16 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		886A097C1E1052FA0091CC16 /* ExampleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTests.swift; sourceTree = "<group>"; };
+		886A097D1E1052FA0091CC16 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		886A09811E1053A00091CC16 /* ExampleUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
+		886A09821E1053A00091CC16 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88D91B881DB6832F007A79F4 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D91B9E1DB6832F007A79F4 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		88D91BA21DB6832F007A79F4 /* ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleTests.swift; sourceTree = "<group>"; };
-		88D91BA41DB6832F007A79F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88D91BA91DB6832F007A79F4 /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		88D91BAD1DB6832F007A79F4 /* ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
-		88D91BAF1DB6832F007A79F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,12 +90,30 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		886A097B1E1052FA0091CC16 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				886A097C1E1052FA0091CC16 /* ExampleTests.swift */,
+				886A097D1E1052FA0091CC16 /* Info.plist */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		886A09801E1053A00091CC16 /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				886A09811E1053A00091CC16 /* ExampleUITests.swift */,
+				886A09821E1053A00091CC16 /* Info.plist */,
+			);
+			path = UITests;
+			sourceTree = "<group>";
+		};
 		88D91B7F1DB6832F007A79F4 = {
 			isa = PBXGroup;
 			children = (
 				886A096A1E10489B0091CC16 /* Sources */,
-				88D91BA11DB6832F007A79F4 /* ExampleTests */,
-				88D91BAC1DB6832F007A79F4 /* ExampleUITests */,
+				886A097B1E1052FA0091CC16 /* Tests */,
+				886A09801E1053A00091CC16 /* UITests */,
 				88D91B891DB6832F007A79F4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,24 +126,6 @@
 				88D91BA91DB6832F007A79F4 /* ExampleUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		88D91BA11DB6832F007A79F4 /* ExampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				88D91BA21DB6832F007A79F4 /* ExampleTests.swift */,
-				88D91BA41DB6832F007A79F4 /* Info.plist */,
-			);
-			path = ExampleTests;
-			sourceTree = "<group>";
-		};
-		88D91BAC1DB6832F007A79F4 /* ExampleUITests */ = {
-			isa = PBXGroup;
-			children = (
-				88D91BAD1DB6832F007A79F4 /* ExampleUITests.swift */,
-				88D91BAF1DB6832F007A79F4 /* Info.plist */,
-			);
-			path = ExampleUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,7 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88D91BA31DB6832F007A79F4 /* ExampleTests.swift in Sources */,
+				886A097E1E1052FA0091CC16 /* ExampleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,7 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88D91BAE1DB6832F007A79F4 /* ExampleUITests.swift in Sources */,
+				886A09831E1053A00091CC16 /* ExampleUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,7 +360,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -405,7 +405,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -419,7 +419,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -432,7 +432,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -445,7 +445,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = ExampleTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.ExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -459,7 +459,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = ExampleTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.ExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -472,7 +472,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = ExampleUITests/Info.plist;
+				INFOPLIST_FILE = UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.ExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -485,7 +485,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = ExampleUITests/Info.plist;
+				INFOPLIST_FILE = UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.ExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
