@@ -18,6 +18,7 @@
 		886A098E1E105CDA0091CC16 /* JSQMessagesViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886A098B1E105CB90091CC16 /* JSQMessagesViewController.framework */; };
 		886A098F1E105CDA0091CC16 /* JSQMessagesViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 886A098B1E105CB90091CC16 /* JSQMessagesViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		886A09941E105D0E0091CC16 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886A09931E105D0E0091CC16 /* MessagesViewController.swift */; };
+		886A09961E106A540091CC16 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886A09951E106A540091CC16 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		886A09821E1053A00091CC16 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		886A09851E105CB90091CC16 /* JSQMessagesViewController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JSQMessagesViewController.xcodeproj; path = ../JSQMessagesViewController.xcodeproj; sourceTree = "<group>"; };
 		886A09931E105D0E0091CC16 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		886A09951E106A540091CC16 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		88D91B881DB6832F007A79F4 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D91B9E1DB6832F007A79F4 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D91BA91DB6832F007A79F4 /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +129,7 @@
 				886A096D1E10489B0091CC16 /* LaunchScreen.storyboard */,
 				886A096F1E10489B0091CC16 /* Main.storyboard */,
 				886A09931E105D0E0091CC16 /* MessagesViewController.swift */,
+				886A09951E106A540091CC16 /* Settings.swift */,
 				886A09731E10489B0091CC16 /* SettingsViewController.swift */,
 			);
 			path = Sources;
@@ -343,6 +346,7 @@
 				886A09781E10489B0091CC16 /* InboxViewController.swift in Sources */,
 				886A09941E105D0E0091CC16 /* MessagesViewController.swift in Sources */,
 				886A097A1E10489B0091CC16 /* SettingsViewController.swift in Sources */,
+				886A09961E106A540091CC16 /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
