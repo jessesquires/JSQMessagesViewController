@@ -15,9 +15,33 @@
 		886A097A1E10489B0091CC16 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886A09731E10489B0091CC16 /* SettingsViewController.swift */; };
 		886A097E1E1052FA0091CC16 /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886A097C1E1052FA0091CC16 /* ExampleTests.swift */; };
 		886A09831E1053A00091CC16 /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886A09811E1053A00091CC16 /* ExampleUITests.swift */; };
+		886A098E1E105CDA0091CC16 /* JSQMessagesViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886A098B1E105CB90091CC16 /* JSQMessagesViewController.framework */; };
+		886A098F1E105CDA0091CC16 /* JSQMessagesViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 886A098B1E105CB90091CC16 /* JSQMessagesViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		886A09941E105D0E0091CC16 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886A09931E105D0E0091CC16 /* MessagesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		886A098A1E105CB90091CC16 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 886A09851E105CB90091CC16 /* JSQMessagesViewController.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 88D91A621DB6779D007A79F4;
+			remoteInfo = JSQMessagesViewController;
+		};
+		886A098C1E105CB90091CC16 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 886A09851E105CB90091CC16 /* JSQMessagesViewController.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 88D91A6B1DB6779D007A79F4;
+			remoteInfo = JSQMessagesViewControllerTests;
+		};
+		886A09901E105CDA0091CC16 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 886A09851E105CB90091CC16 /* JSQMessagesViewController.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 88D91A611DB6779D007A79F4;
+			remoteInfo = JSQMessagesViewController;
+		};
 		88D91B9F1DB6832F007A79F4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 88D91B801DB6832F007A79F4 /* Project object */;
@@ -34,6 +58,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		886A09921E105CDA0091CC16 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				886A098F1E105CDA0091CC16 /* JSQMessagesViewController.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		886A096B1E10489B0091CC16 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		886A096C1E10489B0091CC16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -46,6 +84,8 @@
 		886A097D1E1052FA0091CC16 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		886A09811E1053A00091CC16 /* ExampleUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
 		886A09821E1053A00091CC16 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		886A09851E105CB90091CC16 /* JSQMessagesViewController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JSQMessagesViewController.xcodeproj; path = ../JSQMessagesViewController.xcodeproj; sourceTree = "<group>"; };
+		886A09931E105D0E0091CC16 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		88D91B881DB6832F007A79F4 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D91B9E1DB6832F007A79F4 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D91BA91DB6832F007A79F4 /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				886A098E1E105CDA0091CC16 /* JSQMessagesViewController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +126,7 @@
 				886A09721E10489B0091CC16 /* Info.plist */,
 				886A096D1E10489B0091CC16 /* LaunchScreen.storyboard */,
 				886A096F1E10489B0091CC16 /* Main.storyboard */,
+				886A09931E105D0E0091CC16 /* MessagesViewController.swift */,
 				886A09731E10489B0091CC16 /* SettingsViewController.swift */,
 			);
 			path = Sources;
@@ -108,6 +150,15 @@
 			path = UITests;
 			sourceTree = "<group>";
 		};
+		886A09861E105CB90091CC16 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				886A098B1E105CB90091CC16 /* JSQMessagesViewController.framework */,
+				886A098D1E105CB90091CC16 /* JSQMessagesViewControllerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		88D91B7F1DB6832F007A79F4 = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +166,7 @@
 				886A097B1E1052FA0091CC16 /* Tests */,
 				886A09801E1053A00091CC16 /* UITests */,
 				88D91B891DB6832F007A79F4 /* Products */,
+				886A09851E105CB90091CC16 /* JSQMessagesViewController.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,10 +190,12 @@
 				88D91B841DB6832F007A79F4 /* Sources */,
 				88D91B851DB6832F007A79F4 /* Frameworks */,
 				88D91B861DB6832F007A79F4 /* Resources */,
+				886A09921E105CDA0091CC16 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				886A09911E105CDA0091CC16 /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -221,6 +275,12 @@
 			mainGroup = 88D91B7F1DB6832F007A79F4;
 			productRefGroup = 88D91B891DB6832F007A79F4 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 886A09861E105CB90091CC16 /* Products */;
+					ProjectRef = 886A09851E105CB90091CC16 /* JSQMessagesViewController.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				88D91B871DB6832F007A79F4 /* Example */,
@@ -229,6 +289,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		886A098B1E105CB90091CC16 /* JSQMessagesViewController.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JSQMessagesViewController.framework;
+			remoteRef = 886A098A1E105CB90091CC16 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		886A098D1E105CB90091CC16 /* JSQMessagesViewControllerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JSQMessagesViewControllerTests.xctest;
+			remoteRef = 886A098C1E105CB90091CC16 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		88D91B861DB6832F007A79F4 /* Resources */ = {
@@ -264,6 +341,7 @@
 			files = (
 				886A09741E10489B0091CC16 /* AppDelegate.swift in Sources */,
 				886A09781E10489B0091CC16 /* InboxViewController.swift in Sources */,
+				886A09941E105D0E0091CC16 /* MessagesViewController.swift in Sources */,
 				886A097A1E10489B0091CC16 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,6 +365,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		886A09911E105CDA0091CC16 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JSQMessagesViewController;
+			targetProxy = 886A09901E105CDA0091CC16 /* PBXContainerItemProxy */;
+		};
 		88D91BA01DB6832F007A79F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 88D91B871DB6832F007A79F4 /* Example */;
