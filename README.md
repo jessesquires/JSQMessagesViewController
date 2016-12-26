@@ -1,4 +1,4 @@
-![JSQMessagesViewController banner](https://raw.githubusercontent.com/jessesquires/JSQMessagesViewController/develop/Assets/jsq_messages_banner.png)
+![JSQ banner](https://raw.githubusercontent.com/jessesquires/JSQMessagesViewController/develop/Assets/jsq_messages_banner.png)
 
 [![Build Status](https://secure.travis-ci.org/jessesquires/JSQMessagesViewController.svg)](https://travis-ci.org/jessesquires/JSQMessagesViewController) [![Version Status](https://img.shields.io/cocoapods/v/JSQMessagesViewController.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/JSQMessagesViewController.svg)][mitLink] [![codecov](https://codecov.io/gh/jessesquires/JSQMessagesViewController/branch/develop/graph/badge.svg)](https://codecov.io/gh/jessesquires/JSQMessagesViewController) [![Platform](https://img.shields.io/cocoapods/p/JSQMessagesViewController.svg)][docsLink]
 
@@ -14,11 +14,9 @@ Submit fixes for `v7.3.x` to the [`release_7.3`](https://github.com/jessesquires
 
 ------------------------
 
-![Screenshot0][img0] &nbsp;&nbsp; ![Screenshot1][img1] &nbsp;&nbsp;
+![JSQ screenshots](https://raw.githubusercontent.com/jessesquires/JSQMessagesViewController/project-setup-refactor/Assets/promo.png)
 
-![Screenshot2][img2] &nbsp;&nbsp; ![Screenshot3][img3]
-
-> More screenshots available at [CocoaControls](https://www.cocoacontrols.com/controls/jsqmessagesviewcontroller)
+> More screenshots available at [CocoaControls](https://www.cocoacontrols.com/controls/jsqmessagesviewcontroller).
 
 ## Features
 
@@ -30,14 +28,11 @@ See the [website](http://www.jessesquires.com/JSQMessagesViewController/) for th
 - [SOLID](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) design
 - Easy customization and extension for clients
 
-## Dependencies
-
-* [JSQSystemSoundPlayer][playerLink]
-
 ## Requirements
 
-* iOS 7.0+
-* ARC
+* Xcode 8+ 
+* iOS 8.0+
+* Interoperability with Swift 3.0
 
 ## Installation
 
@@ -91,7 +86,7 @@ Please follow these sweet [contribution guidelines](https://github.com/jessesqui
 
 ## Apps using this library
 
-According to [CocoaPods stats](https://cocoapods.org/pods/JSQMessagesViewController), over **10,000 apps** are using `JSQMessagesViewController`. [Here are the ones](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/apps_using_this_library.md) that we know about. Please submit a [pull request](https://github.com/jessesquires/JSQMessagesViewController/compare) to add your app! :smile:
+According to [CocoaPods stats](https://cocoapods.org/pods/JSQMessagesViewController), over **20,000 apps** are using `JSQMessagesViewController`. [Here are the ones](https://github.com/jessesquires/JSQMessagesViewController/blob/develop/Documentation/apps_using_this_library.md) that we know about. Please submit a [pull request](https://github.com/jessesquires/JSQMessagesViewController/compare) to add your app! :smile:
 
 ## License
 
@@ -104,9 +99,3 @@ According to [CocoaPods stats](https://cocoapods.org/pods/JSQMessagesViewControl
 [docsLink]:http://cocoadocs.org/docsets/JSQMessagesViewController/
 [podLink]:https://cocoapods.org/pods/JSQMessagesViewController
 [mitLink]:http://opensource.org/licenses/MIT
-[playerLink]:https://github.com/jessesquires/JSQSystemSoundPlayer
-
-[img0]:https://raw.githubusercontent.com/jessesquires/JSQMessagesViewController/develop/Screenshots/screenshot0.png
-[img1]:https://raw.githubusercontent.com/jessesquires/JSQMessagesViewController/develop/Screenshots/screenshot1.png
-[img2]:https://raw.githubusercontent.com/jessesquires/JSQMessagesViewController/develop/Screenshots/screenshot2.png
-[img3]:https://raw.githubusercontent.com/jessesquires/JSQMessagesViewController/develop/Screenshots/screenshot3.png
