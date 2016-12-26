@@ -20,7 +20,7 @@ import UIKit
 import JSQMessagesViewController
 
 
-final class InboxViewController: UITableViewController {
+final class InboxViewController: UITableViewController, MessagesViewControllerDelegate {
 
     // MARK: Properties
 
@@ -58,11 +58,19 @@ final class InboxViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = MessagesViewController()
 
-        if (settings.presentModally) {
-            present(controller, animated: true, completion: nil)
+        if settings.presentModally {
+            controller.modalDelegate = self
+            let nav = UINavigationController(rootViewController: controller)
+            present(nav, animated: true, completion: nil)
         }
         else {
             navigationController?.pushViewController(controller, animated: true)
         }
+    }
+
+    // MARK: MessagesViewControllerDelegate
+
+    func didDismiss(messagesViewController: MessagesViewController) {
+        dismiss(animated: true, completion: nil)
     }
 }

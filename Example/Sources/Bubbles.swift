@@ -27,7 +27,7 @@ struct Bubbles {
 
     init() {
         let factory = JSQMessagesBubbleImageFactory()
-        self.incoming = factory.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
-        self.outgoing = factory.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
+        self.incoming = factory.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
+        self.outgoing = factory.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
     }
 }

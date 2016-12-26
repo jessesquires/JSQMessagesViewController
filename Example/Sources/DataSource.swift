@@ -33,7 +33,13 @@ final class DataSource {
     private let settings = Settings.shared
 
     let bubbles = Bubbles()
-    let allUsers = [jsq, jobs, woz, cook]
+    let allUsers = [
+        jsq.id : jsq,
+        jobs.id : jobs,
+        woz.id : woz,
+        cook.id : cook
+    ]
+
     var messages = [JSQMessage]()
 
     var senderId: String {
@@ -50,7 +56,7 @@ final class DataSource {
 
     private func loadFakeMessages() -> [JSQMessage] {
         var messages = [JSQMessage]()
-        if (settings.emptyMessages) {
+        if settings.emptyMessages {
             return messages
         }
 
@@ -84,13 +90,13 @@ final class DataSource {
                                    date: Date(),
                                    text: "Now with media messages!"))
 
-        if (settings.extraMessages) {
+        if settings.extraMessages {
             for _ in 0..<4 {
                 messages.append(contentsOf: messages)
             }
         }
 
-        if (settings.longMessage) {
+        if settings.longMessage {
             messages.append(JSQMessage(senderId: jsq.id,
                                        senderDisplayName: jsq.name,
                                        date: Date(),
@@ -103,7 +109,7 @@ final class DataSource {
     func appendPhotoMessage() {
         // TODO:
     }
-    
+
     func appendAudioMessage() {
         // TODO:
     }
