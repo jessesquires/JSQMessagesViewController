@@ -97,6 +97,7 @@
 		88FCF2B71E1172050011DDCC /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		88FCF2B91E11757D0011DDCC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		88FCF2BB1E1178AD0011DDCC /* Bubbles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bubbles.swift; sourceTree = "<group>"; };
+		88FCF2BD1E117DF30011DDCC /* sample.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +138,7 @@
 				886A096D1E10489B0091CC16 /* LaunchScreen.storyboard */,
 				886A096F1E10489B0091CC16 /* Main.storyboard */,
 				886A09931E105D0E0091CC16 /* MessagesViewController.swift */,
+				88FCF2BD1E117DF30011DDCC /* sample.m4a */,
 				886A09951E106A540091CC16 /* Settings.swift */,
 				886A09731E10489B0091CC16 /* SettingsViewController.swift */,
 				88FCF2B91E11757D0011DDCC /* User.swift */,

@@ -47,17 +47,17 @@ extension User {
     }
 
     static func jobs() -> User {
-        let image = avatarFactory.avatarImage(with: UIImage(named: "demo_avatar_jobs")!)
+        let image = avatarFactory.avatarImage(with: UIImage(named: "avatar_jobs")!)
         return User(name: "Jobs", avatar: image)
     }
 
     static func woz() -> User {
-        let image = avatarFactory.avatarImage(with: UIImage(named: "demo_avatar_woz")!)
+        let image = avatarFactory.avatarImage(with: UIImage(named: "avatar_woz")!)
         return User(name: "Steve Wozniak", avatar: image)
     }
 
     static func cook() -> User {
-        let image = avatarFactory.avatarImage(with: UIImage(named: "demo_avatar_cook")!)
+        let image = avatarFactory.avatarImage(with: UIImage(named: "avatar_cook")!)
         return User(name: "Tim Cook", avatar: image)
     }
 }
