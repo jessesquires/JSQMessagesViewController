@@ -46,7 +46,11 @@ extension UserDefaults {
 
 
 final class Settings {
+    static let shared = Settings()
+
     fileprivate let defaults = UserDefaults.standard
+
+    private init() { }
 }
 
 

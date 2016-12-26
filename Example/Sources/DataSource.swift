@@ -16,13 +16,9 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-import UIKit
 
-final class InboxViewController: UITableViewController {
+import Foundation
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
+final class DataSource {
     
 }

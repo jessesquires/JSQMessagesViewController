@@ -20,7 +20,7 @@ import UIKit
 
 final class SettingsViewController: UITableViewController {
 
-    let settings = Settings()
+    let settings = Settings.shared
 
     // MARK: Outlets
 
