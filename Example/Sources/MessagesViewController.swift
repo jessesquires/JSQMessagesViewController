@@ -26,8 +26,7 @@ protocol MessagesViewControllerDelegate: class {
 }
 
 
-final class MessagesViewController: JSQMessagesViewController,
-JSQMessagesComposerTextViewPasteDelegate {
+final class MessagesViewController: JSQMessagesViewController, JSQMessagesComposerTextViewPasteDelegate {
 
     weak var modalDelegate: MessagesViewControllerDelegate?
 
@@ -104,7 +103,7 @@ JSQMessagesComposerTextViewPasteDelegate {
                                  messageBubbleImageDataForItemAt indexPath: IndexPath) -> JSQMessageBubbleImageDataSource? {
         let message = dataSource.messages[indexPath.item]
 
-        let isOutgoing = message.senderId == dataSource.senderId
+        let isOutgoing = message.senderId == senderId()
         if isOutgoing {
             return dataSource.bubbles.outgoing
         }
@@ -117,7 +116,7 @@ JSQMessagesComposerTextViewPasteDelegate {
         let message = dataSource.messages[indexPath.item]
         let avatar = dataSource.allUsers[message.senderId]?.avatar
 
-        let isOutgoing = message.senderId == dataSource.senderId
+        let isOutgoing = message.senderId == senderId()
         if isOutgoing {
             return settings.outgoingAvatar ? avatar : nil
         }
@@ -133,6 +132,61 @@ JSQMessagesComposerTextViewPasteDelegate {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.messages.count
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
+
+        let message = dataSource.messages[indexPath.item]
+        if !message.isMediaMessage {
+            if message.senderId == senderId() {
+                cell.textView?.textColor = .black
+            }
+            else {
+                cell.textView?.textColor = .white
+            }
+
+            cell.textView?.linkTextAttributes = [
+                NSForegroundColorAttributeName : cell.textView!.textColor!,
+                NSUnderlineStyleAttributeName : NSUnderlineStyle.styleSingle
+            ]
+        }
+
+        // TODO:
+//        cell.accessoryButton?.isHidden
+
+        return cell
+    }
+
+    // MARK: UICollectionViewDelegate
+
+    override func collectionView(_ collectionView: UICollectionView,
+                        canPerformAction action: Selector,
+                        forItemAt indexPath: IndexPath,
+                        withSender sender: Any?) -> Bool {
+        if action == #selector(customAction(_:)) {
+            return true
+        }
+
+        return super.canPerformAction(action, withSender: sender)
+    }
+
+    override func collectionView(_ collectionView: UICollectionView,
+                        performAction action: Selector,
+                        forItemAt indexPath: IndexPath,
+                        withSender sender: Any?) {
+        if action == #selector(customAction(_:)) {
+            customAction(sender)
+            return
+        }
+
+        super.collectionView(collectionView, performAction: action, forItemAt: indexPath, withSender: sender)
+    }
+
+    @objc func customAction(_ sender: Any?) {
+        let alert = UIAlertController(title: "Custom action", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 
     // MARK: Actions
