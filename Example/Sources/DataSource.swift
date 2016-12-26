@@ -18,7 +18,36 @@
 
 
 import Foundation
+import UIKit
+import JSQMessagesViewController
+
+
+fileprivate let jsq = User.jsq()
+fileprivate let jobs = User.jobs()
+fileprivate let woz = User.woz()
+fileprivate let cook = User.cook()
+
 
 final class DataSource {
+
+    private let settings = Settings.shared
+
+    let bubbles = Bubbles()
+    let allUsers = [jsq, jobs, woz, cook]
+    var messages = [JSQMessage]()
+
+    init() {
+        if (!settings.emptyMessages) {
+            self.messages = loadFakeMessages()
+        }
+    }
+
+    private func loadFakeMessages() -> [JSQMessage] {
+        let messages = [JSQMessage]()
+
+        
+
+        return messages
+    }
 
 }
