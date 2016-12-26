@@ -12,7 +12,7 @@
 //
 //
 //  License
-//  Copyright © 2014-present Jesse Squires
+//  Copyright © 2013-present Jesse Squires
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
@@ -20,5 +20,5 @@
 import Foundation
 
 final class DataSource {
-    
+
 }
