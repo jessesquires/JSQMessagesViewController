@@ -23,16 +23,19 @@ import JSQMessagesViewController
 
 final class MessagesViewController: JSQMessagesViewController {
 
+    let dataSource = DataSource()
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     override func senderId() -> String {
-        return "id"
+        return dataSource.senderId
     }
 
     override func senderDisplayName() -> String {
-        return "jsq"
+        return dataSource.senderName
     }
 
 }

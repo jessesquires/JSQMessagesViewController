@@ -36,6 +36,14 @@ final class DataSource {
     let allUsers = [jsq, jobs, woz, cook]
     var messages = [JSQMessage]()
 
+    var senderId: String {
+        return jsq.id
+    }
+
+    var senderName: String {
+        return jsq.name
+    }
+
     init() {
         self.messages = loadFakeMessages()
     }
