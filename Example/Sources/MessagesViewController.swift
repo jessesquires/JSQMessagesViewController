@@ -26,7 +26,9 @@ protocol MessagesViewControllerDelegate: class {
 }
 
 
-final class MessagesViewController: JSQMessagesViewController, JSQMessagesComposerTextViewPasteDelegate {
+final class MessagesViewController: JSQMessagesViewController,
+JSQMessagesComposerTextViewPasteDelegate,
+JSQMessagesViewAccessoryButtonDelegate {
 
     weak var modalDelegate: MessagesViewControllerDelegate?
 
@@ -152,8 +154,7 @@ final class MessagesViewController: JSQMessagesViewController, JSQMessagesCompos
             ]
         }
 
-        // TODO:
-//        cell.accessoryButton?.isHidden
+        cell.accessoryButton?.isHidden = !(message.isMediaMessage && settings.accessoryForMedia)
 
         return cell
     }
@@ -199,7 +200,6 @@ final class MessagesViewController: JSQMessagesViewController, JSQMessagesCompos
         modalDelegate?.didDismiss(messagesViewController: self)
     }
 
-
     // MARK: JSQMessagesComposerTextViewPasteDelegate
 
     func composerTextView(_ textView: JSQMessagesComposerTextView, shouldPasteWithSender sender: Any) -> Bool {
@@ -207,5 +207,10 @@ final class MessagesViewController: JSQMessagesViewController, JSQMessagesCompos
         
         return true
     }
-    
+
+    // MARK: JSQMessagesViewAccessoryButtonDelegate
+
+    func messageView(_ messageView: JSQMessagesCollectionView, didTapAccessoryButtonAt indexPath: IndexPath) {
+        print(#function)
+    }
 }
