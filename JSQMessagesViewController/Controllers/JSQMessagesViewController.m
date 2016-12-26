@@ -943,13 +943,14 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 
     double animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
 
+    CGFloat height = self.view.frame.size.height - keyboardEndFrame.origin.y;
     [UIView animateWithDuration:animationDuration
                           delay:0.0
                         options:animationCurveOption
                      animations:^{
                          const UIEdgeInsets insets = self.additionalContentInset;
                          [self jsq_setCollectionViewInsetsTopValue:insets.top
-                                                       bottomValue:CGRectGetHeight(keyboardEndFrame) + insets.bottom];
+                                                       bottomValue:height + insets.bottom];
                      }
                      completion:nil];
 }
