@@ -32,6 +32,9 @@ JSQMessagesViewAccessoryButtonDelegate {
 
     weak var modalDelegate: MessagesViewControllerDelegate?
 
+    /**
+     *  Load up our fake data for the demo
+     */
     let dataSource = DataSource()
     let settings = Settings.shared
 
@@ -43,6 +46,14 @@ JSQMessagesViewAccessoryButtonDelegate {
         title = "JSQMessages"
         inputToolbar.contentView?.textView?.pasteDelegate = self
 
+        /**
+         *  Set up message accessory button delegate and configuration
+         */
+        collectionView?.accessoryDelegate = self
+
+        /**
+         *  You can set custom avatar sizes
+         */
         if !settings.incomingAvatars {
             collectionView?.collectionViewLayout.incomingAvatarViewSize = .zero
         }
@@ -57,7 +68,24 @@ JSQMessagesViewAccessoryButtonDelegate {
                                                             target: self,
                                                             action: #selector(didTapReceiveMessage(sender:)))
 
-        // TODO: menu actions
+        /**
+         *  Register custom menu actions for cells.
+         */
+        JSQMessagesCollectionViewCell.registerMenuAction(#selector(customAction(_:)))
+        JSQMessagesCollectionViewCell.registerMenuAction(#selector(delete(_:)))
+
+        /**
+         *  Customize your toolbar buttons
+         *
+         *  inputToolbar.contentView.leftBarButtonItem = custom button or nil to remove
+         *  inputToolbar.contentView.rightBarButtonItem = custom button or nil to remove
+         */
+
+        /**
+         *  Set a maximum height for the input toolbar
+         *
+         *  inputToolbar.maximumHeight = 150;
+         */
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -103,6 +131,12 @@ JSQMessagesViewAccessoryButtonDelegate {
 
     override func collectionView(_ collectionView: JSQMessagesCollectionView,
                                  messageBubbleImageDataForItemAt indexPath: IndexPath) -> JSQMessageBubbleImageDataSource? {
+        /**
+         *  You may return nil here if you do not want bubbles.
+         *  In this case, you should set the background color of your collection view cell's textView.
+         *
+         *  Otherwise, return your previously created bubble image data objects.
+         */
         let message = dataSource.messages[indexPath.item]
 
         let isOutgoing = message.senderId == senderId()
@@ -115,6 +149,26 @@ JSQMessagesViewAccessoryButtonDelegate {
 
     override func collectionView(_ collectionView: JSQMessagesCollectionView,
                                  avatarImageDataForItemAt indexPath: IndexPath) -> JSQMessageAvatarImageDataSource? {
+        /**
+         *  Return `nil` here if you do not want avatars.
+         *  If you do return `nil`, be sure to do the following in `viewDidLoad`:
+         *
+         *  self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
+         *  self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+         *
+         *  It is possible to have only outgoing avatars or only incoming avatars, too.
+         */
+
+        /**
+         *  Return your previously created avatar image data objects.
+         *
+         *  Note: these the avatars will be sized according to these values:
+         *
+         *  self.collectionView.collectionViewLayout.incomingAvatarViewSize
+         *  self.collectionView.collectionViewLayout.outgoingAvatarViewSize
+         *
+         *  Override the defaults in `viewDidLoad`
+         */
         let message = dataSource.messages[indexPath.item]
         let avatar = dataSource.allUsers[message.senderId]?.avatar
 
@@ -124,6 +178,20 @@ JSQMessagesViewAccessoryButtonDelegate {
         }
 
         return settings.incomingAvatars ? avatar : nil
+    }
+
+    override func collectionView(_ collectionView: JSQMessagesCollectionView, attributedTextForCellTopLabelAt indexPath: IndexPath) -> NSAttributedString? {
+        // TODO:
+        return nil
+    }
+
+    override func collectionView(_ collectionView: JSQMessagesCollectionView, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath) -> NSAttributedString? {
+        // TODO:
+        return nil
+    }
+
+    override func collectionView(_ collectionView: JSQMessagesCollectionView, attributedTextForCellBottomLabelAt indexPath: IndexPath) -> NSAttributedString? {
+        return nil
     }
 
     // MARK:  UICollectionViewDataSource
@@ -184,6 +252,19 @@ JSQMessagesViewAccessoryButtonDelegate {
         super.collectionView(collectionView, performAction: action, forItemAt: indexPath, withSender: sender)
     }
 
+
+    // MARK: Custom menu actions for cells
+
+    override func didReceiveMenuWillShow(_ notification: Notification) {
+        /**
+         *  Display custom menu actions for cells.
+         */
+        let menu = notification.object as! UIMenuController
+        menu.menuItems = [ UIMenuItem(title: "Custom Action", action: #selector(customAction(_:))) ]
+
+        super.didReceiveMenuWillShow(notification)
+    }
+
     @objc func customAction(_ sender: Any?) {
         let alert = UIAlertController(title: "Custom action", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
@@ -193,11 +274,35 @@ JSQMessagesViewAccessoryButtonDelegate {
     // MARK: Actions
 
     @objc func didTapReceiveMessage(sender: UIBarButtonItem) {
+        showTypingIndicator = !showTypingIndicator
+
+        scrollToBottom(animated: true)
+
+        var lastMessage = dataSource.messages.last
+        if lastMessage == nil {
+            lastMessage = JSQMessage(senderId: jobs.id, displayName: jobs.name, text: "First message!")
+        }
+
         // TODO: simulate receiving messages
+
     }
 
     @objc func didTapClose(sender: UIBarButtonItem) {
         modalDelegate?.didDismiss(messagesViewController: self)
+    }
+
+    // MARK: Overrides
+
+    override func didPressSend(_ button: UIButton, withMessageText text: String, senderId: String, senderDisplayName: String, date: Date) {
+        let message = JSQMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
+
+        dataSource.messages.append(message)
+
+        finishSendingMessage()
+    }
+
+    override func didPressAccessoryButton(_ sender: UIButton) {
+        // TODO: accessory button
     }
 
     // MARK: JSQMessagesComposerTextViewPasteDelegate

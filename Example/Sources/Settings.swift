@@ -51,6 +51,14 @@ final class Settings {
     fileprivate let defaults = UserDefaults.standard
 
     private init() { }
+
+    class func register() {
+        UserDefaults.standard.register(defaults: [
+            Key.presentModal.rawValue : true,
+            Key.incomingAvatars.rawValue : true,
+            Key.outgoingAvatars.rawValue : true
+            ])
+    }
 }
 
 

@@ -22,10 +22,10 @@ import UIKit
 import JSQMessagesViewController
 
 
-fileprivate let jsq = User.jsq()
-fileprivate let jobs = User.jobs()
-fileprivate let woz = User.woz()
-fileprivate let cook = User.cook()
+let jsq = User.jsq()
+let jobs = User.jobs()
+let woz = User.woz()
+let cook = User.cook()
 
 
 final class DataSource {
