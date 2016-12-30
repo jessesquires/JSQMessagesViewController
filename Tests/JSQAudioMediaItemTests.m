@@ -43,7 +43,7 @@
 
 - (void)testAudioItemIsEqual
 {
-    NSString *sample = [[NSBundle bundleForClass:[self class]] pathForResource:@"jsq_messages_sample" ofType:@"m4a"];
+    NSString *sample = [[NSBundle bundleForClass:[self class]] pathForResource:@"audio" ofType:@"m4a"];
     JSQAudioMediaItem *item = [[JSQAudioMediaItem alloc] initWithData:[NSData dataWithContentsOfFile:sample]];
     
     JSQAudioMediaItem *copy = [item copy];
@@ -57,7 +57,7 @@
 
 - (void)testAudioItemArchiving
 {
-    NSString *sample = [[NSBundle bundleForClass:[self class]] pathForResource:@"jsq_messages_sample" ofType:@"m4a"];
+    NSString *sample = [[NSBundle bundleForClass:[self class]] pathForResource:@"audio" ofType:@"m4a"];
     JSQAudioMediaItem *item = [[JSQAudioMediaItem alloc] initWithData:[NSData dataWithContentsOfFile:sample]];
     
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:item];
@@ -75,7 +75,7 @@
     XCTAssertNotNil([item mediaPlaceholderView]);
     XCTAssertNil([item mediaView], @"Media view should be nil if image is nil");
 
-    NSString *sample = [[NSBundle bundleForClass:[self class]] pathForResource:@"jsq_messages_sample" ofType:@"m4a"];
+    NSString *sample = [[NSBundle bundleForClass:[self class]] pathForResource:@"audio" ofType:@"m4a"];
     item.audioData = [NSData dataWithContentsOfFile:sample];
     
     XCTAssertNotNil([item mediaView], @"Media view should NOT be nil once item has media data");

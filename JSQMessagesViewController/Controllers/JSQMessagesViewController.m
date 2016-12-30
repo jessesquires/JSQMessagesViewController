@@ -133,6 +133,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 - (void)jsq_configureMessagesViewController
 {
     self.view.backgroundColor = [UIColor whiteColor];
+    self.hidesBottomBarWhenPushed = YES;
 
     self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
 

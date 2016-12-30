@@ -129,7 +129,7 @@
 		88D91B771DB6798C007A79F4 /* JSQMessagesTypingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 88D91B1C1DB6798C007A79F4 /* JSQMessagesTypingView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		88D91B781DB6798C007A79F4 /* JSQMessagesTypingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D91B1D1DB6798C007A79F4 /* JSQMessagesTypingView.m */; };
 		88D91B7C1DB67F1E007A79F4 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 88D91B7B1DB67F1E007A79F4 /* image.png */; };
-		88D91B7E1DB6801F007A79F4 /* jsq_messages_sample.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 88D91B7D1DB6801F007A79F4 /* jsq_messages_sample.m4a */; };
+		88D91B7E1DB6801F007A79F4 /* audio.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 88D91B7D1DB6801F007A79F4 /* audio.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -268,7 +268,7 @@
 		88D91B1C1DB6798C007A79F4 /* JSQMessagesTypingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesTypingView.h; sourceTree = "<group>"; };
 		88D91B1D1DB6798C007A79F4 /* JSQMessagesTypingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesTypingView.m; sourceTree = "<group>"; };
 		88D91B7B1DB67F1E007A79F4 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
-		88D91B7D1DB6801F007A79F4 /* jsq_messages_sample.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = jsq_messages_sample.m4a; sourceTree = "<group>"; };
+		88D91B7D1DB6801F007A79F4 /* audio.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = audio.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,8 +326,8 @@
 		88D91A7C1DB67894007A79F4 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				88D91B7D1DB6801F007A79F4 /* audio.m4a */,
 				88D91B7B1DB67F1E007A79F4 /* image.png */,
-				88D91B7D1DB6801F007A79F4 /* jsq_messages_sample.m4a */,
 				88D91A7D1DB67894007A79F4 /* Info.plist */,
 				88D91A811DB67950007A79F4 /* JSQAudioMediaItemTests.m */,
 				88D91A821DB67950007A79F4 /* JSQLocationMediaItemTests.m */,
@@ -654,7 +654,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88D91B7C1DB67F1E007A79F4 /* image.png in Resources */,
-				88D91B7E1DB6801F007A79F4 /* jsq_messages_sample.m4a in Resources */,
+				88D91B7E1DB6801F007A79F4 /* audio.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
