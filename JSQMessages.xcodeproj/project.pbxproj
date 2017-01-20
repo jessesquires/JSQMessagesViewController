@@ -55,11 +55,11 @@
 		14D8D3321E32355900649654 /* UIImage+JSQMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 88A25F5B19D8E01A00924534 /* UIImage+JSQMessages.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14D8D3331E32356100649654 /* UIView+JSQMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 88A25F5D19D8E01A00924534 /* UIView+JSQMessages.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14D8D3341E32356B00649654 /* NSBundle+JSQMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 8873B60A1AB7B244006DF9AC /* NSBundle+JSQMessages.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		14D8D3351E32358200649654 /* JSQMessagesCellTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 883C11761A09FB100092A16D /* JSQMessagesCellTextView.h */; };
-		14D8D3361E32358200649654 /* JSQMessagesCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 88A25F8C19D8E01A00924534 /* JSQMessagesCollectionViewCell.h */; };
-		14D8D3371E32358200649654 /* JSQMessagesLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 88A25F9819D8E01A00924534 /* JSQMessagesLabel.h */; };
-		14D8D3381E32358200649654 /* JSQMessagesMediaPlaceholderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 88078A9B19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.h */; };
-		14D8D3391E32358200649654 /* JSQMessagesTypingView.h in Headers */ = {isa = PBXBuildFile; fileRef = BF10D6A81D062AD10072D215 /* JSQMessagesTypingView.h */; };
+		14D8D3351E32358200649654 /* JSQMessagesCellTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 883C11761A09FB100092A16D /* JSQMessagesCellTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		14D8D3361E32358200649654 /* JSQMessagesCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 88A25F8C19D8E01A00924534 /* JSQMessagesCollectionViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		14D8D3371E32358200649654 /* JSQMessagesLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 88A25F9819D8E01A00924534 /* JSQMessagesLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		14D8D3381E32358200649654 /* JSQMessagesMediaPlaceholderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 88078A9B19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		14D8D3391E32358200649654 /* JSQMessagesTypingView.h in Headers */ = {isa = PBXBuildFile; fileRef = BF10D6A81D062AD10072D215 /* JSQMessagesTypingView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0EFE0F1AC23D7E003FF3DB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EFE0E1AC23D7E003FF3DB /* MobileCoreServices.framework */; };
 		50B7F5A81CA401FA009A44F5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50B7F5AA1CA401FA009A44F5 /* Localizable.strings */; };
 		54271E3B1C90469100294290 /* jsq_messages_sample.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 54271E3A1C90469100294290 /* jsq_messages_sample.m4a */; };
@@ -698,6 +698,10 @@
 			files = (
 				14D788C61E32259F00A9E17F /* JSQMessages.h in Headers */,
 				14D788D11E3225AF00A9E17F /* JSQMessagesViewController.h in Headers */,
+				14D8D3361E32358200649654 /* JSQMessagesCollectionViewCell.h in Headers */,
+				14D8D3371E32358200649654 /* JSQMessagesLabel.h in Headers */,
+				14D8D3381E32358200649654 /* JSQMessagesMediaPlaceholderView.h in Headers */,
+				14D8D3391E32358200649654 /* JSQMessagesTypingView.h in Headers */,
 				14D8D30E1E3232E300649654 /* JSQMessagesCollectionView.h in Headers */,
 				14D8D30F1E3232EC00649654 /* JSQMessagesCollectionViewCellIncoming.h in Headers */,
 				14D8D3101E3232F500649654 /* JSQMessagesCollectionViewCellOutgoing.h in Headers */,
@@ -738,10 +742,6 @@
 				14D8D3331E32356100649654 /* UIView+JSQMessages.h in Headers */,
 				14D8D3341E32356B00649654 /* NSBundle+JSQMessages.h in Headers */,
 				14D8D3351E32358200649654 /* JSQMessagesCellTextView.h in Headers */,
-				14D8D3361E32358200649654 /* JSQMessagesCollectionViewCell.h in Headers */,
-				14D8D3371E32358200649654 /* JSQMessagesLabel.h in Headers */,
-				14D8D3381E32358200649654 /* JSQMessagesMediaPlaceholderView.h in Headers */,
-				14D8D3391E32358200649654 /* JSQMessagesTypingView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
