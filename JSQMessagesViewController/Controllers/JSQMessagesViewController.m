@@ -585,8 +585,11 @@ JSQMessagesKeyboardControllerDelegate>
         needsAvatar = NO;
     }
 
+    CGFloat bubbleTopLabelInset = 15.0f;
     id<JSQMessageAvatarImageDataSource> avatarImageDataSource = nil;
     if (needsAvatar) {
+        bubbleTopLabelInset += isOutgoingMessage ? collectionView.collectionViewLayout.outgoingAvatarViewSize.width : collectionView.collectionViewLayout.incomingAvatarViewSize.width;
+
         avatarImageDataSource = [collectionView.dataSource collectionView:collectionView avatarImageDataForItemAtIndexPath:indexPath];
         if (avatarImageDataSource != nil) {
 
@@ -605,8 +608,6 @@ JSQMessagesKeyboardControllerDelegate>
     cell.cellTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellTopLabelAtIndexPath:indexPath];
     cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
     cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellBottomLabelAtIndexPath:indexPath];
-
-    CGFloat bubbleTopLabelInset = (avatarImageDataSource != nil) ? 60.0f : 15.0f;
 
     if (isOutgoingMessage) {
         cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
