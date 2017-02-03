@@ -430,8 +430,9 @@ JSQMessagesKeyboardControllerDelegate>
         return;
     }
 
-    NSIndexPath *lastCell = [NSIndexPath indexPathForItem:([self.collectionView numberOfItemsInSection:0] - 1)
-                                                inSection:([self.collectionView numberOfSections] - 1)];
+    NSUInteger lastSection = [self.collectionView numberOfSections] - 1;
+    NSIndexPath *lastCell = [NSIndexPath indexPathForItem:([self.collectionView numberOfItemsInSection:lastSection] - 1)
+                                                inSection:lastSection];
     [self scrollToIndexPath:lastCell animated:animated];
 }
 
