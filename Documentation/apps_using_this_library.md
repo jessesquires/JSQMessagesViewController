@@ -50,4 +50,5 @@ These are the (known) apps that use `JSQMessagesViewController`. Submit a [pull 
 * [multipeer-chat](https://github.com/J4awesome/multipeer-chat)
 * [FriendlyU](https://itunes.apple.com/us/app/friendlyu/id963421205)
 * [LŌC](https://itunes.apple.com/us/app/loc-location-based-social/id957193908?mt=8)
+* [Ginger.io](https://itunes.apple.com/us/app/ginger.io-coaching-therapy/id515118602)
 * *Your app here, submit a [pull request](https://github.com/jessesquires/JSQMessagesViewController/compare)!*
