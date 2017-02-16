@@ -12,7 +12,7 @@
 //
 //
 //  License
-//  Copyright (c) 2014 Jesse Squires
+//  Copyright © 2014-present Jesse Squires
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
@@ -64,8 +64,8 @@ didChangeAudioCategory:(NSString *)category
 /**
  *  Initializes and returns a audio media item having the given audioData.
  *
- *  @param audioData              The data object that contains the audio resource.
- *  @param audioViewConfiguration The view attributes to configure the appearance of the audio media view.
+ *  @param audioData           The data object that contains the audio resource.
+ *  @param audioViewAttributes The view attributes to configure the appearance of the audio media view.
  *
  *  @return An initialized `JSQAudioMediaItem`.
  *

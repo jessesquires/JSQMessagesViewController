@@ -11,7 +11,7 @@
 //
 //
 //  License
-//  Copyright (c) 2014 Jesse Squires
+//  Copyright © 2014-present Jesse Squires
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param messageView    The collection view object that is notifying the delegate of the tap event.
  *  @param indexPath      The index path of the item for which the accessory button was tapped.
  */
-- (void)messageView:(JSQMessagesCollectionView *)messageView didTapAccessoryButtonAtIndexPath:(NSIndexPath *)path;
+- (void)messageView:(JSQMessagesCollectionView *)messageView didTapAccessoryButtonAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

@@ -12,7 +12,7 @@
 //
 //
 //  License
-//  Copyright (c) 2014 Jesse Squires
+//  Copyright © 2014-present Jesse Squires
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
@@ -349,7 +349,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     //  thus, remove any additional subviews hidden behind the new media view
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.messageBubbleContainerView.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger index, BOOL *stop) {
-            if (subview != _mediaView) {
+            if (subview != self->_mediaView) {
                 [subview removeFromSuperview];
             }
         }];
