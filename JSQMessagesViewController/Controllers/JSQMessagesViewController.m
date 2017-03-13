@@ -864,7 +864,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 
 - (void)jsq_updateCollectionViewInsets
 {
-    const CGFloat top = self.additionalContentInset.top;
+    CGFloat top = self.additionalContentInset.top;
     const CGFloat bottom = CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame) + self.additionalContentInset.bottom;
     [self jsq_setCollectionViewInsetsTopValue:top bottomValue:bottom];
 }
@@ -872,6 +872,10 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 - (void)jsq_setCollectionViewInsetsTopValue:(CGFloat)top bottomValue:(CGFloat)bottom
 {
     UIEdgeInsets insets = UIEdgeInsetsMake(self.topLayoutGuide.length + top, 0.0f, bottom, 0.0f);
+    if (self.navigationController != nil && self.topLayoutGuide.length == 0) {
+        CGRect nbFrame = self.navigationController.navigationBar.frame;
+        insets.top += nbFrame.origin.y + nbFrame.size.height;
+    }
     self.collectionView.contentInset = insets;
     self.collectionView.scrollIndicatorInsets = insets;
 }
@@ -943,13 +947,14 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 
     double animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
 
+    CGFloat height = self.view.frame.size.height - keyboardEndFrame.origin.y;
     [UIView animateWithDuration:animationDuration
                           delay:0.0
                         options:animationCurveOption
                      animations:^{
                          const UIEdgeInsets insets = self.additionalContentInset;
                          [self jsq_setCollectionViewInsetsTopValue:insets.top
-                                                       bottomValue:CGRectGetHeight(keyboardEndFrame) + insets.bottom];
+                                                       bottomValue:height + insets.bottom];
                      }
                      completion:nil];
 }
