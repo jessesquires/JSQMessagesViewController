@@ -22,6 +22,11 @@
 #import "JSQMessagesViewController.h"
 
 //  Views
+#import "JSQMessagesCellTextView.h"
+#import "JSQMessagesLabel.h"
+#import "JSQMessagesMediaPlaceholderView.h"
+#import "JSQMessagesTypingView.h"
+#import "JSQMessagesCollectionViewCell.h"
 #import "JSQMessagesCollectionView.h"
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
