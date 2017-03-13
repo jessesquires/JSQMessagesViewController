@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Notifies the delegate that the accessory button at the specified indexPath did receive a tap event.
  *
  *  @param messageView    The collection view object that is notifying the delegate of the tap event.
- *  @param indexPath      The index path of the item for which the accessory button was tapped.
+ *  @param path      The index path of the item for which the accessory button was tapped.
  */
 - (void)messageView:(JSQMessagesCollectionView *)messageView didTapAccessoryButtonAtIndexPath:(NSIndexPath *)path;
 

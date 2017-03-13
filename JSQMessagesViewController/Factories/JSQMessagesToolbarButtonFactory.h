@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Creates and returns a new instance of `JSQMessagesToolbarButtonFactory` that uses
  *  the specified font for creating buttons.
  *
- *  @param A font that will be used for the buttons produced by the factory.
+ *  @param font The font that will be used for the buttons produced by the factory.
  *
  *  @return An initialized `JSQMessagesToolbarButtonFactory` object.
  */
