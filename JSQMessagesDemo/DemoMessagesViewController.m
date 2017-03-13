@@ -604,14 +604,14 @@
 - (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
     if (action == @selector(customAction:)) {
-        [self customAction:sender];
+        [self performCustomAction:sender];
         return;
     }
 
     [super collectionView:collectionView performAction:action forItemAtIndexPath:indexPath withSender:sender];
 }
 
-- (void)customAction:(id)sender
+- (void)performCustomAction:(id)sender
 {
     NSLog(@"Custom action received! Sender: %@", sender);
 
