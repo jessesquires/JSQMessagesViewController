@@ -20,7 +20,6 @@
 
 #import "NSUserDefaults+DemoSettings.h"
 
-
 /**
  *  This is for demo/testing purposes only.
  *  This object sets up some fake model data.
@@ -130,6 +129,7 @@
     
     [self addPhotoMediaMessage];
     [self addAudioMediaMessage];
+    [self addContactMediaMessage];
     
     /**
      *  Setting to load extra messages for testing/demo
@@ -211,5 +211,23 @@
                                                          media:videoItem];
     [self.messages addObject:videoMessage];
 }
+- (void)addContactMediaMessage
+{
+    
+    CNMutableContact *contact = [[CNMutableContact alloc] init];
+    
+    contact.givenName = @"Bary";
+    contact.familyName = @"Levy";
+    CNLabeledValue *homePhone = [CNLabeledValue labeledValueWithLabel:CNLabelHome value:[CNPhoneNumber phoneNumberWithStringValue:@"972-3-7396874"]];
+    
+    contact.phoneNumbers = @[homePhone];
+    
+    JSQContactMediaItem *contactItem = [[JSQContactMediaItem alloc] initWithContact:contact];
+    JSQMessage *contactMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
+                                                     displayName:kJSQDemoAvatarDisplayNameSquires
+                                                           media:contactItem];
+    [self.messages addObject:contactMessage];
+}
+
 
 @end
