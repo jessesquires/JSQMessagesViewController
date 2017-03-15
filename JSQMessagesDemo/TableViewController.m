@@ -47,7 +47,7 @@
         case 0:
             return 2;
         case 1:
-            return 2;
+            return 3;
         case 2:
             return 1;
         case 3:
@@ -83,6 +83,9 @@
                 break;
             case 1:
                 cell.textLabel.text = @"Modal programmatically";
+                break;
+            case 2:
+                cell.textLabel.text = @"Modal with Tab Bar";
                 break;
         }
     }
@@ -151,6 +154,17 @@
                 vc.delegateModal = self;
                 UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
                 [self presentViewController:nc animated:YES completion:nil];
+            }
+                break;
+            case 2:
+            {
+                DemoMessagesViewController *vc = [DemoMessagesViewController messagesViewController];
+                vc.delegateModal = self;
+                UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+                UITabBarController *tc = [[UITabBarController alloc] init];
+                tc.tabBar.translucent = YES;
+                tc.viewControllers = @[nc];
+                [self presentViewController:tc animated:YES completion:nil];
             }
                 break;
         }
