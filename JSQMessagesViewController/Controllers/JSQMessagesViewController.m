@@ -210,11 +210,14 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     if (_showLoadEarlierMessagesHeader == showLoadEarlierMessagesHeader) {
         return;
     }
-
-    _showLoadEarlierMessagesHeader = showLoadEarlierMessagesHeader;
-    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-    [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.collectionView reloadData];
+    
+    //run this update in next runloop. Other way it causes crash during finishLoadingEarlierMessages: method
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _showLoadEarlierMessagesHeader = showLoadEarlierMessagesHeader;
+        [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+        [self.collectionView.collectionViewLayout invalidateLayout];
+        [self.collectionView reloadData];
+    });
 }
 
 - (void)setAdditionalContentInset:(UIEdgeInsets)additionalContentInset
@@ -330,6 +333,76 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
     NSAssert(NO, @"Error! required method not implemented in subclass. Need to implement %s", __PRETTY_FUNCTION__);
+}
+
+- (void)finishLoadingEarlierMessages:(NSInteger)loadedCount{
+    // calculate offset of the top of the displayed content from the bottom of contentSize
+    CGFloat bottomOffset = self.collectionView.contentSize.height - self.collectionView.contentOffset.y;
+    UIImageView *snapshot = [[UIImageView alloc] init];
+    [snapshot setTranslatesAutoresizingMaskIntoConstraints:false];
+    [self.view insertSubview:snapshot belowSubview:self.inputToolbar];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:snapshot
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.collectionView
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1
+                                                           constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:snapshot
+                                                          attribute:NSLayoutAttributeCenterY
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.collectionView
+                                                          attribute:NSLayoutAttributeCenterY
+                                                         multiplier:1
+                                                           constant:self.collectionView.contentInset.top]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:snapshot
+                                                          attribute:NSLayoutAttributeWidth
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.collectionView
+                                                          attribute:NSLayoutAttributeWidth
+                                                         multiplier:1
+                                                           constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:snapshot
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.collectionView
+                                                          attribute:NSLayoutAttributeHeight
+                                                         multiplier:1
+                                                           constant:0]];
+    [self.view updateConstraints];
+    [self.view layoutSubviews];
+    
+    // capture collection view image representation into UIImage
+    UIGraphicsBeginImageContextWithOptions(self.collectionView.bounds.size, NO, 0);
+    [self.collectionView drawViewHierarchyInRect:self.collectionView.bounds afterScreenUpdates:YES];
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    snapshot.image = snapshotImage;
+    snapshot.hidden = NO;
+    [UIView setAnimationsEnabled:NO];
+    
+    [self.collectionView performBatchUpdates:^{
+        // perform the actual insertion of new cells
+        NSMutableArray *indexPaths = [NSMutableArray new];
+        for (int i = 0; i < loadedCount; i ++) {
+            [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
+        }
+        [self.collectionView insertItemsAtIndexPaths:indexPaths];
+    } completion:^(BOOL finished) {
+        [self.collectionView.collectionViewLayout invalidateLayout];
+        // after insertion finishes, scroll the collection so that content position is not
+        // changed compared to such prior to the update
+        self.collectionView.contentOffset = CGPointMake(0, self.collectionView.contentSize.height - bottomOffset);
+        [UIView setAnimationsEnabled:YES];
+        
+        // and hide the snapshot view
+        [snapshot removeFromSuperview];
+    }];
 }
 
 - (void)finishSendingMessage

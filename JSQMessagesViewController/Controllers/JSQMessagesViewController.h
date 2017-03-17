@@ -201,6 +201,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)didPressAccessoryButton:(UIButton *)sender;
 
 /**
+ *  Completes the "loading earlier messages" by keeping collectionView offset on same place.
+ *
+ *  @param loadedCount Specifies number of added messages
+ *
+ *  @discussion You should call this method at the end of data update,
+ *  after adding the new messages to your data source and performing any related tasks.
+ *
+ */
+- (void)finishLoadingEarlierMessages:(NSInteger)loadedCount;
+
+/**
  *  Animates the sending of a new message. See `finishSendingMessageAnimated:` for more details.
  *
  *  @see `finishSendingMessageAnimated:`.

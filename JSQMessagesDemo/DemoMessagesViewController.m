@@ -682,6 +682,20 @@
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender
 {
     NSLog(@"Load earlier messages!");
+    [self.demoData.messages insertObject:[[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
+                                                            senderDisplayName:kJSQDemoAvatarDisplayNameSquires
+                                                                         date:[NSDate date]
+                                                                         text:@"Early received message"]
+                                 atIndex:0];
+    
+    [self.demoData.messages insertObject:[[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdWoz
+                                                            senderDisplayName:kJSQDemoAvatarDisplayNameWoz
+                                                                         date:[NSDate date]
+                                                                         text:@"Lorem ipsum dolor sit amet, et cum vide possit. Cu has mucius indoctum conceptam, ius ad diam dicam sapientem. Libris fuisset interpretaris ei vel, no vis modo delicata, dicit liberavisse cu usu. Ad sed simul graeco fabulas, cu eam lorem persius, at nam duis epicurei accusata. Eu cum oratio nemore hendrerit, maiorum adversarium usu ne."]
+                                 atIndex:0];
+    
+    [self finishLoadingEarlierMessages:2];
+
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAvatarImageView:(UIImageView *)avatarImageView atIndexPath:(NSIndexPath *)indexPath
