@@ -41,6 +41,8 @@
 
 #import <objc/runtime.h>
 
+#import "NSAttributedString+EmojiExtension.h"
+#import "EmojiTextAttachment.h"
 
 // Fixes rdar://26295020
 // See issue #1247 and Peter Steinberger's comment:
@@ -556,8 +558,9 @@ JSQMessagesKeyboardControllerDelegate>
     cell.delegate = collectionView;
 
     if (!isMediaMessage) {
-        cell.textView.text = [messageItem text];
-
+        
+        cell.textView.attributedText = [self formatTextInTextView:[messageItem text]];
+        
         if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
             //  workaround for iOS 7 textView data detectors bug
             cell.textView.text = nil;
@@ -623,6 +626,31 @@ JSQMessagesKeyboardControllerDelegate>
     [self collectionView:collectionView accessibilityForCell:cell indexPath:indexPath message:messageItem];
 
     return cell;
+}
+
+- (NSAttributedString *)formatTextInTextView:(NSString *)text
+{
+    
+    EmojiTextAttachment *emojiTextAttachment = [EmojiTextAttachment new];
+    
+    emojiTextAttachment.image = [UIImage imageNamed:@"1"];
+    emojiTextAttachment.emojiSize = CGSizeMake(20,20);
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:text];
+
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"1" options:0 error:&error];
+    NSArray *matches = [regex matchesInString:text
+                                      options:0
+                                        range:NSMakeRange(0, text.length)];
+    
+    for (NSTextCheckingResult *match in matches)
+    {
+        NSRange matchRange = [match rangeAtIndex:0];
+        [attributedString replaceCharactersInRange:matchRange withAttributedString:[NSAttributedString attributedStringWithAttachment:emojiTextAttachment]];
+    }
+    return attributedString;
+
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
@@ -794,10 +822,12 @@ JSQMessagesKeyboardControllerDelegate>
     [self.inputToolbar.contentView.textView.inputDelegate selectionWillChange:self.inputToolbar.contentView.textView];
     [self.inputToolbar.contentView.textView.inputDelegate selectionDidChange:self.inputToolbar.contentView.textView];
 
-    return [self.inputToolbar.contentView.textView.text jsq_stringByTrimingWhitespace];
+    NSString *textViewText = [self.inputToolbar.contentView.textView.textStorage getPlainString];
+    return [textViewText jsq_stringByTrimingWhitespace];
 }
 
-#pragma mark - Text view delegate
+
+#pragma mark - Text view delegate   
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
