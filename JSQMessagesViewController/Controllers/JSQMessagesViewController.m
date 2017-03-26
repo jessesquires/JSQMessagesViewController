@@ -501,7 +501,10 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
     NSParameterAssert(messageItem != nil);
 
-    BOOL isOutgoingMessage = [self isOutgoingMessage:messageItem];
+    NSString *messageSenderId = [messageItem senderId];
+    NSParameterAssert(messageSenderId != nil);
+
+    BOOL isOutgoingMessage = [messageSenderId isEqualToString:[collectionView.dataSource senderId]];
     BOOL isMediaMessage = [messageItem isMediaMessage];
 
     NSString *cellIdentifier = nil;
