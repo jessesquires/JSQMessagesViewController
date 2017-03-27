@@ -68,7 +68,7 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
     for (AGEmojiKeyboardViewCategoryImage i = AGEmojiKeyboardViewCategoryImageRecent;
          i <= AGEmojiKeyboardViewCategoryImageCharacters;
          ++i) {
-      [array addObject:[self imageWithImage:[self.dataSource emojiKeyboardView:self imageForSelectedCategory:i] scaledToSize:CGSize(30,30)]];
+      [array addObject:[self imageWithImage:[self.dataSource emojiKeyboardView:self imageForSelectedCategory:i] scaledToSize:CGSizeMake(30, 30)]];
     }
   });
   return array;
@@ -82,7 +82,7 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
     for (AGEmojiKeyboardViewCategoryImage i = AGEmojiKeyboardViewCategoryImageRecent;
          i <= AGEmojiKeyboardViewCategoryImageCharacters;
          ++i) {
-        [array addObject:[self imageWithImage:[self.dataSource emojiKeyboardView:self imageForNonSelectedCategory:i] scaledToSize:CGSize(30,30)]];
+        [array addObject:[self imageWithImage:[self.dataSource emojiKeyboardView:self imageForNonSelectedCategory:i] scaledToSize:CGSizeMake(30, 30)]];
     }
   });
   return array;
