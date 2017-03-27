@@ -293,8 +293,6 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     if (self.showTypingIndicator) {
-        self.showTypingIndicator = NO;
-        self.showTypingIndicator = YES;
         [self.collectionView reloadData];
     }
 }
