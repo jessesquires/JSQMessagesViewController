@@ -404,12 +404,8 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
 
 // add the emoji to recents
 - (void)emojiPageView:(AGEmojiPageView *)emojiPageView didUseEmoji:(NSString *)emoji {
-    if ([self.category isEqualToString:@"Custom"]) {
-        emoji = @"1";
-    } else {
-        [self setInRecentsEmoji:emoji];
-    }
-  [self.delegate emojiKeyBoardView:self didUseEmoji:emoji];
+    [self setInRecentsEmoji:emoji];
+    [self.delegate emojiKeyBoardView:self didUseEmoji:emoji];
 }
 
 - (void)emojiPageViewDidPressBackSpace:(AGEmojiPageView *)emojiPageView {

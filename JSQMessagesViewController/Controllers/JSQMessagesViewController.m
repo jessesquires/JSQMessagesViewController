@@ -122,7 +122,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 
 @interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate,
-JSQMessagesKeyboardControllerDelegate>
+JSQMessagesKeyboardControllerDelegate>{
+    
+    NSArray *emojis;
+}
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
@@ -267,6 +270,12 @@ JSQMessagesKeyboardControllerDelegate>
 {
     [super viewDidLoad];
 
+    NSBundle *selfBundle = [NSBundle bundleForClass:[self class]];
+    
+    NSString *plistPath = [selfBundle pathForResource:@"EmojisList"
+                                               ofType:@"plist"];
+    emojis = [[[NSDictionary dictionaryWithContentsOfFile:plistPath] copy] valueForKey:@"Custom"];
+    
     [[[self class] nib] instantiateWithOwner:self options:nil];
 
     [self jsq_configureMessagesViewController];
@@ -559,7 +568,7 @@ JSQMessagesKeyboardControllerDelegate>
 
     if (!isMediaMessage) {
         
-        cell.textView.attributedText = [self formatTextInTextView:[messageItem text]];
+        cell.textView.attributedText = [[NSAttributedString alloc] initWithAttributedString:[self formatTextInTextView:[messageItem text]]];
         
         if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
             //  workaround for iOS 7 textView data detectors bug
@@ -630,24 +639,20 @@ JSQMessagesKeyboardControllerDelegate>
 
 - (NSAttributedString *)formatTextInTextView:(NSString *)text
 {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] init];
     
-    EmojiTextAttachment *emojiTextAttachment = [EmojiTextAttachment new];
-    
-    emojiTextAttachment.image = [UIImage imageNamed:@"1"];
-    emojiTextAttachment.emojiSize = CGSizeMake(20,20);
-    
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:text];
+    NSString *firstLetter = [text substringFromIndex:1];
 
-    NSError *error = nil;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"1" options:0 error:&error];
-    NSArray *matches = [regex matchesInString:text
-                                      options:0
-                                        range:NSMakeRange(0, text.length)];
-    
-    for (NSTextCheckingResult *match in matches)
-    {
-        NSRange matchRange = [match rangeAtIndex:0];
-        [attributedString replaceCharactersInRange:matchRange withAttributedString:[NSAttributedString attributedStringWithAttachment:emojiTextAttachment]];
+    for (NSInteger i = 0; i < text.length; i += 2) {
+        NSString * newString = [text substringWithRange:NSMakeRange(i, 2)];
+        if ([emojis containsObject:newString]) {
+            EmojiTextAttachment *emojiTextAttachment = [EmojiTextAttachment new];
+            emojiTextAttachment.image = [UIImage imageNamed:newString];
+            emojiTextAttachment.emojiSize = CGSizeMake(15,15);
+            [attributedString appendAttributedString:[NSAttributedString attributedStringWithAttachment:emojiTextAttachment]];
+        } else {
+            [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:newString]];
+        }
     }
     return attributedString;
 

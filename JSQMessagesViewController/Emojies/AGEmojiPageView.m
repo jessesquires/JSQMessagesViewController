@@ -61,6 +61,7 @@
     for (NSUInteger i = 0; i < [buttonTexts count]; ++i) {
         UIButton *button = [self createButtonAtIndex:i];
         [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", buttonTexts[i]]] forState:UIControlStateNormal];
+        button.titleLabel.text = [NSString stringWithFormat:@"%@", buttonTexts[i]];
         [self addToViewButton:button];
     }
 }
