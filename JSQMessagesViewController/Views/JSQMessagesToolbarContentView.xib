@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -32,23 +32,43 @@
                     </constraints>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dm4-NT-mvr" customClass="JSQMessagesComposerTextView">
-                    <rect key="frame" x="86" y="7" width="187" height="30"/>
+                    <rect key="frame" x="93" y="7" width="180" height="30"/>
                     <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fns-Yl-4GI">
+                    <rect key="frame" x="89" y="6" width="1" height="38"/>
+                    <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="g9b-nD-voY"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bax-E7-ba3">
+                    <rect key="frame" x="0.0" y="43" width="273" height="1"/>
+                    <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="uMd-9T-jGB"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="LEq-G7-jGt" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="9" id="0gD-Qu-dIc"/>
+                <constraint firstItem="Myo-1S-Vg1" firstAttribute="leading" secondItem="bax-E7-ba3" secondAttribute="trailing" constant="3" id="7x4-bl-ElR"/>
                 <constraint firstItem="dm4-NT-mvr" firstAttribute="top" secondItem="1" secondAttribute="top" constant="7" id="7zR-wr-vpW"/>
                 <constraint firstItem="LEq-G7-jGt" firstAttribute="centerY" secondItem="1" secondAttribute="centerY" id="H2a-O3-gKR"/>
                 <constraint firstItem="dm4-NT-mvr" firstAttribute="centerY" secondItem="1" secondAttribute="centerY" id="Klh-5v-PAE"/>
                 <constraint firstAttribute="bottom" secondItem="Myo-1S-Vg1" secondAttribute="bottom" id="Qxi-H9-Vzk"/>
                 <constraint firstItem="Myo-1S-Vg1" firstAttribute="leading" secondItem="dm4-NT-mvr" secondAttribute="trailing" constant="3" id="SxG-5P-oTf"/>
+                <constraint firstItem="bax-E7-ba3" firstAttribute="top" secondItem="fns-Yl-4GI" secondAttribute="bottom" constant="-1" id="Tjt-at-fjT"/>
+                <constraint firstItem="fns-Yl-4GI" firstAttribute="leading" secondItem="LEq-G7-jGt" secondAttribute="trailing" constant="18" id="ecQ-qD-DdL"/>
+                <constraint firstItem="fns-Yl-4GI" firstAttribute="top" secondItem="1" secondAttribute="top" constant="6" id="eeI-5b-5eK"/>
                 <constraint firstItem="Myo-1S-Vg1" firstAttribute="top" secondItem="1" secondAttribute="top" id="ffg-ab-XUs"/>
                 <constraint firstAttribute="trailing" secondItem="Myo-1S-Vg1" secondAttribute="trailing" id="lc3-xq-4go"/>
-                <constraint firstItem="dm4-NT-mvr" firstAttribute="leading" secondItem="LEq-G7-jGt" secondAttribute="trailing" constant="15" id="vCr-p8-GbG"/>
+                <constraint firstItem="bax-E7-ba3" firstAttribute="top" secondItem="dm4-NT-mvr" secondAttribute="top" constant="36" id="nl5-qS-Qcg"/>
+                <constraint firstItem="bax-E7-ba3" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="rnn-gf-jMj"/>
+                <constraint firstItem="dm4-NT-mvr" firstAttribute="leading" secondItem="LEq-G7-jGt" secondAttribute="trailing" constant="22" id="vCr-p8-GbG"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
