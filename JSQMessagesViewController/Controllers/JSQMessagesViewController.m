@@ -275,7 +275,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     return YES;
 }
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+- (NSUInteger)supportedInterfaceOrientations
 {
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         return UIInterfaceOrientationMaskAllButUpsideDown;
