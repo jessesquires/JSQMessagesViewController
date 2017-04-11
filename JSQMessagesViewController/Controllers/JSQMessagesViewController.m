@@ -681,13 +681,14 @@ JSQMessagesKeyboardControllerDelegate>
 
 - (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Positioning the edit-menu properly requires tracking which item is selected.
+    self.selectedIndexPathForMenu = indexPath;
+
     //  disable menu for media messages
     id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
     if ([messageItem isMediaMessage]) {
         return NO;
     }
-
-    self.selectedIndexPathForMenu = indexPath;
 
     //  textviews are selectable to allow data detectors
     //  however, this allows the 'copy, define, select' UIMenuController to show
