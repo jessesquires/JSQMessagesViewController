@@ -123,6 +123,8 @@
 
 - (void)didReceiveMenuWillShowNotification:(NSNotification *)notification
 {
+    [super didReceiveMenuWillShowNotification:notification];
+
     /**
      *  Display custom menu actions for cells.
      */
