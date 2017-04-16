@@ -101,31 +101,33 @@
     
     MKMapSnapshotter *snapShotter = [[MKMapSnapshotter alloc] initWithOptions:options];
     
-    [snapShotter startWithQueue:dispatch_get_main_queue()
+    [snapShotter startWithQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
               completionHandler:^(MKMapSnapshot *snapshot, NSError *error) {
                   if (snapshot == nil) {
                       NSLog(@"%s Error creating map snapshot: %@", __PRETTY_FUNCTION__, error);
                       return;
                   }
-                  
-                  MKAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:nil];
-                  CGPoint coordinatePoint = [snapshot pointForCoordinate:location.coordinate];
-                  UIImage *image = snapshot.image;
-                  
-                  coordinatePoint.x += pin.centerOffset.x - (CGRectGetWidth(pin.bounds) / 2.0);
-                  coordinatePoint.y += pin.centerOffset.y - (CGRectGetHeight(pin.bounds) / 2.0);
-                  
-                  UIGraphicsBeginImageContextWithOptions(image.size, YES, image.scale);
-                  {
-                      [image drawAtPoint:CGPointZero];
-                      [pin.image drawAtPoint:coordinatePoint];
-                      self.cachedMapSnapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-                  }
-                  UIGraphicsEndImageContext();
-                  
-                  if (completion) {
-                      completion();
-                  }
+
+                  dispatch_async(dispatch_get_main_queue(), ^{
+                      MKAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:nil];
+                      CGPoint coordinatePoint = [snapshot pointForCoordinate:location.coordinate];
+                      UIImage *image = snapshot.image;
+
+                      coordinatePoint.x += pin.centerOffset.x - (CGRectGetWidth(pin.bounds) / 2.0);
+                      coordinatePoint.y += pin.centerOffset.y - (CGRectGetHeight(pin.bounds) / 2.0);
+
+                      UIGraphicsBeginImageContextWithOptions(image.size, YES, image.scale);
+                      {
+                          [image drawAtPoint:CGPointZero];
+                          [pin.image drawAtPoint:coordinatePoint];
+                          self.cachedMapSnapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+                      }
+                      UIGraphicsEndImageContext();
+
+                      if (completion) {
+                          completion();
+                      }
+                  });
               }];
 }
 
