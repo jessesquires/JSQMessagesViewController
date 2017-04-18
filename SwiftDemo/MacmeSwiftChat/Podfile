@@ -1,0 +1,18 @@
+source 'https://github.com/CocoaPods/Specs.git'
+project 'MacmeSwiftChat.xcodeproj'
+platform :ios, '9.0'
+# We have to have this line because we use swift.
+use_frameworks!
+
+target 'MacmeSwiftChat' do
+    pod 'JSQMessagesViewController'
+end
+
+target 'MacmeSwiftChatTests' do
+
+end
+
+target 'MacmeSwiftChatUITests' do
+
+end
+
