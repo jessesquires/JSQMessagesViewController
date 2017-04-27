@@ -26,6 +26,7 @@ This release closes the [8.0.0 milestone](https://github.com/jessesquires/JSQMes
 - Send button now can be turned on/off manually. (#1575, #1609) Thanks @sebastianludwig!
 - Video message items now have a custom thumbnail option. (#628, #709, #1408, #1823) Thanks @weekwood, @benjaminhallock!
 - A new class `JSQMessagesVideoThumbnailFactory` now can generate thumbnail images from `AVURLAsset`. (#709, #1823) Thanks @weekwood, @Lucashuang0802!
+- Added a `placeHolderInsets` property to `JSQMessagesComposerTextView` to allow insetting the placeholder text. (#1908)
 
 ### Fixes
 

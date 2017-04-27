@@ -27,6 +27,8 @@ before_install:
    - gem install cocoapods --pre
 
 script:
+- set -o pipefail
+  
 - if [ $POD_LINT == "YES" ]; then
    pod lib lint;
   fi

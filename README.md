@@ -75,6 +75,7 @@ Read the docs, [available here][docsLink] via [@CocoaDocs](https://twitter.com/C
 - Eli Burke ([**@eliburke**](https://github.com/eliburke))
 - Sebastian Ludwig ([**@sebastianludwig**](https://github.com/sebastianludwig))
 - Lucas Huang ([**@Lucashuang0802**](https://github.com/Lucashuang0802))
+- Dan Leonard ([**@macmedan**](https://github.com/macmedan))
 
 ## Contributing
 
