@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return An initialized `JSQMessagesBubbleImageFactory` object.
  */
-- (instancetype)init;
+- (instancetype)initWithLayoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection;
 
 /**
  *  Creates and returns a new instance of `JSQMessagesBubbleImageFactory` having the specified

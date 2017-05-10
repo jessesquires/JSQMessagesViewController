@@ -50,21 +50,20 @@
         _layoutDirection = layoutDirection;
 
         if (UIEdgeInsetsEqualToEdgeInsets(capInsets, UIEdgeInsetsZero)) {
-            _capInsets = [self jsq_centerPointEdgeInsetsForImageSize:bubbleImage.size];
+//            _capInsets = [self jsq_centerPointEdgeInsetsForImageSize:bubbleImage.size];
         }
     }
     return self;
 }
 
-- (instancetype)init
+- (instancetype)initWithLayoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection
 {
     return [self initWithBubbleImage:[UIImage jsq_bubbleCompactImage]
                            capInsets:UIEdgeInsetsZero
-                     layoutDirection:[UIApplication sharedApplication].userInterfaceLayoutDirection];
+                     layoutDirection:layoutDirection];
 }
 
 #pragma mark - Public
-
 - (JSQMessagesBubbleImage *)outgoingMessagesBubbleImageWithColor:(UIColor *)color
 {
     return [self jsq_messagesBubbleImageWithColor:color flippedForIncoming:NO ^ self.isRightToLeftLanguage];

@@ -20,7 +20,7 @@
 
 #import "JSQMessagesMediaPlaceholderView.h"
 #import "JSQMessagesMediaViewBubbleImageMasker.h"
-#import "JSQMessagesVideoThumbnailFactory.h"
+//#import "JSQMessagesVideoThumbnailFactory.h"
 
 #import "UIImage+JSQMessages.h"
 
