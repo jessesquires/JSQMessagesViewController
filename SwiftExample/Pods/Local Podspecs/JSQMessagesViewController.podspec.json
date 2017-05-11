@@ -32,5 +32,8 @@
     "MobileCoreServices",
     "AVFoundation"
   ],
-  "requires_arc": true
+  "requires_arc": true,
+  "pod_target_xcconfig": {
+    "APPLICATION_EXTENSION_API_ONLY": "YES"
+  }
 }
