@@ -21,4 +21,5 @@ Pod::Spec.new do |s|
 
 	s.frameworks = 'QuartzCore', 'CoreGraphics', 'CoreLocation', 'MapKit', 'MobileCoreServices', 'AVFoundation'
 	s.requires_arc = true
+	s.pod_target_xcconfig = { 'APPLICATION_EXTENSION_API_ONLY' => 'YES' }
 end

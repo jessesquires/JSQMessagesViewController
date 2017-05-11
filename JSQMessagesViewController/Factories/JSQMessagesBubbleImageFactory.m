@@ -60,7 +60,7 @@
 {
     return [self initWithBubbleImage:[UIImage jsq_bubbleCompactImage]
                            capInsets:UIEdgeInsetsZero
-                     layoutDirection:[UIApplication sharedApplication].userInterfaceLayoutDirection];
+                     layoutDirection:[UIView new].effectiveUserInterfaceLayoutDirection];
 }
 
 #pragma mark - Public

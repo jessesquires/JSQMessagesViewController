@@ -41,7 +41,7 @@
     UIImage *bubble = [UIImage jsq_bubbleCompactImage];
     XCTAssertNotNil(bubble, @"Bubble image should not be nil");
   
-    if ([UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft) {
+    if ([UIView new].effectiveUserInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft) {
       bubble = [UIImage imageWithCGImage:[bubble CGImage]
                                    scale:[bubble scale]
                              orientation: UIImageOrientationUpMirrored];
@@ -73,7 +73,7 @@
     UIImage *bubble = [UIImage jsq_bubbleCompactImage];
     XCTAssertNotNil(bubble, @"Bubble image should not be nil");
   
-    if ([UIApplication sharedApplication].userInterfaceLayoutDirection != UIUserInterfaceLayoutDirectionRightToLeft) {
+    if ([UIView new].effectiveUserInterfaceLayoutDirection != UIUserInterfaceLayoutDirectionRightToLeft) {
       bubble = [UIImage imageWithCGImage:[bubble CGImage]
                                  scale:[bubble scale]
                            orientation: UIImageOrientationUpMirrored];
