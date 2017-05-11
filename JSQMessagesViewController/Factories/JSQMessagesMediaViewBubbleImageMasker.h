@@ -40,16 +40,22 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly) JSQMessagesBubbleImageFactory *bubbleImageFactory;
 
 /**
+ *  Unavailable and raises an exception if used. Use instead initWithLayoutDirection:
+ */
+- (instancetype)init;
+
+/**
  *  Creates and returns a new instance of `JSQMessagesMediaViewBubbleImageMasker`
  *  that uses a default instance of `JSQMessagesBubbleImageFactory`. The masker uses the `JSQMessagesBubbleImage`
  *  objects returned by the factory to mask media views.
  *
+ *  @param layoutDirection A User Interface Layout Direction used to determine if language is left -> right or right -> left. This value must not be `nil`.
  *  @return An initialized `JSQMessagesMediaViewBubbleImageMasker` object.
  *
  *  @see JSQMessagesBubbleImageFactory.
  *  @see JSQMessagesBubbleImage.
  */
-- (instancetype)init;
+- (instancetype)initWithLayoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection;
 
 /**
  *  Creates and returns a new instance of `JSQMessagesMediaViewBubbleImageMasker`

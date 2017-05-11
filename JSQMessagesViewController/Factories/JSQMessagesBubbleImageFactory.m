@@ -37,6 +37,13 @@
 
 #pragma mark - Initialization
 
+- (instancetype)init {
+    
+    [NSException raise:NSInternalInconsistencyException format:@"%@ initialisation requires initWithLayoutDirection:", NSStringFromClass([self class])];
+    
+    return [super init];
+}
+
 - (instancetype)initWithBubbleImage:(UIImage *)bubbleImage
                           capInsets:(UIEdgeInsets)capInsets
                     layoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection

@@ -31,16 +31,24 @@ class ChatViewController: JSQMessagesViewController {
          *
          */
         
+        let layoutDirection = UIApplication.shared.userInterfaceLayoutDirection
+        var factory: JSQMessagesBubbleImageFactory? = nil
+        
         if defaults.bool(forKey: Setting.removeBubbleTails.rawValue) {
             // Make taillessBubbles
-            incomingBubble = JSQMessagesBubbleImageFactory(bubble: UIImage.jsq_bubbleCompactTailless(), capInsets: UIEdgeInsets.zero, layoutDirection: UIApplication.shared.userInterfaceLayoutDirection).incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
-            outgoingBubble = JSQMessagesBubbleImageFactory(bubble: UIImage.jsq_bubbleCompactTailless(), capInsets: UIEdgeInsets.zero, layoutDirection: UIApplication.shared.userInterfaceLayoutDirection).outgoingMessagesBubbleImage(with: UIColor.lightGray)
+            factory = JSQMessagesBubbleImageFactory(bubble: UIImage.jsq_bubbleCompactTailless(), capInsets: UIEdgeInsets.zero, layoutDirection: layoutDirection)
         }
         else {
             // Bubbles with tails
-            incomingBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
-            outgoingBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImage(with: UIColor.lightGray)
+            factory = JSQMessagesBubbleImageFactory(layoutDirection: layoutDirection)
         }
+        
+        if let factory = factory {
+            incomingBubble = factory.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
+            outgoingBubble = factory.outgoingMessagesBubbleImage(with: UIColor.lightGray)
+        }
+        
+        
         
         /**
          *  Example on showing or removing Avatars based on user settings.

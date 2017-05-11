@@ -25,9 +25,15 @@
 
 #pragma mark - Initialization
 
-- (instancetype)init
+- (instancetype)init {
+    [NSException raise:NSInternalInconsistencyException format:"%@ initialisation requires initWithLayoutDirection:",NSStringFromClass([self class])]
+    
+    return [super init]
+}
+
+- (instancetype)initWithLayoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection
 {
-    return [self initWithBubbleImageFactory:[[JSQMessagesBubbleImageFactory alloc] init]];
+    return [self initWithBubbleImageFactory:[[JSQMessagesBubbleImageFactory alloc] initWithLayoutDirection:layoutDirection]];
 }
 
 - (instancetype)initWithBubbleImageFactory:(JSQMessagesBubbleImageFactory *)bubbleImageFactory
