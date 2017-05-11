@@ -34,11 +34,11 @@ class ChatViewController: JSQMessagesViewController {
 		
         var factory: JSQMessagesBubbleImageFactory? = nil
         let makeTaillessBubbles = defaults.bool(forKey: Setting.removeBubbleTails.rawValue)
-		
+        
         if makeTaillessBubbles {
             let layoutDirection = UIApplication.shared.userInterfaceLayoutDirection
-			let bubbleImage = UIImage.jsq_bubbleCompactTailless()
-			factory = JSQMessagesBubbleImageFactory(bubble:bubbleImage, capInsets: .zero, layoutDirection: layoutDirection)
+            let bubbleImage = UIImage.jsq_bubbleCompactTailless()
+            factory = JSQMessagesBubbleImageFactory(bubble:bubbleImage, capInsets: .zero, layoutDirection: layoutDirection)
         }
         else {
             factory = JSQMessagesBubbleImageFactory()
