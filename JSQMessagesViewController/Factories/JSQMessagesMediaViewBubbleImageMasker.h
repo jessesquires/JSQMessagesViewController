@@ -21,8 +21,6 @@
 
 @class JSQMessagesBubbleImageFactory;
 
-NS_ASSUME_NONNULL_BEGIN
-
 /**
  *  An instance of `JSQMessagesMediaViewBubbleImageMasker` is an object that masks
  *  media views for a `JSQMessageMediaData` object. Given a view, it will mask the view
@@ -40,22 +38,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly) JSQMessagesBubbleImageFactory *bubbleImageFactory;
 
 /**
- *  Unavailable and raises an exception if used. Use instead initWithLayoutDirection:
- */
-- (instancetype)init;
-
-/**
  *  Creates and returns a new instance of `JSQMessagesMediaViewBubbleImageMasker`
  *  that uses a default instance of `JSQMessagesBubbleImageFactory`. The masker uses the `JSQMessagesBubbleImage`
  *  objects returned by the factory to mask media views.
  *
- *  @param layoutDirection A User Interface Layout Direction used to determine if language is left -> right or right -> left. This value must not be `nil`.
- *  @return An initialized `JSQMessagesMediaViewBubbleImageMasker` object.
+ *  @return An initialized `JSQMessagesMediaViewBubbleImageMasker` object if created successfully, `nil` otherwise.
  *
  *  @see JSQMessagesBubbleImageFactory.
  *  @see JSQMessagesBubbleImage.
  */
-- (instancetype)initWithLayoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection;
+- (instancetype)init;
 
 /**
  *  Creates and returns a new instance of `JSQMessagesMediaViewBubbleImageMasker`
@@ -64,12 +56,12 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param bubbleImageFactory An initialized `JSQMessagesBubbleImageFactory` object to use for masking media views. This value must not be `nil`.
  *
- *  @return An initialized `JSQMessagesMediaViewBubbleImageMasker` object.
+ *  @return An initialized `JSQMessagesMediaViewBubbleImageMasker` object if created successfully, `nil` otherwise.
  *
  *  @see JSQMessagesBubbleImageFactory.
  *  @see JSQMessagesBubbleImage.
  */
-- (instancetype)initWithBubbleImageFactory:(JSQMessagesBubbleImageFactory *)bubbleImageFactory NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithBubbleImageFactory:(JSQMessagesBubbleImageFactory *)bubbleImageFactory;
 
 /**
  *  Applies an outgoing bubble image mask to the specified mediaView.
@@ -96,5 +88,3 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)applyBubbleImageMaskToMediaView:(UIView *)mediaView isOutgoing:(BOOL)isOutgoing;
 
 @end
-
-NS_ASSUME_NONNULL_END

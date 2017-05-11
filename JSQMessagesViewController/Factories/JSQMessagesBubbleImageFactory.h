@@ -21,8 +21,6 @@
 
 #import "JSQMessagesBubbleImage.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 /**
  *  `JSQMessagesBubbleImageFactory` is a factory that provides a means for creating and styling 
  *  `JSQMessagesBubbleImage` objects to be displayed in a `JSQMessagesCollectionViewCell` of a `JSQMessagesCollectionView`.
@@ -39,9 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Creates and returns a new instance of `JSQMessagesBubbleImageFactory` that uses the
  *  default bubble image assets, cap insets, and layout direction.
  *
- *  @return An initialized `JSQMessagesBubbleImageFactory` object.
+ *  @return An initialized `JSQMessagesBubbleImageFactory` object if created successfully, `nil` otherwise.
  */
-- (instancetype)initWithLayoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection;
+- (instancetype)init;
 
 /**
  *  Creates and returns a new instance of `JSQMessagesBubbleImageFactory` having the specified
@@ -55,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param capInsets   The values to use for the cap insets that define the unstretchable regions of the image.
  *  Specify `UIEdgeInsetsZero` to have the factory create insets that allow the image to stretch from its center point.
  *
- *  @return An initialized `JSQMessagesBubbleImageFactory`.
+ *  @return An initialized `JSQMessagesBubbleImageFactory` object if created successfully, `nil` otherwise.
  */
 
 - (instancetype)initWithBubbleImage:(UIImage *)bubbleImage
@@ -69,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param color The color of the bubble image in the image view. This value must not be `nil`.
  *
- *  @return An initialized `JSQMessagesBubbleImage` object.
+ *  @return An initialized `JSQMessagesBubbleImage` object if created successfully, `nil` otherwise.
  */
 - (JSQMessagesBubbleImage *)outgoingMessagesBubbleImageWithColor:(UIColor *)color;
 
@@ -80,10 +78,8 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param color The color of the bubble image in the image view. This value must not be `nil`.
  *
- *  @return An initialized `JSQMessagesBubbleImage` object.
+ *  @return An initialized `JSQMessagesBubbleImage` object if created successfully, `nil` otherwise.
  */
 - (JSQMessagesBubbleImage *)incomingMessagesBubbleImageWithColor:(UIColor *)color;
 
 @end
-
-NS_ASSUME_NONNULL_END

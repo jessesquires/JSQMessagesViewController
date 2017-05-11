@@ -37,13 +37,6 @@
 
 #pragma mark - Initialization
 
-- (instancetype)init {
-    
-    [NSException raise:NSInternalInconsistencyException format:@"%@ initialisation requires initWithLayoutDirection:", NSStringFromClass([self class])];
-    
-    return [super init];
-}
-
 - (instancetype)initWithBubbleImage:(UIImage *)bubbleImage
                           capInsets:(UIEdgeInsets)capInsets
                     layoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection
@@ -57,20 +50,21 @@
         _layoutDirection = layoutDirection;
 
         if (UIEdgeInsetsEqualToEdgeInsets(capInsets, UIEdgeInsetsZero)) {
-//            _capInsets = [self jsq_centerPointEdgeInsetsForImageSize:bubbleImage.size];
+            _capInsets = [self jsq_centerPointEdgeInsetsForImageSize:bubbleImage.size];
         }
     }
     return self;
 }
 
-- (instancetype)initWithLayoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection
+- (instancetype)init
 {
     return [self initWithBubbleImage:[UIImage jsq_bubbleCompactImage]
                            capInsets:UIEdgeInsetsZero
-                     layoutDirection:layoutDirection];
+                     layoutDirection:[UIView new].effectiveUserInterfaceLayoutDirection];
 }
 
 #pragma mark - Public
+
 - (JSQMessagesBubbleImage *)outgoingMessagesBubbleImageWithColor:(UIColor *)color
 {
     return [self jsq_messagesBubbleImageWithColor:color flippedForIncoming:NO ^ self.isRightToLeftLanguage];

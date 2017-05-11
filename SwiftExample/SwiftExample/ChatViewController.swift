@@ -31,25 +31,24 @@ class ChatViewController: JSQMessagesViewController {
          *
          */
         
-        let layoutDirection = UIApplication.shared.userInterfaceLayoutDirection
+		
         var factory: JSQMessagesBubbleImageFactory? = nil
-        
-        if defaults.bool(forKey: Setting.removeBubbleTails.rawValue) {
-            // Make taillessBubbles
-            factory = JSQMessagesBubbleImageFactory(bubble: UIImage.jsq_bubbleCompactTailless(), capInsets: UIEdgeInsets.zero, layoutDirection: layoutDirection)
+        let makeTaillessBubbles = defaults.bool(forKey: Setting.removeBubbleTails.rawValue)
+		
+        if makeTaillessBubbles {
+            let layoutDirection = UIApplication.shared.userInterfaceLayoutDirection
+			let bubbleImage = UIImage.jsq_bubbleCompactTailless()
+			factory = JSQMessagesBubbleImageFactory(bubble:bubbleImage, capInsets: .zero, layoutDirection: layoutDirection)
         }
         else {
-            // Bubbles with tails
-            factory = JSQMessagesBubbleImageFactory(layoutDirection: layoutDirection)
+            factory = JSQMessagesBubbleImageFactory()
         }
         
         if let factory = factory {
             incomingBubble = factory.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
             outgoingBubble = factory.outgoingMessagesBubbleImage(with: UIColor.lightGray)
         }
-        
-        
-        
+	
         /**
          *  Example on showing or removing Avatars based on user settings.
          */
