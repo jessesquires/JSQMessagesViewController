@@ -41,7 +41,12 @@
 }
 
 + (UIUserInterfaceLayoutDirection)jsq_userInterfaceLayoutDirection{
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
     return [UIView userInterfaceLayoutDirectionForSemanticContentAttribute:UISemanticContentAttributeUnspecified];
+#else
+    return [[UIApplication sharedApplication] userInterfaceLayoutDirection];
+#endif
 }
 
 @end
+
