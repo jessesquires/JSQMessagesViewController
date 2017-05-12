@@ -1,0 +1,9 @@
+/* 
+  File.strings
+  SwiftExample
+
+  Created by Paul Stringer on 12/05/2017.
+  Copyright © 2017 MacMeDan. All rights reserved.
+*/
+
+"Hello" = "Arabic";
