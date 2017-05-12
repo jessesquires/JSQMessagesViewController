@@ -13,7 +13,7 @@
 #import "JSQMessagesBubbleImageFactory.h"
 
 #import "UIImage+JSQMessages.h"
-
+#import "UIView+JSQMessages.h"
 
 @interface JSQMessagesBubbleImageFactoryTests : XCTestCase
 
@@ -41,7 +41,7 @@
     UIImage *bubble = [UIImage jsq_bubbleCompactImage];
     XCTAssertNotNil(bubble, @"Bubble image should not be nil");
   
-    if ([UIView new].effectiveUserInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft) {
+    if ([UIView jsq_userInterfaceLayoutDirection] == UIUserInterfaceLayoutDirectionRightToLeft) {
       bubble = [UIImage imageWithCGImage:[bubble CGImage]
                                    scale:[bubble scale]
                              orientation: UIImageOrientationUpMirrored];
@@ -73,7 +73,7 @@
     UIImage *bubble = [UIImage jsq_bubbleCompactImage];
     XCTAssertNotNil(bubble, @"Bubble image should not be nil");
   
-    if ([UIView new].effectiveUserInterfaceLayoutDirection != UIUserInterfaceLayoutDirectionRightToLeft) {
+    if ([UIView jsq_userInterfaceLayoutDirection] != UIUserInterfaceLayoutDirectionRightToLeft) {
       bubble = [UIImage imageWithCGImage:[bubble CGImage]
                                  scale:[bubble scale]
                            orientation: UIImageOrientationUpMirrored];
