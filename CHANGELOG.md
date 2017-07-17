@@ -4,6 +4,11 @@ The changelog for `JSQMessagesViewController`. Also see the [releases](https://g
 
 --------------------------------------
 
+7.3.5
+-----
+
+This libary is being deprecated.
+
 7.3.4
 -----
 
