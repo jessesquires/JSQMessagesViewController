@@ -93,6 +93,16 @@
 @property (assign, nonatomic) NSUInteger maximumHeight;
 
 /**
+ * Whether the input view is currently at it's maximum height
+ */
+@property (assign, nonatomic, readonly) BOOL atMaximumHeight;
+
+/**
+ * Returns the maximum height reached by the text view
+ */
+@property (assign, nonatomic, readonly) NSUInteger maximumTextViewHeight;
+
+/**
  *  Enables or disables the send button based on whether or not its `textView` has text.
  *  That is, the send button will be enabled if there is text in the `textView`, and disabled otherwise.
  */

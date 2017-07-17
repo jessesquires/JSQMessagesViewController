@@ -67,4 +67,46 @@
     XCTAssertLessThanOrEqual(CGRectGetHeight(demoVC.inputToolbar.frame), 54, @"Toolbar height should be <= to maximumInputToolbarHeight");
 }
 
+/**
+ * Tests JSQMessagesInputToolbar
+ * Verifies 'atMaximumHeight' is set correctly
+ * Verifies 'maximumTextViewHeight is set correctly, asynchronously
+ */
+- (void)testLayoutSubviews
+{
+    JSQMessagesViewController *vc = [JSQMessagesViewController messagesViewController];
+    [vc loadView];
+    
+    JSQMessagesInputToolbar *toolbar = vc.inputToolbar;
+    toolbar.maximumHeight = toolbar.frame.size.height;
+    
+    [self keyValueObservingExpectationForObject:toolbar
+                                        keyPath:@"maximumTextViewHeight"
+                                  expectedValue:@(toolbar.contentView.textView.frame.size.height)];
+    
+    [toolbar layoutSubviews];
+    
+    XCTAssertTrue(toolbar.atMaximumHeight);
+    
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
+}
+
+/**
+ * Tests JSQMessagesInputToolbar
+ * Verifies 'atMaximumHeight' is set correctly
+ * Verifies 'maximumTextViewHeight is set correctly, asynchronously
+ */
+- (void)testLayoutSubviews_NotAtMax
+{
+    JSQMessagesViewController *vc = [JSQMessagesViewController messagesViewController];
+    [vc loadView];
+    
+    JSQMessagesInputToolbar *toolbar = vc.inputToolbar;
+    toolbar.maximumHeight = toolbar.frame.size.height+1;
+    
+    [toolbar layoutSubviews];
+    
+    XCTAssertFalse(toolbar.atMaximumHeight);
+}
+
 @end

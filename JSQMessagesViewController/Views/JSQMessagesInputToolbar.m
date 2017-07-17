@@ -32,6 +32,8 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 @interface JSQMessagesInputToolbar ()
 
 @property (assign, nonatomic) BOOL jsq_isObserving;
+@property (assign, nonatomic, readwrite) BOOL atMaximumHeight;
+@property (assign, nonatomic, readwrite) NSUInteger maximumTextViewHeight;
 
 @end
 
@@ -80,6 +82,21 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 - (void)dealloc
 {
     [self jsq_removeObservers];
+}
+
+#pragma mark - View Overrides
+
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.atMaximumHeight = (self.frame.size.height >= self.maximumHeight);
+    if(self.atMaximumHeight)
+    {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{ //async, because the new height hasn't been fully calculated during the execution loop
+            self.maximumTextViewHeight = self.contentView.textView.frame.size.height;
+        }];
+    }
 }
 
 #pragma mark - Setters
