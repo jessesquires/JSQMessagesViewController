@@ -19,7 +19,6 @@ class ChatViewController: JSQMessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Setup navigation
         setupBackButton()
         
@@ -61,11 +60,17 @@ class ChatViewController: JSQMessagesViewController {
         collectionView?.collectionViewLayout.springinessEnabled = false
         
         automaticallyScrollsToMostRecentMessage = true
-
         self.collectionView?.reloadData()
         self.collectionView?.layoutIfNeeded()
     }
-    
+
+    override func viewDidLayoutSubviews() {
+        if let navigationBarRect = self.navigationController?.navigationBar.frame {
+            let y = navigationBarRect.size.height + navigationBarRect.origin.y
+            self.collectionView?.contentInset = UIEdgeInsetsMake( y, 0, 0, 0)
+        }
+    }
+
     func setupBackButton() {
         let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem = backButton
