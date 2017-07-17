@@ -37,12 +37,20 @@
 
 const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
 const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
+NSString * const kJSQCollectionElementKindEditOverlay = @"jsq_edit_overlay";
+NSString * const kJSQCollectionUpdateTypeInsert = @"jsq_insert";
+NSString * const kJSQCollectionUpdateTypeDelete = @"jsq_delete";
 
 
 @interface JSQMessagesCollectionViewFlowLayout ()
 
 @property (strong, nonatomic) UIDynamicAnimator *dynamicAnimator;
 @property (strong, nonatomic) NSMutableSet *visibleIndexPaths;
+@property (strong, nonatomic) NSMutableSet *editableIndexPaths;
+
+//used in prepareForUpdate
+//we'll keep editing overlay view's index paths to add/remove here
+@property (nonatomic, strong) NSDictionary<NSString*, NSMutableArray<NSIndexPath*>*> *transientEditingOverlayIndexPaths;
 
 @property (assign, nonatomic) CGFloat latestDelta;
 
@@ -82,6 +90,9 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     _springinessEnabled = NO;
     _springResistanceFactor = 1000;
+    
+    _transientEditingOverlayIndexPaths = @{kJSQCollectionUpdateTypeInsert : [NSMutableArray array],
+                                           kJSQCollectionUpdateTypeDelete : [NSMutableArray array]};
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(jsq_didReceiveApplicationMemoryWarningNotification:)
@@ -143,6 +154,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     if (!springinessEnabled) {
         [_dynamicAnimator removeAllBehaviors];
         [_visibleIndexPaths removeAllObjects];
+        [_editableIndexPaths removeAllObjects];
     }
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
@@ -195,6 +207,20 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
+
+- (void)setEditing:(BOOL)editing
+{
+    if (_editing == editing) {
+        return;
+    }
+
+    _editing = editing;
+    JSQMessagesCollectionViewFlowLayoutInvalidationContext *context = [JSQMessagesCollectionViewFlowLayoutInvalidationContext context];
+    context.invalidateFlowLayoutDelegateMetrics = NO;
+
+    [self invalidateLayoutWithContext:context];
+}
+
 #pragma mark - Getters
 
 - (CGFloat)itemWidth
@@ -216,6 +242,14 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         _visibleIndexPaths = [NSMutableSet new];
     }
     return _visibleIndexPaths;
+}
+
+-(NSMutableSet *)editableIndexPaths
+{
+    if (!_editableIndexPaths) {
+        _editableIndexPaths = [NSMutableSet new];
+    }
+    return _editableIndexPaths;
 }
 
 - (id<JSQMessagesBubbleSizeCalculating>)bubbleSizeCalculator
@@ -277,12 +311,15 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         
         [self jsq_addNewlyVisibleBehaviorsFromVisibleItems:visibleItems];
     }
+    
+    [self.editableIndexPaths removeAllObjects];
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
     NSArray *attributesInRect = [[NSArray alloc] initWithArray:[super layoutAttributesForElementsInRect:rect] copyItems:YES];
-    
+    [self.editableIndexPaths removeAllObjects];
+
     if (self.springinessEnabled) {
         NSMutableArray *attributesInRectCopy = [attributesInRect mutableCopy];
         NSArray *dynamicAttributes = [self.dynamicAnimator itemsInRect:rect];
@@ -305,15 +342,37 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         attributesInRect = [attributesInRectCopy copy];
     }
     
+    NSMutableArray *editingAttributesinRect = nil;
+    if (self.editing) {
+        editingAttributesinRect = [NSMutableArray array];
+    }
+
     [attributesInRect enumerateObjectsUsingBlock:^(JSQMessagesCollectionViewLayoutAttributes *attributesItem, NSUInteger idx, BOOL *stop) {
         if (attributesItem.representedElementCategory == UICollectionElementCategoryCell) {
+            BOOL canEdit = NO;
+            if (self.editing) {
+                if([self.collectionView.delegate respondsToSelector:@selector(collectionView:layout:shouldEditItemAtIndexPath:)]) {
+                    if([self.collectionView.delegate collectionView:self.collectionView layout:self shouldEditItemAtIndexPath:attributesItem.indexPath]) {
+                        [self.editableIndexPaths addObject:attributesItem.indexPath];
+                        canEdit = YES;
+                    }
+                }
+            }
             [self jsq_configureMessageCellLayoutAttributes:attributesItem];
+            if (canEdit) {
+                [editingAttributesinRect addObject:[self jsq_createEditingOverlayAttributesForCellAttributes:attributesItem]];
+            }
+            
         }
         else {
             attributesItem.zIndex = -1;
         }
     }];
     
+    if (editingAttributesinRect.count > 0) {
+        return [attributesInRect arrayByAddingObjectsFromArray:editingAttributesinRect];
+    }
+
     return attributesInRect;
 }
 
@@ -327,6 +386,17 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     return customAttributes;
 }
+
+-(UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([elementKind isEqualToString:kJSQCollectionElementKindEditOverlay]) {
+        JSQMessagesCollectionViewLayoutAttributes *itemAttributes = (JSQMessagesCollectionViewLayoutAttributes*)[self layoutAttributesForItemAtIndexPath:indexPath];
+        return [self jsq_createEditingOverlayAttributesForCellAttributes:itemAttributes];
+    }
+
+    return [super layoutAttributesForSupplementaryViewOfKind:elementKind atIndexPath:indexPath];
+}
+
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
 {
@@ -382,7 +452,73 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
             }
         }
     }];
+    
+    if(self.editing) {
+        [self prepareForCollectionViewUpdatesInEditMode:updateItems];
+    }
 }
+
+
+
+
+- (void)prepareForCollectionViewUpdatesInEditMode:(NSArray *)updateItems
+{
+    [updateItems enumerateObjectsUsingBlock:^(UICollectionViewUpdateItem *updateItem, NSUInteger index, BOOL *stop) {
+        switch (updateItem.updateAction) {
+            case UICollectionUpdateActionInsert:{
+                    JSQMessagesCollectionViewLayoutAttributes *attributes = [JSQMessagesCollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
+                    if ((attributes.representedElementCategory == UICollectionElementCategoryCell)
+                        && ([self.collectionView.delegate respondsToSelector:@selector(collectionView:layout:shouldEditItemAtIndexPath:)])
+                        && ([self.collectionView.delegate collectionView:self.collectionView layout:self shouldEditItemAtIndexPath:updateItem.indexPathAfterUpdate])) {
+                        [self.transientEditingOverlayIndexPaths[kJSQCollectionUpdateTypeInsert] addObject:updateItem.indexPathAfterUpdate];
+                    }
+                }
+                break;
+            case UICollectionUpdateActionDelete:
+                [self.transientEditingOverlayIndexPaths[kJSQCollectionUpdateTypeDelete] addObject:updateItem.indexPathBeforeUpdate];
+                [self.collectionView layoutWillDeleteItemAtIndexPath:updateItem.indexPathBeforeUpdate];
+                break;
+            case UICollectionUpdateActionMove:
+                if ([self.editableIndexPaths containsObject:updateItem.indexPathBeforeUpdate]) {
+                    [self.editableIndexPaths addObject:updateItem.indexPathAfterUpdate];
+                    [self.editableIndexPaths removeObject:updateItem.indexPathBeforeUpdate];
+                    [self.transientEditingOverlayIndexPaths[kJSQCollectionUpdateTypeDelete] addObject:updateItem.indexPathBeforeUpdate];
+                    [self.transientEditingOverlayIndexPaths[kJSQCollectionUpdateTypeInsert] addObject:updateItem.indexPathAfterUpdate];
+                    [self.collectionView layoutWillMoveItemAtIndexPath:updateItem.indexPathBeforeUpdate toIndexPath:updateItem.indexPathAfterUpdate];
+                }
+                break;
+            default:
+                break;
+        }
+    }];
+}
+
+-(NSArray<NSIndexPath *> *)indexPathsToInsertForSupplementaryViewOfKind:(NSString *)elementKind
+{
+    if(![elementKind isEqualToString:kJSQCollectionElementKindEditOverlay]) {
+        return [super indexPathsToInsertForSupplementaryViewOfKind:elementKind];
+    }
+    
+    return self.transientEditingOverlayIndexPaths[kJSQCollectionUpdateTypeInsert].copy;
+}
+
+-(NSArray<NSIndexPath *> *)indexPathsToDeleteForSupplementaryViewOfKind:(NSString *)elementKind
+{
+    if(![elementKind isEqualToString:kJSQCollectionElementKindEditOverlay]) {
+        return [super indexPathsToDeleteForSupplementaryViewOfKind:elementKind];
+    }
+    
+    return self.transientEditingOverlayIndexPaths[kJSQCollectionUpdateTypeDelete].copy;
+}
+
+-(void)finalizeCollectionViewUpdates
+{
+    [super finalizeCollectionViewUpdates];
+    [self.transientEditingOverlayIndexPaths[kJSQCollectionUpdateTypeInsert] removeAllObjects];
+    [self.transientEditingOverlayIndexPaths[kJSQCollectionUpdateTypeDelete] removeAllObjects];
+
+}
+
 
 #pragma mark - Invalidation utilities
 
@@ -390,6 +526,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 {
     [self.bubbleSizeCalculator prepareForResettingLayout:self];
     [self jsq_resetDynamicAnimator];
+    [self.editableIndexPaths removeAllObjects];
 }
 
 - (void)jsq_resetDynamicAnimator
@@ -432,6 +569,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     CGSize messageBubbleSize = [self messageBubbleSizeForItemAtIndexPath:indexPath];
     
     layoutAttributes.messageBubbleContainerViewWidth = messageBubbleSize.width;
+    layoutAttributes.messageBubbleContainerViewHeight = messageBubbleSize.height;
     
     layoutAttributes.textViewFrameInsets = self.messageBubbleTextViewFrameInsets;
     
@@ -454,7 +592,41 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     layoutAttributes.cellBottomLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
                                                                                    layout:self
                                                       heightForCellBottomLabelAtIndexPath:indexPath];
+
+    if (self.editing && [self.editableIndexPaths containsObject:layoutAttributes.indexPath]) {
+        CGFloat offset = [self.collectionView.delegate collectionView:self.collectionView
+                                                               layout:self
+                                      editingOffsetForCellAtIndexPath:indexPath];
+        layoutAttributes.frame = CGRectOffset(layoutAttributes.frame, offset, 0);
+    }
 }
+
+- (JSQMessagesCollectionViewLayoutAttributes*)jsq_createEditingOverlayAttributesForCellAttributes:(JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes
+{
+    JSQMessagesCollectionViewLayoutAttributes * attributes = [[[self class] layoutAttributesClass] layoutAttributesForSupplementaryViewOfKind:kJSQCollectionElementKindEditOverlay
+                                                                                                                                withIndexPath:layoutAttributes.indexPath];
+
+    attributes.zIndex = layoutAttributes.zIndex + 1;
+
+    CGFloat offset = [self.collectionView.delegate collectionView:self.collectionView
+                                                           layout:self
+                                  editingOffsetForCellAtIndexPath:attributes.indexPath];
+
+    attributes.frame                            = CGRectOffset(layoutAttributes.frame, -offset, 0);
+    attributes.messageBubbleContainerViewWidth  = layoutAttributes.messageBubbleContainerViewWidth;
+    attributes.messageBubbleContainerViewHeight = layoutAttributes.messageBubbleContainerViewHeight;
+    attributes.textViewFrameInsets              = layoutAttributes.textViewFrameInsets;
+    attributes.textViewTextContainerInsets      = layoutAttributes.textViewTextContainerInsets;
+    attributes.messageBubbleFont                = layoutAttributes.messageBubbleFont;
+    attributes.incomingAvatarViewSize           = layoutAttributes.incomingAvatarViewSize;
+    attributes.outgoingAvatarViewSize           = layoutAttributes.outgoingAvatarViewSize;
+    attributes.cellTopLabelHeight               = layoutAttributes.cellTopLabelHeight;
+    attributes.messageBubbleTopLabelHeight      = layoutAttributes.messageBubbleTopLabelHeight;
+    attributes.cellBottomLabelHeight            = layoutAttributes.cellBottomLabelHeight;
+
+    return attributes;
+}
+
 
 #pragma mark - Spring behavior utilities
 

@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface JSQMessagesViewController : UIViewController <JSQMessagesCollectionViewDataSource,
                                                          JSQMessagesCollectionViewDelegateFlowLayout,
+                                                         JSQMessagesEditButtonDelegate,
                                                          UITextViewDelegate>
 
 /**
@@ -135,6 +136,19 @@ NS_ASSUME_NONNULL_BEGIN
  *  to the bottom of the collection view in order to see the typing indicator. You may use `scrollToBottomAnimated:` for this.
  */
 @property (assign, nonatomic) BOOL showTypingIndicator;
+
+
+/**
+ *  Turn editing mode on/off
+ *  Switching mode off will clean up 'editingIndexPaths'
+ */
+@property (assign, nonatomic) BOOL editing;
+
+/**
+ *  Selected index paths for editing mode.
+ */
+@property (nonatomic, strong) NSArray<NSIndexPath*> *editingIndexPaths;
+
 
 /**
  *  Specifies whether or not the view controller should show the "load earlier messages" header view.
@@ -256,6 +270,11 @@ NS_ASSUME_NONNULL_BEGIN
  * this method to specialize the decision logic.
  */
 - (BOOL)isOutgoingMessage:(id<JSQMessageData>)messageItem;
+
+/**
+ *  Called after 'editing' value is set to False
+ */
+- (void)finishedEditing;
 
 /**
  * Scrolls the collection view so that the cell at the specified indexPath is completely visible above the `inputToolbar`.

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1F0EFE0F1AC23D7E003FF3DB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EFE0E1AC23D7E003FF3DB /* MobileCoreServices.framework */; };
+		2745E8251CF2DC16008ED701 /* JSQMessagesEditCollectionOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2745E8241CF2DC16008ED701 /* JSQMessagesEditCollectionOverlayView.m */; };
+		2745E8271CF2DC1E008ED701 /* JSQMessagesEditCollectionOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2745E8261CF2DC1E008ED701 /* JSQMessagesEditCollectionOverlayView.xib */; };
 		50B7F5A81CA401FA009A44F5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50B7F5AA1CA401FA009A44F5 /* Localizable.strings */; };
 		54271E3B1C90469100294290 /* jsq_messages_sample.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 54271E3A1C90469100294290 /* jsq_messages_sample.m4a */; };
 		54271E3E1C905B9200294290 /* JSQAudioMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 54271E3D1C905B9200294290 /* JSQAudioMediaItem.m */; };
@@ -122,6 +124,9 @@
 
 /* Begin PBXFileReference section */
 		1F0EFE0E1AC23D7E003FF3DB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		2745E8231CF2DC16008ED701 /* JSQMessagesEditCollectionOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesEditCollectionOverlayView.h; sourceTree = "<group>"; };
+		2745E8241CF2DC16008ED701 /* JSQMessagesEditCollectionOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesEditCollectionOverlayView.m; sourceTree = "<group>"; };
+		2745E8261CF2DC1E008ED701 /* JSQMessagesEditCollectionOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesEditCollectionOverlayView.xib; sourceTree = "<group>"; };
 		50B7F5A51CA3FF4E009A44F5 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Main.strings; sourceTree = "<group>"; };
 		50B7F5A91CA401FA009A44F5 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
 		50B7F5AB1CA40202009A44F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -542,6 +547,9 @@
 				88A25FA219D8E01A00924534 /* JSQMessagesTypingIndicatorFooterView.xib */,
 				BF10D6A81D062AD10072D215 /* JSQMessagesTypingView.h */,
 				BF10D6A91D062AD10072D215 /* JSQMessagesTypingView.m */,
+				2745E8231CF2DC16008ED701 /* JSQMessagesEditCollectionOverlayView.h */,
+				2745E8241CF2DC16008ED701 /* JSQMessagesEditCollectionOverlayView.m */,
+				2745E8261CF2DC1E008ED701 /* JSQMessagesEditCollectionOverlayView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -721,6 +729,7 @@
 				88A25FBC19D8E01A00924534 /* JSQMessagesViewController.xib in Resources */,
 				88A25FD819D8E01A00924534 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				88A25F3919D8DF2500924534 /* Main.storyboard in Resources */,
+				2745E8271CF2DC1E008ED701 /* JSQMessagesEditCollectionOverlayView.xib in Resources */,
 				88A25FD419D8E01A00924534 /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -753,6 +762,7 @@
 				88A25FCA19D8E01A00924534 /* JSQMessagesCollectionView.m in Sources */,
 				88A25FD219D8E01A00924534 /* JSQMessagesLabel.m in Sources */,
 				88445B4019E1B4470014F889 /* JSQLocationMediaItem.m in Sources */,
+				2745E8251CF2DC16008ED701 /* JSQMessagesEditCollectionOverlayView.m in Sources */,
 				88A25FC619D8E01A00924534 /* JSQMessagesAvatarImage.m in Sources */,
 				88A25FD519D8E01A00924534 /* JSQMessagesToolbarContentView.m in Sources */,
 				88A25FC119D8E01A00924534 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,

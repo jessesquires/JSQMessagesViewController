@@ -22,6 +22,7 @@
 #import "JSQMessagesCollectionViewDelegateFlowLayout.h"
 #import "JSQMessagesCollectionViewDataSource.h"
 #import "JSQMessagesCollectionViewCell.h"
+#import "JSQMessagesEditCollectionOverlayView.h"
 
 @class JSQMessagesTypingIndicatorFooterView;
 @class JSQMessagesLoadEarlierHeaderView;
@@ -33,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  The `JSQMessagesCollectionView` class manages an ordered collection of message data items and presents
  *  them using a specialized layout for messages.
  */
-@interface JSQMessagesCollectionView : UICollectionView <JSQMessagesCollectionViewCellDelegate>
+@interface JSQMessagesCollectionView : UICollectionView <JSQMessagesCollectionViewCellDelegate, JSQMessagesEditCollectionOverlayViewDelegate, JSQMessagesEditButtonDelegate>
 
 /**
  *  The object that provides the data for the collection view.
@@ -42,10 +43,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic, nullable) id<JSQMessagesCollectionViewDataSource> dataSource;
 
 /**
- *  The object that acts as the delegate of the collection view. 
+ *  The object that acts as the delegate of the collection view.
  *  The delegate must adopt the `JSQMessagesCollectionViewDelegateFlowLayout` protocol.
  */
-@property (weak, nonatomic, nullable) id<JSQMessagesCollectionViewDelegateFlowLayout> delegate;
+@property (weak, nonatomic, nullable) id<JSQMessagesCollectionViewDelegateFlowLayout, JSQMessagesEditButtonDelegate> delegate;
 
 /**
  *  The object that handles accessory actions for the collection view.
@@ -105,6 +106,29 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return A valid `JSQMessagesLoadEarlierHeaderView` object.
  */
 - (JSQMessagesLoadEarlierHeaderView *)dequeueLoadEarlierMessagesViewHeaderForIndexPath:(NSIndexPath *)indexPath;
+
+
+/**
+ *  Returns a `JSQMessagesEditCollectionOverlayView` object for the specified index path
+ */
+- (JSQMessagesEditCollectionOverlayView *)dequeueEditingOverlayViewForIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  Invoked by JSQCollectionViewlayout to give JSQCollectionView a chance to remove selected item (bulk edit mode)
+ *
+ *  @param indexPath Disappearing item index path
+ */
+-(void) layoutWillDeleteItemAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *   Invoked by JSQCollectionViewlayout to give JSQCollectionView a chance to change selected item values(bulk edit mode)
+ *
+ *  @param indexPath    index path before update
+ *  @param newIndexPath index path after update
+ */
+-(void) layoutWillMoveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)newIndexPath;
+
+
 
 @end
 

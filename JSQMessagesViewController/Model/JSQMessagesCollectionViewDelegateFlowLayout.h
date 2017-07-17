@@ -26,6 +26,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class JSQMessagesEditCollectionOverlayView;
+
 /**
 *  The `JSQMessagesCollectionViewDelegateFlowLayout` protocol defines methods that allow you to
 *  manage additional layout information for the collection view and respond to additional actions on its items.
@@ -119,6 +121,50 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender;
+
+
+/**
+ *  Ask delegate, if item at target index path is editable
+ *
+ *  @param collectionView       The collection view object displaying the flow layout.
+ *  @param collectionViewLayout The layout object requesting the information.
+ *  @param indexPath            The index path of the item.
+ *
+ *  @return YES if item is ediatble, NO otherwise
+ */
+- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView
+                layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout shouldEditItemAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  Asks delegate for offset for editble item at 'indexPath'
+ *
+ *  @param collectionView       The collection view object displaying the flow layout.
+ *  @param collectionViewLayout The layout object requesting the information.
+ *  @param indexPath            The index path of the item.
+ *
+ *  @return Offset for editable item at 'indexPath'
+ */
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout editingOffsetForCellAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  Notify delegate, that selection changed on ediable item
+ *
+ *  @param collectionView       The collection view object displaying the flow layout.
+ *  @param collectionViewLayout The layout object requesting the information.
+ *  @param indexPath            The index path of the item.
+ */
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView editingOverlayAtIndexPath:(NSIndexPath*)indexPath
+        becomeSelected:(BOOL)selected;
+
+/**
+ *  Ask delegate, if the item at the specified index path is selected
+ *
+ *  @param indexPath The index path of the item.
+ *
+ *  @return BOOL selection state of item at 'indexPath'
+ */
+- (BOOL)isEditableItemSelectedAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

@@ -32,6 +32,8 @@
 
 #import "NSString+JSQMessages.h"
 #import "NSBundle+JSQMessages.h"
+#import "UIImage+JSQMessages.h"
+#import "UIColor+JSQMessages.h"
 
 #import <objc/runtime.h>
 
@@ -203,6 +205,27 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     _showTypingIndicator = showTypingIndicator;
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView.collectionViewLayout invalidateLayout];
+}
+
+- (void)setEditing:(BOOL)editing
+{
+    if (_editing == editing) {
+        return;
+    }
+
+    BOOL finishing = _editing && !editing;
+
+    _editing = editing;
+    self.collectionView.collectionViewLayout.editing = editing;
+
+    if (finishing) {
+        [self finishedEditing];
+    }
+
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+        [self.collectionView layoutIfNeeded];
+    }];
 }
 
 - (void)setShowLoadEarlierMessagesHeader:(BOOL)showLoadEarlierMessagesHeader
@@ -432,6 +455,11 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     return [messageSenderId isEqualToString:[self.collectionView.dataSource senderId]];
 }
 
+- (void)finishedEditing
+{
+    // Optionally implement in subclass
+}
+
 #pragma mark - JSQMessages collection view data source
 
 - (NSString *)senderDisplayName
@@ -606,6 +634,15 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     else if (self.showLoadEarlierMessagesHeader && [kind isEqualToString:UICollectionElementKindSectionHeader]) {
         return [collectionView dequeueLoadEarlierMessagesViewHeaderForIndexPath:indexPath];
     }
+    else if ([kind isEqualToString:kJSQCollectionElementKindEditOverlay]) {
+        JSQMessagesEditCollectionOverlayView *view = [collectionView dequeueEditingOverlayViewForIndexPath:indexPath];
+
+        [view configureDisplayingOnLeft:YES
+                               isActive:[self isEditableItemSelectedAtIndexPath:indexPath]
+                      forCollectionView:collectionView];
+
+        return view;
+    }
 
     return nil;
 }
@@ -731,6 +768,43 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
  didTapCellAtIndexPath:(NSIndexPath *)indexPath
          touchLocation:(CGPoint)touchLocation { }
+
+#pragma mark - bulk edit mode support
+
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout editingOffsetForCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+
+    // outgoing messages aren't offsetted
+    return [self isOutgoingMessage:messageData] ? 0.0f : 30.0f;
+}
+
+- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView
+                layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout shouldEditItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (UIImage *)editingActiveImage
+{
+    return [[UIImage jsq_defaultEditingActiveImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+}
+
+- (UIImage *)editingInactiveImage
+{
+    return [[UIImage jsq_defaultEditingInactiveImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+}
+
+- (UIColor *)editingActiveColor
+{
+    return [UIColor jsq_messageBubbleBlueColor];
+}
+
+- (UIColor *)editingInactiveColor
+{
+    return [UIColor jsq_messageBubbleLightGrayColor];
+}
 
 #pragma mark - Input toolbar delegate
 
