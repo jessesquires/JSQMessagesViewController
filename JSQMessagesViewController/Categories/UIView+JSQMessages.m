@@ -17,6 +17,7 @@
 //
 
 #import "UIView+JSQMessages.h"
+#import "Availability.h"
 
 @implementation UIView (JSQMessages)
 
@@ -39,4 +40,13 @@
     [self jsq_pinSubview:subview toEdge:NSLayoutAttributeTrailing];
 }
 
++ (UIUserInterfaceLayoutDirection)jsq_userInterfaceLayoutDirection{
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
+    return [UIView userInterfaceLayoutDirectionForSemanticContentAttribute:UISemanticContentAttributeUnspecified];
+#else
+    return [[UIApplication sharedApplication] userInterfaceLayoutDirection];
+#endif
+}
+
 @end
+

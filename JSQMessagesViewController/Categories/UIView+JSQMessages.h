@@ -37,6 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)jsq_pinAllEdgesOfSubview:(UIView *)subview;
 
++ (UIUserInterfaceLayoutDirection)jsq_userInterfaceLayoutDirection;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

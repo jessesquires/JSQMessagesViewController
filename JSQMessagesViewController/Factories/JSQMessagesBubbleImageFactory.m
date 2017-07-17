@@ -20,7 +20,7 @@
 
 #import "UIImage+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
-
+#import "UIView+JSQMessages.h"
 
 @interface JSQMessagesBubbleImageFactory ()
 
@@ -60,7 +60,7 @@
 {
     return [self initWithBubbleImage:[UIImage jsq_bubbleCompactImage]
                            capInsets:UIEdgeInsetsZero
-                     layoutDirection:[UIApplication sharedApplication].userInterfaceLayoutDirection];
+                     layoutDirection:[UIView jsq_userInterfaceLayoutDirection]];
 }
 
 #pragma mark - Public
