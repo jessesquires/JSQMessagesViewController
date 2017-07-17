@@ -26,6 +26,8 @@
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
 
+#import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
+
 #import "UIColor+JSQMessages.h"
 
 
@@ -36,7 +38,9 @@
 @end
 
 
-@implementation JSQMessagesCollectionView
+@implementation JSQMessagesCollectionView {
+    CGSize previousSize;
+}
 
 @dynamic dataSource;
 @dynamic delegate;
@@ -78,6 +82,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
     _typingIndicatorEllipsisColor = [_typingIndicatorMessageBubbleColor jsq_colorByDarkeningColorWithValue:0.3f];
 
     _loadEarlierMessagesHeaderTextColor = [UIColor jsq_messageBubbleBlueColor];
+    previousSize = self.frame.size;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout
@@ -93,6 +98,18 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
 {
     [super awakeFromNib];
     [self jsq_configureCollectionView];
+}
+
+#pragma mark - Overrides
+
+- (void)layoutSubviews {
+    if (!CGSizeEqualToSize(previousSize, self.frame.size)) {
+        JSQMessagesCollectionViewFlowLayoutInvalidationContext *context = [JSQMessagesCollectionViewFlowLayoutInvalidationContext context];
+        context.invalidateFlowLayoutMessagesCache = YES;
+        [self.collectionViewLayout invalidateLayoutWithContext:context];
+        previousSize = self.frame.size;
+    }
+    [super layoutSubviews];
 }
 
 #pragma mark - Typing indicator
