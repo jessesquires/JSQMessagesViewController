@@ -241,7 +241,6 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     if (!self.inputToolbar.contentView.textView.hasText) {
         self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
     }
-    [self.view layoutIfNeeded];
     [self.collectionView.collectionViewLayout invalidateLayout];
 
     if (self.automaticallyScrollsToMostRecentMessage) {
@@ -865,7 +864,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 - (void)jsq_updateCollectionViewInsets
 {
     const CGFloat top = self.additionalContentInset.top;
-    const CGFloat bottom = CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame) + self.additionalContentInset.bottom;
+    const CGFloat bottom = self.inputToolbar.frame.size.height + self.additionalContentInset.bottom;
     [self jsq_setCollectionViewInsetsTopValue:top bottomValue:bottom];
 }
 
@@ -874,6 +873,11 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     UIEdgeInsets insets = UIEdgeInsetsMake(self.topLayoutGuide.length + top, 0.0f, bottom, 0.0f);
     self.collectionView.contentInset = insets;
     self.collectionView.scrollIndicatorInsets = insets;
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [self jsq_updateCollectionViewInsets];
 }
 
 - (BOOL)jsq_isMenuVisible
