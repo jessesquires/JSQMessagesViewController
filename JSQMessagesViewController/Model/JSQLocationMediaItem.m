@@ -107,25 +107,27 @@
                       NSLog(@"%s Error creating map snapshot: %@", __PRETTY_FUNCTION__, error);
                       return;
                   }
-                  
-                  MKAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:nil];
-                  CGPoint coordinatePoint = [snapshot pointForCoordinate:location.coordinate];
-                  UIImage *image = snapshot.image;
-                  
-                  coordinatePoint.x += pin.centerOffset.x - (CGRectGetWidth(pin.bounds) / 2.0);
-                  coordinatePoint.y += pin.centerOffset.y - (CGRectGetHeight(pin.bounds) / 2.0);
-                  
-                  UIGraphicsBeginImageContextWithOptions(image.size, YES, image.scale);
-                  {
-                      [image drawAtPoint:CGPointZero];
-                      [pin.image drawAtPoint:coordinatePoint];
-                      self.cachedMapSnapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-                  }
-                  UIGraphicsEndImageContext();
-                  
-                  if (completion) {
-                      dispatch_async(dispatch_get_main_queue(), completion);
-                  }
+
+                  dispatch_async(dispatch_get_main_queue(), ^{
+                      MKAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:nil];
+                      CGPoint coordinatePoint = [snapshot pointForCoordinate:location.coordinate];
+                      UIImage *image = snapshot.image;
+
+                      coordinatePoint.x += pin.centerOffset.x - (CGRectGetWidth(pin.bounds) / 2.0);
+                      coordinatePoint.y += pin.centerOffset.y - (CGRectGetHeight(pin.bounds) / 2.0);
+
+                      UIGraphicsBeginImageContextWithOptions(image.size, YES, image.scale);
+                      {
+                          [image drawAtPoint:CGPointZero];
+                          [pin.image drawAtPoint:coordinatePoint];
+                          self.cachedMapSnapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+                      }
+                      UIGraphicsEndImageContext();
+
+                      if (completion) {
+                          completion();
+                      }
+                  });
               }];
 }
 
