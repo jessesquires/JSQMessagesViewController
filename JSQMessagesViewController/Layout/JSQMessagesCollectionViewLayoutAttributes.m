@@ -125,8 +125,9 @@
 
 #pragma mark - NSCopying
 
-- (instancetype)copyWithZone:(NSZone *)zone
+- (id)copyWithZone:(NSZone *)zone
 {
+
     JSQMessagesCollectionViewLayoutAttributes *copy = [super copyWithZone:zone];
     
     if (copy.representedElementCategory != UICollectionElementCategoryCell) {
