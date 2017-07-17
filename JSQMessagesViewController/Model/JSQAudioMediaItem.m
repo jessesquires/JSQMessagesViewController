@@ -33,14 +33,15 @@
 
 @property (strong, nonatomic) UIProgressView *progressView;
 @property (strong, nonatomic) UILabel *progressLabel;
-@property (strong, nonatomic) NSTimer *progressTimer;
 
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 
 @end
 
 
-@implementation JSQAudioMediaItem
+@implementation JSQAudioMediaItem {
+    BOOL progressTimerIsRunning;
+}
 
 #pragma mark - Initialization
 
@@ -50,6 +51,7 @@
 
     self = [super init];
     if (self) {
+        progressTimerIsRunning = NO;
         _cachedMediaView = nil;
         _audioData = [audioData copy];
         _audioViewAttributes = audioViewAttributes;
@@ -86,7 +88,6 @@
     _playButton = nil;
     _progressView = nil;
     _progressLabel = nil;
-    [self stopProgressTimer];
 
     _cachedMediaView = nil;
     [super clearCachedMediaViews];
@@ -116,25 +117,24 @@
 
 - (void)startProgressTimer
 {
-    self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
-                                                          target:self
-                                                        selector:@selector(updateProgressTimer:)
-                                                        userInfo:nil
-                                                         repeats:YES];
+    if (!progressTimerIsRunning) {
+        [self updateProgress];
+        progressTimerIsRunning = YES;
+    }
 }
 
-- (void)stopProgressTimer
-{
-    [_progressTimer invalidate];
-    _progressTimer = nil;
-}
-
-- (void)updateProgressTimer:(NSTimer *)sender
+- (void)updateProgress
 {
     if (self.audioPlayer.playing) {
         self.progressView.progress = self.audioPlayer.currentTime / self.audioPlayer.duration;
         self.progressLabel.text = [self timestampString:self.audioPlayer.currentTime
                                             forDuration:self.audioPlayer.duration];
+        __weak typeof(self) weakSelf = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf updateProgress];
+        });
+    } else {
+        progressTimerIsRunning = NO;
     }
 }
 
@@ -176,7 +176,6 @@
 
     if (self.audioPlayer.playing) {
         self.playButton.selected = NO;
-        [self stopProgressTimer];
         [self.audioPlayer stop];
     }
     else {
@@ -189,8 +188,8 @@
                         }
                         completion:nil];
 
-        [self startProgressTimer];
         [self.audioPlayer play];
+        [self startProgressTimer];
     }
 }
 
@@ -200,7 +199,6 @@
                        successfully:(BOOL)flag {
 
     // set progress to full, then fade back to the default state
-    [self stopProgressTimer];
     self.progressView.progress = 1;
     [UIView transitionWithView:self.cachedMediaView
                       duration:.2
