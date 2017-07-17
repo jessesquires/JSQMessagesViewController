@@ -36,7 +36,19 @@
 
 + (NSString *)jsq_localizedStringForKey:(NSString *)key
 {
-    return NSLocalizedStringFromTableInBundle(key, @"JSQMessages", [NSBundle jsq_messagesAssetBundle], nil);
+    NSString *value = NSLocalizedStringFromTableInBundle(key, @"JSQMessages", [NSBundle jsq_messagesAssetBundle], nil);
+    
+    if ([value isEqualToString:key]) {
+        // This translation is partial, and the key we're looking up is missing
+        // Fall back to the Base localization
+        if (![[[NSLocale preferredLanguages] objectAtIndex:0] isEqualToString:@"en"]) {
+            NSString *baseTranslationPath = [[NSBundle jsq_messagesAssetBundle] pathForResource:@"Base" ofType:@"lproj"];
+            NSBundle *baseTranslationBundle = [NSBundle bundleWithPath:baseTranslationPath];
+            value = [baseTranslationBundle localizedStringForKey:key value:@"" table:@"JSQMessages"];
+        }
+    }
+    
+    return value;
 }
 
 @end
