@@ -72,6 +72,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     else {
         _messageBubbleLeftRightMargin = 50.0f;
     }
+    _messageBubbleTopLabelInset = 5.0f;
     
     _messageBubbleTextViewFrameInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 6.0f);
     _messageBubbleTextViewTextContainerInsets = UIEdgeInsetsMake(7.0f, 14.0f, 7.0f, 14.0f);
@@ -192,6 +193,15 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     }
     
     _outgoingAvatarViewSize = outgoingAvatarViewSize;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setMessageBubbleTopLabelInset:(CGFloat)messageBubbleTopLabelInset {
+    if (_messageBubbleTopLabelInset == messageBubbleTopLabelInset) {
+        return;
+    }
+    
+    _messageBubbleTopLabelInset = messageBubbleTopLabelInset;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 

@@ -165,6 +165,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) UIEdgeInsets messageBubbleTextViewTextContainerInsets;
 
 /**
+ *  The inset of the message bubble top label. This is used to align the label 
+ *  with the body of the message bubble in cases where it has a "tail" 
+ *  projecting out to either side.
+ *  The specified value should be positive.
+ *
+ *  @discussion The default value is 5.0f.
+ *
+ *  @warning Adjusting this value is an advanced endeavour and not recommended.
+ *  You will only need to adjust this value should you choose to provide your own bubble image assets.
+ */
+@property (assign, nonatomic) CGFloat messageBubbleTopLabelInset;
+
+/**
  *  The size of the avatar image view for incoming messages.
  *
  *  @discussion The default value is `(30.0f, 30.0f)`. Set to `CGSizeZero` to remove incoming avatars.
