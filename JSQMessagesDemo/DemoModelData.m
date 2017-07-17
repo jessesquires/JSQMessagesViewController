@@ -130,6 +130,8 @@
     
     [self addPhotoMediaMessage];
     [self addAudioMediaMessage];
+    [self addVideoMediaMessage];
+    [self addVideoMediaMessageWithThumbnail];
     
     /**
      *  Setting to load extra messages for testing/demo
