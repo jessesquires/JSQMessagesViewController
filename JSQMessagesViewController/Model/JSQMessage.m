@@ -40,7 +40,7 @@
 {
     NSParameterAssert(text != nil);
 
-    self = [self initWithSenderId:senderId senderDisplayName:senderDisplayName date:date isMedia:NO];
+    self = [self initWithSenderId:senderId senderDisplayName:senderDisplayName date:date isMedia:NO isPaginated:NO];
     if (self) {
         _text = [text copy];
     }
@@ -64,7 +64,7 @@
 {
     NSParameterAssert(media != nil);
 
-    self = [self initWithSenderId:senderId senderDisplayName:senderDisplayName date:date isMedia:YES];
+    self = [self initWithSenderId:senderId senderDisplayName:senderDisplayName date:date isMedia:YES isPaginated:NO];
     if (self) {
         _media = media;
     }
@@ -75,6 +75,7 @@
                senderDisplayName:(NSString *)senderDisplayName
                             date:(NSDate *)date
                          isMedia:(BOOL)isMedia
+                     isPaginated:(BOOL)isPaginaned
 {
     NSParameterAssert(senderId != nil);
     NSParameterAssert(senderDisplayName != nil);
@@ -86,6 +87,7 @@
         _senderDisplayName = [senderDisplayName copy];
         _date = [date copy];
         _isMediaMessage = isMedia;
+        _isPaginatedMessage = isPaginaned;
     }
     return self;
 }
@@ -150,6 +152,7 @@
         _isMediaMessage = [aDecoder decodeBoolForKey:NSStringFromSelector(@selector(isMediaMessage))];
         _text = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(text))];
         _media = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(media))];
+        _isPaginatedMessage = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(isPaginatedMessage))];
     }
     return self;
 }
@@ -161,6 +164,7 @@
     [aCoder encodeObject:self.date forKey:NSStringFromSelector(@selector(date))];
     [aCoder encodeBool:self.isMediaMessage forKey:NSStringFromSelector(@selector(isMediaMessage))];
     [aCoder encodeObject:self.text forKey:NSStringFromSelector(@selector(text))];
+    [aCoder encodeBool:self.isPaginatedMessage forKey:NSStringFromSelector(@selector(isPaginatedMessage))];
 
     if ([self.media conformsToProtocol:@protocol(NSCoding)]) {
         [aCoder encodeObject:self.media forKey:NSStringFromSelector(@selector(media))];

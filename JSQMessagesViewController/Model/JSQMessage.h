@@ -52,6 +52,13 @@
 @property (assign, nonatomic, readonly) BOOL isMediaMessage;
 
 /**
+ *  Returns a boolean value specifying whether or not the message consists of paginated content - e.g.: message cards.
+ *  If `NO`, the message doesn't have paginated content. If `YES`, the message contains pages of content.
+ *  The value of this property depends on how the object was initialized.
+ */
+@property (assign, nonatomic, readonly) BOOL isPaginatedMessage;
+
+/**
  *  Returns the body text of the message, or `nil` if the message is a media message.
  *  That is, if `isMediaMessage` is equal to `YES` then this value will be `nil`.
  */
