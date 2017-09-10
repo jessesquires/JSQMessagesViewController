@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,8 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cell top label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxM-YD-sVG" userLabel="Cell top label" customClass="JSQMessagesLabel">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="9oK-E7-iXA"/>
                         </constraints>
@@ -25,8 +25,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bubble top label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p52-YN-yLu" userLabel="Bubble top label" customClass="JSQMessagesLabel">
-                        <rect key="frame" x="0.0" y="20" width="320" height="20"/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="8TB-va-f8L"/>
                         </constraints>
@@ -35,39 +34,40 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2zh-vR-QJW" userLabel="Bubble container">
-                        <rect key="frame" x="40" y="40" width="244" height="94"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2qm-c6-OZf" userLabel="Bubble Image View">
-                                <rect key="frame" x="0.0" y="0.0" width="244" height="94"/>
-                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2qm-c6-OZf" userLabel="Bubble Image View"/>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vLY-aM-0Dr" customClass="JSQMessagesCellTextView">
-                                <rect key="frame" x="0.0" y="0.0" width="238" height="94"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="watch.png" translatesAutoresizingMaskIntoConstraints="NO" id="WGb-3b-mql">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="13" id="uPG-pU-e9x"/>
+                                    <constraint firstAttribute="width" constant="13" id="vsZ-Iw-QAZ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="vLY-aM-0Dr" firstAttribute="leading" secondItem="2zh-vR-QJW" secondAttribute="leading" id="7rI-Nc-AK3"/>
                             <constraint firstAttribute="trailing" secondItem="2qm-c6-OZf" secondAttribute="trailing" id="AEu-1l-tqh"/>
                             <constraint firstItem="2qm-c6-OZf" firstAttribute="top" secondItem="2zh-vR-QJW" secondAttribute="top" id="DbW-Cx-zOW"/>
                             <constraint firstItem="2qm-c6-OZf" firstAttribute="leading" secondItem="2zh-vR-QJW" secondAttribute="leading" id="H1H-yn-Raq"/>
                             <constraint firstItem="vLY-aM-0Dr" firstAttribute="top" secondItem="2zh-vR-QJW" secondAttribute="top" id="RiG-21-Bqc"/>
-                            <constraint firstAttribute="bottom" secondItem="vLY-aM-0Dr" secondAttribute="bottom" id="UbF-Bl-Q7v"/>
                             <constraint firstAttribute="trailing" secondItem="vLY-aM-0Dr" secondAttribute="trailing" constant="6" id="aVg-yy-8K7"/>
+                            <constraint firstAttribute="bottom" secondItem="WGb-3b-mql" secondAttribute="bottom" constant="3" id="bRK-T1-g8l"/>
                             <constraint firstAttribute="width" constant="244" id="imD-52-K45"/>
+                            <constraint firstItem="WGb-3b-mql" firstAttribute="trailing" secondItem="vLY-aM-0Dr" secondAttribute="trailing" constant="-10" id="k8v-zc-pZN"/>
                             <constraint firstAttribute="bottom" secondItem="2qm-c6-OZf" secondAttribute="bottom" id="lts-Ve-wSh"/>
+                            <constraint firstItem="WGb-3b-mql" firstAttribute="top" secondItem="vLY-aM-0Dr" secondAttribute="bottom" id="p8O-O2-3bH"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X89-B1-aAd" userLabel="Avatar container">
-                        <rect key="frame" x="286" y="100" width="34" height="34"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y9b-D9-Q7W" userLabel="Avatar Image View">
-                                <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
-                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y9b-D9-Q7W" userLabel="Avatar Image View"/>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="y9b-D9-Q7W" secondAttribute="bottom" id="7SX-4t-GAr"/>
                             <constraint firstAttribute="width" constant="34" id="Pkm-tW-k4z"/>
@@ -78,8 +78,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cell bottom label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Uc-dI-YDD" userLabel="Cell bottom label" customClass="JSQMessagesLabel">
-                        <rect key="frame" x="0.0" y="134" width="320" height="20"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="cPs-M4-tjX"/>
                         </constraints>
@@ -88,7 +87,6 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="7Uc-dI-YDD" secondAttribute="trailing" id="1v4-5s-XmK"/>
@@ -114,6 +112,7 @@
                 <outlet property="avatarImageView" destination="y9b-D9-Q7W" id="cZo-SR-S9h"/>
                 <outlet property="cellBottomLabel" destination="7Uc-dI-YDD" id="gVD-C2-UcZ"/>
                 <outlet property="cellBottomLabelHeightConstraint" destination="cPs-M4-tjX" id="b5k-6e-iA8"/>
+                <outlet property="cellIndecatorImage" destination="WGb-3b-mql" id="mqi-P4-TT3"/>
                 <outlet property="cellTopLabel" destination="jxM-YD-sVG" id="acH-pr-spx"/>
                 <outlet property="cellTopLabelHeightConstraint" destination="9oK-E7-iXA" id="MZM-kV-2dI"/>
                 <outlet property="messageBubbleContainerView" destination="2zh-vR-QJW" id="pu0-GU-eZl"/>
@@ -123,11 +122,18 @@
                 <outlet property="messageBubbleTopLabelHeightConstraint" destination="8TB-va-f8L" id="FNt-BS-Wxi"/>
                 <outlet property="textView" destination="vLY-aM-0Dr" id="YEp-mW-xIY"/>
                 <outlet property="textViewAvatarHorizontalSpaceConstraint" destination="aVg-yy-8K7" id="CIe-Bi-eng"/>
-                <outlet property="textViewBottomVerticalSpaceConstraint" destination="UbF-Bl-Q7v" id="KHP-49-3u4"/>
                 <outlet property="textViewMarginHorizontalSpaceConstraint" destination="7rI-Nc-AK3" id="ciu-j6-IpH"/>
                 <outlet property="textViewTopVerticalSpaceConstraint" destination="RiG-21-Bqc" id="i3j-z0-feE"/>
             </connections>
             <point key="canvasLocation" x="371" y="145"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="watch.png" width="39" height="45"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>

@@ -162,7 +162,7 @@
 @property (weak, nonatomic) UIView *mediaView;
 
 /**
- *  Returns the underlying gesture recognizer for tap gestures in the avatarImageView of the cell.
+ *  Returns the underlying gesture recognizer for tasp gestures in the avatarImageView of the cell.
  *  This gesture handles the tap event for the avatarImageView and notifies the cell's delegate.
  */
 @property (weak, nonatomic, readonly) UITapGestureRecognizer *tapGestureRecognizer;
