@@ -114,6 +114,8 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     else {
         self.contentView.leftBarButtonItem.enabled = hasText;
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"textChanged" object:[NSNumber numberWithBool:hasText]];
+
 }
 
 #pragma mark - Key-value observing

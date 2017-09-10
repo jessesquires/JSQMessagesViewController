@@ -556,7 +556,23 @@ JSQMessagesKeyboardControllerDelegate>
     cell.delegate = collectionView;
 
     if (!isMediaMessage) {
-        cell.textView.text = [messageItem text];
+        if (isOutgoingMessage) {
+            NSString* messageStatus = [messageItem MessageStatus];
+            cell.textView.text = [messageItem text];
+            UIImage* statusImage;
+            if ([messageStatus isEqualToString:@"Sending"]) {//Sending
+                statusImage = [UIImage imageNamed:@"watch.png"];
+            }else if ([messageStatus isEqualToString:@"Sent"]) {//Sent
+                statusImage = [UIImage imageNamed:@"oneTick.png"];
+            }else if ([messageStatus isEqualToString:@"Delevered"]) {//Delevered
+                statusImage = [UIImage imageNamed:@"twoTicks.png"];
+            }else if ([messageStatus isEqualToString:@"Read"]) {//Read
+               statusImage =  [UIImage imageNamed:@"twoTicksColored.png"];
+            }
+            [[(JSQMessagesCollectionViewCellOutgoing*)cell cellIndecatorImage] setImage:statusImage];
+        }else{
+            cell.textView.text = [messageItem text];
+        }
 
         if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
             //  workaround for iOS 7 textView data detectors bug

@@ -29,4 +29,6 @@
     self.cellBottomLabel.textAlignment = NSTextAlignmentRight;
 }
 
+- (IBAction)adjustDocumentPrivacySetting:(UIButton *)sender {
+}
 @end

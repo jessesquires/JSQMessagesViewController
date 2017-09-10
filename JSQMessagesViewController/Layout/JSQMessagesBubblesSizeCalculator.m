@@ -120,6 +120,7 @@
                                                              options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
                                                           attributes:@{ NSFontAttributeName : layout.messageBubbleFont }
                                                              context:nil];
+        stringRect.size.height = stringRect.size.height+15;
 
         CGSize stringSize = CGRectIntegral(stringRect).size;
 

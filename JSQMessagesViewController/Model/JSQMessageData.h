@@ -44,6 +44,7 @@
  *  @warning You must not return `nil` from this method. This value must be unique.
  */
 - (NSString *)senderId;
+- (NSString *)MessageStatus;
 
 /**
  *  @return The display name for the user who sent the message.
