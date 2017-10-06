@@ -182,4 +182,8 @@
                        withSender:sender];
 }
 
+- (void)messagesCollectionViewDidTap
+{
+    [self.delegate collectionViewDidTap:self];
+}
 @end

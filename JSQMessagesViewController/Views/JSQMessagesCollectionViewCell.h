@@ -72,6 +72,7 @@
  */
 - (void)messagesCollectionViewCell:(JSQMessagesCollectionViewCell *)cell didPerformAction:(SEL)action withSender:(id)sender;
 
+- (void)messagesCollectionViewDidTap;
 @end
 
 

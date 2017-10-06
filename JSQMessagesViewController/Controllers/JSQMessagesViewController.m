@@ -758,6 +758,10 @@ JSQMessagesKeyboardControllerDelegate>
  didTapCellAtIndexPath:(NSIndexPath *)indexPath
          touchLocation:(CGPoint)touchLocation { }
 
+- (void)collectionViewDidTap:(JSQMessagesCollectionView *)collectionView {
+    [self.inputToolbar.contentView.textView resignFirstResponder];
+}
+
 #pragma mark - Input toolbar delegate
 
 - (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar didPressLeftBarButton:(UIButton *)sender
