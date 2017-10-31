@@ -1,5 +1,8 @@
+> This library is ⚠️ [deprecated](https://www.jessesquires.com/blog/officially-deprecating-jsqmessagesviewcontroller/) ⚠️ and is **only** accepting pull requests for critical bug fixes. Consider using [MessageKit](https://github.com/MessageKit/MessageKit) for new projects.
+
 ## Pull request checklist
 
+- [ ] I understand that this library is ⚠️ [deprecated](https://www.jessesquires.com/blog/officially-deprecating-jsqmessagesviewcontroller/) ⚠️ and is **only** accepting pull requests for critical bug fixes.
 - [ ] All tests pass. 
 - [ ] Demo project builds and runs.
 - [ ] I have resolved merge conflicts.
