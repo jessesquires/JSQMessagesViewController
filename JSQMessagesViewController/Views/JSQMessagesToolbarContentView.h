@@ -121,4 +121,10 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
  */
 + (UINib *)nib;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *imageBarButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraBarButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *stickerBarButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sendBarButton;
+
+
 @end
