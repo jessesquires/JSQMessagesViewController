@@ -1,8 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <deployment version="2304" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JSQMessagesViewController">
@@ -21,7 +26,7 @@
             <subviews>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="l9u-2b-4LK" customClass="JSQMessagesCollectionView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <collectionViewLayout key="collectionViewLayout" id="dZl-7C-LHR" customClass="JSQMessagesCollectionViewFlowLayout"/>
                     <cells/>
                 </collectionView>
@@ -33,17 +38,18 @@
                     <items/>
                 </toolbar>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="BoD-Az-3DM" secondAttribute="trailing" id="7xc-Ha-asg"/>
                 <constraint firstItem="l9u-2b-4LK" firstAttribute="leading" secondItem="mUa-cS-ru4" secondAttribute="leading" id="MmF-oh-Y75"/>
                 <constraint firstAttribute="trailing" secondItem="l9u-2b-4LK" secondAttribute="trailing" id="O9u-TA-A0e"/>
-                <constraint firstAttribute="bottom" secondItem="l9u-2b-4LK" secondAttribute="bottom" id="Re7-WW-UmS"/>
+                <constraint firstItem="dZ1-1f-5KF" firstAttribute="bottom" secondItem="l9u-2b-4LK" secondAttribute="bottom" id="Re7-WW-UmS"/>
                 <constraint firstItem="l9u-2b-4LK" firstAttribute="top" secondItem="mUa-cS-ru4" secondAttribute="top" id="dCQ-DM-Wdj"/>
-                <constraint firstAttribute="bottom" secondItem="BoD-Az-3DM" secondAttribute="bottom" id="rHs-6q-NX4"/>
+                <constraint firstItem="dZ1-1f-5KF" firstAttribute="bottom" secondItem="BoD-Az-3DM" secondAttribute="bottom" id="rHs-6q-NX4"/>
                 <constraint firstItem="BoD-Az-3DM" firstAttribute="leading" secondItem="mUa-cS-ru4" secondAttribute="leading" id="ts7-8f-0lH"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
+            <viewLayoutGuide key="safeArea" id="dZ1-1f-5KF"/>
         </view>
     </objects>
 </document>
