@@ -44,6 +44,8 @@
  *  This view controller is the toolbar's delegate.
  */
 @property (weak, nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
+- (void)jsq_setToolbarBottomLayoutGuideConstant:(CGFloat)constant;
+- (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame;
 
 /**
  *  Returns the keyboard controller object used to manage the software keyboard.
