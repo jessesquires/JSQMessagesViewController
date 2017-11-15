@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -91,10 +92,24 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O42-k0-IIR">
+                        <rect key="frame" x="286" y="65" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="O42-k0-IIR" secondAttribute="height" multiplier="1:1" id="QEd-hx-Kfq"/>
+                            <constraint firstAttribute="height" constant="24" id="mmy-Cd-n1B"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.57999999999999996" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="didTapAccessoryButton:" destination="4lh-CK-yVn" eventType="touchUpInside" id="D8S-UL-Lnl"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="UPz-5x-c1T" firstAttribute="leading" secondItem="4lh-CK-yVn" secondAttribute="leading" id="54r-MX-MGW"/>
+                <constraint firstItem="O42-k0-IIR" firstAttribute="centerY" secondItem="4lh-CK-yVn" secondAttribute="centerY" id="De4-Id-9uc"/>
                 <constraint firstAttribute="trailing" secondItem="UPz-5x-c1T" secondAttribute="trailing" id="G3U-h0-DWS"/>
                 <constraint firstItem="afj-rd-iNv" firstAttribute="centerX" secondItem="4lh-CK-yVn" secondAttribute="centerX" id="Ok6-RS-2bf"/>
                 <constraint firstItem="Ufa-bF-l1Y" firstAttribute="leading" secondItem="4lh-CK-yVn" secondAttribute="leading" id="Z5z-m3-8Ne"/>
@@ -107,9 +122,11 @@
                 <constraint firstItem="Da1-09-wR4" firstAttribute="leading" secondItem="4lh-CK-yVn" secondAttribute="leading" id="jiu-B4-TSD"/>
                 <constraint firstAttribute="bottom" secondItem="UPz-5x-c1T" secondAttribute="bottom" id="nsK-Gh-M3Z"/>
                 <constraint firstItem="UPz-5x-c1T" firstAttribute="top" secondItem="btS-p8-B7Z" secondAttribute="bottom" id="s8G-Je-7GA"/>
+                <constraint firstItem="O42-k0-IIR" firstAttribute="leading" secondItem="btS-p8-B7Z" secondAttribute="trailing" constant="6" id="wwP-Qr-jGf"/>
             </constraints>
             <size key="customSize" width="317" height="245"/>
             <connections>
+                <outlet property="accessoryButton" destination="O42-k0-IIR" id="4yv-Aa-PJt"/>
                 <outlet property="avatarContainerView" destination="Da1-09-wR4" id="tpM-P4-qUR"/>
                 <outlet property="avatarContainerViewHeightConstraint" destination="tZk-AK-JFa" id="tPu-mC-ITh"/>
                 <outlet property="avatarContainerViewWidthConstraint" destination="YwX-fW-Me6" id="5PN-NL-hEP"/>

@@ -18,6 +18,8 @@
 
 #import "JSQMessagesCollectionView.h"
 
+#import "JSQMessagesViewAccessoryButtonDelegate.h"
+
 #import "JSQMessagesCollectionViewFlowLayout.h"
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
@@ -180,6 +182,16 @@
                     performAction:action
                forItemAtIndexPath:indexPath
                        withSender:sender];
+}
+
+- (void)messagesCollectionViewCellDidTapAccessoryButton:(JSQMessagesCollectionViewCell *)cell
+{
+    NSIndexPath *indexPath = [self indexPathForCell:cell];
+    if (indexPath == nil) {
+        return;
+    }
+    
+    [self.accessoryDelegate messageView:self didTapAccessoryButtonAtIndexPath:indexPath];
 }
 
 - (void)messagesCollectionViewDidTap

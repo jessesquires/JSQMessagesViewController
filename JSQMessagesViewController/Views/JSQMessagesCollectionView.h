@@ -25,6 +25,7 @@
 
 @class JSQMessagesTypingIndicatorFooterView;
 @class JSQMessagesLoadEarlierHeaderView;
+@protocol JSQMessagesViewAccessoryButtonDelegate;
 
 
 /**
@@ -44,6 +45,12 @@
  *  The delegate must adopt the `JSQMessagesCollectionViewDelegateFlowLayout` protocol.
  */
 @property (weak, nonatomic) id<JSQMessagesCollectionViewDelegateFlowLayout> delegate;
+
+/**
+ *  The object that handles accessory actions for the collection view.
+ *  It must adopt the `JSQMessagesViewAccessoryButtonDelegate` protocol.
+ */
+@property (weak, nonatomic, nullable) id<JSQMessagesViewAccessoryButtonDelegate> accessoryDelegate;
 
 /**
  *  The layout used to organize the collection view’s items.

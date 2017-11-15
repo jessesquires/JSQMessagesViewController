@@ -17,6 +17,10 @@
 //
 
 #import "DemoMessagesViewController.h"
+#import "JSQMessagesViewAccessoryButtonDelegate.h"
+
+@interface DemoMessagesViewController () <JSQMessagesViewAccessoryButtonDelegate>
+@end
 
 @implementation DemoMessagesViewController
 
@@ -49,6 +53,11 @@
      *  Load up our fake data for the demo
      */
     self.demoData = [[DemoModelData alloc] init];
+    
+    /**
+     *  Set up message accessory button delegate and configuration
+     */
+    self.collectionView.accessoryDelegate = self;
     
     
     /**
@@ -555,6 +564,9 @@
         
         cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
                                               NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
+        
+        [cell.accessoryButton setImage:[UIImage imageNamed:@"demo_avatar_jobs"] forState:UIControlStateNormal];
+        cell.accessoryButton.hidden = NO;
     }
     
     return cell;
@@ -690,6 +702,13 @@
         return NO;
     }
     return YES;
+}
+
+#pragma mark - JSQMessagesViewAccessoryDelegate methods
+
+- (void)messageView:(JSQMessagesCollectionView *)view didTapAccessoryButtonAtIndexPath:(NSIndexPath *)path
+{
+    NSLog(@"Tapped accessory button!");
 }
 
 @end

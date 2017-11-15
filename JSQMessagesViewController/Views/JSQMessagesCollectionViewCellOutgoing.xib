@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -44,11 +45,12 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2qm-c6-OZf" userLabel="Bubble Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="244" height="94"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vLY-aM-0Dr" customClass="JSQMessagesCellTextView">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLY-aM-0Dr" customClass="JSQMessagesCellTextView">
                                 <rect key="frame" x="0.0" y="0.0" width="238" height="94"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -91,6 +93,19 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ll9-jw-nP9">
+                        <rect key="frame" x="10" y="65" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="ll9-jw-nP9" secondAttribute="height" multiplier="1:1" id="ZBK-iN-udk"/>
+                            <constraint firstAttribute="width" constant="24" id="d6D-lp-BfY"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.57999999999999996" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="didTapAccessoryButton:" destination="23f-xH-rkY" eventType="touchUpInside" id="Kg1-sU-oqe"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
@@ -105,11 +120,14 @@
                 <constraint firstAttribute="trailing" secondItem="p52-YN-yLu" secondAttribute="trailing" id="gen-N0-uZj"/>
                 <constraint firstItem="7Uc-dI-YDD" firstAttribute="top" secondItem="X89-B1-aAd" secondAttribute="bottom" id="iiF-tn-5Ir"/>
                 <constraint firstItem="p52-YN-yLu" firstAttribute="top" secondItem="jxM-YD-sVG" secondAttribute="bottom" id="jBD-JV-AWk"/>
+                <constraint firstItem="2zh-vR-QJW" firstAttribute="leading" secondItem="ll9-jw-nP9" secondAttribute="trailing" constant="6" id="k1b-Iq-QBN"/>
+                <constraint firstItem="ll9-jw-nP9" firstAttribute="centerY" secondItem="23f-xH-rkY" secondAttribute="centerY" id="ouw-2k-xQq"/>
                 <constraint firstItem="p52-YN-yLu" firstAttribute="leading" secondItem="23f-xH-rkY" secondAttribute="leading" id="tTj-Mp-0va"/>
                 <constraint firstItem="X89-B1-aAd" firstAttribute="leading" secondItem="2zh-vR-QJW" secondAttribute="trailing" constant="2" id="vMz-Yi-B0w"/>
             </constraints>
             <size key="customSize" width="317" height="245"/>
             <connections>
+                <outlet property="accessoryButton" destination="ll9-jw-nP9" id="MUe-iM-Igc"/>
                 <outlet property="avatarContainerView" destination="X89-B1-aAd" id="WSI-Zc-qIE"/>
                 <outlet property="avatarContainerViewHeightConstraint" destination="tgw-aN-JJu" id="pgV-tY-5Cm"/>
                 <outlet property="avatarContainerViewWidthConstraint" destination="Pkm-tW-k4z" id="Cpe-d3-yiq"/>
