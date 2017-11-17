@@ -94,11 +94,12 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ll9-jw-nP9">
-                        <rect key="frame" x="10" y="65" width="24" height="24"/>
+                        <rect key="frame" x="10" y="110" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="ll9-jw-nP9" secondAttribute="height" multiplier="1:1" id="ZBK-iN-udk"/>
                             <constraint firstAttribute="width" constant="24" id="d6D-lp-BfY"/>
                         </constraints>
+                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <state key="normal">
                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.57999999999999996" colorSpace="calibratedRGB"/>
                         </state>
@@ -121,7 +122,7 @@
                 <constraint firstItem="7Uc-dI-YDD" firstAttribute="top" secondItem="X89-B1-aAd" secondAttribute="bottom" id="iiF-tn-5Ir"/>
                 <constraint firstItem="p52-YN-yLu" firstAttribute="top" secondItem="jxM-YD-sVG" secondAttribute="bottom" id="jBD-JV-AWk"/>
                 <constraint firstItem="2zh-vR-QJW" firstAttribute="leading" secondItem="ll9-jw-nP9" secondAttribute="trailing" constant="6" id="k1b-Iq-QBN"/>
-                <constraint firstItem="ll9-jw-nP9" firstAttribute="centerY" secondItem="23f-xH-rkY" secondAttribute="centerY" id="ouw-2k-xQq"/>
+                <constraint firstItem="ll9-jw-nP9" firstAttribute="bottom" secondItem="y9b-D9-Q7W" secondAttribute="bottom" id="rgq-q1-WlH"/>
                 <constraint firstItem="p52-YN-yLu" firstAttribute="leading" secondItem="23f-xH-rkY" secondAttribute="leading" id="tTj-Mp-0va"/>
                 <constraint firstItem="X89-B1-aAd" firstAttribute="leading" secondItem="2zh-vR-QJW" secondAttribute="trailing" constant="2" id="vMz-Yi-B0w"/>
             </constraints>
