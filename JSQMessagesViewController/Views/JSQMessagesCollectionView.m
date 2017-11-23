@@ -193,9 +193,4 @@
     
     [self.accessoryDelegate messageView:self didTapAccessoryButtonAtIndexPath:indexPath];
 }
-
-- (void)messagesCollectionViewDidTap
-{
-    [self.delegate collectionViewDidTap:self];
-}
 @end

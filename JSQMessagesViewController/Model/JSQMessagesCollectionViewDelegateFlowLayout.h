@@ -118,6 +118,4 @@
  */
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender;
-
-- (void)collectionViewDidTap:(JSQMessagesCollectionView *)collectionView;
 @end

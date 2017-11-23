@@ -169,11 +169,6 @@
     self.showTypingIndicator = !self.showTypingIndicator;
     
     /**
-     *  Scroll to actually view the indicator
-     */
-    [self scrollToBottomAnimated:YES];
-    
-    /**
      *  Copy last sent message, this will be the new "received" message
      */
     JSQMessage *copyMessage = [[self.demoData.messages lastObject] copy];

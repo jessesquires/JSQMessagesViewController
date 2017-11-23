@@ -126,7 +126,6 @@ JSQMessagesKeyboardControllerDelegate>
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
 
 @property (weak, nonatomic) UIView *snapshotView;
 
@@ -184,8 +183,6 @@ JSQMessagesKeyboardControllerDelegate>
     self.inputToolbar.contentView.textView.accessibilityLabel = [NSBundle jsq_localizedStringForKey:@"new_message"];
 
     self.inputToolbar.contentView.textView.delegate = self;
-
-    self.automaticallyScrollsToMostRecentMessage = YES;
 
     self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
     self.outgoingMediaCellIdentifier = [JSQMessagesCollectionViewCellOutgoing mediaCellReuseIdentifier];
@@ -280,13 +277,6 @@ JSQMessagesKeyboardControllerDelegate>
     self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
     [self.view layoutIfNeeded];
     [self.collectionView.collectionViewLayout invalidateLayout];
-
-    if (self.automaticallyScrollsToMostRecentMessage) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self scrollToBottomAnimated:NO];
-            [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-        });
-    }
 
     [self jsq_updateKeyboardTriggerPoint];
 }
@@ -399,10 +389,6 @@ JSQMessagesKeyboardControllerDelegate>
 
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView reloadData];
-
-    if (self.automaticallyScrollsToMostRecentMessage) {
-        [self scrollToBottomAnimated:animated];
-    }
 }
 
 - (void)finishReceivingMessage
@@ -417,23 +403,8 @@ JSQMessagesKeyboardControllerDelegate>
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView reloadData];
 
-    if (self.automaticallyScrollsToMostRecentMessage && ![self jsq_isMenuVisible]) {
-        [self scrollToBottomAnimated:animated];
-    }
-
     UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, [NSBundle jsq_localizedStringForKey:@"new_message_received_accessibility_announcement"]);
 }
-
-- (void)scrollToBottomAnimated:(BOOL)animated
-{
-    if ([self.collectionView numberOfSections] == 0) {
-        return;
-    }
-
-    NSIndexPath *lastCell = [NSIndexPath indexPathForItem:([self.collectionView numberOfItemsInSection:0] - 1) inSection:0];
-    [self scrollToIndexPath:lastCell animated:animated];
-}
-
 
 - (void)scrollToIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated
 {
@@ -758,10 +729,6 @@ JSQMessagesKeyboardControllerDelegate>
  didTapCellAtIndexPath:(NSIndexPath *)indexPath
          touchLocation:(CGPoint)touchLocation { }
 
-- (void)collectionViewDidTap:(JSQMessagesCollectionView *)collectionView {
-    [self.inputToolbar.contentView.textView resignFirstResponder];
-}
-
 #pragma mark - Input toolbar delegate
 
 - (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar didPressLeftBarButton:(UIButton *)sender
@@ -810,10 +777,6 @@ JSQMessagesKeyboardControllerDelegate>
     }
 
     [textView becomeFirstResponder];
-
-    if (self.automaticallyScrollsToMostRecentMessage) {
-        [self scrollToBottomAnimated:YES];
-    }
 }
 
 - (void)textViewDidChange:(UITextView *)textView
@@ -897,9 +860,6 @@ JSQMessagesKeyboardControllerDelegate>
 
             [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:dy];
             [self jsq_updateCollectionViewInsets];
-            if (self.automaticallyScrollsToMostRecentMessage) {
-                [self scrollToBottomAnimated:NO];
-            }
         }
     }
 }

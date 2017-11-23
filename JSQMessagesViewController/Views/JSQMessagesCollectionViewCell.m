@@ -389,8 +389,6 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     else {
         [self.delegate messagesCollectionViewCellDidTapCell:self atPosition:touchPt];
     }
-
-    [self.delegate messagesCollectionViewDidTap];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch

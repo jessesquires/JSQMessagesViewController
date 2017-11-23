@@ -78,8 +78,6 @@
  *  @param cell The cell that the accessory button belongs to.
  */
 - (void)messagesCollectionViewCellDidTapAccessoryButton:(JSQMessagesCollectionViewCell *)cell;
-
-- (void)messagesCollectionViewDidTap;
 @end
 
 
