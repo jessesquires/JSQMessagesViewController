@@ -1,0 +1,47 @@
+fastlane_version "2.45.0"
+default_platform :ios
+
+podspec_path = "JSQMessagesViewController.podspec"
+ynd_pods_spec_repo = {
+  :name => "ynd",
+  :address => "git@bitbucket.org:ynd-consult-gmbh/cocoapods-spec-repo.git"
+}
+
+before_all do  
+  pod_version = version_get_podspec
+  if git_tag_exists(tag: pod_version)
+    UI.user_error!("Version #{pod_version} already exists! Make sure to update!")
+  end
+
+  pod_repo_add(
+    repo_name: ynd_pods_spec_repo[:name], 
+    repo_url: ynd_pods_spec_repo[:address]
+  )
+end
+
+desc "Lint pod by checking podspec"
+lane :lint do
+  pod_lib_lint(
+    allow_warnings:true,
+    sources: [
+      ynd_pods_spec_repo[:address],
+      "https://github.com/CocoaPods/Specs"
+    ]
+  )
+end
+
+desc "Publish pod to YND private podspec repo"
+lane :publish do
+  add_git_tag(tag: version_get_podspec)
+  push_git_tags
+
+  pod_push(
+    path: podspec_path,
+    allow_warnings:true,
+    repo: ynd_pods_spec_repo[:name],
+    sources: [
+      ynd_pods_spec_repo[:address],
+      "https://github.com/CocoaPods/Specs"
+    ]
+  )
+end
