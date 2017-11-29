@@ -70,7 +70,7 @@
     
     NSString *timestampString = [[JSQMessagesTimestampFormatter sharedFormatter] timestampForDate:date];
     
-    XCTAssertEqualObjects(timestampString, @"Jun 6, 2013, 7:06 PM", @"Timestamp string should return expected value");
+    XCTAssertEqualObjects(timestampString, @"Jun 6, 2013 at 7:06 PM", @"Timestamp string should return expected value");
     
     NSAttributedString *timestampAttributedString = [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:date];
     
