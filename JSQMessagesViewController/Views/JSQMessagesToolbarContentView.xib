@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <deployment version="4096" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -39,6 +40,9 @@
                 </textView>
                 <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mlJ-6H-P2N">
                     <rect key="frame" x="0.0" y="44" width="320" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="uDL-eA-rZ5"/>
+                    </constraints>
                     <items>
                         <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="MTh-NZ-6bO"/>
                         <barButtonItem title="照片" id="bxh-Uo-6FZ"/>
@@ -52,7 +56,7 @@
                         </barButtonItem>
                         <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="n7I-ZM-wJE"/>
                     </items>
-                    <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="barTintColor" red="0.91764705879999997" green="0.4823529412" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                             <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -63,22 +67,23 @@
                     </userDefinedRuntimeAttributes>
                 </toolbar>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.074509803920000006" green="0.73725490199999999" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="mlJ-6H-P2N" firstAttribute="top" secondItem="LEq-G7-jGt" secondAttribute="bottom" constant="6" id="4Ej-jv-ANo"/>
                 <constraint firstItem="Myo-1S-Vg1" firstAttribute="leading" secondItem="dm4-NT-mvr" secondAttribute="trailing" constant="8" id="7Ld-5r-Hp3"/>
-                <constraint firstItem="dm4-NT-mvr" firstAttribute="top" secondItem="1" secondAttribute="top" constant="7" id="9Tz-Wq-xIf"/>
-                <constraint firstItem="LEq-G7-jGt" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="8" id="LAU-fo-GJJ"/>
+                <constraint firstItem="dm4-NT-mvr" firstAttribute="top" secondItem="QxG-CE-wuU" secondAttribute="top" constant="7" id="9Tz-Wq-xIf"/>
+                <constraint firstItem="LEq-G7-jGt" firstAttribute="leading" secondItem="QxG-CE-wuU" secondAttribute="leading" constant="8" id="LAU-fo-GJJ"/>
                 <constraint firstItem="mlJ-6H-P2N" firstAttribute="top" secondItem="dm4-NT-mvr" secondAttribute="bottom" constant="7" id="Nf8-9X-Po9"/>
-                <constraint firstItem="mlJ-6H-P2N" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Y1W-o8-bwb"/>
-                <constraint firstAttribute="trailing" secondItem="mlJ-6H-P2N" secondAttribute="trailing" id="aqb-F8-hyh"/>
-                <constraint firstAttribute="trailing" secondItem="Myo-1S-Vg1" secondAttribute="trailing" constant="8" id="ds6-61-GNv"/>
-                <constraint firstAttribute="bottom" secondItem="mlJ-6H-P2N" secondAttribute="bottom" id="eRN-dy-v5r"/>
+                <constraint firstItem="mlJ-6H-P2N" firstAttribute="leading" secondItem="QxG-CE-wuU" secondAttribute="leading" id="Y1W-o8-bwb"/>
+                <constraint firstItem="QxG-CE-wuU" firstAttribute="trailing" secondItem="mlJ-6H-P2N" secondAttribute="trailing" id="aqb-F8-hyh"/>
+                <constraint firstItem="QxG-CE-wuU" firstAttribute="trailing" secondItem="Myo-1S-Vg1" secondAttribute="trailing" constant="8" id="ds6-61-GNv"/>
+                <constraint firstItem="QxG-CE-wuU" firstAttribute="bottom" secondItem="mlJ-6H-P2N" secondAttribute="bottom" id="eRN-dy-v5r"/>
                 <constraint firstItem="dm4-NT-mvr" firstAttribute="leading" secondItem="LEq-G7-jGt" secondAttribute="trailing" constant="8" id="owo-gB-gyR"/>
                 <constraint firstItem="mlJ-6H-P2N" firstAttribute="top" secondItem="Myo-1S-Vg1" secondAttribute="bottom" constant="6" id="wLO-XD-sXN"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="QxG-CE-wuU"/>
             <connections>
                 <outlet property="cameraBarButton" destination="1Ce-tv-7sD" id="akq-Hn-mvJ"/>
                 <outlet property="imageBarButton" destination="bxh-Uo-6FZ" id="fld-zX-bnd"/>

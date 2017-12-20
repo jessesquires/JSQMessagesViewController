@@ -881,7 +881,7 @@ JSQMessagesKeyboardControllerDelegate>
 
 - (void)jsq_setToolbarBottomLayoutGuideConstant:(CGFloat)constant
 {
-    self.toolbarBottomLayoutGuide.constant = constant;
+    self.toolbarBottomLayoutGuide.constant = -constant;
     [self.view setNeedsUpdateConstraints];
     [self.view layoutIfNeeded];
 
