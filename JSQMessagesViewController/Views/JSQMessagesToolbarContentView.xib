@@ -40,6 +40,7 @@
                 </textView>
                 <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mlJ-6H-P2N">
                     <rect key="frame" x="0.0" y="44" width="320" height="44"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="uDL-eA-rZ5"/>
                     </constraints>
