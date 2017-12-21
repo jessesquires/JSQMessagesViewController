@@ -56,7 +56,6 @@
                         </barButtonItem>
                         <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="n7I-ZM-wJE"/>
                     </items>
-                    <color key="barTintColor" red="0.91764705879999997" green="0.4823529412" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                             <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -67,7 +66,7 @@
                     </userDefinedRuntimeAttributes>
                 </toolbar>
             </subviews>
-            <color key="backgroundColor" red="0.074509803920000006" green="0.73725490199999999" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="mlJ-6H-P2N" firstAttribute="top" secondItem="LEq-G7-jGt" secondAttribute="bottom" constant="6" id="4Ej-jv-ANo"/>
                 <constraint firstItem="Myo-1S-Vg1" firstAttribute="leading" secondItem="dm4-NT-mvr" secondAttribute="trailing" constant="8" id="7Ld-5r-Hp3"/>

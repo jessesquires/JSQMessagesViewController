@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="l9u-2b-4LK" customClass="JSQMessagesCollectionView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <collectionViewLayout key="collectionViewLayout" id="dZl-7C-LHR" customClass="JSQMessagesCollectionViewFlowLayout"/>
                     <cells/>
@@ -43,9 +43,9 @@
                 <constraint firstAttribute="trailing" secondItem="BoD-Az-3DM" secondAttribute="trailing" id="7xc-Ha-asg"/>
                 <constraint firstItem="BoD-Az-3DM" firstAttribute="bottom" secondItem="Ivo-jT-OW0" secondAttribute="bottom" id="L7G-db-B6F"/>
                 <constraint firstItem="l9u-2b-4LK" firstAttribute="leading" secondItem="Ivo-jT-OW0" secondAttribute="leading" id="MmF-oh-Y75"/>
-                <constraint firstAttribute="trailing" secondItem="l9u-2b-4LK" secondAttribute="trailing" id="O9u-TA-A0e"/>
+                <constraint firstItem="Ivo-jT-OW0" firstAttribute="trailing" secondItem="l9u-2b-4LK" secondAttribute="trailing" id="O9u-TA-A0e"/>
                 <constraint firstItem="l9u-2b-4LK" firstAttribute="bottom" secondItem="Ivo-jT-OW0" secondAttribute="bottom" id="VUe-Pl-vxd"/>
-                <constraint firstItem="l9u-2b-4LK" firstAttribute="top" secondItem="Ivo-jT-OW0" secondAttribute="top" constant="-20" id="dCQ-DM-Wdj"/>
+                <constraint firstItem="l9u-2b-4LK" firstAttribute="top" secondItem="Ivo-jT-OW0" secondAttribute="top" id="dCQ-DM-Wdj"/>
                 <constraint firstItem="BoD-Az-3DM" firstAttribute="leading" secondItem="Ivo-jT-OW0" secondAttribute="leading" id="ts7-8f-0lH"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
