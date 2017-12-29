@@ -158,11 +158,47 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                                              selector:@selector(jsq_didReceiveKeyboardDidHideNotification:)
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(jsq_didReceiveTextInputModeChangeNotification)
+                                                 name:UITextInputCurrentInputModeDidChangeNotification
+                                               object:nil];
 }
 
 - (void)jsq_unregisterForNotifications
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+    
+- (void)jsq_didReceiveTextInputModeChangeNotification
+{
+    // WORKAROUND: fix text view frame only when showing emoji keyboard
+    if(![[UITextInputMode currentInputMode].primaryLanguage isEqualToString:@"emoji"]) {
+        return;
+    }
+    
+    NSTimeInterval duration = 0.001;
+    CGRect newKeyboardViewFrame = self.keyboardView.frame;
+    newKeyboardViewFrame.origin.y = self.keyboardView.frame.origin.y - 1;
+    
+    [UIView animateWithDuration:duration
+                          delay:0.0
+                        options:UIViewAnimationOptionTransitionNone
+                     animations:^{
+                         self.keyboardView.frame = newKeyboardViewFrame;
+                     }
+                     completion: ^(BOOL finished) {
+                         
+                         CGRect keyboardEndFrameConverted = [self.contextView convertRect:self.keyboardView.frame fromView:nil];
+                         
+                         [UIView animateWithDuration:duration
+                                               delay:0.0
+                                             options:UIViewAnimationOptionTransitionNone
+                                          animations:^{
+                                              [self jsq_notifyKeyboardFrameNotificationForFrame:keyboardEndFrameConverted];
+                                          }
+                                          completion:nil];
+                     }];
 }
 
 - (void)jsq_didReceiveKeyboardDidShowNotification:(NSNotification *)notification
