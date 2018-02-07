@@ -45,6 +45,10 @@
  */
 @property (weak, nonatomic, readonly) JSQMessagesInputToolbar *inputToolbar;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
+- (void)jsq_setToolbarBottomLayoutGuideConstant:(CGFloat)constant;
+- (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame;
+
 /**
  *  Returns the keyboard controller object used to manage the software keyboard.
  */
@@ -65,15 +69,6 @@
  *  checked against this identifier. This value must not be `nil`.
  */
 @property (copy, nonatomic) NSString *senderId;
-
-/**
- *  Specifies whether or not the view controller should automatically scroll to the most recent message
- *  when the view appears and when sending, receiving, and composing a new message.
- *
- *  @discussion The default value is `YES`, which allows the view controller to scroll automatically to the most recent message.
- *  Set to `NO` if you want to manage scrolling yourself.
- */
-@property (assign, nonatomic) BOOL automaticallyScrollsToMostRecentMessage;
 
 /**
  *  The collection view cell identifier to use for dequeuing outgoing message collection view cells 
@@ -260,13 +255,6 @@
  *  @see `automaticallyScrollsToMostRecentMessage`.
  */
 - (void)finishReceivingMessageAnimated:(BOOL)animated;
-
-/**
- *  Scrolls the collection view such that the bottom most cell is completely visible, above the `inputToolbar`.
- *
- *  @param animated Pass `YES` if you want to animate scrolling, `NO` if it should be immediate.
- */
-- (void)scrollToBottomAnimated:(BOOL)animated;
 
 /**
  * Used to decide if a message is incoming or outgoing.

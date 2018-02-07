@@ -24,6 +24,7 @@
 
 #import "UIView+JSQMessages.h"
 #import "UIDevice+JSQMessages.h"
+#import "UIImage+JSQMessages.h"
 
 
 static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
@@ -126,10 +127,19 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
     self.cellBottomLabel.font = [UIFont systemFontOfSize:11.0f];
     self.cellBottomLabel.textColor = [UIColor lightGrayColor];
+    
+    [self configureAccessoryButton];
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
     [self addGestureRecognizer:tap];
     self.tapGestureRecognizer = tap;
+}
+
+- (void)configureAccessoryButton
+{
+    UIColor *tintColor = [UIColor lightGrayColor];
+    UIImage *shareActionImage = [[UIImage jsq_shareActionImage] jsq_imageMaskedWithColor:tintColor];
+    [self.accessoryButton setImage:shareActionImage forState:UIControlStateNormal];
 }
 
 - (void)dealloc
@@ -166,6 +176,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
     self.avatarImageView.image = nil;
     self.avatarImageView.highlightedImage = nil;
+    self.accessoryButton.hidden = YES;
 }
 
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
@@ -314,7 +325,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
 - (void)setMediaView:(UIView *)mediaView
 {
-    [self.messageBubbleImageView removeFromSuperview];
+    [self.messageBubbleImageView setHidden:YES];
     [self.textView removeFromSuperview];
 
     [mediaView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -329,7 +340,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     //  thus, remove any additional subviews hidden behind the new media view
     dispatch_async(dispatch_get_main_queue(), ^{
         for (NSUInteger i = 0; i < self.messageBubbleContainerView.subviews.count; i++) {
-            if (self.messageBubbleContainerView.subviews[i] != _mediaView) {
+            if (self.messageBubbleContainerView.subviews[i] != _mediaView && self.messageBubbleContainerView.subviews[i] != self.messageBubbleImageView) {
                 [self.messageBubbleContainerView.subviews[i] removeFromSuperview];
             }
         }
@@ -389,6 +400,11 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     }
     
     return NO;
+}
+
+- (IBAction)didTapAccessoryButton:(UIButton *)accessoryButton
+{
+    [self.delegate messagesCollectionViewCellDidTapAccessoryButton:self];
 }
 
 @end

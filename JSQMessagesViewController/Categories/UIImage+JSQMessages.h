@@ -81,4 +81,11 @@
  */
 + (UIImage *)jsq_defaultPauseImage;
 
+/**
+ *  @return The standard share icon image.
+ *
+ *  @discussion This is the default icon for the message accessory button.
+ */
++ (UIImage *)jsq_shareActionImage;
+
 @end
