@@ -1152,4 +1152,38 @@ JSQMessagesKeyboardControllerDelegate>
     }
 }
 
+#pragma mark - Handling hardware keyboard commands
+
+- (NSArray *)keyCommands
+{
+    UIKeyCommand *returnCommand = [UIKeyCommand keyCommandWithInput:@"\r"
+                                                      modifierFlags:0
+                                                             action:@selector(hardwareReturnPressed)];
+    
+    UIKeyCommand *returnWithShiftCommand = [UIKeyCommand keyCommandWithInput:@"\r"
+                                                               modifierFlags:UIKeyModifierShift
+                                                                      action:@selector(hardwareReturnWithShiftPressed)];
+    
+    return @[returnCommand, returnWithShiftCommand];
+}
+
+- (void)hardwareReturnPressed
+{
+    if (![self.inputToolbar.contentView.textView hasText]) {
+        return;
+    }
+    
+    [self didPressSendButton:nil
+             withMessageText:[self jsq_currentlyComposedMessageText]
+                    senderId:self.senderId
+           senderDisplayName:self.senderDisplayName
+                        date:[NSDate date]];
+}
+
+- (void)hardwareReturnWithShiftPressed
+{
+    NSString *text = self.inputToolbar.contentView.textView.text;
+    self.inputToolbar.contentView.textView.text = [text stringByAppendingString:@"\n"];
+}
+
 @end
