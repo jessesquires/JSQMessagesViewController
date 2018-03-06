@@ -58,7 +58,7 @@
 
 - (instancetype)init
 {
-    return [self initWithBubbleImage:[UIImage jsq_bubbleCompactImage]
+    return [self initWithBubbleImage:[UIImage jsq_bubbleCompactTaillessImage]
                            capInsets:UIEdgeInsetsZero
                      layoutDirection:[UIApplication sharedApplication].userInterfaceLayoutDirection];
 }

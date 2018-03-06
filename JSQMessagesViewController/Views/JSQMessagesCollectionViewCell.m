@@ -126,6 +126,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     UIFont *messageBubbleTopLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     self.messageBubbleTopLabel.font = messageBubbleTopLabelFont;
     self.messageBubbleTopLabel.textColor = [UIColor lightGrayColor];
+    [self.messageBubbleTopLabel setTextAlignment:NSTextAlignmentLeft];
     self.messageBubbleTopLabel.numberOfLines = 0;
     
     UIFont *bottomLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
