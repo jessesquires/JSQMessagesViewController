@@ -191,6 +191,8 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
  *  Computes and returns the size of the `messageBubbleImageView` property of a `JSQMessagesCollectionViewCell`
  *  at the specified indexPath.
  *
+ *  @param messageItem The item to be displayed.
+ *
  *  @param indexPath The index path of the item to be displayed.
  *
  *  @return The size of the message bubble for the item displayed at indexPath.
@@ -199,7 +201,7 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
  *  The returned size contains the required dimensions to display the entire message contents.
  *  Note, this is *not* the entire cell, but only its message bubble.
  */
-- (CGSize)messageBubbleSizeForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (CGSize)messageBubbleSizeForItem:(id<JSQMessageData>)messageItem atIndexPath:(NSIndexPath *)indexPath withProposedAttributes:(JSQMessagesCollectionViewLayoutAttributes *)attributes;
 
 /**
  *  Computes and returns the size of the item specified by indexPath.
