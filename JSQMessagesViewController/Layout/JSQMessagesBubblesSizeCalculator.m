@@ -21,6 +21,8 @@
 #import "JSQMessagesCollectionView.h"
 #import "JSQMessagesCollectionViewDataSource.h"
 #import "JSQMessagesCollectionViewFlowLayout.h"
+#import "JSQMessagesCollectionViewLayoutAttributes.h"
+
 #import "JSQMessageData.h"
 
 #import "UIImage+JSQMessages.h"
@@ -94,6 +96,7 @@
 - (CGSize)messageBubbleSizeForMessageData:(id<JSQMessageData>)messageData
                               atIndexPath:(NSIndexPath *)indexPath
                                withLayout:(JSQMessagesCollectionViewFlowLayout *)layout
+                       proposedAttributes:(JSQMessagesCollectionViewLayoutAttributes *)attributes
 {
     NSValue *cachedSize = [self.cache objectForKey:@([messageData messageHash])];
     if (cachedSize != nil) {
@@ -118,7 +121,7 @@
 
         CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
                                                              options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-                                                          attributes:@{ NSFontAttributeName : layout.messageBubbleFont }
+                                                          attributes:@{ NSFontAttributeName : attributes.messageBubbleFont }
                                                              context:nil];
 
         CGSize stringSize = CGRectIntegral(stringRect).size;

@@ -35,6 +35,21 @@
 @optional
 
 /**
+ *  Asks the delegate for the message bubble font size for the item at the specified indexPath.
+ *
+ *  @param collectionView       The collection view object displaying the flow layout.
+ *  @param collectionViewLayout The layout object requesting the information.
+ *  @param indexPath            The index path of the item.
+ *
+ *
+ *  @return The font. Returning NULL results in using default font defined in JSQMessagesCollectionViewFlowLayout.
+ *
+ */
+- (UIFont *)collectionView:(JSQMessagesCollectionView *)collectionView
+                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout
+messageBubbleFontAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
  *  Asks the delegate for the height of the `cellTopLabel` for the item at the specified indexPath.
  *
  *  @param collectionView       The collection view object displaying the flow layout.

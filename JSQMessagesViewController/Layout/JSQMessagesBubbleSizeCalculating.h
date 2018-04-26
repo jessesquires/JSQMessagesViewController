@@ -19,7 +19,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@class JSQMessagesCollectionViewFlowLayout;
+@class JSQMessagesCollectionViewFlowLayout, JSQMessagesCollectionViewLayoutAttributes;
 @protocol JSQMessageData;
 
 /**
@@ -44,7 +44,8 @@
  */
 - (CGSize)messageBubbleSizeForMessageData:(id<JSQMessageData>)messageData
                               atIndexPath:(NSIndexPath *)indexPath
-                               withLayout:(JSQMessagesCollectionViewFlowLayout *)layout;
+                               withLayout:(JSQMessagesCollectionViewFlowLayout *)layout
+                       proposedAttributes:(JSQMessagesCollectionViewLayoutAttributes *)attributes;
 
 /**
  *  Notifies the receiver that the layout will be reset. 

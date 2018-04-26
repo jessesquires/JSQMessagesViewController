@@ -27,6 +27,7 @@
 
 #import "JSQMessagesCollectionView.h"
 #import "JSQMessagesCollectionViewCell.h"
+#import "JSQMessagesCollectionViewDelegateFlowLayout.h"
 
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
@@ -402,20 +403,19 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 #pragma mark - Message cell layout utilities
 
-- (CGSize)messageBubbleSizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)messageBubbleSizeForItem:(id<JSQMessageData>)messageItem atIndexPath:(NSIndexPath *)indexPath withProposedAttributes:(JSQMessagesCollectionViewLayoutAttributes *)attributes
 {
-    id<JSQMessageData> messageItem = [self.collectionView.dataSource collectionView:self.collectionView
-                                                      messageDataForItemAtIndexPath:indexPath];
-
     return [self.bubbleSizeCalculator messageBubbleSizeForMessageData:messageItem
                                                           atIndexPath:indexPath
-                                                           withLayout:self];
+                                                           withLayout:self
+                                                   proposedAttributes:attributes];
 }
 
 - (CGSize)sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize messageBubbleSize = [self messageBubbleSizeForItemAtIndexPath:indexPath];
+    id<JSQMessageData> messageItem = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
     JSQMessagesCollectionViewLayoutAttributes *attributes = (JSQMessagesCollectionViewLayoutAttributes *)[self layoutAttributesForItemAtIndexPath:indexPath];
+    CGSize messageBubbleSize = [self messageBubbleSizeForItem:messageItem atIndexPath:indexPath withProposedAttributes:attributes];
     
     CGFloat finalHeight = messageBubbleSize.height;
     finalHeight += attributes.cellTopLabelHeight;
@@ -429,10 +429,6 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 {
     NSIndexPath *indexPath = layoutAttributes.indexPath;
     
-    CGSize messageBubbleSize = [self messageBubbleSizeForItemAtIndexPath:indexPath];
-    
-    layoutAttributes.messageBubbleContainerViewWidth = messageBubbleSize.width;
-    
     layoutAttributes.textViewFrameInsets = self.messageBubbleTextViewFrameInsets;
     
     layoutAttributes.textViewTextContainerInsets = self.messageBubbleTextViewTextContainerInsets;
@@ -443,17 +439,29 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     layoutAttributes.outgoingAvatarViewSize = self.outgoingAvatarViewSize;
     
-    layoutAttributes.cellTopLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
-                                                                                layout:self
-                                                      heightForCellTopLabelAtIndexPath:indexPath];
+    id <JSQMessagesCollectionViewDelegateFlowLayout> flowLayoutDelegate = self.collectionView.delegate;
+    if ([flowLayoutDelegate respondsToSelector:@selector(collectionView:layout:messageBubbleFontAtIndexPath:)]) {
+        UIFont * newFont = [flowLayoutDelegate collectionView:self.collectionView layout:self messageBubbleFontAtIndexPath:indexPath];
+        if (newFont) {
+            layoutAttributes.messageBubbleFont = newFont;
+        }
+    }
     
-    layoutAttributes.messageBubbleTopLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
-                                                                                         layout:self
-                                                      heightForMessageBubbleTopLabelAtIndexPath:indexPath];
+    layoutAttributes.cellTopLabelHeight = [flowLayoutDelegate collectionView:self.collectionView
+                                                                      layout:self
+                                            heightForCellTopLabelAtIndexPath:indexPath];
     
-    layoutAttributes.cellBottomLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
-                                                                                   layout:self
-                                                      heightForCellBottomLabelAtIndexPath:indexPath];
+    layoutAttributes.messageBubbleTopLabelHeight = [flowLayoutDelegate collectionView:self.collectionView
+                                                                               layout:self
+                                            heightForMessageBubbleTopLabelAtIndexPath:indexPath];
+    
+    layoutAttributes.cellBottomLabelHeight = [flowLayoutDelegate collectionView:self.collectionView
+                                                                         layout:self
+                                            heightForCellBottomLabelAtIndexPath:indexPath];
+    
+    id<JSQMessageData> messageItem = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
+    CGSize messageBubbleSize = [self messageBubbleSizeForItem:messageItem atIndexPath:indexPath withProposedAttributes:layoutAttributes];
+    layoutAttributes.messageBubbleContainerViewWidth = messageBubbleSize.width;
 }
 
 #pragma mark - Spring behavior utilities
