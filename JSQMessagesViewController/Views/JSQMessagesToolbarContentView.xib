@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -64,9 +64,11 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="leftBarButtonContainerView" destination="LEq-G7-jGt" id="F0V-4N-1Mo"/>
+                <outlet property="leftBarButtonContainerViewHeightConstraint" destination="0sE-GV-joM" id="fzA-0D-KHY"/>
                 <outlet property="leftBarButtonContainerViewWidthConstraint" destination="eMy-Af-wwH" id="FI9-F2-2bN"/>
                 <outlet property="leftHorizontalSpacingConstraint" destination="LAU-fo-GJJ" id="X2c-BI-0Q4"/>
                 <outlet property="rightBarButtonContainerView" destination="Myo-1S-Vg1" id="0SR-cw-EkD"/>
+                <outlet property="rightBarButtonContainerViewHeightConstraint" destination="NaR-re-dJ4" id="KfJ-N3-T4u"/>
                 <outlet property="rightBarButtonContainerViewWidthConstraint" destination="yde-S9-dHe" id="WGu-df-M3L"/>
                 <outlet property="rightHorizontalSpacingConstraint" destination="ds6-61-GNv" id="ZQh-8M-QFs"/>
                 <outlet property="textView" destination="dm4-NT-mvr" id="PFw-HO-oT8"/>
