@@ -366,7 +366,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
             
             CGFloat collectionViewHeight = CGRectGetHeight(self.collectionView.bounds);
             
-            JSQMessagesCollectionViewLayoutAttributes *attributes = [JSQMessagesCollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
+            JSQMessagesCollectionViewLayoutAttributes *attributes = [[[self class] layoutAttributesClass] layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
             
             if (attributes.representedElementCategory == UICollectionElementCategoryCell) {
                 [self jsq_configureMessageCellLayoutAttributes:attributes];
