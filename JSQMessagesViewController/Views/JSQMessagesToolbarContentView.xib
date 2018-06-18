@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -16,15 +16,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LEq-G7-jGt" userLabel="Left button container">
-                    <rect key="frame" x="8" y="6" width="34" height="32"/>
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="44"/>
                     <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="32" id="0sE-GV-joM"/>
-                        <constraint firstAttribute="width" constant="34" id="eMy-Af-wwH"/>
+                        <constraint firstAttribute="width" constant="40" id="0bM-5L-bNg"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Myo-1S-Vg1" userLabel="Right button container">
-                    <rect key="frame" x="262" y="6" width="50" height="32"/>
+                    <rect key="frame" x="262" y="4" width="50" height="32"/>
                     <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="NaR-re-dJ4"/>
@@ -32,41 +31,30 @@
                     </constraints>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dm4-NT-mvr" customClass="JSQMessagesComposerTextView">
-                    <rect key="frame" x="50" y="7" width="204" height="30"/>
+                    <rect key="frame" x="48" y="7" width="206" height="30"/>
                     <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hMZ-c3-VuJ">
-                    <rect key="frame" x="49" y="0.0" width="1" height="44"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="49" id="54e-OG-33z"/>
-                        <constraint firstAttribute="width" constant="1" id="lhc-Xh-ZJk"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="hMZ-c3-VuJ" secondAttribute="bottom" id="1FD-a6-oxr"/>
                 <constraint firstItem="Myo-1S-Vg1" firstAttribute="leading" secondItem="dm4-NT-mvr" secondAttribute="trailing" constant="8" id="7Ld-5r-Hp3"/>
-                <constraint firstItem="hMZ-c3-VuJ" firstAttribute="centerY" secondItem="LEq-G7-jGt" secondAttribute="centerY" id="8kF-OB-8bP"/>
                 <constraint firstItem="dm4-NT-mvr" firstAttribute="top" secondItem="1" secondAttribute="top" constant="7" id="9Tz-Wq-xIf"/>
                 <constraint firstAttribute="bottom" secondItem="dm4-NT-mvr" secondAttribute="bottom" constant="7" id="CCb-V7-yek"/>
-                <constraint firstItem="LEq-G7-jGt" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="8" id="LAU-fo-GJJ"/>
-                <constraint firstItem="Myo-1S-Vg1" firstAttribute="centerY" secondItem="hMZ-c3-VuJ" secondAttribute="centerY" id="LN7-oV-hAO"/>
-                <constraint firstItem="dm4-NT-mvr" firstAttribute="leading" secondItem="hMZ-c3-VuJ" secondAttribute="trailing" id="M6i-2v-QWv"/>
-                <constraint firstItem="hMZ-c3-VuJ" firstAttribute="height" secondItem="1" secondAttribute="height" priority="750" id="O7D-nU-XUq"/>
+                <constraint firstAttribute="bottom" secondItem="Myo-1S-Vg1" secondAttribute="bottom" constant="8" id="Gz9-Vp-swL"/>
+                <constraint firstItem="LEq-G7-jGt" firstAttribute="top" secondItem="1" secondAttribute="top" id="Vbp-Es-r0x"/>
                 <constraint firstAttribute="trailing" secondItem="Myo-1S-Vg1" secondAttribute="trailing" constant="8" id="ds6-61-GNv"/>
+                <constraint firstAttribute="bottom" secondItem="LEq-G7-jGt" secondAttribute="bottom" id="fQz-Vg-GUQ"/>
+                <constraint firstItem="LEq-G7-jGt" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="h9x-fk-hV2"/>
                 <constraint firstItem="dm4-NT-mvr" firstAttribute="leading" secondItem="LEq-G7-jGt" secondAttribute="trailing" constant="8" id="owo-gB-gyR"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="leftBarButtonContainerView" destination="LEq-G7-jGt" id="F0V-4N-1Mo"/>
-                <outlet property="leftBarButtonContainerViewHeightConstraint" destination="0sE-GV-joM" id="fzA-0D-KHY"/>
-                <outlet property="leftBarButtonContainerViewWidthConstraint" destination="eMy-Af-wwH" id="FI9-F2-2bN"/>
-                <outlet property="leftHorizontalSpacingConstraint" destination="LAU-fo-GJJ" id="X2c-BI-0Q4"/>
+                <outlet property="leftBarButtonContainerView" destination="LEq-G7-jGt" id="Kcl-b9-zpw"/>
+                <outlet property="leftBarButtonContainerViewWidthConstraint" destination="0bM-5L-bNg" id="5EA-Hr-Axn"/>
+                <outlet property="leftHorizontalSpacingConstraint" destination="h9x-fk-hV2" id="bIS-bW-bUf"/>
                 <outlet property="rightBarButtonContainerView" destination="Myo-1S-Vg1" id="0SR-cw-EkD"/>
                 <outlet property="rightBarButtonContainerViewHeightConstraint" destination="NaR-re-dJ4" id="KfJ-N3-T4u"/>
                 <outlet property="rightBarButtonContainerViewWidthConstraint" destination="yde-S9-dHe" id="WGu-df-M3L"/>
