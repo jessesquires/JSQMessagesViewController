@@ -59,13 +59,6 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
 @property (assign, nonatomic) CGFloat leftBarButtonItemWidth;
 
 /**
- *  Specifies the height of the leftBarButtonItem.
- *
- *  @discussion This property modifies the height of the leftBarButtonContainerView.
- */
-@property (assign, nonatomic) CGFloat leftBarButtonItemHeight;
-
-/**
  *  Specifies the amount of spacing between the content view and the leading edge of leftBarButtonItem.
  *
  *  @discussion The default value is `8.0f`.
