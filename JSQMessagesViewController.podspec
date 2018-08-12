@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
 	s.platform = :ios, '7.0'
 
 	s.author = 'Jesse Squires'
-
+	s.homepage = "http://EXAMPLE/MyLib"
 	s.source = { :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :tag => s.version }
 	s.source_files = 'JSQMessagesViewController/**/*.{h,m}'
 
