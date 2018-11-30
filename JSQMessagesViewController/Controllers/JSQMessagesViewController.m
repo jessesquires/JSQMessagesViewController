@@ -902,7 +902,9 @@ JSQMessagesKeyboardControllerDelegate>
 
 #pragma mark - Keyboard controller delegate
 
-- (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame
+- (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController
+    keyboardDidChangeFrame:(CGRect)keyboardFrame
+              changeSource:(JSQMessagesKeyboardControllerKeyboardFrameChangeSource)changeSource
 {
     if (![self.inputToolbar.contentView.textView isFirstResponder] && self.toolbarBottomLayoutGuide.constant == 0.0) {
         return;
@@ -912,7 +914,26 @@ JSQMessagesKeyboardControllerDelegate>
 
     heightFromBottom = MAX(0.0, heightFromBottom);
 
-    [self jsq_setToolbarBottomLayoutGuideConstant:heightFromBottom];
+    if ([self shouldInputToolbarChangePositionForKeyboardFrameChangeWithHeightFromBottom:heightFromBottom
+                                                                            changeSource:changeSource]) {
+        [self jsq_setToolbarBottomLayoutGuideConstant:heightFromBottom];
+    }    
+}
+
+- (BOOL)shouldInputToolbarChangePositionForKeyboardFrameChangeWithHeightFromBottom:(CGFloat)heightFromBottom
+                                                                      changeSource:(JSQMessagesKeyboardControllerKeyboardFrameChangeSource)source {
+    return YES;
+}
+
+- (void)moveInputToolbarToDistanceFromBottom:(CGFloat)distanceFromBottom
+                                  completion:(void(^)(BOOL finished))completion {
+    [UIView animateWithDuration:0.3f
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         [self jsq_setToolbarBottomLayoutGuideConstant:distanceFromBottom];
+                     }
+                     completion:completion];
 }
 
 - (void)jsq_setToolbarBottomLayoutGuideConstant:(CGFloat)constant

@@ -324,4 +324,16 @@
  */
 - (void)didReceiveMenuWillHideNotification:(NSNotification *)notification;
 
+/**
+ Override in subclass to customize input toolbar movement rules.
+ 
+ @param heightFromBottom The height of keyboard from bottom of the screen.
+ @param source The source of the keyboard frame change.
+ */
+- (BOOL)inputToolbarShouldChangePositionForKeyboardFrameChangeWithHeightFromBottom:(CGFloat)heightFromBottom
+                                                                      changeSource:(JSQMessagesKeyboardControllerKeyboardFrameChangeSource)source;
+
+- (void)moveInputToolbarToDistanceFromBottom:(CGFloat)distanceFromBottom
+                                  completion:(void(^)(BOOL finished))completion;
+
 @end
