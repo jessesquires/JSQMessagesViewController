@@ -1,4 +1,4 @@
-iosNode = 'jenkins-slave-mac'
+iosNode = 'mac-builder-xcode9'
 
 //MAIN BLOCK BEGIN
 
