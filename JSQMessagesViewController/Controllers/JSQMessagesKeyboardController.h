@@ -24,6 +24,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, JSQMessagesKeyboardControllerKeyboardFrameChangeSource) {
+    JSQMessagesKeyboardControllerKeyboardFrameChangeSourceNotification,
+    JSQMessagesKeyboardControllerKeyboardFrameChangeSourceGestureRecognizer
+};
+
 @class JSQMessagesKeyboardController;
 
 /**
@@ -57,7 +62,12 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
  *  @param keyboardController The keyboard controller that is notifying the delegate.
  *  @param keyboardFrame      The new frame of the keyboard in the coordinate system of the `contextView`.
  */
-- (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame;
+- (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController
+    keyboardDidChangeFrame:(CGRect)keyboardFrame
+              changeSource:(JSQMessagesKeyboardControllerKeyboardFrameChangeSource)changeSource;
+
+- (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController
+keyboardAnimationsDidCompleteWithFrameChangeSource:(JSQMessagesKeyboardControllerKeyboardFrameChangeSource)changeSource;
 
 @end
 

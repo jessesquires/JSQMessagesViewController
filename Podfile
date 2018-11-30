@@ -7,6 +7,7 @@ inhibit_all_warnings!
 
 pod 'JSQSystemSoundPlayer', '~> 2.0'
 
-target :JSQMessagesTests, :exclusive => true do
+target :JSQMessagesTests do
+   inherit! :search_paths
    pod 'JSQSystemSoundPlayer', '~> 2.0'
 end

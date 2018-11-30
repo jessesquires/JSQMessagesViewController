@@ -195,7 +195,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                                                delay:0.0
                                              options:UIViewAnimationOptionTransitionNone
                                           animations:^{
-                                              [self jsq_notifyKeyboardFrameNotificationForFrame:keyboardEndFrameConverted];
+                                              [self jsq_notifyKeyboardFrameNotificationForFrame:keyboardEndFrameConverted
+                                                                                         source:JSQMessagesKeyboardControllerKeyboardFrameChangeSourceNotification];
                                           }
                                           completion:nil];
                      }];
@@ -268,7 +269,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                           delay:0.0
                         options:animationCurveOption
                      animations:^{
-                         [self jsq_notifyKeyboardFrameNotificationForFrame:keyboardEndFrameConverted];
+                         [self jsq_notifyKeyboardFrameNotificationForFrame:keyboardEndFrameConverted
+                                                                    source:JSQMessagesKeyboardControllerKeyboardFrameChangeSourceNotification];
                      }
                      completion:^(BOOL finished) {
                          if (completion) {
@@ -285,9 +287,9 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     self.keyboardView.userInteractionEnabled = !hidden;
 }
 
-- (void)jsq_notifyKeyboardFrameNotificationForFrame:(CGRect)frame
+- (void)jsq_notifyKeyboardFrameNotificationForFrame:(CGRect)frame source:(JSQMessagesKeyboardControllerKeyboardFrameChangeSource)source
 {
-    [self.delegate keyboardController:self keyboardDidChangeFrame:frame];
+    [self.delegate keyboardController:self keyboardDidChangeFrame:frame changeSource:source];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame
                                                         object:self
@@ -318,7 +320,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
             CGRect keyboardEndFrameConverted = [self.contextView convertRect:newKeyboardFrame
                                                                     fromView:self.keyboardView.superview];
-            [self jsq_notifyKeyboardFrameNotificationForFrame:keyboardEndFrameConverted];
+            [self jsq_notifyKeyboardFrameNotificationForFrame:keyboardEndFrameConverted
+                                                       source:JSQMessagesKeyboardControllerKeyboardFrameChangeSourceGestureRecognizer];
         }
     }
 }
