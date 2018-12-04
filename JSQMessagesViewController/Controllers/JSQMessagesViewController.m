@@ -926,14 +926,23 @@ JSQMessagesKeyboardControllerDelegate>
 }
 
 - (void)moveInputToolbarToDistanceFromBottom:(CGFloat)distanceFromBottom
+                                    animated:(BOOL)animated
                                   completion:(void(^)(BOOL finished))completion {
-    [UIView animateWithDuration:0.3f
-                          delay:0.0f
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                         [self jsq_setToolbarBottomLayoutGuideConstant:distanceFromBottom];
-                     }
-                     completion:completion];
+    if (animated) {
+        [UIView animateWithDuration:0.3f
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             [self jsq_setToolbarBottomLayoutGuideConstant:distanceFromBottom];
+                         }
+                         completion:completion];
+    } else {
+        [self jsq_setToolbarBottomLayoutGuideConstant:distanceFromBottom];
+        
+        if (completion) {
+            completion(YES);
+        }
+    }
 }
 
 - (void)jsq_setToolbarBottomLayoutGuideConstant:(CGFloat)constant

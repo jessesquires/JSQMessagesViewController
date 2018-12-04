@@ -334,6 +334,7 @@
                                                                       changeSource:(JSQMessagesKeyboardControllerKeyboardFrameChangeSource)source;
 
 - (void)moveInputToolbarToDistanceFromBottom:(CGFloat)distanceFromBottom
+                                    animated:(BOOL)animated
                                   completion:(void(^)(BOOL finished))completion;
 
 @end
